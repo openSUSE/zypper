@@ -163,6 +163,10 @@ namespace zypp
       void swap( AutoDispose & rhs )
       { _pimpl.swap( rhs._pimpl ); }
 
+      /** Returns true if this is the only AutoDispose instance managing the current data object */
+      bool unique () const
+      { return _pimpl.unique(); }
+
     public:
       /** Return the current dispose function. */
       const Dispose & getDispose() const

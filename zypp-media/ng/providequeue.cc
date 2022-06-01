@@ -461,7 +461,7 @@ namespace zyppng {
             // no matter if the item does the correct dance or not, this code is duplicated by all ProvideItems that receive ProvideFinished
             // results that require file cleanups.
             // we keep the ref around until after sending the result to the item. At that point it should take a reference
-            std::shared_ptr<ProvideResourceData> dataRef;
+            std::optional<zypp::ManagedFile> dataRef;
 
             if ( !reqIter->isFileRequest() ) {
               ERR << "Invalid message for request ID: " << reqIter->_request->provideMessage().requestId() << std::endl;

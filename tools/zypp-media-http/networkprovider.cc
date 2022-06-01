@@ -140,7 +140,7 @@ void NetworkProvider::provide()
   if ( !queue.size() )
     return;
 
-  const auto now = std::chrono::system_clock::now();
+  const auto now = std::chrono::steady_clock::now();
   auto &io = controlIO();
 
   while ( io.readFdOpen() ) {

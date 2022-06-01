@@ -15,6 +15,7 @@
 #include <iosfwd>
 #include <list>
 #include <zypp-core/base/DefaultIntegral>
+#include <zypp-media/FileCheckException>
 #include <zypp/base/Exception.h>
 #include <zypp/base/Function.h>
 #include <zypp/PathInfo.h>
@@ -35,30 +36,6 @@ namespace zypp
    * validate and the user don't want to continue.
    */
   typedef function<void ( const Pathname &file )> FileChecker;
-
-  class FileCheckException : public Exception
-  {
-  public:
-    FileCheckException(const std::string &msg)
-      : Exception(msg)
-    {}
-  };
-
-  class CheckSumCheckException : public FileCheckException
-  {
-  public:
-    CheckSumCheckException(const std::string &msg)
-      : FileCheckException(msg)
-    {}
-  };
-
-  class SignatureCheckException : public FileCheckException
-  {
-  public:
-    SignatureCheckException(const std::string &msg)
-      : FileCheckException(msg)
-    {}
-  };
 
   /**
    * Built in file checkers

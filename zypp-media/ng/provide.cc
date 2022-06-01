@@ -7,6 +7,7 @@
 #include <zypp-core/base/DtorReset>
 #include <zypp-core/fs/PathInfo.h>
 #include <zypp-media/MediaException>
+#include <zypp-media/FileCheckException>
 #include <zypp-media/CDTools>
 
 // required to generate uuids
@@ -117,8 +118,8 @@ namespace zyppng {
         continue;
       }
       if ( iMedia->_workerType == ProvideQueue::Config::Downloading ) {
-        // we keep the information around for an hour so we do not constantly download the media files for no reason
-        if ( std::chrono::system_clock::now() - iMedia->_idleSince >= std::chrono::hours(1) ) {
+        // we keep the information around for an hour so we do not constantly download the media files for no reasonDD
+        if ( std::chrono::steady_clock::now() - iMedia->_idleSince >= std::chrono::hours(1) ) {
           MIL << "Detaching medium " << iMedia->_name << " for baseUrl " << iMedia->_attachedUrl << std::endl;
           iMedia = _attachedMediaInfos.erase(iMedia);
           continue;
@@ -151,11 +152,11 @@ namespace zyppng {
     zypp::DtorReset schedFlag( _isScheduling, false );
     _isScheduling = true;
 
-    const auto schedStart = std::chrono::system_clock::now();
+    const auto schedStart = std::chrono::steady_clock::now();
     MIL_PRV << "Start scheduling" << std::endl;
 
     zypp::OnScopeExit deferExitMessage( [&](){
-      const auto dur = std::chrono::system_clock::now() - schedStart;
+      const auto dur = std::chrono::steady_clock::now() - schedStart;
       MIL_PRV << "Exit scheduling after:" << std::chrono::duration_cast<std::chrono::milliseconds>( dur ).count () << std::endl;
     });
 
@@ -723,25 +724,24 @@ namespace zyppng {
     }
   }
 
-  std::shared_ptr<ProvideResourceData> ProvidePrivate::addToFileCache( const zypp::filesystem::Pathname &downloadedFile )
+  std::optional<zypp::ManagedFile> ProvidePrivate::addToFileCache( const zypp::filesystem::Pathname &downloadedFile )
   {
     const auto &key = downloadedFile.asString();
 
     if ( !zypp::PathInfo(downloadedFile).isExist() ) {
       _fileCache.erase ( key );
-      return nullptr;
+      return {};
     }
 
-    auto i = _fileCache.insert( { key, nullptr } );
+    auto i = _fileCache.insert( { key, FileCacheItem() } );
     if ( !i.second ) {
       // file did already exist in the cache, return the shared data
-      return i.first->second;
+      i.first->second._deathTimer.reset();
+      return i.first->second._file;
     }
 
-    i.first->second = std::make_shared<ProvideResourceData>();
-    i.first->second->_myFile = zypp::ManagedFile( downloadedFile, zypp::filesystem::unlink );
-
-    return i.first->second;
+    i.first->second._file = zypp::ManagedFile( downloadedFile, zypp::filesystem::unlink );
+    return i.first->second._file;
   }
 
   bool ProvidePrivate::isInCache ( const zypp::Pathname &downloadedFile ) const
@@ -859,20 +859,27 @@ namespace zyppng {
   {
     DBG_PRV << "Pulse timeout" << std::endl;
 
-    auto now = std::chrono::system_clock::now();
+    auto now = std::chrono::steady_clock::now();
 
     if ( _log ) _log->pulse();
 
     // release old cache files
     for ( auto i = _fileCache.begin (); i != _fileCache.end(); ) {
-      auto &ptr = i->second;
-      if( !ptr.unique() || now - ptr->_lastUnref < std::chrono::seconds(20)  ) {
-        ++i;
-        continue;
+      auto &cacheItem = i->second;
+      if ( cacheItem._file.unique() ) {
+        if ( cacheItem._deathTimer ) {
+          if ( now - *cacheItem._deathTimer < std::chrono::seconds(20) ) {
+            MIL << "Releasing file " << *i->second._file << " from cache, death timeout." << std::endl;
+            i = _fileCache.erase(i);
+            continue;
+          }
+        } else {
+          // start the death timeout
+          cacheItem._deathTimer = std::chrono::steady_clock::now();
+        }
       }
 
-      MIL << "Releasing file " << i->second->_myFile << " from cache, death timeout." << std::endl;
-      i = _fileCache.erase(i);
+      ++i;
     }
   }
 
@@ -1070,6 +1077,21 @@ namespace zyppng {
 
     d->queueItem (op);
     return op->promise();
+  }
+
+  AsyncOpRef<expected<std::string>> Provide::checksumForFile ( const zypp::Pathname &p, const std::string &algorithm  )
+  {
+    using namespace zyppng::operators;
+
+    zypp::Url url("chksum:///");
+    url.setPathName( p );
+    auto fut = provide( url, zyppng::ProvideFileSpec().setCustomHeaderValue( "chksumType", algorithm ) )
+      | mbind( [algorithm]( zyppng::ProvideRes &&chksumRes ) {
+        if ( chksumRes.headers().contains(algorithm) )
+          return expected<std::string>::success( chksumRes.headers().value(algorithm).asString() );
+        return expected<std::string>::error( ZYPP_EXCPT_PTR( zypp::FileCheckException("Invalid/Empty checksum returned from worker") ) );
+      } );
+    return fut;
   }
 
   void Provide::start ()

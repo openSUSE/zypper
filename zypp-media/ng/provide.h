@@ -117,6 +117,11 @@ namespace zyppng {
     AsyncOpRef<expected<ProvideRes>> provide(  const zypp::Url &url, const ProvideFileSpec &request );
     AsyncOpRef<expected<ProvideRes>> provide(  const MediaHandle &attachHandle, const zypp::Pathname &fileName, const ProvideFileSpec &request );
 
+    /*!
+     * Schedules a job to calculate the checksum for the given file
+     */
+    AsyncOpRef<expected<std::string>> checksumForFile ( const zypp::Pathname &p, const std::string &algorithm );
+
     void start();
     void setWorkerPath( const zypp::Pathname &path );
     bool isRunning() const;

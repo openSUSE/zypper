@@ -10,6 +10,7 @@
 #include "provideres.h"
 #include "private/provide_p.h"
 #include "private/providequeue_p.h"
+#include "private/provideres_p.h"
 
 namespace zyppng {
 
@@ -17,9 +18,7 @@ namespace zyppng {
   { }
 
   ProvideRes::~ProvideRes()
-  {
-    _data->_lastUnref = std::chrono::system_clock::now();
-  }
+  { }
 
   const zypp::filesystem::Pathname ProvideRes::file() const
   {
@@ -34,6 +33,16 @@ namespace zyppng {
   const ProvideMediaHandle &ProvideRes::mediaHandle () const
   {
     return _data->_mediaHandle;
+  }
+
+  const zypp::Url &ProvideRes::resourceUrl () const
+  {
+    return _data->_resourceUrl;
+  }
+
+  const HeaderValueMap &ProvideRes::headers () const
+  {
+    return _data->_responseHeaders;
   }
 
 }

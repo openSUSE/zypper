@@ -249,6 +249,18 @@ namespace zyppng
   const HeaderValueMap &ProvideFileSpec::customHeaders() const
   { return _pimpl->_customHeaders; }
 
+  ProvideFileSpec &ProvideFileSpec::setCustomHeaderValue(const std::string &key, const HeaderValueMap::Value &val)
+  {
+    _pimpl->_customHeaders.set( key,val );
+    return *this;
+  }
+
+  ProvideFileSpec &ProvideFileSpec::addCustomHeaderValue(const std::string &key, const HeaderValueMap::Value &val)
+  {
+    _pimpl->_customHeaders.add( key,val );
+    return *this;
+  }
+
   std::ostream & operator<<( std::ostream & str, const ProvideFileSpec & obj )
   { return str << *obj._pimpl; }
 

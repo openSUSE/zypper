@@ -11,6 +11,7 @@
 #include "private/provideitem_p.h"
 #include "private/provide_p.h"
 #include "private/providemessage_p.h"
+#include "private/provideres_p.h"
 #include "provide-configvars.h"
 #include <zypp-media/MediaException>
 #include <zypp-core/base/UserRequestException>
@@ -672,12 +673,12 @@ namespace zyppng {
         const bool doesDownload     = wConf.worker_type() == ProvideQueue::Config::Downloading;
         const bool fileNeedsCleanup = doesDownload || ( wConf.worker_type() == ProvideQueue::Config::CPUBound && wConf.cfg_flags() & ProvideQueue::Config::FileArtifacts );
 
-        std::shared_ptr<ProvideResourceData> dataRef;
+        std::optional<zypp::ManagedFile> resFile;
 
         if ( doesDownload ) {
 
-          dataRef = provider().addToFileCache ( locFilename );
-          if ( !dataRef ) {
+          resFile = provider().addToFileCache ( locFilename );
+          if ( !resFile ) {
             if ( cacheHit ) {
               MIL << "CACHE MISS, file " << locFilename << " was already removed, queueing again" << std::endl;
               cacheMiss ( finishedReq );
@@ -694,23 +695,26 @@ namespace zyppng {
           }
 
         } else {
-          dataRef = std::make_shared<ProvideResourceData>();
-          dataRef->_myFile = zypp::ManagedFile( zypp::filesystem::Pathname(locFilename) );
+          resFile = zypp::ManagedFile( zypp::filesystem::Pathname(locFilename) );
           if ( fileNeedsCleanup )
-            dataRef->_myFile.setDispose( zypp::filesystem::unlink );
+            resFile->setDispose( zypp::filesystem::unlink );
           else
-            dataRef->_myFile.resetDispose();
+            resFile->resetDispose();
         }
 
         _targetFile = locFilename;
 
         // keep the media handle around as long as the file is used by the code
-        dataRef->_mediaHandle = this->_handleRef;
+        auto resObj = std::make_shared<ProvideResourceData>();
+        resObj->_mediaHandle     = this->_handleRef;
+        resObj->_myFile          = *resFile;
+        resObj->_resourceUrl     = *(finishedReq->activeUrl());
+        resObj->_responseHeaders = msg.headers();
 
         auto p = promise();
         if ( p ) {
           try {
-            p->setReady( expected<ProvideRes>::success(ProvideRes( dataRef )) );
+            p->setReady( expected<ProvideRes>::success( ProvideRes( resObj )) );
           } catch( const zypp::Exception &e ) {
             ZYPP_CAUGHT(e);
           }

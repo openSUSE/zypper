@@ -29,7 +29,7 @@ namespace zyppng {
   public:
     void ref() {
       if ( _refCount == 0 )
-        _idleSince = std::chrono::system_clock::time_point::max();
+        _idleSince = std::chrono::steady_clock::time_point::max();
 
       _refCount++;
     }
@@ -38,7 +38,7 @@ namespace zyppng {
         _refCount--;
 
         if ( _refCount == 0 )
-          _idleSince = std::chrono::system_clock::now();
+          _idleSince = std::chrono::steady_clock::now();
       }
     }
 
@@ -61,7 +61,7 @@ namespace zyppng {
     zypp::Url   _attachedUrl; // the URL that was used for the attach request
     ProvideMediaSpec _spec;
     uint _refCount = 0;
-    std::chrono::system_clock::time_point _idleSince = std::chrono::system_clock::time_point::max();
+    std::chrono::steady_clock::time_point _idleSince = std::chrono::steady_clock::time_point::max();
   };
 
 }

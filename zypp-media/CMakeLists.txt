@@ -9,6 +9,8 @@ ADD_DEFINITIONS( -DLOCALEDIR="${CMAKE_INSTALL_PREFIX}/share/locale" -DTEXTDOMAIN
 SET( zypp_media_HEADERS
   CDTools
   cdtools.h
+  FileCheckException
+  filecheckexception.h
   MediaConfig
   mediaconfig.h
   mediaexception.h
@@ -22,6 +24,7 @@ SET( zypp_media_private_HEADERS
 
 SET( zypp_media_SRCS
   cdtools.cc
+  filecheckexception.cc
   mediaconfig.cc
   mediaexception.cc
   mount.cc
@@ -79,8 +82,8 @@ SET( zypp_media_ng_private_HEADERS
   ng/private/provideitem_p.h
   ng/private/providemessage_p.h
   ng/private/providequeue_p.h
+  ng/private/provideres_p.h
   ng/private/providedbg_p.h
-
 )
 
 SET( zypp_media_ng_SRCS

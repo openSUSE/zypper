@@ -122,17 +122,17 @@ namespace zyppng {
     using Code = zypp::proto::MessageCodes;
     using FieldVal = HeaderValue;
 
-    static expected<ProvideMessage> create( const zyppng::RpcMessage &message );
-    static expected<ProvideMessage> create(const zypp::proto::ProvideMessage &message );
-    static ProvideMessage createProvideStarted( const uint32_t reqId, const zypp::Url &url , const std::optional<std::string> &localFilename = {}, const std::optional<std::string> &stagingFilename = {} );
+    static expected<ProvideMessage> create ( const zyppng::RpcMessage &message );
+    static expected<ProvideMessage> create ( const zypp::proto::ProvideMessage &message );
+    static ProvideMessage createProvideStarted  ( const uint32_t reqId, const zypp::Url &url , const std::optional<std::string> &localFilename = {}, const std::optional<std::string> &stagingFilename = {} );
     static ProvideMessage createProvideFinished ( const uint32_t reqId, const std::string &localFilename , bool cacheHit );
     static ProvideMessage createAttachFinished  ( const uint32_t reqId );
     static ProvideMessage createDetachFinished  ( const uint32_t reqId );
-    static ProvideMessage createAuthInfo( const uint32_t reqId, const std::string &user, const std::string &pw, int64_t timestamp, const std::map<std::string, std::string> &extraValues = {} );
-    static ProvideMessage createMediaChanged( const uint32_t reqId );
-    static ProvideMessage createRedirect( const uint32_t reqId, const zypp::Url &newUrl );
-    static ProvideMessage createMetalinkRedir( const uint32_t reqId, const std::vector<zypp::Url> &newUrls );
-    static ProvideMessage createErrorResponse( const uint32_t reqId, const uint code, const std::string &reason, bool transient = false  );
+    static ProvideMessage createAuthInfo ( const uint32_t reqId, const std::string &user, const std::string &pw, int64_t timestamp, const std::map<std::string, std::string> &extraValues = {} );
+    static ProvideMessage createMediaChanged ( const uint32_t reqId );
+    static ProvideMessage createRedirect ( const uint32_t reqId, const zypp::Url &newUrl );
+    static ProvideMessage createMetalinkRedir ( const uint32_t reqId, const std::vector<zypp::Url> &newUrls );
+    static ProvideMessage createErrorResponse ( const uint32_t reqId, const uint code, const std::string &reason, bool transient = false  );
 
     static ProvideMessage createProvide         ( const uint32_t reqId
                                                   , const zypp::Url &url
@@ -163,6 +163,7 @@ namespace zyppng {
 
     std::vector<FieldVal> values ( const std::string_view &str ) const;
     std::vector<FieldVal> values ( const std::string &str ) const;
+    HeaderValueMap headers() const;
     /*!
      * Returns the last entry with key \a str in the list of values
      * or the default value specified in \a defaultVal
@@ -182,7 +183,6 @@ namespace zyppng {
     ProvideMessage();
     zypp::RWCOW_pointer<zypp::proto::ProvideMessage> _impl;
   };
-
 }
 
 namespace zypp {

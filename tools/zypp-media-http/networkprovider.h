@@ -35,7 +35,7 @@ public:
   zypp::Pathname _targetFileName;
   zypp::Pathname _stagingFileName;
 
-  std::chrono::system_clock::time_point _scheduleAfter = std::chrono::system_clock::time_point::min();
+  std::chrono::steady_clock::time_point _scheduleAfter = std::chrono::steady_clock::time_point::min();
 
 private:
   void clearConnections ();

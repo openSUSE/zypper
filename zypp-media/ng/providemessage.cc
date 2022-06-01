@@ -579,13 +579,24 @@ namespace zyppng {
     return values( std::string_view(str));
   }
 
-  ProvideMessage::FieldVal ProvideMessage::value ( const std::string_view &str, const FieldVal &defaultVal ) const
+  ProvideMessage::FieldVal ProvideMessage::value( const std::string_view &str, const FieldVal &defaultVal ) const
   {
     const auto &fields = _impl->fields();
     auto i = std::find_if( fields.rbegin(), fields.rend(), [&str]( const auto &val ){ return val.key() == str; } );
     if ( i == fields.rend() )
       return defaultVal;
     return fieldValFromProto(*i);
+  }
+
+
+  HeaderValueMap ProvideMessage::headers() const
+  {
+    HeaderValueMap res;
+    auto &fields = _impl->fields();
+    for ( const auto &val : fields ) {
+      res.add( val.key() ,fieldValFromProto(val) );
+    }
+    return res;
   }
 
   ProvideMessage::FieldVal ProvideMessage::value( const std::string &str, const FieldVal &defaultVal ) const

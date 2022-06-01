@@ -134,10 +134,15 @@ namespace zyppng::worker {
     }
   }
 
-  void ProvideWorker::provideSuccess(const uint32_t id, bool cacheHit, const zypp::filesystem::Pathname &localFile)
+  void ProvideWorker::provideSuccess(const uint32_t id, bool cacheHit, const zypp::filesystem::Pathname &localFile, const HeaderValueMap extra )
   {
     MIL_PRV << "Sending provideSuccess for id " << id  << " file " << localFile << std::endl;
-    if ( !_stream->sendMessage( ProvideMessage::createProvideFinished( id ,localFile.asString() ,cacheHit).impl() ) ) {
+    auto msg = ProvideMessage::createProvideFinished( id ,localFile.asString() ,cacheHit);
+    for ( auto i = extra.beginList (); i != extra.endList(); i++ ) {
+      for ( const auto &val : i->second )
+        msg.addValue( i->first, val );
+    }
+    if ( !_stream->sendMessage( msg.impl() ) ) {
       ERR << "Failed to send ProvideSuccess message" << std::endl;
     }
   }

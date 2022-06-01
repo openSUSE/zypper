@@ -55,6 +55,16 @@ namespace zyppng
      */
     const ProvideMediaHandle &mediaHandle () const;
 
+    /*!
+     * The URL this ressource was provided from, can be empty
+     */
+    const zypp::Url &resourceUrl () const;
+
+    /*!
+     * All headers that were received from the worker when sending the result
+     */
+    const HeaderValueMap &headers () const;
+
     private:
       std::shared_ptr<ProvideResourceData> _data;
   };

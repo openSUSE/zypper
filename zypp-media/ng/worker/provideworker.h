@@ -142,7 +142,7 @@ namespace zyppng::worker {
      * Send a \a ProvideSuccess message to the controller. This is to signal that we are finished with providing a file
      * and release the file to be used by the controller side.
      */
-    void provideSuccess (const uint32_t id, bool cacheHit, const zypp::Pathname &localFile );
+    void provideSuccess (const uint32_t id, bool cacheHit, const zypp::Pathname &localFile, const HeaderValueMap extra = {} );
 
     /*!
      * Send a \a ProvideFailed message to the controller. This is to signal that we are failed providing a resource

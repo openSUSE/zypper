@@ -30,6 +30,7 @@ ADD_SUBDIRECTORY( zypp-media-disk )
 ADD_SUBDIRECTORY( zypp-media-iso )
 ADD_SUBDIRECTORY( zypp-media-copy )
 ADD_SUBDIRECTORY( zypp-media-tvm )
+ADD_SUBDIRECTORY( zypp-media-chksum )
 
 FIND_PACKAGE( Notcurses++ )
 if ( Notcurses++_FOUND)

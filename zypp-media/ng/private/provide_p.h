@@ -22,7 +22,6 @@
 #include <zypp-media/ng/Provide>
 #include <zypp-media/ng/ProvideItem>
 #include <zypp-media/ng/ProvideSpec>
-#include <zypp-media/ng/ProvideRes>
 #include <zypp-proto/envelope.pb.h>
 #include <zypp-proto/provider.pb.h>
 #include <zypp-core/zyppng/base/private/base_p.h>
@@ -47,21 +46,6 @@ namespace zyppng {
   class RpcMessageStream;
   using RpcMessageStreamPtr = std::shared_ptr<RpcMessageStream>;
 
-
-  /*!
-     * Represents a reference count for files that are provided by us.
-     * We store a shared_ptr instance inside the file cache map, by combining
-     * the _lastUnref and use_count() == 1 we know exactly when to release the file
-     * from the cache.
-     *
-     * @todo move to private/provideres_p.h
-     */
-  struct ProvideResourceData {
-    zyppng::Provide::MediaHandle _mediaHandle;
-    zypp::ManagedFile _myFile;
-    zypp::Url _resourceUrl; //< The resource where the file was provided from
-    std::chrono::system_clock::time_point _lastUnref = std::chrono::system_clock::time_point::max(); // last time a ref to this item was released
-  };
 
   class ProvidePrivate : public BasePrivate
   {
@@ -97,7 +81,7 @@ namespace zyppng {
     void onItemStateChanged ( ProvideItem &item );
     expected<ProvideQueue::Config> schemeConfig(const std::string &scheme);
 
-    std::shared_ptr<ProvideResourceData> addToFileCache    ( const zypp::Pathname &downloadedFile );
+    std::optional<zypp::ManagedFile> addToFileCache ( const zypp::Pathname &downloadedFile );
     bool isInCache ( const zypp::Pathname &downloadedFile ) const;
 
     bool isRunning() const;
@@ -156,7 +140,13 @@ namespace zyppng {
 
     std::unordered_map< std::string, ProvideQueueRef > _workerQueues;
     std::unordered_map< std::string, ProvideQueue::Config > _schemeConfigs;
-    std::unordered_map< std::string, std::shared_ptr<ProvideResourceData> > _fileCache;
+
+    struct FileCacheItem {
+      zypp::ManagedFile _file;
+      std::optional<std::chrono::steady_clock::time_point> _deathTimer; // timepoint where this item was seen first without a refcount
+    };
+    std::unordered_map< std::string, FileCacheItem > _fileCache;
+
     zypp::Pathname _workerPath;
     zypp::media::CredManagerOptions _credManagerOptions;
 

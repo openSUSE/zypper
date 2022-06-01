@@ -171,6 +171,16 @@ namespace zyppng
     HeaderValueMap &customHeaders();
     const HeaderValueMap &customHeaders() const;
 
+    /*!
+     * Set the custom header value identified by \a key to \a val
+     */
+    ProvideFileSpec &setCustomHeaderValue (  const std::string &key, const HeaderValueMap::Value &val );
+
+    /*!
+     * Adds the custom header value \a val to the list of values identified by \a key
+     */
+    ProvideFileSpec &addCustomHeaderValue (  const std::string &key, const HeaderValueMap::Value &val );
+
   public:
     class Impl;                 ///< Implementation class.
   private:
