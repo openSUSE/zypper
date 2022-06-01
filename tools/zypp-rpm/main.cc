@@ -554,6 +554,7 @@ void *rpmLibCallback( const void *h, const rpmCallbackType what, const rpm_loff_
 
   const auto &sendEndOfScriptTag = [&](){
     //ZDBG << "Send end of script" << std::endl;
+    ::Fflush( that->rpmFd );
     ::sendBytes( static_cast<int>( ExpectedFds::ScriptFd ), endOfScriptTag.data(), endOfScriptTag.size() );
   };
 
