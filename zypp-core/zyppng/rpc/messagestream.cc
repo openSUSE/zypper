@@ -106,6 +106,8 @@ namespace zyppng {
     }
 
     if ( _messages.size() )
+      _nextMessageTimer->start(0);
+    else
       _nextMessageTimer->stop();
 
     return res;
