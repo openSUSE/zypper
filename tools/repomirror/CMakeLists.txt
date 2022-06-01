@@ -4,6 +4,7 @@ set (CMAKE_CXX_STANDARD 17)
 SET (CMAKE_CXX_EXTENSIONS OFF)
 
 SET( SOURCES
+  output.h
   main.cc
 )
 

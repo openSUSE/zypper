@@ -3,6 +3,7 @@
 
 #include <zypp-media/ng/Provide>
 #include <zypp-media/ng/ProvideSpec>
+#include <zypp-media/FileCheckException>
 #include <zypp-core/zyppng/base/EventLoop>
 #include <zypp-core/zyppng/base/Timer>
 #include <zypp-core/zyppng/pipelines/Transform>
@@ -15,273 +16,15 @@
 #include <cstdlib>
 #include <clocale>
 #include <iostream>
-#include <ncpp/NotCurses.hh>
-#include <ncpp/Plane.hh>
-#include <ncpp/MultiSelector.hh>
-#include <ncpp/Reader.hh>
+#include <numeric>
+
+#include "output.h"
 
 class DlSkippedException : public zypp::Exception
 {
   public:
     DlSkippedException() : zypp::Exception("Download was skipped" ) {}
 };
-
-static void zypp_release_ncplane ( struct ncplane *ptr ) { if ( ptr ) ncplane_destroy(ptr); }
-static void zypp_release_progbar ( struct ncprogbar *ptr ) { if ( ptr ) ncprogbar_destroy(ptr); }
-
-class OutputView : public zyppng::Base
-{
-  public:
-    ~OutputView() {
-    }
-    static std::shared_ptr<OutputView> create( ) {
-
-      auto ptr = std::shared_ptr<OutputView>( new OutputView() );
-      ptr->_nc = std::make_unique<ncpp::NotCurses>();
-      if ( !ptr->_nc )
-        return nullptr;
-
-      ptr->_stdplane = std::unique_ptr<ncpp::Plane>( ptr->_nc->get_stdplane() );
-      if ( !ptr->_stdplane )
-        return nullptr;
-
-      int rows = 0;
-      int cols = 0;
-      ptr->_stdplane->get_dim( rows, cols );
-
-      int top_rows = ( rows - 2 );
-      if ( top_rows <= 0 ){
-        return nullptr;
-      }
-
-      int bottom_rows = rows - top_rows;
-      if ( bottom_rows <= 0 ) {
-        return nullptr;
-      }
-
-      // the outer plane this is just used to draw a nice border
-      ptr->_topOuterPlane = std::make_unique<ncpp::Plane>( *ptr->_stdplane, top_rows, cols, 0, 0, nullptr );
-      ptr->_topOuterPlane->rounded_box_sized( 0, 0, top_rows, cols, 0 );
-
-      // the inner plane, here we put the text
-      int r,c;
-      ptr->_topOuterPlane->get_dim( r, c );
-      ptr->_topPlaneLeft = std::make_unique<ncpp::Plane>( *ptr->_topOuterPlane, r-2 , (c-1) / 2, 1, 1 );
-      ptr->_topPlaneLeft->set_scrolling( true );
-
-      ptr->_topPlaneRight = std::make_unique<ncpp::Plane>( *ptr->_topOuterPlane, r-2 , c - ptr->_topPlaneLeft->get_dim_x() - 1 , 1, ptr->_topPlaneLeft->get_dim_x() + 1  );
-      ptr->_topPlaneRight->set_scrolling( true );
-
-      // the plane where we show the progressbar text
-      ptr->_progBarTextPlane = std::make_unique<ncpp::Plane>( *ptr->_stdplane, 1 , cols, top_rows, 0 );
-
-      // to create the progressbar we need to fall back to the C API due to some bugs in the C++ progbar implementation
-      ncplane_options nopts = {
-        .y = top_rows+1,
-        .x = 0,
-        .rows = bottom_rows-1,
-        .cols = cols,
-        .userptr = nullptr,
-        .name = nullptr,
-        .resizecb = nullptr,
-        .flags = 0,
-        .margin_b = 0,
-        .margin_r = 0,
-      };
-
-      std::unique_ptr<struct ncplane, void(*)(struct ncplane*)> bottomPlane( ncplane_create( *ptr->_stdplane, &nopts ), &zypp_release_ncplane );
-      if ( !bottomPlane ) {
-        return nullptr;
-      }
-
-      struct ncprogbar_options popts = {
-        .ulchannel = 0,
-        .urchannel = 0,
-        .blchannel = 0,
-        .brchannel = 0,
-        .flags = 0,
-      };
-      ptr->_progbar = std::unique_ptr<struct ncprogbar, void(*)(struct ncprogbar*)> ( ncprogbar_create( bottomPlane.release(), &popts ), &zypp_release_progbar );
-      if ( !ptr->_progbar ) {
-        return nullptr;
-      }
-      return ptr;
-    }
-
-    void updateProgress ( const std::string &txt, double prog, bool autoRender = true ) {
-      if ( !_progbar )
-        return;
-
-      _progBarTextPlane->erase();
-      _progBarTextPlane->putstr( 0, ncpp::NCAlign::Center, txt.data() );
-      ncprogbar_set_progress( _progbar.get(), prog );
-      if ( autoRender )
-        renderNow();
-    }
-
-    void putMsgTxt ( const std::string &txt, bool doAutoRender = true ) {
-      if ( !_topPlaneLeft )
-        return;
-
-      ncplane_puttext( *_topPlaneLeft, -1, NCALIGN_LEFT, txt.data(), nullptr );
-      if ( doAutoRender )
-        renderNow();
-    }
-
-    void putMsgErr ( const std::string &txt, bool doAutoRender = true ) {
-      if ( !_topPlaneRight )
-        return;
-
-      _topPlaneRight->set_fg_rgb( 0xff5349 );
-      ncplane_puttext( *_topPlaneRight, -1, NCALIGN_LEFT, txt.data(), nullptr );
-      _topPlaneRight->set_fg_default();
-      if ( doAutoRender )
-        renderNow();
-    }
-
-    std::optional<std::string> promptUser ( const std::string &desc, const std::string &label )
-    {
-      if ( desc.size() )
-        putMsgTxt( desc, false  );
-      putMsgTxt( label + ": " );
-
-      int curX, curY;
-      _topPlaneLeft->get_cursor_yx( curY, curX  );
-      ncplane_options nopts = {
-        .y = curY,
-        .x = curX,
-        .rows = 1,
-        .cols = _topPlaneLeft->get_dim_x() - curX,
-        .userptr = nullptr,
-        .name = nullptr,
-        .resizecb = nullptr,
-        .flags = 0,
-        .margin_b = 0,
-        .margin_r = 0,
-      };
-
-      std::unique_ptr<struct ncplane, void(*)(struct ncplane*)> inputPlane( ncplane_create( *_topPlaneLeft, &nopts ), &zypp_release_ncplane );
-      if ( !inputPlane ) {
-        return {};
-      }
-
-      auto readOpts = ncreader_options {
-        .tchannels = 0,
-        .tattrword = 0,
-        .flags = NCREADER_OPTION_CURSOR | NCREADER_OPTION_NOCMDKEYS
-      };
-      std::unique_ptr<struct ncreader, void(*)(struct ncreader*)> reader( ncreader_create( inputPlane.release(), &readOpts ), []( struct ncreader *relme){ ncreader_destroy(relme, nullptr);} );
-      if ( !reader )
-        return {};
-
-      while ( true ) {
-        renderNow();
-        ncinput ni;
-        _nc->get( true, &ni );
-        if ( ni.id == NCKEY_ENTER ) {
-          break;
-        }
-        ncreader_offer_input( reader.get(), &ni );
-      }
-
-      std::unique_ptr<char, void(*)(void *)> data( ncreader_contents( reader.get() ), free );
-      std::string_view cppData( data.get() );
-      if ( cppData.empty() )
-        return {};
-
-      return std::string(cppData);
-    }
-
-    template <typename T>
-    std::vector<int> promptMultiSelect( const std::string &title, const std::string &secondary, const std::vector<T> &data ) {
-
-      // use a boost container here, because the stdlib decided to completely break vector<bool> by prematurely optimizing it
-      boost::container::vector<bool> selected( data.size(), false );
-      std::vector<ncmselector_item> items;
-      std::vector<std::pair<std::string, std::string>> stringsStorage;
-      items.reserve( data.size() );
-      stringsStorage.reserve( data.size() );
-
-      for ( const T& entry : data ) {
-        stringsStorage.push_back( std::make_pair( entry.asUserString(), std::string("") ) );
-        items.push_back( ncmselector_item{
-          .option = stringsStorage.back().first.data(),
-          .desc   = stringsStorage.back().second.data(),
-          .selected = false
-        });
-      }
-      items.push_back(ncmselector_item{
-        .option = nullptr,
-        .desc   = nullptr,
-        .selected = false
-      });
-
-      std::string_view footer("Press Enter to accept or ESC to cancel.");
-
-      auto selOpts = ncmultiselector_options{
-        .title          = title.data(),
-        .secondary      = secondary.data(),
-        .footer         = footer.data(),
-        .items          =  items.data(),
-        .maxdisplay     = 0,
-        .opchannels     = NCCHANNELS_INITIALIZER(0xe0, 0x80, 0x40, 0, 0, 0),
-        .descchannels   = NCCHANNELS_INITIALIZER(0x80, 0xe0, 0x40, 0, 0, 0),
-        .titlechannels  = NCCHANNELS_INITIALIZER(0x20, 0xff, 0xff, 0, 0, 0x20),
-        .footchannels   = NCCHANNELS_INITIALIZER(0xe0, 0, 0x40, 0x20, 0x20, 0),
-        .boxchannels    = NCCHANNELS_INITIALIZER(0x20, 0xe0, 0xe0, 0x20, 0, 0),
-        .flags          = 0
-      };
-
-      auto tmpPlane = ncpp::Plane( *_stdplane, _stdplane->get_dim_y()-1, _stdplane->get_dim_x()-1, 1, 1 );
-      ncpp::MultiSelector selector( tmpPlane, &selOpts);
-
-      while ( true ) {
-        renderNow();
-        ncinput ni;
-        _nc->get( true, &ni );
-        if ( ni.id == NCKEY_ESC ) {
-          return {};
-        } else if ( ni.id == NCKEY_ENTER ) {
-          break;
-        }
-        selector.offer_input( &ni );
-      }
-
-      selector.get_selected( selected.data(), selected.size() );
-      std::vector<int> selIndices;
-      for ( int i = 0; i < selected.size(); i++ ) {
-        if ( selected[i])
-          selIndices.push_back(i);
-      }
-
-      return selIndices;
-    }
-
-    void renderNow () {
-      if ( _nc ) _nc->render();
-    }
-
-    uint32_t waitForKeys ( std::vector<uint32_t> keys = {} ) {
-      ncinput ni;
-      while ( true ) {
-        _nc->get( true, &ni );
-        if ( keys.empty() || std::find( keys.begin(), keys.end(), ni.id ) != keys.end() )
-          return ni.id;
-      }
-    }
-
-  private:
-    OutputView() : _topOuterPlane( nullptr ), _topPlaneLeft( nullptr ), _topPlaneRight( nullptr ), _progbar( nullptr, &zypp_release_progbar ) {}
-
-    std::unique_ptr<ncpp::NotCurses> _nc;
-    std::unique_ptr<ncpp::Plane> _stdplane;
-    std::unique_ptr<ncpp::Plane> _topOuterPlane;
-    std::unique_ptr<ncpp::Plane> _topPlaneLeft;
-    std::unique_ptr<ncpp::Plane> _topPlaneRight;
-    std::unique_ptr<ncpp::Plane> _progBarTextPlane;
-    std::unique_ptr<struct ncprogbar, void(*)(struct ncprogbar*)> _progbar;
-};
-
 
 class MyDLStatus : public zyppng::ProvideStatus
 {
@@ -305,6 +48,108 @@ class MyDLStatus : public zyppng::ProvideStatus
     OutputView &_out;
 };
 
+/*!
+ * Downloads a solvable via the given handle.
+ * Returns the AsyncResult
+ */
+zyppng::AsyncOpRef<zyppng::expected<zyppng::ProvideRes>> provideSolvable ( std::shared_ptr<OutputView> output, zyppng::ProvideMediaHandle handle, const zypp::sat::Solvable &s )
+{
+  using namespace zyppng::operators;
+
+  auto prov = handle.parent();
+  if ( !prov  )
+    return zyppng::makeReadyResult( zyppng::expected<zyppng::ProvideRes>::error( std::make_exception_ptr( zypp::Exception("Handle without parent!"))) );
+
+  zypp::PoolItem pi(s);
+  if ( !pi->isKind<zypp::Package>() ) {
+    //output->putMsgErr( zypp::str::Str() <<  "Skipping 1:  " << pi.asUserString() << "\n" );
+    return zyppng::makeReadyResult( zyppng::expected<zyppng::ProvideRes>::error( std::make_exception_ptr(DlSkippedException())) );
+  }
+
+  auto oml = pi.lookupLocation();
+  if ( oml.filename().empty() ) {
+    output->putMsgErr( zypp::str::Str() <<  "Skipping:  " << pi.asUserString() << "\n" );
+    return zyppng::makeReadyResult( zyppng::expected<zyppng::ProvideRes>::error( std::make_exception_ptr(DlSkippedException())) );
+  }
+
+  // enable for more output, but sloooooows the startup time down significantly
+  //output->putMsgTxt( zypp::str::Str() << "Downloading " << pi.asUserString() << " size is: " << pi.downloadSize() << "\n" );
+
+  return prov->provide( handle, oml.filename(), zyppng::ProvideFileSpec( oml ) )
+  | [output]( zyppng::expected<zyppng::ProvideRes> &&res ) {
+      if ( res ) {
+        output->putMsgTxt( zypp::str::Str() << "File downloaded: " << res->file() << "\n" );
+      } else {
+        output->putMsgErr( zypp::str::Str() <<   "Failed to download file\n" );
+        try
+        {
+          std::rethrow_exception(res.error());
+        }
+        catch(const zypp::Exception& e)
+        {
+          output->putMsgErr( zypp::str::Str() << e.asUserHistory() << '\n' );
+        }
+        catch(const std::exception& e)
+        {
+          output->putMsgErr( zypp::str::Str() << e.what() << '\n' );
+        }
+      }
+      return res;
+    };
+}
+
+/*!
+ * Helper function to copy a ProvideRes underlying file to a target destination, keeping the ProvideRes alive until the copy operation has finished
+ */
+zyppng::AsyncOpRef<zyppng::expected<zypp::ManagedFile>> copyProvideResToFile ( std::shared_ptr<OutputView> output, zyppng::ProvideRef prov, zyppng::ProvideRes &&res, const zypp::Pathname &targetDir )
+{
+  using namespace zyppng::operators;
+
+  auto fName = res.file();
+  return prov->copyFile( fName, targetDir/fName.basename() )
+    | [ resSave = std::move(res) ] ( auto &&result ) {
+      // callback lambda to keep the ProvideRes reference around until the op is finished,
+      // if the op fails the callback will be cleaned up and so the reference
+      return result;
+    };
+}
+
+/*!
+ * Helper function to calculate a checksum on a ProvideRes result file, keeping the ProvideRes alive during the operation and returning it again after the test was successful,
+ * here we could also ask the user if a invalid checksum should be accepted and ignore the result if the user wants to
+ */
+zyppng::AsyncOpRef<zyppng::expected<zyppng::ProvideRes>> checksumIfRequired ( std::shared_ptr<OutputView> output, zyppng::ProvideRef prov, zypp::sat::Solvable solvable, zyppng::ProvideRes &&res )
+{
+  using namespace zyppng::operators;
+
+  auto fName = res.file();
+
+  const auto oml = solvable.lookupLocation();
+  if ( !oml.checksum().empty() ) {
+    output->putMsgTxt( zypp::str::Str()<<"  calculating checksum for file: " << fName << "\n");
+
+    return prov->checksumForFile( fName, oml.checksum().type() )
+    | mbind([ output, expectedSum = oml.checksum(), saveRes = std::move(res) ]( auto &&checksumRes ) {
+      output->putMsgTxt( zypp::str::Str()<<"  Got checksum for file: " << saveRes.file() << " is: "  << checksumRes << "\n" );
+      try {
+        zypp::CheckSum s( expectedSum.type(), checksumRes );
+        if ( expectedSum == s )
+          return zyppng::expected<zyppng::ProvideRes>::success(std::move(saveRes));
+        else
+          return zyppng::expected<zyppng::ProvideRes>::error( ZYPP_EXCPT_PTR( zypp::CheckSumCheckException( zypp::str::Str() << saveRes.file() << " has wrong checksum" ) ) );
+      } catch ( const zypp::Exception &e ) {
+        ZYPP_CAUGHT(e);
+        return zyppng::expected<zyppng::ProvideRes>::error( ZYPP_EXCPT_PTR(e) );
+      }
+
+    });
+  }
+
+  return zyppng::makeReadyResult( zyppng::expected<zyppng::ProvideRes>::success(std::move(res)) );
+}
+
+
+
 int main ( int argc, char *argv[] )
 {
   using namespace zyppng::operators;
@@ -319,6 +164,45 @@ int main ( int argc, char *argv[] )
 
   output->putMsgTxt("Loading System\n");
   output->putMsgErr("Errors go here\n");
+
+#if 0
+  {
+    auto prov = zyppng::Provide::create();
+    prov->setStatusTracker( std::make_shared<MyDLStatus>( *output, prov) );
+
+    zypp::Url test("copy://");
+    test.setPathName("/tmp/test/test1");
+
+    auto rootOp = prov->provide( test, zyppng::ProvideFileSpec().setDestFilenameHint("/tmp/test/test2") )
+    | [&]( zyppng::expected<zyppng::ProvideRes> &&res ) {
+      if ( !res ) {
+        output->putMsgErr( zypp::str::Str() <<   "Failed to copy file: ", false );
+        try {
+          std::rethrow_exception(res.error());
+
+        } catch(const zypp::Exception& e) {
+          output->putMsgErr( zypp::str::Str() << e.asUserHistory() << '\n' );
+
+        } catch(const std::exception& e) {
+          output->putMsgErr( zypp::str::Str() << e.what() << '\n' );
+
+        } catch(...) {
+          output->putMsgErr( zypp::str::Str() << "Unknown exception\n" );
+        }
+      } else {
+        output->putMsgTxt( zypp::str::Str() <<  "Yay copy worked\n" );
+      }
+      return 0;
+    };
+
+    prov->start();
+    if ( !rootOp->isReady() )
+      ev->run();
+    output->putMsgTxt( zypp::str::Str() <<  "Waiting, press Return to exit\n" );
+    output->waitForKeys( { NCKEY_ENTER } );
+    return 0;
+  }
+#endif
 
   TestSetup t;
   try {
@@ -381,10 +265,13 @@ int main ( int argc, char *argv[] )
     return d;
   });
 
-  std::vector< zyppng::AsyncOpRef< std::vector<zyppng::expected<zyppng::ProvideRes>>> > mop;
+  std::vector< zyppng::AsyncOpRef< std::vector<zyppng::expected<zypp::ManagedFile>>> > mop;
 
   // we need a way to remember the data for the full transaction, there is probably a better way for a real application
   std::unordered_map<int, std::unordered_map<int, std::vector<zypp::sat::Solvable>>> repoToMediaToSolvables;
+
+  zypp::Pathname workPath = zypp::Pathname(".").realpath() / "allrpms";
+  zypp::filesystem::assert_dir( workPath );
 
   for ( const auto repoToDl : reposToDl ) {
     const auto &r = myRepos[repoToDl];
@@ -445,49 +332,16 @@ int main ( int argc, char *argv[] )
                 output->putMsgErr( zypp::str::Str() << "Unknown exception\n" );
 
               }
-              return std::vector<zyppng::AsyncOpRef<zyppng::expected<zyppng::ProvideRes>>>{ zyppng::makeReadyResult( zyppng::expected<zyppng::ProvideRes>::error( hdl.error() ) ) };
+              return std::vector<zyppng::AsyncOpRef<zyppng::expected<zypp::ManagedFile>>>{ zyppng::makeReadyResult( zyppng::expected<zypp::ManagedFile>::error( hdl.error() ) ) };
             }
 
             return zyppng::transform( solvables, [ &, hdl=hdl.get() ]( const zypp::sat::Solvable &s ) {
-              zypp::PoolItem pi(s);
-              if ( !pi->isKind<zypp::Package>() ) {
-                //output->putMsgErr( zypp::str::Str() <<  "Skipping 1:  " << pi.asUserString() << "\n" );
-                return zyppng::makeReadyResult( zyppng::expected<zyppng::ProvideRes>::error( std::make_exception_ptr(DlSkippedException())) );
-              }
-
-              auto oml = pi.lookupLocation();
-              if ( oml.filename().empty() ) {
-                output->putMsgErr( zypp::str::Str() <<  "Skipping:  " << pi.asUserString() << "\n" );
-                return zyppng::makeReadyResult( zyppng::expected<zyppng::ProvideRes>::error( std::make_exception_ptr(DlSkippedException())) );
-              }
-
-              output->putMsgTxt( zypp::str::Str() << "Downloading " << pi.asUserString() << " size is: " << pi.downloadSize() << "\n" );
-              //std::cout << "Filename: " << oml.filename() << std::endl;
-
-              return prov->provide( hdl, oml.filename(), zyppng::ProvideFileSpec( oml ) )
-              | [&output]( zyppng::expected<zyppng::ProvideRes> &&res ) {
-                  if ( res ) {
-                    output->putMsgTxt( zypp::str::Str() << "File downloaded: " << res->file() << "\n" );
-                  } else {
-                    output->putMsgErr( zypp::str::Str() <<   "Failed to download file\n" );
-                    try
-                    {
-                      std::rethrow_exception(res.error());
-                    }
-                    catch(const zypp::Exception& e)
-                    {
-                      output->putMsgErr( zypp::str::Str() << e.asUserHistory() << '\n' );
-                    }
-                    catch(const std::exception& e)
-                    {
-                      output->putMsgErr( zypp::str::Str() << e.what() << '\n' );
-                    }
-                  }
-                  return res;
-                };
+              return s |       (std::bind( &provideSolvable,      output, hdl,  std::placeholders::_1 ))
+                       | mbind (std::bind( &checksumIfRequired,   output, prov, sat::Solvable(s), std::placeholders::_1 ))
+                       | mbind (std::bind( &copyProvideResToFile, output, prov, std::placeholders::_1, workPath ) ) ;
             });
           }
-        | zyppng::waitFor<zyppng::expected<zyppng::ProvideRes>>()
+        | zyppng::waitFor<zyppng::expected<zypp::ManagedFile>>()
         | [ &r, &output ]( const auto &&res ){
           output->putMsgTxt( zypp::str::Str() << "Finished with rpo: " << r.info().name() << "\n" );
           return res;
@@ -495,12 +349,18 @@ int main ( int argc, char *argv[] )
     });
   }
 
-  std::vector<std::vector<zyppng::expected<zyppng::ProvideRes>>> finalResults;
+  std::vector<zyppng::expected<zypp::ManagedFile>> finalResults;
 
   auto rootOp = std::move( mop )
-  | zyppng::waitFor< std::vector<zyppng::expected<zyppng::ProvideRes>> >()
-  | [&]( std::vector<std::vector<zyppng::expected<zyppng::ProvideRes>>> &&allResults ) {
-      finalResults = std::move(allResults);
+  | zyppng::waitFor< std::vector<zyppng::expected<zypp::ManagedFile>> >()
+  | [&]( std::vector<std::vector<zyppng::expected<zypp::ManagedFile>>> &&allResults ) {
+      // reduce to one vector of results
+      for ( auto &innerVec : allResults ) {
+        std::accumulate( std::make_move_iterator(innerVec.begin()), std::make_move_iterator(innerVec.end()), &finalResults, []( std::vector<zyppng::expected<zypp::ManagedFile>>* vec, auto &&bla ){
+          vec->push_back(std::move(bla));
+          return vec;
+        });
+      }
       ev->quit();
       return 0;
   };
@@ -512,28 +372,33 @@ int main ( int argc, char *argv[] )
   int succ = 0;
   int skip = 0;
   int err  = 0;
-  for ( const auto &outer : finalResults ) {
-    for ( const auto &inner : outer ) {
-      if ( inner )
-        succ++;
-      else {
-        try
-        {
-          std::rethrow_exception( inner.error() );
-        }
-        catch(const DlSkippedException& e)
-        {
-          skip++;
-        }
-        catch(...) {
-          err++;
-        }
+  for ( const auto &res : finalResults ) {
+    if ( res )
+      succ++;
+    else {
+      try {
+        std::rethrow_exception( res.error() );
+      } catch(const DlSkippedException& e) {
+        skip++;
+      } catch( const zypp::Exception &e ) {
+        output->putMsgErr( zypp::str::Str()<<"Request failed with: " << e.asUserString() << "\n");
+        err++;
+      } catch( const std::exception &e ) {
+        output->putMsgErr( zypp::str::Str()<<"Request failed with: " << e.what() << "\n");
+        err++;
+      } catch( ... ) {
+        output->putMsgErr( zypp::str::Str()<<"Request failed with an unknown error.\n" );
+        err++;
       }
-
     }
   }
+  #if 0
+  for ( const auto &outer : finalResults ) {
 
-  output->putMsgTxt( zypp::str::Str() <<  "All done:\n\tSuccess:\t" << succ << "\n\tErrors: \t"<< err << "\n\tSkipped:\t"<<skip<<"\n", false );
+  }
+  #endif
+
+  output->putMsgTxt( zypp::str::Str() <<  "All done:\nSuccess:" << succ << "\nErrors: "<< err << "\nSkipped:"<<skip<<"\n", false );
   output->putMsgTxt( zypp::str::Str() <<  "Waiting, press Return to exit\n" );
   output->waitForKeys( { NCKEY_ENTER } );
   return 0;
