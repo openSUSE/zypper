@@ -63,7 +63,10 @@ BOOST_AUTO_TEST_CASE( http_prov )
       resOpt = *res;
   });
 
-  ev->run();
+  BOOST_REQUIRE( !op->isReady() );
+
+  if ( !op->isReady() )
+    ev->run();
 
   BOOST_REQUIRE( !err );
   BOOST_REQUIRE( resOpt.has_value() );
@@ -102,7 +105,11 @@ BOOST_AUTO_TEST_CASE( http_attach )
     BOOST_REQUIRE( res.is_valid() );
     BOOST_REQUIRE( !res->handle().empty() );
   });
-  ev->run();
+
+  BOOST_REQUIRE( !op->isReady() );
+
+  if ( !op->isReady() )
+    ev->run();
 }
 
 BOOST_AUTO_TEST_CASE( http_attach_prov )
@@ -139,7 +146,11 @@ BOOST_AUTO_TEST_CASE( http_attach_prov )
       fileRes = std::move(*res);
     ev->quit();
   });
-  ev->run();
+
+  BOOST_REQUIRE( !op->isReady() );
+
+  if ( !op->isReady() )
+    ev->run();
 
   BOOST_REQUIRE( fileRes.has_value() );
   zypp::PathInfo pi ( fileRes->file() );
@@ -188,7 +199,11 @@ BOOST_AUTO_TEST_CASE( http_attach_prov_404 )
     }
 
   });
-  ev->run();
+
+  BOOST_REQUIRE( !op->isReady() );
+
+  if ( !op->isReady() )
+    ev->run();
 }
 
 
@@ -228,7 +243,11 @@ BOOST_AUTO_TEST_CASE( http_attach_prov_notafile )
     if ( !res )
       err = res.error();
   });
-  ev->run();
+
+  BOOST_REQUIRE( !op->isReady() );
+
+  if ( !op->isReady() )
+    ev->run();
 
   BOOST_REQUIRE( err );
   ZYPP_REQUIRE_THROW( std::rethrow_exception( err ), zypp::media::MediaNotAFileException );
@@ -314,7 +333,10 @@ BOOST_AUTO_TEST_CASE( http_prov_auth )
       resOpt = *res;
   });
 
-  ev->run();
+  BOOST_REQUIRE( !op->isReady() );
+
+  if ( !op->isReady() )
+    ev->run();
 
   //BOOST_REQUIRE( gotSigAuthRequired );
   BOOST_REQUIRE( !err );
@@ -380,7 +402,10 @@ BOOST_AUTO_TEST_CASE( http_prov_auth_nouserresponse )
       resOpt = *res;
   });
 
-  ev->run();
+  BOOST_REQUIRE( !op->isReady() );
+
+  if ( !op->isReady() )
+    ev->run();
 
   BOOST_REQUIRE( gotSigAuthRequired );
   BOOST_REQUIRE( err );
@@ -450,7 +475,10 @@ BOOST_AUTO_TEST_CASE( http_prov_auth_wrongpw )
       resOpt = *res;
   });
 
-  ev->run();
+  BOOST_REQUIRE( !op->isReady() );
+
+  if ( !op->isReady() )
+    ev->run();
 
   BOOST_REQUIRE_EQUAL( cntAuthRequired, 2 );
   BOOST_REQUIRE( !err );
@@ -521,7 +549,11 @@ BOOST_AUTO_TEST_CASE( http_attach_prov_auth )
       fileRes = std::move(*res);
     ev->quit();
   });
-  ev->run();
+
+  BOOST_REQUIRE( !op->isReady() );
+
+  if ( !op->isReady() )
+    ev->run();
 
   BOOST_REQUIRE_EQUAL( cntAuthRequired, 1 ); // after the first auth request all others should work
   BOOST_REQUIRE( fileRes.has_value() );
@@ -624,7 +656,10 @@ BOOST_AUTO_TEST_CASE( tvm_basic )
     ev->quit();
   });
 
-  ev->run();
+  BOOST_REQUIRE( !r->isReady() );
+
+  if ( !r->isReady() )
+    ev->run();
 
   for ( const auto &res : r->get() ) {
     BOOST_REQUIRE(res);
@@ -681,7 +716,10 @@ BOOST_AUTO_TEST_CASE( tvm_medchange )
     ev->quit();
   });
 
-  ev->run();
+  BOOST_REQUIRE( !r->isReady() );
+
+  if ( !r->isReady() )
+    ev->run();
 
   BOOST_REQUIRE( gotMediaChange );
   BOOST_REQUIRE_EQUAL( labelAsked, std::string("CD Test Set") );
@@ -744,7 +782,12 @@ BOOST_DATA_TEST_CASE( tvm_medchange_abort, bdata::make( cancelOps ), cancelOp )
   op1->sigReady().connect( readyCB );
   op2->sigReady().connect( readyCB );
 
-  ev->run();
+  BOOST_REQUIRE( !op1->isReady() );
+  BOOST_REQUIRE( !op2->isReady() );
+
+
+  if ( !op1->isReady() && !op2->isReady() )
+    ev->run();
 
   BOOST_REQUIRE( gotMediaChange );
   BOOST_REQUIRE_EQUAL( labelAsked, std::string("CD Test Set") );
@@ -806,7 +849,12 @@ BOOST_AUTO_TEST_CASE( tvm_jammed )
   op2->sigReady().connect( readyCB );
 
 
-  ev->run();
+  BOOST_REQUIRE( !op1->isReady() );
+  BOOST_REQUIRE( !op2->isReady() );
+
+
+  if ( !op1->isReady() && !op2->isReady() )
+    ev->run();
 
   //we have only one drive which is in use, so we can  not be asked for media change
   BOOST_REQUIRE( !gotMediaChange );
@@ -897,7 +945,12 @@ BOOST_AUTO_TEST_CASE( tvm_jammed_release )
     });
   });
 
-  ev->run();
+  BOOST_REQUIRE( !op1->isReady() );
+  BOOST_REQUIRE( !op2 || !op2->isReady() );
+  BOOST_REQUIRE( !op3 || !op3->isReady() );
+
+  if ( !op1->isReady() )
+    ev->run();
 
   //we have only one drive which is in use, so we can  not be asked for media change
   BOOST_REQUIRE( !gotInvalidMediaChange );
