@@ -11,6 +11,8 @@
 #include <zypp/ZConfig.h>
 #include <zypp/TmpPath.h>
 #include <zypp-core/zyppng/pipelines/Wait>
+#include <zypp-core/zyppng/rpc/zerocopystreams.h>
+#include <zypp-core/zyppng/base/private/linuxhelpers_p.h>
 
 #include <zypp-proto/tvm.pb.h>
 #include <iostream>
@@ -567,9 +569,17 @@ BOOST_AUTO_TEST_CASE( http_attach_prov_auth )
 
 static void writeTVMConfig ( const zypp::Pathname &file, const zypp::proto::test::TVMSettings &set )
 {
-  std::ofstream out( (file/"tvm.conf").asString(), std::ofstream::binary );
-  if ( !set.SerializePartialToOstream( &out ) )
+  const auto &fname = file/"tvm.conf";
+  int fd = open( fname.asString().data(), O_WRONLY | O_CREAT | O_TRUNC, 0666 );
+  if ( fd < 0 ) {
+    ERR << "Failed to open/create file " << fname << " error: "<<zyppng::strerr_cxx(errno)<< " " << errno << std::endl;
+    return;
+  }
+  zyppng::FileOutputStream out( fd );
+  out.SetCloseOnDelete( true );
+  if ( !set.SerializeToZeroCopyStream( &out ) )
     ERR << "Failed to serialize settings" << std::endl;
+  MIL << "TVM config serialized to: " << fname << std::endl;
 }
 
 static auto makeDVDProv ( zyppng::ProvideRef &prov, const zypp::filesystem::Pathname &devRoot, int mediaNr, const std::string &fName )

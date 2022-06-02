@@ -14,6 +14,9 @@
 #include <zypp-core/base/StringV.h>
 #include <zypp-media/ng/MediaVerifier>
 #include <zypp-proto/tvm.pb.h>
+#include <zypp-core/zyppng/rpc/zerocopystreams.h>
+#include <zypp-core/zyppng/base/private/linuxhelpers_p.h>
+
 
 #undef ZYPP_BASE_LOGGER_LOGGROUP
 #define ZYPP_BASE_LOGGER_LOGGROUP "TestVMProvider"
@@ -281,9 +284,18 @@ void TestVMProvider::unmountDevice( zyppng::worker::Device &dev )
 
 void TestVMProvider::detectDevices( )
 {
-  std::ifstream in( (_provRoot/"tvm.conf").asString(), std::iostream::binary );
+  const auto &fname = _provRoot/"tvm.conf";
+  int fd = open( fname.asString().data(), O_RDONLY );
+  if ( fd < 0 ) {
+    ERR << "Failed to open file " << fname << " error: "<<"("<<errno<<")"<<zyppng::strerr_cxx(errno)<< std::endl;
+    return;
+  }
+
+  zyppng::FileInputStream in( fd );
+  in.SetCloseOnDelete(true);
+
   zypp::proto::test::TVMSettings set;
-  if ( !set.ParseFromIstream( &in ) ) {
+  if ( !set.ParseFromZeroCopyStream( &in ) ) {
     MIL << "No devices configured!" << std::endl;
     return;
   }
