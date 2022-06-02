@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-02-23 18:47+0100\n"
-"PO-Revision-Date: 2022-05-31 23:13+0000\n"
-"Last-Translator: Salman Mubarak <salmandjuli@gmail.com>\n"
+"PO-Revision-Date: 2022-06-02 05:13+0000\n"
+"Last-Translator: Kukuh Syafaat <syafaatkukuh@gmail.com>\n"
 "Language-Team: Indonesian <https://l10n.opensuse.org/projects/zypper/master/"
 "id/>\n"
 "Language: id\n"
@@ -21,7 +21,7 @@ msgstr ""
 
 #: src/Command.cc:93
 msgid "Invalid command"
-msgstr "Perintah tidak sesuai"
+msgstr "Perintah tidak valid"
 
 #: src/Command.cc:111
 msgid "Repository Management:"
@@ -37,11 +37,11 @@ msgstr "Manajemen Perangkat Lunak:"
 
 #: src/Command.cc:131
 msgid "Update Management:"
-msgstr "Manajemen Pembaruan:"
+msgstr "Manajemen Pemutakhiran:"
 
 #: src/Command.cc:138
 msgid "Querying:"
-msgstr "Menanyakan:"
+msgstr "Mengkueri:"
 
 #: src/Command.cc:149
 msgid "Package Locks:"
@@ -49,7 +49,7 @@ msgstr "Kunci Paket:"
 
 #: src/Command.cc:154
 msgid "Locale Management:"
-msgstr "Manajemen Lokal:"
+msgstr "Manajemen Locale:"
 
 #: src/Command.cc:158
 msgid "Other Commands:"
@@ -62,11 +62,11 @@ msgstr "Sub perintah:"
 #: src/Command.cc:288
 #, c-format, boost-format
 msgid "Unknown command '%s'"
-msgstr "Perintah '%s' tidak diketahui"
+msgstr "Perintah '%s' tidak dikenal"
 
 #: src/CommitSummary.cc:90
 msgid "Installation has completed with error."
-msgstr "Instalasi selesai dengan kesalahan."
+msgstr "Pemasangan selesai dengan galat."
 
 #: src/CommitSummary.cc:92
 #, boost-format
@@ -110,7 +110,7 @@ msgstr[0] "... dan %1% item lagi."
 #: src/Config.cc:53
 #, c-format, boost-format
 msgid "Invalid table style %d."
-msgstr "Gaya tabel %d tidak sah."
+msgstr "Gaya tabel %d tidak valid."
 
 #: src/Config.cc:54
 #, c-format, boost-format
@@ -119,7 +119,7 @@ msgstr " Gunakan bilangan bulat dari %d hingga %d"
 
 #: src/Config.cc:244
 msgid "The path specified in the --root option must be absolute."
-msgstr "Jalur yang ditentukan dalam opsi - root harus mutlak."
+msgstr "Path yang ditentukan dalam opsi --root harus mutlak."
 
 #. translators: --help, -h
 #: src/Config.cc:322
@@ -138,9 +138,8 @@ msgstr "Keluaran daftar petunjuk pengguna zypper."
 
 #. translators: --config, -c <FILE>
 #: src/Config.cc:356
-#, fuzzy
 msgid "Use specified config file instead of the default."
-msgstr "Gunakan konfigurasi khusus file yang dialihkan sebagai ganti bawaan."
+msgstr "Gunakan berkas konfigurasi yang ditentukan sebagai ganti bawaan."
 
 #: src/Config.cc:363
 msgid "User data string must not contain nonprintable or newline characters!"
@@ -213,7 +212,7 @@ msgstr "Beralih ke keluaran XML."
 #. translators: --ignore-unknown, -i
 #: src/Config.cc:448
 msgid "Ignore unknown packages."
-msgstr "Abaikan paket yang tidak diketahui."
+msgstr "Abaikan paket yang tidak dikenal."
 
 #. translators: --terse, -t
 #: src/Config.cc:459
@@ -2245,7 +2244,8 @@ msgstr ""
 #: src/commands/installremove.cc:126
 msgid "Uninstallation of a source package not defined and implemented."
 msgstr ""
-"Penghapusan instalasi paket sumber tidak didefinisikan dan diimplementasikan."
+"Penghapusan pemasangan paket sumber tidak didefinisikan dan "
+"diimplementasikan."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/installremove.cc:166
@@ -4642,7 +4642,7 @@ msgstr "Nama paket sumber adalah argumen yang diperlukan."
 
 #: src/commands/sourceinstall.cc:86
 msgid "Uninstalling source packages is not supported."
-msgstr "Menghapus instalasi paket sumber tidak didukung."
+msgstr "Menghapus pemasangan paket sumber tidak didukung."
 
 #. translators: %1% is the name of the command which has no man page available.
 #: src/commands/subcommand.cc:88
@@ -5965,7 +5965,7 @@ msgstr "Masalah saat membaca data dari media '%s'"
 
 #: src/repos.cc:1281
 msgid "Please check if your installation media is valid and readable."
-msgstr "Silakan periksa apakah media instalasi Anda valid dan mudah dibaca."
+msgstr "Silakan periksa apakah media pemasangan Anda valid dan mudah dibaca."
 
 #: src/repos.cc:1288
 #, c-format, boost-format
@@ -6470,7 +6470,7 @@ msgstr ""
 "\n"
 "- coba saja perintah sebelumnya\n"
 "- perbarui repositori menggunakan 'zypper refresh'\n"
-"- gunakan media instalasi lain (jika misalnya rusak)\n"
+"- gunakan media pemasangan lain (jika misalnya rusak)\n"
 "- gunakan repositori lain"
 
 #: src/solve-commit.cc:952
@@ -7155,7 +7155,7 @@ msgstr "Galat I/O"
 
 #: src/utils/prompt.h:185
 msgid "Invalid object"
-msgstr "Obyek tidak benar"
+msgstr "Obyek tidak valid"
 
 #: src/utils/prompt.h:192
 msgid "Error"
