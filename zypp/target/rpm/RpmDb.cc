@@ -1495,6 +1495,7 @@ bool RpmDb::systemReadLine( std::string & line )
 
           // we might have received a partial line, lets not forget about it
           line += readResult.second;
+          break;
         }
         case io::ReceiveUpToResult::Error:
         case io::ReceiveUpToResult::EndOfFile: {
