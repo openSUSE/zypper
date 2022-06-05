@@ -73,8 +73,8 @@ namespace zypp::io {
     while ( read != size ) {
       const auto r = zyppng::eintrSafeCall( ::read, fd, tmpBuf+read, size - read );
       if ( r == 0 )
-                                return ReadAllResult::Eof;
-                        if ( r < 0 )
+        return ReadAllResult::Eof;
+      if ( r < 0 )
         return ReadAllResult::Error;
 
       read += r;
@@ -138,7 +138,7 @@ namespace zypp::io {
         ssize_t nread = getdelim( &linebuf.value(), &linebuffer_size, c, inputfile );
         if ( nread == -1 ) {
           if ( ::feof( inputfile ) )
-            return std::make_pair( ReceiveUpToResult::EndOfFile, line );
+            return std::make_pair( ReceiveUpToResult::EndOfFile, std::move(line) );
         }
         else
         {
@@ -146,7 +146,7 @@ namespace zypp::io {
             line += std::string( linebuf, nread );
 
           if ( ! ::ferror( inputfile ) || ::feof( inputfile ) ) {
-            return std::make_pair( ReceiveUpToResult::Success, line ); // complete line
+            return std::make_pair( ReceiveUpToResult::Success, std::move(line) ); // complete line
           }
         }
       }
@@ -156,7 +156,7 @@ namespace zypp::io {
       if ( timer ) {
         remainingTimeout -= g_timer_elapsed( timer, nullptr ) * 1000;
         if ( remainingTimeout <= 0 )
-          return std::make_pair( ReceiveUpToResult::Timeout, line );
+          return std::make_pair( ReceiveUpToResult::Timeout, std::move(line) );
       }
     } while ( true );
   }
