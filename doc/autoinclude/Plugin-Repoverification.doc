@@ -1,0 +1,34 @@
+/**
+
+\page plugin-repoverification Repository metadata verification plugin
+
+\author Michael Andres <ma@suse.de>
+
+<HR><!-- ====================================================================== -->
+\section intro Introduction
+
+Stateless plugins found in \c /usr/lib/zypp/plugins/repoverification are called during a repository metadata refresh, immediately after a repositories master index file has been downloaded and before any further GPG checks are performed. The plugins determine whether the repository is allowed to be used on the system or not. If a plugin returns not-zero, the repository is discarded and can not be used.
+
+All executable plugins found in \c /usr/lib/zypp/plugins/repoverification (relative to the RepoManagers root directory) are launched in arbitrary order. If the RepoManagers root directory is not \c /, the plugins are executed via \c chroot.
+
+Arguments passed to the plugin are:
+<DL>
+
+  <DT>--file PATH</DT>
+  <DD>Path to the repositories master index file.</DD>
+
+  <DT>--fsig PATH</DT>
+  <DD>Path to the master index files detached gpg signature. A path is always supplied, but whether it actually denotes a file depends on whether the master index file is actually signed.</DD>
+
+  <DT>--fkey PATH</DT>
+  <DD>Path to the ascii armored GPG key that signed the signature. A path is always supplied, but whether it actually denotes a file depends on whether the key is provided by the repo.</DD>
+
+  <DT>--ralias NAME</DT>
+  <DD>The alias of the repository.</DD>
+
+</DL>
+
+All output written to stdout/stderr is forwarded to the application (zypper,YAST,PK...) and may become  visible to the user. All output written to stderr is also captured in the logfile, in case logging is enabled by the application.
+
+\see \ref plugin-writing
+*/
