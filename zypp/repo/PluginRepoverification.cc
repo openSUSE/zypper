@@ -15,10 +15,10 @@
 
 #include <zypp/Globals.h>
 #include <zypp/PathInfo.h>
+#include <zypp/ZYppCallbacks.h>
 #include <zypp/ExternalProgram.h>
 #include <zypp/base/LogTools.h>
 #include <zypp/base/WatchFile.h>
-
 using std::endl;
 
 ///////////////////////////////////////////////////////////////////
@@ -28,6 +28,77 @@ namespace zypp_private
   ///////////////////////////////////////////////////////////////////
   namespace repo
   {
+
+    struct Monitor
+    {
+      /** Report a line of output (without trailing NL) otherwise a life ping on timeout. */
+      using Callback = std::function<bool(std::optional<std::string>)>;
+
+      Monitor( io::timeout_type timeout_r = io::no_timeout )
+      : _timeout { timeout_r }
+      {}
+
+      int operator()( ExternalProgram & prog_r, Callback cb_r = Callback() )
+      {
+        std::string line;
+        bool goOn = true;
+        prog_r.setBlocking( false );
+        FILE * inputfile = prog_r.inputFile();
+        do {
+          const auto &readResult = io::receiveUpto( inputfile, '\n', _timeout );
+          line += readResult.second; // we always may have received a partial line
+          goOn = true;
+          switch ( readResult.first ) {
+
+            case io::ReceiveUpToResult::Success:
+              goOn = reportLine( line, cb_r );
+              line.clear(); // in case the CB did not move it out
+              break;
+
+            case io::ReceiveUpToResult::Timeout:
+              goOn = reportTimeout( cb_r );
+              break;
+
+            case io::ReceiveUpToResult::Error:
+            case io::ReceiveUpToResult::EndOfFile:
+              reportFinalLineUnlessEmpty( line, cb_r );
+              line.clear(); // in case the CB did not move it out
+              goOn = false;
+              break;
+          }
+        } while ( goOn );
+
+        if ( prog_r.running() ) {
+          WAR << "ABORT by callback: pid " << prog_r.getpid() << endl;
+          prog_r.kill();
+        }
+        return prog_r.close();
+      }
+
+    private:
+      bool reportLine( std::string & line_r, Callback & cb_r )
+      {
+        if ( cb_r ) {
+          if ( not line_r.empty() && line_r.back() == '\n' )
+            line_r.pop_back();
+          return cb_r( std::move(line_r) );
+        }
+        return true;
+      }
+      bool reportTimeout( Callback & cb_r )
+      {
+        return cb_r ? cb_r( std::nullopt ) : true;
+      }
+      bool reportFinalLineUnlessEmpty( std::string & line_r, Callback & cb_r )
+      {
+        if ( cb_r && not line_r.empty() ) // implies an incomplete line (no NL)
+          cb_r( std::move(line_r) );
+        return false;
+      }
+    private:
+      io::timeout_type _timeout = io::no_timeout;
+    };
+
     ///////////////////////////////////////////////////////////////////
     /// \class PluginRepoverification::Checker::Impl
     /// \brief PluginRepoverification::Checker data storage.
@@ -127,17 +198,36 @@ namespace zypp_private
         args.push_back( data_r._repoinfo.alias() );
         ExternalProgram cmd { args, ExternalProgram::Stderr_To_Stdout, false, -1, false, _chroot };
 
-        std::ostringstream buffer;
-        cmd >> buffer;
+        // draft: maybe integrate jobReport into Monitor
+        Monitor monitor( 800 );
+        UserDataJobReport jobReport { "cmdout", "monitor" };
+        jobReport.set( "CmdId",   unsigned(cmd.getpid()) );
+        jobReport.set( "CmdTag",  str::numstring( cmd.getpid() ) );
+        jobReport.set( "CmdName", "Repoverification plugin "+plugin_r );
+        jobReport.set( "RepoInfo", data_r._repoinfo );
 
-        int ret = cmd.close();
+        std::optional<std::ostringstream> buffer; // Send output in exception is no one is listening
+        jobReport.debug( "?" ); // someone listening?
+        if ( not jobReport.haskey( "!" ) ) // no
+          buffer = std::ostringstream();
+
+        int ret = monitor( cmd, [&jobReport,&buffer,&cmd]( std::optional<std::string> line_r )->bool {
+          if ( line_r ) {
+            DBG << "["<<cmd.getpid()<<"> " << *line_r << endl;
+            if ( buffer ) (*buffer) << *line_r << endl;
+            return jobReport.data( *line_r );
+          }
+          else {
+            return jobReport.debug( "ping" );
+          }
+          return true;
+        } );
+
         if ( ret ) {
           const std::string & msg { str::Format( "Metadata rejected by '%1%' plugin (returned %2%)" ) % plugin_r % ret };
-//           ERR << buffer.str() << endl;
-//           ERR << msg << endl;
 
           ExceptionType excp { msg };
-          excp.addHistory( buffer.str() );
+          if ( buffer ) excp.addHistory( buffer->str() );
           excp.addHistory( str::Format( "%1%%2% returned %3%" ) % (_chroot.emptyOrRoot()?"":"("+_chroot.asString()+")") % pluginPath % ret );
 
           ZYPP_THROW( std::move(excp) );
