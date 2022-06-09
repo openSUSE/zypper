@@ -554,7 +554,7 @@ namespace zypp
               cmd.push_back( "-t" );
               cmd.push_back( rinfo.type().asString() );
               cmd.push_back( "-p" );
-              cmd.push_back( rinfo.metadataPath().asString() );
+              cmd.push_back( (rinfo.metadataPath()/rinfo.path()).asString() ); // bsc#1197684: path to the repodata/ directory inside the cache
             }
 
             for_( it, entries.begin(), entries.end() )
