@@ -112,6 +112,9 @@ namespace zyppng {
 
   void IOBuffer::append(const char *data, int64_t count)
   {
+    if ( count <= 0 )
+      return;
+
     assert( count > 0 && size_t(count) < ByteArray::maxSize() );
 
     char *buf = reserve( count );
