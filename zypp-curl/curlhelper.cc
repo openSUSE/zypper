@@ -21,6 +21,7 @@
 #include <zypp-curl/auth/CurlAuthData>
 #include <zypp-media/MediaException>
 #include <list>
+#include <string>
 
 using std::endl;
 using namespace zypp;
@@ -356,7 +357,8 @@ Url clearQueryString(const Url &url)
 // bsc#933839: propagate proxy settings passed in the repo URL
 zypp::Url propagateQueryParams( zypp::Url url_r, const zypp::Url & template_r )
 {
-  for ( const std::string &param : { "proxy", "proxyport", "proxyuser", "proxypass"} )
+  using namespace std::literals::string_literals;
+  for ( const std::string &param : { "proxy"s, "proxyport"s, "proxyuser"s, "proxypass"s} )
   {
     const std::string & value( template_r.getQueryParam( param ) );
     if ( ! value.empty() )

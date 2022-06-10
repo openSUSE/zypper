@@ -24,10 +24,6 @@
 
 #include <optional>
 
-namespace zypp::proto {
-  class DownloadSpec;
-}
-
 namespace zyppng {
 
 
@@ -45,7 +41,6 @@ namespace zyppng {
   public:
 
     DownloadSpec( Url file, zypp::filesystem::Pathname targetPath, zypp::ByteCount expectedFileSize = zypp::ByteCount() );
-    DownloadSpec( const zypp::proto::DownloadSpec &spec );
 
     DownloadSpec( const DownloadSpec &other );
     DownloadSpec &operator= ( const DownloadSpec &other );
@@ -53,13 +48,13 @@ namespace zyppng {
     /*!
      * Returns the source URL of the download
      */
-    Url url () const;
+    const Url &url () const;
     DownloadSpec &setUrl ( const Url &url );
 
     /*!
      * Returns the target file path, this is where the downloaded data is stored
      */
-    zypp::filesystem::Pathname targetPath() const;
+    const zypp::Pathname &targetPath() const;
     DownloadSpec &setTargetPath ( const zypp::Pathname &path );
 
     /*!
@@ -95,7 +90,7 @@ namespace zyppng {
      * possible sub downloads, however authentication data is stripped if the subdownload uses a different host to
      * fetch the data from. If there is no auth data known \sa sigAuthRequired is emitted.
      */
-    TransferSettings settings () const;
+    const TransferSettings &settings () const;
     DownloadSpec &setTransferSettings( TransferSettings &&set );
     DownloadSpec &setTransferSettings( const TransferSettings &set );
 
@@ -105,19 +100,13 @@ namespace zyppng {
     DownloadSpec &setHeaderSize ( const zypp::ByteCount &bc );
     zypp::ByteCount headerSize() const;
 
-    std::optional<zypp::CheckSum> headerChecksum () const;
+    const std::optional<zypp::CheckSum> &headerChecksum () const;
     DownloadSpec &setHeaderChecksum ( const zypp::CheckSum &sum );
-
-    const zypp::proto::DownloadSpec &protoData() const;
-    zypp::proto::DownloadSpec &protoData();
 
   private:
     zypp::RWCOW_pointer<DownloadSpecPrivate> d_ptr;
   };
 
 }
-
-
-
 
 #endif // ZYPPNG_MEDIA_NETWORK_DOWNLOADSPEC_H

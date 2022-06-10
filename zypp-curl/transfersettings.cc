@@ -22,8 +22,6 @@
 #include <zypp-core/ExternalProgram.h>
 #include <zypp-media/MediaConfig>
 
-#include <zypp-proto/transfersettings.pb.h>
-
 #include <zypp/APIConfig.h>
 
 using std::endl;
@@ -37,19 +35,18 @@ namespace zypp
     class TransferSettings::Impl
     {
     public:
-      Impl() {
-        _settingsObj.set_useproxy( false );
-        _settingsObj.set_timeout( MediaConfig::instance().download_transfer_timeout() );
-        _settingsObj.set_connect_timeout( 60 );
-        _settingsObj.set_maxconcurrentconnections( MediaConfig::instance().download_max_concurrent_connections() );
-        _settingsObj.set_mindownloadspeed(MediaConfig::instance().download_min_download_speed());
-        _settingsObj.set_maxdownloadspeed(MediaConfig::instance().download_max_download_speed());
-        _settingsObj.set_maxsilenttries(MediaConfig::instance().download_max_silent_tries() );
-        _settingsObj.set_verify_host(false);
-        _settingsObj.set_verify_peer(false);
-        _settingsObj.set_ca_path("/etc/ssl/certs");
-        _settingsObj.set_head_requests_allowed(true);
-      }
+      Impl() : _useproxy( false ),
+        _timeout( MediaConfig::instance().download_transfer_timeout() ),
+        _connect_timeout( 60 ),
+        _maxConcurrentConnections( MediaConfig::instance().download_max_concurrent_connections() ),
+        _minDownloadSpeed(MediaConfig::instance().download_min_download_speed()),
+        _maxDownloadSpeed(MediaConfig::instance().download_max_download_speed()),
+        _maxSilentTries(MediaConfig::instance().download_max_silent_tries() ),
+        _verify_host(false),
+        _verify_peer(false),
+        _ca_path("/etc/ssl/certs"),
+        _head_requests_allowed(true)
+      {}
 
       virtual ~Impl()
       {}
@@ -69,54 +66,81 @@ namespace zypp
 
     public:
       std::vector<std::string> _headers;
-      zypp::proto::TransferSettings _settingsObj;
+      std::string _useragent;
+      std::string _username;
+      std::string _password;
+      bool _useproxy;
+      std::string _proxy;
+      std::string _proxy_username;
+      std::string _proxy_password;
+      std::string _authtype;
+      long _timeout;
+      long _connect_timeout;
+      Url _url;
+      Pathname _targetdir;
+
+      long _maxConcurrentConnections;
+      long _minDownloadSpeed;
+      long _maxDownloadSpeed;
+      long _maxSilentTries;
+
+      bool _verify_host;
+      bool _verify_peer;
+      Pathname _ca_path;
+      Pathname _client_cert_path;
+      Pathname _client_key_path;
+
+      // workarounds
+      bool _head_requests_allowed;
     };
 
     TransferSettings::TransferSettings()
     : _impl(new TransferSettings::Impl())
     {}
 
-    TransferSettings::TransferSettings( const proto::TransferSettings &settings )
-      : _impl(new TransferSettings::Impl())
-    {
-      _impl->_settingsObj = settings;
-    }
-
     void TransferSettings::reset()
     { _impl.reset(new TransferSettings::Impl()); }
 
 
-    void TransferSettings::addHeader( std::string && val_r )
-    { if ( ! val_r.empty() ) *_impl->_settingsObj.add_header() = std::move(val_r); }
+    void TransferSettings::addHeader( const std::string & val_r )
+    { if ( ! val_r.empty() ) _impl->_headers.push_back(val_r); }
 
-    TransferSettings::Headers TransferSettings::headers() const
+    void TransferSettings::addHeader( std::string && val_r )
+    { if ( ! val_r.empty() ) _impl->_headers.push_back(std::move(val_r)); }
+
+    const TransferSettings::Headers &TransferSettings::headers() const
     {
       //@TODO check if we could use a vector of std::string_view here
-      auto vec = Headers();
-      for ( const auto &head : _impl->_settingsObj.header() ) {
-        vec.push_back( head );
-      }
-      return vec;
+      return _impl->_headers;
     }
 
+    void TransferSettings::setUserAgentString( const std::string && val_r )
+    { _impl->_useragent = val_r; }
+
     void TransferSettings::setUserAgentString( std::string && val_r )
-    { _impl->_settingsObj.set_useragent( std::move(val_r) ); }
+    { _impl->_useragent = std::move(val_r); }
 
-    std::string TransferSettings::userAgentString() const
-    { return _impl->_settingsObj.useragent(); }
+    const std::string &TransferSettings::userAgentString() const
+    { return _impl->_useragent; }
 
+
+    void TransferSettings::setUsername( const std::string &val_r )
+    { _impl->_username = val_r; }
 
     void TransferSettings::setUsername( std::string && val_r )
-    { _impl->_settingsObj.set_username( std::move(val_r) ); }
+    { _impl->_username = std::move(val_r); }
 
-    std::string TransferSettings::username() const
-    { return _impl->_settingsObj.username(); }
+    const std::string &TransferSettings::username() const
+    { return _impl->_username; }
+
+    void TransferSettings::setPassword( const std::string & val_r )
+    { _impl->_password = val_r; }
 
     void TransferSettings::setPassword( std::string && val_r )
-    { _impl->_settingsObj.set_password( std::move(val_r) ); }
+    { _impl->_password = std::move(val_r); }
 
-    std::string TransferSettings::password() const
-    { return _impl->_settingsObj.password(); }
+    const std::string &TransferSettings::password() const
+    { return _impl->_password; }
 
     std::string TransferSettings::userPassword() const
     {
@@ -135,30 +159,39 @@ namespace zypp
 
 
     void TransferSettings::setProxyEnabled( bool enabled )
-    { _impl->_settingsObj.set_useproxy( enabled ); }
+    { _impl->_useproxy = enabled; }
 
     bool TransferSettings::proxyEnabled() const
-    { return _impl->_settingsObj.useproxy(); }
+    { return _impl->_useproxy; }
 
+
+    void TransferSettings::setProxy( const std::string &val_r )
+    { _impl->_proxy = val_r; }
 
     void TransferSettings::setProxy( std::string && val_r )
-    { _impl->_settingsObj.set_proxy( std::move(val_r) ); }
+    { _impl->_proxy = std::move(val_r); }
 
-    std::string TransferSettings::proxy() const
-    { return _impl->_settingsObj.proxy(); }
+    const std::string &TransferSettings::proxy() const
+    { return _impl->_proxy; }
 
+
+    void TransferSettings::setProxyUsername( const std::string &val_r )
+    { _impl->_proxy_username = val_r; }
 
     void TransferSettings::setProxyUsername( std::string && val_r )
-    { _impl->_settingsObj.set_proxy_username( std::move(val_r) ); }
+    { _impl->_proxy_username = std::move(val_r); }
 
-    std::string TransferSettings::proxyUsername() const
-    { return _impl->_settingsObj.proxy_username(); }
+    const std::string &TransferSettings::proxyUsername() const
+    { return _impl->_proxy_username; }
+
+    void TransferSettings::setProxyPassword( const std::string &val_r )
+    { _impl->_proxy_password = val_r; }
 
     void TransferSettings::setProxyPassword( std::string && val_r )
-    { _impl->_settingsObj.set_proxy_password( std::move(val_r) ); }
+    { _impl->_proxy_password = std::move(val_r); }
 
-    std::string TransferSettings::proxyPassword() const
-    { return _impl->_settingsObj.proxy_password(); }
+    const std::string &TransferSettings::proxyPassword() const
+    { return _impl->_proxy_password; }
 
     std::string TransferSettings::proxyUserPassword() const
     {
@@ -171,104 +204,105 @@ namespace zypp
 
 
     void TransferSettings::setTimeout( long t )
-    { _impl->_settingsObj.set_timeout(t); }
+    { _impl->_timeout = (t); }
 
     long TransferSettings::timeout() const
-    { return _impl->_settingsObj.timeout(); }
+    { return _impl->_timeout; }
 
 
     void TransferSettings::setConnectTimeout( long t )
-    { _impl->_settingsObj.set_connect_timeout(t); }
+    { _impl->_connect_timeout = (t); }
 
     long TransferSettings::connectTimeout() const
-    { return _impl->_settingsObj.connect_timeout(); }
+    { return _impl->_connect_timeout; }
 
 
     void TransferSettings::setMaxConcurrentConnections( long v )
-    { _impl->_settingsObj.set_maxconcurrentconnections(v); }
+    { _impl->_maxConcurrentConnections = (v); }
 
     long TransferSettings::maxConcurrentConnections() const
-    { return _impl->_settingsObj.maxconcurrentconnections(); }
+    { return _impl->_maxConcurrentConnections; }
 
 
     void TransferSettings::setMinDownloadSpeed( long v )
-    { _impl->_settingsObj.set_mindownloadspeed(v); }
+    { _impl->_minDownloadSpeed = (v); }
 
     long TransferSettings::minDownloadSpeed() const
-    { return _impl->_settingsObj.mindownloadspeed(); }
+    { return _impl->_minDownloadSpeed; }
 
 
     void TransferSettings::setMaxDownloadSpeed( long v )
-    { _impl->_settingsObj.set_maxdownloadspeed(v); }
+    { _impl->_maxDownloadSpeed = (v); }
 
     long TransferSettings::maxDownloadSpeed() const
-    { return _impl->_settingsObj.maxdownloadspeed(); }
+    { return _impl->_maxDownloadSpeed; }
 
 
     void TransferSettings::setMaxSilentTries( long v )
-    { _impl->_settingsObj.set_maxsilenttries(v); }
+    { _impl->_maxSilentTries = (v); }
 
     long TransferSettings::maxSilentTries() const
-    { return _impl->_settingsObj.maxsilenttries(); }
+    { return _impl->_maxSilentTries; }
 
 
     void TransferSettings::setVerifyHostEnabled( bool enabled )
-    { _impl->_settingsObj.set_verify_host(enabled); }
+    { _impl->_verify_host = (enabled); }
 
     bool TransferSettings::verifyHostEnabled() const
-    { return _impl->_settingsObj.verify_host(); }
+    { return _impl->_verify_host; }
 
 
     void TransferSettings::setVerifyPeerEnabled( bool enabled )
-    { _impl->_settingsObj.set_verify_peer(enabled); }
+    { _impl->_verify_peer = enabled; }
 
     bool TransferSettings::verifyPeerEnabled() const
-    { return _impl->_settingsObj.verify_peer(); }
+    { return _impl->_verify_peer; }
 
+    void TransferSettings::setClientCertificatePath( const Pathname &val_r )
+    { _impl->_client_cert_path = val_r; }
 
     void TransferSettings::setClientCertificatePath( Pathname && val_r )
-    { _impl->_settingsObj.set_client_cert_path( val_r.asString() ); }
+    { _impl->_client_cert_path = std::move( val_r ); }
 
-    Pathname TransferSettings::clientCertificatePath() const
-    { return _impl->_settingsObj.client_cert_path(); }
+    const Pathname &TransferSettings::clientCertificatePath() const
+    { return _impl->_client_cert_path; }
 
+
+    void TransferSettings::setClientKeyPath( const Pathname &val_r )
+    { _impl->_client_key_path = val_r; }
 
     void TransferSettings::setClientKeyPath( Pathname && val_r )
-    { _impl->_settingsObj.set_client_key_path( val_r.asString() ); }
+    { _impl->_client_key_path = std::move( val_r ); }
 
-    Pathname TransferSettings::clientKeyPath() const
-    { return _impl->_settingsObj.client_key_path(); }
+    const Pathname &TransferSettings::clientKeyPath() const
+    { return _impl->_client_key_path; }
 
-    proto::TransferSettings &TransferSettings::protoData()
-    {
-      return _impl->_settingsObj;
-    }
 
-    const proto::TransferSettings &TransferSettings::protoData() const
-    {
-      return _impl->_settingsObj;
-    }
+    void TransferSettings::setCertificateAuthoritiesPath( const Pathname &val_r )
+    { _impl->_ca_path = val_r; }
 
     void TransferSettings::setCertificateAuthoritiesPath( Pathname && val_r )
-    { _impl->_settingsObj.set_ca_path(val_r.asString()); }
+    { _impl->_ca_path = std::move(val_r.asString()); }
 
-    Pathname TransferSettings::certificateAuthoritiesPath() const
-    { return _impl->_settingsObj.ca_path(); }
+    const Pathname &TransferSettings::certificateAuthoritiesPath() const
+    { return _impl->_ca_path; }
 
+
+    void TransferSettings::setAuthType( const std::string &val_r )
+    { _impl->_authtype = val_r; }
 
     void TransferSettings::setAuthType( std::string && val_r )
-    { _impl->_settingsObj.set_authtype( std::move(val_r) ); }
+    { _impl->_authtype = std::move(val_r); }
 
-    std::string TransferSettings::authType() const
-    { return _impl->_settingsObj.authtype(); }
+    const std::string &TransferSettings::authType() const
+    { return _impl->_authtype; }
 
 
     void TransferSettings::setHeadRequestsAllowed( bool allowed )
-    { _impl->_settingsObj.set_head_requests_allowed(allowed); }
+    { _impl->_head_requests_allowed = allowed; }
 
     bool TransferSettings::headRequestsAllowed() const
-    { return _impl->_settingsObj.head_requests_allowed(); }
+    { return _impl->_head_requests_allowed; }
 
   } // namespace media
 } // namespace zypp
-

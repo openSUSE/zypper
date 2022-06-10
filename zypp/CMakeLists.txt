@@ -817,8 +817,6 @@ INSTALL(  FILES
   DESTINATION ${INCLUDE_INSTALL_DIR}/zypp/media/proxyinfo
 )
 
-add_subdirectory( zyppng )
-
 SET( zypp_lib_SRCS
 ${zypp_misc_SRCS}
 ${zypp_pool_SRCS}
@@ -890,7 +888,7 @@ add_dependencies( zypp-objlib zypp-protobuf )
 
 macro( ADDZYPPLIB LIBNAME )
   message( "ADDING lib ${LIBNAME} to project" )
-  ADD_LIBRARY( ${LIBNAME} SHARED $<TARGET_OBJECTS:zypp-objlib> $<TARGET_OBJECTS:zyppng-objlib> )
+  ADD_LIBRARY( ${LIBNAME} SHARED $<TARGET_OBJECTS:zypp-objlib> )
   SET_TARGET_PROPERTIES( ${LIBNAME} PROPERTIES VERSION "${LIBZYPP_VERSION_INFO}" )
   SET_TARGET_PROPERTIES( ${LIBNAME} PROPERTIES SOVERSION "${LIBZYPP_SOVERSION_INFO}" )
   # System libraries

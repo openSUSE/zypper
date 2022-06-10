@@ -8,7 +8,6 @@
 ----------------------------------------------------------------------*/
 #include "downloadspec.h"
 #include <string>
-#include <zypp-proto/download.pb.h>
 
 namespace zyppng {
 
@@ -17,13 +16,21 @@ namespace zyppng {
     DownloadSpecPrivate() = default;
     DownloadSpecPrivate( const DownloadSpecPrivate &other ) = default;
     DownloadSpecPrivate( DownloadSpecPrivate &&other ) = default;
-    DownloadSpecPrivate( zypp::proto::DownloadSpec spec ) :_protoData( std::move(spec) ) {}
 
     DownloadSpecPrivate *clone () const {
       return new DownloadSpecPrivate(*this);
     }
 
-    zypp::proto::DownloadSpec _protoData;
+    zypp::Url _url;
+    TransferSettings _settings;
+    zypp::Pathname  _delta;
+    zypp::ByteCount _expectedFileSize;
+    zypp::Pathname  _targetPath;
+    bool _checkExistanceOnly = false; //< this will NOT download the file, but only query the server if it exists
+    bool _metalink_enabled   = true;  //< should the download try to use metalinks
+    zypp::ByteCount _headerSize;     //< Optional file header size for things like zchunk
+    std::optional<zypp::CheckSum> _headerChecksum; //< Optional file header checksum
+    zypp::ByteCount _preferred_chunk_size = zypp::ByteCount( 4096, zypp::ByteCount::K );
   };
 
   ZYPP_IMPL_PRIVATE( DownloadSpec )
@@ -31,161 +38,134 @@ namespace zyppng {
   DownloadSpec::DownloadSpec( Url file , zypp::filesystem::Pathname targetPath, zypp::ByteCount expectedFileSize ) : d_ptr( new DownloadSpecPrivate() )
   {
     // default settings
-    *d_ptr->_protoData.mutable_settings() = std::move( TransferSettings().protoData() );
-
-    setUrl( file );
-    setTargetPath( targetPath );
-    setExpectedFileSize( expectedFileSize );
-    setPreferredChunkSize( zypp::ByteCount( 4096, zypp::ByteCount::K ) );
-    d_ptr->_protoData.set_checkexistanceonly( false );
-    d_ptr->_protoData.set_metalink_enabled( true );
+    d_ptr->_url = std::move(file);
+    d_ptr->_targetPath = std::move(targetPath);
+    d_ptr->_expectedFileSize = std::move( expectedFileSize );
   }
-
-  DownloadSpec::DownloadSpec( const zypp::proto::DownloadSpec &spec ) : d_ptr( new DownloadSpecPrivate( spec ) )
-  { }
 
   DownloadSpec::DownloadSpec( const DownloadSpec &other ) = default;
 
   DownloadSpec &DownloadSpec::operator=(const DownloadSpec &other) = default;
 
-  Url DownloadSpec::url() const
+  const Url &DownloadSpec::url() const
   {
-    return d_ptr->_protoData.url();
+    return d_ptr->_url;
   }
 
   DownloadSpec &DownloadSpec::setUrl(const Url &url)
   {
-    d_ptr->_protoData.set_url( url.asCompleteString() );
+    d_ptr->_url = url;
     return *this;
   }
 
-  zypp::Pathname DownloadSpec::targetPath() const
+  const zypp::Pathname &DownloadSpec::targetPath() const
   {
-    return zypp::Pathname(d_ptr->_protoData.targetpath());
+    return d_ptr->_targetPath;
   }
 
   DownloadSpec &DownloadSpec::setTargetPath(const zypp::filesystem::Pathname &path)
   {
-    d_ptr->_protoData.set_targetpath( path.asString() );
+    d_ptr->_targetPath = path;
     return *this;
   }
 
   DownloadSpec &DownloadSpec::setMetalinkEnabled(bool enable)
   {
-    d_ptr->_protoData.set_metalink_enabled( enable );
+    d_ptr->_metalink_enabled = enable;
     return *this;
   }
 
   bool DownloadSpec::metalinkEnabled() const
   {
-    return d_ptr->_protoData.metalink_enabled();
+    return d_ptr->_metalink_enabled;
   }
 
   DownloadSpec &DownloadSpec::setCheckExistsOnly(bool set)
   {
-    d_ptr->_protoData.set_checkexistanceonly( set );
+    d_ptr->_checkExistanceOnly = ( set );
     return *this;
   }
 
   bool DownloadSpec::checkExistsOnly() const
   {
-    return d_ptr->_protoData.checkexistanceonly();
+    return d_ptr->_checkExistanceOnly;
   }
 
-  DownloadSpec &DownloadSpec::setDeltaFile(const zypp::filesystem::Pathname &file)
+  DownloadSpec &DownloadSpec::setDeltaFile(const zypp::Pathname &file)
   {
-    if ( !file.empty() )
-      d_ptr->_protoData.set_delta( file.asString() );
-    else
-      d_ptr->_protoData.clear_delta();
+    d_ptr->_delta = file;
     return *this;
   }
 
-  zypp::filesystem::Pathname DownloadSpec::deltaFile() const
+  zypp::Pathname DownloadSpec::deltaFile() const
   {
-    return d_ptr->_protoData.delta();
+    return d_ptr->_delta;
   }
 
   DownloadSpec &DownloadSpec::setPreferredChunkSize(const zypp::ByteCount &bc)
   {
-    d_ptr->_protoData.set_preferred_chunk_size( bc.operator long long() );
+    d_ptr->_preferred_chunk_size = bc;
     return *this;
   }
 
   zypp::ByteCount DownloadSpec::preferredChunkSize() const
   {
-    return d_ptr->_protoData.preferred_chunk_size();
+    return d_ptr->_preferred_chunk_size;
   }
 
-  TransferSettings DownloadSpec::settings() const
+  const TransferSettings &DownloadSpec::settings() const
   {
-    return TransferSettings( d_ptr->_protoData.settings() );
+    return d_ptr->_settings;
   }
 
   DownloadSpec & DownloadSpec::setTransferSettings(TransferSettings &&set)
   {
-    (*d_ptr->_protoData.mutable_settings()) = std::move( set.protoData() );
+    d_ptr->_settings = std::move( set );
     return *this;
   }
 
   DownloadSpec & DownloadSpec::setTransferSettings(const TransferSettings &set)
   {
-    (*d_ptr->_protoData.mutable_settings()) = set.protoData();
+    d_ptr->_settings = set;
     return *this;
   }
 
   DownloadSpec &DownloadSpec::setExpectedFileSize(const zypp::ByteCount &bc)
   {
-    d_ptr->_protoData.set_expectedfilesize( bc.operator long long() );
+    d_ptr->_expectedFileSize = bc;
     return *this;
   }
 
   zypp::ByteCount DownloadSpec::expectedFileSize() const
   {
-    return d_ptr->_protoData.expectedfilesize();
+    return d_ptr->_expectedFileSize;
   }
 
   DownloadSpec &DownloadSpec::setHeaderSize(const zypp::ByteCount &bc)
   {
-    d_ptr->_protoData.set_headersize( bc.operator long long() );
+    d_ptr->_headerSize = bc;
     return *this;
   }
 
   zypp::ByteCount DownloadSpec::headerSize() const
   {
-    return d_ptr->_protoData.headersize();
+    return d_ptr->_headerSize;
   }
 
-  std::optional<zypp::CheckSum> DownloadSpec::headerChecksum() const
+  const std::optional<zypp::CheckSum> &DownloadSpec::headerChecksum() const
   {
     Z_D();
-    if ( !d->_protoData.has_headerchecksum() )
-      return {};
-
-    return zypp::CheckSum( d->_protoData.headerchecksum().type(), d->_protoData.headerchecksum().sum() );
-
+    return d->_headerChecksum;
   }
 
   DownloadSpec &DownloadSpec::setHeaderChecksum(const zypp::CheckSum &sum)
   {
+    Z_D();
     if ( sum.empty() )
-      d_func()->_protoData.clear_headerchecksum();
+      d->_headerChecksum.reset();
     else {
-      auto csum = d_func()->_protoData.mutable_headerchecksum();
-      csum->set_type( sum.type() );
-      csum->set_sum( sum.checksum() );
+      d->_headerChecksum = sum;
     }
     return *this;
   }
-
-  const zypp::proto::DownloadSpec &DownloadSpec::protoData() const
-  {
-    return d_ptr->_protoData;
-  }
-
-  zypp::proto::DownloadSpec &DownloadSpec::protoData()
-  {
-    return d_ptr->_protoData;
-  }
 }
-

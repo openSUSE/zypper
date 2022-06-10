@@ -3,10 +3,6 @@ SET( zypp_core_PROTOBUF_SOURCES
 )
 
 SET( zypp_media_PROTOBUF_SOURCES
-  media/transfersettings.proto
-  media/download.proto
-  media/messages.proto
-  media/networkrequesterror.proto
   media/provider.proto
 )
 
