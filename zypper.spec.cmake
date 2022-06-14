@@ -134,6 +134,7 @@ CMAKE_FLAGS=
 cmake $CMAKE_FLAGS \
       -DCMAKE_INSTALL_PREFIX=%{_prefix} \
       -DSYSCONFDIR=%{_sysconfdir} \
+      -DDISTCONFDIR=%{_distconfdir} \
       -DMANDIR=%{_mandir} \
       -DCMAKE_VERBOSE_MAKEFILE=TRUE \
       -DCMAKE_C_FLAGS_RELEASE:STRING="$RPM_OPT_FLAGS" \
@@ -175,8 +176,9 @@ rm -rf "$RPM_BUILD_ROOT"
 %license COPYING
 %endif
 %config(noreplace) %{_sysconfdir}/zypp/zypper.conf
-%config(noreplace) %{_sysconfdir}/logrotate.d/zypper.lr
-%config(noreplace) %{_sysconfdir}/logrotate.d/zypp-refresh.lr
+%dir %{_distconfdir}/logrotate.d
+%{_distconfdir}/logrotate.d/zypper.lr
+%{_distconfdir}/logrotate.d/zypp-refresh.lr
 %{_sysconfdir}/bash_completion.d/zypper.sh
 %{_bindir}/zypper
 %{_bindir}/yzpper

@@ -279,7 +279,7 @@ INSTALL(
 # logrotate config file
 INSTALL(
   FILES zypper.lr zypp-refresh.lr
-  DESTINATION ${SYSCONFDIR}/logrotate.d
+  DESTINATION ${DISTCONFDIR}/logrotate.d
 )
 
 # augeas lens

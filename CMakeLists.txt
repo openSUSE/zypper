@@ -13,6 +13,10 @@ INCLUDE(ZyppCommon)
 OPTION (ENABLE_BUILD_TRANS "Build translation files by default?" ON)
 OPTION (ENABLE_BUILD_TESTS "Build and run test suite by default?" OFF)
 
+#Vendor specific directory
+SET( DISTCONFDIR "/usr/etc")
+ADD_DEFINITIONS( -DDISTCONFDIR="${DISTCONFDIR}" )
+
 # VERSION
 INCLUDE( ${ZYPPER_SOURCE_DIR}/VERSION.cmake )
 SET( VERSION "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}" )
