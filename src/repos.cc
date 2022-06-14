@@ -18,7 +18,7 @@
 
 #include <zypp/RepoManager.h>
 #include <zypp/repo/RepoException.h>
-#include <zypp/parser/ParseException.h>
+#include <zypp-core/parser/ParseException>
 #include <zypp/media/MediaException.h>
 #include <zypp/target/rpm/RpmHeader.h>
 
@@ -216,193 +216,222 @@ bool refresh_raw_metadata( Zypper & zypper, const RepoInfo & repo, bool force_do
 #define DISABLE_ScopedDisableMediaChangeReport_GUARD
   callback::TempConnect<zypp::media::MediaChangeReport> tempDisconnect;
 
-  try
+  int autoRetryCount    = 0;
+  const auto maxRetries = ZConfig::instance().download_max_silent_tries();
+  bool canRetry = true;
+  const auto &qualifiesForRetry = [&](){
+    if ( autoRetryCount < maxRetries ) {
+      auto action = read_action_ari_with_timeout(PROMPT_ARI_RETRY_OPERATION, ZConfig::instance().download_retry_wait_time(), 1);
+      if ( action == 1 ) {
+        canRetry = true;
+        autoRetryCount++;
+        return true;
+      }
+    }
+    return false;
+  };
+
+  while ( canRetry )
   {
-    if ( !force_download )
+    canRetry = false; // we will decide in a per error case if retry is possible
+
+    try
     {
-      // check whether libzypp indicates a refresh is needed, and if so,
-      // print a message
-      zypper.out().info( str::Format(_("Checking whether to refresh metadata for %s")) % repo.asUserString(),
-                         Out::HIGH );
-      if ( !repo.baseUrlsEmpty() )
+      if ( !force_download )
       {
-#ifndef DISABLE_ScopedDisableMediaChangeReport_GUARD
-        Disabled because of fix for bsc#1123967
-        // Suppress (interactive) media::MediaChangeReport if we in have multiple basurls (>1)
-        media::ScopedDisableMediaChangeReport guard( repo.baseUrlsSize() > 1 );
-#endif
-
-        for ( RepoInfo::urls_const_iterator it = repo.baseUrlsBegin(); it != repo.baseUrlsEnd(); )
+        // check whether libzypp indicates a refresh is needed, and if so,
+        // print a message
+        zypper.out().info( str::Format(_("Checking whether to refresh metadata for %s")) % repo.asUserString(),
+                          Out::HIGH );
+        if ( !repo.baseUrlsEmpty() )
         {
-          try
-          {
-            RepoManager::RefreshCheckStatus stat = manager.checkIfToRefreshMetadata( repo, *it,
-                  zypper.command() == ZypperCommand::REFRESH ||
-                  zypper.command() == ZypperCommand::REFRESH_SERVICES ?
-                    RepoManager::RefreshIfNeededIgnoreDelay :
-                    RepoManager::RefreshIfNeeded );
+  #ifndef DISABLE_ScopedDisableMediaChangeReport_GUARD
+          Disabled because of fix for bsc#1123967
+          // Suppress (interactive) media::MediaChangeReport if we in have multiple basurls (>1)
+          media::ScopedDisableMediaChangeReport guard( repo.baseUrlsSize() > 1 );
+  #endif
 
-            do_refresh = ( stat == RepoManager::REFRESH_NEEDED );
-            if ( !do_refresh
-              && ( zypper.command() == ZypperCommand::REFRESH || zypper.command() == ZypperCommand::REFRESH_SERVICES ) )
-            {
-              switch ( stat )
-              {
-              case RepoManager::REPO_UP_TO_DATE:
-              {
-                TermLine outstr( TermLine::SF_SPLIT | TermLine::SF_EXPAND );
-                outstr.lhs << str::Format(_("Repository '%s' is up to date.")) % repo.asUserString();
-                //outstr.rhs << repoGpgCheckStatus( repo );
-                zypper.out().infoLine( outstr );
-              }
-              break;
-              case RepoManager::REPO_CHECK_DELAYED:
-                zypper.out().info( str::Format(_("The up-to-date check of '%s' has been delayed.")) % repo.asUserString(),
-                                   Out::HIGH );
-              break;
-              default:
-                WAR << "new item in enum, which is not covered" << endl;
-              }
-            }
-            break; // don't check all the urls, just the first successful.
-          }
-          catch ( const Exception & e )
+          for ( RepoInfo::urls_const_iterator it = repo.baseUrlsBegin(); it != repo.baseUrlsEnd(); )
           {
-            ZYPP_CAUGHT( e );
-            Url badurl( *it );
-            if ( ++it == repo.baseUrlsEnd() )
-              ZYPP_RETHROW( e );
-            ERR << badurl << " doesn't look good. Trying another url (" << *it << ")." << endl;
+            try
+            {
+              RepoManager::RefreshCheckStatus stat = manager.checkIfToRefreshMetadata( repo, *it,
+                    zypper.command() == ZypperCommand::REFRESH ||
+                    zypper.command() == ZypperCommand::REFRESH_SERVICES ?
+                      RepoManager::RefreshIfNeededIgnoreDelay :
+                      RepoManager::RefreshIfNeeded );
+
+              do_refresh = ( stat == RepoManager::REFRESH_NEEDED );
+              if ( !do_refresh
+                && ( zypper.command() == ZypperCommand::REFRESH || zypper.command() == ZypperCommand::REFRESH_SERVICES ) )
+              {
+                switch ( stat )
+                {
+                case RepoManager::REPO_UP_TO_DATE:
+                {
+                  TermLine outstr( TermLine::SF_SPLIT | TermLine::SF_EXPAND );
+                  outstr.lhs << str::Format(_("Repository '%s' is up to date.")) % repo.asUserString();
+                  //outstr.rhs << repoGpgCheckStatus( repo );
+                  zypper.out().infoLine( outstr );
+                }
+                break;
+                case RepoManager::REPO_CHECK_DELAYED:
+                  zypper.out().info( str::Format(_("The up-to-date check of '%s' has been delayed.")) % repo.asUserString(),
+                                    Out::HIGH );
+                break;
+                default:
+                  WAR << "new item in enum, which is not covered" << endl;
+                }
+              }
+              break; // don't check all the urls, just the first successful.
+            }
+            catch ( const Exception & e )
+            {
+              ZYPP_CAUGHT( e );
+              Url badurl( *it );
+              if ( ++it == repo.baseUrlsEnd() )
+                ZYPP_RETHROW( e );
+              ERR << badurl << " doesn't look good. Trying another url (" << *it << ")." << endl;
+            }
           }
         }
       }
-    }
-    else
-    {
-      zypper.out().info(_("Forcing raw metadata refresh"));
-      do_refresh = true;
-    }
-
-    if ( do_refresh )
-    {
-      plabel = str::form(_("Retrieving repository '%s' metadata"), repo.asUserString().c_str() );
-      zypper.out().progressStart( "raw-refresh", plabel, true );
-
-      // RepoManager::RefreshForced because we already know from checkIfToRefreshMetadata above
-      // that refresh is needed (or forced anyway). Forcing here prevents refreshMetadata from
-      // doing it's own checkIfToRefreshMetadata. Otherwise we'd download the stats twice.
-      manager.refreshMetadata( repo, RepoManager::RefreshForced );
-
-      //plabel += repoGpgCheckStatus( repo );
-      zypper.out().progressEnd( "raw-refresh", plabel );
-      plabel.clear();
-    }
-  }
-  catch ( const AbortRequestException & e )
-  {
-    ZYPP_CAUGHT( e );
-    // rethrow ABORT exception, stop executing the command
-    zypper.setExitCode( ZYPPER_EXIT_ERR_ZYPP );
-    ZYPP_RETHROW( e );
-  }
-  catch ( const SkipRequestException & e )
-  {
-    ZYPP_CAUGHT( e );
-
-    std::string question = str::Format(_("Do you want to disable the repository %s permanently?")) % repo.name();
-
-    if ( read_bool_answer( PROMPT_YN_MEDIA_CHANGE, question, false ) )
-    {
-      MIL << "Disabling repository " << repo.name().c_str() << " permanently." << endl;
-
-      try
+      else
       {
-        RepoInfo origRepo( manager.getRepositoryInfo(repo.alias()) );
-
-        origRepo.setEnabled( false );
-        manager.modifyRepository (repo.alias(), origRepo );
+        zypper.out().info(_("Forcing raw metadata refresh"));
+        do_refresh = true;
       }
-      catch ( const Exception & ex )
-      {
-        ZYPP_CAUGHT( ex );
-        zypper.out().error( ex, str::Format(_("Error while disabling repository '%s'.")) % repo.alias() );
 
-        ERR << "Error while disabling the repository." << endl;
+      if ( do_refresh )
+      {
+        plabel = str::form(_("Retrieving repository '%s' metadata"), repo.asUserString().c_str() );
+        zypper.out().progressStart( "raw-refresh", plabel, true );
+
+        // RepoManager::RefreshForced because we already know from checkIfToRefreshMetadata above
+        // that refresh is needed (or forced anyway). Forcing here prevents refreshMetadata from
+        // doing it's own checkIfToRefreshMetadata. Otherwise we'd download the stats twice.
+        manager.refreshMetadata( repo, RepoManager::RefreshForced );
+
+        //plabel += repoGpgCheckStatus( repo );
+        zypper.out().progressEnd( "raw-refresh", plabel );
+        plabel.clear();
       }
     }
-    // will disable repo in gData.repos
-    return true;
-  }
-  catch ( const media::MediaException & e )
-  {
-    ZYPP_CAUGHT( e );
-    if ( do_refresh )
+    catch ( const AbortRequestException & e )
     {
-      zypper.out().progressEnd( "raw-refresh", plabel, true );
-      plabel.clear();
+      ZYPP_CAUGHT( e );
+      // rethrow ABORT exception, stop executing the command
+      zypper.setExitCode( ZYPPER_EXIT_ERR_ZYPP );
+      ZYPP_RETHROW( e );
     }
-    zypper.out().error( e, str::Format(_("Problem retrieving files from '%s'.")) % repo.asUserString(),
-                        _("Please see the above error message for a hint.") );
-
-    return true; // error
-  }
-  catch ( const repo::RepoNoUrlException & e )
-  {
-    ZYPP_CAUGHT( e );
-    if ( do_refresh )
+    catch ( const SkipRequestException & e )
     {
-      zypper.out().progressEnd( "raw-refresh", plabel, true );
-      plabel.clear();
+      ZYPP_CAUGHT( e );
+
+      std::string question = str::Format(_("Do you want to disable the repository %s permanently?")) % repo.name();
+
+      if ( read_bool_answer( PROMPT_YN_MEDIA_CHANGE, question, false ) )
+      {
+        MIL << "Disabling repository " << repo.name().c_str() << " permanently." << endl;
+
+        try
+        {
+          RepoInfo origRepo( manager.getRepositoryInfo(repo.alias()) );
+
+          origRepo.setEnabled( false );
+          manager.modifyRepository (repo.alias(), origRepo );
+        }
+        catch ( const Exception & ex )
+        {
+          ZYPP_CAUGHT( ex );
+          zypper.out().error( ex, str::Format(_("Error while disabling repository '%s'.")) % repo.alias() );
+
+          ERR << "Error while disabling the repository." << endl;
+        }
+      }
+      // will disable repo in gData.repos
+      return true;
     }
-    zypper.out().error( str::Format(_("No URIs defined for '%s'.")) % repo.asUserString() );
-    if ( !repo.filepath().empty() )
-
-      zypper.out().info(
-        // TranslatorExplanation the first %s is a .repo file path
-        str::Format(_("Please add one or more base URI (baseurl=URI) entries to %s for repository '%s'."))
-        % repo.filepath() % repo.asUserString()
-      );
-
-    return true; // error
-  }
-  catch ( const repo::RepoNoAliasException & e )
-  {
-    ZYPP_CAUGHT( e );
-    if ( do_refresh )
+    catch ( const media::MediaException & e )
     {
-      zypper.out().progressEnd( "raw-refresh", plabel, true );
-      plabel.clear();
-    }
-    zypper.out().error(_("No alias defined for this repository.") );
-    report_a_bug( zypper.out() );
-    return true; // error
-  }
-  catch ( const repo::RepoException & e )
-  {
-    ZYPP_CAUGHT( e );
-    if ( do_refresh )
-    {
-      zypper.out().progressEnd( "raw-refresh", plabel, true );
-      plabel.clear();
-    }
-    zypper.out().error( e, str::Format(_("Repository '%s' is invalid.")) % repo.asUserString(),
-                        _("Please check if the URIs defined for this repository are pointing to a valid repository.") );
-    return true; // error
-  }
-  catch ( const Exception & e )
-  {
-    ZYPP_CAUGHT( e );
-    if ( do_refresh )
-    {
-      zypper.out().progressEnd( "raw-refresh", plabel, true );
-      plabel.clear();
-    }
-    ERR << "Error reading repository '" << repo.asUserString() << "'" << endl;
-    zypper.out().error( e, str::Format(_("Error retrieving metadata for '%s':")) % repo.asUserString() );
+      ZYPP_CAUGHT( e );
+      if ( do_refresh )
+      {
+        zypper.out().progressEnd( "raw-refresh", plabel, true );
+        plabel.clear();
+      }
+      zypper.out().error( e, str::Format(_("Problem retrieving files from '%s'.")) % repo.asUserString(),
+                          _("Please see the above error message for a hint.") );
 
-    return true; // error
-  }
+      if ( qualifiesForRetry() )
+        continue;
 
+      return true; // error
+    }
+    catch ( const repo::RepoNoUrlException & e )
+    {
+      ZYPP_CAUGHT( e );
+      if ( do_refresh )
+      {
+        zypper.out().progressEnd( "raw-refresh", plabel, true );
+        plabel.clear();
+      }
+      zypper.out().error( str::Format(_("No URIs defined for '%s'.")) % repo.asUserString() );
+      if ( !repo.filepath().empty() )
+
+        zypper.out().info(
+          // TranslatorExplanation the first %s is a .repo file path
+          str::Format(_("Please add one or more base URI (baseurl=URI) entries to %s for repository '%s'."))
+          % repo.filepath() % repo.asUserString()
+        );
+
+      return true; // error
+    }
+    catch ( const repo::RepoNoAliasException & e )
+    {
+      ZYPP_CAUGHT( e );
+      if ( do_refresh )
+      {
+        zypper.out().progressEnd( "raw-refresh", plabel, true );
+        plabel.clear();
+      }
+      zypper.out().error(_("No alias defined for this repository.") );
+      report_a_bug( zypper.out() );
+      return true; // error
+    }
+    catch ( const repo::RepoException & e )
+    {
+      ZYPP_CAUGHT( e );
+      if ( do_refresh )
+      {
+        zypper.out().progressEnd( "raw-refresh", plabel, true );
+        plabel.clear();
+      }
+      zypper.out().error( e, str::Format(_("Repository '%s' is invalid.")) % repo.asUserString(),
+                          _("Please check if the URIs defined for this repository are pointing to a valid repository.") );
+
+      if ( qualifiesForRetry() )
+        continue;
+
+      return true; // error
+    }
+    catch ( const Exception & e )
+    {
+      ZYPP_CAUGHT( e );
+      if ( do_refresh )
+      {
+        zypper.out().progressEnd( "raw-refresh", plabel, true );
+        plabel.clear();
+      }
+      ERR << "Error reading repository '" << repo.asUserString() << "'" << endl;
+      zypper.out().error( e, str::Format(_("Error retrieving metadata for '%s':")) % repo.asUserString() );
+
+      if ( qualifiesForRetry() )
+        continue;
+
+      return true; // error
+    }
+  }
   return false; // no error
 }
 
@@ -1950,4 +1979,3 @@ std::vector<std::string> createTempRepoFromArgs( Zypper &zypper, std::vector<std
 // Local Variables:
 // c-basic-offset: 2
 // End:
-

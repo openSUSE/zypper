@@ -10,11 +10,11 @@
 #include <zypp/base/Exception.h>
 #include <zypp/base/String.h>
 #include <zypp/base/Flags.h>
-#include <zypp/base/DefaultIntegral.h>
-#include <zypp/base/DtorReset.h>
+#include <zypp-core/base/DefaultIntegral>
+#include <zypp-core/base/DtorReset>
 #include <zypp/Url.h>
 #include <zypp/TriBool.h>
-#include <zypp/ProgressData.h>
+#include <zypp-core/ui/ProgressData>
 #include <zypp/ZYppCallbacks.h>
 #include <zypp/base/LogTools.h>
 

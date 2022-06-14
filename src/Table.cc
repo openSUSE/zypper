@@ -4,7 +4,7 @@
 
 #include <zypp/base/LogTools.h>
 #include <zypp/base/String.h>
-#include <zypp/base/DtorReset.h>
+#include <zypp-core/base/DtorReset>
 
 #include "utils/colors.h"
 #include "utils/console.h"

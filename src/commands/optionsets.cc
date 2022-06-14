@@ -5,6 +5,7 @@
                              |__/|_|  |_|
 \*---------------------------------------------------------------------------*/
 #include "optionsets.h"
+#include "commonflags.h"
 #include "utils/flags/flagtypes.h"
 #include "global-settings.h"
 #include "Zypper.h"
@@ -183,7 +184,9 @@ std::vector<ZyppFlags::CommandGroup> DownloadOptionSet::options()
         },
         { "download-in-advance", '\0', ZyppFlags::NoArgument | ZyppFlags::Repeatable | ZyppFlags::Hidden, DownloadModeNoArgType( *this, DownloadMode::DownloadInAdvance ), "" },
         { "download-in-heaps",   '\0', ZyppFlags::NoArgument | ZyppFlags::Repeatable | ZyppFlags::Hidden, DownloadModeNoArgType( *this, DownloadMode::DownloadInHeaps ), "" },
-        { "download-as-needed",  '\0', ZyppFlags::NoArgument | ZyppFlags::Repeatable | ZyppFlags::Hidden, DownloadModeNoArgType( *this, DownloadMode::DownloadAsNeeded ), "" }
+        { "download-as-needed",  '\0', ZyppFlags::NoArgument | ZyppFlags::Repeatable | ZyppFlags::Hidden, DownloadModeNoArgType( *this, DownloadMode::DownloadAsNeeded ), "" },
+        CommonFlags::downloadMaxRetriesFlag(),
+        CommonFlags::downloadRetryWaitTimeFlag()
   }}};
 }
 
@@ -191,6 +194,8 @@ void DownloadOptionSet::reset()
 {
   _mode = ZConfig::instance().commit_downloadMode();
   _wasSetBefore = false;
+  ZConfig::instance().reset_download_max_silent_tries();
+  ZConfig::instance().reset_download_retry_wait_time();
 }
 
 

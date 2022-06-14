@@ -13,7 +13,7 @@
 #include <zypp/base/Logger.h>
 #include <zypp/TriBool.h>
 #include <zypp/FileChecker.h>
-#include <zypp/base/InputStream.h>
+#include <zypp-core/base/InputStream>
 #include <zypp/base/IOStream.h>
 
 #include <zypp/media/MediaException.h>
