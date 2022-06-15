@@ -29,6 +29,11 @@ namespace ZmartRecipients
     virtual bool message( MsgType type_r, const std::string & msg_r, const UserData & userData_r ) const
     {
       static const JobReport::UserData::ContentType rpmPosttrans { "cmdout", "%posttrans" };
+      static const JobReport::UserData::ContentType cmdMonitor   { "cmdout", "monitor" };
+
+      if ( userData_r.type() == cmdMonitor ) {
+        return doCmdMonitor( type_r, msg_r, userData_r );
+      }
 
       Out & out( Zypper::instance().out() );
       switch ( type_r.asEnum() )
@@ -68,6 +73,36 @@ namespace ZmartRecipients
       }
       return true;
     }
+
+    bool doCmdMonitor( MsgType type_r, const std::string & msg_r, const UserData & userData_r ) const
+    {
+      static unsigned lastid = 0;
+      static std::string tag;
+
+      if ( type_r == MsgType::debug ) {
+        if ( msg_r == "?" ) {
+          userData_r.reset( "!" );  // we are listening!
+        }
+        else if ( msg_r == "ping" ) {
+          // still alive
+        }
+      }
+
+      if ( type_r == MsgType::data ) {
+        Out & out( Zypper::instance().out() );
+        unsigned id { userData_r.get( "CmdId", unsigned(0) ) };
+        if ( id != lastid ) {
+          tag = "#"+userData_r.get( "CmdTag", std::string() )+"> ";
+          out.info() << ( ColorContext::HIGHLIGHT << tag << "Output from " << userData_r.get( "CmdName", std::string() ) << ":" ); // info() writes NL
+          tag[0] = '[';
+          lastid = id;
+        }
+        out.info() << ( ColorContext::HIGHLIGHT << tag ) << msg_r; // info() writes NL
+      }
+
+      return true;
+    }
+
   };
 } // namespace ZmartRecipients
 ///////////////////////////////////////////////////////////////////
