@@ -1,4 +1,19 @@
 -------------------------------------------------------------------
+Wed Jun 15 13:22:04 CEST 2022 - ma@suse.de
+
+- Basic JobReport for "cmdout/monitor".
+- versioncmp: if verbose, also print the edition 'parts' which are
+  compared.
+- Make sure MediaAccess is closed on exception (bsc#1194550)
+- Display plus-content hint conditionally (fixes #433)
+- Honor the NO_COLOR environment variable when auto-detecting
+  whether to use color (fixes #432)
+- Define table columns which should be sorted natural [case
+  insensitive] (fixes #391, closes #396, fixes #424)
+- lr/ls: Use highlight color on name and alias as well.
+- version 1.14.53
+
+-------------------------------------------------------------------
 Thu Feb 24 13:48:24 CET 2022 - ma@suse.de
 
 - info: print the packages upstream URL if available (fixes #426)
