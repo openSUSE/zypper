@@ -183,7 +183,6 @@ rm -rf "$RPM_BUILD_ROOT"
 %endif
 %config(noreplace) %{_sysconfdir}/zypp/zypper.conf
 %if 0%{?suse_version} > 1500
-%dir %{_distconfdir}/logrotate.d
 %config %{_distconfdir}/logrotate.d/zypper.lr
 %config %{_distconfdir}/logrotate.d/zypp-refresh.lr
 %else
