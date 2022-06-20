@@ -166,6 +166,13 @@ cd ..
 %{__install} -d -m755 $RPM_BUILD_ROOT%{_var}/log
 touch $RPM_BUILD_ROOT%{_var}/log/zypper.log
 
+%if 0%{?suse_version} > 1500
+# Move logratate files form /etc/logrotate.d to /usr/etc/logrotage.d
+mkdir -p %{buildroot}%{_distconfdir}/logrotate.d
+mv %{buildroot}/%{_sysconfdir}/logrotate.d/zypper.lr %{buildroot}%{_distconfdir}/logrotate.d
+mv %{buildroot}/%{_sysconfdir}/logrotate.d/zypp-refresh.lr %{buildroot}%{_distconfdir}/logrotate.d
+%endif
+
 %clean
 rm -rf "$RPM_BUILD_ROOT"
 
@@ -175,8 +182,14 @@ rm -rf "$RPM_BUILD_ROOT"
 %license COPYING
 %endif
 %config(noreplace) %{_sysconfdir}/zypp/zypper.conf
+%if 0%{?suse_version} > 1500
+%dir %{_distconfdir}/logrotate.d
+%config %{_distconfdir}/logrotate.d/zypper.lr
+%config %{_distconfdir}/logrotate.d/zypp-refresh.lr
+%else
 %config(noreplace) %{_sysconfdir}/logrotate.d/zypper.lr
 %config(noreplace) %{_sysconfdir}/logrotate.d/zypp-refresh.lr
+%endif
 %{_sysconfdir}/bash_completion.d/zypper.sh
 %{_bindir}/zypper
 %{_bindir}/yzpper
