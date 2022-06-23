@@ -487,8 +487,8 @@ namespace zypp
         Zypper & zypper { Zypper::instance() };
 
         // translator: %1% is the number of keys, %2% the name of a repository
-        zypper.out().notePar( str::Format( PL_( "Received %1% new package signing key from repository %2%:",
-                                                "Received %1% new package signing keys from repository %2%:",
+        zypper.out().notePar( str::Format( PL_( "Received %1% new package signing key from repository \"%2%\":",
+                                                "Received %1% new package signing keys from repository \"%2%\":",
                                          keyDataList.size() )) % keyDataList.size() % context.repoInfo().asUserString() );
 
         zypper.out().par( 2,_("Those additional keys are usually used to sign packages shipped by the repository. In order to validate those packages upon download and installation the new keys will be imported into the rpm database.") );

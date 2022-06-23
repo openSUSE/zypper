@@ -1783,11 +1783,11 @@ msgstr ""
 #. translator: %1% is the number of keys, %2% the name of a repository
 #: src/callbacks/keyring.h:490
 #, boost-format
-msgid "Received %1% new package signing key from repository %2%:"
-msgid_plural "Received %1% new package signing keys from repository %2%:"
-msgstr[0] "Отримано %1% новий пакунок ключа підпису зі сховища %2%:"
-msgstr[1] "Отримано %1% нових пакунки ключів підпису зі сховища %2%:"
-msgstr[2] "Отримано %1% нових пакунків ключів підпису зі сховища %2%:"
+msgid "Received %1% new package signing key from repository \"%2%\":"
+msgid_plural "Received %1% new package signing keys from repository \"%2%\":"
+msgstr[0] "Отримано %1% новий пакунок ключа підпису зі сховища \"%2%\":"
+msgstr[1] "Отримано %1% нових пакунки ключів підпису зі сховища \"%2%\":"
+msgstr[2] "Отримано %1% нових пакунків ключів підпису зі сховища \"%2%\":"
 
 #: src/callbacks/keyring.h:494
 msgid ""

@@ -1531,9 +1531,9 @@ msgstr ""
 #. translator: %1% is the number of keys, %2% the name of a repository
 #: src/callbacks/keyring.h:490
 #, boost-format
-msgid "Received %1% new package signing key from repository %2%:"
-msgid_plural "Received %1% new package signing keys from repository %2%:"
-msgstr[0] "收到来自 %2% 仓库的 %1% 个软件包签名密钥："
+msgid "Received %1% new package signing key from repository \"%2%\":"
+msgid_plural "Received %1% new package signing keys from repository \"%2%\":"
+msgstr[0] "收到来自 《%2%》 仓库的 %1% 个软件包签名密钥："
 
 #: src/callbacks/keyring.h:494
 msgid ""
