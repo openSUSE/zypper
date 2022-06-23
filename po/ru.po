@@ -1782,11 +1782,11 @@ msgstr ""
 #. translator: %1% is the number of keys, %2% the name of a repository
 #: src/callbacks/keyring.h:490
 #, boost-format
-msgid "Received %1% new package signing key from repository %2%:"
-msgid_plural "Received %1% new package signing keys from repository %2%:"
-msgstr[0] "Получен %1% новый ключ подписи пакетов из репозитория %2%:"
-msgstr[1] "Получено %1% новых ключей подписи пакетов из репозитория %2%:"
-msgstr[2] "Получено %1% новых ключей подписи пакетов из репозитория %2%:"
+msgid "Received %1% new package signing key from repository \"%2%\":"
+msgid_plural "Received %1% new package signing keys from repository \"%2%\":"
+msgstr[0] "Получен %1% новый ключ подписи пакетов из репозитория \"%2%\":"
+msgstr[1] "Получено %1% новых ключей подписи пакетов из репозитория \"%2%\":"
+msgstr[2] "Получено %1% новых ключей подписи пакетов из репозитория \"%2%\":"
 
 #: src/callbacks/keyring.h:494
 msgid ""

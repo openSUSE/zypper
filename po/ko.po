@@ -1564,9 +1564,9 @@ msgstr ""
 #. translator: %1% is the number of keys, %2% the name of a repository
 #: src/callbacks/keyring.h:490
 #, boost-format
-msgid "Received %1% new package signing key from repository %2%:"
-msgid_plural "Received %1% new package signing keys from repository %2%:"
-msgstr[0] "%1%개의 새로운 패키지 서명 키를 저장소 %2%에서 가져옴:"
+msgid "Received %1% new package signing key from repository \"%2%\":"
+msgid_plural "Received %1% new package signing keys from repository \"%2%\":"
+msgstr[0] "%1%개의 새로운 패키지 서명 키를 저장소 \"%2%\"에서 가져옴:"
 
 #: src/callbacks/keyring.h:494
 msgid ""
