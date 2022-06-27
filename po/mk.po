@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-03-14 15:21+0100\n"
-"PO-Revision-Date: 2022-06-01 11:12+0000\n"
+"PO-Revision-Date: 2022-06-27 07:13+0000\n"
 "Last-Translator: Kristijan Fremen Velkovski <me@krisfremen.com>\n"
 "Language-Team: Macedonian <https://l10n.opensuse.org/projects/libzypp/master/"
 "mk/>\n"
@@ -118,9 +118,8 @@ msgstr "Аруба"
 # fuzzy
 #. :ABW:533:
 #: zypp/CountryCode.cc:173
-#, fuzzy
 msgid "Aland Islands"
-msgstr "Ирска"
+msgstr "Оландски Острови"
 
 # AZ
 # fuzzy
@@ -219,9 +218,8 @@ msgstr "Бутан"
 # fuzzy
 #. :BTN:064:
 #: zypp/CountryCode.cc:190
-#, fuzzy
 msgid "Bouvet Island"
-msgstr "Ирска"
+msgstr "Остров Буве"
 
 #. :BVT:074:
 #: zypp/CountryCode.cc:191
@@ -250,7 +248,6 @@ msgstr "Канада"
 
 #. :CAN:124:
 #: zypp/CountryCode.cc:195
-#, fuzzy
 msgid "Cocos (Keeling) Islands"
 msgstr "Кокосови Острови"
 
@@ -487,16 +484,14 @@ msgstr "Србија"
 
 #. :GEO:268:
 #: zypp/CountryCode.cc:236
-#, fuzzy
 msgid "French Guiana"
-msgstr "Француски"
+msgstr "Француска Гвајана"
 
 # DE
 #. :GUF:254:
 #: zypp/CountryCode.cc:237
-#, fuzzy
 msgid "Guernsey"
-msgstr "Германија"
+msgstr "Гернзи"
 
 # GH
 # fuzzy
@@ -697,16 +692,15 @@ msgstr "Кенија"
 # fuzzy
 #. :KEN:404:
 #: zypp/CountryCode.cc:272
-#, fuzzy
 msgid "Kyrgyzstan"
-msgstr "Тајван"
+msgstr "Киргистан"
 
 # KH
 # fuzzy
 #. :KGZ:417:
 #: zypp/CountryCode.cc:273
 msgid "Cambodia"
-msgstr "Колумбија"
+msgstr "Камбодија"
 
 #. :KHM:116:
 #: zypp/CountryCode.cc:274
@@ -731,9 +725,8 @@ msgstr ""
 # ZA
 #. :PRK:408:
 #: zypp/CountryCode.cc:278
-#, fuzzy
 msgid "South Korea"
-msgstr "Јужна Африка"
+msgstr "Јужна Кореја"
 
 #. :KOR:410:
 #: zypp/CountryCode.cc:279
