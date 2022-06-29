@@ -1,5 +1,6 @@
 #include <fcntl.h>
 #include <unistd.h>
+#include <time.h>
 #include <zypp/base/Random.h>
 
 
