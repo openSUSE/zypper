@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Tue Jul  5 10:29:19 CEST 2022 - ma@suse.de
+
+- Fix building with GCC 12.x release (#396)
+- version 17.30.3 (22)
+
+-------------------------------------------------------------------
 Wed Jun 15 12:07:22 CEST 2022 - ma@suse.de
 
 - appdata plugin: Pass path to the repodata/ directory inside the
