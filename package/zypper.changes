@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Jul  5 12:18:11 CEST 2022 - ma@suse.de
+
+- Fix building with GCC 13 (fixes #448)
+- Put signing key supplying repository name in quotes.
+- version 1.14.54
+
+-------------------------------------------------------------------
 Wed Jun 15 13:22:04 CEST 2022 - ma@suse.de
 
 - Basic JobReport for "cmdout/monitor".
