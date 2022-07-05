@@ -10,6 +10,7 @@
 #ifndef ZYPPER_UTILS_ANSI_H
 #define ZYPPER_UTILS_ANSI_H
 
+#include <cstdint>
 #include <iostream>
 #include <sstream>
 #include <type_traits>
