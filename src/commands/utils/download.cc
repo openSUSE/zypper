@@ -236,7 +236,7 @@ int DownloadCmd::execute( Zypper &zypper , const std::vector<std::string> &posit
       {
         // translators: Label text; is followed by ': cmdline argument'
         zypper.out().error( str::Str() << _("Argument resolves to no package") << ": " << pkgspec.orig_str );
-        zypper.setExitCode( ZYPPER_EXIT_INF_CAP_NOT_FOUND );
+        zypper.setExitInfoCode( ZYPPER_EXIT_INF_CAP_NOT_FOUND );
         continue;
       }
 
@@ -252,7 +252,7 @@ int DownloadCmd::execute( Zypper &zypper , const std::vector<std::string> &posit
     if ( collect.empty() )
     {
       zypper.out().info( _("Nothing to do.") );
-      return zypper.exitCode();
+      return ZYPPER_EXIT_OK;
     }
 
     unsigned total = 0;
@@ -343,5 +343,5 @@ int DownloadCmd::execute( Zypper &zypper , const std::vector<std::string> &posit
           break;	// first==best version only.
       }
     }
-    return zypper.exitCode();
+    return ZYPPER_EXIT_OK;
 }
