@@ -612,7 +612,9 @@ void MediaCurl::disconnectFrom()
 
   if ( _curl )
   {
-    curl_easy_cleanup( _curl );
+    // bsc#1201092: Strange but within global_dtors we may exceptions here.
+    try { curl_easy_cleanup( _curl ); }
+    catch (...) { ; }
     _curl = NULL;
   }
 }
