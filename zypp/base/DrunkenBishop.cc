@@ -8,6 +8,7 @@
 \---------------------------------------------------------------------*/
 /** \file	zypp/base/DrunkenBishop.cc
  */
+#include <cstdint>
 #include <iostream>
 //#include <zypp/base/LogTools.h>
 #include <zypp/base/Flags.h>
