@@ -391,17 +391,17 @@ void DiscProvider::detectDevices( )
           }
         }
       }
+    }
 #endif
-      if ( sysDevs.empty() )
-      {
-        WAR << "CD/DVD drive detection with UDEV failed! Guessing..." << std::endl;
-        auto dev = registerDevice( zypp::PathInfo ( "/dev/dvd" ), "GUESS" );
-        if ( dev != sysDevs.end() && (*dev)->_properties.count("DVD") == 0 )
-          (*dev)->_properties["DVD"] = true;
-        dev = registerDevice( zypp::PathInfo ( "/dev/cdrom" ), "GUESS" );
-        if ( dev != sysDevs.end() && (*dev)->_properties.count("DVD") == 0 )
-          (*dev)->_properties["DVD"] = false;
-      }
+    if ( sysDevs.empty() )
+    {
+      WAR << "CD/DVD drive detection with UDEV failed! Guessing..." << std::endl;
+      auto dev = registerDevice( zypp::PathInfo ( "/dev/dvd" ), "GUESS" );
+      if ( dev != sysDevs.end() && (*dev)->_properties.count("DVD") == 0 )
+        (*dev)->_properties["DVD"] = true;
+      dev = registerDevice( zypp::PathInfo ( "/dev/cdrom" ), "GUESS" );
+      if ( dev != sysDevs.end() && (*dev)->_properties.count("DVD") == 0 )
+        (*dev)->_properties["DVD"] = false;
     }
   }
 }
