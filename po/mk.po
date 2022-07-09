@@ -8,18 +8,20 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-02-23 18:47+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2022-07-09 22:13+0000\n"
+"Last-Translator: Kristijan Fremen Velkovski <me@krisfremen.com>\n"
+"Language-Team: Macedonian <https://l10n.opensuse.org/projects/zypper/master/"
+"mk/>\n"
 "Language: mk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n==1 || n%10==1 ? 0 : 1;\n"
+"X-Generator: Weblate 4.9.1\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
-msgstr ""
+msgstr "Невалидна команда"
 
 #: src/Command.cc:111
 msgid "Repository Management:"
@@ -51,20 +53,20 @@ msgstr ""
 
 #: src/Command.cc:158
 msgid "Other Commands:"
-msgstr ""
+msgstr "Други команди:"
 
 #: src/Command.cc:167
 msgid "Subcommands:"
-msgstr ""
+msgstr "Подкоманди:"
 
 #: src/Command.cc:288
 #, c-format, boost-format
 msgid "Unknown command '%s'"
-msgstr ""
+msgstr "Непозната команда '%s'"
 
 #: src/CommitSummary.cc:90
 msgid "Installation has completed with error."
-msgstr ""
+msgstr "Инсталацијата заврши без грешки."
 
 #: src/CommitSummary.cc:92
 #, boost-format
@@ -75,8 +77,8 @@ msgstr ""
 #, c-format, boost-format
 msgid "The following package failed to install:"
 msgid_plural "The following %d packages failed to install:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Следниот пакет не успеа да се инсталира:"
+msgstr[1] "Следните %d пакети не успеаа да се инсталираат:"
 
 #: src/CommitSummary.cc:140
 #, c-format, boost-format
