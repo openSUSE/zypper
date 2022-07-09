@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-03-14 15:21+0100\n"
-"PO-Revision-Date: 2022-07-02 23:12+0000\n"
+"PO-Revision-Date: 2022-07-09 22:12+0000\n"
 "Last-Translator: Kristijan Fremen Velkovski <me@krisfremen.com>\n"
 "Language-Team: Macedonian <https://l10n.opensuse.org/projects/libzypp/master/"
 "mk/>\n"
@@ -737,9 +737,8 @@ msgstr ""
 # fuzzy
 #. :KWT:414:
 #: zypp/CountryCode.cc:280
-#, fuzzy
 msgid "Cayman Islands"
-msgstr "Ирска"
+msgstr "Кајмански Острови"
 
 # KZ
 # fuzzy
@@ -751,27 +750,27 @@ msgstr "Тајван"
 #. :KAZ:398:
 #: zypp/CountryCode.cc:282
 msgid "Lao People's Democratic Republic"
-msgstr ""
+msgstr "Лаоска Народна Демократска Република"
 
 #. :LAO:418:
 #: zypp/CountryCode.cc:283
 msgid "Lebanon"
-msgstr ""
+msgstr "Либан"
 
 #. :LBN:422:
 #: zypp/CountryCode.cc:284
 msgid "Saint Lucia"
-msgstr ""
+msgstr "Света Луција"
 
 #. :LCA:662:
 #: zypp/CountryCode.cc:285
 msgid "Liechtenstein"
-msgstr ""
+msgstr "Лихтенштајн"
 
 #. :LIE:438:
 #: zypp/CountryCode.cc:286
 msgid "Sri Lanka"
-msgstr ""
+msgstr "Шри Ланка"
 
 # LR
 # fuzzy
