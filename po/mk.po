@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-02-23 18:47+0100\n"
-"PO-Revision-Date: 2022-07-09 22:13+0000\n"
+"PO-Revision-Date: 2022-07-10 18:12+0000\n"
 "Last-Translator: Kristijan Fremen Velkovski <me@krisfremen.com>\n"
 "Language-Team: Macedonian <https://l10n.opensuse.org/projects/zypper/master/"
 "mk/>\n"
@@ -25,31 +25,31 @@ msgstr "Невалидна команда"
 
 #: src/Command.cc:111
 msgid "Repository Management:"
-msgstr ""
+msgstr "Управување со складиштето:"
 
 #: src/Command.cc:119
 msgid "Service Management:"
-msgstr ""
+msgstr "Управување со сервиси:"
 
 #: src/Command.cc:125
 msgid "Software Management:"
-msgstr ""
+msgstr "Управување со Софтвер:"
 
 #: src/Command.cc:131
 msgid "Update Management:"
-msgstr ""
+msgstr "Управување со Ажурирање:"
 
 #: src/Command.cc:138
 msgid "Querying:"
-msgstr ""
+msgstr "Барање:"
 
 #: src/Command.cc:149
 msgid "Package Locks:"
-msgstr ""
+msgstr "Заклучени Пакети:"
 
 #: src/Command.cc:154
 msgid "Locale Management:"
-msgstr ""
+msgstr "Управување со Локали:"
 
 #: src/Command.cc:158
 msgid "Other Commands:"
@@ -71,7 +71,7 @@ msgstr "Инсталацијата заврши без грешки."
 #: src/CommitSummary.cc:92
 #, boost-format
 msgid "You may run '%1%' to repair any dependency problems."
-msgstr ""
+msgstr "Можете да извршите '%1%' за да ги поправите зависните проблеми."
 
 #: src/CommitSummary.cc:125
 #, c-format, boost-format
@@ -84,15 +84,15 @@ msgstr[1] "Следните %d пакети не успеаа да се инст
 #, c-format, boost-format
 msgid "The following package installation was skipped:"
 msgid_plural "The following %d package installations were skipped:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Следниот пакет не се инсталира затоа што беше прескокнат:"
+msgstr[1] "Следните %d пакети не се инсталираа затоа што беа прескокнати:"
 
 #: src/CommitSummary.cc:155
 #, c-format, boost-format
 msgid "The following package failed to uninstall:"
 msgid_plural "The following %d packages failed to uninstall:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Следниот пакет не успеа да се деинсталира:"
+msgstr[1] "Следните %d пакети не успеаа да се деинсталираат:"
 
 #: src/CommitSummary.cc:170
 #, c-format, boost-format
@@ -119,16 +119,16 @@ msgstr ""
 #: src/Config.cc:54
 #, c-format, boost-format
 msgid " Use an integer number from %d to %d"
-msgstr ""
+msgstr " Користите цели броеви од %d до %d"
 
 #: src/Config.cc:244
 msgid "The path specified in the --root option must be absolute."
-msgstr ""
+msgstr "Патеката наведена во опцијата --root мора да биде апсолутна."
 
 #. translators: --help, -h
 #: src/Config.cc:322
 msgid "Help."
-msgstr ""
+msgstr "Помош."
 
 #. translators: --version, -V
 #: src/Config.cc:331
