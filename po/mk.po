@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-03-14 15:21+0100\n"
-"PO-Revision-Date: 2022-07-09 22:12+0000\n"
+"PO-Revision-Date: 2022-07-10 22:12+0000\n"
 "Last-Translator: Kristijan Fremen Velkovski <me@krisfremen.com>\n"
 "Language-Team: Macedonian <https://l10n.opensuse.org/projects/libzypp/master/"
 "mk/>\n"
@@ -575,7 +575,7 @@ msgstr "Хонгконг"
 #. :HKG:344:
 #: zypp/CountryCode.cc:252
 msgid "Heard Island and McDonald Islands"
-msgstr ""
+msgstr "Остров Херд и Острови МекДоналд"
 
 # HN
 #. :HMD:334:
@@ -710,17 +710,17 @@ msgstr "Кирибати"
 #. :KIR:296:
 #: zypp/CountryCode.cc:275
 msgid "Comoros"
-msgstr ""
+msgstr "Комори"
 
 #. :COM:174:
 #: zypp/CountryCode.cc:276
 msgid "Saint Kitts and Nevis"
-msgstr ""
+msgstr "Свети Кристофер и Невис"
 
 #. :KNA:659:
 #: zypp/CountryCode.cc:277
 msgid "North Korea"
-msgstr ""
+msgstr "Северна Кореја"
 
 # ZA
 #. :PRK:408:
@@ -731,7 +731,7 @@ msgstr "Јужна Кореја"
 #. :KOR:410:
 #: zypp/CountryCode.cc:279
 msgid "Kuwait"
-msgstr ""
+msgstr "Кувајт"
 
 # FO
 # fuzzy
