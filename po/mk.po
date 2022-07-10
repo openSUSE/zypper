@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-02-23 18:47+0100\n"
-"PO-Revision-Date: 2022-07-10 18:12+0000\n"
+"PO-Revision-Date: 2022-07-10 22:12+0000\n"
 "Last-Translator: Kristijan Fremen Velkovski <me@krisfremen.com>\n"
 "Language-Team: Macedonian <https://l10n.opensuse.org/projects/zypper/master/"
 "mk/>\n"
@@ -1289,31 +1289,31 @@ msgstr ""
 
 #: src/callbacks/keyring.h:85
 msgid "Repository:"
-msgstr ""
+msgstr "Складиште:"
 
 #: src/callbacks/keyring.h:87
 msgid "Key Fingerprint:"
-msgstr ""
+msgstr "Клучен отпечаток:"
 
 #: src/callbacks/keyring.h:88
 msgid "Key Name:"
-msgstr ""
+msgstr "Клучно Име:"
 
 #: src/callbacks/keyring.h:89
 msgid "Key Algorithm:"
-msgstr ""
+msgstr "Клучен Алгоритам:"
 
 #: src/callbacks/keyring.h:90
 msgid "Key Created:"
-msgstr ""
+msgstr "Дата на созданието на Клучот:"
 
 #: src/callbacks/keyring.h:91
 msgid "Key Expires:"
-msgstr ""
+msgstr "Дата на истекување на клуч:"
 
 #: src/callbacks/keyring.h:93
 msgid "Subkey:"
-msgstr ""
+msgstr "Подклуч:"
 
 #: src/callbacks/keyring.h:94
 msgid "Rpm Name:"
