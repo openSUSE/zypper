@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-03-14 15:21+0100\n"
-"PO-Revision-Date: 2022-07-10 22:12+0000\n"
+"PO-Revision-Date: 2022-07-12 07:12+0000\n"
 "Last-Translator: Kristijan Fremen Velkovski <me@krisfremen.com>\n"
 "Language-Team: Macedonian <https://l10n.opensuse.org/projects/libzypp/master/"
 "mk/>\n"
@@ -949,7 +949,7 @@ msgstr ""
 #. :MOZ:508:
 #: zypp/CountryCode.cc:316
 msgid "Namibia"
-msgstr ""
+msgstr "Намибија"
 
 # NC
 # fuzzy
@@ -962,17 +962,15 @@ msgstr "Македонија"
 # fuzzy
 #. :NCL:540:
 #: zypp/CountryCode.cc:318
-#, fuzzy
 msgid "Niger"
-msgstr "Србија"
+msgstr "Нигер"
 
 # FO
 # fuzzy
 #. :NER:562:
 #: zypp/CountryCode.cc:319
-#, fuzzy
 msgid "Norfolk Island"
-msgstr "Ирска"
+msgstr "Норфолшки Остров"
 
 # NG
 # fuzzy
@@ -1003,13 +1001,13 @@ msgstr "Норвешка"
 #. :NOR:578:
 #: zypp/CountryCode.cc:324
 msgid "Nepal"
-msgstr ""
+msgstr "Непал"
 
 #. :NPL:524:
 #. language code: nau na
 #: zypp/CountryCode.cc:325 zypp/LanguageCode.cc:781
 msgid "Nauru"
-msgstr ""
+msgstr "Науру"
 
 #. :NRU:520:
 #: zypp/CountryCode.cc:326
