@@ -106,7 +106,7 @@ static bool remove_duplicate( PackageArgs::PackageSpecSet & set, const PackageSp
 
 void PackageArgs::argsToCaps( const ResKind & kind )
 {
-  bool dont;
+  bool dont = not _opts.do_by_default;
   std::string arg, repo;
   for_( it, _args.begin(), _args.end() )
   {
@@ -160,10 +160,6 @@ void PackageArgs::argsToCaps( const ResKind & kind )
       dont = true;
       arg.erase( 0, 1 );
     }
-    else if ( _opts.do_by_default )
-      dont = false;
-    else
-      dont = true;
 
     // check for and remove the 'repo:' prefix
     // ignore colons coming after '(' or '=' (bnc #433679)
