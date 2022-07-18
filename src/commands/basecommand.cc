@@ -125,7 +125,7 @@ int ZypperBaseCommand::parseArguments( Zypper &, const int argc, char * const *a
 
   if ( _fillRawOptions ) {
     //skip first argument here as well
-    for ( int i = 1; i < argc; i++ ) {
+    for ( int i = 1; i < argc; ++i ) {
       _rawOptions.push_back( argv[ i ] );
     }
   }
