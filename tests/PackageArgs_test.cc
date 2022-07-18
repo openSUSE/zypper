@@ -233,6 +233,15 @@ BOOST_AUTO_TEST_CASE(argToCaps_with_patch_test)
   }
 }
 
+BOOST_AUTO_TEST_CASE(illegal_modifier)
+{
+  // bsc#1201576: Make sure a modifier precedes a not-empty argument.
+  for ( const char * mod : { "-","!","+","~" } ) {
+    std::vector<std::string> rawargs = { mod };
+    BOOST_CHECK_THROW( PackageArgs args(rawargs), ExitRequestException );;
+  }
+}
+
 BOOST_AUTO_TEST_CASE(kind_tests)
 {
   std::vector<std::string> inp {

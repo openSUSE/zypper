@@ -152,14 +152,24 @@ void PackageArgs::argsToCaps( const ResKind & kind )
 
     // check for and remove the install/remove modifiers
     // sort as do/dont
-
+    // bsc#1201576: Make sure a modifier precedes a not-empty argument.
     if (arg[0] == '+' || arg[0] == '~' )
     {
+      if ( arg[1] == '\0' ) {
+        zypper.out().error( str::form(_("'%s' install modifier must not be used without a package name or capability."), arg.c_str()) );
+        zypper.setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
+        ZYPP_THROW( ExitRequestException("Illegal use of install modifier") );
+      }
       dont = false;
       arg.erase( 0, 1 );
     }
     else if ( arg[0] == '-' || arg[0] == '!' )
     {
+      if ( arg[1] == '\0' ) {
+        zypper.out().error( str::form(_("'%s' remove modifier must not be used without a package name or capability."), arg.c_str()) );
+        zypper.setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
+        ZYPP_THROW( ExitRequestException("Illegal use of remove modifier") );
+      }
       dont = true;
       arg.erase( 0, 1 );
     }
