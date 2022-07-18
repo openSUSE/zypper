@@ -28,6 +28,12 @@ PackageArgs::PackageArgs( const std::vector<std::string> & args, const ResKind &
 
 void PackageArgs::preprocess( const std::vector<std::string> & args )
 {
+  // Preprocess asserts not to store empty strings in _args !
+  auto storeIfNotEmpty = [this]( std::string && arg ) {
+    if ( ! arg.empty() )
+      this->_args.insert( std::move(arg) );
+  };
+
   std::vector<std::string>::size_type argc = args.size();
   std::string arg;
   bool op = false;
@@ -52,8 +58,7 @@ void PackageArgs::preprocess( const std::vector<std::string> & args )
     // operator at the end of a random string, e.g. 'zypper='
     else if ( tmp.find_last_of( "=<>" ) == tmp.size() - 1 && i < argc - 1 )
     {
-      if ( !arg.empty() )
-        _args.insert( arg );
+      storeIfNotEmpty( std::move(arg) );
       arg = tmp;
       op = true;
       continue;
@@ -70,14 +75,12 @@ void PackageArgs::preprocess( const std::vector<std::string> & args )
       arg += tmp;
     else
     {
-      if ( !arg.empty() )
-        _args.insert( arg );
+      storeIfNotEmpty( std::move(arg) );
       arg = tmp;
     }
   }
 
-  if ( !arg.empty() )
-    _args.insert( arg );
+  storeIfNotEmpty( std::move(arg) );
 
   DBG << "args received: ";
   std::copy( args.begin(), args.end(), std::ostream_iterator<std::string>(DBG, " ") );
