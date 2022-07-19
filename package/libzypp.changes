@@ -1,4 +1,24 @@
 -------------------------------------------------------------------
+Tue Jul 19 16:03:01 CEST 2022 - ma@suse.de
+
+- Add PoolItem::statusReinit to reset the status it's initial
+  state in the ResPool (might help bsc#1199895)
+  This may either be 'KEEP_STATE bySOLVER' or 'LOCKED byUSER' if
+  the PoolItem matched a hard lock defined in /etc/zypp/locks.
+- Fix building with GCC 13 on i586 (fixes #407, fixes #396)
+- Be prepared to receive exceptions from curl_easy_cleanup
+  (bsc#1201092)
+- Don't auto-flag kernel-firmware as 'reboot-needed' (bsc#1200993)
+- Remove Medianetwork and dependend code.
+  This commit removes the MediaNetwork tech preview and all related
+  code. First reason for this is that MediaNetwork was just meant
+  as a way to test the new CURL based downloader and second: since
+  the Provide API is going to completely replace the current media
+  backend it would be extra work to ensure that changes on the
+  Downloader do not break MediaNetwork.
+- version 17.31.0 (22)
+
+-------------------------------------------------------------------
 Tue Jul  5 10:29:19 CEST 2022 - ma@suse.de
 
 - Fix building with GCC 12.x release (#396)
