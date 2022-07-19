@@ -69,6 +69,13 @@ namespace zypp
         return _status;
       }
 
+      ResStatus & statusReinit() const
+      {
+        _status.setLock( _status.isUserLockQueryMatch(), zypp::ResStatus::USER );
+        _status.resetTransact( zypp::ResStatus::USER );
+        return _status;
+      }
+
     public:
       bool isUndetermined() const
       {
@@ -203,6 +210,7 @@ namespace zypp
 
   ResStatus & PoolItem::status() const			{ return _pimpl->status(); }
   ResStatus & PoolItem::statusReset() const		{ return _pimpl->statusReset(); }
+  ResStatus & PoolItem::statusReinit() const		{ return _pimpl->statusReinit(); }
   sat::Solvable PoolItem::buddy() const			{ return _pimpl->buddy(); }
   void PoolItem::setBuddy( const sat::Solvable & solv_r )	{ _pimpl->setBuddy( solv_r ); }
   bool PoolItem::isUndetermined() const			{ return _pimpl->isUndetermined(); }

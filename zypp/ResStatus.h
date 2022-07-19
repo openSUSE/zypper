@@ -328,22 +328,21 @@ namespace zypp
     { return isToBeUninstalled() && fieldValueIs<TransactDetailField>( SOFT_REMOVE ); }
 
   private:
-
-    /** \name Internal hard lock maintainance */
+    /** \name Internal hard lock maintenance */
     //@{
     friend struct resstatus::UserLockQueryManip;
-
-    bool isUserLockQueryMatch() const
-    { return fieldValueIs<UserLockQueryField>( USERLOCK_MATCH ); }
 
     void setUserLockQueryMatch( bool match_r )
     { fieldValueAssign<UserLockQueryField>( match_r ? USERLOCK_MATCH : USERLOCK_NOMATCH ); }
     //@}
+  public:
+    bool isUserLockQueryMatch() const
+    { return fieldValueIs<UserLockQueryField>( USERLOCK_MATCH ); }
 
   public:
 
     //------------------------------------------------------------------------
-    // get/set functions, returnig \c true if requested status change
+    // get/set functions, returning \c true if requested status change
     // was successful (i.e. leading to the desired transaction).
     // If a lower level (e.g.SOLVER) wants to transact, but it's
     // already set by a higher level, \c true should be returned.
@@ -382,7 +381,7 @@ namespace zypp
 
     /** Apply a lock (prevent transaction).
      * Currently by USER or APPL_HIGH only, but who knows...
-     * Set LOCKED from KEEP_STATE to be shure all transaction
+     * Set LOCKED from KEEP_STATE to be sure all transaction
      * details were reset properly.
     */
     bool setLock( bool toLock_r, TransactByValue causer_r )
@@ -428,7 +427,7 @@ namespace zypp
     /** Toggle between TRANSACT and KEEP_STATE.
      * LOCKED state means KEEP_STATE. But in contrary to KEEP_STATE,
      * LOCKED state is immutable for \a causer_r less than TransactByValue.
-     * KEEP_STATE may be canged by any \a causer_r.
+     * KEEP_STATE may be changed by any \a causer_r.
     */
     bool setTransact( bool toTansact_r, TransactByValue causer_r )
     {

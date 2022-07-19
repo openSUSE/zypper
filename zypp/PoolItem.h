@@ -75,8 +75,14 @@ namespace zypp
       /** Returns the current status. */
       ResStatus & status() const;
 
-      /** Reset status. */
+      /** Resets status to the default state (KEEP_STATE bySOLVER; clears any lock!). */
       ResStatus & statusReset() const;
+
+      /** Resets status to it's initial state in the ResPool (KEEP_STATE bySOLVER or LOCKED byUSER).
+       * The state depends on whether the PoolItem matched a hard lock defined
+       * in /etc/zypp/locks or not.
+       */
+      ResStatus & statusReinit() const;
       //@}
 
 
