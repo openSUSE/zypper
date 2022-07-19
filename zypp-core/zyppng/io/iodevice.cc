@@ -200,7 +200,7 @@ namespace zyppng {
       int64_t lastReadSize = 0;
       result.resize (1); // leave room for \0
       do {
-        result.resize( std::min( std::size_t(maxSize), result.size() + d->_readBufChunkSize ) );
+        result.resize( std::min( std::size_t(maxSize), std::size_t(result.size() + d->_readBufChunkSize )) );
         lastReadSize = channelReadLine( channel, result.data() + readSoFar, result.size() - readSoFar );
         if ( lastReadSize > 0)
           readSoFar += lastReadSize;
