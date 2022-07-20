@@ -1,4 +1,18 @@
 -------------------------------------------------------------------
+Wed Jul 20 12:21:25 CEST 2022 - ma@suse.de
+
+- lr: Allow shortening the Name column if table is wider than the
+  terminal (bsc#1201638)
+- Don't accepts install/remove modifier without argument
+  (bsc#1201576)
+- zypper-download: Set correct ExitInfoCode when failing to
+  resolve argument.
+- zypper-download: Handle unresolvable arguments as error.
+  This commit changes zypper-download such that it behaves more
+  consistent to zypper-install when an argument can't be resolved.
+- version 1.14.55
+
+-------------------------------------------------------------------
 Tue Jul  5 12:18:11 CEST 2022 - ma@suse.de
 
 - Fix building with GCC 13 (fixes #448)
