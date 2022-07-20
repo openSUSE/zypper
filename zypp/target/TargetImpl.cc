@@ -2395,7 +2395,7 @@ namespace zypp
           while ( msgSource->bytesAvailable() ) {
 
             if ( pendingMessageSize == 0 ) {
-              if ( msgSource->bytesAvailable() >= sizeof( zyppng::rpc::HeaderSizeType ) ) {
+              if ( std::size_t(msgSource->bytesAvailable()) >= sizeof( zyppng::rpc::HeaderSizeType ) ) {
                 msgSource->read( reinterpret_cast<char *>( &pendingMessageSize ),  sizeof( zyppng::rpc::HeaderSizeType ) );
               }
             }
