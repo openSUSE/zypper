@@ -224,6 +224,7 @@ void ListReposCmd::printRepoList( Zypper & zypper, const std::list<RepoInfo> & r
      ++index;
      if ( _listOptions._flags.testFlag( RSCommonListOptions::SortByName ) || ( list_cols.find("N") != std::string::npos && !sort_override ) )
        sort_index = index;
+     tbl.allowAbbrev( index );
   }
 
   // 'enabled' flag

@@ -115,6 +115,8 @@ void ListServicesCmd::printServiceList( Zypper &zypper )
     if ( _listOptions._flags.testFlag( RSCommonListOptions::ShowURI ) )
       th << N_("URI");
     tbl << std::move(th);
+    tbl.allowAbbrev( 2 ); //Name
+
   }
 
   bool show_enabled_only = _listOptions._flags.testFlag( RSCommonListOptions::ShowEnabledOnly );
