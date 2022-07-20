@@ -102,7 +102,7 @@ namespace zypp
      *
      * \see \ref RepoVarExpand for supported variable syntax.
      */
-    struct RepoVariablesStringReplacer : public std::unary_function<const std::string &, std::string>
+    struct RepoVariablesStringReplacer
     {
       std::string operator()( const std::string & value_r ) const;
 
@@ -116,7 +116,7 @@ namespace zypp
      * Replaces repository variables in the URL (except for user/pass inside authority)
      * \see RepoVariablesStringReplacer
      */
-    struct RepoVariablesUrlReplacer : public std::unary_function<const Url &, Url>
+    struct RepoVariablesUrlReplacer
     {
       Url operator()( const Url & url_r ) const;
     };

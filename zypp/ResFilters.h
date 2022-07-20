@@ -148,16 +148,12 @@ namespace zypp
     ///////////////////////////////////////////////////////////////////
 
     /** */
-    typedef std::unary_function<ResObject::constPtr, bool> ResObjectFilterFunctor;
-    typedef boost::function<bool ( ResObject::constPtr )> ResFilter;
-
-    /** */
     template<class TRes>
       inline filter::ByKind byKind()
       { return filter::ByKind( ResTraits<TRes>::kind ); }
 
     /** Select ResObject by name. */
-    struct ByName : public ResObjectFilterFunctor
+    struct ByName
     {
       ByName()
       {}
@@ -175,7 +171,7 @@ namespace zypp
     };
 
     /** Select ResObject by repository or repository alias. */
-    struct ByRepository : public ResObjectFilterFunctor
+    struct ByRepository
     {
       ByRepository( Repository repository_r )
       : _alias( repository_r.info().alias() )
@@ -206,7 +202,7 @@ namespace zypp
      * \endcode
     */
     template<class TCompare = CompareByEQ<Edition> >
-      struct ByEdition : public ResObjectFilterFunctor
+      struct ByEdition
       {
         ByEdition( const Edition & edition_r, TCompare cmp_r )
         : _edition( edition_r )
@@ -246,7 +242,7 @@ namespace zypp
      * \endcode
     */
     template<class TCompare = CompareByEQ<Arch> >
-      struct ByArch : public ResObjectFilterFunctor
+      struct ByArch
       {
         ByArch( const Arch & arch_r, TCompare cmp_r )
         : _arch( arch_r )
@@ -281,11 +277,8 @@ namespace zypp
     //
     ///////////////////////////////////////////////////////////////////
 
-    /** */
-    typedef std::unary_function<PoolItem, bool> PoolItemFilterFunctor;
-
     /** Select PoolItem by installed. */
-    struct ByInstalled : public PoolItemFilterFunctor
+    struct ByInstalled
     {
       bool operator()( const PoolItem & p ) const
       {
@@ -294,7 +287,7 @@ namespace zypp
     };
 
     /** Select PoolItem by uninstalled. */
-    struct ByUninstalled : public PoolItemFilterFunctor
+    struct ByUninstalled
     {
       bool operator()( const PoolItem & p ) const
       {
@@ -303,7 +296,7 @@ namespace zypp
     };
 
     /** Select PoolItem by transact. */
-    struct ByTransact : public PoolItemFilterFunctor
+    struct ByTransact
     {
       bool operator()( const PoolItem & p ) const
       {
@@ -312,7 +305,7 @@ namespace zypp
     };
 
     /** Select PoolItem by lock. */
-    struct ByLock : public PoolItemFilterFunctor
+    struct ByLock
     {
       bool operator()( const PoolItem & p ) const
       {
@@ -321,7 +314,7 @@ namespace zypp
     };
 
     /** Select PoolItem by keep. */
-    struct ByKeep : public PoolItemFilterFunctor
+    struct ByKeep
     {
       bool operator()( const PoolItem & p ) const
       {
@@ -330,7 +323,7 @@ namespace zypp
     };
 
     /** PoolItem which is recommended. */
-    struct ByRecommended : public PoolItemFilterFunctor
+    struct ByRecommended
     {
       bool operator()( const PoolItem & p ) const
       {
@@ -339,7 +332,7 @@ namespace zypp
     };
 
     /** PoolItem which is suggested. */
-    struct BySuggested : public PoolItemFilterFunctor
+    struct BySuggested
     {
       bool operator()( const PoolItem & p ) const
       {

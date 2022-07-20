@@ -27,10 +27,8 @@ namespace zypp
     namespace selfilter
     { /////////////////////////////////////////////////////////////////
 
-      typedef std::unary_function<Selectable::constPtr,bool> SelectableFilterFunctor;
-
       /** */
-      struct ByKind : public SelectableFilterFunctor
+      struct ByKind
       {
         ByKind( const ResKind & kind_r )
         : _kind( kind_r )
@@ -45,7 +43,7 @@ namespace zypp
       };
 
       /** */
-      struct ByName : public SelectableFilterFunctor
+      struct ByName
       {
         ByName( const std::string & name_r )
         : _name( name_r )
@@ -58,20 +56,20 @@ namespace zypp
       };
 
       /** */
-      struct ByHasInstalledObj : public SelectableFilterFunctor
+      struct ByHasInstalledObj
       {
         bool operator()( const ui::Selectable::constPtr & obj ) const
         { return obj && !obj->installedEmpty(); }
       };
 
       /** */
-      struct ByHasCandidateObj : public SelectableFilterFunctor
+      struct ByHasCandidateObj
       {
         bool operator()( const ui::Selectable::constPtr & obj ) const
         { return obj && obj->hasCandidateObj(); }
       };
 
-      struct ByStatus : public SelectableFilterFunctor
+      struct ByStatus
       /** */
       {
         ByStatus( Status status_r )

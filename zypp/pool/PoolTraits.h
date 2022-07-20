@@ -43,10 +43,10 @@ namespace zypp
       { return bool(pi); }
     };
 
-    /** In CXX0X std::_Select2nd does no longer derive from std::unary_function
+    /** std::_Select2nd
      */
     template<typename TPair>
-    struct P_Select2nd : public std::unary_function<TPair, typename TPair::second_type>
+    struct P_Select2nd
     {
       typename TPair::second_type&
       operator()(TPair& __x) const

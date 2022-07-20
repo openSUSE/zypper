@@ -41,7 +41,7 @@ namespace zypp
      *   system:       1
      * \endcode
     */
-    struct PoolStats : public std::unary_function<ResObject::constPtr, void>
+    struct PoolStats
     {
       void operator()( ResObject::constPtr ptr )
       {

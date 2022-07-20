@@ -41,7 +41,7 @@ namespace zypp
        * \li newer buildtime
        * \li ResObject::constPtr as fallback.
       */
-      struct AVOrder : public std::binary_function<PoolItem,PoolItem,bool>
+      struct AVOrder
       {
         // NOTE: operator() provides LESS semantics to order the set.
         // So LESS means 'prior in set'. We want 'better' archs and
@@ -91,7 +91,7 @@ namespace zypp
        * \li newer install time
        * \li ResObject::constPtr as fallback.
       */
-      struct IOrder : public std::binary_function<PoolItem,PoolItem,bool>
+      struct IOrder
       {
         // NOTE: operator() provides LESS semantics to order the set.
         // So LESS means 'prior in set'. We want 'newer' install time

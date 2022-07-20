@@ -152,7 +152,7 @@ namespace zypp
    * \see MapKVIteratorTraits
   */
   template<class TPair>
-    struct GetPairFirst : public std::unary_function<TPair, const typename TPair::first_type &>
+    struct GetPairFirst
     {
       const typename TPair::first_type & operator()( const TPair & pair_r ) const
       { return pair_r.first; }
@@ -162,7 +162,7 @@ namespace zypp
    * \see MapKVIteratorTraits
   */
   template<class TPair>
-    struct GetPairSecond : public std::unary_function<TPair, const typename TPair::second_type &>
+    struct GetPairSecond
     {
       const typename TPair::second_type & operator()( const TPair & pair_r ) const
       { return pair_r.second; }

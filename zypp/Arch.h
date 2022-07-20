@@ -330,7 +330,7 @@ namespace zypp
   /** Functor finding compatible architectures.
    * \see Arch::compatibleWith
   */
-  struct ArchCompatibleWith : public std::unary_function<Arch,bool>
+  struct ArchCompatibleWith
   {
     /** The target architecture */
     Arch _targetArch;

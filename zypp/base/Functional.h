@@ -13,7 +13,6 @@
 #define ZYPP_BASE_FUNCTIONAL_H
 
 #include <boost/functional.hpp>
-
 #include <zypp/base/Function.h>
 
 ///////////////////////////////////////////////////////////////////
@@ -43,7 +42,7 @@ namespace zypp
      * \code
      *   // Counts invokations of operator().
      *   template<class Tp>
-     *     struct Counter : public std::unary_function<Tp, void>
+     *     struct Counter
      *     {
      *       void operator()( Tp )
      *       { ++_value; }
@@ -94,7 +93,7 @@ namespace zypp
         };
 
       template <class TFunctor, class res_type, class arg1_type>
-        struct FunctorRef1 : public std::unary_function<arg1_type, res_type>
+        struct FunctorRef1
         {
           FunctorRef1( TFunctor & f_r )
           : _f( f_r )
@@ -110,7 +109,7 @@ namespace zypp
         };
 
       template <class TFunctor, class res_type, class arg1_type, class arg2_type>
-        struct FunctorRef2 : public std::binary_function<arg1_type, arg2_type, res_type>
+        struct FunctorRef2
         {
           FunctorRef2( TFunctor & f_r )
           : _f( f_r )

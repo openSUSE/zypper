@@ -29,16 +29,11 @@ namespace std {
 }
 
 // A plain functor
-struct PlainTransformator
+struct FncTransformator
 {
   std::string operator()( const std::string & value_r ) const
   { return "{"+value_r+"}"; }
 };
-
-// plain functor + required std::unary_function typedefs
-struct FncTransformator : public PlainTransformator, public std::unary_function<const std::string &, std::string>
-{};
-
 
 BOOST_AUTO_TEST_CASE(value_transform)
 {

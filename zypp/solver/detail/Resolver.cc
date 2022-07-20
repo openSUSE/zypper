@@ -266,7 +266,7 @@ void Resolver::addWeak( const PoolItem & item )
 
 //---------------------------------------------------------------------------
 
-struct UndoTransact : public resfilter::PoolItemFilterFunctor
+struct UndoTransact
 {
     ResStatus::TransactByValue resStatus;
     UndoTransact ( const ResStatus::TransactByValue &status)
@@ -281,7 +281,7 @@ struct UndoTransact : public resfilter::PoolItemFilterFunctor
 };
 
 
-struct DoTransact : public resfilter::PoolItemFilterFunctor
+struct DoTransact
 {
     ResStatus::TransactByValue resStatus;
     DoTransact ( const ResStatus::TransactByValue &status)

@@ -201,7 +201,7 @@ namespace zypp
 
       /** \ref matches functor.
        */
-      struct Matches: public std::binary_function<Capability,Capability,CapMatch>
+      struct Matches
       {
         CapMatch operator()( const Capability & lhs, const Capability & rhs ) const
         { return Capability::matches( lhs, rhs ); }

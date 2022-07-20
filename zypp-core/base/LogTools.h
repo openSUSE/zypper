@@ -241,7 +241,7 @@ namespace zypp
         typedef typename TMap::value_type   PairType;
         typedef MapEntry<PairType>          MapEntryType;
 
-        struct Transformer : public std::unary_function<PairType, MapEntryType>
+        struct Transformer
         {
           MapEntryType operator()( const PairType & pair_r ) const
           { return mapEntry( pair_r ); }

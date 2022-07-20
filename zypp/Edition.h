@@ -157,7 +157,7 @@ namespace zypp
       /** \ref match functor.
        * \see \ref RelCompare.
        */
-      struct Match: public std::binary_function<Edition,Edition,int>
+      struct Match
       {
         int operator()( const Edition & lhs, const Edition & rhs ) const
         { return Edition::match( lhs, rhs ); }

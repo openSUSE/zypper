@@ -369,7 +369,7 @@ SATSolutionToPool (PoolItem item, const ResStatus & status, const ResStatus::Tra
 /// On the fly it clears all PoolItem bySolver/ByApplLow status.
 /// The lists are cleared in the Ctor, populated by \ref operator().
 /////////////////////////////////////////////////////////////////////////
-struct SATCollectTransact : public resfilter::PoolItemFilterFunctor
+struct SATCollectTransact
 {
   SATCollectTransact( PoolItemList & items_to_install_r,
                       PoolItemList & items_to_remove_r,
@@ -436,7 +436,7 @@ private:
 //----------------------------------------------------------------------------
 
 
-class CheckIfUpdate : public resfilter::PoolItemFilterFunctor
+class CheckIfUpdate
 {
   public:
     bool is_updated;
@@ -981,7 +981,7 @@ void SATResolver::doUpdate()
 // helper function
 //----------------------------------------------------------------------------
 
-struct FindPackage : public resfilter::ResObjectFilterFunctor
+struct FindPackage
 {
     ProblemSolutionCombi *problemSolution;
     TransactionKind action;
