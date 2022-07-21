@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-02-23 18:47+0100\n"
-"PO-Revision-Date: 2022-04-28 18:12+0000\n"
-"Last-Translator: Goran Šutilović <goran_sutilovic@sutotech.com>\n"
+"PO-Revision-Date: 2022-07-21 09:13+0000\n"
+"Last-Translator: Maja Reberc <maja.reberc@freedommail.ch>\n"
 "Language-Team: Slovenian <https://l10n.opensuse.org/projects/zypper/master/"
 "sl/>\n"
 "Language: sl\n"
@@ -79,37 +79,37 @@ msgstr "Za popravilo morebitnih težav z odvisnostjo lahko zaženete '%1%'."
 #, c-format, boost-format
 msgid "The following package failed to install:"
 msgid_plural "The following %d packages failed to install:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Namestitev sledečega paketa je spodletela:"
+msgstr[1] "Namestitev sledečih %d paketov je spodletela:"
+msgstr[2] "Namestitev sledečih %d paketov je spodletela:"
+msgstr[3] "Namestitev sledečih %d paketov je spodletela:"
 
 #: src/CommitSummary.cc:140
 #, c-format, boost-format
 msgid "The following package installation was skipped:"
 msgid_plural "The following %d package installations were skipped:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Namestitev sledečega paketa je bila izpuščena:"
+msgstr[1] "Namestitev sledečih %d paketov je bila izpuščena:"
+msgstr[2] "Namestitev sledečih %d paketov je bila izpuščena:"
+msgstr[3] "Namestitev sledečih %d paketov je bila izpuščena:"
 
 #: src/CommitSummary.cc:155
 #, c-format, boost-format
 msgid "The following package failed to uninstall:"
 msgid_plural "The following %d packages failed to uninstall:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Odstranitev sledeča paketa je spodletela:"
+msgstr[1] "Odstranitev sledečih %d paketov je spodletela:"
+msgstr[2] "Odstranitev sledečih %d paketov je spodletela:"
+msgstr[3] "Odstranitev sledečih %d paketov je spodletela:"
 
 #: src/CommitSummary.cc:170
 #, c-format, boost-format
 msgid "The following package removal was skipped:"
 msgid_plural "The following %d package removal were skipped:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Odstranitev sledečega paketa je bila izpuščena:"
+msgstr[1] "Odstranitev sledečih %d paketov je bila izpuščena:"
+msgstr[2] "Odstranitev sledečih %d paketov je bila izpuščena:"
+msgstr[3] "Odstranitev sledečih %d paketov je bila izpuščena:"
 
 #. translators: Appended when clipping a long enumeration:
 #. "ConsoleKit-devel ConsoleKit-doc ... and 20828 more items."
@@ -118,10 +118,10 @@ msgstr[3] ""
 #, boost-format
 msgid "... and %1% more item."
 msgid_plural "... and %1% more items."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "... in %1% dodaten element."
+msgstr[1] "... in %1% dodatna elementa."
+msgstr[2] "... in %1% dodatnih elementov."
+msgstr[3] "... in %1% dodatnih elementov."
 
 #: src/Config.cc:53
 #, fuzzy, c-format, boost-format
@@ -131,7 +131,7 @@ msgstr "Napačna privzeta pot (default route):"
 #: src/Config.cc:54
 #, c-format, boost-format
 msgid " Use an integer number from %d to %d"
-msgstr ""
+msgstr " Uporabite celo število od %d do %d"
 
 #: src/Config.cc:244
 msgid "The path specified in the --root option must be absolute."
@@ -177,114 +177,122 @@ msgstr "Preprečite običajen izpis, natisnite samo sporočila o napakah."
 #. translators: --verbose, -v
 #: src/Config.cc:385
 msgid "Increase verbosity."
-msgstr ""
+msgstr "Razvleči izpis."
 
 #. translators: --color / --no-color
 #: src/Config.cc:406
 msgid "Whether to use colors in output if tty supports it."
-msgstr ""
+msgstr "Ali naj bo izpis barven, če tty to omogoča."
 
 #. translators: --no-abbrev, -A
 #: src/Config.cc:411
 msgid "Do not abbreviate text in tables."
-msgstr ""
+msgstr "Ne okrajšaj besedila v tabelah."
 
 #. translators: --table-style, -s, %1% denotes the supported range of the integer argument (e.g. "1-11")
 #: src/Config.cc:416
 #, boost-format
 msgid "Table style (%1%)."
-msgstr ""
+msgstr "Slog preglednice (%1%)."
 
 #: src/Config.cc:420 src/commands/optionsets.cc:284
 msgid "Entering non-interactive mode."
-msgstr ""
+msgstr "Prehajam v neinteraktiven način."
 
 #. translators: --non-interactive, -n
 #: src/Config.cc:424
 msgid "Do not ask anything, use default answers automatically."
-msgstr ""
+msgstr "Ne sprašuj, samodejno uporabi privzete odgovore."
 
 #: src/Config.cc:429
 msgid ""
 "Patches having the flag rebootSuggested set will not be treated as "
 "interactive."
 msgstr ""
+"Popravki s postavljeno zastavico rebootSuggested ne bodo obravnavani kot "
+"interaktivni."
 
 #. translators: --non-interactive-include-reboot-patches
 #: src/Config.cc:433
 msgid ""
 "Do not treat patches as interactive, which have the rebootSuggested-flag set."
 msgstr ""
+"Popravkov, ki imajo postavljeno zastavico rebootSuggested, ne obravnavaj kot "
+"interaktivne."
 
 #. translators: --xmlout, -x
 #: src/Config.cc:443
 msgid "Switch to XML output."
-msgstr ""
+msgstr "Preklopi na izpis XML."
 
 #. translators: --ignore-unknown, -i
 #: src/Config.cc:448
 msgid "Ignore unknown packages."
-msgstr ""
+msgstr "Prezri neznane pakete."
 
 #. translators: --terse, -t
 #: src/Config.cc:459
 msgid ""
 "Terse output for machine consumption. Implies --no-abbrev and --no-color."
 msgstr ""
+"Kratek izpis za strojno uporabo. Posledično vključi --no-abbrev in --no-"
+"color."
 
 #. translators: --reposd-dir, -D <DIR>
 #: src/Config.cc:483
 msgid "Use alternative repository definition file directory."
-msgstr ""
+msgstr "Uporabi drugo mapo z datotekami za definicijo repozitorija."
 
 #. translators: --cache-dir, -C <DIR>
 #: src/Config.cc:498
 msgid "Use alternative directory for all caches."
-msgstr ""
+msgstr "Uporabi drugo mapo za vse vrste predpomnilnika."
 
 #. translators: --raw-cache-dir <DIR>
 #: src/Config.cc:511
 msgid "Use alternative raw meta-data cache directory."
-msgstr ""
+msgstr "Uporabi drugo mapo za predpomnilnik surovih metapodatkov."
 
 #. translators: --solv-cache-dir <DIR>
 #: src/Config.cc:525
 msgid "Use alternative solv file cache directory."
-msgstr ""
+msgstr "Uporabi drugo mapo za predpomnilnik datotek solv."
 
 #. translators: --pkg-cache-dir <DIR>
 #: src/Config.cc:539
 msgid "Use alternative package cache directory."
-msgstr ""
+msgstr "Uporabi drugo mapo za predpomnilnik paketov."
 
 #: src/Config.cc:544
 msgid "Repository Options"
-msgstr ""
+msgstr "Nastavitve repozitorija"
 
 #: src/Config.cc:548
 msgid "Entering 'no-gpg-checks' mode."
-msgstr ""
+msgstr "Prehajam v način 'no-gpg-checks'."
 
 #. translators: --no-gpg-checks
 #: src/Config.cc:552
 msgid "Ignore GPG check failures and continue."
-msgstr ""
+msgstr "Prezri spodletele preizkuse GPG in nadaljuj."
 
 #: src/Config.cc:557
 #, c-format, boost-format
 msgid ""
 "Turning on '%s'. New repository signing keys will be automatically imported!"
 msgstr ""
+"Vklapljam '%s'. Novi ključi za podpisovanje repozitorija bodo samodejno "
+"uvoženi!"
 
 #. translators: --gpg-auto-import-keys
 #: src/Config.cc:563
 msgid "Automatically trust and import new repository signing keys."
-msgstr ""
+msgstr "Samodejno zaupaj in uvozi nove ključe za podpisovanje repozitorijev."
 
 #. translators: --plus-repo, -p <URI>
 #: src/Config.cc:567
 msgid "Use an additional repository."
-msgstr ""
+msgstr "Uporabi dodatni repozitorij."
 
 #. translators: --plus-content <TAG>
 #: src/Config.cc:571
