@@ -596,7 +596,7 @@ SATResolver::solving(const CapabilitySet & requires_caps,
         invokeOnEach( _pool.byIdentBegin( poolItem ),
                       _pool.byIdentEnd( poolItem ),
                       resfilter::ByUninstalled(),			// ByUninstalled
-                      functor::functorRef<bool,PoolItem> (info) );
+                      std::ref(info) );
 
         if (info.is_updated) {
           SATSolutionToPool( poolItem, ResStatus::toBeUninstalledDueToUpgrade, ResStatus::SOLVER );
@@ -689,7 +689,7 @@ SATResolver::solverInit(const PoolItemList & weakItems)
     // clear and rebuild: _items_to_install, _items_to_remove, _items_to_lock, _items_to_keep
     {
       SATCollectTransact collector( _items_to_install, _items_to_remove, _items_to_lock, _items_to_keep, solveSrcPackages() );
-      invokeOnEach ( _pool.begin(), _pool.end(), functor::functorRef<bool,PoolItem>( collector ) );
+      invokeOnEach ( _pool.begin(), _pool.end(), std::ref( collector ) );
     }
 
     for (PoolItemList::const_iterator iter = weakItems.begin(); iter != weakItems.end(); iter++) {
@@ -948,7 +948,7 @@ void SATResolver::doUpdate()
             invokeOnEach( _pool.byIdentBegin( poolItem ),
                           _pool.byIdentEnd( poolItem ),
                           resfilter::ByUninstalled(),			// ByUninstalled
-                          functor::functorRef<bool,PoolItem> (info) );
+                          std::ref(info) );
 
             if (info.is_updated) {
                 SATSolutionToPool (poolItem, ResStatus::toBeUninstalledDueToUpgrade , ResStatus::SOLVER);
@@ -1371,7 +1371,7 @@ SATResolver::problems ()
                                               _pool.byIdentEnd( ident ),
                                               functor::chain (resfilter::ByInstalled (),			// ByInstalled
                                                               resfilter::ByTransact ()),			// will be deinstalled
-                                              functor::functorRef<bool,PoolItem> (info) );
+                                              std::ref(info) );
 
                                 SolverQueueItemDelete_Ptr del =
                                     new SolverQueueItemDelete(_pool, ident.asString(), false );

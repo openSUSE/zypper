@@ -118,7 +118,7 @@ namespace zypp
      *
      * But as a rule of thumb, a functor should be lightweight. If you
      * want to get data out, pass references to variables in (and assert
-     * these variables live as long as the query lasts). Or use \ref FunctorRef.
+     * these variables live as long as the query lasts). Or use std::ref.
      *
      * Internally all functors are passed by value. Thus it would not help
      * you to create an instance of some collecting functor, and pass it

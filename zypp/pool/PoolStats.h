@@ -71,8 +71,7 @@ namespace zypp
                                   TIterator begin_r, TIterator end_r )
     {
       pool::PoolStats stats;
-      std::for_each( begin_r, end_r,
-                     functor::functorRef<void,ResObject::constPtr>(stats) );
+      std::for_each( begin_r, end_r, std::ref(stats) );
       return str << stats;
     }
 

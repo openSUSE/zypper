@@ -306,7 +306,7 @@ bool Resolver::verifySystem()
 
     invokeOnEach ( _pool.begin(), _pool.end(),
                    resfilter::ByTransact( ),			// Resetting all transcations
-                   functor::functorRef<bool,PoolItem>(resetting) );
+                   std::ref(resetting) );
 
     return resolvePool();
 }
@@ -320,7 +320,7 @@ void Resolver::undo()
     MIL << "*** undo ***" << endl;
     invokeOnEach ( _pool.begin(), _pool.end(),
                    resfilter::ByTransact( ),			// collect transacts from Pool to resolver queue
-                   functor::functorRef<bool,PoolItem>(info) );
+                   std::ref(info) );
     //  Regard dependencies of the item weak onl
     _addWeak.clear();
 
