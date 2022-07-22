@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-02-23 18:47+0100\n"
-"PO-Revision-Date: 2022-07-10 22:12+0000\n"
+"PO-Revision-Date: 2022-07-22 09:13+0000\n"
 "Last-Translator: Kristijan Fremen Velkovski <me@krisfremen.com>\n"
 "Language-Team: Macedonian <https://l10n.opensuse.org/projects/zypper/master/"
 "mk/>\n"
@@ -624,15 +624,15 @@ msgstr[1] ""
 #, c-format, boost-format
 msgid "The following NEW product is going to be installed:"
 msgid_plural "The following %d NEW products are going to be installed:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Следниот НОВ продукт ќе биде инсталиран:"
+msgstr[1] "Следниите %d НОВИ продукти ќе бидат инсталирани:"
 
 #: src/Summary.cc:605
 #, c-format, boost-format
 msgid "The following source package is going to be installed:"
 msgid_plural "The following %d source packages are going to be installed:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Следниот изворен пакет ќе биде инсталиран:"
+msgstr[1] "Следниите %d изворни пакети ќе бидат инсталирани:"
 
 #: src/Summary.cc:611
 #, c-format, boost-format
