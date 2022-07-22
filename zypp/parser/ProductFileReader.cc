@@ -149,7 +149,7 @@ namespace zypp
             ("arch",          MANDTAORY,  xml::parseDefAssign( _pdata._arch ) )
             ("shortsummary",  OPTIONAL,   xml::parseDefAssign( _pdata._shortName ) )
             ("summary",       MULTIPLE_OPTIONAL, xml::parseDefAssign( _ttext )( "lang", _tlocale )
-                                          >>bind( &ProductNode::doneLocalizedDefault, this, _1, boost::ref(_pdata._summary) ))
+                                          >>std::bind( std::mem_fn(&ProductNode::doneLocalizedDefault), this, std::placeholders::_1, std::ref(_pdata._summary) ))
             ("productline",   OPTIONAL,   xml::parseDefAssign( _pdata._productline ) )
             ("register",      OPTIONAL)
             ("updaterepokey", OPTIONAL,   xml::parseDefAssign( _pdata._updaterepokey ) )

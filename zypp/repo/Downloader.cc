@@ -194,7 +194,7 @@ void Downloader::defaultDownloadMasterIndex( MediaSetAccess & media_r, const Pat
           { INT << "Oops!" << endl; }
         });
       }
-      checkers.add( ref(sigchecker) );	// ref() to the local sigchecker is important as we want back fileValidated!
+      checkers.add( std::ref(sigchecker) );	// ref() to the local sigchecker is important as we want back fileValidated!
     }
     else
     {

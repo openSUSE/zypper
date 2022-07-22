@@ -12,10 +12,11 @@
 #ifndef ZYPP_BASE_FUNCTION_H
 #define ZYPP_BASE_FUNCTION_H
 
+#include <functional>
 #include <boost/function.hpp>
 #define BOOST_BIND_GLOBAL_PLACEHOLDERS
 #include <boost/bind.hpp>
-#include <boost/ref.hpp>
+//#include <boost/ref.hpp>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -53,25 +54,6 @@ namespace zypp
    second_argument_type  standard typedefs.
   */
   using boost::bind;
-
-  /* http://www.boost.org/doc/html/ref.html
-
-   The Ref library is a small library that is useful for passing references
-   to function templates (algorithms) that would usually take copies of their
-   arguments. It defines the class template boost::reference_wrapper<T>, the
-   two functions boost::ref and boost::cref that return instances of
-   boost::reference_wrapper<T>, and the two traits classes
-   boost::is_reference_wrapper<T>  and boost::unwrap_reference<T>.
-
-   The purpose of boost::reference_wrapper<T> is to contain a reference to an
-   object of type T. It is primarily used to "feed" references to function
-   templates (algorithms) that take their parameter by value.
-
-   To support this usage, boost::reference_wrapper<T> provides an implicit
-   conversion to T&. This usually allows the function templates to work on
-   references unmodified.
-  */
-  using boost::ref;
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

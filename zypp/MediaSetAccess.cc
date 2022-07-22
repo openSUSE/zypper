@@ -165,7 +165,7 @@ IMPL_PTR_TYPE(MediaSetAccess);
   Pathname MediaSetAccess::provideFile( const OnMediaLocation &resource, ProvideFileOptions options )
   {
     ProvideFileOperation op;
-    provide( boost::ref(op), resource, options );
+    provide( std::ref(op), resource, options );
     return op.result;
   }
 
@@ -231,7 +231,7 @@ IMPL_PTR_TYPE(MediaSetAccess);
   {
     ProvideFileExistenceOperation op;
     OnMediaLocation resource(file, media_nr);
-    provide( boost::ref(op), resource, PROVIDE_DEFAULT );
+    provide( std::ref(op), resource, PROVIDE_DEFAULT );
     return op.result;
   }
 
@@ -413,11 +413,11 @@ IMPL_PTR_TYPE(MediaSetAccess);
     if ( recursive )
     {
         ProvideDirTreeOperation op;
-        provide( boost::ref(op), resource, options );
+        provide( std::ref(op), resource, options );
         return op.result;
     }
     ProvideDirOperation op;
-    provide( boost::ref(op), resource, options );
+    provide( std::ref(op), resource, options );
     return op.result;
   }
 
