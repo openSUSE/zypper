@@ -60,7 +60,7 @@ namespace zypp
      *     return true;
      *   }
      *
-     *   unsigned _counter;
+     *   unsigned & _counter;
      * };
      *
      * ResStore store;
@@ -105,11 +105,6 @@ namespace zypp
      *
      * \note These functors are not limited to be used with ResStore::forEach.
      * You can use them with std::algorithms as well.
-     *
-     * \note In case you already have functions or methods which do what you
-     * want, but thet don't perfectly match the required signature: Make yourself
-     * familiar with <tt>std::ptr_fun, mem_fun, bind1st, bind2nd and compose</tt>.
-     * They are sometimes quite helpfull.
      *
      * \c PrintAndCount is an example how a functor can return data collected
      * during the query. You ca easily write a collector, that takes a

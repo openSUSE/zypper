@@ -242,7 +242,7 @@ namespace zypp
       // Arrange DownloadFileReportHack to recieve the source::DownloadFileReport
       // and redirect download progress triggers to call the ProvideFilePolicy
       // callback.
-      DownloadFileReportHack dumb( bind( mem_fun_ref( &ProvideFilePolicy::progress ), ref( policy_r ), _1 ) );
+      DownloadFileReportHack dumb( std::bind( std::mem_fn(&ProvideFilePolicy::progress), std::ref(policy_r), std::placeholders::_1 ) );
 
       RepoException repo_excpt(repo_r,
                                str::form(_("Can't provide file '%s' from repository '%s'"),

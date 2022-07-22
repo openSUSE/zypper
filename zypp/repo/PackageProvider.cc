@@ -350,8 +350,8 @@ namespace zypp
         // scope (cast required as reset is overloaded). We want report to end
         // when leaving providePackage and not wait for *this going out of scope.
         return shared_ptr<void>( static_cast<void*>(0),
-                                 bind( mem_fun_ref( static_cast<void (shared_ptr<Report>::*)()>(&shared_ptr<Report>::reset) ),
-                                       ref(_report) ) );
+                                 std::bind( std::mem_fn(static_cast<void (shared_ptr<Report>::*)()>(&shared_ptr<Report>::reset)),
+                                            std::ref(_report) ) );
       }
 
       mutable bool               _retry;

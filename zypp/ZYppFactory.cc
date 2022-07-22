@@ -155,7 +155,7 @@ namespace zypp
     {
       _openLockFile();
       return ScopedGuard( static_cast<void*>(0),
-                          bind( mem_fun_ref( &ZYppGlobalLock::_closeLockFile ), ref(*this) ) );
+                          std::bind( std::mem_fn( &ZYppGlobalLock::_closeLockFile ), this ) );
     }
 
     /** Use \ref accessLockFile. */

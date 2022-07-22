@@ -122,8 +122,8 @@ namespace zypp
      * \code
      * Arch::CompatSet cset( Arch::compatSet( Arch_x86_64 ) );
      *
-     * cout << str::join( make_transform_iterator( cset.begin(), std::mem_fun_ref(&Arch::asString) ),
-     *                    make_transform_iterator( cset.end(), std::mem_fun_ref(&Arch::asString) ) )
+     * cout << str::join( make_transform_iterator( cset.begin(), std::mem_fn(&Arch::asString) ),
+     *                    make_transform_iterator( cset.end(), std::mem_fn(&Arch::asString) ) )
      *      << endl;
      *
      * // Prints: x86_64 athlon i686 i586 i486 i386 noarch
@@ -134,8 +134,8 @@ namespace zypp
     /** */
     static std::string asString( const CompatSet & cset )
     {
-      return str::join( make_transform_iterator( cset.begin(), std::mem_fun_ref(&Arch::asString) ),
-                        make_transform_iterator( cset.end(), std::mem_fun_ref(&Arch::asString) ) );
+      return str::join( make_transform_iterator( cset.begin(), std::mem_fn(&Arch::asString) ),
+                        make_transform_iterator( cset.end(), std::mem_fn(&Arch::asString) ) );
     }
 
   public:
