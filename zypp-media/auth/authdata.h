@@ -14,7 +14,6 @@
 
 #include <zypp-core/Url.h>
 #include <zypp-core/base/PtrTypes.h>
-#include <zypp-media/ng/HeaderValueMap>
 
 namespace zypp {
   namespace media {
