@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-23 18:47+0100\n"
+"POT-Creation-Date: 2022-07-25 14:05+0200\n"
 "PO-Revision-Date: 2022-02-27 17:12+0000\n"
 "Last-Translator: Rodrigo Macedo <rmsolucoeseminformatic4@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) <https://l10n.opensuse.org/projects/"
@@ -128,77 +128,77 @@ msgstr "Estilo de tabela inválido %d."
 msgid " Use an integer number from %d to %d"
 msgstr " Use um número inteiro de %d para %d"
 
-#: src/Config.cc:244
+#: src/Config.cc:250
 msgid "The path specified in the --root option must be absolute."
 msgstr "O caminho especificado na opção --root deve ser absoluto."
 
 #. translators: --help, -h
-#: src/Config.cc:322
+#: src/Config.cc:328
 msgid "Help."
 msgstr "Ajuda."
 
 #. translators: --version, -V
-#: src/Config.cc:331
+#: src/Config.cc:337
 msgid "Output the version number."
 msgstr "Exibir o número da versão."
 
 #. translators: --promptids
-#: src/Config.cc:343
+#: src/Config.cc:349
 msgid "Output a list of zypper's user prompts."
 msgstr "Exibir uma lista das entradas do usuário no zypper."
 
 #. translators: --config, -c <FILE>
-#: src/Config.cc:356
+#: src/Config.cc:362
 msgid "Use specified config file instead of the default."
 msgstr "Utilizar o arquivo de configuração especificado ao invés do padrão."
 
-#: src/Config.cc:363
+#: src/Config.cc:369
 msgid "User data string must not contain nonprintable or newline characters!"
 msgstr ""
 "O texto de dados do usuário não deve conter caracteres não imprimíveis ou de "
 "mudança de linha!"
 
 #. translators: --userdata <STRING>
-#: src/Config.cc:369
+#: src/Config.cc:375
 msgid "User defined transaction id used in history and plugins."
 msgstr "ID da transação definida pelo usuário usado no histórico e plug-ins."
 
 #. translators: --quiet, -q
-#: src/Config.cc:377
+#: src/Config.cc:383
 msgid "Suppress normal output, print only error messages."
 msgstr "Ocultar a saída normal, imprimir apenas mensagens de erro."
 
 #. translators: --verbose, -v
-#: src/Config.cc:385
+#: src/Config.cc:391
 msgid "Increase verbosity."
 msgstr "Aumenta a quantidade de detalhes."
 
 #. translators: --color / --no-color
-#: src/Config.cc:406
+#: src/Config.cc:412
 msgid "Whether to use colors in output if tty supports it."
 msgstr "Se é para usar cores na saída se o tty suportar."
 
 #. translators: --no-abbrev, -A
-#: src/Config.cc:411
+#: src/Config.cc:417
 msgid "Do not abbreviate text in tables."
 msgstr "Não abreviar textos em tabelas."
 
 #. translators: --table-style, -s, %1% denotes the supported range of the integer argument (e.g. "1-11")
-#: src/Config.cc:416
+#: src/Config.cc:422
 #, boost-format
 msgid "Table style (%1%)."
 msgstr "Estilo de tabela (%1%)."
 
-#: src/Config.cc:420 src/commands/optionsets.cc:284
+#: src/Config.cc:426 src/commands/optionsets.cc:284
 msgid "Entering non-interactive mode."
 msgstr "Entrando no modo não interativo."
 
 #. translators: --non-interactive, -n
-#: src/Config.cc:424
+#: src/Config.cc:430
 msgid "Do not ask anything, use default answers automatically."
 msgstr "Não perguntar nada, usar respostas padrão automaticamente."
 
-#: src/Config.cc:429
+#: src/Config.cc:435
 msgid ""
 "Patches having the flag rebootSuggested set will not be treated as "
 "interactive."
@@ -207,7 +207,7 @@ msgstr ""
 "como interativas."
 
 #. translators: --non-interactive-include-reboot-patches
-#: src/Config.cc:433
+#: src/Config.cc:439
 msgid ""
 "Do not treat patches as interactive, which have the rebootSuggested-flag set."
 msgstr ""
@@ -215,62 +215,62 @@ msgstr ""
 "rebootSuggested configurado."
 
 #. translators: --xmlout, -x
-#: src/Config.cc:443
+#: src/Config.cc:449
 msgid "Switch to XML output."
 msgstr "Alternar para saída XML."
 
 #. translators: --ignore-unknown, -i
-#: src/Config.cc:448
+#: src/Config.cc:454
 msgid "Ignore unknown packages."
 msgstr "Ignorar pacotes desconhecidos."
 
 #. translators: --terse, -t
-#: src/Config.cc:459
+#: src/Config.cc:465
 msgid ""
 "Terse output for machine consumption. Implies --no-abbrev and --no-color."
 msgstr ""
 "Saída baixa para o consumo da máquina. Implica --no-abbrev e --no-color."
 
 #. translators: --reposd-dir, -D <DIR>
-#: src/Config.cc:483
+#: src/Config.cc:489
 msgid "Use alternative repository definition file directory."
 msgstr ""
 "Usar um diretório com um arquivo de definição de repositório alternativo."
 
 #. translators: --cache-dir, -C <DIR>
-#: src/Config.cc:498
+#: src/Config.cc:504
 msgid "Use alternative directory for all caches."
 msgstr "Usar um diretório alternativo para todos os caches."
 
 #. translators: --raw-cache-dir <DIR>
-#: src/Config.cc:511
+#: src/Config.cc:517
 msgid "Use alternative raw meta-data cache directory."
 msgstr "Usar um diretório alternativo para o cache de metadados brutos."
 
 #. translators: --solv-cache-dir <DIR>
-#: src/Config.cc:525
+#: src/Config.cc:531
 msgid "Use alternative solv file cache directory."
 msgstr "Usar um diretório alternativo para o cache de arquivo solv."
 
 #. translators: --pkg-cache-dir <DIR>
-#: src/Config.cc:539
+#: src/Config.cc:545
 msgid "Use alternative package cache directory."
 msgstr "Usar um diretório alternativo para o cache de pacotes."
 
-#: src/Config.cc:544
+#: src/Config.cc:550
 msgid "Repository Options"
 msgstr "Opções do repositório"
 
-#: src/Config.cc:548
+#: src/Config.cc:554
 msgid "Entering 'no-gpg-checks' mode."
 msgstr "Entrando no modo 'no-gpg-checks'."
 
 #. translators: --no-gpg-checks
-#: src/Config.cc:552
+#: src/Config.cc:558
 msgid "Ignore GPG check failures and continue."
 msgstr "Ignorar as falhas na verificação GPG e continuar."
 
-#: src/Config.cc:557
+#: src/Config.cc:563
 #, c-format, boost-format
 msgid ""
 "Turning on '%s'. New repository signing keys will be automatically imported!"
@@ -279,19 +279,19 @@ msgstr ""
 "automaticamente!"
 
 #. translators: --gpg-auto-import-keys
-#: src/Config.cc:563
+#: src/Config.cc:569
 msgid "Automatically trust and import new repository signing keys."
 msgstr ""
 "Confiar automaticamente e importar as chaves de assinatura do novo "
 "repositório."
 
 #. translators: --plus-repo, -p <URI>
-#: src/Config.cc:567
+#: src/Config.cc:573
 msgid "Use an additional repository."
 msgstr "Usar um repositório adicional."
 
 #. translators: --plus-content <TAG>
-#: src/Config.cc:571
+#: src/Config.cc:577
 msgid ""
 "Additionally use disabled repositories providing a specific keyword. Try '--"
 "plus-content debug' to enable repos indicating to provide debug packages."
@@ -300,46 +300,46 @@ msgstr ""
 "específica. Tente '--plus-content debug' para habilitar os repositórios "
 "indicando para fornecer os pacotes de depuração."
 
-#: src/Config.cc:577
+#: src/Config.cc:583
 msgid "Repositories disabled, using the database of installed packages only."
 msgstr ""
 "Repositórios desabilitados, utilizando o banco de dados apenas dos pacotes "
 "instalados."
 
 #. translators: --disable-repositories
-#: src/Config.cc:581
+#: src/Config.cc:587
 msgid "Do not read meta-data from repositories."
 msgstr "Não ler os metadados dos repositórios."
 
-#: src/Config.cc:585
+#: src/Config.cc:591
 msgid "Autorefresh disabled."
 msgstr "Atualização automática desabilitada."
 
 #. translators: --no-refresh
-#: src/Config.cc:589
+#: src/Config.cc:595
 msgid "Do not refresh the repositories."
 msgstr "Não atualizar os repositórios."
 
-#: src/Config.cc:593
+#: src/Config.cc:599
 msgid "CD/DVD repositories disabled."
 msgstr "Repositórios de CD/DVD desabilitados."
 
 #. translators: --no-cd
-#: src/Config.cc:597
+#: src/Config.cc:603
 msgid "Ignore CD/DVD repositories."
 msgstr "Ignorar os repositórios em CD/DVD."
 
-#: src/Config.cc:601
+#: src/Config.cc:607
 msgid "Remote repositories disabled."
 msgstr "Repositórios remotos desabilitados."
 
 #. translators: --no-remote
-#: src/Config.cc:605
+#: src/Config.cc:611
 msgid "Ignore remote repositories."
 msgstr "Ignorar os repositórios remotos."
 
 #. translators: --releasever
-#: src/Config.cc:612
+#: src/Config.cc:618
 msgid ""
 "Set the value of $releasever in all .repo files (default: distribution "
 "version)"
@@ -347,52 +347,64 @@ msgstr ""
 "Definir o valor de $releasever em todos os arquivos .repo (padrão: versão da "
 "distribuição)"
 
-#: src/Config.cc:616
+#: src/Config.cc:622
 msgid "Target Options"
 msgstr "Opções de destino"
 
 #. translators: --root, -R <DIR>
-#: src/Config.cc:621
+#: src/Config.cc:627
 msgid "Operate on a different root directory."
 msgstr "Operar em um diretório raiz diferente."
 
 #. translators: --installroot <DIR>
-#: src/Config.cc:627
+#: src/Config.cc:633
 msgid ""
 "Operate on a different root directory, but share repositories with the host."
 msgstr ""
 "Opere em um diretório raiz diferente, mas compartilhe repositórios com o "
 "host."
 
-#: src/Config.cc:633
+#: src/Config.cc:639
 msgid "Ignoring installed resolvables."
 msgstr "Ignorando resolvíveis instalados."
 
 #. translators: --disable-system-resolvables
-#: src/Config.cc:636
+#: src/Config.cc:642
 msgid "Do not read installed packages."
 msgstr "Não ler os pacotes instalados."
 
-#: src/Config.cc:803
+#: src/Config.cc:809
 msgid "No config file is in use. Can not save options."
 msgstr ""
 "Nenhum arquivo de configuração está em uso. Não é possível salvar opções."
 
-#: src/Config.cc:814
+#: src/Config.cc:820
 #, boost-format
 msgid "Option '%1%' saved in '%2%'."
 msgstr "Opção '%1%' salva em '%2%'."
 
-#: src/Config.cc:821
+#: src/Config.cc:827
 msgid "Failed to save option."
 msgstr "Falha ao salvar opção."
 
-#: src/PackageArgs.cc:208
+#: src/PackageArgs.cc:159
+#, c-format, boost-format
+msgid ""
+"'%s' install modifier must not be used without a package name or capability."
+msgstr ""
+
+#: src/PackageArgs.cc:169
+#, c-format, boost-format
+msgid ""
+"'%s' remove modifier must not be used without a package name or capability."
+msgstr ""
+
+#: src/PackageArgs.cc:221
 #, c-format, boost-format
 msgid "'%s' not found in package names. Trying '%s'."
 msgstr "'%s' não encontrado nos nomes de pacotes. Tentando '%s'."
 
-#: src/PackageArgs.cc:218
+#: src/PackageArgs.cc:231
 #, c-format, boost-format
 msgid "'%s' is not a package name or capability."
 msgstr "'%s' não é um nome ou recurso de pacote."
@@ -472,34 +484,34 @@ msgid "No provider of '%s' found."
 msgstr "Nenhum fornecedor de '%s' encontrado."
 
 #. wildcards used
-#: src/RequestFeedback.cc:84
+#: src/RequestFeedback.cc:85
 #, c-format, boost-format
 msgid "No package matching '%s' is installed."
 msgstr "Nenhum pacote correspondente a '%s' está instalado."
 
-#: src/RequestFeedback.cc:86
+#: src/RequestFeedback.cc:87
 #, c-format, boost-format
 msgid "Package '%s' is not installed."
 msgstr "O pacote '%s' não está instalado."
 
 #. translators: meaning provider of capability %s
-#: src/RequestFeedback.cc:90
+#: src/RequestFeedback.cc:91
 #, c-format, boost-format
 msgid "No provider of '%s' is installed."
 msgstr "Nenhum fornecedor de '%s' está instalado."
 
-#: src/RequestFeedback.cc:95
+#: src/RequestFeedback.cc:96
 #, c-format, boost-format
 msgid "'%s' is already installed."
 msgstr "'%s' já está instalado."
 
 #. translators: %s are package names
-#: src/RequestFeedback.cc:98
+#: src/RequestFeedback.cc:99
 #, c-format, boost-format
 msgid "'%s' providing '%s' is already installed."
 msgstr "'%s', que fornece '%s', já está instalado."
 
-#: src/RequestFeedback.cc:105
+#: src/RequestFeedback.cc:106
 #, c-format, boost-format
 msgid ""
 "No update candidate for '%s'. The highest available version is already "
@@ -508,12 +520,12 @@ msgstr ""
 "Nenhum candidato a atualização para '%s'. A maior versão disponível já está "
 "instalada."
 
-#: src/RequestFeedback.cc:108
+#: src/RequestFeedback.cc:109
 #, c-format, boost-format
 msgid "No update candidate for '%s'."
 msgstr "Nenhuma atualização se candidata para '%s'."
 
-#: src/RequestFeedback.cc:114
+#: src/RequestFeedback.cc:115
 #, c-format, boost-format
 msgid ""
 "There is an update candidate '%s' for '%s', but it does not match the "
@@ -522,7 +534,7 @@ msgstr ""
 "Existe um candidato à atualização '%s' para '%s', mas ele não corresponde a "
 "versão, arquitetura ou repositório especificado."
 
-#: src/RequestFeedback.cc:123
+#: src/RequestFeedback.cc:124
 #, c-format, boost-format
 msgid ""
 "There is an update candidate for '%s' from vendor '%s', while the current "
@@ -531,7 +543,7 @@ msgstr ""
 "Há um candidato de atualização para '%s' do fornecedor '%s', enquanto o "
 "fornecedor atual é '%s'. Use '%s' para instalar este candidato."
 
-#: src/RequestFeedback.cc:132
+#: src/RequestFeedback.cc:133
 #, c-format, boost-format
 msgid ""
 "There is an update candidate for '%s', but it comes from a repository with a "
@@ -540,7 +552,7 @@ msgstr ""
 "Existe um candidato à atualização para '%s', mas ele vem de um repositório "
 "com baixa prioridade. Use '%s' para instalar este candidato."
 
-#: src/RequestFeedback.cc:142
+#: src/RequestFeedback.cc:143
 #, c-format, boost-format
 msgid ""
 "There is an update candidate for '%s', but it is locked. Use '%s' to unlock "
@@ -549,7 +561,7 @@ msgstr ""
 "Existe um candidato à atualização para '%s', mas ele está bloqueado. Use "
 "'%s' para desbloqueá-lo."
 
-#: src/RequestFeedback.cc:148
+#: src/RequestFeedback.cc:149
 #, c-format, boost-format
 msgid ""
 "Package '%s' is not available in your repositories. Cannot reinstall, "
@@ -558,7 +570,7 @@ msgstr ""
 "O pacote '%s' não está disponível em seus repositórios. Não é possível "
 "reinstalar, atualizar ou fazer o downgrade."
 
-#: src/RequestFeedback.cc:158
+#: src/RequestFeedback.cc:159
 #, c-format, boost-format
 msgid ""
 "The selected package '%s' from repository '%s' has lower version than the "
@@ -568,22 +580,22 @@ msgstr ""
 "do pacote instalado."
 
 #. translators: %s = "zypper install --oldpackage package-version.arch"
-#: src/RequestFeedback.cc:162
+#: src/RequestFeedback.cc:163
 #, c-format, boost-format
 msgid "Use '%s' to force installation of the package."
 msgstr "Use '%s' para forçar a instalação do pacote."
 
-#: src/RequestFeedback.cc:169
+#: src/RequestFeedback.cc:170
 #, c-format, boost-format
 msgid "Patch '%s' is interactive, skipping."
 msgstr "A correção '%s' é interativa. Ignorando."
 
-#: src/RequestFeedback.cc:175
+#: src/RequestFeedback.cc:176
 #, c-format, boost-format
 msgid "Patch '%s' is not needed."
 msgstr "Correção '%s' desnecessária."
 
-#: src/RequestFeedback.cc:181
+#: src/RequestFeedback.cc:182
 #, boost-format
 msgid ""
 "Patch '%1%' is optional. Use '%2%' to install it, or '%3%' to include all "
@@ -592,60 +604,60 @@ msgstr ""
 "A correção '%1%' é opcional. Use '%2%' para instalá-la ou '%3%' para incluir "
 "todas as correções opcionais."
 
-#: src/RequestFeedback.cc:192
+#: src/RequestFeedback.cc:193
 #, c-format, boost-format
 msgid "Patch '%s' is locked. Use '%s' to install it, or unlock it using '%s'."
 msgstr ""
 "A correção '%s' está bloqueada. Use '%s' para instalá-la ou desbloqueie-a "
 "utilizando '%s'."
 
-#: src/RequestFeedback.cc:199
+#: src/RequestFeedback.cc:200
 #, c-format, boost-format
 msgid "Patch '%s' is not in the specified category."
 msgstr "A correção '%s' não está na categoria especificada."
 
-#: src/RequestFeedback.cc:206
+#: src/RequestFeedback.cc:207
 #, c-format, boost-format
 msgid "Patch '%s' has not the specified severity."
 msgstr "A correção '%s' não tem a gravidade especificada."
 
-#: src/RequestFeedback.cc:213
+#: src/RequestFeedback.cc:214
 #, c-format, boost-format
 msgid "Patch '%s' was issued after the specified date."
 msgstr "Correção '%s' liberada após a data especificada."
 
-#: src/RequestFeedback.cc:218
+#: src/RequestFeedback.cc:219
 #, c-format, boost-format
 msgid "Selecting '%s' from repository '%s' for installation."
 msgstr "Selecionando '%s' do repositório '%s' para instalação."
 
-#: src/RequestFeedback.cc:222
+#: src/RequestFeedback.cc:223
 #, c-format, boost-format
 msgid "Forcing installation of '%s' from repository '%s'."
 msgstr "Forçando a instalação de '%s' do repositório '%s'."
 
-#: src/RequestFeedback.cc:226
+#: src/RequestFeedback.cc:227
 #, c-format, boost-format
 msgid "Selecting '%s' for removal."
 msgstr "Selecionando '%s' para remoção."
 
-#: src/RequestFeedback.cc:233
+#: src/RequestFeedback.cc:234
 #, c-format, boost-format
 msgid "'%s' is locked. Use '%s' to unlock it."
 msgstr "'%s' está bloqueado. Use '%s' para desbloqueá-lo."
 
-#: src/RequestFeedback.cc:238
+#: src/RequestFeedback.cc:239
 #, c-format, boost-format
 msgid "Adding requirement: '%s'."
 msgstr "Adicionando o requisito: '%s'."
 
-#: src/RequestFeedback.cc:241
+#: src/RequestFeedback.cc:242
 #, c-format, boost-format
 msgid "Adding conflict: '%s'."
 msgstr "Adicionando o conflito: '%s'."
 
 #. translators: %1% expands to a single package name or a ','-separated enumeration of names.
-#: src/RequestFeedback.cc:263
+#: src/RequestFeedback.cc:264
 #, boost-format
 msgid "Did you mean %1%?"
 msgstr "Você quis dizer %1%?"
@@ -1381,7 +1393,7 @@ msgstr "O PackageKit ainda está em execução (provavelmente ocupado)."
 msgid "Try again?"
 msgstr "Tentar novamente?"
 
-#: src/Zypper.cc:248 src/Zypper.cc:707 src/commands/basecommand.cc:287
+#: src/Zypper.cc:248 src/Zypper.cc:707 src/commands/basecommand.cc:289
 msgid "Unexpected exception."
 msgstr "Exceção inesperada."
 
@@ -1423,10 +1435,10 @@ msgstr "Argumentos sem opção do programa: "
 
 #: src/callbacks/keyring.h:32
 msgid ""
-"A GPG pubkey is clearly identified by its fingerprint. Do not rely on the key's "
-"name. If you are not sure whether the presented key is authentic, ask the "
-"repository provider or check their web site. Many providers maintain a web page "
-"showing the fingerprints of the GPG keys they are using."
+"A GPG pubkey is clearly identified by its fingerprint. Do not rely on the "
+"key's name. If you are not sure whether the presented key is authentic, ask "
+"the repository provider or check their web site. Many providers maintain a "
+"web page showing the fingerprints of the GPG keys they are using."
 msgstr ""
 "Uma chave pública GPG é claramente identificada por sua impressão digital. "
 "Não confie no nome da chave. Se você não tem certeza de que a presente chave "
@@ -1714,7 +1726,8 @@ msgstr ""
 #, boost-format
 msgid "Received %1% new package signing key from repository \"%2%\":"
 msgid_plural "Received %1% new package signing keys from repository \"%2%\":"
-msgstr[0] "Recebido %1% novo pacote de chave de assinatura do repositório \"%2%\":"
+msgstr[0] ""
+"Recebido %1% novo pacote de chave de assinatura do repositório \"%2%\":"
 msgstr[1] ""
 "Recebidos %1% novos pacotes de chaves de assinatura do repositório \"%2%\":"
 
@@ -2652,7 +2665,7 @@ msgstr[1] "Bloqueios %lu removidos."
 #: src/commands/repos/list.cc:223 src/commands/services/list.cc:105
 #: src/info.cc:88 src/info.cc:456 src/info.cc:691 src/locales.cc:201
 #: src/search.cc:48 src/search.cc:199 src/search.cc:304 src/search.cc:436
-#: src/search.cc:483 src/update.cc:789 src/utils/misc.cc:324
+#: src/search.cc:483 src/update.cc:789 src/utils/misc.cc:325
 msgid "Name"
 msgstr "Nome"
 
@@ -2663,7 +2676,7 @@ msgstr "Correspondências"
 #. translators: Table column header
 #. translators: type (general header)
 #: src/commands/locks/list.cc:138 src/commands/repos/list.cc:52
-#: src/commands/repos/list.cc:261 src/commands/services/list.cc:114
+#: src/commands/repos/list.cc:262 src/commands/services/list.cc:114
 #: src/info.cc:457 src/search.cc:50 src/search.cc:202
 msgid "Type"
 msgstr "Tipo"
@@ -2672,7 +2685,7 @@ msgstr "Tipo"
 #. translators: package's repository (header)
 #: src/commands/locks/list.cc:138 src/info.cc:86 src/search.cc:56
 #: src/search.cc:306 src/search.cc:435 src/search.cc:479 src/update.cc:786
-#: src/utils/misc.cc:323
+#: src/utils/misc.cc:324
 msgid "Repository"
 msgstr "Repositório"
 
@@ -3136,7 +3149,7 @@ msgid "Command"
 msgstr "Comando"
 
 #. "/etc/init.d/ script that might be used to restart the command (guessed)
-#: src/commands/ps.cc:152 src/commands/repos/list.cc:277
+#: src/commands/ps.cc:152 src/commands/repos/list.cc:278
 msgid "Service"
 msgstr "Serviço"
 
@@ -3490,7 +3503,7 @@ msgstr "Apelido"
 
 #. translators: property name; short; used like "Name: value"
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/commands/repos/list.cc:42 src/commands/repos/list.cc:268
+#: src/commands/repos/list.cc:42 src/commands/repos/list.cc:269
 #: src/commands/services/list.cc:116 src/repos.cc:1254
 #: src/utils/flags/zyppflags.h:49
 msgid "URI"
@@ -3498,21 +3511,21 @@ msgstr "URI"
 
 #. 'enabled' flag
 #. translators: property name; short; used like "Name: value"
-#: src/commands/repos/list.cc:47 src/commands/repos/list.cc:230
+#: src/commands/repos/list.cc:47 src/commands/repos/list.cc:231
 #: src/commands/services/list.cc:106 src/repos.cc:1256
 msgid "Enabled"
 msgstr "Habilitado"
 
 #. GPG Check
 #. translators: property name; short; used like "Name: value"
-#: src/commands/repos/list.cc:48 src/commands/repos/list.cc:234
+#: src/commands/repos/list.cc:48 src/commands/repos/list.cc:235
 #: src/commands/services/list.cc:107 src/repos.cc:1258
 msgid "GPG Check"
 msgstr "Verificação GPG"
 
 #. translators: repository priority (in zypper repos -p or -d)
 #. translators: property name; short; used like "Name: value"
-#: src/commands/repos/list.cc:49 src/commands/repos/list.cc:252
+#: src/commands/repos/list.cc:49 src/commands/repos/list.cc:253
 #: src/commands/services/list.cc:113 src/repos.cc:1262
 msgid "Priority"
 msgstr "Prioridade"
@@ -3592,15 +3605,15 @@ msgstr "Os repositórios foram exportados para %s com sucesso."
 #. translators: 'zypper repos' column - whether autorefresh is enabled
 #. for the repository
 #. translators: 'zypper repos' column - whether autorefresh is enabled for the repository
-#: src/commands/repos/list.cc:242 src/commands/services/list.cc:109
+#: src/commands/repos/list.cc:243 src/commands/services/list.cc:109
 msgid "Refresh"
 msgstr "Atualizar"
 
-#: src/commands/repos/list.cc:332
+#: src/commands/repos/list.cc:333
 msgid "No repositories defined."
 msgstr "Nenhum repositório definido."
 
-#: src/commands/repos/list.cc:333
+#: src/commands/repos/list.cc:334
 msgid "Use the 'zypper addrepo' command to add one or more repositories."
 msgstr "Use o comando 'zypper addrepo' para adicionar um ou mais repositórios."
 
@@ -4388,7 +4401,7 @@ msgstr "Listar todos os serviços definidos."
 msgid "List defined services."
 msgstr "Lista os serviços definidos."
 
-#: src/commands/services/list.cc:167
+#: src/commands/services/list.cc:169
 #, c-format, boost-format
 msgid "No services defined. Use the '%s' command to add one or more services."
 msgstr ""
@@ -5025,28 +5038,28 @@ msgstr ""
 msgid "Argument resolves to no package"
 msgstr "O argumento não resolve para nenhum pacote"
 
-#: src/commands/utils/download.cc:253 src/solve-commit.cc:1023
+#: src/commands/utils/download.cc:254 src/solve-commit.cc:1023
 msgid "Nothing to do."
 msgstr "Nada a fazer."
 
-#: src/commands/utils/download.cc:260
+#: src/commands/utils/download.cc:261
 msgid "No prune to best version."
 msgstr "Sem remoção para melhor versão."
 
-#: src/commands/utils/download.cc:266
+#: src/commands/utils/download.cc:267
 msgid "Prune to best version..."
 msgstr "Remover para melhor versão..."
 
-#: src/commands/utils/download.cc:272
+#: src/commands/utils/download.cc:273
 msgid "Not downloading anything..."
 msgstr "Não baixando nada..."
 
-#: src/commands/utils/download.cc:315
+#: src/commands/utils/download.cc:316
 #, c-format, boost-format
 msgid "Error downloading package '%s'."
 msgstr "Erro ao baixar o pacote '%s'."
 
-#: src/commands/utils/download.cc:329
+#: src/commands/utils/download.cc:330
 #, c-format, boost-format
 msgid "Not downloading package '%s'."
 msgstr "Não baixando o pacote '%s'."
@@ -5329,8 +5342,8 @@ msgstr "Fornecedor"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: package summary (header)
-#: src/info.cc:100 src/search.cc:201 src/utils/misc.cc:330
-#: src/utils/misc.cc:372
+#: src/info.cc:100 src/search.cc:201 src/utils/misc.cc:331
+#: src/utils/misc.cc:373
 msgid "Summary"
 msgstr "Resumo"
 
@@ -5373,8 +5386,8 @@ msgid "Installed Size"
 msgstr "Tamanho após instalação"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:342 src/info.cc:392 src/info.cc:556 src/utils/misc.cc:328
-#: src/utils/misc.cc:370
+#: src/info.cc:342 src/info.cc:392 src/info.cc:556 src/utils/misc.cc:329
+#: src/utils/misc.cc:371
 msgid "Status"
 msgstr "Status"
 
@@ -5398,13 +5411,13 @@ msgstr "URL acima"
 #. translators: property name; short; used like "Name: value"
 #. translator: Table column header.
 #. Name
-#: src/info.cc:394 src/update.cc:406 src/utils/misc.cc:325
-#: src/utils/misc.cc:367
+#: src/info.cc:394 src/update.cc:406 src/utils/misc.cc:326
+#: src/utils/misc.cc:368
 msgid "Category"
 msgstr "Categoria"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:396 src/utils/misc.cc:326 src/utils/misc.cc:368
+#: src/info.cc:396 src/utils/misc.cc:327 src/utils/misc.cc:369
 msgid "Severity"
 msgstr "Gravidade"
 
@@ -5414,7 +5427,7 @@ msgid "Created On"
 msgstr "Criado em"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:400 src/utils/misc.cc:327 src/utils/misc.cc:369
+#: src/info.cc:400 src/utils/misc.cc:328 src/utils/misc.cc:370
 msgid "Interactive"
 msgstr "Interativo"
 
@@ -7056,44 +7069,44 @@ msgstr ""
 "instalado primeiro. Esses pacotes são frequentemente denominados '%1%' ou "
 "'%2%'."
 
-#: src/utils/misc.cc:93
+#: src/utils/misc.cc:94
 msgid "package"
 msgid_plural "packages"
 msgstr[0] "pacote"
 msgstr[1] "pacotes"
 
-#: src/utils/misc.cc:95
+#: src/utils/misc.cc:96
 msgid "pattern"
 msgid_plural "patterns"
 msgstr[0] "padrão"
 msgstr[1] "padrões"
 
-#: src/utils/misc.cc:97
+#: src/utils/misc.cc:98
 msgid "product"
 msgid_plural "product"
 msgstr[0] "produto"
 msgstr[1] "produtos"
 
-#: src/utils/misc.cc:99
+#: src/utils/misc.cc:100
 msgid "patch"
 msgid_plural "patches"
 msgstr[0] "correção"
 msgstr[1] "correções"
 
-#: src/utils/misc.cc:101
+#: src/utils/misc.cc:102
 msgid "srcpackage"
 msgid_plural "srcpackages"
 msgstr[0] "pacote fonte"
 msgstr[1] "pacotes fonte"
 
-#: src/utils/misc.cc:103
+#: src/utils/misc.cc:104
 msgid "application"
 msgid_plural "applications"
 msgstr[0] "aplicativo"
 msgstr[1] "aplicativos"
 
 #. default
-#: src/utils/misc.cc:105
+#: src/utils/misc.cc:106
 msgid "resolvable"
 msgid_plural "resolvables"
 msgstr[0] "resolvível"
@@ -7101,103 +7114,103 @@ msgstr[1] "resolvíveis"
 
 #. Patch status: i18n + color
 #. translator: patch status
-#: src/utils/misc.cc:114
+#: src/utils/misc.cc:115
 msgid "unwanted"
 msgstr "indesejada"
 
 #. translator: patch status
-#: src/utils/misc.cc:115
+#: src/utils/misc.cc:116
 msgid "optional"
 msgstr "opcional"
 
 #. translator: patch status
-#: src/utils/misc.cc:116
+#: src/utils/misc.cc:117
 msgid "needed"
 msgstr "necessário"
 
 #. translator: patch status
-#: src/utils/misc.cc:117
+#: src/utils/misc.cc:118
 msgid "applied"
 msgstr "aplicada"
 
 #. translator: patch status
-#: src/utils/misc.cc:118
+#: src/utils/misc.cc:119
 msgid "not needed"
 msgstr "desnecessário"
 
 #. translator: patch status
-#: src/utils/misc.cc:119
+#: src/utils/misc.cc:120
 msgid "undetermined"
 msgstr "não determinada"
 
 #. pi_r is no patch!
 #. translator: patch status
-#: src/utils/misc.cc:120
+#: src/utils/misc.cc:121
 msgid "retracted"
 msgstr "retraído"
 
-#: src/utils/misc.cc:329 src/utils/misc.cc:371
+#: src/utils/misc.cc:330 src/utils/misc.cc:372
 msgid "Since"
 msgstr "Desde"
 
 #. << _("Repository")
-#: src/utils/misc.cc:364
+#: src/utils/misc.cc:365
 msgid "Issue"
 msgstr "Problema"
 
-#: src/utils/misc.cc:365
+#: src/utils/misc.cc:366
 msgid "No."
 msgstr "Não."
 
-#: src/utils/misc.cc:366
+#: src/utils/misc.cc:367
 msgid "Patch"
 msgstr "Correção"
 
-#: src/utils/misc.cc:444
+#: src/utils/misc.cc:445
 msgid "Specified local path does not exist or is not accessible."
 msgstr "O caminho local especificado não existe ou não é acessível."
 
-#: src/utils/misc.cc:456
+#: src/utils/misc.cc:457
 msgid "Given URI is invalid"
 msgstr "O URI informado não é válido"
 
 #. Guess failed:
 #. translators: don't translate '<platform>'
-#: src/utils/misc.cc:548
+#: src/utils/misc.cc:549
 msgid "Unable to guess a value for <platform>."
 msgstr "Não foi possível adivinhar um valor para <platform>."
 
-#: src/utils/misc.cc:549
+#: src/utils/misc.cc:550
 msgid "Please use obs://<project>/<platform>"
 msgstr "Use obs://<project>/<platform>"
 
-#: src/utils/misc.cc:550 src/utils/misc.cc:596
+#: src/utils/misc.cc:551 src/utils/misc.cc:597
 #, c-format, boost-format
 msgid "Example: %s"
 msgstr "Exemplo: %s"
 
-#: src/utils/misc.cc:595
+#: src/utils/misc.cc:596
 msgid "Invalid OBS URI."
 msgstr "URI OBS inválido."
 
-#: src/utils/misc.cc:595
+#: src/utils/misc.cc:596
 msgid "Correct form is obs://<project>/[platform]"
 msgstr "A forma correta é obs://<projeto>/[plataforma]"
 
-#: src/utils/misc.cc:645
+#: src/utils/misc.cc:644
 msgid "Problem copying the specified RPM file to the cache directory."
 msgstr ""
 "Problema ao copiar o arquivo RPM especificado para o diretório de cache."
 
-#: src/utils/misc.cc:646
+#: src/utils/misc.cc:645
 msgid "Perhaps you are running out of disk space."
 msgstr "Talvez você esteja ficando sem espaço no disco."
 
-#: src/utils/misc.cc:654
+#: src/utils/misc.cc:653
 msgid "Problem retrieving the specified RPM file"
 msgstr "Problema ao baixar o arquivo RPM especificado"
 
-#: src/utils/misc.cc:655
+#: src/utils/misc.cc:654
 msgid "Please check whether the file is accessible."
 msgstr "Verifique se o arquivo é acessível."
 

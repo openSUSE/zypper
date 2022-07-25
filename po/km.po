@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.km\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-23 18:47+0100\n"
+"POT-Creation-Date: 2022-07-25 14:05+0200\n"
 "PO-Revision-Date: 2012-05-24 15:15+0700\n"
 "Last-Translator: Khoem Sokhem <khoemsokhem@khmeros.info>\n"
 "Language-Team: Khmer <support@khmeros.info>\n"
@@ -118,249 +118,261 @@ msgstr "រចនាប័ទ្ម​តារាង %d មិន​ត្រ�
 msgid " Use an integer number from %d to %d"
 msgstr ""
 
-#: src/Config.cc:244
+#: src/Config.cc:250
 msgid "The path specified in the --root option must be absolute."
 msgstr "ផ្លូវ​ដែល​បាន​បញ្ជាក់​ក្នុង​ជម្រើស --root ត្រូវ​តែ​ជា​ផ្លូវ​ពេញលេញ ។"
 
 #. translators: --help, -h
-#: src/Config.cc:322
+#: src/Config.cc:328
 msgid "Help."
 msgstr ""
 
 #. translators: --version, -V
-#: src/Config.cc:331
+#: src/Config.cc:337
 msgid "Output the version number."
 msgstr ""
 
 #. translators: --promptids
-#: src/Config.cc:343
+#: src/Config.cc:349
 msgid "Output a list of zypper's user prompts."
 msgstr ""
 
 #. translators: --config, -c <FILE>
-#: src/Config.cc:356
+#: src/Config.cc:362
 msgid "Use specified config file instead of the default."
 msgstr ""
 
-#: src/Config.cc:363
+#: src/Config.cc:369
 msgid "User data string must not contain nonprintable or newline characters!"
 msgstr ""
 
 #. translators: --userdata <STRING>
-#: src/Config.cc:369
+#: src/Config.cc:375
 msgid "User defined transaction id used in history and plugins."
 msgstr ""
 
 #. translators: --quiet, -q
-#: src/Config.cc:377
+#: src/Config.cc:383
 msgid "Suppress normal output, print only error messages."
 msgstr ""
 
 #. translators: --verbose, -v
-#: src/Config.cc:385
+#: src/Config.cc:391
 msgid "Increase verbosity."
 msgstr ""
 
 #. translators: --color / --no-color
-#: src/Config.cc:406
+#: src/Config.cc:412
 msgid "Whether to use colors in output if tty supports it."
 msgstr ""
 
 #. translators: --no-abbrev, -A
-#: src/Config.cc:411
+#: src/Config.cc:417
 msgid "Do not abbreviate text in tables."
 msgstr ""
 
 #. translators: --table-style, -s, %1% denotes the supported range of the integer argument (e.g. "1-11")
-#: src/Config.cc:416
+#: src/Config.cc:422
 #, boost-format
 msgid "Table style (%1%)."
 msgstr ""
 
-#: src/Config.cc:420 src/commands/optionsets.cc:284
+#: src/Config.cc:426 src/commands/optionsets.cc:284
 msgid "Entering non-interactive mode."
 msgstr "បញ្ចូល​របៀប​​មិន​អន្តរសកម្ម ។"
 
 #. translators: --non-interactive, -n
-#: src/Config.cc:424
+#: src/Config.cc:430
 msgid "Do not ask anything, use default answers automatically."
 msgstr ""
 
-#: src/Config.cc:429
+#: src/Config.cc:435
 msgid ""
 "Patches having the flag rebootSuggested set will not be treated as "
 "interactive."
 msgstr "បំណះ​ដែល​មាន​សំណុំ flag rebootSuggested នឹង​មិន​ត្រូវ​បាន​ចាត់​ទុក​ជា​អន្តរសកម្ម​ទេ ។"
 
 #. translators: --non-interactive-include-reboot-patches
-#: src/Config.cc:433
+#: src/Config.cc:439
 msgid ""
 "Do not treat patches as interactive, which have the rebootSuggested-flag set."
 msgstr ""
 
 #. translators: --xmlout, -x
-#: src/Config.cc:443
+#: src/Config.cc:449
 msgid "Switch to XML output."
 msgstr ""
 
 #. translators: --ignore-unknown, -i
-#: src/Config.cc:448
+#: src/Config.cc:454
 msgid "Ignore unknown packages."
 msgstr ""
 
 #. translators: --terse, -t
-#: src/Config.cc:459
+#: src/Config.cc:465
 msgid ""
 "Terse output for machine consumption. Implies --no-abbrev and --no-color."
 msgstr ""
 
 #. translators: --reposd-dir, -D <DIR>
-#: src/Config.cc:483
+#: src/Config.cc:489
 msgid "Use alternative repository definition file directory."
 msgstr "ប្រើ​ឯកសារ​កំណត់​ឃ្លាំង​ជំនួស directory."
 
 #. translators: --cache-dir, -C <DIR>
-#: src/Config.cc:498
+#: src/Config.cc:504
 msgid "Use alternative directory for all caches."
 msgstr "ប្រើ​ថត​ជំនួស​សម្រាប់​ឃ្លាំង​ទាំងអស់ ។"
 
 #. translators: --raw-cache-dir <DIR>
-#: src/Config.cc:511
+#: src/Config.cc:517
 msgid "Use alternative raw meta-data cache directory."
 msgstr "ប្រើ​ថត​ឃ្លាំង​សម្ងាត់​ទិន្នន័យ​មេតា​ដើម​ជំនួស ។"
 
 #. translators: --solv-cache-dir <DIR>
-#: src/Config.cc:525
+#: src/Config.cc:531
 msgid "Use alternative solv file cache directory."
 msgstr "ប្រើ​ថត​ឃ្លាំង​សម្ងាត់​ឯកសារ solv ជំនួស ។"
 
 #. translators: --pkg-cache-dir <DIR>
-#: src/Config.cc:539
+#: src/Config.cc:545
 msgid "Use alternative package cache directory."
 msgstr "ប្រើ​ថត​ឃ្លាំង​សម្ងាត់​កញ្ចប់​ជំនួស ។"
 
-#: src/Config.cc:544
+#: src/Config.cc:550
 msgid "Repository Options"
 msgstr ""
 
-#: src/Config.cc:548
+#: src/Config.cc:554
 msgid "Entering 'no-gpg-checks' mode."
 msgstr "បញ្ចូល​របៀប 'no-gpg-checks' ។"
 
 #. translators: --no-gpg-checks
-#: src/Config.cc:552
+#: src/Config.cc:558
 msgid "Ignore GPG check failures and continue."
 msgstr ""
 
-#: src/Config.cc:557
+#: src/Config.cc:563
 #, c-format, boost-format
 msgid ""
 "Turning on '%s'. New repository signing keys will be automatically imported!"
 msgstr "បើក '%s' ។ សោ​ចុះហត្ថលេខា​ឃ្លាំង​ថ្មី​នឹង​ត្រូវ​បាននាំចូល​ដោយ​ស្វ័យ​ប្រវត្តិ !"
 
 #. translators: --gpg-auto-import-keys
-#: src/Config.cc:563
+#: src/Config.cc:569
 msgid "Automatically trust and import new repository signing keys."
 msgstr ""
 
 #. translators: --plus-repo, -p <URI>
-#: src/Config.cc:567
+#: src/Config.cc:573
 msgid "Use an additional repository."
 msgstr ""
 
 #. translators: --plus-content <TAG>
-#: src/Config.cc:571
+#: src/Config.cc:577
 msgid ""
 "Additionally use disabled repositories providing a specific keyword. Try '--"
 "plus-content debug' to enable repos indicating to provide debug packages."
 msgstr ""
 
-#: src/Config.cc:577
+#: src/Config.cc:583
 msgid "Repositories disabled, using the database of installed packages only."
 msgstr "បានបិទឃ្លាំង ប្រើ​មូលដ្ឋាន​ទិន្នន័យ​របស់​តែ​កញ្ចប់​ដែល​បាន​ដំឡើង​ប៉ុណ្ណោះ ។"
 
 #. translators: --disable-repositories
-#: src/Config.cc:581
+#: src/Config.cc:587
 msgid "Do not read meta-data from repositories."
 msgstr ""
 
-#: src/Config.cc:585
+#: src/Config.cc:591
 msgid "Autorefresh disabled."
 msgstr "បាន​បិទ​​ការ​ធ្វើ​ឲ្យស្រស់​ស្វ័យ​ប្រវត្តិ ។"
 
 #. translators: --no-refresh
-#: src/Config.cc:589
+#: src/Config.cc:595
 msgid "Do not refresh the repositories."
 msgstr ""
 
-#: src/Config.cc:593
+#: src/Config.cc:599
 msgid "CD/DVD repositories disabled."
 msgstr "បាន​បិទ​ឃ្លាំង​ស៊ីឌី/ឌីវីឌី ។"
 
 #. translators: --no-cd
-#: src/Config.cc:597
+#: src/Config.cc:603
 msgid "Ignore CD/DVD repositories."
 msgstr ""
 
-#: src/Config.cc:601
+#: src/Config.cc:607
 msgid "Remote repositories disabled."
 msgstr "បាន​បិទ​ឃ្លាំង​ពី​ចម្ងាយ ។"
 
 #. translators: --no-remote
-#: src/Config.cc:605
+#: src/Config.cc:611
 msgid "Ignore remote repositories."
 msgstr ""
 
 #. translators: --releasever
-#: src/Config.cc:612
+#: src/Config.cc:618
 msgid ""
 "Set the value of $releasever in all .repo files (default: distribution "
 "version)"
 msgstr ""
 
-#: src/Config.cc:616
+#: src/Config.cc:622
 msgid "Target Options"
 msgstr "ជម្រើស​គោលដៅ ៖"
 
 #. translators: --root, -R <DIR>
-#: src/Config.cc:621
+#: src/Config.cc:627
 msgid "Operate on a different root directory."
 msgstr "ប្រតិបត្តិ​លើ​ថត root ផ្សេងៗ​គ្នា ។"
 
 #. translators: --installroot <DIR>
-#: src/Config.cc:627
+#: src/Config.cc:633
 msgid ""
 "Operate on a different root directory, but share repositories with the host."
 msgstr ""
 
-#: src/Config.cc:633
+#: src/Config.cc:639
 msgid "Ignoring installed resolvables."
 msgstr "មិនអើពើ​នឹង​កញ្ចប់​ដោះស្រាយ​ដែល​បាន​ដំឡើង ។"
 
 #. translators: --disable-system-resolvables
-#: src/Config.cc:636
+#: src/Config.cc:642
 msgid "Do not read installed packages."
 msgstr "កុំ​អាន​កញ្ចប់​ដែល​បានដំឡើង ។"
 
-#: src/Config.cc:803
+#: src/Config.cc:809
 msgid "No config file is in use. Can not save options."
 msgstr ""
 
-#: src/Config.cc:814
+#: src/Config.cc:820
 #, boost-format
 msgid "Option '%1%' saved in '%2%'."
 msgstr ""
 
-#: src/Config.cc:821
+#: src/Config.cc:827
 msgid "Failed to save option."
 msgstr ""
 
-#: src/PackageArgs.cc:208
+#: src/PackageArgs.cc:159
+#, c-format, boost-format
+msgid ""
+"'%s' install modifier must not be used without a package name or capability."
+msgstr ""
+
+#: src/PackageArgs.cc:169
+#, c-format, boost-format
+msgid ""
+"'%s' remove modifier must not be used without a package name or capability."
+msgstr ""
+
+#: src/PackageArgs.cc:221
 #, c-format, boost-format
 msgid "'%s' not found in package names. Trying '%s'."
 msgstr "រក​មិន​ឃើញ '%s' នៅ​ក្នុង​ឈ្មោះ​កញ្ចប់​ទេ​ ។ ព្យាយាម '%s' ។"
 
-#: src/PackageArgs.cc:218
+#: src/PackageArgs.cc:231
 #, c-format, boost-format
 msgid "'%s' is not a package name or capability."
 msgstr "'%s' មិនមែន​ជា​ឈ្មោះ​កញ្ចប់ ឬ​សមត្ថភាព​ទេ ។"
@@ -439,34 +451,34 @@ msgid "No provider of '%s' found."
 msgstr "រក​មិនឃើញ​ក្រុមហ៊ុន​ផ្ដល់ '%s' ទេ ។"
 
 #. wildcards used
-#: src/RequestFeedback.cc:84
+#: src/RequestFeedback.cc:85
 #, fuzzy, c-format, boost-format
 msgid "No package matching '%s' is installed."
 msgstr "គ្មាន​ការ​ផ្គូផ្គង​កញ្ចប់ '%s' ត្រូវ​បាន​ដំឡើង​ទេ ។"
 
-#: src/RequestFeedback.cc:86
+#: src/RequestFeedback.cc:87
 #, c-format, boost-format
 msgid "Package '%s' is not installed."
 msgstr "កញ្ចប់ '%s' មិនទាន់​បាន​ដំឡើង​ទេ ។"
 
 #. translators: meaning provider of capability %s
-#: src/RequestFeedback.cc:90
+#: src/RequestFeedback.cc:91
 #, c-format, boost-format
 msgid "No provider of '%s' is installed."
 msgstr "គ្មាន​ក្រុមហ៊ុន​ផ្ដល់ '%s' ត្រូវ​បាន​ដំឡើង​ទេ ។"
 
-#: src/RequestFeedback.cc:95
+#: src/RequestFeedback.cc:96
 #, c-format, boost-format
 msgid "'%s' is already installed."
 msgstr "'%s' បាន​ដំឡើង​រួចហើយ ។"
 
 #. translators: %s are package names
-#: src/RequestFeedback.cc:98
+#: src/RequestFeedback.cc:99
 #, c-format, boost-format
 msgid "'%s' providing '%s' is already installed."
 msgstr "'%s' ផ្ដល់ '%s' ត្រូវ​បាន​ដំឡើង​រួច​ហើយ ។"
 
-#: src/RequestFeedback.cc:105
+#: src/RequestFeedback.cc:106
 #, c-format, boost-format
 msgid ""
 "No update candidate for '%s'. The highest available version is already "
@@ -474,12 +486,12 @@ msgid ""
 msgstr ""
 "គ្មាន​បេក្ខភាពបច្ចុប្បន្នភាព​​សម្រាប់ '%s' ទេ ។ កំណែ​ដែលអាច​ប្រើ​បាន​ខ្ពស់​បំផុត​ត្រូវបាន​ដំឡើង​រួច​ហើយ ។"
 
-#: src/RequestFeedback.cc:108
+#: src/RequestFeedback.cc:109
 #, c-format, boost-format
 msgid "No update candidate for '%s'."
 msgstr "មិនមានបច្ចុប្បន្នភាព​​សម្រាប់ '%s' ទេ ។"
 
-#: src/RequestFeedback.cc:114
+#: src/RequestFeedback.cc:115
 #, fuzzy, c-format, boost-format
 msgid ""
 "There is an update candidate '%s' for '%s', but it does not match the "
@@ -488,14 +500,14 @@ msgstr ""
 "មាន​បេក្ខភាពបច្ចុប្បន្នភាព '%s' សម្រាប់ '%s' ប៉ុន្តែ​វា​មិន​ផ្គូផ្គង​នឹង​កំណែ​ដែល​បានបញ្ជាក់ "
 "ស្ថាបនត្យកម្ម ឬ​ឃ្លាំង​ដែលបានបញ្ជាក់​ទេ ។"
 
-#: src/RequestFeedback.cc:123
+#: src/RequestFeedback.cc:124
 #, c-format, boost-format
 msgid ""
 "There is an update candidate for '%s' from vendor '%s', while the current "
 "vendor is '%s'. Use '%s' to install this candidate."
 msgstr ""
 
-#: src/RequestFeedback.cc:132
+#: src/RequestFeedback.cc:133
 #, fuzzy, c-format, boost-format
 msgid ""
 "There is an update candidate for '%s', but it comes from a repository with a "
@@ -504,14 +516,14 @@ msgstr ""
 "មានបច្ចុប្បន្នភាព​​សម្រាប់ '%s' ប៉ុន្តែ​វា​បាន​មក​ពី​ឃ្លាំង​ដែលមាន​អាទិភាព​ទាប ។ ប្រើ '%s' ដើម្បី​ដំឡើង​"
 "បច្ចុប្បន្នភាព​នេះ ។"
 
-#: src/RequestFeedback.cc:142
+#: src/RequestFeedback.cc:143
 #, c-format, boost-format
 msgid ""
 "There is an update candidate for '%s', but it is locked. Use '%s' to unlock "
 "it."
 msgstr "មានបច្ចុប្បន្នភាព​​សម្រាប់ '%s' ប៉ុន្តែ​វា​ជាប់​សោ ។ ប្រើ '%s' ដើម្បីដោះសោ​វា ។"
 
-#: src/RequestFeedback.cc:148
+#: src/RequestFeedback.cc:149
 #, c-format, boost-format
 msgid ""
 "Package '%s' is not available in your repositories. Cannot reinstall, "
@@ -519,7 +531,7 @@ msgid ""
 msgstr ""
 "មិន​មាន​កញ្ចប់​ '%s' នៅ​ក្នុង​ឃ្លាំង​របស់​អ្នក​ ។ មិន​អាច​ដំឡើង​ឡើងវិញ​ ធ្វើ​ឲ្យ​ប្រសើរ​ឡើង ឬ​បន្ទាប​បាន​ទេ ។"
 
-#: src/RequestFeedback.cc:158
+#: src/RequestFeedback.cc:159
 #, c-format, boost-format
 msgid ""
 "The selected package '%s' from repository '%s' has lower version than the "
@@ -527,80 +539,80 @@ msgid ""
 msgstr "កញ្ចប់​ '%s' ដែល​បាន​ជ្រើស​ពី​ឃ្លាំង '%s' មានកំណែ​ទាបជាង​កញ្ចប់​មួយ​ដែល​បានដមឡើង ។"
 
 #. translators: %s = "zypper install --oldpackage package-version.arch"
-#: src/RequestFeedback.cc:162
+#: src/RequestFeedback.cc:163
 #, c-format, boost-format
 msgid "Use '%s' to force installation of the package."
 msgstr "ប្រើ '%s' ដើម្បី​បង្ខំ​ឲ្យ​ដំឡើង​កញ្ចប់ ។"
 
-#: src/RequestFeedback.cc:169
+#: src/RequestFeedback.cc:170
 #, c-format, boost-format
 msgid "Patch '%s' is interactive, skipping."
 msgstr "ផ្លូវ '%s' គឺ​ជា​ជម្រើស រំលង ។"
 
-#: src/RequestFeedback.cc:175
+#: src/RequestFeedback.cc:176
 #, c-format, boost-format
 msgid "Patch '%s' is not needed."
 msgstr "ផ្លូវ '%s' មិន​ចាំបាច់​ទេ ។"
 
-#: src/RequestFeedback.cc:181
+#: src/RequestFeedback.cc:182
 #, fuzzy, boost-format
 msgid ""
 "Patch '%1%' is optional. Use '%2%' to install it, or '%3%' to include all "
 "optional patches."
 msgstr "បំណះ '%s' ត្រូវ​បាន​ចាក់​សោ ។ ប្រើ​ '%s' ដើម្បី​ដំឡើង​វា ឬ​ដោះ​សោ​វា​ដោយ​ប្រើ​ '%s' ។"
 
-#: src/RequestFeedback.cc:192
+#: src/RequestFeedback.cc:193
 #, c-format, boost-format
 msgid "Patch '%s' is locked. Use '%s' to install it, or unlock it using '%s'."
 msgstr "បំណះ '%s' ត្រូវ​បាន​ចាក់​សោ ។ ប្រើ​ '%s' ដើម្បី​ដំឡើង​វា ឬ​ដោះ​សោ​វា​ដោយ​ប្រើ​ '%s' ។"
 
-#: src/RequestFeedback.cc:199
+#: src/RequestFeedback.cc:200
 #, c-format, boost-format
 msgid "Patch '%s' is not in the specified category."
 msgstr "បំណះ​ '%s' មិន​ស្ថិត​នៅ​ក្នុង​ប្រភេទ​ដែល​បាន​បញ្ជាក់ទេ ។"
 
-#: src/RequestFeedback.cc:206
+#: src/RequestFeedback.cc:207
 #, fuzzy, c-format, boost-format
 msgid "Patch '%s' has not the specified severity."
 msgstr "បំណះ​ '%s' មិន​ស្ថិត​នៅ​ក្នុង​ប្រភេទ​ដែល​បាន​បញ្ជាក់ទេ ។"
 
-#: src/RequestFeedback.cc:213
+#: src/RequestFeedback.cc:214
 #, c-format, boost-format
 msgid "Patch '%s' was issued after the specified date."
 msgstr "បំណះ '%s' ត្រូវ​បាន​ចេញផ្សាយ​ បន្ទាប់​ពី​កាល​បរិច្ឆេទ​ដែល​បានបញ្ជាក់ ។"
 
-#: src/RequestFeedback.cc:218
+#: src/RequestFeedback.cc:219
 #, c-format, boost-format
 msgid "Selecting '%s' from repository '%s' for installation."
 msgstr "ជ្រើស '%s' ពី​ឃ្លាំង '%s' ដើម្បី​ដំឡើង ។"
 
-#: src/RequestFeedback.cc:222
+#: src/RequestFeedback.cc:223
 #, c-format, boost-format
 msgid "Forcing installation of '%s' from repository '%s'."
 msgstr "បង្ខំ​ឲ្យ​ដំឡើង​ '%s' ពី​ឃ្លាំង '%s' ។"
 
-#: src/RequestFeedback.cc:226
+#: src/RequestFeedback.cc:227
 #, c-format, boost-format
 msgid "Selecting '%s' for removal."
 msgstr "ជ្រើស​ '%s' ដើម្បី​យកចេញ ។"
 
-#: src/RequestFeedback.cc:233
+#: src/RequestFeedback.cc:234
 #, fuzzy, c-format, boost-format
 msgid "'%s' is locked. Use '%s' to unlock it."
 msgstr "បំណះ '%s' ត្រូវ​បាន​ចាក់​សោ ។ ប្រើ​ '%s' ដើម្បី​ដំឡើង​វា ឬ​ដោះ​សោ​វា​ដោយ​ប្រើ​ '%s' ។"
 
-#: src/RequestFeedback.cc:238
+#: src/RequestFeedback.cc:239
 #, c-format, boost-format
 msgid "Adding requirement: '%s'."
 msgstr "បន្ថែម​តម្រូវការ ៖ '%s' ។"
 
-#: src/RequestFeedback.cc:241
+#: src/RequestFeedback.cc:242
 #, c-format, boost-format
 msgid "Adding conflict: '%s'."
 msgstr "បន្ថែម​កា​រប៉ះទង្គិច ៖ '%s' ។"
 
 #. translators: %1% expands to a single package name or a ','-separated enumeration of names.
-#: src/RequestFeedback.cc:263
+#: src/RequestFeedback.cc:264
 #, boost-format
 msgid "Did you mean %1%?"
 msgstr ""
@@ -1220,7 +1232,7 @@ msgstr "PackageKit នៅតែ​កំពុង​រត់ (ប្រហែ�
 msgid "Try again?"
 msgstr "​ព្យាយាម​ម្ដងទៀត ?"
 
-#: src/Zypper.cc:248 src/Zypper.cc:707 src/commands/basecommand.cc:287
+#: src/Zypper.cc:248 src/Zypper.cc:707 src/commands/basecommand.cc:289
 msgid "Unexpected exception."
 msgstr "ករណី​លើកលែង​ដែល​មិនបាន​រំពឹង​ទុក ។"
 
@@ -1259,10 +1271,10 @@ msgstr "អាគុយម៉ង់​កម្មវិធី​មិនមែ
 
 #: src/callbacks/keyring.h:32
 msgid ""
-"A GPG pubkey is clearly identified by its fingerprint. Do not rely on the key's "
-"name. If you are not sure whether the presented key is authentic, ask the "
-"repository provider or check their web site. Many providers maintain a web page "
-"showing the fingerprints of the GPG keys they are using."
+"A GPG pubkey is clearly identified by its fingerprint. Do not rely on the "
+"key's name. If you are not sure whether the presented key is authentic, ask "
+"the repository provider or check their web site. Many providers maintain a "
+"web page showing the fingerprints of the GPG keys they are using."
 msgstr ""
 
 #: src/callbacks/keyring.h:37
@@ -2374,7 +2386,7 @@ msgstr[0] "សោ %lu ដែលបាន​យកចេញ ។"
 #: src/commands/repos/list.cc:223 src/commands/services/list.cc:105
 #: src/info.cc:88 src/info.cc:456 src/info.cc:691 src/locales.cc:201
 #: src/search.cc:48 src/search.cc:199 src/search.cc:304 src/search.cc:436
-#: src/search.cc:483 src/update.cc:789 src/utils/misc.cc:324
+#: src/search.cc:483 src/update.cc:789 src/utils/misc.cc:325
 msgid "Name"
 msgstr "ឈ្មោះ"
 
@@ -2386,7 +2398,7 @@ msgstr "បំណះ"
 #. translators: Table column header
 #. translators: type (general header)
 #: src/commands/locks/list.cc:138 src/commands/repos/list.cc:52
-#: src/commands/repos/list.cc:261 src/commands/services/list.cc:114
+#: src/commands/repos/list.cc:262 src/commands/services/list.cc:114
 #: src/info.cc:457 src/search.cc:50 src/search.cc:202
 msgid "Type"
 msgstr "ប្រភេទ"
@@ -2395,7 +2407,7 @@ msgstr "ប្រភេទ"
 #. translators: package's repository (header)
 #: src/commands/locks/list.cc:138 src/info.cc:86 src/search.cc:56
 #: src/search.cc:306 src/search.cc:435 src/search.cc:479 src/update.cc:786
-#: src/utils/misc.cc:323
+#: src/utils/misc.cc:324
 msgid "Repository"
 msgstr "ឃ្លាំង"
 
@@ -2817,7 +2829,7 @@ msgid "Command"
 msgstr "ពាក្យ​បញ្ជា"
 
 #. "/etc/init.d/ script that might be used to restart the command (guessed)
-#: src/commands/ps.cc:152 src/commands/repos/list.cc:277
+#: src/commands/ps.cc:152 src/commands/repos/list.cc:278
 msgid "Service"
 msgstr "សេវា"
 
@@ -3156,7 +3168,7 @@ msgstr "ឈ្មោះ​ក្លែងក្លាយ"
 
 #. translators: property name; short; used like "Name: value"
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/commands/repos/list.cc:42 src/commands/repos/list.cc:268
+#: src/commands/repos/list.cc:42 src/commands/repos/list.cc:269
 #: src/commands/services/list.cc:116 src/repos.cc:1254
 #: src/utils/flags/zyppflags.h:49
 msgid "URI"
@@ -3164,21 +3176,21 @@ msgstr "URI"
 
 #. 'enabled' flag
 #. translators: property name; short; used like "Name: value"
-#: src/commands/repos/list.cc:47 src/commands/repos/list.cc:230
+#: src/commands/repos/list.cc:47 src/commands/repos/list.cc:231
 #: src/commands/services/list.cc:106 src/repos.cc:1256
 msgid "Enabled"
 msgstr "អនុញ្ញាត"
 
 #. GPG Check
 #. translators: property name; short; used like "Name: value"
-#: src/commands/repos/list.cc:48 src/commands/repos/list.cc:234
+#: src/commands/repos/list.cc:48 src/commands/repos/list.cc:235
 #: src/commands/services/list.cc:107 src/repos.cc:1258
 msgid "GPG Check"
 msgstr "ពិនិត្យ​មើល GPG"
 
 #. translators: repository priority (in zypper repos -p or -d)
 #. translators: property name; short; used like "Name: value"
-#: src/commands/repos/list.cc:49 src/commands/repos/list.cc:252
+#: src/commands/repos/list.cc:49 src/commands/repos/list.cc:253
 #: src/commands/services/list.cc:113 src/repos.cc:1262
 msgid "Priority"
 msgstr "អទិភាព"
@@ -3258,16 +3270,16 @@ msgstr "ឃ្លាំង​ត្រូវ​បាន​នាំចេញ​
 #. translators: 'zypper repos' column - whether autorefresh is enabled
 #. for the repository
 #. translators: 'zypper repos' column - whether autorefresh is enabled for the repository
-#: src/commands/repos/list.cc:242 src/commands/services/list.cc:109
+#: src/commands/repos/list.cc:243 src/commands/services/list.cc:109
 msgid "Refresh"
 msgstr "ធ្វើ​ឲ្យ​ស្រស់"
 
-#: src/commands/repos/list.cc:332
+#: src/commands/repos/list.cc:333
 #, fuzzy
 msgid "No repositories defined."
 msgstr "រក​មិន​ឃើញ​ឃ្លាំង ។"
 
-#: src/commands/repos/list.cc:333
+#: src/commands/repos/list.cc:334
 #, fuzzy
 msgid "Use the 'zypper addrepo' command to add one or more repositories."
 msgstr "គ្មាន​ឃ្លាំង​បាន​កំណត់ ។ ប្រើ​ពាក្យ​បញ្ជា 'zypper addrepo' ដើម្បី​បន្ថែម​ឃ្លាំង​មួយ ឬ​ច្រើន ។"
@@ -4015,7 +4027,7 @@ msgstr "រាយ​សេវា​ដែល​បានកំណត់​ទា
 msgid "List defined services."
 msgstr ""
 
-#: src/commands/services/list.cc:167
+#: src/commands/services/list.cc:169
 #, c-format, boost-format
 msgid "No services defined. Use the '%s' command to add one or more services."
 msgstr "គ្មាន​សេវា​បាន​កំណត់ ។ ប្រើ​ពាក្យ​បញ្ជា '%s' ដើម្បី​បន្ថែម​សេវា​មួយ ឬ​ច្រើន ។"
@@ -4596,29 +4608,29 @@ msgstr ""
 msgid "Argument resolves to no package"
 msgstr "បានបរាជ័យ​ក្នុង​កា​រដោះស្រាយ​កញ្ចប់"
 
-#: src/commands/utils/download.cc:253 src/solve-commit.cc:1023
+#: src/commands/utils/download.cc:254 src/solve-commit.cc:1023
 msgid "Nothing to do."
 msgstr "គ្មាន​អ្វី​ត្រូវ​ធ្វើ ។"
 
-#: src/commands/utils/download.cc:260
+#: src/commands/utils/download.cc:261
 #, fuzzy
 msgid "No prune to best version."
 msgstr "ទេ បោះបង់​ប្រតិបត្តិការ ។"
 
-#: src/commands/utils/download.cc:266
+#: src/commands/utils/download.cc:267
 msgid "Prune to best version..."
 msgstr ""
 
-#: src/commands/utils/download.cc:272
+#: src/commands/utils/download.cc:273
 msgid "Not downloading anything..."
 msgstr ""
 
-#: src/commands/utils/download.cc:315
+#: src/commands/utils/download.cc:316
 #, fuzzy, c-format, boost-format
 msgid "Error downloading package '%s'."
 msgstr "ដំឡើង​កញ្ចប់​ប្រភព %s-%s"
 
-#: src/commands/utils/download.cc:329
+#: src/commands/utils/download.cc:330
 #, fuzzy, c-format, boost-format
 msgid "Not downloading package '%s'."
 msgstr "ដំឡើង​កញ្ចប់​ប្រភព %s-%s"
@@ -4899,8 +4911,8 @@ msgstr "ក្រុមហ៊ុន​លក់ ៖ "
 
 #. translators: property name; short; used like "Name: value"
 #. translators: package summary (header)
-#: src/info.cc:100 src/search.cc:201 src/utils/misc.cc:330
-#: src/utils/misc.cc:372
+#: src/info.cc:100 src/search.cc:201 src/utils/misc.cc:331
+#: src/utils/misc.cc:373
 msgid "Summary"
 msgstr "សង្ខេប"
 
@@ -4942,8 +4954,8 @@ msgid "Installed Size"
 msgstr "ទំហំ​ដំឡើង ៖ "
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:342 src/info.cc:392 src/info.cc:556 src/utils/misc.cc:328
-#: src/utils/misc.cc:370
+#: src/info.cc:342 src/info.cc:392 src/info.cc:556 src/utils/misc.cc:329
+#: src/utils/misc.cc:371
 msgid "Status"
 msgstr "ស្ថានភាព"
 
@@ -4967,13 +4979,13 @@ msgstr ""
 #. translators: property name; short; used like "Name: value"
 #. translator: Table column header.
 #. Name
-#: src/info.cc:394 src/update.cc:406 src/utils/misc.cc:325
-#: src/utils/misc.cc:367
+#: src/info.cc:394 src/update.cc:406 src/utils/misc.cc:326
+#: src/utils/misc.cc:368
 msgid "Category"
 msgstr "ប្រភេទ"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:396 src/utils/misc.cc:326 src/utils/misc.cc:368
+#: src/info.cc:396 src/utils/misc.cc:327 src/utils/misc.cc:369
 msgid "Severity"
 msgstr "ភាព​ត្រឹមត្រូវ"
 
@@ -4983,7 +4995,7 @@ msgid "Created On"
 msgstr "បាន​បង្កើត​នៅ ៖"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:400 src/utils/misc.cc:327 src/utils/misc.cc:369
+#: src/info.cc:400 src/utils/misc.cc:328 src/utils/misc.cc:370
 #, fuzzy
 msgid "Interactive"
 msgstr "អន្តរ​សកម្ម ៖ "
@@ -6568,141 +6580,141 @@ msgid ""
 "installed first. Those packages are often named '%1%' or '%2%'."
 msgstr ""
 
-#: src/utils/misc.cc:93
+#: src/utils/misc.cc:94
 msgid "package"
 msgid_plural "packages"
 msgstr[0] "កញ្ចប់"
 
-#: src/utils/misc.cc:95
+#: src/utils/misc.cc:96
 msgid "pattern"
 msgid_plural "patterns"
 msgstr[0] "លំនាំ"
 
-#: src/utils/misc.cc:97
+#: src/utils/misc.cc:98
 msgid "product"
 msgid_plural "product"
 msgstr[0] "ផលិតផល"
 
-#: src/utils/misc.cc:99
+#: src/utils/misc.cc:100
 msgid "patch"
 msgid_plural "patches"
 msgstr[0] "បំណះ"
 
-#: src/utils/misc.cc:101
+#: src/utils/misc.cc:102
 msgid "srcpackage"
 msgid_plural "srcpackages"
 msgstr[0] "កញ្ចប់​ប្រភព"
 
-#: src/utils/misc.cc:103
+#: src/utils/misc.cc:104
 msgid "application"
 msgid_plural "applications"
 msgstr[0] ""
 
 #. default
-#: src/utils/misc.cc:105
+#: src/utils/misc.cc:106
 msgid "resolvable"
 msgid_plural "resolvables"
 msgstr[0] "កញ្ចប់​ដោះស្រាយ"
 
 #. Patch status: i18n + color
 #. translator: patch status
-#: src/utils/misc.cc:114
+#: src/utils/misc.cc:115
 msgid "unwanted"
 msgstr ""
 
 #. translator: patch status
-#: src/utils/misc.cc:115
+#: src/utils/misc.cc:116
 msgid "optional"
 msgstr ""
 
 #. translator: patch status
-#: src/utils/misc.cc:116
+#: src/utils/misc.cc:117
 msgid "needed"
 msgstr "ត្រូវការ"
 
 #. translator: patch status
-#: src/utils/misc.cc:117
+#: src/utils/misc.cc:118
 msgid "applied"
 msgstr ""
 
 #. translator: patch status
-#: src/utils/misc.cc:118
+#: src/utils/misc.cc:119
 msgid "not needed"
 msgstr "មិន​ត្រូវការ"
 
 #. translator: patch status
-#: src/utils/misc.cc:119
+#: src/utils/misc.cc:120
 msgid "undetermined"
 msgstr ""
 
 #. pi_r is no patch!
 #. translator: patch status
-#: src/utils/misc.cc:120
+#: src/utils/misc.cc:121
 msgid "retracted"
 msgstr ""
 
-#: src/utils/misc.cc:329 src/utils/misc.cc:371
+#: src/utils/misc.cc:330 src/utils/misc.cc:372
 msgid "Since"
 msgstr ""
 
 #. << _("Repository")
-#: src/utils/misc.cc:364
+#: src/utils/misc.cc:365
 msgid "Issue"
 msgstr "​ចេញ​ផ្សាយ"
 
-#: src/utils/misc.cc:365
+#: src/utils/misc.cc:366
 msgid "No."
 msgstr "ទេ"
 
-#: src/utils/misc.cc:366
+#: src/utils/misc.cc:367
 msgid "Patch"
 msgstr "បំណះ"
 
-#: src/utils/misc.cc:444
+#: src/utils/misc.cc:445
 msgid "Specified local path does not exist or is not accessible."
 msgstr "មិនមាន​ផ្លូវ​មូលដ្ឋាន​ពិសេស​ទេ ឬ​មិនអាច​ចូល​ដំណើរការបាន ។"
 
-#: src/utils/misc.cc:456
+#: src/utils/misc.cc:457
 msgid "Given URI is invalid"
 msgstr "URI ដែល​បាន​ផ្ដល់​មិនត្រឹមត្រូវ"
 
 #. Guess failed:
 #. translators: don't translate '<platform>'
-#: src/utils/misc.cc:548
+#: src/utils/misc.cc:549
 msgid "Unable to guess a value for <platform>."
 msgstr ""
 
-#: src/utils/misc.cc:549
+#: src/utils/misc.cc:550
 #, fuzzy
 msgid "Please use obs://<project>/<platform>"
 msgstr "ទម្រង់​ត្រឹមត្រូវ​គឺ obs://<project>/[platform]"
 
-#: src/utils/misc.cc:550 src/utils/misc.cc:596
+#: src/utils/misc.cc:551 src/utils/misc.cc:597
 #, c-format, boost-format
 msgid "Example: %s"
 msgstr "ឧទាហរណ៍ ៖ %s"
 
-#: src/utils/misc.cc:595
+#: src/utils/misc.cc:596
 msgid "Invalid OBS URI."
 msgstr "URI របស់​ OBS មិន​ត្រឹមត្រូវ ។"
 
-#: src/utils/misc.cc:595
+#: src/utils/misc.cc:596
 msgid "Correct form is obs://<project>/[platform]"
 msgstr "ទម្រង់​ត្រឹមត្រូវ​គឺ obs://<project>/[platform]"
 
-#: src/utils/misc.cc:645
+#: src/utils/misc.cc:644
 msgid "Problem copying the specified RPM file to the cache directory."
 msgstr "មាន​បញ្ហា​ក្នុង​ការ​ចម្លង​ឯកសារ RPM ដែល​បាន​បញ្ជាក់​ទៅ​ថត​ឃ្លាំង​សម្ងាត់ ។"
 
-#: src/utils/misc.cc:646
+#: src/utils/misc.cc:645
 msgid "Perhaps you are running out of disk space."
 msgstr "ប្រហែល​ជា​អ្នក​អស់​ទំហំ​ថាស​ហើយ ។"
 
-#: src/utils/misc.cc:654
+#: src/utils/misc.cc:653
 msgid "Problem retrieving the specified RPM file"
 msgstr "បញ្ហា​ក្នុងការ​ទៅ​យក​ឯកសារ RPM ដែល​បាន​បញ្ជាក់"
 
-#: src/utils/misc.cc:655
+#: src/utils/misc.cc:654
 msgid "Please check whether the file is accessible."
 msgstr "សូ​ម​ពិនិត្យ​មើល ថាតើ​អាច​ចូលដំណើរការ​ឯកសារ​បាន ឬ​អត់ ។"
 
