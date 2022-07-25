@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-07-25 14:05+0200\n"
-"PO-Revision-Date: 2022-02-24 01:12+0000\n"
+"PO-Revision-Date: 2022-07-26 02:13+0000\n"
 "Last-Translator: Freek de Kruijf <freek@opensuse.org>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/zypper/master/nl/>\n"
 "Language: nl\n"
@@ -388,12 +388,16 @@ msgstr "Optie opslaan is mislukt."
 msgid ""
 "'%s' install modifier must not be used without a package name or capability."
 msgstr ""
+"Wijziger van installatie '%s' moet niet gebruikt worden zonder een "
+"pakketnaam of mogelijkheid (capability)."
 
 #: src/PackageArgs.cc:169
 #, c-format, boost-format
 msgid ""
 "'%s' remove modifier must not be used without a package name or capability."
 msgstr ""
+"Verwijderaar van wijziger '%s' moet niet gebruikt worden zonder een "
+"pakketnaam of mogelijkheid (capability)."
 
 #: src/PackageArgs.cc:221
 #, c-format, boost-format
