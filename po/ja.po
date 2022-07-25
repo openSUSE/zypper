@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-07-25 14:05+0200\n"
-"PO-Revision-Date: 2022-02-24 01:12+0000\n"
+"PO-Revision-Date: 2022-07-26 02:12+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
 "Language-Team: Japanese <https://l10n.opensuse.org/projects/zypper/master/ja/"
 ">\n"
@@ -308,7 +308,7 @@ msgstr "リポジトリの更新を行わないようにします。"
 
 #: src/Config.cc:599
 msgid "CD/DVD repositories disabled."
-msgstr "CD/DVDリポジトリが無効になっています。"
+msgstr "CD/DVD のリポジトリが無効になっています。"
 
 #. translators: --no-cd
 #: src/Config.cc:603
@@ -376,13 +376,13 @@ msgstr "オプションの保存に失敗しました。"
 #, c-format, boost-format
 msgid ""
 "'%s' install modifier must not be used without a package name or capability."
-msgstr ""
+msgstr "'%s' のインストール修飾子は、パッケージ名もしくは能力とともに使用しなければなりません。"
 
 #: src/PackageArgs.cc:169
 #, c-format, boost-format
 msgid ""
 "'%s' remove modifier must not be used without a package name or capability."
-msgstr ""
+msgstr "'%s' のアンインストール修飾子は、パッケージ名もしくは能力とともに使用しなければなりません。"
 
 #: src/PackageArgs.cc:221
 #, c-format, boost-format
