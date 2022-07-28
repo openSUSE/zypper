@@ -21,8 +21,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-07-25 14:05+0200\n"
-"PO-Revision-Date: 2022-04-06 23:12+0000\n"
-"Last-Translator: Jan Papež <honyczek@centrum.cz>\n"
+"PO-Revision-Date: 2022-07-28 18:13+0000\n"
+"Last-Translator: Aleš Kastner <alkas@volny.cz>\n"
 "Language-Team: Czech <https://l10n.opensuse.org/projects/zypper/master/cs/>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
@@ -399,12 +399,14 @@ msgstr "Uložení voleb se nezdařilo."
 msgid ""
 "'%s' install modifier must not be used without a package name or capability."
 msgstr ""
+"Modifikátor instalace '%s' nelze použít bez názvu balíčku nebo schopnosti."
 
 #: src/PackageArgs.cc:169
 #, c-format, boost-format
 msgid ""
 "'%s' remove modifier must not be used without a package name or capability."
 msgstr ""
+"Modifikátor odebrání '%s' nelze použít bez názvu balíčku nebo schopnosti."
 
 #: src/PackageArgs.cc:221
 #, c-format, boost-format
