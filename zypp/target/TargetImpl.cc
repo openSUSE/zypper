@@ -896,7 +896,7 @@ namespace zypp
       try
       {
         updateFileContent( idpath,
-                           boost::bind(fileMissing, idpath),
+                           std::bind(fileMissing, idpath),
                            generateRandomId );
       }
       catch ( const Exception &e )

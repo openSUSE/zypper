@@ -281,7 +281,7 @@ public:
 
         FCGX_Request request;
         FCGX_InitRequest(&request, sockFD,0);
-        AutoDispose<FCGX_Request*> guard( &request, boost::bind( &FCGX_Free, _1, 0 ) );
+        AutoDispose<FCGX_Request*> guard( &request, std::bind( &FCGX_Free, _1, 0 ) );
 
         struct pollfd fds[] { {
             _wakeupPipe[0],

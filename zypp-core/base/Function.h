@@ -14,9 +14,6 @@
 
 #include <functional>
 #include <boost/function.hpp>
-#define BOOST_BIND_GLOBAL_PLACEHOLDERS
-#include <boost/bind.hpp>
-//#include <boost/ref.hpp>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp
@@ -43,17 +40,10 @@ namespace zypp
   */
   using boost::function;
 
-  /* http://www.boost.org/libs/bind/bind.html
-
-   boost::bind is a generalization of the standard functions std::bind1st
-   and std::bind2nd. It supports arbitrary function objects, functions,
-   function pointers, and member function pointers, and is able to bind
-   any argument to a specific value or route input arguments into arbitrary
-   positions. bind  does not place any requirements on the function object;
-   in particular, it does not need the result_type, first_argument_type and
-   second_argument_type  standard typedefs.
-  */
-  using boost::bind;
+  using std::bind;
+  using std::placeholders::_1;
+  using std::placeholders::_2;
+  using std::placeholders::_3;
 
   /////////////////////////////////////////////////////////////////
 } // namespace zypp

@@ -387,7 +387,7 @@ namespace zypp {
 
     const auto versionPredicate = []( const auto &editionVariants ){
       return [ &editionVariants ]( const auto &elem ) {
-        const auto &f = std::bind( versionMatch, std::placeholders::_1, elem.first );
+        const auto &f = std::bind( versionMatch, _1, elem.first );
         return std::any_of( editionVariants.begin(), editionVariants.end(), f );
       };
     };

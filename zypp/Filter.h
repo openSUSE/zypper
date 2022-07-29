@@ -73,12 +73,12 @@ namespace zypp
 
         /** Solvables supporting \c locale_r. */
         explicit ByLocaleSupport( const Locale & locale_r )
-        : _sel( std::bind( std::mem_fn((LS1)&sat::Solvable::supportsLocale), std::placeholders::_1, locale_r ) )
+        : _sel( std::bind( std::mem_fn((LS1)&sat::Solvable::supportsLocale), _1, locale_r ) )
         {}
 
         /** Solvables supporting at least one locale in \c locales_r. */
         explicit ByLocaleSupport( const LocaleSet & locales_r )
-        : _sel( std::bind( std::mem_fn((LS2)&sat::Solvable::supportsLocale), std::placeholders::_1, locales_r ) )
+        : _sel( std::bind( std::mem_fn((LS2)&sat::Solvable::supportsLocale), _1, locales_r ) )
         {}
 
       public:
