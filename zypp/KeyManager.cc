@@ -346,7 +346,6 @@ std::list<PublicKeyData> KeyManagerCtx::listKeys()
   return ret;
 }
 
-#if 1
 std::list<PublicKeyData> KeyManagerCtx::readKeyFromFile( const Pathname & keyfile_r )
 {
   // bsc#1140670: GPGME does not support reading keys from a keyfile using
@@ -369,43 +368,6 @@ std::list<PublicKeyData> KeyManagerCtx::readKeyFromFile( const Pathname & keyfil
 
   return ret;
 }
-#else
-std::list<PublicKeyData> KeyManagerCtx::readKeyFromFile( const Pathname & file_r )
-{
-  std::list<PublicKeyData> ret;
-  GpgmeErr err = GPG_ERR_NO_ERROR;
-
-  AutoDispose<gpgme_data_t> data { nullptr, &gpgme_data_release };
-  if ( (err = gpgme_data_new_from_file( &(*data), file_r.c_str(), 1 )) != GPG_ERR_NO_ERROR ) {
-    ERR << "gpgme_data_new_from_file " << file_r << ": " << err << endl;
-    return ret;
-  }
-
-  // Reset gpgme_keylist_mode on return!
-  AutoDispose<gpgme_keylist_mode_t> guard { gpgme_get_keylist_mode( _pimpl->_ctx ), bind( &gpgme_set_keylist_mode, _pimpl->_ctx, _1 ) };
-  // Let listed keys include signatures (required if PublicKeyData are created from the key)
-  if ( (err = gpgme_set_keylist_mode( _pimpl->_ctx, GPGME_KEYLIST_MODE_LOCAL | GPGME_KEYLIST_MODE_SIGS )) != GPG_ERR_NO_ERROR ) {
-    ERR << "gpgme_set_keylist_mode: " << err << endl;
-    return ret;
-  }
-
-  if ( (err = gpgme_op_keylist_from_data_start( _pimpl->_ctx, data, 0 )) != GPG_ERR_NO_ERROR ) {
-    ERR << "gpgme_op_keylist_from_data_start " << file_r << ": " << err << endl;
-    return ret;
-  }
-  // Close list operation on return!
-  AutoDispose<gpgme_ctx_t> guard2 { _pimpl->_ctx, &gpgme_op_keylist_end };
-
-  AutoDispose<gpgme_key_t> key { nullptr, &gpgme_key_release };
-  for ( ; gpgme_op_keylist_next( _pimpl->_ctx, &(*key) ) == GPG_ERR_NO_ERROR; key.getDispose()( key ) ) {
-    PublicKeyData data { PublicKeyData::fromGpgmeKey( key ) };
-    if ( data )
-      ret.push_back( data );
-  }
-
-  return ret;
-}
-#endif
 
 bool KeyManagerCtx::verify(const Pathname &file, const Pathname &signature)
 {
