@@ -22,6 +22,15 @@
 #include <zypp/Edition.h>
 #include <zypp/Date.h>
 
+#ifdef YUILogComponent
+// Work around https://github.com/libyui/libyui/issues/78
+// The hack here is needed to allow older libyui-qt-pkg building
+// against current libzypp. Otherwise libyui builds for Code15.4
+// or older will break.
+#define BOOST_BIND_GLOBAL_PLACEHOLDERS
+#include <boost/bind.hpp>
+#endif
+
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 { /////////////////////////////////////////////////////////////////
