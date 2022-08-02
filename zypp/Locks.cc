@@ -9,14 +9,13 @@
 
 #include <set>
 #include <fstream>
-#include <boost/function.hpp>
-#include <boost/iterator/function_output_iterator.hpp>
 #include <algorithm>
 
 #include <zypp/base/Regex.h>
 #include <zypp/base/String.h>
 #include <zypp/base/LogTools.h>
 #include <zypp/base/IOStream.h>
+#include <zypp/base/Iterator.h>
 #include <zypp/PoolItem.h>
 #include <zypp/PoolQueryUtil.tcc>
 #include <zypp/ZYppCallbacks.h>

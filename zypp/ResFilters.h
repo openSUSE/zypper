@@ -12,8 +12,6 @@
 #ifndef ZYPP_RESFILTERS_H
 #define ZYPP_RESFILTERS_H
 
-#include <boost/function.hpp>
-
 #include <zypp/base/Functional.h>
 #include <zypp/Filter.h>
 #include <zypp/Resolvable.h>
