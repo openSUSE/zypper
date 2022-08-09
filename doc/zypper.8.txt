@@ -321,7 +321,6 @@ If used together with *--dry-run* a meaningful file conflict check can be perfor
 		heap until all are installed. This helps to keep the system in consistent state
 		without the need to download _all_ packages in advance, which combines the
 		advantages of *--download-in-advance* and *--download-as-needed*.
-		This is the default mode.
 +
 NOTE: While the resolver is not capable of building heaps, this behaves the same as *--download-in-advance*.
 
