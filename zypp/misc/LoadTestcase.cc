@@ -77,9 +77,8 @@ namespace zypp::misc::testcase {
 
   const std::string &TestcaseTrial::Node::getProp( const std::string &name, const std::string &def ) const
   {
-    if ( _pimpl->properties.find( name) == _pimpl->properties.end() )
-      return def;
-    return _pimpl->properties.at( name );
+    auto it { _pimpl->properties.find( name ) };
+    return it == _pimpl->properties.end() ? def : it->second;
   }
 
   const std::map<std::string, std::string> &TestcaseTrial::Node::properties() const
