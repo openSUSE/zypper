@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-07-25 14:05+0200\n"
-"PO-Revision-Date: 2022-07-22 09:13+0000\n"
+"PO-Revision-Date: 2022-08-18 06:14+0000\n"
 "Last-Translator: Kristijan Fremen Velkovski <me@krisfremen.com>\n"
 "Language-Team: Macedonian <https://l10n.opensuse.org/projects/zypper/master/"
 "mk/>\n"
@@ -98,8 +98,8 @@ msgstr[1] "Следните %d пакети не успеаа да се деин
 #, c-format, boost-format
 msgid "The following package removal was skipped:"
 msgid_plural "The following %d package removal were skipped:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Следниот пакет за бришење беше прескокнат:"
+msgstr[1] "Следните %d пакети за бришење беа прескокнати:"
 
 #. translators: Appended when clipping a long enumeration:
 #. "ConsoleKit-devel ConsoleKit-doc ... and 20828 more items."
@@ -108,13 +108,13 @@ msgstr[1] ""
 #, boost-format
 msgid "... and %1% more item."
 msgid_plural "... and %1% more items."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "... и %1% повеќе предмет."
+msgstr[1] "... и %1% повеќе предмети."
 
 #: src/Config.cc:53
 #, c-format, boost-format
 msgid "Invalid table style %d."
-msgstr ""
+msgstr "Невалиден стил на табела %d."
 
 #: src/Config.cc:54
 #, c-format, boost-format
@@ -133,52 +133,56 @@ msgstr "Помош."
 #. translators: --version, -V
 #: src/Config.cc:337
 msgid "Output the version number."
-msgstr ""
+msgstr "Излез на бројот на верзијата."
 
 #. translators: --promptids
 #: src/Config.cc:349
 msgid "Output a list of zypper's user prompts."
-msgstr ""
+msgstr "Излези со листа на кориснички прашања од zypper."
 
 #. translators: --config, -c <FILE>
 #: src/Config.cc:362
 msgid "Use specified config file instead of the default."
-msgstr ""
+msgstr "Користи наведен конфиг фајл наместо стандардниот."
 
 #: src/Config.cc:369
 msgid "User data string must not contain nonprintable or newline characters!"
 msgstr ""
+"Корисничка дата стринг неможе да содржи карактери што неможе да се принтаат "
+"или нови линии!"
 
 #. translators: --userdata <STRING>
 #: src/Config.cc:375
 msgid "User defined transaction id used in history and plugins."
 msgstr ""
+"Кориснички наведени транзакциски идентификации се користат во историја и "
+"плагини."
 
 #. translators: --quiet, -q
 #: src/Config.cc:383
 msgid "Suppress normal output, print only error messages."
-msgstr ""
+msgstr "Спречете го нормалниот излез, испечати само пораки за грешки."
 
 #. translators: --verbose, -v
 #: src/Config.cc:391
 msgid "Increase verbosity."
-msgstr ""
+msgstr "Зголеми ја говорноста."
 
 #. translators: --color / --no-color
 #: src/Config.cc:412
 msgid "Whether to use colors in output if tty supports it."
-msgstr ""
+msgstr "Користи боја во излезот ако терминалот ги поддржува."
 
 #. translators: --no-abbrev, -A
 #: src/Config.cc:417
 msgid "Do not abbreviate text in tables."
-msgstr ""
+msgstr "Не скратувај текст во табели."
 
 #. translators: --table-style, -s, %1% denotes the supported range of the integer argument (e.g. "1-11")
 #: src/Config.cc:422
 #, boost-format
 msgid "Table style (%1%)."
-msgstr ""
+msgstr "Стил на табела (%1%)."
 
 #: src/Config.cc:426 src/commands/optionsets.cc:284
 msgid "Entering non-interactive mode."
