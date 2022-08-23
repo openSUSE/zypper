@@ -10,7 +10,7 @@ BOOST_AUTO_TEST_CASE(out_of_bounds_read_issue_167)
    * read out of bounds. This check makes sure we do not regress on that.
    * */
 
-  cout << "locale set to: " << setlocale (LC_CTYPE, "en_US.UTF-8") << endl;
+  cout << "locale set to: " << setlocale (LC_CTYPE, "C.UTF-8") << endl;
   mbs::MbsIterator it( "ABC\0\200\210\220\277\0" );
   while ( !it.atEnd() ) {
     ++it;
@@ -67,10 +67,7 @@ BOOST_AUTO_TEST_CASE(mbs_invalid_chars)
 
 BOOST_AUTO_TEST_CASE(mbs_width_test)
 {
-  cout << "locale set to: " << setlocale (LC_CTYPE, "en_US.UTF-8") << endl;
-  unsigned width;
-
-  width = mbs_width("Koľko stĺpcov zaberajú znaky '和平'?");
+  unsigned width = mbs_width("Koľko stĺpcov zaberajú znaky '和平'?");
   BOOST_CHECK_EQUAL(width, 36);
 }
 
