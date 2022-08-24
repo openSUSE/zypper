@@ -61,7 +61,7 @@ if(COMMAND cmake_policy)
   cmake_policy(SET CMP0003 NEW)
 endif(COMMAND cmake_policy)
 
-find_package(FindPkgConfig)
+find_package(FindPkgConfig, QUIET)
 INCLUDE( ${LIBZYPP_SOURCE_DIR}/VERSION.cmake )
 
 MATH( EXPR LIBZYPP_NUMVERSION "${LIBZYPP_MAJOR} * 10000 + ${LIBZYPP_MINOR} * 100 + ${LIBZYPP_PATCH}" )
