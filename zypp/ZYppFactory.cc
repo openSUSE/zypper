@@ -47,18 +47,25 @@ namespace zyppintern { void repoVariablesReset(); }	// upon re-acquiring the loc
 namespace zypp
 { /////////////////////////////////////////////////////////////////
 
-  namespace
+  namespace sighandler
   {
-    void sigsegvHandler( int sig );
-    ::sighandler_t lastSigsegvHandler = ::signal( SIGSEGV, sigsegvHandler );
-
-    /** SIGSEGV handler to log stack trace */
-    void sigsegvHandler( int sig )
+    /// Signal handler logging a stack trace
+    template <int SIG>
+    class SigBacktraceHandler
     {
-      INT << "Error: signal " << sig << endl << dumpBacktrace << endl;
-      base::LogControl::instance().emergencyShutdown();
-      ::signal( SIGSEGV, lastSigsegvHandler );
-    }
+      static void backtraceHandler( int sig ) {
+        INT << "Error: signal " << SIG << endl << dumpBacktrace << endl;
+        base::LogControl::instance().emergencyShutdown();
+        ::signal( SIG, lastSigHandler );
+      }
+      static ::sighandler_t lastSigHandler;
+    };
+    template <int SIG>
+    ::sighandler_t SigBacktraceHandler<SIG>::lastSigHandler { ::signal( SIG, SigBacktraceHandler::backtraceHandler ) };
+
+    // Explicit instantiation installs the handler:
+    template class SigBacktraceHandler<SIGSEGV>;
+    template class SigBacktraceHandler<SIGABRT>;
   }
 
   namespace env
