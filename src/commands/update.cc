@@ -105,12 +105,9 @@ int UpdateCmd::execute( Zypper &zypper, const std::vector<std::string> &position
     {
       if ( kind == ResKind::package )
       {
-        MIL << "Computing package update..." << endl;
-        // this will do a complete package update as far as possible
+        // Do a complete package update as far as possible
         // while respecting solver policies
-        zypp::getZYpp()->resolver()->doUpdate();
-        // no need to call Resolver::resolvePool() afterwards
-        zypper.runtimeData().solve_before_commit = false;
+        zypper.runtimeData().solve_update_only = true;
       }
       // update -t patch; patch
       else if ( kind == ResKind::patch )

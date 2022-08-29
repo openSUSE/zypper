@@ -632,8 +632,8 @@ void solve_and_commit ( Zypper &zypper, SolveAndCommitPolicy policy )
   {
     // CALL SOLVER
 
-    // e.g. doUpdate unsets this flag, no need for another solving
-    if ( zypper.runtimeData().solve_before_commit )
+    // doUpdate sets this flag, if no other jobs are to be included
+    if ( not zypper.runtimeData().solve_update_only )
     {
       MIL << "solving..." << endl;
 
@@ -664,6 +664,10 @@ void solve_and_commit ( Zypper &zypper, SolveAndCommitPolicy policy )
           return;
         }
       }
+    } else {
+      MIL << "Computing package update..." << endl;
+      set_solver_flags( zypper );   // bsc#1201972: make sure 'up' also respects solver options
+      zypp::getZYpp()->resolver()->doUpdate();
     }
 
     if ( SolverSettings::instance()._debugSolver )
