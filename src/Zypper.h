@@ -62,7 +62,7 @@ struct RuntimeData
   RuntimeData()
   : show_media_progress_hack( false )
   , force_resolution( indeterminate )
-  , solve_before_commit( true )
+  , solve_update_only( false )
   , solve_with_update( false )
   , plain_patch_command( false )
   , commit_pkgs_total( 0 )
@@ -109,7 +109,7 @@ struct RuntimeData
    * Set to <tt>false</tt> to avoid calling of the solver
    * in \ref solve_and_commit(). Needed after Resolver::doUpdate()
    */
-  bool solve_before_commit;
+  bool solve_update_only;       ///< Just 'update all packages', no extra jobs
   bool solve_with_update;	///< Include an 'update all packages' job; BEWARE: don't set it in the 1st solver run computing the PPP status
   bool plain_patch_command;	///< plain patch may update updatestack only; handle it in Summary and on --with-update
 
