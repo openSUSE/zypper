@@ -55,7 +55,7 @@ enum SetupSystemBits
  LoadTargetResolvables  = (1 << 5),
  LoadRepoResolvables    = (1 << 6),
  LoadResolvables        = LoadTargetResolvables |  LoadRepoResolvables,            //< Load resolvables
- Resolve                = (1 << 9),             //< compute status of PPP
+ Resolve                = (1 << 9),             //< compute status of PPP (NOP - since libzypp 17.23.0 the PPP status is auto established)
  DefaultSetup           = ResetRepoManager | InitTarget | InitRepos | LoadResolvables | Resolve
 };
 ZYPP_DECLARE_FLAGS( SetupSystemFlags, SetupSystemBits );

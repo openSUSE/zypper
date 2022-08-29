@@ -371,8 +371,6 @@ static void set_solver_flags( Zypper & zypper )
   set_no_recommends( zypper );
   set_ignore_recommends_of_installed( zypper );
 
-  // Beware: While zypper calls resolve() once just to compute the PPP status,
-  // solve_with_update must be false until the command passed the initialization!
   God->resolver()->setUpdateMode( zypper.runtimeData().solve_with_update );
 
   const auto &solverSettings = SolverSettings::instance();

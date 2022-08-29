@@ -110,7 +110,7 @@ struct RuntimeData
    * in \ref solve_and_commit(). Needed after Resolver::doUpdate()
    */
   bool solve_update_only;       ///< Just 'update all packages', no extra jobs
-  bool solve_with_update;	///< Include an 'update all packages' job; BEWARE: don't set it in the 1st solver run computing the PPP status
+  bool solve_with_update;	///< Include an 'update all packages' job
   bool plain_patch_command;	///< plain patch may update updatestack only; handle it in Summary and on --with-update
 
   unsigned commit_pkgs_total;

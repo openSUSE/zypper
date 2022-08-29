@@ -78,8 +78,6 @@ int PatchCmd::execute( Zypper &zypper, const std::vector<std::string> &positiona
   if ( code != ZYPPER_EXIT_OK )
     return code;
 
-  // Beware: While zypper calls resolve() once just to compute the PPP status,
-  // solve_with_update must be false until the command passed the initialization!
   // Reset to false when leaving the block in case we are in shell mode!
   DtorReset guard( zypper.runtimeData().solve_with_update );
   if ( _withUpdate )
