@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-07-25 14:05+0200\n"
-"PO-Revision-Date: 2022-08-18 06:14+0000\n"
+"PO-Revision-Date: 2022-08-30 07:13+0000\n"
 "Last-Translator: Kristijan Fremen Velkovski <me@krisfremen.com>\n"
 "Language-Team: Macedonian <https://l10n.opensuse.org/projects/zypper/master/"
 "mk/>\n"
@@ -186,12 +186,12 @@ msgstr "Стил на табела (%1%)."
 
 #: src/Config.cc:426 src/commands/optionsets.cc:284
 msgid "Entering non-interactive mode."
-msgstr ""
+msgstr "Влез во не-интерактивен мод."
 
 #. translators: --non-interactive, -n
 #: src/Config.cc:430
 msgid "Do not ask anything, use default answers automatically."
-msgstr ""
+msgstr "Не прашувај ништо, користи стандардни одговори автоматски."
 
 #: src/Config.cc:435
 msgid ""
