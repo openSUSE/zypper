@@ -318,69 +318,7 @@ pushd build/tests
 LD_LIBRARY_PATH="$(pwd)/../zypp:$LD_LIBRARY_PATH" ctest --output-on-failure .
 popd
 
-%post
-/sbin/ldconfig
-if [ -f /var/cache/zypp/zypp.db ]; then rm /var/cache/zypp/zypp.db; fi
-
-# convert old lock file to new
-# TODO make this a separate file?
-# TODO run the sript only when updating form pre-11.0 libzypp versions
-LOCKSFILE=%{_sysconfdir}/zypp/locks
-OLDLOCKSFILE=%{_sysconfdir}/zypp/locks.old
-
-is_old(){
-  # if no such file, exit with false (1 in bash)
-  test -f ${LOCKSFILE} || return 1
-  TEMP_FILE=`mktemp`
-  cat ${LOCKSFILE} | sed '/^\#.*/ d;/.*:.*/d;/^[^[a-zA-Z\*?.0-9]*$/d' > ${TEMP_FILE}
-  if [ -s ${TEMP_FILE} ]
-  then
-    RES=0
-  else
-    RES=1
-  fi
-  rm -f ${TEMP_FILE}
-  return ${RES}
-}
-
-append_new_lock(){
-  case "$#" in
-    1 )
-  echo "
-solvable_name: $1
-match_type: glob
-" >> ${LOCKSFILE}
-;;
-    2 ) #TODO version
-  echo "
-solvable_name: $1
-match_type: glob
-version: $2
-" >> ${LOCKSFILE}
-;;
-    3 ) #TODO version
-  echo "
-solvable_name: $1
-match_type: glob
-version: $2 $3
-" >> ${LOCKSFILE}
-  ;;
-esac
-}
-
-die() {
-  echo $1
-  exit 1
-}
-
-if is_old ${LOCKSFILE}
-  then
-  mv -f ${LOCKSFILE} ${OLDLOCKSFILE} || die "cannot backup old locks"
-  cat ${OLDLOCKSFILE}| sed "/^\#.*/d"| while read line
-  do
-    append_new_lock $line
-  done
-fi
+%post -p /sbin/ldconfig
 
 %postun -p /sbin/ldconfig
 
