@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-03-14 15:21+0100\n"
-"PO-Revision-Date: 2022-07-12 07:12+0000\n"
+"PO-Revision-Date: 2022-08-30 07:13+0000\n"
 "Last-Translator: Kristijan Fremen Velkovski <me@krisfremen.com>\n"
 "Language-Team: Macedonian <https://l10n.opensuse.org/projects/libzypp/master/"
 "mk/>\n"
@@ -782,7 +782,7 @@ msgstr "Србија"
 #. :LBR:430:
 #: zypp/CountryCode.cc:288
 msgid "Lesotho"
-msgstr ""
+msgstr "Лесото"
 
 # LT
 # fuzzy
@@ -823,34 +823,32 @@ msgstr "Монако"
 #. :MCO:492:
 #: zypp/CountryCode.cc:295
 msgid "Moldova"
-msgstr ""
+msgstr "Молдавија"
 
 #. :MDA:498:
 #: zypp/CountryCode.cc:296
 msgid "Montenegro"
-msgstr ""
+msgstr "Црна Гора"
 
 #: zypp/CountryCode.cc:297
 msgid "Saint Martin"
-msgstr ""
+msgstr "Свети Мартин"
 
 #: zypp/CountryCode.cc:298
 msgid "Madagascar"
-msgstr ""
+msgstr "Мадагаскар"
 
 # FO
 # fuzzy
 #. :MDG:450:
 #: zypp/CountryCode.cc:299
-#, fuzzy
 msgid "Marshall Islands"
-msgstr "Ирска"
+msgstr "Маршалски Острови"
 
 #. :MHL:584:
 #: zypp/CountryCode.cc:300
-#, fuzzy
 msgid "Macedonia"
-msgstr "Македонски"
+msgstr "Македонија"
 
 # ML
 # fuzzy
@@ -869,7 +867,7 @@ msgstr "Панама"
 #. :MMR:104:
 #: zypp/CountryCode.cc:303
 msgid "Mongolia"
-msgstr ""
+msgstr "Монголија"
 
 # MO
 # fuzzy
