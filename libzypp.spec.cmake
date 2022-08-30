@@ -313,10 +313,32 @@ cd ..
 # Create filelist with translations
 %{find_lang} zypp
 
+%if %{defined _distconfdir}
+# Move logratate files form /etc/logrotate.d to /usr/etc/logrotate.d
+mkdir -p %{buildroot}/%{_distconfdir}/logrotate.d
+mv %{buildroot}/%{_sysconfdir}/logrotate.d/zypp-history.lr %{buildroot}%{_distconfdir}/logrotate.d
+%endif
+
 %check
 pushd build/tests
 LD_LIBRARY_PATH="$(pwd)/../zypp:$LD_LIBRARY_PATH" ctest --output-on-failure .
 popd
+
+%if %{defined _distconfdir}
+%pre
+# Prepare for migration to /usr/etc; save any old .rpmsave
+for i in logrotate.d/zypp-history.lr; do
+   test -f %{_sysconfdir}/${i}.rpmsave && mv -v %{_sysconfdir}/${i}.rpmsave %{_sysconfdir}/${i}.rpmsave.old ||:
+done
+%endif
+
+%if %{defined _distconfdir}
+%posttrans
+# Migration to /usr/etc, restore just created .rpmsave
+for i in logrotate.d/zypp-history.lr; do
+   test -f %{_sysconfdir}/${i}.rpmsave && mv -v %{_sysconfdir}/${i}.rpmsave %{_sysconfdir}/${i} ||:
+done
+%endif
 
 %post -p /sbin/ldconfig
 
@@ -343,7 +365,11 @@ popd
 %dir               %{_sysconfdir}/zypp/credentials.d
 %config(noreplace) %{_sysconfdir}/zypp/zypp.conf
 %config(noreplace) %{_sysconfdir}/zypp/systemCheck
+%if %{defined _distconfdir}
+%{_distconfdir}/logrotate.d/zypp-history.lr
+%else
 %config(noreplace) %{_sysconfdir}/logrotate.d/zypp-history.lr
+%endif
 %dir               %{_var}/lib/zypp
 %if "%{_libexecdir}" != "%{_prefix}/lib"
 %dir               %{_libexecdir}/zypp
