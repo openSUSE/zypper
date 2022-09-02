@@ -1,4 +1,19 @@
 -------------------------------------------------------------------
+Fri Sep  2 16:38:42 CEST 2022 - ma@suse.de
+
+- UsrEtc: Store logrotate files in %{_distconfdir} if defined
+  (fixes #402)
+- Log backtrace on SIGABRT too.
+- Need to explicitly enable building experimental code. Otherwise
+  an old Notcurses++ package which happens to be present in the
+  buildenv breaks the build (fixes #412).
+- Work around libyui/libyui#78 on code 15.4 and older.
+- Stop using std::*ary_function; deprecated and removed in c++17.
+- Don't expose header files which use types not available in
+  c++11.  In 15.3 and older, YAST and PK compile with -std=c++11.
+- version 17.31.1 (22)
+
+-------------------------------------------------------------------
 Tue Jul 19 16:03:01 CEST 2022 - ma@suse.de
 
 - Add PoolItem::statusReinit to reset the status it's initial
