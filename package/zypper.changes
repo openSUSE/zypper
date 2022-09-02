@@ -1,4 +1,17 @@
 -------------------------------------------------------------------
+Fri Sep  2 16:45:46 CEST 2022 - ma@suse.de
+
+- UsrEtc: Store logrotate files in %{_distconfdir} if defined
+  (fixes #441, fixes #444)
+- Remove unneeded code to compute the PPP status.
+  Since libzypp 17.23.0 the PPP status is auto established. No
+  extra solver run is needed.
+- Make sure 'up' respects solver related CLI options (bsc#1201972)
+- Fix tests to use locale "C.UTF-8" rather than "en_US".
+- Fix man page (fixes #451)
+- version 1.14.56
+
+-------------------------------------------------------------------
 Wed Jul 20 12:21:25 CEST 2022 - ma@suse.de
 
 - lr: Allow shortening the Name column if table is wider than the
