@@ -18,10 +18,10 @@ msgstr ""
 "Project-Id-Version: zypp.de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-03-14 15:21+0100\n"
-"PO-Revision-Date: 2022-03-04 18:12+0000\n"
-"Last-Translator: Gemineo <vistatec@gemineo.de>\n"
-"Language-Team: German <https://l10n.opensuse.org/projects/libzypp/master/de/"
-">\n"
+"PO-Revision-Date: 2022-09-10 18:13+0000\n"
+"Last-Translator: Ettore Atalan <atalanttore@googlemail.com>\n"
+"Language-Team: German <https://l10n.opensuse.org/projects/libzypp/master/de/>"
+"\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -4637,11 +4637,11 @@ msgstr "Entfernen des öffentlichen Schlüssels %1% fehlgeschlagen"
 
 #: zypp/target/rpm/RpmDb.cc:1271
 msgid "Package header is not signed!"
-msgstr ""
+msgstr "Paket-Kopfdaten sind nicht signiert!"
 
 #: zypp/target/rpm/RpmDb.cc:1273
 msgid "Package payload is not signed!"
-msgstr ""
+msgstr "Paket-Nutzdaten sind nicht signiert!"
 
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
