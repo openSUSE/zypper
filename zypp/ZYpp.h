@@ -153,7 +153,7 @@ namespace zypp
     explicit ZYpp( const Impl_Ptr & impl_r );
   private:
     /** Deleted via shared_ptr */
-    friend void ::boost::checked_delete<ZYpp>(ZYpp*);	// template<class T> inline void checked_delete(T * x)
+    friend void ::boost::checked_delete<ZYpp>(ZYpp*) BOOST_NOEXCEPT;	// template<class T> inline void checked_delete(T * x)
     /** Dtor */
     ~ZYpp();
   private:
