@@ -189,7 +189,10 @@ To use a local RIS service create a directory /somewhere on your disk (or access
 </repoindex>
 \endverbatim
 
-%{VAR} always refers to the value defined in the <tt>repoindex</tt> tag (reserved names are 'ttl' and 'alias'). %{alias} is available within a <tt>repo</tt> tag after the alias was defined there.
+%{VAR} always refers to the value defined in the <tt>repoindex</tt> tag. Reserved names are 'ttl' and 'alias'.
+
+- <tt>ttl="SECONDS"</tt> defines the matadata's expected time to live in case autorefresh is turned on for the service. It's the number of seconds that should pass before the service is autorefreshed again. It is not available as variable.
+- %{alias} is available within a <tt>repo</tt> tag after the alias was defined there.
 
 Given the file is located at /somewhere/repo/repoindex.xml, add the service by:
 \verbatim
