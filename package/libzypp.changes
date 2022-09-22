@@ -11,6 +11,9 @@ Fri Sep  2 16:38:42 CEST 2022 - ma@suse.de
 - Stop using std::*ary_function; deprecated and removed in c++17.
 - Don't expose header files which use types not available in
   c++11.  In 15.3 and older, YAST and PK compile with -std=c++11.
+- Remove no longer needed %post code (bsc#1203649)
+- Enable zck support for SLE15-SP4 and newer. On Leap it is enabled
+  since 15.1 (bsc#1189282)
 - version 17.31.1 (22)
 
 -------------------------------------------------------------------
