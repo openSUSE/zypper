@@ -18,10 +18,10 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-07-25 14:05+0200\n"
-"PO-Revision-Date: 2022-03-15 14:12+0000\n"
-"Last-Translator: Matías Silva Bustos <matiasasb@gmail.com>\n"
-"Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/"
-">\n"
+"PO-Revision-Date: 2022-09-26 12:13+0000\n"
+"Last-Translator: Victor hck <correohck@gmail.com>\n"
+"Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
+"\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -402,12 +402,16 @@ msgstr "Error al guardar la opción."
 msgid ""
 "'%s' install modifier must not be used without a package name or capability."
 msgstr ""
+"'%s' el modificador de instalación no debe usarse sin un nombre de paquete o "
+"característica."
 
 #: src/PackageArgs.cc:169
 #, c-format, boost-format
 msgid ""
 "'%s' remove modifier must not be used without a package name or capability."
 msgstr ""
+"'%s' el modificador de eliminación no debe usarse sin un nombre de paquete o "
+"característica."
 
 #: src/PackageArgs.cc:221
 #, c-format, boost-format
