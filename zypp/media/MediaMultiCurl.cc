@@ -121,6 +121,9 @@ public:
   void run(std::vector<Url> &urllist);
 
 protected:
+
+  static size_t makeBlksize ( size_t filesize );
+
   friend class multifetchworker;
 
   const MediaMultiCurl *_context;
@@ -139,6 +142,7 @@ protected:
   bool _havenewjob;
 
   size_t _blkno;
+  size_t _defaultBlksize = 0; //< The blocksize to use if the metalink file does not specify one
   off_t _blkoff;
   size_t _activeworkers;
   size_t _lookupworkers;
@@ -164,7 +168,6 @@ public:
 };
 
 constexpr auto MIN_REQ_MIRRS = 4;
-constexpr auto BLKSIZE       = 131072;
 constexpr auto MAXURLS       = 10;
 
 //////////////////////////////////////////////////////////////////////
@@ -707,18 +710,19 @@ multifetchworker::nextjob()
   MediaBlockList *blklist = _request->_blklist;
   if (!blklist)
     {
-      _blksize = BLKSIZE;
+      _blksize = _request->_defaultBlksize;
       if (_request->_filesize != off_t(-1))
-        {
-          if (_request->_blkoff >= _request->_filesize)
-            {
-              stealjob();
-              return;
-            }
-          _blksize = _request->_filesize - _request->_blkoff;
-          if (_blksize > BLKSIZE)
-            _blksize = BLKSIZE;
-        }
+      {
+        if (_request->_blkoff >= _request->_filesize)
+          {
+            stealjob();
+            return;
+          }
+        _blksize = _request->_filesize - _request->_blkoff;
+        if (_blksize > _request->_defaultBlksize)
+          _blksize = _request->_defaultBlksize;
+      }
+      DBG << "No BLOCKLIST falling back to chunk size: " <<  _request->_defaultBlksize << std::endl;
     }
   else
     {
@@ -734,8 +738,10 @@ multifetchworker::nextjob()
           _request->_blkoff = blk.off;
         }
       _blksize = blk.off + blk.size - _request->_blkoff;
-      if (_blksize > BLKSIZE && !blklist->haveChecksum(_request->_blkno))
-        _blksize = BLKSIZE;
+      if (_blksize > _request->_defaultBlksize && !blklist->haveChecksum(_request->_blkno)) {
+        DBG << "Block: "<< _request->_blkno << " has no checksum falling back to default blocksize: " <<  _request->_defaultBlksize << std::endl;
+        _blksize = _request->_defaultBlksize;
+      }
     }
   _blkno = _request->_blkno;
   _blkstart = _request->_blkoff;
@@ -791,6 +797,7 @@ multifetchrequest::multifetchrequest(const MediaMultiCurl *context, const Pathna
   _report = report;
   _blklist = blklist;
   _filesize = filesize;
+  _defaultBlksize = makeBlksize( filesize );
   _multi = multi;
   _stealing = false;
   _havenewjob = false;
@@ -1156,6 +1163,15 @@ multifetchrequest::run(std::vector<Url> &urllist)
     }
 }
 
+inline size_t multifetchrequest::makeBlksize ( size_t filesize )
+{
+  // this case should never happen because we never start a multi download if we do not know the filesize beforehand
+  if ( filesize == 0 )  return 2 * 1024 * 1024;
+  else if ( filesize < 2*256*1024 ) return filesize;
+  else if ( filesize < 8*1024*1024 ) return 256*1024;
+  else if ( filesize < 256*1024*1024 ) return 1024*1024;
+  return 4*1024*1024;
+}
 
 //////////////////////////////////////////////////////////////////////
 
@@ -1610,4 +1626,3 @@ void MediaMultiCurl::toEasyPool(const std::string &host, CURL *easy) const
 
   } // namespace media
 } // namespace zypp
-
