@@ -413,7 +413,7 @@ namespace zypp
 	// translators: %1%      - a file name
 	// translators: %2%      - full path name
 	// translators: %3%, %4% - checksum strings (>60 chars), please keep them aligned
-	zypper.out().warning( str::FormatNAC(_(
+	zypper.out().warning( str::Format(_(
 		"Digest verification failed for file '%1%'\n"
 		"[%2%]\n"
 		"\n"
@@ -433,7 +433,7 @@ namespace zypp
 
 	// translators: !!! BOOST STYLE PLACEHOLDERS ( %N% - reorder and multiple occurrence is OK )
 	// translators: %1%      - abbreviated checksum (4 chars)
-	zypper.out().info( str::FormatNAC(_(
+	zypper.out().info( str::Format(_(
 		"However if you made certain that the file with checksum '%1%..' is secure, correct\n"
 		"and should be used within this operation, enter the first 4 characters of the checksum\n"
 		"to unblock using this file on your own risk. Empty input will discard the file.\n" ) )

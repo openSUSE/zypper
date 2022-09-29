@@ -1747,7 +1747,7 @@ void add_repo( Zypper & zypper, RepoInfo & repo )
     zypper.out().warning(
       // translators: BOOST STYLE POSITIONAL DIRECTIVES ( %N% )
       // translators: %1% - a repository name
-      str::FormatNAC(_("GPG checking is disabled in configuration of repository '%1%'. Integrity and origin of packages cannot be verified."))
+      str::Format(_("GPG checking is disabled in configuration of repository '%1%'. Integrity and origin of packages cannot be verified."))
       % repo.asUserString() );
   }
 
@@ -1832,7 +1832,7 @@ void add_repo_by_url( Zypper & zypper,
 
   bopt = get_boolean_option( zypper, "keep-packages", "no-keep-packages" );
   if ( !indeterminate(bopt) )
-    repo.setKeepPackages( bopt );
+    repo.setKeepPackages( bool(bopt) );
 
   RepoInfo::GpgCheck gpgCheck( cli::gpgCheck( zypper ) );
   if ( gpgCheck != RepoInfo::GpgCheck::indeterminate )
@@ -1915,13 +1915,13 @@ void add_repo_from_file( Zypper & zypper,
       repo.setName( name );
 
     if ( !indeterminate(enabled) )
-      repo.setEnabled( enabled );
+      repo.setEnabled( bool(enabled) );
 
     if ( !indeterminate(autorefresh) )
-      repo.setAutorefresh( autorefresh );
+      repo.setAutorefresh( bool(autorefresh) );
 
     if ( !indeterminate(keepPackages) )
-      repo.setKeepPackages( keepPackages );
+      repo.setKeepPackages( bool(keepPackages) );
 
     if ( gpgCheck != RepoInfo::GpgCheck::indeterminate )
       repo.setGpgCheck( gpgCheck );
@@ -2105,21 +2105,21 @@ void modify_repo( Zypper & zypper, const std::string & alias )
     {
       if ( enable != repo.enabled() )
         changed_enabled = true;
-      repo.setEnabled( enable );
+      repo.setEnabled( bool(enable) );
     }
 
     if ( !indeterminate(autoref) )
     {
       if ( autoref != repo.autorefresh())
         changed_autoref = true;
-      repo.setAutorefresh( autoref );
+      repo.setAutorefresh( bool ( autoref ) );
     }
 
     if ( !indeterminate(keepPackages) )
     {
       if ( keepPackages != repo.keepPackages() )
         changed_keeppackages = true;
-      repo.setKeepPackages( keepPackages );
+      repo.setKeepPackages( bool( keepPackages ) );
     }
 
     if ( gpgCheck != RepoInfo::GpgCheck::indeterminate )
@@ -2960,14 +2960,14 @@ void modify_service( Zypper & zypper, const std::string & alias )
     {
       if ( enable != srv.enabled() )
         changed_enabled = true;
-      srv.setEnabled( enable );
+      srv.setEnabled( bool( enable ) );
     }
 
     if ( !indeterminate(autoref) )
     {
       if ( autoref != srv.autorefresh() )
         changed_autoref = true;
-      srv.setAutorefresh( autoref );
+      srv.setAutorefresh( bool (autoref ) );
     }
 
     std::string name;

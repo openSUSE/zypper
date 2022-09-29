@@ -169,7 +169,7 @@ static bool show_problems( Zypper & zypper )
     TriBool stopnow = show_problem( zypper, *probPtr, todo );
     if ( !indeterminate( stopnow ) )
     {
-      retry = stopnow;
+      retry = bool (stopnow);
       break;
     }
   }
@@ -245,10 +245,10 @@ static void set_force_resolution( Zypper & zypper )
 
   DBG << "force resolution: " << force_resolution << endl;
   std::ostringstream s;
-  s << _("Force resolution:") << " " << asYesNo( force_resolution );
+  s << _("Force resolution:") << " " << asYesNo( bool ( force_resolution ) );
   zypper.out().info(s.str(), Out::HIGH);
 
-  God->resolver()->setForceResolve( force_resolution );
+  God->resolver()->setForceResolve( bool ( force_resolution ) );
 }
 
 static void set_clean_deps( Zypper & zypper )

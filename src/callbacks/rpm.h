@@ -443,7 +443,7 @@ struct FindFileConflictstReportReceiver : public callback::ReceiveReport<target:
 
       if ( ! noFilelist_r.empty() )	// warning
       {
-	out.warning( str::FormatNAC( // TranslatorExplanation %1%(number of packages); detailed list follows
+	out.warning( str::Format( // TranslatorExplanation %1%(number of packages); detailed list follows
 				  PL_( "%1% package had to be excluded from file conflicts check because it is not yet download.",
 				       "%1% packages had to be excluded from file conflicts check because they are not yet downloaded.",
 				       noFilelist_r.size() ) ) % noFilelist_r.size() );
