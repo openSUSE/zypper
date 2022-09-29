@@ -514,7 +514,7 @@ private:
 		  const TContainer & container_r, const TFormater & formater_r )
   {
     TitleNode guard( XmlNode( *this, nodeName_r, XmlNode::Attr( "size", str::numstring( container_r.size() ) ) ),
-		     str::FormatNAC( title_r ) % container_r.size() );
+		     str::Format( title_r ) % container_r.size() );
     switch ( type() )
     {
       case TYPE_NORMAL:
@@ -1005,7 +1005,7 @@ public:
     _progress.noSend();	// suppress ~ProgressData final report
     if ( indeterminate( _error ) )
       _error = ( _progress.reportValue() != 100 && _progress.reportPercent() );
-    _out.progressEnd( _progressId, outLabel( _progress.name() ), _error );
+    _out.progressEnd( _progressId, outLabel( _progress.name() ), bool(_error) );
   }
 
   /** Immediately print the progress bar not waiting for a new trigger. */

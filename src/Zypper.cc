@@ -347,7 +347,7 @@ namespace {
 
   inline std::string legacyCLIStr( const std::string & old_r, const std::string & new_r, bool global_r = false )
   {
-    return str::FormatNAC( global_r
+    return str::Format( global_r
 			 ? _("Legacy commandline option %1% detected. Please use global option %2% instead.")
 			 : _("Legacy commandline option %1% detected. Please use %2% instead.") )
 			 % NEGATIVEString(dashdash(old_r))
