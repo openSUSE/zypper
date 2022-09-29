@@ -256,7 +256,7 @@ SATResolver::dumpOn( std::ostream & os ) const
         OUTS( ALLOW_UNINSTALL );
         OUTS( NO_UPDATEPROVIDE );
         OUTS( SPLITPROVIDES );
-        OUTS( IGNORE_RECOMMENDED );
+        OUTS( ONLY_NAMESPACE_RECOMMENDED );
         OUTS( ADD_ALREADY_RECOMMENDED );
         OUTS( NO_INFARCHCHECK );
         OUTS( KEEP_EXPLICIT_OBSOLETES );
