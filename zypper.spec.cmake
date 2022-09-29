@@ -15,10 +15,8 @@
 # Please submit bugfixes or comments via http://bugs.opensuse.org/
 #
 
-%if 0%{?rhel} >= 8
 # JEZYPP to support SCC for RES
-%define jezypp %{rhel}
-%endif
+%define jezypp 1
 
 Name:           @PACKAGE@
 BuildRequires:  augeas-devel >= 0.5.0
