@@ -2112,14 +2112,14 @@ void modify_repo( Zypper & zypper, const std::string & alias )
     {
       if ( autoref != repo.autorefresh())
         changed_autoref = true;
-      repo.setAutorefresh( bool ( autoref ) );
+      repo.setAutorefresh( bool(autoref) );
     }
 
     if ( !indeterminate(keepPackages) )
     {
       if ( keepPackages != repo.keepPackages() )
         changed_keeppackages = true;
-      repo.setKeepPackages( bool( keepPackages ) );
+      repo.setKeepPackages( bool(keepPackages) );
     }
 
     if ( gpgCheck != RepoInfo::GpgCheck::indeterminate )
@@ -2960,14 +2960,14 @@ void modify_service( Zypper & zypper, const std::string & alias )
     {
       if ( enable != srv.enabled() )
         changed_enabled = true;
-      srv.setEnabled( bool( enable ) );
+      srv.setEnabled( bool(enable) );
     }
 
     if ( !indeterminate(autoref) )
     {
       if ( autoref != srv.autorefresh() )
         changed_autoref = true;
-      srv.setAutorefresh( bool (autoref ) );
+      srv.setAutorefresh( bool(autoref) );
     }
 
     std::string name;
