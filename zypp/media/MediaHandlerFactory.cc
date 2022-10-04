@@ -13,6 +13,7 @@
 #include <zypp/media/MediaCIFS.h>
 #include <zypp/media/MediaCurl.h>
 #include <zypp/media/MediaMultiCurl.h>
+#include <zypp/media/MediaNetwork.h>
 #include <zypp/media/MediaISO.h>
 #include <zypp/media/MediaPlugin.h>
 #include <zypp/media/UrlResolverPlugin.h>
@@ -57,12 +58,12 @@ namespace zypp::media {
       _handler = std::make_unique<MediaCIFS> (url,preferred_attach_point);
     else if (scheme == "ftp" || scheme == "tftp" || scheme == "http" || scheme == "https")
     {
-      enum WhichHandler { choose, curl, multicurl };
+      enum WhichHandler { choose, curl, multicurl, network };
       WhichHandler which = choose;
       // Leagcy: choose handler in UUrl query
       if ( const std::string & queryparam = url.getQueryParam("mediahandler"); ! queryparam.empty() ) {
         if ( queryparam == "network" )
-          which = multicurl;
+          which = network;
         else if ( queryparam == "multicurl" )
           which = multicurl;
         else if ( queryparam == "curl" )
@@ -78,8 +79,8 @@ namespace zypp::media {
         };
 
         if ( getenvIs( "ZYPP_MEDIANETWORK", "1" ) ) {
-          WAR << "network backend preview was removed, defaulting to multicurl." << std::endl;
-          which = multicurl;
+          WAR << "MediaNetwork backend enabled" << std::endl;
+          which = network;
         }
         else if ( getenvIs( "ZYPP_MULTICURL", "0" ) ) {
           WAR << "multicurl manually disabled." << std::endl;
@@ -94,6 +95,10 @@ namespace zypp::media {
         default:
         case multicurl:
           handler = std::make_unique<MediaMultiCurl>( url, preferred_attach_point );
+          break;
+
+        case network:
+          handler = std::make_unique<MediaNetwork>( url, preferred_attach_point );
           break;
 
         case curl:

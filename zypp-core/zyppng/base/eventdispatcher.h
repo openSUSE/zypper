@@ -25,9 +25,8 @@ namespace zyppng {
 
 class SocketNotifier;
 class Timer;
-class EventDispatcher;
 
-
+ZYPP_FWD_DECL_TYPE_WITH_REFS( EventDispatcher );
 class EventDispatcherPrivate;
 
 /*!

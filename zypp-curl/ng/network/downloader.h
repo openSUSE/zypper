@@ -24,6 +24,9 @@ namespace zyppng {
 
   using TransferSettings = zypp::media::TransferSettings;
 
+  ZYPP_FWD_DECL_TYPE_WITH_REFS( Downloader );
+  ZYPP_FWD_DECL_TYPE_WITH_REFS( Download );
+
 
   /**
    * @brief The Downloader class
@@ -37,8 +40,8 @@ namespace zyppng {
     ZYPP_DECLARE_PRIVATE( Downloader )
   public:
 
-    using Ptr = std::shared_ptr<Downloader>;
-    using WeakPtr = std::shared_ptr<Downloader>;
+    using Ptr = DownloaderRef;
+    using WeakPtr = DownloaderWeakRef;
 
     Downloader();
     Downloader( std::shared_ptr<MirrorControl> mc );
@@ -126,8 +129,8 @@ namespace zyppng {
 
   public:
 
-    using Ptr = std::shared_ptr<Download>;
-    using WeakPtr = std::shared_ptr<Download>;
+    using Ptr = DownloadRef;
+    using WeakPtr = DownloadWeakRef;
 
     /*!
      * The states of the internal state machine. Each of them represents a different
