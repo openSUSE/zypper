@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-07-25 14:05+0200\n"
-"PO-Revision-Date: 2022-10-05 11:13+0000\n"
+"PO-Revision-Date: 2022-10-05 17:13+0000\n"
 "Last-Translator: Alexey Yaryshev <clarkez344@gmail.com>\n"
 "Language-Team: Russian <https://l10n.opensuse.org/projects/zypper/master/ru/>"
 "\n"
@@ -393,6 +393,8 @@ msgstr "Не удалось сохранить параметр."
 msgid ""
 "'%s' install modifier must not be used without a package name or capability."
 msgstr ""
+"Модификатор '%s' install не может быть использован без указания имени пакета "
+"или его возможности."
 
 #: src/PackageArgs.cc:169
 #, c-format, boost-format
