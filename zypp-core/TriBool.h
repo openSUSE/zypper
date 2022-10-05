@@ -55,6 +55,10 @@ namespace zypp
     return ret;
   }
 
+  /** Convert TriBool to bool returning \a default_r if indeterminate.*/
+  inline bool tri2bool( const TriBool & val_r, bool default_r )
+  { return indeterminate(val_r) ? default_r : bool(val_r); }
+
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
