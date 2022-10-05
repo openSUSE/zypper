@@ -64,9 +64,7 @@ std::ostream & Resolver::dumpOn( std::ostream & os ) const
   OUTS( _upgradeMode );
   OUTS( _updateMode );
   OUTS( _verifying );
-  OUTS( _onlyRequires );
   OUTS( _solveSrcPackages );
-  OUTS( _cleandepsOnRemove );
   OUTS( _ignoreAlreadyRecommended );
   #undef OUT
   return os << "<resolver/>";
@@ -82,9 +80,7 @@ Resolver::Resolver (const ResPool & pool)
     , _upgradeMode              ( false )
     , _updateMode               ( false )
     , _verifying                ( false )
-    , _onlyRequires             ( ZConfig::instance().solver_onlyRequires() )
     , _solveSrcPackages         ( false )
-    , _cleandepsOnRemove        ( ZConfig::instance().solver_cleandepsOnRemove() )
     , _ignoreAlreadyRecommended ( true )
     , _applyDefault_focus                ( true )
     , _applyDefault_forceResolve         ( true )
@@ -156,18 +152,14 @@ ResolverFocus Resolver::focus() const			{ return _satResolver->_focus; }
     { return ZVARNAME; }								\
 
 // Flags stored here follow the naming convention,...
-// TODO: But why do we need them here? Probably too many layers and they can
-// go to _satResolver too.
-#define ZOLV_FLAG_LOCALTB( ZSETTER, ZGETTER, ZVARDEFAULT )				\
-    ZOLV_FLAG_TRIBOOL( ZSETTER, ZGETTER, ZVARDEFAULT, _##ZGETTER )
-// Flags down in _satResolver don't (yet).
+// Flags down in _satResolver don't. Could match `_satResolver->_##ZGETTER`
 #define ZOLV_FLAG_SATSOLV( ZSETTER, ZGETTER, ZVARDEFAULT, ZVARNAME )			\
     ZOLV_FLAG_TRIBOOL( ZSETTER, ZGETTER, ZVARDEFAULT, _satResolver->ZVARNAME )
 
 // NOTE: ZVARDEFAULT must be in sync with SATResolver ctor
 ZOLV_FLAG_SATSOLV( setForceResolve         ,forceResolve         ,false                                             ,_allowuninstall        )
-ZOLV_FLAG_LOCALTB( setCleandepsOnRemove    ,cleandepsOnRemove    ,ZConfig::instance().solver_cleandepsOnRemove()    )
-ZOLV_FLAG_LOCALTB( setOnlyRequires         ,onlyRequires         ,ZConfig::instance().solver_onlyRequires()         )
+ZOLV_FLAG_SATSOLV( setCleandepsOnRemove    ,cleandepsOnRemove    ,ZConfig::instance().solver_cleandepsOnRemove()    ,_cleandepsOnRemove     )
+ZOLV_FLAG_SATSOLV( setOnlyRequires         ,onlyRequires         ,ZConfig::instance().solver_onlyRequires()         ,_onlyRequires          )
 ZOLV_FLAG_SATSOLV( setAllowDowngrade       ,allowDowngrade       ,false                                             ,_allowdowngrade        )
 ZOLV_FLAG_SATSOLV( setAllowNameChange      ,allowNameChange      ,true /*bsc#1071466*/                              ,_allownamechange       )
 ZOLV_FLAG_SATSOLV( setAllowArchChange      ,allowArchChange      ,false                                             ,_allowarchchange       )
@@ -177,7 +169,6 @@ ZOLV_FLAG_SATSOLV( dupSetAllowNameChange   ,dupAllowNameChange   ,ZConfig::insta
 ZOLV_FLAG_SATSOLV( dupSetAllowArchChange   ,dupAllowArchChange   ,ZConfig::instance().solver_dupAllowArchChange()   ,_dup_allowarchchange   )
 ZOLV_FLAG_SATSOLV( dupSetAllowVendorChange ,dupAllowVendorChange ,ZConfig::instance().solver_dupAllowVendorChange() ,_dup_allowvendorchange )
 #undef ZOLV_FLAG_SATSOLV
-#undef ZOLV_FLAG_LOCALTB
 #undef ZOLV_FLAG_TRIBOOL
 //---------------------------------------------------------------------------
 
@@ -348,10 +339,8 @@ void Resolver::solverInit()
 
     _satResolver->setFixsystem			( isVerifyingMode() );
     _satResolver->setIgnorealreadyrecommended	( ignoreAlreadyRecommended() );
-    _satResolver->setOnlyRequires		( onlyRequires() );
     _satResolver->setUpdatesystem		(_updateMode);
     _satResolver->setSolveSrcPackages		( solveSrcPackages() );
-    _satResolver->setCleandepsOnRemove		( cleandepsOnRemove() );
 
     _satResolver->setDistupgrade		(_upgradeMode);
     if (_upgradeMode) {

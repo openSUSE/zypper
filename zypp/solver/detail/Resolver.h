@@ -80,9 +80,7 @@ class Resolver : private base::NonCopyable
     bool _upgradeMode:1;              // Resolver has been called with doUpgrade
     bool _updateMode:1;               // Resolver has been called with doUpdate
     bool _verifying:1;                // The system will be checked
-    bool _onlyRequires:1;             // do install required resolvables only
     bool _solveSrcPackages:1;         // whether to generate solver jobs for selected source packges.
-    bool _cleandepsOnRemove:1;        // whether removing a package should also remove no longer needed requirements
     bool _ignoreAlreadyRecommended:1; // ignore recommended packages that have already been recommended by the installed packages
     //@}
 
