@@ -26,7 +26,7 @@ BuildRequires:  boost-devel >= 1.33.1
 BuildRequires:  cmake >= 3.1
 BuildRequires:  gcc-c++ >= 7
 BuildRequires:  gettext-devel >= 0.15
-BuildRequires:  libzypp-devel >= 17.29.0
+BuildRequires:  libzypp-devel >= 17.31.2
 BuildRequires:  readline-devel >= 5.1
 BuildRequires:  libxml2-devel
 Requires:       procps
