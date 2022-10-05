@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Wed Oct  5 18:04:41 CEST 2022 - ma@suse.de
+
+- BuildRequires:  libzypp-devel >= 17.31.2.
+- Fix --[no]-allow-vendor-change feedback in install command
+  (bsc#1201972)
+- version 1.14.57
+
+-------------------------------------------------------------------
 Fri Sep  2 16:45:46 CEST 2022 - ma@suse.de
 
 - UsrEtc: Store logrotate files in %{_distconfdir} if defined
