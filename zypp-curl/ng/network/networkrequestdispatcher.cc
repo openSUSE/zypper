@@ -365,6 +365,11 @@ void NetworkRequestDispatcher::setMaximumConcurrentConnections( const int maxCon
   d_func()->_maxConnections = maxConn;
 }
 
+int NetworkRequestDispatcher::maximumConcurrentConnections () const
+{
+  return d_func()->_maxConnections;
+}
+
 void NetworkRequestDispatcher::enqueue(const std::shared_ptr<NetworkRequest> &req )
 {
   if ( !req )

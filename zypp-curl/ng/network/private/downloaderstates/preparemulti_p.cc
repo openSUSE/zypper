@@ -141,11 +141,13 @@ namespace zyppng {
 
         off_t currOff = 0;
         off_t filesize = _blockList.getFilesize();
+        const auto &prefSize = std::max<zypp::ByteCount>(  sm._spec.preferredChunkSize(), zypp::ByteCount(4, zypp::ByteCount::K) );
+
         while ( currOff <  filesize )  {
 
           auto blksize = filesize - currOff ;
-          if ( blksize > sm._spec.preferredChunkSize() )
-            blksize = sm._spec.preferredChunkSize();
+          if ( blksize > prefSize )
+            blksize = prefSize;
 
           _blockList.addBlock( currOff, blksize );
           currOff += blksize;

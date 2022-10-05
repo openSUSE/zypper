@@ -102,7 +102,8 @@ namespace zyppng {
 
   void DLZckState::enter()
   {
-    const auto &spec = stateMachine()._spec;
+    auto &sm = stateMachine();
+    const auto &spec = sm._spec;
 
     // setup the base downloader
     _error = {};
@@ -156,6 +157,23 @@ namespace zyppng {
       }
     } else {
       _fileSize = fLen;
+    }
+
+    const auto maxConns = sm._requestDispatcher->maximumConcurrentConnections();
+    if ( sm._spec.preferredChunkSize() == 0 ) {
+      const auto autoBlkSize = makeBlksize( _fileSize );
+      if ( maxConns == -1 ) {
+        _preferredChunkSize = autoBlkSize;
+      } else {
+        _preferredChunkSize = _fileSize / maxConns;
+        if ( _preferredChunkSize < autoBlkSize )
+          _preferredChunkSize = autoBlkSize;
+        else if ( _preferredChunkSize > zypp::ByteCount( 100, zypp::ByteCount::M ) )
+          _preferredChunkSize = zypp::ByteCount( 100, zypp::ByteCount::M );
+      }
+    } else {
+      // spec chunk size overrules the automatic one
+      _preferredChunkSize = sm._spec.preferredChunkSize();
     }
 
     if( srcHashType != targetHashType )

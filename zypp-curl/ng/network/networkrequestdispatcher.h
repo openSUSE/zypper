@@ -96,6 +96,11 @@ namespace zyppng {
        */
       void setMaximumConcurrentConnections ( const int maxConn );
 
+      /**
+       * returns the maximum number of allowed concurrent connections
+       */
+      int maximumConcurrentConnections () const;
+
       /*!
        * Enqueues a new \a request and puts it into the waiting queue. If the dispatcher
        * is already running and has free capacatly the request might be started right away

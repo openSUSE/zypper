@@ -81,6 +81,8 @@ namespace zyppng {
     /*!
      * Sets the prefered amount of bytes the downloader tries to request from a single server per metalink chunk request.
      * If the metalink description has smaller chunks those are coalesced to match the preferred size.
+     *
+     * Setting this to 0 tells the \ref Downloader instance to automatically calculate the chunk size. This is also the default.
      */
     DownloadSpec &setPreferredChunkSize ( const zypp::ByteCount &bc );
     zypp::ByteCount preferredChunkSize() const;

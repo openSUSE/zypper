@@ -54,11 +54,14 @@ namespace zyppng {
     void mirrorReceived(MirrorControl::MirrorPick mirror) override;
     void failedToPrepare() override;
 
+    static zypp::ByteCount makeBlksize ( size_t filesize );
+
   protected:
     NetworkRequestError _error;
     bool _inEnsureDownloadsRunning = false; //< Flag to prevent multiple entry to ensureDownloadsRunning
 
     size_t             _fileSize = 0; //< The expected filesize, this is used to make sure we do not write after the end offset of the expected file size
+    zypp::ByteCount    _preferredChunkSize = 0; //< The preferred chunk size we want to download per request
     std::list<Block>   _ranges;
 
     //keep a list with failed blocks in case we run out of mirrors,

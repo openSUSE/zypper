@@ -30,7 +30,7 @@ namespace zyppng {
     bool _metalink_enabled   = true;  //< should the download try to use metalinks
     zypp::ByteCount _headerSize;     //< Optional file header size for things like zchunk
     std::optional<zypp::CheckSum> _headerChecksum; //< Optional file header checksum
-    zypp::ByteCount _preferred_chunk_size = zypp::ByteCount( 4096, zypp::ByteCount::K );
+    zypp::ByteCount _preferred_chunk_size = 0;
   };
 
   ZYPP_IMPL_PRIVATE( DownloadSpec )

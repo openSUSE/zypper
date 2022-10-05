@@ -361,7 +361,7 @@ namespace zyppng {
   std::vector<RangeDownloaderBaseState::Block> RangeDownloaderBaseState::getNextBlocks( const std::string &urlScheme )
   {
     std::vector<Block> blocks;
-    const auto prefSize = static_cast<size_t>( stateMachine()._spec.preferredChunkSize() );
+    const auto &prefSize = std::max<zypp::ByteCount>( _preferredChunkSize, zypp::ByteCount(4, zypp::ByteCount::K) );
     size_t accumulatedSize = 0;
 
     bool canDoRandomBlocks = ( zypp::str::hasPrefixCI( urlScheme, "http") );
@@ -388,7 +388,7 @@ namespace zyppng {
 
   std::vector<RangeDownloaderBaseState::Block> RangeDownloaderBaseState::getNextFailedBlocks( const std::string &urlScheme )
   {
-    const auto prefSize = static_cast<size_t>( stateMachine()._spec.preferredChunkSize() );
+    const auto &prefSize = std::max<zypp::ByteCount>( _preferredChunkSize, zypp::ByteCount(4, zypp::ByteCount::K) );
     // sort the failed requests by block number, this should make sure get them in offset order as well
     _failedRanges.sort( []( const auto &a , const auto &b ){ return a.start < b.start; } );
 
@@ -422,4 +422,14 @@ namespace zyppng {
     return fblks;
   }
 
+  zypp::ByteCount RangeDownloaderBaseState::makeBlksize ( size_t filesize )
+  {
+    // this case should never happen because we never start a multi download if we do not know the filesize beforehand
+    if ( filesize == 0 )  return 4 * 1024 * 1024;
+    else if ( filesize < 4*1024*1024 ) return filesize;
+    else if ( filesize < 8*1024*1024 ) return 4*1024*1024;
+    else if ( filesize < 16*1024*1024 ) return 8*1024*1024;
+    else if ( filesize < 256*1024*1024 ) return 10*1024*1024;
+    return 4*1024*1024;
+  }
 }
