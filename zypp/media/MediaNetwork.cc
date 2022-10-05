@@ -18,7 +18,8 @@
 #include <zypp/base/String.h>
 #include <zypp/base/Gettext.h>
 
-#include <zypp-core/parser/Sysconfig>
+#include <zypp-core/base/Regex.h>
+#include <zypp-core/fs/TmpPath.h>
 #include <zypp-core/zyppng/base/EventDispatcher>
 #include <zypp-core/zyppng/base/EventLoop>
 #include <zypp-core/zyppng/base/private/threaddata_p.h>
@@ -26,13 +27,12 @@
 #include <zypp-curl/ng/network/Downloader>
 #include <zypp-curl/ng/network/NetworkRequestDispatcher>
 #include <zypp-curl/ng/network/DownloadSpec>
-#include <zypp-media/MediaConfig>
 
+#include <zypp-media/MediaConfig>
 #include <zypp/media/MediaNetwork.h>
 #include <zypp-media/auth/CredentialManager>
-#include <zypp-curl/private/curlhelper_p.h>
+
 #include <zypp/Target.h>
-#include <zypp/ZYppFactory.h>
 #include <zypp/ZConfig.h>
 
 
@@ -40,6 +40,8 @@ using std::endl;
 
 namespace internal {
 
+
+    constexpr std::string_view MEDIACACHE_REGEX("^\\/media\\.[1-9][0-9]*\\/media$");
 
     struct ProgressTracker {
 
@@ -105,9 +107,39 @@ namespace internal {
       return data;
     }
 
+    static const zypp::str::regex &mediaRegex () {
+      static zypp::str::regex reg( MEDIACACHE_REGEX.data() );
+      return reg;
+    }
+
     // we need to keep a reference
     zyppng::EventDispatcherRef _dispatcher;
     zyppng::DownloaderRef _downloader;
+
+    struct MediaFileCacheEntry {
+
+      MediaFileCacheEntry( zypp::ManagedFile &&file ) : _file( std::move(file) ) { }
+
+      std::chrono::steady_clock::time_point _creationTime = std::chrono::steady_clock::now();
+      zypp::ManagedFile _file;
+    };
+
+    auto findInCache( const std::string &mediaCacheKey ) {
+      auto i = _mediaCacheEntries.find( mediaCacheKey );
+      if ( i != _mediaCacheEntries.end() ) {
+        auto age = std::chrono::steady_clock::now() - i->second._creationTime;
+        if ( age > std::chrono::minutes( 30 ) ) {
+          MIL << "Found cached media file, but it's older than 30 mins, requesting a new one" << std::endl;
+          _mediaCacheEntries.erase(i);
+        } else {
+          return i;
+        }
+      }
+      return _mediaCacheEntries.end();
+    }
+
+    zypp::filesystem::TmpDir _mediaCacheDir{zypp::filesystem::TmpDir::defaultLocation(), "ZyppMediaCache."};
+    std::unordered_map<std::string, MediaFileCacheEntry> _mediaCacheEntries;
 
     private:
       SharedData() {
@@ -411,12 +443,32 @@ namespace zypp {
     const auto &filename = file.filename();
     Url fileurl(getFileUrl(filename));
 
+    const bool requestedMediaFile = _shared->mediaRegex().matches( filename.asString() );
+    auto &mediaFileCache = _shared->_mediaCacheEntries;
+    const auto &mediaCacheKey = fileurl.asCompleteString();
+
     DBG << "FILEURL IS: " << fileurl << std::endl;
     DBG << "Downloading to: " << targetFilename << std::endl;
 
     if( assert_dir( targetFilename.dirname() ) ) {
       DBG << "assert_dir " << targetFilename.dirname() << " failed" << endl;
       ZYPP_THROW( MediaSystemException(getFileUrl(file.filename()), "System error on " + targetFilename.dirname().asString()) );
+    }
+
+    if ( requestedMediaFile ) {
+      MIL << "Requested " << filename << " trying media cache first" << std::endl;
+
+      auto i = _shared->findInCache( mediaCacheKey );
+      if ( i != mediaFileCache.end() ) {
+        MIL << "Found cached media file, returning a copy to the file" << std::endl;
+        if ( zypp::filesystem::hardlinkCopy( i->second._file, targetFilename ) == 0 )
+          return;
+
+        mediaFileCache.erase(i);
+        MIL << "Failed to copy the requested file, proceeding with download" << std::endl;
+      }
+
+      MIL << "Nothing in the file cache, requesting the file from the server." << std::endl;
     }
 
     zyppng::DownloadSpec spec = zyppng::DownloadSpec( fileurl, targetFilename, file.downloadSize() )
@@ -426,15 +478,55 @@ namespace zypp {
       .setTransferSettings( this->_settings );
 
     callback::SendReport<DownloadProgressReport> report;
-    runRequest( spec, &report );
+
+    try {
+      runRequest( spec, &report );
+    } catch ( const zypp::media::MediaFileNotFoundException &ex ) {
+      if ( requestedMediaFile ) {
+        MIL << "Media file was not found, remembering in the cache" << std::endl;
+        mediaFileCache.insert_or_assign( mediaCacheKey, internal::SharedData::MediaFileCacheEntry( zypp::ManagedFile() ) );
+      }
+      std::rethrow_exception( std::current_exception() );
+    }
+
+    // the request was successful
+    if ( requestedMediaFile ) {
+      const auto &cacheFileName = (_shared->_mediaCacheDir.path() / zypp::CheckSum::md5FromString( mediaCacheKey).asString() ).extend(".cache");
+      zypp::ManagedFile file( cacheFileName, zypp::filesystem::unlink );
+      if ( zypp::filesystem::hardlinkCopy( targetFilename, cacheFileName ) == 0 ) {
+        mediaFileCache.insert_or_assign( mediaCacheKey, internal::SharedData::MediaFileCacheEntry( std::move(file) ) );
+        MIL << "Saved requested media file in media cache for future use" << std::endl;
+      } else {
+        MIL << "Failed to save requested media file in cache, requesting again next time." << std::endl;
+      }
+    }
   }
 
   bool MediaNetwork::getDoesFileExist( const Pathname & filename ) const
   {
+    MIL << "Checking if file " << filename << " does exist" << std::endl;
+    Url fileurl(getFileUrl(filename));
+    const bool requestMediaFile = _shared->mediaRegex().matches( filename.asString() );
+    auto &mediaFileCache = _shared->_mediaCacheEntries;
+    const auto &mediaCacheKey = fileurl.asCompleteString();
+
+    if ( requestMediaFile ) {
+      MIL << "Request for " << filename << " is a media file, trying the cache first" << std::endl;
+      auto i = _shared->findInCache( mediaCacheKey );
+      if ( i != mediaFileCache.end() ) {
+        MIL << "Found a cache entry for requested media file, returning right away" << std::endl;
+        if ( i->second._file->empty() ) {
+          return false;
+        } else {
+          return true;
+        }
+      }
+    }
+
+    bool result = false; //we are pessimists
     try
     {
       const auto &targetFilePath = localPath(filename).absolutename();
-      Url fileurl(getFileUrl(filename));
 
       zyppng::DownloadSpec spec = zyppng::DownloadSpec( fileurl, targetFilePath )
         .setCheckExistsOnly( true )
@@ -442,7 +534,12 @@ namespace zypp {
 
       runRequest( spec );
       // if we get to here the request worked.
-      return true;
+      result = true;
+    }
+    catch ( const MediaFileNotFoundException &e ) {
+      // if the file did not exist then we can return false
+      ZYPP_CAUGHT(e);
+      result = false;
     }
     // unexpected exception
     catch (MediaException & excpt_r)
@@ -450,7 +547,13 @@ namespace zypp {
       ZYPP_RETHROW(excpt_r);
     }
 
-    return false;
+    // if the file does not exist remember it right away in our cache
+    if ( !result && requestMediaFile ) {
+      MIL << filename << " does not exist on medium, remembering in the cache" << std::endl;
+      mediaFileCache.insert_or_assign( mediaCacheKey, internal::SharedData::MediaFileCacheEntry( zypp::ManagedFile() ) );
+    }
+
+    return result;
   }
 
   void MediaNetwork::getDir( const Pathname & dirname, bool recurse_r ) const
