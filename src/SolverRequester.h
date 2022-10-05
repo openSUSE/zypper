@@ -22,6 +22,7 @@
 #include "Zypper.h"
 #include "PackageArgs.h"
 #include "utils/misc.h" // for ResKindSet; might make sense to move this elsewhere
+#include "global-settings.h"
 
 class Out;
 
@@ -128,7 +129,7 @@ public:
       , best_effort( false )
       , skip_interactive( false )
       , skip_optional_patches( false )
-      , allow_vendor_change( ZConfig::instance().solver_allowVendorChange() )
+      , allow_vendor_change( tri2bool( SolverSettings::instance()._allowVendorChange, ZConfig::instance().solver_allowVendorChange() ) )
     {}
 
     void setForceByName( bool value = true );
@@ -466,7 +467,7 @@ private:
 
 private:
   /** Various options to be applied to each requested package */
-  Options _opts;
+  const Options _opts;
 
   /** Requester command being executed.
    * \note This may be different from command given on command line.
