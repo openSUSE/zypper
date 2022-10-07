@@ -63,6 +63,9 @@ namespace yum
             deltafile = fn;
         }
       }
+      if ( !deltafile.empty() )
+        return dir/deltafile;
+
       return deltafile;
     }
   } // namespace
