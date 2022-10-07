@@ -16,6 +16,7 @@
 
 #include "Downloader.h"
 #include <zypp/repo/MediaInfoDownloader.h>
+#include <zypp/repo/SUSEMediaVerifier.h>
 #include <zypp-core/base/UserRequestException>
 #include <zypp/parser/xml/Reader.h>
 #include <zypp/parser/yum/RepomdFileReader.h>
@@ -200,8 +201,9 @@ namespace yum
 
   RepoStatus Downloader::status( MediaSetAccess & media_r )
   {
-    RepoStatus ret { media_r.provideOptionalFile( repoInfo().path() / "/repodata/repomd.xml" ) };
-    if ( !ret.empty() )	// else: mandatory master index is missing
+    const auto & ri = repoInfo();
+    RepoStatus ret { media_r.provideOptionalFile( ri.path() / "/repodata/repomd.xml" ) };
+    if ( !ret.empty() && ri.requireStatusWithMediaFile() )	// else: mandatory master index is missing
       ret = ret && RepoStatus( media_r.provideOptionalFile( "/media.1/media" ) );
     // else: mandatory master index is missing -> stay empty
     return ret;
@@ -209,6 +211,3 @@ namespace yum
 } // namespace yum
 } // namespace repo
 } // namespace zypp
-
-
-

@@ -521,6 +521,12 @@ namespace zypp
       LocaleSet getLicenseLocales( const std::string & name_r ) const;
      //@}
 
+      /**
+       * Returns true if this repository requires the media.1/media file to be included
+       * in the metadata status and repo status calculations.
+       */
+      bool requireStatusWithMediaFile () const;
+
     public:
       /**
        * Write a human-readable representation of this RepoInfo object

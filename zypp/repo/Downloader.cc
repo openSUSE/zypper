@@ -221,6 +221,3 @@ void Downloader::defaultDownloadMasterIndex( MediaSetAccess & media_r, const Pat
 
 }// ns repo
 } // ns zypp
-
-
-

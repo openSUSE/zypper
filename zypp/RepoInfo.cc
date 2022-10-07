@@ -27,6 +27,7 @@
 #include <zypp/Pathname.h>
 #include <zypp/ZConfig.h>
 #include <zypp/repo/RepoMirrorList.h>
+#include <zypp/repo/SUSEMediaVerifier.h>
 #include <zypp/ExternalProgram.h>
 
 #include <zypp/base/IOStream.h>
@@ -1045,6 +1046,24 @@ namespace zypp
 #undef OUTS
     }
     return str << "GpgCheck::UNKNOWN";
+  }
+
+  bool RepoInfo::requireStatusWithMediaFile () const
+  {
+    bool canSkipMediaCheck = std::all_of( baseUrlsBegin(), baseUrlsEnd(), []( const zypp::Url &url ) { return url.schemeIsDownloading(); });
+
+    const auto &mDataPath = metadataPath();
+    if ( canSkipMediaCheck && !mDataPath.empty() ) {
+      zypp::Pathname mediafile = mDataPath/"media.1/media";
+
+      zypp::repo::SUSEMediaVerifier lverifier { mediafile };
+      if ( lverifier ) {
+        canSkipMediaCheck = lverifier.totalMedia() == 1;
+      }
+    }
+
+    DBG << "Can SKIP media.1/media check for status calc: " << canSkipMediaCheck << " for repo " << *this <<  std::endl;
+    return !canSkipMediaCheck;
   }
 
   /////////////////////////////////////////////////////////////////
