@@ -49,7 +49,11 @@ namespace zyppng {
         } catch ( ... ) { }
 
         fclose( f );
+      } else {
+        DBG << "Delta XFER: Delta file: " << spec.deltaFile() << " does not exist or is not readable." << std::endl;
       }
+    } else {
+      DBG << "Delta XFER: No delta file given, can not reuse blocks." << std::endl;
     }
 
     // setup the base downloader

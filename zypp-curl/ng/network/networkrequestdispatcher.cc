@@ -56,6 +56,7 @@ NetworkRequestDispatcherPrivate::NetworkRequestDispatcherPrivate(  NetworkReques
   curl_multi_setopt( _multi, CURLMOPT_TIMERDATA, reinterpret_cast<void *>( this ) );
   curl_multi_setopt( _multi, CURLMOPT_SOCKETFUNCTION, NetworkRequestDispatcherPrivate::static_socket_callback );
   curl_multi_setopt( _multi, CURLMOPT_SOCKETDATA, reinterpret_cast<void *>( this ) );
+  curl_multi_setopt( _multi, CURLMOPT_PIPELINING, CURLPIPE_MULTIPLEX|CURLPIPE_HTTP1 );
 
   _timer->setSingleShot( true );
   _timer->connect( &Timer::sigExpired, *this, &NetworkRequestDispatcherPrivate::multiTimerTimout );
