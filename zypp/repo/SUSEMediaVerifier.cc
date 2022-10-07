@@ -163,6 +163,12 @@ namespace zypp
       SEC << smvData << endl;
       SEC << ref.protocol() << " " <<  Url::schemeIsVolatile( ref.protocol() ) << endl;
 
+      // if we have a downloading URL and can do relaxed verification we do not check the media file again
+      if ( relaxed && Url::schemeIsDownloading( ref.protocol() ) )  {
+        DBG << "Skipping verification due to downloading medium" << std::endl;
+        return ret;
+      }
+
       Pathname mediaFile { _pimpl->mediaFilePath() };
       try {
         ref.provideFile( OnMediaLocation(mediaFile) );
@@ -201,4 +207,3 @@ namespace zypp
 
   } // namespace repo
 } // namespace zypp
-
