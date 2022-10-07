@@ -18,6 +18,7 @@
 #include <zypp-curl/auth/CurlAuthData>
 #include <zypp-media/MediaConfig>
 #include <zypp-core/base/String.h>
+#include <zypp-core/base/StringV.h>
 #include <zypp-core/Pathname.h>
 #include <curl/curl.h>
 #include <stdio.h>
@@ -547,13 +548,13 @@ namespace zyppng {
     }
   }
 
-  bool NetworkRequestPrivate::parseContentRangeHeader(const boost::string_view &line, size_t &start, size_t &len )
-  {
-    static const zypp::str::regex regex("^Content-Range:[[:space:]]+bytes[[:space:]]+([0-9]+)-([0-9]+)\\/([0-9]+)$");
+  bool NetworkRequestPrivate::parseContentRangeHeader(const std::string_view &line, size_t &start, size_t &len )
+  {                                     //content-range: bytes 10485760-19147879/19147880
+    static const zypp::str::regex regex("^Content-Range:[[:space:]]+bytes[[:space:]]+([0-9]+)-([0-9]+)\\/([0-9]+)$", zypp::str::regex::rxdefault | zypp::str::regex::icase );
 
     zypp::str::smatch what;
-    if( !zypp::str::regex_match( line.to_string(), what, regex ) || what.size() != 4 ) {
-      DBG << "Invalid Content-Range Header format: '" << line.to_string() << std::endl;
+    if( !zypp::str::regex_match( std::string(line), what, regex ) || what.size() != 4 ) {
+      DBG << "Invalid Content-Range Header format: '" << std::string(line) << std::endl;
       _originalError = "Invalid Content-Range header format.";
       return false;
     }
@@ -565,12 +566,12 @@ namespace zyppng {
     return true;
   }
 
-  bool NetworkRequestPrivate::parseContentTypeMultiRangeHeader(const boost::string_view &line, std::string &boundary)
+  bool NetworkRequestPrivate::parseContentTypeMultiRangeHeader(const std::string_view &line, std::string &boundary)
   {
-    static const zypp::str::regex regex("^Content-Type:[[:space:]]+multipart\\/byteranges;[[:space:]]+boundary=(.*)$");
+    static const zypp::str::regex regex("^Content-Type:[[:space:]]+multipart\\/byteranges;[[:space:]]+boundary=(.*)$", zypp::str::regex::rxdefault | zypp::str::regex::icase );
 
     zypp::str::smatch what;
-    if( zypp::str::regex_match( line.to_string(), what, regex )  ) {
+    if( zypp::str::regex_match( std::string(line), what, regex )  ) {
       if ( what.size() >= 2 ) {
         boundary = what[1];
         return true;
@@ -632,19 +633,22 @@ namespace zyppng {
 
     if ( _protocolMode == ProtocolMode::HTTP ) {
 
-      boost::string_view hdr( ptr, size*nmemb );
+      std::string_view hdr( ptr, size*nmemb );
 
       hdr.remove_prefix( std::min( hdr.find_first_not_of(" \t\r\n"), hdr.size() ) );
       const auto lastNonWhitespace = hdr.find_last_not_of(" \t\r\n");
       if ( lastNonWhitespace != hdr.npos )
         hdr.remove_suffix( hdr.size() - (lastNonWhitespace + 1) );
       else
-        hdr.clear();
+        hdr = std::string_view();
 
       DBG_MEDIA << "Received header: " << hdr << std::endl;
 
       auto &rmode = std::get<running_t>( _runningMode );
-      if ( hdr.starts_with("HTTP/") ) {
+      if ( !hdr.size() ) {
+        return ( size * nmemb );
+      }
+      if ( zypp::strv::hasPrefixCI( hdr, "HTTP/" ) ) {
 
         long statuscode = 0;
         (void)curl_easy_getinfo( _easyHandle, CURLINFO_RESPONSE_CODE, &statuscode);
@@ -656,17 +660,17 @@ namespace zyppng {
             return 0;
           }
         }
-      } else if ( hdr.starts_with( "Location:" ) ) {
-        _lastRedirect = hdr.substr( 9 ).to_string();
+      } else if ( zypp::strv::hasPrefixCI( hdr, "Location:" ) ) {
+        _lastRedirect = hdr.substr( 9 );
         DBG << "redirecting to " << _lastRedirect << std::endl;
 
-      } else if ( hdr.starts_with("Content-Type:") ) {
+      } else if ( zypp::strv::hasPrefixCI( hdr, "Content-Type:") ) {
         std::string sep;
         if ( parseContentTypeMultiRangeHeader( hdr, sep ) ) {
           rmode._gotMultiRangeHeader = true;
           rmode._seperatorString = "--"+sep;
         }
-      } else if ( hdr.starts_with("Content-Range:") ) {
+      } else if ( zypp::strv::hasPrefixCI( hdr, "Content-Range:") ) {
         NetworkRequest::Range r;
         if ( !parseContentRangeHeader( hdr, r.start, r.len) )
           return 0;
@@ -674,7 +678,7 @@ namespace zyppng {
         rmode._gotContentRangeHeader = true;
         rmode._currentSrvRange = r;
 
-      } else if ( hdr.starts_with("Content-Length:") )  {
+      } else if ( zypp::strv::hasPrefixCI( hdr, "Content-Length:") )  {
         auto lenStr = str::trim( hdr.substr( 15 ), zypp::str::TRIM );
         auto str = std::string ( lenStr.data(), lenStr.length() );
         auto len = zypp::str::strtonum<typename zypp::ByteCount::SizeType>( str.data() );
@@ -886,7 +890,7 @@ namespace zyppng {
         if ( rmode._currentSrvRange )
           continue;
 
-        boost::string_view incoming( ptr + bytesWrittenSoFar, max - bytesWrittenSoFar );
+        std::string_view incoming( ptr + bytesWrittenSoFar, max - bytesWrittenSoFar );
         auto hdrEnd = incoming.find("\r\n\r\n");
         if ( hdrEnd == incoming.npos ) {
           //no header end in the data yet, push to buffer and return
@@ -898,7 +902,7 @@ namespace zyppng {
         rmode._rangePrefaceBuffer.insert( rmode._rangePrefaceBuffer.end(), incoming.begin(), incoming.begin() + ( hdrEnd + 4 )  );
         bytesWrittenSoFar += ( hdrEnd + 4 ); //header data plus header end
 
-        boost::string_view data( rmode._rangePrefaceBuffer.data(), rmode._rangePrefaceBuffer.size() );
+        std::string_view data( rmode._rangePrefaceBuffer.data(), rmode._rangePrefaceBuffer.size() );
         auto sepStrIndex = data.find( rmode._seperatorString );
         if ( sepStrIndex == data.npos ) {
           _originalError = "Invalid multirange header format, seperator string missing.";
@@ -907,10 +911,10 @@ namespace zyppng {
 
         auto startOfHeader = sepStrIndex + rmode._seperatorString.length();
 
-        std::vector<boost::string_view> lines;
-        str::split( data.substr( startOfHeader ), std::back_inserter(lines), "\r\n", zypp::str::TRIM );
+        std::vector<std::string_view> lines;
+        zypp::strv::split( data.substr( startOfHeader ), "\r\n", zypp::strv::Trim::trim, [&]( std::string_view strv ) { lines.push_back(strv); } );
         for ( const auto &hdrLine : lines ) {
-          if ( hdrLine.starts_with("Content-Range:") ) {
+          if ( zypp::strv::hasPrefixCI(hdrLine, "Content-Range:") ) {
             NetworkRequest::Range r;
             //if we can not parse the header the message must be broken
             if(! parseContentRangeHeader( hdrLine, r.start, r.len ) ) {
