@@ -301,8 +301,15 @@ MediaBlockList::reuseBlocks(FILE *wfp, std::string filename)
 {
   FILE *fp;
 
-  if (!chksumlen || (fp = fopen(filename.c_str(), "r")) == 0)
+  if ( !chksumlen ) {
+    DBG << "Delta XFER: Can not reuse blocks because we have no chksumlen" << std::endl;
     return;
+  }
+
+  if ( (fp = fopen(filename.c_str(), "r")) == 0 ) {
+    DBG << "Delta XFER: Can not reuse blocks, unable to open file "<< filename << std::endl;
+    return;
+  }
   size_t nblks = blocks.size();
   std::vector<bool> found;
   found.resize(nblks + 1);
@@ -482,19 +489,26 @@ MediaBlockList::reuseBlocks(FILE *wfp, std::string filename)
           off += blksize;
         }
     }
-  if (!found[nblks])
+  if (!found[nblks]) {
+    DBG << "Delta XFER: No reusable blocks found for " << filename << std::endl;
     return;
+  }
   // now throw out all of the blocks we found
   std::vector<MediaBlock> nblocks;
   std::vector<unsigned char> nchksums;
   std::vector<unsigned int> nrsums;
 
+  size_t originalSize = 0;
+  size_t newSize      = 0;
   for (size_t blkno = 0; blkno < blocks.size(); ++blkno)
     {
+      const auto &blk = blocks[blkno];
+      originalSize += blk.size;
       if (!found[blkno])
         {
           // still need it
-          nblocks.push_back(blocks[blkno]);
+          nblocks.push_back(blk);
+          newSize += blk.size;
           if (chksumlen && (blkno + 1) * chksumlen <= chksums.size())
             {
               nchksums.resize(nblocks.size() * chksumlen);
@@ -504,6 +518,8 @@ MediaBlockList::reuseBlocks(FILE *wfp, std::string filename)
             nrsums.push_back(rsums[blkno]);
         }
     }
+  DBG << "Delta XFER: Found blocks to reuse, " << blocks.size() << " vs " << nblocks.size() << ", resused blocks: " << blocks.size() - nblocks.size() << "\n"
+      << "Old transfer size: " << originalSize << " new size: " << newSize << std::endl;
   blocks = nblocks;
   chksums = nchksums;
   rsums = nrsums;
@@ -552,4 +568,3 @@ MediaBlockList::asString() const
 
   } // namespace media
 } // namespace zypp
-
