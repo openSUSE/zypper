@@ -42,8 +42,12 @@ namespace str {
       typename T::size_type p = ret.find_first_not_of( " \t\r\n" );
       if ( p == T::npos )
       {
-        ret.clear();
-        return ret;
+        if constexpr ( std::is_same_v<std::string_view, StrType> )
+          return T();
+        else {
+          ret.clear();
+          return ret;
+        }
       }
       ret.remove_prefix( p );
     }
@@ -53,8 +57,12 @@ namespace str {
       typename T::size_type p = ret.find_last_not_of( " \t\r\n" );
       if ( p == T::npos )
       {
-        ret.clear();
-        return ret;
+        if constexpr ( std::is_same_v<std::string_view, StrType> )
+          return T();
+        else {
+          ret.clear();
+          return ret;
+        }
       }
       ret.remove_suffix( ret.size() - ( p+1 ) );
     }

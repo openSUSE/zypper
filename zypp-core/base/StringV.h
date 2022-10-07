@@ -90,6 +90,14 @@ namespace zypp
     inline std::string_view trim( std::string_view str_r, TrimFlag trim_r )
     { return trim( std::move(str_r), blank, std::move(trim_r) ); }
 
+    /** Return whether \a str_r has prefix \a prefix_r. */
+    inline bool hasPrefix( std::string_view str_r, std::string_view prefix_r )
+    { return( ::strncmp( str_r.data(), prefix_r.data(), prefix_r.size() ) == 0 ); }
+
+    /** \overload Case insensitive */
+    inline bool hasPrefixCI( std::string_view str_r, std::string_view prefix_r  )
+    { return( ::strncasecmp( str_r.data(), prefix_r.data(), prefix_r.size()  ) == 0 ); }
+
     ///////////////////////////////////////////////////////////////////
     namespace detail
     {
