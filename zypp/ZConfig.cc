@@ -415,6 +415,8 @@ namespace zypp
         , pkgGpgCheck			( indeterminate )
         , apply_locks_file		( true )
         , pluginsPath			( "/usr/lib/zypp/plugins" )
+        , geoipEnabled ( true )
+        , geoipHosts { "download.opensuse.org" }
       {
         MIL << "libzypp: " LIBZYPP_VERSION_STRING << endl;
         if ( PathInfo(_parsedZyppConf).isExist() )
@@ -517,6 +519,9 @@ namespace zypp
                 else if ( entry == "download.media_mountdir" )
                 {
                   download_mediaMountdir.restoreToDefault( Pathname(value) );
+                }
+                else if ( entry == "download.use_geoip_mirror") {
+                  geoipEnabled = str::strToBool( value, geoipEnabled );
                 }
                 else if ( entry == "commit.downloadMode" )
                 {
@@ -711,6 +716,10 @@ namespace zypp
     std::string userData;
 
     Option<Pathname> pluginsPath;
+
+    bool geoipEnabled;
+
+    std::vector<std::string> geoipHosts;
 
     /* Other config singleton instances */
     MediaConfig &_mediaConf = MediaConfig::instance();
@@ -1023,6 +1032,18 @@ namespace zypp
 
   Pathname ZConfig::needrebootPath() const
   { return configPath()/"needreboot.d"; }
+
+  void ZConfig::setGeoipEnabled( bool enable )
+  { _pimpl->geoipEnabled = enable; }
+
+  bool ZConfig::geoipEnabled () const
+  { return _pimpl->geoipEnabled; }
+
+  Pathname ZConfig::geoipCachePath() const
+  { return builtinRepoCachePath()/"geoip.d"; }
+
+  const std::vector<std::string> ZConfig::geoipHostnames () const
+  { return _pimpl->geoipHosts; }
 
   Pathname ZConfig::varsPath() const
   {

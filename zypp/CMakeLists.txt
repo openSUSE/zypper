@@ -248,7 +248,7 @@ SET( zypp_media_SRCS
   media/MediaDIR.cc
   media/MediaDISK.cc
   media/MediaCIFS.cc
-  media/MediaNetworkCommonHandler.h
+  media/MediaNetworkCommonHandler.cc
   media/MediaCurl.cc
   media/MediaMultiCurl.cc
   media/MediaISO.cc
@@ -265,6 +265,7 @@ SET( zypp_media_HEADERS
   media/MediaCIFS.h
   media/MediaCurl.h
   media/MediaMultiCurl.h
+  media/MediaNetworkCommonHandler.h
   media/MediaDIR.h
   media/MediaDISK.h
   media/MediaException.h

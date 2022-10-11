@@ -17,6 +17,7 @@
 #include <list>
 #include <map>
 #include <algorithm>
+#include <chrono>
 
 #include <solv/solvversion.h>
 
@@ -42,6 +43,7 @@
 
 #include <zypp/parser/RepoFileReader.h>
 #include <zypp/parser/ServiceFileReader.h>
+#include <zypp/parser/xml/Reader.h>
 #include <zypp/repo/ServiceRepos.h>
 #include <zypp/repo/yum/Downloader.h>
 #include <zypp/repo/susetags/Downloader.h>
@@ -668,6 +670,8 @@ namespace zypp
 
     repo::ServiceType probeService( const Url & url ) const;
 
+    void refreshGeoIPData ();
+
   private:
     void saveService( ServiceInfo & service ) const;
 
@@ -999,6 +1003,8 @@ namespace zypp
     {
       MIL << "Check if to refresh repo " << info.alias() << " at " << url << " (" << info.type() << ")" << endl;
 
+      refreshGeoIPData();
+
       // first check old (cached) metadata
       Pathname mediarootpath = rawcache_path_for_repoinfo( _options, info );
       filesystem::assert_dir( mediarootpath );
@@ -1121,6 +1127,9 @@ namespace zypp
   {
     assert_alias(info);
     assert_urls(info);
+
+    // make sure geoIP data is up 2 date
+    refreshGeoIPData();
 
     // we will throw this later if no URL checks out fine
     RepoException rexception( info, PL_("Valid metadata not found at specified URL",
@@ -1267,8 +1276,8 @@ namespace zypp
   {
     ProgressData progress(100);
     progress.sendTo(progressfnc);
-
-    filesystem::recursive_rmdir(rawcache_path_for_repoinfo(_options, info));
+    filesystem::recursive_rmdir( ZConfig::instance().geoipCachePath() );
+    filesystem::recursive_rmdir( rawcache_path_for_repoinfo(_options, info) );
     progress.toMax();
   }
 
@@ -2540,6 +2549,134 @@ namespace zypp
     return repo::ServiceType::NONE;
   }
 
+  void RepoManager::Impl::refreshGeoIPData ()
+  {
+    try  {
+
+      if ( !ZConfig::instance().geoipEnabled() ) {
+        MIL << "GeoIp disabled via ZConfig, not refreshing the GeoIP information." << std::endl;
+        return;
+      }
+
+      // for applications like packageKit that are running very long we remember the last time when we checked
+      // for geoIP data. We don't want to query this over and over again.
+      static auto lastCheck = std::chrono::steady_clock::time_point::min();
+      if ( lastCheck != std::chrono::steady_clock::time_point::min()
+          && (std::chrono::steady_clock::now() - lastCheck) < std::chrono::hours(24) )
+        return;
+
+      lastCheck = std::chrono::steady_clock::now();
+
+      const auto &geoIPCache = ZConfig::instance().geoipCachePath();
+
+      if ( filesystem::assert_dir( geoIPCache ) != 0 ) {
+        MIL << "Unable to create cache directory for GeoIP." << std::endl;
+        return;
+      }
+
+      if ( !PathInfo(geoIPCache).userMayRWX() ) {
+        MIL << "No access rights for the GeoIP cache directory." << std::endl;
+        return;
+      }
+
+      // remove all older cache entries
+      filesystem::dirForEachExt( geoIPCache, []( const Pathname &dir, const filesystem::DirEntry &entry ){
+        if ( entry.type != filesystem::FT_FILE )
+          return true;
+
+        PathInfo pi( dir/entry.name );
+        auto age = std::chrono::system_clock::now() - std::chrono::system_clock::from_time_t( pi.mtime() );
+        if ( age < std::chrono::hours(24) )
+          return true;
+
+        MIL << "Removing GeoIP file for " << entry.name << " since it's older than 24hrs." << std::endl;
+        filesystem::unlink( dir/entry.name );
+        return true;
+      });
+
+      // go over all configured hostnames
+      const auto &hosts = ZConfig::instance().geoipHostnames();
+      std::for_each( hosts.begin(), hosts.end(), [ & ]( const std::string &hostname ) {
+
+        // do not query files that are still there
+        if ( zypp::PathInfo( geoIPCache / hostname ).isExist() )  {
+          MIL << "Skipping GeoIP request for " << hostname << " since a valid cache entry exists." << std::endl;
+          return;
+        }
+
+        MIL << "Query GeoIP for " << hostname << std::endl;
+
+        zypp::Url url;
+        try
+        {
+          url.setHost(hostname);
+          url.setScheme("https");
+        }
+        catch(const zypp::Exception &e )
+        {
+          ZYPP_CAUGHT(e);
+          MIL << "Ignoring invalid GeoIP hostname: " << hostname << std::endl;
+          return;
+        }
+
+        zypp::ManagedFile file;
+        try {
+
+          // query the file from the server
+          MediaSetAccess acc( url );
+          file = zypp::ManagedFile (acc.provideOptionalFile("/geoip"), filesystem::unlink );
+
+        } catch ( const zypp::Exception &e  ) {
+          ZYPP_CAUGHT(e);
+          MIL << "Failed to query GeoIP from hostname: " << hostname << std::endl;
+          return;
+        }
+        if ( !file->empty() ) {
+
+          constexpr auto writeHostToFile = []( const Pathname &fName, const std::string &host ){
+            std::ofstream out;
+            out.open( fName.asString(), std::ios_base::trunc );
+            if ( out.is_open() ) {
+              out << host << std::endl;
+            } else {
+              MIL << "Failed to create/open GeoIP cache file " << fName << std::endl;
+            }
+          };
+
+          std::string geoipMirror;
+          try {
+            xml::Reader reader( *file );
+            if ( reader.seekToNode( 1, "host" ) ) {
+              const auto &str = reader.nodeText().asString();
+
+              // make a dummy URL to ensure the hostname is valid
+              zypp::Url testUrl;
+              testUrl.setHost(str);
+              testUrl.setScheme("https");
+
+              if ( testUrl.isValid() ) {
+                MIL << "Storing geoIP redirection: " << hostname << " -> " << str << std::endl;
+                geoipMirror = str;
+              }
+
+            } else {
+              MIL << "No host entry or empty file returned for GeoIP, remembering for 24hrs" << std::endl;
+            }
+          } catch ( const zypp::Exception &e ) {
+            ZYPP_CAUGHT(e);
+            MIL << "Empty or invalid GeoIP file, not requesting again for 24hrs" << std::endl;
+          }
+
+          writeHostToFile( geoIPCache / hostname, geoipMirror );
+        }
+      });
+
+    } catch ( const zypp::Exception &e ) {
+      ZYPP_CAUGHT(e);
+      MIL << "Failed to query GeoIP data." << std::endl;
+    }
+  }
+
   ///////////////////////////////////////////////////////////////////
   //
   //	CLASS NAME : RepoManager
@@ -2698,6 +2835,9 @@ namespace zypp
 
   void RepoManager::modifyService( const std::string & oldAlias, const ServiceInfo & service )
   { return _pimpl->modifyService( oldAlias, service ); }
+
+  void RepoManager::refreshGeoIp ()
+  { return _pimpl->refreshGeoIPData(); }
 
   ////////////////////////////////////////////////////////////////////////////
 

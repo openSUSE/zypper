@@ -634,6 +634,12 @@ namespace zypp
     void modifyService( const ServiceInfo & service )
     { modifyService( service.alias(), service ); }
 
+    /*!
+     * Checks with configured geoIP servers ( usually download.opensuse.org ) if there is new geoip data available, caches the results
+     * in the metadata cache for 24hrs.
+     */
+    void refreshGeoIp ();
+
   private:
     /**
      * Functor thats filter RepoInfo by service which it belongs to.

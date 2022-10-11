@@ -427,7 +427,7 @@ class MediaHandler {
          * \throws MediaException
          *
          **/
-        virtual bool getDoesFileExist( const Pathname & filename ) const = 0;
+        virtual bool getDoesFileExist( const Pathname & filename ) const =   0;
 
   protected:
 
@@ -717,5 +717,3 @@ class MediaHandler {
 
 
 #endif // ZYPP_MEDIA_MEDIAHANDLERL_H
-
-

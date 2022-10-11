@@ -126,11 +126,6 @@ class MediaCurl : public MediaNetworkCommonHandler
      * \throws MediaCurlSetOptException if there is a problem
      **/
     virtual void setupEasy();
-    /**
-     * concatenate the attach url and the filename to a complete
-     * download url
-     **/
-    Url getFileUrl(const Pathname & filename) const;
 
     /**
      * Evaluates a curl return code and throws the right MediaException

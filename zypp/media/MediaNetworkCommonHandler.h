@@ -35,6 +35,8 @@ namespace zypp
                                  const Pathname & urlpath_below_attachpoint_r,
                                  const bool       does_download_r )
       : MediaHandler( url_r, attach_point_r, urlpath_below_attachpoint_r, does_download_r )
+      , _redirTarget( findGeoIPRedirect(url_r) )
+
       {}
 
     public:
@@ -42,7 +44,23 @@ namespace zypp
       { return _settings; }
 
     protected:
+
+      /**
+       * concatenate the attach url and the filename to a complete
+       * download url
+       **/
+      Url getFileUrl(const Pathname & filename) const;
+
+
+      /**
+       * Rewrites the baseURL to the geoIP target if one is found in the metadata cache,
+       * otherwise simply returns the url again.
+       */
+      static zypp::Url findGeoIPRedirect ( const zypp::Url &url );
+
+    protected:
       mutable TransferSettings _settings;
+      Url _redirTarget;
     };
 
   } // namespace media

@@ -224,6 +224,28 @@ namespace zypp
       Pathname needrebootPath() const;
 
       /**
+       * Enables or disables the use of the geoip feature of download.opensuse.org
+       */
+      void setGeoipEnabled( bool enable = true );
+
+      /**
+       * Returns true if zypp should use the geoip feature of download.opensuse.org
+       */
+      bool geoipEnabled () const;
+
+      /**
+       * Path where the geoip caches are kept (/var/cache/zypp/geoip)
+       */
+      Pathname geoipCachePath() const;
+
+      /**
+       * All hostnames we want to rewrite using the geoip feature. The \ref RepoManager
+       * will try to query each hostname via: https://hostname/geoip to receive a redirection
+       * target for requests to the given hostname. The geoip targets are cached in \ref geoipCachePath.
+       */
+      const std::vector<std::string> geoipHostnames () const;
+
+      /**
        * Path containing custom repo variable definitions (configPath()/vars.d).
        * \see \ref zypp::repo::RepoVarExpand Repo variable expander
        * \ingroup g_ZC_CONFIGFILES
