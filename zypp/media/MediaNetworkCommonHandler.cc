@@ -30,6 +30,11 @@ namespace zypp::media
         return Url();
       }
 
+      if ( !( url.getQueryParam("COUNTRY").empty() && url.getQueryParam("AVOID_COUNTRY").empty() )) {
+        MIL << "GeoIp rewrites disabled since the baseurl " << url << " uses an explicit country setting." << std::endl;
+        return Url();
+      }
+
       const auto &hostname = url.getHost();
       auto geoipFile = conf.geoipCachePath() / hostname ;
       if ( PathInfo( geoipFile ).isFile() ) {
