@@ -42,6 +42,83 @@ using std::endl;
 
 namespace internal {
   using namespace zypp;
+  /// Optional files will send no report until data are actually received (we know it exists).
+  struct OptionalDownloadProgressReport : public callback::ReceiveReport<media::DownloadProgressReport>
+  {
+    OptionalDownloadProgressReport( bool isOptional=false )
+    : _oldRec { Distributor::instance().getReceiver() }
+    , _isOptional { isOptional }
+    { connect(); }
+
+    ~OptionalDownloadProgressReport()
+    { if ( _oldRec ) Distributor::instance().setReceiver( *_oldRec ); else Distributor::instance().noReceiver(); }
+
+    void reportbegin() override
+    { if ( _oldRec ) _oldRec->reportbegin(); }
+
+    void reportend() override
+    { if ( _oldRec ) _oldRec->reportend(); }
+
+    void report( const UserData & userData_r = UserData() ) override
+    { if ( _oldRec ) _oldRec->report( userData_r ); }
+
+
+    void start( const Url & file_r, Pathname localfile_r ) override
+    {
+      if ( not _oldRec ) return;
+      if ( _isOptional ) {
+        // delay start until first data are received.
+        _startFile      = file_r;
+        _startLocalfile = std::move(localfile_r);
+        return;
+      }
+      _oldRec->start( file_r, localfile_r );
+    }
+
+    bool progress( int value_r, const Url & file_r, double dbps_avg_r = -1, double dbps_current_r = -1 ) override
+    {
+      if ( not _oldRec ) return true;
+      if ( notStarted() ) {
+        if ( not ( value_r || dbps_avg_r || dbps_current_r ) )
+          return true;
+        sendStart();
+      }
+      return _oldRec->progress( value_r, file_r, dbps_avg_r, dbps_current_r );
+    }
+
+    Action problem( const Url & file_r, Error error_r, const std::string & description_r ) override
+    {
+      if ( not _oldRec || notStarted() ) return ABORT;
+      return _oldRec->problem( file_r, error_r, description_r );
+    }
+
+    void finish( const Url & file_r, Error error_r, const std::string & reason_r ) override
+    {
+      if ( not _oldRec || notStarted() ) return;
+      _oldRec->finish( file_r, error_r, reason_r );
+    }
+
+  private:
+    // _isOptional also indicates the delayed start
+    bool notStarted() const
+    { return _isOptional; }
+
+    void sendStart()
+    {
+      if ( _isOptional ) {
+        // we know _oldRec is valid...
+        _oldRec->start( std::move(_startFile), std::move(_startLocalfile) );
+        _isOptional = false;
+      }
+    }
+
+  private:
+    Receiver *const _oldRec;
+    bool     _isOptional;
+    Url      _startFile;
+    Pathname _startLocalfile;
+  };
+
   struct ProgressData
   {
     ProgressData( CURL *_curl, time_t _timeout = 0, const zypp::Url & _url = zypp::Url(),
@@ -642,6 +719,8 @@ void MediaCurl::getFileCopy( const OnMediaLocation & srcFile , const Pathname & 
 
   const auto &filename = srcFile.filename();
 
+  // Optional files will send no report until data are actually received (we know it exists).
+  OptionalDownloadProgressReport reportfilter( srcFile.optional() );
   callback::SendReport<DownloadProgressReport> report;
 
   Url fileurl(getFileUrl(filename));

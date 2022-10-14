@@ -110,7 +110,7 @@ class MediaCurl : public MediaNetworkCommonHandler
     };
 
   protected:
-//     /** Callback sending just an alive trigger to the UI, without stats (e.g. during metalink download). */
+    /** Callback sending just an alive trigger to the UI, without stats (e.g. during metalink download). */
     static int aliveCallback( void *clientp, double dltotal, double dlnow, double ultotal, double ulnow );
     /** Callback reporting download progress. */
     static int progressCallback( void *clientp, double dltotal, double dlnow, double ultotal, double ulnow );

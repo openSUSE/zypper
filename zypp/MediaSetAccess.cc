@@ -183,8 +183,7 @@ IMPL_PTR_TYPE(MediaSetAccess);
   {
     try
     {
-      if ( doesFileExist( file, media_nr ) )
-        return provideFile( OnMediaLocation( file, media_nr ), PROVIDE_NON_INTERACTIVE );
+      return provideFile( OnMediaLocation( file, media_nr ).setOptional( true ), PROVIDE_NON_INTERACTIVE );
     }
     catch ( const media::MediaFileNotFoundException & excpt_r )
     { ZYPP_CAUGHT( excpt_r ); }
@@ -205,7 +204,8 @@ IMPL_PTR_TYPE(MediaSetAccess);
 
     ManagedFile tmpFile = filesystem::TmpFile::asManagedFile();
 
-    Pathname file = access.provideFile( OnMediaLocation(path, 1), options );
+    bool optional { options & PROVIDE_NON_INTERACTIVE };
+    Pathname file = access.provideFile( OnMediaLocation(path, 1).setOptional( optional ), options );
 
     //prevent the file from being deleted when MediaSetAccess gets out of scope
     if ( filesystem::hardlinkCopy(file, tmpFile) != 0 )
