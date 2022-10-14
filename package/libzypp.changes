@@ -1,4 +1,31 @@
 -------------------------------------------------------------------
+Fri Oct 14 14:09:51 CEST 2022 - ma@suse.de
+
+- Improve download of optional files (fixes #416)
+- Do not use geoip rewrites if the repo has explicit country
+  settings.
+- Implement geoIP feature for zypp.
+  This patch adds a feature to rewrite request URLs to the repo
+  servers by querying a geoIP file from download.opensuse.org. This
+  file can return a redirection target depending on the clients IP
+  adress, this way we can directly contact a local mirror of d.o.o
+  instead. The redir target stays valid for 24hrs.
+  This feature can be disabled in zypp.conf by setting
+  'download.use_geoip_mirror = false'.
+- Use a dynamic fallback for BLKSIZE in downloads.
+  When not receiving a blocklist via metalink file from the server
+  MediaMultiCurl used to fallback to a fixed, relatively small
+  BLKSIZE. This patch changes the fallback into a dynamic value
+  based on the filesize using a similar metric as the MirrorCache
+  implementation on the server side.
+- Skip media.1/media download for http repo status calc.
+  This patch allows zypp to skip a extra media.1/media download to
+  calculate if a repository needs to be refreshed. This
+  optimisation only takes place if the repo does specify only
+  downloading base urls.
+- version 17.31.3 (22)
+
+-------------------------------------------------------------------
 Wed Oct  5 18:02:15 CEST 2022 - ma@suse.de
 
 - Resolver: Fix missing --[no]-recommends initialization in
