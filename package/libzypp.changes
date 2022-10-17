@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Oct 17 12:53:40 CEST 2022 - ma@suse.de
+
+- Do not clean up MediaSetAccess before using the geoip file
+  (fixes #424)
+- version 17.31.4 (22)
+
+-------------------------------------------------------------------
 Fri Oct 14 14:09:51 CEST 2022 - ma@suse.de
 
 - Improve download of optional files (fixes #416)
