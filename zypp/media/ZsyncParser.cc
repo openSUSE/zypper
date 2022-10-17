@@ -115,9 +115,46 @@ ZsyncParser::parse(std::string filename)
           size_t blkno = bl.addBlock(off, size);
           unsigned char rp[16];
           rp[0] = rp[1] = rp[2] = rp[3] = 0;
-          is.read((char *)rp + 4 - rsl, rsl);
+          try {
+            is.read((char *)rp + 4 - rsl, rsl);
+          } catch ( const std::exception &e ) {
+            if ( !is.good() ) {
+              if (is.bad())
+                throw zypp::Exception( "I/O error while reading" );
+              else if (is.eof())
+                throw zypp::Exception( "End of file reached successfully" );
+              else if (is.fail())
+                throw zypp::Exception( "Non-integer data encountered" );
+              else
+                throw zypp::Exception( "Unknown IO err" );
+            }
+          }
+
           bl.setRsum(blkno, rsl, rp[0] << 24 | rp[1] << 16 | rp[2] << 8 | rp[3], blksize);
-          is.read((char *)rp, csl);
+          try {
+            is.read((char *)rp, csl);
+          } catch ( const std::exception &e ) {
+            if ( !is.good() ) {
+              if (is.bad())
+                throw zypp::Exception( "I/O error while reading" );
+              else if (is.eof())
+                throw zypp::Exception( "End of file reached successfully" );
+              else if (is.fail())
+                throw zypp::Exception( "Non-integer data encountered" );
+              else
+                throw zypp::Exception( "Unknown IO err" );
+            }
+          }
+          if ( !is.good() ) {
+            if (is.bad())
+              throw zypp::Exception( "I/O error while reading" );
+            else if (is.eof())
+              throw zypp::Exception( "End of file reached successfully" );
+            else if (is.fail())
+              throw zypp::Exception( "Non-integer data encountered" );
+            else
+              throw zypp::Exception( "Unknown IO err" );
+          }
           bl.setChecksum(blkno, "MD4", csl, rp, blksize);
           off += size;
         }
@@ -143,4 +180,3 @@ ZsyncParser::getBlockList()
 
   } // namespace media
 } // namespace zypp
-

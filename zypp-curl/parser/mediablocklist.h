@@ -54,7 +54,7 @@ public:
   /**
    * return the offset/size of a block with number blkno
    **/
-  inline MediaBlock getBlock(size_t blkno) const {
+  inline const MediaBlock &getBlock(size_t blkno) const {
     return blocks[blkno];
   }
   /**
@@ -154,4 +154,3 @@ inline std::ostream & operator<<(std::ostream &str, const MediaBlockList &bl)
 } // namespace zypp
 
 #endif // ZYPP_CURL_PARSER_MEDIABLOCKLIST_H
-
