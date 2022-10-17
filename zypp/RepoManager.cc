@@ -2619,11 +2619,10 @@ namespace zypp
           return;
         }
 
+        MediaSetAccess acc( url );
         zypp::ManagedFile file;
         try {
-
           // query the file from the server
-          MediaSetAccess acc( url );
           file = zypp::ManagedFile (acc.provideOptionalFile("/geoip"), filesystem::unlink );
 
         } catch ( const zypp::Exception &e  ) {
