@@ -2892,9 +2892,9 @@ msgid ""
 "  \\\\\\\\\\\\\\__o\n"
 "__\\\\\\\\\\\\\\'/_"
 msgstr ""
-"   \\\\\\\\\\\n"
-"  \\\\\\\\\\\\\\__o\n"
-"__\\\\\\\\\\\\\\'/_"
+"  (o)(o)--."
+"   \oo/ (  )"
+"   m\/m--m'`--------."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/nullcommands.cc:37
