@@ -1035,6 +1035,7 @@ bool MediaCurl::doGetDoesFileExist( const Pathname & filename ) const
   // reset curl settings
   if (  _url.getScheme() == "http" ||  _url.getScheme() == "https" )
   {
+    curl_easy_setopt( _curl, CURLOPT_RANGE, NULL );
     curl_easy_setopt( _curl, CURLOPT_NOBODY, 0L);
     if ( ret != 0 ) {
       ZYPP_THROW(MediaCurlSetOptException(url, _curlError));
