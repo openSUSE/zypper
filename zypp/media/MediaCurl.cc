@@ -972,94 +972,57 @@ bool MediaCurl::doGetDoesFileExist( const Pathname & filename ) const
     ZYPP_THROW(MediaCurlSetOptException(url, _curlError));
   }
 
-  // instead of returning no data with NOBODY, we return
+  // If no head requests allowed (?head_requests=no):
+  // Instead of returning no data with NOBODY, we return
   // little data, that works with broken servers, and
   // works for ftp as well, because retrieving only headers
   // ftp will return always OK code ?
   // See http://curl.haxx.se/docs/knownbugs.html #58
-  if (  (_url.getScheme() == "http" ||  _url.getScheme() == "https") &&
-        _settings.headRequestsAllowed() )
-    ret = curl_easy_setopt( _curl, CURLOPT_NOBODY, 1L );
-  else
-    ret = curl_easy_setopt( _curl, CURLOPT_RANGE, "0-1" );
+  /// RAII Handler for temp. setting a head/range request
+  struct TempSetHeadRequest
+  {
+    TempSetHeadRequest( CURL * curl_r, bool doHttpHeadRequest_r )
+    : _curl { curl_r }
+    , _doHttpHeadRequest { doHttpHeadRequest_r }
+    {
+      if ( _doHttpHeadRequest ) {
+        curl_easy_setopt( _curl, CURLOPT_NOBODY, 1L );
+      } else {
+        curl_easy_setopt( _curl, CURLOPT_RANGE, "0-1" );
+      }
+    }
+    ~TempSetHeadRequest() {
+      if ( _doHttpHeadRequest ) {
+        curl_easy_setopt( _curl, CURLOPT_NOBODY, 0L);
+        /* yes, this is why we never got to get NOBODY working before,
+         because setting it changes this option too, and we also*
+         need to reset it
+         See: http://curl.haxx.se/mail/archive-2005-07/0073.html
+         */
+        curl_easy_setopt( _curl, CURLOPT_HTTPGET, 1L );
+      } else {
+        curl_easy_setopt( _curl, CURLOPT_RANGE, NULL );
+      }
+    }
+  private:
+    CURL * _curl;
+    bool   _doHttpHeadRequest;
+  } _guard( _curl, (_url.getScheme() == "http" || _url.getScheme() == "https") && _settings.headRequestsAllowed() );
 
-  if ( ret != 0 ) {
-    curl_easy_setopt( _curl, CURLOPT_NOBODY, 0L);
-    curl_easy_setopt( _curl, CURLOPT_RANGE, NULL );
-    /* yes, this is why we never got to get NOBODY working before,
-       because setting it changes this option too, and we also
-       need to reset it
-       See: http://curl.haxx.se/mail/archive-2005-07/0073.html
-    */
-    curl_easy_setopt( _curl, CURLOPT_HTTPGET, 1L );
-    ZYPP_THROW(MediaCurlSetOptException(url, _curlError));
-  }
 
   AutoFILE file { ::fopen( "/dev/null", "w" ) };
   if ( !file ) {
       ERR << "fopen failed for /dev/null" << endl;
-      curl_easy_setopt( _curl, CURLOPT_NOBODY, 0L);
-      curl_easy_setopt( _curl, CURLOPT_RANGE, NULL );
-      /* yes, this is why we never got to get NOBODY working before,
-       because setting it changes this option too, and we also
-       need to reset it
-       See: http://curl.haxx.se/mail/archive-2005-07/0073.html
-      */
-      curl_easy_setopt( _curl, CURLOPT_HTTPGET, 1L );
-      if ( ret != 0 ) {
-          ZYPP_THROW(MediaCurlSetOptException(url, _curlError));
-      }
       ZYPP_THROW(MediaWriteException("/dev/null"));
   }
 
   ret = curl_easy_setopt( _curl, CURLOPT_WRITEDATA, (*file) );
   if ( ret != 0 ) {
-      std::string err( _curlError);
-      curl_easy_setopt( _curl, CURLOPT_RANGE, NULL );
-      curl_easy_setopt( _curl, CURLOPT_NOBODY, 0L);
-      /* yes, this is why we never got to get NOBODY working before,
-       because setting it changes this option too, and we also
-       need to reset it
-       See: http://curl.haxx.se/mail/archive-2005-07/0073.html
-      */
-      curl_easy_setopt( _curl, CURLOPT_HTTPGET, 1L );
-      if ( ret != 0 ) {
-          ZYPP_THROW(MediaCurlSetOptException(url, _curlError));
-      }
-      ZYPP_THROW(MediaCurlSetOptException(url, err));
+    ZYPP_THROW(MediaCurlSetOptException(url, _curlError));
   }
 
   CURLcode ok = curl_easy_perform( _curl );
   MIL << "perform code: " << ok << " [ " << curl_easy_strerror(ok) << " ]" << endl;
-
-  // reset curl settings
-  if (  _url.getScheme() == "http" ||  _url.getScheme() == "https" )
-  {
-    curl_easy_setopt( _curl, CURLOPT_RANGE, NULL );
-    curl_easy_setopt( _curl, CURLOPT_NOBODY, 0L);
-    if ( ret != 0 ) {
-      ZYPP_THROW(MediaCurlSetOptException(url, _curlError));
-    }
-
-    /* yes, this is why we never got to get NOBODY working before,
-       because setting it changes this option too, and we also
-       need to reset it
-       See: http://curl.haxx.se/mail/archive-2005-07/0073.html
-    */
-    curl_easy_setopt( _curl, CURLOPT_HTTPGET, 1L);
-    if ( ret != 0 ) {
-      ZYPP_THROW(MediaCurlSetOptException(url, _curlError));
-    }
-
-  }
-  else
-  {
-    // for FTP we set different options
-    curl_easy_setopt( _curl, CURLOPT_RANGE, NULL);
-    if ( ret != 0 ) {
-      ZYPP_THROW(MediaCurlSetOptException(url, _curlError));
-    }
-  }
 
   // as we are not having user interaction, the user can't cancel
   // the file existence checking, a callback or timeout return code
