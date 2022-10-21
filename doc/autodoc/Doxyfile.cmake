@@ -69,7 +69,7 @@ WARN_LOGFILE           =
 #---------------------------------------------------------------------------
 # configuration options related to the input files
 #---------------------------------------------------------------------------
-INPUT                  = @ZYPP_DOCINCLUDE_DIR@ @ZYPP_SOURCE_DIR@ @ZYPP_CORE_SOURCE_DIR@
+INPUT                  = @ZYPP_DOCINCLUDE_DIR@ @ZYPP_SOURCE_DIR@ @ZYPP_CORE_SOURCE_DIR@ @ZYPP_MEDIA_SOURCE_DIR@ @ZYPP_CURL_SOURCE_DIR@
 FILE_PATTERNS          = *.h *.hh *.hxx *.hpp *.h++ *.c *.cc *.cxx *.cpp *.c++ *.tcc *.hcc *.doc
 RECURSIVE              = YES
 EXCLUDE                =
@@ -118,6 +118,7 @@ DISABLE_INDEX          = NO
 ENUM_VALUES_PER_LINE   = 4
 GENERATE_TREEVIEW      = YES
 TREEVIEW_WIDTH         = 250
+USE_MATHJAX            = YES
 #---------------------------------------------------------------------------
 # configuration options related to the LaTeX output
 #---------------------------------------------------------------------------

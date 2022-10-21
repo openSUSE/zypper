@@ -12,7 +12,9 @@ ENDIF ( NOT DOT )
 
 SET( ZYPP_PROJECT_ROOT   ${LIBZYPP_SOURCE_DIR} )
 SET( ZYPP_SOURCE_DIR     ${LIBZYPP_SOURCE_DIR}/zypp )
-SET( ZYPP_CORE_SOURCE_DIR     ${LIBZYPP_SOURCE_DIR}/zypp-core )
+SET( ZYPP_CORE_SOURCE_DIR   ${LIBZYPP_SOURCE_DIR}/zypp-core )
+SET( ZYPP_MEDIA_SOURCE_DIR  ${LIBZYPP_SOURCE_DIR}/zypp-media)
+SET( ZYPP_CURL_SOURCE_DIR   ${LIBZYPP_SOURCE_DIR}/zypp-curl )
 SET( ZYPP_DOCINCLUDE_DIR ${LIBZYPP_SOURCE_DIR}/doc/autoinclude )
 SET( ZYPP_EXAMPLE_DIR    ${LIBZYPP_SOURCE_DIR}/examples )
 
@@ -65,4 +67,3 @@ INSTALL( DIRECTORY
 ### ##################################################
 ENDIF ( DOXYGEN )
 ### ##################################################
-

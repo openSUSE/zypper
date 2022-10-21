@@ -82,6 +82,11 @@ BuildRequires:  boost-devel
 %endif
 BuildRequires:  dejagnu
 BuildRequires:  doxygen
+BuildRequires:  texlive-latex
+BuildRequires:  texlive-xcolor
+BuildRequires:  texlive-newunicodechar
+BuildRequires:  texlive-dvips
+BuildRequires:  ghostscript
 BuildRequires:  gcc-c++ >= 7
 BuildRequires:  gettext-devel
 BuildRequires:  graphviz
