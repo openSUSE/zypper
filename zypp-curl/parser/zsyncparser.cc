@@ -10,8 +10,8 @@
  *
  */
 
-#include <zypp/media/ZsyncParser.h>
-#include <zypp/base/Logger.h>
+#include "zsyncparser.h"
+#include <zypp-core/base/Logger.h>
 
 #include <sys/types.h>
 #include <stdio.h>
@@ -61,7 +61,7 @@ hexstr2bytes(unsigned char *buf, const char *str, int buflen)
 }
 
 void
-ZsyncParser::parse(std::string filename)
+ZsyncParser::parse( const Pathname &filename )
 {
   char buf[4096];
 
@@ -100,6 +100,9 @@ ZsyncParser::parse(std::string filename)
     {
       if (csl < 3 || csl > 16 || rsl < 1 || rsl > 4 || sql < 1 || sql > 2)
         ZYPP_THROW(Exception("Parse Error: illegal hash lengths"));
+
+      bl.setRsumSequence( sql );
+
       size_t nblks = (filesize + blksize - 1) / blksize;
       size_t i;
       off_t off = 0;
@@ -122,7 +125,7 @@ ZsyncParser::parse(std::string filename)
               if (is.bad())
                 throw zypp::Exception( "I/O error while reading" );
               else if (is.eof())
-                throw zypp::Exception( "End of file reached successfully" );
+                throw zypp::Exception( "End of file reached unexpectedly" );
               else if (is.fail())
                 throw zypp::Exception( "Non-integer data encountered" );
               else
@@ -138,7 +141,7 @@ ZsyncParser::parse(std::string filename)
               if (is.bad())
                 throw zypp::Exception( "I/O error while reading" );
               else if (is.eof())
-                throw zypp::Exception( "End of file reached successfully" );
+                throw zypp::Exception( "End of file reached unexpectedly" );
               else if (is.fail())
                 throw zypp::Exception( "Non-integer data encountered" );
               else
@@ -149,7 +152,7 @@ ZsyncParser::parse(std::string filename)
             if (is.bad())
               throw zypp::Exception( "I/O error while reading" );
             else if (is.eof())
-              throw zypp::Exception( "End of file reached successfully" );
+              throw zypp::Exception( "End of file reached unexpectedly" );
             else if (is.fail())
               throw zypp::Exception( "Non-integer data encountered" );
             else

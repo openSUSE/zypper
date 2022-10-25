@@ -23,6 +23,12 @@ namespace zyppng {
   struct FinishedState;
   struct PrepareMultiState;
 
+  enum class MetaDataType {
+    None  = 0,
+    Zsync,
+    MetaLink
+  };
+
   /*!
      * State to download the actual metalink file, we can however not be 100% sure that we actually
      * will get a metalink file, so we need to check the content type or in bad cases the
@@ -37,8 +43,8 @@ namespace zyppng {
     SignalProxy< void () > sigFinished() {
       return _sigFinished;
     }
-    SignalProxy< void () > sigGotMetalink() {
-      return _sigGotMetalink;
+    SignalProxy< void () > sigGotMetadata() {
+      return _sigGotMetadata;
     }
     SignalProxy< void () > sigFailed() {
       return _sigFailed;
@@ -51,8 +57,8 @@ namespace zyppng {
     virtual void gotFinished () override;
 
   protected:
-    bool _isMetalink = false;
-    Signal< void () > _sigGotMetalink;
+    MetaDataType _detectedMetaType = MetaDataType::None;
+    Signal< void () > _sigGotMetadata;
 
     virtual void handleRequestProgress ( NetworkRequest &req, off_t dltotal, off_t dlnow ) override;
   };

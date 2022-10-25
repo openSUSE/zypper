@@ -101,14 +101,19 @@ namespace zyppng {
 
     // remember how many bytes we need to download
     size_t bytesToDl = 0;
+    // do we need to pad the digest when calculating the checksum for blocks
+    const auto &chksumPad  = _blockList.checksumPad ();
     for ( size_t i = 0; i < _blockList.numBlocks(); i++ ) {
       const auto &mediaBlock = _blockList.getBlock( i );
+      const auto &blockSum   = _blockList.getChecksum ( i );
       _ranges.push_back(
         Block{
           .start = mediaBlock.off,
           .len   = mediaBlock.size,
           .chksumtype = _blockList.getChecksumType(),
-          .chksumVec  = _blockList.getChecksum ( i )
+          .chksumVec  = blockSum,
+          .chksumCompareLen = blockSum.size( ),
+          .chksumPad = chksumPad > 0 ? chksumPad : std::optional<size_t>()
         } );
 
       bytesToDl += mediaBlock.size;

@@ -97,6 +97,7 @@ public:
   bool checkChecksum(size_t blkno, const unsigned char *buf, size_t bufl) const;
   UByteArray getChecksum( size_t blkno ) const;
   std::string getChecksumType( ) const;
+  size_t checksumPad() const;
   bool createDigest(Digest &digest) const;
   bool verifyDigest(size_t blkno, Digest &digest) const;
   inline bool haveChecksum(size_t blkno) const {
@@ -107,6 +108,12 @@ public:
    * set / verify the (weak) rolling checksum over a single block
    **/
   void setRsum(size_t blkno, int rsl, unsigned int rs, size_t rspad=0);
+
+  /**
+   * how many blocks in sequence need to have the correct checksums to be
+   * considered a match
+   */
+  void setRsumSequence( uint seq );
   bool checkRsum(size_t blkno, const unsigned char *buf, size_t bufl) const;
   unsigned int updateRsum(unsigned int rs, const char *bytes, size_t len) const;
   bool verifyRsum(size_t blkno, unsigned int rs) const;
@@ -118,6 +125,7 @@ public:
    * scan a file for blocks from our blocklist. if we find a suitable block,
    * it is removed from the list
    **/
+  void reuseBlocksOld(FILE *wfp, std::string filename);
   void reuseBlocks(FILE *wfp, std::string filename);
 
   /**
@@ -141,8 +149,8 @@ private:
   size_t chksumpad;
   std::vector<unsigned char> chksums;
 
-  std::string rsumtype;
   int rsumlen;
+  uint rsumseq; // < how many consecutive matches are required
   size_t rsumpad;
   std::vector<unsigned int> rsums;
 };

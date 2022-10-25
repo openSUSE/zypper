@@ -38,7 +38,12 @@ namespace zyppng {
 
     using Request = DownloadPrivateBase::Request;
 
-    PrepareMultiState ( std::shared_ptr<Request> oldReq, DownloadPrivate &parent );
+    enum Mode {
+      Zsync,
+      Metalink
+    };
+
+    PrepareMultiState ( std::shared_ptr<Request> oldReq, Mode m, DownloadPrivate &parent );
 
     void enter ();
     void exit ();
@@ -77,6 +82,7 @@ namespace zyppng {
 #if ENABLE_ZCHUNK_COMPRESSION
     bool _haveZckData = false; //< do we have zck data ready
 #endif
+    Mode _mode; //< wether we should expect a metalink or zsync file
     std::shared_ptr<Request> _oldRequest; //< exising request of previous states, that the next states might reuse
     NetworkRequestError _error;
     Signal< void () > _sigFinished;

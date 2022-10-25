@@ -266,8 +266,8 @@ std::vector< MirrorSet > generateMirr ()
   res.back().filename = "primary.xml.zck";
   res.back().dlTotal = 274638;
   res.back().expectSuccess = true;
-  res.back().expectedHandlerDownloads  = 2; // query if metalink avail + dl metalink
-  res.back().expectedFileDownloads  = 6; // Zck Head + 5 Chunks ( chunk size is at least 4K but is likely a few bytes bigger )
+  res.back().expectedHandlerDownloads  = 3; // query if metalink avail + dl metalink + dl zck head because request is reused
+  res.back().expectedFileDownloads  = 5; // 5 Chunks ( chunk size is at least 4K but is likely a few bytes bigger )
   res.back().expectedStates = { zyppng::Download::InitialState, zyppng::Download::DetectMetaLink, zyppng::Download::DlMetaLinkInfo, zyppng::Download::PrepareMulti, zyppng::Download::DlZChunkHead, zyppng::Download::DlZChunk, zyppng::Download::Finished};
   res.back().headerChecksum = zypp::CheckSum( zypp::Digest::sha256(), "90a1a1b99ba3b6c8ae9f14b0c8b8c43141c69ec3388bfa3b9915fbeea03926b7");
   res.back().headerSize     = 11717;

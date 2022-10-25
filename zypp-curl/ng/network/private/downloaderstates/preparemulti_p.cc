@@ -11,6 +11,7 @@
 #include <zypp-curl/ng/network/private/mediadebug_p.h>
 #include <zypp-curl/ng/network/private/networkrequesterror_p.h>
 #include <zypp-curl/private/curlhelper_p.h>
+#include <zypp-curl/parser/ZsyncParser>
 #include <zypp-core/fs/PathInfo.h>
 
 #include "preparemulti_p.h"
@@ -21,7 +22,10 @@
 
 namespace zyppng {
 
-  PrepareMultiState::PrepareMultiState( std::shared_ptr<Request> oldReq, DownloadPrivate &parent ) : SimpleState( parent )
+  PrepareMultiState::PrepareMultiState( std::shared_ptr<Request> oldReq, Mode m, DownloadPrivate &parent )
+    : SimpleState( parent )
+    , _mode(m)
+    , _oldRequest( oldReq )
   {
     MIL_MEDIA << "About to enter PrepareMultiState" << std::endl;
   }
@@ -46,52 +50,79 @@ namespace zyppng {
     std::vector<zypp::media::MetalinkMirror> mirrs;
 
     try {
-      zypp::media::MetaLinkParser parser;
-      parser.parse( targetPath );
 
-      // we only care about the metalink chunks if we have no zchunk data
-#if ENABLE_ZCHUNK_COMPRESSION
-      if ( !_haveZckData ) {
-#else
-      if ( true ) {
-#endif
-        auto bl = parser.getBlockList();
-        if ( !bl.haveBlocks() )
-          MIL_MEDIA << "Got no blocks for URL " << spec.url() << " but got filesize? " << bl.getFilesize() << std::endl;
-        if ( bl.haveBlocks() || bl.haveFilesize() )
-          _blockList = std::move(bl);
-      }
+      const auto &parseMetadata = [&]( auto &&parser ) {
+        using T = std::decay_t<decltype (parser)>;
+        constexpr auto metalinkMode = std::is_same< T, zypp::media::MetaLinkParser>();
 
-      //migrate some settings from the base url to the mirror
-      mirrs = parser.getMirrors();
-      for ( auto urliter = mirrs.begin(); urliter != mirrs.end(); ++urliter ) {
-        try {
-          const std::string scheme = urliter->url.getScheme();
-          if (scheme == "http" || scheme == "https" || scheme == "ftp" || scheme == "tftp") {
-            if ( !sm._requestDispatcher->supportsProtocol( urliter->url )) {
-              urliter = mirrs.erase( urliter );
-              continue;
-            }
-            urliter->url = ::internal::propagateQueryParams( urliter->url, url );
-            _mirrors.push_back( urliter->url );
-          }
+        parser.parse( targetPath );
+
+        // we only care about the metalink chunks if we have no zchunk data
+  #if ENABLE_ZCHUNK_COMPRESSION
+        if ( !_haveZckData ) {
+  #else
+        if ( true ) {
+  #endif
+          auto bl = parser.getBlockList();
+          if ( !bl.haveBlocks() )
+            MIL_MEDIA << "Got no blocks for URL " << spec.url() << " but got filesize? " << bl.getFilesize() << std::endl;
+          if ( bl.haveBlocks() || bl.haveFilesize() )
+            _blockList = std::move(bl);
         }
-        catch (...) {  }
-      }
 
-      if ( mirrs.empty() ) {
-        mirrs.push_back( { 0, -1, url } );
-        _mirrors.push_back( url );
-      }
+        //migrate some settings from the base url to the mirror
+        if constexpr ( !metalinkMode ) {
+          const auto &urlList = parser.getUrls();
+          std::for_each( urlList.begin(), urlList.end(), [&]( const auto &url ) {
+            mirrs.push_back( { 0, -1, url } );
+          });
+        } else {
+          mirrs = parser.getMirrors();
+        }
 
+        for ( auto urliter = mirrs.begin(); urliter != mirrs.end(); ++urliter ) {
+          try {
+            const std::string scheme = urliter->url.getScheme();
+            if (scheme == "http" || scheme == "https" || scheme == "ftp" || scheme == "tftp") {
+              if ( !sm._requestDispatcher->supportsProtocol( urliter->url )) {
+                urliter = mirrs.erase( urliter );
+                continue;
+              }
+              urliter->url = ::internal::propagateQueryParams( urliter->url, url );
+              _mirrors.push_back( urliter->url );
+            }
+          }
+          catch (...) {  }
+        }
+
+        if ( mirrs.empty() ) {
+          mirrs.push_back( { 0, -1, url } );
+          _mirrors.push_back( url );
+        }
+      };
+
+      switch( _mode ) {
+        case Zsync: {
+          parseMetadata( zypp::media::ZsyncParser() );
+          break;
+        }
+        case Metalink: {
+          parseMetadata( zypp::media::MetaLinkParser() );
+          break;
+        }
+      }
     } catch ( const zypp::Exception &ex ) {
-      _error = NetworkRequestErrorPrivate::customError( NetworkRequestError::InternalError, zypp::str::Format("Failed to parse metalink information.(%1%)" ) % ex.asUserString() );
+      const auto &err = zypp::str::Format("Failed to parse metalink information.(%1%)" ) % ex.asUserString();
+      DBG << err << std::endl;
+      _error = NetworkRequestErrorPrivate::customError( NetworkRequestError::InternalError, err);
       _sigFailed.emit();
       return;
     }
 
     if ( mirrs.size() == 0 ) {
-      _error = NetworkRequestErrorPrivate::customError( NetworkRequestError::InternalError, zypp::str::Format("Invalid metalink information.( No mirrors in metalink file)" ) );
+      const auto &err =  zypp::str::Format("Invalid metalink information.( No mirrors in metalink file)" );
+      DBG << err << std::endl;
+      _error = NetworkRequestErrorPrivate::customError( NetworkRequestError::InternalError, err );
       _sigFailed.emit();
       return;
     }

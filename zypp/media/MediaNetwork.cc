@@ -379,7 +379,8 @@ namespace zypp {
           case zyppng::NetworkRequestError::PeerCertificateInvalid:
           case zyppng::NetworkRequestError::ConnectionFailed:
           case zyppng::NetworkRequestError::ServerReturnedError:
-          case zyppng::NetworkRequestError::MissingData:  {
+          case zyppng::NetworkRequestError::MissingData:
+          case zyppng::NetworkRequestError::RangeFail: {
             excp = ZYPP_EXCPT_PTR( zypp::media::MediaCurlException( spec.url(), error.toString(), error.nativeErrorString() ) );
             break;
           }

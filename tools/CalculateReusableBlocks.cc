@@ -1,6 +1,6 @@
 #include <zypp-curl/parser/MediaBlockList>
 #include <zypp-curl/parser/MetaLinkParser>
-#include <zypp/media/ZsyncParser.h>
+#include <zypp-curl/parser/ZsyncParser>
 #include <zypp-core/Pathname.h>
 #include <zypp-core/fs/PathInfo.h>
 #include <zypp-core/fs/TmpPath.h>
@@ -71,7 +71,7 @@ int main ( int argc, char *argv[] )
 
   std::cout << "Blocks parsed from Metalink file: " << numBlocksBefore << std::endl;
   if ( numBlocksBefore ) {
-    zypp::AutoFILE f( fopen( file.path().c_str(), "w"));
+    zypp::AutoFILE f( fopen( "Out.test.gz", "w"));
     if ( *f ) {
       blocks.reuseBlocks( *f, deltaFile.asString() );
     }

@@ -131,14 +131,17 @@ SET( zypp_curl_parser_HEADERS
   parser/mediablocklist.h
   parser/MetaLinkParser
   parser/metalinkparser.h
+  parser/ZsyncParser
+  parser/zsyncparser.h
 )
 
 SET( zypp_curl_parser_private_HEADERS
 )
 
 SET( zypp_curl_parser_SRCS
-  parser/mediablocklist.cc
+  parser/mediablocklist.cc  
   parser/metalinkparser.cc
+  parser/zsyncparser.cc
 )
 
 INSTALL(  FILES ${zypp_curl_parser_HEADERS} DESTINATION "${INCLUDE_INSTALL_DIR}/zypp-curl/parser" )

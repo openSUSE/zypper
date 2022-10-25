@@ -257,7 +257,6 @@ SET( zypp_media_SRCS
   media/MediaSource.cc
   media/MediaManager.cc
   media/MediaPriority.cc
-  media/ZsyncParser.cc
   media/UrlResolverPlugin.cc
 )
 
@@ -279,7 +278,6 @@ SET( zypp_media_HEADERS
   media/MediaNFS.h
   media/MediaSource.h
   media/MediaPriority.h
-  media/ZsyncParser.h
   media/UrlResolverPlugin.h
 )
 

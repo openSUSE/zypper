@@ -17,9 +17,9 @@
 
 namespace zyppng {
 
-  void InitialState::enter(){ MIL << "Entering initial state"  << std::endl; }
+  void InitialState::enter(){ MIL_MEDIA << "Entering initial state"  << std::endl; }
 
-  void InitialState::exit(){  MIL << "Leaving initial state"  << std::endl;  }
+  void InitialState::exit(){  MIL_MEDIA << "Leaving initial state"  << std::endl;  }
 
   void InitialState::initiate()
   {

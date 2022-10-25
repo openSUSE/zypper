@@ -33,6 +33,85 @@
 
 namespace zyppng {
 
+  void dump(const char *text,
+      FILE *stream, unsigned char *ptr, size_t size)
+  {
+    size_t i;
+    size_t c;
+    unsigned int width=0x10;
+
+    DBG << zypp::str::form ( "%s, %10.10ld bytes (0x%8.8lx)\n", text, (long)size, (long)size );
+
+    for(i=0; i<size; i+= width) {
+
+      DBG << zypp::str::form ( "%4.4lx: ", (long)i );
+
+      /* show hex to the left */
+      for(c = 0; c < width; c++) {
+        if(i+c < size)
+          DBG << zypp::str::form("%02x ", ptr[i+c]);
+        else
+          DBG << ("   ");
+      }
+
+      /* show data on the right */
+      for(c = 0; (c < width) && (i+c < size); c++) {
+        char x = (ptr[i+c] >= 0x20 && ptr[i+c] < 0x80) ? ptr[i+c] : '.';
+        DBG << x;
+      }
+
+      DBG << std::endl;
+    }
+  }
+
+  int log_curl_all(CURL *handle, curl_infotype type,
+      char *data, size_t size,
+      void *userp)
+  {
+    const char *text;
+
+    long maxlvl = userp == nullptr ? 3 :  *((long *)userp);
+
+    (void)handle; /* prevent compiler warning */
+    (void)userp;
+
+    switch (type) {
+      case CURLINFO_TEXT:
+        DBG << "== Info: ";
+        DBG << std::string( data, size ) << std::endl;
+
+      default: /* in case a new one is introduced to shock us */
+        return 0;
+
+      case CURLINFO_HEADER_OUT:
+        text = "=> Send header: ";
+        DBG << std::string( data, size ) << std::endl;
+        return 0;
+      case CURLINFO_DATA_OUT:
+        text = "=> Send data";
+        break;
+      case CURLINFO_SSL_DATA_OUT:
+        text = "=> Send SSL data";
+        break;
+      case CURLINFO_HEADER_IN:
+        text = "<= Recv header: ";
+        DBG << std::string( data, size ) << std::endl;
+        return 0;
+      case CURLINFO_DATA_IN:
+        text = "<= Recv data";
+        break;
+      case CURLINFO_SSL_DATA_IN:
+        text = "<= Recv SSL data";
+        break;
+    }
+
+    if ( maxlvl > 4 )
+      dump(text, stderr, (unsigned char *)data, size);
+    else
+      DBG << " " << size << " bytes " << std::endl;
+    return 0;
+  }
+
   namespace  {
     static size_t nwr_headerCallback (  char *ptr, size_t size, size_t nmemb, void *userdata  ) {
       if ( !userdata )
@@ -71,24 +150,37 @@ namespace zyppng {
     return data;
   }
 
-  NetworkRequest::Range NetworkRequest::Range::make(size_t start, size_t len, zyppng::NetworkRequest::DigestPtr &&digest, zyppng::NetworkRequest::CheckSumBytes &&expectedChkSum, std::any &&userData, std::optional<size_t> digestCompareLen )
+  NetworkRequest::Range NetworkRequest::Range::make(size_t start, size_t len, zyppng::NetworkRequest::DigestPtr &&digest, zyppng::NetworkRequest::CheckSumBytes &&expectedChkSum, std::any &&userData, std::optional<size_t> digestCompareLen, std::optional<size_t> dataBlockPadding )
   {
     return NetworkRequest::Range {
-      start,
-      len,
-      0,
-      std::move( digest ),
-      std::move( expectedChkSum ),
-      std::move( digestCompareLen ),
-      false,
-      std::move( userData )
+      .start = start,
+      .len   = len,
+      .bytesWritten = 0,
+      ._digest   = std::move( digest ),
+      ._checksum = std::move( expectedChkSum ),
+      ._relevantDigestLen = std::move( digestCompareLen ),
+      ._chksumPad  = std::move( dataBlockPadding ),
+      .userData = std::move( userData ),
+      ._rangeState = State::Pending
     };
   }
 
+  NetworkRequestPrivate::prepareNextRangeBatch_t::prepareNextRangeBatch_t(running_t &&prevState)
+    : _outFile( std::move(prevState._outFile) )
+    , _downloaded( prevState._downloaded )
+    , _rangeAttemptIdx( prevState._rangeAttemptIdx )
+  { }
+
   NetworkRequestPrivate::running_t::running_t( pending_t &&prevState )
     : _requireStatusPartial( prevState._requireStatusPartial )
-  {
-  }
+  { }
+
+  NetworkRequestPrivate::running_t::running_t( prepareNextRangeBatch_t &&prevState )
+    : _outFile( std::move(prevState._outFile) )
+    , _requireStatusPartial( true )
+    , _downloaded( prevState._downloaded )
+    , _rangeAttemptIdx( prevState._rangeAttemptIdx )
+  { }
 
   NetworkRequestPrivate::NetworkRequestPrivate(Url &&url, zypp::Pathname &&targetFile, NetworkRequest::FileMode fMode , NetworkRequest &p)
     : BasePrivate(p)
@@ -117,9 +209,11 @@ namespace zyppng {
       curl_easy_reset( _easyHandle );
     else
       _easyHandle = curl_easy_init();
+    return setupHandle ( errBuf );
+  }
 
-    _originalError.reset();
-    _errorBuf.fill( '\0' );
+  bool NetworkRequestPrivate::setupHandle( std::string &errBuf )
+  {
     curl_easy_setopt( _easyHandle, CURLOPT_ERRORBUFFER, this->_errorBuf.data() );
 
     const std::string urlScheme = _url.getScheme();
@@ -158,83 +252,21 @@ namespace zyppng {
       }
 
       if( !( _options & NetworkRequest::ConnectionTest ) && !( _options & NetworkRequest::HeadRequest ) ){
-        std::string rangeDesc;
-
         if ( _requestedRanges.size() ) {
-
-          if ( _requestedRanges.size() > 1 && _protocolMode != ProtocolMode::HTTP ) {
-            errBuf = "Using more than one range is not supported with protocols other than HTTP/HTTPS";
+          if ( ! prepareNextRangeBatch ( errBuf ))
             return false;
-          }
-
-          // check if we have one big range convering the whole file
-          if ( _requestedRanges.size() == 1 && _requestedRanges.front().start == 0 && _requestedRanges.front().len == 0 ) {
-            std::get<pending_t>( _runningMode )._requireStatusPartial = false;
-
-          } else {
-            std::sort( _requestedRanges.begin(), _requestedRanges.end(), []( const auto &elem1, const auto &elem2 ){
-              return ( elem1.start < elem2.start );
-            });
-
-            std::get<pending_t>( _runningMode )._requireStatusPartial = true;
-
-            // helper function to build up the request string for the range
-            auto addRangeString = [ &rangeDesc ]( const std::pair<size_t, size_t> &range ) {
-              std::string rangeD = zypp::str::form("%llu-", static_cast<unsigned long long>( range.first ) );
-              if( range.second > 0 )
-                rangeD.append( zypp::str::form( "%llu", static_cast<unsigned long long>( range.second ) ) );
-
-              if ( rangeDesc.size() )
-                rangeDesc.append(",").append( rangeD );
-              else
-                rangeDesc = std::move( rangeD );
-            };
-
-            std::optional<std::pair<size_t, size_t>> currentZippedRange;
-            bool closedRange = true;
-            for ( auto &range : _requestedRanges ) {
-
-              //reset the download results
-              range._valid = false;
-              range.bytesWritten = 0;
-
-              //when we have a open range in the list of ranges we will get from start of range to end of file,
-              //all following ranges would never be marked as valid, so we have to fail early
-              if ( !closedRange ) {
-                errBuf = "It is not supported to request more ranges after a open range.";
-                return false;
-              }
-
-              const auto rangeEnd = range.len > 0 ? range.start + range.len - 1 : 0;
-              closedRange = (rangeEnd > 0);
-
-              // we try to compress the requested ranges into as big chunks as possible for the request,
-              // when receiving we still track the original ranges so we can collect and test their checksums
-              if ( !currentZippedRange ) {
-                currentZippedRange = std::make_pair( range.start, rangeEnd );
-              } else {
-                //range is directly consecutive to the previous range
-                if ( currentZippedRange->second + 1 == range.start ) {
-                  currentZippedRange->second = rangeEnd;
-                } else {
-                  //this range does not directly follow the previous one, we build the string and start a new one
-                  addRangeString( *currentZippedRange );
-                  currentZippedRange = std::make_pair( range.start, rangeEnd );
-                }
-              }
-            }
-
-            // add the last range too
-            if ( currentZippedRange )
-              addRangeString( *currentZippedRange );
-
-            setCurlOption( CURLOPT_RANGE, rangeDesc.c_str() );
-          }
         } else {
-          std::get<pending_t>( _runningMode )._requireStatusPartial = false;
+          std::visit( [&]( auto &arg ){
+            using T = std::decay_t<decltype(arg)>;
+            if constexpr ( std::is_same_v<T, pending_t> ) {
+              arg._requireStatusPartial = false;
+            } else {
+              DBG << "NetworkRequestPrivate::setupHandle called in unexpected state" << std::endl;
+            }
+          }, _runningMode );
           _requestedRanges.push_back( NetworkRequest::Range() );
+          _requestedRanges.back()._rangeState = NetworkRequest::State::Pending;
         }
-
       }
 
       //make a local copy of the settings, so headers are not added multiple times
@@ -265,7 +297,10 @@ namespace zyppng {
         if( _curlDebug > 0)
         {
           setCurlOption( CURLOPT_VERBOSE, 1L);
-          setCurlOption( CURLOPT_DEBUGFUNCTION, ::internal::log_curl);
+          if ( _curlDebug >= 3 )
+            setCurlOption( CURLOPT_DEBUGFUNCTION, log_curl_all );
+          else
+            setCurlOption( CURLOPT_DEBUGFUNCTION, ::internal::log_curl);
           setCurlOption( CURLOPT_DEBUGDATA, &_curlDebug);
         }
       }
@@ -453,9 +488,171 @@ namespace zyppng {
     return false;
   }
 
-  void NetworkRequestPrivate::aboutToStart()
+  bool NetworkRequestPrivate::canRecover() const
   {
-    _runningMode = running_t( std::move(std::get<pending_t>( _runningMode )) );
+    // We can recover from RangeFail errors if we have more batch sizes to try
+    auto rmode = std::get_if<NetworkRequestPrivate::running_t>( &_runningMode );
+    if ( rmode->_cachedResult && rmode->_cachedResult->type() == NetworkRequestError::RangeFail )
+      return ( rmode->_rangeAttemptIdx + 1 < sizeof( _rangeAttempt ) ) && hasMoreWork();
+    return false;
+  }
+
+  bool NetworkRequestPrivate::prepareToContinue( std::string &errBuf )
+  {
+    auto rmode = std::get_if<NetworkRequestPrivate::running_t>( &_runningMode );
+
+    if ( hasMoreWork() ) {
+      // go to the next range batch level if we are restarted due to a failed range request
+      if ( rmode->_cachedResult && rmode->_cachedResult->type() == NetworkRequestError::RangeFail ) {
+        if ( rmode->_rangeAttemptIdx + 1 >= sizeof( _rangeAttempt ) ) {
+          errBuf = "No more range batch sizes available";
+          return false;
+        }
+        rmode->_rangeAttemptIdx++;
+      }
+
+      _runningMode = prepareNextRangeBatch_t( std::move(std::get<running_t>( _runningMode )) );
+
+      // we reset the handle to default values. We do this to not run into
+      // "transfer closed with outstanding read data remaining" error CURL sometimes returns when
+      // we cancel a connection because of a range error to request a smaller batch.
+      // The error will still happen but much less frequently than without resetting the handle.
+      //
+      // Note: Even creating a new handle will NOT fix the issue
+      curl_easy_reset( _easyHandle );
+      if ( !setupHandle (errBuf) )
+        return false;
+      return true;
+    }
+    errBuf = "Request has no more work";
+    return false;
+
+  }
+
+  bool NetworkRequestPrivate::prepareNextRangeBatch(std::string &errBuf)
+  {
+    if ( _requestedRanges.size() == 0 ) {
+      errBuf = "Calling the prepareNextRangeBatch function without a range to download is not supported.";
+      return false;
+    }
+
+    std::string rangeDesc;
+    uint rangesAdded = 0;
+    if ( _requestedRanges.size() > 1 && _protocolMode != ProtocolMode::HTTP ) {
+      errBuf = "Using more than one range is not supported with protocols other than HTTP/HTTPS";
+      return false;
+    }
+
+    // check if we have one big range convering the whole file
+    if ( _requestedRanges.size() == 1 && _requestedRanges.front().start == 0 && _requestedRanges.front().len == 0 ) {
+      if ( !std::holds_alternative<pending_t>( _runningMode ) ) {
+        errBuf = zypp::str::Str() << "Unexpected state when calling prepareNextRangeBatch " << _runningMode.index ();
+        return false;
+      }
+
+      _requestedRanges[0]._rangeState = NetworkRequest::Running;
+      std::get<pending_t>( _runningMode )._requireStatusPartial = false;
+
+    } else {
+      std::sort( _requestedRanges.begin(), _requestedRanges.end(), []( const auto &elem1, const auto &elem2 ){
+        return ( elem1.start < elem2.start );
+      });
+
+      if ( std::holds_alternative<pending_t>( _runningMode ) )
+        std::get<pending_t>( _runningMode )._requireStatusPartial = true;
+
+      auto maxRanges = _rangeAttempt[0];
+      if ( std::holds_alternative<prepareNextRangeBatch_t>( _runningMode ) )
+        maxRanges = _rangeAttempt[std::get<prepareNextRangeBatch_t>( _runningMode )._rangeAttemptIdx];
+
+      // helper function to build up the request string for the range
+      auto addRangeString = [ &rangeDesc, &rangesAdded ]( const std::pair<size_t, size_t> &range ) {
+        std::string rangeD = zypp::str::form("%llu-", static_cast<unsigned long long>( range.first ) );
+        if( range.second > 0 )
+          rangeD.append( zypp::str::form( "%llu", static_cast<unsigned long long>( range.second ) ) );
+
+        if ( rangeDesc.size() )
+          rangeDesc.append(",").append( rangeD );
+        else
+          rangeDesc = std::move( rangeD );
+
+        rangesAdded++;
+      };
+
+      std::optional<std::pair<size_t, size_t>> currentZippedRange;
+      bool closedRange = true;
+      for ( auto &range : _requestedRanges ) {
+
+        if ( range._rangeState != NetworkRequest::Pending )
+          continue;
+
+        //reset the download results
+        range.bytesWritten = 0;
+
+        //when we have a open range in the list of ranges we will get from start of range to end of file,
+        //all following ranges would never be marked as valid, so we have to fail early
+        if ( !closedRange ) {
+          errBuf = "It is not supported to request more ranges after a open range.";
+          return false;
+        }
+
+        const auto rangeEnd = range.len > 0 ? range.start + range.len - 1 : 0;
+        closedRange = (rangeEnd > 0);
+
+        // remember this range was already requested
+        range._rangeState  = NetworkRequest::Running;
+        range.bytesWritten = 0;
+        if ( range._digest )
+          range._digest->reset();
+
+        // we try to compress the requested ranges into as big chunks as possible for the request,
+        // when receiving we still track the original ranges so we can collect and test their checksums
+        if ( !currentZippedRange ) {
+          currentZippedRange = std::make_pair( range.start, rangeEnd );
+        } else {
+          //range is directly consecutive to the previous range
+          if ( currentZippedRange->second + 1 == range.start ) {
+            currentZippedRange->second = rangeEnd;
+          } else {
+            //this range does not directly follow the previous one, we build the string and start a new one
+            addRangeString( *currentZippedRange );
+            currentZippedRange = std::make_pair( range.start, rangeEnd );
+          }
+        }
+
+        if ( rangesAdded >= maxRanges ) {
+          MIL_MEDIA << "Reached max nr of ranges (" << maxRanges << "), batching the request to not break the server" << std::endl;
+          break;
+        }
+      }
+
+      // add the last range too
+      if ( currentZippedRange )
+        addRangeString( *currentZippedRange );
+
+      MIL_MEDIA << "Requesting Ranges: " << rangeDesc << std::endl;
+
+      setCurlOption( CURLOPT_RANGE, rangeDesc.c_str() );
+    }
+
+    return true;
+  }
+
+  bool NetworkRequestPrivate::hasMoreWork() const
+  {
+    // check if we have ranges that have never been requested
+    return std::any_of( _requestedRanges.begin(), _requestedRanges.end(), []( const auto &range ){ return range._rangeState == NetworkRequest::Pending; });
+  }
+
+  void NetworkRequestPrivate::aboutToStart( )
+  {
+    bool isRangeContinuation = std::holds_alternative<prepareNextRangeBatch_t>( _runningMode );
+    if ( isRangeContinuation ) {
+      MIL_MEDIA << "Continuing a previously started range batch." << std::endl;
+      _runningMode = running_t( std::move(std::get<prepareNextRangeBatch_t>( _runningMode )) );
+    } else {
+      _runningMode = running_t( std::move(std::get<pending_t>( _runningMode )) );
+    }
 
     auto &m = std::get<running_t>( _runningMode );
 
@@ -464,7 +661,21 @@ namespace zyppng {
       m._activityTimer->start( static_cast<uint64_t>( _settings.timeout() * 1000 ) );
     }
 
-    _sigStarted.emit( *z_func() );
+    if ( !isRangeContinuation )
+      _sigStarted.emit( *z_func() );
+  }
+
+  void NetworkRequestPrivate::dequeueNotify()
+  {
+    if ( std::holds_alternative<running_t>(_runningMode) ) {
+      auto &rmode = std::get<running_t>( _runningMode );
+      // if we still have a current range set it valid by checking the checksum
+      if ( rmode._currentRange >= 0 ) {
+        auto &currR = _requestedRanges[rmode._currentRange];
+        rmode._currentRange = -1;
+        validateRange( currR );
+      }
+    }
   }
 
   void NetworkRequestPrivate::setResult( NetworkRequestError &&err )
@@ -481,19 +692,11 @@ namespace zyppng {
       resState._contentLenght = rmode._contentLenght;
 
       if ( resState._result.type() == NetworkRequestError::NoError && !(_options & NetworkRequest::HeadRequest) && !(_options & NetworkRequest::ConnectionTest) ) {
-
-        // check if the current range is a open range, if it is set it valid by checking the checksum
-        if ( rmode._currentRange >= 0 ) {
-          auto &currR = _requestedRanges[rmode._currentRange];
-          rmode._currentRange = -1;
-          validateRange( currR );
-        }
-
         //we have a successful download lets see if we got everything we needed
         for ( const auto &r : _requestedRanges ) {
-          if ( !r._valid ) {
+          if ( r._rangeState != NetworkRequest::Finished ) {
             if ( r.len > 0 && r.bytesWritten != r.len )
-              resState._result = NetworkRequestErrorPrivate::customError( NetworkRequestError::MissingData, (zypp::str::Format("Did not receive all requested data from the server.") ) );
+              resState._result = NetworkRequestErrorPrivate::customError( NetworkRequestError::MissingData, (zypp::str::Format("Did not receive all requested data from the server ( off: %1%, req: %2%, recv: %3% ).") % r.start % r.len % r.bytesWritten ) );
             else if ( r._digest && r._checksum.size() && ! checkIfRangeChkSumIsValid(r) )  {
               resState._result = NetworkRequestErrorPrivate::customError( NetworkRequestError::InvalidChecksum, (zypp::str::Format("Invalid checksum %1%, expected checksum %2%") % r._digest->digest() % zypp::Digest::digestVectorToString( r._checksum ) ) );
             } else {
@@ -514,9 +717,11 @@ namespace zyppng {
   {
     _protocolMode = ProtocolMode::Default;
     _headers.reset( nullptr );
-    _originalError.reset();
     _errorBuf.fill( 0 );
     _runningMode = pending_t();
+    std::for_each( _requestedRanges.begin (), _requestedRanges.end(), []( auto &range ) {
+        range._rangeState = NetworkRequest::Pending;
+    });
   }
 
   void NetworkRequestPrivate::onActivityTimeout( Timer & )
@@ -530,6 +735,12 @@ namespace zyppng {
   bool NetworkRequestPrivate::checkIfRangeChkSumIsValid ( const NetworkRequest::Range &rng )
   {
     if ( rng._digest && rng._checksum.size() ) {
+      auto bytesHashed = rng._digest->bytesHashed ();
+      if ( rng._chksumPad && *rng._chksumPad > bytesHashed ) {
+        MIL_MEDIA << "Padding the digest to required block size" << std::endl;
+        zypp::ByteArray padding( *rng._chksumPad - bytesHashed, '\0' );
+        rng._digest->update( padding.data(), padding.size() );
+      }
       auto digVec = rng._digest->digestVector();
       if ( rng._relevantDigestLen ) {
         digVec.resize( *rng._relevantDigestLen );
@@ -542,9 +753,15 @@ namespace zyppng {
   void NetworkRequestPrivate::validateRange( NetworkRequest::Range &rng )
   {
     if ( rng._digest && rng._checksum.size() ) {
-      rng._valid = checkIfRangeChkSumIsValid(rng);
+      if ( ( rng.len == 0 || rng.bytesWritten == rng.len ) && checkIfRangeChkSumIsValid(rng) )
+        rng._rangeState = NetworkRequest::Finished;
+      else
+        rng._rangeState = NetworkRequest::Error;
     } else {
-      rng._valid = rng.len == 0 ? true : rng.bytesWritten == rng.len;
+      if ( rng.len == 0 ? true : rng.bytesWritten == rng.len )
+        rng._rangeState = NetworkRequest::Finished;
+      else
+        rng._rangeState = NetworkRequest::Error;
     }
   }
 
@@ -555,7 +772,6 @@ namespace zyppng {
     zypp::str::smatch what;
     if( !zypp::str::regex_match( std::string(line), what, regex ) || what.size() != 4 ) {
       DBG << "Invalid Content-Range Header format: '" << std::string(line) << std::endl;
-      _originalError = "Invalid Content-Range header format.";
       return false;
     }
 
@@ -582,9 +798,6 @@ namespace zyppng {
 
   std::string NetworkRequestPrivate::errorMessage() const
   {
-    if ( _originalError )
-      return *_originalError;
-
     return std::string( _errorBuf.data() );
   }
 
@@ -656,7 +869,13 @@ namespace zyppng {
         // ignore other status codes, maybe we are redirected etc.
         if ( statuscode >= 200 && statuscode <= 299 ) {
           if ( rmode._requireStatusPartial && statuscode != 206 ) {
-            _originalError = "Expected range status code 206, but got none.";
+            rmode._cachedResult = NetworkRequestErrorPrivate::customError(  NetworkRequestError::RangeFail,  "Expected range status code 206, but got none." );
+
+            // reset all ranges we requested to pending, we never got the data for them
+            std::for_each( _requestedRanges.begin (), _requestedRanges.end(), []( auto &range ) {
+              if ( range._rangeState == NetworkRequest::Running )
+                range._rangeState = NetworkRequest::Pending;
+            });
             return 0;
           }
         }
@@ -672,8 +891,10 @@ namespace zyppng {
         }
       } else if ( zypp::strv::hasPrefixCI( hdr, "Content-Range:") ) {
         NetworkRequest::Range r;
-        if ( !parseContentRangeHeader( hdr, r.start, r.len) )
+        if ( !parseContentRangeHeader( hdr, r.start, r.len) ) {
+          rmode._cachedResult = NetworkRequestErrorPrivate::customError( NetworkRequestError::InternalError, "Invalid Content-Range header format." );
           return 0;
+        }
         DBG_MEDIA << "Got content range :" << r.start << " len " << r.len << std::endl;
         rmode._gotContentRangeHeader = true;
         rmode._currentSrvRange = r;
@@ -730,7 +951,8 @@ namespace zyppng {
         }
 
         if ( !rmode._outFile ) {
-          _originalError = zypp::str::Format("Unable to open target file (%1%). Errno: (%2%:%3%)") % _targetFile.asString() % errno % strerr_cxx();
+          rmode._cachedResult = NetworkRequestErrorPrivate::customError(  NetworkRequestError::InternalError
+            ,zypp::str::Format("Unable to open target file (%1%). Errno: (%2%:%3%)") % _targetFile.asString() % errno % strerr_cxx() );
           return 0;
         }
       }
@@ -738,7 +960,8 @@ namespace zyppng {
       // seek to the given offset
       if ( offset >= 0 ) {
         if ( fseek( rmode._outFile, offset, SEEK_SET ) != 0 ) {
-          _originalError = "Unable to set output file pointer.";
+          rmode._cachedResult = NetworkRequestErrorPrivate::customError(  NetworkRequestError::InternalError,
+            "Unable to set output file pointer." );
           return 0;
         }
       }
@@ -748,7 +971,7 @@ namespace zyppng {
 
       //make sure we do not write after the expected file size
       if ( _expectedFileSize && _expectedFileSize <= static_cast<zypp::ByteCount::SizeType>(rng.start + rng.bytesWritten + bytesToWrite) ) {
-        _originalError = "Downloaded data exceeds expected length.";
+        rmode._cachedResult = NetworkRequestErrorPrivate::customError(  NetworkRequestError::InternalError, "Downloaded data exceeds expected length." );
         return 0;
       }
 
@@ -799,7 +1022,8 @@ namespace zyppng {
 
           if ( rmode._requireStatusPartial ) {
             //we got a invalid response, the status code pointed to being partial but we got no range definition
-            _originalError = "Invalid data from server, range respone was announced but there was no range definiton.";
+            rmode._cachedResult = NetworkRequestErrorPrivate::customError(  NetworkRequestError::ServerReturnedError,
+              "Invalid data from server, range respone was announced but there was no range definiton." );
             return 0;
           }
 
@@ -827,7 +1051,7 @@ namespace zyppng {
           const auto &currR = _requestedRanges[i];
 
           // do not allow double ranges
-          if ( currR._valid )
+          if ( currR._rangeState == NetworkRequest::Finished || currR._rangeState == NetworkRequest::Error )
             continue;
 
           // check if the range was already written
@@ -853,7 +1077,8 @@ namespace zyppng {
           }
         }
         if ( !foundRange ) {
-          _originalError = "Unable to find a matching range for data returned by the server.";
+          rmode._cachedResult = NetworkRequestErrorPrivate::customError(  NetworkRequestError::InternalError
+            , "Unable to find a matching range for data returned by the server." );
           return 0;
         }
 
@@ -905,12 +1130,12 @@ namespace zyppng {
         std::string_view data( rmode._rangePrefaceBuffer.data(), rmode._rangePrefaceBuffer.size() );
         auto sepStrIndex = data.find( rmode._seperatorString );
         if ( sepStrIndex == data.npos ) {
-          _originalError = "Invalid multirange header format, seperator string missing.";
+          rmode._cachedResult = NetworkRequestErrorPrivate::customError( NetworkRequestError::InternalError,
+            "Invalid multirange header format, seperator string missing." );
           return 0;
         }
 
         auto startOfHeader = sepStrIndex + rmode._seperatorString.length();
-
         std::vector<std::string_view> lines;
         zypp::strv::split( data.substr( startOfHeader ), "\r\n", zypp::strv::Trim::trim, [&]( std::string_view strv ) { lines.push_back(strv); } );
         for ( const auto &hdrLine : lines ) {
@@ -918,7 +1143,7 @@ namespace zyppng {
             NetworkRequest::Range r;
             //if we can not parse the header the message must be broken
             if(! parseContentRangeHeader( hdrLine, r.start, r.len ) ) {
-              WAR << "Broken header for Network Request to " << _url << std::endl;
+              rmode._cachedResult = NetworkRequestErrorPrivate::customError( NetworkRequestError::InternalError, "Invalid Content-Range header format." );
               return 0;
             }
             rmode._currentSrvRange = r;
@@ -975,13 +1200,13 @@ namespace zyppng {
     return d_func()->_options;
   }
 
-  void NetworkRequest::addRequestRange( size_t start, size_t len, DigestPtr digest, CheckSumBytes expectedChkSum , std::any userData, std::optional<size_t> digestCompareLen  )
+  void NetworkRequest::addRequestRange( size_t start, size_t len, DigestPtr digest, CheckSumBytes expectedChkSum , std::any userData, std::optional<size_t> digestCompareLen, std::optional<size_t> chksumpad  )
   {
     Z_D();
     if ( state() == Running )
       return;
 
-    d->_requestedRanges.push_back( Range::make( start, len, std::move(digest), std::move( expectedChkSum ), std::move( userData ), digestCompareLen ) );
+    d->_requestedRanges.push_back( Range::make( start, len, std::move(digest), std::move( expectedChkSum ), std::move( userData ), digestCompareLen, chksumpad ) );
   }
 
   void NetworkRequest::addRequestRange( const NetworkRequest::Range &range )
@@ -990,7 +1215,12 @@ namespace zyppng {
     if ( state() == Running )
       return;
 
-     d->_requestedRanges.push_back( range );
+    d->_requestedRanges.push_back( range );
+    auto &rng = d->_requestedRanges.back();
+    rng._rangeState = NetworkRequest::Pending;
+    rng.bytesWritten = 0;
+    if ( rng._digest )
+      rng._digest->reset();
   }
 
   void NetworkRequest::resetRequestRanges()
@@ -1011,7 +1241,7 @@ namespace zyppng {
 
     std::vector<Range> failed;
     for ( const auto &r : d->_requestedRanges ) {
-      if ( !r._valid )
+      if ( r._rangeState != NetworkRequest::Finished )
         failed.push_back( r );
     }
     return failed;
@@ -1063,6 +1293,9 @@ namespace zyppng {
   std::vector<char> NetworkRequest::peekData( off_t offset, size_t count ) const
   {
     Z_D();
+
+    if ( !std::holds_alternative<NetworkRequestPrivate::running_t>( d->_runningMode) )
+      return {};
 
     const auto &rmode = std::get<NetworkRequestPrivate::running_t>( d->_runningMode );
     return peek_data_fd( rmode._outFile, offset, count );
@@ -1118,9 +1351,9 @@ namespace zyppng {
 
   zypp::ByteCount NetworkRequest::reportedByteCount() const
   {
-    return std::visit([](auto&& arg) -> zypp::ByteCount {
+    return std::visit([](auto& arg) -> zypp::ByteCount {
       using T = std::decay_t<decltype(arg)>;
-      if constexpr (std::is_same_v<T, NetworkRequestPrivate::pending_t>)
+      if constexpr (std::is_same_v<T, NetworkRequestPrivate::pending_t> || std::is_same_v<T, NetworkRequestPrivate::prepareNextRangeBatch_t> )
         return zypp::ByteCount(0);
       else if constexpr (std::is_same_v<T, NetworkRequestPrivate::running_t>
                          || std::is_same_v<T, NetworkRequestPrivate::finished_t>)
@@ -1132,11 +1365,12 @@ namespace zyppng {
 
   zypp::ByteCount NetworkRequest::downloadedByteCount() const
   {
-    return std::visit([](auto&& arg) -> zypp::ByteCount {
+    return std::visit([](auto& arg) -> zypp::ByteCount {
       using T = std::decay_t<decltype(arg)>;
       if constexpr (std::is_same_v<T, NetworkRequestPrivate::pending_t>)
         return zypp::ByteCount();
       else if constexpr (std::is_same_v<T, NetworkRequestPrivate::running_t>
+                          || std::is_same_v<T, NetworkRequestPrivate::prepareNextRangeBatch_t>
                           || std::is_same_v<T, NetworkRequestPrivate::finished_t>)
         return arg._downloaded;
       else
@@ -1151,11 +1385,11 @@ namespace zyppng {
 
   NetworkRequest::State NetworkRequest::state() const
   {
-    return std::visit([this](auto&& arg) {
+    return std::visit([this](auto& arg) {
       using T = std::decay_t<decltype(arg)>;
       if constexpr (std::is_same_v<T, NetworkRequestPrivate::pending_t>)
         return Pending;
-      else if constexpr (std::is_same_v<T, NetworkRequestPrivate::running_t>)
+      else if constexpr (std::is_same_v<T, NetworkRequestPrivate::running_t> || std::is_same_v<T, NetworkRequestPrivate::prepareNextRangeBatch_t> )
         return Running;
       else if constexpr (std::is_same_v<T, NetworkRequestPrivate::finished_t>) {
         if ( std::get<NetworkRequestPrivate::finished_t>( d_func()->_runningMode )._result.isError() )
@@ -1222,4 +1456,5 @@ namespace zyppng {
   {
     return d_func()->_sigFinished;
   }
+
 }

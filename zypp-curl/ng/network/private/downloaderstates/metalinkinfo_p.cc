@@ -20,14 +20,19 @@ namespace zyppng {
 
     constexpr auto minMetalinkProbeSize = 256; //< The maximum probe size we download before we decide we really got no metalink file
 
-    bool looks_like_metalink_data( const std::vector<char> &data )
+    MetaDataType looks_like_meta_data( const std::vector<char> &data )
     {
       if ( data.empty() )
-        return false;
+        return MetaDataType::None;
 
       const char *p = data.data();
       while (*p == ' ' || *p == '\t' || *p == '\r' || *p == '\n')
         p++;
+
+      // If we have a zsync file, it has to start with zsync:
+      if ( !strncasecmp( p, "zsync:", 6 ) ) {
+        return MetaDataType::Zsync;
+      }
 
       if (!strncasecmp(p, "<?xml", 5))
       {
@@ -39,28 +44,31 @@ namespace zyppng {
           p++;
       }
       bool ret = !strncasecmp( p, "<metalink", 9 ) ? true : false;
-      return ret;
+      if ( ret )
+        return MetaDataType::MetaLink;
+
+      return MetaDataType::None;
     }
 
-    bool looks_like_metalink_file( const zypp::Pathname &file )
+    MetaDataType looks_like_meta_file( const zypp::Pathname &file )
     {
       std::unique_ptr<FILE, decltype(&fclose)> fd( fopen( file.c_str(), "r" ), &fclose );
       if ( !fd )
-        return false;
-      return looks_like_metalink_data( zyppng::peek_data_fd( fd.get(), 0, minMetalinkProbeSize ) );
+        return MetaDataType::None;
+      return looks_like_meta_data( zyppng::peek_data_fd( fd.get(), 0, minMetalinkProbeSize )  );
     }
   }
 
   DlMetaLinkInfoState::DlMetaLinkInfoState(DownloadPrivate &parent)
     : BasicDownloaderStateBase( parent )
   {
-    MIL_MEDIA << "Downloading metalink on " << parent._spec.url() << std::endl;
+    MIL_MEDIA << "Downloading metalink/zsync on " << parent._spec.url() << std::endl;
   }
 
   DlMetaLinkInfoState::DlMetaLinkInfoState(std::shared_ptr<Request> &&prevRequest, DownloadPrivate &parent)
     : BasicDownloaderStateBase( std::move(prevRequest), parent )
   {
-    MIL_MEDIA << "Downloading metalink on " << parent._spec.url() << std::endl;
+    MIL_MEDIA << "Downloading metalink/zsync on " << parent._spec.url() << std::endl;
   }
 
   std::shared_ptr<FinishedState> DlMetaLinkInfoState::transitionToFinished()
@@ -72,15 +80,16 @@ namespace zyppng {
   std::shared_ptr<PrepareMultiState> DlMetaLinkInfoState::transitionToPrepareMulti()
   {
     _request->disconnectSignals();
-    auto nState = std::make_shared<PrepareMultiState>( std::move( _request ), stateMachine() );
+    auto prepareMode = ( _detectedMetaType == MetaDataType::MetaLink ? PrepareMultiState::Metalink : PrepareMultiState::Zsync );
+    auto nState = std::make_shared<PrepareMultiState>( std::move( _request ), prepareMode, stateMachine() );
     _request = nullptr;
     return nState;
   }
 
   bool DlMetaLinkInfoState::initializeRequest(std::shared_ptr<Request> &r )
   {
-    MIL << "Requesting Metalink info from server!" << std::endl;
-    r->transferSettings().addHeader("Accept: */*, application/metalink+xml, application/metalink4+xml");
+    MIL << "Requesting Metadata info from server!" << std::endl;
+    r->transferSettings().addHeader("Accept: */*, application/x-zsync, application/metalink+xml, application/metalink4+xml");
     return BasicDownloaderStateBase::initializeRequest(r);
   }
 
@@ -88,48 +97,54 @@ namespace zyppng {
   {
     // some proxies do not store the content type, so also look at the file to find
     // out if we received a metalink (bnc#649925)
-    if ( !_isMetalink )
-      _isMetalink = looks_like_metalink_file( _request->targetFilePath() );
-    if ( !_isMetalink ) {
+    if ( _detectedMetaType == MetaDataType::None )
+      _detectedMetaType = looks_like_meta_file( _request->targetFilePath() );
+    if ( _detectedMetaType == MetaDataType::None ) {
       // Move to finished state
-      MIL << "Downloading on " << stateMachine()._spec.url() << " was successful, no metalink data. " << std::endl;
+      MIL << "Downloading on " << stateMachine()._spec.url() << " was successful, no metalink/zsync data. " << std::endl;
       return BasicDownloaderStateBase::gotFinished();
     }
 
     auto &sm = stateMachine();
     if ( sm._stopOnMetalink ) {
-      MIL << "Stopping after receiving MetaLink data as requested" << std::endl;
+      MIL << "Stopping after receiving MetaData as requested" << std::endl;
       sm._stoppedOnMetalink = true;
       return BasicDownloaderStateBase::gotFinished();
     }
 
     // Move to Prepare Multi state
-    MIL << "Downloading on " << sm._spec.url() << " returned a Metalink " << std::endl;
-    _sigGotMetalink.emit();
+    if ( _detectedMetaType == MetaDataType::Zsync )
+      MIL << "Downloading on " << sm._spec.url() << " returned a Zsync file " << std::endl;
+    else
+      MIL << "Downloading on " << sm._spec.url() << " returned a Metalink file" << std::endl;
+    _sigGotMetadata.emit();
   }
 
   void DlMetaLinkInfoState::handleRequestProgress(NetworkRequest &req, off_t dltotal, off_t dlnow)
   {
     auto &sm = stateMachine();
 
-    if ( !_isMetalink && dlnow < minMetalinkProbeSize ) {
+    if ( _detectedMetaType == MetaDataType::None && dlnow < minMetalinkProbeSize ) {
       // can't tell yet, ...
       return sm._sigAlive.emit( *sm.z_func(), dlnow );
     }
 
-    if ( !_isMetalink ) {
+    if ( _detectedMetaType == MetaDataType::None ) {
       std::string cType = req.contentType();
-      _isMetalink = ( cType.find("application/metalink+xml") == 0 || cType.find("application/metalink4+xml") == 0 );
+      if ( cType.find("application/x-zsync") == 0 )
+        _detectedMetaType = MetaDataType::Zsync;
+      else if ( cType.find("application/metalink+xml") == 0 || cType.find("application/metalink4+xml") == 0 )
+        _detectedMetaType = MetaDataType::MetaLink;
     }
 
-    if ( !_isMetalink ) {
-      _isMetalink = looks_like_metalink_data( req.peekData( 0, minMetalinkProbeSize ) );
+    if ( _detectedMetaType == MetaDataType::None ) {
+      _detectedMetaType = looks_like_meta_data( req.peekData( 0, minMetalinkProbeSize ) );
     }
 
-    if ( _isMetalink ) {
+    if ( _detectedMetaType != MetaDataType::None ) {
       // this is a metalink file change the expected filesize
       if ( zypp::ByteCount( 2, zypp::ByteCount::MB) < static_cast<zypp::ByteCount::SizeType>( dlnow ) ) {
-        WAR << "Metalink file exceeds 2MB in filesize, aborting."<<std::endl;
+        WAR << "Metadata file exceeds 2MB in filesize, aborting."<<std::endl;
         sm._requestDispatcher->cancel( req, NetworkRequestErrorPrivate::customError( NetworkRequestError::ExceededMaxLen ) );
         return;
       }

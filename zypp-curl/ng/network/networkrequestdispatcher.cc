@@ -221,11 +221,35 @@ void NetworkRequestDispatcherPrivate::handleMultiSocketAction(curl_socket_t nati
       }
 
       NetworkRequestPrivate *request = reinterpret_cast<NetworkRequestPrivate *>( privatePtr );
+      request->dequeueNotify();
 
-      //trigger notification about file downloaded
-      NetworkRequestError e = NetworkRequestErrorPrivate::fromCurlError( *request->z_func(), res, request->errorMessage() );
-      setFinished( *request->z_func(), e );
+      if ( request->hasMoreWork() && ( res == CURLE_OK || request->canRecover() ) ) {
+        std::string errBuf = "Broken easy handle in request";
+        if ( !request->_easyHandle ) {
+          NetworkRequestError e = NetworkRequestErrorPrivate::customError ( NetworkRequestError::InternalError, std::move(errBuf) );
+          setFinished( *request->z_func(), e );
+          continue;
+        }
 
+        // remove the handle from multi to change options
+        curl_multi_remove_handle( _multi, request->_easyHandle );
+
+        errBuf = "Failed to reinitialize the request";
+        if ( !request->prepareToContinue ( errBuf ) ) {
+          NetworkRequestError e = NetworkRequestErrorPrivate::customError ( NetworkRequestError::InternalError, std::move(errBuf) );
+          setFinished( *request->z_func(), e );
+        } else {
+          // add the request back to the multi handle, it is not done
+          if ( !addRequestToMultiHandle( *request->z_func() ) )
+            continue;
+
+          request->aboutToStart( );
+        }
+      } else {
+        //trigger notification about file downloaded
+        NetworkRequestError e = NetworkRequestErrorPrivate::fromCurlError( *request->z_func(), res, request->errorMessage() );
+        setFinished( *request->z_func(), e );
+      }
       //attention request could be deleted from here on
     }
   }
@@ -295,6 +319,16 @@ void NetworkRequestDispatcherPrivate::setFinished( NetworkRequest &req, NetworkR
   dequeuePending();
 }
 
+bool NetworkRequestDispatcherPrivate::addRequestToMultiHandle(NetworkRequest &req)
+{
+  CURLMcode rc = curl_multi_add_handle( _multi, req.d_func()->_easyHandle );
+  if ( rc != 0 ) {
+    setFinished( req, NetworkRequestErrorPrivate::fromCurlMError( rc ) );
+    return false;
+  }
+  return true;
+}
+
 void NetworkRequestDispatcherPrivate::dequeuePending()
 {
   if ( !_isRunning || _locked )
@@ -314,11 +348,8 @@ void NetworkRequestDispatcherPrivate::dequeuePending()
       continue;
     }
 
-    CURLMcode rc = curl_multi_add_handle( _multi, req->d_func()->_easyHandle );
-    if ( rc != 0 ) {
-      setFinished( *req, NetworkRequestErrorPrivate::fromCurlMError( rc ) );
+    if ( !addRequestToMultiHandle( *req ) )
       continue;
-    }
 
     req->d_func()->aboutToStart();
     _sigDownloadStarted.emit( *z_func(), *req );

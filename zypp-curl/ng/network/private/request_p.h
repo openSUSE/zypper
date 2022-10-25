@@ -44,8 +44,49 @@ namespace zyppng {
     NetworkRequestPrivate(Url &&url, zypp::Pathname &&targetFile, NetworkRequest::FileMode fMode, NetworkRequest &p );
     virtual ~NetworkRequestPrivate();
 
-    bool initialize(std::string &errBuf );
-    void aboutToStart ();
+    bool initialize( std::string &errBuf );
+
+    bool setupHandle ( std::string &errBuf );
+
+    /*!
+     * \internal
+     * Called by the dispatcher if we report a error. If this function returns
+     * true we are qeued again and reinitialize is called
+     */
+    bool canRecover () const;
+
+    /*!
+     * Prepares the request before it is queued again
+     * currently this is used only for range batching but could be used to
+     * recover from other types of errors too
+     */
+    bool prepareToContinue ( std::string &errBuf  );
+
+    /*!
+     * Add the next batch of range descriptions to the curl handle
+     */
+    bool prepareNextRangeBatch( std::string &errBuf );
+
+    /*!
+     * \internal
+     * This will return true if the download needs to be queued again to
+     * continue downloading more stuff.
+     */
+    bool hasMoreWork() const;
+
+    /*!
+     * \internal
+     * Prepares the request to be started, or restarted for a range batch request.
+     */
+    void aboutToStart ( );
+
+    /*!
+     * \internal
+     * Tells the request it was just removed from the curl multi handle and is about
+     * to be finalized. This function is called before \ref hasPendingRanges and \ref setResult
+     */
+    void dequeueNotify();
+
     void setResult ( NetworkRequestError &&err );
     void reset ();
     void resetActivityTimer ();
@@ -59,7 +100,6 @@ namespace zyppng {
 
 
     std::array<char, CURL_ERROR_SIZE+1> _errorBuf; //provide a buffer for a nicely formatted error for CURL
-    std::optional<std::string> _originalError; // if this is initialized we manually set a error that caused the error stored in _errorBuf
 
     template<typename T>
     void setCurlOption ( CURLoption opt, T data )
@@ -99,13 +139,40 @@ namespace zyppng {
 
     std::unique_ptr< curl_slist, decltype (&curl_slist_free_all) > _headers;
 
+    // when requesting ranges from the server, we need to make sure not to request
+    // too many at the same time. Instead we batch our requests and reuse the open
+    // connection until we have the full file.
+    // However different server have different maximum nr of ranges, so we start with
+    // a high number and decrease until we find a rangecount that works
+    constexpr static int _rangeAttempt[] = {
+      255,
+      127,
+      63,
+      31,
+      15,
+      7
+    };
+
+    struct pending_t;
+    struct running_t;
+    struct prepareNextRangeBatch_t;
+
     struct pending_t {
       pending_t(){}
       bool _requireStatusPartial  = false;
     };
 
+    struct prepareNextRangeBatch_t
+    {
+      prepareNextRangeBatch_t( running_t &&prevState );
+      zypp::AutoFILE _outFile;     //the file we are writing to
+      off_t _downloaded       = 0; //downloaded bytes
+      int   _rangeAttemptIdx  = 0; // which range attempt index are we currently using
+    };
+
     struct running_t  {
       running_t( pending_t &&prevState );
+      running_t( prepareNextRangeBatch_t &&prevState );
 
       Timer::Ptr _activityTimer = Timer::create();
 
@@ -120,10 +187,14 @@ namespace zyppng {
 
       // handle the case when cancel() is called from a slot to the progress signal
       bool _isInCallback          = false;
+
+      // used to handle cancel() when emitting the progress signal, or when we explicitely trigger
+      // a error during callbacks.
       std::optional<NetworkRequestError> _cachedResult;
 
       off_t _lastProgressNow = -1; // last value returned from CURL, lets only send signals if we get actual updates
       off_t _downloaded = 0; //downloaded bytes
+      int   _rangeAttemptIdx = 0; // which range attempt index are we currently using
       zypp::ByteCount _contentLenght; // the content length as reported by the server
 
       //multirange support for HTTP requests (https://tools.ietf.org/html/rfc7233)
@@ -137,7 +208,7 @@ namespace zyppng {
       NetworkRequestError _result; // the overall result of the download
     };
 
-    std::variant< pending_t, running_t, finished_t > _runningMode = pending_t();
+    std::variant< pending_t, running_t, prepareNextRangeBatch_t, finished_t > _runningMode = pending_t();
   };
 
   std::vector<char> peek_data_fd ( FILE *fd, off_t offset, size_t count );

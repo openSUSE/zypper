@@ -417,6 +417,7 @@ void NetworkProvider::itemFinished( NetworkProvideItemRef item )
     switch( error.type() ) {
       case zyppng::NetworkRequestError::NoError: { throw std::runtime_error("DownloadError info broken"); break;}
       case zyppng::NetworkRequestError::InternalError: { errCode = zyppng::ProvideMessage::Code::InternalError; break;}
+      case zyppng::NetworkRequestError::RangeFail: { errCode = zyppng::ProvideMessage::Code::InternalError; break;}
       case zyppng::NetworkRequestError::Cancelled: { errCode = zyppng::ProvideMessage::Code::Cancelled; break;}
       case zyppng::NetworkRequestError::PeerCertificateInvalid: { errCode = zyppng::ProvideMessage::Code::PeerCertificateInvalid; break;}
       case zyppng::NetworkRequestError::ConnectionFailed: { errCode = zyppng::ProvideMessage::Code::ConnectionFailed; break;}

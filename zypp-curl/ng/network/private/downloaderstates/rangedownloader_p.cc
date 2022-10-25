@@ -126,7 +126,8 @@ namespace zyppng {
         std::transform( fRanges.begin(), fRanges.end(), std::back_inserter(_failedRanges), [ &req ]( const auto &r ){
           Block b = std::any_cast<Block>(r.userData);;
           b._failedWithErr = req->error();
-          DBG_MEDIA << "Adding failed block to failed blocklist: " << b.start << " " << b.len << " (" << req->error().toString() << " [" << req->error().nativeErrorString()<< "])" << std::endl;
+          if ( zypp::env::ZYPP_MEDIA_CURL_DEBUG() > 3 )
+            DBG_MEDIA << "Adding failed block to failed blocklist: " << b.start << " " << b.len << " (" << req->error().toString() << " [" << req->error().nativeErrorString()<< "])" << std::endl;
           return b;
         });
 
@@ -317,10 +318,13 @@ namespace zyppng {
           return false;
         }
 
-        DBG_MEDIA << "Starting block " << block.start << " with checksum " << zypp::Digest::digestVectorToString( *block.chksumVec ) << "." << std::endl;
-        req->addRequestRange( block.start, block.len, dig, *block.chksumVec, std::any( block ), block.chksumCompareLen );
+        if ( zypp::env::ZYPP_MEDIA_CURL_DEBUG() > 3 )
+          DBG_MEDIA << "Starting block " << block.start << " with checksum " << zypp::Digest::digestVectorToString( *block.chksumVec ) << "." << std::endl;
+        req->addRequestRange( block.start, block.len, dig, *block.chksumVec, std::any( block ), block.chksumCompareLen, block.chksumPad );
       } else {
-        DBG_MEDIA << "Starting block " << block.start << " without checksum." << std::endl;
+
+        if ( zypp::env::ZYPP_MEDIA_CURL_DEBUG() > 3 )
+          DBG_MEDIA << "Starting block " << block.start << " without checksum." << std::endl;
         req->addRequestRange( block.start, block.len, {}, {}, std::any( block ) );
       }
     }

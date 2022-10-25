@@ -169,10 +169,14 @@ NetworkRequestError NetworkRequestErrorPrivate::fromCurlError(NetworkRequest &re
       case CURLE_FTP_CANT_GET_HOST:
         c = NetworkRequestError::ConnectionFailed;
         break;
-      case CURLE_WRITE_ERROR:
+      case CURLE_WRITE_ERROR: {
+        // this error code also handles the cases when a callback returned a error.
         c = NetworkRequestError::InternalError;
         break;
+      }
       case CURLE_PARTIAL_FILE:
+        c = NetworkRequestError::ServerReturnedError;
+        break;
       case CURLE_OPERATION_TIMEDOUT:
         c = NetworkRequestError::Timeout;
         break;
@@ -276,6 +280,8 @@ std::string NetworkRequestErrorPrivate::typeToString( NetworkRequestError::Type 
       return "Server returned an error for the given request.";
     case NetworkRequestError::MissingData:
       return "Server did not send all requested ranges.";
+    case NetworkRequestError::RangeFail:
+      return "Invalid data from server, multipart was requested but there was no range status code.";
   }
   return std::string();
 }

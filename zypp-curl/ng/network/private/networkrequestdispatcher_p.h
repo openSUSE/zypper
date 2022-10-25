@@ -64,6 +64,7 @@ private:
   int  socketCallback(CURL *easy, curl_socket_t s, int what, void * );
 
   void cancelAll ( NetworkRequestError result );
+  bool addRequestToMultiHandle ( NetworkRequest &req );
   void setFinished( NetworkRequest &req , NetworkRequestError result );
 
   void onSocketActivated  ( const SocketNotifier &listener, int events );

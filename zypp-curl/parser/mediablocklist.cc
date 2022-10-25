@@ -112,6 +112,7 @@
 #include <zypp-core/base/Logger.h>
 #include <zypp-core/base/String.h>
 #include <zypp-core/AutoDispose.h>
+#include <zypp-core/base/Exception.h>
 
 using namespace zypp::base;
 
@@ -119,6 +120,30 @@ namespace zypp {
   namespace media {
 
     namespace {
+
+      struct rsum {
+        unsigned short	a = 0;
+        unsigned short	b = 0;
+      } __attribute__((packed));
+
+      /* rcksum_calc_rsum_block(data, data_len)
+      * Calculate the rsum for a single block of data. */
+      rsum rcksum_calc_rsum_block(const unsigned char *data, size_t len) {
+        unsigned short a = 0;
+        unsigned short b = 0;
+
+        while (len) {
+            unsigned char c = *data++;
+            a += c;
+            b += len * c;
+            len--;
+        }
+        return rsum{ a, b };
+      }
+
+      // update the rsum by removing the old and adding the new char
+      #define UPDATE_RSUM(a, b, oldc, newc, bshift) do { (a) += ((unsigned char)(newc)) - ((unsigned char)(oldc)); (b) += (a) - ((oldc) << (bshift)); } while (0)
+
       /**
        * Zsync uses a different rsum length based on the blocksize, since we always calculate the big
        * checksum we need to cut off the bits we are not interested in
@@ -140,17 +165,18 @@ namespace zypp {
           break;
         }
       }
+
     }
 
 MediaBlockList::MediaBlockList(off_t size)
-{
-  filesize = size;
-  haveblocks = false;
-  chksumlen = 0;
-  chksumpad = 0;
-  rsumlen = 0;
-  rsumpad = 0;
-}
+: filesize(size),
+  haveblocks(false),
+  chksumlen(0),
+  chksumpad(0),
+  rsumlen(0),
+  rsumseq(0),
+  rsumpad(0)
+{ }
 
 size_t
 MediaBlockList::addBlock(off_t off, size_t size)
@@ -231,6 +257,12 @@ MediaBlockList::setRsum(size_t blkno, int rsl, unsigned int rs, size_t rspad)
   if (rsl != rsumlen || rspad != rsumpad || blkno != rsums.size())
     return;
   rsums.push_back(rs);
+}
+
+void
+MediaBlockList::setRsumSequence( uint seq )
+{
+  rsumseq = seq;
 }
 
 bool
@@ -333,6 +365,11 @@ std::string MediaBlockList::getChecksumType() const
   return chksumtype;
 }
 
+size_t MediaBlockList::checksumPad() const
+{
+  return chksumpad;
+}
+
 // specialized version of checkChecksum that can deal with a "rotated" buffer
 bool
 MediaBlockList::checkChecksumRotated(size_t blkno, const unsigned char *buf, size_t bufl, size_t start) const
@@ -400,6 +437,336 @@ fetchnext(FILE *fp, unsigned char *bp, size_t blksize, size_t pushback, unsigned
 }
 
 void MediaBlockList::reuseBlocks(FILE *wfp, std::string filename)
+{
+
+  zypp::AutoFILE fp;
+
+  if ( !chksumlen ) {
+    DBG << "Delta XFER: Can not reuse blocks because we have no chksumlen" << std::endl;
+    return;
+  }
+
+  if ( (fp = fopen(filename.c_str(), "r")) == 0 ) {
+    DBG << "Delta XFER: Can not reuse blocks, unable to open file "<< filename << std::endl;
+    return;
+  }
+
+  size_t nblks = blocks.size();
+  std::vector<bool> found( nblks + 1 );
+  if (rsumlen && !rsums.empty()) {
+
+      const auto rsumAMask = rsumlen < 3 ? 0 : rsumlen == 3 ? 0xff : 0xffff;
+
+      // we are building a array of rsum structs to directly access a and b parts of the checksum
+      // we make the array bigger so that the code calculating the rsum hashes does not need to care
+      // about the array size
+      // @TODO move that to the function adding new rsums when removing the old code
+      auto zsyncRsumsData = std::make_unique<rsum[]>( rsums.size() + rsumseq );
+      auto zsyncRsums = zsyncRsumsData.get();
+      for ( std::size_t i = 0; i < rsums.size(); i++ ) {
+        const auto &rs = rsums[i];
+        unsigned short s, m;
+        s = (rs >> 16) & 65535;
+        m = rs & 65535;
+        zsyncRsums[i] = rsum{ s, m };
+      }
+
+      // we use the same code as zsync to calc the hash
+      const auto & calc_rhash = [&]( const rsum* e ) -> unsigned {
+        unsigned h = e[0].b;
+        if ( this->rsumseq > 1 ) {
+          for ( uint i = 1; i < rsumseq; i++ ) {
+            h ^= e[i].b << 3;
+          }
+        } else {
+          h ^= ( e[0].a & rsumAMask ) << 3;
+        }
+        return h;
+      };
+
+      size_t blksize = blocks[0].size;
+      if (nblks == 1 && rsumpad && rsumpad > blksize)
+        blksize = rsumpad;
+
+      // create hash of checksums
+      // build the hashtable
+      uint rsumHashMask;
+      {
+        int i = 16;
+
+        /* Try hash size of 2^i; step down the value of i until we find a good size */
+        while ((2 << (i - 1)) > nblks && i > 4)
+          i--;
+
+        /* Allocate hash based on rsum */
+        rsumHashMask = (2 << i) - 1;
+      }
+
+      // a array indexed via hash with lists of blocks resulting in the same rsum hash
+      auto rsumHashTableData = std::make_unique<std::vector<size_t>[]>( rsumHashMask + 1 );
+      auto rsumHashTable = rsumHashTableData.get();
+
+      // Now fill in the hash tables.
+      for ( size_t id = 0; id < nblks; id++) {
+        const auto hash = calc_rhash( &zsyncRsums[id] );
+        auto &hashList = rsumHashTable[ hash & rsumHashMask ];
+        hashList.push_back(id);
+      }
+
+      // we read in 16 sequences at once to speed up processing
+      constexpr auto BLOCKCNT = 16;
+
+      // we allocate the buffer so that we always have the data to verify 16 blocks, if we need to do
+      // sequence matching we grow the buffer accordingly
+      const auto readBufSize = blksize * rsumseq * BLOCKCNT;
+
+      // buffer thats going to hold our cached data
+      auto readBufData = std::make_unique<unsigned char[]>( readBufSize );
+      memset(readBufData.get(), 0, blksize);
+
+      // avoid using .get() all the time
+      auto readBuf = readBufData.get();
+
+      // our running checksums for the blocks we need to match in sequence
+      auto seqRsumsData = std::make_unique<rsum[]> ( rsumseq );
+      auto seqRsums = seqRsumsData.get();
+
+      // use byteshift instead of multiplication if the blksize is a power of 2
+      // a value is a power of 2 if  ( N & N-1 ) == 0
+      int bshift = 0; // how many bytes do we need to shift
+      if ((blksize & (blksize - 1)) == 0)
+        for (bshift = 0; size_t(1 << bshift) != blksize; bshift++)
+          ;
+
+      bool init = true;
+      // when we are in a run of matches, we remember which block ID would need to match next in order
+      // to continue writing
+      std::optional<size_t> nextReqMatchInSequence;
+      off_t dataOffset = 0; //< Our current read offset in the buffer
+      off_t dataLen = 0;    //< The length of our read buffer
+
+      // helper lambda that follows a list of hashmap entries and tries to write those that match
+      const auto &tryWriteMatchingBlocks  = [&]( const std::vector<size_t> &list, const u_char *currBuf, uint reqMatches ){
+        // the number of blocks we have transferred to the target file
+        int targetBlocksWritten = 0;
+
+        // reset the next match hint
+        nextReqMatchInSequence.reset();
+
+        for ( const auto blkno : list ) {
+
+          if ( found[blkno] )
+              continue;
+
+          const auto blockRsum = &zsyncRsums[blkno];
+
+          uint weakMatches = 0;
+
+          // first check only the current block, we maybe can skip checking the others
+          // if we are in a run of matches
+          if ( (seqRsums[0].a & rsumAMask) != blockRsum[0].a ||
+               seqRsums[0].b != blockRsum[0].b )
+            continue;
+
+          weakMatches++;
+
+          for ( uint i = 1; i < reqMatches; i++ ) {
+            if ( (seqRsums[i].a & rsumAMask) != blockRsum[i].a ||
+                 seqRsums[i].b != blockRsum[i].b )
+              break;
+            weakMatches++;
+          }
+
+          if ( weakMatches < reqMatches )
+            continue;
+
+          // we have a weak match, now we need to calc the checksums for the blocks
+          uint realMatches = 0;
+          for( uint i = 0; i < reqMatches; i++ ) {
+            if ( !checkChecksum(blkno + i, currBuf + ( i * blksize ), blksize ) ) {
+              break;
+            }
+            realMatches++;
+          }
+
+          // check if we have the amount of matches we need ( only 1 if we are in a block sequence )
+          if( realMatches < reqMatches )
+            continue;
+
+          // we found blocks that match , write them to target but keep searching the hashmap
+          // in case we have redundancies
+          const auto nextPossibleMatch = blkno + realMatches;
+          if ( !found[nextPossibleMatch] )
+            nextReqMatchInSequence = nextPossibleMatch; // remember that we are currently in a run of matches, next iteration we just need to look at one block
+
+          for( uint i = 0; i < realMatches; i++ ) {
+            writeBlock( blkno + i, wfp, currBuf + ( i * blksize ), blksize, 0, found );
+            targetBlocksWritten++;
+          }
+        }
+        return targetBlocksWritten;
+      };
+
+      if (!rsumseq)
+        rsumseq = nblks > 1 && chksumlen < 16 ? 2 : 1;
+
+      const off_t seqMatchLen = ( blksize * rsumseq ); //< how many bytes do we need to match when searching a block
+
+      while (! feof(fp) ) {
+          if ( init ) {
+            // fill the buffer for the first time
+            dataLen = fread( readBuf, 1, readBufSize, fp );
+            init = false;
+          } else {
+            // move the remaining data to the begin and read from the file to fill up the buffer again
+            const auto remainLen = dataLen-dataOffset;
+            if ( remainLen )
+              memmove( readBuf, readBuf+dataOffset, remainLen );
+
+            dataLen = fread( readBuf+remainLen, 1, readBufSize-remainLen, fp );
+            dataLen += remainLen;
+            dataOffset = 0;
+          }
+
+          // if we hit eof, pad with zeros
+          if ( feof(fp) ) {
+            memset( readBuf + dataLen, 0, readBufSize - dataLen );
+            dataLen = readBufSize;
+          }
+
+          if ( dataLen < seqMatchLen )
+            return;
+
+          // intialize our first set of checksums
+          for( uint i = 0; i < rsumseq; i++ )
+            seqRsums[i] = rcksum_calc_rsum_block( readBuf + ( i * blksize ), blksize );
+
+          //read over the buffer we have allocated so far
+          while ( true ) {
+
+            if ( dataOffset + seqMatchLen > dataLen )
+              break;
+
+            u_char *currBuf = readBuf + dataOffset;
+
+            // the number of deltafile blocks we have matched, e.g. how much blocks
+            // can we skip forward
+            uint deltaBlocksMatched = 0;
+
+            if ( nextReqMatchInSequence.has_value() ) {
+              if ( tryWriteMatchingBlocks( { *nextReqMatchInSequence }, currBuf, 1 ) > 0 )
+                deltaBlocksMatched = 1;
+
+            } else {
+              const auto hash = calc_rhash( seqRsums );
+
+              // reference to the list of blocks that share our calculated hash
+              auto &blockListForHash = rsumHashTable[ hash & rsumHashMask ];
+              if ( blockListForHash.size() ) {
+                if ( tryWriteMatchingBlocks( blockListForHash, currBuf, rsumseq ) > 0 )
+                  deltaBlocksMatched = rsumseq;
+              }
+            }
+
+            if ( deltaBlocksMatched > 0 ) {
+              // we jump forward in the buffer to after what we matched
+              dataOffset += ( deltaBlocksMatched * blksize );
+
+              if ( dataOffset + seqMatchLen > dataLen )
+                break;
+
+              if ( deltaBlocksMatched < rsumseq ) {
+                //@TODO move the rsums we already have
+              }
+
+              for( uint i = 0; i < rsumseq; i++ )
+                seqRsums[i] = rcksum_calc_rsum_block( readBuf + dataOffset + ( i * blksize ), blksize );
+
+
+            } else {
+              // we found nothing advance the window by one byte and update the rsums
+              dataOffset++;
+              if ( dataOffset + seqMatchLen > dataLen )
+                break;
+              for ( uint i = 0; i < rsumseq; i++ ) {
+                const auto blkOff = ( i*blksize );
+                u_char oldC = (currBuf + blkOff)[0];
+                u_char newC = (currBuf + blkOff)[blksize];
+                UPDATE_RSUM( seqRsums[i].a, seqRsums[i].b, oldC, newC, bshift );
+              }
+            }
+          }
+        }
+    }
+  else if (chksumlen >= 16)
+    {
+      // dummy variant, just check the checksums
+      size_t bufl = 4096;
+      off_t off = 0;
+      auto buf = std::make_unique<unsigned char[]>( bufl );
+      for (size_t blkno = 0; blkno < blocks.size(); ++blkno)
+        {
+          if (off > blocks[blkno].off)
+            continue;
+          size_t blksize = blocks[blkno].size;
+          if (blksize > bufl)
+            {
+              bufl = blksize;
+              buf = std::make_unique<unsigned char[]>( bufl );
+            }
+          size_t skip = blocks[blkno].off - off;
+          while (skip)
+            {
+              size_t l = skip > bufl ? bufl : skip;
+              if (fread(buf.get(), l, 1, fp) != 1)
+                break;
+              skip -= l;
+              off += l;
+            }
+          if (fread(buf.get(), blksize, 1, fp) != 1)
+            break;
+          if (checkChecksum(blkno, buf.get(), blksize))
+            writeBlock(blkno, wfp, buf.get(), blksize, 0, found);
+          off += blksize;
+        }
+    }
+  if (!found[nblks]) {
+    DBG << "Delta XFER: No reusable blocks found for " << filename << std::endl;
+    return;
+  }
+  // now throw out all of the blocks we found
+  std::vector<MediaBlock> nblocks;
+  std::vector<unsigned char> nchksums;
+  std::vector<unsigned int> nrsums;
+
+  size_t originalSize = 0;
+  size_t newSize      = 0;
+  for (size_t blkno = 0; blkno < blocks.size(); ++blkno)
+    {
+      const auto &blk = blocks[blkno];
+      originalSize += blk.size;
+      if (!found[blkno])
+        {
+          // still need it
+          nblocks.push_back(blk);
+          newSize += blk.size;
+          if (chksumlen && (blkno + 1) * chksumlen <= chksums.size())
+            {
+              nchksums.resize(nblocks.size() * chksumlen);
+              memcpy(&nchksums[(nblocks.size() - 1) * chksumlen], &chksums[blkno * chksumlen], chksumlen);
+            }
+          if (rsumlen && (blkno + 1) <= rsums.size())
+            nrsums.push_back(rsums[blkno]);
+        }
+    }
+  DBG << "Delta XFER: Found blocks to reuse, " << blocks.size() << " vs " << nblocks.size() << ", resused blocks: " << blocks.size() - nblocks.size() << "\n"
+      << "Old transfer size: " << originalSize << " new size: " << newSize << std::endl;
+  blocks = nblocks;
+  chksums = nchksums;
+  rsums = nrsums;
+}
+
+void MediaBlockList::reuseBlocksOld(FILE *wfp, std::string filename)
 {
 
   zypp::AutoFILE fp;
@@ -486,7 +853,10 @@ void MediaBlockList::reuseBlocks(FILE *wfp, std::string filename)
       memset(ringBuf.get(), 0, blksize);
       bool eof = 0;
       bool init = 1;
-      int sql = nblks > 1 && chksumlen < 16 ? 2 : 1;
+
+      if (!rsumseq)
+        rsumseq = nblks > 1 && chksumlen < 16 ? 2 : 1;
+
       while (!eof)
         {
           for (size_t i = 0; i < blksize; i++)
@@ -509,7 +879,7 @@ void MediaBlockList::reuseBlocks(FILE *wfp, std::string filename)
                     {
                       eof = true;
                       c = 0;
-                      if (!i || sql == 2)
+                      if (!i || rsumseq == 2)
                         break;
                     }
                 }
@@ -560,7 +930,7 @@ void MediaBlockList::reuseBlocks(FILE *wfp, std::string filename)
 
                   // if we need to always match 2 blocks in sequence, get the next block
                   // and check its checksum
-                  if (sql == 2)
+                  if (rsumseq == 2)
                     {
                       if (eof || blkno + 1 >= nblks)
                         continue;
@@ -578,12 +948,12 @@ void MediaBlockList::reuseBlocks(FILE *wfp, std::string filename)
                     continue;
 
                   // heavy checksum for second block
-                  if (sql == 2 && !checkChecksum(blkno + 1, buf2.get(), blksize))
+                  if (rsumseq == 2 && !checkChecksum(blkno + 1, buf2.get(), blksize))
                     continue;
 
                   // write the first and second blocks if applicable
                   writeBlock(blkno, wfp, ringBuf.get(), blksize, i + 1, found);
-                  if (sql == 2)
+                  if (rsumseq == 2)
                     {
                       writeBlock(blkno + 1, wfp, buf2.get(), blksize, 0, found);
                       pushback = 0;

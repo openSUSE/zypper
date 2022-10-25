@@ -6,18 +6,18 @@
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
 \---------------------------------------------------------------------*/
-/** \file zypp/media/ZsyncParser.h
+/** \file zypp-curl/parser/zsyncparser.h
  *
 */
-#ifndef ZYPP_MEDIA_ZSYNCPARSER_H
-#define ZYPP_MEDIA_ZSYNCPARSER_H
+#ifndef ZYPP_CURL_PARSER_ZSYNCPARSER_H
+#define ZYPP_CURL_PARSER_ZSYNCPARSER_H
 
 #include <string>
 
-#include <zypp/base/Exception.h>
-#include <zypp/base/NonCopyable.h>
+#include <zypp-core/base/Exception.h>
+#include <zypp-core/base/NonCopyable.h>
 #include <zypp-curl/parser/MediaBlockList>
-#include <zypp/Url.h>
+#include <zypp-core/Url.h>
 
 namespace zypp {
   namespace media {
@@ -30,7 +30,7 @@ public:
    * parse a file consisting of zlink data
    * \throws Exception
    **/
-  void parse(std::string filename);
+  void parse( const Pathname &filename );
   /**
    * return the download urls from the parsed metalink data
    **/
@@ -53,4 +53,4 @@ private:
   } // namespace media
 } // namespace zypp
 
-#endif // ZYPP_MEDIA_ZSYNCPARSER_H
+#endif // ZYPP_CURL_PARSER_ZSYNCPARSER_H

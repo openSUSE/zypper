@@ -51,6 +51,7 @@ namespace zyppng {
       std::string chksumtype;
       std::optional<UByteArray> chksumVec;
       std::optional<size_t> chksumCompareLen; //< initialized if only the first few bytes of the checksum should be considered
+      std::optional<size_t> chksumPad; //< initialized if the hashed blocks for a digest need to be padded if a block is smaller ( e.g. last block in a zsync file )
 
       int _retryCount = 0;  //< how many times was this request restarted
       NetworkRequestError _failedWithErr; //< what was the error this request failed with

@@ -85,10 +85,12 @@ namespace zyppng {
       */
       CheckSumBytes _checksum;
       std::optional<size_t> _relevantDigestLen; //< If this is initialized , it defines how many bytes of the resulting checkum are compared
-      bool _valid = false;
+      std::optional<size_t> _chksumPad;   //< If initialized we need to pad the digest with zeros before calculating the final checksum
       std::any userData; //< Custom data the user can associate with the Range
 
-      static Range make ( size_t start, size_t len = 0, DigestPtr &&digest = nullptr, CheckSumBytes &&expectedChkSum = CheckSumBytes(), std::any &&userData = std::any(), std::optional<size_t> digestCompareLen = {} );
+      State _rangeState = State::Pending; //< Flag to know if this range has been already requested and if the request was successful
+
+      static Range make ( size_t start, size_t len = 0, DigestPtr &&digest = nullptr, CheckSumBytes &&expectedChkSum = CheckSumBytes(), std::any &&userData = std::any(), std::optional<size_t> digestCompareLen = {}, std::optional<size_t> _dataBlockPadding = {} );
     };
 
     struct Timings {
@@ -143,7 +145,7 @@ namespace zyppng {
      * Adds a new range to the requested range list, the ranges can not overlap
      * \note This will not change a running download
      */
-    void addRequestRange ( size_t start, size_t len = 0, DigestPtr digest = nullptr, CheckSumBytes expectedChkSum = CheckSumBytes(), std::any userData = std::any(), std::optional<size_t> digestCompareLen = {}  );
+    void addRequestRange ( size_t start, size_t len = 0, DigestPtr digest = nullptr, CheckSumBytes expectedChkSum = CheckSumBytes(), std::any userData = std::any(), std::optional<size_t> digestCompareLen = {}, std::optional<size_t> chksumpad = {}  );
 
     void addRequestRange ( const Range &range );
 
@@ -223,6 +225,8 @@ namespace zyppng {
     /**
      * Returns the number of bytes that are reported from the backend as the full download size, those can
      * be 0 even when the download is already running.
+     * \note When downloading ranges, the reported byte count could be reported just partially due to
+     *       range batching.
      */
     zypp::ByteCount reportedByteCount() const;
 

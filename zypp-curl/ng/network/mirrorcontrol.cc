@@ -57,7 +57,11 @@ namespace zyppng {
 
   void MirrorControl::Mirror::transferUnref()
   {
-    bool stillLoaded = ( runningTransfers - 1 ) >= maxConnections();
+    const auto newCount = runningTransfers - 1;
+    if ( newCount < 0 )
+      return;
+
+    bool stillLoaded = ( newCount ) >= maxConnections();
     runningTransfers--;
     if ( !stillLoaded )
       _parent._sigNewMirrorsReady.emit();

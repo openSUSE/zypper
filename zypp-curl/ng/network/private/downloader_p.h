@@ -60,7 +60,7 @@ namespace zyppng {
     Transition< DetectMetalinkState, &DetectMetalinkState::sigFinished,   DlNormalFileState,   &DetectMetalinkState::toSimpleDownloadGuard >,
 
     Transition< DlMetaLinkInfoState, &DlMetaLinkInfoState::sigFinished,    FinishedState, DefaultStateCondition, &DlMetaLinkInfoState::transitionToFinished >,
-    Transition< DlMetaLinkInfoState, &DlMetaLinkInfoState::sigGotMetalink, PrepareMultiState, DefaultStateCondition, &DlMetaLinkInfoState::transitionToPrepareMulti >,
+    Transition< DlMetaLinkInfoState, &DlMetaLinkInfoState::sigGotMetadata, PrepareMultiState, DefaultStateCondition, &DlMetaLinkInfoState::transitionToPrepareMulti >,
     Transition< DlMetaLinkInfoState, &DlMetaLinkInfoState::sigFailed,      FinishedState, DefaultStateCondition, &DlMetaLinkInfoState::transitionToFinished >,
 
     Transition< PrepareMultiState, &PrepareMultiState::sigFinished,   DlMetalinkState,  &PrepareMultiState::toMetalinkDownloadGuard , &PrepareMultiState::transitionToMetalinkDl >,

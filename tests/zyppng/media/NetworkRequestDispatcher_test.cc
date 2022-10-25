@@ -1,6 +1,7 @@
 #include <boost/test/unit_test.hpp>
 #include <boost/test/data/test_case.hpp>
 #include <zypp-core/zyppng/base/EventLoop>
+#include <zypp-core/fs/PathInfo.h>
 #include <zypp-curl/parser/MetaLinkParser> // for hexstr2bytes
 #include <zypp-curl/ng/network/Request>
 #include <zypp-curl/ng/network/NetworkRequestDispatcher>
@@ -27,6 +28,8 @@
 
 #define BOOST_TEST_REQ_SUCCESS(REQ) \
   do { \
+  if ( REQ->hasError() ) \
+    BOOST_ERROR( REQ->error().toString() ); \
   BOOST_REQUIRE( !REQ->hasError() ); \
   BOOST_REQUIRE( !REQ->error().isError() ); \
   BOOST_REQUIRE_EQUAL( REQ->error().type(), zyppng::NetworkRequestError::NoError ); \
@@ -550,3 +553,57 @@ BOOST_DATA_TEST_CASE(nwdispatcher_multipart_data_missing, bdata::make( withSSL )
   ev->run();
   BOOST_TEST_REQ_ERR( reqDLFile, zyppng::NetworkRequestError::MissingData );
 }
+
+//Get many ranges from a file to force the server to return a range error
+BOOST_DATA_TEST_CASE(nwdispatcher_multipart_many_chunks_dl, bdata::make( withSSL ), withSSL )
+{
+  auto ev = zyppng::EventLoop::create();
+  auto disp = std::make_shared<zyppng::NetworkRequestDispatcher>();
+  disp->sigQueueFinished().connect( [&ev]( const zyppng::NetworkRequestDispatcher& ){
+    ev->quit();
+  });
+
+  disp->run();
+
+  WebServer web((zypp::Pathname(TESTS_SRC_DIR)/"zypp/data/Fetcher/remote-site").c_str(), 10001, withSSL );
+  BOOST_REQUIRE( web.start() );
+
+  auto weburl = web.url();
+  weburl.setPathName("/file-1.txt");
+
+  auto sourceFile = zypp::Pathname(TESTS_SRC_DIR)/"zypp/data/Fetcher/remote-site/file-1.txt";
+
+  zyppng::TransferSettings set = web.transferSettings();
+  zypp::filesystem::TmpFile targetFile;
+
+  zypp::PathInfo pi( sourceFile );
+
+  // request every other chunk from the file
+  zypp::ByteCount seekInterval = pi.size () / 512;
+
+  auto reqDLFile = std::make_shared<zyppng::NetworkRequest>( weburl, targetFile.path() );
+  reqDLFile->transferSettings() = set;
+  reqDLFile->setUrl( weburl );
+
+  auto chunkLen = seekInterval / 2;
+  for ( zypp::ByteCount off = 0;( off + chunkLen )< pi.size(); off += seekInterval ) {
+    reqDLFile->addRequestRange(  off, chunkLen );
+  }
+
+  disp->enqueue( reqDLFile );
+  ev->run();
+  auto err = reqDLFile->error();
+  std::cerr << err.toString () << std::endl;
+  BOOST_TEST_REQ_SUCCESS( reqDLFile );
+
+  std::string downloaded = TestTools::readFile ( targetFile.path() );
+
+  BOOST_REQUIRE( !downloaded.empty() );
+
+  std::string sourceData = TestTools::readFile ( sourceFile );
+
+  for ( zypp::ByteCount off = 0;( off + chunkLen )< pi.size(); off += seekInterval ) {
+    BOOST_REQUIRE_EQUAL( std::string_view ( sourceData.data()+off , chunkLen ), std::string_view ( downloaded.data()+off , chunkLen ) );
+  }
+}
+

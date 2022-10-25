@@ -63,6 +63,7 @@ namespace zypp {
         const EVP_MD *md;
         unsigned char md_value[EVP_MAX_MD_SIZE];
         unsigned md_len;
+        zypp::ByteCount bytesHashed;
 
         bool finalized : 1;
         static bool openssl_digests_added;
@@ -120,6 +121,8 @@ namespace zypp {
         md_len = 0;
         ::memset(md_value, 0, sizeof(md_value));
 
+        bytesHashed = 0;
+
         mdctx.swap(tmp_mdctx);
       }
       return true;
@@ -169,6 +172,7 @@ namespace zypp {
       if(!EVP_DigestInit_ex(_dp->mdctx.get(), _dp->md, NULL))
         return false;
       _dp->finalized = false;
+      _dp->bytesHashed = 0;
       return true;
     }
 
@@ -265,6 +269,7 @@ namespace zypp {
       if(!EVP_DigestUpdate(_dp->mdctx.get(), reinterpret_cast<const unsigned char*>(bytes), len))
         return false;
 
+      _dp->bytesHashed += len;
       return true;
     }
 
@@ -285,6 +290,11 @@ namespace zypp {
       }
 
       return true;
+    }
+
+    ByteCount Digest::bytesHashed() const
+    {
+      return _dp->bytesHashed;
     }
 
     std::string Digest::digest(const std::string& name, std::istream& is, size_t bufsize)

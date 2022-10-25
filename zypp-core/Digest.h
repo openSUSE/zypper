@@ -21,6 +21,7 @@
 
 #include <zypp-core/Pathname.h>
 #include <zypp-core/ByteArray.h>
+#include <zypp-core/ByteCount.h>
 
 namespace zypp {
 
@@ -95,6 +96,11 @@ namespace zypp {
          * @return whether an error occured
          * */
         bool update(std::istream& is, size_t bufsize = 4096);
+
+        /**
+         * Returns the number of input bytes that have been added to the hash
+         */
+        zypp::ByteCount bytesHashed () const;
 
         /** \brief get hex string representation of the digest
          *
