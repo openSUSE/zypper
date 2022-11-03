@@ -455,6 +455,10 @@ namespace zypp
     };
     ////////////////////////////////////////////////////////////////////////////
 
+    /** bsc#1204956: Tweak to prevent auto pruning package caches. */
+    inline bool autoPruneInDir( const Pathname & path_r )
+    { return not PathInfo(path_r/".no_auto_prune").isExist(); }
+
   } // namespace
   ///////////////////////////////////////////////////////////////////
 
@@ -606,7 +610,7 @@ namespace zypp
 
     void cleanMetadata( const RepoInfo & info, OPT_PROGRESS );
 
-    void cleanPackages( const RepoInfo & info, OPT_PROGRESS );
+    void cleanPackages( const RepoInfo & info, OPT_PROGRESS, bool isAutoClean = false );
 
     void buildCache( const RepoInfo & info, CacheBuildPolicy policy, OPT_PROGRESS );
 
@@ -905,9 +909,11 @@ namespace zypp
       cleanupNonRepoMetadtaFolders( _options.repoSolvCachePath,
                                     Pathname::assertprefix( _options.rootDir, ZConfig::instance().builtinRepoSolvfilesPath() ),
                                     repoEscAliases );
-      cleanupNonRepoMetadtaFolders( _options.repoPackagesCachePath,
-                                    Pathname::assertprefix( _options.rootDir, ZConfig::instance().builtinRepoPackagesPath() ),
-                                    repoEscAliases );
+      // bsc#1204956: Tweak to prevent auto pruning package caches
+      if ( autoPruneInDir( _options.repoPackagesCachePath ) )
+        cleanupNonRepoMetadtaFolders( _options.repoPackagesCachePath,
+                                      Pathname::assertprefix( _options.rootDir, ZConfig::instance().builtinRepoPackagesPath() ),
+                                      repoEscAliases );
     }
     MIL << "end construct known repos" << endl;
   }
@@ -1282,12 +1288,15 @@ namespace zypp
   }
 
 
-  void RepoManager::Impl::cleanPackages( const RepoInfo & info, const ProgressData::ReceiverFnc & progressfnc )
+  void RepoManager::Impl::cleanPackages( const RepoInfo & info, const ProgressData::ReceiverFnc & progressfnc, bool isAutoClean_r )
   {
     ProgressData progress(100);
     progress.sendTo(progressfnc);
 
-    filesystem::recursive_rmdir(packagescache_path_for_repoinfo(_options, info));
+    // bsc#1204956: Tweak to prevent auto pruning package caches
+    const Pathname & rpc { packagescache_path_for_repoinfo(_options, info) };
+    if ( not isAutoClean_r || autoPruneInDir( rpc.dirname() ) )
+      filesystem::recursive_rmdir( rpc );
     progress.toMax();
   }
 
@@ -1861,7 +1870,7 @@ namespace zypp
           cleanCache( todelete, cSubprogrcv);
         // now delete metadata (#301037)
         cleanMetadata( todelete, mSubprogrcv );
-        cleanPackages( todelete, pSubprogrcv );
+        cleanPackages( todelete, pSubprogrcv, true/*isAutoClean*/ );
         reposManip().erase(todelete);
         MIL << todelete.alias() << " successfully deleted." << endl;
         HistoryLog(_options.rootDir).removeRepository(todelete);
