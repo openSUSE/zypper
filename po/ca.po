@@ -9,10 +9,10 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-11-04 14:37+0100\n"
-"PO-Revision-Date: 2022-07-25 16:13+0000\n"
+"PO-Revision-Date: 2022-11-04 20:13+0000\n"
 "Last-Translator: David Medina <medipas@gmail.com>\n"
-"Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/"
-">\n"
+"Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/>"
+"\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -6257,7 +6257,7 @@ msgstr "No s'han carregat els elements de %s a causa d'un error."
 #: src/repos.cc:1827
 #, boost-format
 msgid "Repository '%1%' metadata expired since %2%."
-msgstr ""
+msgstr "Les metadades del repositori %1% estan caducades des del %2%."
 
 #. translators: the first %s is 'zypper refresh' and the second 'zypper clean -m'
 #: src/repos.cc:1839
@@ -6272,6 +6272,11 @@ msgid ""
 "solve the issue, it could be that you are using a broken mirror or the "
 "server has actually discontinued to support the repository."
 msgstr ""
+"Les metadades del repositori estan caducades: comproveu si l'actualització "
+"automàtica està activada (zypper lr); en cas contrari, actualitzeu el "
+"repositori manualment (zypper ref). Si això no resol el problema, pot ser "
+"que useu una rèplica malmesa o que el servidor hagi deixat d'oferir el "
+"repositori."
 
 #: src/repos.cc:1857
 msgid "Reading installed packages..."
