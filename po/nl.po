@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-11-04 14:37+0100\n"
-"PO-Revision-Date: 2022-07-26 02:13+0000\n"
+"PO-Revision-Date: 2022-11-05 01:13+0000\n"
 "Last-Translator: Freek de Kruijf <freek@opensuse.org>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/zypper/master/nl/>\n"
 "Language: nl\n"
@@ -6352,7 +6352,7 @@ msgstr "Oplosbare pakketten van '%s' zijn niet geladen vanwege een fout."
 #: src/repos.cc:1827
 #, boost-format
 msgid "Repository '%1%' metadata expired since %2%."
-msgstr ""
+msgstr "Metagegevens in opslagruimte '%1%' zijn verlopen sinds %2%."
 
 #. translators: the first %s is 'zypper refresh' and the second 'zypper clean -m'
 #: src/repos.cc:1839
@@ -6367,6 +6367,11 @@ msgid ""
 "solve the issue, it could be that you are using a broken mirror or the "
 "server has actually discontinued to support the repository."
 msgstr ""
+"Metagegevens in opslagruimte zijn verlopen: Controleer of 'autorefresh' is "
+"aangezet (zypper lr), vernieuw anders handmatig de opslagruimte (zypper ref)"
+". Als dat does het probleem niet oplost, dan zou het kunnen dat u een "
+"gebroken mirror gebruikt of heeft de server de ondersteuning van de "
+"opslagruimte niet voortgezet."
 
 #: src/repos.cc:1857
 msgid "Reading installed packages..."
