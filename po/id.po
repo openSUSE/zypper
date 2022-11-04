@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-07-25 14:05+0200\n"
-"PO-Revision-Date: 2022-06-02 05:13+0000\n"
+"PO-Revision-Date: 2022-11-04 06:13+0000\n"
 "Last-Translator: Kukuh Syafaat <syafaatkukuh@gmail.com>\n"
 "Language-Team: Indonesian <https://l10n.opensuse.org/projects/zypper/master/"
 "id/>\n"
@@ -380,12 +380,16 @@ msgstr "Gagal menyimpan opsi."
 msgid ""
 "'%s' install modifier must not be used without a package name or capability."
 msgstr ""
+"Pengubah pemasangan '%s' tidak boleh digunakan tanpa nama atau kemampuan "
+"paket."
 
 #: src/PackageArgs.cc:169
 #, c-format, boost-format
 msgid ""
 "'%s' remove modifier must not be used without a package name or capability."
 msgstr ""
+"Pengubah penghapusan '%s' tidak boleh digunakan tanpa nama atau kemampuan "
+"paket."
 
 #: src/PackageArgs.cc:221
 #, c-format, boost-format
