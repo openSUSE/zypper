@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-25 14:05+0200\n"
+"POT-Creation-Date: 2022-11-04 14:37+0100\n"
 "PO-Revision-Date: 2022-07-26 02:12+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
 "Language-Team: Japanese <https://l10n.opensuse.org/projects/zypper/master/ja/"
@@ -376,13 +376,17 @@ msgstr "オプションの保存に失敗しました。"
 #, c-format, boost-format
 msgid ""
 "'%s' install modifier must not be used without a package name or capability."
-msgstr "'%s' のインストール修飾子は、パッケージ名もしくは能力とともに使用しなければなりません。"
+msgstr ""
+"'%s' のインストール修飾子は、パッケージ名もしくは能力とともに使用しなければな"
+"りません。"
 
 #: src/PackageArgs.cc:169
 #, c-format, boost-format
 msgid ""
 "'%s' remove modifier must not be used without a package name or capability."
-msgstr "'%s' のアンインストール修飾子は、パッケージ名もしくは能力とともに使用しなければなりません。"
+msgstr ""
+"'%s' のアンインストール修飾子は、パッケージ名もしくは能力とともに使用しなけれ"
+"ばなりません。"
 
 #: src/PackageArgs.cc:221
 #, c-format, boost-format
@@ -654,12 +658,12 @@ msgstr "%1% のことでしょうか？"
 msgid "Ignoring option %s when updating the update stack first."
 msgstr "更新スタックを最初に更新するため、オプション %s を無視しています。"
 
-#: src/SolverRequester.h:52
+#: src/SolverRequester.h:53
 #, boost-format
 msgid "Suspicious category filter value '%1%'."
 msgstr "カテゴリフィルタの値 '%1%' が解釈できません。"
 
-#: src/SolverRequester.h:60
+#: src/SolverRequester.h:61
 #, boost-format
 msgid "Suspicious severity filter value '%1%'."
 msgstr "重要度フィルタの値 '%1%' が解釈できません。"
@@ -2971,12 +2975,12 @@ msgstr ""
 msgid "Write debug output to file <path>."
 msgstr "デバッグ出力をファイル <path> に出力します。"
 
-#: src/commands/ps.cc:72 src/solve-commit.cc:561
+#: src/commands/ps.cc:72 src/solve-commit.cc:559
 msgid "Check failed:"
 msgstr "確認に失敗:"
 
 #. Here: Table output
-#: src/commands/ps.cc:127 src/solve-commit.cc:550
+#: src/commands/ps.cc:127 src/solve-commit.cc:548
 msgid "Checking for running processes using deleted libraries..."
 msgstr "削除されたライブラリを使用している実行中プロセスを確認しています..."
 
@@ -4822,7 +4826,7 @@ msgstr ""
 "みパッケージを、新しいバージョンに更新します。"
 
 #: src/commands/update.cc:69 src/commands/update.cc:76
-#: src/commands/update.cc:126
+#: src/commands/update.cc:123
 msgid "Operation not supported."
 msgstr "指定した操作には対応していません。"
 
@@ -4903,7 +4907,7 @@ msgstr ""
 msgid "Argument resolves to no package"
 msgstr "パラメータを解釈しましたが、該当するパッケージがありません"
 
-#: src/commands/utils/download.cc:254 src/solve-commit.cc:1023
+#: src/commands/utils/download.cc:254 src/solve-commit.cc:1025
 msgid "Nothing to do."
 msgstr "何もすることがありません。"
 
@@ -5736,8 +5740,8 @@ msgstr "リポジトリ '%s' を無効にする際にエラーが発生しまし
 msgid "Problem retrieving files from '%s'."
 msgstr "'%s' からのファイル取得中に問題が発生しました。"
 
-#: src/repos.cc:345 src/repos.cc:1859 src/solve-commit.cc:898
-#: src/solve-commit.cc:929 src/solve-commit.cc:953
+#: src/repos.cc:345 src/repos.cc:1867 src/solve-commit.cc:900
+#: src/solve-commit.cc:931 src/solve-commit.cc:955
 msgid "Please see the above error message for a hint."
 msgstr "解決へのヒントとして上記のエラーメッセージをお読みください。"
 
@@ -6115,72 +6119,76 @@ msgstr ""
 "リポジトリが定義されていません。操作はインストール済みの解決方法についてのみ"
 "行われます。何もインストールできません。"
 
-#: src/repos.cc:1790
+#: src/repos.cc:1791
 #, c-format, boost-format
 msgid "Retrieving repository '%s' data..."
 msgstr "リポジトリ '%s' のデータを取り出しています..."
 
-#: src/repos.cc:1796
+#: src/repos.cc:1797
 #, c-format, boost-format
 msgid "Repository '%s' not cached. Caching..."
 msgstr "リポジトリ '%s' はキャッシュされていません。キャッシュしています..."
 
-#: src/repos.cc:1802 src/repos.cc:1836
+#: src/repos.cc:1803 src/repos.cc:1837
 #, c-format, boost-format
 msgid "Problem loading data from '%s'"
 msgstr "'%s' からのデータ読み込みの際に問題"
 
-#: src/repos.cc:1806
+#: src/repos.cc:1807
 #, c-format, boost-format
 msgid "Repository '%s' could not be refreshed. Using old cache."
 msgstr "リポジトリ '%s' を更新できませんでした。古いキャッシュを使用します。"
 
-#: src/repos.cc:1810 src/repos.cc:1839
+#: src/repos.cc:1811 src/repos.cc:1840
 #, c-format, boost-format
 msgid "Resolvables from '%s' not loaded because of error."
 msgstr "エラーにより '%s' からの解決方法が読み取れませんでした。"
 
 #: src/repos.cc:1827
-#, c-format, boost-format
-msgid ""
-"Repository '%s' appears to be outdated. Consider using a different mirror or "
-"server."
+#, boost-format
+msgid "Repository '%1%' metadata expired since %2%."
 msgstr ""
-"リポジトリ '%s' は古くなっているように思われます。異なるミラーまたはサーバを"
-"お使いになることをお勧めします。"
 
 #. translators: the first %s is 'zypper refresh' and the second 'zypper clean -m'
-#: src/repos.cc:1838
+#: src/repos.cc:1839
 #, c-format, boost-format
 msgid "Try '%s', or even '%s' before doing so."
 msgstr "それを行う前に '%s' または '%s' を試してみてください。"
 
-#: src/repos.cc:1849
+#: src/repos.cc:1844
+msgid ""
+"Repository metadata expired: Check if 'autorefresh' is turned on (zypper "
+"lr), otherwise manualy refresh the repository (zypper ref). If this does not "
+"solve the issue, it could be that you are using a broken mirror or the "
+"server has actually discontinued to support the repository."
+msgstr ""
+
+#: src/repos.cc:1857
 msgid "Reading installed packages..."
 msgstr "インストール済みのパッケージを読み込んでいます..."
 
-#: src/repos.cc:1858
+#: src/repos.cc:1866
 msgid "Problem occurred while reading the installed packages:"
 msgstr "インストール済みのパッケージを読み込む際にエラー:"
 
-#: src/repos.cc:1875
+#: src/repos.cc:1883
 #, c-format, boost-format
 msgid "'%s' looks like an RPM file. Will try to download it."
 msgstr "'%s' は RPM ファイルのようです。ダウンロードを行います。"
 
-#: src/repos.cc:1884
+#: src/repos.cc:1892
 #, c-format, boost-format
 msgid "Problem with the RPM file specified as '%s', skipping."
 msgstr "'%s' で指定したRPMファイルで問題が発生しました。スキップしています。"
 
-#: src/repos.cc:1906
+#: src/repos.cc:1914
 #, c-format, boost-format
 msgid "Problem reading the RPM header of %s. Is it an RPM file?"
 msgstr ""
 "%s のRPMヘッダを読み込む際に問題が発生しました。 RPMファイルでない可能性があ"
 "ります。"
 
-#: src/repos.cc:1926
+#: src/repos.cc:1934
 msgid "Plain RPM files cache"
 msgstr "RPM ファイルキャッシュ"
 
@@ -6312,29 +6320,29 @@ msgstr "依存関係を解決しています..."
 msgid "Force resolution:"
 msgstr "強制的な解決:"
 
-#: src/solve-commit.cc:415
+#: src/solve-commit.cc:413
 msgid "Verifying dependencies..."
 msgstr "依存関係を解決しています..."
 
 #. Here: compute the full upgrade
-#: src/solve-commit.cc:465
+#: src/solve-commit.cc:463
 msgid "Computing upgrade..."
 msgstr "アップグレードを準備しています..."
 
-#: src/solve-commit.cc:479
+#: src/solve-commit.cc:477
 msgid "Generating solver test case..."
 msgstr "解決処理のテスト出力を作成しています..."
 
-#: src/solve-commit.cc:481
+#: src/solve-commit.cc:479
 #, c-format, boost-format
 msgid "Solver test case generated successfully at %s."
 msgstr "解決処理のテスト結果は %s に出力されました。"
 
-#: src/solve-commit.cc:484
+#: src/solve-commit.cc:482
 msgid "Error creating the solver test case."
 msgstr "解決処理のテスト出力中にエラーが発生しました。"
 
-#: src/solve-commit.cc:529
+#: src/solve-commit.cc:527
 msgid ""
 "DownloadAsNeeded can not be used with ZYPP_SINGLE_RPMTRANS=1, falling back "
 "to DownloadInAdvance"
@@ -6342,7 +6350,7 @@ msgstr ""
 "ZYPP_SINGLE_RPMTRANS=1 を指定している場合は DownloadAsNeeded を指定できませ"
 "ん。 DownloadInAdvance が指定されたものとして処理します"
 
-#: src/solve-commit.cc:547
+#: src/solve-commit.cc:545
 #, c-format, boost-format
 msgid ""
 "Check for running processes using deleted libraries is disabled in zypper."
@@ -6351,11 +6359,11 @@ msgstr ""
 "削除されたライブラリを使用している実行中プロセスの確認は、zypper.confで無効に"
 "されています。'%s' を実行して手動で確認してください。"
 
-#: src/solve-commit.cc:563
+#: src/solve-commit.cc:561
 msgid "Skip check:"
 msgstr "確認を省略:"
 
-#: src/solve-commit.cc:570
+#: src/solve-commit.cc:568
 #, boost-format
 msgid ""
 "There are running programs which still use files and libraries deleted or "
@@ -6366,32 +6374,32 @@ msgstr ""
 "ルを使用しています。ご確認の上、これらを再起動してください。 '%1%' と入力して"
 "実行すると、プログラムの一覧を表示することができます。"
 
-#: src/solve-commit.cc:584
+#: src/solve-commit.cc:582
 msgid "Update notifications were received from the following packages:"
 msgstr "下記のパッケージから更新通知を受信しました:"
 
-#: src/solve-commit.cc:593
+#: src/solve-commit.cc:591
 #, c-format, boost-format
 msgid "Message from package %s:"
 msgstr "パッケージ %s からのメッセージ:"
 
-#: src/solve-commit.cc:601
+#: src/solve-commit.cc:599
 msgid "y/n"
 msgstr "y/n"
 
-#: src/solve-commit.cc:602
+#: src/solve-commit.cc:600
 msgid "View the notifications now?"
 msgstr "今すぐ通知を閲覧しますか？"
 
-#: src/solve-commit.cc:647
+#: src/solve-commit.cc:645
 msgid "Computing distribution upgrade..."
 msgstr "ディストリビューションのアップグレードを準備しています..."
 
-#: src/solve-commit.cc:652
+#: src/solve-commit.cc:650
 msgid "Resolving package dependencies..."
 msgstr "パッケージの依存関係を解決しています..."
 
-#: src/solve-commit.cc:707
+#: src/solve-commit.cc:709
 msgid ""
 "Some of the dependencies of installed packages are broken. In order to fix "
 "these dependencies, the following actions need to be taken:"
@@ -6399,7 +6407,7 @@ msgstr ""
 "インストール済みのパッケージのうち、いくつかの依存関係が壊れています。依存関"
 "係を修復するには、以下の作業を実行する必要があります:"
 
-#: src/solve-commit.cc:714
+#: src/solve-commit.cc:716
 msgid "Root privileges are required to fix broken package dependencies."
 msgstr "壊れた依存関係を修復するには root 権限が必要です。"
 
@@ -6413,12 +6421,12 @@ msgstr "壊れた依存関係を修復するには root 権限が必要です。
 #. The answers should be lower case letters, but in general, any UTF-8
 #. string will do.
 #. ! \todo add c for changelog and x for explain (show the dep tree)
-#: src/solve-commit.cc:736
+#: src/solve-commit.cc:738
 msgid "y/n/p/v/a/r/m/d/g"
 msgstr "y/n/p/v/a/r/m/d/g"
 
 #. translators: help text for 'y' option in the 'Continue?' prompt
-#: src/solve-commit.cc:741
+#: src/solve-commit.cc:743
 msgid ""
 "Yes, accept the summary and proceed with installation/removal of packages."
 msgstr ""
@@ -6426,67 +6434,67 @@ msgstr ""
 "行います。"
 
 #. translators: help text for 'n' option in the 'Continue?' prompt
-#: src/solve-commit.cc:743
+#: src/solve-commit.cc:745
 msgid "No, cancel the operation."
 msgstr "いいえ (n)、操作をキャンセルします。"
 
 #. translators: help text for 'p' option in the 'Continue?' prompt
-#: src/solve-commit.cc:745
+#: src/solve-commit.cc:747
 msgid ""
 "Restart solver in no-force-resolution mode in order to show dependency "
 "problems."
 msgstr "依存関係の問題を表示するため、強制力を設定せずに解決器を実行します。"
 
 #. translators: help text for 'v' option in the 'Continue?' prompt
-#: src/solve-commit.cc:747
+#: src/solve-commit.cc:749
 msgid "Toggle display of package versions."
 msgstr "パッケージバージョンの表示を切り替えます。"
 
 #. translators: help text for 'a' option in the 'Continue?' prompt
-#: src/solve-commit.cc:749
+#: src/solve-commit.cc:751
 msgid "Toggle display of package architectures."
 msgstr "パッケージアーキテクチャの表示を切り替えます。"
 
 #. translators: help text for 'r' option in the 'Continue?' prompt
-#: src/solve-commit.cc:751
+#: src/solve-commit.cc:753
 msgid ""
 "Toggle display of repositories from which the packages will be installed."
 msgstr "パッケージのインストール元リポジトリの表示を切り替えます。"
 
 #. translators: help text for 'm' option in the 'Continue?' prompt
-#: src/solve-commit.cc:753
+#: src/solve-commit.cc:755
 msgid "Toggle display of package vendor names."
 msgstr "パッケージのベンダ名の表示を切り替えます。"
 
 #. translators: help text for 'd' option in the 'Continue?' prompt
-#: src/solve-commit.cc:755
+#: src/solve-commit.cc:757
 msgid "Toggle between showing all details and as few details as possible."
 msgstr "すべての詳細を表示するか、最小限の表示のみにとどめるかを切り替えます。"
 
 #. translators: help text for 'g' option in the 'Continue?' prompt
-#: src/solve-commit.cc:757
+#: src/solve-commit.cc:759
 msgid "View the summary in pager."
 msgstr "ページャで詳細を表示します。"
 
-#: src/solve-commit.cc:866
+#: src/solve-commit.cc:868
 msgid "committing"
 msgstr "確定しています"
 
-#: src/solve-commit.cc:868
+#: src/solve-commit.cc:870
 msgid "(dry run)"
 msgstr "(テスト)"
 
-#: src/solve-commit.cc:897 src/solve-commit.cc:930
+#: src/solve-commit.cc:899 src/solve-commit.cc:932
 msgid "Problem retrieving the package file from the repository:"
 msgstr "リポジトリからのパッケージファイルの取得に問題:"
 
 #. translators: the first %s is 'zypper refresh' and the second is repo alias
-#: src/solve-commit.cc:927
+#: src/solve-commit.cc:929
 #, c-format, boost-format
 msgid "Repository '%s' is out of date. Running '%s' might help."
 msgstr "リポジトリ '%s' の情報は古くなっています。 '%s' を実行してください。"
 
-#: src/solve-commit.cc:938
+#: src/solve-commit.cc:940
 msgid ""
 "The package integrity check failed. This may be a problem with the "
 "repository or media. Try one of the following:\n"
@@ -6504,12 +6512,12 @@ msgstr ""
 "- 他のインストールメディアを使用する　(損傷している場合など)　\n"
 "- 他のリポジトリを使用する"
 
-#: src/solve-commit.cc:952
+#: src/solve-commit.cc:954
 msgid "Problem occurred during or after installation or removal of packages:"
 msgstr ""
 "インストールまたは削除の際、もしくはそれぞれの作業の後に問題が発生しました:"
 
-#: src/solve-commit.cc:991
+#: src/solve-commit.cc:993
 msgid ""
 "One of the installed patches requires a reboot of your machine. Reboot as "
 "soon as possible."
@@ -6517,7 +6525,7 @@ msgstr ""
 "インストールされたパッチの中にはコンピュータの再起動を必要とするものがありま"
 "す。できるだけ早めに再起動してください。"
 
-#: src/solve-commit.cc:999
+#: src/solve-commit.cc:1001
 msgid ""
 "One of the installed patches affects the package manager itself. Run this "
 "command once more to install any other needed patches."
@@ -6526,7 +6534,7 @@ msgstr ""
 "ています。再度このコマンドを実行して、その他の必要な更新をインストールしてく"
 "ださい。"
 
-#: src/solve-commit.cc:1021
+#: src/solve-commit.cc:1023
 msgid "Dependencies of all installed packages are satisfied."
 msgstr "インストール済みの全パッケージの依存関係に問題はありません。"
 
@@ -7202,6 +7210,13 @@ msgstr "無効なオブジェクト"
 #: src/utils/prompt.h:192
 msgid "Error"
 msgstr "エラー"
+
+#~ msgid ""
+#~ "Repository '%s' appears to be outdated. Consider using a different mirror "
+#~ "or server."
+#~ msgstr ""
+#~ "リポジトリ '%s' は古くなっているように思われます。異なるミラーまたはサーバ"
+#~ "をお使いになることをお勧めします。"
 
 # =============================================================================
 #~ msgid "addlock (al) [OPTIONS] <PACKAGENAME> ..."

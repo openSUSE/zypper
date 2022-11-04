@@ -31,7 +31,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenSUSE\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-25 14:05+0200\n"
+"POT-Creation-Date: 2022-11-04 14:37+0100\n"
 "PO-Revision-Date: 2016-10-26 12:30+0000\n"
 "Last-Translator: Pasca Alexandru <yo6ial@yahoo.com>\n"
 "Language-Team: Romanian <https://l10n.opensuse.org/projects/zypper/master/ro/"
@@ -676,12 +676,12 @@ msgstr "Vrei sa spui %1%?"
 msgid "Ignoring option %s when updating the update stack first."
 msgstr ""
 
-#: src/SolverRequester.h:52
+#: src/SolverRequester.h:53
 #, boost-format
 msgid "Suspicious category filter value '%1%'."
 msgstr ""
 
-#: src/SolverRequester.h:60
+#: src/SolverRequester.h:61
 #, boost-format
 msgid "Suspicious severity filter value '%1%'."
 msgstr ""
@@ -3081,12 +3081,12 @@ msgstr ""
 msgid "Write debug output to file <path>."
 msgstr ""
 
-#: src/commands/ps.cc:72 src/solve-commit.cc:561
+#: src/commands/ps.cc:72 src/solve-commit.cc:559
 msgid "Check failed:"
 msgstr "Verificare eșuată:"
 
 #. Here: Table output
-#: src/commands/ps.cc:127 src/solve-commit.cc:550
+#: src/commands/ps.cc:127 src/solve-commit.cc:548
 msgid "Checking for running processes using deleted libraries..."
 msgstr "Se verifică procesele care rulează utilizând bibliotecile șterse..."
 
@@ -4863,7 +4863,7 @@ msgid ""
 msgstr ""
 
 #: src/commands/update.cc:69 src/commands/update.cc:76
-#: src/commands/update.cc:126
+#: src/commands/update.cc:123
 msgid "Operation not supported."
 msgstr "Operațiunea nu este suportată."
 
@@ -4934,7 +4934,7 @@ msgstr ""
 msgid "Argument resolves to no package"
 msgstr ""
 
-#: src/commands/utils/download.cc:254 src/solve-commit.cc:1023
+#: src/commands/utils/download.cc:254 src/solve-commit.cc:1025
 msgid "Nothing to do."
 msgstr "Nimic de făcut."
 
@@ -5777,8 +5777,8 @@ msgstr "Dezactivez sursa de instalare '%s'."
 msgid "Problem retrieving files from '%s'."
 msgstr "Problemă la obținerea fișierelor de la '%s'."
 
-#: src/repos.cc:345 src/repos.cc:1859 src/solve-commit.cc:898
-#: src/solve-commit.cc:929 src/solve-commit.cc:953
+#: src/repos.cc:345 src/repos.cc:1867 src/solve-commit.cc:900
+#: src/solve-commit.cc:931 src/solve-commit.cc:955
 msgid "Please see the above error message for a hint."
 msgstr "Consultați mesajul de eroare de mai sus pentru sugestii."
 
@@ -6150,73 +6150,77 @@ msgstr ""
 "Avertisment: Nu au fost definite surse de instalare. Operez doar cu "
 "dependențele instalate. Nu poate fi instalat nimic."
 
-#: src/repos.cc:1790
+#: src/repos.cc:1791
 #, c-format, boost-format
 msgid "Retrieving repository '%s' data..."
 msgstr "Obțin datele sursei de instalare '%s'..."
 
-#: src/repos.cc:1796
+#: src/repos.cc:1797
 #, c-format, boost-format
 msgid "Repository '%s' not cached. Caching..."
 msgstr "Sursa de instalare '%s' nu este în cache ..."
 
-#: src/repos.cc:1802 src/repos.cc:1836
+#: src/repos.cc:1803 src/repos.cc:1837
 #, c-format, boost-format
 msgid "Problem loading data from '%s'"
 msgstr "Problemă la încărcarea datelor de la '%s'"
 
-#: src/repos.cc:1806
+#: src/repos.cc:1807
 #, c-format, boost-format
 msgid "Repository '%s' could not be refreshed. Using old cache."
 msgstr ""
 "Sursa de instalare '%s' nu a putut fi reîmprospătată. Se va utiliza "
 "versiunea din memoria cache."
 
-#: src/repos.cc:1810 src/repos.cc:1839
+#: src/repos.cc:1811 src/repos.cc:1840
 #, c-format, boost-format
 msgid "Resolvables from '%s' not loaded because of error."
 msgstr "Dependențele de la '%s' nu au fost încărcate din cauza unei erori."
 
 #: src/repos.cc:1827
-#, fuzzy, c-format, boost-format
-msgid ""
-"Repository '%s' appears to be outdated. Consider using a different mirror or "
-"server."
+#, boost-format
+msgid "Repository '%1%' metadata expired since %2%."
 msgstr ""
-"Sursa de instalare '%s' pare a fi învechită. Încercați să utilizați altă "
-"oglindă sau alt server."
 
 #. translators: the first %s is 'zypper refresh' and the second 'zypper clean -m'
-#: src/repos.cc:1838
+#: src/repos.cc:1839
 #, c-format, boost-format
 msgid "Try '%s', or even '%s' before doing so."
 msgstr "Încercați '%s' sau chiar '%s' înainte să faceți asta."
 
-#: src/repos.cc:1849
+#: src/repos.cc:1844
+msgid ""
+"Repository metadata expired: Check if 'autorefresh' is turned on (zypper "
+"lr), otherwise manualy refresh the repository (zypper ref). If this does not "
+"solve the issue, it could be that you are using a broken mirror or the "
+"server has actually discontinued to support the repository."
+msgstr ""
+
+#: src/repos.cc:1857
 msgid "Reading installed packages..."
 msgstr "Citesc pachetele instalate..."
 
-#: src/repos.cc:1858
+#: src/repos.cc:1866
 #, fuzzy
 msgid "Problem occurred while reading the installed packages:"
 msgstr "A apărut o problemă în timpul citirii pachetelor instalate:"
 
-#: src/repos.cc:1875
+#: src/repos.cc:1883
 #, c-format, boost-format
 msgid "'%s' looks like an RPM file. Will try to download it."
 msgstr "'%s' pare a fi un fișier RPM. Voi încerca să-l descarc."
 
-#: src/repos.cc:1884
+#: src/repos.cc:1892
 #, c-format, boost-format
 msgid "Problem with the RPM file specified as '%s', skipping."
 msgstr "Probleme cu fișierul RPM specificat ca '%s', îl omit."
 
-#: src/repos.cc:1906
+#: src/repos.cc:1914
 #, c-format, boost-format
 msgid "Problem reading the RPM header of %s. Is it an RPM file?"
 msgstr "Probleme la citirea header-ului RPM al %s. Este un fișier RPM?"
 
-#: src/repos.cc:1926
+#: src/repos.cc:1934
 msgid "Plain RPM files cache"
 msgstr "Cache pentru fișiere RPM simple"
 
@@ -6350,47 +6354,47 @@ msgstr "Rezolv dependențele..."
 msgid "Force resolution:"
 msgstr "Forțează soluția:"
 
-#: src/solve-commit.cc:415
+#: src/solve-commit.cc:413
 msgid "Verifying dependencies..."
 msgstr "Verific dependențele..."
 
 #. Here: compute the full upgrade
-#: src/solve-commit.cc:465
+#: src/solve-commit.cc:463
 msgid "Computing upgrade..."
 msgstr "Upgrade calculator ..."
 
-#: src/solve-commit.cc:479
+#: src/solve-commit.cc:477
 msgid "Generating solver test case..."
 msgstr "Generarea unui scenariu de test pentru rezolvare ..."
 
-#: src/solve-commit.cc:481
+#: src/solve-commit.cc:479
 #, c-format, boost-format
 msgid "Solver test case generated successfully at %s."
 msgstr "Scenariul de rezolvare a unui test s-a generat cu succes %s."
 
-#: src/solve-commit.cc:484
+#: src/solve-commit.cc:482
 msgid "Error creating the solver test case."
 msgstr "Traduceri de test similare: 1-1 la 1."
 
-#: src/solve-commit.cc:529
+#: src/solve-commit.cc:527
 msgid ""
 "DownloadAsNeeded can not be used with ZYPP_SINGLE_RPMTRANS=1, falling back "
 "to DownloadInAdvance"
 msgstr ""
 
-#: src/solve-commit.cc:547
+#: src/solve-commit.cc:545
 #, fuzzy, c-format, boost-format
 msgid ""
 "Check for running processes using deleted libraries is disabled in zypper."
 "conf. Run '%s' to check manually."
 msgstr "Se verifică procesele care rulează utilizând bibliotecile șterse..."
 
-#: src/solve-commit.cc:563
+#: src/solve-commit.cc:561
 #, fuzzy
 msgid "Skip check:"
 msgstr "Verificare GPG"
 
-#: src/solve-commit.cc:570
+#: src/solve-commit.cc:568
 #, boost-format
 msgid ""
 "There are running programs which still use files and libraries deleted or "
@@ -6398,32 +6402,32 @@ msgid ""
 "latest updates. Run '%1%' to list these programs."
 msgstr ""
 
-#: src/solve-commit.cc:584
+#: src/solve-commit.cc:582
 msgid "Update notifications were received from the following packages:"
 msgstr "Au fost primite notificări pentru actualizarea următoarele pachete:"
 
-#: src/solve-commit.cc:593
+#: src/solve-commit.cc:591
 #, c-format, boost-format
 msgid "Message from package %s:"
 msgstr "Mesaj de la pachetul %s:"
 
-#: src/solve-commit.cc:601
+#: src/solve-commit.cc:599
 msgid "y/n"
 msgstr "y/n"
 
-#: src/solve-commit.cc:602
+#: src/solve-commit.cc:600
 msgid "View the notifications now?"
 msgstr "Vizualizați notificările acum?"
 
-#: src/solve-commit.cc:647
+#: src/solve-commit.cc:645
 msgid "Computing distribution upgrade..."
 msgstr "Se evaluează reactualizarea distribuției..."
 
-#: src/solve-commit.cc:652
+#: src/solve-commit.cc:650
 msgid "Resolving package dependencies..."
 msgstr "Rezolv dependențele pachetelor..."
 
-#: src/solve-commit.cc:707
+#: src/solve-commit.cc:709
 msgid ""
 "Some of the dependencies of installed packages are broken. In order to fix "
 "these dependencies, the following actions need to be taken:"
@@ -6431,7 +6435,7 @@ msgstr ""
 "O parte din dependențele pachetelor instalate sunt defecte. Pentru a repara "
 "aceste dependențe trebuie luate următoarele măsuri:"
 
-#: src/solve-commit.cc:714
+#: src/solve-commit.cc:716
 msgid "Root privileges are required to fix broken package dependencies."
 msgstr ""
 "Pentru a repara dependențe defecte dintre pachete sunt necesare privilegii "
@@ -6447,23 +6451,23 @@ msgstr ""
 #. The answers should be lower case letters, but in general, any UTF-8
 #. string will do.
 #. ! \todo add c for changelog and x for explain (show the dep tree)
-#: src/solve-commit.cc:736
+#: src/solve-commit.cc:738
 msgid "y/n/p/v/a/r/m/d/g"
 msgstr "y/n/p/v/a/r/m/d/g"
 
 #. translators: help text for 'y' option in the 'Continue?' prompt
-#: src/solve-commit.cc:741
+#: src/solve-commit.cc:743
 msgid ""
 "Yes, accept the summary and proceed with installation/removal of packages."
 msgstr "Da, accept cuprinsul și inițiez instalarea/ștergerea pachetelor."
 
 #. translators: help text for 'n' option in the 'Continue?' prompt
-#: src/solve-commit.cc:743
+#: src/solve-commit.cc:745
 msgid "No, cancel the operation."
 msgstr "Nu, anulează operația."
 
 #. translators: help text for 'p' option in the 'Continue?' prompt
-#: src/solve-commit.cc:745
+#: src/solve-commit.cc:747
 msgid ""
 "Restart solver in no-force-resolution mode in order to show dependency "
 "problems."
@@ -6472,57 +6476,57 @@ msgstr ""
 "de dependințe."
 
 #. translators: help text for 'v' option in the 'Continue?' prompt
-#: src/solve-commit.cc:747
+#: src/solve-commit.cc:749
 msgid "Toggle display of package versions."
 msgstr "Schimbă ordinea versiunilor de la pachete."
 
 #. translators: help text for 'a' option in the 'Continue?' prompt
-#: src/solve-commit.cc:749
+#: src/solve-commit.cc:751
 msgid "Toggle display of package architectures."
 msgstr "Schimbă ordinea arhitecturii pachetelor."
 
 #. translators: help text for 'r' option in the 'Continue?' prompt
-#: src/solve-commit.cc:751
+#: src/solve-commit.cc:753
 msgid ""
 "Toggle display of repositories from which the packages will be installed."
 msgstr ""
 "Schimbă ordinea surselor de instalare din care pachetele vor fi instalate."
 
 #. translators: help text for 'm' option in the 'Continue?' prompt
-#: src/solve-commit.cc:753
+#: src/solve-commit.cc:755
 msgid "Toggle display of package vendor names."
 msgstr "Schimbă ordinea numelor vânzătorilor de pachete."
 
 #. translators: help text for 'd' option in the 'Continue?' prompt
-#: src/solve-commit.cc:755
+#: src/solve-commit.cc:757
 msgid "Toggle between showing all details and as few details as possible."
 msgstr ""
 "Schimbă între a arăta toate detaliile și cât mai puține detalii posibil."
 
 #. translators: help text for 'g' option in the 'Continue?' prompt
-#: src/solve-commit.cc:757
+#: src/solve-commit.cc:759
 msgid "View the summary in pager."
 msgstr "Vizualizează sumarul în pagină."
 
-#: src/solve-commit.cc:866
+#: src/solve-commit.cc:868
 msgid "committing"
 msgstr "comitere"
 
-#: src/solve-commit.cc:868
+#: src/solve-commit.cc:870
 msgid "(dry run)"
 msgstr "(rulează)"
 
-#: src/solve-commit.cc:897 src/solve-commit.cc:930
+#: src/solve-commit.cc:899 src/solve-commit.cc:932
 msgid "Problem retrieving the package file from the repository:"
 msgstr "Problemă la obținerea fișierului pachet de la sursa de instalare:"
 
 #. translators: the first %s is 'zypper refresh' and the second is repo alias
-#: src/solve-commit.cc:927
+#: src/solve-commit.cc:929
 #, c-format, boost-format
 msgid "Repository '%s' is out of date. Running '%s' might help."
 msgstr "Sursa de instalare '%s' este învechită. Rularea '%s' poate ajuta."
 
-#: src/solve-commit.cc:938
+#: src/solve-commit.cc:940
 msgid ""
 "The package integrity check failed. This may be a problem with the "
 "repository or media. Try one of the following:\n"
@@ -6540,13 +6544,13 @@ msgstr ""
 "- utilizați alt mediu de instalare (dacă de ex. este deteriorat)\n"
 "- utilizați altă sursă de instalare"
 
-#: src/solve-commit.cc:952
+#: src/solve-commit.cc:954
 msgid "Problem occurred during or after installation or removal of packages:"
 msgstr ""
 "A apărut o problemă în timpul sau după instalarea sau îndepărtarea de "
 "pachete:"
 
-#: src/solve-commit.cc:991
+#: src/solve-commit.cc:993
 msgid ""
 "One of the installed patches requires a reboot of your machine. Reboot as "
 "soon as possible."
@@ -6554,7 +6558,7 @@ msgstr ""
 "Unul dintre peticele instalate cere repornirea calculatorului. Reporniți cât "
 "mai repede."
 
-#: src/solve-commit.cc:999
+#: src/solve-commit.cc:1001
 msgid ""
 "One of the installed patches affects the package manager itself. Run this "
 "command once more to install any other needed patches."
@@ -6562,7 +6566,7 @@ msgstr ""
 "Unul dintre peticele instalate afectează managerul de pachete. Rulați "
 "această comandă încă o dată pentru a instala orice alt petic necesar."
 
-#: src/solve-commit.cc:1021
+#: src/solve-commit.cc:1023
 msgid "Dependencies of all installed packages are satisfied."
 msgstr "Dependențele tuturor pachetelor instalate sunt satisfăcute."
 
@@ -7250,6 +7254,14 @@ msgstr "Obiect invalid"
 #: src/utils/prompt.h:192
 msgid "Error"
 msgstr "Eroare"
+
+#, fuzzy
+#~ msgid ""
+#~ "Repository '%s' appears to be outdated. Consider using a different mirror "
+#~ "or server."
+#~ msgstr ""
+#~ "Sursa de instalare '%s' pare a fi învechită. Încercați să utilizați altă "
+#~ "oglindă sau alt server."
 
 #~ msgid ""
 #~ "Add a package lock. Specify packages to lock by exact name or by a glob "

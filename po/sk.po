@@ -5,11 +5,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-25 14:05+0200\n"
+"POT-Creation-Date: 2022-11-04 14:37+0100\n"
 "PO-Revision-Date: 2022-07-26 17:13+0000\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
-"Language-Team: Slovak <https://l10n.opensuse.org/projects/zypper/master/sk/>"
-"\n"
+"Language-Team: Slovak <https://l10n.opensuse.org/projects/zypper/master/sk/"
+">\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -660,12 +660,12 @@ msgstr "Mali ste na mysli %1%?"
 msgid "Ignoring option %s when updating the update stack first."
 msgstr "Ignorovanie voľby %s, ak sa najskôr aktualizuje zásobník aktualizácií."
 
-#: src/SolverRequester.h:52
+#: src/SolverRequester.h:53
 #, boost-format
 msgid "Suspicious category filter value '%1%'."
 msgstr "Podozrivá hodnota filtra kategórie '%1%'."
 
-#: src/SolverRequester.h:60
+#: src/SolverRequester.h:61
 #, boost-format
 msgid "Suspicious severity filter value '%1%'."
 msgstr "Podozrivá hodnota filtra závažnosti '%1%'."
@@ -3154,12 +3154,12 @@ msgstr ""
 msgid "Write debug output to file <path>."
 msgstr "Zapísať ladiaci výstup do súboru <path>."
 
-#: src/commands/ps.cc:72 src/solve-commit.cc:561
+#: src/commands/ps.cc:72 src/solve-commit.cc:559
 msgid "Check failed:"
 msgstr "Overovanie zlyhalo:"
 
 #. Here: Table output
-#: src/commands/ps.cc:127 src/solve-commit.cc:550
+#: src/commands/ps.cc:127 src/solve-commit.cc:548
 msgid "Checking for running processes using deleted libraries..."
 msgstr "Overujem, či nejaké procesy nepoužívajú práve zmazané súbory..."
 
@@ -4985,7 +4985,7 @@ msgstr ""
 "verziami, ak je to možné."
 
 #: src/commands/update.cc:69 src/commands/update.cc:76
-#: src/commands/update.cc:126
+#: src/commands/update.cc:123
 msgid "Operation not supported."
 msgstr "Operácia nie je podporovaná."
 
@@ -5065,7 +5065,7 @@ msgstr ""
 msgid "Argument resolves to no package"
 msgstr "Argument neviedol k žiadnemu balíku"
 
-#: src/commands/utils/download.cc:254 src/solve-commit.cc:1023
+#: src/commands/utils/download.cc:254 src/solve-commit.cc:1025
 msgid "Nothing to do."
 msgstr "Nie je čo vykonať."
 
@@ -5886,8 +5886,8 @@ msgstr "Chyba počas vypínania repozitára '%s'."
 msgid "Problem retrieving files from '%s'."
 msgstr "Problém pri sťahovaní súborov z '%s'."
 
-#: src/repos.cc:345 src/repos.cc:1859 src/solve-commit.cc:898
-#: src/solve-commit.cc:929 src/solve-commit.cc:953
+#: src/repos.cc:345 src/repos.cc:1867 src/solve-commit.cc:900
+#: src/solve-commit.cc:931 src/solve-commit.cc:955
 msgid "Please see the above error message for a hint."
 msgstr "Pozrite vyššie vypísanú chybu pre informáciu o jej príčine."
 
@@ -6253,71 +6253,75 @@ msgstr ""
 "Nie sú definované žiadne repozitáre. Prevádzka len s nainštalovanými "
 "riešeniami. Nič nemôže byť nainštalované."
 
-#: src/repos.cc:1790
+#: src/repos.cc:1791
 #, c-format, boost-format
 msgid "Retrieving repository '%s' data..."
 msgstr "Načítavam údaje repozitára '%s'..."
 
-#: src/repos.cc:1796
+#: src/repos.cc:1797
 #, c-format, boost-format
 msgid "Repository '%s' not cached. Caching..."
 msgstr "Repozitár '%s' nie je uchovávaný. Uchovávanie..."
 
-#: src/repos.cc:1802 src/repos.cc:1836
+#: src/repos.cc:1803 src/repos.cc:1837
 #, c-format, boost-format
 msgid "Problem loading data from '%s'"
 msgstr "Problém pri sťahovaní údajov z '%s'"
 
-#: src/repos.cc:1806
+#: src/repos.cc:1807
 #, c-format, boost-format
 msgid "Repository '%s' could not be refreshed. Using old cache."
 msgstr ""
 "Repozitár '%s' nemohol byť obnovený. Použitie starej vyrovnávacej pamäte."
 
-#: src/repos.cc:1810 src/repos.cc:1839
+#: src/repos.cc:1811 src/repos.cc:1840
 #, c-format, boost-format
 msgid "Resolvables from '%s' not loaded because of error."
 msgstr "Riešenia z repozitára '%s' neboli kvôli chybe načítané."
 
 #: src/repos.cc:1827
-#, c-format, boost-format
-msgid ""
-"Repository '%s' appears to be outdated. Consider using a different mirror or "
-"server."
+#, boost-format
+msgid "Repository '%1%' metadata expired since %2%."
 msgstr ""
-"Repozitár '%s' je pravdepodobne neaktuálny. Zvážiť použitie iného zrkadla "
-"alebo servera."
 
 #. translators: the first %s is 'zypper refresh' and the second 'zypper clean -m'
-#: src/repos.cc:1838
+#: src/repos.cc:1839
 #, c-format, boost-format
 msgid "Try '%s', or even '%s' before doing so."
 msgstr "Vyskúšajte '%s' alebo dokonca '%s' než tak urobíte."
 
-#: src/repos.cc:1849
+#: src/repos.cc:1844
+msgid ""
+"Repository metadata expired: Check if 'autorefresh' is turned on (zypper "
+"lr), otherwise manualy refresh the repository (zypper ref). If this does not "
+"solve the issue, it could be that you are using a broken mirror or the "
+"server has actually discontinued to support the repository."
+msgstr ""
+
+#: src/repos.cc:1857
 msgid "Reading installed packages..."
 msgstr "Načítavam nainštalované balíky..."
 
-#: src/repos.cc:1858
+#: src/repos.cc:1866
 msgid "Problem occurred while reading the installed packages:"
 msgstr "Chyba pri čítaní nainštalovaných balíkov:"
 
-#: src/repos.cc:1875
+#: src/repos.cc:1883
 #, c-format, boost-format
 msgid "'%s' looks like an RPM file. Will try to download it."
 msgstr "'%s' vyzerá ako RPM súbor. Pokúsim sa ho stiahnuť."
 
-#: src/repos.cc:1884
+#: src/repos.cc:1892
 #, c-format, boost-format
 msgid "Problem with the RPM file specified as '%s', skipping."
 msgstr "Nastal problém s RPM súborom zadaným ako '%s', preskakujem."
 
-#: src/repos.cc:1906
+#: src/repos.cc:1914
 #, c-format, boost-format
 msgid "Problem reading the RPM header of %s. Is it an RPM file?"
 msgstr "Nastal problém pri čítaní RPM hlavičky balíka %s. Je to RPM súbor?"
 
-#: src/repos.cc:1926
+#: src/repos.cc:1934
 msgid "Plain RPM files cache"
 msgstr "Vyrovnávacie pamäť RPM súborov"
 
@@ -6456,29 +6460,29 @@ msgstr "Riešim závislosti..."
 msgid "Force resolution:"
 msgstr "Vynucovať riešenie:"
 
-#: src/solve-commit.cc:415
+#: src/solve-commit.cc:413
 msgid "Verifying dependencies..."
 msgstr "Overujem závislosti..."
 
 #. Here: compute the full upgrade
-#: src/solve-commit.cc:465
+#: src/solve-commit.cc:463
 msgid "Computing upgrade..."
 msgstr "Vypočítavam povýšenie..."
 
-#: src/solve-commit.cc:479
+#: src/solve-commit.cc:477
 msgid "Generating solver test case..."
 msgstr "Generujem testovací prípad pre riešiteľa..."
 
-#: src/solve-commit.cc:481
+#: src/solve-commit.cc:479
 #, c-format, boost-format
 msgid "Solver test case generated successfully at %s."
 msgstr "Testovací prípad pre riešiteľa bol úspešne vygenerovaný v %s."
 
-#: src/solve-commit.cc:484
+#: src/solve-commit.cc:482
 msgid "Error creating the solver test case."
 msgstr "Chyba pri vytváraní testovacieho prípadu pre riešiteľa."
 
-#: src/solve-commit.cc:529
+#: src/solve-commit.cc:527
 msgid ""
 "DownloadAsNeeded can not be used with ZYPP_SINGLE_RPMTRANS=1, falling back "
 "to DownloadInAdvance"
@@ -6486,7 +6490,7 @@ msgstr ""
 "DownloadAsNeeded nemožno použiť s ZYPP_SINGLE_RPMTRANS=1, vrátenie sa späť "
 "na DownloadInAdvance"
 
-#: src/solve-commit.cc:547
+#: src/solve-commit.cc:545
 #, c-format, boost-format
 msgid ""
 "Check for running processes using deleted libraries is disabled in zypper."
@@ -6495,11 +6499,11 @@ msgstr ""
 "Kontrola bežiacich procesov pomocou vymazaných knižníc je v zypper.conf "
 "zakázaná. Spustite '%s' na ručnú kontrolu."
 
-#: src/solve-commit.cc:563
+#: src/solve-commit.cc:561
 msgid "Skip check:"
 msgstr "Preskočiť kontrolu:"
 
-#: src/solve-commit.cc:570
+#: src/solve-commit.cc:568
 #, boost-format
 msgid ""
 "There are running programs which still use files and libraries deleted or "
@@ -6511,32 +6515,32 @@ msgstr ""
 "spustiť, aby využívali najnovšie aktualizácie. Spustite '%1%' pre vypísanie "
 "týchto programov."
 
-#: src/solve-commit.cc:584
+#: src/solve-commit.cc:582
 msgid "Update notifications were received from the following packages:"
 msgstr "Nasledujúce balíky zanechali hlásenia z vykonanej aktualizácie:"
 
-#: src/solve-commit.cc:593
+#: src/solve-commit.cc:591
 #, c-format, boost-format
 msgid "Message from package %s:"
 msgstr "Správa z balíka %s:"
 
-#: src/solve-commit.cc:601
+#: src/solve-commit.cc:599
 msgid "y/n"
 msgstr "a/n"
 
-#: src/solve-commit.cc:602
+#: src/solve-commit.cc:600
 msgid "View the notifications now?"
 msgstr "Zobrazovať hlásenia teraz?"
 
-#: src/solve-commit.cc:647
+#: src/solve-commit.cc:645
 msgid "Computing distribution upgrade..."
 msgstr "Vypočítavam povýšenie distribúcie..."
 
-#: src/solve-commit.cc:652
+#: src/solve-commit.cc:650
 msgid "Resolving package dependencies..."
 msgstr "Riešim závislosti balíkov..."
 
-#: src/solve-commit.cc:707
+#: src/solve-commit.cc:709
 msgid ""
 "Some of the dependencies of installed packages are broken. In order to fix "
 "these dependencies, the following actions need to be taken:"
@@ -6544,7 +6548,7 @@ msgstr ""
 "Závislosti niektorých balíkov sú porušené. Pre ich opravu sú potrebné "
 "nasledujúce akcie:"
 
-#: src/solve-commit.cc:714
+#: src/solve-commit.cc:716
 msgid "Root privileges are required to fix broken package dependencies."
 msgstr ""
 "Pre opravu porušených závislostí sú potrebné práva správcu systému (root)."
@@ -6559,23 +6563,23 @@ msgstr ""
 #. The answers should be lower case letters, but in general, any UTF-8
 #. string will do.
 #. ! \todo add c for changelog and x for explain (show the dep tree)
-#: src/solve-commit.cc:736
+#: src/solve-commit.cc:738
 msgid "y/n/p/v/a/r/m/d/g"
 msgstr "a/n/p/v/c/r/m/d/g"
 
 #. translators: help text for 'y' option in the 'Continue?' prompt
-#: src/solve-commit.cc:741
+#: src/solve-commit.cc:743
 msgid ""
 "Yes, accept the summary and proceed with installation/removal of packages."
 msgstr "Áno, prijať návrh a pokračovať v inštalácii/odstraňovaní balíkov."
 
 #. translators: help text for 'n' option in the 'Continue?' prompt
-#: src/solve-commit.cc:743
+#: src/solve-commit.cc:745
 msgid "No, cancel the operation."
 msgstr "Nie, zrušiť operáciu."
 
 #. translators: help text for 'p' option in the 'Continue?' prompt
-#: src/solve-commit.cc:745
+#: src/solve-commit.cc:747
 msgid ""
 "Restart solver in no-force-resolution mode in order to show dependency "
 "problems."
@@ -6584,57 +6588,57 @@ msgstr ""
 "so závislosťami."
 
 #. translators: help text for 'v' option in the 'Continue?' prompt
-#: src/solve-commit.cc:747
+#: src/solve-commit.cc:749
 msgid "Toggle display of package versions."
 msgstr "Zapnúť/vypnúť zobrazovanie verzií balíkov."
 
 #. translators: help text for 'a' option in the 'Continue?' prompt
-#: src/solve-commit.cc:749
+#: src/solve-commit.cc:751
 msgid "Toggle display of package architectures."
 msgstr "Zapnúť/vypnúť zobrazovanie architektúr balíkov."
 
 #. translators: help text for 'r' option in the 'Continue?' prompt
-#: src/solve-commit.cc:751
+#: src/solve-commit.cc:753
 msgid ""
 "Toggle display of repositories from which the packages will be installed."
 msgstr ""
 "Zapnúť/vypnúť zobrazovanie repozitárov z ktorých sa majú balíky inštalovať."
 
 #. translators: help text for 'm' option in the 'Continue?' prompt
-#: src/solve-commit.cc:753
+#: src/solve-commit.cc:755
 msgid "Toggle display of package vendor names."
 msgstr "Zapnúť/vypnúť zobrazovanie názvov dodávateľov balíkov."
 
 #. translators: help text for 'd' option in the 'Continue?' prompt
-#: src/solve-commit.cc:755
+#: src/solve-commit.cc:757
 msgid "Toggle between showing all details and as few details as possible."
 msgstr ""
 "Prepnúť medzi zobrazovaním všetkých podrobností a stručným zoznamom balíkov."
 
 #. translators: help text for 'g' option in the 'Continue?' prompt
-#: src/solve-commit.cc:757
+#: src/solve-commit.cc:759
 msgid "View the summary in pager."
 msgstr "Prezrieť zhrnutie v prehliadači."
 
-#: src/solve-commit.cc:866
+#: src/solve-commit.cc:868
 msgid "committing"
 msgstr "odovzdávam"
 
-#: src/solve-commit.cc:868
+#: src/solve-commit.cc:870
 msgid "(dry run)"
 msgstr "(beh naprázdno)"
 
-#: src/solve-commit.cc:897 src/solve-commit.cc:930
+#: src/solve-commit.cc:899 src/solve-commit.cc:932
 msgid "Problem retrieving the package file from the repository:"
 msgstr "Problém pri sťahovaní balíka z repozitára:"
 
 #. translators: the first %s is 'zypper refresh' and the second is repo alias
-#: src/solve-commit.cc:927
+#: src/solve-commit.cc:929
 #, c-format, boost-format
 msgid "Repository '%s' is out of date. Running '%s' might help."
 msgstr "Repozitár '%s' je neaktuálny. Skúste spustiť '%s'."
 
-#: src/solve-commit.cc:938
+#: src/solve-commit.cc:940
 msgid ""
 "The package integrity check failed. This may be a problem with the "
 "repository or media. Try one of the following:\n"
@@ -6652,11 +6656,11 @@ msgstr ""
 "- použite iné inštalačné médium (ak je napr. toto poškodené)\n"
 "- použite iný repozitár"
 
-#: src/solve-commit.cc:952
+#: src/solve-commit.cc:954
 msgid "Problem occurred during or after installation or removal of packages:"
 msgstr "Počas alebo po inštalácii alebo odstraňovaní balíkov nastala chyba:"
 
-#: src/solve-commit.cc:991
+#: src/solve-commit.cc:993
 msgid ""
 "One of the installed patches requires a reboot of your machine. Reboot as "
 "soon as possible."
@@ -6664,7 +6668,7 @@ msgstr ""
 "Jedna z nainštalovaných opráv vyžaduje reštart vášho počítača. Reštartujte "
 "čo najskôr."
 
-#: src/solve-commit.cc:999
+#: src/solve-commit.cc:1001
 msgid ""
 "One of the installed patches affects the package manager itself. Run this "
 "command once more to install any other needed patches."
@@ -6673,7 +6677,7 @@ msgstr ""
 "nainštalovanie prípadných ďalších opráv je potrebné spustiť tento príkaz "
 "ešte raz."
 
-#: src/solve-commit.cc:1021
+#: src/solve-commit.cc:1023
 msgid "Dependencies of all installed packages are satisfied."
 msgstr "Závislosti všetkých balíkov sú v poriadku."
 
@@ -7364,6 +7368,13 @@ msgstr "Neplatný objekt"
 #: src/utils/prompt.h:192
 msgid "Error"
 msgstr "Chyba"
+
+#~ msgid ""
+#~ "Repository '%s' appears to be outdated. Consider using a different mirror "
+#~ "or server."
+#~ msgstr ""
+#~ "Repozitár '%s' je pravdepodobne neaktuálny. Zvážiť použitie iného zrkadla "
+#~ "alebo servera."
 
 # =============================================================================
 #~ msgid "addlock (al) [OPTIONS] <PACKAGENAME> ..."

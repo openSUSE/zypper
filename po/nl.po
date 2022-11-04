@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.nl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-25 14:05+0200\n"
+"POT-Creation-Date: 2022-11-04 14:37+0100\n"
 "PO-Revision-Date: 2022-07-26 02:13+0000\n"
 "Last-Translator: Freek de Kruijf <freek@opensuse.org>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/zypper/master/nl/>\n"
@@ -670,12 +670,12 @@ msgstr ""
 "Optie %s wordt genegeerd wanneer de softwarestack voor bijwerken eerst wordt "
 "bijgewerkt."
 
-#: src/SolverRequester.h:52
+#: src/SolverRequester.h:53
 #, boost-format
 msgid "Suspicious category filter value '%1%'."
 msgstr "Verdachte waarde van categoriefilter '%1%'."
 
-#: src/SolverRequester.h:60
+#: src/SolverRequester.h:61
 #, boost-format
 msgid "Suspicious severity filter value '%1%'."
 msgstr "Verdachte waarde van ernst-filter '%1%'."
@@ -3149,12 +3149,12 @@ msgstr ""
 msgid "Write debug output to file <path>."
 msgstr "Debuguitvoer naar bestand <pad> schrijven."
 
-#: src/commands/ps.cc:72 src/solve-commit.cc:561
+#: src/commands/ps.cc:72 src/solve-commit.cc:559
 msgid "Check failed:"
 msgstr "Controleren is mislukt:"
 
 #. Here: Table output
-#: src/commands/ps.cc:127 src/solve-commit.cc:550
+#: src/commands/ps.cc:127 src/solve-commit.cc:548
 msgid "Checking for running processes using deleted libraries..."
 msgstr ""
 "Controle op actieve programma's die verwijderde bibliotheken gebruiken..."
@@ -5037,7 +5037,7 @@ msgstr ""
 "indien mogelijk, bijwerken."
 
 #: src/commands/update.cc:69 src/commands/update.cc:76
-#: src/commands/update.cc:126
+#: src/commands/update.cc:123
 msgid "Operation not supported."
 msgstr "Handeling wordt niet ondersteund."
 
@@ -5118,7 +5118,7 @@ msgstr ""
 msgid "Argument resolves to no package"
 msgstr "Argument is geen oplossing voor een pakket"
 
-#: src/commands/utils/download.cc:254 src/solve-commit.cc:1023
+#: src/commands/utils/download.cc:254 src/solve-commit.cc:1025
 msgid "Nothing to do."
 msgstr "Geen activiteit."
 
@@ -5948,8 +5948,8 @@ msgstr "Fout bij het uitschakelen van opslagruimte '%s'."
 msgid "Problem retrieving files from '%s'."
 msgstr "Probleem bij ophalen van bestanden van '%s'."
 
-#: src/repos.cc:345 src/repos.cc:1859 src/solve-commit.cc:898
-#: src/solve-commit.cc:929 src/solve-commit.cc:953
+#: src/repos.cc:345 src/repos.cc:1867 src/solve-commit.cc:900
+#: src/solve-commit.cc:931 src/solve-commit.cc:955
 msgid "Please see the above error message for a hint."
 msgstr "Zie bovenstaande foutmelding voor een hint."
 
@@ -6322,73 +6322,77 @@ msgstr ""
 "Geen opslagruimtes gedefinieerd. Er wordt nu alleen gewerkt met de "
 "geïnstalleerde oplosbare pakketten. Er kan niets worden geïnstalleerd."
 
-#: src/repos.cc:1790
+#: src/repos.cc:1791
 #, c-format, boost-format
 msgid "Retrieving repository '%s' data..."
 msgstr "Gegevens van opslagruimte '%s' worden opgehaald..."
 
-#: src/repos.cc:1796
+#: src/repos.cc:1797
 #, c-format, boost-format
 msgid "Repository '%s' not cached. Caching..."
 msgstr ""
 "Opslagruimte '%s' bevindt zich niet in de cache. Deze wordt nu toegevoegd..."
 
-#: src/repos.cc:1802 src/repos.cc:1836
+#: src/repos.cc:1803 src/repos.cc:1837
 #, c-format, boost-format
 msgid "Problem loading data from '%s'"
 msgstr "Probleem bij laden van gegevens van '%s'"
 
-#: src/repos.cc:1806
+#: src/repos.cc:1807
 #, c-format, boost-format
 msgid "Repository '%s' could not be refreshed. Using old cache."
 msgstr ""
 "Opslagruimte '%s' kan niet worden vernieuwd. De oude cache wordt gebruikt."
 
-#: src/repos.cc:1810 src/repos.cc:1839
+#: src/repos.cc:1811 src/repos.cc:1840
 #, c-format, boost-format
 msgid "Resolvables from '%s' not loaded because of error."
 msgstr "Oplosbare pakketten van '%s' zijn niet geladen vanwege een fout."
 
 #: src/repos.cc:1827
-#, c-format, boost-format
-msgid ""
-"Repository '%s' appears to be outdated. Consider using a different mirror or "
-"server."
+#, boost-format
+msgid "Repository '%1%' metadata expired since %2%."
 msgstr ""
-"Opslagruimte '%s' lijkt verouderd te zijn. Ga na of u een andere mirror of "
-"server moet gebruiken."
 
 #. translators: the first %s is 'zypper refresh' and the second 'zypper clean -m'
-#: src/repos.cc:1838
+#: src/repos.cc:1839
 #, c-format, boost-format
 msgid "Try '%s', or even '%s' before doing so."
 msgstr "Probeer '%s', of zelfs '%s' alvorens dit te doen."
 
-#: src/repos.cc:1849
+#: src/repos.cc:1844
+msgid ""
+"Repository metadata expired: Check if 'autorefresh' is turned on (zypper "
+"lr), otherwise manualy refresh the repository (zypper ref). If this does not "
+"solve the issue, it could be that you are using a broken mirror or the "
+"server has actually discontinued to support the repository."
+msgstr ""
+
+#: src/repos.cc:1857
 msgid "Reading installed packages..."
 msgstr "Lezen van geïnstalleerde pakketten..."
 
-#: src/repos.cc:1858
+#: src/repos.cc:1866
 msgid "Problem occurred while reading the installed packages:"
 msgstr "Er is een fout opgetreden bij het lezen van geïnstalleerde pakketten:"
 
-#: src/repos.cc:1875
+#: src/repos.cc:1883
 #, c-format, boost-format
 msgid "'%s' looks like an RPM file. Will try to download it."
 msgstr "'%s' lijkt op een RPM-bestand. Er wordt geprobeerd het te downloaden."
 
-#: src/repos.cc:1884
+#: src/repos.cc:1892
 #, c-format, boost-format
 msgid "Problem with the RPM file specified as '%s', skipping."
 msgstr "Probleem met het RPM-bestand gespecificeerd als '%s', overslaan."
 
-#: src/repos.cc:1906
+#: src/repos.cc:1914
 #, c-format, boost-format
 msgid "Problem reading the RPM header of %s. Is it an RPM file?"
 msgstr ""
 "Probleem met het lezen van de RPM-header van %s. Is het een RPM-bestand?"
 
-#: src/repos.cc:1926
+#: src/repos.cc:1934
 msgid "Plain RPM files cache"
 msgstr "Cache van gewone RPM-bestanden"
 
@@ -6526,29 +6530,29 @@ msgstr "Afhankelijkheden oplossen..."
 msgid "Force resolution:"
 msgstr "Forceer een oplossing:"
 
-#: src/solve-commit.cc:415
+#: src/solve-commit.cc:413
 msgid "Verifying dependencies..."
 msgstr "Controleren van afhankelijkheden..."
 
 #. Here: compute the full upgrade
-#: src/solve-commit.cc:465
+#: src/solve-commit.cc:463
 msgid "Computing upgrade..."
 msgstr "Berekenen van opwaardering.."
 
-#: src/solve-commit.cc:479
+#: src/solve-commit.cc:477
 msgid "Generating solver test case..."
 msgstr "Genereert een test..."
 
-#: src/solve-commit.cc:481
+#: src/solve-commit.cc:479
 #, c-format, boost-format
 msgid "Solver test case generated successfully at %s."
 msgstr "Test met oplosser is met succes gegenereerd in %s."
 
-#: src/solve-commit.cc:484
+#: src/solve-commit.cc:482
 msgid "Error creating the solver test case."
 msgstr "Fout bij genereren van test."
 
-#: src/solve-commit.cc:529
+#: src/solve-commit.cc:527
 msgid ""
 "DownloadAsNeeded can not be used with ZYPP_SINGLE_RPMTRANS=1, falling back "
 "to DownloadInAdvance"
@@ -6556,7 +6560,7 @@ msgstr ""
 "DownloadAsNeeded kan niet gebruikt worden met ZYPP_SINGLE_RPMTRANS=1, wordt "
 "terugvallen op DownloadInAdvance"
 
-#: src/solve-commit.cc:547
+#: src/solve-commit.cc:545
 #, c-format, boost-format
 msgid ""
 "Check for running processes using deleted libraries is disabled in zypper."
@@ -6565,11 +6569,11 @@ msgstr ""
 "Controle op actieve processen die verwijderde bibliotheken gebruiken is in "
 "zypper.conf uitgeschakeld. Voer '%s' handmatig uit voor controle."
 
-#: src/solve-commit.cc:563
+#: src/solve-commit.cc:561
 msgid "Skip check:"
 msgstr "Controle overslaan:"
 
-#: src/solve-commit.cc:570
+#: src/solve-commit.cc:568
 #, boost-format
 msgid ""
 "There are running programs which still use files and libraries deleted or "
@@ -6582,32 +6586,32 @@ msgstr ""
 "vormen van bijwerken. Voer '%1%' uit om een lijst met deze programma's te "
 "maken."
 
-#: src/solve-commit.cc:584
+#: src/solve-commit.cc:582
 msgid "Update notifications were received from the following packages:"
 msgstr "Van de volgende pakketten zijn updatemeldingen ontvangen:"
 
-#: src/solve-commit.cc:593
+#: src/solve-commit.cc:591
 #, c-format, boost-format
 msgid "Message from package %s:"
 msgstr "Melding van pakket %s:"
 
-#: src/solve-commit.cc:601
+#: src/solve-commit.cc:599
 msgid "y/n"
 msgstr "j/n"
 
-#: src/solve-commit.cc:602
+#: src/solve-commit.cc:600
 msgid "View the notifications now?"
 msgstr "Meldingen nu weergeven?"
 
-#: src/solve-commit.cc:647
+#: src/solve-commit.cc:645
 msgid "Computing distribution upgrade..."
 msgstr "Distributie-upgrades berekenen..."
 
-#: src/solve-commit.cc:652
+#: src/solve-commit.cc:650
 msgid "Resolving package dependencies..."
 msgstr "Pakketafhankelijkheden oplossen..."
 
-#: src/solve-commit.cc:707
+#: src/solve-commit.cc:709
 msgid ""
 "Some of the dependencies of installed packages are broken. In order to fix "
 "these dependencies, the following actions need to be taken:"
@@ -6615,7 +6619,7 @@ msgstr ""
 "Sommige afhankelijkheden van geïnstalleerde pakketten kloppen niet. Om deze "
 "afhankelijkheden te verhelpen moeten de volgende acties uitgevoerd worden:"
 
-#: src/solve-commit.cc:714
+#: src/solve-commit.cc:716
 msgid "Root privileges are required to fix broken package dependencies."
 msgstr ""
 "Er zijn root-privileges vereist voor het repareren van niet kloppende "
@@ -6631,12 +6635,12 @@ msgstr ""
 #. The answers should be lower case letters, but in general, any UTF-8
 #. string will do.
 #. ! \todo add c for changelog and x for explain (show the dep tree)
-#: src/solve-commit.cc:736
+#: src/solve-commit.cc:738
 msgid "y/n/p/v/a/r/m/d/g"
 msgstr "j/n/p/v/a/i/l/d/g"
 
 #. translators: help text for 'y' option in the 'Continue?' prompt
-#: src/solve-commit.cc:741
+#: src/solve-commit.cc:743
 msgid ""
 "Yes, accept the summary and proceed with installation/removal of packages."
 msgstr ""
@@ -6644,12 +6648,12 @@ msgstr ""
 "verwijdering van pakketten."
 
 #. translators: help text for 'n' option in the 'Continue?' prompt
-#: src/solve-commit.cc:743
+#: src/solve-commit.cc:745
 msgid "No, cancel the operation."
 msgstr "Nee, annuleer de bewerking."
 
 #. translators: help text for 'p' option in the 'Continue?' prompt
-#: src/solve-commit.cc:745
+#: src/solve-commit.cc:747
 msgid ""
 "Restart solver in no-force-resolution mode in order to show dependency "
 "problems."
@@ -6658,17 +6662,17 @@ msgstr ""
 "afhankelijkheidsproblemen weer te geven."
 
 #. translators: help text for 'v' option in the 'Continue?' prompt
-#: src/solve-commit.cc:747
+#: src/solve-commit.cc:749
 msgid "Toggle display of package versions."
 msgstr "Schakel weergave van pakketversies in of uit."
 
 #. translators: help text for 'a' option in the 'Continue?' prompt
-#: src/solve-commit.cc:749
+#: src/solve-commit.cc:751
 msgid "Toggle display of package architectures."
 msgstr "Schakel weergave van pakketarchitecturen in of uit."
 
 #. translators: help text for 'r' option in the 'Continue?' prompt
-#: src/solve-commit.cc:751
+#: src/solve-commit.cc:753
 msgid ""
 "Toggle display of repositories from which the packages will be installed."
 msgstr ""
@@ -6676,39 +6680,39 @@ msgstr ""
 "in of uit."
 
 #. translators: help text for 'm' option in the 'Continue?' prompt
-#: src/solve-commit.cc:753
+#: src/solve-commit.cc:755
 msgid "Toggle display of package vendor names."
 msgstr "Schakel weergave van de leverancier van de pakketten in of uit."
 
 #. translators: help text for 'd' option in the 'Continue?' prompt
-#: src/solve-commit.cc:755
+#: src/solve-commit.cc:757
 msgid "Toggle between showing all details and as few details as possible."
 msgstr "Schakel tussen alle details en zo min mogelijk details weergeven."
 
 #. translators: help text for 'g' option in the 'Continue?' prompt
-#: src/solve-commit.cc:757
+#: src/solve-commit.cc:759
 msgid "View the summary in pager."
 msgstr "Geef samenvatting weer in de pager."
 
-#: src/solve-commit.cc:866
+#: src/solve-commit.cc:868
 msgid "committing"
 msgstr "goedkeuren"
 
-#: src/solve-commit.cc:868
+#: src/solve-commit.cc:870
 msgid "(dry run)"
 msgstr "(test)"
 
-#: src/solve-commit.cc:897 src/solve-commit.cc:930
+#: src/solve-commit.cc:899 src/solve-commit.cc:932
 msgid "Problem retrieving the package file from the repository:"
 msgstr "Probleem bij ophalen van pakketbestand van de opslagruimte:"
 
 #. translators: the first %s is 'zypper refresh' and the second is repo alias
-#: src/solve-commit.cc:927
+#: src/solve-commit.cc:929
 #, c-format, boost-format
 msgid "Repository '%s' is out of date. Running '%s' might help."
 msgstr "Opslagruimte '%s' is verouderd. Als u '%s' uitvoert, kan dit helpen."
 
-#: src/solve-commit.cc:938
+#: src/solve-commit.cc:940
 msgid ""
 "The package integrity check failed. This may be a problem with the "
 "repository or media. Try one of the following:\n"
@@ -6726,13 +6730,13 @@ msgstr ""
 " - gebruik een ander installatiemedium (bijvoorbeeld bij beschadiging)\n"
 " - gebruik een andere opslagruimte"
 
-#: src/solve-commit.cc:952
+#: src/solve-commit.cc:954
 msgid "Problem occurred during or after installation or removal of packages:"
 msgstr ""
 "Er is een fout opgetreden tijdens of na de installatie of verwijdering van "
 "pakketten:"
 
-#: src/solve-commit.cc:991
+#: src/solve-commit.cc:993
 msgid ""
 "One of the installed patches requires a reboot of your machine. Reboot as "
 "soon as possible."
@@ -6740,7 +6744,7 @@ msgstr ""
 "Een van de geïnstalleerde patches vereist dat u de computer opnieuw opstart. "
 "Doe dit zo snel mogelijk."
 
-#: src/solve-commit.cc:999
+#: src/solve-commit.cc:1001
 msgid ""
 "One of the installed patches affects the package manager itself. Run this "
 "command once more to install any other needed patches."
@@ -6749,7 +6753,7 @@ msgstr ""
 "Opnieuw starten hiervan is daarom vereist voor het installeren van de andere "
 "noodzakelijke patches."
 
-#: src/solve-commit.cc:1021
+#: src/solve-commit.cc:1023
 msgid "Dependencies of all installed packages are satisfied."
 msgstr "Aan afhankelijkheden van alle pakketten is voldaan."
 
@@ -7439,6 +7443,13 @@ msgstr "Ongeldig object"
 #: src/utils/prompt.h:192
 msgid "Error"
 msgstr "Fout"
+
+#~ msgid ""
+#~ "Repository '%s' appears to be outdated. Consider using a different mirror "
+#~ "or server."
+#~ msgstr ""
+#~ "Opslagruimte '%s' lijkt verouderd te zijn. Ga na of u een andere mirror "
+#~ "of server moet gebruiken."
 
 # =============================================================================
 #~ msgid "addlock (al) [OPTIONS] <PACKAGENAME> ..."

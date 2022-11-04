@@ -9,11 +9,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-25 14:05+0200\n"
+"POT-Creation-Date: 2022-11-04 14:37+0100\n"
 "PO-Revision-Date: 2022-10-05 17:13+0000\n"
 "Last-Translator: Alexey Yaryshev <clarkez344@gmail.com>\n"
-"Language-Team: Russian <https://l10n.opensuse.org/projects/zypper/master/ru/>"
-"\n"
+"Language-Team: Russian <https://l10n.opensuse.org/projects/zypper/master/ru/"
+">\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -672,12 +672,12 @@ msgstr "Вы имели в виду %1%?"
 msgid "Ignoring option %s when updating the update stack first."
 msgstr "При обновлении стека обновлений сначала игнорировать параметр %s."
 
-#: src/SolverRequester.h:52
+#: src/SolverRequester.h:53
 #, boost-format
 msgid "Suspicious category filter value '%1%'."
 msgstr "Подозрительное значение фильтра категорий \"%1%\"."
 
-#: src/SolverRequester.h:60
+#: src/SolverRequester.h:61
 #, boost-format
 msgid "Suspicious severity filter value '%1%'."
 msgstr "Подозрительное значение фильтра важности \"%1%\"."
@@ -3182,12 +3182,12 @@ msgstr ""
 msgid "Write debug output to file <path>."
 msgstr "Вывод выходных данных отладки в файл <path>."
 
-#: src/commands/ps.cc:72 src/solve-commit.cc:561
+#: src/commands/ps.cc:72 src/solve-commit.cc:559
 msgid "Check failed:"
 msgstr "Проверка не удалась:"
 
 #. Here: Table output
-#: src/commands/ps.cc:127 src/solve-commit.cc:550
+#: src/commands/ps.cc:127 src/solve-commit.cc:548
 msgid "Checking for running processes using deleted libraries..."
 msgstr "Проверка запущенных процессов, использующих удаленные библиотеки..."
 
@@ -5045,7 +5045,7 @@ msgstr ""
 "возможно."
 
 #: src/commands/update.cc:69 src/commands/update.cc:76
-#: src/commands/update.cc:126
+#: src/commands/update.cc:123
 msgid "Operation not supported."
 msgstr "Операция не поддерживается."
 
@@ -5125,7 +5125,7 @@ msgstr ""
 msgid "Argument resolves to no package"
 msgstr "Аргумент не соответствует ни одному пакету"
 
-#: src/commands/utils/download.cc:254 src/solve-commit.cc:1023
+#: src/commands/utils/download.cc:254 src/solve-commit.cc:1025
 msgid "Nothing to do."
 msgstr "Нечего выполнять."
 
@@ -5950,8 +5950,8 @@ msgstr "Ошибка при отключении репозитория \"%s\"."
 msgid "Problem retrieving files from '%s'."
 msgstr "Проблемы при получении файлов из \"%s\"."
 
-#: src/repos.cc:345 src/repos.cc:1859 src/solve-commit.cc:898
-#: src/solve-commit.cc:929 src/solve-commit.cc:953
+#: src/repos.cc:345 src/repos.cc:1867 src/solve-commit.cc:900
+#: src/solve-commit.cc:931 src/solve-commit.cc:955
 msgid "Please see the above error message for a hint."
 msgstr "Рекомендация имеется в выданном ранее сообщении об ошибке."
 
@@ -6317,69 +6317,75 @@ msgstr ""
 "Репозитории не определены. Работа ведется только с установленными объектами "
 "разрешения зависимостей. Нельзя ничего установить."
 
-#: src/repos.cc:1790
+#: src/repos.cc:1791
 #, c-format, boost-format
 msgid "Retrieving repository '%s' data..."
 msgstr "Получение данных о репозитории \"%s\"..."
 
-#: src/repos.cc:1796
+#: src/repos.cc:1797
 #, c-format, boost-format
 msgid "Repository '%s' not cached. Caching..."
 msgstr "Репозиторий \"%s\" не кэширован. Кэширование..."
 
-#: src/repos.cc:1802 src/repos.cc:1836
+#: src/repos.cc:1803 src/repos.cc:1837
 #, c-format, boost-format
 msgid "Problem loading data from '%s'"
 msgstr "Проблема загрузки данных из \"%s\""
 
-#: src/repos.cc:1806
+#: src/repos.cc:1807
 #, c-format, boost-format
 msgid "Repository '%s' could not be refreshed. Using old cache."
 msgstr "Невозможно обновить репозиторий \"%s\". Используется старый кэш."
 
-#: src/repos.cc:1810 src/repos.cc:1839
+#: src/repos.cc:1811 src/repos.cc:1840
 #, c-format, boost-format
 msgid "Resolvables from '%s' not loaded because of error."
 msgstr ""
 "Объекты разрешения зависимостей из \"%s\" не были загружены из-за ошибки."
 
 #: src/repos.cc:1827
-#, c-format, boost-format
-msgid ""
-"Repository '%s' appears to be outdated. Consider using a different mirror or "
-"server."
-msgstr "Репозиторий \"%s\" устарел. Используйте другое зеркало или сервер."
+#, boost-format
+msgid "Repository '%1%' metadata expired since %2%."
+msgstr ""
 
 #. translators: the first %s is 'zypper refresh' and the second 'zypper clean -m'
-#: src/repos.cc:1838
+#: src/repos.cc:1839
 #, c-format, boost-format
 msgid "Try '%s', or even '%s' before doing so."
 msgstr "Попробуйте \"%s\" или даже \"%s\" перед тем, как делать это."
 
-#: src/repos.cc:1849
+#: src/repos.cc:1844
+msgid ""
+"Repository metadata expired: Check if 'autorefresh' is turned on (zypper "
+"lr), otherwise manualy refresh the repository (zypper ref). If this does not "
+"solve the issue, it could be that you are using a broken mirror or the "
+"server has actually discontinued to support the repository."
+msgstr ""
+
+#: src/repos.cc:1857
 msgid "Reading installed packages..."
 msgstr "Чтение установленных пакетов..."
 
-#: src/repos.cc:1858
+#: src/repos.cc:1866
 msgid "Problem occurred while reading the installed packages:"
 msgstr "Произошла ошибка при чтении установленных пакетов:"
 
-#: src/repos.cc:1875
+#: src/repos.cc:1883
 #, c-format, boost-format
 msgid "'%s' looks like an RPM file. Will try to download it."
 msgstr "\"%s\" выглядит как файл RPM. Попробую загрузить его."
 
-#: src/repos.cc:1884
+#: src/repos.cc:1892
 #, c-format, boost-format
 msgid "Problem with the RPM file specified as '%s', skipping."
 msgstr "Проблема с файлом RPM, указанным как \"%s\", пропуск."
 
-#: src/repos.cc:1906
+#: src/repos.cc:1914
 #, c-format, boost-format
 msgid "Problem reading the RPM header of %s. Is it an RPM file?"
 msgstr "Проблема с чтением заголовка RPM файла %s. Это файл RPM?"
 
-#: src/repos.cc:1926
+#: src/repos.cc:1934
 msgid "Plain RPM files cache"
 msgstr "Кэш простых файлов RPM"
 
@@ -6519,29 +6525,29 @@ msgstr "Разрешение зависимостей..."
 msgid "Force resolution:"
 msgstr "Принудительное решение:"
 
-#: src/solve-commit.cc:415
+#: src/solve-commit.cc:413
 msgid "Verifying dependencies..."
 msgstr "Проверка зависимостей..."
 
 #. Here: compute the full upgrade
-#: src/solve-commit.cc:465
+#: src/solve-commit.cc:463
 msgid "Computing upgrade..."
 msgstr "Просчет обновления..."
 
-#: src/solve-commit.cc:479
+#: src/solve-commit.cc:477
 msgid "Generating solver test case..."
 msgstr "Создается набор тестовых данных для решающей программы..."
 
-#: src/solve-commit.cc:481
+#: src/solve-commit.cc:479
 #, c-format, boost-format
 msgid "Solver test case generated successfully at %s."
 msgstr "Набор тестовых данных решающей программы успешно создан в %s."
 
-#: src/solve-commit.cc:484
+#: src/solve-commit.cc:482
 msgid "Error creating the solver test case."
 msgstr "Ошибка при создании набора тестовых данных для решающей программы."
 
-#: src/solve-commit.cc:529
+#: src/solve-commit.cc:527
 msgid ""
 "DownloadAsNeeded can not be used with ZYPP_SINGLE_RPMTRANS=1, falling back "
 "to DownloadInAdvance"
@@ -6549,7 +6555,7 @@ msgstr ""
 "DownloadAsNeeded не может быть использован с ZYPP_SINGLE_RPMTRANS=1, "
 "переключаюсь на DownloadInAdvance"
 
-#: src/solve-commit.cc:547
+#: src/solve-commit.cc:545
 #, c-format, boost-format
 msgid ""
 "Check for running processes using deleted libraries is disabled in zypper."
@@ -6558,11 +6564,11 @@ msgstr ""
 "Проверка запущенных процессов, использующих удаленные библиотеки, отключена "
 "в zypper.conf. Для ручной проверки запустите \"%s\"."
 
-#: src/solve-commit.cc:563
+#: src/solve-commit.cc:561
 msgid "Skip check:"
 msgstr "Пропустить проверку:"
 
-#: src/solve-commit.cc:570
+#: src/solve-commit.cc:568
 #, boost-format
 msgid ""
 "There are running programs which still use files and libraries deleted or "
@@ -6574,32 +6580,32 @@ msgstr ""
 "перезапустить для использования обновлений. Чтобы посмотреть список этих "
 "программ, воспользуйтесь командой %1%."
 
-#: src/solve-commit.cc:584
+#: src/solve-commit.cc:582
 msgid "Update notifications were received from the following packages:"
 msgstr "От следующих пакетов были получены уведомления об обновлении:"
 
-#: src/solve-commit.cc:593
+#: src/solve-commit.cc:591
 #, c-format, boost-format
 msgid "Message from package %s:"
 msgstr "Сообщение от пакета %s:"
 
-#: src/solve-commit.cc:601
+#: src/solve-commit.cc:599
 msgid "y/n"
 msgstr "y/n"
 
-#: src/solve-commit.cc:602
+#: src/solve-commit.cc:600
 msgid "View the notifications now?"
 msgstr "Просмотреть уведомления сейчас?"
 
-#: src/solve-commit.cc:647
+#: src/solve-commit.cc:645
 msgid "Computing distribution upgrade..."
 msgstr "Просчет обновления дистрибутива..."
 
-#: src/solve-commit.cc:652
+#: src/solve-commit.cc:650
 msgid "Resolving package dependencies..."
 msgstr "Разрешение зависимостей пакетов..."
 
-#: src/solve-commit.cc:707
+#: src/solve-commit.cc:709
 msgid ""
 "Some of the dependencies of installed packages are broken. In order to fix "
 "these dependencies, the following actions need to be taken:"
@@ -6607,7 +6613,7 @@ msgstr ""
 "Некоторые из зависимостей установленных пакетов нарушены. Для того, чтобы "
 "исправить эти зависимости, необходимо выполнить следующие действия:"
 
-#: src/solve-commit.cc:714
+#: src/solve-commit.cc:716
 msgid "Root privileges are required to fix broken package dependencies."
 msgstr ""
 "Для исправления нарушенных зависимостей пакетов необходимы права "
@@ -6623,24 +6629,24 @@ msgstr ""
 #. The answers should be lower case letters, but in general, any UTF-8
 #. string will do.
 #. ! \todo add c for changelog and x for explain (show the dep tree)
-#: src/solve-commit.cc:736
+#: src/solve-commit.cc:738
 msgid "y/n/p/v/a/r/m/d/g"
 msgstr "y/n/p/v/a/r/m/d/g"
 
 #. translators: help text for 'y' option in the 'Continue?' prompt
-#: src/solve-commit.cc:741
+#: src/solve-commit.cc:743
 msgid ""
 "Yes, accept the summary and proceed with installation/removal of packages."
 msgstr ""
 "Да, принять сводную информацию и приступить к установке/удалению пакетов."
 
 #. translators: help text for 'n' option in the 'Continue?' prompt
-#: src/solve-commit.cc:743
+#: src/solve-commit.cc:745
 msgid "No, cancel the operation."
 msgstr "Нет, отменить операцию."
 
 #. translators: help text for 'p' option in the 'Continue?' prompt
-#: src/solve-commit.cc:745
+#: src/solve-commit.cc:747
 msgid ""
 "Restart solver in no-force-resolution mode in order to show dependency "
 "problems."
@@ -6649,56 +6655,56 @@ msgstr ""
 "проблем с зависимостями."
 
 #. translators: help text for 'v' option in the 'Continue?' prompt
-#: src/solve-commit.cc:747
+#: src/solve-commit.cc:749
 msgid "Toggle display of package versions."
 msgstr "Переключить отображение версий пакетов."
 
 #. translators: help text for 'a' option in the 'Continue?' prompt
-#: src/solve-commit.cc:749
+#: src/solve-commit.cc:751
 msgid "Toggle display of package architectures."
 msgstr "Переключить отображение архитектуры пакетов."
 
 #. translators: help text for 'r' option in the 'Continue?' prompt
-#: src/solve-commit.cc:751
+#: src/solve-commit.cc:753
 msgid ""
 "Toggle display of repositories from which the packages will be installed."
 msgstr ""
 "Переключить отображение репозиториев, из которых будут установлены пакеты."
 
 #. translators: help text for 'm' option in the 'Continue?' prompt
-#: src/solve-commit.cc:753
+#: src/solve-commit.cc:755
 msgid "Toggle display of package vendor names."
 msgstr "Переключить отображение имен поставщиков пакетов."
 
 #. translators: help text for 'd' option in the 'Continue?' prompt
-#: src/solve-commit.cc:755
+#: src/solve-commit.cc:757
 msgid "Toggle between showing all details and as few details as possible."
 msgstr "Переключить между максимальным и минимальным количеством подробностей."
 
 #. translators: help text for 'g' option in the 'Continue?' prompt
-#: src/solve-commit.cc:757
+#: src/solve-commit.cc:759
 msgid "View the summary in pager."
 msgstr "Посмотреть сводку в пейджере."
 
-#: src/solve-commit.cc:866
+#: src/solve-commit.cc:868
 msgid "committing"
 msgstr "фиксирование"
 
-#: src/solve-commit.cc:868
+#: src/solve-commit.cc:870
 msgid "(dry run)"
 msgstr "(пробный прогон)"
 
-#: src/solve-commit.cc:897 src/solve-commit.cc:930
+#: src/solve-commit.cc:899 src/solve-commit.cc:932
 msgid "Problem retrieving the package file from the repository:"
 msgstr "Проблема при получении файла пакета из репозитория:"
 
 #. translators: the first %s is 'zypper refresh' and the second is repo alias
-#: src/solve-commit.cc:927
+#: src/solve-commit.cc:929
 #, c-format, boost-format
 msgid "Repository '%s' is out of date. Running '%s' might help."
 msgstr "Репозиторий \"%s\" устарел. Может помочь запуск \"%s\"."
 
-#: src/solve-commit.cc:938
+#: src/solve-commit.cc:940
 msgid ""
 "The package integrity check failed. This may be a problem with the "
 "repository or media. Try one of the following:\n"
@@ -6716,11 +6722,11 @@ msgstr ""
 " — используйте для установки другие носители (например, при повреждении)\n"
 " — используйте другой репозиторий"
 
-#: src/solve-commit.cc:952
+#: src/solve-commit.cc:954
 msgid "Problem occurred during or after installation or removal of packages:"
 msgstr "Во время или после установки или удаления пакетов возникла ошибка:"
 
-#: src/solve-commit.cc:991
+#: src/solve-commit.cc:993
 msgid ""
 "One of the installed patches requires a reboot of your machine. Reboot as "
 "soon as possible."
@@ -6728,7 +6734,7 @@ msgstr ""
 "Для одного из установленных исправлений требуется перезагрузка компьютера. "
 "Выполните её как можно скорее."
 
-#: src/solve-commit.cc:999
+#: src/solve-commit.cc:1001
 msgid ""
 "One of the installed patches affects the package manager itself. Run this "
 "command once more to install any other needed patches."
@@ -6736,7 +6742,7 @@ msgstr ""
 "Одно из установленных исправлений затрагивает сам менеджер пакетов. "
 "Запустите эту команду еще раз для установки других необходимых исправлений."
 
-#: src/solve-commit.cc:1021
+#: src/solve-commit.cc:1023
 msgid "Dependencies of all installed packages are satisfied."
 msgstr "Зависимости установленных пакетов удовлетворены."
 
@@ -7431,6 +7437,11 @@ msgstr "Недопустимый объект"
 #: src/utils/prompt.h:192
 msgid "Error"
 msgstr "Ошибка"
+
+#~ msgid ""
+#~ "Repository '%s' appears to be outdated. Consider using a different mirror "
+#~ "or server."
+#~ msgstr "Репозиторий \"%s\" устарел. Используйте другое зеркало или сервер."
 
 # =============================================================================
 #~ msgid "addlock (al) [OPTIONS] <PACKAGENAME> ..."

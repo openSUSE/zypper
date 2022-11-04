@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.el\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-25 14:05+0200\n"
+"POT-Creation-Date: 2022-11-04 14:37+0100\n"
 "PO-Revision-Date: 2016-08-23 07:58+0000\n"
 "Last-Translator: Anastasios Mavrommatis <anastasios@mavrommatis.net>\n"
 "Language-Team: Greek <https://l10n.opensuse.org/projects/zypper/master/el/>\n"
@@ -663,12 +663,12 @@ msgstr ""
 msgid "Ignoring option %s when updating the update stack first."
 msgstr ""
 
-#: src/SolverRequester.h:52
+#: src/SolverRequester.h:53
 #, boost-format
 msgid "Suspicious category filter value '%1%'."
 msgstr ""
 
-#: src/SolverRequester.h:60
+#: src/SolverRequester.h:61
 #, boost-format
 msgid "Suspicious severity filter value '%1%'."
 msgstr ""
@@ -3042,12 +3042,12 @@ msgstr ""
 msgid "Write debug output to file <path>."
 msgstr ""
 
-#: src/commands/ps.cc:72 src/solve-commit.cc:561
+#: src/commands/ps.cc:72 src/solve-commit.cc:559
 msgid "Check failed:"
 msgstr "Ο έλεγχος απέτυχε:"
 
 #. Here: Table output
-#: src/commands/ps.cc:127 src/solve-commit.cc:550
+#: src/commands/ps.cc:127 src/solve-commit.cc:548
 msgid "Checking for running processes using deleted libraries..."
 msgstr ""
 "Έλεγχος για διαδικασίες που εκτελούνται και χρησιμοποιούν διαγραμμένες "
@@ -4850,7 +4850,7 @@ msgid ""
 msgstr ""
 
 #: src/commands/update.cc:69 src/commands/update.cc:76
-#: src/commands/update.cc:126
+#: src/commands/update.cc:123
 msgid "Operation not supported."
 msgstr "Η λειτουργία δεν υποστηρίζεται."
 
@@ -4921,7 +4921,7 @@ msgstr ""
 msgid "Argument resolves to no package"
 msgstr "Το όρισμα δεν επιλύεται σε κάποιο πακέτο"
 
-#: src/commands/utils/download.cc:254 src/solve-commit.cc:1023
+#: src/commands/utils/download.cc:254 src/solve-commit.cc:1025
 msgid "Nothing to do."
 msgstr "Δεν υπάρχει τίποτα να γίνει."
 
@@ -5749,8 +5749,8 @@ msgstr "Σφάλμα απενεργοποίησης του αποθετηρίο�
 msgid "Problem retrieving files from '%s'."
 msgstr "Πρόβλημα κατά τη λήψη αρχείων από το %s."
 
-#: src/repos.cc:345 src/repos.cc:1859 src/solve-commit.cc:898
-#: src/solve-commit.cc:929 src/solve-commit.cc:953
+#: src/repos.cc:345 src/repos.cc:1867 src/solve-commit.cc:900
+#: src/solve-commit.cc:931 src/solve-commit.cc:955
 msgid "Please see the above error message for a hint."
 msgstr "Παρακαλώ δείτε το παραπάνω μήνυμα σφάλματος για κάποια υπόδειξη."
 
@@ -6133,73 +6133,77 @@ msgstr ""
 "Δεν έχουν οριστεί αποθετήρια. Λειτουργία μόνο με τα εγκατεστημένα δεδομένα "
 "επιλύσεων. Τίποτα δεν μπορεί να εγκατασταθεί."
 
-#: src/repos.cc:1790
+#: src/repos.cc:1791
 #, c-format, boost-format
 msgid "Retrieving repository '%s' data..."
 msgstr "Λήψη δεδομένων αποθετηρίου '%s'..."
 
-#: src/repos.cc:1796
+#: src/repos.cc:1797
 #, c-format, boost-format
 msgid "Repository '%s' not cached. Caching..."
 msgstr "Το αποθετήριο '%s' δεν είναι στην λανθάνουσα μνήμη. Αποθήκευση..."
 
-#: src/repos.cc:1802 src/repos.cc:1836
+#: src/repos.cc:1803 src/repos.cc:1837
 #, c-format, boost-format
 msgid "Problem loading data from '%s'"
 msgstr "Πρόβλημα φόρτωσης δεδομένων από '%s'"
 
-#: src/repos.cc:1806
+#: src/repos.cc:1807
 #, c-format, boost-format
 msgid "Repository '%s' could not be refreshed. Using old cache."
 msgstr ""
 "Το αποθετήριο '%s' δεν μπόρεσε να ενημερωθεί. Θα χρησιμοποιήσει την παλιά "
 "λανθάνουσα μνήμη."
 
-#: src/repos.cc:1810 src/repos.cc:1839
+#: src/repos.cc:1811 src/repos.cc:1840
 #, c-format, boost-format
 msgid "Resolvables from '%s' not loaded because of error."
 msgstr "Επιλύσεις από '%s' δεν φορτώνονται λόγω σφάλματος."
 
 #: src/repos.cc:1827
-#, c-format, boost-format
-msgid ""
-"Repository '%s' appears to be outdated. Consider using a different mirror or "
-"server."
+#, boost-format
+msgid "Repository '%1%' metadata expired since %2%."
 msgstr ""
-"Το αποθετήριο '%s' φαίνεται να μην είναι ενημερωμένο. Ίσως πρέπει να "
-"χρησιμοποιήσετε διαφορετικό mirror ή διακομιστή."
 
 #. translators: the first %s is 'zypper refresh' and the second 'zypper clean -m'
-#: src/repos.cc:1838
+#: src/repos.cc:1839
 #, c-format, boost-format
 msgid "Try '%s', or even '%s' before doing so."
 msgstr "Δοκιμάστε '%s', ή καλύτερα '%s' πριν συνεχίσετε."
 
+#: src/repos.cc:1844
+msgid ""
+"Repository metadata expired: Check if 'autorefresh' is turned on (zypper "
+"lr), otherwise manualy refresh the repository (zypper ref). If this does not "
+"solve the issue, it could be that you are using a broken mirror or the "
+"server has actually discontinued to support the repository."
+msgstr ""
+
 #  progress stages
-#: src/repos.cc:1849
+#: src/repos.cc:1857
 msgid "Reading installed packages..."
 msgstr "Ανάγνωση εγκατεστημένων πακέτων..."
 
-#: src/repos.cc:1858
+#: src/repos.cc:1866
 msgid "Problem occurred while reading the installed packages:"
 msgstr "Παρουσιάστηκε πρόβλημα κατά την ανάγνωση των εγκατεστημένων πακέτων:"
 
-#: src/repos.cc:1875
+#: src/repos.cc:1883
 #, c-format, boost-format
 msgid "'%s' looks like an RPM file. Will try to download it."
 msgstr "Το '%s' μοιάζει με αρχείο RPM. Θα γίνει προσπάθεια για λήψη."
 
-#: src/repos.cc:1884
+#: src/repos.cc:1892
 #, c-format, boost-format
 msgid "Problem with the RPM file specified as '%s', skipping."
 msgstr "Πρόβλημα με τον καθορισμό αρχείου RPM ως '%s', προσπέραση."
 
-#: src/repos.cc:1906
+#: src/repos.cc:1914
 #, c-format, boost-format
 msgid "Problem reading the RPM header of %s. Is it an RPM file?"
 msgstr "Πρόβλημα ανάγνωσης της επικεφαλίδας του RPM του %s. Είναι αρχείο RPM;"
 
-#: src/repos.cc:1926
+#: src/repos.cc:1934
 msgid "Plain RPM files cache"
 msgstr "Λανθάνουσα μνήμη απλών αρχείων RPM"
 
@@ -6336,47 +6340,47 @@ msgstr "Επίλυση εξαρτήσεων..."
 msgid "Force resolution:"
 msgstr "Επιβολή ανάλυσης:"
 
-#: src/solve-commit.cc:415
+#: src/solve-commit.cc:413
 msgid "Verifying dependencies..."
 msgstr "Επαλήθευση εξαρτήσεων..."
 
 #. Here: compute the full upgrade
-#: src/solve-commit.cc:465
+#: src/solve-commit.cc:463
 msgid "Computing upgrade..."
 msgstr "Υπολογισμός αναβάθμισης..."
 
-#: src/solve-commit.cc:479
+#: src/solve-commit.cc:477
 msgid "Generating solver test case..."
 msgstr "Δημιουργία δοκιμαστικής επίλυσης..."
 
-#: src/solve-commit.cc:481
+#: src/solve-commit.cc:479
 #, c-format, boost-format
 msgid "Solver test case generated successfully at %s."
 msgstr "Η δοκιμαστική επίλυση δημιουργήθηκε με επιτυχία στο %s."
 
-#: src/solve-commit.cc:484
+#: src/solve-commit.cc:482
 msgid "Error creating the solver test case."
 msgstr "Σφάλμα κατά τη δημιουργία δοκιμαστικής επίλυσης."
 
-#: src/solve-commit.cc:529
+#: src/solve-commit.cc:527
 msgid ""
 "DownloadAsNeeded can not be used with ZYPP_SINGLE_RPMTRANS=1, falling back "
 "to DownloadInAdvance"
 msgstr ""
 
-#: src/solve-commit.cc:547
+#: src/solve-commit.cc:545
 #, c-format, boost-format
 msgid ""
 "Check for running processes using deleted libraries is disabled in zypper."
 "conf. Run '%s' to check manually."
 msgstr ""
 
-#: src/solve-commit.cc:563
+#: src/solve-commit.cc:561
 #, fuzzy
 msgid "Skip check:"
 msgstr "Έλεγχος GPG"
 
-#: src/solve-commit.cc:570
+#: src/solve-commit.cc:568
 #, boost-format
 msgid ""
 "There are running programs which still use files and libraries deleted or "
@@ -6384,32 +6388,32 @@ msgid ""
 "latest updates. Run '%1%' to list these programs."
 msgstr ""
 
-#: src/solve-commit.cc:584
+#: src/solve-commit.cc:582
 msgid "Update notifications were received from the following packages:"
 msgstr "Οι ειδοποιήσεις ενημερώσεων ελήφθησαν από τα ακόλουθα πακέτα:"
 
-#: src/solve-commit.cc:593
+#: src/solve-commit.cc:591
 #, c-format, boost-format
 msgid "Message from package %s:"
 msgstr "Μήνυμα από το πακέτο %s:"
 
-#: src/solve-commit.cc:601
+#: src/solve-commit.cc:599
 msgid "y/n"
 msgstr "y/n"
 
-#: src/solve-commit.cc:602
+#: src/solve-commit.cc:600
 msgid "View the notifications now?"
 msgstr "Εμφάνιση ειδοποιήσεων τώρα;"
 
-#: src/solve-commit.cc:647
+#: src/solve-commit.cc:645
 msgid "Computing distribution upgrade..."
 msgstr "Υπολογισμός αναβάθμισης διανομής..."
 
-#: src/solve-commit.cc:652
+#: src/solve-commit.cc:650
 msgid "Resolving package dependencies..."
 msgstr "Επίλυση εξαρτήσεων πακέτων..."
 
-#: src/solve-commit.cc:707
+#: src/solve-commit.cc:709
 msgid ""
 "Some of the dependencies of installed packages are broken. In order to fix "
 "these dependencies, the following actions need to be taken:"
@@ -6418,7 +6422,7 @@ msgstr ""
 "Για να διορθωθούν αυτές τις εξαρτήσεις, οι ακόλουθες ενέργειες πρέπει να "
 "γίνουν:"
 
-#: src/solve-commit.cc:714
+#: src/solve-commit.cc:716
 msgid "Root privileges are required to fix broken package dependencies."
 msgstr ""
 "Απαιτούνται δικαιώματα root για τη διόρθωση κατεστραμμένων εξαρτήσεων "
@@ -6434,12 +6438,12 @@ msgstr ""
 #. The answers should be lower case letters, but in general, any UTF-8
 #. string will do.
 #. ! \todo add c for changelog and x for explain (show the dep tree)
-#: src/solve-commit.cc:736
+#: src/solve-commit.cc:738
 msgid "y/n/p/v/a/r/m/d/g"
 msgstr "y/n/p/v/a/r/m/d/g"
 
 #. translators: help text for 'y' option in the 'Continue?' prompt
-#: src/solve-commit.cc:741
+#: src/solve-commit.cc:743
 msgid ""
 "Yes, accept the summary and proceed with installation/removal of packages."
 msgstr ""
@@ -6447,12 +6451,12 @@ msgstr ""
 "πακέτων."
 
 #. translators: help text for 'n' option in the 'Continue?' prompt
-#: src/solve-commit.cc:743
+#: src/solve-commit.cc:745
 msgid "No, cancel the operation."
 msgstr "Όχι, ακύρωση της λειτουργίας."
 
 #. translators: help text for 'p' option in the 'Continue?' prompt
-#: src/solve-commit.cc:745
+#: src/solve-commit.cc:747
 msgid ""
 "Restart solver in no-force-resolution mode in order to show dependency "
 "problems."
@@ -6461,60 +6465,60 @@ msgstr ""
 "προβλήματα εξαρτήσεων."
 
 #. translators: help text for 'v' option in the 'Continue?' prompt
-#: src/solve-commit.cc:747
+#: src/solve-commit.cc:749
 msgid "Toggle display of package versions."
 msgstr "Εναλλαγή εμφάνισης των εκδόσεων των πακέτων."
 
 #. translators: help text for 'a' option in the 'Continue?' prompt
-#: src/solve-commit.cc:749
+#: src/solve-commit.cc:751
 msgid "Toggle display of package architectures."
 msgstr "Εναλλαγή εμφάνισης των αρχιτεκτονικών των πακέτων."
 
 #. translators: help text for 'r' option in the 'Continue?' prompt
-#: src/solve-commit.cc:751
+#: src/solve-commit.cc:753
 msgid ""
 "Toggle display of repositories from which the packages will be installed."
 msgstr ""
 "Εναλλαγή εμφάνισης των αποθετηρίων από τα οποία θα εγκατασταθούν τα πακέτα."
 
 #. translators: help text for 'm' option in the 'Continue?' prompt
-#: src/solve-commit.cc:753
+#: src/solve-commit.cc:755
 msgid "Toggle display of package vendor names."
 msgstr "Εναλλαγή εμφάνισης των ονομάτων των προμηθευτών."
 
 #. translators: help text for 'd' option in the 'Continue?' prompt
-#: src/solve-commit.cc:755
+#: src/solve-commit.cc:757
 msgid "Toggle between showing all details and as few details as possible."
 msgstr ""
 "Εναλλαγή μεταξύ εμφάνισης όλων των λεπτομερειών και των λιγότερο δυνατόν "
 "λεπτομερειών."
 
 #. translators: help text for 'g' option in the 'Continue?' prompt
-#: src/solve-commit.cc:757
+#: src/solve-commit.cc:759
 msgid "View the summary in pager."
 msgstr "Εμφάνιση της περίληψης στο σελιδοδείκτη."
 
-#: src/solve-commit.cc:866
+#: src/solve-commit.cc:868
 msgid "committing"
 msgstr "υποβολή"
 
-#: src/solve-commit.cc:868
+#: src/solve-commit.cc:870
 msgid "(dry run)"
 msgstr "(στεγνή εκτέλεση)"
 
-#: src/solve-commit.cc:897 src/solve-commit.cc:930
+#: src/solve-commit.cc:899 src/solve-commit.cc:932
 msgid "Problem retrieving the package file from the repository:"
 msgstr "Πρόβλημα κατά τη λήψη του πακέτου από το αποθετήριο:"
 
 #. translators: the first %s is 'zypper refresh' and the second is repo alias
-#: src/solve-commit.cc:927
+#: src/solve-commit.cc:929
 #, c-format, boost-format
 msgid "Repository '%s' is out of date. Running '%s' might help."
 msgstr ""
 "Το αποθετήριο '%s' δεν είναι ενημερωμένο. Η εκτέλεση του '%s' μπορεί να "
 "βοηθήσει."
 
-#: src/solve-commit.cc:938
+#: src/solve-commit.cc:940
 msgid ""
 "The package integrity check failed. This may be a problem with the "
 "repository or media. Try one of the following:\n"
@@ -6532,13 +6536,13 @@ msgstr ""
 "- χρησιμοποιήστε άλλο μέσο εγκατάστασης (εαν π.χ. είναι κατεστραμμένο)\n"
 "- χρησιμοποιήστε άλλο αποθετήριο"
 
-#: src/solve-commit.cc:952
+#: src/solve-commit.cc:954
 msgid "Problem occurred during or after installation or removal of packages:"
 msgstr ""
 "Παρουσιάστηκε πρόβλημα κατά ή μετά την εγκατάσταση ή την αφαίρεση των "
 "πακέτων:"
 
-#: src/solve-commit.cc:991
+#: src/solve-commit.cc:993
 msgid ""
 "One of the installed patches requires a reboot of your machine. Reboot as "
 "soon as possible."
@@ -6546,7 +6550,7 @@ msgstr ""
 "Μία από τις εγκατεστημένες διορθώσεις απαιτεί επανεκκίνηση του υπολογιστή "
 "σας. Επανεκκινήστε το συντομότερο δυνατόν."
 
-#: src/solve-commit.cc:999
+#: src/solve-commit.cc:1001
 msgid ""
 "One of the installed patches affects the package manager itself. Run this "
 "command once more to install any other needed patches."
@@ -6555,7 +6559,7 @@ msgstr ""
 "Εκτελέστε αυτή την εντολή ακόμη μια φορά για να εγκαταστήσετε όποιες άλλες "
 "διορθώσεις απαιτούνται."
 
-#: src/solve-commit.cc:1021
+#: src/solve-commit.cc:1023
 msgid "Dependencies of all installed packages are satisfied."
 msgstr "Οι εξαρτήσεις όλων των εγκατεστημένων πακέτων είναι εντάξει."
 
@@ -7239,6 +7243,13 @@ msgstr "Μη έγκυρο αντικείμενο"
 #: src/utils/prompt.h:192
 msgid "Error"
 msgstr "Σφάλμα"
+
+#~ msgid ""
+#~ "Repository '%s' appears to be outdated. Consider using a different mirror "
+#~ "or server."
+#~ msgstr ""
+#~ "Το αποθετήριο '%s' φαίνεται να μην είναι ενημερωμένο. Ίσως πρέπει να "
+#~ "χρησιμοποιήσετε διαφορετικό mirror ή διακομιστή."
 
 #~ msgid ""
 #~ "Add a package lock. Specify packages to lock by exact name or by a glob "
