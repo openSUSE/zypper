@@ -1769,6 +1769,7 @@ void load_repo_resolvables( Zypper & zypper )
   if ( gData.repos.empty() )
     zypper.out().warning(_("No repositories defined. Operating only with the installed resolvables. Nothing can be installed.") );
 
+  bool hintExpired = false;
   for_( it, gData.repos.begin(), gData.repos.end() )
   {
     const RepoInfo & repo( *it );
@@ -1823,11 +1824,11 @@ void load_repo_resolvables( Zypper & zypper )
       Repository robj = sat::Pool::instance().reposFind( repo.alias() );
       if ( robj != Repository::noRepository && robj.maybeOutdated() )
       {
-        WAR << "Repository '" << repo.alias() << "' seems to be outdated" << endl;
-        zypper.out().warning( str::Format(_("Repository '%s' appears to be outdated. "
-                              "Consider using a different mirror or server.")) % repo.asUserString(),
+        zypper.out().warning( str::Format(_("Repository '%1%' metadata expired since %2%."))
+                              % repo.asUserString()
+                              % robj.suggestedExpirationTimestamp().print(),
                               Out::QUIET );
-
+        hintExpired = true;
       }
     }
     catch ( const Exception & e )
@@ -1838,6 +1839,13 @@ void load_repo_resolvables( Zypper & zypper )
                           str::Format(_("Try '%s', or even '%s' before doing so.")) % "zypper refresh" % "zypper clean -m" );
       zypper.out().info( str::Format(_("Resolvables from '%s' not loaded because of error.")) % repo.asUserString() );
     }
+  }
+  if ( hintExpired ) {
+    Zypper::instance().out().warningPar( 4, _("Repository metadata expired: "
+    "Check if 'autorefresh' is turned on (zypper lr), otherwise manualy refresh the repository (zypper ref). "
+    "If this does not solve the issue, it could be that you are using a broken mirror or "
+    "the server has actually discontinued to support the repository." ) );
+    zypper.out().gap();
   }
 }
 
