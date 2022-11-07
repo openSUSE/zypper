@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-11-07 18:09+0100\n"
-"PO-Revision-Date: 2022-11-05 01:13+0000\n"
+"PO-Revision-Date: 2022-11-08 02:13+0000\n"
 "Last-Translator: Freek de Kruijf <freek@opensuse.org>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/zypper/master/nl/>\n"
 "Language: nl\n"
@@ -4385,6 +4385,8 @@ msgstr "Patches selecteren overeenkomend met de gespecificeerde tekenreeks."
 msgid ""
 "Service '%1%' with URL '%2%' already exists. Just updating the settings."
 msgstr ""
+"Service '%1%' met URL '%2%' bestaat al. Alleen de instellingen worden "
+"bijgewerkt."
 
 #: src/commands/services/add.cc:58
 #, boost-format
@@ -4392,6 +4394,8 @@ msgid ""
 "Service '%1%' already exists but uses a different URL '%2%'. Please use "
 "another alias."
 msgstr ""
+"Service '%1%' bestaat al maar gebruikt een andere URL '%2%'. Een andere "
+"alias gebruiker."
 
 #: src/commands/services/add.cc:70
 #, c-format, boost-format
