@@ -1502,6 +1502,9 @@ void MediaMultiCurl::doGetFileCopy( const OnMediaLocation &srcFile , const Pathn
           file = fopen((*destNew).c_str(), "w+e");
           if (!file)
             ZYPP_THROW(MediaWriteException(destNew));
+
+          // use the default progressCallback
+          curl_easy_setopt(_curl, CURLOPT_PROGRESSFUNCTION, &MediaCurl::progressCallback);
           MediaCurl::doGetFileCopyFile(srcFile, dest, file, report, options | OPTION_NO_REPORT_START);
         }
     }
