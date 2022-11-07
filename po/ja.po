@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-11-07 18:09+0100\n"
-"PO-Revision-Date: 2022-11-05 01:13+0000\n"
+"PO-Revision-Date: 2022-11-08 02:13+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
 "Language-Team: Japanese <https://l10n.opensuse.org/projects/zypper/master/ja/"
 ">\n"
@@ -4193,14 +4193,14 @@ msgstr "指定した文字列に合致するもののみを選択します。"
 #, boost-format
 msgid ""
 "Service '%1%' with URL '%2%' already exists. Just updating the settings."
-msgstr ""
+msgstr "URL '%2%' のサービス '%1%' が既に存在しているため、設定の更新を実施します。"
 
 #: src/commands/services/add.cc:58
 #, boost-format
 msgid ""
 "Service '%1%' already exists but uses a different URL '%2%'. Please use "
 "another alias."
-msgstr ""
+msgstr "サービス '%1%' は既に存在していますが、異なる URL '%2%' が設定されています。異なる別名を指定してください。"
 
 #: src/commands/services/add.cc:70
 #, c-format, boost-format
