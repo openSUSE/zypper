@@ -44,17 +44,25 @@ void add_service( Zypper & zypper, const ServiceInfo & service )
 {
   RepoManager manager( zypper.config().rm_options );
 
-  try
-  {
-    manager.addService( service );
-  }
-  catch ( const repo::RepoAlreadyExistsException & e )
-  {
-    ZYPP_CAUGHT( e );
-    ERR << "Service aliased '" << service.alias() << "' already exists." << endl;
-    zypper.out().error( str::Format(_("Service aliased '%s' already exists. Please use another alias.")) % service.alias() );
-    zypper.setExitCode( ZYPPER_EXIT_ERR_ZYPP );
-    return;
+  try {
+    ServiceInfo exists { manager.getService( service.alias() ) };
+    if ( exists != zypp::ServiceInfo::noService ) {
+      if ( service.url() == exists.url() ) {
+        // bsc#1203715: Support (re)adding a service with the same URL.
+        MIL << "Service '" << service.alias() << "' exists with same URL '" << service.url() << "'" << endl;
+        zypper.out().info( str::Format(_("Service '%1%' with URL '%2%' already exists. Just updating the settings.")) % service.alias() % service.url() );
+        manager.modifyService( service.alias(), service );
+      }
+      else {
+        ERR << "Service '" << service.alias() << "' exists with different URL '" << service.url() << "'" << endl;
+        zypper.out().error( str::Format(_("Service '%1%' already exists but uses a different URL '%2%'. Please use another alias.")) % service.alias() % service.url() );
+        zypper.setExitCode( ZYPPER_EXIT_ERR_ZYPP );
+        return;
+      }
+    }
+    else {
+      manager.addService( service );
+    }
   }
   catch ( const Exception & e )
   {
@@ -65,7 +73,21 @@ void add_service( Zypper & zypper, const ServiceInfo & service )
   }
 
   MIL << "Service '" << service.alias() << "' has been added." << endl;
-  zypper.out().info( str::Format(_("Service '%s' has been successfully added.")) % service.asUserString() );
+  std::ostringstream s;
+  s << str::Format(_("Service '%s' has been successfully added.")) % service.asUserString() << endl;
+  s << endl;
+
+  {
+    PropertyTable p;
+    // translators: property name; short; used like "Name: value"
+    p.add( _("URI"),		service.url() );
+    // translators: property name; short; used like "Name: value"
+    p.add( _("Enabled"),	service.enabled() );
+    // translators: property name; short; used like "Name: value"
+    p.add( _("Autorefresh"),	service.autorefresh() );
+    s << p;
+  }
+  zypper.out().info( s.str() );
 }
 
 // ---------------------------------------------------------------------------
@@ -84,7 +106,7 @@ void add_service_by_url( Zypper & zypper,
     service.setName( props._name );
   service.setUrl( url );
 
-  std::cout << "Setting new service " << alias << asString(props._enable) << " " << asString(props._enableAutoRefresh) << endl;
+  zypper.out().info( str::Str() << "Adding service '" << alias << "'...");
 
   service.setEnabled( indeterminate( props._enable ) ? true : bool(props._enable) );
   service.setAutorefresh( indeterminate( props._enableAutoRefresh ) ? true : bool(props._enableAutoRefresh) );

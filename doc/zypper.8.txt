@@ -1338,7 +1338,7 @@ The *services*, *addservice*, *removeservice*, *modifyservice*, and *refresh-ser
 Standalone repositories (not belonging to any service) are treated like services, too. The *ls* command will list them, *ms* command will modify them, etc. Repository specific options, like *--keep-packages* are not available here, though. You can use repository handling commands to manipulate them.
 
 *addservice* (*as*) [_options_] _URI_ _alias_::
-	Adds a service specified by *URI* to the system. The _alias_ must be unique and serves to identify the service.
+	Adds a service specified by *URI* to the system. The _alias_ must be unique and serves to identify the service. If a service with the _same alias and URI_ already exists, the command behaves like *modifyservice* and updates the settings accordingly.
 +
 Newly added services are not refreshed automatically. Use the *refresh-services* command to refresh them. Zypper does not access the service URI when adding the service, so the type of the services is unknown until it is refreshed.
 +
