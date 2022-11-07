@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Mon Nov  7 18:10:12 CET 2022 - ma@suse.de
+
+- Update man page and explain '.no_auto_prune' (bsc#1204956)
+- Allow to (re)add a service with the same URL (bsc#1203715)
+- Explain outdatedness of repos (fixes #463)
+- BuildRequires:  libzypp-devel >= 17.31.5
+- version 1.14.58
+
+-------------------------------------------------------------------
 Wed Oct  5 18:04:41 CEST 2022 - ma@suse.de
 
 - BuildRequires:  libzypp-devel >= 17.31.2.
