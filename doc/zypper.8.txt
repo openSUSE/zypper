@@ -1909,7 +1909,8 @@ This directory is used by all ZYpp-based applications.
 This directory is used by all ZYpp-based applications.
 
 */var/cache/zypp/packages*::
-	If *keeppackages* property is set for a repository (see the *modifyrepo* command), all the RPM file downloaded during installation will be kept here. See also the *clean* command for cleaning these cache directories.
+	If *keeppackages* property is set for a repository (see the *modifyrepo* command), all the RPM file downloaded during installation will be kept here. Packages are stored in subdirectories named after their repositories alias. Subdirectories of removed or otherwise unknown repositories are cleaned automatically. This auto-cleanup can be prevented by creating a file named *.no_auto_prune* in the pkg-cache directory.
+	See also the *clean* command for cleaning these cache directories.
 +
 This directory is used by all ZYpp-based applications.
 
