@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Mon Nov  7 13:09:46 CET 2022 - ma@suse.de
+
+- Create '.no_auto_prune' in the package cache dir to prevent auto
+  cleanup of orphaned repositories (bsc#1204956)
+- properly reset range requests (bsc#1204548)
+- version 17.31.5 (22)
+
+-------------------------------------------------------------------
 Mon Oct 17 12:53:40 CEST 2022 - ma@suse.de
 
 - Do not clean up MediaSetAccess before using the geoip file
