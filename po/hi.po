@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.hi\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-04 14:37+0100\n"
+"POT-Creation-Date: 2022-11-07 18:09+0100\n"
 "PO-Revision-Date: 2021-04-22 19:57+0000\n"
 "Last-Translator: Panwar <caspian7pena@gmail.com>\n"
 "Language-Team: Hindi <https://l10n.opensuse.org/projects/zypper/master/hi/>\n"
@@ -3290,15 +3290,16 @@ msgstr "एलियास"
 #. translators: property name; short; used like "Name: value"
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/commands/repos/list.cc:42 src/commands/repos/list.cc:269
-#: src/commands/services/list.cc:116 src/repos.cc:1254
-#: src/utils/flags/zyppflags.h:49
+#: src/commands/services/add.cc:83 src/commands/services/list.cc:116
+#: src/repos.cc:1254 src/utils/flags/zyppflags.h:49
 msgid "URI"
 msgstr ""
 
 #. 'enabled' flag
 #. translators: property name; short; used like "Name: value"
 #: src/commands/repos/list.cc:47 src/commands/repos/list.cc:231
-#: src/commands/services/list.cc:106 src/repos.cc:1256
+#: src/commands/services/add.cc:85 src/commands/services/list.cc:106
+#: src/repos.cc:1256
 msgid "Enabled"
 msgstr "समर्थ हैं"
 
@@ -3318,7 +3319,8 @@ msgid "Priority"
 msgstr ""
 
 #. translators: property name; short; used like "Name: value"
-#: src/commands/repos/list.cc:50 src/repos.cc:1260
+#: src/commands/repos/list.cc:50 src/commands/services/add.cc:87
+#: src/repos.cc:1260
 #, fuzzy
 msgid "Autorefresh"
 msgstr "स्वत: रीफ्रेश"
@@ -4080,35 +4082,43 @@ msgstr ""
 msgid "Select issues matching the specified string."
 msgstr ""
 
-#: src/commands/services/add.cc:55
-#, c-format, boost-format
-msgid "Service aliased '%s' already exists. Please use another alias."
+#: src/commands/services/add.cc:53
+#, boost-format
+msgid ""
+"Service '%1%' with URL '%2%' already exists. Just updating the settings."
 msgstr ""
 
-#: src/commands/services/add.cc:62
+#: src/commands/services/add.cc:58
+#, boost-format
+msgid ""
+"Service '%1%' already exists but uses a different URL '%2%'. Please use "
+"another alias."
+msgstr ""
+
+#: src/commands/services/add.cc:70
 #, fuzzy, c-format, boost-format
 msgid "Error occurred while adding service '%s'."
 msgstr "सेक्टर %u पढ़ने में त्रुटि।"
 
-#: src/commands/services/add.cc:68
+#: src/commands/services/add.cc:77
 #, fuzzy, c-format, boost-format
 msgid "Service '%s' has been successfully added."
 msgstr "निर्दिष्ट स्कीम AC नहीं मिली."
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/commands/services/add.cc:102
+#: src/commands/services/add.cc:124
 msgid "addservice (as) [OPTIONS] <URI> <ALIAS>"
 msgstr ""
 
-#: src/commands/services/add.cc:103
+#: src/commands/services/add.cc:125
 msgid "Add a new service."
 msgstr ""
 
-#: src/commands/services/add.cc:104
+#: src/commands/services/add.cc:126
 msgid "Add a repository index service to the system."
 msgstr ""
 
-#: src/commands/services/add.cc:118
+#: src/commands/services/add.cc:140
 msgid "The type of service is always autodetected. This option is ignored."
 msgstr ""
 

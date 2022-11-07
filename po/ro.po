@@ -31,7 +31,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenSUSE\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-04 14:37+0100\n"
+"POT-Creation-Date: 2022-11-07 18:09+0100\n"
 "PO-Revision-Date: 2016-10-26 12:30+0000\n"
 "Last-Translator: Pasca Alexandru <yo6ial@yahoo.com>\n"
 "Language-Team: Romanian <https://l10n.opensuse.org/projects/zypper/master/ro/"
@@ -3466,15 +3466,16 @@ msgstr "Alias"
 #. translators: property name; short; used like "Name: value"
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/commands/repos/list.cc:42 src/commands/repos/list.cc:269
-#: src/commands/services/list.cc:116 src/repos.cc:1254
-#: src/utils/flags/zyppflags.h:49
+#: src/commands/services/add.cc:83 src/commands/services/list.cc:116
+#: src/repos.cc:1254 src/utils/flags/zyppflags.h:49
 msgid "URI"
 msgstr "URI"
 
 #. 'enabled' flag
 #. translators: property name; short; used like "Name: value"
 #: src/commands/repos/list.cc:47 src/commands/repos/list.cc:231
-#: src/commands/services/list.cc:106 src/repos.cc:1256
+#: src/commands/services/add.cc:85 src/commands/services/list.cc:106
+#: src/repos.cc:1256
 msgid "Enabled"
 msgstr "Activat"
 
@@ -3493,7 +3494,8 @@ msgid "Priority"
 msgstr "Importanță"
 
 #. translators: property name; short; used like "Name: value"
-#: src/commands/repos/list.cc:50 src/repos.cc:1260
+#: src/commands/repos/list.cc:50 src/commands/services/add.cc:87
+#: src/repos.cc:1260
 msgid "Autorefresh"
 msgstr "Reîmprospătare automată"
 
@@ -4260,35 +4262,43 @@ msgstr ""
 msgid "Select issues matching the specified string."
 msgstr ""
 
-#: src/commands/services/add.cc:55
-#, c-format, boost-format
-msgid "Service aliased '%s' already exists. Please use another alias."
-msgstr "Serviciul cu alias-ul '%s' există deja. Utilizați alt alias."
+#: src/commands/services/add.cc:53
+#, boost-format
+msgid ""
+"Service '%1%' with URL '%2%' already exists. Just updating the settings."
+msgstr ""
 
-#: src/commands/services/add.cc:62
+#: src/commands/services/add.cc:58
+#, boost-format
+msgid ""
+"Service '%1%' already exists but uses a different URL '%2%'. Please use "
+"another alias."
+msgstr ""
+
+#: src/commands/services/add.cc:70
 #, c-format, boost-format
 msgid "Error occurred while adding service '%s'."
 msgstr "A apărut o eroare la adăugarea serviciului '%s'."
 
-#: src/commands/services/add.cc:68
+#: src/commands/services/add.cc:77
 #, c-format, boost-format
 msgid "Service '%s' has been successfully added."
 msgstr "Serviciul '%s' a fost adăugat cu succes."
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/commands/services/add.cc:102
+#: src/commands/services/add.cc:124
 msgid "addservice (as) [OPTIONS] <URI> <ALIAS>"
 msgstr ""
 
-#: src/commands/services/add.cc:103
+#: src/commands/services/add.cc:125
 msgid "Add a new service."
 msgstr "Adaugă un serviciu nou."
 
-#: src/commands/services/add.cc:104
+#: src/commands/services/add.cc:126
 msgid "Add a repository index service to the system."
 msgstr ""
 
-#: src/commands/services/add.cc:118
+#: src/commands/services/add.cc:140
 msgid "The type of service is always autodetected. This option is ignored."
 msgstr ""
 
@@ -7254,6 +7264,9 @@ msgstr "Obiect invalid"
 #: src/utils/prompt.h:192
 msgid "Error"
 msgstr "Eroare"
+
+#~ msgid "Service aliased '%s' already exists. Please use another alias."
+#~ msgstr "Serviciul cu alias-ul '%s' există deja. Utilizați alt alias."
 
 #, fuzzy
 #~ msgid ""

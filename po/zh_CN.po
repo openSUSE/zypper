@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-04 14:37+0100\n"
+"POT-Creation-Date: 2022-11-07 18:09+0100\n"
 "PO-Revision-Date: 2022-02-28 07:12+0000\n"
 "Last-Translator: Marguerite Su <i@marguerite.su>\n"
 "Language-Team: Chinese (China) <https://l10n.opensuse.org/projects/zypper/"
@@ -3211,15 +3211,16 @@ msgstr "别名"
 #. translators: property name; short; used like "Name: value"
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/commands/repos/list.cc:42 src/commands/repos/list.cc:269
-#: src/commands/services/list.cc:116 src/repos.cc:1254
-#: src/utils/flags/zyppflags.h:49
+#: src/commands/services/add.cc:83 src/commands/services/list.cc:116
+#: src/repos.cc:1254 src/utils/flags/zyppflags.h:49
 msgid "URI"
 msgstr "URI"
 
 #. 'enabled' flag
 #. translators: property name; short; used like "Name: value"
 #: src/commands/repos/list.cc:47 src/commands/repos/list.cc:231
-#: src/commands/services/list.cc:106 src/repos.cc:1256
+#: src/commands/services/add.cc:85 src/commands/services/list.cc:106
+#: src/repos.cc:1256
 msgid "Enabled"
 msgstr "已启用"
 
@@ -3238,7 +3239,8 @@ msgid "Priority"
 msgstr "优先级"
 
 #. translators: property name; short; used like "Name: value"
-#: src/commands/repos/list.cc:50 src/repos.cc:1260
+#: src/commands/repos/list.cc:50 src/commands/services/add.cc:87
+#: src/repos.cc:1260
 msgid "Autorefresh"
 msgstr "自动刷新"
 
@@ -3986,35 +3988,43 @@ msgstr "选取可修复指定 CVE 问题的补丁。"
 msgid "Select issues matching the specified string."
 msgstr "选取匹配指定字符串的 CVE 问题。"
 
-#: src/commands/services/add.cc:55
-#, c-format, boost-format
-msgid "Service aliased '%s' already exists. Please use another alias."
-msgstr "已存在别名为 '%s' 的服务。请使用其它别名。"
+#: src/commands/services/add.cc:53
+#, boost-format
+msgid ""
+"Service '%1%' with URL '%2%' already exists. Just updating the settings."
+msgstr ""
 
-#: src/commands/services/add.cc:62
+#: src/commands/services/add.cc:58
+#, boost-format
+msgid ""
+"Service '%1%' already exists but uses a different URL '%2%'. Please use "
+"another alias."
+msgstr ""
+
+#: src/commands/services/add.cc:70
 #, c-format, boost-format
 msgid "Error occurred while adding service '%s'."
 msgstr "添加服务 '%s' 时出错。"
 
-#: src/commands/services/add.cc:68
+#: src/commands/services/add.cc:77
 #, c-format, boost-format
 msgid "Service '%s' has been successfully added."
 msgstr "已成功添加了服务 '%s'。"
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/commands/services/add.cc:102
+#: src/commands/services/add.cc:124
 msgid "addservice (as) [OPTIONS] <URI> <ALIAS>"
 msgstr "addservice (as) [选项] <URI> <别名>"
 
-#: src/commands/services/add.cc:103
+#: src/commands/services/add.cc:125
 msgid "Add a new service."
 msgstr "添加一个新服务。"
 
-#: src/commands/services/add.cc:104
+#: src/commands/services/add.cc:126
 msgid "Add a repository index service to the system."
 msgstr "向系统中添加一个软件源索引服务。"
 
-#: src/commands/services/add.cc:118
+#: src/commands/services/add.cc:140
 msgid "The type of service is always autodetected. This option is ignored."
 msgstr "服务类型始终都是自动检测的。该选项已被忽略。"
 
@@ -6870,6 +6880,9 @@ msgstr "无效对象"
 #: src/utils/prompt.h:192
 msgid "Error"
 msgstr "错误"
+
+#~ msgid "Service aliased '%s' already exists. Please use another alias."
+#~ msgstr "已存在别名为 '%s' 的服务。请使用其它别名。"
 
 #~ msgid ""
 #~ "Repository '%s' appears to be outdated. Consider using a different mirror "

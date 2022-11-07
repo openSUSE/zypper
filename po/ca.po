@@ -8,11 +8,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-04 14:37+0100\n"
+"POT-Creation-Date: 2022-11-07 18:09+0100\n"
 "PO-Revision-Date: 2022-11-04 20:13+0000\n"
 "Last-Translator: David Medina <medipas@gmail.com>\n"
-"Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/>"
-"\n"
+"Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/"
+">\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -3487,15 +3487,16 @@ msgstr "Àlies"
 #. translators: property name; short; used like "Name: value"
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/commands/repos/list.cc:42 src/commands/repos/list.cc:269
-#: src/commands/services/list.cc:116 src/repos.cc:1254
-#: src/utils/flags/zyppflags.h:49
+#: src/commands/services/add.cc:83 src/commands/services/list.cc:116
+#: src/repos.cc:1254 src/utils/flags/zyppflags.h:49
 msgid "URI"
 msgstr "URI (adreça del recurs)"
 
 #. 'enabled' flag
 #. translators: property name; short; used like "Name: value"
 #: src/commands/repos/list.cc:47 src/commands/repos/list.cc:231
-#: src/commands/services/list.cc:106 src/repos.cc:1256
+#: src/commands/services/add.cc:85 src/commands/services/list.cc:106
+#: src/repos.cc:1256
 msgid "Enabled"
 msgstr "Habilitat"
 
@@ -3514,7 +3515,8 @@ msgid "Priority"
 msgstr "Prioritat"
 
 #. translators: property name; short; used like "Name: value"
-#: src/commands/repos/list.cc:50 src/repos.cc:1260
+#: src/commands/repos/list.cc:50 src/commands/services/add.cc:87
+#: src/repos.cc:1260
 msgid "Autorefresh"
 msgstr "Refresca automàticament"
 
@@ -4307,37 +4309,43 @@ msgstr "Selecciona pedaços aplicables per als problemes de CVE especificats."
 msgid "Select issues matching the specified string."
 msgstr "Selecciona els problemes que coincideixin amb la cadena especificada."
 
-#: src/commands/services/add.cc:55
-#, c-format, boost-format
-msgid "Service aliased '%s' already exists. Please use another alias."
+#: src/commands/services/add.cc:53
+#, boost-format
+msgid ""
+"Service '%1%' with URL '%2%' already exists. Just updating the settings."
 msgstr ""
-"El servei amb l'àlies \"%s\" ja existeix. Si us plau, feu servir un altre "
-"àlies."
 
-#: src/commands/services/add.cc:62
+#: src/commands/services/add.cc:58
+#, boost-format
+msgid ""
+"Service '%1%' already exists but uses a different URL '%2%'. Please use "
+"another alias."
+msgstr ""
+
+#: src/commands/services/add.cc:70
 #, c-format, boost-format
 msgid "Error occurred while adding service '%s'."
 msgstr "Error en afegir el servei %s."
 
-#: src/commands/services/add.cc:68
+#: src/commands/services/add.cc:77
 #, c-format, boost-format
 msgid "Service '%s' has been successfully added."
 msgstr "El servei %s s'ha afegit correctament."
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/commands/services/add.cc:102
+#: src/commands/services/add.cc:124
 msgid "addservice (as) [OPTIONS] <URI> <ALIAS>"
 msgstr "addservice (as) [opcions] <URI> <àlies>"
 
-#: src/commands/services/add.cc:103
+#: src/commands/services/add.cc:125
 msgid "Add a new service."
 msgstr "Afegeix un nou servei."
 
-#: src/commands/services/add.cc:104
+#: src/commands/services/add.cc:126
 msgid "Add a repository index service to the system."
 msgstr "Afegeix un servei d'índex de repositoris al sistema."
 
-#: src/commands/services/add.cc:118
+#: src/commands/services/add.cc:140
 msgid "The type of service is always autodetected. This option is ignored."
 msgstr "El tipus de servei sempre s'autodetecta. Aquesta opció s'ignora."
 
@@ -7350,6 +7358,11 @@ msgstr "Objecte no vàlid"
 #: src/utils/prompt.h:192
 msgid "Error"
 msgstr "Error"
+
+#~ msgid "Service aliased '%s' already exists. Please use another alias."
+#~ msgstr ""
+#~ "El servei amb l'àlies \"%s\" ja existeix. Si us plau, feu servir un altre "
+#~ "àlies."
 
 #~ msgid ""
 #~ "Repository '%s' appears to be outdated. Consider using a different mirror "

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-04 14:37+0100\n"
+"POT-Creation-Date: 2022-11-07 18:09+0100\n"
 "PO-Revision-Date: 2022-08-04 15:13+0000\n"
 "Last-Translator: Luiz Fernando Ranghetti <elchevive68@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) <https://l10n.opensuse.org/projects/"
@@ -3508,15 +3508,16 @@ msgstr "Apelido"
 #. translators: property name; short; used like "Name: value"
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/commands/repos/list.cc:42 src/commands/repos/list.cc:269
-#: src/commands/services/list.cc:116 src/repos.cc:1254
-#: src/utils/flags/zyppflags.h:49
+#: src/commands/services/add.cc:83 src/commands/services/list.cc:116
+#: src/repos.cc:1254 src/utils/flags/zyppflags.h:49
 msgid "URI"
 msgstr "URI"
 
 #. 'enabled' flag
 #. translators: property name; short; used like "Name: value"
 #: src/commands/repos/list.cc:47 src/commands/repos/list.cc:231
-#: src/commands/services/list.cc:106 src/repos.cc:1256
+#: src/commands/services/add.cc:85 src/commands/services/list.cc:106
+#: src/repos.cc:1256
 msgid "Enabled"
 msgstr "Habilitado"
 
@@ -3535,7 +3536,8 @@ msgid "Priority"
 msgstr "Prioridade"
 
 #. translators: property name; short; used like "Name: value"
-#: src/commands/repos/list.cc:50 src/repos.cc:1260
+#: src/commands/repos/list.cc:50 src/commands/services/add.cc:87
+#: src/repos.cc:1260
 msgid "Autorefresh"
 msgstr "Atualização automática"
 
@@ -4326,35 +4328,43 @@ msgstr "Selecione patches aplicáveis para os problemas de CVE especificados."
 msgid "Select issues matching the specified string."
 msgstr "Selecione problemas que correspondam à string especificada."
 
-#: src/commands/services/add.cc:55
-#, c-format, boost-format
-msgid "Service aliased '%s' already exists. Please use another alias."
-msgstr "Um serviço chamado '%s' já existe. Escolha outro apelido."
+#: src/commands/services/add.cc:53
+#, boost-format
+msgid ""
+"Service '%1%' with URL '%2%' already exists. Just updating the settings."
+msgstr ""
 
-#: src/commands/services/add.cc:62
+#: src/commands/services/add.cc:58
+#, boost-format
+msgid ""
+"Service '%1%' already exists but uses a different URL '%2%'. Please use "
+"another alias."
+msgstr ""
+
+#: src/commands/services/add.cc:70
 #, c-format, boost-format
 msgid "Error occurred while adding service '%s'."
 msgstr "Erro ao adicionar o serviço '%s'."
 
-#: src/commands/services/add.cc:68
+#: src/commands/services/add.cc:77
 #, c-format, boost-format
 msgid "Service '%s' has been successfully added."
 msgstr "Serviço '%s' adicionado com sucesso."
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/commands/services/add.cc:102
+#: src/commands/services/add.cc:124
 msgid "addservice (as) [OPTIONS] <URI> <ALIAS>"
 msgstr "addservice (as) [opções] <URI> <apelido>"
 
-#: src/commands/services/add.cc:103
+#: src/commands/services/add.cc:125
 msgid "Add a new service."
 msgstr "Adicionar um novo serviço."
 
-#: src/commands/services/add.cc:104
+#: src/commands/services/add.cc:126
 msgid "Add a repository index service to the system."
 msgstr "Adiciona um serviço de índice do repositório no sistema."
 
-#: src/commands/services/add.cc:118
+#: src/commands/services/add.cc:140
 msgid "The type of service is always autodetected. This option is ignored."
 msgstr "O tipo de serviço sempre é autodetectado. Essa opção será ignorada."
 
@@ -7342,6 +7352,9 @@ msgstr "Objeto inválido"
 #: src/utils/prompt.h:192
 msgid "Error"
 msgstr "Erro"
+
+#~ msgid "Service aliased '%s' already exists. Please use another alias."
+#~ msgstr "Um serviço chamado '%s' já existe. Escolha outro apelido."
 
 #~ msgid ""
 #~ "Repository '%s' appears to be outdated. Consider using a different mirror "

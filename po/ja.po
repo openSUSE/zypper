@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-04 14:37+0100\n"
+"POT-Creation-Date: 2022-11-07 18:09+0100\n"
 "PO-Revision-Date: 2022-11-05 01:13+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
 "Language-Team: Japanese <https://l10n.opensuse.org/projects/zypper/master/ja/"
@@ -3362,15 +3362,16 @@ msgstr "別名"
 #. translators: property name; short; used like "Name: value"
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/commands/repos/list.cc:42 src/commands/repos/list.cc:269
-#: src/commands/services/list.cc:116 src/repos.cc:1254
-#: src/utils/flags/zyppflags.h:49
+#: src/commands/services/add.cc:83 src/commands/services/list.cc:116
+#: src/repos.cc:1254 src/utils/flags/zyppflags.h:49
 msgid "URI"
 msgstr "URI"
 
 #. 'enabled' flag
 #. translators: property name; short; used like "Name: value"
 #: src/commands/repos/list.cc:47 src/commands/repos/list.cc:231
-#: src/commands/services/list.cc:106 src/repos.cc:1256
+#: src/commands/services/add.cc:85 src/commands/services/list.cc:106
+#: src/repos.cc:1256
 msgid "Enabled"
 msgstr "有効"
 
@@ -3389,7 +3390,8 @@ msgid "Priority"
 msgstr "優先順位"
 
 #. translators: property name; short; used like "Name: value"
-#: src/commands/repos/list.cc:50 src/repos.cc:1260
+#: src/commands/repos/list.cc:50 src/commands/services/add.cc:87
+#: src/repos.cc:1260
 msgid "Autorefresh"
 msgstr "自動更新"
 
@@ -4187,36 +4189,43 @@ msgstr "指定した CVE 番号に対応するパッチのみを選択します�
 msgid "Select issues matching the specified string."
 msgstr "指定した文字列に合致するもののみを選択します。"
 
-#: src/commands/services/add.cc:55
-#, c-format, boost-format
-msgid "Service aliased '%s' already exists. Please use another alias."
+#: src/commands/services/add.cc:53
+#, boost-format
+msgid ""
+"Service '%1%' with URL '%2%' already exists. Just updating the settings."
 msgstr ""
-"'%s' という名前のサービスは既に存在します。他の別名を設定してください。"
 
-#: src/commands/services/add.cc:62
+#: src/commands/services/add.cc:58
+#, boost-format
+msgid ""
+"Service '%1%' already exists but uses a different URL '%2%'. Please use "
+"another alias."
+msgstr ""
+
+#: src/commands/services/add.cc:70
 #, c-format, boost-format
 msgid "Error occurred while adding service '%s'."
 msgstr "サービス '%s' を追加する際にエラーが発生しました。"
 
-#: src/commands/services/add.cc:68
+#: src/commands/services/add.cc:77
 #, c-format, boost-format
 msgid "Service '%s' has been successfully added."
 msgstr "サービス '%s' は正常に追加されました。"
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/commands/services/add.cc:102
+#: src/commands/services/add.cc:124
 msgid "addservice (as) [OPTIONS] <URI> <ALIAS>"
 msgstr "addservice (as) [OPTIONS] <URI> <alias>"
 
-#: src/commands/services/add.cc:103
+#: src/commands/services/add.cc:125
 msgid "Add a new service."
 msgstr "新しいサービスを追加します。"
 
-#: src/commands/services/add.cc:104
+#: src/commands/services/add.cc:126
 msgid "Add a repository index service to the system."
 msgstr "システムにリポジトリインデックスサービスを追加します。"
 
-#: src/commands/services/add.cc:118
+#: src/commands/services/add.cc:140
 msgid "The type of service is always autodetected. This option is ignored."
 msgstr "サービスの種類は常に自動検出されます。このオプションは無視されます。"
 
@@ -6162,9 +6171,11 @@ msgid ""
 "solve the issue, it could be that you are using a broken mirror or the "
 "server has actually discontinued to support the repository."
 msgstr ""
-"リポジトリのメタデータの有効期限が切れています: 'autorefresh' の設定が有効化されていること (zypper lr で表示できます) "
-"を確認するか、もしくは手作業でリポジトリを更新してください (zypper ref で実行できます) "
-"。手作業で更新しても問題が解決しない場合は、お使いのミラーサーバの更新が止まっているか、提供を終了しているものと考えられます。"
+"リポジトリのメタデータの有効期限が切れています: 'autorefresh' の設定が有効化"
+"されていること (zypper lr で表示できます) を確認するか、もしくは手作業でリポ"
+"ジトリを更新してください (zypper ref で実行できます) 。手作業で更新しても問題"
+"が解決しない場合は、お使いのミラーサーバの更新が止まっているか、提供を終了し"
+"ているものと考えられます。"
 
 #: src/repos.cc:1857
 msgid "Reading installed packages..."
@@ -7213,6 +7224,10 @@ msgstr "無効なオブジェクト"
 #: src/utils/prompt.h:192
 msgid "Error"
 msgstr "エラー"
+
+#~ msgid "Service aliased '%s' already exists. Please use another alias."
+#~ msgstr ""
+#~ "'%s' という名前のサービスは既に存在します。他の別名を設定してください。"
 
 #~ msgid ""
 #~ "Repository '%s' appears to be outdated. Consider using a different mirror "
