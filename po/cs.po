@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-11-07 18:09+0100\n"
-"PO-Revision-Date: 2022-07-28 18:13+0000\n"
+"PO-Revision-Date: 2022-11-08 23:13+0000\n"
 "Last-Translator: Aleš Kastner <alkas@volny.cz>\n"
 "Language-Team: Czech <https://l10n.opensuse.org/projects/zypper/master/cs/>\n"
 "Language: cs\n"
@@ -4361,7 +4361,7 @@ msgstr "Vybere opravy odpovídající zadanému řetězci."
 #, boost-format
 msgid ""
 "Service '%1%' with URL '%2%' already exists. Just updating the settings."
-msgstr ""
+msgstr "Služba '%1%' s URL '%2%' už existuje. Aktualizujte pouze nastavení."
 
 #: src/commands/services/add.cc:58
 #, boost-format
@@ -4369,6 +4369,7 @@ msgid ""
 "Service '%1%' already exists but uses a different URL '%2%'. Please use "
 "another alias."
 msgstr ""
+"Služba '%1%' už existuje, ale používá jiný URL - '%2%' Použijte jiný alias."
 
 #: src/commands/services/add.cc:70
 #, c-format, boost-format
@@ -6287,7 +6288,7 @@ msgstr "Závislosti z '%s' nebyly načteny, protože došlo k chybě."
 #: src/repos.cc:1827
 #, boost-format
 msgid "Repository '%1%' metadata expired since %2%."
-msgstr ""
+msgstr "Metadata úložiště '%1%' vypršela %2%."
 
 #. translators: the first %s is 'zypper refresh' and the second 'zypper clean -m'
 #: src/repos.cc:1839
@@ -6302,6 +6303,10 @@ msgid ""
 "solve the issue, it could be that you are using a broken mirror or the "
 "server has actually discontinued to support the repository."
 msgstr ""
+"Metadata úložiště vypršela: zkontrolujte, zda je zapnuta funkce "
+"'autorefresh' (zypper lr); když ne, obnovte úložiště ručně (zypper ref). "
+"Nevyřeší-li to problém, asi používáte nefunkční zrcadlo nebo server skutečně "
+"přestal úložiště podporovat."
 
 #: src/repos.cc:1857
 msgid "Reading installed packages..."
