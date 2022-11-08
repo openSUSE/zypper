@@ -9,10 +9,10 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-11-07 18:09+0100\n"
-"PO-Revision-Date: 2022-11-04 20:13+0000\n"
+"PO-Revision-Date: 2022-11-08 12:13+0000\n"
 "Last-Translator: David Medina <medipas@gmail.com>\n"
-"Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/"
-">\n"
+"Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/>"
+"\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -4314,6 +4314,8 @@ msgstr "Selecciona els problemes que coincideixin amb la cadena especificada."
 msgid ""
 "Service '%1%' with URL '%2%' already exists. Just updating the settings."
 msgstr ""
+"El servei %1% amb l'URL %2% ja existeix. Només se n'actualitza la "
+"configuració."
 
 #: src/commands/services/add.cc:58
 #, boost-format
@@ -4321,6 +4323,8 @@ msgid ""
 "Service '%1%' already exists but uses a different URL '%2%'. Please use "
 "another alias."
 msgstr ""
+"El servei %1% ja existeix però usa un URL diferent: %2%. Si us plau, useu un "
+"altre àlies."
 
 #: src/commands/services/add.cc:70
 #, c-format, boost-format
