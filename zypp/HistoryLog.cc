@@ -168,7 +168,9 @@ namespace zypp
     if ( _refcnt )
       closeLog();
 
-    _fname = rootdir / ZConfig::instance().historyLogFile();
+    _fname = ZConfig::instance().historyLogFile();
+    if ( _fname != "/dev/null" )  // no need to redirect /dev/null into the target
+      _fname = rootdir / _fname;
     filesystem::assert_dir( _fname.dirname() );
     MIL << "installation log file " << _fname << endl;
 
