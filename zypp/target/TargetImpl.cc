@@ -244,13 +244,13 @@ namespace zypp
         {
           root_r /= "/proc";
           if ( ! PathInfo(root_r/"self").isDir() ) {
-            MIL << "Try to make sure proc is mounted at" << _mountpoint << endl;
+            MIL << "Try to make sure proc is mounted at" << root_r << endl;
             if ( filesystem::assert_dir(root_r) == 0
               && execute({ "mount", "-t", "proc", "proc", root_r.asString() }) == 0 ) {
               _mountpoint = std::move(root_r);	// so we'll later unmount it
             }
             else {
-              WAR << "Mounting proc at " << _mountpoint << " failed" << endl;
+              WAR << "Mounting proc at " << root_r << " failed" << endl;
             }
           }
         }
