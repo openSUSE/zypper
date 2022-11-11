@@ -219,6 +219,10 @@ IF ( NOT YAML-CPP_FOUND)
   MESSAGE( FATAL_ERROR " yaml-cpp not found" )
 ELSE ( NOT YAML-CPP_FOUND)
   INCLUDE_DIRECTORIES(${YAML_CPP_INCLUDE_DIR})
+  IF ( NOT YAML_CPP_LIBRARIES )
+    # Must have been found by config insted of module, use target instead.
+    SET( YAML_CPP_LIBRARIES "yaml-cpp" )
+  ENDIF ( NOT YAML_CPP_LIBRARIES )
 ENDIF( NOT YAML-CPP_FOUND)
 
 
