@@ -889,45 +889,14 @@ SATResolver::resolvePool(const CapabilitySet & requires_caps,
     solverInit(weakItems);
 
     // Add pool and extra jobs.
-    for (PoolItemList::const_iterator iter = _items_to_install.begin(); iter != _items_to_install.end(); iter++) {
-        Id id = iter->id();
-        if (id == ID_NULL) {
-            ERR << "Install: " << *iter << " not found" << endl;
-        } else {
-            MIL << "Install " << *iter << endl;
-            queue_push( &(_jobQueue), SOLVER_INSTALL | SOLVER_SOLVABLE );
-            queue_push( &(_jobQueue), id );
-        }
-    }
-
-    for (PoolItemList::const_iterator iter = _items_to_remove.begin(); iter != _items_to_remove.end(); iter++) {
-        Id id = iter->id();
-        if (id == ID_NULL) {
-            ERR << "Delete: " << *iter << " not found" << endl;
-        } else {
-            MIL << "Delete " << *iter << endl;
-            queue_push( &(_jobQueue), SOLVER_ERASE | SOLVER_SOLVABLE | MAYBE_CLEANDEPS );
-            queue_push( &(_jobQueue), id);
-        }
-    }
-
+    solverAddJobsFromPool();
+    solverAddJobsFromExtraQueues( requires_caps, conflict_caps );
+    // 'dup --from' jobs
     for_( iter, upgradeRepos.begin(), upgradeRepos.end() )
     {
         queue_push( &(_jobQueue), SOLVER_DISTUPGRADE | SOLVER_SOLVABLE_REPO );
         queue_push( &(_jobQueue), iter->get()->repoid );
         MIL << "Upgrade repo " << *iter << endl;
-    }
-
-    for (CapabilitySet::const_iterator iter = requires_caps.begin(); iter != requires_caps.end(); iter++) {
-        queue_push( &(_jobQueue), SOLVER_INSTALL | SOLVER_SOLVABLE_PROVIDES );
-        queue_push( &(_jobQueue), iter->id() );
-        MIL << "Requires " << *iter << endl;
-    }
-
-    for (CapabilitySet::const_iterator iter = conflict_caps.begin(); iter != conflict_caps.end(); iter++) {
-        queue_push( &(_jobQueue), SOLVER_ERASE | SOLVER_SOLVABLE_PROVIDES | MAYBE_CLEANDEPS );
-        queue_push( &(_jobQueue), iter->id() );
-        MIL << "Conflicts " << *iter << endl;
     }
 
     // Solve!
@@ -953,22 +922,7 @@ SATResolver::resolveQueue(const SolverQueueItemList &requestQueue,
     }
 
     // Add pool jobs; they do contain any problem resolutions.
-    for (PoolItemList::const_iterator iter = _items_to_install.begin(); iter != _items_to_install.end(); iter++) {
-        Id id = iter->id();
-        if (id == ID_NULL) {
-            ERR << "Install: " << *iter << " not found" << endl;
-        } else {
-            MIL << "Install " << *iter << endl;
-            queue_push( &(_jobQueue), SOLVER_INSTALL | SOLVER_SOLVABLE );
-            queue_push( &(_jobQueue), id );
-        }
-    }
-    for (PoolItemList::const_iterator iter = _items_to_remove.begin(); iter != _items_to_remove.end(); iter++) {
-        sat::detail::IdType ident( iter->ident().id() );
-        MIL << "Delete " << *iter << ident << endl;
-        queue_push( &(_jobQueue), SOLVER_ERASE | SOLVER_SOLVABLE_NAME | MAYBE_CLEANDEPS );
-        queue_push( &(_jobQueue), ident);
-    }
+    solverAddJobsFromPool();
 
     // Solve!
     bool ret = solving();
