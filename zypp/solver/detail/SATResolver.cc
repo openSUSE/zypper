@@ -737,6 +737,12 @@ SATResolver::solverInit(const PoolItemList & weakItems)
     }
 
     ::pool_add_userinstalled_jobs(_satPool, sat::Pool::instance().autoInstalled(), &(_jobQueue), GET_USERINSTALLED_NAMES|GET_USERINSTALLED_INVERTED);
+
+    // set requirements for a running system
+    setSystemRequirements();
+
+    // set locks for the solver
+    setLocks();
 }
 
 void
@@ -804,12 +810,6 @@ SATResolver::resolvePool(const CapabilitySet & requires_caps,
         MIL << "Conflicts " << *iter << endl;
     }
 
-    // set requirements for a running system
-    setSystemRequirements();
-
-    // set locks for the solver
-    setLocks();
-
     // solving
     bool ret = solving(requires_caps, conflict_caps);
 
@@ -850,12 +850,6 @@ SATResolver::resolveQueue(const SolverQueueItemList &requestQueue,
         queue_push( &(_jobQueue), ident);
     }
 
-    // set requirements for a running system
-    setSystemRequirements();
-
-    // set locks for the solver
-    setLocks();
-
     // solving
     bool ret = solving();
 
@@ -870,12 +864,6 @@ void SATResolver::doUpdate()
 
     // initialize
     solverInit(PoolItemList());
-
-    // set requirements for a running system
-    setSystemRequirements();
-
-    // set locks for the solver
-    setLocks();
 
     if (_fixsystem) {
         queue_push( &(_jobQueue), SOLVER_VERIFY|SOLVER_SOLVABLE_ALL);
