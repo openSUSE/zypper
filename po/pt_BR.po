@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-11-07 18:09+0100\n"
-"PO-Revision-Date: 2022-08-04 15:13+0000\n"
+"PO-Revision-Date: 2022-11-19 00:56+0000\n"
 "Last-Translator: Luiz Fernando Ranghetti <elchevive68@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) <https://l10n.opensuse.org/projects/"
 "zypper/master/pt_BR/>\n"
@@ -4333,6 +4333,8 @@ msgstr "Selecione problemas que correspondam à string especificada."
 msgid ""
 "Service '%1%' with URL '%2%' already exists. Just updating the settings."
 msgstr ""
+"O serviço '%1%' com a URL '%2%' já existe. Apenas atualizando as "
+"configurações."
 
 #: src/commands/services/add.cc:58
 #, boost-format
@@ -4340,6 +4342,7 @@ msgid ""
 "Service '%1%' already exists but uses a different URL '%2%'. Please use "
 "another alias."
 msgstr ""
+"O serviço '%1%' já existe mas usa uma URL diferente '%2%'. Use outro apelido."
 
 #: src/commands/services/add.cc:70
 #, c-format, boost-format
@@ -6276,7 +6279,7 @@ msgstr "Os resolvíveis de '%s' não foram carregados devido a um erro."
 #: src/repos.cc:1827
 #, boost-format
 msgid "Repository '%1%' metadata expired since %2%."
-msgstr ""
+msgstr "Os metadados do repositório '%1%' estão expirados desde %2%."
 
 #. translators: the first %s is 'zypper refresh' and the second 'zypper clean -m'
 #: src/repos.cc:1839
@@ -6291,6 +6294,10 @@ msgid ""
 "solve the issue, it could be that you are using a broken mirror or the "
 "server has actually discontinued to support the repository."
 msgstr ""
+"Metadados do repositório expirado: Verifique se a 'atualização automática' "
+"está ligada (zypper lr), caso contrário, atualize manualmente o repositório ("
+"zypper ref). Se isto não resolver o problema, pode ser que você esteja "
+"usando um mirror com problemas e que descontinuou o suporte ao repositório."
 
 #: src/repos.cc:1857
 msgid "Reading installed packages..."
