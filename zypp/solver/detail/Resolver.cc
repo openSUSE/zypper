@@ -190,19 +190,6 @@ void Resolver::reset( bool keepExtras )
     _installedSatisfied.clear();
 }
 
-bool Resolver::doUpgrade()
-{
-  // Setting Resolver to upgrade mode. SAT solver will do the update
-  _upgradeMode = true;
-  return resolvePool();
-}
-
-void Resolver::doUpdate()
-{
-    _updateMode = true;
-    return _satResolver->doUpdate();
-}
-
 PoolItemList Resolver::problematicUpdateItems() const
 { return _satResolver->problematicUpdateItems(); }
 
@@ -286,23 +273,6 @@ struct DoTransact
     }
 };
 
-
-bool Resolver::verifySystem()
-{
-    UndoTransact resetting (ResStatus::APPL_HIGH);
-
-    DBG << "Resolver::verifySystem()" << endl;
-
-    _verifying = true;
-
-    invokeOnEach ( _pool.begin(), _pool.end(),
-                   resfilter::ByTransact( ),			// Resetting all transcations
-                   std::ref(resetting) );
-
-    return resolvePool();
-}
-
-
 //----------------------------------------------------------------------------
 // undo
 void Resolver::undo()
@@ -355,10 +325,35 @@ void Resolver::solverInit()
     _installedSatisfied.clear();
 }
 
+bool Resolver::verifySystem()
+{
+  DBG << "Resolver::verifySystem()" << endl;
+  _verifying = true;
+  UndoTransact resetting (ResStatus::APPL_HIGH);
+  invokeOnEach ( _pool.begin(), _pool.end(),
+                 resfilter::ByTransact( ),			// Resetting all transcations
+                 std::ref(resetting) );
+  return resolvePool();
+}
+
+
+bool Resolver::doUpgrade()
+{
+  // Setting Resolver to upgrade mode. SAT solver will do the update
+  _upgradeMode = true;
+  return resolvePool();
+}
+
 bool Resolver::resolvePool()
 {
     solverInit();
     return _satResolver->resolvePool(_extra_requires, _extra_conflicts, _addWeak, _upgradeRepos );
+}
+
+void Resolver::doUpdate()
+{
+  _updateMode = true;
+  return _satResolver->doUpdate();
 }
 
 bool Resolver::resolveQueue( solver::detail::SolverQueueItemList & queue )
