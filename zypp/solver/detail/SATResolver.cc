@@ -522,13 +522,16 @@ SATResolver::solverInit(const PoolItemList & weakItems)
     }
 
     // set requirements for a running system
-    setSystemRequirements();
+    solverInitSetSystemRequirements();
 
     // set locks for the solver
-    setLocks();
+    solverInitSetLocks();
+
+    // set mode (verify,up,dup) specific jobs and solver flags
+    solverInitSetModeJobsAndFlags();
 }
 
-void SATResolver::setSystemRequirements()
+void SATResolver::solverInitSetSystemRequirements()
 {
     CapabilitySet system_requires = SystemCheck::instance().requiredSystemCap();
     CapabilitySet system_conflicts = SystemCheck::instance().conflictSystemCap();
@@ -564,7 +567,7 @@ void SATResolver::setSystemRequirements()
     }
 }
 
-void SATResolver::setLocks()
+void SATResolver::solverInitSetLocks()
 {
     unsigned icnt = 0;
     unsigned acnt = 0;
@@ -602,12 +605,47 @@ void SATResolver::setLocks()
     }
 }
 
+void SATResolver::solverInitSetModeJobsAndFlags()
+{
+    if (_fixsystem) {
+        queue_push( &(_jobQueue), SOLVER_VERIFY|SOLVER_SOLVABLE_ALL);
+        queue_push( &(_jobQueue), 0 );
+    }
+    if (_updatesystem) {
+        queue_push( &(_jobQueue), SOLVER_UPDATE|SOLVER_SOLVABLE_ALL);
+        queue_push( &(_jobQueue), 0 );
+    }
+    if (_distupgrade) {
+        queue_push( &(_jobQueue), SOLVER_DISTUPGRADE|SOLVER_SOLVABLE_ALL);
+        queue_push( &(_jobQueue), 0 );
+    }
+    if (_distupgrade_removeunsupported) {
+        queue_push( &(_jobQueue), SOLVER_DROP_ORPHANED|SOLVER_SOLVABLE_ALL);
+        queue_push( &(_jobQueue), 0 );
+    }
+
+    solverSetFocus( *_satSolver, _focus );
+    solver_set_flag(_satSolver, SOLVER_FLAG_ADD_ALREADY_RECOMMENDED, !_ignorealreadyrecommended);
+    solver_set_flag(_satSolver, SOLVER_FLAG_ALLOW_DOWNGRADE,		_allowdowngrade);
+    solver_set_flag(_satSolver, SOLVER_FLAG_ALLOW_NAMECHANGE,		_allownamechange);
+    solver_set_flag(_satSolver, SOLVER_FLAG_ALLOW_ARCHCHANGE,		_allowarchchange);
+    solver_set_flag(_satSolver, SOLVER_FLAG_ALLOW_VENDORCHANGE,		_allowvendorchange);
+    solver_set_flag(_satSolver, SOLVER_FLAG_ALLOW_UNINSTALL,		_allowuninstall);
+    solver_set_flag(_satSolver, SOLVER_FLAG_NO_UPDATEPROVIDE,		_noupdateprovide);
+    solver_set_flag(_satSolver, SOLVER_FLAG_SPLITPROVIDES,		_dosplitprovides);
+    solver_set_flag(_satSolver, SOLVER_FLAG_IGNORE_RECOMMENDED, 	false);		// resolve recommended namespaces
+    solver_set_flag(_satSolver, SOLVER_FLAG_ONLY_NAMESPACE_RECOMMENDED,	_onlyRequires);	//
+    solver_set_flag(_satSolver, SOLVER_FLAG_DUP_ALLOW_DOWNGRADE,	_dup_allowdowngrade );
+    solver_set_flag(_satSolver, SOLVER_FLAG_DUP_ALLOW_NAMECHANGE,	_dup_allownamechange );
+    solver_set_flag(_satSolver, SOLVER_FLAG_DUP_ALLOW_ARCHCHANGE,	_dup_allowarchchange );
+    solver_set_flag(_satSolver, SOLVER_FLAG_DUP_ALLOW_VENDORCHANGE,	_dup_allowvendorchange );
+}
+
 //----------------------------------------------------------------------------
 //----------------------------------------------------------------------------
 // solving.....
 //----------------------------------------------------------------------------
 //----------------------------------------------------------------------------
-
 
 class CheckIfUpdate
 {
@@ -641,38 +679,6 @@ bool
 SATResolver::solving(const CapabilitySet & requires_caps,
                      const CapabilitySet & conflict_caps)
 {
-    if (_fixsystem) {
-        queue_push( &(_jobQueue), SOLVER_VERIFY|SOLVER_SOLVABLE_ALL);
-        queue_push( &(_jobQueue), 0 );
-    }
-    if (_updatesystem) {
-        queue_push( &(_jobQueue), SOLVER_UPDATE|SOLVER_SOLVABLE_ALL);
-        queue_push( &(_jobQueue), 0 );
-    }
-    if (_distupgrade) {
-        queue_push( &(_jobQueue), SOLVER_DISTUPGRADE|SOLVER_SOLVABLE_ALL);
-        queue_push( &(_jobQueue), 0 );
-    }
-    if (_distupgrade_removeunsupported) {
-        queue_push( &(_jobQueue), SOLVER_DROP_ORPHANED|SOLVER_SOLVABLE_ALL);
-        queue_push( &(_jobQueue), 0 );
-    }
-    solverSetFocus( *_satSolver, _focus );
-    solver_set_flag(_satSolver, SOLVER_FLAG_ADD_ALREADY_RECOMMENDED, !_ignorealreadyrecommended);
-    solver_set_flag(_satSolver, SOLVER_FLAG_ALLOW_DOWNGRADE,		_allowdowngrade);
-    solver_set_flag(_satSolver, SOLVER_FLAG_ALLOW_NAMECHANGE,		_allownamechange);
-    solver_set_flag(_satSolver, SOLVER_FLAG_ALLOW_ARCHCHANGE,		_allowarchchange);
-    solver_set_flag(_satSolver, SOLVER_FLAG_ALLOW_VENDORCHANGE,		_allowvendorchange);
-    solver_set_flag(_satSolver, SOLVER_FLAG_ALLOW_UNINSTALL,		_allowuninstall);
-    solver_set_flag(_satSolver, SOLVER_FLAG_NO_UPDATEPROVIDE,		_noupdateprovide);
-    solver_set_flag(_satSolver, SOLVER_FLAG_SPLITPROVIDES,		_dosplitprovides);
-    solver_set_flag(_satSolver, SOLVER_FLAG_IGNORE_RECOMMENDED, 	false);		// resolve recommended namespaces
-    solver_set_flag(_satSolver, SOLVER_FLAG_ONLY_NAMESPACE_RECOMMENDED,	_onlyRequires);	//
-    solver_set_flag(_satSolver, SOLVER_FLAG_DUP_ALLOW_DOWNGRADE,	_dup_allowdowngrade );
-    solver_set_flag(_satSolver, SOLVER_FLAG_DUP_ALLOW_NAMECHANGE,	_dup_allownamechange );
-    solver_set_flag(_satSolver, SOLVER_FLAG_DUP_ALLOW_ARCHCHANGE,	_dup_allowarchchange );
-    solver_set_flag(_satSolver, SOLVER_FLAG_DUP_ALLOW_VENDORCHANGE,	_dup_allowvendorchange );
-
     sat::Pool::instance().prepare();
 
     // Solve !
@@ -939,34 +945,6 @@ void SATResolver::doUpdate()
 
     // initialize
     solverInit(PoolItemList());
-
-    if (_fixsystem) {
-        queue_push( &(_jobQueue), SOLVER_VERIFY|SOLVER_SOLVABLE_ALL);
-        queue_push( &(_jobQueue), 0 );
-    }
-    if (1) {
-        queue_push( &(_jobQueue), SOLVER_UPDATE|SOLVER_SOLVABLE_ALL);
-        queue_push( &(_jobQueue), 0 );
-    }
-    if (_distupgrade) {
-        queue_push( &(_jobQueue), SOLVER_DISTUPGRADE|SOLVER_SOLVABLE_ALL);
-        queue_push( &(_jobQueue), 0 );
-    }
-    if (_distupgrade_removeunsupported) {
-        queue_push( &(_jobQueue), SOLVER_DROP_ORPHANED|SOLVER_SOLVABLE_ALL);
-        queue_push( &(_jobQueue), 0 );
-    }
-    solverSetFocus( *_satSolver, _focus );
-    solver_set_flag(_satSolver, SOLVER_FLAG_ADD_ALREADY_RECOMMENDED, !_ignorealreadyrecommended);
-    solver_set_flag(_satSolver, SOLVER_FLAG_ALLOW_DOWNGRADE,		_allowdowngrade);
-    solver_set_flag(_satSolver, SOLVER_FLAG_ALLOW_NAMECHANGE,		_allownamechange);
-    solver_set_flag(_satSolver, SOLVER_FLAG_ALLOW_ARCHCHANGE,		_allowarchchange);
-    solver_set_flag(_satSolver, SOLVER_FLAG_ALLOW_VENDORCHANGE,		_allowvendorchange);
-    solver_set_flag(_satSolver, SOLVER_FLAG_ALLOW_UNINSTALL,		_allowuninstall);
-    solver_set_flag(_satSolver, SOLVER_FLAG_NO_UPDATEPROVIDE,		_noupdateprovide);
-    solver_set_flag(_satSolver, SOLVER_FLAG_SPLITPROVIDES,		_dosplitprovides);
-    solver_set_flag(_satSolver, SOLVER_FLAG_IGNORE_RECOMMENDED, 	false);		// resolve recommended namespaces
-    solver_set_flag(_satSolver, SOLVER_FLAG_ONLY_NAMESPACE_RECOMMENDED,	_onlyRequires);	//
 
     sat::Pool::instance().prepare();
 

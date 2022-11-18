@@ -115,15 +115,15 @@ class SATResolver : public base::ReferenceCounted, private base::NonCopyable, pr
 
     // Create a SAT solver and reset solver selection in the pool (Collecting
     void solverInit(const PoolItemList & weakItems);
+    void solverInitSetLocks();
+    void solverInitSetSystemRequirements();
+    void solverInitSetModeJobsAndFlags();
+
     // common solver run with the _jobQueue; Save results back to pool
     bool solving(const CapabilitySet & requires_caps = CapabilitySet(),
                  const CapabilitySet & conflict_caps = CapabilitySet());
     // cleanup solver
     void solverEnd();
-    // set locks for the solver
-    void setLocks();
-    // set requirements for a running system
-    void setSystemRequirements();
 
    // Checking if this solvable/item has a buddy which reflect the real
    // user visible description of an item
