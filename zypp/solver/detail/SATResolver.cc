@@ -359,7 +359,7 @@ SATSolutionToPool (PoolItem item, const ResStatus & status, const ResStatus::Tra
 
 //----------------------------------------------------------------------------
 //----------------------------------------------------------------------------
-// resolvePool
+// solverInit
 //----------------------------------------------------------------------------
 //----------------------------------------------------------------------------
 /////////////////////////////////////////////////////////////////////////
@@ -428,6 +428,179 @@ private:
 };
 /////////////////////////////////////////////////////////////////////////
 
+void
+SATResolver::solverEnd()
+{
+  // cleanup
+  if ( _satSolver )
+  {
+    solver_free(_satSolver);
+    _satSolver = NULL;
+    queue_free( &(_jobQueue) );
+  }
+}
+
+void
+SATResolver::solverInit(const PoolItemList & weakItems)
+{
+    MIL << "SATResolver::solverInit()" << endl;
+
+    // Remove old stuff and create a new jobqueue
+    solverEnd();
+    _satSolver = solver_create( _satPool );
+    queue_init( &_jobQueue );
+
+    {
+      // bsc#1182629: in dup allow an available -release package providing 'dup-vendor-relax(suse)'
+      // to let (suse/opensuse) vendor being treated as being equivalent.
+      bool toRelax = false;
+      if ( _distupgrade ) {
+        for ( sat::Solvable solv : sat::WhatProvides( Capability("dup-vendor-relax(suse)") ) ) {
+          if ( ! solv.isSystem() ) {
+            MIL << "Relaxed vendor check requested by " << solv << endl;
+            toRelax = true;
+            break;
+          }
+        }
+      }
+      ::pool_set_custom_vendorcheck( _satPool, toRelax ? &relaxedVendorCheck : &vendorCheck );
+    }
+
+    // Add rules for user/auto installed packages
+    ::pool_add_userinstalled_jobs(_satPool, sat::Pool::instance().autoInstalled(), &(_jobQueue), GET_USERINSTALLED_NAMES|GET_USERINSTALLED_INVERTED);
+
+    // Collect PoolItem's tasks and cleanup Pool for solving.
+    // Todos are kept in _items_to_install, _items_to_remove, _items_to_lock, _items_to_keep
+    {
+      SATCollectTransact collector( _items_to_install, _items_to_remove, _items_to_lock, _items_to_keep, solveSrcPackages() );
+      invokeOnEach ( _pool.begin(), _pool.end(), std::ref( collector ) );
+    }
+
+    // Add rules for previous ProblemSolutions "break %s by ignoring some of its dependencies"
+    for (PoolItemList::const_iterator iter = weakItems.begin(); iter != weakItems.end(); iter++) {
+        Id id = iter->id();
+        if (id == ID_NULL) {
+            ERR << "Weaken: " << *iter << " not found" << endl;
+        }
+        MIL << "Weaken dependencies of " << *iter << endl;
+        queue_push( &(_jobQueue), SOLVER_WEAKENDEPS | SOLVER_SOLVABLE );
+        queue_push( &(_jobQueue), id );
+    }
+
+    // Add rules for retracted patches and packages
+    {
+      queue_push( &(_jobQueue), SOLVER_BLACKLIST|SOLVER_SOLVABLE_PROVIDES );
+      queue_push( &(_jobQueue), sat::Solvable::retractedToken.id() );
+      queue_push( &(_jobQueue), SOLVER_BLACKLIST|SOLVER_SOLVABLE_PROVIDES );
+      queue_push( &(_jobQueue), sat::Solvable::ptfMasterToken.id() );
+      // bsc#1186503: ptfPackageToken should not be blacklisted
+    }
+
+    // Add rules for changed requestedLocales
+    {
+      const auto & trackedLocaleIds( myPool().trackedLocaleIds() );
+
+      // just track changed locakes
+      for ( const auto & locale : trackedLocaleIds.added() )
+      {
+        queue_push( &(_jobQueue), SOLVER_INSTALL | SOLVER_SOLVABLE_PROVIDES );
+        queue_push( &(_jobQueue), Capability( ResolverNamespace::language, IdString(locale) ).id() );
+      }
+
+      for ( const auto & locale : trackedLocaleIds.removed() )
+      {
+        queue_push( &(_jobQueue), SOLVER_ERASE | SOLVER_SOLVABLE_PROVIDES | SOLVER_CLEANDEPS );	// needs uncond. SOLVER_CLEANDEPS!
+        queue_push( &(_jobQueue), Capability( ResolverNamespace::language, IdString(locale) ).id() );
+      }
+    }
+
+    // Add rules for parallel installable resolvables with different versions
+    for ( const sat::Solvable & solv : myPool().multiversionList() )
+    {
+      queue_push( &(_jobQueue), SOLVER_NOOBSOLETES | SOLVER_SOLVABLE );
+      queue_push( &(_jobQueue), solv.id() );
+    }
+
+    // set requirements for a running system
+    setSystemRequirements();
+
+    // set locks for the solver
+    setLocks();
+}
+
+void SATResolver::setSystemRequirements()
+{
+    CapabilitySet system_requires = SystemCheck::instance().requiredSystemCap();
+    CapabilitySet system_conflicts = SystemCheck::instance().conflictSystemCap();
+
+    for (CapabilitySet::const_iterator iter = system_requires.begin(); iter != system_requires.end(); ++iter) {
+        queue_push( &(_jobQueue), SOLVER_INSTALL | SOLVER_SOLVABLE_PROVIDES );
+        queue_push( &(_jobQueue), iter->id() );
+        MIL << "SYSTEM Requires " << *iter << endl;
+    }
+
+    for (CapabilitySet::const_iterator iter = system_conflicts.begin(); iter != system_conflicts.end(); ++iter) {
+        queue_push( &(_jobQueue), SOLVER_ERASE | SOLVER_SOLVABLE_PROVIDES | MAYBE_CLEANDEPS );
+        queue_push( &(_jobQueue), iter->id() );
+        MIL << "SYSTEM Conflicts " << *iter << endl;
+    }
+
+    // Lock the architecture of the running systems rpm
+    // package on distupgrade.
+    if ( _distupgrade && ZConfig::instance().systemRoot() == "/" )
+    {
+      ResPool pool( ResPool::instance() );
+      IdString rpm( "rpm" );
+      for_( it, pool.byIdentBegin(rpm), pool.byIdentEnd(rpm) )
+      {
+        if ( (*it)->isSystem() )
+        {
+          Capability archrule( (*it)->arch(), rpm.c_str(), Capability::PARSED );
+          queue_push( &(_jobQueue), SOLVER_INSTALL | SOLVER_SOLVABLE_NAME | SOLVER_ESSENTIAL );
+          queue_push( &(_jobQueue), archrule.id() );
+
+        }
+      }
+    }
+}
+
+void SATResolver::setLocks()
+{
+    unsigned icnt = 0;
+    unsigned acnt = 0;
+
+    for (PoolItemList::const_iterator iter = _items_to_lock.begin(); iter != _items_to_lock.end(); ++iter) {
+        sat::detail::SolvableIdType id( iter->id() );
+        if (iter->status().isInstalled()) {
+            ++icnt;
+            queue_push( &(_jobQueue), SOLVER_INSTALL | SOLVER_SOLVABLE );
+            queue_push( &(_jobQueue), id );
+        } else {
+            ++acnt;
+            queue_push( &(_jobQueue), SOLVER_ERASE | SOLVER_SOLVABLE | MAYBE_CLEANDEPS );
+            queue_push( &(_jobQueue), id );
+        }
+    }
+    MIL << "Locked " << icnt << " installed items and " << acnt << " NOT installed items." << endl;
+
+    ///////////////////////////////////////////////////////////////////
+    // Weak locks: Ignore if an item with this name is already installed.
+    // If it's not installed try to keep it this way using a weak delete
+    ///////////////////////////////////////////////////////////////////
+    std::set<IdString> unifiedByName;
+    for (PoolItemList::const_iterator iter = _items_to_keep.begin(); iter != _items_to_keep.end(); ++iter) {
+      IdString ident( iter->ident() );
+      if ( unifiedByName.insert( ident ).second )
+      {
+        if ( ! ui::Selectable::get( *iter )->hasInstalledObj() )
+        {
+          MIL << "Keep NOT installed name " << ident << " (" << *iter << ")" << endl;
+          queue_push( &(_jobQueue), SOLVER_ERASE | SOLVER_SOLVABLE_NAME | SOLVER_WEAK | MAYBE_CLEANDEPS );
+          queue_push( &(_jobQueue), ident.id() );
+        }
+      }
+    }
+}
 
 //----------------------------------------------------------------------------
 //----------------------------------------------------------------------------
@@ -658,104 +831,6 @@ SATResolver::solving(const CapabilitySet & requires_caps,
     return true;
 }
 
-
-void
-SATResolver::solverInit(const PoolItemList & weakItems)
-{
-
-    MIL << "SATResolver::solverInit()" << endl;
-
-    // remove old stuff
-    solverEnd();
-    _satSolver = solver_create( _satPool );
-    {
-      // bsc#1182629: in dup allow an available -release package providing 'dup-vendor-relax(suse)'
-      // to let (suse/opensuse) vendor being treated as being equivalent.
-      bool toRelax = false;
-      if ( _distupgrade ) {
-        for ( sat::Solvable solv : sat::WhatProvides( Capability("dup-vendor-relax(suse)") ) ) {
-          if ( ! solv.isSystem() ) {
-            MIL << "Relaxed vendor check requested by " << solv << endl;
-            toRelax = true;
-            break;
-          }
-        }
-      }
-      ::pool_set_custom_vendorcheck( _satPool, toRelax ? &relaxedVendorCheck : &vendorCheck );
-    }
-
-    queue_init( &_jobQueue );
-
-    // clear and rebuild: _items_to_install, _items_to_remove, _items_to_lock, _items_to_keep
-    {
-      SATCollectTransact collector( _items_to_install, _items_to_remove, _items_to_lock, _items_to_keep, solveSrcPackages() );
-      invokeOnEach ( _pool.begin(), _pool.end(), std::ref( collector ) );
-    }
-
-    for (PoolItemList::const_iterator iter = weakItems.begin(); iter != weakItems.end(); iter++) {
-        Id id = iter->id();
-        if (id == ID_NULL) {
-            ERR << "Weaken: " << *iter << " not found" << endl;
-        }
-        MIL << "Weaken dependencies of " << *iter << endl;
-        queue_push( &(_jobQueue), SOLVER_WEAKENDEPS | SOLVER_SOLVABLE );
-        queue_push( &(_jobQueue), id );
-    }
-
-    // Ad rules for retracted patches and packages
-    {
-      queue_push( &(_jobQueue), SOLVER_BLACKLIST|SOLVER_SOLVABLE_PROVIDES );
-      queue_push( &(_jobQueue), sat::Solvable::retractedToken.id() );
-      queue_push( &(_jobQueue), SOLVER_BLACKLIST|SOLVER_SOLVABLE_PROVIDES );
-      queue_push( &(_jobQueue), sat::Solvable::ptfMasterToken.id() );
-      // bsc#1186503: ptfPackageToken should not be blacklisted
-    }
-
-    // Ad rules for changed requestedLocales
-    {
-      const auto & trackedLocaleIds( myPool().trackedLocaleIds() );
-
-      // just track changed locakes
-      for ( const auto & locale : trackedLocaleIds.added() )
-      {
-        queue_push( &(_jobQueue), SOLVER_INSTALL | SOLVER_SOLVABLE_PROVIDES );
-        queue_push( &(_jobQueue), Capability( ResolverNamespace::language, IdString(locale) ).id() );
-      }
-
-      for ( const auto & locale : trackedLocaleIds.removed() )
-      {
-        queue_push( &(_jobQueue), SOLVER_ERASE | SOLVER_SOLVABLE_PROVIDES | SOLVER_CLEANDEPS );	// needs uncond. SOLVER_CLEANDEPS!
-        queue_push( &(_jobQueue), Capability( ResolverNamespace::language, IdString(locale) ).id() );
-      }
-    }
-
-    // Add rules for parallel installable resolvables with different versions
-    for ( const sat::Solvable & solv : myPool().multiversionList() )
-    {
-      queue_push( &(_jobQueue), SOLVER_NOOBSOLETES | SOLVER_SOLVABLE );
-      queue_push( &(_jobQueue), solv.id() );
-    }
-
-    ::pool_add_userinstalled_jobs(_satPool, sat::Pool::instance().autoInstalled(), &(_jobQueue), GET_USERINSTALLED_NAMES|GET_USERINSTALLED_INVERTED);
-
-    // set requirements for a running system
-    setSystemRequirements();
-
-    // set locks for the solver
-    setLocks();
-}
-
-void
-SATResolver::solverEnd()
-{
-  // cleanup
-  if ( _satSolver )
-  {
-    solver_free(_satSolver);
-    _satSolver = NULL;
-    queue_free( &(_jobQueue) );
-  }
-}
 
 
 bool
@@ -1586,80 +1661,6 @@ SATResolver::problems ()
 
 void SATResolver::applySolutions( const ProblemSolutionList & solutions )
 { Resolver( _pool ).applySolutions( solutions ); }
-
-void SATResolver::setLocks()
-{
-    unsigned icnt = 0;
-    unsigned acnt = 0;
-
-    for (PoolItemList::const_iterator iter = _items_to_lock.begin(); iter != _items_to_lock.end(); ++iter) {
-        sat::detail::SolvableIdType id( iter->id() );
-        if (iter->status().isInstalled()) {
-            ++icnt;
-            queue_push( &(_jobQueue), SOLVER_INSTALL | SOLVER_SOLVABLE );
-            queue_push( &(_jobQueue), id );
-        } else {
-            ++acnt;
-            queue_push( &(_jobQueue), SOLVER_ERASE | SOLVER_SOLVABLE | MAYBE_CLEANDEPS );
-            queue_push( &(_jobQueue), id );
-        }
-    }
-    MIL << "Locked " << icnt << " installed items and " << acnt << " NOT installed items." << endl;
-
-    ///////////////////////////////////////////////////////////////////
-    // Weak locks: Ignore if an item with this name is already installed.
-    // If it's not installed try to keep it this way using a weak delete
-    ///////////////////////////////////////////////////////////////////
-    std::set<IdString> unifiedByName;
-    for (PoolItemList::const_iterator iter = _items_to_keep.begin(); iter != _items_to_keep.end(); ++iter) {
-      IdString ident( iter->ident() );
-      if ( unifiedByName.insert( ident ).second )
-      {
-        if ( ! ui::Selectable::get( *iter )->hasInstalledObj() )
-        {
-          MIL << "Keep NOT installed name " << ident << " (" << *iter << ")" << endl;
-          queue_push( &(_jobQueue), SOLVER_ERASE | SOLVER_SOLVABLE_NAME | SOLVER_WEAK | MAYBE_CLEANDEPS );
-          queue_push( &(_jobQueue), ident.id() );
-        }
-      }
-    }
-}
-
-void SATResolver::setSystemRequirements()
-{
-    CapabilitySet system_requires = SystemCheck::instance().requiredSystemCap();
-    CapabilitySet system_conflicts = SystemCheck::instance().conflictSystemCap();
-
-    for (CapabilitySet::const_iterator iter = system_requires.begin(); iter != system_requires.end(); ++iter) {
-        queue_push( &(_jobQueue), SOLVER_INSTALL | SOLVER_SOLVABLE_PROVIDES );
-        queue_push( &(_jobQueue), iter->id() );
-        MIL << "SYSTEM Requires " << *iter << endl;
-    }
-
-    for (CapabilitySet::const_iterator iter = system_conflicts.begin(); iter != system_conflicts.end(); ++iter) {
-        queue_push( &(_jobQueue), SOLVER_ERASE | SOLVER_SOLVABLE_PROVIDES | MAYBE_CLEANDEPS );
-        queue_push( &(_jobQueue), iter->id() );
-        MIL << "SYSTEM Conflicts " << *iter << endl;
-    }
-
-    // Lock the architecture of the running systems rpm
-    // package on distupgrade.
-    if ( _distupgrade && ZConfig::instance().systemRoot() == "/" )
-    {
-      ResPool pool( ResPool::instance() );
-      IdString rpm( "rpm" );
-      for_( it, pool.byIdentBegin(rpm), pool.byIdentEnd(rpm) )
-      {
-        if ( (*it)->isSystem() )
-        {
-          Capability archrule( (*it)->arch(), rpm.c_str(), Capability::PARSED );
-          queue_push( &(_jobQueue), SOLVER_INSTALL | SOLVER_SOLVABLE_NAME | SOLVER_ESSENTIAL );
-          queue_push( &(_jobQueue), archrule.id() );
-
-        }
-      }
-    }
-}
 
 sat::StringQueue SATResolver::autoInstalled() const
 {
