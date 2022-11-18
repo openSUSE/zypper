@@ -837,7 +837,45 @@ SATResolver::solving(const CapabilitySet & requires_caps,
     return true;
 }
 
+void SATResolver::solverAddJobsFromPool()
+{
+  for (PoolItemList::const_iterator iter = _items_to_install.begin(); iter != _items_to_install.end(); iter++) {
+    Id id = iter->id();
+    if (id == ID_NULL) {
+      ERR << "Install: " << *iter << " not found" << endl;
+    } else {
+      MIL << "Install " << *iter << endl;
+      queue_push( &(_jobQueue), SOLVER_INSTALL | SOLVER_SOLVABLE );
+      queue_push( &(_jobQueue), id );
+    }
+  }
 
+  for (PoolItemList::const_iterator iter = _items_to_remove.begin(); iter != _items_to_remove.end(); iter++) {
+    Id id = iter->id();
+    if (id == ID_NULL) {
+      ERR << "Delete: " << *iter << " not found" << endl;
+    } else {
+      MIL << "Delete " << *iter << endl;
+      queue_push( &(_jobQueue), SOLVER_ERASE | SOLVER_SOLVABLE | MAYBE_CLEANDEPS );
+      queue_push( &(_jobQueue), id);
+    }
+  }
+}
+
+void SATResolver::solverAddJobsFromExtraQueues( const CapabilitySet & requires_caps, const CapabilitySet & conflict_caps )
+{
+  for (CapabilitySet::const_iterator iter = requires_caps.begin(); iter != requires_caps.end(); iter++) {
+    queue_push( &(_jobQueue), SOLVER_INSTALL | SOLVER_SOLVABLE_PROVIDES );
+    queue_push( &(_jobQueue), iter->id() );
+    MIL << "Requires " << *iter << endl;
+  }
+
+  for (CapabilitySet::const_iterator iter = conflict_caps.begin(); iter != conflict_caps.end(); iter++) {
+    queue_push( &(_jobQueue), SOLVER_ERASE | SOLVER_SOLVABLE_PROVIDES | MAYBE_CLEANDEPS );
+    queue_push( &(_jobQueue), iter->id() );
+    MIL << "Conflicts " << *iter << endl;
+  }
+}
 
 bool
 SATResolver::resolvePool(const CapabilitySet & requires_caps,
@@ -847,9 +885,10 @@ SATResolver::resolvePool(const CapabilitySet & requires_caps,
 {
     MIL << "SATResolver::resolvePool()" << endl;
 
-    // initialize
+    // Initialize
     solverInit(weakItems);
 
+    // Add pool and extra jobs.
     for (PoolItemList::const_iterator iter = _items_to_install.begin(); iter != _items_to_install.end(); iter++) {
         Id id = iter->id();
         if (id == ID_NULL) {
@@ -891,7 +930,7 @@ SATResolver::resolvePool(const CapabilitySet & requires_caps,
         MIL << "Conflicts " << *iter << endl;
     }
 
-    // solving
+    // Solve!
     bool ret = solving(requires_caps, conflict_caps);
 
     (ret?MIL:WAR) << "SATResolver::resolvePool() done. Ret:" << ret <<  endl;
@@ -905,15 +944,15 @@ SATResolver::resolveQueue(const SolverQueueItemList &requestQueue,
 {
     MIL << "SATResolver::resolvQueue()" << endl;
 
-    // initialize
+    // Initialize
     solverInit(weakItems);
 
-    // generate solver queue
+    // Add request queue's jobs.
     for (SolverQueueItemList::const_iterator iter = requestQueue.begin(); iter != requestQueue.end(); iter++) {
         (*iter)->addRule(_jobQueue);
     }
 
-    // Add addition item status to the resolve-queue cause these can be set by problem resolutions
+    // Add pool jobs; they do contain any problem resolutions.
     for (PoolItemList::const_iterator iter = _items_to_install.begin(); iter != _items_to_install.end(); iter++) {
         Id id = iter->id();
         if (id == ID_NULL) {
@@ -931,24 +970,29 @@ SATResolver::resolveQueue(const SolverQueueItemList &requestQueue,
         queue_push( &(_jobQueue), ident);
     }
 
-    // solving
+    // Solve!
     bool ret = solving();
 
-    MIL << "SATResolver::resolveQueue() done. Ret:" << ret <<  endl;
+    (ret?MIL:WAR) << "SATResolver::resolveQueue() done. Ret:" << ret <<  endl;
     return ret;
 }
 
-/** \todo duplicate code to be joined with \ref solving. */
+
 void SATResolver::doUpdate()
 {
     MIL << "SATResolver::doUpdate()" << endl;
 
-    // initialize
+    // Initialize
     solverInit(PoolItemList());
 
+    // By now, doUpdate has no additional jobs.
+    // It does not include any pool jobs, and so it does not create an conflicts.
+    // Combinations like patch_with_update are driven by resolvePool + _updatesystem.
+
+    // TODO: Try to join the following with solving()
     sat::Pool::instance().prepare();
 
-    // Solve !
+    // Solve!
     MIL << "Starting solving for update...." << endl;
     MIL << *this;
     solver_solve( _satSolver, &(_jobQueue) );

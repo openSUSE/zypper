@@ -113,11 +113,14 @@ class SATResolver : public base::ReferenceCounted, private base::NonCopyable, pr
     std::vector<std::string> SATgetCompleteProblemInfoStrings ( Id problem );
     void resetItemTransaction (PoolItem item);
 
-    // Create a SAT solver and reset solver selection in the pool (Collecting
+    // Create a SAT solver and
     void solverInit(const PoolItemList & weakItems);
     void solverInitSetLocks();
     void solverInitSetSystemRequirements();
     void solverInitSetModeJobsAndFlags();
+
+    void solverAddJobsFromPool();
+    void solverAddJobsFromExtraQueues( const CapabilitySet & requires_caps, const CapabilitySet & conflict_caps );
 
     // common solver run with the _jobQueue; Save results back to pool
     bool solving(const CapabilitySet & requires_caps = CapabilitySet(),
