@@ -307,12 +307,13 @@ void Resolver::solverInit()
         }
     }
 
-    _satResolver->setFixsystem			( isVerifyingMode() );
-    _satResolver->setIgnorealreadyrecommended	( ignoreAlreadyRecommended() );
-    _satResolver->setUpdatesystem		(_updateMode);
-    _satResolver->setSolveSrcPackages		( solveSrcPackages() );
-
+    // update solver mode flags
     _satResolver->setDistupgrade		(_upgradeMode);
+    _satResolver->setUpdatesystem		(_updateMode);
+    _satResolver->setFixsystem			( isVerifyingMode() );
+    _satResolver->setSolveSrcPackages		( solveSrcPackages() );
+    _satResolver->setIgnorealreadyrecommended	( ignoreAlreadyRecommended() );
+
     if (_upgradeMode) {
       // may overwrite some settings
       _satResolver->setDistupgrade_removeunsupported	(false);
@@ -346,13 +347,14 @@ bool Resolver::doUpgrade()
 
 bool Resolver::resolvePool()
 {
-    solverInit();
-    return _satResolver->resolvePool(_extra_requires, _extra_conflicts, _addWeak, _upgradeRepos );
+  solverInit();
+  return _satResolver->resolvePool(_extra_requires, _extra_conflicts, _addWeak, _upgradeRepos );
 }
 
 void Resolver::doUpdate()
 {
   _updateMode = true;
+  solverInit();
   return _satResolver->doUpdate();
 }
 
