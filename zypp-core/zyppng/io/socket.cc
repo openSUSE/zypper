@@ -413,6 +413,25 @@ namespace zyppng {
     return std::visit([]( const auto &s ) constexpr { return s.type(); }, _state );
   }
 
+  Socket::Ptr SocketPrivate::wrapSocket(int fd, int domain, int type, int protocol, Socket::SocketState state)
+  {
+    // from here on the Socket instance owns the fd, no need to manually close it
+    // in case of error
+    auto sptr = Socket::create( domain, type, protocol );
+    sptr->d_func()->_socket = fd;
+
+    // make sure the socket is non blocking
+    if ( !sptr->setBlocking( false ) ) {
+      DBG << "Failed to unblock socket." << std::endl;
+      return nullptr;
+    }
+
+    if( sptr->d_func()->transition( state ) )
+      return sptr;
+
+    return nullptr;
+  }
+
   ZYPP_IMPL_PRIVATE(Socket)
 
   Socket::Socket( int domain, int type, int protocol )
@@ -537,7 +556,7 @@ namespace zyppng {
       }
     }
 
-    return Socket::fromSocket( res, Socket::ConnectedState );
+    return SocketPrivate::wrapSocket( res, d->_domain, d->_type, d->_protocol, Socket::ConnectedState );
   }
 
   Socket::Ptr Socket::fromSocket( int fd, Socket::SocketState state )
@@ -553,7 +572,7 @@ namespace zyppng {
     }
 
     int protocol;
-    optlen = sizeof(domain);
+    optlen = sizeof(protocol);
     res = getsockopt( fd, SOL_SOCKET, SO_PROTOCOL, &protocol, &optlen );
     if ( res < 0 ) {
       DBG << "Error querying socket protocol: " << strerr_cxx() << std::endl;
@@ -562,7 +581,7 @@ namespace zyppng {
     }
 
     int type;
-    optlen = sizeof(domain);
+    optlen = sizeof(type);
     res = getsockopt( fd, SOL_SOCKET, SO_TYPE, &type, &optlen );
     if ( res < 0 ) {
       DBG << "Error querying socket type: " << strerr_cxx() << std::endl;
@@ -570,21 +589,7 @@ namespace zyppng {
       return nullptr;
     }
 
-    // from here on the Socket instance owns the fd, no need to manually close it
-    // in case of error
-    auto sptr = Socket::create( domain, type, protocol );
-    sptr->d_func()->_socket = fd;
-
-    // make sure the socket is non blocking
-    if ( !sptr->setBlocking( false ) ) {
-      DBG << "Failed to unblock socket." << std::endl;
-      return nullptr;
-    }
-
-    if( sptr->d_func()->transition( state ) )
-      return sptr;
-
-    return nullptr;
+    return SocketPrivate::wrapSocket( fd, domain, type, protocol, state );
   }
 
   bool Socket::setBlocking( const bool set )

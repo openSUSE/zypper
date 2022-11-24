@@ -36,6 +36,8 @@ namespace zyppng {
       _protocol( protocol )
     { }
 
+    static Socket::Ptr wrapSocket( int fd, int domain, int type, int protocol, Socket::SocketState state );
+
     bool initSocket () ;
     void setError ( Socket::SocketError error, std::string &&err, bool emit = true );
     bool handleConnectError ( int error );
