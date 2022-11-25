@@ -310,29 +310,32 @@ static void list_pattern_table( Zypper & zypper, SolvableFilterMode mode_r )
   bool installed_only = mode_r == SolvableFilterMode::ShowOnlyInstalled;
   bool notinst_only   = mode_r == SolvableFilterMode::ShowOnlyNotInstalled;
 
-  for( const PoolItem & pi : God->pool().byKind<Pattern>() )
+  for( const auto & sel : God->pool().proxy().byKind<Pattern>() )
   {
-    bool isInstalled = pi.status().isInstalled();
-    if ( isInstalled && notinst_only && !installed_only )
-      continue;
-    else if ( !isInstalled && installed_only && !notinst_only )
-      continue;
+    for ( const auto & pi : sel->picklist() )
+    {
+      bool isInstalled = pi.status().isInstalled();
+      if ( isInstalled && notinst_only && !installed_only )
+        continue;
+      else if ( !isInstalled && installed_only && !notinst_only )
+        continue;
 
-    const std::string & piRepoName( pi.repoInfo().name() );
-    if ( repofilter && piRepoName == "@System" )
-      continue;
+      const std::string & piRepoName( pi.repoInfo().name() );
+      if ( repofilter && piRepoName == "@System" )
+        continue;
 
-    Pattern::constPtr pattern = asKind<Pattern>(pi.resolvable());
-    // hide patterns with user visible flag not set (bnc #538152)
-    if ( !pattern->userVisible() )
-      continue;
+      Pattern::constPtr pattern = asKind<Pattern>(pi.resolvable());
+      // hide patterns with user visible flag not set (bnc #538152)
+      if ( !pattern->userVisible() )
+        continue;
 
-    tbl << ( TableRow()
-        << computeStatusIndicator( pi )
-        << pi.name()
-        << pi.edition()
-        << piRepoName
-        << string_weak_status(pi.status()) );
+      tbl << ( TableRow()
+          << computeStatusIndicator( pi )
+          << pi.name()
+          << pi.edition()
+          << piRepoName
+          << string_weak_status(pi.status()) );
+    }
   }
   tbl.sort( 1 ); // Name
 
