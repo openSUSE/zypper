@@ -1,4 +1,17 @@
 -------------------------------------------------------------------
+Fri Nov 25 13:41:55 CET 2022 - ma@suse.de
+
+- Avoid calling getsockopt when we know the info already.
+  This patch hopefully fixes logging on WSL, getsockopt seems to
+  not be fully supported but the code required it when accepting
+  new socket connections. (for bsc#1178233)
+- Enhance yaml-cpp detection (fixes #428)
+- No need to redirect 'history.logfile=/dev/null' into the target.
+- MultiCurl: Make sure to reset the progress function when
+  falling back.
+- version 17.31.6 (22)
+
+-------------------------------------------------------------------
 Mon Nov  7 13:09:46 CET 2022 - ma@suse.de
 
 - Create '.no_auto_prune' in the package cache dir to prevent auto
