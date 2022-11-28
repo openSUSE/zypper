@@ -77,15 +77,15 @@ namespace zyppng {
 
     switch (type) {
       case CURLINFO_TEXT:
-        DBG << "== Info: ";
-        DBG << std::string( data, size ) << std::endl;
+        DBG << handle << " " << "== Info: ";
+        DBG << handle << " " << std::string( data, size ) << std::endl;
 
       default: /* in case a new one is introduced to shock us */
         return 0;
 
       case CURLINFO_HEADER_OUT:
         text = "=> Send header: ";
-        DBG << std::string( data, size ) << std::endl;
+        DBG << handle << " " << std::string( data, size ) << std::endl;
         return 0;
       case CURLINFO_DATA_OUT:
         text = "=> Send data";
@@ -95,7 +95,7 @@ namespace zyppng {
         break;
       case CURLINFO_HEADER_IN:
         text = "<= Recv header: ";
-        DBG << std::string( data, size ) << std::endl;
+        DBG << handle << " " << std::string( data, size ) << std::endl;
         return 0;
       case CURLINFO_DATA_IN:
         text = "<= Recv data";
@@ -108,7 +108,7 @@ namespace zyppng {
     if ( maxlvl > 4 )
       dump(text, stderr, (unsigned char *)data, size);
     else
-      DBG << " " << size << " bytes " << std::endl;
+      DBG << handle << " " << " " << size << " bytes " << std::endl;
     return 0;
   }
 
@@ -261,7 +261,7 @@ namespace zyppng {
             if constexpr ( std::is_same_v<T, pending_t> ) {
               arg._requireStatusPartial = false;
             } else {
-              DBG << "NetworkRequestPrivate::setupHandle called in unexpected state" << std::endl;
+              DBG << _easyHandle << " " << "NetworkRequestPrivate::setupHandle called in unexpected state" << std::endl;
             }
           }, _runningMode );
           _requestedRanges.push_back( NetworkRequest::Range() );
@@ -387,7 +387,7 @@ namespace zyppng {
         long auth = zypp::media::CurlAuthData::auth_type_str2long(use_auth);
         if( auth != CURLAUTH_NONE)
         {
-          DBG << "Enabling HTTP authentication methods: " << use_auth
+          DBG << _easyHandle << " "  << "Enabling HTTP authentication methods: " << use_auth
               << " (CURLOPT_HTTPAUTH=" << auth << ")" << std::endl;
           setCurlOption(CURLOPT_HTTPAUTH, auth);
         }
@@ -395,7 +395,7 @@ namespace zyppng {
 
       if ( locSet.proxyEnabled() && ! locSet.proxy().empty() )
       {
-        DBG << "Proxy: '" << locSet.proxy() << "'" << std::endl;
+        DBG << _easyHandle << " " << "Proxy: '" << locSet.proxy() << "'" << std::endl;
         setCurlOption(CURLOPT_PROXY, locSet.proxy().c_str());
         setCurlOption(CURLOPT_PROXYAUTH, CURLAUTH_BASIC|CURLAUTH_DIGEST|CURLAUTH_NTLM );
 
@@ -413,16 +413,16 @@ namespace zyppng {
           zypp::media::CurlConfig curlconf;
           zypp::media::CurlConfig::parseConfig(curlconf); // parse ~/.curlrc
           if ( curlconf.proxyuserpwd.empty() )
-            DBG << "Proxy: ~/.curlrc does not contain the proxy-user option" << std::endl;
+            DBG << _easyHandle << " "  << "Proxy: ~/.curlrc does not contain the proxy-user option" << std::endl;
           else
           {
             proxyuserpwd = curlconf.proxyuserpwd;
-            DBG << "Proxy: using proxy-user from ~/.curlrc" << std::endl;
+            DBG << _easyHandle << " " << "Proxy: using proxy-user from ~/.curlrc" << std::endl;
           }
         }
         else
         {
-          DBG << "Proxy: using provided proxy-user '" << _settings.proxyUsername() << "'" << std::endl;
+          DBG << _easyHandle << " "  << _easyHandle << " "  << "Proxy: using provided proxy-user '" << _settings.proxyUsername() << "'" << std::endl;
         }
 
         if ( ! proxyuserpwd.empty() )
@@ -435,15 +435,15 @@ namespace zyppng {
       {
         // Explicitly disabled in URL (see fillSettingsFromUrl()).
         // This should also prevent libcurl from looking into the environment.
-        DBG << "Proxy: explicitly NOPROXY" << std::endl;
+        DBG << _easyHandle << " "  << "Proxy: explicitly NOPROXY" << std::endl;
         setCurlOption(CURLOPT_NOPROXY, "*");
       }
 
 #endif
       else
       {
-        DBG << "Proxy: not explicitly set" << std::endl;
-        DBG_MEDIA << "Proxy: libcurl may look into the environment" << std::endl;
+        DBG << _easyHandle << " " << "Proxy: not explicitly set" << std::endl;
+        DBG << _easyHandle << " " << "Proxy: libcurl may look into the environment" << std::endl;
       }
 
       /** Speed limits */
@@ -462,7 +462,7 @@ namespace zyppng {
       if ( zypp::str::strToBool( _url.getQueryParam( "cookies" ), true ) )
         setCurlOption( CURLOPT_COOKIEFILE, _currentCookieFile.c_str() );
       else
-        MIL << "No cookies requested" << std::endl;
+        MIL << _easyHandle << " " << "No cookies requested" << std::endl;
       setCurlOption(CURLOPT_COOKIEJAR, _currentCookieFile.c_str() );
 
 #if CURLVERSION_AT_LEAST(7,18,0)
@@ -621,7 +621,7 @@ namespace zyppng {
         }
 
         if ( rangesAdded >= maxRanges ) {
-          MIL_MEDIA << "Reached max nr of ranges (" << maxRanges << "), batching the request to not break the server" << std::endl;
+          MIL_MEDIA << _easyHandle << " " << "Reached max nr of ranges (" << maxRanges << "), batching the request to not break the server" << std::endl;
           break;
         }
       }
@@ -630,7 +630,7 @@ namespace zyppng {
       if ( currentZippedRange )
         addRangeString( *currentZippedRange );
 
-      MIL_MEDIA << "Requesting Ranges: " << rangeDesc << std::endl;
+      MIL_MEDIA << _easyHandle << " " << "Requesting Ranges: " << rangeDesc << std::endl;
 
       setCurlOption( CURLOPT_RANGE, rangeDesc.c_str() );
     }
@@ -648,7 +648,7 @@ namespace zyppng {
   {
     bool isRangeContinuation = std::holds_alternative<prepareNextRangeBatch_t>( _runningMode );
     if ( isRangeContinuation ) {
-      MIL_MEDIA << "Continuing a previously started range batch." << std::endl;
+      MIL_MEDIA << _easyHandle << " " << "Continuing a previously started range batch." << std::endl;
       _runningMode = running_t( std::move(std::get<prepareNextRangeBatch_t>( _runningMode )) );
     } else {
       _runningMode = running_t( std::move(std::get<pending_t>( _runningMode )) );
@@ -657,6 +657,7 @@ namespace zyppng {
     auto &m = std::get<running_t>( _runningMode );
 
     if ( m._activityTimer ) {
+      DBG_MEDIA << _easyHandle << " Setting activity timeout to: " << _settings.timeout() << std::endl;
       m._activityTimer->connect( &Timer::sigExpired, *this, &NetworkRequestPrivate::onActivityTimeout );
       m._activityTimer->start( static_cast<uint64_t>( _settings.timeout() * 1000 ) );
     }
@@ -724,8 +725,11 @@ namespace zyppng {
     });
   }
 
-  void NetworkRequestPrivate::onActivityTimeout( Timer & )
+  void NetworkRequestPrivate::onActivityTimeout( Timer &t )
   {
+    auto &m = std::get<running_t>( _runningMode );
+
+    MIL_MEDIA << _easyHandle << " Request timeout interval: " << t.interval()<< " remaining: " << t.remaining() <<  std::endl;
     std::map<std::string, boost::any> extraInfo;
     extraInfo.insert( {"requestUrl", _url } );
     extraInfo.insert( {"filepath", _targetFile } );
@@ -737,7 +741,7 @@ namespace zyppng {
     if ( rng._digest && rng._checksum.size() ) {
       auto bytesHashed = rng._digest->bytesHashed ();
       if ( rng._chksumPad && *rng._chksumPad > bytesHashed ) {
-        MIL_MEDIA << "Padding the digest to required block size" << std::endl;
+        MIL_MEDIA << _easyHandle << " " << "Padding the digest to required block size" << std::endl;
         zypp::ByteArray padding( *rng._chksumPad - bytesHashed, '\0' );
         rng._digest->update( padding.data(), padding.size() );
       }
@@ -771,7 +775,7 @@ namespace zyppng {
 
     zypp::str::smatch what;
     if( !zypp::str::regex_match( std::string(line), what, regex ) || what.size() != 4 ) {
-      DBG << "Invalid Content-Range Header format: '" << std::string(line) << std::endl;
+      DBG << _easyHandle << " " << "Invalid Content-Range Header format: '" << std::string(line) << std::endl;
       return false;
     }
 
@@ -817,7 +821,7 @@ namespace zyppng {
     NetworkRequestPrivate *that = reinterpret_cast<NetworkRequestPrivate *>( clientp );
 
     if ( !std::holds_alternative<running_t>(that->_runningMode) ){
-      DBG_MEDIA << "Curl progress callback was called in invalid state "<< that->z_func()->state() << std::endl;
+      DBG_MEDIA << that->_easyHandle << " " << "Curl progress callback was called in invalid state "<< that->z_func()->state() << std::endl;
       return -1;
     }
 
@@ -855,7 +859,7 @@ namespace zyppng {
       else
         hdr = std::string_view();
 
-      DBG_MEDIA << "Received header: " << hdr << std::endl;
+      DBG_MEDIA << _easyHandle << " " << "Received header: " << hdr << std::endl;
 
       auto &rmode = std::get<running_t>( _runningMode );
       if ( !hdr.size() ) {
@@ -881,7 +885,7 @@ namespace zyppng {
         }
       } else if ( zypp::strv::hasPrefixCI( hdr, "Location:" ) ) {
         _lastRedirect = hdr.substr( 9 );
-        DBG << "redirecting to " << _lastRedirect << std::endl;
+        DBG << _easyHandle << " " << "redirecting to " << _lastRedirect << std::endl;
 
       } else if ( zypp::strv::hasPrefixCI( hdr, "Content-Type:") ) {
         std::string sep;
@@ -895,7 +899,7 @@ namespace zyppng {
           rmode._cachedResult = NetworkRequestErrorPrivate::customError( NetworkRequestError::InternalError, "Invalid Content-Range header format." );
           return 0;
         }
-        DBG_MEDIA << "Got content range :" << r.start << " len " << r.len << std::endl;
+        DBG_MEDIA << _easyHandle << " " << "Got content range :" << r.start << " len " << r.len << std::endl;
         rmode._gotContentRangeHeader = true;
         rmode._currentSrvRange = r;
 
@@ -904,7 +908,7 @@ namespace zyppng {
         auto str = std::string ( lenStr.data(), lenStr.length() );
         auto len = zypp::str::strtonum<typename zypp::ByteCount::SizeType>( str.data() );
         if ( len > 0 ) {
-          DBG_MEDIA << "Got Content-Length Header: " << len << std::endl;
+          DBG_MEDIA << _easyHandle << " " << "Got Content-Length Header: " << len << std::endl;
           rmode._contentLenght = zypp::ByteCount(len, zypp::ByteCount::B);
         }
       }
@@ -933,7 +937,7 @@ namespace zyppng {
     auto writeDataToFile = [ this, &rmode ]( off_t offset, const char *data, size_t len ) -> off_t {
 
       if ( rmode._currentRange < 0 ) {
-        DBG_MEDIA << "Current range is zero in write request" << std::endl;
+        DBG_MEDIA << _easyHandle << " " << "Current range is zero in write request" << std::endl;
         return 0;
       }
 
