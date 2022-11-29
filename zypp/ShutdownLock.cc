@@ -1,12 +1,13 @@
 #include "ShutdownLock_p.h"
 
+#include <zypp/base/LogTools.h>
 #include <zypp/ExternalProgram.h>
 #include <iostream>
 
 zypp::ShutdownLock::ShutdownLock(const std::string &reason)
 {
   try {
-
+    MIL << "Try to acquire an inhibitor lock..." << endl;
     std::string whyStr = str::form("--why=%s", reason.c_str());
 
     const char* argv[] =
@@ -27,6 +28,8 @@ zypp::ShutdownLock::ShutdownLock(const std::string &reason)
 zypp::ShutdownLock::~ShutdownLock()
 {
   if (_prog) {
-    _prog->kill();
+    MIL << "Terminate inhibitor lock: pid " << _prog->getpid() << endl;
+    _prog->kill(15);
+    _prog->close();
   }
 }
