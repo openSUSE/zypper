@@ -57,6 +57,7 @@
 #include <zypp/ZYppCallbacks.h>
 
 #include "sat/Pool.h"
+#include <zypp/base/Algorithm.h>
 
 using std::endl;
 using std::string;
@@ -674,7 +675,7 @@ namespace zypp
 
     repo::ServiceType probeService( const Url & url ) const;
 
-    void refreshGeoIPData ();
+    void refreshGeoIPData ( const RepoInfo::url_set &urls );
 
   private:
     void saveService( ServiceInfo & service ) const;
@@ -1009,7 +1010,7 @@ namespace zypp
     {
       MIL << "Check if to refresh repo " << info.alias() << " at " << url << " (" << info.type() << ")" << endl;
 
-      refreshGeoIPData();
+      refreshGeoIPData( { url } );
 
       // first check old (cached) metadata
       Pathname mediarootpath = rawcache_path_for_repoinfo( _options, info );
@@ -1135,7 +1136,7 @@ namespace zypp
     assert_urls(info);
 
     // make sure geoIP data is up 2 date
-    refreshGeoIPData();
+    refreshGeoIPData( info.baseUrls() );
 
     // we will throw this later if no URL checks out fine
     RepoException rexception( info, PL_("Valid metadata not found at specified URL",
@@ -2558,7 +2559,7 @@ namespace zypp
     return repo::ServiceType::NONE;
   }
 
-  void RepoManager::Impl::refreshGeoIPData ()
+  void RepoManager::Impl::refreshGeoIPData ( const RepoInfo::url_set &urls )
   {
     try  {
 
@@ -2567,14 +2568,19 @@ namespace zypp
         return;
       }
 
-      // for applications like packageKit that are running very long we remember the last time when we checked
-      // for geoIP data. We don't want to query this over and over again.
-      static auto lastCheck = std::chrono::steady_clock::time_point::min();
-      if ( lastCheck != std::chrono::steady_clock::time_point::min()
-          && (std::chrono::steady_clock::now() - lastCheck) < std::chrono::hours(24) )
-        return;
+      std::vector<std::string> hosts;
+      for ( const auto &baseUrl : urls ) {
+        const auto &host = baseUrl.getHost();
+        if ( zypp::any_of( ZConfig::instance().geoipHostnames(), [&host]( const auto &elem ){ return ( zypp::str::compareCI( host, elem ) == 0 ); } ) ) {
+          hosts.push_back( host );
+          break;
+        }
+      }
 
-      lastCheck = std::chrono::steady_clock::now();
+      if ( hosts.empty() ) {
+        MIL << "No configured geoip URL found, not updating geoip data" << std::endl;
+        return;
+      }
 
       const auto &geoIPCache = ZConfig::instance().geoipCachePath();
 
@@ -2603,8 +2609,7 @@ namespace zypp
         return true;
       });
 
-      // go over all configured hostnames
-      const auto &hosts = ZConfig::instance().geoipHostnames();
+      // go over all found hostnames
       std::for_each( hosts.begin(), hosts.end(), [ & ]( const std::string &hostname ) {
 
         // do not query files that are still there
@@ -2844,8 +2849,8 @@ namespace zypp
   void RepoManager::modifyService( const std::string & oldAlias, const ServiceInfo & service )
   { return _pimpl->modifyService( oldAlias, service ); }
 
-  void RepoManager::refreshGeoIp ()
-  { return _pimpl->refreshGeoIPData(); }
+  void RepoManager::refreshGeoIp (const RepoInfo::url_set &urls)
+  { return _pimpl->refreshGeoIPData( urls ); }
 
   ////////////////////////////////////////////////////////////////////////////
 

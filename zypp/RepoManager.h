@@ -635,10 +635,10 @@ namespace zypp
     { modifyService( service.alias(), service ); }
 
     /*!
-     * Checks with configured geoIP servers ( usually download.opensuse.org ) if there is new geoip data available, caches the results
-     * in the metadata cache for 24hrs.
+     * Checks for any of the given \a urls if there is no geoip data available, caches the results
+     * in the metadata cache for 24hrs. The given urls need to be configured as valid geoIP targets ( usually download.opensuse.org )
      */
-    void refreshGeoIp ();
+    void refreshGeoIp ( const RepoInfo::url_set &urls );
 
   private:
     /**

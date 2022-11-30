@@ -66,6 +66,18 @@ namespace zypp
       return cnt;
     }
 
+    template <class Container, class Elem>
+    bool contains ( const Container &c, const Elem &elem )
+    {
+      return ( std::find( c.begin(), c.end(), elem ) != c.end() );
+    }
+
+    template <class Container, class Fnc >
+    bool any_of ( const Container &c, Fnc &&cb )
+    {
+      return std::any_of( c.begin(), c.end(), std::forward<Fnc>(cb) );
+    }
+
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
