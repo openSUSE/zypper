@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-03-14 15:21+0100\n"
-"PO-Revision-Date: 2022-08-30 07:13+0000\n"
+"PO-Revision-Date: 2022-11-30 04:13+0000\n"
 "Last-Translator: Kristijan Fremen Velkovski <me@krisfremen.com>\n"
 "Language-Team: Macedonian <https://l10n.opensuse.org/projects/libzypp/master/"
 "mk/>\n"
@@ -1054,9 +1054,8 @@ msgstr ""
 # fuzzy
 #. :PHL:608:
 #: zypp/CountryCode.cc:334
-#, fuzzy
 msgid "Pakistan"
-msgstr "Тајван"
+msgstr "Пакистан"
 
 # PL
 #. :PAK:586:
@@ -1123,9 +1122,8 @@ msgstr "Романија"
 
 #. :ROU:642:
 #: zypp/CountryCode.cc:346
-#, fuzzy
 msgid "Serbia"
-msgstr "Српски"
+msgstr "Србија"
 
 #: zypp/CountryCode.cc:347
 msgid "Russian Federation"
@@ -1147,9 +1145,8 @@ msgstr ""
 # fuzzy
 #. :SAU:682:
 #: zypp/CountryCode.cc:350
-#, fuzzy
 msgid "Solomon Islands"
-msgstr "Ирска"
+msgstr "Соломонови Острови"
 
 #. :SLB:090:
 #: zypp/CountryCode.cc:351
@@ -1292,9 +1289,8 @@ msgstr ""
 # fuzzy
 #. :TKL:772:
 #: zypp/CountryCode.cc:375
-#, fuzzy
 msgid "Turkmenistan"
-msgstr "Тајван"
+msgstr "Туркменистан"
 
 # TN
 # fuzzy
@@ -1379,9 +1375,8 @@ msgstr "Уругвај"
 # fuzzy
 #. :URY:858:
 #: zypp/CountryCode.cc:389
-#, fuzzy
 msgid "Uzbekistan"
-msgstr "Тајван"
+msgstr "Узбекистан"
 
 #. :UZB:860:
 #: zypp/CountryCode.cc:390
@@ -1403,9 +1398,8 @@ msgstr "Венецуела"
 # fuzzy
 #. :VEN:862:
 #: zypp/CountryCode.cc:393
-#, fuzzy
 msgid "British Virgin Islands"
-msgstr "Финска"
+msgstr "Британски Девствени Острови"
 
 # VI
 # fuzzy
@@ -1505,14 +1499,12 @@ msgid "Tried to import not existent key %s into keyring %s"
 msgstr ""
 
 #: zypp/KeyRing.cc:759
-#, fuzzy
 msgid "Failed to import key."
-msgstr "Failed to parse: %s."
+msgstr "Не успеа да се увезе клучот."
 
 #: zypp/KeyRing.cc:766
-#, fuzzy
 msgid "Failed to delete key."
-msgstr "Failed to parse: %s."
+msgstr "Не успеа да се избрише клучот."
 
 #: zypp/KeyRing.cc:772
 #, c-format, boost-format
@@ -1535,9 +1527,8 @@ msgstr ""
 
 #. language code: ace
 #: zypp/LanguageCode.cc:165
-#, fuzzy
 msgid "Achinese"
-msgstr "Кинески"
+msgstr "Акинески"
 
 #. language code: ach
 #: zypp/LanguageCode.cc:167
@@ -1586,9 +1577,8 @@ msgstr ""
 
 #. language code: alb sqi sq
 #: zypp/LanguageCode.cc:185 zypp/LanguageCode.cc:187
-#, fuzzy
 msgid "Albanian"
-msgstr "Романски"
+msgstr "Албански"
 
 #. language code: ale
 #: zypp/LanguageCode.cc:189
@@ -1598,16 +1588,14 @@ msgstr ""
 # AU
 #. language code: alg
 #: zypp/LanguageCode.cc:191
-#, fuzzy
 msgid "Algonquian Languages"
-msgstr "Австралија"
+msgstr "Алгонкиски јазици"
 
 # ZA
 #. language code: alt
 #: zypp/LanguageCode.cc:193
-#, fuzzy
 msgid "Southern Altai"
-msgstr "Јужна Африка"
+msgstr "Јужен Алтај"
 
 #. language code: amh am
 #: zypp/LanguageCode.cc:195
@@ -1622,9 +1610,8 @@ msgstr ""
 # AU
 #. language code: apa
 #: zypp/LanguageCode.cc:199
-#, fuzzy
 msgid "Apache Languages"
-msgstr "Австралија"
+msgstr "Апачи јазици"
 
 #. language code: ara ar
 #: zypp/LanguageCode.cc:201
@@ -1635,9 +1622,8 @@ msgstr "Арапски"
 # fuzzy
 #. language code: arc
 #: zypp/LanguageCode.cc:203
-#, fuzzy
 msgid "Aramaic"
-msgstr "Јамајка"
+msgstr "Арамејски"
 
 #. language code: arg an
 #: zypp/LanguageCode.cc:205
@@ -1648,15 +1634,13 @@ msgstr ""
 # fuzzy
 #. language code: arm hye hy
 #: zypp/LanguageCode.cc:207 zypp/LanguageCode.cc:209
-#, fuzzy
 msgid "Armenian"
-msgstr "Аргентина"
+msgstr "Ерменски"
 
 #. language code: arn
 #: zypp/LanguageCode.cc:211
-#, fuzzy
 msgid "Araucanian"
-msgstr "Литвански"
+msgstr "Араукански"
 
 #. language code: arp
 #: zypp/LanguageCode.cc:213
