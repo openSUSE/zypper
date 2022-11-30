@@ -48,6 +48,8 @@ namespace zyppng {
 
     bool setupHandle ( std::string &errBuf );
 
+    bool assertOutputFile ();
+
     /*!
      * \internal
      * Called by the dispatcher if we report a error. If this function returns
@@ -148,9 +150,8 @@ namespace zyppng {
       255,
       127,
       63,
-      31,
       15,
-      7
+      5
     };
 
     struct pending_t;

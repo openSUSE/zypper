@@ -56,6 +56,11 @@ const char * err401 = "Status: 401 Unauthorized\r\n"
                      "\r\n"
                      "Sorry you are not authorized.";
 
+const char * resp204 = "Status: 204\r\n"
+                       "server: Apache\r\n"
+                       "content-type: text/html;charset=UTF-8\r\n"
+                       "date: Wed, 30 Nov 2022 14:31:22 GMT\r\n\r\n";
+
 bool withSSL[] = { true, false };
 
 BOOST_DATA_TEST_CASE(nwdispatcher_basic, bdata::make( withSSL ), withSSL)
@@ -129,8 +134,7 @@ BOOST_DATA_TEST_CASE(nwdispatcher_http_errors, bdata::make( withSSL ), withSSL)
   web.addRequestHandler("get403", makeErrorResponder( "403 Forbidden" ) );
   web.addRequestHandler("get410", makeErrorResponder( "410 Gone" ) );
   web.addRequestHandler("get418", makeErrorResponder( "418 I'm a teapot" ) );
-  web.addRequestHandler("delayMe", []( WebServer::Request &req ) {
-  });
+  web.addRequestHandler("get204", WebServer::makeResponse( resp204 ) );
   BOOST_REQUIRE( web.start() );
 
   zyppng::TransferSettings set = web.transferSettings();
@@ -204,6 +208,12 @@ BOOST_DATA_TEST_CASE(nwdispatcher_http_errors, bdata::make( withSSL ), withSSL)
   req418->transferSettings() = set;
   disp->enqueue( req418 );
 
+  weburl = zyppng::Url( web.url() );
+  weburl.setPathName("/handler/get204");
+  zyppng::NetworkRequest::Ptr get204 = std::make_shared<zyppng::NetworkRequest>( weburl, targetFile.path() );
+  get204->transferSettings() = set;
+  disp->enqueue( get204 );
+
   disp->run();
   ev->run();
 
@@ -217,6 +227,7 @@ BOOST_DATA_TEST_CASE(nwdispatcher_http_errors, bdata::make( withSSL ), withSSL)
   BOOST_TEST_REQ_ERR( req403, zyppng::NetworkRequestError::Forbidden );
   BOOST_TEST_REQ_ERR( req410, zyppng::NetworkRequestError::NotFound );
   BOOST_TEST_REQ_ERR( req418, zyppng::NetworkRequestError::ServerReturnedError );
+  BOOST_TEST_REQ_SUCCESS( get204 );
 }
 
 BOOST_DATA_TEST_CASE(nwdispatcher_http_download, bdata::make( withSSL ), withSSL )

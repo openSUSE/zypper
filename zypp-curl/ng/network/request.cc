@@ -265,7 +265,7 @@ namespace zyppng {
             }
           }, _runningMode );
           _requestedRanges.push_back( NetworkRequest::Range() );
-          _requestedRanges.back()._rangeState = NetworkRequest::State::Pending;
+          _requestedRanges.back()._rangeState = NetworkRequest::State::Running;
         }
       }
 
@@ -488,6 +488,36 @@ namespace zyppng {
     return false;
   }
 
+  bool NetworkRequestPrivate::assertOutputFile()
+  {
+    auto rmode = std::get_if<NetworkRequestPrivate::running_t>( &_runningMode );
+    if ( !rmode ) {
+      DBG << "Can only create output file in running mode" << std::endl;
+      return false;
+    }
+    // if we have no open file create or open it
+    if ( !rmode->_outFile ) {
+      std::string openMode = "w+b";
+      if ( _fMode == NetworkRequest::WriteShared )
+        openMode = "r+b";
+
+      rmode->_outFile = fopen( _targetFile.asString().c_str() , openMode.c_str() );
+
+      //if the file does not exist create a new one
+      if ( !rmode->_outFile && _fMode == NetworkRequest::WriteShared ) {
+        rmode->_outFile = fopen( _targetFile.asString().c_str() , "w+b" );
+      }
+
+      if ( !rmode->_outFile ) {
+        rmode->_cachedResult = NetworkRequestErrorPrivate::customError(  NetworkRequestError::InternalError
+          ,zypp::str::Format("Unable to open target file (%1%). Errno: (%2%:%3%)") % _targetFile.asString() % errno % strerr_cxx() );
+        return false;
+      }
+    }
+
+    return true;
+  }
+
   bool NetworkRequestPrivate::canRecover() const
   {
     // We can recover from RangeFail errors if we have more batch sizes to try
@@ -651,8 +681,14 @@ namespace zyppng {
       MIL_MEDIA << _easyHandle << " " << "Continuing a previously started range batch." << std::endl;
       _runningMode = running_t( std::move(std::get<prepareNextRangeBatch_t>( _runningMode )) );
     } else {
-      _runningMode = running_t( std::move(std::get<pending_t>( _runningMode )) );
+      auto mode = running_t( std::move(std::get<pending_t>( _runningMode )) );
+      if ( _requestedRanges.size() == 1 && _requestedRanges.front().start == 0 && _requestedRanges.front().len == 0 )
+        mode._currentRange = 0;
+
+      _runningMode = std::move(mode);
     }
+
+    assertOutputFile();
 
     auto &m = std::get<running_t>( _runningMode );
 
@@ -751,7 +787,9 @@ namespace zyppng {
       }
       return ( digVec == rng._checksum );
     }
-    return false;
+
+    // no checksum required
+    return true;
   }
 
   void NetworkRequestPrivate::validateRange( NetworkRequest::Range &rng )
@@ -870,19 +908,26 @@ namespace zyppng {
         long statuscode = 0;
         (void)curl_easy_getinfo( _easyHandle, CURLINFO_RESPONSE_CODE, &statuscode);
 
-        // ignore other status codes, maybe we are redirected etc.
-        if ( statuscode >= 200 && statuscode <= 299 ) {
-          if ( rmode._requireStatusPartial && statuscode != 206 ) {
-            rmode._cachedResult = NetworkRequestErrorPrivate::customError(  NetworkRequestError::RangeFail,  "Expected range status code 206, but got none." );
+        const auto &doRangeFail = [&](){
+          WAR << "Range FAIL, trying with a smaller batch" << std::endl;
+          rmode._cachedResult = NetworkRequestErrorPrivate::customError(  NetworkRequestError::RangeFail,  "Expected range status code 206, but got none." );
 
-            // reset all ranges we requested to pending, we never got the data for them
-            std::for_each( _requestedRanges.begin (), _requestedRanges.end(), []( auto &range ) {
-              if ( range._rangeState == NetworkRequest::Running )
-                range._rangeState = NetworkRequest::Pending;
-            });
-            return 0;
+          // reset all ranges we requested to pending, we never got the data for them
+          std::for_each( _requestedRanges.begin (), _requestedRanges.end(), []( auto &range ) {
+            if ( range._rangeState == NetworkRequest::Running )
+              range._rangeState = NetworkRequest::Pending;
+          });
+          return 0;
+        };
+
+        if ( rmode._requireStatusPartial ) {
+          // ignore other status codes, maybe we are redirected etc.
+          if ( ( statuscode >= 200 && statuscode <= 299 && statuscode != 206 )
+                || statuscode == 416 ) {
+              return doRangeFail();
           }
         }
+
       } else if ( zypp::strv::hasPrefixCI( hdr, "Location:" ) ) {
         _lastRedirect = hdr.substr( 9 );
         DBG << _easyHandle << " " << "redirecting to " << _lastRedirect << std::endl;
@@ -942,24 +987,8 @@ namespace zyppng {
       }
 
       // if we have no open file create or open it
-      if ( !rmode._outFile ) {
-        std::string openMode = "w+b";
-        if ( _fMode == NetworkRequest::WriteShared )
-          openMode = "r+b";
-
-        rmode._outFile = fopen( _targetFile.asString().c_str() , openMode.c_str() );
-
-        //if the file does not exist create a new one
-        if ( !rmode._outFile && _fMode == NetworkRequest::WriteShared ) {
-          rmode._outFile = fopen( _targetFile.asString().c_str() , "w+b" );
-        }
-
-        if ( !rmode._outFile ) {
-          rmode._cachedResult = NetworkRequestErrorPrivate::customError(  NetworkRequestError::InternalError
-            ,zypp::str::Format("Unable to open target file (%1%). Errno: (%2%:%3%)") % _targetFile.asString() % errno % strerr_cxx() );
-          return 0;
-        }
-      }
+      if ( !assertOutputFile() )
+        return 0;
 
       // seek to the given offset
       if ( offset >= 0 ) {
@@ -1034,6 +1063,7 @@ namespace zyppng {
           //we always download a range even if it is not explicitly requested
           if ( _requestedRanges.empty() ) {
             _requestedRanges.push_back( NetworkRequest::Range() );
+            _requestedRanges.back()._rangeState = NetworkRequest::State::Running;
           }
 
           rmode._currentRange = 0;
