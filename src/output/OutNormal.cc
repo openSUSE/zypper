@@ -115,6 +115,10 @@ void OutNormal::error( const Exception & e, const std::string & problem_desc, co
 }
 
 // ----------------------------------------------------------------------------
+inline std::ostream & PROGRESS_FLUSH( std::ostream & str ) {
+  static const bool dbg = getenv("ZYPPER_PBD"); // every progress bar redraw on a single line
+  return (dbg ? str << std::endl : str << std::flush );
+}
 
 void OutNormal::displayProgress ( const std::string & s, int percent )
 {
@@ -138,7 +142,7 @@ void OutNormal::displayProgress ( const std::string & s, int percent )
     cout << ansi::tty::clearLN;
 
     std::string outline( outstr.get( termwidth() ) );
-    cout << outline << std::flush;
+    cout << outline << PROGRESS_FLUSH;
     // no _oneup if CRUSHed // _oneup = ( outline.length() > termwidth() );
   }
   else
@@ -163,7 +167,7 @@ void OutNormal::displayTick( const std::string & s )
     cout << ansi::tty::clearLN;
 
     std::string outline( outstr.get( termwidth() ) );
-    cout << outline << std::flush;
+    cout << outline << PROGRESS_FLUSH;
     // no _oneup if CRUSHed // _oneup = ( outline.length() > termwidth() );
   }
   else
@@ -171,7 +175,6 @@ void OutNormal::displayTick( const std::string & s )
 }
 
 // ----------------------------------------------------------------------------
-
 void OutNormal::progressStart( const std::string & id, const std::string & label, bool is_tick )
 {
   if ( progressFilter() )
@@ -256,7 +259,7 @@ void OutNormal::dwnldProgressStart( const Url & uri )
     outstr.rhs << '[' ;
 
   std::string outline( outstr.get( termwidth() ) );
-  cout << outline << std::flush;
+  cout << outline << PROGRESS_FLUSH;
   // no _oneup if CRUSHed // _oneup = (outline.length() > termwidth());
 
   _newline = false;
@@ -297,7 +300,7 @@ void OutNormal::dwnldProgress( const Url & uri, int value, long rate )
   outstr.rhs << ']';
 
   std::string outline( outstr.get( termwidth() ) );
-  cout << outline << std::flush;
+  cout << outline << PROGRESS_FLUSH;
   // no _oneup if CRUSHed // _oneup = (outline.length() > termwidth());
   _newline = false;
 }
