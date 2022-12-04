@@ -101,9 +101,7 @@ Out::~Out()
 
 bool Out::progressFilter()
 {
-  if (verbosity() < Out::NORMAL)
-      return true;
-  return false;
+  return verbosity() < Out::NORMAL;
 }
 
 std::string Out::zyppExceptionReport(const Exception & e)
