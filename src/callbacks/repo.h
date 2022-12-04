@@ -36,13 +36,15 @@ struct DownloadResolvableReportReceiver : public callback::ReceiveReport<repo::D
   Pathname _patch;
   ByteCount _patch_size;
 
+  Offering::ScopedDemand _demandVerboseDownloadProgress;
+
   void reportbegin() override
   {
-    Zypper::instance().runtimeData().show_media_progress_hack = true;
+    _demandVerboseDownloadProgress = Zypper::instance().runtimeData().scopedVerboseDownloadProgress.demand();
   }
   void reportend() override
   {
-    Zypper::instance().runtimeData().show_media_progress_hack = false;
+    _demandVerboseDownloadProgress.reset();
   }
 
   // Dowmload delta rpm:
