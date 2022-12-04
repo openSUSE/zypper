@@ -103,15 +103,15 @@ struct DownloadResolvableReportReceiver : public callback::ReceiveReport<repo::D
     Zypper::instance().out().progressEnd("apply-delta", _label_apply_delta);
   }
 
-  void fillsRhs( TermLine & outstr_r, Zypper & zypper_r, Package::constPtr pkg_r )
+  void fillsRhs( TermLine & outstr_r, Zypper & zypper_r, Resolvable::constPtr res_r )
   {
     outstr_r.rhs << " (" << ++zypper_r.runtimeData().commit_pkg_current
                  << "/" << zypper_r.runtimeData().commit_pkgs_total << ")";
-    if ( pkg_r )
+    if ( res_r )
     {
-      outstr_r.rhs << ", " << pkg_r->downloadSize().asString( 5, 3 ) << " "
-                   // TranslatorExplanation %s is package size like "5.6 M"
-                   << str::Format(_("(%s unpacked)")) % pkg_r->installSize().asString( 5, 3 );
+      outstr_r.rhs << ", " << res_r->downloadSize().asString( 5, 3 ) << "    "/* indent `/s)]` of download speed line following */;
+      // TranslatorExplanation %s is package size like "5.6 M"
+      // outstr_r.rhs << " " << str::Format(_("(%s unpacked)")) % pkg_r->installSize().asString( 5, 3 );
     }
   }
 
@@ -121,7 +121,7 @@ struct DownloadResolvableReportReceiver : public callback::ReceiveReport<repo::D
 
     TermLine outstr( TermLine::SF_SPLIT | TermLine::SF_EXPAND );
     outstr.lhs << str::Format(_("In cache %1%")) % localfile_r.basename();
-    fillsRhs( outstr, zypper, asKind<Package>(res_r) );
+    fillsRhs( outstr, zypper, res_r );
     zypper.out().infoLine( outstr );
   }
 
@@ -136,11 +136,8 @@ struct DownloadResolvableReportReceiver : public callback::ReceiveReport<repo::D
     Zypper & zypper = Zypper::instance();
 
     TermLine outstr( TermLine::SF_SPLIT | TermLine::SF_EXPAND );
-    outstr.lhs << str::Format(_("Retrieving %s %s-%s.%s"))
-        % kind_to_string_localized(_resolvable_ptr->kind(), 1)
-        % _resolvable_ptr->name()
-        % _resolvable_ptr->edition() % _resolvable_ptr->arch();
-    fillsRhs( outstr, zypper, asKind<Package>(resolvable_ptr) );
+    outstr.lhs << _("Retrieving:") << " " << _resolvable_ptr-> asUserString();
+    fillsRhs( outstr, zypper, resolvable_ptr );
 
     // temporary fix for bnc #545295
     if ( zypper.runtimeData().commit_pkg_current == zypper.runtimeData().commit_pkgs_total )
