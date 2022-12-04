@@ -11,6 +11,7 @@
 */
 
 #include <iostream>
+#include <chrono>
 #include <list>
 
 #include <zypp/base/Logger.h>
@@ -42,9 +43,13 @@ using std::endl;
 
 namespace internal {
   using namespace zypp;
-  /// Optional files will send no report until data are actually received (we know it exists).
+  /// \brief Bottleneck filtering all DownloadProgressReport issued from Media[Muli]Curl.
+  /// - Optional files will send no report until data are actually received (we know it exists).
+  /// - Control the progress report frequency passed along to the application.
   struct OptionalDownloadProgressReport : public callback::ReceiveReport<media::DownloadProgressReport>
   {
+    using TimePoint = std::chrono::steady_clock::time_point;
+
     OptionalDownloadProgressReport( bool isOptional=false )
     : _oldRec { Distributor::instance().getReceiver() }
     , _isOptional { isOptional }
@@ -83,6 +88,14 @@ namespace internal {
           return true;
         sendStart();
       }
+
+      //static constexpr std::chrono::milliseconds minfequency { 1000 }; only needed if we'd avoid sending reports without change
+      static constexpr std::chrono::milliseconds maxfequency { 100 };
+      TimePoint now { TimePoint::clock::now() };
+      TimePoint::duration elapsed { now - _lastProgressSent };
+      if ( elapsed < maxfequency )
+        return true;  // continue
+      _lastProgressSent = now;
       return _oldRec->progress( value_r, file_r, dbps_avg_r, dbps_current_r );
     }
 
@@ -117,6 +130,7 @@ namespace internal {
     bool     _isOptional;
     Url      _startFile;
     Pathname _startLocalfile;
+    TimePoint _lastProgressSent;
   };
 
   struct ProgressData
