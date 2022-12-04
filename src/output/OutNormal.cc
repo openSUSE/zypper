@@ -259,7 +259,7 @@ void OutNormal::dwnldProgressStart( const Url & uri )
     outstr.rhs << '[' ;
 
   std::string outline( outstr.get( termwidth() ) );
-  cout << outline << PROGRESS_FLUSH;
+  cout << (ColorContext::HIGHLIGHT << outline) << PROGRESS_FLUSH;
   // no _oneup if CRUSHed // _oneup = (outline.length() > termwidth());
 
   _newline = false;
@@ -300,7 +300,7 @@ void OutNormal::dwnldProgress( const Url & uri, int value, long rate )
   outstr.rhs << ']';
 
   std::string outline( outstr.get( termwidth() ) );
-  cout << outline << PROGRESS_FLUSH;
+  cout << (ColorContext::HIGHLIGHT << outline) << PROGRESS_FLUSH;
   // no _oneup if CRUSHed // _oneup = (outline.length() > termwidth());
   _newline = false;
 }
@@ -314,34 +314,36 @@ void OutNormal::dwnldProgressEnd( const Url & uri, long rate, TriBool error )
     cout << ColorContext::MSG_STATUS;
 
   TermLine outstr( TermLine::SF_CRUSH | TermLine::SF_EXPAND, '.' );
+  ColorStream lhs { outstr.lhs.stream(), ColorContext::HIGHLIGHT };
+  ColorStream rhs { outstr.rhs.stream(), ColorContext::HIGHLIGHT };
   if ( _isatty )
   {
     if( _oneup )
       cout << ansi::tty::clearLN << ansi::tty::cursorUP;
     cout << ansi::tty::clearLN;
-    outstr.lhs << _("Retrieving:") << " ";
+    lhs << _("Retrieving:") << " ";
     if ( verbosity() == DEBUG )
-      outstr.lhs << uri;
+      lhs << uri;
     else
-      outstr.lhs << Pathname(uri.getPathName()).basename();
-    outstr.lhs << ' ';
-    outstr.rhs << '[';
+      lhs << Pathname(uri.getPathName()).basename();
+    lhs << ' ';
+    rhs << '[';
     if ( indeterminate( error ) )
       // Translator: download progress bar result: "........[not found]"
-      outstr.rhs << CHANGEString(_("not found") );
+      rhs << CHANGEString(_("not found") );
     else if ( error )
       // Translator: download progress bar result: "............[error]"
-      outstr.rhs << NEGATIVEString(_("error") );
+      rhs << NEGATIVEString(_("error") );
     else
       // Translator: download progress bar result: ".............[done]"
-      outstr.rhs << _("done");
+      rhs << _("done");
   }
   else
-    outstr.rhs << ( indeterminate( error ) ? _("not found") : ( error ? _("error") : _("done") ) );
+    rhs << ( indeterminate( error ) ? _("not found") : ( error ? _("error") : _("done") ) );
 
   if ( rate > 0 )
-    outstr.rhs << " (" << ByteCount(rate) << "/s)";
-  outstr.rhs << ']';
+    rhs << " (" << ByteCount(rate) << "/s)";
+  rhs << ']';
 
   std::string outline( outstr.get( termwidth() ) );
   cout << outline << endl << std::flush;
