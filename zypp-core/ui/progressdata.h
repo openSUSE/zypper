@@ -14,6 +14,7 @@
 
 #include <iosfwd>
 #include <string>
+#include <chrono>
 
 #include <zypp/base/PtrTypes.h>
 #include <zypp/base/Function.h>
@@ -144,9 +145,11 @@ namespace zypp
       class Data
       {
         public:
+          using TimePoint = std::chrono::steady_clock::time_point;
+
           Data( value_type min_r, value_type max_r, value_type val_r )
           : _state( INIT ), _min( min_r ), _max( max_r ), _val( val_r )
-          , _last_val( 0 ), _last_send( 0 )
+          , _last_val( 0 )
           {}
 
         public:
@@ -158,7 +161,7 @@ namespace zypp
 
           ReceiverFnc _receiver;
           value_type  _last_val;
-          Date        _last_send;
+          TimePoint   _last_send;
 
         private:
           /** clone for RWCOW_pointer */

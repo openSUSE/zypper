@@ -32,18 +32,21 @@ namespace zypp
   //
   bool ProgressData::report()
   {
-    Date now = Date::now();
+    static constexpr std::chrono::milliseconds minfequency { 1000 };
+    static constexpr std::chrono::milliseconds maxfequency { 100 };
+    Data::TimePoint now {  Data::TimePoint::clock::now() };
+    Data::TimePoint::duration elapsed { now - _d->_last_send };
+    if ( elapsed < maxfequency ) {
+      return true;	// skip report, continue per default
+    }
 
     // compute value and check whether to report it
     if ( hasRange() )
     {
       value_type newVal = _d->_val * 100 / ( _d->_max - _d->_min );
 
-      if ( newVal - _d->_last_val > 10
-           || now - _d->_last_send > 1
-           || ( _d->_last_val == 0 && newVal > 0 )
-           || ( newVal == 100 && _d->_last_val != 100 )
-           || ( newVal != 100 && _d->_last_val == 100 )
+      if ( elapsed > minfequency
+           || newVal != _d->_last_val
            || _d->_state != RUN /*INIT||END*/ )
       {
         _d->_last_val  = newVal;
@@ -54,7 +57,7 @@ namespace zypp
     }
     else
     {
-      if ( now - _d->_last_send > 1 || _d->_state != RUN /*INIT||END*/ )
+      if ( elapsed > minfequency || _d->_state != RUN /*INIT||END*/ )
       {
         _d->_last_val  = _d->_val;
         _d->_last_send = now;
