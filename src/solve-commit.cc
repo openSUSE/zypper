@@ -851,7 +851,6 @@ void solve_and_commit ( Zypper &zypper, SolveAndCommitPolicy policy )
         try
         {
           RuntimeData & gData = Zypper::instance().runtimeData();
-          gData.show_media_progress_hack = true;
           // Total packages to download & install.
           // To be used to write overall progress of retrieving packages.
           gData.commit_pkgs_total = summary.packagesToGetAndInstall();
@@ -877,7 +876,6 @@ void solve_and_commit ( Zypper &zypper, SolveAndCommitPolicy policy )
           MIL << "Using commit policy: " << policy.zyppCommitPolicy() << endl;
           result = God->commit( policy.zyppCommitPolicy() );
 
-          gData.show_media_progress_hack = false;
           gData.entered_commit = false;
 
           if ( !result->allDone() && !( dryRunEtc && result->noError() ) )

@@ -36,6 +36,15 @@ struct DownloadResolvableReportReceiver : public callback::ReceiveReport<repo::D
   Pathname _patch;
   ByteCount _patch_size;
 
+  void reportbegin() override
+  {
+    Zypper::instance().runtimeData().show_media_progress_hack = true;
+  }
+  void reportend() override
+  {
+    Zypper::instance().runtimeData().show_media_progress_hack = false;
+  }
+
   // Dowmload delta rpm:
   // - path below url reported on start()
   // - expected download size (0 if unknown)

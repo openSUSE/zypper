@@ -293,7 +293,6 @@ int DownloadCmd::execute( Zypper &zypper , const std::vector<std::string> &posit
             {
               Out::ProgressBar report( zypper.out(), Out::ProgressBar::noStartBar, pi.asUserString(), current, total );
               report.error(); // error if provideSrcPackage throws
-              Out::DownloadProgress redirect( report );
               localfile = packageCache.get( pi );
               report.error( false );
               report.print( cachedLocation( pi ).asString() );

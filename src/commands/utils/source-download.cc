@@ -433,7 +433,6 @@ namespace Pimpl
           ManagedFile localfile;
           {
             report.error(); // error if provideSrcPackage throws
-            Out::DownloadProgress redirect( report );
             localfile = prov.provideSrcPackage( spkg._srcPackage->asKind<SrcPackage>() );
             DBG << localfile << endl;
             report.error( false );
