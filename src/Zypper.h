@@ -27,6 +27,7 @@
 #include "Config.h"
 #include "Command.h"
 #include "utils/getopt.h"
+#include "utils/Offering.h"
 #include "output/Out.h"
 #include "Guardians.h"
 
@@ -60,8 +61,7 @@ inline std::string dashdash( std::string optname_r )
 struct RuntimeData
 {
   RuntimeData()
-  : show_media_progress_hack( false )
-  , force_resolution( indeterminate )
+  : force_resolution( indeterminate )
   , solve_update_only( false )
   , solve_with_update( false )
   , plain_patch_command( false )
@@ -89,9 +89,8 @@ struct RuntimeData
 
   std::set<SrcPackage::constPtr> srcpkgs_to_install;
 
-  // hack to enable media progress reporting in the commit phase in normal
-  // output level
-  bool show_media_progress_hack;
+  // Demand verbose media progress reporting (e.g. when downloading packages)
+  Offering scopedVerboseDownloadProgress;
 
   // Indicates an ongoing raw meta-data refresh.
   // If not empty call zypper.out().progress(

@@ -105,8 +105,8 @@ namespace ZmartRecipients
 
       if (out.verbosity() < Out::HIGH &&
            (
-             // don't show download info unless show_media_progress_hack is used
-             !Zypper::instance().runtimeData().show_media_progress_hack ||
+             // don't show download info unless scopedVerboseDownloadProgress is demanded
+             not Zypper::instance().runtimeData().scopedVerboseDownloadProgress.isDemanded() ||
              // don't report download of the media file (bnc #330614)
              Pathname(uri.getPathName()).basename() == "media"
            )
