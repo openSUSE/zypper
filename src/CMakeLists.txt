@@ -207,6 +207,7 @@ SET( zypper_utils_HEADERS
   utils/messages.h
   utils/misc.h
   utils/MultiParText.h
+  utils/Offering.h
   utils/pager.h
   utils/prompt.h
   utils/richtext.h
