@@ -121,17 +121,37 @@ namespace internal {
 
   struct ProgressData
   {
-    ProgressData( CURL *_curl, time_t _timeout = 0, const zypp::Url & _url = zypp::Url(),
-      zypp::ByteCount expectedFileSize_r = 0,
-      zypp::callback::SendReport<zypp::media::DownloadProgressReport> *_report = nullptr );
+    ProgressData( CURL *curl, time_t timeout = 0, const zypp::Url & url = zypp::Url(),
+                  zypp::ByteCount expectedFileSize_r = 0,
+                  zypp::callback::SendReport<zypp::media::DownloadProgressReport> *_report = nullptr );
 
-    CURL	*curl;
-    zypp::Url	url;
-    time_t	timeout;
-    bool	reached;
-    bool      fileSizeExceeded;
+    void updateStats( double dltotal = 0.0, double dlnow = 0.0 );
+
+    int reportProgress() const;
+
+    CURL * curl()
+    { return _curl; }
+
+    bool timeoutReached() const
+    { return _timeoutReached; }
+
+    bool fileSizeExceeded() const
+    { return _fileSizeExceeded; }
+
+    ByteCount expectedFileSize() const
+    { return _expectedFileSize; }
+
+    void expectedFileSize( ByteCount newval_r )
+    { _expectedFileSize = newval_r; }
+
+  private:
+    CURL *      _curl;
+    zypp::Url	_url;
+    time_t	_timeout;
+    bool	_timeoutReached;
+    bool        _fileSizeExceeded;
+    ByteCount   _expectedFileSize;
     zypp::callback::SendReport<zypp::media::DownloadProgressReport> *report;
-    zypp::ByteCount _expectedFileSize;
 
     time_t _timeStart	= 0;	///< Start total stats
     time_t _timeLast	= 0;	///< Start last period(~1sec)
@@ -146,38 +166,18 @@ namespace internal {
 
     double _drateTotal= 0.0;	///< Download rate so far
     double _drateLast	= 0.0;	///< Download rate in last period
-
-    void updateStats( double dltotal = 0.0, double dlnow = 0.0 );
-
-    int reportProgress() const;
-
-
-    // download rate of the last period (cca 1 sec)
-    double                                        drate_period;
-    // bytes downloaded at the start of the last period
-    double                                        dload_period;
-    // seconds from the start of the download
-    long                                          secs;
-    // average download rate
-    double                                        drate_avg;
-    // last time the progress was reported
-    time_t                                        ltime;
-    // bytes downloaded at the moment the progress was last reported
-    double                                        dload;
-    // bytes uploaded at the moment the progress was last reported
-    double                                        uload;
   };
 
 
 
-  ProgressData::ProgressData(CURL *_curl, time_t _timeout, const Url &_url, ByteCount expectedFileSize_r, zypp::callback::SendReport< zypp::media::DownloadProgressReport> *_report)
-    : curl( _curl )
-    , url( _url )
-    , timeout( _timeout )
-    , reached( false )
-    , fileSizeExceeded ( false )
-    , report( _report )
+  ProgressData::ProgressData(CURL *curl, time_t timeout, const Url &url, ByteCount expectedFileSize_r, zypp::callback::SendReport< zypp::media::DownloadProgressReport> *_report)
+    : _curl( curl )
+    , _url( url )
+    , _timeout( timeout )
+    , _timeoutReached( false )
+    , _fileSizeExceeded ( false )
     , _expectedFileSize( expectedFileSize_r )
+    , report( _report )
   {}
 
   void ProgressData::updateStats(double dltotal, double dlnow)
@@ -199,11 +199,11 @@ namespace internal {
       _timeStart = _timeLast = _timeRcv = now;
 
     // timeout condition
-    if ( timeout )
-      reached = ( (now - _timeRcv) > timeout );
+    if ( _timeout )
+      _timeoutReached = ( (now - _timeRcv) > _timeout );
 
     // check if the downloaded data is already bigger than what we expected
-    fileSizeExceeded = _expectedFileSize > 0 && _expectedFileSize < static_cast<ByteCount::SizeType>(_dnlNow);
+    _fileSizeExceeded = _expectedFileSize > 0 && _expectedFileSize < static_cast<ByteCount::SizeType>(_dnlNow);
 
     // percentage:
     if ( _dnlTotal )
@@ -225,11 +225,11 @@ namespace internal {
 
   int ProgressData::reportProgress() const
   {
-    if ( fileSizeExceeded )
+    if ( _fileSizeExceeded )
       return 1;
-    if ( reached )
+    if ( _timeoutReached )
       return 1;	// no-data timeout
-    if ( report && !(*report)->progress( _dnlPercent, url, _drateTotal, _drateLast ) )
+    if ( report && !(*report)->progress( _dnlPercent, _url, _drateTotal, _drateLast ) )
       return 1;	// user requested abort
     return 0;
   }
@@ -1283,10 +1283,10 @@ void MediaCurl::doGetFileCopyFile( const OnMediaLocation & srcFile, const Pathna
       // otherwise it would be a user cancel
       try {
 
-        if ( progressData.fileSizeExceeded )
-          ZYPP_THROW(MediaFileSizeExceededException(url, progressData._expectedFileSize));
+        if ( progressData.fileSizeExceeded() )
+          ZYPP_THROW(MediaFileSizeExceededException(url, progressData.expectedFileSize()));
 
-        evaluateCurlCode( srcFile.filename(), ret, progressData.reached );
+        evaluateCurlCode( srcFile.filename(), ret, progressData.timeoutReached() );
       }
       catch ( const MediaException &e ) {
         // some error, we are not sure about file existence, rethrw
@@ -1374,7 +1374,7 @@ int MediaCurl::progressCallback( void *clientp, double dltotal, double dlnow, do
   {
     // work around curl bug that gives us old data
     long httpReturnCode = 0;
-    if ( curl_easy_getinfo( pdata->curl, CURLINFO_RESPONSE_CODE, &httpReturnCode ) != CURLE_OK || httpReturnCode == 0 )
+    if ( curl_easy_getinfo( pdata->curl(), CURLINFO_RESPONSE_CODE, &httpReturnCode ) != CURLE_OK || httpReturnCode == 0 )
       return aliveCallback( clientp, dltotal, dlnow, ultotal, ulnow );
 
     pdata->updateStats( dltotal, dlnow );
@@ -1386,7 +1386,7 @@ int MediaCurl::progressCallback( void *clientp, double dltotal, double dlnow, do
 CURL *MediaCurl::progressCallback_getcurl( void *clientp )
 {
   internal::ProgressData *pdata = reinterpret_cast<internal::ProgressData *>(clientp);
-  return pdata ? pdata->curl : 0;
+  return pdata ? pdata->curl() : 0;
 }
 
 ///////////////////////////////////////////////////////////////////
@@ -1414,7 +1414,7 @@ void MediaCurl::resetExpectedFileSize(void *clientp, const ByteCount &expectedFi
 {
   internal::ProgressData *data = reinterpret_cast<internal::ProgressData *>(clientp);
   if ( data ) {
-    data->_expectedFileSize = expectedFileSize;
+    data->expectedFileSize( expectedFileSize );
   }
 }
 
