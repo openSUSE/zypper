@@ -62,6 +62,10 @@ struct CCString : public ColorString
   explicit CCString( std::string && str_r )		: ColorString( _ctxt, std::move(str_r) ) {}
 };
 
+template <ColorContext _ctxt>
+inline ansi::ColorStream & operator<<( ansi::ColorStream & cstr_r, const CCString<_ctxt> & cstring_r )
+{ return cstr_r << (const ColorString &)cstring_r; }
+
 typedef CCString<ColorContext::DEFAULT>		DEFAULTString;
 
 typedef CCString<ColorContext::MSG_STATUS>	MSG_STATUSString;
