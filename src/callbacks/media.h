@@ -98,7 +98,6 @@ namespace ZmartRecipients
 
     virtual void start( const Url & uri, Pathname localfile )
     {
-      _last_reported = time(NULL);
       _last_drate_avg = -1;
 
       Out & out = Zypper::instance().out();
@@ -123,13 +122,6 @@ namespace ZmartRecipients
 
     virtual bool progress(int value, const Url & uri, double drate_avg, double drate_now)
     {
-      // don't report more often than 1 second
-      time_t now = time(NULL);
-      if (now > _last_reported)
-        _last_reported = now;
-      else
-        return !Zypper::instance().exitRequested();
-
       Zypper & zypper( Zypper::instance() );
 
       if (zypper.exitRequested())
@@ -177,7 +169,6 @@ namespace ZmartRecipients
 
   private:
     bool _be_quiet;
-    time_t _last_reported;
     double _last_drate_avg;
   };
 
