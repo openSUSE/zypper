@@ -10,10 +10,10 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-11-07 18:09+0100\n"
-"PO-Revision-Date: 2022-10-05 17:13+0000\n"
-"Last-Translator: Alexey Yaryshev <clarkez344@gmail.com>\n"
-"Language-Team: Russian <https://l10n.opensuse.org/projects/zypper/master/ru/"
-">\n"
+"PO-Revision-Date: 2022-12-07 08:13+0000\n"
+"Last-Translator: Alex Minton <alex239@gmail.com>\n"
+"Language-Team: Russian <https://l10n.opensuse.org/projects/zypper/master/ru/>"
+"\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -80,7 +80,7 @@ msgstr "Для исправления проблем с зависимостям
 #, c-format, boost-format
 msgid "The following package failed to install:"
 msgid_plural "The following %d packages failed to install:"
-msgstr[0] "Не удалось установить пакет:"
+msgstr[0] "Следующий %d пакет установить не удалось:"
 msgstr[1] "Следующие %d пакетов установить не удалось:"
 msgstr[2] "Следующие %d пакетов установить не удалось:"
 
@@ -96,17 +96,17 @@ msgstr[2] "Установка следующих %d пакетов была пр
 #, c-format, boost-format
 msgid "The following package failed to uninstall:"
 msgid_plural "The following %d packages failed to uninstall:"
-msgstr[0] "Следующий пакет не удалось удалить:"
-msgstr[1] "Следующие пакеты (%d) не удалось удалить:"
-msgstr[2] "Следующие пакеты (%d) не удалось удалить:"
+msgstr[0] "%d пакет не удалось удалить:"
+msgstr[1] "%d пакета не удалось удалить:"
+msgstr[2] "%d пакетов не удалось удалить:"
 
 #: src/CommitSummary.cc:170
 #, c-format, boost-format
 msgid "The following package removal was skipped:"
 msgid_plural "The following %d package removal were skipped:"
-msgstr[0] "Удаление следующего пакета было пропущено:"
-msgstr[1] "Удаление следующих %d пакетов было пропущено:"
-msgstr[2] "Удаление следующих %d пакетов было пропущено:"
+msgstr[0] "Удаление %d пакета было пропущено:"
+msgstr[1] "Удаление %d пакетов было пропущено:"
+msgstr[2] "Удаление %d пакетов было пропущено:"
 
 #. translators: Appended when clipping a long enumeration:
 #. "ConsoleKit-devel ConsoleKit-doc ... and 20828 more items."
@@ -1264,9 +1264,9 @@ msgstr[2] "%d исправлений требуют перезагрузки:"
 #, c-format, boost-format
 msgid "The following package requires a system reboot:"
 msgid_plural "The following %d packages require a system reboot:"
-msgstr[0] "Следующему пакету требуется перезагрузка системы:"
-msgstr[1] "Для следующих %d пакетов требуется перезагрузка системы:"
-msgstr[2] "Для следующих %d пакетов требуется перезагрузка системы:"
+msgstr[0] "Для %d пакета требуется перезагрузка системы:"
+msgstr[1] "Для %d пакетов требуется перезагрузка системы:"
+msgstr[2] "Для %d пакетов требуется перезагрузка системы:"
 
 #: src/Summary.cc:1390
 #, boost-format
@@ -4397,7 +4397,7 @@ msgstr "Выбор исправлений, соответствующих ука
 #, boost-format
 msgid ""
 "Service '%1%' with URL '%2%' already exists. Just updating the settings."
-msgstr ""
+msgstr "Сервис '%1%' с URL '%2%' уже существует. Только обновление настроек."
 
 #: src/commands/services/add.cc:58
 #, boost-format
@@ -4405,6 +4405,8 @@ msgid ""
 "Service '%1%' already exists but uses a different URL '%2%'. Please use "
 "another alias."
 msgstr ""
+"Сервис '%1%' уже существует, но использует другой URL '%2%'. Используйте "
+"другой псевдоним."
 
 #: src/commands/services/add.cc:70
 #, c-format, boost-format
@@ -6355,7 +6357,7 @@ msgstr ""
 #: src/repos.cc:1827
 #, boost-format
 msgid "Repository '%1%' metadata expired since %2%."
-msgstr ""
+msgstr "Метаданные репозитория '%1%' устарели с %2%."
 
 #. translators: the first %s is 'zypper refresh' and the second 'zypper clean -m'
 #: src/repos.cc:1839
@@ -6370,6 +6372,10 @@ msgid ""
 "solve the issue, it could be that you are using a broken mirror or the "
 "server has actually discontinued to support the repository."
 msgstr ""
+"Метаданные репозитория устарели: Проверьте, что включено «автообновление» ("
+"zypper lr), либо обновите репозиторий вручную (zypper ref). Если это не "
+"решит проблему, то вы, возможно, используете сломанное зеркало или сервер "
+"прекратил поддержку репозитория."
 
 #: src/repos.cc:1857
 msgid "Reading installed packages..."
