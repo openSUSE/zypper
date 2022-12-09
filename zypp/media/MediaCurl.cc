@@ -291,6 +291,20 @@ namespace internal {
       );
     return _value.c_str();
   }
+
+  /// Attempt to work around certain issues by autoretry in MediaCurl::getFileCopy
+  /// E.g. curl error: 92: HTTP/2 PROTOCOL_ERROR as in bsc#1205843, zypper/issues/457,...
+  class MediaCurlExceptionMayRetryInternaly : public media::MediaCurlException
+  {
+  public:
+    MediaCurlExceptionMayRetryInternaly( const Url & url_r,
+                                         const std::string & err_r,
+                                         const std::string & msg_r )
+    : media::MediaCurlException( url_r, err_r, msg_r )
+    {}
+    //~MediaCurlExceptionMayRetryInternaly() noexcept {}
+  };
+
 }
 
 
@@ -740,13 +754,15 @@ void MediaCurl::getFileCopy( const OnMediaLocation & srcFile , const Pathname & 
   Url fileurl(getFileUrl(filename));
 
   bool retry = false;
+  unsigned internalTry = 0;
+  static constexpr unsigned maxInternalTry = 3;
 
   do
   {
+    retry = false;
     try
     {
       doGetFileCopy( srcFile, target, report );
-      retry = false;
     }
     // retry with proper authentication data
     catch (MediaUnauthorizedException & ex_r)
@@ -762,6 +778,17 @@ void MediaCurl::getFileCopy( const OnMediaLocation & srcFile , const Pathname & 
     // unexpected exception
     catch (MediaException & excpt_r)
     {
+      if ( typeid(excpt_r) == typeid( MediaCurlExceptionMayRetryInternaly ) ) {
+        ++internalTry;
+        if ( internalTry < maxInternalTry ) {
+          // just report (NO_ERROR); no interactive request to the user
+          report->problem(fileurl, media::DownloadProgressReport::NO_ERROR, excpt_r.asUserHistory());
+          retry = true;
+          continue;
+        }
+        excpt_r.addHistory( str::Format(_("Giving up after %1% attempts.")) % maxInternalTry );
+      }
+
       media::DownloadProgressReport::Error reason = media::DownloadProgressReport::ERROR;
       if( typeid(excpt_r) == typeid( media::MediaFileNotFoundException )  ||
           typeid(excpt_r) == typeid( media::MediaNotAFileException ) )
@@ -933,7 +960,14 @@ void MediaCurl::evaluateCurlCode(const Pathname &filename,
           err = "User abort";
         }
         break;
-      case CURLE_SSL_PEER_CERTIFICATE:
+
+      // Attempt to work around certain issues by autoretry in MediaCurl::getFileCopy
+      case CURLE_HTTP2:
+      case CURLE_HTTP2_STREAM:
+        err = "Curl error " + str::numstring( code );
+        ZYPP_THROW(MediaCurlExceptionMayRetryInternaly(url, err, _curlError));
+        break;
+
       default:
         err = "Curl error " + str::numstring( code );
         break;
