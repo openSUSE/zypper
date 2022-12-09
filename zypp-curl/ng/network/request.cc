@@ -688,8 +688,6 @@ namespace zyppng {
       _runningMode = std::move(mode);
     }
 
-    assertOutputFile();
-
     auto &m = std::get<running_t>( _runningMode );
 
     if ( m._activityTimer ) {
@@ -919,6 +917,10 @@ namespace zyppng {
           });
           return 0;
         };
+
+        // if we have a status 204 we need to create a empty file
+        if( statuscode == 204 && !( _options & NetworkRequest::ConnectionTest ) && !( _options & NetworkRequest::HeadRequest ) )
+          assertOutputFile();
 
         if ( rmode._requireStatusPartial ) {
           // ignore other status codes, maybe we are redirected etc.
