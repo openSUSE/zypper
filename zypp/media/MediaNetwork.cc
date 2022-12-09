@@ -366,70 +366,68 @@ namespace zypp {
 
     std::for_each( signalConnections.begin(), signalConnections.end(), []( auto &conn ) { conn.disconnect(); });
 
-    if ( report ) {
-      if ( dl->hasError() ) {
-        auto errCode = zypp::media::DownloadProgressReport::ERROR;
-        std::exception_ptr excp;
-        const auto &error = dl->lastRequestError();
-        switch ( error.type() ) {
-          case zyppng::NetworkRequestError::InternalError:
-          case zyppng::NetworkRequestError::InvalidChecksum:
-          case zyppng::NetworkRequestError::UnsupportedProtocol:
-          case zyppng::NetworkRequestError::MalformedURL:
-          case zyppng::NetworkRequestError::PeerCertificateInvalid:
-          case zyppng::NetworkRequestError::ConnectionFailed:
-          case zyppng::NetworkRequestError::ServerReturnedError:
-          case zyppng::NetworkRequestError::MissingData:
-          case zyppng::NetworkRequestError::RangeFail: {
-            excp = ZYPP_EXCPT_PTR( zypp::media::MediaCurlException( spec.url(), error.toString(), error.nativeErrorString() ) );
-            break;
-          }
-          case zyppng::NetworkRequestError::Cancelled: {
-            excp = ZYPP_EXCPT_PTR( zypp::media::MediaRequestCancelledException( error.toString() ) );
-            break;
-          }
-          case zyppng::NetworkRequestError::ExceededMaxLen: {
-            excp = ZYPP_EXCPT_PTR( zypp::media::MediaFileSizeExceededException( spec.url(), spec.expectedFileSize() ) );
-            break;
-          }
-          case zyppng::NetworkRequestError::TemporaryProblem: {
-            excp = ZYPP_EXCPT_PTR( zypp::media::MediaTemporaryProblemException( spec.url(), error.toString() ) );
-            break;
-          }
-          case zyppng::NetworkRequestError::Timeout: {
-            excp = ZYPP_EXCPT_PTR( zypp::media::MediaTimeoutException( spec.url(), error.toString() ) );
-            break;
-          }
-          case zyppng::NetworkRequestError::Forbidden: {
-            excp = ZYPP_EXCPT_PTR( zypp::media::MediaForbiddenException( spec.url(), error.toString() ) );
-            break;
-          }
-          case zyppng::NetworkRequestError::NotFound: {
-            errCode = zypp::media::DownloadProgressReport::NOT_FOUND;
-
-            //@BUG using getPathName() can result in wrong error messages
-            excp = ZYPP_EXCPT_PTR( zypp::media::MediaFileNotFoundException( _url, spec.url().getPathName() ) );
-            break;
-          }
-          case zyppng::NetworkRequestError::Unauthorized:
-          case zyppng::NetworkRequestError::AuthFailed: {
-            errCode = zypp::media::DownloadProgressReport::ACCESS_DENIED;
-            excp = ZYPP_EXCPT_PTR( zypp::media::MediaUnauthorizedException( spec.url(), error.toString(), error.nativeErrorString(), "" ) );
-            break;
-          }
-          case zyppng::NetworkRequestError::NoError:
-            // should never happen
-            DBG << "BUG: Download error flag is set , but Error code is NoError" << std::endl;
-            break;
+    if ( dl->hasError() ) {
+      auto errCode = zypp::media::DownloadProgressReport::ERROR;
+      std::exception_ptr excp;
+      const auto &error = dl->lastRequestError();
+      switch ( error.type() ) {
+        case zyppng::NetworkRequestError::InternalError:
+        case zyppng::NetworkRequestError::InvalidChecksum:
+        case zyppng::NetworkRequestError::UnsupportedProtocol:
+        case zyppng::NetworkRequestError::MalformedURL:
+        case zyppng::NetworkRequestError::PeerCertificateInvalid:
+        case zyppng::NetworkRequestError::ConnectionFailed:
+        case zyppng::NetworkRequestError::ServerReturnedError:
+        case zyppng::NetworkRequestError::MissingData:
+        case zyppng::NetworkRequestError::RangeFail: {
+          excp = ZYPP_EXCPT_PTR( zypp::media::MediaCurlException( spec.url(), error.toString(), error.nativeErrorString() ) );
+          break;
         }
-
-        if ( excp ) {
-          (*report)->finish( spec.url(), errCode, error.toString() );
-          std::rethrow_exception( excp );
+        case zyppng::NetworkRequestError::Cancelled: {
+          excp = ZYPP_EXCPT_PTR( zypp::media::MediaRequestCancelledException( error.toString() ) );
+          break;
         }
+        case zyppng::NetworkRequestError::ExceededMaxLen: {
+          excp = ZYPP_EXCPT_PTR( zypp::media::MediaFileSizeExceededException( spec.url(), spec.expectedFileSize() ) );
+          break;
+        }
+        case zyppng::NetworkRequestError::TemporaryProblem: {
+          excp = ZYPP_EXCPT_PTR( zypp::media::MediaTemporaryProblemException( spec.url(), error.toString() ) );
+          break;
+        }
+        case zyppng::NetworkRequestError::Timeout: {
+          excp = ZYPP_EXCPT_PTR( zypp::media::MediaTimeoutException( spec.url(), error.toString() ) );
+          break;
+        }
+        case zyppng::NetworkRequestError::Forbidden: {
+          excp = ZYPP_EXCPT_PTR( zypp::media::MediaForbiddenException( spec.url(), error.toString() ) );
+          break;
+        }
+        case zyppng::NetworkRequestError::NotFound: {
+          errCode = zypp::media::DownloadProgressReport::NOT_FOUND;
+
+          //@BUG using getPathName() can result in wrong error messages
+          excp = ZYPP_EXCPT_PTR( zypp::media::MediaFileNotFoundException( _url, spec.url().getPathName() ) );
+          break;
+        }
+        case zyppng::NetworkRequestError::Unauthorized:
+        case zyppng::NetworkRequestError::AuthFailed: {
+          errCode = zypp::media::DownloadProgressReport::ACCESS_DENIED;
+          excp = ZYPP_EXCPT_PTR( zypp::media::MediaUnauthorizedException( spec.url(), error.toString(), error.nativeErrorString(), "" ) );
+          break;
+        }
+        case zyppng::NetworkRequestError::NoError:
+          // should never happen
+          DBG << "BUG: Download error flag is set , but Error code is NoError" << std::endl;
+          break;
       }
-      (*report)->finish( spec.url(), zypp::media::DownloadProgressReport::NO_ERROR, "" );
+
+      if ( excp ) {
+        if ( report ) (*report)->finish( spec.url(), errCode, error.toString() );
+        std::rethrow_exception( excp );
+      }
     }
+    if ( report ) (*report)->finish( spec.url(), zypp::media::DownloadProgressReport::NO_ERROR, "" );
   }
 
   void MediaNetwork::getFile( const OnMediaLocation &file ) const
