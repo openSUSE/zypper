@@ -8,6 +8,7 @@
 #include "repos.h"
 #include "commands/conditions.h"
 #include "commands/services/refresh.h"
+#include "commands/commonflags.h"
 
 
 #include "utils/messages.h"
@@ -68,6 +69,8 @@ zypp::ZyppFlags::CommandGroup RefreshRepoCmd::cmdOptions() const
             // translators: -D, --download-only
             _("Only download raw metadata, don't build the database.")
       },
+      CommonFlags::downloadMaxRetriesFlag(),
+      CommonFlags::downloadRetryWaitTimeFlag(),
       {"repo", 'r', ZyppFlags::RequiredArgument | ZyppFlags::Repeatable,
             ZyppFlags::StringVectorType( &that->_repos, ARG_REPOSITORY),
             // translators: -r, --repo <ALIAS|#|URI>
@@ -87,6 +90,8 @@ void RefreshRepoCmd::doReset()
   _flags = Default;
   _repos.clear();
   _services = false;
+  ZConfig::instance().reset_download_max_silent_tries();
+  ZConfig::instance().reset_download_retry_wait_time();
 }
 
 int RefreshRepoCmd::execute( Zypper &zypper , const std::vector<std::string> &positionalArgs_r )

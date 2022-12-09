@@ -12,7 +12,7 @@
 #include <string>
 
 #include <boost/utility/string_ref.hpp>
-#include <zypp/base/DtorReset.h>
+#include <zypp-core/base/DtorReset>
 #include <zypp/base/String.h>
 
 //#include "output/Out.h" MOVED TO THE BOTTOM

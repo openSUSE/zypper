@@ -24,8 +24,8 @@
 
 #include <zypp/base/LogTools.h>
 #include <zypp/base/Algorithm.h>
-#include <zypp/base/UserRequestException.h>
-#include <zypp/base/DtorReset.h>
+#include <zypp-core/base/UserRequestException>
+#include <zypp-core/base/DtorReset>
 
 #include <zypp/sat/SolvAttr.h>
 #include <zypp/AutoDispose.h>

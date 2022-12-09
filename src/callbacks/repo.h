@@ -35,6 +35,7 @@ struct DownloadResolvableReportReceiver : public callback::ReceiveReport<repo::D
   std::string _label_apply_delta;
   Pathname _patch;
   ByteCount _patch_size;
+  int _silentRetries;
 
   // Dowmload delta rpm:
   // - path below url reported on start()
@@ -120,6 +121,7 @@ struct DownloadResolvableReportReceiver : public callback::ReceiveReport<repo::D
    */
   virtual void start( Resolvable::constPtr resolvable_ptr, const Url & url )
   {
+    _silentRetries = 0;
     _resolvable_ptr =  resolvable_ptr;
     _url = url;
     Zypper & zypper = Zypper::instance();
@@ -147,7 +149,14 @@ struct DownloadResolvableReportReceiver : public callback::ReceiveReport<repo::D
     Zypper::instance().out().error(description);
     DBG << "error report" << std::endl;
 
-    Action action = (Action) read_action_ari(PROMPT_ARI_RPM_DOWNLOAD_PROBLEM, ABORT);
+    Action action = ABORT;
+    if ( _silentRetries < ZConfig::instance().download_max_silent_tries() ) {
+      action = (Action) read_action_ari_with_timeout(PROMPT_ARI_RPM_DOWNLOAD_PROBLEM, 0, RETRY);
+      if ( action == RETRY )
+        _silentRetries++;
+    } else {
+      action = (Action) read_action_ari(PROMPT_ARI_RPM_DOWNLOAD_PROBLEM, ABORT);
+    }
     if (action == DownloadResolvableReport::RETRY)
       --Zypper::instance().runtimeData().commit_pkg_current;
     else

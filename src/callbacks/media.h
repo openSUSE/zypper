@@ -15,6 +15,7 @@
 #include <zypp/base/Logger.h>
 #include <zypp/Pathname.h>
 #include <zypp/Url.h>
+#include <zypp/ZConfig.h>
 
 #include "Zypper.h"
 
@@ -100,6 +101,7 @@ namespace ZmartRecipients
     {
       _last_reported = time(NULL);
       _last_drate_avg = -1;
+      _silentRetries = 0;
 
       Out & out = Zypper::instance().out();
 
@@ -154,12 +156,19 @@ namespace ZmartRecipients
     problem( const Url & uri, DownloadProgressReport::Error error, const std::string & description )
     {
       DBG << "media problem" << std::endl;
+
       if (_be_quiet)
         Zypper::instance().out().dwnldProgressEnd(uri, _last_drate_avg, true);
       Zypper::instance().out().error(zcb_error2str(error, description));
 
-      Action action = (Action) read_action_ari(
-          PROMPT_ARI_MEDIA_PROBLEM, DownloadProgressReport::ABORT);
+      Action action = DownloadProgressReport::ABORT;
+      if ( _silentRetries < ZConfig::instance().download_max_silent_tries() ) {
+        action = (Action) read_action_ari_with_timeout( PROMPT_ARI_MEDIA_PROBLEM, 0, DownloadProgressReport::RETRY );
+        if ( action == DownloadProgressReport::RETRY )
+          _silentRetries++;
+      } else {
+        action = (Action) read_action_ari( PROMPT_ARI_MEDIA_PROBLEM, DownloadProgressReport::ABORT );
+      }
       if (action == DownloadProgressReport::RETRY)
         Zypper::instance().requestExit(false);
       return action;
@@ -179,6 +188,7 @@ namespace ZmartRecipients
     bool _be_quiet;
     time_t _last_reported;
     double _last_drate_avg;
+    int _silentRetries;
   };
 
 
