@@ -782,7 +782,7 @@ void MediaCurl::getFileCopy( const OnMediaLocation & srcFile , const Pathname & 
         ++internalTry;
         if ( internalTry < maxInternalTry ) {
           // just report (NO_ERROR); no interactive request to the user
-          report->problem(fileurl, media::DownloadProgressReport::NO_ERROR, excpt_r.asUserHistory());
+          report->problem(fileurl, media::DownloadProgressReport::NO_ERROR, excpt_r.asUserHistory()+_("Will try again..."));
           retry = true;
           continue;
         }
