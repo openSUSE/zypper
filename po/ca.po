@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-12-15 09:39+0100\n"
-"PO-Revision-Date: 2022-03-14 22:12+0000\n"
+"PO-Revision-Date: 2022-12-15 20:13+0000\n"
 "Last-Translator: David Medina <medipas@gmail.com>\n"
 "Language-Team: Catalan <https://l10n.opensuse.org/projects/libzypp/master/ca/"
 ">\n"
@@ -4363,12 +4363,12 @@ msgstr "Cal autenticació per a '%s'"
 #. just report (NO_ERROR); no interactive request to the user
 #: zypp/media/MediaCurl.cc:785
 msgid "Will try again..."
-msgstr ""
+msgstr "Es tornarà a intentar..."
 
 #: zypp/media/MediaCurl.cc:789
 #, boost-format
 msgid "Giving up after %1% attempts."
-msgstr ""
+msgstr "Es deixarà estar després de %1% intents."
 
 #: zypp/media/MediaCurl.cc:905 zypp-curl/ng/network/networkrequesterror.cc:127
 msgid ""
@@ -5459,7 +5459,7 @@ msgstr ""
 
 #: zypp-media/mediaexception.cc:220
 msgid "No free ressources available to attach medium."
-msgstr ""
+msgstr "No hi ha recursos lliures disponibles per adjuntar el mitjà."
 
 #: zypp-curl/auth/curlauthdata.cc:97
 #, c-format, boost-format
