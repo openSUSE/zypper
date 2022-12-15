@@ -145,8 +145,13 @@ namespace ZmartRecipients
     virtual DownloadProgressReport::Action
     problem( const Url & uri, DownloadProgressReport::Error error, const std::string & description )
     {
-      DBG << "media problem" << std::endl;
-      if (_be_quiet)
+      if ( error == DownloadProgressReport::NO_ERROR ) {
+        // NO_ERROR: just a report but let the caller proceed as appropriate...
+        Zypper::instance().out().info() << "- " << ( ColorContext::LOWLIGHT << description );
+        return DownloadProgressReport::IGNORE;
+      }
+
+      if ( not _be_quiet )
         Zypper::instance().out().dwnldProgressEnd(uri, _last_drate_avg, true);
       Zypper::instance().out().error(zcb_error2str(error, description));
 
