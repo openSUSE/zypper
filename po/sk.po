@@ -6,10 +6,10 @@ msgstr ""
 "Project-Id-Version: libzypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-12-15 09:39+0100\n"
-"PO-Revision-Date: 2022-03-14 17:12+0000\n"
+"PO-Revision-Date: 2022-12-15 20:14+0000\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
-"Language-Team: Slovak <https://l10n.opensuse.org/projects/libzypp/master/sk/"
-">\n"
+"Language-Team: Slovak <https://l10n.opensuse.org/projects/libzypp/master/sk/>"
+"\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -3962,12 +3962,12 @@ msgstr "'%s' vyžaduje autentifikáciu"
 #. just report (NO_ERROR); no interactive request to the user
 #: zypp/media/MediaCurl.cc:785
 msgid "Will try again..."
-msgstr ""
+msgstr "Skúste to znova..."
 
 #: zypp/media/MediaCurl.cc:789
 #, boost-format
 msgid "Giving up after %1% attempts."
-msgstr ""
+msgstr "Vzdanie sa po %1 % pokusoch."
 
 #: zypp/media/MediaCurl.cc:905 zypp-curl/ng/network/networkrequesterror.cc:127
 msgid ""
@@ -5057,7 +5057,7 @@ msgstr ""
 
 #: zypp-media/mediaexception.cc:220
 msgid "No free ressources available to attach medium."
-msgstr ""
+msgstr "Na pripojenie média nie sú k dispozícii žiadne voľné zdroje."
 
 #: zypp-curl/auth/curlauthdata.cc:97
 #, c-format, boost-format
