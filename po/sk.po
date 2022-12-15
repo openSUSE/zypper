@@ -5,11 +5,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libzypp\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-14 15:21+0100\n"
+"POT-Creation-Date: 2022-12-15 09:39+0100\n"
 "PO-Revision-Date: 2022-03-14 17:12+0000\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
-"Language-Team: Slovak <https://l10n.opensuse.org/projects/libzypp/master/sk/>"
-"\n"
+"Language-Team: Slovak <https://l10n.opensuse.org/projects/libzypp/master/sk/"
+">\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -3705,52 +3705,52 @@ msgstr[2] "(vyprší za %d dní)"
 
 #. translator: %1% is a gpg key ID like 3DBDC284
 #. %2% is a cache directories path
-#: zypp/RepoInfo.cc:547
+#: zypp/RepoInfo.cc:548
 #, boost-format
 msgid "Looking for gpg key ID %1% in cache %2%."
 msgstr "Hľadanie ID gpg kľúča %1% vo vyrovnávacej pamäti %2%."
 
 #. translator: %1% is a gpg key ID like 3DBDC284
 #. %2% is a repositories name
-#: zypp/RepoInfo.cc:575
+#: zypp/RepoInfo.cc:576
 #, boost-format
 msgid "Looking for gpg key ID %1% in repository %2%."
 msgstr "Hľadanie ID gpg kľúča %1% v repozitári %2%."
 
 #. translator: %1% is a repositories name
-#: zypp/RepoInfo.cc:599
+#: zypp/RepoInfo.cc:600
 #, boost-format
 msgid "Repository %1% does not define additional 'gpgkey=' URLs."
 msgstr "Repozitár %1% nedefinuje dodatočné URL 'gpgkey='."
 
-#: zypp/RepoManager.cc:313
+#: zypp/RepoManager.cc:317
 #, boost-format
 msgid "Cannot read repo directory '%1%': Permission denied"
 msgstr "Nie je možné čítať adresár repozitára '%1%': Prístup zamietnutý"
 
 #. TranslatorExplanation '%s' is a pathname
-#: zypp/RepoManager.cc:321 zypp/RepoManager.cc:784 zypp/RepoManager.cc:1565
+#: zypp/RepoManager.cc:325 zypp/RepoManager.cc:797 zypp/RepoManager.cc:1593
 #: zypp/repo/PluginServices.cc:49
 #, c-format, boost-format
 msgid "Failed to read directory '%s'"
 msgstr "Zlyhalo čítanie adresára '%s'"
 
-#: zypp/RepoManager.cc:331
+#: zypp/RepoManager.cc:335
 #, boost-format
 msgid "Cannot read repo file '%1%': Permission denied"
 msgstr "Nie je možné čítať súbor repozitára '%1%': Prístup zamietnutý"
 
-#: zypp/RepoManager.cc:354
+#: zypp/RepoManager.cc:358
 msgid "Repository alias cannot start with dot."
 msgstr "Alias repozitára nemôže začínať bodkou."
 
-#: zypp/RepoManager.cc:365
+#: zypp/RepoManager.cc:369
 msgid "Service alias cannot start with dot."
 msgstr "Alias služby nemôže začínať bodkou."
 
 #. TranslatorExplanation '%s' is a filename
-#: zypp/RepoManager.cc:739 zypp/RepoManager.cc:1683 zypp/RepoManager.cc:1749
-#: zypp/RepoManager.cc:1827 zypp/RepoManager.cc:1892 zypp/RepoManager.cc:2023
+#: zypp/RepoManager.cc:752 zypp/RepoManager.cc:1711 zypp/RepoManager.cc:1777
+#: zypp/RepoManager.cc:1855 zypp/RepoManager.cc:1920 zypp/RepoManager.cc:2051
 #, c-format, boost-format
 msgid "Can't open file '%s' for writing."
 msgstr "Nemôžem otvoriť súbor '%s' pre zápis."
@@ -3758,45 +3758,45 @@ msgstr "Nemôžem otvoriť súbor '%s' pre zápis."
 #. translators: Cleanup a repository previously owned by a meanwhile unknown (deleted) service.
 #. %1% = service name
 #. %2% = repository name
-#: zypp/RepoManager.cc:875
+#: zypp/RepoManager.cc:888
 #, boost-format
 msgid "Unknown service '%1%': Removing orphaned service repository '%2%'"
 msgstr "Neznámá služba '%1%': Odstraňovanie osirelého repozitára služby '%2%'"
 
 #. we will throw this later if no URL checks out fine
-#: zypp/RepoManager.cc:1120
+#: zypp/RepoManager.cc:1142
 msgid "Valid metadata not found at specified URL"
 msgid_plural "Valid metadata not found at specified URLs"
 msgstr[0] "Na stanovenej adrese URL sa nenašli platné metadáta"
 msgstr[1] "Na stanovených adresách URL sa nenašli platné metadáta"
 msgstr[2] "Na stanovených adresách URL sa nenašli platné metadáta"
 
-#: zypp/RepoManager.cc:1172 zypp/RepoManager.cc:1285 zypp/RepoManager.cc:1341
+#: zypp/RepoManager.cc:1194 zypp/RepoManager.cc:1313 zypp/RepoManager.cc:1369
 #, c-format, boost-format
 msgid "Can't create %s"
 msgstr "Nie je možné vytvoriť %s"
 
-#: zypp/RepoManager.cc:1180
+#: zypp/RepoManager.cc:1202
 msgid "Can't create metadata cache directory."
 msgstr "Nie je možné vytvoriť adresár vyrovnávacej pamäte metadát."
 
-#: zypp/RepoManager.cc:1327
+#: zypp/RepoManager.cc:1355
 #, c-format, boost-format
 msgid "Building repository '%s' cache"
 msgstr "Vytváram vyrovnávaciu pamäť repozitára '%s'"
 
-#: zypp/RepoManager.cc:1347
+#: zypp/RepoManager.cc:1375
 #, c-format, boost-format
 msgid "Can't create cache at %s - no writing permissions."
 msgstr ""
 "Nie je možné vytvoriť vyrovnávaciu pamäť v %s - žiadne práva na zapisovanie."
 
-#: zypp/RepoManager.cc:1408
+#: zypp/RepoManager.cc:1436
 #, c-format, boost-format
 msgid "Failed to cache repo (%d)."
 msgstr "Zlyhalo ukladanie do vyrovnávacej pamäti pre repozitár (%d)."
 
-#: zypp/RepoManager.cc:1419
+#: zypp/RepoManager.cc:1447
 msgid "Unhandled repository type"
 msgstr "Nepodporovaný typ repozitára"
 
@@ -3806,44 +3806,44 @@ msgstr "Nepodporovaný typ repozitára"
 #. on ftp file-not-found(bnc #335906). Instead we'll check another types
 #. before throwing.
 #. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1456 zypp/RepoManager.cc:2518
+#: zypp/RepoManager.cc:1484 zypp/RepoManager.cc:2546
 #, c-format, boost-format
 msgid "Error trying to read from '%s'"
 msgstr "Chyba pri čítaní z '%s'"
 
 #. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1509 zypp/RepoManager.cc:2526
+#: zypp/RepoManager.cc:1537 zypp/RepoManager.cc:2554
 #, c-format, boost-format
 msgid "Unknown error reading from '%s'"
 msgstr "Neznáma chyba čítania z '%s'"
 
-#: zypp/RepoManager.cc:1647
+#: zypp/RepoManager.cc:1675
 #, c-format, boost-format
 msgid "Adding repository '%s'"
 msgstr "Pridávam repozitár '%s'"
 
 #. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1735
+#: zypp/RepoManager.cc:1763
 #, c-format, boost-format
 msgid "Invalid repo file name at '%s'"
 msgstr "Neplatný názov súboru repozitára v '%s'"
 
-#: zypp/RepoManager.cc:1776
+#: zypp/RepoManager.cc:1804
 #, c-format, boost-format
 msgid "Removing repository '%s'"
 msgstr "Odstraňujem repozitár '%s'"
 
-#: zypp/RepoManager.cc:1795 zypp/RepoManager.cc:1873
+#: zypp/RepoManager.cc:1823 zypp/RepoManager.cc:1901
 msgid "Can't figure out where the repo is stored."
 msgstr "Nie je možné prísť na to, kde je uložený repozitár."
 
 #. TranslatorExplanation '%s' is a filename
-#: zypp/RepoManager.cc:1809 zypp/RepoManager.cc:2011
+#: zypp/RepoManager.cc:1837 zypp/RepoManager.cc:2039
 #, c-format, boost-format
 msgid "Can't delete '%s'"
 msgstr "Nie je možné vymazať '%s'"
 
-#: zypp/RepoManager.cc:1999 zypp/RepoManager.cc:2449
+#: zypp/RepoManager.cc:2027 zypp/RepoManager.cc:2477
 msgid "Can't figure out where the service is stored."
 msgstr "Nie je možné prísť na to, kde je uložená služba."
 
@@ -3923,7 +3923,7 @@ msgstr "Pre poskytovanie podpory je potrebná ďalšia zákaznícka zmluva."
 msgid "Unknown support option. Description not available"
 msgstr "Neznáma voľba podpory. Popis nie je k dispozícii"
 
-#: zypp/ZYppFactory.cc:403
+#: zypp/ZYppFactory.cc:410
 #, c-format, boost-format
 msgid ""
 "System management is locked by the application with pid %d (%s).\n"
@@ -3953,13 +3953,23 @@ msgid "Invalid regular expression '%s'"
 msgstr "Neplatný regulárny výraz '%s'"
 
 #. !\todo add comma to the message for the next release
-#: zypp/media/MediaCIFS.cc:427 zypp/media/MediaCurl.cc:1430
-#: zypp/zyppng/media/medianetwork.cc:582
+#: zypp/media/MediaCIFS.cc:427 zypp/media/MediaCurl.cc:1503
+#: zypp/media/MediaNetwork.cc:305
 #, c-format, boost-format
 msgid "Authentication required for '%s'"
 msgstr "'%s' vyžaduje autentifikáciu"
 
-#: zypp/media/MediaCurl.cc:803 zypp-curl/ng/network/networkrequesterror.cc:127
+#. just report (NO_ERROR); no interactive request to the user
+#: zypp/media/MediaCurl.cc:785
+msgid "Will try again..."
+msgstr ""
+
+#: zypp/media/MediaCurl.cc:789
+#, boost-format
+msgid "Giving up after %1% attempts."
+msgstr ""
+
+#: zypp/media/MediaCurl.cc:905 zypp-curl/ng/network/networkrequesterror.cc:127
 msgid ""
 "Visit the SUSE Customer Center to check whether your registration is valid "
 "and has not expired."
@@ -3967,7 +3977,7 @@ msgstr ""
 "Navštívte SUSE Customer Center, aby ste skontrolovali, či je vaša "
 "registrácia platná a ešte nevypršala."
 
-#: zypp/media/MediaCurl.cc:805 zypp-curl/ng/network/networkrequesterror.cc:129
+#: zypp/media/MediaCurl.cc:907 zypp-curl/ng/network/networkrequesterror.cc:129
 msgid ""
 "Visit the Novell Customer Center to check whether your registration is valid "
 "and has not expired."
@@ -3975,7 +3985,7 @@ msgstr ""
 "Navštívte Novell Customer Center, aby ste skontrolovali, či je vaša "
 "registrácia platná a ešte nevypršala."
 
-#: zypp/media/MediaHandler.cc:369
+#: zypp/media/MediaHandler.cc:338
 msgid ""
 "Create attach point: Can't find a writable directory to create an attach "
 "point"
@@ -4039,7 +4049,7 @@ msgid "No url in repository."
 msgstr "Pre tento repozitár nie je definovaná žiadna URL adresa."
 
 #. Translator: %1% the expected medium number; %2% the total number of media in the set; %3% the ident file on the medium.
-#: zypp/repo/SUSEMediaVerifier.cc:104
+#: zypp/repo/SUSEMediaVerifier.cc:104 zypp-media/ng/mediaverifier.cc:109
 #, boost-format
 msgid "Expected medium %1%/%2% identified by file '%3%' with content:"
 msgstr "Očakávané médium% 1%/%2% identifikované podľa súboru '%3%' s obsahom:"
@@ -4582,14 +4592,14 @@ msgstr "Chyba zasielania oznámenia o aktualizačnej správe."
 msgid "New update message"
 msgstr "Nová správa aktualizácie"
 
-#: zypp/target/TargetImpl.cc:2688
+#: zypp/target/TargetImpl.cc:2684
 msgid "Executing the transaction failed because of the following problems:"
 msgstr "Vykonanie transakcie zlyhalo z dôvodu nasledujúcich problémov:"
 
 #. TranslatorExplanation after semicolon is error message
 #. TranslatorExplanation the colon is followed by an error message
-#: zypp/target/rpm/RpmDb.cc:467 zypp/target/rpm/RpmDb.cc:1810
-#: zypp/target/rpm/RpmDb.cc:1969
+#: zypp/target/rpm/RpmDb.cc:467 zypp/target/rpm/RpmDb.cc:1811
+#: zypp/target/rpm/RpmDb.cc:1970
 msgid "RPM failed: "
 msgstr "RPM zlyhalo: "
 
@@ -4615,19 +4625,19 @@ msgstr "Príloha balíka nie je podpísaná!"
 
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
-#: zypp/target/rpm/RpmDb.cc:1609
+#: zypp/target/rpm/RpmDb.cc:1610
 #, c-format, boost-format
 msgid "Changed configuration files for %s:"
 msgstr "Zmenené konfiguračné súbory pre '%s':"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:1791
+#: zypp/target/rpm/RpmDb.cc:1792
 #, c-format, boost-format
 msgid "rpm saved %s as %s, but it was impossible to determine the difference"
 msgstr "Balík rpm uložil %s ako %s, ale nebolo možné určiť rozdiel"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:1793
+#: zypp/target/rpm/RpmDb.cc:1794
 #, c-format, boost-format
 msgid ""
 "rpm saved %s as %s.\n"
@@ -4637,13 +4647,13 @@ msgstr ""
 "Tu je prvých 25 riadkov rozdielov:\n"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:1796
+#: zypp/target/rpm/RpmDb.cc:1797
 #, c-format, boost-format
 msgid "rpm created %s as %s, but it was impossible to determine the difference"
 msgstr "Balík rpm vytvoril %s as %s, ale nebolo možné určiť rozdiel"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:1798
+#: zypp/target/rpm/RpmDb.cc:1799
 #, c-format, boost-format
 msgid ""
 "rpm created %s as %s.\n"
@@ -4656,47 +4666,47 @@ msgstr ""
 #. TranslatorExplanation Text is followed by a ':'  and the actual output.
 #. report additional rpm output in finish (LEGACY! Lines are immediately reported as RemoveResolvableReport::contentRpmout)
 #. TranslatorExplanation Text is followed by a ':'  and the actual output.
-#: zypp/target/rpm/RpmDb.cc:1826 zypp/target/rpm/RpmDb.cc:1985
+#: zypp/target/rpm/RpmDb.cc:1827 zypp/target/rpm/RpmDb.cc:1986
 msgid "Additional rpm output"
 msgstr "Ďalší výstup z rpm"
 
-#: zypp/target/rpm/RpmDb.cc:2127
+#: zypp/target/rpm/RpmDb.cc:2128
 #, c-format, boost-format
 msgid "created backup %s"
 msgstr "Bola vytvorená záloha %s"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2148
+#: zypp/target/rpm/RpmDb.cc:2149
 msgid "Signature is OK"
 msgstr "Podpis je v poriadku"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2150
+#: zypp/target/rpm/RpmDb.cc:2151
 msgid "Unknown type of signature"
 msgstr "Neznámy typ podpisu"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2152
+#: zypp/target/rpm/RpmDb.cc:2153
 msgid "Signature does not verify"
 msgstr "Podpis neoveruje"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2154
+#: zypp/target/rpm/RpmDb.cc:2155
 msgid "Signature is OK, but key is not trusted"
 msgstr "Podpis je v poriadku, ale kľúč nie je dôveryhodný"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2156
+#: zypp/target/rpm/RpmDb.cc:2157
 msgid "Signatures public key is not available"
 msgstr "Verejný kľúč podpisov nie je k dispozícii"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2158
+#: zypp/target/rpm/RpmDb.cc:2159
 msgid "File does not exist or signature can't be checked"
 msgstr "Súbor neexistuje alebo podpis nie je možné overiť"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2160
+#: zypp/target/rpm/RpmDb.cc:2161
 msgid "File is unsigned"
 msgstr "Súbor je nepodpísaný"
 
@@ -4824,17 +4834,17 @@ msgstr "Neplatný oddeľovací znak pre mapu parametrov"
 msgid "Invalid parameter array join separator character"
 msgstr "Neplatný oddeľovací znak pre spájanie poľa parametrov"
 
-#: zypp-core/zyppng/io/abstractspawnengine.cc:177
+#: zypp-core/zyppng/io/abstractspawnengine.cc:183
 #, c-format, boost-format
 msgid "Command exited with status %d."
 msgstr "Stav príkazu po skončení je %d."
 
-#: zypp-core/zyppng/io/abstractspawnengine.cc:198
+#: zypp-core/zyppng/io/abstractspawnengine.cc:204
 #, c-format, boost-format
 msgid "Command was killed by signal %d (%s)."
 msgstr "Príkaz bol zabitý signálom %d (%s)."
 
-#: zypp-core/zyppng/io/abstractspawnengine.cc:203
+#: zypp-core/zyppng/io/abstractspawnengine.cc:209
 msgid "Command exited with unknown error."
 msgstr "Príkaz skončil s neznámou chybou."
 
@@ -5044,6 +5054,10 @@ msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
 msgstr ""
 " problém s certifikátom SSL, skontrolujte či certifikát CA je v poriadku pre "
 "'%s'."
+
+#: zypp-media/mediaexception.cc:220
+msgid "No free ressources available to attach medium."
+msgstr ""
 
 #: zypp-curl/auth/curlauthdata.cc:97
 #, c-format, boost-format

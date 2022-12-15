@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-14 15:21+0100\n"
+"POT-Creation-Date: 2022-12-15 09:39+0100\n"
 "PO-Revision-Date: 2005-07-29 15:37+0530\n"
 "Last-Translator: Priyavert Sharma<priyavert.sharma@agreeya.com>\n"
 "Language-Team: AgreeYa Solutions <linux_team@agreeya.com>\n"
@@ -3709,52 +3709,52 @@ msgstr[1] ""
 
 #. translator: %1% is a gpg key ID like 3DBDC284
 #. %2% is a cache directories path
-#: zypp/RepoInfo.cc:547
+#: zypp/RepoInfo.cc:548
 #, boost-format
 msgid "Looking for gpg key ID %1% in cache %2%."
 msgstr ""
 
 #. translator: %1% is a gpg key ID like 3DBDC284
 #. %2% is a repositories name
-#: zypp/RepoInfo.cc:575
+#: zypp/RepoInfo.cc:576
 #, boost-format
 msgid "Looking for gpg key ID %1% in repository %2%."
 msgstr ""
 
 #. translator: %1% is a repositories name
-#: zypp/RepoInfo.cc:599
+#: zypp/RepoInfo.cc:600
 #, boost-format
 msgid "Repository %1% does not define additional 'gpgkey=' URLs."
 msgstr ""
 
-#: zypp/RepoManager.cc:313
+#: zypp/RepoManager.cc:317
 #, boost-format
 msgid "Cannot read repo directory '%1%': Permission denied"
 msgstr ""
 
 #. TranslatorExplanation '%s' is a pathname
-#: zypp/RepoManager.cc:321 zypp/RepoManager.cc:784 zypp/RepoManager.cc:1565
+#: zypp/RepoManager.cc:325 zypp/RepoManager.cc:797 zypp/RepoManager.cc:1593
 #: zypp/repo/PluginServices.cc:49
 #, fuzzy, c-format, boost-format
 msgid "Failed to read directory '%s'"
 msgstr "Failed to parse: %s."
 
-#: zypp/RepoManager.cc:331
+#: zypp/RepoManager.cc:335
 #, boost-format
 msgid "Cannot read repo file '%1%': Permission denied"
 msgstr ""
 
-#: zypp/RepoManager.cc:354
+#: zypp/RepoManager.cc:358
 msgid "Repository alias cannot start with dot."
 msgstr ""
 
-#: zypp/RepoManager.cc:365
+#: zypp/RepoManager.cc:369
 msgid "Service alias cannot start with dot."
 msgstr ""
 
 #. TranslatorExplanation '%s' is a filename
-#: zypp/RepoManager.cc:739 zypp/RepoManager.cc:1683 zypp/RepoManager.cc:1749
-#: zypp/RepoManager.cc:1827 zypp/RepoManager.cc:1892 zypp/RepoManager.cc:2023
+#: zypp/RepoManager.cc:752 zypp/RepoManager.cc:1711 zypp/RepoManager.cc:1777
+#: zypp/RepoManager.cc:1855 zypp/RepoManager.cc:1920 zypp/RepoManager.cc:2051
 #, fuzzy, c-format, boost-format
 msgid "Can't open file '%s' for writing."
 msgstr "লেখার জন্যে ফাইল খুলতে পারে না।"
@@ -3762,44 +3762,44 @@ msgstr "লেখার জন্যে ফাইল খুলতে পার�
 #. translators: Cleanup a repository previously owned by a meanwhile unknown (deleted) service.
 #. %1% = service name
 #. %2% = repository name
-#: zypp/RepoManager.cc:875
+#: zypp/RepoManager.cc:888
 #, boost-format
 msgid "Unknown service '%1%': Removing orphaned service repository '%2%'"
 msgstr ""
 
 #. we will throw this later if no URL checks out fine
-#: zypp/RepoManager.cc:1120
+#: zypp/RepoManager.cc:1142
 msgid "Valid metadata not found at specified URL"
 msgid_plural "Valid metadata not found at specified URLs"
 msgstr[0] ""
 msgstr[1] ""
 
-#: zypp/RepoManager.cc:1172 zypp/RepoManager.cc:1285 zypp/RepoManager.cc:1341
+#: zypp/RepoManager.cc:1194 zypp/RepoManager.cc:1313 zypp/RepoManager.cc:1369
 #, fuzzy, c-format, boost-format
 msgid "Can't create %s"
 msgstr "'%s' ডেস্কটপ বস্তু খুলতে পারে না"
 
-#: zypp/RepoManager.cc:1180
+#: zypp/RepoManager.cc:1202
 #, fuzzy
 msgid "Can't create metadata cache directory."
 msgstr "ডায়রেক্টরি %1: %2 তৈরী করা যাচ্ছে না"
 
-#: zypp/RepoManager.cc:1327
+#: zypp/RepoManager.cc:1355
 #, c-format, boost-format
 msgid "Building repository '%s' cache"
 msgstr ""
 
-#: zypp/RepoManager.cc:1347
+#: zypp/RepoManager.cc:1375
 #, c-format, boost-format
 msgid "Can't create cache at %s - no writing permissions."
 msgstr ""
 
-#: zypp/RepoManager.cc:1408
+#: zypp/RepoManager.cc:1436
 #, fuzzy, c-format, boost-format
 msgid "Failed to cache repo (%d)."
 msgstr "Failed to parse: %s."
 
-#: zypp/RepoManager.cc:1419
+#: zypp/RepoManager.cc:1447
 msgid "Unhandled repository type"
 msgstr ""
 
@@ -3809,44 +3809,44 @@ msgstr ""
 #. on ftp file-not-found(bnc #335906). Instead we'll check another types
 #. before throwing.
 #. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1456 zypp/RepoManager.cc:2518
+#: zypp/RepoManager.cc:1484 zypp/RepoManager.cc:2546
 #, c-format, boost-format
 msgid "Error trying to read from '%s'"
 msgstr ""
 
 #. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1509 zypp/RepoManager.cc:2526
+#: zypp/RepoManager.cc:1537 zypp/RepoManager.cc:2554
 #, fuzzy, c-format, boost-format
 msgid "Unknown error reading from '%s'"
 msgstr "ফ্লপি ডিস্ক থেকে পড়ায় ত্রুটি।"
 
-#: zypp/RepoManager.cc:1647
+#: zypp/RepoManager.cc:1675
 #, c-format, boost-format
 msgid "Adding repository '%s'"
 msgstr ""
 
 #. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1735
+#: zypp/RepoManager.cc:1763
 #, fuzzy, c-format, boost-format
 msgid "Invalid repo file name at '%s'"
 msgstr "রপ্তানি ফাইলনাম অবৈধ৷"
 
-#: zypp/RepoManager.cc:1776
+#: zypp/RepoManager.cc:1804
 #, fuzzy, c-format, boost-format
 msgid "Removing repository '%s'"
 msgstr "সংস্থান পুনঃস্থাপন করছে"
 
-#: zypp/RepoManager.cc:1795 zypp/RepoManager.cc:1873
+#: zypp/RepoManager.cc:1823 zypp/RepoManager.cc:1901
 msgid "Can't figure out where the repo is stored."
 msgstr ""
 
 #. TranslatorExplanation '%s' is a filename
-#: zypp/RepoManager.cc:1809 zypp/RepoManager.cc:2011
+#: zypp/RepoManager.cc:1837 zypp/RepoManager.cc:2039
 #, fuzzy, c-format, boost-format
 msgid "Can't delete '%s'"
 msgstr "'%s' ডেস্কটপ বস্তু খুলতে পারে না"
 
-#: zypp/RepoManager.cc:1999 zypp/RepoManager.cc:2449
+#: zypp/RepoManager.cc:2027 zypp/RepoManager.cc:2477
 msgid "Can't figure out where the service is stored."
 msgstr ""
 
@@ -3916,7 +3916,7 @@ msgstr ""
 msgid "Unknown support option. Description not available"
 msgstr ""
 
-#: zypp/ZYppFactory.cc:403
+#: zypp/ZYppFactory.cc:410
 #, c-format, boost-format
 msgid ""
 "System management is locked by the application with pid %d (%s).\n"
@@ -3944,25 +3944,35 @@ msgid "Invalid regular expression '%s'"
 msgstr "অবৈধ Url যোজনা %s"
 
 #. !\todo add comma to the message for the next release
-#: zypp/media/MediaCIFS.cc:427 zypp/media/MediaCurl.cc:1430
-#: zypp/zyppng/media/medianetwork.cc:582
+#: zypp/media/MediaCIFS.cc:427 zypp/media/MediaCurl.cc:1503
+#: zypp/media/MediaNetwork.cc:305
 #, fuzzy, c-format, boost-format
 msgid "Authentication required for '%s'"
 msgstr "সত্যতা যাচাইয়ের ধরন"
 
-#: zypp/media/MediaCurl.cc:803 zypp-curl/ng/network/networkrequesterror.cc:127
+#. just report (NO_ERROR); no interactive request to the user
+#: zypp/media/MediaCurl.cc:785
+msgid "Will try again..."
+msgstr ""
+
+#: zypp/media/MediaCurl.cc:789
+#, boost-format
+msgid "Giving up after %1% attempts."
+msgstr ""
+
+#: zypp/media/MediaCurl.cc:905 zypp-curl/ng/network/networkrequesterror.cc:127
 msgid ""
 "Visit the SUSE Customer Center to check whether your registration is valid "
 "and has not expired."
 msgstr ""
 
-#: zypp/media/MediaCurl.cc:805 zypp-curl/ng/network/networkrequesterror.cc:129
+#: zypp/media/MediaCurl.cc:907 zypp-curl/ng/network/networkrequesterror.cc:129
 msgid ""
 "Visit the Novell Customer Center to check whether your registration is valid "
 "and has not expired."
 msgstr ""
 
-#: zypp/media/MediaHandler.cc:369
+#: zypp/media/MediaHandler.cc:338
 msgid ""
 "Create attach point: Can't find a writable directory to create an attach "
 "point"
@@ -4029,7 +4039,7 @@ msgid "No url in repository."
 msgstr "রিপোসিটারিতে ফাইল %1 পাওয়া যায়নি"
 
 #. Translator: %1% the expected medium number; %2% the total number of media in the set; %3% the ident file on the medium.
-#: zypp/repo/SUSEMediaVerifier.cc:104
+#: zypp/repo/SUSEMediaVerifier.cc:104 zypp-media/ng/mediaverifier.cc:109
 #, boost-format
 msgid "Expected medium %1%/%2% identified by file '%3%' with content:"
 msgstr ""
@@ -4506,14 +4516,14 @@ msgstr "কী এনক্রিপশনে ত্রুটি"
 msgid "New update message"
 msgstr ""
 
-#: zypp/target/TargetImpl.cc:2688
+#: zypp/target/TargetImpl.cc:2684
 msgid "Executing the transaction failed because of the following problems:"
 msgstr ""
 
 #. TranslatorExplanation after semicolon is error message
 #. TranslatorExplanation the colon is followed by an error message
-#: zypp/target/rpm/RpmDb.cc:467 zypp/target/rpm/RpmDb.cc:1810
-#: zypp/target/rpm/RpmDb.cc:1969
+#: zypp/target/rpm/RpmDb.cc:467 zypp/target/rpm/RpmDb.cc:1811
+#: zypp/target/rpm/RpmDb.cc:1970
 #, fuzzy
 msgid "RPM failed: "
 msgstr "ব্যর্থ"
@@ -4540,19 +4550,19 @@ msgstr ""
 
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
-#: zypp/target/rpm/RpmDb.cc:1609
+#: zypp/target/rpm/RpmDb.cc:1610
 #, c-format, boost-format
 msgid "Changed configuration files for %s:"
 msgstr " %s-এর জন্য পরিবর্তিত কনফিগারেশন ফাইলসমূহ :"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:1791
+#: zypp/target/rpm/RpmDb.cc:1792
 #, fuzzy, c-format, boost-format
 msgid "rpm saved %s as %s, but it was impossible to determine the difference"
 msgstr "rpm %s কে %sরূপে সংরক্ষণ করেছিল ,কিন্তু পার্থক্য নিরূপণ করা অসম্ভব হয়েছিল "
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:1793
+#: zypp/target/rpm/RpmDb.cc:1794
 #, c-format, boost-format
 msgid ""
 "rpm saved %s as %s.\n"
@@ -4562,13 +4572,13 @@ msgstr ""
 "এখানে পার্থক্যের প্রথম ২৫ টি লাইন দেওয়া আছে:\n"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:1796
+#: zypp/target/rpm/RpmDb.cc:1797
 #, fuzzy, c-format, boost-format
 msgid "rpm created %s as %s, but it was impossible to determine the difference"
 msgstr "rpm %s কে %sরূপে সংরক্ষণ করেছিল ,কিন্তু পার্থক্য নিরূপণ করা  অসম্ভব হয়েছিল "
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:1798
+#: zypp/target/rpm/RpmDb.cc:1799
 #, c-format, boost-format
 msgid ""
 "rpm created %s as %s.\n"
@@ -4581,51 +4591,51 @@ msgstr ""
 #. TranslatorExplanation Text is followed by a ':'  and the actual output.
 #. report additional rpm output in finish (LEGACY! Lines are immediately reported as RemoveResolvableReport::contentRpmout)
 #. TranslatorExplanation Text is followed by a ':'  and the actual output.
-#: zypp/target/rpm/RpmDb.cc:1826 zypp/target/rpm/RpmDb.cc:1985
+#: zypp/target/rpm/RpmDb.cc:1827 zypp/target/rpm/RpmDb.cc:1986
 #, fuzzy
 msgid "Additional rpm output"
 msgstr "অতিরিক্ত তথ্য"
 
-#: zypp/target/rpm/RpmDb.cc:2127
+#: zypp/target/rpm/RpmDb.cc:2128
 #, c-format, boost-format
 msgid "created backup %s"
 msgstr "%s ব্যাকআপ তৈরী করছে"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2148
+#: zypp/target/rpm/RpmDb.cc:2149
 #, fuzzy
 msgid "Signature is OK"
 msgstr "এন্ট্রি পাওয়া যায়নি"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2150
+#: zypp/target/rpm/RpmDb.cc:2151
 msgid "Unknown type of signature"
 msgstr ""
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2152
+#: zypp/target/rpm/RpmDb.cc:2153
 #, fuzzy
 msgid "Signature does not verify"
 msgstr "এন্ট্রি পাওয়া যায়নি"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2154
+#: zypp/target/rpm/RpmDb.cc:2155
 #, fuzzy
 msgid "Signature is OK, but key is not trusted"
 msgstr "এন্ট্রি পাওয়া যায়নি"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2156
+#: zypp/target/rpm/RpmDb.cc:2157
 msgid "Signatures public key is not available"
 msgstr ""
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2158
+#: zypp/target/rpm/RpmDb.cc:2159
 msgid "File does not exist or signature can't be checked"
 msgstr ""
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2160
+#: zypp/target/rpm/RpmDb.cc:2161
 msgid "File is unsigned"
 msgstr ""
 
@@ -4752,17 +4762,17 @@ msgstr "অবৈধ প্যারামিটার ম্যাপ স্প
 msgid "Invalid parameter array join separator character"
 msgstr "অবৈধ প্যারামিটার এরে জয়েন সেপারেটর ক্যারেক্টার"
 
-#: zypp-core/zyppng/io/abstractspawnengine.cc:177
+#: zypp-core/zyppng/io/abstractspawnengine.cc:183
 #, c-format, boost-format
 msgid "Command exited with status %d."
 msgstr ""
 
-#: zypp-core/zyppng/io/abstractspawnengine.cc:198
+#: zypp-core/zyppng/io/abstractspawnengine.cc:204
 #, c-format, boost-format
 msgid "Command was killed by signal %d (%s)."
 msgstr ""
 
-#: zypp-core/zyppng/io/abstractspawnengine.cc:203
+#: zypp-core/zyppng/io/abstractspawnengine.cc:209
 #, fuzzy
 msgid "Command exited with unknown error."
 msgstr "সংযোগ সাধনের সময়ে আদেশ সম্পন্ন হয়েছে"
@@ -4967,6 +4977,10 @@ msgstr ""
 #: zypp-media/mediaexception.cc:213
 #, c-format, boost-format
 msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
+msgstr ""
+
+#: zypp-media/mediaexception.cc:220
+msgid "No free ressources available to attach medium."
 msgstr ""
 
 #: zypp-curl/auth/curlauthdata.cc:97

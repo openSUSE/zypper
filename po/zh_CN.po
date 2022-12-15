@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-14 15:21+0100\n"
+"POT-Creation-Date: 2022-12-15 09:39+0100\n"
 "PO-Revision-Date: 2022-03-15 15:12+0000\n"
 "Last-Translator: Marguerite Su <i@marguerite.su>\n"
 "Language-Team: Chinese (China) <https://l10n.opensuse.org/projects/libzypp/"
@@ -3709,52 +3709,52 @@ msgstr[0] "（%d 天后过期）"
 
 #. translator: %1% is a gpg key ID like 3DBDC284
 #. %2% is a cache directories path
-#: zypp/RepoInfo.cc:547
+#: zypp/RepoInfo.cc:548
 #, boost-format
 msgid "Looking for gpg key ID %1% in cache %2%."
 msgstr "正在缓存 %2% 中查找 GPG 密钥 ID %1%。"
 
 #. translator: %1% is a gpg key ID like 3DBDC284
 #. %2% is a repositories name
-#: zypp/RepoInfo.cc:575
+#: zypp/RepoInfo.cc:576
 #, boost-format
 msgid "Looking for gpg key ID %1% in repository %2%."
 msgstr "正在软件源 %2% 中查找 GPG 密钥 ID %1%。"
 
 #. translator: %1% is a repositories name
-#: zypp/RepoInfo.cc:599
+#: zypp/RepoInfo.cc:600
 #, boost-format
 msgid "Repository %1% does not define additional 'gpgkey=' URLs."
 msgstr "软件源 %1% 并未定义额外的 'gpgkey=' URL。"
 
-#: zypp/RepoManager.cc:313
+#: zypp/RepoManager.cc:317
 #, boost-format
 msgid "Cannot read repo directory '%1%': Permission denied"
 msgstr "无法读取源文件夹 '%1%'：权限被拒"
 
 #. TranslatorExplanation '%s' is a pathname
-#: zypp/RepoManager.cc:321 zypp/RepoManager.cc:784 zypp/RepoManager.cc:1565
+#: zypp/RepoManager.cc:325 zypp/RepoManager.cc:797 zypp/RepoManager.cc:1593
 #: zypp/repo/PluginServices.cc:49
 #, c-format, boost-format
 msgid "Failed to read directory '%s'"
 msgstr "读取文件夹 '%s' 失败"
 
-#: zypp/RepoManager.cc:331
+#: zypp/RepoManager.cc:335
 #, boost-format
 msgid "Cannot read repo file '%1%': Permission denied"
 msgstr "无法读取源文件 '%1%'：权限被拒"
 
-#: zypp/RepoManager.cc:354
+#: zypp/RepoManager.cc:358
 msgid "Repository alias cannot start with dot."
 msgstr "软件源别名不能以点开头。"
 
-#: zypp/RepoManager.cc:365
+#: zypp/RepoManager.cc:369
 msgid "Service alias cannot start with dot."
 msgstr "服务别名不能以点开头。"
 
 #. TranslatorExplanation '%s' is a filename
-#: zypp/RepoManager.cc:739 zypp/RepoManager.cc:1683 zypp/RepoManager.cc:1749
-#: zypp/RepoManager.cc:1827 zypp/RepoManager.cc:1892 zypp/RepoManager.cc:2023
+#: zypp/RepoManager.cc:752 zypp/RepoManager.cc:1711 zypp/RepoManager.cc:1777
+#: zypp/RepoManager.cc:1855 zypp/RepoManager.cc:1920 zypp/RepoManager.cc:2051
 #, c-format, boost-format
 msgid "Can't open file '%s' for writing."
 msgstr "无法打开 '%s' 文件进行写入。"
@@ -3762,42 +3762,42 @@ msgstr "无法打开 '%s' 文件进行写入。"
 #. translators: Cleanup a repository previously owned by a meanwhile unknown (deleted) service.
 #. %1% = service name
 #. %2% = repository name
-#: zypp/RepoManager.cc:875
+#: zypp/RepoManager.cc:888
 #, boost-format
 msgid "Unknown service '%1%': Removing orphaned service repository '%2%'"
 msgstr "未知服务 '%1%'：正在移除孤立的服务软件源 '%2%'"
 
 #. we will throw this later if no URL checks out fine
-#: zypp/RepoManager.cc:1120
+#: zypp/RepoManager.cc:1142
 msgid "Valid metadata not found at specified URL"
 msgid_plural "Valid metadata not found at specified URLs"
 msgstr[0] "在指定 URL 未找到有效元数据"
 
-#: zypp/RepoManager.cc:1172 zypp/RepoManager.cc:1285 zypp/RepoManager.cc:1341
+#: zypp/RepoManager.cc:1194 zypp/RepoManager.cc:1313 zypp/RepoManager.cc:1369
 #, c-format, boost-format
 msgid "Can't create %s"
 msgstr "无法创建 %s"
 
-#: zypp/RepoManager.cc:1180
+#: zypp/RepoManager.cc:1202
 msgid "Can't create metadata cache directory."
 msgstr "无法创建元数据缓存文件夹。"
 
-#: zypp/RepoManager.cc:1327
+#: zypp/RepoManager.cc:1355
 #, c-format, boost-format
 msgid "Building repository '%s' cache"
 msgstr "正在构建软件源 '%s' 的缓存"
 
-#: zypp/RepoManager.cc:1347
+#: zypp/RepoManager.cc:1375
 #, c-format, boost-format
 msgid "Can't create cache at %s - no writing permissions."
 msgstr "无法在 %s 创建缓存 - 无写入权限。"
 
-#: zypp/RepoManager.cc:1408
+#: zypp/RepoManager.cc:1436
 #, c-format, boost-format
 msgid "Failed to cache repo (%d)."
 msgstr "缓存软件源 (%d) 失败。"
 
-#: zypp/RepoManager.cc:1419
+#: zypp/RepoManager.cc:1447
 msgid "Unhandled repository type"
 msgstr "未处理的软件源类型"
 
@@ -3807,44 +3807,44 @@ msgstr "未处理的软件源类型"
 #. on ftp file-not-found(bnc #335906). Instead we'll check another types
 #. before throwing.
 #. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1456 zypp/RepoManager.cc:2518
+#: zypp/RepoManager.cc:1484 zypp/RepoManager.cc:2546
 #, c-format, boost-format
 msgid "Error trying to read from '%s'"
 msgstr "试图读取 '%s' 出错"
 
 #. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1509 zypp/RepoManager.cc:2526
+#: zypp/RepoManager.cc:1537 zypp/RepoManager.cc:2554
 #, c-format, boost-format
 msgid "Unknown error reading from '%s'"
 msgstr "读取 '%s' 遇到未知错误"
 
-#: zypp/RepoManager.cc:1647
+#: zypp/RepoManager.cc:1675
 #, c-format, boost-format
 msgid "Adding repository '%s'"
 msgstr "正在添加软件源 '%s'"
 
 #. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1735
+#: zypp/RepoManager.cc:1763
 #, c-format, boost-format
 msgid "Invalid repo file name at '%s'"
 msgstr "'%s' 处的源文件名无效"
 
-#: zypp/RepoManager.cc:1776
+#: zypp/RepoManager.cc:1804
 #, c-format, boost-format
 msgid "Removing repository '%s'"
 msgstr "正在移除软件源 '%s'"
 
-#: zypp/RepoManager.cc:1795 zypp/RepoManager.cc:1873
+#: zypp/RepoManager.cc:1823 zypp/RepoManager.cc:1901
 msgid "Can't figure out where the repo is stored."
 msgstr "不确定软件源的存储位置。"
 
 #. TranslatorExplanation '%s' is a filename
-#: zypp/RepoManager.cc:1809 zypp/RepoManager.cc:2011
+#: zypp/RepoManager.cc:1837 zypp/RepoManager.cc:2039
 #, c-format, boost-format
 msgid "Can't delete '%s'"
 msgstr "无法删除 '%s'"
 
-#: zypp/RepoManager.cc:1999 zypp/RepoManager.cc:2449
+#: zypp/RepoManager.cc:2027 zypp/RepoManager.cc:2477
 msgid "Can't figure out where the service is stored."
 msgstr "不确定服务的储存位置。"
 
@@ -3920,7 +3920,7 @@ msgstr "签署一份额外的客户合同后才能获得支持。"
 msgid "Unknown support option. Description not available"
 msgstr "未知支持选项。描述不可用"
 
-#: zypp/ZYppFactory.cc:403
+#: zypp/ZYppFactory.cc:410
 #, c-format, boost-format
 msgid ""
 "System management is locked by the application with pid %d (%s).\n"
@@ -3950,25 +3950,35 @@ msgid "Invalid regular expression '%s'"
 msgstr "无效的正则表达式 '%s'"
 
 #. !\todo add comma to the message for the next release
-#: zypp/media/MediaCIFS.cc:427 zypp/media/MediaCurl.cc:1430
-#: zypp/zyppng/media/medianetwork.cc:582
+#: zypp/media/MediaCIFS.cc:427 zypp/media/MediaCurl.cc:1503
+#: zypp/media/MediaNetwork.cc:305
 #, c-format, boost-format
 msgid "Authentication required for '%s'"
 msgstr "'%s' 需要认证"
 
-#: zypp/media/MediaCurl.cc:803 zypp-curl/ng/network/networkrequesterror.cc:127
+#. just report (NO_ERROR); no interactive request to the user
+#: zypp/media/MediaCurl.cc:785
+msgid "Will try again..."
+msgstr ""
+
+#: zypp/media/MediaCurl.cc:789
+#, boost-format
+msgid "Giving up after %1% attempts."
+msgstr ""
+
+#: zypp/media/MediaCurl.cc:905 zypp-curl/ng/network/networkrequesterror.cc:127
 msgid ""
 "Visit the SUSE Customer Center to check whether your registration is valid "
 "and has not expired."
 msgstr "访问 SUSE 客户中心检查您的注册是否有效且未过期。"
 
-#: zypp/media/MediaCurl.cc:805 zypp-curl/ng/network/networkrequesterror.cc:129
+#: zypp/media/MediaCurl.cc:907 zypp-curl/ng/network/networkrequesterror.cc:129
 msgid ""
 "Visit the Novell Customer Center to check whether your registration is valid "
 "and has not expired."
 msgstr "访问 Novell 客户中心检查您的注册是否有效并尚未过期。"
 
-#: zypp/media/MediaHandler.cc:369
+#: zypp/media/MediaHandler.cc:338
 msgid ""
 "Create attach point: Can't find a writable directory to create an attach "
 "point"
@@ -4028,7 +4038,7 @@ msgid "No url in repository."
 msgstr "软件源中没有 url。"
 
 #. Translator: %1% the expected medium number; %2% the total number of media in the set; %3% the ident file on the medium.
-#: zypp/repo/SUSEMediaVerifier.cc:104
+#: zypp/repo/SUSEMediaVerifier.cc:104 zypp-media/ng/mediaverifier.cc:109
 #, boost-format
 msgid "Expected medium %1%/%2% identified by file '%3%' with content:"
 msgstr "由'%3%' 文件标识的预期介质 %1%/%2% 内容为："
@@ -4548,14 +4558,14 @@ msgstr "发送更新消息通知出错。"
 msgid "New update message"
 msgstr "新更新消息"
 
-#: zypp/target/TargetImpl.cc:2688
+#: zypp/target/TargetImpl.cc:2684
 msgid "Executing the transaction failed because of the following problems:"
 msgstr "由于以下问题执行操作失败："
 
 #. TranslatorExplanation after semicolon is error message
 #. TranslatorExplanation the colon is followed by an error message
-#: zypp/target/rpm/RpmDb.cc:467 zypp/target/rpm/RpmDb.cc:1810
-#: zypp/target/rpm/RpmDb.cc:1969
+#: zypp/target/rpm/RpmDb.cc:467 zypp/target/rpm/RpmDb.cc:1811
+#: zypp/target/rpm/RpmDb.cc:1970
 msgid "RPM failed: "
 msgstr "RPM 失败： "
 
@@ -4581,19 +4591,19 @@ msgstr "软件包数据体未签名！"
 
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
-#: zypp/target/rpm/RpmDb.cc:1609
+#: zypp/target/rpm/RpmDb.cc:1610
 #, c-format, boost-format
 msgid "Changed configuration files for %s:"
 msgstr "%s 配置文件有变化："
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:1791
+#: zypp/target/rpm/RpmDb.cc:1792
 #, c-format, boost-format
 msgid "rpm saved %s as %s, but it was impossible to determine the difference"
 msgstr "rpm 已将 %s 另存为 %s，但是无法确定两者的差异"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:1793
+#: zypp/target/rpm/RpmDb.cc:1794
 #, c-format, boost-format
 msgid ""
 "rpm saved %s as %s.\n"
@@ -4603,13 +4613,13 @@ msgstr ""
 "以下是前 25 行差异：\n"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:1796
+#: zypp/target/rpm/RpmDb.cc:1797
 #, c-format, boost-format
 msgid "rpm created %s as %s, but it was impossible to determine the difference"
 msgstr "rpm 已将 %s 创建为 %s，但是无法确定两者的差异"
 
 #. %s = filenames
-#: zypp/target/rpm/RpmDb.cc:1798
+#: zypp/target/rpm/RpmDb.cc:1799
 #, c-format, boost-format
 msgid ""
 "rpm created %s as %s.\n"
@@ -4622,47 +4632,47 @@ msgstr ""
 #. TranslatorExplanation Text is followed by a ':'  and the actual output.
 #. report additional rpm output in finish (LEGACY! Lines are immediately reported as RemoveResolvableReport::contentRpmout)
 #. TranslatorExplanation Text is followed by a ':'  and the actual output.
-#: zypp/target/rpm/RpmDb.cc:1826 zypp/target/rpm/RpmDb.cc:1985
+#: zypp/target/rpm/RpmDb.cc:1827 zypp/target/rpm/RpmDb.cc:1986
 msgid "Additional rpm output"
 msgstr "额外的 RPM 输出"
 
-#: zypp/target/rpm/RpmDb.cc:2127
+#: zypp/target/rpm/RpmDb.cc:2128
 #, c-format, boost-format
 msgid "created backup %s"
 msgstr "已创建备份 %s"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2148
+#: zypp/target/rpm/RpmDb.cc:2149
 msgid "Signature is OK"
 msgstr "签名正确"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2150
+#: zypp/target/rpm/RpmDb.cc:2151
 msgid "Unknown type of signature"
 msgstr "未知签名类型"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2152
+#: zypp/target/rpm/RpmDb.cc:2153
 msgid "Signature does not verify"
 msgstr "无法校验签名"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2154
+#: zypp/target/rpm/RpmDb.cc:2155
 msgid "Signature is OK, but key is not trusted"
 msgstr "签名正确，但密钥是非受信的"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2156
+#: zypp/target/rpm/RpmDb.cc:2157
 msgid "Signatures public key is not available"
 msgstr "签名公钥不可用"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2158
+#: zypp/target/rpm/RpmDb.cc:2159
 msgid "File does not exist or signature can't be checked"
 msgstr "文件不存在或无法检查其签名"
 
 #. translators: possible rpm package signature check result [brief]
-#: zypp/target/rpm/RpmDb.cc:2160
+#: zypp/target/rpm/RpmDb.cc:2161
 msgid "File is unsigned"
 msgstr "未签署文件"
 
@@ -4789,17 +4799,17 @@ msgstr "无效的参数映射分割的分隔符"
 msgid "Invalid parameter array join separator character"
 msgstr "无效的参数数组合并的分隔符"
 
-#: zypp-core/zyppng/io/abstractspawnengine.cc:177
+#: zypp-core/zyppng/io/abstractspawnengine.cc:183
 #, c-format, boost-format
 msgid "Command exited with status %d."
 msgstr "命令退出，状态 %d。"
 
-#: zypp-core/zyppng/io/abstractspawnengine.cc:198
+#: zypp-core/zyppng/io/abstractspawnengine.cc:204
 #, c-format, boost-format
 msgid "Command was killed by signal %d (%s)."
 msgstr "命令已被信号 %d (%s) 杀死。"
 
-#: zypp-core/zyppng/io/abstractspawnengine.cc:203
+#: zypp-core/zyppng/io/abstractspawnengine.cc:209
 msgid "Command exited with unknown error."
 msgstr "命令退出，未知错误。"
 
@@ -5006,6 +5016,10 @@ msgstr "位置 '%s' 暂时无法访问。"
 #, c-format, boost-format
 msgid " SSL certificate problem, verify that the CA cert is OK for '%s'."
 msgstr " SSL 证书问题，请校验 '%s' 的 CA 证书。"
+
+#: zypp-media/mediaexception.cc:220
+msgid "No free ressources available to attach medium."
+msgstr ""
 
 #: zypp-curl/auth/curlauthdata.cc:97
 #, c-format, boost-format
