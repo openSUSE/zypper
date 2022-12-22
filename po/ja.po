@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-12-22 14:35+0100\n"
-"PO-Revision-Date: 2022-12-15 12:13+0000\n"
+"PO-Revision-Date: 2022-12-23 00:13+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
 "Language-Team: Japanese <https://l10n.opensuse.org/projects/libzypp/master/"
 "ja/>\n"
@@ -4425,17 +4425,19 @@ msgid ""
 "Removing the installed %1% in this context will remove (not replace!) the "
 "included PTF-packages too."
 msgstr ""
+"この状況下において、インストールされている %1% を削除すると、その中に含まれている PTF パッケージも削除 (置換ではありません！) "
+"することになります。"
 
 #: zypp/solver/detail/SATResolver.cc:1318
 #, boost-format
 msgid ""
 "The PTF should be removed by calling '%1%'. This will update the included "
 "PTF-packages rather than removing them."
-msgstr ""
+msgstr "PTF を削除したい場合は、 '%1%' を実行してください。このコマンドを実行することにより、 PTF パッケージを削除せずに更新できます。"
 
 #: zypp/solver/detail/SATResolver.cc:1319
 msgid "Typically you want to keep the PTF or choose to cancel the action."
-msgstr ""
+msgstr "PTF はそのまま維持するか、処理をキャンセルするのが一般的です。"
 
 #. translator: %1% is the name of a PTF.
 #: zypp/solver/detail/SATResolver.cc:1324
