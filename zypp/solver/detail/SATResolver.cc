@@ -1310,12 +1310,11 @@ namespace {
       //else: a common problem due to an installed ptf
 
       if ( _showremoveProtectHint ) { // bsc#1203248
-        //const std::string & removeptfCommnd { str::Format("zypper removeptf %1%") % printlist(_ptf) };
-        const std::string & removeptfCommnd { str::Format("zypper install -- -%1%") % printlist(_ptf) };
+        const std::string & removeptfCommand { str::Format("zypper removeptf %1%") % printlist(_ptf) };
         return str::Str()
         // translator: %1% is the name of a PTF.
         << (str::Format( _("Removing the installed %1% in this context will remove (not replace!) the included PTF-packages too." ) ) % printlist(_ptf)) << endl
-        << (str::Format( _("The PTF should be removed by calling '%1%'. This will update the included PTF-packages rather than removing them." ) ) % removeptfCommnd) << endl
+        << (str::Format( _("The PTF should be removed by calling '%1%'. This will update the included PTF-packages rather than removing them." ) ) % removeptfCommand) << endl
         << _("Typically you want to keep the PTF or choose to cancel the action."); // ma: When translated, it should replace the '..and choose..' below too
       }
 
