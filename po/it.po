@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-15 09:39+0100\n"
+"POT-Creation-Date: 2022-12-22 14:35+0100\n"
 "PO-Revision-Date: 2022-10-13 23:13+0000\n"
 "Last-Translator: Paolo Za <zapaolo@email.it>\n"
 "Language-Team: Italian <https://l10n.opensuse.org/projects/libzypp/master/it/"
@@ -4225,7 +4225,7 @@ msgstr "installa comunque %s ignorando alcune delle sue dipendenze"
 msgid "generally ignore of some dependencies"
 msgstr "generalmente ignora alcune dipendenze"
 
-#: zypp/solver/detail/SATResolver.cc:1089
+#: zypp/solver/detail/SATResolver.cc:1143
 #, boost-format
 msgid ""
 "the installed %1% does not belong to a distupgrade repository and must be "
@@ -4235,98 +4235,98 @@ msgstr ""
 "distribuzione e deve essere sostituito"
 
 #. just in case
-#: zypp/solver/detail/SATResolver.cc:1091
+#: zypp/solver/detail/SATResolver.cc:1145
 #, boost-format
 msgid "the to be installed %1% does not belong to a distupgrade repository"
 msgstr ""
 "%1% da installare non appartiene a un repository di aggiornamento della "
 "distribuzione"
 
-#: zypp/solver/detail/SATResolver.cc:1095
+#: zypp/solver/detail/SATResolver.cc:1149
 #, boost-format
 msgid "the installed %1% has inferior architecture"
 msgstr "%1% installato presenta un'architettura inferiore"
 
-#: zypp/solver/detail/SATResolver.cc:1097
+#: zypp/solver/detail/SATResolver.cc:1151
 #, boost-format
 msgid "the to be installed %1% has inferior architecture"
 msgstr "%1% da installare presenta un'architettura inferiore"
 
-#: zypp/solver/detail/SATResolver.cc:1100
+#: zypp/solver/detail/SATResolver.cc:1154
 #, boost-format
 msgid "problem with the installed %1%"
 msgstr "problema con %1% installato"
 
-#: zypp/solver/detail/SATResolver.cc:1103
+#: zypp/solver/detail/SATResolver.cc:1157
 msgid "conflicting requests"
 msgstr "richieste in conflitto"
 
-#: zypp/solver/detail/SATResolver.cc:1106
+#: zypp/solver/detail/SATResolver.cc:1160
 msgid "some dependency problem"
 msgstr "alcuni problemi di dipendenze"
 
-#: zypp/solver/detail/SATResolver.cc:1109
+#: zypp/solver/detail/SATResolver.cc:1163
 #, boost-format
 msgid "nothing provides the requested '%1%'"
 msgstr "nessun elemento fornisce '%1%' obbligatorio"
 
-#: zypp/solver/detail/SATResolver.cc:1110
-#: zypp/solver/detail/SATResolver.cc:1114
+#: zypp/solver/detail/SATResolver.cc:1164
+#: zypp/solver/detail/SATResolver.cc:1168
 msgid "Have you enabled all the required repositories?"
 msgstr "Sono stati abilitati tutti i repository richiesti?"
 
-#: zypp/solver/detail/SATResolver.cc:1113
+#: zypp/solver/detail/SATResolver.cc:1167
 #, boost-format
 msgid "the requested package %1% does not exist"
 msgstr "il pacchetto richiesto %1% non esiste"
 
-#: zypp/solver/detail/SATResolver.cc:1117
+#: zypp/solver/detail/SATResolver.cc:1171
 msgid "unsupported request"
 msgstr "richiesta non supportata"
 
-#: zypp/solver/detail/SATResolver.cc:1120
+#: zypp/solver/detail/SATResolver.cc:1174
 #, boost-format
 msgid "'%1%' is provided by the system and cannot be erased"
 msgstr "'%1%' viene fornito dal sistema e non può essere cancellato"
 
-#: zypp/solver/detail/SATResolver.cc:1123
+#: zypp/solver/detail/SATResolver.cc:1177
 #, boost-format
 msgid "%1% is not installable"
 msgstr "%1% non è installabile"
 
-#: zypp/solver/detail/SATResolver.cc:1128
+#: zypp/solver/detail/SATResolver.cc:1182
 #, boost-format
 msgid "nothing provides '%1%' needed by the installed %2%"
 msgstr "nessun elemento fornisce '%1%' obbligatorio per %2% installato"
 
-#: zypp/solver/detail/SATResolver.cc:1130
+#: zypp/solver/detail/SATResolver.cc:1184
 #, boost-format
 msgid "nothing provides '%1%' needed by the to be installed %2%"
 msgstr "nessun elemento fornisce '%1%' obbligatorio per %2% da installare"
 
-#: zypp/solver/detail/SATResolver.cc:1133
+#: zypp/solver/detail/SATResolver.cc:1187
 #, boost-format
 msgid "cannot install both %1% and %2%"
 msgstr "impossibile installare %1% e %2%"
 
-#: zypp/solver/detail/SATResolver.cc:1138
+#: zypp/solver/detail/SATResolver.cc:1192
 #, boost-format
 msgid "the installed %1% conflicts with '%2%' provided by the installed %3%"
 msgstr "%1% installato è in conflitto con '%2%' fornito da %3% installato"
 
-#: zypp/solver/detail/SATResolver.cc:1140
+#: zypp/solver/detail/SATResolver.cc:1194
 #, boost-format
 msgid ""
 "the installed %1% conflicts with '%2%' provided by the to be installed %3%"
 msgstr "%1% installato è in conflitto con '%2%' fornito da %3% da installare"
 
-#: zypp/solver/detail/SATResolver.cc:1144
+#: zypp/solver/detail/SATResolver.cc:1198
 #, boost-format
 msgid ""
 "the to be installed %1% conflicts with '%2%' provided by the installed %3%"
 msgstr "%1% da installare è in conflitto con '%2%' fornito da %3% installato"
 
-#: zypp/solver/detail/SATResolver.cc:1146
+#: zypp/solver/detail/SATResolver.cc:1200
 #, boost-format
 msgid ""
 "the to be installed %1% conflicts with '%2%' provided by the to be installed "
@@ -4334,45 +4334,45 @@ msgid ""
 msgstr ""
 "%1% da installare è in conflitto con '%2%' fornito da %3% da installare"
 
-#: zypp/solver/detail/SATResolver.cc:1153
+#: zypp/solver/detail/SATResolver.cc:1207
 #, boost-format
 msgid "the installed %1% obsoletes '%2%' provided by the installed %3%"
 msgstr "%1% installato rende obsoleto '%2%' fornito da %3% installato"
 
-#: zypp/solver/detail/SATResolver.cc:1155
+#: zypp/solver/detail/SATResolver.cc:1209
 #, boost-format
 msgid "the installed %1% obsoletes '%2%' provided by the to be installed %3%"
 msgstr "%1% installato rende obsoleto '%2%' fornito da %3% da installare"
 
-#: zypp/solver/detail/SATResolver.cc:1159
+#: zypp/solver/detail/SATResolver.cc:1213
 #, boost-format
 msgid "the to be installed %1% obsoletes '%2%' provided by the installed %3%"
 msgstr "%1% da installare rende obsoleto '%2%' fornito da %3% installato"
 
-#: zypp/solver/detail/SATResolver.cc:1161
+#: zypp/solver/detail/SATResolver.cc:1215
 #, boost-format
 msgid ""
 "the to be installed %1% obsoletes '%2%' provided by the to be installed %3%"
 msgstr "%1% da installare rende obsoleto '%2%' fornito da %3% da installare"
 
-#: zypp/solver/detail/SATResolver.cc:1166
+#: zypp/solver/detail/SATResolver.cc:1220
 #, boost-format
 msgid "the installed %1% conflicts with '%2%' provided by itself"
 msgstr "%1% installato è in conflitto con '%2%' fornito da se stesso"
 
-#: zypp/solver/detail/SATResolver.cc:1168
+#: zypp/solver/detail/SATResolver.cc:1222
 #, boost-format
 msgid "the to be installed %1% conflicts with '%2%' provided by itself"
 msgstr "%1% da installare è in conflitto con '%2%' fornito da se stesso"
 
-#: zypp/solver/detail/SATResolver.cc:1200
+#: zypp/solver/detail/SATResolver.cc:1254
 #, boost-format
 msgid ""
 "the installed %1% requires '%2%', but this requirement cannot be provided"
 msgstr ""
 "%1% installato richiede '%2%', ma non è possibile fornire questo requisito"
 
-#: zypp/solver/detail/SATResolver.cc:1202
+#: zypp/solver/detail/SATResolver.cc:1256
 #, boost-format
 msgid ""
 "the to be installed %1% requires '%2%', but this requirement cannot be "
@@ -4380,11 +4380,11 @@ msgid ""
 msgstr ""
 "%1% da installare richiede '%2%', ma non è possibile fornire questo requisito"
 
-#: zypp/solver/detail/SATResolver.cc:1204
+#: zypp/solver/detail/SATResolver.cc:1258
 msgid "deleted providers: "
 msgstr "provider cancellati: "
 
-#: zypp/solver/detail/SATResolver.cc:1214
+#: zypp/solver/detail/SATResolver.cc:1268
 msgid ""
 "\n"
 "not installable providers: "
@@ -4392,17 +4392,17 @@ msgstr ""
 "\n"
 "impossibile installare i provider: "
 
-#: zypp/solver/detail/SATResolver.cc:1216
+#: zypp/solver/detail/SATResolver.cc:1270
 msgid "not installable providers: "
 msgstr "provider non installabili: "
 
 #. translator: %1% is the name of a PTF, %2% the name of a patch.
-#: zypp/solver/detail/SATResolver.cc:1253
+#: zypp/solver/detail/SATResolver.cc:1307
 #, boost-format
 msgid "%1% is not yet fully integrated into %2%."
 msgstr "%1% non è ancora completamente integrato in %2%."
 
-#: zypp/solver/detail/SATResolver.cc:1254
+#: zypp/solver/detail/SATResolver.cc:1308
 msgid ""
 "Typically you want to keep the PTF and choose to not install the maintenance "
 "patches."
@@ -4411,114 +4411,133 @@ msgstr ""
 "patch di manutenzione."
 
 #. translator: %1% is the name of a PTF.
-#: zypp/solver/detail/SATResolver.cc:1259
+#: zypp/solver/detail/SATResolver.cc:1317
+#, boost-format
+msgid ""
+"Removing the installed %1% in this context will remove (not replace!) the "
+"included PTF-packages too."
+msgstr ""
+
+#: zypp/solver/detail/SATResolver.cc:1318
+#, boost-format
+msgid ""
+"The PTF should be removed by calling '%1%'. This will update the included "
+"PTF-packages rather than removing them."
+msgstr ""
+
+#: zypp/solver/detail/SATResolver.cc:1319
+msgid "Typically you want to keep the PTF or choose to cancel the action."
+msgstr ""
+
+#. translator: %1% is the name of a PTF.
+#: zypp/solver/detail/SATResolver.cc:1324
 #, boost-format
 msgid "The installed %1% blocks the desired action."
 msgstr "%1% installato blocca l'azione desiderata."
 
-#: zypp/solver/detail/SATResolver.cc:1260
+#: zypp/solver/detail/SATResolver.cc:1325
 msgid "Typically you want to keep the PTF and choose to cancel the action."
 msgstr ""
 "In genere, è consigliabile mantenere il PTF e scegliere di annullare "
 "l'azione."
 
-#: zypp/solver/detail/SATResolver.cc:1316
+#: zypp/solver/detail/SATResolver.cc:1382
 #, boost-format
 msgid "remove lock to allow removal of %1%"
 msgstr "rimuovi il blocco per consentire la rimozione di %1%"
 
-#: zypp/solver/detail/SATResolver.cc:1321
-#: zypp/solver/detail/SATResolver.cc:1359
+#: zypp/solver/detail/SATResolver.cc:1389
+#: zypp/solver/detail/SATResolver.cc:1427
 #, boost-format
 msgid "do not install %1%"
 msgstr "non installare %1%"
 
-#: zypp/solver/detail/SATResolver.cc:1338
-#: zypp/solver/detail/SATResolver.cc:1380
+#: zypp/solver/detail/SATResolver.cc:1406
+#: zypp/solver/detail/SATResolver.cc:1448
 #, boost-format
 msgid "keep %1%"
 msgstr "mantieni %1%"
 
-#: zypp/solver/detail/SATResolver.cc:1343
+#: zypp/solver/detail/SATResolver.cc:1411
 #, boost-format
 msgid "remove lock to allow installation of %1%"
 msgstr "rimuovi il blocco per consentire l'installazione di %1%"
 
-#: zypp/solver/detail/SATResolver.cc:1394
-#: zypp/solver/detail/SATResolver.cc:1415
+#: zypp/solver/detail/SATResolver.cc:1462
+#: zypp/solver/detail/SATResolver.cc:1483
 msgid "This request will break your system!"
 msgstr "Questa richiesta potrebbe danneggiare il sistema!"
 
-#: zypp/solver/detail/SATResolver.cc:1395
-#: zypp/solver/detail/SATResolver.cc:1416
+#: zypp/solver/detail/SATResolver.cc:1463
+#: zypp/solver/detail/SATResolver.cc:1484
 msgid "ignore the warning of a broken system"
 msgstr "ignora avviso di sistema malfunzionante"
 
-#: zypp/solver/detail/SATResolver.cc:1400
+#: zypp/solver/detail/SATResolver.cc:1468
 #, boost-format
 msgid "do not ask to install a solvable providing %1%"
 msgstr "non chiedere di installare un risolubile che fornisce %1%"
 
-#: zypp/solver/detail/SATResolver.cc:1422
+#: zypp/solver/detail/SATResolver.cc:1490
 #, boost-format
 msgid "do not ask to delete all solvables providing %1%"
 msgstr "non chiedere di eliminare tutti i risolubili che forniscono %1%"
 
-#: zypp/solver/detail/SATResolver.cc:1435
+#: zypp/solver/detail/SATResolver.cc:1503
 #, boost-format
 msgid "do not install most recent version of %1%"
 msgstr "non installare la versione più recente di %1%"
 
-#: zypp/solver/detail/SATResolver.cc:1456
+#: zypp/solver/detail/SATResolver.cc:1524
 #, boost-format
 msgid "keep %1% despite the inferior architecture"
 msgstr "mantieni %1% nonostante l'architettura inferiore"
 
-#: zypp/solver/detail/SATResolver.cc:1461
+#: zypp/solver/detail/SATResolver.cc:1529
 #, boost-format
 msgid "install %1% despite the inferior architecture"
 msgstr "installa %1% nonostante l'architettura inferiore"
 
-#: zypp/solver/detail/SATResolver.cc:1470
+#: zypp/solver/detail/SATResolver.cc:1538
 #, boost-format
 msgid "keep obsolete %1%"
 msgstr "mantieni %1% obsoleto"
 
-#: zypp/solver/detail/SATResolver.cc:1475
+#: zypp/solver/detail/SATResolver.cc:1543
 #, boost-format
 msgid "install %1% from excluded repository"
 msgstr "installa %1% dal repository escluso"
 
 #. translator: %1% is a package name
-#: zypp/solver/detail/SATResolver.cc:1489
+#: zypp/solver/detail/SATResolver.cc:1557
 #, boost-format
 msgid "install %1% although it has been retracted"
 msgstr "installare %1% anche se è stato ritirato"
 
 #. translator: %1% is a package name
-#: zypp/solver/detail/SATResolver.cc:1492
+#: zypp/solver/detail/SATResolver.cc:1560
 #, boost-format
 msgid "allow installing the PTF %1%"
 msgstr "consentire installazione di PTF %1%"
 
 #. translator: %1% is a package name
-#: zypp/solver/detail/SATResolver.cc:1495
+#: zypp/solver/detail/SATResolver.cc:1563
 #, boost-format
 msgid "install %1% although it is blacklisted"
 msgstr "Installare %1% anche se è nella black list"
 
-#: zypp/solver/detail/SATResolver.cc:1515
+#: zypp/solver/detail/SATResolver.cc:1583
 #, boost-format
 msgid "downgrade of %1% to %2%"
 msgstr "downgrade di %1% a %2%"
 
-#: zypp/solver/detail/SATResolver.cc:1522
+#: zypp/solver/detail/SATResolver.cc:1590
 #, boost-format
 msgid "architecture change of %1% to %2%"
 msgstr "modifica di architettura di %1% in %2%"
 
 #. FIXME? Actually .ident() must be eq. But the more verbose 'else' isn't bad either.
-#: zypp/solver/detail/SATResolver.cc:1533
+#: zypp/solver/detail/SATResolver.cc:1601
 #, boost-format
 msgid ""
 "install %1% (with vendor change)\n"
@@ -4527,7 +4546,7 @@ msgstr ""
 "installa %1% (con cambio di fornitore)\n"
 "  %2%  -->  %3%"
 
-#: zypp/solver/detail/SATResolver.cc:1538
+#: zypp/solver/detail/SATResolver.cc:1606
 #, boost-format
 msgid ""
 "install %1% from vendor %2%\n"
@@ -4536,12 +4555,12 @@ msgstr ""
 "installa %1% dal fornitore %2%\n"
 "  sostituzione di %3% del fornitore %4%"
 
-#: zypp/solver/detail/SATResolver.cc:1547
+#: zypp/solver/detail/SATResolver.cc:1615
 #, boost-format
 msgid "replacement of %1% with %2%"
 msgstr "sostituzione di %1% con %2%"
 
-#: zypp/solver/detail/SATResolver.cc:1558
+#: zypp/solver/detail/SATResolver.cc:1626
 #, boost-format
 msgid "deinstallation of %1%"
 msgstr "disinstallazione di %1%"
