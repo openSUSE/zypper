@@ -6,10 +6,10 @@ msgstr ""
 "Project-Id-Version: libzypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-12-22 14:35+0100\n"
-"PO-Revision-Date: 2022-12-15 20:14+0000\n"
+"PO-Revision-Date: 2022-12-22 17:27+0000\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
-"Language-Team: Slovak <https://l10n.opensuse.org/projects/libzypp/master/sk/"
-">\n"
+"Language-Team: Slovak <https://l10n.opensuse.org/projects/libzypp/master/sk/>"
+"\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -4420,6 +4420,8 @@ msgid ""
 "Removing the installed %1% in this context will remove (not replace!) the "
 "included PTF-packages too."
 msgstr ""
+"Odstránenie nainštalovaného %1% v tomto kontexte odstráni (nie nahradí!) aj "
+"zahrnuté PTF balíky."
 
 #: zypp/solver/detail/SATResolver.cc:1318
 #, boost-format
@@ -4427,10 +4429,12 @@ msgid ""
 "The PTF should be removed by calling '%1%'. This will update the included "
 "PTF-packages rather than removing them."
 msgstr ""
+"PTF by sa malo odstrániť volaním '%1%'. Tým sa aktualizujú zahrnuté PTF "
+"balíky namiesto ich odstránenia."
 
 #: zypp/solver/detail/SATResolver.cc:1319
 msgid "Typically you want to keep the PTF or choose to cancel the action."
-msgstr ""
+msgstr "Zvyčajne si chcete ponechať PTF alebo sa rozhodnúť zrušiť akciu."
 
 #. translator: %1% is the name of a PTF.
 #: zypp/solver/detail/SATResolver.cc:1324
