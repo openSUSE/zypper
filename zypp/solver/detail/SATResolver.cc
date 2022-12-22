@@ -52,7 +52,6 @@ extern "C"
 #include <zypp/solver/detail/SystemCheck.h>
 #include <zypp/solver/detail/SolutionAction.h>
 #include <zypp/solver/detail/SolverQueueItem.h>
-
 using std::endl;
 
 #define XDEBUG(x) do { if (base::logger::isExcessive()) XXX << x << std::endl;} while (0)
@@ -519,6 +518,22 @@ SATResolver::solverInit(const PoolItemList & weakItems)
     {
       queue_push( &(_jobQueue), SOLVER_NOOBSOLETES | SOLVER_SOLVABLE );
       queue_push( &(_jobQueue), solv.id() );
+    }
+
+    // Add rules to protect PTF removal without repos (bsc#1203248)
+    // Removing a PTF its packages should be replaced by the official
+    // versions again. If just the system repo is present, they'd get
+    // removed instead.
+    {
+      _protectPTFs = sat::Pool::instance().reposSize() == 1;
+      if ( _protectPTFs ) {
+        for ( const auto & solv : sat::AllPTFs() ) {
+          if ( solv.isSystem() ) {
+            queue_push( &(_jobQueue), SOLVER_INSTALL | SOLVER_SOLVABLE );
+            queue_push( &(_jobQueue), solv.id() );
+          }
+        }
+      }
     }
 
     // set requirements for a running system
@@ -1276,11 +1291,11 @@ namespace {
   /// bsc#1194848 hint on ptf<>patch conflicts or common ptf conflicts
   struct PtfPatchHint
   {
-    void notInstallPatch( sat::Solvable slv_r, unsigned solution_r )
+    void notInstallPatch( sat::Solvable slv_r )
     { _patch.push_back( slv_r.ident() ); }
 
-    void removePtf(  sat::Solvable slv_r, unsigned solution_r )
-    { _ptf.push_back( slv_r.ident() ); }
+    void removePtf(  sat::Solvable slv_r, bool showremoveProtectHint_r = false )
+    { _ptf.push_back( slv_r.ident() ); if ( showremoveProtectHint_r ) _showremoveProtectHint = true; }
 
     bool applies() const
     { return not _ptf.empty(); }
@@ -1293,6 +1308,17 @@ namespace {
         << _("Typically you want to keep the PTF and choose to not install the maintenance patches.");
       }
       //else: a common problem due to an installed ptf
+
+      if ( _showremoveProtectHint ) { // bsc#1203248
+        //const std::string & removeptfCommnd { str::Format("zypper removeptf %1%") % printlist(_ptf) };
+        const std::string & removeptfCommnd { str::Format("zypper install -- -%1%") % printlist(_ptf) };
+        return str::Str()
+        // translator: %1% is the name of a PTF.
+        << (str::Format( _("Removing the installed %1% in this context will remove (not replace!) the included PTF-packages too." ) ) % printlist(_ptf)) << endl
+        << (str::Format( _("The PTF should be removed by calling '%1%'. This will update the included PTF-packages rather than removing them." ) ) % removeptfCommnd) << endl
+        << _("Typically you want to keep the PTF or choose to cancel the action."); // ma: When translated, it should replace the '..and choose..' below too
+      }
+
       return str::Str()
       // translator: %1% is the name of a PTF.
       << (str::Format( _("The installed %1% blocks the desired action.") ) % printlist(_ptf)) << endl
@@ -1305,6 +1331,7 @@ namespace {
 
     std::vector<StoreType> _ptf;
     std::vector<StoreType> _patch;
+    bool _showremoveProtectHint = false;
   };
 }
 /////////////////////////////////////////////////////////////////////////
@@ -1355,13 +1382,15 @@ SATResolver::problems ()
                                         std::string description = str::Format(_("remove lock to allow removal of %1%") ) % s.asString();
                                         MIL << description << endl;
                                         problemSolution->addDescription (description);
+                                        if ( _protectPTFs && s.isPtfMaster() )
+                                          ptfPatchHint.removePtf( s, _protectPTFs ); // bsc#1203248
                                     } else {
                                         problemSolution->addSingleAction (poolItem, KEEP);
                                         std::string description = str::Format(_("do not install %1%") ) % s.asString();
                                         MIL << description << endl;
                                         problemSolution->addDescription (description);
                                         if ( s.isKind<Patch>() )
-                                          ptfPatchHint.notInstallPatch( s, resolverProblem->solutions().size() );
+                                          ptfPatchHint.notInstallPatch( s );
                                     }
                                 } else {
                                     ERR << "SOLVER_INSTALL_SOLVABLE: No item found for " << s.asString() << endl;
@@ -1599,7 +1628,7 @@ SATResolver::problems ()
                                 problemSolution->addDescription (description);
                                 problemSolution->addSingleAction (itemFrom, REMOVE);
                                 if ( s.isPtfMaster() )
-                                  ptfPatchHint.removePtf( s, resolverProblem->solutions().size() );
+                                  ptfPatchHint.removePtf( s );
                             }
                         }
                     }

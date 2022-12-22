@@ -132,6 +132,14 @@ namespace zypp
     /** \relates WhatProvides Stream output */
     std::ostream & operator<<( std::ostream & str, const WhatProvides & obj );
 
+    ///////////////////////////////////////////////////////////////////
+    /// \brief Container of packages providing `ptf()`
+    class AllPTFs : public WhatProvides
+    {
+    public:
+      AllPTFs() : WhatProvides( Capability(Solvable::ptfMasterToken.id()) ) {};
+    };
+
     namespace detail
     {
     ///////////////////////////////////////////////////////////////////

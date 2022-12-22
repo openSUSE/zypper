@@ -83,6 +83,7 @@ class SATResolver : public base::ReferenceCounted, private base::NonCopyable, pr
     // solve results
     PoolItemList _result_items_to_install;
     PoolItemList _result_items_to_remove;
+
   public:
     ResolverFocus _focus;		// The resolver's general attitude
 
@@ -107,6 +108,8 @@ class SATResolver : public base::ReferenceCounted, private base::NonCopyable, pr
     bool _cleandepsOnRemove:1;		// whether removing a package should also remove no longer needed requirements
 
   private:
+    bool _protectPTFs:1;		// protect from accidental removal of PTFs if only @System is present (bsc#1203248)
+
     // ---------------------------------- methods
     std::string SATprobleminfoString (Id problem, std::string &detail, Id &ignoreId);
     std::string SATproblemRuleInfoString (Id rule, std::string &detail, Id &ignoreId);
