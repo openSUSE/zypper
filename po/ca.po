@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-12-22 14:35+0100\n"
-"PO-Revision-Date: 2022-12-15 20:13+0000\n"
+"PO-Revision-Date: 2022-12-23 15:13+0000\n"
 "Last-Translator: David Medina <medipas@gmail.com>\n"
 "Language-Team: Catalan <https://l10n.opensuse.org/projects/libzypp/master/ca/"
 ">\n"
@@ -4816,6 +4816,8 @@ msgid ""
 "Removing the installed %1% in this context will remove (not replace!) the "
 "included PTF-packages too."
 msgstr ""
+"La supressió del PTF %1% instal·lat en aquest context també suprimirà (no "
+"substituirà!) els paquets PTF inclosos."
 
 #: zypp/solver/detail/SATResolver.cc:1318
 #, boost-format
@@ -4823,10 +4825,12 @@ msgid ""
 "The PTF should be removed by calling '%1%'. This will update the included "
 "PTF-packages rather than removing them."
 msgstr ""
+"El PTF s'hauria de suprimir cridant %1%. Això actualitzarà els paquets PTF "
+"inclosos en lloc de suprimir-los."
 
 #: zypp/solver/detail/SATResolver.cc:1319
 msgid "Typically you want to keep the PTF or choose to cancel the action."
-msgstr ""
+msgstr "Normalment, voleu mantenir el PTF o opteu per cancel·lar l'acció."
 
 #. translator: %1% is the name of a PTF.
 #: zypp/solver/detail/SATResolver.cc:1324
