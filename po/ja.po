@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-12-24 02:27+0100\n"
-"PO-Revision-Date: 2022-11-08 02:13+0000\n"
+"PO-Revision-Date: 2022-12-24 05:13+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
 "Language-Team: Japanese <https://l10n.opensuse.org/projects/zypper/master/ja/"
 ">\n"
@@ -2303,12 +2303,12 @@ msgstr "正しいパラメータが指定されていません。"
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/installremove.cc:312
 msgid "removeptf (rmptf) [OPTIONS] <PTF|CAPABILITY> ..."
-msgstr ""
+msgstr "removeptf (rmptf) [オプション] <PTF|能力設定> ..."
 
 #. translators: command summary: removeptf, rmptf
 #: src/commands/installremove.cc:314
 msgid "Remove (not only) PTFs."
-msgstr ""
+msgstr "PTF (および付随するもの) を削除します。"
 
 #. translators: command description
 #: src/commands/installremove.cc:316
@@ -2320,6 +2320,10 @@ msgid ""
 "the install command. It is the recommended way to remove a PTF (Program "
 "Temporary Fix)."
 msgstr ""
+"依存関係にあるパッケージの削除よりも置換を優先する削除コマンドです。実際に、 install コマンドで削除演算子 (-) "
+"を指定してインストールした場合と同じ動作になり、たとえば 'removeptf foo' は 'install -- -foo' の意味になります。なお、"
+" install コマンドと同じオプションを指定することができます。このコマンドは PTF (プログラム一時修正; Program Temporary "
+"Fix) を削除する際の推奨コマンドです。"
 
 #: src/commands/installremove.cc:317
 msgid ""
@@ -2329,6 +2333,9 @@ msgid ""
 "remove command would do. The removeptf command however will aim to replace "
 "the dependant packages by their official update versions."
 msgstr ""
+"通常、 PTF は対象のパッケージに公式な更新が公開されるとすぐに削除されますが、 PTF を削除しようとして通常の削除コマンドを実行してしまうと、 "
+"PTF だけでなく対象のパッケージまで削除してしまいます。 removeptf コマンドはこのような問題に対応するためのコマンドで、 PTF "
+"を公式の更新版に置き換えることを目的としたコマンドです。"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/listpatches.cc:16
