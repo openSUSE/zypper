@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.uk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-07 18:09+0100\n"
+"POT-Creation-Date: 2022-12-24 02:27+0100\n"
 "PO-Revision-Date: 2022-04-08 20:12+0000\n"
 "Last-Translator: Taras Panchenko <top39@ukr.net>\n"
 "Language-Team: Ukrainian <https://l10n.opensuse.org/projects/zypper/master/"
@@ -42,31 +42,31 @@ msgstr "Керування сервісами:"
 msgid "Software Management:"
 msgstr "Керування програмами:"
 
-#: src/Command.cc:131
+#: src/Command.cc:132
 msgid "Update Management:"
 msgstr "Керування оновленнями:"
 
-#: src/Command.cc:138
+#: src/Command.cc:139
 msgid "Querying:"
 msgstr "Запити:"
 
-#: src/Command.cc:149
+#: src/Command.cc:150
 msgid "Package Locks:"
 msgstr "Блокування пакунків:"
 
-#: src/Command.cc:154
+#: src/Command.cc:155
 msgid "Locale Management:"
 msgstr "Керування локалью:"
 
-#: src/Command.cc:158
+#: src/Command.cc:159
 msgid "Other Commands:"
 msgstr "Інші команди:"
 
-#: src/Command.cc:167
+#: src/Command.cc:168
 msgid "Subcommands:"
 msgstr "Підкоманди:"
 
-#: src/Command.cc:288
+#: src/Command.cc:289
 #, c-format, boost-format
 msgid "Unknown command '%s'"
 msgstr "Невідома команда \"%s\""
@@ -2046,36 +2046,30 @@ msgstr "Ім'я користувача"
 msgid "Password"
 msgstr "Пароль"
 
-#: src/callbacks/repo.h:49
+#: src/callbacks/repo.h:60
 msgid "Retrieving delta"
 msgstr "Отримання розбіжності"
 
 #. translators: this text is a progress display label e.g. "Applying delta foo [42%]"
-#: src/callbacks/repo.h:74
+#: src/callbacks/repo.h:85
 msgid "Applying delta"
 msgstr "Застосування розбіжності"
 
-#. TranslatorExplanation %s is package size like "5.6 M"
-#: src/callbacks/repo.h:103
-#, c-format, boost-format
-msgid "(%s unpacked)"
-msgstr "(%s розпаковано)"
-
-#: src/callbacks/repo.h:112
+#: src/callbacks/repo.h:123
 #, boost-format
 msgid "In cache %1%"
 msgstr "У кеші %1%"
 
-#: src/callbacks/repo.h:128
-#, c-format, boost-format
-msgid "Retrieving %s %s-%s.%s"
-msgstr "Отримання %s %s-%s.%s"
+#: src/callbacks/repo.h:139 src/output/OutNormal.cc:250
+#: src/output/OutNormal.cc:284 src/output/OutNormal.cc:324
+msgid "Retrieving:"
+msgstr "Отримання:"
 
-#: src/callbacks/repo.h:217
+#: src/callbacks/repo.h:225
 msgid "Signature verification failed"
 msgstr "Перевірка підпису зазнала невдачі"
 
-#: src/callbacks/repo.h:237
+#: src/callbacks/repo.h:245
 msgid "Accepting package despite the error."
 msgstr "Приймається пакунок, незважаючи на помилку."
 
@@ -2406,12 +2400,12 @@ msgstr ""
 "Вилучити пакунки з вказаною здатністю. Здатність - це запис у вигляді НАЗВА[."
 "АРХ][ДІЯ<ВЕРСІЯ>], де ДІЯ є одним з знаків порівняння <, <=, =, >=, >."
 
-#: src/commands/installremove.cc:104 src/commands/installremove.cc:224
+#: src/commands/installremove.cc:104 src/commands/installremove.cc:234
 #: src/utils/messages.cc:53
 msgid "Too few arguments."
 msgstr "Замало аргументів."
 
-#: src/commands/installremove.cc:105 src/commands/installremove.cc:225
+#: src/commands/installremove.cc:105 src/commands/installremove.cc:235
 msgid "At least one package name is required."
 msgstr "Потрібна хоча би одна назва пакунка."
 
@@ -2455,12 +2449,12 @@ msgstr ""
 "<, <=, =, >=, >."
 
 #. translators: --from <ALIAS|#|URI>
-#: src/commands/installremove.cc:185 src/commands/utils/download.cc:172
+#: src/commands/installremove.cc:195 src/commands/utils/download.cc:172
 msgid "Select packages from the specified repository."
 msgstr "Вибрати пакунки з вказаного сховища."
 
 #. translators: --oldpackage
-#: src/commands/installremove.cc:189
+#: src/commands/installremove.cc:199
 msgid ""
 "Allow to replace a newer item with an older one. Handy if you are doing a "
 "rollback. Unlike --force it will not enforce a reinstall."
@@ -2468,14 +2462,14 @@ msgstr ""
 "Дозволити заміну новішого елемента на старіший. Зручно для відкочування. На "
 "відміну від --force перевстановлення не виконується."
 
-#: src/commands/installremove.cc:193
+#: src/commands/installremove.cc:203
 msgid "Silently install unsigned rpm packages given as commandline parameters."
 msgstr ""
 "Тихо встановлювати непідписані пакунки rpm, задані параметрами командного "
 "рядка."
 
 #. translators: -f, --force
-#: src/commands/installremove.cc:198
+#: src/commands/installremove.cc:208
 msgid ""
 "Install even if the item is already installed (reinstall), downgraded or "
 "changes vendor or architecture."
@@ -2485,13 +2479,43 @@ msgstr ""
 
 #. translators: rug related message, shown if
 #. 'zypper in --entire-catalog foorepo someargument' is specified
-#: src/commands/installremove.cc:236
+#: src/commands/installremove.cc:246
 msgid "Ignoring arguments, marking the entire repository."
 msgstr "Аргументи буде зігноровано, позначається ціле сховище."
 
-#: src/commands/installremove.cc:249 src/commands/sourceinstall.cc:92
+#: src/commands/installremove.cc:259 src/commands/sourceinstall.cc:92
 msgid "No valid arguments specified."
 msgstr "Не вказано дійсні аргументи."
+
+#. translators: command synopsis; do not translate lowercase words
+#: src/commands/installremove.cc:312
+msgid "removeptf (rmptf) [OPTIONS] <PTF|CAPABILITY> ..."
+msgstr ""
+
+#. translators: command summary: removeptf, rmptf
+#: src/commands/installremove.cc:314
+msgid "Remove (not only) PTFs."
+msgstr ""
+
+#. translators: command description
+#: src/commands/installremove.cc:316
+msgid ""
+"A remove command which prefers replacing dependant packages to removing them "
+"as well. In fact this is a full featured install command with the remove "
+"modifier (-) applied to its plain arguments. So 'removeptf foo' is the same "
+"as 'install -- -foo'. This is why the command accepts the same options as "
+"the install command. It is the recommended way to remove a PTF (Program "
+"Temporary Fix)."
+msgstr ""
+
+#: src/commands/installremove.cc:317
+msgid ""
+"A PTF is typically removed as soon as the fix it provides is applied to the "
+"latest official update of the dependant packages. But you don't want the "
+"dependant packages to be removed together with the PTF, which is what the "
+"remove command would do. The removeptf command however will aim to replace "
+"the dependant packages by their official update versions."
+msgstr ""
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/listpatches.cc:16
@@ -2724,8 +2748,8 @@ msgstr[2] "Вилучено %lu блокувань."
 #: src/commands/locks/list.cc:135 src/commands/repos/list.cc:41
 #: src/commands/repos/list.cc:223 src/commands/services/list.cc:105
 #: src/info.cc:88 src/info.cc:456 src/info.cc:691 src/locales.cc:201
-#: src/search.cc:48 src/search.cc:199 src/search.cc:304 src/search.cc:436
-#: src/search.cc:483 src/update.cc:789 src/utils/misc.cc:325
+#: src/search.cc:48 src/search.cc:199 src/search.cc:304 src/search.cc:439
+#: src/search.cc:486 src/update.cc:789 src/utils/misc.cc:325
 msgid "Name"
 msgstr "Назва"
 
@@ -2744,7 +2768,7 @@ msgstr "Тип"
 #. translators: property name; short; used like "Name: value"
 #. translators: package's repository (header)
 #: src/commands/locks/list.cc:138 src/info.cc:86 src/search.cc:56
-#: src/search.cc:306 src/search.cc:435 src/search.cc:479 src/update.cc:786
+#: src/search.cc:306 src/search.cc:438 src/search.cc:482 src/update.cc:786
 #: src/utils/misc.cc:324
 msgid "Repository"
 msgstr "Сховище"
@@ -5092,7 +5116,7 @@ msgstr ""
 msgid "Argument resolves to no package"
 msgstr "Аргумент не відповідає жодному пакунку"
 
-#: src/commands/utils/download.cc:254 src/solve-commit.cc:1025
+#: src/commands/utils/download.cc:254 src/solve-commit.cc:1023
 msgid "Nothing to do."
 msgstr "Нема що робити."
 
@@ -5108,12 +5132,12 @@ msgstr "Обрізування до кращої версії…"
 msgid "Not downloading anything..."
 msgstr "Не завантажую нічого…"
 
-#: src/commands/utils/download.cc:316
+#: src/commands/utils/download.cc:315
 #, c-format, boost-format
 msgid "Error downloading package '%s'."
 msgstr "Помилка завантаження пакунка \"%s\"."
 
-#: src/commands/utils/download.cc:330
+#: src/commands/utils/download.cc:329
 #, c-format, boost-format
 msgid "Not downloading package '%s'."
 msgstr "Не завантажується пакунок \"%s\"."
@@ -5255,35 +5279,35 @@ msgstr "Завантаження потрібних сирцевих пакун�
 msgid "Source package '%s' is not provided by any repository."
 msgstr "Сирцевий пакунок \"%s\" не надається жодним сховищем."
 
-#: src/commands/utils/source-download.cc:447
-#: src/commands/utils/source-download.cc:461
+#: src/commands/utils/source-download.cc:446
+#: src/commands/utils/source-download.cc:460
 #, c-format, boost-format
 msgid "Error downloading source package '%s'."
 msgstr "Помилка завантаження сирцевого пакунку \"%s\"."
 
-#: src/commands/utils/source-download.cc:472
+#: src/commands/utils/source-download.cc:471
 msgid "No source packages to download."
 msgstr "Відсутні сирцеві пакунки для завантаження."
 
 #. translators: command summary: source-download
 #. translators: command description
-#: src/commands/utils/source-download.cc:482
-#: src/commands/utils/source-download.cc:484
+#: src/commands/utils/source-download.cc:481
+#: src/commands/utils/source-download.cc:483
 msgid "Download source rpms for all installed packages to a local directory."
 msgstr "Завантажити rpm з сирцями для всіх пакунків у локальну директорію."
 
 #. translators: -d, --directory <DIR>
-#: src/commands/utils/source-download.cc:496
+#: src/commands/utils/source-download.cc:495
 msgid "Download all source rpms to this directory."
 msgstr "Завантажити усі rpm з сирцями у цю директорію."
 
 #. translators: --delete/--no-delete
-#: src/commands/utils/source-download.cc:502
+#: src/commands/utils/source-download.cc:501
 msgid "Whether to delete extraneous source rpms in the local directory."
 msgstr "Чи слід видаляти сторонні сирцеві пакунки з локальної директорії."
 
 #. translators: --status
-#: src/commands/utils/source-download.cc:506
+#: src/commands/utils/source-download.cc:505
 msgid ""
 "Don't download any source rpms, but show which source rpms are missing or "
 "extraneous."
@@ -5292,12 +5316,12 @@ msgstr ""
 "зайвими."
 
 #. translators: --status
-#: src/commands/utils/source-download.cc:512
+#: src/commands/utils/source-download.cc:511
 msgid "Write a manifest file."
 msgstr "Записати файл маніфесту."
 
 #. translators: --status
-#: src/commands/utils/source-download.cc:516
+#: src/commands/utils/source-download.cc:515
 msgid "Disable writing a manifest file."
 msgstr "Вимкнути запис файлів маніфесту."
 
@@ -5377,13 +5401,13 @@ msgstr "%s старіший за %s"
 #. translators: Table column header
 #. translators: package version (header)
 #: src/info.cc:90 src/info.cc:692 src/search.cc:52 src/search.cc:305
-#: src/search.cc:437 src/search.cc:484
+#: src/search.cc:440 src/search.cc:487
 msgid "Version"
 msgstr "Версія"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: package architecture (header)
-#: src/info.cc:92 src/search.cc:54 src/search.cc:438 src/search.cc:485
+#: src/info.cc:92 src/search.cc:54 src/search.cc:441 src/search.cc:488
 #: src/update.cc:795
 msgid "Arch"
 msgstr "Арх."
@@ -5505,7 +5529,7 @@ msgstr "(порожній)"
 #. translators: S for installed Status
 #. TranslatorExplanation S stands for Status
 #: src/info.cc:455 src/info.cc:690 src/locales.cc:199 src/search.cc:46
-#: src/search.cc:198 src/search.cc:303 src/search.cc:434 src/search.cc:478
+#: src/search.cc:198 src/search.cc:303 src/search.cc:437 src/search.cc:481
 #: src/update.cc:784
 msgid "S"
 msgstr "S"
@@ -5548,7 +5572,7 @@ msgid "Flavor"
 msgstr "Вид"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:551 src/search.cc:486
+#: src/info.cc:551 src/search.cc:489
 msgid "Is Base"
 msgstr "Базується"
 
@@ -5755,20 +5779,20 @@ msgstr "Проблема встановлення сирцевого пакун�
 
 #. translator: Shown as result tag in a progress bar: ............[done]
 #. Translator: download progress bar result: ".............[done]"
-#: src/output/Out.cc:122 src/output/OutNormal.cc:334
-#: src/output/OutNormal.cc:337
+#: src/output/Out.cc:120 src/output/OutNormal.cc:339
+#: src/output/OutNormal.cc:342
 msgid "done"
 msgstr "завершено"
 
 #. translator: Shown as result tag in a progress bar: .......[attention]
-#: src/output/Out.cc:124
+#: src/output/Out.cc:122
 msgid "attention"
 msgstr "увага"
 
 #. translator: Shown as result tag in a progress bar: ...........[error]
 #. Translator: download progress bar result: "............[error]"
-#: src/output/Out.cc:126 src/output/OutNormal.cc:331
-#: src/output/OutNormal.cc:337
+#: src/output/Out.cc:124 src/output/OutNormal.cc:336
+#: src/output/OutNormal.cc:342
 msgid "error"
 msgstr "помилка"
 
@@ -5802,26 +5826,21 @@ msgstr "Продовжити?"
 msgid "Warning: "
 msgstr "Попередження: "
 
-#: src/output/OutNormal.cc:247 src/output/OutNormal.cc:281
-#: src/output/OutNormal.cc:319
-msgid "Retrieving:"
-msgstr "Отримання:"
-
 # window title for kernel loading (see txt_load_kernel)
-#: src/output/OutNormal.cc:254
+#: src/output/OutNormal.cc:257
 msgid "starting"
 msgstr "запуск"
 
 #. Translator: download progress bar result: "........[not found]"
-#: src/output/OutNormal.cc:328 src/output/OutNormal.cc:337
+#: src/output/OutNormal.cc:333 src/output/OutNormal.cc:342
 msgid "not found"
 msgstr "не знайдено"
 
-#: src/output/OutNormal.cc:414
+#: src/output/OutNormal.cc:419
 msgid "No help available for this prompt."
 msgstr "Для цього запрошення немає довідки."
 
-#: src/output/OutNormal.cc:431
+#: src/output/OutNormal.cc:436
 msgid "no help available for this option"
 msgstr "для цього параметра немає довідки"
 
@@ -5918,8 +5937,8 @@ msgstr "Помилка вимикання сховища \"%s\"."
 msgid "Problem retrieving files from '%s'."
 msgstr "Проблема зі звантаженням файлів з \"%s\"."
 
-#: src/repos.cc:345 src/repos.cc:1867 src/solve-commit.cc:900
-#: src/solve-commit.cc:931 src/solve-commit.cc:955
+#: src/repos.cc:345 src/repos.cc:1867 src/solve-commit.cc:898
+#: src/solve-commit.cc:929 src/solve-commit.cc:953
 msgid "Please see the above error message for a hint."
 msgstr ""
 "Будь ласка, прочитайте повідомлення про помилку, розміщене вище, щоб краще "
@@ -6369,21 +6388,21 @@ msgstr "Системні пакунки"
 msgid "No needed patches found."
 msgstr "Не знайдено потрібних латок."
 
-#: src/search.cc:340
+#: src/search.cc:343
 msgid "No patterns found."
 msgstr "Не знайдено шаблонів."
 
-#: src/search.cc:428
+#: src/search.cc:431
 msgid "No packages found."
 msgstr "Не знайдено пакунків."
 
 #. translators: used in products. Internal Name is the unix name of the
 #. product whereas simply Name is the official full name of the product.
-#: src/search.cc:482
+#: src/search.cc:485
 msgid "Internal Name"
 msgstr "Внутрішня назва"
 
-#: src/search.cc:520
+#: src/search.cc:523
 msgid "No products found."
 msgstr "Не знайдено продуктів."
 
@@ -6663,25 +6682,25 @@ msgstr "Перемкнути показ всіх подробиць або ма�
 msgid "View the summary in pager."
 msgstr "Перегляд зведення в пейджері."
 
-#: src/solve-commit.cc:868
+#: src/solve-commit.cc:867
 msgid "committing"
 msgstr "передається"
 
-#: src/solve-commit.cc:870
+#: src/solve-commit.cc:869
 msgid "(dry run)"
 msgstr "(пробний прогін)"
 
-#: src/solve-commit.cc:899 src/solve-commit.cc:932
+#: src/solve-commit.cc:897 src/solve-commit.cc:930
 msgid "Problem retrieving the package file from the repository:"
 msgstr "Проблема зі звантаженням файла пакунка зі сховища:"
 
 #. translators: the first %s is 'zypper refresh' and the second is repo alias
-#: src/solve-commit.cc:929
+#: src/solve-commit.cc:927
 #, c-format, boost-format
 msgid "Repository '%s' is out of date. Running '%s' might help."
 msgstr "Дані сховища \"%s\" застаріли. Запуск \"%s\" має допомогти."
 
-#: src/solve-commit.cc:940
+#: src/solve-commit.cc:938
 msgid ""
 "The package integrity check failed. This may be a problem with the "
 "repository or media. Try one of the following:\n"
@@ -6699,11 +6718,11 @@ msgstr ""
 "- замініть носій встановлення (якщо пошкоджений)\n"
 "- скористайтесь іншим сховищем"
 
-#: src/solve-commit.cc:954
+#: src/solve-commit.cc:952
 msgid "Problem occurred during or after installation or removal of packages:"
 msgstr "Під час або після встановлення або вилучення пакунків сталася помилка:"
 
-#: src/solve-commit.cc:993
+#: src/solve-commit.cc:991
 msgid ""
 "One of the installed patches requires a reboot of your machine. Reboot as "
 "soon as possible."
@@ -6711,7 +6730,7 @@ msgstr ""
 "Одна з встановлених латок потребує перезапуску вашого комп'ютера. Будь "
 "ласка, зробіть це якомога швидше."
 
-#: src/solve-commit.cc:1001
+#: src/solve-commit.cc:999
 msgid ""
 "One of the installed patches affects the package manager itself. Run this "
 "command once more to install any other needed patches."
@@ -6719,7 +6738,7 @@ msgstr ""
 "Одна з встановлених латок стосується самого менеджера пакунків. Знову "
 "запустіть цю команду, щоб встановити інші потрібні пакунки."
 
-#: src/solve-commit.cc:1023
+#: src/solve-commit.cc:1021
 msgid "Dependencies of all installed packages are satisfied."
 msgstr "Залежності всіх встановлених пакунків задоволено."
 
@@ -7414,6 +7433,12 @@ msgstr "Недійсний об'єкт"
 #: src/utils/prompt.h:192
 msgid "Error"
 msgstr "Помилка"
+
+#~ msgid "(%s unpacked)"
+#~ msgstr "(%s розпаковано)"
+
+#~ msgid "Retrieving %s %s-%s.%s"
+#~ msgstr "Отримання %s %s-%s.%s"
 
 #~ msgid "Service aliased '%s' already exists. Please use another alias."
 #~ msgstr ""

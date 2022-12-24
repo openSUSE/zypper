@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-07 18:09+0100\n"
+"POT-Creation-Date: 2022-12-24 02:27+0100\n"
 "PO-Revision-Date: 2008-11-17 23:32+0700\n"
 "Last-Translator: Thanomsub Noppaburana <donga.nb@gmail.com>\n"
 "Language-Team: Thai <thai-l10n@googlegroups.com>\n"
@@ -33,31 +33,31 @@ msgstr "การจัดการบริการ:"
 msgid "Software Management:"
 msgstr "การจัดการซอฟต์แวร์:"
 
-#: src/Command.cc:131
+#: src/Command.cc:132
 msgid "Update Management:"
 msgstr "การจัดการปรับรุ่น:"
 
-#: src/Command.cc:138
+#: src/Command.cc:139
 msgid "Querying:"
 msgstr "การค้นข้อมูล:"
 
-#: src/Command.cc:149
+#: src/Command.cc:150
 msgid "Package Locks:"
 msgstr ""
 
-#: src/Command.cc:154
+#: src/Command.cc:155
 msgid "Locale Management:"
 msgstr ""
 
-#: src/Command.cc:158
+#: src/Command.cc:159
 msgid "Other Commands:"
 msgstr ""
 
-#: src/Command.cc:167
+#: src/Command.cc:168
 msgid "Subcommands:"
 msgstr ""
 
-#: src/Command.cc:288
+#: src/Command.cc:289
 #, c-format, boost-format
 msgid "Unknown command '%s'"
 msgstr "ไม่รู้จักคำสั่ง '%s'"
@@ -1772,37 +1772,31 @@ msgstr "ชื่อผู้ใช้"
 msgid "Password"
 msgstr "รหัสผ่าน"
 
-#: src/callbacks/repo.h:49
+#: src/callbacks/repo.h:60
 msgid "Retrieving delta"
 msgstr "กำลังรับแฟ้ม delta"
 
 #. translators: this text is a progress display label e.g. "Applying delta foo [42%]"
-#: src/callbacks/repo.h:74
+#: src/callbacks/repo.h:85
 msgid "Applying delta"
 msgstr "กำลังปรับใช้แฟ้ม delta"
 
-#. TranslatorExplanation %s is package size like "5.6 M"
-#: src/callbacks/repo.h:103
-#, c-format, boost-format
-msgid "(%s unpacked)"
-msgstr "(ขนาดที่ยังไม่ขยาย %s)"
-
-#: src/callbacks/repo.h:112
+#: src/callbacks/repo.h:123
 #, boost-format
 msgid "In cache %1%"
 msgstr ""
 
-#: src/callbacks/repo.h:128
-#, c-format, boost-format
-msgid "Retrieving %s %s-%s.%s"
-msgstr "กำลังรับข้อมูล %s %s-%s.%s"
+#: src/callbacks/repo.h:139 src/output/OutNormal.cc:250
+#: src/output/OutNormal.cc:284 src/output/OutNormal.cc:324
+msgid "Retrieving:"
+msgstr "กำลังรับข้อมูล:"
 
-#: src/callbacks/repo.h:217
+#: src/callbacks/repo.h:225
 #, fuzzy
 msgid "Signature verification failed"
 msgstr "ไม่สนใจต่อความล้มเหลวในการตรวจสอบลายเซ็นของแฟ้ม '%s' !"
 
-#: src/callbacks/repo.h:237
+#: src/callbacks/repo.h:245
 msgid "Accepting package despite the error."
 msgstr ""
 
@@ -2097,12 +2091,12 @@ msgid ""
 "[OP<VERSION>], where OP is one of <, <=, =, >=, >."
 msgstr ""
 
-#: src/commands/installremove.cc:104 src/commands/installremove.cc:224
+#: src/commands/installremove.cc:104 src/commands/installremove.cc:234
 #: src/utils/messages.cc:53
 msgid "Too few arguments."
 msgstr "มีอาร์กิวเมนต์น้อยเกินไป"
 
-#: src/commands/installremove.cc:105 src/commands/installremove.cc:225
+#: src/commands/installremove.cc:105 src/commands/installremove.cc:235
 msgid "At least one package name is required."
 msgstr "ต้องการให้ระบุชื่อแพกเกจอย่างน้อยหนึ่งชื่อ"
 
@@ -2144,23 +2138,23 @@ msgid ""
 msgstr ""
 
 #. translators: --from <ALIAS|#|URI>
-#: src/commands/installremove.cc:185 src/commands/utils/download.cc:172
+#: src/commands/installremove.cc:195 src/commands/utils/download.cc:172
 msgid "Select packages from the specified repository."
 msgstr ""
 
 #. translators: --oldpackage
-#: src/commands/installremove.cc:189
+#: src/commands/installremove.cc:199
 msgid ""
 "Allow to replace a newer item with an older one. Handy if you are doing a "
 "rollback. Unlike --force it will not enforce a reinstall."
 msgstr ""
 
-#: src/commands/installremove.cc:193
+#: src/commands/installremove.cc:203
 msgid "Silently install unsigned rpm packages given as commandline parameters."
 msgstr ""
 
 #. translators: -f, --force
-#: src/commands/installremove.cc:198
+#: src/commands/installremove.cc:208
 msgid ""
 "Install even if the item is already installed (reinstall), downgraded or "
 "changes vendor or architecture."
@@ -2168,13 +2162,43 @@ msgstr ""
 
 #. translators: rug related message, shown if
 #. 'zypper in --entire-catalog foorepo someargument' is specified
-#: src/commands/installremove.cc:236
+#: src/commands/installremove.cc:246
 msgid "Ignoring arguments, marking the entire repository."
 msgstr ""
 
-#: src/commands/installremove.cc:249 src/commands/sourceinstall.cc:92
+#: src/commands/installremove.cc:259 src/commands/sourceinstall.cc:92
 msgid "No valid arguments specified."
 msgstr "ยังไม่มีการระบุอาร์กิวเมนต์ที่ใช้ได้"
+
+#. translators: command synopsis; do not translate lowercase words
+#: src/commands/installremove.cc:312
+msgid "removeptf (rmptf) [OPTIONS] <PTF|CAPABILITY> ..."
+msgstr ""
+
+#. translators: command summary: removeptf, rmptf
+#: src/commands/installremove.cc:314
+msgid "Remove (not only) PTFs."
+msgstr ""
+
+#. translators: command description
+#: src/commands/installremove.cc:316
+msgid ""
+"A remove command which prefers replacing dependant packages to removing them "
+"as well. In fact this is a full featured install command with the remove "
+"modifier (-) applied to its plain arguments. So 'removeptf foo' is the same "
+"as 'install -- -foo'. This is why the command accepts the same options as "
+"the install command. It is the recommended way to remove a PTF (Program "
+"Temporary Fix)."
+msgstr ""
+
+#: src/commands/installremove.cc:317
+msgid ""
+"A PTF is typically removed as soon as the fix it provides is applied to the "
+"latest official update of the dependant packages. But you don't want the "
+"dependant packages to be removed together with the PTF, which is what the "
+"remove command would do. The removeptf command however will aim to replace "
+"the dependant packages by their official update versions."
+msgstr ""
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/listpatches.cc:16
@@ -2388,8 +2412,8 @@ msgstr[0] "เอาออกทั้งหมด"
 #: src/commands/locks/list.cc:135 src/commands/repos/list.cc:41
 #: src/commands/repos/list.cc:223 src/commands/services/list.cc:105
 #: src/info.cc:88 src/info.cc:456 src/info.cc:691 src/locales.cc:201
-#: src/search.cc:48 src/search.cc:199 src/search.cc:304 src/search.cc:436
-#: src/search.cc:483 src/update.cc:789 src/utils/misc.cc:325
+#: src/search.cc:48 src/search.cc:199 src/search.cc:304 src/search.cc:439
+#: src/search.cc:486 src/update.cc:789 src/utils/misc.cc:325
 msgid "Name"
 msgstr "ชื่อ"
 
@@ -2409,7 +2433,7 @@ msgstr "ประเภท"
 #. translators: property name; short; used like "Name: value"
 #. translators: package's repository (header)
 #: src/commands/locks/list.cc:138 src/info.cc:86 src/search.cc:56
-#: src/search.cc:306 src/search.cc:435 src/search.cc:479 src/update.cc:786
+#: src/search.cc:306 src/search.cc:438 src/search.cc:482 src/update.cc:786
 #: src/utils/misc.cc:324
 msgid "Repository"
 msgstr "คลังแพกเกจ"
@@ -4632,7 +4656,7 @@ msgstr ""
 msgid "Argument resolves to no package"
 msgstr ""
 
-#: src/commands/utils/download.cc:254 src/solve-commit.cc:1025
+#: src/commands/utils/download.cc:254 src/solve-commit.cc:1023
 msgid "Nothing to do."
 msgstr "ไม่มีอะไรต้องทำ"
 
@@ -4650,12 +4674,12 @@ msgstr ""
 msgid "Not downloading anything..."
 msgstr "กำลังดาวน์โหลดแฟ้ม..."
 
-#: src/commands/utils/download.cc:316
+#: src/commands/utils/download.cc:315
 #, fuzzy, c-format, boost-format
 msgid "Error downloading package '%s'."
 msgstr "กำลังติดตั้งแพกเกจต้นฉบับ %s-%s"
 
-#: src/commands/utils/download.cc:330
+#: src/commands/utils/download.cc:329
 #, fuzzy, c-format, boost-format
 msgid "Not downloading package '%s'."
 msgstr "กำลังติดตั้งแพกเกจต้นฉบับ %s-%s"
@@ -4798,48 +4822,48 @@ msgstr "อ่านข้อมูลแพกเกจที่ติดตั
 msgid "Source package '%s' is not provided by any repository."
 msgstr "ไม่พบแพกเกจต้นฉบับ '%s'"
 
-#: src/commands/utils/source-download.cc:447
-#: src/commands/utils/source-download.cc:461
+#: src/commands/utils/source-download.cc:446
+#: src/commands/utils/source-download.cc:460
 #, fuzzy, c-format, boost-format
 msgid "Error downloading source package '%s'."
 msgstr "กำลังติดตั้งแพกเกจต้นฉบับ %s-%s"
 
-#: src/commands/utils/source-download.cc:472
+#: src/commands/utils/source-download.cc:471
 #, fuzzy
 msgid "No source packages to download."
 msgstr "รายการแพกเกจที่จะติดตั้ง"
 
 #. translators: command summary: source-download
 #. translators: command description
-#: src/commands/utils/source-download.cc:482
-#: src/commands/utils/source-download.cc:484
+#: src/commands/utils/source-download.cc:481
+#: src/commands/utils/source-download.cc:483
 msgid "Download source rpms for all installed packages to a local directory."
 msgstr ""
 
 #. translators: -d, --directory <DIR>
-#: src/commands/utils/source-download.cc:496
+#: src/commands/utils/source-download.cc:495
 msgid "Download all source rpms to this directory."
 msgstr ""
 
 #. translators: --delete/--no-delete
-#: src/commands/utils/source-download.cc:502
+#: src/commands/utils/source-download.cc:501
 msgid "Whether to delete extraneous source rpms in the local directory."
 msgstr ""
 
 #. translators: --status
-#: src/commands/utils/source-download.cc:506
+#: src/commands/utils/source-download.cc:505
 msgid ""
 "Don't download any source rpms, but show which source rpms are missing or "
 "extraneous."
 msgstr ""
 
 #. translators: --status
-#: src/commands/utils/source-download.cc:512
+#: src/commands/utils/source-download.cc:511
 msgid "Write a manifest file."
 msgstr ""
 
 #. translators: --status
-#: src/commands/utils/source-download.cc:516
+#: src/commands/utils/source-download.cc:515
 msgid "Disable writing a manifest file."
 msgstr ""
 
@@ -4917,13 +4941,13 @@ msgstr "%s เก่ากว่า %s"
 #. translators: Table column header
 #. translators: package version (header)
 #: src/info.cc:90 src/info.cc:692 src/search.cc:52 src/search.cc:305
-#: src/search.cc:437 src/search.cc:484
+#: src/search.cc:440 src/search.cc:487
 msgid "Version"
 msgstr "รุ่น"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: package architecture (header)
-#: src/info.cc:92 src/search.cc:54 src/search.cc:438 src/search.cc:485
+#: src/info.cc:92 src/search.cc:54 src/search.cc:441 src/search.cc:488
 #: src/update.cc:795
 msgid "Arch"
 msgstr "สถาปัตยกรรม"
@@ -5046,7 +5070,7 @@ msgstr "(ว่าง)"
 #. translators: S for installed Status
 #. TranslatorExplanation S stands for Status
 #: src/info.cc:455 src/info.cc:690 src/locales.cc:199 src/search.cc:46
-#: src/search.cc:198 src/search.cc:303 src/search.cc:434 src/search.cc:478
+#: src/search.cc:198 src/search.cc:303 src/search.cc:437 src/search.cc:481
 #: src/update.cc:784
 msgid "S"
 msgstr "สถานะ"
@@ -5090,7 +5114,7 @@ msgid "Flavor"
 msgstr ""
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:551 src/search.cc:486
+#: src/info.cc:551 src/search.cc:489
 msgid "Is Base"
 msgstr ""
 
@@ -5299,20 +5323,20 @@ msgstr "เกิดปัญหาในการติดตั้งแพก
 
 #. translator: Shown as result tag in a progress bar: ............[done]
 #. Translator: download progress bar result: ".............[done]"
-#: src/output/Out.cc:122 src/output/OutNormal.cc:334
-#: src/output/OutNormal.cc:337
+#: src/output/Out.cc:120 src/output/OutNormal.cc:339
+#: src/output/OutNormal.cc:342
 msgid "done"
 msgstr "เสร็จแล้ว"
 
 #. translator: Shown as result tag in a progress bar: .......[attention]
-#: src/output/Out.cc:124
+#: src/output/Out.cc:122
 msgid "attention"
 msgstr ""
 
 #. translator: Shown as result tag in a progress bar: ...........[error]
 #. Translator: download progress bar result: "............[error]"
-#: src/output/Out.cc:126 src/output/OutNormal.cc:331
-#: src/output/OutNormal.cc:337
+#: src/output/Out.cc:124 src/output/OutNormal.cc:336
+#: src/output/OutNormal.cc:342
 msgid "error"
 msgstr "ผิดพลาด"
 
@@ -5347,26 +5371,21 @@ msgstr "ทำต่อไปหรือไม่ ?"
 msgid "Warning: "
 msgstr "แจ้งเตือน: "
 
-#: src/output/OutNormal.cc:247 src/output/OutNormal.cc:281
-#: src/output/OutNormal.cc:319
-msgid "Retrieving:"
-msgstr "กำลังรับข้อมูล:"
-
-#: src/output/OutNormal.cc:254
+#: src/output/OutNormal.cc:257
 msgid "starting"
 msgstr "กำลังเริ่ม"
 
 #. Translator: download progress bar result: "........[not found]"
-#: src/output/OutNormal.cc:328 src/output/OutNormal.cc:337
+#: src/output/OutNormal.cc:333 src/output/OutNormal.cc:342
 #, fuzzy
 msgid "not found"
 msgstr "ไม่พบ"
 
-#: src/output/OutNormal.cc:414
+#: src/output/OutNormal.cc:419
 msgid "No help available for this prompt."
 msgstr "ไม่พบข้อความช่วยเหลือของส่วนนี้"
 
-#: src/output/OutNormal.cc:431
+#: src/output/OutNormal.cc:436
 msgid "no help available for this option"
 msgstr "ไม่พบข้อความช่วยเหลือของตัวเลือกนี้"
 
@@ -5459,8 +5478,8 @@ msgstr "ทำการปิดการใช้งานคลังแพก
 msgid "Problem retrieving files from '%s'."
 msgstr "เกิดปัญหาในการรับแฟ้มจาก '%s'"
 
-#: src/repos.cc:345 src/repos.cc:1867 src/solve-commit.cc:900
-#: src/solve-commit.cc:931 src/solve-commit.cc:955
+#: src/repos.cc:345 src/repos.cc:1867 src/solve-commit.cc:898
+#: src/solve-commit.cc:929 src/solve-commit.cc:953
 msgid "Please see the above error message for a hint."
 msgstr "โปรดดูข้อความผิดพลาดด้านบนเพื่อช่วยในการแก้ปัญหา"
 
@@ -5901,22 +5920,22 @@ msgstr "แพกเกจระบบ"
 msgid "No needed patches found."
 msgstr "ไม่พบแพตช์ที่จำเป็นต้องใช้ใด ๆ"
 
-#: src/search.cc:340
+#: src/search.cc:343
 msgid "No patterns found."
 msgstr "ไม่พบชุดรูปแบบใด ๆ"
 
-#: src/search.cc:428
+#: src/search.cc:431
 msgid "No packages found."
 msgstr "ไม่พบแพกเกจใด ๆ"
 
 #. translators: used in products. Internal Name is the unix name of the
 #. product whereas simply Name is the official full name of the product.
-#: src/search.cc:482
+#: src/search.cc:485
 #, fuzzy
 msgid "Internal Name"
 msgstr "ชื่อส่วนเชื่อมต่อ"
 
-#: src/search.cc:520
+#: src/search.cc:523
 msgid "No products found."
 msgstr "ไม่พบผลิตภัณฑ์ใด ๆ"
 
@@ -6171,25 +6190,25 @@ msgstr ""
 msgid "View the summary in pager."
 msgstr ""
 
-#: src/solve-commit.cc:868
+#: src/solve-commit.cc:867
 msgid "committing"
 msgstr "ทำการมอบหมาย"
 
-#: src/solve-commit.cc:870
+#: src/solve-commit.cc:869
 msgid "(dry run)"
 msgstr "(ประมวลผลแห้ง)"
 
-#: src/solve-commit.cc:899 src/solve-commit.cc:932
+#: src/solve-commit.cc:897 src/solve-commit.cc:930
 msgid "Problem retrieving the package file from the repository:"
 msgstr "เกิดปัญหาขึ้นในการรับแฟ้มแพกเกจจากคลังแพกเกจ:"
 
 #. translators: the first %s is 'zypper refresh' and the second is repo alias
-#: src/solve-commit.cc:929
+#: src/solve-commit.cc:927
 #, c-format, boost-format
 msgid "Repository '%s' is out of date. Running '%s' might help."
 msgstr "คลังแพกเกจ '%s' ล้าสมัยแล้ว การเรียกคำสั่ง '%s' อาจจะช่วยได้"
 
-#: src/solve-commit.cc:940
+#: src/solve-commit.cc:938
 msgid ""
 "The package integrity check failed. This may be a problem with the "
 "repository or media. Try one of the following:\n"
@@ -6207,11 +6226,11 @@ msgstr ""
 "- เปลี่ยนไปใช้สื่อการติดตั้งอื่น (เช่น หากสื่อเดิมที่ใช้เสียหาย)\n"
 "- เปลี่ยนไปใช้คลังแพกเกจอื่น"
 
-#: src/solve-commit.cc:954
+#: src/solve-commit.cc:952
 msgid "Problem occurred during or after installation or removal of packages:"
 msgstr "เกิดปัญหาขึ้นในระหว่างหรือหลังจากการติดตั้งหรือถอนการติดตั้งแพกเกจ:"
 
-#: src/solve-commit.cc:993
+#: src/solve-commit.cc:991
 msgid ""
 "One of the installed patches requires a reboot of your machine. Reboot as "
 "soon as possible."
@@ -6219,7 +6238,7 @@ msgstr ""
 "มีแพตช์ที่ถูกติดตั้งตัวหนึ่งที่ต้องการการเริ่มระบบของเครื่องคุณใหม่อีกครั้ง "
 "โปรดทำการเริ่มระบบใหม่ให้เร็วที่สุดเท่าที่จะทำได้"
 
-#: src/solve-commit.cc:1001
+#: src/solve-commit.cc:999
 msgid ""
 "One of the installed patches affects the package manager itself. Run this "
 "command once more to install any other needed patches."
@@ -6227,7 +6246,7 @@ msgstr ""
 "มีแพตช์ที่ถูกติดตั้งตัวหนึ่งที่มีผลกระทบกับตัวจัดการแพกเกจด้วย โปรดสั่งคำสั่งนี้ใหม่อีกครั้ง "
 "เพื่อติดตั้งแพตช์ที่จำเป็นต้องใช้ตัวอื่น ๆ"
 
-#: src/solve-commit.cc:1023
+#: src/solve-commit.cc:1021
 msgid "Dependencies of all installed packages are satisfied."
 msgstr "ความเกี่ยวพันกันของแพกเกจที่ถูกติดตั้งไว้แล้วทั้งหมด ไม่มีปัญหาใด ๆ"
 
@@ -6882,6 +6901,12 @@ msgstr "วัตถุใช้งานไม่ได้"
 #: src/utils/prompt.h:192
 msgid "Error"
 msgstr "ผิดพลาด"
+
+#~ msgid "(%s unpacked)"
+#~ msgstr "(ขนาดที่ยังไม่ขยาย %s)"
+
+#~ msgid "Retrieving %s %s-%s.%s"
+#~ msgstr "กำลังรับข้อมูล %s %s-%s.%s"
 
 #~ msgid "Service aliased '%s' already exists. Please use another alias."
 #~ msgstr "มีชื่อเรียกอื่น '%s' ของบริการอยู่แล้ว โปรดใช้ชื่อเรียกอื่นของบริการ"

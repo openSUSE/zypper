@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-07 18:09+0100\n"
+"POT-Creation-Date: 2022-12-24 02:27+0100\n"
 "PO-Revision-Date: 2019-03-21 12:49+0000\n"
 "Last-Translator: Iman Abd Elaziz <Iman.AbdelAziz@arabize.com>\n"
 "Language-Team: Arabic <https://l10n.opensuse.org/projects/zypper/master/ar/"
@@ -40,31 +40,31 @@ msgstr "إدارة الخدمات:"
 msgid "Software Management:"
 msgstr "إدارة البرامج:"
 
-#: src/Command.cc:131
+#: src/Command.cc:132
 msgid "Update Management:"
 msgstr "إدارة التحديثات:"
 
-#: src/Command.cc:138
+#: src/Command.cc:139
 msgid "Querying:"
 msgstr "الاستعلام:"
 
-#: src/Command.cc:149
+#: src/Command.cc:150
 msgid "Package Locks:"
 msgstr "أقفال الحزم:"
 
-#: src/Command.cc:154
+#: src/Command.cc:155
 msgid "Locale Management:"
 msgstr "إدارة المناطق اللغوية:"
 
-#: src/Command.cc:158
+#: src/Command.cc:159
 msgid "Other Commands:"
 msgstr "الأوامر الأخرى:"
 
-#: src/Command.cc:167
+#: src/Command.cc:168
 msgid "Subcommands:"
 msgstr "الأوامر الفرعية:"
 
-#: src/Command.cc:288
+#: src/Command.cc:289
 #, c-format, boost-format
 msgid "Unknown command '%s'"
 msgstr "أمر غير معروف '%s'"
@@ -2253,36 +2253,30 @@ msgstr "اسم المستخدم"
 msgid "Password"
 msgstr "كلمة السر"
 
-#: src/callbacks/repo.h:49
+#: src/callbacks/repo.h:60
 msgid "Retrieving delta"
 msgstr "استرداد دلتا"
 
 #. translators: this text is a progress display label e.g. "Applying delta foo [42%]"
-#: src/callbacks/repo.h:74
+#: src/callbacks/repo.h:85
 msgid "Applying delta"
 msgstr "تطبيق دلتا"
 
-#. TranslatorExplanation %s is package size like "5.6 M"
-#: src/callbacks/repo.h:103
-#, c-format, boost-format
-msgid "(%s unpacked)"
-msgstr "(%s غير مجمع في حزم)"
-
-#: src/callbacks/repo.h:112
+#: src/callbacks/repo.h:123
 #, boost-format
 msgid "In cache %1%"
 msgstr "في الذاكرة المؤقتة %1%"
 
-#: src/callbacks/repo.h:128
-#, c-format, boost-format
-msgid "Retrieving %s %s-%s.%s"
-msgstr "يتم الآن استرداد %s %s-%s.%s"
+#: src/callbacks/repo.h:139 src/output/OutNormal.cc:250
+#: src/output/OutNormal.cc:284 src/output/OutNormal.cc:324
+msgid "Retrieving:"
+msgstr "استرداد:"
 
-#: src/callbacks/repo.h:217
+#: src/callbacks/repo.h:225
 msgid "Signature verification failed"
 msgstr "فشل التحقق من التوقيع"
 
-#: src/callbacks/repo.h:237
+#: src/callbacks/repo.h:245
 msgid "Accepting package despite the error."
 msgstr "قبول الحزمة على الرغم من وجود الخطأ."
 
@@ -2609,12 +2603,12 @@ msgstr ""
 "إزالة الحزم ذات الإمكانيات المحددة. الإمكانية هي NAME[.ARCH][OP<VERSION>]، "
 "حيث تمثل قيمة OP إحدى  قيم <، <=، =، >=، >."
 
-#: src/commands/installremove.cc:104 src/commands/installremove.cc:224
+#: src/commands/installremove.cc:104 src/commands/installremove.cc:234
 #: src/utils/messages.cc:53
 msgid "Too few arguments."
 msgstr "الوسيطات قليلة للغاية."
 
-#: src/commands/installremove.cc:105 src/commands/installremove.cc:225
+#: src/commands/installremove.cc:105 src/commands/installremove.cc:235
 msgid "At least one package name is required."
 msgstr "مطلوب اسم حزمة واحد على الأقل."
 
@@ -2658,12 +2652,12 @@ msgstr ""
 "<=، =، >=، >."
 
 #. translators: --from <ALIAS|#|URI>
-#: src/commands/installremove.cc:185 src/commands/utils/download.cc:172
+#: src/commands/installremove.cc:195 src/commands/utils/download.cc:172
 msgid "Select packages from the specified repository."
 msgstr "تحديد الحزم من المخزن المحدد."
 
 #. translators: --oldpackage
-#: src/commands/installremove.cc:189
+#: src/commands/installremove.cc:199
 msgid ""
 "Allow to replace a newer item with an older one. Handy if you are doing a "
 "rollback. Unlike --force it will not enforce a reinstall."
@@ -2671,12 +2665,12 @@ msgstr ""
 "السماح باستبدال العناصر القديمة بالجديدة. متوفر إذا كنت تقوم بالإرجاع. على "
 "عكس --force لن ينفذ عملية إعادة تثبيت."
 
-#: src/commands/installremove.cc:193
+#: src/commands/installremove.cc:203
 msgid "Silently install unsigned rpm packages given as commandline parameters."
 msgstr "قم بتثبيت تلقائيًا حزم rpm غير الموقعة المحددة كمعلمات سطر الأوامر."
 
 #. translators: -f, --force
-#: src/commands/installremove.cc:198
+#: src/commands/installremove.cc:208
 msgid ""
 "Install even if the item is already installed (reinstall), downgraded or "
 "changes vendor or architecture."
@@ -2686,13 +2680,43 @@ msgstr ""
 
 #. translators: rug related message, shown if
 #. 'zypper in --entire-catalog foorepo someargument' is specified
-#: src/commands/installremove.cc:236
+#: src/commands/installremove.cc:246
 msgid "Ignoring arguments, marking the entire repository."
 msgstr "تجاهل الوسيطات، ووضع علامة على المخزن الكامل."
 
-#: src/commands/installremove.cc:249 src/commands/sourceinstall.cc:92
+#: src/commands/installremove.cc:259 src/commands/sourceinstall.cc:92
 msgid "No valid arguments specified."
 msgstr "لم يتم تحديد أية وسيطات صالحة."
+
+#. translators: command synopsis; do not translate lowercase words
+#: src/commands/installremove.cc:312
+msgid "removeptf (rmptf) [OPTIONS] <PTF|CAPABILITY> ..."
+msgstr ""
+
+#. translators: command summary: removeptf, rmptf
+#: src/commands/installremove.cc:314
+msgid "Remove (not only) PTFs."
+msgstr ""
+
+#. translators: command description
+#: src/commands/installremove.cc:316
+msgid ""
+"A remove command which prefers replacing dependant packages to removing them "
+"as well. In fact this is a full featured install command with the remove "
+"modifier (-) applied to its plain arguments. So 'removeptf foo' is the same "
+"as 'install -- -foo'. This is why the command accepts the same options as "
+"the install command. It is the recommended way to remove a PTF (Program "
+"Temporary Fix)."
+msgstr ""
+
+#: src/commands/installremove.cc:317
+msgid ""
+"A PTF is typically removed as soon as the fix it provides is applied to the "
+"latest official update of the dependant packages. But you don't want the "
+"dependant packages to be removed together with the PTF, which is what the "
+"remove command would do. The removeptf command however will aim to replace "
+"the dependant packages by their official update versions."
+msgstr ""
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/listpatches.cc:16
@@ -2924,8 +2948,8 @@ msgstr[5] "إزالة %lu أقفال."
 #: src/commands/locks/list.cc:135 src/commands/repos/list.cc:41
 #: src/commands/repos/list.cc:223 src/commands/services/list.cc:105
 #: src/info.cc:88 src/info.cc:456 src/info.cc:691 src/locales.cc:201
-#: src/search.cc:48 src/search.cc:199 src/search.cc:304 src/search.cc:436
-#: src/search.cc:483 src/update.cc:789 src/utils/misc.cc:325
+#: src/search.cc:48 src/search.cc:199 src/search.cc:304 src/search.cc:439
+#: src/search.cc:486 src/update.cc:789 src/utils/misc.cc:325
 msgid "Name"
 msgstr "الاسم"
 
@@ -2944,7 +2968,7 @@ msgstr "النوع"
 #. translators: property name; short; used like "Name: value"
 #. translators: package's repository (header)
 #: src/commands/locks/list.cc:138 src/info.cc:86 src/search.cc:56
-#: src/search.cc:306 src/search.cc:435 src/search.cc:479 src/update.cc:786
+#: src/search.cc:306 src/search.cc:438 src/search.cc:482 src/update.cc:786
 #: src/utils/misc.cc:324
 msgid "Repository"
 msgstr "المخزن"
@@ -5243,7 +5267,7 @@ msgstr ""
 msgid "Argument resolves to no package"
 msgstr "الوسيطة لا تتحلل إلى حزمة"
 
-#: src/commands/utils/download.cc:254 src/solve-commit.cc:1025
+#: src/commands/utils/download.cc:254 src/solve-commit.cc:1023
 msgid "Nothing to do."
 msgstr "لا يوجد ما يمكن إجراؤه."
 
@@ -5259,12 +5283,12 @@ msgstr "التنقيح إلى الإصدار الأفضل..."
 msgid "Not downloading anything..."
 msgstr "لا يتم إنزال أي شيء..."
 
-#: src/commands/utils/download.cc:316
+#: src/commands/utils/download.cc:315
 #, c-format, boost-format
 msgid "Error downloading package '%s'."
 msgstr "حدث خطأ أثناء إنزال الحزمة '%s'."
 
-#: src/commands/utils/download.cc:330
+#: src/commands/utils/download.cc:329
 #, c-format, boost-format
 msgid "Not downloading package '%s'."
 msgstr "لا يتم إنزال حزمة '%s'."
@@ -5401,47 +5425,47 @@ msgstr "يتم الآن تنزيل الحزم المصدر المطلوبة..."
 msgid "Source package '%s' is not provided by any repository."
 msgstr "الحزمة المصدر '%s' غير متوفرة في أي مخزن."
 
-#: src/commands/utils/source-download.cc:447
-#: src/commands/utils/source-download.cc:461
+#: src/commands/utils/source-download.cc:446
+#: src/commands/utils/source-download.cc:460
 #, c-format, boost-format
 msgid "Error downloading source package '%s'."
 msgstr "حدث خطأ أثناء تنزيل الحزمة المصدر '%s'."
 
-#: src/commands/utils/source-download.cc:472
+#: src/commands/utils/source-download.cc:471
 msgid "No source packages to download."
 msgstr "لا توجد حزم مصدر مطلوب تنزيلها."
 
 #. translators: command summary: source-download
 #. translators: command description
-#: src/commands/utils/source-download.cc:482
-#: src/commands/utils/source-download.cc:484
+#: src/commands/utils/source-download.cc:481
+#: src/commands/utils/source-download.cc:483
 msgid "Download source rpms for all installed packages to a local directory."
 msgstr "تنزيل rpms لجميع الحزم المثبتة إلى دليل محلي."
 
 #. translators: -d, --directory <DIR>
-#: src/commands/utils/source-download.cc:496
+#: src/commands/utils/source-download.cc:495
 msgid "Download all source rpms to this directory."
 msgstr "تنزيل جميع rpms المصدر إلى هذا الدليل."
 
 #. translators: --delete/--no-delete
-#: src/commands/utils/source-download.cc:502
+#: src/commands/utils/source-download.cc:501
 msgid "Whether to delete extraneous source rpms in the local directory."
 msgstr ""
 
 #. translators: --status
-#: src/commands/utils/source-download.cc:506
+#: src/commands/utils/source-download.cc:505
 msgid ""
 "Don't download any source rpms, but show which source rpms are missing or "
 "extraneous."
 msgstr "عدم تنزيل أي rpms مصدر فقط إظهار rpms المصدر أو الخارجية المفقودة."
 
 #. translators: --status
-#: src/commands/utils/source-download.cc:512
+#: src/commands/utils/source-download.cc:511
 msgid "Write a manifest file."
 msgstr "كتابة ملف بيان."
 
 #. translators: --status
-#: src/commands/utils/source-download.cc:516
+#: src/commands/utils/source-download.cc:515
 msgid "Disable writing a manifest file."
 msgstr "تعطيل كتابة ملف بيان."
 
@@ -5521,13 +5545,13 @@ msgstr "%s أقدم من %s"
 #. translators: Table column header
 #. translators: package version (header)
 #: src/info.cc:90 src/info.cc:692 src/search.cc:52 src/search.cc:305
-#: src/search.cc:437 src/search.cc:484
+#: src/search.cc:440 src/search.cc:487
 msgid "Version"
 msgstr "الإصدار"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: package architecture (header)
-#: src/info.cc:92 src/search.cc:54 src/search.cc:438 src/search.cc:485
+#: src/info.cc:92 src/search.cc:54 src/search.cc:441 src/search.cc:488
 #: src/update.cc:795
 msgid "Arch"
 msgstr "الهيكل"
@@ -5652,7 +5676,7 @@ msgstr "(فارغ)"
 #. translators: S for installed Status
 #. TranslatorExplanation S stands for Status
 #: src/info.cc:455 src/info.cc:690 src/locales.cc:199 src/search.cc:46
-#: src/search.cc:198 src/search.cc:303 src/search.cc:434 src/search.cc:478
+#: src/search.cc:198 src/search.cc:303 src/search.cc:437 src/search.cc:481
 #: src/update.cc:784
 msgid "S"
 msgstr "S"
@@ -5695,7 +5719,7 @@ msgid "Flavor"
 msgstr "صفة"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:551 src/search.cc:486
+#: src/info.cc:551 src/search.cc:489
 msgid "Is Base"
 msgstr "هو أساس"
 
@@ -5898,20 +5922,20 @@ msgstr "حدثت مشكلة أثناء تثبيت الحزمة المصدر %s-%
 
 #. translator: Shown as result tag in a progress bar: ............[done]
 #. Translator: download progress bar result: ".............[done]"
-#: src/output/Out.cc:122 src/output/OutNormal.cc:334
-#: src/output/OutNormal.cc:337
+#: src/output/Out.cc:120 src/output/OutNormal.cc:339
+#: src/output/OutNormal.cc:342
 msgid "done"
 msgstr "تم"
 
 #. translator: Shown as result tag in a progress bar: .......[attention]
-#: src/output/Out.cc:124
+#: src/output/Out.cc:122
 msgid "attention"
 msgstr ""
 
 #. translator: Shown as result tag in a progress bar: ...........[error]
 #. Translator: download progress bar result: "............[error]"
-#: src/output/Out.cc:126 src/output/OutNormal.cc:331
-#: src/output/OutNormal.cc:337
+#: src/output/Out.cc:124 src/output/OutNormal.cc:336
+#: src/output/OutNormal.cc:342
 msgid "error"
 msgstr "الخطأ"
 
@@ -5945,26 +5969,21 @@ msgstr "هل تريد المتابعة؟"
 msgid "Warning: "
 msgstr "تحذير: "
 
-#: src/output/OutNormal.cc:247 src/output/OutNormal.cc:281
-#: src/output/OutNormal.cc:319
-msgid "Retrieving:"
-msgstr "استرداد:"
-
 # window title for kernel loading (see txt_load_kernel)
-#: src/output/OutNormal.cc:254
+#: src/output/OutNormal.cc:257
 msgid "starting"
 msgstr "بدء تشغيل"
 
 #. Translator: download progress bar result: "........[not found]"
-#: src/output/OutNormal.cc:328 src/output/OutNormal.cc:337
+#: src/output/OutNormal.cc:333 src/output/OutNormal.cc:342
 msgid "not found"
 msgstr "لم يتم العثور عليه"
 
-#: src/output/OutNormal.cc:414
+#: src/output/OutNormal.cc:419
 msgid "No help available for this prompt."
 msgstr "لا تتوفر أية تعليمات لهذه المطالبة."
 
-#: src/output/OutNormal.cc:431
+#: src/output/OutNormal.cc:436
 msgid "no help available for this option"
 msgstr "لا تتوفر أية تعليمات لهذا الخيار"
 
@@ -6063,8 +6082,8 @@ msgstr "حدث خطأ أثناء تعطيل المخزن '%s'."
 msgid "Problem retrieving files from '%s'."
 msgstr "حدثت مشكلة أثناء استرداد الملفات من '%s'."
 
-#: src/repos.cc:345 src/repos.cc:1867 src/solve-commit.cc:900
-#: src/solve-commit.cc:931 src/solve-commit.cc:955
+#: src/repos.cc:345 src/repos.cc:1867 src/solve-commit.cc:898
+#: src/solve-commit.cc:929 src/solve-commit.cc:953
 msgid "Please see the above error message for a hint."
 msgstr "الرجاء مراجعة رسالة الخطأ أعلاه للحصول على تلميح."
 
@@ -6505,21 +6524,21 @@ msgstr "حزم النظام"
 msgid "No needed patches found."
 msgstr "لم يتم العثور على أية تصحيحات ضرورية."
 
-#: src/search.cc:340
+#: src/search.cc:343
 msgid "No patterns found."
 msgstr "لم يتم العثور على أية أنماط."
 
-#: src/search.cc:428
+#: src/search.cc:431
 msgid "No packages found."
 msgstr "لم يتم العثور على أية حزم."
 
 #. translators: used in products. Internal Name is the unix name of the
 #. product whereas simply Name is the official full name of the product.
-#: src/search.cc:482
+#: src/search.cc:485
 msgid "Internal Name"
 msgstr "الاسم الداخلي"
 
-#: src/search.cc:520
+#: src/search.cc:523
 msgid "No products found."
 msgstr "لم يتم العثور على أية منتجات."
 
@@ -6801,25 +6820,25 @@ msgstr "التبديل بين إظهار كل التفاصيل وإظهار أق
 msgid "View the summary in pager."
 msgstr "عرض الملخص في المتصفح."
 
-#: src/solve-commit.cc:868
+#: src/solve-commit.cc:867
 msgid "committing"
 msgstr "تنفيذ"
 
-#: src/solve-commit.cc:870
+#: src/solve-commit.cc:869
 msgid "(dry run)"
 msgstr "(تشغيل اختباري)"
 
-#: src/solve-commit.cc:899 src/solve-commit.cc:932
+#: src/solve-commit.cc:897 src/solve-commit.cc:930
 msgid "Problem retrieving the package file from the repository:"
 msgstr "حدثت مشكلة أثناء استرداد ملف الحزمة من المخزن:"
 
 #. translators: the first %s is 'zypper refresh' and the second is repo alias
-#: src/solve-commit.cc:929
+#: src/solve-commit.cc:927
 #, c-format, boost-format
 msgid "Repository '%s' is out of date. Running '%s' might help."
 msgstr "المخزن '%s' قديم. قد يوفر تشغيل '%s' نوعًا من المساعدة."
 
-#: src/solve-commit.cc:940
+#: src/solve-commit.cc:938
 msgid ""
 "The package integrity check failed. This may be a problem with the "
 "repository or media. Try one of the following:\n"
@@ -6837,11 +6856,11 @@ msgstr ""
 "- استخدم وسائط تثبيت أخرى (في حالة تلفها)\n"
 "- استخدم مخزنًا آخر"
 
-#: src/solve-commit.cc:954
+#: src/solve-commit.cc:952
 msgid "Problem occurred during or after installation or removal of packages:"
 msgstr "حدثت مشكلة أثناء أو بعد تثبيت الحزم أو إزالتها:"
 
-#: src/solve-commit.cc:993
+#: src/solve-commit.cc:991
 msgid ""
 "One of the installed patches requires a reboot of your machine. Reboot as "
 "soon as possible."
@@ -6849,7 +6868,7 @@ msgstr ""
 "يتطلب أحد التصحيحات المثبتة إعادة تشغيل الجهاز. قم بإعادة التشغيل في أقرب "
 "وقت ممكن."
 
-#: src/solve-commit.cc:1001
+#: src/solve-commit.cc:999
 msgid ""
 "One of the installed patches affects the package manager itself. Run this "
 "command once more to install any other needed patches."
@@ -6857,7 +6876,7 @@ msgstr ""
 "تؤثر إحدى التصحيحات المثبتة على مدير الحزم نفسه. قم ببدء تشغيل هذا الأمر مرة "
 "واحدة لتثبيت أي تصحيحات أخرى مطلوبة."
 
-#: src/solve-commit.cc:1023
+#: src/solve-commit.cc:1021
 msgid "Dependencies of all installed packages are satisfied."
 msgstr "تم استيفاء تبعيات كل الحزم المثبَّتة."
 
@@ -7584,6 +7603,12 @@ msgstr "كائن غير صالح"
 #: src/utils/prompt.h:192
 msgid "Error"
 msgstr "الخطأ"
+
+#~ msgid "(%s unpacked)"
+#~ msgstr "(%s غير مجمع في حزم)"
+
+#~ msgid "Retrieving %s %s-%s.%s"
+#~ msgstr "يتم الآن استرداد %s %s-%s.%s"
 
 #~ msgid "Service aliased '%s' already exists. Please use another alias."
 #~ msgstr ""

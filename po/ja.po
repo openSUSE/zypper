@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-07 18:09+0100\n"
+"POT-Creation-Date: 2022-12-24 02:27+0100\n"
 "PO-Revision-Date: 2022-11-08 02:13+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
 "Language-Team: Japanese <https://l10n.opensuse.org/projects/zypper/master/ja/"
@@ -38,31 +38,31 @@ msgstr "サービス管理:"
 msgid "Software Management:"
 msgstr "ソフトウエア管理:"
 
-#: src/Command.cc:131
+#: src/Command.cc:132
 msgid "Update Management:"
 msgstr "更新管理:"
 
-#: src/Command.cc:138
+#: src/Command.cc:139
 msgid "Querying:"
 msgstr "問い合わせ:"
 
-#: src/Command.cc:149
+#: src/Command.cc:150
 msgid "Package Locks:"
 msgstr "パッケージロック:"
 
-#: src/Command.cc:154
+#: src/Command.cc:155
 msgid "Locale Management:"
 msgstr "ロケール管理:"
 
-#: src/Command.cc:158
+#: src/Command.cc:159
 msgid "Other Commands:"
 msgstr "その他のコマンド:"
 
-#: src/Command.cc:167
+#: src/Command.cc:168
 msgid "Subcommands:"
 msgstr "サブコマンド:"
 
-#: src/Command.cc:288
+#: src/Command.cc:289
 #, c-format, boost-format
 msgid "Unknown command '%s'"
 msgstr "不明なコマンド '%s'"
@@ -1861,36 +1861,30 @@ msgstr "ユーザ名"
 msgid "Password"
 msgstr "パスワード"
 
-#: src/callbacks/repo.h:49
+#: src/callbacks/repo.h:60
 msgid "Retrieving delta"
 msgstr "差分を取得しています"
 
 #. translators: this text is a progress display label e.g. "Applying delta foo [42%]"
-#: src/callbacks/repo.h:74
+#: src/callbacks/repo.h:85
 msgid "Applying delta"
 msgstr "差分を適用しています"
 
-#. TranslatorExplanation %s is package size like "5.6 M"
-#: src/callbacks/repo.h:103
-#, c-format, boost-format
-msgid "(%s unpacked)"
-msgstr "(展開後サイズ %s)"
-
-#: src/callbacks/repo.h:112
+#: src/callbacks/repo.h:123
 #, boost-format
 msgid "In cache %1%"
 msgstr "キャッシュ %1% 内にあります"
 
-#: src/callbacks/repo.h:128
-#, c-format, boost-format
-msgid "Retrieving %s %s-%s.%s"
-msgstr "%s %s-%s.%s を取得しています"
+#: src/callbacks/repo.h:139 src/output/OutNormal.cc:250
+#: src/output/OutNormal.cc:284 src/output/OutNormal.cc:324
+msgid "Retrieving:"
+msgstr "取得しています:"
 
-#: src/callbacks/repo.h:217
+#: src/callbacks/repo.h:225
 msgid "Signature verification failed"
 msgstr "署名検証が失敗しました"
 
-#: src/callbacks/repo.h:237
+#: src/callbacks/repo.h:245
 msgid "Accepting package despite the error."
 msgstr "エラーが発生していますが、パッケージを受け入れています。"
 
@@ -2215,12 +2209,12 @@ msgstr ""
 "[OP<VERSION>]の形式で記述します。 「OP」は<、<=、=、>=、>のうちのいずれかを指"
 "定します。"
 
-#: src/commands/installremove.cc:104 src/commands/installremove.cc:224
+#: src/commands/installremove.cc:104 src/commands/installremove.cc:234
 #: src/utils/messages.cc:53
 msgid "Too few arguments."
 msgstr "引数が少なすぎます。"
 
-#: src/commands/installremove.cc:105 src/commands/installremove.cc:225
+#: src/commands/installremove.cc:105 src/commands/installremove.cc:235
 msgid "At least one package name is required."
 msgstr "少なくとも 1 つのパッケージ名を指定する必要があります。"
 
@@ -2266,12 +2260,12 @@ msgstr ""
 "定します。"
 
 #. translators: --from <ALIAS|#|URI>
-#: src/commands/installremove.cc:185 src/commands/utils/download.cc:172
+#: src/commands/installremove.cc:195 src/commands/utils/download.cc:172
 msgid "Select packages from the specified repository."
 msgstr "指定したリポジトリからのパッケージを選択します。"
 
 #. translators: --oldpackage
-#: src/commands/installremove.cc:189
+#: src/commands/installremove.cc:199
 msgid ""
 "Allow to replace a newer item with an older one. Handy if you are doing a "
 "rollback. Unlike --force it will not enforce a reinstall."
@@ -2280,14 +2274,14 @@ msgstr ""
 "す場合に有用です。--force とは異なり、再インストールを強制することはありませ"
 "ん。"
 
-#: src/commands/installremove.cc:193
+#: src/commands/installremove.cc:203
 msgid "Silently install unsigned rpm packages given as commandline parameters."
 msgstr ""
 "コマンドラインパラメータで指定した未署名の RPM パッケージを、警告を発すること"
 "なくインストールします。"
 
 #. translators: -f, --force
-#: src/commands/installremove.cc:198
+#: src/commands/installremove.cc:208
 msgid ""
 "Install even if the item is already installed (reinstall), downgraded or "
 "changes vendor or architecture."
@@ -2298,13 +2292,43 @@ msgstr ""
 
 #. translators: rug related message, shown if
 #. 'zypper in --entire-catalog foorepo someargument' is specified
-#: src/commands/installremove.cc:236
+#: src/commands/installremove.cc:246
 msgid "Ignoring arguments, marking the entire repository."
 msgstr "引数を無視し、リポジトリ全体にマークを付与します。"
 
-#: src/commands/installremove.cc:249 src/commands/sourceinstall.cc:92
+#: src/commands/installremove.cc:259 src/commands/sourceinstall.cc:92
 msgid "No valid arguments specified."
 msgstr "正しいパラメータが指定されていません。"
+
+#. translators: command synopsis; do not translate lowercase words
+#: src/commands/installremove.cc:312
+msgid "removeptf (rmptf) [OPTIONS] <PTF|CAPABILITY> ..."
+msgstr ""
+
+#. translators: command summary: removeptf, rmptf
+#: src/commands/installremove.cc:314
+msgid "Remove (not only) PTFs."
+msgstr ""
+
+#. translators: command description
+#: src/commands/installremove.cc:316
+msgid ""
+"A remove command which prefers replacing dependant packages to removing them "
+"as well. In fact this is a full featured install command with the remove "
+"modifier (-) applied to its plain arguments. So 'removeptf foo' is the same "
+"as 'install -- -foo'. This is why the command accepts the same options as "
+"the install command. It is the recommended way to remove a PTF (Program "
+"Temporary Fix)."
+msgstr ""
+
+#: src/commands/installremove.cc:317
+msgid ""
+"A PTF is typically removed as soon as the fix it provides is applied to the "
+"latest official update of the dependant packages. But you don't want the "
+"dependant packages to be removed together with the PTF, which is what the "
+"remove command would do. The removeptf command however will aim to replace "
+"the dependant packages by their official update versions."
+msgstr ""
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/listpatches.cc:16
@@ -2538,8 +2562,8 @@ msgstr[0] "%lu 個のパッケージロックを削除しました。"
 #: src/commands/locks/list.cc:135 src/commands/repos/list.cc:41
 #: src/commands/repos/list.cc:223 src/commands/services/list.cc:105
 #: src/info.cc:88 src/info.cc:456 src/info.cc:691 src/locales.cc:201
-#: src/search.cc:48 src/search.cc:199 src/search.cc:304 src/search.cc:436
-#: src/search.cc:483 src/update.cc:789 src/utils/misc.cc:325
+#: src/search.cc:48 src/search.cc:199 src/search.cc:304 src/search.cc:439
+#: src/search.cc:486 src/update.cc:789 src/utils/misc.cc:325
 msgid "Name"
 msgstr "名前"
 
@@ -2558,7 +2582,7 @@ msgstr "種類"
 #. translators: property name; short; used like "Name: value"
 #. translators: package's repository (header)
 #: src/commands/locks/list.cc:138 src/info.cc:86 src/search.cc:56
-#: src/search.cc:306 src/search.cc:435 src/search.cc:479 src/update.cc:786
+#: src/search.cc:306 src/search.cc:438 src/search.cc:482 src/update.cc:786
 #: src/utils/misc.cc:324
 msgid "Repository"
 msgstr "リポジトリ"
@@ -4193,14 +4217,17 @@ msgstr "指定した文字列に合致するもののみを選択します。"
 #, boost-format
 msgid ""
 "Service '%1%' with URL '%2%' already exists. Just updating the settings."
-msgstr "URL '%2%' のサービス '%1%' が既に存在しているため、設定の更新を実施します。"
+msgstr ""
+"URL '%2%' のサービス '%1%' が既に存在しているため、設定の更新を実施します。"
 
 #: src/commands/services/add.cc:58
 #, boost-format
 msgid ""
 "Service '%1%' already exists but uses a different URL '%2%'. Please use "
 "another alias."
-msgstr "サービス '%1%' は既に存在していますが、異なる URL '%2%' が設定されています。異なる別名を指定してください。"
+msgstr ""
+"サービス '%1%' は既に存在していますが、異なる URL '%2%' が設定されています。"
+"異なる別名を指定してください。"
 
 #: src/commands/services/add.cc:70
 #, c-format, boost-format
@@ -4916,7 +4943,7 @@ msgstr ""
 msgid "Argument resolves to no package"
 msgstr "パラメータを解釈しましたが、該当するパッケージがありません"
 
-#: src/commands/utils/download.cc:254 src/solve-commit.cc:1025
+#: src/commands/utils/download.cc:254 src/solve-commit.cc:1023
 msgid "Nothing to do."
 msgstr "何もすることがありません。"
 
@@ -4932,12 +4959,12 @@ msgstr "最良のバージョンを選択します..."
 msgid "Not downloading anything..."
 msgstr "何もダウンロードしません..."
 
-#: src/commands/utils/download.cc:316
+#: src/commands/utils/download.cc:315
 #, c-format, boost-format
 msgid "Error downloading package '%s'."
 msgstr "パッケージ '%s' のダウンロード時にエラーが発生しました。"
 
-#: src/commands/utils/download.cc:330
+#: src/commands/utils/download.cc:329
 #, c-format, boost-format
 msgid "Not downloading package '%s'."
 msgstr "パッケージ '%s' はダウンロードしません。"
@@ -5082,39 +5109,39 @@ msgstr "必要なソースパッケージをダウンロードしています...
 msgid "Source package '%s' is not provided by any repository."
 msgstr "ソースパッケージ '%s' は、どのリポジトリからも提供されていません。"
 
-#: src/commands/utils/source-download.cc:447
-#: src/commands/utils/source-download.cc:461
+#: src/commands/utils/source-download.cc:446
+#: src/commands/utils/source-download.cc:460
 #, c-format, boost-format
 msgid "Error downloading source package '%s'."
 msgstr "ソースパッケージ '%s' のダウンロード時にエラーが発生しました。"
 
-#: src/commands/utils/source-download.cc:472
+#: src/commands/utils/source-download.cc:471
 msgid "No source packages to download."
 msgstr "ダウンロードすべきソースパッケージはありません。"
 
 #. translators: command summary: source-download
 #. translators: command description
-#: src/commands/utils/source-download.cc:482
-#: src/commands/utils/source-download.cc:484
+#: src/commands/utils/source-download.cc:481
+#: src/commands/utils/source-download.cc:483
 msgid "Download source rpms for all installed packages to a local directory."
 msgstr ""
 "全てのインストール済みパッケージに対して、対応するソース RPM をローカル ディ"
 "レクトリにダウンロードします。"
 
 #. translators: -d, --directory <DIR>
-#: src/commands/utils/source-download.cc:496
+#: src/commands/utils/source-download.cc:495
 msgid "Download all source rpms to this directory."
 msgstr "全てのソース RPM を、このディレクトリにダウンロード します。"
 
 #. translators: --delete/--no-delete
-#: src/commands/utils/source-download.cc:502
+#: src/commands/utils/source-download.cc:501
 msgid "Whether to delete extraneous source rpms in the local directory."
 msgstr ""
 "ローカルディレクトリ内にある無関係なソース RPM を削除するかどうかを指定しま"
 "す。"
 
 #. translators: --status
-#: src/commands/utils/source-download.cc:506
+#: src/commands/utils/source-download.cc:505
 msgid ""
 "Don't download any source rpms, but show which source rpms are missing or "
 "extraneous."
@@ -5123,12 +5150,12 @@ msgstr ""
 "ます。"
 
 #. translators: --status
-#: src/commands/utils/source-download.cc:512
+#: src/commands/utils/source-download.cc:511
 msgid "Write a manifest file."
 msgstr "マニフェストファイルを書き込みます。"
 
 #. translators: --status
-#: src/commands/utils/source-download.cc:516
+#: src/commands/utils/source-download.cc:515
 msgid "Disable writing a manifest file."
 msgstr "マニフェストファイルの書き込みを無効化します。"
 
@@ -5209,13 +5236,13 @@ msgstr "%s は %s よりも古くなっています"
 #. translators: Table column header
 #. translators: package version (header)
 #: src/info.cc:90 src/info.cc:692 src/search.cc:52 src/search.cc:305
-#: src/search.cc:437 src/search.cc:484
+#: src/search.cc:440 src/search.cc:487
 msgid "Version"
 msgstr "バージョン"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: package architecture (header)
-#: src/info.cc:92 src/search.cc:54 src/search.cc:438 src/search.cc:485
+#: src/info.cc:92 src/search.cc:54 src/search.cc:441 src/search.cc:488
 #: src/update.cc:795
 msgid "Arch"
 msgstr "アーキテクチャ"
@@ -5335,7 +5362,7 @@ msgstr "(何もありません)"
 #. translators: S for installed Status
 #. TranslatorExplanation S stands for Status
 #: src/info.cc:455 src/info.cc:690 src/locales.cc:199 src/search.cc:46
-#: src/search.cc:198 src/search.cc:303 src/search.cc:434 src/search.cc:478
+#: src/search.cc:198 src/search.cc:303 src/search.cc:437 src/search.cc:481
 #: src/update.cc:784
 msgid "S"
 msgstr "S"
@@ -5378,7 +5405,7 @@ msgid "Flavor"
 msgstr "フレーバー"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:551 src/search.cc:486
+#: src/info.cc:551 src/search.cc:489
 msgid "Is Base"
 msgstr "ベース"
 
@@ -5587,20 +5614,20 @@ msgstr "ソースパッケージ %s-%s のインストール中に問題が発�
 
 #. translator: Shown as result tag in a progress bar: ............[done]
 #. Translator: download progress bar result: ".............[done]"
-#: src/output/Out.cc:122 src/output/OutNormal.cc:334
-#: src/output/OutNormal.cc:337
+#: src/output/Out.cc:120 src/output/OutNormal.cc:339
+#: src/output/OutNormal.cc:342
 msgid "done"
 msgstr "完了"
 
 #. translator: Shown as result tag in a progress bar: .......[attention]
-#: src/output/Out.cc:124
+#: src/output/Out.cc:122
 msgid "attention"
 msgstr "注意"
 
 #. translator: Shown as result tag in a progress bar: ...........[error]
 #. Translator: download progress bar result: "............[error]"
-#: src/output/Out.cc:126 src/output/OutNormal.cc:331
-#: src/output/OutNormal.cc:337
+#: src/output/Out.cc:124 src/output/OutNormal.cc:336
+#: src/output/OutNormal.cc:342
 msgid "error"
 msgstr "エラー"
 
@@ -5635,26 +5662,21 @@ msgstr "続行しますか？"
 msgid "Warning: "
 msgstr "警告: "
 
-#: src/output/OutNormal.cc:247 src/output/OutNormal.cc:281
-#: src/output/OutNormal.cc:319
-msgid "Retrieving:"
-msgstr "取得しています:"
-
 # window title for kernel loading (see txt_load_kernel)
-#: src/output/OutNormal.cc:254
+#: src/output/OutNormal.cc:257
 msgid "starting"
 msgstr "開始しています"
 
 #. Translator: download progress bar result: "........[not found]"
-#: src/output/OutNormal.cc:328 src/output/OutNormal.cc:337
+#: src/output/OutNormal.cc:333 src/output/OutNormal.cc:342
 msgid "not found"
 msgstr "見つかりません"
 
-#: src/output/OutNormal.cc:414
+#: src/output/OutNormal.cc:419
 msgid "No help available for this prompt."
 msgstr "このプロンプトに対するヘルプは用意されていません。"
 
-#: src/output/OutNormal.cc:431
+#: src/output/OutNormal.cc:436
 msgid "no help available for this option"
 msgstr "このオプションに対するヘルプは用意されていません"
 
@@ -5749,8 +5771,8 @@ msgstr "リポジトリ '%s' を無効にする際にエラーが発生しまし
 msgid "Problem retrieving files from '%s'."
 msgstr "'%s' からのファイル取得中に問題が発生しました。"
 
-#: src/repos.cc:345 src/repos.cc:1867 src/solve-commit.cc:900
-#: src/solve-commit.cc:931 src/solve-commit.cc:955
+#: src/repos.cc:345 src/repos.cc:1867 src/solve-commit.cc:898
+#: src/solve-commit.cc:929 src/solve-commit.cc:953
 msgid "Please see the above error message for a hint."
 msgstr "解決へのヒントとして上記のエラーメッセージをお読みください。"
 
@@ -6214,21 +6236,21 @@ msgstr "システムパッケージ"
 msgid "No needed patches found."
 msgstr "適用すべきパッチが見つかりません。"
 
-#: src/search.cc:340
+#: src/search.cc:343
 msgid "No patterns found."
 msgstr "パターンが見つかりません。"
 
-#: src/search.cc:428
+#: src/search.cc:431
 msgid "No packages found."
 msgstr "パッケージが見つかりません。"
 
 #. translators: used in products. Internal Name is the unix name of the
 #. product whereas simply Name is the official full name of the product.
-#: src/search.cc:482
+#: src/search.cc:485
 msgid "Internal Name"
 msgstr "内部名"
 
-#: src/search.cc:520
+#: src/search.cc:523
 msgid "No products found."
 msgstr "製品が見つかりません。"
 
@@ -6490,25 +6512,25 @@ msgstr "すべての詳細を表示するか、最小限の表示のみにとど
 msgid "View the summary in pager."
 msgstr "ページャで詳細を表示します。"
 
-#: src/solve-commit.cc:868
+#: src/solve-commit.cc:867
 msgid "committing"
 msgstr "確定しています"
 
-#: src/solve-commit.cc:870
+#: src/solve-commit.cc:869
 msgid "(dry run)"
 msgstr "(テスト)"
 
-#: src/solve-commit.cc:899 src/solve-commit.cc:932
+#: src/solve-commit.cc:897 src/solve-commit.cc:930
 msgid "Problem retrieving the package file from the repository:"
 msgstr "リポジトリからのパッケージファイルの取得に問題:"
 
 #. translators: the first %s is 'zypper refresh' and the second is repo alias
-#: src/solve-commit.cc:929
+#: src/solve-commit.cc:927
 #, c-format, boost-format
 msgid "Repository '%s' is out of date. Running '%s' might help."
 msgstr "リポジトリ '%s' の情報は古くなっています。 '%s' を実行してください。"
 
-#: src/solve-commit.cc:940
+#: src/solve-commit.cc:938
 msgid ""
 "The package integrity check failed. This may be a problem with the "
 "repository or media. Try one of the following:\n"
@@ -6526,12 +6548,12 @@ msgstr ""
 "- 他のインストールメディアを使用する　(損傷している場合など)　\n"
 "- 他のリポジトリを使用する"
 
-#: src/solve-commit.cc:954
+#: src/solve-commit.cc:952
 msgid "Problem occurred during or after installation or removal of packages:"
 msgstr ""
 "インストールまたは削除の際、もしくはそれぞれの作業の後に問題が発生しました:"
 
-#: src/solve-commit.cc:993
+#: src/solve-commit.cc:991
 msgid ""
 "One of the installed patches requires a reboot of your machine. Reboot as "
 "soon as possible."
@@ -6539,7 +6561,7 @@ msgstr ""
 "インストールされたパッチの中にはコンピュータの再起動を必要とするものがありま"
 "す。できるだけ早めに再起動してください。"
 
-#: src/solve-commit.cc:1001
+#: src/solve-commit.cc:999
 msgid ""
 "One of the installed patches affects the package manager itself. Run this "
 "command once more to install any other needed patches."
@@ -6548,7 +6570,7 @@ msgstr ""
 "ています。再度このコマンドを実行して、その他の必要な更新をインストールしてく"
 "ださい。"
 
-#: src/solve-commit.cc:1023
+#: src/solve-commit.cc:1021
 msgid "Dependencies of all installed packages are satisfied."
 msgstr "インストール済みの全パッケージの依存関係に問題はありません。"
 
@@ -7224,6 +7246,12 @@ msgstr "無効なオブジェクト"
 #: src/utils/prompt.h:192
 msgid "Error"
 msgstr "エラー"
+
+#~ msgid "(%s unpacked)"
+#~ msgstr "(展開後サイズ %s)"
+
+#~ msgid "Retrieving %s %s-%s.%s"
+#~ msgstr "%s %s-%s.%s を取得しています"
 
 #~ msgid "Service aliased '%s' already exists. Please use another alias."
 #~ msgstr ""
