@@ -1,4 +1,21 @@
 -------------------------------------------------------------------
+Sat Dec 24 02:26:11 CET 2022 - ma@suse.de
+
+- BuildRequires:  libzypp-devel >= 17.31.7.
+- Provide "removeptf" command (bsc#1203249)
+  A remove command which prefers replacing dependant packages to
+  removing them as well.
+  A PTF is typically removed as soon as the fix it provides is
+  applied to the latest official update of the dependant packages.
+  But you don't want the dependant packages to be removed together
+  with the PTF, which is what the remove command would do. The
+  removeptf command however will aim to replace the dependant
+  packages by their official update versions.
+- patterns: Avoid dispylaing superfluous @System entries
+  (bsc#1205570)
+- version 1.14.59
+
+-------------------------------------------------------------------
 Mon Nov  7 18:10:12 CET 2022 - ma@suse.de
 
 - Update man page and explain '.no_auto_prune' (bsc#1204956)
