@@ -1,4 +1,17 @@
 -------------------------------------------------------------------
+Sat Dec 24 02:22:11 CET 2022 - ma@suse.de
+
+- Hint to "zypper removeptf" to remove PTFs.
+- Removing a PTF without enabled repos should always fail
+  (bsc#1203248)
+  Without enabled repos, the dependent PTF-packages would be
+  removed (not replaced!) as well. To remove a PTF "zypper install
+  -- -PTF" or a dedicated "zypper removeptf PTF" should be used.
+  This will update the installed PTF packages to theit latest
+  version.
+- version 17.31.7 (22)
+
+-------------------------------------------------------------------
 Fri Nov 25 13:41:55 CET 2022 - ma@suse.de
 
 - Avoid calling getsockopt when we know the info already.
