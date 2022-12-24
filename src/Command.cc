@@ -124,6 +124,7 @@ namespace
 
       makeCmd<InstallCmd> ( ZypperCommand::INSTALL_e , _("Software Management:"), { "install", "in" } ),
       makeCmd<RemoveCmd> ( ZypperCommand::REMOVE_e , std::string(), { "remove", "rm" } ),
+      makeCmd<RemovePtfCmd> ( ZypperCommand::REMOVE_PTF_e , std::string(), { "removeptf", "rmptf" } ),
       makeCmd<InrVerifyCmd> ( ZypperCommand::VERIFY_e , std::string(), { "verify", "ve" }, InrVerifyCmd::Mode::Verify ),
       makeCmd<SourceInstallCmd> ( ZypperCommand::SRC_INSTALL_e , std::string(), { "source-install", "si" } ),
       makeCmd<InrVerifyCmd> ( ZypperCommand::INSTALL_NEW_RECOMMENDS_e , std::string(), { "install-new-recommends", "inr" }, InrVerifyCmd::Mode::InstallRecommends ),

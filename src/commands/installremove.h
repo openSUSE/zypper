@@ -60,6 +60,12 @@ class InstallCmd : public InstallRemoveBase
 public:
   InstallCmd( std::vector<std::string> &&commandAliases_r );
 
+  // Alternate form for derived classes like RemovePtfCmd
+  InstallCmd( std::vector<std::string> &&commandAliases_r,
+              std::string &&synopsis_r,
+              std::string &&summary_r = std::string(),
+              CommandDescription &&description_r = CommandDescription() );
+
 private:
   bool _force  = false;
   bool _oldPackage = false;
@@ -79,6 +85,14 @@ protected:
   ZyppFlags::CommandGroup cmdOptions() const override;
   void doReset() override;
   int execute(Zypper &zypper, const std::vector<std::string> &positionalArgs_r) override;
+};
+
+class RemovePtfCmd : public InstallCmd // InstallRemoveBase
+{
+public:
+  RemovePtfCmd( std::vector<std::string> &&commandAliases_r );
+protected:
+  int execute( Zypper &zypper, const std::vector<std::string> &positionalArgs_r ) override;
 };
 
 #endif

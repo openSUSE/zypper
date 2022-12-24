@@ -160,16 +160,26 @@ int RemoveCmd::execute(Zypper &zypper, const std::vector<std::string> &positiona
 }
 
 InstallCmd::InstallCmd(std::vector<std::string> &&commandAliases_r) :
-  InstallRemoveBase (
+  InstallCmd(
     std::move( commandAliases_r ),
     // translators: command synopsis; do not translate lowercase words
     _("install (in) [OPTIONS] <CAPABILITY|RPM_FILE_URI> ..."),
     // translators: command summary: install, in
     _("Install packages."),
     // translators: command description
-    _("Install packages with specified capabilities or RPM files with specified location. A capability is NAME[.ARCH][OP<VERSION>], where OP is one of <, <=, =, >=, >."),
-    ResetRepoManager
+    _("Install packages with specified capabilities or RPM files with specified location. A capability is NAME[.ARCH][OP<VERSION>], where OP is one of <, <=, =, >=, >.")
   )
+{}
+
+InstallCmd::InstallCmd( std::vector<std::string> &&commandAliases_r,
+                        std::string &&synopsis_r,
+                        std::string &&summary_r,
+                        CommandDescription &&description_r )
+: InstallRemoveBase ( std::move( commandAliases_r ),
+                      std::move( synopsis_r ),
+                      std::move( summary_r ),
+                      std::move( description_r ),
+                      ResetRepoManager )
 {
   _dryRun.setCompatibilityMode( CompatModeBits::EnableNewOpt | CompatModeBits::EnableRugOpt );
   _initRepos.setCompatibilityMode( CompatModeBits::EnableNewOpt | CompatModeBits::EnableRugOpt );
@@ -292,3 +302,31 @@ int InstallCmd::execute( Zypper &zypper, const std::vector<std::string> &positio
   return zypper.exitCode();
 }
 
+////////////////////////////////////////////////////////////////////////////////
+// RemovePtfCmd
+////////////////////////////////////////////////////////////////////////////////
+
+RemovePtfCmd::RemovePtfCmd( std::vector<std::string> &&commandAliases_r )
+: InstallCmd( std::move(commandAliases_r),
+              // translators: command synopsis; do not translate lowercase words
+              _("removeptf (rmptf) [OPTIONS] <PTF|CAPABILITY> ..."),
+              // translators: command summary: removeptf, rmptf
+              _("Remove (not only) PTFs."),
+              // translators: command description
+              { _("A remove command which prefers replacing dependant packages to removing them as well. In fact this is a full featured install command with the remove modifier (-) applied to its plain arguments. So 'removeptf foo' is the same as 'install -- -foo'. This is why the command accepts the same options as the install command. It is the recommended way to remove a PTF (Program Temporary Fix)."),
+                _("A PTF is typically removed as soon as the fix it provides is applied to the latest official update of the dependant packages. But you don't want the dependant packages to be removed together with the PTF, which is what the remove command would do. The removeptf command however will aim to replace the dependant packages by their official update versions.")
+              } )
+{}
+
+int RemovePtfCmd::execute( Zypper &zypper, const std::vector<std::string> &positionalArgs_r )
+{
+  static constexpr std::string_view modifiers { "+~-!" }; // explicit install/remove modifiers
+  std::vector<std::string> positionalArgs;
+  for ( const auto & arg : positionalArgs_r ) {
+    if ( modifiers.find( arg[0] ) != std::string_view::npos )
+      positionalArgs.push_back( arg );
+    else
+      positionalArgs.push_back( "-"+arg );
+  }
+  return InstallCmd::execute( zypper, positionalArgs );
+}

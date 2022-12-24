@@ -40,6 +40,7 @@ struct ZypperCommand
 
   static const ZypperCommand INSTALL;
   static const ZypperCommand REMOVE;
+  static const ZypperCommand REMOVE_PTF;
   static const ZypperCommand SRC_INSTALL;
   static const ZypperCommand VERIFY;
   static const ZypperCommand INSTALL_NEW_RECOMMENDS;
@@ -116,6 +117,7 @@ struct ZypperCommand
 
     INSTALL_e,
     REMOVE_e,
+    REMOVE_PTF_e,
     SRC_INSTALL_e,
     VERIFY_e,
     INSTALL_NEW_RECOMMENDS_e,
