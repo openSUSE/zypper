@@ -6,10 +6,10 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-12-24 02:27+0100\n"
-"PO-Revision-Date: 2022-11-09 18:13+0000\n"
+"PO-Revision-Date: 2022-12-24 18:13+0000\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
-"Language-Team: Slovak <https://l10n.opensuse.org/projects/zypper/master/sk/"
-">\n"
+"Language-Team: Slovak <https://l10n.opensuse.org/projects/zypper/master/sk/>"
+"\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2477,12 +2477,12 @@ msgstr "Neboli zadané žiadne platné argumenty."
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/installremove.cc:312
 msgid "removeptf (rmptf) [OPTIONS] <PTF|CAPABILITY> ..."
-msgstr ""
+msgstr "removeptf (rmptf) [VOĽBY] <PTF|SCHOPNOSŤ> ..."
 
 #. translators: command summary: removeptf, rmptf
 #: src/commands/installremove.cc:314
 msgid "Remove (not only) PTFs."
-msgstr ""
+msgstr "Odstrániť (nielen) položky PTF."
 
 #. translators: command description
 #: src/commands/installremove.cc:316
@@ -2494,6 +2494,12 @@ msgid ""
 "the install command. It is the recommended way to remove a PTF (Program "
 "Temporary Fix)."
 msgstr ""
+"Príkaz remove, ktorý tiež uprednostňuje nahradenie závislých balíkov pred "
+"ich odstránením. V skutočnosti ide o plnohodnotný príkaz install s "
+"modifikátorom remove (-) aplikovaným na jeho jednoduché argumenty. Takže "
+"'removeptf foo' je to isté ako 'install -- -foo'. Preto tento príkaz "
+"akceptuje rovnaké voľby ako príkaz install. Je to odporúčaný spôsob "
+"odstránenia PTF (Program Temporary Fix)."
 
 #: src/commands/installremove.cc:317
 msgid ""
@@ -2503,6 +2509,11 @@ msgid ""
 "remove command would do. The removeptf command however will aim to replace "
 "the dependant packages by their official update versions."
 msgstr ""
+"PTF sa zvyčajne odstráni hneď, ako sa oprava, ktorú poskytuje, použije v "
+"najnovšej oficiálnej aktualizácii závislých balíkov. Nechcete však, aby sa "
+"závislé balíky odstránili spolu s PTF, čo by urobil príkaz remove. Príkaz "
+"removeptf sa však zameria na nahradenie závislých balíkov ich oficiálnymi "
+"aktualizovanými verziami."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/listpatches.cc:16
