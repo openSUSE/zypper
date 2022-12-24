@@ -9,10 +9,10 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-12-24 02:27+0100\n"
-"PO-Revision-Date: 2022-11-08 12:13+0000\n"
+"PO-Revision-Date: 2022-12-24 18:13+0000\n"
 "Last-Translator: David Medina <medipas@gmail.com>\n"
-"Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/"
-">\n"
+"Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/>"
+"\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2411,12 +2411,12 @@ msgstr "No s'ha especificat cap argument vàlid."
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/installremove.cc:312
 msgid "removeptf (rmptf) [OPTIONS] <PTF|CAPABILITY> ..."
-msgstr ""
+msgstr "removeptf (rmptf) [OPCIONS] <PTF|CAPACITAT>..."
 
 #. translators: command summary: removeptf, rmptf
 #: src/commands/installremove.cc:314
 msgid "Remove (not only) PTFs."
-msgstr ""
+msgstr "Suprimeix (no només) els PTF."
 
 #. translators: command description
 #: src/commands/installremove.cc:316
@@ -2428,6 +2428,13 @@ msgid ""
 "the install command. It is the recommended way to remove a PTF (Program "
 "Temporary Fix)."
 msgstr ""
+"Una ordre de supressió que prefereix substituir els paquets dependents a "
+"també suprimir-los. De fet, aquesta és una ordre d'instal·lació completa amb "
+"el modificador de supressió (-) aplicat als seus arguments senzills. Per "
+"tant, \"removeptf foo\" és el mateix que \"install -- -foo\". És per això "
+"que l'ordre accepta les mateixes opcions que l'ordre d'instal·lació. És la "
+"manera recomanada de suprimir un PTF (Program Temporary Fix, Correcció "
+"temporal del programa)."
 
 #: src/commands/installremove.cc:317
 msgid ""
@@ -2437,6 +2444,12 @@ msgid ""
 "remove command would do. The removeptf command however will aim to replace "
 "the dependant packages by their official update versions."
 msgstr ""
+"Normalment, un PTF se suprimeix tan bon punt la correcció que proporciona "
+"s'aplica a la darrera actualització oficial dels paquets dependents. Però no "
+"voleu que els paquets dependents se suprimeixin juntament amb el PTF, que és "
+"el que faria l'ordre remove. Tanmateix, l'ordre removeptf tindrà com a "
+"objectiu substituir els paquets dependents per les seves versions "
+"d'actualització oficials."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/listpatches.cc:16
