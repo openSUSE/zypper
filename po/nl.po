@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-12-24 02:27+0100\n"
-"PO-Revision-Date: 2022-11-08 02:13+0000\n"
+"PO-Revision-Date: 2022-12-24 18:13+0000\n"
 "Last-Translator: Freek de Kruijf <freek@opensuse.org>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/zypper/master/nl/>\n"
 "Language: nl\n"
@@ -2467,12 +2467,12 @@ msgstr "Geen geldig argument gespecificeerd."
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/installremove.cc:312
 msgid "removeptf (rmptf) [OPTIONS] <PTF|CAPABILITY> ..."
-msgstr ""
+msgstr "removeptf (rmptf) [OPTIES] <PTF|CAPACITEIT> ..."
 
 #. translators: command summary: removeptf, rmptf
 #: src/commands/installremove.cc:314
 msgid "Remove (not only) PTFs."
-msgstr ""
+msgstr "Verwijder (niet alleen) PTF's."
 
 #. translators: command description
 #: src/commands/installremove.cc:316
@@ -2484,6 +2484,12 @@ msgid ""
 "the install command. It is the recommended way to remove a PTF (Program "
 "Temporary Fix)."
 msgstr ""
+"Een commando verwijder die bij voorkeur afhankelijke pakketten vervangt "
+"naast deze ook te verwijderen. In feite is dit een installatiecommando vol "
+"functies met de toevoeging voor verwijderen (-) toegepast op zijn gewone "
+"argumenten. Dus 'removeptf foo' is hetzelfde als 'install -- -foo'. Dit is "
+"waarom het commando dezelfde opties accepteert als het commando install. Het "
+"is de aanbevolen manier om een PTF (Program Temporary Fix) te verwijderen."
 
 #: src/commands/installremove.cc:317
 msgid ""
@@ -2493,6 +2499,12 @@ msgid ""
 "remove command would do. The removeptf command however will aim to replace "
 "the dependant packages by their official update versions."
 msgstr ""
+"Een PTF wordt typisch verwijderd zodra de reparatie die het levert is "
+"toegepast op het laatste officiële bijwerken van de afhankelijke pakketten. "
+"Maar u wilt niet dat de afhankelijke pakketten verwijderd worden samen met "
+"de PTF, wat is wat het commando remove zou doen. Het commando removeptf zal "
+"zich richten op vervangen van de afhankelijke pakketten door hun officiële "
+"bijgewerkte versies."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/listpatches.cc:16
