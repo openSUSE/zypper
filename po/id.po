@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-12-24 02:27+0100\n"
-"PO-Revision-Date: 2022-11-04 06:13+0000\n"
+"PO-Revision-Date: 2023-01-02 06:14+0000\n"
 "Last-Translator: Kukuh Syafaat <syafaatkukuh@gmail.com>\n"
 "Language-Team: Indonesian <https://l10n.opensuse.org/projects/zypper/master/"
 "id/>\n"
@@ -229,22 +229,22 @@ msgstr "Gunakan direktori berkas definisi repositori alternatif."
 #. translators: --cache-dir, -C <DIR>
 #: src/Config.cc:504
 msgid "Use alternative directory for all caches."
-msgstr "Gunakan direktori alternatif untuk semua cache."
+msgstr "Gunakan direktori alternatif untuk semua singgahan."
 
 #. translators: --raw-cache-dir <DIR>
 #: src/Config.cc:517
 msgid "Use alternative raw meta-data cache directory."
-msgstr "Gunakan direktori cache raw meta-data alternatif."
+msgstr "Gunakan direktori singgahan raw meta-data alternatif."
 
 #. translators: --solv-cache-dir <DIR>
 #: src/Config.cc:531
 msgid "Use alternative solv file cache directory."
-msgstr "Gunakan direktori cache berkas solv alternatif."
+msgstr "Gunakan direktori singgahan berkas solv alternatif."
 
 #. translators: --pkg-cache-dir <DIR>
 #: src/Config.cc:545
 msgid "Use alternative package cache directory."
-msgstr "Gunakan direktori cache package alternatif."
+msgstr "Gunakan direktori singgahan package alternatif."
 
 #: src/Config.cc:550
 msgid "Repository Options"
@@ -1124,7 +1124,7 @@ msgstr[0] "Paket %d berikut ini membutuhkan mulai ulang sistem:"
 #: src/Summary.cc:1390
 #, boost-format
 msgid "Overall download size: %1%. Already cached: %2%."
-msgstr "Keseluruhan ukuran unduh %1%. Sudah di cache: %2%."
+msgstr "Keseluruhan ukuran unduh %1%. Sudah di singgahan: %2%."
 
 #: src/Summary.cc:1393
 msgid "Download only."
@@ -1892,7 +1892,7 @@ msgstr "Menerapkan delta"
 #: src/callbacks/repo.h:123
 #, boost-format
 msgid "In cache %1%"
-msgstr "Didalam cache %1%"
+msgstr "Didalam singgahan %1%"
 
 #: src/callbacks/repo.h:139 src/output/OutNormal.cc:250
 #: src/output/OutNormal.cc:284 src/output/OutNormal.cc:324
@@ -2322,12 +2322,12 @@ msgstr "Tidak ada argumen yang valid yang ditentukan."
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/installremove.cc:312
 msgid "removeptf (rmptf) [OPTIONS] <PTF|CAPABILITY> ..."
-msgstr ""
+msgstr "removeptf (rmptf) [OPSI] <PTF|KEMAMPUAN> ..."
 
 #. translators: command summary: removeptf, rmptf
 #: src/commands/installremove.cc:314
 msgid "Remove (not only) PTFs."
-msgstr ""
+msgstr "Hapus (tidak hanya) PTF."
 
 #. translators: command description
 #: src/commands/installremove.cc:316
@@ -2339,6 +2339,12 @@ msgid ""
 "the install command. It is the recommended way to remove a PTF (Program "
 "Temporary Fix)."
 msgstr ""
+"Perintah hapus yang lebih suka mengganti paket dependensi alih-alih "
+"menghapusnya juga. Sebenarnya ini adalah perintah pasang berfitur lengkap "
+"dengan pengubah hapus (-) yang diterapkan pada argumen biasa. Jadi "
+"'removeptf foo' sama dengan 'install -- -foo'. Inilah sebabnya mengapa "
+"perintah menerima opsi yang sama dengan perintah pasang. Ini adalah cara "
+"yang disarankan untuk menghapus PTF (Program Temporary Fix)."
 
 #: src/commands/installremove.cc:317
 msgid ""
@@ -2348,6 +2354,11 @@ msgid ""
 "remove command would do. The removeptf command however will aim to replace "
 "the dependant packages by their official update versions."
 msgstr ""
+"PTF biasanya dihapus segera setelah perbaikan yang diberikannya diterapkan "
+"pada pemutakhiran resmi terbaru dari paket dependensi. Tetapi Anda tidak "
+"ingin paket dependensi dihapus bersama dengan PTF, itulah yang akan "
+"dilakukan oleh perintah hapus. Namun perintah removeptf akan bertujuan untuk "
+"mengganti paket dependensi dengan versi pemutakhiran resmi mereka."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/listpatches.cc:16
@@ -2498,7 +2509,7 @@ msgstr "Jangan hapus paket yang sesuai dengan locale yang diberikan."
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
 #: src/commands/locks/add.cc:29
 msgid "addlock (al) [OPTIONS] <LOCKSPEC>..."
-msgstr "addlock (al) [OPTIONS] <LOCKSPEC>..."
+msgstr "addlock (al) [OPSI] <LOCKSPEC>..."
 
 #. translators: command summary
 #: src/commands/locks/add.cc:31 src/commands/locks/add.cc:34
@@ -3376,7 +3387,7 @@ msgstr "clean (cc) [ALIAS|#|URI] ..."
 
 #: src/commands/repos/clean.cc:17 src/commands/repos/clean.cc:18
 msgid "Clean local caches."
-msgstr "Bersihkan cache lokal."
+msgstr "Bersihkan singgahan lokal."
 
 #. translators: -r, --repo <ALIAS|#|URI>
 #: src/commands/repos/clean.cc:37
@@ -3386,17 +3397,17 @@ msgstr "Bersihkan hanya repositori yang telah ditentukan."
 #. translators: -m, --metadata
 #: src/commands/repos/clean.cc:42
 msgid "Clean metadata cache."
-msgstr "Bersihkan cache metadata."
+msgstr "Bersihkan singgahan metadata."
 
 #. translators: -M, --raw-metadata
 #: src/commands/repos/clean.cc:48
 msgid "Clean raw metadata cache."
-msgstr "Bersihkan cache metadata raw."
+msgstr "Bersihkan singgahan metadata raw."
 
 #. translators: -a, --all
 #: src/commands/repos/clean.cc:53
 msgid "Clean both metadata and package caches."
-msgstr "Bersihkan keduanya, metadata dan cache paket."
+msgstr "Bersihkan keduanya, metadata dan singgahan paket."
 
 #: src/commands/repos/list.cc:40 src/commands/repos/list.cc:212
 #: src/commands/services/list.cc:104
@@ -3474,7 +3485,7 @@ msgstr "Path info Repo"
 
 #: src/commands/repos/list.cc:58
 msgid "MD Cache Path"
-msgstr "Path Cache MD"
+msgstr "Path Singgahan MD"
 
 #: src/commands/repos/list.cc:74
 msgid "repos (lr) [OPTIONS] [REPO] ..."
@@ -3848,11 +3859,11 @@ msgstr "Atur prioritas repositori."
 
 #: src/commands/reposerviceoptionsets.cc:138
 msgid "Enable RPM files caching."
-msgstr "Aktifkan cache berkas RPM."
+msgstr "Aktifkan singgahan berkas RPM."
 
 #: src/commands/reposerviceoptionsets.cc:139
 msgid "Disable RPM files caching."
-msgstr "Nonaktifkan cache berkas RPM."
+msgstr "Nonaktifkan singgahan berkas RPM."
 
 #: src/commands/reposerviceoptionsets.cc:140
 msgid "Enable GPG check for this repository."
@@ -4237,6 +4248,7 @@ msgstr "Pilih masalah yang cocok dengan string yang ditentukan."
 msgid ""
 "Service '%1%' with URL '%2%' already exists. Just updating the settings."
 msgstr ""
+"Layanan '%1%' dengan URL '%2%' sudah ada. Hanya memutakhirkan pengaturan."
 
 #: src/commands/services/add.cc:58
 #, boost-format
@@ -4244,6 +4256,8 @@ msgid ""
 "Service '%1%' already exists but uses a different URL '%2%'. Please use "
 "another alias."
 msgstr ""
+"Layanan '%1%' sudah ada tetapi menggunakan URL '%2%' yang berbeda. Silakan "
+"gunakan alias lain."
 
 #: src/commands/services/add.cc:70
 #, c-format, boost-format
@@ -4775,7 +4789,7 @@ msgid ""
 "will look in the rest of your $PATH for it. Thus, it's possible\n"
 "to write local zypper extensions that don't live in system space.\n"
 msgstr ""
-"Sub perintah Zypper adalah executable tersendiri yang berada di\n"
+"Sub perintah zypper adalah dapat dieksekusi tersendiri yang berada di\n"
 "zypper_execdir ('%1%').\n"
 "\n"
 "Untuk sub perintah, zypper menyediakan sebuah pembungkus yang mengetahui\n"
@@ -4919,9 +4933,9 @@ msgid ""
 "changed by using the global --pkg-cache-dir option."
 msgstr ""
 "Unduh rpm yang ditentukan pada baris perintah ke direktori lokal. Per paket "
-"bawaan diunduh ke cache paket libzypp (/var/cache/zypp/packages; untuk "
-"pengguna non-root $XDG_CACHE_HOME/zypp/packages), namun hal ini bisa diubah "
-"dengan menggunakan opsi global --pkg-cache-dir."
+"bawaan diunduh ke singgahan paket libzypp (/var/singgahan/zypp/packages; "
+"untuk pengguna non-root $XDG_CACHE_HOME/zypp/packages), namun hal ini bisa "
+"diubah dengan menggunakan opsi global --pkg-singgahan-dir."
 
 #. translators: command description
 #: src/commands/utils/download.cc:153
@@ -5807,7 +5821,7 @@ msgstr "Galat saat mengambil metadata untuk '%s':"
 
 #: src/repos.cc:414
 msgid "Forcing building of repository cache"
-msgstr "Memaksa membangun cache repositori"
+msgstr "Memaksa membangun singgahan repositori"
 
 #: src/repos.cc:439
 #, c-format, boost-format
@@ -5830,11 +5844,11 @@ msgstr ""
 #: src/repos.cc:450
 #, c-format, boost-format
 msgid "Repository metadata for '%s' not found in local cache."
-msgstr "Metadata repositori untuk '%s' tidak ditemukan di cache lokal."
+msgstr "Metadata repositori untuk '%s' tidak ditemukan di singgahan lokal."
 
 #: src/repos.cc:458
 msgid "Error building the cache:"
-msgstr "Galat saat membangun cache:"
+msgstr "Galat saat membangun singgahan:"
 
 #: src/repos.cc:677
 #, c-format, boost-format
@@ -5882,7 +5896,7 @@ msgid ""
 "The metadata cache needs to be built for the '%s' repository. You can run "
 "'zypper refresh' as root to do this."
 msgstr ""
-"Cache metadata perlu dibangun untuk repositori '%s'. Anda bisa jalankan "
+"Singgahan metadata perlu dibangun untuk repositori '%s'. Anda bisa jalankan "
 "'zypper refresh' sebagai root untuk melakukan ini."
 
 #: src/repos.cc:925
@@ -5901,17 +5915,17 @@ msgstr "Inisialisasi target gagal:"
 #: src/repos.cc:1071
 #, c-format, boost-format
 msgid "Cleaning metadata cache for '%s'."
-msgstr "Membersihkan cache metadata untuk '%s'."
+msgstr "Membersihkan singgahan metadata untuk '%s'."
 
 #: src/repos.cc:1079
 #, c-format, boost-format
 msgid "Cleaning raw metadata cache for '%s'."
-msgstr "Membersihkan cache metadata raw untuk '%s'."
+msgstr "Membersihkan singgahan metadata raw untuk '%s'."
 
 #: src/repos.cc:1085
 #, c-format, boost-format
 msgid "Keeping raw metadata cache for %s '%s'."
-msgstr "Menyimpan cache metadata raw untuk %s '%s'."
+msgstr "Menyimpan singgahan metadata raw untuk %s '%s'."
 
 #. translators: meaning the cached rpm files
 #: src/repos.cc:1092
@@ -5926,11 +5940,12 @@ msgstr "Tidak dapat membersihkan repositori '%s' karena galat."
 
 #: src/repos.cc:1111
 msgid "Cleaning installed packages cache."
-msgstr "Membersihkan cache paket yang dipasang."
+msgstr "Membersihkan singgahan paket yang dipasang."
 
 #: src/repos.cc:1120
 msgid "Cannot clean installed packages cache because of an error."
-msgstr "Tidak dapat membersihkan cache paket yang dipasang karena kesalahan."
+msgstr ""
+"Tidak dapat membersihkan singgahan paket yang dipasang karena kesalahan."
 
 #: src/repos.cc:1138
 msgid "Could not clean the repositories because of errors."
@@ -6081,12 +6096,12 @@ msgstr "Segarkan otomatis telah dinonaktifkan untuk repositori '%s'."
 #: src/repos.cc:1640
 #, c-format, boost-format
 msgid "RPM files caching has been enabled for repository '%s'."
-msgstr "Cache berkas RPM telah diaktifkan untuk repositori '%s'."
+msgstr "Singgahan berkas RPM telah diaktifkan untuk repositori '%s'."
 
 #: src/repos.cc:1642
 #, c-format, boost-format
 msgid "RPM files caching has been disabled for repository '%s'."
-msgstr "Cache berkas RPM telah dinonaktifkan untuk repositori '%s'."
+msgstr "Singgahan berkas RPM telah dinonaktifkan untuk repositori '%s'."
 
 #: src/repos.cc:1649
 #, c-format, boost-format
@@ -6138,7 +6153,7 @@ msgstr "Mengambil data repositori '%s'..."
 #: src/repos.cc:1797
 #, c-format, boost-format
 msgid "Repository '%s' not cached. Caching..."
-msgstr "Repositori '%s' tidak di-cache. Membuat cache..."
+msgstr "Repositori '%s' tidak di-singgahan. Membuat singgahan..."
 
 #: src/repos.cc:1803 src/repos.cc:1837
 #, c-format, boost-format
@@ -6148,7 +6163,7 @@ msgstr "Masalah memuat data dari '%s'"
 #: src/repos.cc:1807
 #, c-format, boost-format
 msgid "Repository '%s' could not be refreshed. Using old cache."
-msgstr "Repositori '%s' tidak dapat disegarkan. Menggunakan cache lama."
+msgstr "Repositori '%s' tidak dapat disegarkan. Menggunakan singgahan lama."
 
 #: src/repos.cc:1811 src/repos.cc:1840
 #, c-format, boost-format
@@ -6158,7 +6173,7 @@ msgstr "Perbaikan dari '%s' tidak dimuat karena kesalahan."
 #: src/repos.cc:1827
 #, boost-format
 msgid "Repository '%1%' metadata expired since %2%."
-msgstr ""
+msgstr "Metadata repositori '%1%' kedaluwarsa sejak %2%."
 
 #. translators: the first %s is 'zypper refresh' and the second 'zypper clean -m'
 #: src/repos.cc:1839
@@ -6173,6 +6188,11 @@ msgid ""
 "solve the issue, it could be that you are using a broken mirror or the "
 "server has actually discontinued to support the repository."
 msgstr ""
+"Metadata repositori kedaluwarsa: Periksa apakah 'autorefresh' diaktifkan ("
+"zypper lr), jika tidak segarkan repositori secara manual (zypper ref). Jika "
+"ini tidak menyelesaikan masalah, bisa jadi Anda menggunakan cermin yang "
+"rusak atau peladen yang sebenarnya telah dihentikan untuk mendukung "
+"repositori."
 
 #: src/repos.cc:1857
 msgid "Reading installed packages..."
@@ -6199,7 +6219,7 @@ msgstr "Masalah saat membaca header RPM dari %s. Apakah ini berkas RPM?"
 
 #: src/repos.cc:1934
 msgid "Plain RPM files cache"
-msgstr "Cache berkas RPM yang plain"
+msgstr "Singgahan berkas RPM biasa"
 
 #: src/search.cc:99
 msgid "System Packages"
@@ -7076,7 +7096,7 @@ msgstr "Bentuk yang benar adalah obs://<project>/[platform]"
 
 #: src/utils/misc.cc:644
 msgid "Problem copying the specified RPM file to the cache directory."
-msgstr "Masalah menyalin berkas RPM yang ditentukan ke direktori cache."
+msgstr "Masalah menyalin berkas RPM yang ditentukan ke direktori singgahan."
 
 #: src/utils/misc.cc:645
 msgid "Perhaps you are running out of disk space."
