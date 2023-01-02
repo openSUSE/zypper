@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-12-22 14:35+0100\n"
-"PO-Revision-Date: 2022-05-20 11:13+0000\n"
+"PO-Revision-Date: 2023-01-02 05:14+0000\n"
 "Last-Translator: Kukuh Syafaat <syafaatkukuh@gmail.com>\n"
 "Language-Team: Indonesian <https://l10n.opensuse.org/projects/libzypp/master/"
 "id/>\n"
@@ -4403,12 +4403,12 @@ msgstr "Autentikasi dibutuhkan untuk '%s'"
 #. just report (NO_ERROR); no interactive request to the user
 #: zypp/media/MediaCurl.cc:785
 msgid "Will try again..."
-msgstr ""
+msgstr "Akan mencoba lagi..."
 
 #: zypp/media/MediaCurl.cc:789
 #, boost-format
 msgid "Giving up after %1% attempts."
-msgstr ""
+msgstr "Menyerah setelah %1% mencoba."
 
 #: zypp/media/MediaCurl.cc:905 zypp-curl/ng/network/networkrequesterror.cc:127
 msgid ""
@@ -4854,6 +4854,8 @@ msgid ""
 "Removing the installed %1% in this context will remove (not replace!) the "
 "included PTF-packages too."
 msgstr ""
+"Menghapus %1% yang dipasang dalam konteks ini akan menghapus (bukan "
+"mengganti!) paket PTF yang disertakan juga."
 
 #: zypp/solver/detail/SATResolver.cc:1318
 #, boost-format
@@ -4861,10 +4863,14 @@ msgid ""
 "The PTF should be removed by calling '%1%'. This will update the included "
 "PTF-packages rather than removing them."
 msgstr ""
+"PTF harus dihapus dengan memanggil '%1%'. Ini akan memutakhirkan paket PTF "
+"yang disertakan alih-alih menghapusnya."
 
 #: zypp/solver/detail/SATResolver.cc:1319
 msgid "Typically you want to keep the PTF or choose to cancel the action."
 msgstr ""
+"Biasanya Anda ingin mempertahankan PTF atau memilih untuk membatalkan "
+"tindakan."
 
 #. translator: %1% is the name of a PTF.
 #: zypp/solver/detail/SATResolver.cc:1324
@@ -5512,7 +5518,7 @@ msgstr " Masalah SSL Sertifikat, pastikan CA cert sudah benar untuk '%s'."
 
 #: zypp-media/mediaexception.cc:220
 msgid "No free ressources available to attach medium."
-msgstr ""
+msgstr "Tidak ada sumber daya bebas yang tersedia untuk melampirkan media."
 
 #: zypp-curl/auth/curlauthdata.cc:97
 #, c-format, boost-format
