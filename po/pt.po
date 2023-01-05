@@ -15,8 +15,8 @@ msgstr ""
 "Project-Id-Version: zypper.pt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-12-24 02:27+0100\n"
-"PO-Revision-Date: 2020-12-14 18:27+0000\n"
-"Last-Translator: Luís Tiago Favas <al62006@utad.eu>\n"
+"PO-Revision-Date: 2023-01-05 13:14+0000\n"
+"Last-Translator: Juliano Camargo <julianosc@pm.me>\n"
 "Language-Team: Portuguese <https://l10n.opensuse.org/projects/zypper/master/"
 "pt/>\n"
 "Language: pt\n"
@@ -24,7 +24,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Weblate 3.6.1\n"
+"X-Generator: Weblate 4.9.1\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -84,29 +84,29 @@ msgstr "Pode correr '%1%' para reparar qualquer problema de dependências."
 #, c-format, boost-format
 msgid "The following package failed to install:"
 msgid_plural "The following %d packages failed to install:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Falhou a instalação do seguinte pacote:"
+msgstr[1] "Falhou a instalação dos %d seguintes pacotes:"
 
 #: src/CommitSummary.cc:140
 #, c-format, boost-format
 msgid "The following package installation was skipped:"
 msgid_plural "The following %d package installations were skipped:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Ignorou a instalação do seguinte pacote:"
+msgstr[1] "Ignorou a instalação dos %d seguintes pacotes:"
 
 #: src/CommitSummary.cc:155
 #, c-format, boost-format
 msgid "The following package failed to uninstall:"
 msgid_plural "The following %d packages failed to uninstall:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Falhou a desinstalação do seguinte pacote:"
+msgstr[1] "Falhou a desinstalação dos %d seguintes pacotes:"
 
 #: src/CommitSummary.cc:170
 #, c-format, boost-format
 msgid "The following package removal was skipped:"
 msgid_plural "The following %d package removal were skipped:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Ignorou a remoção do seguinte pacote:"
+msgstr[1] "Ignorou a remoção dos %d seguintes pacotes:"
 
 #. translators: Appended when clipping a long enumeration:
 #. "ConsoleKit-devel ConsoleKit-doc ... and 20828 more items."
@@ -392,6 +392,8 @@ msgstr "Falha ao gravar a opção."
 msgid ""
 "'%s' install modifier must not be used without a package name or capability."
 msgstr ""
+"O modificador '%s' de instalação não deve ser usado sem um nome de pacote ou "
+"característica."
 
 #: src/PackageArgs.cc:169
 #, c-format, boost-format
@@ -1234,8 +1236,8 @@ msgstr "Depois da operação, %s irão ser libertados."
 #: src/Summary.cc:1432
 msgid "package to upgrade"
 msgid_plural "packages to upgrade"
-msgstr[0] "pacote para melhorar"
-msgstr[1] "pacotes para melhorar"
+msgstr[0] "pacote para atualizar"
+msgstr[1] "pacotes para atualizar"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
 #: src/Summary.cc:1443
@@ -1248,8 +1250,8 @@ msgstr[1] "para desmelhorar"
 #: src/Summary.cc:1446
 msgid "package to downgrade"
 msgid_plural "packages to downgrade"
-msgstr[0] "pacote para desmelhorar"
-msgstr[1] "pacotes para desmelhorar"
+msgstr[0] "pacote para desatualizar"
+msgstr[1] "pacotes para desatualizar"
 
 #. translators: this text will be preceded by a number e.g. "5 new"
 #: src/Summary.cc:1457
@@ -1732,7 +1734,7 @@ msgstr ""
 
 #: src/callbacks/keyring.h:496
 msgid "New:"
-msgstr ""
+msgstr "Novo:"
 
 #: src/callbacks/keyring.h:502
 msgid ""
@@ -2082,19 +2084,19 @@ msgstr ""
 #: src/callbacks/rpm.h:759 src/callbacks/rpm.h:766
 #, c-format, boost-format
 msgid "Executing %s script for: %s"
-msgstr ""
+msgstr "A correr o guião %s para: %s"
 
 #. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
 #: src/callbacks/rpm.h:773
 #, c-format, boost-format
 msgid "Executing %s script"
-msgstr ""
+msgstr "A correr o guião %s"
 
 #. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
 #: src/callbacks/rpm.h:895
 #, c-format, boost-format
 msgid "Cleaning up: %s"
-msgstr ""
+msgstr "A limpar: %s"
 
 #. translator: %s is an other command: "This is an alias for 'zypper info -t patch'."
 #: src/commands/commandhelpformatter.h:94
@@ -2690,7 +2692,7 @@ msgstr "Repositório"
 
 #: src/commands/locks/list.cc:138
 msgid "Comment"
-msgstr ""
+msgstr "Comentário"
 
 #. translators: locks table value
 #: src/commands/locks/list.cc:156 src/commands/locks/list.cc:235
@@ -5410,7 +5412,7 @@ msgstr "não instalado"
 
 #: src/info.cc:355
 msgid "Upstream URL"
-msgstr ""
+msgstr "URL ascendente"
 
 #. translators: property name; short; used like "Name: value"
 #. translator: Table column header.
@@ -5716,7 +5718,7 @@ msgstr "concluído"
 #. translator: Shown as result tag in a progress bar: .......[attention]
 #: src/output/Out.cc:122
 msgid "attention"
-msgstr ""
+msgstr "atenção"
 
 #. translator: Shown as result tag in a progress bar: ...........[error]
 #. Translator: download progress bar result: "............[error]"
@@ -6264,7 +6266,7 @@ msgstr "Os resolúveis de '%s' não foram carregados devido a um erro."
 #: src/repos.cc:1827
 #, boost-format
 msgid "Repository '%1%' metadata expired since %2%."
-msgstr ""
+msgstr "Metadados do repositório '%1%' expirou desde %2%."
 
 #. translators: the first %s is 'zypper refresh' and the second 'zypper clean -m'
 #: src/repos.cc:1839
@@ -6442,7 +6444,7 @@ msgstr "A verificar dependências..."
 #. Here: compute the full upgrade
 #: src/solve-commit.cc:463
 msgid "Computing upgrade..."
-msgstr "A computar o melhoramento..."
+msgstr "A computar a atualização..."
 
 #: src/solve-commit.cc:477
 msgid "Generating solver test case..."
@@ -6507,7 +6509,7 @@ msgstr "Ver as notificações agora?"
 
 #: src/solve-commit.cc:645
 msgid "Computing distribution upgrade..."
-msgstr "A computar melhoramento de distribuição..."
+msgstr "A computar a atualização da distribuição..."
 
 #: src/solve-commit.cc:650
 msgid "Resolving package dependencies..."
