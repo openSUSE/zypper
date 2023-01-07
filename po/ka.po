@@ -9,15 +9,16 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-12-24 02:27+0100\n"
-"PO-Revision-Date: 2009-03-06 01:21+0400\n"
-"Last-Translator: George Machitidze <giomac@gmail.com>\n"
-"Language-Team: Georgian <>\n"
+"PO-Revision-Date: 2023-01-08 00:14+0000\n"
+"Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
+"Language-Team: Georgian <https://l10n.opensuse.org/projects/zypper/master/ka/"
+">\n"
 "Language: ka\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 0.2\n"
+"X-Generator: Weblate 4.9.1\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -633,260 +634,266 @@ msgid "Product '%1%' requires to be updated by calling '%2%'!"
 msgstr ""
 
 #: src/Summary.cc:585
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following NEW package is going to be installed:"
 msgid_plural "The following %d NEW packages are going to be installed:"
-msgstr[0] "უნდა განახლდეს შემდეგი პაკეტები:"
+msgstr[0] "მოხდება შემდეგი %d ახალი პაკეტის დაყენება:"
 
 #: src/Summary.cc:590
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following NEW patch is going to be installed:"
 msgid_plural "The following %d NEW patches are going to be installed:"
-msgstr[0] "უნდა განახლდეს შემდეგი პაკეტები:"
+msgstr[0] "მოხდება %d ახალი პაჩის დაყენება:"
 
 #: src/Summary.cc:595
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following NEW pattern is going to be installed:"
 msgid_plural "The following %d NEW patterns are going to be installed:"
-msgstr[0] "უნდა განახლდეს შემდეგი პაკეტები:"
+msgstr[0] "მოხდება %d ახალი ნიმუშის დაყენება:"
 
 #: src/Summary.cc:600
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following NEW product is going to be installed:"
 msgid_plural "The following %d NEW products are going to be installed:"
-msgstr[0] "უნდა განახლდეს შემეგი პროდუქტები:"
+msgstr[0] "მოხდდება %d ახალი პროდუქტის დაყენება:"
 
 #: src/Summary.cc:605
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following source package is going to be installed:"
 msgid_plural "The following %d source packages are going to be installed:"
-msgstr[0] "უნდა განახლდეს შემდეგი პაკეტები:"
+msgstr[0] "მოხდება %d საწყისი კოდის პაკეტის დაყენება:"
 
 #: src/Summary.cc:611
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following application is going to be installed:"
 msgid_plural "The following %d applications are going to be installed:"
-msgstr[0] "უნდა განახლდეს შემდეგი პაკეტები:"
+msgstr[0] "მოხდება %d აპლიკაციის დაყენება:"
 
 #: src/Summary.cc:636
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following package is going to be REMOVED:"
 msgid_plural "The following %d packages are going to be REMOVED:"
-msgstr[0] "უნდა განახლდეს შემდეგი პაკეტები:"
+msgstr[0] "მოხდება %d პაკეტის წაშლა:"
 
 #: src/Summary.cc:641
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following patch is going to be REMOVED:"
 msgid_plural "The following %d patches are going to be REMOVED:"
-msgstr[0] "უნდა განახლდეს შემდეგი პაკეტები:"
+msgstr[0] "წაიშლება %d პაჩი:"
 
 #: src/Summary.cc:646
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following pattern is going to be REMOVED:"
 msgid_plural "The following %d patterns are going to be REMOVED:"
-msgstr[0] "უნდა განახლდეს შემდეგი პაკეტები:"
+msgstr[0] "წაიშლება %d ნიმუში:"
 
 #: src/Summary.cc:651
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following product is going to be REMOVED:"
 msgid_plural "The following %d products are going to be REMOVED:"
-msgstr[0] "უნდა განახლდეს შემდეგი პაკეტები:"
+msgstr[0] "წაიშლება %d პროდუქტი:"
 
 #: src/Summary.cc:657
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following application is going to be REMOVED:"
 msgid_plural "The following %d applications are going to be REMOVED:"
-msgstr[0] "უნდა განახლდეს შემდეგი პაკეტები:"
+msgstr[0] "წაიშლება %d აპლიკაცია:"
 
 #: src/Summary.cc:680
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following package is going to be upgraded:"
 msgid_plural "The following %d packages are going to be upgraded:"
-msgstr[0] "უნდა განახლდეს შემდეგი პაკეტები:"
+msgstr[0] "განახლდება %d პაკეტი:"
 
 #: src/Summary.cc:685
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following patch is going to be upgraded:"
 msgid_plural "The following %d patches are going to be upgraded:"
-msgstr[0] "უნდა განახლდეს შემდეგი პაკეტები:"
+msgstr[0] "განახლდება %d პაჩი:"
 
 #: src/Summary.cc:690
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following pattern is going to be upgraded:"
 msgid_plural "The following %d patterns are going to be upgraded:"
-msgstr[0] "უნდა განახლდეს შემდეგი პაკეტები:"
+msgstr[0] "განახლდება %d ნიმუში:"
 
 #: src/Summary.cc:696
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following product is going to be upgraded:"
 msgid_plural "The following %d products are going to be upgraded:"
-msgstr[0] "უნდა განახლდეს შემეგი პროდუქტები:"
+msgstr[0] "განახლდება %d პროდუქტი:"
 
 #: src/Summary.cc:704
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following application is going to be upgraded:"
 msgid_plural "The following %d applications are going to be upgraded:"
-msgstr[0] "უნდა განახლდეს შემდეგი პაკეტები:"
+msgstr[0] "განახლდება %d აპლიკაცია:"
 
 #: src/Summary.cc:726
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following package is going to be downgraded:"
 msgid_plural "The following %d packages are going to be downgraded:"
-msgstr[0] "უნდა განახლდეს შემდეგი პაკეტები:"
+msgstr[0] "ჩამოიწევა %d პაკეტის ვერსია:"
 
 #: src/Summary.cc:731
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following patch is going to be downgraded:"
 msgid_plural "The following %d patches are going to be downgraded:"
-msgstr[0] "უნდა განახლდეს შემდეგი პაკეტები:"
+msgstr[0] "ჩამოიწევა %d პაჩის ვერსია:"
 
 #: src/Summary.cc:736
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following pattern is going to be downgraded:"
 msgid_plural "The following %d patterns are going to be downgraded:"
-msgstr[0] "უნდა განახლდეს შემდეგი პაკეტები:"
+msgstr[0] "ჩამოიწევა %d ნიმუშის ვერსია:"
 
 #: src/Summary.cc:741
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following product is going to be downgraded:"
 msgid_plural "The following %d products are going to be downgraded:"
-msgstr[0] "უნდა განახლდეს შემეგი პროდუქტები:"
+msgstr[0] "ჩამოიწევა %d პროდუქტის ვერსია:"
 
 #: src/Summary.cc:747
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following application is going to be downgraded:"
 msgid_plural "The following %d applications are going to be downgraded:"
-msgstr[0] "უნდა განახლდეს შემდეგი პაკეტები:"
+msgstr[0] "ჩამოიწევა %d აპლიკაციის ვერსია:"
 
 #: src/Summary.cc:769
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following package is going to be reinstalled:"
 msgid_plural "The following %d packages are going to be reinstalled:"
-msgstr[0] "უნდა განახლდეს შემდეგი პაკეტები:"
+msgstr[0] "თავიდან დადგება %d პაკეტი:"
 
 #: src/Summary.cc:774
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following patch is going to be reinstalled:"
 msgid_plural "The following %d patches are going to be reinstalled:"
-msgstr[0] "უნდა განახლდეს შემდეგი პაკეტები:"
+msgstr[0] "თავიდან დადგება %d პაჩი:"
 
 #: src/Summary.cc:779
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following pattern is going to be reinstalled:"
 msgid_plural "The following %d patterns are going to be reinstalled:"
-msgstr[0] "უნდა განახლდეს შემდეგი პაკეტები:"
+msgstr[0] "თავიდან დადგება %d ნიმუში:"
 
 #: src/Summary.cc:784
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following product is going to be reinstalled:"
 msgid_plural "The following %d products are going to be reinstalled:"
-msgstr[0] "უნდა განახლდეს შემეგი პროდუქტები:"
+msgstr[0] "თავიდან დადგება %d პროდუქტი:"
 
 #: src/Summary.cc:797
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following application is going to be reinstalled:"
 msgid_plural "The following %d applications are going to be reinstalled:"
-msgstr[0] "უნდა განახლდეს შემდეგი პაკეტები:"
+msgstr[0] "თავიდან დადგება %d აპლიკაცია:"
 
 #: src/Summary.cc:934
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following recommended package was automatically selected:"
 msgid_plural ""
 "The following %d recommended packages were automatically selected:"
-msgstr[0] "უნდა განახლდეს შემდეგი პაკეტები:"
+msgstr[0] "შემდეგი %d რეკომენდებული პაკეტი ავტომატურად იქნა არჩეული:"
 
 #: src/Summary.cc:939
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following recommended patch was automatically selected:"
 msgid_plural ""
 "The following %d recommended patches were automatically selected:"
-msgstr[0] "უნდა განახლდეს შემდეგი პაკეტები:"
+msgstr[0] "შემდეგი %d რეკომენდებული პაჩი ავტომატურად იქნა არჩეული:"
 
 #: src/Summary.cc:944
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following recommended pattern was automatically selected:"
 msgid_plural ""
 "The following %d recommended patterns were automatically selected:"
-msgstr[0] "უნდა განახლდეს შემდეგი პაკეტები:"
+msgstr[0] "შემდეგი %d რეკომენდებული ნიმუში ავტომატურად იქნა არჩეული:"
 
 #: src/Summary.cc:949
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following recommended product was automatically selected:"
 msgid_plural ""
 "The following %d recommended products were automatically selected:"
-msgstr[0] "უნდა განახლდეს შემდეგი პაკეტები:"
+msgstr[0] "შემდეგი %d რეკომენდებული პროდუქტი ავტომატურად იქნა არჩეული:"
 
 #: src/Summary.cc:954
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following recommended source package was automatically selected:"
 msgid_plural ""
 "The following %d recommended source packages were automatically selected:"
-msgstr[0] "უნდა განახლდეს შემდეგი პაკეტები:"
+msgstr[0] "შემდეგი %d რეკომენდებული საწყისი კოდის პაკეტი ავტომატურად იქნა არჩეული:"
 
 #: src/Summary.cc:960
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following recommended application was automatically selected:"
 msgid_plural ""
 "The following %d recommended applications were automatically selected:"
-msgstr[0] "უნდა განახლდეს შემდეგი პაკეტები:"
+msgstr[0] "შემდეგი %d რეკომენდებული აპლიკაცია ავტომატურად იქნა არჩეული:"
 
 #: src/Summary.cc:1007
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid ""
 "The following package is recommended, but will not be installed (only "
 "required packages will be installed):"
 msgid_plural ""
 "The following %d packages are recommended, but will not be installed (only "
 "required packages will be installed):"
-msgstr[0] "უნდა განახლდეს შემდეგი პაკეტები:"
+msgstr[0] ""
+"შემდეგი %d პაკეტი რეკომენდებულია, მაგრამ დაყენებული არ იქნება (მოხდება "
+"მხოლოდ აუცილებელი პაკეტების დაყენება):"
 
 #: src/Summary.cc:1019
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid ""
 "The following package is recommended, but will not be installed because it's "
 "unwanted (was manually removed before):"
 msgid_plural ""
 "The following %d packages are recommended, but will not be installed because "
 "they are unwanted (were manually removed before):"
-msgstr[0] "უნდა განახლდეს შემდეგი პაკეტები:"
+msgstr[0] ""
+"შემდეგი %d პაკეტი რეკომენდებულია, მაგრამ დაყენებული არ იქნება, რადგან ისინი "
+"სასურველი არაა (ხელით იქნა წაშლილი):"
 
 #: src/Summary.cc:1029
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid ""
 "The following package is recommended, but will not be installed due to "
 "conflicts or dependency issues:"
 msgid_plural ""
 "The following %d packages are recommended, but will not be installed due to "
 "conflicts or dependency issues:"
-msgstr[0] "უნდა განახლდეს შემდეგი პაკეტები:"
+msgstr[0] ""
+"შემდეგი %d პაკეტი რეკომენდებულია, მაგრამ მათი დაყენება არ მოხდება კონფლიქტის "
+"ან დამოკიდებულების პრობლემების გამო:"
 
 #: src/Summary.cc:1042
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following patch is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d patches are recommended, but will not be installed:"
-msgstr[0] "უნდა განახლდეს შემდეგი პაკეტები:"
+msgstr[0] "შემდეგი %d პაჩი რეკომენდებულია, მაგრამ მათი დაყენება არ მოხდება:"
 
 #: src/Summary.cc:1046
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following pattern is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d patterns are recommended, but will not be installed:"
-msgstr[0] "უნდა განახლდეს შემდეგი პაკეტები:"
+msgstr[0] "შემდეგი %d ნიმუში რეკომენდებულია, მაგრამ მათი დაყენება არ მოხდება:"
 
 #: src/Summary.cc:1050
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following product is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d products are recommended, but will not be installed:"
-msgstr[0] "უნდა განახლდეს შემეგი პროდუქტები:"
+msgstr[0] "შემდეგი %d პროდუქტი რეკომენდებულია, მაგრამ მათი დაყენება არ მოხდება:"
 
 #: src/Summary.cc:1055
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following application is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d applications are recommended, but will not be installed:"
-msgstr[0] "უნდა განახლდეს შემდეგი პაკეტები:"
+msgstr[0] "შემდეგი %d აპლიკაცია რეკომენდებულია, მაგრამ მათი დაყენება არ მოხდება:"
 
 #: src/Summary.cc:1088
 #, fuzzy, c-format, boost-format
@@ -1357,9 +1364,9 @@ msgstr ""
 
 #. translator: %1% is a file name, %2% a repositories name
 #: src/callbacks/keyring.h:166
-#, fuzzy, boost-format
+#, boost-format
 msgid "File '%1%' from repository '%2%' is unsigned."
-msgstr "მითითებული რეპოზიტორიები:"
+msgstr "ფაილი '%1%' რეპოზიტორიიდან '%2%' ხელმოუწერელია."
 
 #. TranslatorExplanation: speaking of a file
 #: src/callbacks/keyring.h:183
@@ -1681,7 +1688,7 @@ msgstr ""
 # cancel button label
 #: src/callbacks/media.cc:134
 msgid "Cancel"
-msgstr "შეწყვეტა"
+msgstr "გაუქმება"
 
 #: src/callbacks/media.cc:136
 msgid "Select device to eject."
@@ -3082,9 +3089,8 @@ msgid "Just another means to specify a .repo file to read."
 msgstr ""
 
 #: src/commands/repos/add.cc:41
-#, fuzzy
 msgid "Probe URI."
-msgstr "პრობლემა:"
+msgstr "ზონდის URI."
 
 #: src/commands/repos/add.cc:42
 msgid "Don't probe URI, probe later during refresh."
@@ -3358,7 +3364,7 @@ msgstr ""
 
 #: src/commands/repos/refresh.cc:195 src/repos.cc:1023
 msgid "Specified repositories: "
-msgstr "მითითებული რეპოზიტორიები:"
+msgstr "მითითებული რეპოზიტორიები: "
 
 #: src/commands/repos/refresh.cc:218
 #, fuzzy, c-format, boost-format
@@ -3870,9 +3876,9 @@ msgid ""
 msgstr ""
 
 #: src/commands/search/search.cc:290 src/repos.cc:781
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Specified repository '%s' is disabled."
-msgstr "მითითებული რეპოზიტორიები:"
+msgstr "მითითებული რეპოზიტორიa '%s' გამორთულია."
 
 #. translators: empty search result message
 #: src/commands/search/search.cc:463
@@ -4045,18 +4051,16 @@ msgid "Add a RIS service repository to enable."
 msgstr ""
 
 #: src/commands/services/modify.cc:44
-#, fuzzy
 msgid "Add a RIS service repository to disable."
-msgstr "მითითებული რეპოზიტორიები:"
+msgstr "RIS სერვისის რეპოზიტორიის გასათიშად დამატება."
 
 #: src/commands/services/modify.cc:45
 msgid "Remove a RIS service repository to enable."
 msgstr ""
 
 #: src/commands/services/modify.cc:46
-#, fuzzy
 msgid "Remove a RIS service repository to disable."
-msgstr "მითითებული რეპოზიტორიები:"
+msgstr "გასათიშად წაშალეთ RIS სერვისის რეპოზიტორია."
 
 #: src/commands/services/modify.cc:47
 msgid "Clear the list of RIS repositories to enable."
@@ -5039,9 +5043,8 @@ msgstr ""
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:572 src/info.cc:599
-#, fuzzy
 msgid "Update Repositories"
-msgstr "მითითებული რეპოზიტორიები:"
+msgstr "განახლების რეპოზიტორიები"
 
 #: src/info.cc:577
 msgid "Content Id"
@@ -5268,9 +5271,8 @@ msgstr ""
 
 #. translator: usually followed by a ' ' and some explanatory text
 #: src/output/Out.h:45
-#, fuzzy
 msgid "Error:"
-msgstr "შეცდომა"
+msgstr "შეცდომა:"
 
 #: src/output/Out.h:47
 msgid "Continue?"
@@ -5834,7 +5836,7 @@ msgstr ""
 #. translators: meaning 'dependency problem' found during solving
 #: src/solve-commit.cc:74
 msgid "Problem: "
-msgstr "პრობლემა:"
+msgstr "პრობლემა: "
 
 #: src/solve-commit.cc:80
 msgid "Detailed information: "
@@ -6547,10 +6549,9 @@ msgstr[0] ""
 
 #. default
 #: src/utils/misc.cc:106
-#, fuzzy
 msgid "resolvable"
 msgid_plural "resolvables"
-msgstr[0] "No se han encontrado elementos."
+msgstr[0] "ამოხსნადები"
 
 #. Patch status: i18n + color
 #. translator: patch status
@@ -6755,7 +6756,7 @@ msgstr "ვერ მოიძებნა"
 
 #: src/utils/prompt.h:185
 msgid "I/O error"
-msgstr " "
+msgstr "I/O შეცდომა"
 
 #: src/utils/prompt.h:185
 msgid "Invalid object"
