@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-12-24 02:27+0100\n"
-"PO-Revision-Date: 2023-01-08 05:12+0000\n"
+"PO-Revision-Date: 2023-01-08 08:14+0000\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <https://l10n.opensuse.org/projects/zypper/master/ka/"
 ">\n"
@@ -22,52 +22,52 @@ msgstr ""
 
 #: src/Command.cc:93
 msgid "Invalid command"
-msgstr ""
+msgstr "არასწორი ბრძანება"
 
 #: src/Command.cc:111
 msgid "Repository Management:"
-msgstr ""
+msgstr "რეპოზიტორიის მართვა:"
 
 #: src/Command.cc:119
 msgid "Service Management:"
-msgstr ""
+msgstr "სერვისის მართვა:"
 
 #: src/Command.cc:125
 msgid "Software Management:"
-msgstr ""
+msgstr "პროგრამების მართვა:"
 
 #: src/Command.cc:132
 msgid "Update Management:"
-msgstr ""
+msgstr "განახლებების მართვა:"
 
 #: src/Command.cc:139
 msgid "Querying:"
-msgstr ""
+msgstr "მოთხოვნა:"
 
 #: src/Command.cc:150
 msgid "Package Locks:"
-msgstr ""
+msgstr "პაკეტების დაბლოკვები:"
 
 #: src/Command.cc:155
 msgid "Locale Management:"
-msgstr ""
+msgstr "ენის მართვა:"
 
 #: src/Command.cc:159
 msgid "Other Commands:"
-msgstr ""
+msgstr "სხვა ბრძანებები:"
 
 #: src/Command.cc:168
 msgid "Subcommands:"
-msgstr ""
+msgstr "ქვებრძანებები:"
 
 #: src/Command.cc:289
 #, c-format, boost-format
 msgid "Unknown command '%s'"
-msgstr ""
+msgstr "უცნობი ბრძანება: %s"
 
 #: src/CommitSummary.cc:90
 msgid "Installation has completed with error."
-msgstr ""
+msgstr "დაყენება შეცდომით დასრულდა."
 
 #: src/CommitSummary.cc:92
 #, boost-format
@@ -124,12 +124,12 @@ msgstr ""
 #. translators: --help, -h
 #: src/Config.cc:328
 msgid "Help."
-msgstr ""
+msgstr "დახმარება."
 
 #. translators: --version, -V
 #: src/Config.cc:337
 msgid "Output the version number."
-msgstr ""
+msgstr "ვერსიის ნომრის გამოტანა."
 
 #. translators: --promptids
 #: src/Config.cc:349
@@ -240,7 +240,7 @@ msgstr ""
 
 #: src/Config.cc:550
 msgid "Repository Options"
-msgstr ""
+msgstr "რეპოზიტორიის მორგება"
 
 #: src/Config.cc:554
 msgid "Entering 'no-gpg-checks' mode."
@@ -1040,7 +1040,7 @@ msgstr[0] "შემდეგი %d ჩანაწერი დაბლოკ�
 #. translators: used as 'tag:' (i.e. followed by ':')
 #: src/Summary.cc:1337
 msgid "Available"
-msgstr ""
+msgstr "ხელმისაწვდომი"
 
 #. translators: used as 'tag:' (i.e. followed by ':')
 #. translators: property name; short; used like "Name: value"
@@ -1094,79 +1094,79 @@ msgstr ""
 #: src/Summary.cc:1432
 msgid "package to upgrade"
 msgid_plural "packages to upgrade"
-msgstr[0] ""
+msgstr[0] "პაკეტის განახლება"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
 #: src/Summary.cc:1443
 msgid "to downgrade"
 msgid_plural "to downgrade"
-msgstr[0] ""
+msgstr[0] "ვერსია ჩამოიწევა"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
 #: src/Summary.cc:1446
 msgid "package to downgrade"
 msgid_plural "packages to downgrade"
-msgstr[0] ""
+msgstr[0] "პაკეტის ვერსიის ჩამოწევა"
 
 #. translators: this text will be preceded by a number e.g. "5 new"
 #: src/Summary.cc:1457
 msgid "new"
 msgid_plural "new"
-msgstr[0] ""
+msgstr[0] "ახალი"
 
 #. translators: this text will be preceded by a number e.g. "5 new to install"
 #: src/Summary.cc:1460
 msgid "new package to install"
 msgid_plural "new packages to install"
-msgstr[0] ""
+msgstr[0] "ახალი დასაყენებელი პაკეტი"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
 #: src/Summary.cc:1471
 msgid "to reinstall"
 msgid_plural "to reinstall"
-msgstr[0] ""
+msgstr[0] "თავიდან დასაყენებელი"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
 #: src/Summary.cc:1474
 msgid "package to reinstall"
 msgid_plural "packages to reinstall"
-msgstr[0] ""
+msgstr[0] "თავიდან დასაყენებელი პაკეტი"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
 #: src/Summary.cc:1485
 msgid "to remove"
 msgid_plural "to remove"
-msgstr[0] ""
+msgstr[0] "წასაშლელი"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
 #: src/Summary.cc:1488
 msgid "package to remove"
 msgid_plural "packages to remove"
-msgstr[0] ""
+msgstr[0] "წასაშლელი პაკეტი"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
 #: src/Summary.cc:1499
 msgid "to change vendor"
 msgid_plural " to change vendor"
-msgstr[0] ""
+msgstr[0] "მომწოდებლის შეცვლა"
 
 #. translators: this text will be preceded by a number e.g. "5 packages ..."
 #: src/Summary.cc:1502
 msgid "package will change vendor"
 msgid_plural "packages will change vendor"
-msgstr[0] ""
+msgstr[0] "პაკეტი შეიცვლის მომწოდებელს"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
 #: src/Summary.cc:1513
 msgid "to change arch"
 msgid_plural "to change arch"
-msgstr[0] ""
+msgstr[0] "შეიცვლის არქიტექტურას"
 
 #. translators: this text will be preceded by a number e.g. "5 packages ..."
 #: src/Summary.cc:1516
 msgid "package will change arch"
 msgid_plural "packages will change arch"
-msgstr[0] ""
+msgstr[0] "პაკეტი შეიცვლის არქიტექტურას"
 
 #. translators: this text will be preceded by a number e.g. "5 new"
 #: src/Summary.cc:1527
@@ -1225,7 +1225,7 @@ msgstr ""
 
 #: src/Zypper.cc:110
 msgid "Try again?"
-msgstr ""
+msgstr "კიდევ სცადეთ?"
 
 #: src/Zypper.cc:248 src/Zypper.cc:707 src/commands/basecommand.cc:289
 msgid "Unexpected exception."
@@ -1303,7 +1303,7 @@ msgstr ""
 
 #: src/callbacks/keyring.h:85
 msgid "Repository:"
-msgstr ""
+msgstr "რეპოზიტორია:"
 
 #: src/callbacks/keyring.h:87
 msgid "Key Fingerprint:"
@@ -1584,7 +1584,7 @@ msgstr ""
 #. translators: A prompt option
 #: src/callbacks/keyring.h:577
 msgid "discard"
-msgstr ""
+msgstr "მოცილება"
 
 #. translators: A prompt option help text
 #: src/callbacks/keyring.h:579
@@ -1679,7 +1679,7 @@ msgstr ""
 
 #: src/callbacks/media.cc:119
 msgid "Detected devices:"
-msgstr ""
+msgstr "ნაპოვნი მოწყობილობები:"
 
 # cancel button label
 #: src/callbacks/media.cc:134
@@ -1740,7 +1740,7 @@ msgstr ""
 
 #: src/callbacks/media.cc:314 src/callbacks/media.cc:321
 msgid "User Name"
-msgstr ""
+msgstr "მომხმარებლის სახელი"
 
 # password dialog title
 #. password
@@ -1790,7 +1790,7 @@ msgstr ""
 #: src/callbacks/rpm.h:350 src/callbacks/rpm.h:631
 #, c-format, boost-format
 msgid "Removing %s"
-msgstr ""
+msgstr "%s-ის წაშლა"
 
 #: src/callbacks/rpm.h:393
 #, c-format, boost-format
@@ -1873,15 +1873,15 @@ msgstr ""
 
 #: src/commands/commandhelpformatter.h:107
 msgid "Examples:"
-msgstr ""
+msgstr "მაგალითები:"
 
 #: src/commands/commandhelpformatter.h:110
 msgid "Arguments:"
-msgstr ""
+msgstr "არგუმენტები:"
 
 #: src/commands/commandhelpformatter.h:123 src/utils/flags/zyppflags.cc:627
 msgid "Command options:"
-msgstr ""
+msgstr "ბრძანების პარამეტრები:"
 
 #: src/commands/commandhelpformatter.h:126
 msgid "Solver options:"
@@ -1907,7 +1907,7 @@ msgstr ""
 
 #: src/commands/commandhelpformatter.h:187
 msgid "Usage:"
-msgstr ""
+msgstr "გამოყენება:"
 
 #: src/commands/commandhelpformatter.h:189
 msgid "Global Options:"
@@ -2387,7 +2387,7 @@ msgstr ""
 
 #: src/commands/locks/list.cc:137
 msgid "Matches"
-msgstr ""
+msgstr "დამთხვევები"
 
 #. translators: Table column header
 #. translators: type (general header)
@@ -2403,7 +2403,7 @@ msgstr ""
 #: src/search.cc:306 src/search.cc:438 src/search.cc:482 src/update.cc:786
 #: src/utils/misc.cc:324
 msgid "Repository"
-msgstr ""
+msgstr "საცავი"
 
 #: src/commands/locks/list.cc:138
 msgid "Comment"
@@ -2787,12 +2787,12 @@ msgstr ""
 #. process ID
 #: src/commands/ps.cc:142
 msgid "PID"
-msgstr ""
+msgstr "PID"
 
 #. parent process ID
 #: src/commands/ps.cc:144
 msgid "PPID"
-msgstr ""
+msgstr "PPID"
 
 #. process user ID
 #: src/commands/ps.cc:146
@@ -2911,7 +2911,7 @@ msgstr ""
 #: src/commands/query/info.cc:108 src/utils/messages.cc:37
 #: src/utils/messages.cc:52 src/utils/messages.cc:72 src/utils/messages.cc:89
 msgid "Usage"
-msgstr ""
+msgstr "გამოყენება"
 
 #. translators: command summary: patch-info
 #: src/commands/query/info.cc:138
@@ -3069,7 +3069,7 @@ msgstr ""
 
 #: src/commands/repos/add.cc:24
 msgid "Add a new repository."
-msgstr ""
+msgstr "ახალი რეპოზიტორიის დამატება."
 
 #: src/commands/repos/add.cc:25
 msgid ""
@@ -3143,7 +3143,7 @@ msgstr ""
 #: src/commands/repos/list.cc:40 src/commands/repos/list.cc:212
 #: src/commands/services/list.cc:104
 msgid "Alias"
-msgstr ""
+msgstr "სინონიმი"
 
 #. translators: property name; short; used like "Name: value"
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
@@ -3187,7 +3187,7 @@ msgstr ""
 
 #: src/commands/repos/list.cc:50 src/commands/repos/list.cc:51
 msgid "Off"
-msgstr ""
+msgstr "გამორთ"
 
 #: src/commands/repos/list.cc:51
 msgid "Keep Packages"
@@ -3207,7 +3207,7 @@ msgstr "მშობელი სერვისი"
 
 #: src/commands/repos/list.cc:56
 msgid "Keywords"
-msgstr ""
+msgstr "საკვანძო სიტყვები"
 
 #: src/commands/repos/list.cc:57
 msgid "Repo Info Path"
@@ -4034,7 +4034,7 @@ msgstr ""
 
 #: src/commands/services/modify.cc:41
 msgid "Advanced:"
-msgstr ""
+msgstr "დამატებით:"
 
 #: src/commands/services/modify.cc:43
 msgid "Add a RIS service repository to enable."
@@ -4584,7 +4584,7 @@ msgstr ""
 
 #: src/commands/utils/download.cc:254 src/solve-commit.cc:1023
 msgid "Nothing to do."
-msgstr ""
+msgstr "გასაკეთებელი არაფერია."
 
 #: src/commands/utils/download.cc:261
 msgid "No prune to best version."
@@ -4871,14 +4871,14 @@ msgstr "არქიტექტურა"
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:94
 msgid "Vendor"
-msgstr ""
+msgstr "მომწოდებელი"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: package summary (header)
 #: src/info.cc:100 src/search.cc:201 src/utils/misc.cc:331
 #: src/utils/misc.cc:373
 msgid "Summary"
-msgstr ""
+msgstr "შეჯამება"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: header of table column - the package summary
@@ -4910,12 +4910,12 @@ msgstr ""
 
 #: src/info.cc:335
 msgid "Support Level"
-msgstr ""
+msgstr "მხარდაჭერის დონე"
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:338
 msgid "Installed Size"
-msgstr ""
+msgstr "დაყენებული ზომა"
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:342 src/info.cc:392 src/info.cc:556 src/utils/misc.cc:329
@@ -4934,11 +4934,11 @@ msgstr ""
 
 #: src/info.cc:351 src/info.cc:565
 msgid "not installed"
-msgstr ""
+msgstr "დაყენებული არაა"
 
 #: src/info.cc:355
 msgid "Upstream URL"
-msgstr ""
+msgstr "აღმავლის URL"
 
 #. translators: property name; short; used like "Name: value"
 #. translator: Table column header.
@@ -4951,17 +4951,17 @@ msgstr ""
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:396 src/utils/misc.cc:327 src/utils/misc.cc:369
 msgid "Severity"
-msgstr ""
+msgstr "სიმკაცრე"
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:398
 msgid "Created On"
-msgstr ""
+msgstr "შექმნის თარიღი"
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:400 src/utils/misc.cc:328 src/utils/misc.cc:370
 msgid "Interactive"
-msgstr ""
+msgstr "ინტერაქტიური"
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:435
@@ -4971,11 +4971,11 @@ msgstr ""
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:449 src/info.cc:485
 msgid "Contents"
-msgstr ""
+msgstr "შიგთავსი"
 
 #: src/info.cc:449
 msgid "(empty)"
-msgstr ""
+msgstr "(ცარიელი)"
 
 #. translators: Table column header
 #. translators: header of table column - S is for 'Status' (package installed or not)
@@ -4991,15 +4991,15 @@ msgstr ""
 #. translators: Table column header
 #: src/info.cc:458 src/search.cc:307
 msgid "Dependency"
-msgstr ""
+msgstr "დამოკიდებულება"
 
 #: src/info.cc:463 src/info.cc:477
 msgid "Required"
-msgstr ""
+msgstr "სავალდებულო"
 
 #: src/info.cc:468 src/info.cc:477 src/search.cc:243
 msgid "Recommended"
-msgstr ""
+msgstr "რეკომენდებულია"
 
 #: src/info.cc:474 src/info.cc:477 src/search.cc:245
 msgid "Suggested"
@@ -5023,7 +5023,7 @@ msgstr ""
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:549
 msgid "Flavor"
-msgstr ""
+msgstr "ტიპი"
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:551 src/search.cc:489
@@ -5054,7 +5054,7 @@ msgstr ""
 
 #: src/info.cc:609
 msgid "undefined"
-msgstr ""
+msgstr "გაურკვეველი"
 
 #: src/info.cc:611
 msgid "invalid CPE Name"
@@ -5063,7 +5063,7 @@ msgstr ""
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:614
 msgid "Short Name"
-msgstr ""
+msgstr "მოკლე სახელი"
 
 #. translators: property name; short; used like "Name: value"; is followed by a list of binary packages built from this source package
 #: src/info.cc:700
@@ -5073,11 +5073,11 @@ msgstr ""
 #. translators: header of table column - is the language requested? (Yes/No)
 #: src/locales.cc:68 src/locales.cc:178
 msgid "Requested"
-msgstr ""
+msgstr "Მოთხოვნილი"
 
 #: src/locales.cc:70
 msgid "Fallback"
-msgstr ""
+msgstr "გადართვა შეცდომის შემთხვევაში"
 
 #: src/locales.cc:72 src/output/Out.h:27 src/repos.cc:131 src/repos.cc:159
 msgid "No"
@@ -5086,7 +5086,7 @@ msgstr "არა"
 #. translators: header of table column - the language code, e.g. en_US
 #: src/locales.cc:174
 msgid "Code"
-msgstr ""
+msgstr "კოდი"
 
 #. translators: header of table column - the language, e.g. English (United States)
 #: src/locales.cc:176
@@ -5170,7 +5170,7 @@ msgstr ""
 
 #: src/misc.cc:248
 msgid "License"
-msgstr ""
+msgstr "ლიცენზია"
 
 #: src/misc.cc:267
 msgid "EULA"
@@ -5256,7 +5256,7 @@ msgstr ""
 #. translator: usually followed by a ' ' and some explanatory text
 #: src/output/Out.h:43
 msgid "Warning:"
-msgstr ""
+msgstr "გაფთხილება:"
 
 #. translator: usually followed by a ' ' and some explanatory text
 #: src/output/Out.h:45
@@ -5265,7 +5265,7 @@ msgstr "შეცდომა:"
 
 #: src/output/Out.h:47
 msgid "Continue?"
-msgstr ""
+msgstr "გავაგრძლო?"
 
 #. Since this message will be emitted before we know if the current output is XML or Normal we need to send this message to stderr
 #. to not break scripts that use xml output (bsc#1172925)
@@ -5275,7 +5275,7 @@ msgstr ""
 
 #: src/output/OutNormal.cc:257
 msgid "starting"
-msgstr ""
+msgstr "გაშვება"
 
 #. Translator: download progress bar result: "........[not found]"
 #: src/output/OutNormal.cc:333 src/output/OutNormal.cc:342
@@ -5293,7 +5293,7 @@ msgstr ""
 #. translators: used as 'XYZ changed to SOMETHING [volatile]' to tag specific property changes.
 #: src/repos.cc:51
 msgid "volatile"
-msgstr ""
+msgstr "ცვალებადი"
 
 #. translators: 'Volatile' refers to changes we previously tagged as 'XYZ changed to SOMETHING [volatile]'
 #: src/repos.cc:57
@@ -5916,7 +5916,7 @@ msgstr ""
 
 #: src/solve-commit.cc:316
 msgid "Force resolution:"
-msgstr ""
+msgstr "გარჩევადობის ხელით მითითება:"
 
 #: src/solve-commit.cc:413
 msgid "Verifying dependencies..."
@@ -6169,12 +6169,12 @@ msgstr ""
 #. translator: Table column header.
 #: src/update.cc:410 src/update.cc:702
 msgid "Patches"
-msgstr ""
+msgstr "პაჩები"
 
 #. translator: Table column header.
 #: src/update.cc:412
 msgid "Locked"
-msgstr ""
+msgstr "დაბლოკილი"
 
 #. translator: Table column header
 #. Used if stats collect data for more than one category name.
@@ -6347,12 +6347,12 @@ msgstr ""
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:27
 msgid "CATEGORY"
-msgstr ""
+msgstr "კატეგორია"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:29
 msgid "DIR"
-msgstr ""
+msgstr "საქაღალდე"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:31
@@ -6367,7 +6367,7 @@ msgstr ""
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:35
 msgid "FORMAT"
-msgstr ""
+msgstr "ფორმატი"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:37
@@ -6377,7 +6377,7 @@ msgstr ""
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:39
 msgid "PATH"
-msgstr ""
+msgstr "ბილიკი"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:41
@@ -6387,27 +6387,27 @@ msgstr ""
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:43
 msgid "STRING"
-msgstr ""
+msgstr "სტრიქონი"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:45
 msgid "TAG"
-msgstr ""
+msgstr "ჭდე"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:47
 msgid "TYPE"
-msgstr ""
+msgstr "ტიპი"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:51
 msgid "YYYY-MM-DD"
-msgstr ""
+msgstr "წწწწ-თთ-დდ"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:53
 msgid "MODE"
-msgstr ""
+msgstr "რეჟიმი"
 
 #. For '-garbage' argument, with 'a', 'b', and 'e' as known options,
 #. getopt_long reports 'a', 'b', and 'e' as known options.
@@ -6417,7 +6417,7 @@ msgstr ""
 #. wrong option in the last argument
 #: src/utils/getopt.cc:78
 msgid "Unknown option "
-msgstr ""
+msgstr "უცნობი პარამეტრი "
 
 #: src/utils/getopt.cc:98
 msgid "Missing argument for "
@@ -6435,7 +6435,7 @@ msgstr ""
 
 #: src/utils/messages.cc:38
 msgid "Too many arguments."
-msgstr ""
+msgstr "მეტისმეტად ბევრი არგუმენტი."
 
 #: src/utils/messages.cc:81
 #, c-format, boost-format
@@ -6507,7 +6507,7 @@ msgstr[0] "პაკეტები"
 #: src/utils/misc.cc:96
 msgid "pattern"
 msgid_plural "patterns"
-msgstr[0] ""
+msgstr[0] "შაბლონი"
 
 #: src/utils/misc.cc:98
 msgid "product"
@@ -6517,7 +6517,7 @@ msgstr[0] "პროდუქტი"
 #: src/utils/misc.cc:100
 msgid "patch"
 msgid_plural "patches"
-msgstr[0] ""
+msgstr[0] "საკერებელი"
 
 #: src/utils/misc.cc:102
 msgid "srcpackage"
@@ -6527,7 +6527,7 @@ msgstr[0] "საწყკოდისპაკეტები"
 #: src/utils/misc.cc:104
 msgid "application"
 msgid_plural "applications"
-msgstr[0] ""
+msgstr[0] "პროგრამა"
 
 #. default
 #: src/utils/misc.cc:106
@@ -6544,7 +6544,7 @@ msgstr ""
 #. translator: patch status
 #: src/utils/misc.cc:116
 msgid "optional"
-msgstr ""
+msgstr "არასავალდებულო"
 
 #. translator: patch status
 #: src/utils/misc.cc:117
@@ -6564,7 +6564,7 @@ msgstr ""
 #. translator: patch status
 #: src/utils/misc.cc:120
 msgid "undetermined"
-msgstr ""
+msgstr "განუსაზღვრელია"
 
 #. pi_r is no patch!
 #. translator: patch status
@@ -6574,12 +6574,12 @@ msgstr ""
 
 #: src/utils/misc.cc:330 src/utils/misc.cc:372
 msgid "Since"
-msgstr ""
+msgstr "საწყისი დრო"
 
 #. << _("Repository")
 #: src/utils/misc.cc:365
 msgid "Issue"
-msgstr ""
+msgstr "Პრობლემა"
 
 #: src/utils/misc.cc:366
 msgid "No."
@@ -6587,7 +6587,7 @@ msgstr "არა."
 
 #: src/utils/misc.cc:367
 msgid "Patch"
-msgstr ""
+msgstr "პაჩი"
 
 #: src/utils/misc.cc:445
 msgid "Specified local path does not exist or is not accessible."
@@ -6691,11 +6691,11 @@ msgstr ""
 
 #: src/utils/prompt.cc:331
 msgid "always"
-msgstr ""
+msgstr "ყოველთვის"
 
 #: src/utils/prompt.cc:331
 msgid "never"
-msgstr ""
+msgstr "არასოდეს"
 
 #: src/utils/prompt.cc:377
 msgid "Cannot read input: bad stream or EOF."
@@ -6741,7 +6741,7 @@ msgstr "I/O შეცდომა"
 
 #: src/utils/prompt.h:185
 msgid "Invalid object"
-msgstr ""
+msgstr "არასწორი ობიექტი"
 
 #: src/utils/prompt.h:192
 msgid "Error"
