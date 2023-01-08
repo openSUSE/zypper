@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-12-24 02:27+0100\n"
-"PO-Revision-Date: 2023-01-08 00:14+0000\n"
+"PO-Revision-Date: 2023-01-08 05:12+0000\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <https://l10n.opensuse.org/projects/zypper/master/ka/"
 ">\n"
@@ -896,145 +896,145 @@ msgid_plural ""
 msgstr[0] "შემდეგი %d აპლიკაცია რეკომენდებულია, მაგრამ მათი დაყენება არ მოხდება:"
 
 #: src/Summary.cc:1088
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following package is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d packages are suggested, but will not be installed:"
-msgstr[0] "უნდა განახლდეს შემდეგი პაკეტები:"
+msgstr[0] "გირჩევთ %d პაკეტს, მაგრამ დაყენებული არ იქნება:"
 
 #: src/Summary.cc:1093
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following patch is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d patches are suggested, but will not be installed:"
-msgstr[0] "უნდა განახლდეს შემდეგი პაკეტები:"
+msgstr[0] "გირჩევთ %d პაჩს, მაგრამ დაყენებული არ იქნება:"
 
 #: src/Summary.cc:1098
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following pattern is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d patterns are suggested, but will not be installed:"
-msgstr[0] "უნდა განახლდეს შემდეგი პაკეტები:"
+msgstr[0] "გირჩევთ %d ნიმუშს, მაგრამ დაყენებული არ იქნება:"
 
 #: src/Summary.cc:1103
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following product is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d products are suggested, but will not be installed:"
-msgstr[0] "უნდა განახლდეს შემეგი პროდუქტები:"
+msgstr[0] "გირჩევთ %d პროდუქტს, მაგრამ დაყენებული არ იქნება:"
 
 #: src/Summary.cc:1109
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following application is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d applications are suggested, but will not be installed:"
-msgstr[0] "უნდა განახლდეს შემდეგი პაკეტები:"
+msgstr[0] "გირჩევთ %d აპლიკაციას, მაგრამ დაყენებული არ იქნება:"
 
 #: src/Summary.cc:1134
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following package is going to change architecture:"
 msgid_plural "The following %d packages are going to change architecture:"
-msgstr[0] "უნდა განახლდეს შემდეგი პაკეტები:"
+msgstr[0] "%d პაკეტი არქიტექტურას შეიცვლის:"
 
 #: src/Summary.cc:1139
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following patch is going to change architecture:"
 msgid_plural "The following %d patches are going to change architecture:"
-msgstr[0] "უნდა განახლდეს შემდეგი პაკეტები:"
+msgstr[0] "%d პაჩი არქიტექტურას შეიცვლის:"
 
 #: src/Summary.cc:1144
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following pattern is going to change architecture:"
 msgid_plural "The following %d patterns are going to change architecture:"
-msgstr[0] "უნდა განახლდეს შემდეგი პაკეტები:"
+msgstr[0] "%d ნიმუში არქიტექტურას შეიცვლის:"
 
 #: src/Summary.cc:1149
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following product is going to change architecture:"
 msgid_plural "The following %d products are going to change architecture:"
-msgstr[0] "უნდა განახლდეს შემდეგი პაკეტები:"
+msgstr[0] "%d პროდუქტი არქიტექტურას შეიცვლის:"
 
 #: src/Summary.cc:1155
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following application is going to change architecture:"
 msgid_plural "The following %d applications are going to change architecture:"
-msgstr[0] "უნდა განახლდეს შემდეგი პაკეტები:"
+msgstr[0] "%d აპლიკაცია არქიტექტურას შეიცვლის:"
 
 #: src/Summary.cc:1180
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following package is going to change vendor:"
 msgid_plural "The following %d packages are going to change vendor:"
-msgstr[0] "უნდა განახლდეს შემდეგი პაკეტები:"
+msgstr[0] "%d პაკეტი მომწოდებელს შეიცვლის:"
 
 #: src/Summary.cc:1185
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following patch is going to change vendor:"
 msgid_plural "The following %d patches are going to change vendor:"
-msgstr[0] "უნდა განახლდეს შემდეგი პაკეტები:"
+msgstr[0] "%d პაჩი მომწოდებელს შეიცვლის:"
 
 #: src/Summary.cc:1190
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following pattern is going to change vendor:"
 msgid_plural "The following %d patterns are going to change vendor:"
-msgstr[0] "უნდა განახლდეს შემდეგი პაკეტები:"
+msgstr[0] "%d ნიმუში მომწოდებელს შეიცვლის:"
 
 #: src/Summary.cc:1195
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following product is going to change vendor:"
 msgid_plural "The following %d products are going to change vendor:"
-msgstr[0] "უნდა განახლდეს შემდეგი პაკეტები:"
+msgstr[0] "%d პროდუქტი მომწოდებელს შეიცვლის:"
 
 #: src/Summary.cc:1201
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following application is going to change vendor:"
 msgid_plural "The following %d applications are going to change vendor:"
-msgstr[0] "უნდა განახლდეს შემდეგი პაკეტები:"
+msgstr[0] "%d აპლიკაცია მომწოდებელს შეიცვლის:"
 
 #: src/Summary.cc:1224
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following package has no support information from its vendor:"
 msgid_plural ""
 "The following %d packages have no support information from their vendor:"
-msgstr[0] "უნდა განახლდეს შემდეგი პაკეტები:"
+msgstr[0] "%d პაკეტს მათი მომწოდებლის მხარდაჭერის შესახებ ინფორმაცია არ გააჩნია:"
 
 #: src/Summary.cc:1242
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following package is not supported by its vendor:"
 msgid_plural "The following %d packages are not supported by their vendor:"
-msgstr[0] "უნდა განახლდეს შემდეგი პაკეტები:"
+msgstr[0] "%d პაკეტი არაა მხარდაჭერილი მათი მომწოდებლის მიერ:"
 
 #: src/Summary.cc:1260
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid ""
 "The following package needs additional customer contract to get support:"
 msgid_plural ""
 "The following %d packages need additional customer contract to get support:"
-msgstr[0] "უნდა განახლდეს შემდეგი პაკეტები:"
+msgstr[0] "შემდეგ %d პაკეტს მხარდაჭერისთვის ცალკე კონტრაქტი სჭირდება:"
 
 #: src/Summary.cc:1280
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following package update will NOT be installed:"
 msgid_plural "The following %d package updates will NOT be installed:"
-msgstr[0] "უნდა განახლდეს შემდეგი პაკეტები:"
+msgstr[0] "არ მოხდება %d პაკეტის განახლების დაყენება:"
 
 #: src/Summary.cc:1285
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following product update will NOT be installed:"
 msgid_plural "The following %d product updates will NOT be installed:"
-msgstr[0] "უნდა განახლდეს შემდეგი პაკეტები:"
+msgstr[0] "არ მოხდება %d პროდუქტის განახლების დაყენება:"
 
 #: src/Summary.cc:1291
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following application update will NOT be installed:"
 msgid_plural "The following %d application updates will NOT be installed:"
-msgstr[0] "უნდა განახლდეს შემდეგი პაკეტები:"
+msgstr[0] "არ მოხდება %d აპლიკაციის განახლების დაყენება:"
 
 #: src/Summary.cc:1324
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following item is locked and will not be changed by any action:"
 msgid_plural ""
 "The following %d items are locked and will not be changed by any action:"
-msgstr[0] "უნდა განახლდეს შემდეგი პაკეტები:"
+msgstr[0] "შემდეგი %d ჩანაწერი დაბლოკილია და ცვლილებები არ შეეხება:"
 
 #. always as plain name list
 #. translators: used as 'tag:' (i.e. followed by ':')
@@ -1054,10 +1054,10 @@ msgid "Run '%1%' to see the complete list of locked items."
 msgstr ""
 
 #: src/Summary.cc:1357
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The following patch requires a system reboot:"
 msgid_plural "The following %d patches require a system reboot:"
-msgstr[0] "უნდა განახლდეს შემდეგი პაკეტები:"
+msgstr[0] "შემდეგ %d პაჩს ესაჭიროება სისტემის გადატვირთვა:"
 
 #: src/Summary.cc:1361
 #, c-format, boost-format
@@ -1170,17 +1170,15 @@ msgstr[0] ""
 
 #. translators: this text will be preceded by a number e.g. "5 new"
 #: src/Summary.cc:1527
-#, fuzzy
 msgid "source package"
 msgid_plural "source packages"
-msgstr[0] "სისტემური პაკეტები"
+msgstr[0] "საწყისი კოდის პაკეტები"
 
 #. translators: this text will be preceded by a number e.g. "5 new to install"
 #: src/Summary.cc:1530
-#, fuzzy
 msgid "source package to install"
 msgid_plural "source packages to install"
-msgstr[0] "სისტემური პაკეტები"
+msgstr[0] "დასაყენებელი საწყისი კოდის პაკეტები"
 
 #. patch command (auto)restricted to update stack patches
 #: src/Summary.cc:1609
@@ -1436,9 +1434,8 @@ msgstr ""
 # power-off message
 #. translators: this message is shown after showing description of the key
 #: src/callbacks/keyring.h:308
-#, fuzzy
 msgid "Do you want to reject the key, or trust always?"
-msgstr "¿Desea confiar en esta clave?"
+msgstr "გნებავთ უარყოთ გასაღები, თუ ყოველთვის ენდოთ?"
 
 #. translators: r/t/a stands for Reject/TrustTemporarily/trustAlways(import)
 #. translate to whatever is appropriate for your language
@@ -1645,9 +1642,8 @@ msgstr ""
 
 #. translators: this is a prompt label, will appear as "New URI: "
 #: src/callbacks/media.cc:49
-#, fuzzy
 msgid "New URI"
-msgstr "URI"
+msgstr "ახალი URI"
 
 #. https options
 #. translators: a/r/i/u are replies to the "Abort, retry, ignore?" prompt.
@@ -1700,9 +1696,8 @@ msgstr ""
 
 # window title for kernel loading (see txt_load_kernel)
 #: src/callbacks/media.cc:154
-#, fuzzy
 msgid "Retrying..."
-msgstr "დაწყება..."
+msgstr "თავიდან ცდა..."
 
 #. cd/dvd options
 #. translators: a/r/i/u are replies to the "Abort, retry, ignore?" prompt.
@@ -2801,9 +2796,8 @@ msgstr ""
 
 #. process user ID
 #: src/commands/ps.cc:146
-#, fuzzy
 msgid "UID"
-msgstr "URI"
+msgstr "UID"
 
 #. process login name
 #: src/commands/ps.cc:148
@@ -2823,9 +2817,8 @@ msgstr "სერვისი"
 # menu item for selecting a file
 #. "list of deleted files or libraries accessed"
 #: src/commands/ps.cc:156
-#, fuzzy
 msgid "Files"
-msgstr "ფაილი"
+msgstr "ფაილები"
 
 #: src/commands/ps.cc:187
 msgid "No processes using deleted files found."
@@ -3197,9 +3190,8 @@ msgid "Off"
 msgstr ""
 
 #: src/commands/repos/list.cc:51
-#, fuzzy
 msgid "Keep Packages"
-msgstr "სისტემური პაკეტები"
+msgstr "პაკეტების შენარჩუნება"
 
 #: src/commands/repos/list.cc:53
 msgid "GPG Key URI"
@@ -3210,9 +3202,8 @@ msgid "Path Prefix"
 msgstr ""
 
 #: src/commands/repos/list.cc:55
-#, fuzzy
 msgid "Parent Service"
-msgstr "სერვისი"
+msgstr "მშობელი სერვისი"
 
 #: src/commands/repos/list.cc:56
 msgid "Keywords"
@@ -3367,9 +3358,9 @@ msgid "Specified repositories: "
 msgstr "მითითებული რეპოზიტორიები: "
 
 #: src/commands/repos/refresh.cc:218
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Refreshing repository '%s'."
-msgstr "'%s' რეპოზიტორიის მონაცემების მიღება..."
+msgstr "რეპოზიტორიის ('%s') განახლება."
 
 #: src/commands/repos/refresh.cc:236 src/repos.cc:844
 #, c-format, boost-format
@@ -3882,9 +3873,8 @@ msgstr "მითითებული რეპოზიტორიa '%s' გ�
 
 #. translators: empty search result message
 #: src/commands/search/search.cc:463
-#, fuzzy
 msgid "No matching items found."
-msgstr "No hay parches que coincidan con '%s'."
+msgstr "შედეგის გარეშე."
 
 #: src/commands/search/search.cc:493
 msgid "Problem occurred initializing or executing the search query"
@@ -4067,9 +4057,8 @@ msgid "Clear the list of RIS repositories to enable."
 msgstr ""
 
 #: src/commands/services/modify.cc:48
-#, fuzzy
 msgid "Clear the list of RIS repositories to disable."
-msgstr "CD/DVD რეპოზიტორიები გათიშულია."
+msgstr "გასათიშად გაასუფთავეთ RIS რეპოზიტორიები."
 
 #. translators: aggregate option is e.g. "--all". This message will be
 #. followed by ms command help text which will explain it
@@ -5290,9 +5279,8 @@ msgstr ""
 
 #. Translator: download progress bar result: "........[not found]"
 #: src/output/OutNormal.cc:333 src/output/OutNormal.cc:342
-#, fuzzy
 msgid "not found"
-msgstr "ვერ მოიძებნა"
+msgstr "ვერ ვიპოვე"
 
 #: src/output/OutNormal.cc:419
 msgid "No help available for this prompt."
@@ -5320,9 +5308,8 @@ msgid "default priority"
 msgstr ""
 
 #: src/repos.cc:74
-#, fuzzy
 msgid "raised priority"
-msgstr "პრიორიტეტი"
+msgstr "გაზრდილი პრიორიტეტი"
 
 #: src/repos.cc:74
 msgid "lowered priority"
@@ -6035,9 +6022,8 @@ msgstr ""
 
 #. translators: help text for 'n' option in the 'Continue?' prompt
 #: src/solve-commit.cc:745
-#, fuzzy
 msgid "No, cancel the operation."
-msgstr "მოქმედების შეწყვეტა."
+msgstr "არა, შეწყვიტე ოპერაცია."
 
 #. translators: help text for 'p' option in the 'Continue?' prompt
 #: src/solve-commit.cc:747
@@ -6201,9 +6187,8 @@ msgstr ""
 
 #. translator: Table headline; 'Needed' refers to patches with status 'needed'
 #: src/update.cc:592
-#, fuzzy
 msgid "Needed software management updates will be installed first:"
-msgstr "უნდა განახლდეს შემდეგი პაკეტები:"
+msgstr "ჯერ მოხდება პროგრამების მართვის განახლებების დაყენება:"
 
 #: src/update.cc:600 src/update.cc:842
 msgid "No updates found."
@@ -6227,9 +6212,8 @@ msgid "Product updates"
 msgstr ""
 
 #: src/update.cc:794
-#, fuzzy
 msgid "Current Version"
-msgstr "ვერსია"
+msgstr "მიმდინარე ვერსია"
 
 #: src/update.cc:795
 msgid "Available Version"
@@ -6516,10 +6500,9 @@ msgid ""
 msgstr ""
 
 #: src/utils/misc.cc:94
-#, fuzzy
 msgid "package"
 msgid_plural "packages"
-msgstr[0] "სისტემური პაკეტები"
+msgstr[0] "პაკეტები"
 
 #: src/utils/misc.cc:96
 msgid "pattern"
@@ -6537,10 +6520,9 @@ msgid_plural "patches"
 msgstr[0] ""
 
 #: src/utils/misc.cc:102
-#, fuzzy
 msgid "srcpackage"
 msgid_plural "srcpackages"
-msgstr[0] "სისტემური პაკეტები"
+msgstr[0] "საწყკოდისპაკეტები"
 
 #: src/utils/misc.cc:104
 msgid "application"
@@ -6600,9 +6582,8 @@ msgid "Issue"
 msgstr ""
 
 #: src/utils/misc.cc:366
-#, fuzzy
 msgid "No."
-msgstr "არა"
+msgstr "არა."
 
 #: src/utils/misc.cc:367
 msgid "Patch"
