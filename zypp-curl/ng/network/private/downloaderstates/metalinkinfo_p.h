@@ -61,6 +61,9 @@ namespace zyppng {
     Signal< void () > _sigGotMetadata;
 
     virtual void handleRequestProgress ( NetworkRequest &req, off_t dltotal, off_t dlnow ) override;
+
+  private:
+    bool _fallbackMilWritten = false; //< Flag to know if we already logged that we fall back to the normal progress
   };
 
 }

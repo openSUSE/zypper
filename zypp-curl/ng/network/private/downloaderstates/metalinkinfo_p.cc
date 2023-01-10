@@ -148,8 +148,15 @@ namespace zyppng {
         sm._requestDispatcher->cancel( req, NetworkRequestErrorPrivate::customError( NetworkRequestError::ExceededMaxLen ) );
         return;
       }
+
+      return sm._sigAlive.emit( *sm.z_func(), dlnow );
+
     } else {
       // still no metalink, we assume a normal download, not perfect though
+      if ( !_fallbackMilWritten ) {
+        _fallbackMilWritten = true;
+        MIL << "No Metalink file detected after " << minMetalinkProbeSize << ", falling back to normal progress updates" << std::endl;
+      }
       return BasicDownloaderStateBase::handleRequestProgress( req, dltotal, dlnow );
     }
   }
