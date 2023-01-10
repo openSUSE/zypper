@@ -188,13 +188,14 @@ NetworkRequestError NetworkRequestErrorPrivate::fromCurlError(NetworkRequest &re
         break;
       default:
         c = NetworkRequestError::ServerReturnedError;
-        err = "Curl error " + zypp::str::numstring( nativeCode );
         break;
     }
   }
 
   if ( err.empty() )
     err = typeToString( c );
+
+  err += " Curl error (" + zypp::str::numstring( nativeCode ) + ")";
 
   return NetworkRequestError( *new NetworkRequestErrorPrivate(c, std::move(err), std::move(extraInfo)) );
 }
