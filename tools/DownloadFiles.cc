@@ -182,6 +182,9 @@ int main ( int argc, char *argv[] )
   } catch ( YAML::Exception &e ) {
     std::cerr << "YAML exception: " << e.what() << std::endl;
     return 1;
+  } catch ( const std::exception &e )  {
+    std::cerr << "Error when parsing the control file: " << e.what() << std::endl;
+    return 1;
   } catch ( ... )  {
     std::cerr << "Unknown error when parsing the control file" << std::endl;
     return 1;
