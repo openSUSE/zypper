@@ -1062,7 +1062,7 @@ namespace zypp
       }
     }
 
-    DBG << "Can SKIP media.1/media check for status calc: " << canSkipMediaCheck << " for repo " << *this <<  std::endl;
+    DBG << "Can SKIP media.1/media check for status calc: " << canSkipMediaCheck << " for repo " << alias() << std::endl;
     return !canSkipMediaCheck;
   }
 
