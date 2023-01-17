@@ -532,7 +532,11 @@ namespace zypp
 
   std::string CheckAccessDeleted::ProcInfo::service() const
   {
-    static const str::regex rx( "(0::|[0-9]+:name=systemd:)/system.slice/(.*/)?(.*).service$" );
+    // cgroup entries like:
+    // 1:name=systemd:/system.slice/systemd-udevd.service
+    // 0::/system.slice/systemd-udevd.service
+    // 0::/system.slice/systemd-udevd.service/udev
+    static const str::regex rx( "(0::|[0-9]+:name=systemd:)/system.slice/(.*/)?(.*).service(/.*)?$" );
     str::smatch what;
     std::string ret;
     iostr::simpleParseFile( InputStream( Pathname("/proc")/pid/"cgroup" ),
