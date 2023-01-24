@@ -10,8 +10,10 @@
 #include <boost/test/unit_test.hpp>
 
 #include <zypp-core/ui/ProgressData>
-
+#include <zypp/ZYppCallbacks.h>
 using boost::unit_test::test_case;
+using std::cout;
+using std::endl;
 
 using namespace zypp;
 
@@ -56,4 +58,72 @@ BOOST_AUTO_TEST_CASE(progressdata_test)
 
 }
 
+// Check expected ProgressReport triggers:
+// none | (start progress)  progress*  (progress end)
+struct PReceive : public callback::ReceiveReport<ProgressReport>
+{
+  int frame = 0;  // 0 -start-> 1(progress) -finish-> 2
+  int pings = 0;  // count progress triggers
 
+  void reportbegin() override
+  {
+    // cout << "REPORT+++" << endl;
+    frame = pings = 0;
+  }
+
+  void start( const ProgressData & task ) override
+  {
+    // cout << "REPBEG " << task << " " << frame <<":"<< pings << endl;
+    BOOST_CHECK_EQUAL( frame, 0 );
+    BOOST_CHECK_EQUAL( pings, 0 );
+    frame = 1;
+    pings -= 1; // start must be followed by 1 progress
+  }
+
+  bool progress( const ProgressData & task ) override
+  {
+    // cout << "REP... " << task << " " << frame <<":"<< pings << endl;
+    BOOST_CHECK_EQUAL( frame, 1 );  // progress
+    pings += 1;
+    return true;
+  }
+
+  void finish( const ProgressData & task ) override
+  {
+    // cout << "REPEND " << task << " " << frame <<":"<< pings << endl;
+    BOOST_CHECK_EQUAL( frame, 1 );
+    frame = 2;
+    pings -= 1; // finish must be preceded by 1 progress
+  }
+
+  void reportend() override
+  {
+    // cout << "REPORT--- " << " " << frame <<":"<< pings << endl;
+    BOOST_CHECK( ( frame == 0 && pings == 0 ) || ( frame == 2 && pings >= 0 ) );
+  }
+};
+
+BOOST_AUTO_TEST_CASE(progress_report)
+{
+  PReceive preceive;
+  preceive.connect();
+  {
+    callback::SendReport<ProgressReport> report;
+    ProgressData ticks;
+    ticks.sendTo( ProgressReportAdaptor( report ) );
+    ticks.range( 5 );
+  }
+  BOOST_CHECK_EQUAL( preceive.frame, 0 ); // If no value was set no reports were sent.
+
+  {
+    callback::SendReport<ProgressReport> report;
+    ProgressData ticks;
+    ticks.sendTo( ProgressReportAdaptor( report ) );
+    ticks.range( 5 );
+    ticks.toMin();
+    ticks.set(3);
+    ticks.toMax();
+  }
+  BOOST_CHECK_EQUAL( preceive.frame, 2 ); // Values were set, so finish was sent.
+
+}

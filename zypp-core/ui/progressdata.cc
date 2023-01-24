@@ -32,11 +32,13 @@ namespace zypp
   //
   bool ProgressData::report()
   {
+    bool forceReport { _d->_state != RUN }; // bsc#1206949: force reporting the INIT||END states
+
     static constexpr std::chrono::milliseconds minfequency { 1000 };
     static constexpr std::chrono::milliseconds maxfequency { 100 };
     Data::TimePoint now {  Data::TimePoint::clock::now() };
     Data::TimePoint::duration elapsed { now - _d->_last_send };
-    if ( elapsed < maxfequency ) {
+    if ( not forceReport && elapsed < maxfequency ) {
       return true;	// skip report, continue per default
     }
 
@@ -47,7 +49,7 @@ namespace zypp
 
       if ( elapsed > minfequency
            || newVal != _d->_last_val
-           || _d->_state != RUN /*INIT||END*/ )
+           || forceReport )
       {
         _d->_last_val  = newVal;
         _d->_last_send = now;
@@ -57,7 +59,7 @@ namespace zypp
     }
     else
     {
-      if ( elapsed > minfequency || _d->_state != RUN /*INIT||END*/ )
+      if ( elapsed > minfequency || forceReport )
       {
         _d->_last_val  = _d->_val;
         _d->_last_send = now;
