@@ -59,13 +59,17 @@ namespace zypp
   struct ProgressReportAdaptor
   {
 
+    ProgressReportAdaptor( callback::SendReport<ProgressReport> &report )
+      : _report(report)
+      , _first(true)
+    {}
+
     ProgressReportAdaptor( const ProgressData::ReceiverFnc &fnc,
                            callback::SendReport<ProgressReport> &report )
       : _fnc(fnc)
       , _report(report)
       , _first(true)
-    {
-    }
+    {}
 
     bool operator()( const ProgressData &progress )
     {
