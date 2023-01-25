@@ -43,14 +43,14 @@ namespace zyppng {
     : BasicDownloaderStateBase( std::move(oldReq), parent )
   {
     _fileMirrors = std::move(mirrors);
-    MIL_MEDIA << "About to enter DlZckHeadState for url " << parent._spec.url() << std::endl;
+    MIL << "About to enter DlZckHeadState for url " << parent._spec.url() << std::endl;
   }
 
   DLZckHeadState::DLZckHeadState( std::vector<Url> &&mirrors, DownloadPrivate &parent )
     : BasicDownloaderStateBase( parent )
   {
     _fileMirrors = std::move(mirrors);
-    MIL_MEDIA << "About to enter DlZckHeadState for url " << parent._spec.url() << std::endl;
+    MIL << "About to enter DlZckHeadState for url " << parent._spec.url() << std::endl;
   }
 
 
@@ -60,7 +60,7 @@ namespace zyppng {
 
     const auto &s = stateMachine()._spec;
     if ( s.headerSize() == 0 ) {
-      ERR_MEDIA << "Downloading the zck header was requested, but headersize is zero." << std::endl;
+      ERR << "Downloading the zck header was requested, but headersize is zero." << std::endl;
       return false;
     }
 

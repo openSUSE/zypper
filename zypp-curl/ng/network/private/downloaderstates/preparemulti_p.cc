@@ -27,7 +27,7 @@ namespace zyppng {
     , _mode(m)
     , _oldRequest( oldReq )
   {
-    MIL_MEDIA << "About to enter PrepareMultiState" << std::endl;
+    MIL << "About to enter PrepareMultiState for URL: " << parent._spec.url() << std::endl;
   }
 
   void PrepareMultiState::enter( )
@@ -38,9 +38,9 @@ namespace zyppng {
     const auto &targetPath = spec.targetPath();
 #if ENABLE_ZCHUNK_COMPRESSION
     _haveZckData = (isZchunkFile( spec.deltaFile() )  && spec.headerSize() > 0);
-    DBG_MEDIA << " Upgrading request for URL: "<< url << " to multipart download , which zckunk=" << _haveZckData << std::endl;
+    MIL << " Upgrading request for URL: "<< url << " to multipart download , which zckunk=" << _haveZckData << std::endl;
 #else
-    DBG_MEDIA << " Upgrading request for URL: "<< url << " to multipart download , which zckunk=false" << std::endl;
+    MIL << " Upgrading request for URL: "<< url << " to multipart download , which zckunk=false" << std::endl;
 #endif
 
 
@@ -65,7 +65,7 @@ namespace zyppng {
   #endif
           auto bl = parser.getBlockList();
           if ( !bl.haveBlocks() )
-            MIL_MEDIA << "Got no blocks for URL " << spec.url() << " but got filesize? " << bl.getFilesize() << std::endl;
+            MIL << "Got no blocks for URL " << spec.url() << " but got filesize? " << bl.getFilesize() << std::endl;
           if ( bl.haveBlocks() || bl.haveFilesize() )
             _blockList = std::move(bl);
         }
@@ -113,7 +113,7 @@ namespace zyppng {
       }
     } catch ( const zypp::Exception &ex ) {
       const auto &err = zypp::str::Format("Failed to parse metalink information.(%1%)" ) % ex.asUserString();
-      DBG << err << std::endl;
+      WAR << err << std::endl;
       _error = NetworkRequestErrorPrivate::customError( NetworkRequestError::InternalError, err);
       _sigFailed.emit();
       return;
@@ -121,7 +121,7 @@ namespace zyppng {
 
     if ( mirrs.size() == 0 ) {
       const auto &err =  zypp::str::Format("Invalid metalink information.( No mirrors in metalink file)" );
-      DBG << err << std::endl;
+      WAR << err << std::endl;
       _error = NetworkRequestErrorPrivate::customError( NetworkRequestError::InternalError, err );
       _sigFailed.emit();
       return;
@@ -168,7 +168,7 @@ namespace zyppng {
       } else {
         //we generate a blocklist on the fly based on the filesize
 
-        MIL_MEDIA << "Generate blocklist, since there was none in the metalink file." << url  << std::endl;
+        MIL << "Generate blocklist, since there was none in the metalink file." << url  << std::endl;
 
         off_t currOff = 0;
         off_t filesize = _blockList.getFilesize();
@@ -193,7 +193,7 @@ namespace zyppng {
 
   std::shared_ptr<DlNormalFileState> PrepareMultiState::fallbackToNormalTransition()
   {
-    MIL_MEDIA << "No blocklist and no filesize, falling back to normal download for URL " << stateMachine()._spec.url() << std::endl;
+    MIL << "No blocklist and no filesize, falling back to normal download for URL " << stateMachine()._spec.url() << std::endl;
     std::shared_ptr<DlNormalFileState> ptr;
     if ( _oldRequest ) {
       ptr = std::make_shared<DlNormalFileState>( std::move(_oldRequest), stateMachine() );

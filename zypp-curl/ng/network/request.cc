@@ -492,7 +492,7 @@ namespace zyppng {
   {
     auto rmode = std::get_if<NetworkRequestPrivate::running_t>( &_runningMode );
     if ( !rmode ) {
-      DBG << "Can only create output file in running mode" << std::endl;
+      DBG << _easyHandle << "Can only create output file in running mode" << std::endl;
       return false;
     }
     // if we have no open file create or open it
@@ -651,7 +651,7 @@ namespace zyppng {
         }
 
         if ( rangesAdded >= maxRanges ) {
-          MIL_MEDIA << _easyHandle << " " << "Reached max nr of ranges (" << maxRanges << "), batching the request to not break the server" << std::endl;
+          MIL << _easyHandle << " " << "Reached max nr of ranges (" << maxRanges << "), batching the request to not break the server" << std::endl;
           break;
         }
       }
@@ -660,7 +660,7 @@ namespace zyppng {
       if ( currentZippedRange )
         addRangeString( *currentZippedRange );
 
-      MIL_MEDIA << _easyHandle << " " << "Requesting Ranges: " << rangeDesc << std::endl;
+      MIL << _easyHandle << " " << "Requesting Ranges: " << rangeDesc << std::endl;
 
       setCurlOption( CURLOPT_RANGE, rangeDesc.c_str() );
     }
@@ -678,7 +678,7 @@ namespace zyppng {
   {
     bool isRangeContinuation = std::holds_alternative<prepareNextRangeBatch_t>( _runningMode );
     if ( isRangeContinuation ) {
-      MIL_MEDIA << _easyHandle << " " << "Continuing a previously started range batch." << std::endl;
+      MIL << _easyHandle << " " << "Continuing a previously started range batch." << std::endl;
       _runningMode = running_t( std::move(std::get<prepareNextRangeBatch_t>( _runningMode )) );
     } else {
       auto mode = running_t( std::move(std::get<pending_t>( _runningMode )) );
@@ -857,7 +857,7 @@ namespace zyppng {
     NetworkRequestPrivate *that = reinterpret_cast<NetworkRequestPrivate *>( clientp );
 
     if ( !std::holds_alternative<running_t>(that->_runningMode) ){
-      DBG_MEDIA << that->_easyHandle << " " << "Curl progress callback was called in invalid state "<< that->z_func()->state() << std::endl;
+      DBG << that->_easyHandle << " " << "Curl progress callback was called in invalid state "<< that->z_func()->state() << std::endl;
       return -1;
     }
 
@@ -907,7 +907,7 @@ namespace zyppng {
         (void)curl_easy_getinfo( _easyHandle, CURLINFO_RESPONSE_CODE, &statuscode);
 
         const auto &doRangeFail = [&](){
-          WAR << "Range FAIL, trying with a smaller batch" << std::endl;
+          WAR << _easyHandle << " " << "Range FAIL, trying with a smaller batch" << std::endl;
           rmode._cachedResult = NetworkRequestErrorPrivate::customError(  NetworkRequestError::RangeFail,  "Expected range status code 206, but got none." );
 
           // reset all ranges we requested to pending, we never got the data for them
@@ -946,7 +946,7 @@ namespace zyppng {
           rmode._cachedResult = NetworkRequestErrorPrivate::customError( NetworkRequestError::InternalError, "Invalid Content-Range header format." );
           return 0;
         }
-        DBG_MEDIA << _easyHandle << " " << "Got content range :" << r.start << " len " << r.len << std::endl;
+        DBG << _easyHandle << " " << "Got content range :" << r.start << " len " << r.len << std::endl;
         rmode._gotContentRangeHeader = true;
         rmode._currentSrvRange = r;
 
@@ -955,7 +955,7 @@ namespace zyppng {
         auto str = std::string ( lenStr.data(), lenStr.length() );
         auto len = zypp::str::strtonum<typename zypp::ByteCount::SizeType>( str.data() );
         if ( len > 0 ) {
-          DBG_MEDIA << _easyHandle << " " << "Got Content-Length Header: " << len << std::endl;
+          DBG << _easyHandle << " " << "Got Content-Length Header: " << len << std::endl;
           rmode._contentLenght = zypp::ByteCount(len, zypp::ByteCount::B);
         }
       }
@@ -984,7 +984,7 @@ namespace zyppng {
     auto writeDataToFile = [ this, &rmode ]( off_t offset, const char *data, size_t len ) -> off_t {
 
       if ( rmode._currentRange < 0 ) {
-        DBG_MEDIA << _easyHandle << " " << "Current range is zero in write request" << std::endl;
+        DBG << _easyHandle << " " << "Current range is zero in write request" << std::endl;
         return 0;
       }
 

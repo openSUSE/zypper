@@ -62,12 +62,12 @@ namespace zyppng {
       return;
     }
 
-    MIL_MEDIA << "Request finished "<<std::endl;
+    MIL  << req.nativeHandle() << " " << "Request finished successfully."<<std::endl;
     const auto &rngs = reqLocked->requestedRanges();
-    std::for_each( rngs.begin(), rngs.end(), []( const auto &b ){ DBG << "-> Block " << b.start << " finished." << std::endl; } );
+    std::for_each( rngs.begin(), rngs.end(), [&req]( const auto &b ){ DBG_MEDIA  << req.nativeHandle() << " " << "-> Block " << b.start << " finished." << std::endl; } );
 
     auto restartReqWithBlock = [ this ]( std::shared_ptr<Request> &req, std::vector<Block> &&blocks ) {
-      MIL_MEDIA << "Reusing Request to download blocks:"<<std::endl;
+      MIL  << req->nativeHandle() << " " << "Reusing Request to download blocks:"<<std::endl;
       if ( !addBlockRanges( req, std::move( blocks ) ) )
         return false;
 
@@ -78,7 +78,7 @@ namespace zyppng {
 
     //check if we already have enqueued all blocks if not reuse the request
     if ( _ranges.size() ) {
-      MIL_MEDIA << "Reusing to download blocks: "<<std::endl;
+      MIL  << req.nativeHandle() << " " << "Reusing to download blocks: "<<std::endl;
       if ( !restartReqWithBlock( reqLocked, getNextBlocks( reqLocked->url().getScheme() ) ) ) {
         return setFailed( "Failed to restart request with new blocks." );
       }
@@ -89,7 +89,7 @@ namespace zyppng {
       if ( !_failedRanges.empty() ) {
 
         auto fblks = getNextFailedBlocks( reqLocked->url().getScheme() );
-        MIL_MEDIA << "Reusing to download failed blocks: "<<std::endl;
+        MIL  << req.nativeHandle() << " " << "Reusing to download failed blocks: "<<std::endl;
         if ( !restartReqWithBlock( reqLocked, std::move(fblks) ) ) {
           return setFailed( "Failed to restart request with previously failed blocks." );
         }
@@ -117,7 +117,9 @@ namespace zyppng {
     } else {
 
       //if a error happens during a multi download we try to use another mirror to download the failed block
-      MIL << "Request failed " << req->extendedErrorString() << "(" << req->url() << ")" << std::endl;
+      MIL << req->nativeHandle() << " " << "Request failed " << req->extendedErrorString() << "(" << req->url() << ")" << std::endl;
+      if ( req->lastRedirectInfo ().size () )
+        MIL << req->nativeHandle() << " Last redirection target was: " << req->lastRedirectInfo () << std::endl;
 
       NetworkRequestError dummyErr;
 
@@ -245,7 +247,7 @@ namespace zyppng {
     // note: this sets the activity timeout, not the download timeout
     req->transferSettings().setTimeout( 2 );
 
-    DBG_MEDIA << "Creating Request to download blocks:"<<std::endl;
+    MIL << "Creating Request to download blocks via mirror: "  << myUrl << std::endl;
     if ( !addBlockRanges( req, std::move(blocks) ) ) {
       setFailed( NetworkRequestErrorPrivate::customError( NetworkRequestError::InternalError, "Failed to add blocks to request." ) );
       return;

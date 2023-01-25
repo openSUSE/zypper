@@ -24,7 +24,7 @@ namespace zyppng {
     : RangeDownloaderBaseState( std::move(mirrors), parent )
     , _blockList( std::move(blockList) )
   {
-    MIL_MEDIA << "About to enter DlMetalinkState for url " << parent._spec.url() << std::endl;
+    MIL << "About to enter DlMetalinkState for url " << parent._spec.url() << std::endl;
   }
 
   void DlMetalinkState::enter()
@@ -97,7 +97,7 @@ namespace zyppng {
       _preferredChunkSize = sm._spec.preferredChunkSize();
     }
 
-    DBG << "Downloading " << sm._spec.url() << " with " << _preferredChunkSize << " chunk size over " << maxConns << std::endl;
+    MIL << "Downloading " << sm._spec.url() << " with " << _preferredChunkSize << " chunk size over " << maxConns << std::endl;
 
     // remember how many bytes we need to download
     size_t bytesToDl = 0;

@@ -17,7 +17,7 @@
 namespace zyppng {
 
   DetectMetalinkState::DetectMetalinkState(DownloadPrivate &parent) : SimpleState( parent ){
-    MIL_MEDIA << "Creating DetectMetalinkState" << std::endl;
+    MIL << "Entering DetectMetalinkState for url: " << parent._spec.url() << std::endl;
   }
 
   void DetectMetalinkState::enter()
@@ -63,7 +63,10 @@ namespace zyppng {
   {
     auto lck = stateMachine().z_func()->shared_from_this();
     if ( req.hasError() ) {
-      WAR << "Detecing if metalink is possible for url " << req.url() << " failed with error " << err.toString() << " falling back to download without metalink." << std::endl;
+      WAR << req.nativeHandle() << " " << "Detecing if metalink is possible for url " << req.url() << " failed with error " << err.toString() << " falling back to download without metalink." << std::endl;
+      if ( req.lastRedirectInfo ().size () )
+        WAR << req.nativeHandle() << " Last redirection target was: " << req.lastRedirectInfo () << std::endl;
+
       _error = err;
       _gotMetalink = false;
       return _sigFinished.emit();
@@ -71,7 +74,7 @@ namespace zyppng {
 
     std::string cType = req.contentType();
     _gotMetalink = ( cType.find("application/metalink+xml") == 0 || cType.find("application/metalink4+xml") == 0 );
-    MIL << "Metalink detection result on url " << req.url() << " is " << _gotMetalink << std::endl;
+    MIL << req.nativeHandle() << " " << "Metalink detection result on url " << req.url() << " is " << _gotMetalink << std::endl;
     _sigFinished.emit();
   }
 

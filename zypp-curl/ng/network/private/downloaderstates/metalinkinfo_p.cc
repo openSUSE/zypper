@@ -62,18 +62,18 @@ namespace zyppng {
   DlMetaLinkInfoState::DlMetaLinkInfoState(DownloadPrivate &parent)
     : BasicDownloaderStateBase( parent )
   {
-    MIL_MEDIA << "Downloading metalink/zsync on " << parent._spec.url() << std::endl;
+    MIL << "Downloading metalink/zsync on " << parent._spec.url() << std::endl;
   }
 
   DlMetaLinkInfoState::DlMetaLinkInfoState(std::shared_ptr<Request> &&prevRequest, DownloadPrivate &parent)
     : BasicDownloaderStateBase( std::move(prevRequest), parent )
   {
-    MIL_MEDIA << "Downloading metalink/zsync on " << parent._spec.url() << std::endl;
+    MIL << "Downloading metalink/zsync on " << parent._spec.url() << std::endl;
   }
 
   std::shared_ptr<FinishedState> DlMetaLinkInfoState::transitionToFinished()
   {
-    MIL_MEDIA << "Downloading on " << stateMachine()._spec.url() << " transition to final state. " << std::endl;
+    MIL << "Downloading on " << stateMachine()._spec.url() << " transition to final state. " << std::endl;
     return std::make_shared<FinishedState>( std::move(_error), stateMachine() );
   }
 

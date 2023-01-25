@@ -62,7 +62,7 @@ namespace zyppng {
 
     auto err = setupMirror( mirror, url, set );
     if ( err.isError() ) {
-      WAR_MEDIA << "Setting up mirror " << mirror.second->mirrorUrl << " failed with error: " << err.toString() << "(" << err.nativeErrorString() << "), falling back to original URL." << std::endl;
+      WAR << "Setting up mirror " << mirror.second->mirrorUrl << " failed with error: " << err.toString() << "(" << err.nativeErrorString() << "), falling back to original URL." << std::endl;
       failedToPrepare();
     }
     startWithMirror( mirror.second, url, set );
@@ -195,7 +195,11 @@ namespace zyppng {
         sm._requestDispatcher->enqueue( _request );
         return;
       }
-      MIL_MEDIA << "Downloading on " << stateMachine()._spec.url() << " failed with error "<< err.toString() << " " << err.nativeErrorString() << std::endl;
+
+      MIL << req.nativeHandle() << " " << "Downloading on " << stateMachine()._spec.url() << " failed with error "<< err.toString() << " " << err.nativeErrorString() << std::endl;
+      if ( req.lastRedirectInfo ().size () )
+        MIL << req.nativeHandle() << " Last redirection target was: " << req.lastRedirectInfo () << std::endl;
+
       return failed( NetworkRequestError(err) );
     }
 

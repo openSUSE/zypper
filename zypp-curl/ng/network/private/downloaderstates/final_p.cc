@@ -17,7 +17,7 @@ namespace zyppng {
     : SimpleState( parent )
     , _error( std::move(error) )
   {
-    MIL_MEDIA << "About to enter FinishedState for url " << parent._spec.url() << std::endl;
+    MIL << "About to enter FinishedState for url " << parent._spec.url() << std::endl;
   }
 
 }
