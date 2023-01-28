@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-12-22 14:35+0100\n"
-"PO-Revision-Date: 2023-01-28 13:07+0000\n"
+"PO-Revision-Date: 2023-01-28 15:14+0000\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <https://l10n.opensuse.org/projects/libzypp/master/"
 "ka/>\n"
@@ -22,13 +22,13 @@ msgstr ""
 
 #: zypp/CountryCode.cc:50
 msgid "Unknown country: "
-msgstr ""
+msgstr "უცნობი ქვეყანა: "
 
 #. Defined CountryCode constants
 #. Defined LanguageCode constants
 #: zypp/CountryCode.cc:149 zypp/LanguageCode.cc:148
 msgid "No Code"
-msgstr ""
+msgstr "კოდის გარეშე"
 
 #: zypp/CountryCode.cc:158
 msgid "Andorra"
@@ -37,7 +37,7 @@ msgstr "ანდირა"
 #. :AND:020:
 #: zypp/CountryCode.cc:159
 msgid "United Arab Emirates"
-msgstr ""
+msgstr "არაბეთის გაერთიანებული ემირატები"
 
 #. :ARE:784:
 #: zypp/CountryCode.cc:160
@@ -52,7 +52,7 @@ msgstr "ანტიგუა და ბარბუდა"
 #. :ATG:028:
 #: zypp/CountryCode.cc:162
 msgid "Anguilla"
-msgstr ""
+msgstr "ანგილა"
 
 #. :AIA:660:
 #: zypp/CountryCode.cc:163
@@ -67,7 +67,7 @@ msgstr "სომხეთი"
 #. :ARM:051:
 #: zypp/CountryCode.cc:165
 msgid "Netherlands Antilles"
-msgstr ""
+msgstr "ნიდერლანდების ანტილის კუნძულები (NL)"
 
 #. :ANT:530:
 #: zypp/CountryCode.cc:166
@@ -87,7 +87,7 @@ msgstr "არგენტინა"
 #. :ARG:032:
 #: zypp/CountryCode.cc:169
 msgid "American Samoa"
-msgstr ""
+msgstr "ამერიკული სამოა"
 
 #. :ASM:016:
 #: zypp/CountryCode.cc:170
@@ -102,12 +102,12 @@ msgstr "ავსტრალია"
 #. :AUS:036:
 #: zypp/CountryCode.cc:172
 msgid "Aruba"
-msgstr ""
+msgstr "არუბა"
 
 #. :ABW:533:
 #: zypp/CountryCode.cc:173
 msgid "Aland Islands"
-msgstr ""
+msgstr "ალანდის კუნძულები"
 
 #. :ALA:248:
 #: zypp/CountryCode.cc:174
@@ -167,7 +167,7 @@ msgstr "ბერმუდები"
 #. :BMU:060:
 #: zypp/CountryCode.cc:185
 msgid "Brunei Darussalam"
-msgstr ""
+msgstr "ბრუნეი"
 
 #. :BRN:096:
 #: zypp/CountryCode.cc:186
@@ -192,7 +192,7 @@ msgstr "ბუტანი"
 #. :BTN:064:
 #: zypp/CountryCode.cc:190
 msgid "Bouvet Island"
-msgstr ""
+msgstr "ბუვეტის კუნძული"
 
 #. :BVT:074:
 #: zypp/CountryCode.cc:191
@@ -212,43 +212,43 @@ msgstr "ბელიზი"
 #. :BLZ:084:
 #: zypp/CountryCode.cc:194
 msgid "Canada"
-msgstr ""
+msgstr "კანადა"
 
 #. :CAN:124:
 #: zypp/CountryCode.cc:195
 msgid "Cocos (Keeling) Islands"
-msgstr ""
+msgstr "ქოქოს (კეელინგ) კუნძულები"
 
 #. :CCK:166:
 #. :CAF:140:
 #: zypp/CountryCode.cc:196 zypp/CountryCode.cc:198
 msgid "Congo"
-msgstr ""
+msgstr "კონგო"
 
 #. :COD:180:
 #: zypp/CountryCode.cc:197
 msgid "Central African Republic"
-msgstr ""
+msgstr "ცენტრალური აფრიკის რესპუბლიკა"
 
 #. :COG:178:
 #: zypp/CountryCode.cc:199
 msgid "Switzerland"
-msgstr ""
+msgstr "შვეიცარია"
 
 #. :CHE:756:
 #: zypp/CountryCode.cc:200
 msgid "Cote D'Ivoire"
-msgstr ""
+msgstr "კოტ-დ’ივუარი"
 
 #. :CIV:384:
 #: zypp/CountryCode.cc:201
 msgid "Cook Islands"
-msgstr ""
+msgstr "კუკის კუნძულები (ახალი ზელანდია)"
 
 #. :COK:184:
 #: zypp/CountryCode.cc:202
 msgid "Chile"
-msgstr ""
+msgstr "ჩილე"
 
 #. :CHL:152:
 #: zypp/CountryCode.cc:203
@@ -258,67 +258,67 @@ msgstr "კამერუნი"
 #. :CMR:120:
 #: zypp/CountryCode.cc:204
 msgid "China"
-msgstr ""
+msgstr "ჩინეთი"
 
 #. :CHN:156:
 #: zypp/CountryCode.cc:205
 msgid "Colombia"
-msgstr ""
+msgstr "კოლუმბია"
 
 #. :COL:170:
 #: zypp/CountryCode.cc:206
 msgid "Costa Rica"
-msgstr ""
+msgstr "კოსტა რიკა"
 
 #. :CRI:188:
 #: zypp/CountryCode.cc:207
 msgid "Cuba"
-msgstr ""
+msgstr "კუბა"
 
 #. :CUB:192:
 #: zypp/CountryCode.cc:208
 msgid "Cape Verde"
-msgstr ""
+msgstr "კაბო ვერდე"
 
 #. :CPV:132:
 #: zypp/CountryCode.cc:209
 msgid "Christmas Island"
-msgstr ""
+msgstr "შობის კუნძული"
 
 #. :CXR:162:
 #: zypp/CountryCode.cc:210
 msgid "Cyprus"
-msgstr ""
+msgstr "კვიპროსი"
 
 #. :CYP:196:
 #: zypp/CountryCode.cc:211
 msgid "Czech Republic"
-msgstr ""
+msgstr "ჩეხეთი"
 
 #. :CZE:203:
 #: zypp/CountryCode.cc:212
 msgid "Germany"
-msgstr ""
+msgstr "გერმანია"
 
 #. :DEU:276:
 #: zypp/CountryCode.cc:213
 msgid "Djibouti"
-msgstr ""
+msgstr "ჯიბუტი"
 
 #. :DJI:262:
 #: zypp/CountryCode.cc:214
 msgid "Denmark"
-msgstr ""
+msgstr "დანია"
 
 #. :DNK:208:
 #: zypp/CountryCode.cc:215
 msgid "Dominica"
-msgstr ""
+msgstr "დომინიკა"
 
 #. :DMA:212:
 #: zypp/CountryCode.cc:216
 msgid "Dominican Republic"
-msgstr ""
+msgstr "დომენიკის რესპუბლიკა"
 
 #. :DOM:214:
 #: zypp/CountryCode.cc:217
@@ -328,67 +328,67 @@ msgstr "ალჟირი"
 #. :DZA:012:
 #: zypp/CountryCode.cc:218
 msgid "Ecuador"
-msgstr ""
+msgstr "ეკვადორი"
 
 #. :ECU:218:
 #: zypp/CountryCode.cc:219
 msgid "Estonia"
-msgstr ""
+msgstr "ესტონეთი"
 
 #. :EST:233:
 #: zypp/CountryCode.cc:220
 msgid "Egypt"
-msgstr ""
+msgstr "ეგვიპტე"
 
 #. :EGY:818:
 #: zypp/CountryCode.cc:221
 msgid "Western Sahara"
-msgstr ""
+msgstr "დასავლეთ საჰარა"
 
 #. :ESH:732:
 #: zypp/CountryCode.cc:222
 msgid "Eritrea"
-msgstr ""
+msgstr "ერითრეა"
 
 #. :ERI:232:
 #: zypp/CountryCode.cc:223
 msgid "Spain"
-msgstr ""
+msgstr "ესპანეთი"
 
 #. :ESP:724:
 #: zypp/CountryCode.cc:224
 msgid "Ethiopia"
-msgstr ""
+msgstr "ეთიოპია"
 
 #. :ETH:231:
 #: zypp/CountryCode.cc:225
 msgid "Finland"
-msgstr ""
+msgstr "ფინეთი"
 
 #. :FIN:246:
 #: zypp/CountryCode.cc:226
 msgid "Fiji"
-msgstr ""
+msgstr "ფიჯი"
 
 #. :FJI:242:
 #: zypp/CountryCode.cc:227
 msgid "Falkland Islands (Malvinas)"
-msgstr ""
+msgstr "ფოლკლენდის კუნძულები"
 
 #. :FLK:238:
 #: zypp/CountryCode.cc:228
 msgid "Federated States of Micronesia"
-msgstr ""
+msgstr "მიკრონეზიის ფედერალური შტატები"
 
 #. :FSM:583:
 #: zypp/CountryCode.cc:229
 msgid "Faroe Islands"
-msgstr ""
+msgstr "ფარერის კუნძულები"
 
 #. :FRO:234:
 #: zypp/CountryCode.cc:230
 msgid "France"
-msgstr ""
+msgstr "საფრანგეთი"
 
 #. :FRA:250:
 #: zypp/CountryCode.cc:231
@@ -398,17 +398,17 @@ msgstr ""
 #. :FXX:249:
 #: zypp/CountryCode.cc:232
 msgid "Gabon"
-msgstr ""
+msgstr "გაბონი"
 
 #. :GAB:266:
 #: zypp/CountryCode.cc:233
 msgid "United Kingdom"
-msgstr ""
+msgstr "დიდი ბრიტანეთი"
 
 #. :GBR:826:
 #: zypp/CountryCode.cc:234
 msgid "Grenada"
-msgstr ""
+msgstr "გრენადა"
 
 #. :GRD:308:
 #: zypp/CountryCode.cc:235
@@ -418,81 +418,81 @@ msgstr "საქართველო"
 #. :GEO:268:
 #: zypp/CountryCode.cc:236
 msgid "French Guiana"
-msgstr ""
+msgstr "ფრანგული გვიანა"
 
 #. :GUF:254:
 #: zypp/CountryCode.cc:237
 msgid "Guernsey"
-msgstr ""
+msgstr "გერნსი"
 
 #: zypp/CountryCode.cc:238
 msgid "Ghana"
-msgstr ""
+msgstr "განა"
 
 #. :GHA:288:
 #: zypp/CountryCode.cc:239
 msgid "Gibraltar"
-msgstr ""
+msgstr "გიბრალტარი"
 
 #. :GIB:292:
 #: zypp/CountryCode.cc:240
 msgid "Greenland"
-msgstr ""
+msgstr "გრენლანდია"
 
 #. :GRL:304:
 #: zypp/CountryCode.cc:241
 msgid "Gambia"
-msgstr ""
+msgstr "გამბია"
 
 #. :GMB:270:
 #: zypp/CountryCode.cc:242
 msgid "Guinea"
-msgstr ""
+msgstr "გვინეა"
 
 #. :GIN:324:
 #: zypp/CountryCode.cc:243
 msgid "Guadeloupe"
-msgstr ""
+msgstr "გვადალუპე"
 
 #. :GLP:312:
 #: zypp/CountryCode.cc:244
 msgid "Equatorial Guinea"
-msgstr ""
+msgstr "ეკვატორული გვინეა"
 
 #. :GNQ:226:
 #: zypp/CountryCode.cc:245
 msgid "Greece"
-msgstr ""
+msgstr "საბერძნეთი"
 
 #. :GRC:300:
 #: zypp/CountryCode.cc:246
 msgid "South Georgia and the South Sandwich Islands"
-msgstr ""
+msgstr "სამხრეთ ჯორჯია და სამხრეთ სენდვიჩის კუნძულები"
 
 #. :SGS:239:
 #: zypp/CountryCode.cc:247
 msgid "Guatemala"
-msgstr ""
+msgstr "გვატემალა"
 
 #. :GTM:320:
 #: zypp/CountryCode.cc:248
 msgid "Guam"
-msgstr ""
+msgstr "გუამი"
 
 #. :GUM:316:
 #: zypp/CountryCode.cc:249
 msgid "Guinea-Bissau"
-msgstr ""
+msgstr "გვინეა-ბისაუ"
 
 #. :GNB:624:
 #: zypp/CountryCode.cc:250
 msgid "Guyana"
-msgstr ""
+msgstr "გაიანა"
 
 #. :GUY:328:
 #: zypp/CountryCode.cc:251
 msgid "Hong Kong"
-msgstr ""
+msgstr "ჰონგკონგი"
 
 #. :HKG:344:
 #: zypp/CountryCode.cc:252
@@ -502,27 +502,27 @@ msgstr ""
 #. :HMD:334:
 #: zypp/CountryCode.cc:253
 msgid "Honduras"
-msgstr ""
+msgstr "ჰონდურასი"
 
 #. :HND:340:
 #: zypp/CountryCode.cc:254
 msgid "Croatia"
-msgstr ""
+msgstr "ხორვატია"
 
 #. :HRV:191:
 #: zypp/CountryCode.cc:255
 msgid "Haiti"
-msgstr ""
+msgstr "ჰაიტი"
 
 #. :HTI:332:
 #: zypp/CountryCode.cc:256
 msgid "Hungary"
-msgstr ""
+msgstr "უნგრეთი"
 
 #. :HUN:348:
 #: zypp/CountryCode.cc:257
 msgid "Indonesia"
-msgstr ""
+msgstr "ინდონეზია"
 
 #. :IDN:360:
 #: zypp/CountryCode.cc:258
@@ -537,16 +537,16 @@ msgstr "ისრაელი"
 #. :ISR:376:
 #: zypp/CountryCode.cc:260
 msgid "Isle of Man"
-msgstr ""
+msgstr "მენის კუნძული"
 
 #: zypp/CountryCode.cc:261
 msgid "India"
-msgstr ""
+msgstr "ინდოეთი"
 
 #. :IND:356:
 #: zypp/CountryCode.cc:262
 msgid "British Indian Ocean Territory"
-msgstr ""
+msgstr "ბრიტანეთის ინდოეთის ოკეანის ტერიტორია"
 
 #. :IOT:086:
 #: zypp/CountryCode.cc:263
@@ -561,7 +561,7 @@ msgstr "ირანი"
 #. :IRN:364:
 #: zypp/CountryCode.cc:265
 msgid "Iceland"
-msgstr ""
+msgstr "ისლანდია"
 
 #. :ISL:352:
 #: zypp/CountryCode.cc:266
@@ -571,7 +571,7 @@ msgstr "იტალია"
 #. :ITA:380:
 #: zypp/CountryCode.cc:267
 msgid "Jersey"
-msgstr ""
+msgstr "ჯერსი"
 
 #: zypp/CountryCode.cc:268
 msgid "Jamaica"
@@ -580,7 +580,7 @@ msgstr "იამაიკა"
 #. :JAM:388:
 #: zypp/CountryCode.cc:269
 msgid "Jordan"
-msgstr ""
+msgstr "იორდანია"
 
 #. :JOR:400:
 #: zypp/CountryCode.cc:270
@@ -590,12 +590,12 @@ msgstr "იაპონია"
 #. :JPN:392:
 #: zypp/CountryCode.cc:271
 msgid "Kenya"
-msgstr ""
+msgstr "კენია"
 
 #. :KEN:404:
 #: zypp/CountryCode.cc:272
 msgid "Kyrgyzstan"
-msgstr ""
+msgstr "ყირგიზეთი"
 
 #. :KGZ:417:
 #: zypp/CountryCode.cc:273
@@ -605,117 +605,117 @@ msgstr "კამბოჯა"
 #. :KHM:116:
 #: zypp/CountryCode.cc:274
 msgid "Kiribati"
-msgstr ""
+msgstr "კირიბატი"
 
 #. :KIR:296:
 #: zypp/CountryCode.cc:275
 msgid "Comoros"
-msgstr ""
+msgstr "კომორი"
 
 #. :COM:174:
 #: zypp/CountryCode.cc:276
 msgid "Saint Kitts and Nevis"
-msgstr ""
+msgstr "სენტ კიტსი და ნევისი"
 
 #. :KNA:659:
 #: zypp/CountryCode.cc:277
 msgid "North Korea"
-msgstr ""
+msgstr "ჩრდილოეთ კორეა"
 
 #. :PRK:408:
 #: zypp/CountryCode.cc:278
 msgid "South Korea"
-msgstr ""
+msgstr "სამხრეთ კორეა"
 
 #. :KOR:410:
 #: zypp/CountryCode.cc:279
 msgid "Kuwait"
-msgstr ""
+msgstr "ქუვეიტი"
 
 #. :KWT:414:
 #: zypp/CountryCode.cc:280
 msgid "Cayman Islands"
-msgstr ""
+msgstr "კაიმანის კუნძულები"
 
 #. :CYM:136:
 #: zypp/CountryCode.cc:281
 msgid "Kazakhstan"
-msgstr ""
+msgstr "ყაზახეთი"
 
 #. :KAZ:398:
 #: zypp/CountryCode.cc:282
 msgid "Lao People's Democratic Republic"
-msgstr ""
+msgstr "ლაოსის სახალხო დემოკრატიული რესპუბლიკა"
 
 #. :LAO:418:
 #: zypp/CountryCode.cc:283
 msgid "Lebanon"
-msgstr ""
+msgstr "ლიბანი"
 
 #. :LBN:422:
 #: zypp/CountryCode.cc:284
 msgid "Saint Lucia"
-msgstr ""
+msgstr "წმინდა ლუჩია"
 
 #. :LCA:662:
 #: zypp/CountryCode.cc:285
 msgid "Liechtenstein"
-msgstr ""
+msgstr "ლიჰტენშტაინი"
 
 #. :LIE:438:
 #: zypp/CountryCode.cc:286
 msgid "Sri Lanka"
-msgstr ""
+msgstr "შრი ლანკა"
 
 #. :LKA:144:
 #: zypp/CountryCode.cc:287
 msgid "Liberia"
-msgstr ""
+msgstr "ლიბერია"
 
 #. :LBR:430:
 #: zypp/CountryCode.cc:288
 msgid "Lesotho"
-msgstr ""
+msgstr "ლესოტო"
 
 #. :LSO:426:
 #: zypp/CountryCode.cc:289
 msgid "Lithuania"
-msgstr ""
+msgstr "ლიეტუვა"
 
 #. :LTU:440:
 #: zypp/CountryCode.cc:290
 msgid "Luxembourg"
-msgstr ""
+msgstr "ლუქსემბურგი"
 
 #. :LUX:442:
 #: zypp/CountryCode.cc:291
 msgid "Latvia"
-msgstr ""
+msgstr "ლატვია"
 
 #. :LVA:428:
 #: zypp/CountryCode.cc:292
 msgid "Libya"
-msgstr ""
+msgstr "ლიბია"
 
 #. :LBY:434:
 #: zypp/CountryCode.cc:293
 msgid "Morocco"
-msgstr ""
+msgstr "მაროკო"
 
 #. :MAR:504:
 #: zypp/CountryCode.cc:294
 msgid "Monaco"
-msgstr ""
+msgstr "მონაკო"
 
 #. :MCO:492:
 #: zypp/CountryCode.cc:295
 msgid "Moldova"
-msgstr ""
+msgstr "მოლდოვა"
 
 #. :MDA:498:
 #: zypp/CountryCode.cc:296
 msgid "Montenegro"
-msgstr ""
+msgstr "მონტენეგრო"
 
 #: zypp/CountryCode.cc:297
 msgid "Saint Martin"
@@ -723,243 +723,243 @@ msgstr "სენტ მარტინი"
 
 #: zypp/CountryCode.cc:298
 msgid "Madagascar"
-msgstr ""
+msgstr "მადაგასკარი"
 
 #. :MDG:450:
 #: zypp/CountryCode.cc:299
 msgid "Marshall Islands"
-msgstr ""
+msgstr "მარშალის კუნძულები"
 
 #. :MHL:584:
 #: zypp/CountryCode.cc:300
 msgid "Macedonia"
-msgstr ""
+msgstr "მაკედონია"
 
 #. :MKD:807:
 #: zypp/CountryCode.cc:301
 msgid "Mali"
-msgstr ""
+msgstr "მალი"
 
 #. :MLI:466:
 #: zypp/CountryCode.cc:302
 msgid "Myanmar"
-msgstr ""
+msgstr "მიანმარი"
 
 #. :MMR:104:
 #: zypp/CountryCode.cc:303
 msgid "Mongolia"
-msgstr ""
+msgstr "მონღოლეთი"
 
 #. :MNG:496:
 #: zypp/CountryCode.cc:304
 msgid "Macao"
-msgstr ""
+msgstr "მაკაო"
 
 #. :MAC:446:
 #: zypp/CountryCode.cc:305
 msgid "Northern Mariana Islands"
-msgstr ""
+msgstr "ჩრდილოეთ მარიანას კუნძულები"
 
 #. :MNP:580:
 #: zypp/CountryCode.cc:306
 msgid "Martinique"
-msgstr ""
+msgstr "მარტინიკა"
 
 #. :MTQ:474:
 #: zypp/CountryCode.cc:307
 msgid "Mauritania"
-msgstr ""
+msgstr "მავრიტანია"
 
 #. :MRT:478:
 #: zypp/CountryCode.cc:308
 msgid "Montserrat"
-msgstr ""
+msgstr "მონტსერატი"
 
 #. :MSR:500:
 #: zypp/CountryCode.cc:309
 msgid "Malta"
-msgstr ""
+msgstr "მალტა"
 
 #. :MLT:470:
 #: zypp/CountryCode.cc:310
 msgid "Mauritius"
-msgstr ""
+msgstr "მავრიკი"
 
 #. :MUS:480:
 #: zypp/CountryCode.cc:311
 msgid "Maldives"
-msgstr ""
+msgstr "მალდივები"
 
 #. :MDV:462:
 #: zypp/CountryCode.cc:312
 msgid "Malawi"
-msgstr ""
+msgstr "მალავი"
 
 #. :MWI:454:
 #: zypp/CountryCode.cc:313
 msgid "Mexico"
-msgstr ""
+msgstr "მექსიკა"
 
 #. :MEX:484:
 #: zypp/CountryCode.cc:314
 msgid "Malaysia"
-msgstr ""
+msgstr "მალაიზია"
 
 #. :MYS:458:
 #: zypp/CountryCode.cc:315
 msgid "Mozambique"
-msgstr ""
+msgstr "მოზამბიკი"
 
 #. :MOZ:508:
 #: zypp/CountryCode.cc:316
 msgid "Namibia"
-msgstr ""
+msgstr "ნამიბია"
 
 #. :NAM:516:
 #: zypp/CountryCode.cc:317
 msgid "New Caledonia"
-msgstr ""
+msgstr "ახალი კალედონია"
 
 #. :NCL:540:
 #: zypp/CountryCode.cc:318
 msgid "Niger"
-msgstr ""
+msgstr "ნიგერი"
 
 #. :NER:562:
 #: zypp/CountryCode.cc:319
 msgid "Norfolk Island"
-msgstr ""
+msgstr "ნორფოლკის კუნძული"
 
 #. :NFK:574:
 #: zypp/CountryCode.cc:320
 msgid "Nigeria"
-msgstr ""
+msgstr "ნიგერია"
 
 #. :NGA:566:
 #: zypp/CountryCode.cc:321
 msgid "Nicaragua"
-msgstr ""
+msgstr "ნიკარაგუა"
 
 #. :NIC:558:
 #: zypp/CountryCode.cc:322
 msgid "Netherlands"
-msgstr ""
+msgstr "ჰოლანდია"
 
 #. :NLD:528:
 #: zypp/CountryCode.cc:323
 msgid "Norway"
-msgstr ""
+msgstr "ნორვეგია"
 
 #. :NOR:578:
 #: zypp/CountryCode.cc:324
 msgid "Nepal"
-msgstr ""
+msgstr "ნეპალი"
 
 #. :NPL:524:
 #. language code: nau na
 #: zypp/CountryCode.cc:325 zypp/LanguageCode.cc:781
 msgid "Nauru"
-msgstr ""
+msgstr "ნაურუ"
 
 #. :NRU:520:
 #: zypp/CountryCode.cc:326
 msgid "Niue"
-msgstr ""
+msgstr "ნიუე"
 
 #. :NIU:570:
 #: zypp/CountryCode.cc:327
 msgid "New Zealand"
-msgstr ""
+msgstr "ახალი ზელანდია"
 
 #. :NZL:554:
 #: zypp/CountryCode.cc:328
 msgid "Oman"
-msgstr ""
+msgstr "ომანი"
 
 #. :OMN:512:
 #: zypp/CountryCode.cc:329
 msgid "Panama"
-msgstr ""
+msgstr "პანამა"
 
 #. :PAN:591:
 #: zypp/CountryCode.cc:330
 msgid "Peru"
-msgstr ""
+msgstr "პერუ"
 
 #. :PER:604:
 #: zypp/CountryCode.cc:331
 msgid "French Polynesia"
-msgstr ""
+msgstr "ფრანგული პოლინეზია"
 
 #. :PYF:258:
 #: zypp/CountryCode.cc:332
 msgid "Papua New Guinea"
-msgstr ""
+msgstr "პაპუა ახალი გვინეა"
 
 #. :PNG:598:
 #: zypp/CountryCode.cc:333
 msgid "Philippines"
-msgstr ""
+msgstr "ფილიპინები"
 
 #. :PHL:608:
 #: zypp/CountryCode.cc:334
 msgid "Pakistan"
-msgstr ""
+msgstr "პაკისტანი"
 
 #. :PAK:586:
 #: zypp/CountryCode.cc:335
 msgid "Poland"
-msgstr ""
+msgstr "პოლონეთი"
 
 #. :POL:616:
 #: zypp/CountryCode.cc:336
 msgid "Saint Pierre and Miquelon"
-msgstr ""
+msgstr "წმინდა პიერი და მიქელონი"
 
 #. :SPM:666:
 #: zypp/CountryCode.cc:337
 msgid "Pitcairn"
-msgstr ""
+msgstr "პიტკერნი"
 
 #. :PCN:612:
 #: zypp/CountryCode.cc:338
 msgid "Puerto Rico"
-msgstr ""
+msgstr "პუერტო რიკო"
 
 #. :PRI:630:
 #: zypp/CountryCode.cc:339
 msgid "Palestinian Territory"
-msgstr ""
+msgstr "პალესტინის ტერიტორია"
 
 #. :PSE:275:
 #: zypp/CountryCode.cc:340
 msgid "Portugal"
-msgstr ""
+msgstr "პორტუგალია"
 
 #. :PRT:620:
 #: zypp/CountryCode.cc:341
 msgid "Palau"
-msgstr ""
+msgstr "პალაუ"
 
 #. :PLW:585:
 #: zypp/CountryCode.cc:342
 msgid "Paraguay"
-msgstr ""
+msgstr "პარაგვაი"
 
 #. :PRY:600:
 #: zypp/CountryCode.cc:343
 msgid "Qatar"
-msgstr ""
+msgstr "ყატარი"
 
 #. :QAT:634:
 #: zypp/CountryCode.cc:344
 msgid "Reunion"
-msgstr ""
+msgstr "რეიუნიონი"
 
 #. :REU:638:
 #: zypp/CountryCode.cc:345
 msgid "Romania"
-msgstr ""
+msgstr "რუმინეთი"
 
 #. :ROU:642:
 #: zypp/CountryCode.cc:346
@@ -968,293 +968,293 @@ msgstr "სერბეთი"
 
 #: zypp/CountryCode.cc:347
 msgid "Russian Federation"
-msgstr ""
+msgstr "რუსეთის ფედერაცია"
 
 #. :RUS:643:
 #: zypp/CountryCode.cc:348
 msgid "Rwanda"
-msgstr ""
+msgstr "რუანდა"
 
 #. :RWA:646:
 #: zypp/CountryCode.cc:349
 msgid "Saudi Arabia"
-msgstr ""
+msgstr "საუდის არაბეთი"
 
 #. :SAU:682:
 #: zypp/CountryCode.cc:350
 msgid "Solomon Islands"
-msgstr ""
+msgstr "სოლომონის კუნძულები"
 
 #. :SLB:090:
 #: zypp/CountryCode.cc:351
 msgid "Seychelles"
-msgstr ""
+msgstr "სეიშელები"
 
 #. :SYC:690:
 #: zypp/CountryCode.cc:352
 msgid "Sudan"
-msgstr ""
+msgstr "სუდანი"
 
 #. :SDN:736:
 #: zypp/CountryCode.cc:353
 msgid "Sweden"
-msgstr ""
+msgstr "შვედეთი"
 
 #. :SWE:752:
 #: zypp/CountryCode.cc:354
 msgid "Singapore"
-msgstr ""
+msgstr "სინგაპური"
 
 #. :SGP:702:
 #: zypp/CountryCode.cc:355
 msgid "Saint Helena"
-msgstr ""
+msgstr "წმინდა ელენე"
 
 #. :SHN:654:
 #: zypp/CountryCode.cc:356
 msgid "Slovenia"
-msgstr ""
+msgstr "სლოვენია"
 
 #. :SVN:705:
 #: zypp/CountryCode.cc:357
 msgid "Svalbard and Jan Mayen"
-msgstr ""
+msgstr "სვალბარდი და ან-მაიენი"
 
 #. :SJM:744:
 #: zypp/CountryCode.cc:358
 msgid "Slovakia"
-msgstr ""
+msgstr "სლოვაკეთი"
 
 #. :SVK:703:
 #: zypp/CountryCode.cc:359
 msgid "Sierra Leone"
-msgstr ""
+msgstr "სიერა ლეონე"
 
 #. :SLE:694:
 #: zypp/CountryCode.cc:360
 msgid "San Marino"
-msgstr ""
+msgstr "სან მარინო"
 
 #. :SMR:674:
 #: zypp/CountryCode.cc:361
 msgid "Senegal"
-msgstr ""
+msgstr "სენეგალი"
 
 #. :SEN:686:
 #: zypp/CountryCode.cc:362
 msgid "Somalia"
-msgstr ""
+msgstr "სომალი"
 
 #. :SOM:706:
 #: zypp/CountryCode.cc:363
 msgid "Suriname"
-msgstr ""
+msgstr "სურინამი"
 
 #. :SUR:740:
 #: zypp/CountryCode.cc:364
 msgid "Sao Tome and Principe"
-msgstr ""
+msgstr "საო ტომე და პრინციპე"
 
 #. :STP:678:
 #: zypp/CountryCode.cc:365
 msgid "El Salvador"
-msgstr ""
+msgstr "ელ სალვადორი"
 
 #. :SLV:222:
 #: zypp/CountryCode.cc:366
 msgid "Syria"
-msgstr ""
+msgstr "სირია"
 
 #. :SYR:760:
 #: zypp/CountryCode.cc:367
 msgid "Swaziland"
-msgstr ""
+msgstr "ესვატინი"
 
 #. :SWZ:748:
 #: zypp/CountryCode.cc:368
 msgid "Turks and Caicos Islands"
-msgstr ""
+msgstr "ტერქსისა და კაიკოსის კუნძულები"
 
 #. :TCA:796:
 #: zypp/CountryCode.cc:369
 msgid "Chad"
-msgstr ""
+msgstr "ჩადი"
 
 #. :TCD:148:
 #: zypp/CountryCode.cc:370
 msgid "French Southern Territories"
-msgstr ""
+msgstr "ფრანგული სამხრეთ ტერიტორიები"
 
 #. :ATF:260:
 #: zypp/CountryCode.cc:371
 msgid "Togo"
-msgstr ""
+msgstr "ტოგო"
 
 #. :TGO:768:
 #: zypp/CountryCode.cc:372
 msgid "Thailand"
-msgstr ""
+msgstr "ტაილანდი"
 
 #. :THA:764:
 #: zypp/CountryCode.cc:373
 msgid "Tajikistan"
-msgstr ""
+msgstr "ტაჯიკეთი"
 
 #. :TJK:762:
 #. language code: tkl
 #: zypp/CountryCode.cc:374 zypp/LanguageCode.cc:1045
 msgid "Tokelau"
-msgstr ""
+msgstr "ტოკელაუ"
 
 #. :TKL:772:
 #: zypp/CountryCode.cc:375
 msgid "Turkmenistan"
-msgstr ""
+msgstr "თურქმენეთი"
 
 #. :TKM:795:
 #: zypp/CountryCode.cc:376
 msgid "Tunisia"
-msgstr ""
+msgstr "ტუნისი"
 
 #. :TUN:788:
 #: zypp/CountryCode.cc:377
 msgid "Tonga"
-msgstr ""
+msgstr "ტონგა"
 
 #. :TON:776:
 #: zypp/CountryCode.cc:378
 msgid "East Timor"
-msgstr ""
+msgstr "აღმოსავლეთ ტიმორი"
 
 #. :TLS:626:
 #: zypp/CountryCode.cc:379
 msgid "Turkey"
-msgstr ""
+msgstr "თურქეთი"
 
 #. :TUR:792:
 #: zypp/CountryCode.cc:380
 msgid "Trinidad and Tobago"
-msgstr ""
+msgstr "ტრინიდადი და ტობაგო"
 
 #. :TTO:780:
 #. language code: tvl
 #: zypp/CountryCode.cc:381 zypp/LanguageCode.cc:1075
 msgid "Tuvalu"
-msgstr ""
+msgstr "ტუვალუ"
 
 #. :TUV:798:
 #: zypp/CountryCode.cc:382
 msgid "Taiwan"
-msgstr ""
+msgstr "ტაივანი"
 
 #. :TWN:158:
 #: zypp/CountryCode.cc:383
 msgid "Tanzania"
-msgstr ""
+msgstr "ტანზანია"
 
 #. :TZA:834:
 #: zypp/CountryCode.cc:384
 msgid "Ukraine"
-msgstr ""
+msgstr "უკრაინა"
 
 #. :UKR:804:
 #: zypp/CountryCode.cc:385
 msgid "Uganda"
-msgstr ""
+msgstr "უგანდა"
 
 #. :UGA:800:
 #: zypp/CountryCode.cc:386
 msgid "United States Minor Outlying Islands"
-msgstr ""
+msgstr "შეერთებული შტატების მცირე გარემდებარე კუნძულები"
 
 #. :UMI:581:
 #: zypp/CountryCode.cc:387
 msgid "United States"
-msgstr ""
+msgstr "ამერიკის შეერთებული შტატები"
 
 #. :USA:840:
 #: zypp/CountryCode.cc:388
 msgid "Uruguay"
-msgstr ""
+msgstr "ურუგვაი"
 
 #. :URY:858:
 #: zypp/CountryCode.cc:389
 msgid "Uzbekistan"
-msgstr ""
+msgstr "უზბეკეთი"
 
 #. :UZB:860:
 #: zypp/CountryCode.cc:390
 msgid "Holy See (Vatican City State)"
-msgstr ""
+msgstr "წმიდა საყდართან (ვატიკანის ქალაქი სახელმწიფო)"
 
 #. :VAT:336:
 #: zypp/CountryCode.cc:391
 msgid "Saint Vincent and the Grenadines"
-msgstr ""
+msgstr "სენტ ვინცენტი და გრენადინები"
 
 #. :VCT:670:
 #: zypp/CountryCode.cc:392
 msgid "Venezuela"
-msgstr ""
+msgstr "ვენესუელა"
 
 #. :VEN:862:
 #: zypp/CountryCode.cc:393
 msgid "British Virgin Islands"
-msgstr ""
+msgstr "ბრიტანეთის ვირჯინიის კუნძულები"
 
 #. :VGB:092:
 #: zypp/CountryCode.cc:394
 msgid "Virgin Islands, U.S."
-msgstr ""
+msgstr "ვირჯინიის კუნძულები, აშშ."
 
 #. :VIR:850:
 #: zypp/CountryCode.cc:395
 msgid "Vietnam"
-msgstr ""
+msgstr "ვიეტნამი"
 
 #. :VNM:704:
 #: zypp/CountryCode.cc:396
 msgid "Vanuatu"
-msgstr ""
+msgstr "ვანუატუ"
 
 #. :VUT:548:
 #: zypp/CountryCode.cc:397
 msgid "Wallis and Futuna"
-msgstr ""
+msgstr "ვალისი და ფუტუნა"
 
 #. :WLF:876:
 #: zypp/CountryCode.cc:398
 msgid "Samoa"
-msgstr ""
+msgstr "სამოა"
 
 #. :WSM:882:
 #: zypp/CountryCode.cc:399
 msgid "Yemen"
-msgstr ""
+msgstr "იემენი"
 
 #. :YEM:887:
 #: zypp/CountryCode.cc:400
 msgid "Mayotte"
-msgstr ""
+msgstr "მეიოტი"
 
 #. :MYT:175:
 #: zypp/CountryCode.cc:401
 msgid "South Africa"
-msgstr ""
+msgstr "სამხრეთ აფრიკა"
 
 #. :ZAF:710:
 #: zypp/CountryCode.cc:402
 msgid "Zambia"
-msgstr ""
+msgstr "ზამბია"
 
 #. :ZMB:894:
 #: zypp/CountryCode.cc:403
 msgid "Zimbabwe"
-msgstr ""
+msgstr "ზიმბაბვე"
 
 #: zypp/Dep.cc:96
 msgid "Provides"
-msgstr ""
+msgstr "მომწოდებლები"
 
 #: zypp/Dep.cc:97
 msgid "Prerequires"
@@ -1262,15 +1262,15 @@ msgstr ""
 
 #: zypp/Dep.cc:98
 msgid "Requires"
-msgstr ""
+msgstr "ესაჭიროება"
 
 #: zypp/Dep.cc:99
 msgid "Conflicts"
-msgstr ""
+msgstr "კონფლიქტები"
 
 #: zypp/Dep.cc:100
 msgid "Obsoletes"
-msgstr ""
+msgstr "მოძველებული"
 
 #: zypp/Dep.cc:101
 msgid "Recommends"
@@ -1296,11 +1296,11 @@ msgstr ""
 
 #: zypp/KeyRing.cc:759
 msgid "Failed to import key."
-msgstr ""
+msgstr "გასაღების შემოტანის შეცდომა."
 
 #: zypp/KeyRing.cc:766
 msgid "Failed to delete key."
-msgstr ""
+msgstr "გასაღების წაშლის შეცდომა."
 
 #: zypp/KeyRing.cc:772
 #, c-format, boost-format
@@ -1309,17 +1309,17 @@ msgstr ""
 
 #: zypp/LanguageCode.cc:49
 msgid "Unknown language: "
-msgstr ""
+msgstr "უცნობი ენა: "
 
 #. language code: aar aa
 #: zypp/LanguageCode.cc:161
 msgid "Afar"
-msgstr ""
+msgstr "აფარი"
 
 #. language code: abk ab
 #: zypp/LanguageCode.cc:163
 msgid "Abkhazian"
-msgstr ""
+msgstr "აბხაზური"
 
 #. language code: ace
 #: zypp/LanguageCode.cc:165
@@ -1339,7 +1339,7 @@ msgstr ""
 #. language code: ady
 #: zypp/LanguageCode.cc:171
 msgid "Adyghe"
-msgstr ""
+msgstr "ადიღეური"
 
 #. language code: afa
 #: zypp/LanguageCode.cc:173
@@ -1364,7 +1364,7 @@ msgstr ""
 #. language code: aka ak
 #: zypp/LanguageCode.cc:181
 msgid "Akan"
-msgstr ""
+msgstr "აკანი"
 
 #. language code: akk
 #: zypp/LanguageCode.cc:183
@@ -1394,7 +1394,7 @@ msgstr ""
 #. language code: amh am
 #: zypp/LanguageCode.cc:195
 msgid "Amharic"
-msgstr ""
+msgstr "ამჰარული"
 
 #. language code: ang
 #: zypp/LanguageCode.cc:197
@@ -1419,7 +1419,7 @@ msgstr "არამეული"
 #. language code: arg an
 #: zypp/LanguageCode.cc:205
 msgid "Aragonese"
-msgstr ""
+msgstr "არაგონური"
 
 #. language code: arm hye hy
 #: zypp/LanguageCode.cc:207 zypp/LanguageCode.cc:209
@@ -1449,12 +1449,12 @@ msgstr ""
 #. language code: asm as
 #: zypp/LanguageCode.cc:219
 msgid "Assamese"
-msgstr ""
+msgstr "ასამური"
 
 #. language code: ast
 #: zypp/LanguageCode.cc:221
 msgid "Asturian"
-msgstr ""
+msgstr "ასთურიანული"
 
 #. language code: ath
 #: zypp/LanguageCode.cc:223
@@ -1474,7 +1474,7 @@ msgstr ""
 #. language code: ave ae
 #: zypp/LanguageCode.cc:229
 msgid "Avestan"
-msgstr ""
+msgstr "ავესტანი"
 
 #. language code: awa
 #: zypp/LanguageCode.cc:231
@@ -1484,7 +1484,7 @@ msgstr ""
 #. language code: aym ay
 #: zypp/LanguageCode.cc:233
 msgid "Aymara"
-msgstr ""
+msgstr "აიმარა"
 
 #. language code: aze az
 #: zypp/LanguageCode.cc:235
@@ -1504,7 +1504,7 @@ msgstr ""
 #. language code: bak ba
 #: zypp/LanguageCode.cc:241
 msgid "Bashkir"
-msgstr ""
+msgstr "ბაშკირი"
 
 #. language code: bal
 #: zypp/LanguageCode.cc:243
@@ -1519,12 +1519,12 @@ msgstr ""
 #. language code: ban
 #: zypp/LanguageCode.cc:247
 msgid "Balinese"
-msgstr ""
+msgstr "ბალინური"
 
 #. language code: baq eus eu
 #: zypp/LanguageCode.cc:249 zypp/LanguageCode.cc:251
 msgid "Basque"
-msgstr ""
+msgstr "ბასკური"
 
 #. language code: bas
 #: zypp/LanguageCode.cc:253
@@ -1539,7 +1539,7 @@ msgstr "ბალტიური (სხვა)"
 #. language code: bej
 #: zypp/LanguageCode.cc:257
 msgid "Beja"
-msgstr ""
+msgstr "ბეჟა"
 
 #. language code: bel be
 #: zypp/LanguageCode.cc:259
@@ -1549,12 +1549,12 @@ msgstr "ბელორუსული"
 #. language code: bem
 #: zypp/LanguageCode.cc:261
 msgid "Bemba"
-msgstr ""
+msgstr "ბემბა"
 
 #. language code: ben bn
 #: zypp/LanguageCode.cc:263
 msgid "Bengali"
-msgstr ""
+msgstr "ბენგალური"
 
 #. language code: ber
 #: zypp/LanguageCode.cc:265
@@ -1569,7 +1569,7 @@ msgstr ""
 #. language code: bih bh
 #: zypp/LanguageCode.cc:269
 msgid "Bihari"
-msgstr ""
+msgstr "ბიჰარი"
 
 #. language code: bik
 #: zypp/LanguageCode.cc:271
@@ -1584,7 +1584,7 @@ msgstr ""
 #. language code: bis bi
 #: zypp/LanguageCode.cc:275
 msgid "Bislama"
-msgstr ""
+msgstr "ბისლამა"
 
 #. language code: bla
 #: zypp/LanguageCode.cc:277
@@ -1609,7 +1609,7 @@ msgstr ""
 #. language code: bre br
 #: zypp/LanguageCode.cc:285
 msgid "Breton"
-msgstr ""
+msgstr "ბრეტონული"
 
 #. language code: btk
 #: zypp/LanguageCode.cc:287
@@ -1624,7 +1624,7 @@ msgstr ""
 #. language code: bug
 #: zypp/LanguageCode.cc:291
 msgid "Buginese"
-msgstr ""
+msgstr "ბუგინური"
 
 #. language code: bul bg
 #: zypp/LanguageCode.cc:293
@@ -1634,7 +1634,7 @@ msgstr "ბულგარული"
 #. language code: bur mya my
 #: zypp/LanguageCode.cc:295 zypp/LanguageCode.cc:297
 msgid "Burmese"
-msgstr ""
+msgstr "ბირმული"
 
 #. language code: byn
 #: zypp/LanguageCode.cc:299
@@ -1659,7 +1659,7 @@ msgstr ""
 #. language code: cat ca
 #: zypp/LanguageCode.cc:307
 msgid "Catalan"
-msgstr ""
+msgstr "კატალანური"
 
 #. language code: cau
 #: zypp/LanguageCode.cc:309
@@ -1679,7 +1679,7 @@ msgstr ""
 #. language code: cha ch
 #: zypp/LanguageCode.cc:315
 msgid "Chamorro"
-msgstr ""
+msgstr "ჩამორო"
 
 #. language code: chb
 #: zypp/LanguageCode.cc:317
@@ -1689,7 +1689,7 @@ msgstr ""
 #. language code: che ce
 #: zypp/LanguageCode.cc:319
 msgid "Chechen"
-msgstr ""
+msgstr "ჩეჩნური"
 
 #. language code: chg
 #: zypp/LanguageCode.cc:321
@@ -1699,7 +1699,7 @@ msgstr ""
 #. language code: chi zho zh
 #: zypp/LanguageCode.cc:323 zypp/LanguageCode.cc:325
 msgid "Chinese"
-msgstr ""
+msgstr "ჩინური"
 
 #. language code: chk
 #: zypp/LanguageCode.cc:327
@@ -1709,7 +1709,7 @@ msgstr ""
 #. language code: chm
 #: zypp/LanguageCode.cc:329
 msgid "Mari"
-msgstr ""
+msgstr "მარული"
 
 #. language code: chn
 #: zypp/LanguageCode.cc:331
@@ -1729,22 +1729,22 @@ msgstr ""
 #. language code: chr
 #: zypp/LanguageCode.cc:337
 msgid "Cherokee"
-msgstr ""
+msgstr "ჩეროკი"
 
 #. language code: chu cu
 #: zypp/LanguageCode.cc:339
 msgid "Church Slavic"
-msgstr ""
+msgstr "ეკლესიის სლავური"
 
 #. language code: chv cv
 #: zypp/LanguageCode.cc:341
 msgid "Chuvash"
-msgstr ""
+msgstr "ჩუვაშური"
 
 #. language code: chy
 #: zypp/LanguageCode.cc:343
 msgid "Cheyenne"
-msgstr ""
+msgstr "შეიენი"
 
 #. language code: cmc
 #: zypp/LanguageCode.cc:345
@@ -1754,17 +1754,17 @@ msgstr ""
 #. language code: cop
 #: zypp/LanguageCode.cc:347
 msgid "Coptic"
-msgstr ""
+msgstr "კოპტური"
 
 #. language code: cor kw
 #: zypp/LanguageCode.cc:349
 msgid "Cornish"
-msgstr ""
+msgstr "კორნიშური"
 
 #. language code: cos co
 #: zypp/LanguageCode.cc:351
 msgid "Corsican"
-msgstr ""
+msgstr "კორსიკული"
 
 #. language code: cpe
 #: zypp/LanguageCode.cc:353
@@ -1789,7 +1789,7 @@ msgstr ""
 #. language code: crh
 #: zypp/LanguageCode.cc:361
 msgid "Crimean Tatar"
-msgstr ""
+msgstr "ყირიმელი თათრული"
 
 #. language code: crp
 #: zypp/LanguageCode.cc:363
@@ -1799,7 +1799,7 @@ msgstr ""
 #. language code: csb
 #: zypp/LanguageCode.cc:365
 msgid "Kashubian"
-msgstr ""
+msgstr "კაშუბური"
 
 #. language code: cus
 #: zypp/LanguageCode.cc:367
@@ -1809,7 +1809,7 @@ msgstr ""
 #. language code: cze ces cs
 #: zypp/LanguageCode.cc:369 zypp/LanguageCode.cc:371
 msgid "Czech"
-msgstr ""
+msgstr "ჩეხური"
 
 #. language code: dak
 #: zypp/LanguageCode.cc:373
@@ -1819,7 +1819,7 @@ msgstr ""
 #. language code: dan da
 #: zypp/LanguageCode.cc:375
 msgid "Danish"
-msgstr ""
+msgstr "დანიური"
 
 #. language code: dar
 #: zypp/LanguageCode.cc:377
@@ -1834,7 +1834,7 @@ msgstr ""
 #. language code: del
 #: zypp/LanguageCode.cc:381
 msgid "Delaware"
-msgstr ""
+msgstr "დელავერი"
 
 #. language code: den
 #: zypp/LanguageCode.cc:383
@@ -1854,7 +1854,7 @@ msgstr ""
 #. language code: div dv
 #: zypp/LanguageCode.cc:389
 msgid "Divehi"
-msgstr ""
+msgstr "დივეხი"
 
 #. language code: doi
 #: zypp/LanguageCode.cc:391
@@ -1869,7 +1869,7 @@ msgstr ""
 #. language code: dsb
 #: zypp/LanguageCode.cc:395
 msgid "Lower Sorbian"
-msgstr ""
+msgstr "ქვედა სორბული"
 
 #. language code: dua
 #: zypp/LanguageCode.cc:397
@@ -1884,7 +1884,7 @@ msgstr ""
 #. language code: dut nld nl
 #: zypp/LanguageCode.cc:401 zypp/LanguageCode.cc:403
 msgid "Dutch"
-msgstr ""
+msgstr "ჰოლანდიური"
 
 #. language code: dyu
 #: zypp/LanguageCode.cc:405
@@ -1894,7 +1894,7 @@ msgstr ""
 #. language code: dzo dz
 #: zypp/LanguageCode.cc:407
 msgid "Dzongkha"
-msgstr ""
+msgstr "ძონგკხა"
 
 #. language code: efi
 #: zypp/LanguageCode.cc:409
@@ -1929,17 +1929,17 @@ msgstr "ინგლისური, შუასაუკუნეების 
 #. language code: epo eo
 #: zypp/LanguageCode.cc:421
 msgid "Esperanto"
-msgstr ""
+msgstr "ესპერანტო"
 
 #. language code: est et
 #: zypp/LanguageCode.cc:423
 msgid "Estonian"
-msgstr ""
+msgstr "ესტონური"
 
 #. language code: ewe ee
 #: zypp/LanguageCode.cc:425
 msgid "Ewe"
-msgstr ""
+msgstr "Ewe"
 
 #. language code: ewo
 #: zypp/LanguageCode.cc:427
@@ -1954,7 +1954,7 @@ msgstr ""
 #. language code: fao fo
 #: zypp/LanguageCode.cc:431
 msgid "Faroese"
-msgstr ""
+msgstr "ფაროული"
 
 #. language code: fat
 #: zypp/LanguageCode.cc:433
@@ -1964,17 +1964,17 @@ msgstr ""
 #. language code: fij fj
 #: zypp/LanguageCode.cc:435
 msgid "Fijian"
-msgstr ""
+msgstr "ფიჯიური"
 
 #. language code: fil
 #: zypp/LanguageCode.cc:437
 msgid "Filipino"
-msgstr ""
+msgstr "ფილიპინები"
 
 #. language code: fin fi
 #: zypp/LanguageCode.cc:439
 msgid "Finnish"
-msgstr ""
+msgstr "ფინური"
 
 #. language code: fiu
 #: zypp/LanguageCode.cc:441
@@ -1989,7 +1989,7 @@ msgstr ""
 #. language code: fre fra fr
 #: zypp/LanguageCode.cc:445 zypp/LanguageCode.cc:447
 msgid "French"
-msgstr ""
+msgstr "ფრანგული"
 
 #. language code: frm
 #: zypp/LanguageCode.cc:449
@@ -2004,7 +2004,7 @@ msgstr ""
 #. language code: fry fy
 #: zypp/LanguageCode.cc:453
 msgid "Frisian"
-msgstr ""
+msgstr "ფრისული"
 
 #. language code: ful ff
 #: zypp/LanguageCode.cc:455
@@ -2014,12 +2014,12 @@ msgstr ""
 #. language code: fur
 #: zypp/LanguageCode.cc:457
 msgid "Friulian"
-msgstr ""
+msgstr "ფრიულური"
 
 #. language code: gaa
 #: zypp/LanguageCode.cc:459
 msgid "Ga"
-msgstr ""
+msgstr "გა"
 
 #. language code: gay
 #: zypp/LanguageCode.cc:461
@@ -2044,7 +2044,7 @@ msgstr "ქართული"
 #. language code: ger deu de
 #: zypp/LanguageCode.cc:471 zypp/LanguageCode.cc:473
 msgid "German"
-msgstr ""
+msgstr "გერმანული"
 
 #. language code: gez
 #: zypp/LanguageCode.cc:475
@@ -2059,7 +2059,7 @@ msgstr ""
 #. language code: gla gd
 #: zypp/LanguageCode.cc:479
 msgid "Gaelic"
-msgstr ""
+msgstr "გელური"
 
 #. language code: gle ga
 #: zypp/LanguageCode.cc:481
@@ -2069,12 +2069,12 @@ msgstr "ირლანდიური"
 #. language code: glg gl
 #: zypp/LanguageCode.cc:483
 msgid "Galician"
-msgstr ""
+msgstr "გალური"
 
 #. language code: glv gv
 #: zypp/LanguageCode.cc:485
 msgid "Manx"
-msgstr ""
+msgstr "მენცი"
 
 #. language code: gmh
 #: zypp/LanguageCode.cc:487
@@ -2094,12 +2094,12 @@ msgstr ""
 #. language code: gor
 #: zypp/LanguageCode.cc:493
 msgid "Gorontalo"
-msgstr ""
+msgstr "გორონტალო"
 
 #. language code: got
 #: zypp/LanguageCode.cc:495
 msgid "Gothic"
-msgstr ""
+msgstr "გოთური"
 
 #. language code: grb
 #: zypp/LanguageCode.cc:497
@@ -2119,12 +2119,12 @@ msgstr ""
 #. language code: grn gn
 #: zypp/LanguageCode.cc:505
 msgid "Guarani"
-msgstr ""
+msgstr "გუარანი"
 
 #. language code: guj gu
 #: zypp/LanguageCode.cc:507
 msgid "Gujarati"
-msgstr ""
+msgstr "გუჯარათული"
 
 #. language code: gwi
 #: zypp/LanguageCode.cc:509
@@ -2144,22 +2144,22 @@ msgstr ""
 #. language code: hau ha
 #: zypp/LanguageCode.cc:515
 msgid "Hausa"
-msgstr ""
+msgstr "ჰაუსა"
 
 #. language code: haw
 #: zypp/LanguageCode.cc:517
 msgid "Hawaiian"
-msgstr ""
+msgstr "ჰავაიური"
 
 #. language code: heb he
 #: zypp/LanguageCode.cc:519
 msgid "Hebrew"
-msgstr ""
+msgstr "ივრითი"
 
 #. language code: her hz
 #: zypp/LanguageCode.cc:521
 msgid "Herero"
-msgstr ""
+msgstr "ჰერერო"
 
 #. language code: hil
 #: zypp/LanguageCode.cc:523
@@ -2174,7 +2174,7 @@ msgstr ""
 #. language code: hin hi
 #: zypp/LanguageCode.cc:527
 msgid "Hindi"
-msgstr ""
+msgstr "ინდური"
 
 #. language code: hit
 #: zypp/LanguageCode.cc:529
@@ -2184,22 +2184,22 @@ msgstr ""
 #. language code: hmn
 #: zypp/LanguageCode.cc:531
 msgid "Hmong"
-msgstr ""
+msgstr "Hmong"
 
 #. language code: hmo ho
 #: zypp/LanguageCode.cc:533
 msgid "Hiri Motu"
-msgstr ""
+msgstr "ჰირი მოგუ"
 
 #. language code: hsb
 #: zypp/LanguageCode.cc:535
 msgid "Upper Sorbian"
-msgstr ""
+msgstr "ზედა სორბიული"
 
 #. language code: hun hu
 #: zypp/LanguageCode.cc:537
 msgid "Hungarian"
-msgstr ""
+msgstr "უნგრული"
 
 #. language code: hup
 #: zypp/LanguageCode.cc:539
@@ -2214,17 +2214,17 @@ msgstr ""
 #. language code: ibo ig
 #: zypp/LanguageCode.cc:543
 msgid "Igbo"
-msgstr ""
+msgstr "იგბო"
 
 #. language code: ice isl is
 #: zypp/LanguageCode.cc:545 zypp/LanguageCode.cc:547
 msgid "Icelandic"
-msgstr ""
+msgstr "ისლანდიური"
 
 #. language code: ido io
 #: zypp/LanguageCode.cc:549
 msgid "Ido"
-msgstr ""
+msgstr "იდო"
 
 #. language code: iii ii
 #: zypp/LanguageCode.cc:551
@@ -2239,12 +2239,12 @@ msgstr ""
 #. language code: iku iu
 #: zypp/LanguageCode.cc:555
 msgid "Inuktitut"
-msgstr ""
+msgstr "ინუკტიტუტი"
 
 #. language code: ile ie
 #: zypp/LanguageCode.cc:557
 msgid "Interlingue"
-msgstr ""
+msgstr "ოქსიდენტური"
 
 #. language code: ilo
 #: zypp/LanguageCode.cc:559
@@ -2264,7 +2264,7 @@ msgstr ""
 #. language code: ind id
 #: zypp/LanguageCode.cc:565
 msgid "Indonesian"
-msgstr ""
+msgstr "ინდონეზიური"
 
 #. language code: ine
 #: zypp/LanguageCode.cc:567
@@ -2279,7 +2279,7 @@ msgstr ""
 #. language code: ipk ik
 #: zypp/LanguageCode.cc:571
 msgid "Inupiaq"
-msgstr ""
+msgstr "ინუპიატი"
 
 #. language code: ira
 #: zypp/LanguageCode.cc:573
@@ -2299,7 +2299,7 @@ msgstr "იტალიური"
 #. language code: jav jv
 #: zypp/LanguageCode.cc:579
 msgid "Javanese"
-msgstr ""
+msgstr "იავური"
 
 #. language code: jbo
 #: zypp/LanguageCode.cc:581
@@ -2329,17 +2329,17 @@ msgstr ""
 #. language code: kab
 #: zypp/LanguageCode.cc:591
 msgid "Kabyle"
-msgstr ""
+msgstr "ქაბილი"
 
 #. language code: kac
 #: zypp/LanguageCode.cc:593
 msgid "Kachin"
-msgstr ""
+msgstr "კაჩინი"
 
 #. language code: kal kl
 #: zypp/LanguageCode.cc:595
 msgid "Kalaallisut"
-msgstr ""
+msgstr "კალაალისუტი"
 
 #. language code: kam
 #: zypp/LanguageCode.cc:597
@@ -2349,7 +2349,7 @@ msgstr ""
 #. language code: kan kn
 #: zypp/LanguageCode.cc:599
 msgid "Kannada"
-msgstr ""
+msgstr "კანნადა"
 
 #. language code: kar
 #: zypp/LanguageCode.cc:601
@@ -2359,7 +2359,7 @@ msgstr ""
 #. language code: kas ks
 #: zypp/LanguageCode.cc:603
 msgid "Kashmiri"
-msgstr ""
+msgstr "კაშმირი"
 
 #. language code: kau kr
 #: zypp/LanguageCode.cc:605
@@ -2374,7 +2374,7 @@ msgstr ""
 #. language code: kaz kk
 #: zypp/LanguageCode.cc:609
 msgid "Kazakh"
-msgstr ""
+msgstr "ყაზახური"
 
 #. language code: kbd
 #: zypp/LanguageCode.cc:611
@@ -2394,7 +2394,7 @@ msgstr ""
 #. language code: khm km
 #: zypp/LanguageCode.cc:617
 msgid "Khmer"
-msgstr ""
+msgstr "კხმერული"
 
 #. language code: kho
 #: zypp/LanguageCode.cc:619
@@ -2404,17 +2404,17 @@ msgstr ""
 #. language code: kik ki
 #: zypp/LanguageCode.cc:621
 msgid "Kikuyu"
-msgstr ""
+msgstr "კიკუიუ"
 
 #. language code: kin rw
 #: zypp/LanguageCode.cc:623
 msgid "Kinyarwanda"
-msgstr ""
+msgstr "კენიარუანდა"
 
 #. language code: kir ky
 #: zypp/LanguageCode.cc:625
 msgid "Kirghiz"
-msgstr ""
+msgstr "ყირგიზული"
 
 #. language code: kmb
 #: zypp/LanguageCode.cc:627
@@ -2479,7 +2479,7 @@ msgstr ""
 #. language code: kur ku
 #: zypp/LanguageCode.cc:651
 msgid "Kurdish"
-msgstr ""
+msgstr "ქურთული"
 
 #. language code: kut
 #: zypp/LanguageCode.cc:653
@@ -2504,17 +2504,17 @@ msgstr ""
 #. language code: lao lo
 #: zypp/LanguageCode.cc:661
 msgid "Lao"
-msgstr ""
+msgstr "ლაოსური"
 
 #. language code: lat la
 #: zypp/LanguageCode.cc:663
 msgid "Latin"
-msgstr ""
+msgstr "ლათინური"
 
 #. language code: lav lv
 #: zypp/LanguageCode.cc:665
 msgid "Latvian"
-msgstr ""
+msgstr "ლატვიური"
 
 #. language code: lez
 #: zypp/LanguageCode.cc:667
@@ -2524,17 +2524,17 @@ msgstr ""
 #. language code: lim li
 #: zypp/LanguageCode.cc:669
 msgid "Limburgan"
-msgstr ""
+msgstr "ლიმბურგანული"
 
 #. language code: lin ln
 #: zypp/LanguageCode.cc:671
 msgid "Lingala"
-msgstr ""
+msgstr "ლინგალა"
 
 #. language code: lit lt
 #: zypp/LanguageCode.cc:673
 msgid "Lithuanian"
-msgstr ""
+msgstr "ლიტვური"
 
 #. language code: lol
 #: zypp/LanguageCode.cc:675
@@ -2549,7 +2549,7 @@ msgstr ""
 #. language code: ltz lb
 #: zypp/LanguageCode.cc:679
 msgid "Luxembourgish"
-msgstr ""
+msgstr "ლუმბურგული"
 
 #. language code: lua
 #: zypp/LanguageCode.cc:681
@@ -2589,7 +2589,7 @@ msgstr ""
 #. language code: mac mkd mk
 #: zypp/LanguageCode.cc:695 zypp/LanguageCode.cc:697
 msgid "Macedonian"
-msgstr ""
+msgstr "მაკედონური"
 
 #. language code: mad
 #: zypp/LanguageCode.cc:699
@@ -2604,12 +2604,12 @@ msgstr ""
 #. language code: mah mh
 #: zypp/LanguageCode.cc:703
 msgid "Marshallese"
-msgstr ""
+msgstr "მარშალური"
 
 #. language code: mai
 #: zypp/LanguageCode.cc:705
 msgid "Maithili"
-msgstr ""
+msgstr "მაითხილი"
 
 #. language code: mak
 #: zypp/LanguageCode.cc:707
@@ -2619,7 +2619,7 @@ msgstr ""
 #. language code: mal ml
 #: zypp/LanguageCode.cc:709
 msgid "Malayalam"
-msgstr ""
+msgstr "მალაიამი"
 
 #. language code: man
 #: zypp/LanguageCode.cc:711
@@ -2629,7 +2629,7 @@ msgstr ""
 #. language code: mao mri mi
 #: zypp/LanguageCode.cc:713 zypp/LanguageCode.cc:715
 msgid "Maori"
-msgstr ""
+msgstr "მაორი"
 
 #. language code: map
 #: zypp/LanguageCode.cc:717
@@ -2639,7 +2639,7 @@ msgstr ""
 #. language code: mar mr
 #: zypp/LanguageCode.cc:719
 msgid "Marathi"
-msgstr ""
+msgstr "მარათი"
 
 #. language code: mas
 #: zypp/LanguageCode.cc:721
@@ -2649,7 +2649,7 @@ msgstr ""
 #. language code: may msa ms
 #: zypp/LanguageCode.cc:723 zypp/LanguageCode.cc:725
 msgid "Malay"
-msgstr ""
+msgstr "მალაიური"
 
 #. language code: mdf
 #: zypp/LanguageCode.cc:727
@@ -2664,7 +2664,7 @@ msgstr ""
 #. language code: men
 #: zypp/LanguageCode.cc:731
 msgid "Mende"
-msgstr ""
+msgstr "მანდი"
 
 #. language code: mga
 #: zypp/LanguageCode.cc:733
@@ -2694,12 +2694,12 @@ msgstr ""
 #. language code: mlg mg
 #: zypp/LanguageCode.cc:743
 msgid "Malagasy"
-msgstr ""
+msgstr "მალაგასი"
 
 #. language code: mlt mt
 #: zypp/LanguageCode.cc:745
 msgid "Maltese"
-msgstr ""
+msgstr "მალტური"
 
 #. language code: mnc
 #: zypp/LanguageCode.cc:747
@@ -2724,12 +2724,12 @@ msgstr ""
 #. language code: mol mo
 #: zypp/LanguageCode.cc:755
 msgid "Moldavian"
-msgstr ""
+msgstr "მოლდავური"
 
 #. language code: mon mn
 #: zypp/LanguageCode.cc:757
 msgid "Mongolian"
-msgstr ""
+msgstr "მონღოლური"
 
 #. language code: mos
 #: zypp/LanguageCode.cc:759
@@ -2744,7 +2744,7 @@ msgstr ""
 #. language code: mun
 #: zypp/LanguageCode.cc:763
 msgid "Munda languages"
-msgstr ""
+msgstr "მუნდას ენები"
 
 #. language code: mus
 #: zypp/LanguageCode.cc:765
@@ -2784,37 +2784,37 @@ msgstr ""
 #. language code: nap
 #: zypp/LanguageCode.cc:779
 msgid "Neapolitan"
-msgstr ""
+msgstr "ნეაპოლიტური"
 
 #. language code: nav nv
 #: zypp/LanguageCode.cc:783
 msgid "Navajo"
-msgstr ""
+msgstr "ნავაიო"
 
 #. language code: nbl nr
 #: zypp/LanguageCode.cc:785
 msgid "Ndebele, South"
-msgstr ""
+msgstr "სამხრეთ ნდებელე"
 
 #. language code: nde nd
 #: zypp/LanguageCode.cc:787
 msgid "Ndebele, North"
-msgstr ""
+msgstr "ჩრდილო ნდებელური"
 
 #. language code: ndo ng
 #: zypp/LanguageCode.cc:789
 msgid "Ndonga"
-msgstr ""
+msgstr "ნდონგა"
 
 #. language code: nds
 #: zypp/LanguageCode.cc:791
 msgid "Low German"
-msgstr ""
+msgstr "ქვემოგერმანული"
 
 #. language code: nep ne
 #: zypp/LanguageCode.cc:793
 msgid "Nepali"
-msgstr ""
+msgstr "ნეპალური"
 
 #. language code: new
 #: zypp/LanguageCode.cc:795
@@ -2839,7 +2839,7 @@ msgstr ""
 #. language code: nno nn
 #: zypp/LanguageCode.cc:803
 msgid "Norwegian Nynorsk"
-msgstr ""
+msgstr "ნორვეგიული ნიუნორსკი"
 
 #. language code: nob nb
 #: zypp/LanguageCode.cc:805
@@ -2859,12 +2859,12 @@ msgstr ""
 #. language code: nor no
 #: zypp/LanguageCode.cc:811
 msgid "Norwegian"
-msgstr ""
+msgstr "ნორვეგიული"
 
 #. language code: nso
 #: zypp/LanguageCode.cc:813
 msgid "Northern Sotho"
-msgstr ""
+msgstr "სამხრეთ-სოზო"
 
 #. language code: nub
 #: zypp/LanguageCode.cc:815
@@ -2879,7 +2879,7 @@ msgstr ""
 #. language code: nya ny
 #: zypp/LanguageCode.cc:819
 msgid "Chichewa"
-msgstr ""
+msgstr "ჩიჩევა"
 
 #. language code: nym
 #: zypp/LanguageCode.cc:821
@@ -2914,12 +2914,12 @@ msgstr ""
 #. language code: ori or
 #: zypp/LanguageCode.cc:833
 msgid "Oriya"
-msgstr ""
+msgstr "ორია"
 
 #. language code: orm om
 #: zypp/LanguageCode.cc:835
 msgid "Oromo"
-msgstr ""
+msgstr "ორომო"
 
 #. language code: osa
 #: zypp/LanguageCode.cc:837
@@ -2929,7 +2929,7 @@ msgstr ""
 #. language code: oss os
 #: zypp/LanguageCode.cc:839
 msgid "Ossetian"
-msgstr ""
+msgstr "ოსური"
 
 #. language code: ota
 #: zypp/LanguageCode.cc:841
@@ -2949,7 +2949,7 @@ msgstr ""
 #. language code: pag
 #: zypp/LanguageCode.cc:847
 msgid "Pangasinan"
-msgstr ""
+msgstr "პანგასინანი"
 
 #. language code: pal
 #: zypp/LanguageCode.cc:849
@@ -2959,7 +2959,7 @@ msgstr ""
 #. language code: pam
 #: zypp/LanguageCode.cc:851
 msgid "Pampanga"
-msgstr ""
+msgstr "პამპანგა"
 
 #. language code: pan pa
 #: zypp/LanguageCode.cc:853
@@ -2984,7 +2984,7 @@ msgstr ""
 #. language code: per fas fa
 #: zypp/LanguageCode.cc:861 zypp/LanguageCode.cc:863
 msgid "Persian"
-msgstr ""
+msgstr "სპარსული"
 
 #. language code: phi
 #: zypp/LanguageCode.cc:865
@@ -2994,17 +2994,17 @@ msgstr ""
 #. language code: phn
 #: zypp/LanguageCode.cc:867
 msgid "Phoenician"
-msgstr ""
+msgstr "ფონეტიკური"
 
 #. language code: pli pi
 #: zypp/LanguageCode.cc:869
 msgid "Pali"
-msgstr ""
+msgstr "პალი"
 
 #. language code: pol pl
 #: zypp/LanguageCode.cc:871
 msgid "Polish"
-msgstr ""
+msgstr "პოლონური"
 
 #. language code: pon
 #: zypp/LanguageCode.cc:873
@@ -3014,7 +3014,7 @@ msgstr ""
 #. language code: por pt
 #: zypp/LanguageCode.cc:875
 msgid "Portuguese"
-msgstr ""
+msgstr "პორტუგალიური"
 
 #. language code: pra
 #: zypp/LanguageCode.cc:877
@@ -3029,12 +3029,12 @@ msgstr ""
 #. language code: pus ps
 #: zypp/LanguageCode.cc:881
 msgid "Pushto"
-msgstr ""
+msgstr "პუშტო"
 
 #. language code: que qu
 #: zypp/LanguageCode.cc:883
 msgid "Quechua"
-msgstr ""
+msgstr "კეჩუა"
 
 #. language code: raj
 #: zypp/LanguageCode.cc:885
@@ -3064,22 +3064,22 @@ msgstr ""
 #. language code: rom
 #: zypp/LanguageCode.cc:895
 msgid "Romany"
-msgstr ""
+msgstr "რომაული"
 
 #. language code: rum ron ro
 #: zypp/LanguageCode.cc:897 zypp/LanguageCode.cc:899
 msgid "Romanian"
-msgstr ""
+msgstr "რუმინული"
 
 #. language code: run rn
 #: zypp/LanguageCode.cc:901
 msgid "Rundi"
-msgstr ""
+msgstr "რუნდი"
 
 #. language code: rus ru
 #: zypp/LanguageCode.cc:903
 msgid "Russian"
-msgstr ""
+msgstr "რუსული"
 
 #. language code: sad
 #: zypp/LanguageCode.cc:905
@@ -3089,12 +3089,12 @@ msgstr ""
 #. language code: sag sg
 #: zypp/LanguageCode.cc:907
 msgid "Sango"
-msgstr ""
+msgstr "სანგო"
 
 #. language code: sah
 #: zypp/LanguageCode.cc:909
 msgid "Yakut"
-msgstr ""
+msgstr "იაკუტიური"
 
 #. language code: sai
 #: zypp/LanguageCode.cc:911
@@ -3114,7 +3114,7 @@ msgstr ""
 #. language code: san sa
 #: zypp/LanguageCode.cc:917
 msgid "Sanskrit"
-msgstr ""
+msgstr "სანსკრიტი"
 
 #. language code: sas
 #: zypp/LanguageCode.cc:919
@@ -3124,17 +3124,17 @@ msgstr ""
 #. language code: sat
 #: zypp/LanguageCode.cc:921
 msgid "Santali"
-msgstr ""
+msgstr "სანტალი"
 
 #. language code: scc srp sr
 #: zypp/LanguageCode.cc:923 zypp/LanguageCode.cc:925
 msgid "Serbian"
-msgstr ""
+msgstr "სერბული"
 
 #. language code: scn
 #: zypp/LanguageCode.cc:927
 msgid "Sicilian"
-msgstr ""
+msgstr "სიცილიური"
 
 #. language code: sco
 #: zypp/LanguageCode.cc:929
@@ -3144,7 +3144,7 @@ msgstr ""
 #. language code: scr hrv hr
 #: zypp/LanguageCode.cc:931 zypp/LanguageCode.cc:933
 msgid "Croatian"
-msgstr ""
+msgstr "ხორვატული"
 
 #. language code: sel
 #: zypp/LanguageCode.cc:935
@@ -3169,7 +3169,7 @@ msgstr ""
 #. language code: shn
 #: zypp/LanguageCode.cc:943
 msgid "Shan"
-msgstr ""
+msgstr "შანი"
 
 #. language code: sid
 #: zypp/LanguageCode.cc:945
@@ -3179,7 +3179,7 @@ msgstr ""
 #. language code: sin si
 #: zypp/LanguageCode.cc:947
 msgid "Sinhala"
-msgstr ""
+msgstr "სინჰალა"
 
 #. language code: sio
 #: zypp/LanguageCode.cc:949
@@ -3199,12 +3199,12 @@ msgstr ""
 #. language code: slo slk sk
 #: zypp/LanguageCode.cc:955 zypp/LanguageCode.cc:957
 msgid "Slovak"
-msgstr ""
+msgstr "სლოვაკური"
 
 #. language code: slv sl
 #: zypp/LanguageCode.cc:959
 msgid "Slovenian"
-msgstr ""
+msgstr "სლოვენური"
 
 #. language code: sma
 #: zypp/LanguageCode.cc:961
@@ -3214,7 +3214,7 @@ msgstr ""
 #. language code: sme se
 #: zypp/LanguageCode.cc:963
 msgid "Northern Sami"
-msgstr ""
+msgstr "ჩრდილო-საამური"
 
 #. language code: smi
 #: zypp/LanguageCode.cc:965
@@ -3234,7 +3234,7 @@ msgstr ""
 #. language code: smo sm
 #: zypp/LanguageCode.cc:971
 msgid "Samoan"
-msgstr ""
+msgstr "სამოური"
 
 #. language code: sms
 #: zypp/LanguageCode.cc:973
@@ -3244,12 +3244,12 @@ msgstr ""
 #. language code: sna sn
 #: zypp/LanguageCode.cc:975
 msgid "Shona"
-msgstr ""
+msgstr "შონა"
 
 #. language code: snd sd
 #: zypp/LanguageCode.cc:977
 msgid "Sindhi"
-msgstr ""
+msgstr "სინდი"
 
 #. language code: snk
 #: zypp/LanguageCode.cc:979
@@ -3264,7 +3264,7 @@ msgstr ""
 #. language code: som so
 #: zypp/LanguageCode.cc:983
 msgid "Somali"
-msgstr ""
+msgstr "სომალი"
 
 #. language code: son
 #: zypp/LanguageCode.cc:985
@@ -3274,17 +3274,17 @@ msgstr ""
 #. language code: sot st
 #: zypp/LanguageCode.cc:987
 msgid "Sotho, Southern"
-msgstr ""
+msgstr "სამხრეთ-სოზო"
 
 #. language code: spa es
 #: zypp/LanguageCode.cc:989
 msgid "Spanish"
-msgstr ""
+msgstr "ესპანური"
 
 #. language code: srd sc
 #: zypp/LanguageCode.cc:991
 msgid "Sardinian"
-msgstr ""
+msgstr "სარდინიული"
 
 #. language code: srr
 #: zypp/LanguageCode.cc:993
@@ -3299,7 +3299,7 @@ msgstr ""
 #. language code: ssw ss
 #: zypp/LanguageCode.cc:997
 msgid "Swati"
-msgstr ""
+msgstr "სვატი"
 
 #. language code: suk
 #: zypp/LanguageCode.cc:999
@@ -3309,7 +3309,7 @@ msgstr ""
 #. language code: sun su
 #: zypp/LanguageCode.cc:1001
 msgid "Sundanese"
-msgstr ""
+msgstr "სუნდური"
 
 #. language code: sus
 #: zypp/LanguageCode.cc:1003
@@ -3324,22 +3324,22 @@ msgstr ""
 #. language code: swa sw
 #: zypp/LanguageCode.cc:1007
 msgid "Swahili"
-msgstr ""
+msgstr "სუაჰილი"
 
 #. language code: swe sv
 #: zypp/LanguageCode.cc:1009
 msgid "Swedish"
-msgstr ""
+msgstr "შვედური"
 
 #. language code: syr
 #: zypp/LanguageCode.cc:1011
 msgid "Syriac"
-msgstr ""
+msgstr "სირიული"
 
 #. language code: tah ty
 #: zypp/LanguageCode.cc:1013
 msgid "Tahitian"
-msgstr ""
+msgstr "ტაიტური"
 
 #. language code: tai
 #: zypp/LanguageCode.cc:1015
@@ -3349,17 +3349,17 @@ msgstr ""
 #. language code: tam ta
 #: zypp/LanguageCode.cc:1017
 msgid "Tamil"
-msgstr ""
+msgstr "თამილური"
 
 #. language code: tat tt
 #: zypp/LanguageCode.cc:1019
 msgid "Tatar"
-msgstr ""
+msgstr "თათრული"
 
 #. language code: tel te
 #: zypp/LanguageCode.cc:1021
 msgid "Telugu"
-msgstr ""
+msgstr "ტელუგური"
 
 #. language code: tem
 #: zypp/LanguageCode.cc:1023
@@ -3379,22 +3379,22 @@ msgstr ""
 #. language code: tgk tg
 #: zypp/LanguageCode.cc:1029
 msgid "Tajik"
-msgstr ""
+msgstr "ტაჯიკური"
 
 #. language code: tgl tl
 #: zypp/LanguageCode.cc:1031
 msgid "Tagalog"
-msgstr ""
+msgstr "ტაგალოგური"
 
 #. language code: tha th
 #: zypp/LanguageCode.cc:1033
 msgid "Thai"
-msgstr ""
+msgstr "ტაილანდური"
 
 #. language code: tib bod bo
 #: zypp/LanguageCode.cc:1035 zypp/LanguageCode.cc:1037
 msgid "Tibetan"
-msgstr ""
+msgstr "ტიბეტური"
 
 #. language code: tig
 #: zypp/LanguageCode.cc:1039
@@ -3404,7 +3404,7 @@ msgstr ""
 #. language code: tir ti
 #: zypp/LanguageCode.cc:1041
 msgid "Tigrinya"
-msgstr ""
+msgstr "ტიგრინია"
 
 #. language code: tiv
 #: zypp/LanguageCode.cc:1043
@@ -3449,17 +3449,17 @@ msgstr ""
 #. language code: tsn tn
 #: zypp/LanguageCode.cc:1061
 msgid "Tswana"
-msgstr ""
+msgstr "ცვანა"
 
 #. language code: tso ts
 #: zypp/LanguageCode.cc:1063
 msgid "Tsonga"
-msgstr ""
+msgstr "ტონგა"
 
 #. language code: tuk tk
 #: zypp/LanguageCode.cc:1065
 msgid "Turkmen"
-msgstr ""
+msgstr "თურქმენული"
 
 #. language code: tum
 #: zypp/LanguageCode.cc:1067
@@ -3474,7 +3474,7 @@ msgstr ""
 #. language code: tur tr
 #: zypp/LanguageCode.cc:1071
 msgid "Turkish"
-msgstr ""
+msgstr "თურქული"
 
 #. language code: tut
 #: zypp/LanguageCode.cc:1073
@@ -3484,7 +3484,7 @@ msgstr ""
 #. language code: twi tw
 #: zypp/LanguageCode.cc:1077
 msgid "Twi"
-msgstr ""
+msgstr "ტვი"
 
 #. language code: tyv
 #: zypp/LanguageCode.cc:1079
@@ -3494,22 +3494,22 @@ msgstr ""
 #. language code: udm
 #: zypp/LanguageCode.cc:1081
 msgid "Udmurt"
-msgstr ""
+msgstr "უდმურტული"
 
 #. language code: uga
 #: zypp/LanguageCode.cc:1083
 msgid "Ugaritic"
-msgstr ""
+msgstr "უგარათული"
 
 #. language code: uig ug
 #: zypp/LanguageCode.cc:1085
 msgid "Uighur"
-msgstr ""
+msgstr "უიღური"
 
 #. language code: ukr uk
 #: zypp/LanguageCode.cc:1087
 msgid "Ukrainian"
-msgstr ""
+msgstr "უკრაინული"
 
 #. language code: umb
 #: zypp/LanguageCode.cc:1089
@@ -3524,27 +3524,27 @@ msgstr ""
 #. language code: urd ur
 #: zypp/LanguageCode.cc:1093
 msgid "Urdu"
-msgstr ""
+msgstr "ურდუ"
 
 #. language code: uzb uz
 #: zypp/LanguageCode.cc:1095
 msgid "Uzbek"
-msgstr ""
+msgstr "უზბეკური"
 
 #. language code: vai
 #: zypp/LanguageCode.cc:1097
 msgid "Vai"
-msgstr ""
+msgstr "ვაი"
 
 #. language code: ven ve
 #: zypp/LanguageCode.cc:1099
 msgid "Venda"
-msgstr ""
+msgstr "ვენდა"
 
 #. language code: vie vi
 #: zypp/LanguageCode.cc:1101
 msgid "Vietnamese"
-msgstr ""
+msgstr "ვიეტნამური"
 
 #. language code: vol vo
 #: zypp/LanguageCode.cc:1103
@@ -3579,7 +3579,7 @@ msgstr ""
 #. language code: wel cym cy
 #: zypp/LanguageCode.cc:1115 zypp/LanguageCode.cc:1117
 msgid "Welsh"
-msgstr ""
+msgstr "უელსური"
 
 #. language code: wen
 #: zypp/LanguageCode.cc:1119
@@ -3589,27 +3589,27 @@ msgstr ""
 #. language code: wln wa
 #: zypp/LanguageCode.cc:1121
 msgid "Walloon"
-msgstr ""
+msgstr "ვალუნი"
 
 #. language code: wol wo
 #: zypp/LanguageCode.cc:1123
 msgid "Wolof"
-msgstr ""
+msgstr "ვოლოფი"
 
 #. language code: xal
 #: zypp/LanguageCode.cc:1125
 msgid "Kalmyk"
-msgstr ""
+msgstr "კალმიკური"
 
 #. language code: xho xh
 #: zypp/LanguageCode.cc:1127
 msgid "Xhosa"
-msgstr ""
+msgstr "ხოსა"
 
 #. language code: yao
 #: zypp/LanguageCode.cc:1129
 msgid "Yao"
-msgstr ""
+msgstr "იაო"
 
 #. language code: yap
 #: zypp/LanguageCode.cc:1131
@@ -3619,12 +3619,12 @@ msgstr ""
 #. language code: yid yi
 #: zypp/LanguageCode.cc:1133
 msgid "Yiddish"
-msgstr ""
+msgstr "იდიში"
 
 #. language code: yor yo
 #: zypp/LanguageCode.cc:1135
 msgid "Yoruba"
-msgstr ""
+msgstr "იორუბა"
 
 #. language code: ypk
 #: zypp/LanguageCode.cc:1137
@@ -3644,7 +3644,7 @@ msgstr ""
 #. language code: zha za
 #: zypp/LanguageCode.cc:1143
 msgid "Zhuang"
-msgstr ""
+msgstr "ჟუანგი"
 
 #. language code: znd
 #: zypp/LanguageCode.cc:1145
@@ -3654,7 +3654,7 @@ msgstr ""
 #. language code: zul zu
 #: zypp/LanguageCode.cc:1147
 msgid "Zulu"
-msgstr ""
+msgstr "ზულუ"
 
 #. language code: zun
 #: zypp/LanguageCode.cc:1149
@@ -3851,19 +3851,19 @@ msgstr ""
 
 #: zypp/VendorSupportOptions.cc:17
 msgid "unsupported"
-msgstr ""
+msgstr "მხარდაუჭერელი"
 
 #: zypp/VendorSupportOptions.cc:20
 msgid "Level 1"
-msgstr ""
+msgstr "დონე 1"
 
 #: zypp/VendorSupportOptions.cc:23
 msgid "Level 2"
-msgstr ""
+msgstr "დონე 2"
 
 #: zypp/VendorSupportOptions.cc:26
 msgid "Level 3"
-msgstr ""
+msgstr "დონე 3"
 
 #: zypp/VendorSupportOptions.cc:29
 msgid "Additional Customer Contract Necessary"
@@ -3871,7 +3871,7 @@ msgstr ""
 
 #: zypp/VendorSupportOptions.cc:31
 msgid "invalid"
-msgstr ""
+msgstr "არასწორი"
 
 #: zypp/VendorSupportOptions.cc:39
 msgid "The level of support is unspecified"
@@ -3989,7 +3989,7 @@ msgstr ""
 
 #: zypp/repo/PackageProvider.cc:331
 msgid "Signature verification failed"
-msgstr ""
+msgstr "ხელმოწერის გადამოწმების შეცდომა"
 
 #. TranslatorExplanation %s = package being checked for integrity
 #: zypp/repo/PackageProvider.cc:462
@@ -4174,11 +4174,11 @@ msgstr ""
 
 #: zypp/solver/detail/SATResolver.cc:1157
 msgid "conflicting requests"
-msgstr ""
+msgstr "ურთიერთგამომრიცხავი მოთხოვნები"
 
 #: zypp/solver/detail/SATResolver.cc:1160
 msgid "some dependency problem"
-msgstr ""
+msgstr "დამოკიდებულების რამდენიმე პრობლემა"
 
 #: zypp/solver/detail/SATResolver.cc:1163
 #, boost-format
@@ -4197,7 +4197,7 @@ msgstr ""
 
 #: zypp/solver/detail/SATResolver.cc:1171
 msgid "unsupported request"
-msgstr ""
+msgstr "მხარდაუჭერელი მოთხოვნა"
 
 #: zypp/solver/detail/SATResolver.cc:1174
 #, boost-format
@@ -4665,7 +4665,7 @@ msgstr ""
 
 #: zypp-core/base/Exception.cc:150
 msgid "History:"
-msgstr ""
+msgstr "ისტორია:"
 
 #: zypp-core/url/UrlBase.cc:220
 #, c-format, boost-format
