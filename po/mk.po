@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-12-22 14:35+0100\n"
-"PO-Revision-Date: 2022-11-30 04:13+0000\n"
+"PO-Revision-Date: 2023-01-28 08:14+0000\n"
 "Last-Translator: Kristijan Fremen Velkovski <me@krisfremen.com>\n"
 "Language-Team: Macedonian <https://l10n.opensuse.org/projects/libzypp/master/"
 "mk/>\n"
@@ -879,12 +879,12 @@ msgstr "KStep"
 #. :MAC:446:
 #: zypp/CountryCode.cc:305
 msgid "Northern Mariana Islands"
-msgstr ""
+msgstr "Северните Маријански Острови"
 
 #. :MNP:580:
 #: zypp/CountryCode.cc:306
 msgid "Martinique"
-msgstr ""
+msgstr "Мартиник"
 
 # MR
 # fuzzy
@@ -896,7 +896,7 @@ msgstr "Литвански"
 #. :MRT:478:
 #: zypp/CountryCode.cc:308
 msgid "Montserrat"
-msgstr ""
+msgstr "Монтсерат"
 
 # MT
 # fuzzy
@@ -1670,16 +1670,14 @@ msgstr ""
 # AU
 #. language code: ath
 #: zypp/LanguageCode.cc:223
-#, fuzzy
 msgid "Athapascan Languages"
-msgstr "Австралија"
+msgstr "Атапаскански јазици"
 
 # AU
 #. language code: aus
 #: zypp/LanguageCode.cc:225
-#, fuzzy
 msgid "Australian Languages"
-msgstr "Австралија"
+msgstr "Австралиски јазици"
 
 #. language code: ava av
 #: zypp/LanguageCode.cc:227
@@ -1705,17 +1703,15 @@ msgstr ""
 # fuzzy
 #. language code: aze az
 #: zypp/LanguageCode.cc:235
-#, fuzzy
 msgid "Azerbaijani"
-msgstr "Српски"
+msgstr "Азербејџански"
 
 # RW
 # fuzzy
 #. language code: bad
 #: zypp/LanguageCode.cc:237
-#, fuzzy
 msgid "Banda"
-msgstr "Канада"
+msgstr "Банда"
 
 #. language code: bai
 #: zypp/LanguageCode.cc:239
