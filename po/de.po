@@ -17,10 +17,10 @@ msgstr ""
 "Project-Id-Version: zypper.de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-12-24 02:27+0100\n"
-"PO-Revision-Date: 2022-03-04 18:12+0000\n"
-"Last-Translator: Gemineo <vistatec@gemineo.de>\n"
-"Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/"
-">\n"
+"PO-Revision-Date: 2023-01-28 16:14+0000\n"
+"Last-Translator: Ettore Atalan <atalanttore@googlemail.com>\n"
+"Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/>"
+"\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2459,12 +2459,12 @@ msgstr "Keine gültigen Argumente angegeben."
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/installremove.cc:312
 msgid "removeptf (rmptf) [OPTIONS] <PTF|CAPABILITY> ..."
-msgstr ""
+msgstr "removeptf (rmptf) [OPTIONEN] <PTF|FÄHIGKEIT> ..."
 
 #. translators: command summary: removeptf, rmptf
 #: src/commands/installremove.cc:314
 msgid "Remove (not only) PTFs."
-msgstr ""
+msgstr "PTFs (nicht nur) entfernen."
 
 #. translators: command description
 #: src/commands/installremove.cc:316
@@ -4410,6 +4410,8 @@ msgstr "Wählen Sie Einträge aus, die der angegebenen Zeichenfolge entsprechen.
 msgid ""
 "Service '%1%' with URL '%2%' already exists. Just updating the settings."
 msgstr ""
+"Dienst '%1%' mit URL '%2%' existiert bereits. Nur die Einstellungen werden "
+"aktualisiert."
 
 #: src/commands/services/add.cc:58
 #, boost-format
