@@ -18,10 +18,10 @@ msgstr ""
 "Project-Id-Version: zypp.de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-12-22 14:35+0100\n"
-"PO-Revision-Date: 2022-09-10 18:13+0000\n"
+"PO-Revision-Date: 2023-01-28 15:14+0000\n"
 "Last-Translator: Ettore Atalan <atalanttore@googlemail.com>\n"
-"Language-Team: German <https://l10n.opensuse.org/projects/libzypp/master/de/"
-">\n"
+"Language-Team: German <https://l10n.opensuse.org/projects/libzypp/master/de/>"
+"\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -3977,12 +3977,12 @@ msgstr "Authentifizierung erforderlich für '%s'"
 #. just report (NO_ERROR); no interactive request to the user
 #: zypp/media/MediaCurl.cc:785
 msgid "Will try again..."
-msgstr ""
+msgstr "Werde es erneut versuchen..."
 
 #: zypp/media/MediaCurl.cc:789
 #, boost-format
 msgid "Giving up after %1% attempts."
-msgstr ""
+msgstr "Gebe nach %1% Versuchen auf."
 
 #: zypp/media/MediaCurl.cc:905 zypp-curl/ng/network/networkrequesterror.cc:127
 msgid ""
@@ -4445,6 +4445,8 @@ msgid ""
 "Removing the installed %1% in this context will remove (not replace!) the "
 "included PTF-packages too."
 msgstr ""
+"Das Entfernen des installierten %1% in diesem Zusammenhang entfernt (nicht "
+"ersetzt!) auch die enthaltenen PTF-Pakete."
 
 #: zypp/solver/detail/SATResolver.cc:1318
 #, boost-format
@@ -4452,10 +4454,12 @@ msgid ""
 "The PTF should be removed by calling '%1%'. This will update the included "
 "PTF-packages rather than removing them."
 msgstr ""
+"Das PTF sollte durch den Aufruf von '%1%' entfernt werden. Dies aktualisiert "
+"die enthaltenen PTF-Pakete, anstatt sie zu entfernen."
 
 #: zypp/solver/detail/SATResolver.cc:1319
 msgid "Typically you want to keep the PTF or choose to cancel the action."
-msgstr ""
+msgstr "Normalerweise möchten Sie die PTF behalten oder die Aktion abbrechen."
 
 #. translator: %1% is the name of a PTF.
 #: zypp/solver/detail/SATResolver.cc:1324
@@ -5115,8 +5119,9 @@ msgstr ""
 "Ordnung ist."
 
 #: zypp-media/mediaexception.cc:220
+#, fuzzy
 msgid "No free ressources available to attach medium."
-msgstr ""
+msgstr "Keine freien Ressourcen zum Anhängen des Mediums verfügbar."
 
 #: zypp-curl/auth/curlauthdata.cc:97
 #, c-format, boost-format
