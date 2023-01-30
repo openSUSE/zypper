@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-12-24 02:27+0100\n"
-"PO-Revision-Date: 2022-08-30 07:13+0000\n"
+"PO-Revision-Date: 2023-01-30 05:14+0000\n"
 "Last-Translator: Kristijan Fremen Velkovski <me@krisfremen.com>\n"
 "Language-Team: Macedonian <https://l10n.opensuse.org/projects/zypper/master/"
 "mk/>\n"
@@ -198,12 +198,15 @@ msgid ""
 "Patches having the flag rebootSuggested set will not be treated as "
 "interactive."
 msgstr ""
+"Закрпи со знамето rebootSuggested нема да се третираат како интерактивни."
 
 #. translators: --non-interactive-include-reboot-patches
 #: src/Config.cc:439
 msgid ""
 "Do not treat patches as interactive, which have the rebootSuggested-flag set."
 msgstr ""
+"Не ги третирајте закрпите како интерактивни, на кои е поставено знамето "
+"rebootSuggested."
 
 #. translators: --xmlout, -x
 #: src/Config.cc:449
