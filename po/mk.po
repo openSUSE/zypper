@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-12-24 02:27+0100\n"
-"PO-Revision-Date: 2023-01-30 05:14+0000\n"
+"PO-Revision-Date: 2023-01-31 08:14+0000\n"
 "Last-Translator: Kristijan Fremen Velkovski <me@krisfremen.com>\n"
 "Language-Team: Macedonian <https://l10n.opensuse.org/projects/zypper/master/"
 "mk/>\n"
@@ -211,28 +211,29 @@ msgstr ""
 #. translators: --xmlout, -x
 #: src/Config.cc:449
 msgid "Switch to XML output."
-msgstr ""
+msgstr "Сменете во излез на XML."
 
 #. translators: --ignore-unknown, -i
 #: src/Config.cc:454
 msgid "Ignore unknown packages."
-msgstr ""
+msgstr "Игнорирај непознати пакети."
 
 #. translators: --terse, -t
 #: src/Config.cc:465
 msgid ""
 "Terse output for machine consumption. Implies --no-abbrev and --no-color."
-msgstr ""
+msgstr "Терс излез за машинска конзумпција Имплицира --no-abbrev и --no-color."
 
 #. translators: --reposd-dir, -D <DIR>
 #: src/Config.cc:489
 msgid "Use alternative repository definition file directory."
 msgstr ""
+"Користете алтернативен директориум за фајлови со дефиниција на складиште."
 
 #. translators: --cache-dir, -C <DIR>
 #: src/Config.cc:504
 msgid "Use alternative directory for all caches."
-msgstr ""
+msgstr "Користете алтернативен директориум за сите кешови."
 
 #. translators: --raw-cache-dir <DIR>
 #: src/Config.cc:517
