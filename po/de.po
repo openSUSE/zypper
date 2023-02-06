@@ -18,8 +18,8 @@ msgstr ""
 "Project-Id-Version: zypp.de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-12-22 14:35+0100\n"
-"PO-Revision-Date: 2023-01-28 15:14+0000\n"
-"Last-Translator: Ettore Atalan <atalanttore@googlemail.com>\n"
+"PO-Revision-Date: 2023-02-06 15:14+0000\n"
+"Last-Translator: Gemineo <vistatec@gemineo.de>\n"
 "Language-Team: German <https://l10n.opensuse.org/projects/libzypp/master/de/>"
 "\n"
 "Language: de\n"
@@ -5119,7 +5119,6 @@ msgstr ""
 "Ordnung ist."
 
 #: zypp-media/mediaexception.cc:220
-#, fuzzy
 msgid "No free ressources available to attach medium."
 msgstr "Keine freien Ressourcen zum Anhängen des Mediums verfügbar."
 
