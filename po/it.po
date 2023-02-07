@@ -12,10 +12,10 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-12-24 02:27+0100\n"
-"PO-Revision-Date: 2022-03-07 11:12+0000\n"
+"PO-Revision-Date: 2023-02-07 15:14+0000\n"
 "Last-Translator: Davide Aiello <davide.aiello@novilingulists.com>\n"
-"Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/"
-">\n"
+"Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/>"
+"\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -389,12 +389,16 @@ msgstr "Salvataggio dell'opzione non riuscito."
 msgid ""
 "'%s' install modifier must not be used without a package name or capability."
 msgstr ""
+"Non utilizzare il modificatore di installazione '%s' senza un nome di "
+"pacchetto o una funzionalità."
 
 #: src/PackageArgs.cc:169
 #, c-format, boost-format
 msgid ""
 "'%s' remove modifier must not be used without a package name or capability."
 msgstr ""
+"Non utilizzare il modificatore di rimozione '%s' senza un nome di pacchetto "
+"o una funzionalità."
 
 #: src/PackageArgs.cc:221
 #, c-format, boost-format
@@ -2454,12 +2458,12 @@ msgstr "Nessun argomento valido specificato."
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/installremove.cc:312
 msgid "removeptf (rmptf) [OPTIONS] <PTF|CAPABILITY> ..."
-msgstr ""
+msgstr "removeptf (rmptf) [OPZIONI] <PTF|FUNZIONALITÀ> ..."
 
 #. translators: command summary: removeptf, rmptf
 #: src/commands/installremove.cc:314
 msgid "Remove (not only) PTFs."
-msgstr ""
+msgstr "Rimuovi (non solo) PTF."
 
 #. translators: command description
 #: src/commands/installremove.cc:316
@@ -2471,6 +2475,13 @@ msgid ""
 "the install command. It is the recommended way to remove a PTF (Program "
 "Temporary Fix)."
 msgstr ""
+"Un comando di rimozione che preferisce sostituire i pacchetti dipendenti "
+"oltre a rimuoverli. Di fatto, si tratta di un comando di installazione "
+"completo di modificatore di rimozione (-) applicato ai rispettivi argomenti "
+"semplici. Pertanto, 'removeptf foo' è uguale a 'install -- -foo'. Questo "
+"perché il comando accetta le stesse opzioni del comando di installazione. "
+"Questo è il metodo consigliato per rimuovere un PTF (Program Temporary Fix, "
+"correzione temporanea del programma)."
 
 #: src/commands/installremove.cc:317
 msgid ""
@@ -2480,6 +2491,12 @@ msgid ""
 "remove command would do. The removeptf command however will aim to replace "
 "the dependant packages by their official update versions."
 msgstr ""
+"Di norma, una PTF viene rimossa non appena la correzione fornita viene "
+"applicata all'aggiornamento ufficiale più recente dei pacchetti dipendenti. "
+"Ma non si desidera che i pacchetti dipendenti vengano rimossi insieme alla "
+"PTF, che è ciò che farebbe il comando di rimozione. Il comando removeptf, "
+"tuttavia, mirerà a sostituire i pacchetti dipendenti dalle rispettive "
+"versioni di aggiornamento ufficiali."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/listpatches.cc:16
@@ -4395,6 +4412,8 @@ msgstr "Seleziona i problemi che corrispondono alla stringa specificata."
 msgid ""
 "Service '%1%' with URL '%2%' already exists. Just updating the settings."
 msgstr ""
+"Il servizio '%1%' con URL '%2%' esiste già. Vengono aggiornate solo le "
+"impostazioni."
 
 #: src/commands/services/add.cc:58
 #, boost-format
@@ -4402,6 +4421,8 @@ msgid ""
 "Service '%1%' already exists but uses a different URL '%2%'. Please use "
 "another alias."
 msgstr ""
+"Il servizio '%1%' esiste già ma utilizza un URL '%2%' diverso. Utilizzare un "
+"altro alias."
 
 #: src/commands/services/add.cc:70
 #, c-format, boost-format
@@ -6381,7 +6402,7 @@ msgstr "Risolvibili da '%s' non caricati a causa di un errore."
 #: src/repos.cc:1827
 #, boost-format
 msgid "Repository '%1%' metadata expired since %2%."
-msgstr ""
+msgstr "I metadati del repository '%1%' sono scaduti da %2%."
 
 #. translators: the first %s is 'zypper refresh' and the second 'zypper clean -m'
 #: src/repos.cc:1839
@@ -6396,6 +6417,10 @@ msgid ""
 "solve the issue, it could be that you are using a broken mirror or the "
 "server has actually discontinued to support the repository."
 msgstr ""
+"I metadati del repository sono scaduti: verificare che 'autorefresh' sia "
+"attivato su (zypper lr), altrimenti aggiornare manualmente il repository ("
+"zypper ref). Se il problema persiste, il mirror in uso potrebbe essere rotto "
+"o il server ha effettivamente smesso di supportare il repository."
 
 #: src/repos.cc:1857
 msgid "Reading installed packages..."
