@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-12-22 14:35+0100\n"
-"PO-Revision-Date: 2022-03-15 15:12+0000\n"
-"Last-Translator: Marguerite Su <i@marguerite.su>\n"
+"PO-Revision-Date: 2023-02-07 12:14+0000\n"
+"Last-Translator: Grace Yu <grace.yu@excel-gits.com>\n"
 "Language-Team: Chinese (China) <https://l10n.opensuse.org/projects/libzypp/"
 "master/zh_CN/>\n"
 "Language: zh_CN\n"
@@ -3959,12 +3959,12 @@ msgstr "'%s' 需要认证"
 #. just report (NO_ERROR); no interactive request to the user
 #: zypp/media/MediaCurl.cc:785
 msgid "Will try again..."
-msgstr ""
+msgstr "将重试..."
 
 #: zypp/media/MediaCurl.cc:789
 #, boost-format
 msgid "Giving up after %1% attempts."
-msgstr ""
+msgstr "尝试 %1% 次后放弃。"
 
 #: zypp/media/MediaCurl.cc:905 zypp-curl/ng/network/networkrequesterror.cc:127
 msgid ""
@@ -4385,18 +4385,18 @@ msgstr "通常情况下，您需要保留 PTF 并选择不安装维护补丁。"
 msgid ""
 "Removing the installed %1% in this context will remove (not replace!) the "
 "included PTF-packages too."
-msgstr ""
+msgstr "移除此环境中安装的 %1% 还会移除（而不是替换）包含的 PTF 软件包。"
 
 #: zypp/solver/detail/SATResolver.cc:1318
 #, boost-format
 msgid ""
 "The PTF should be removed by calling '%1%'. This will update the included "
 "PTF-packages rather than removing them."
-msgstr ""
+msgstr "应通过调用 \"%1%\" 来移除 PTF。这样将会更新包含的 PTF 软件包，而不会将其移除。"
 
 #: zypp/solver/detail/SATResolver.cc:1319
 msgid "Typically you want to keep the PTF or choose to cancel the action."
-msgstr ""
+msgstr "通常，您需要保留 PTF 并选择取消该操作。"
 
 #. translator: %1% is the name of a PTF.
 #: zypp/solver/detail/SATResolver.cc:1324
@@ -5038,7 +5038,7 @@ msgstr " SSL 证书问题，请校验 '%s' 的 CA 证书。"
 
 #: zypp-media/mediaexception.cc:220
 msgid "No free ressources available to attach medium."
-msgstr ""
+msgstr "没有可供挂接媒体的免费资源。"
 
 #: zypp-curl/auth/curlauthdata.cc:97
 #, c-format, boost-format
