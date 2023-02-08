@@ -17,8 +17,8 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-12-22 14:35+0100\n"
-"PO-Revision-Date: 2023-01-06 03:14+0000\n"
-"Last-Translator: Alejandro Leal <ajleal@msn.com>\n"
+"PO-Revision-Date: 2023-02-08 22:14+0000\n"
+"Last-Translator: Antonio Simón <antonio@trans-mission.com>\n"
 "Language-Team: Spanish <https://l10n.opensuse.org/projects/libzypp/master/es/"
 ">\n"
 "Language: es\n"
@@ -3984,9 +3984,8 @@ msgstr "Se requiere autenticación para %s"
 
 #. just report (NO_ERROR); no interactive request to the user
 #: zypp/media/MediaCurl.cc:785
-#, fuzzy
 msgid "Will try again..."
-msgstr "Intentar de nuevo..."
+msgstr "Se intentará de nuevo..."
 
 #: zypp/media/MediaCurl.cc:789
 #, boost-format
@@ -4467,10 +4466,8 @@ msgstr ""
 "PTF incluidos en lugar de eliminarlos."
 
 #: zypp/solver/detail/SATResolver.cc:1319
-#, fuzzy
 msgid "Typically you want to keep the PTF or choose to cancel the action."
-msgstr ""
-"Por lo general, usted desea mantener el PTF o elegir cancelar la acción."
+msgstr "Lo habitual es conservar el PTF o cancelar la acción."
 
 #. translator: %1% is the name of a PTF.
 #: zypp/solver/detail/SATResolver.cc:1324
