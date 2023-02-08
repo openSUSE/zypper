@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-12-24 02:27+0100\n"
-"PO-Revision-Date: 2022-11-19 00:56+0000\n"
-"Last-Translator: Luiz Fernando Ranghetti <elchevive68@gmail.com>\n"
+"PO-Revision-Date: 2023-02-08 16:14+0000\n"
+"Last-Translator: Samanta Magalhaes <samanta_texttrans@outlook.com>\n"
 "Language-Team: Portuguese (Brazil) <https://l10n.opensuse.org/projects/"
 "zypper/master/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -1248,8 +1248,8 @@ msgstr[1] "pacotes a atualizar"
 #: src/Summary.cc:1443
 msgid "to downgrade"
 msgid_plural "to downgrade"
-msgstr[0] "para desatualizar"
-msgstr[1] "para desatualizar"
+msgstr[0] "para instalar a versão menos eficiente"
+msgstr[1] "para instalar as versões menos eficientes"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
 #: src/Summary.cc:1446
@@ -1276,8 +1276,8 @@ msgstr[1] "novos pacotes a serem instalados"
 #: src/Summary.cc:1471
 msgid "to reinstall"
 msgid_plural "to reinstall"
-msgstr[0] "para reinstalar"
-msgstr[1] "para reinstalar"
+msgstr[0] "para ser reinstalado"
+msgstr[1] "para serem reinstalados"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
 #: src/Summary.cc:1474
@@ -1290,8 +1290,8 @@ msgstr[1] "pacotes para reinstalar"
 #: src/Summary.cc:1485
 msgid "to remove"
 msgid_plural "to remove"
-msgstr[0] "para remover"
-msgstr[1] "para remover"
+msgstr[0] "para ser removido"
+msgstr[1] "para serem removidos"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
 #: src/Summary.cc:1488
@@ -1304,8 +1304,8 @@ msgstr[1] "pacotes para remover"
 #: src/Summary.cc:1499
 msgid "to change vendor"
 msgid_plural " to change vendor"
-msgstr[0] "para alterar de fornecedor"
-msgstr[1] "para alterar de fornecedor"
+msgstr[0] "para ser alterado de fornecedor"
+msgstr[1] "para serem alterados de fornecedor"
 
 #. translators: this text will be preceded by a number e.g. "5 packages ..."
 #: src/Summary.cc:1502
@@ -1318,8 +1318,8 @@ msgstr[1] "pacotes irão alterar de fornecedor"
 #: src/Summary.cc:1513
 msgid "to change arch"
 msgid_plural "to change arch"
-msgstr[0] "para alterar de arquitetura"
-msgstr[1] "para alterar de arquitetura"
+msgstr[0] "para ser alterado de arquitetura"
+msgstr[1] "para serem alterados de arquitetura"
 
 #. translators: this text will be preceded by a number e.g. "5 packages ..."
 #: src/Summary.cc:1516
@@ -2427,12 +2427,12 @@ msgstr "Nenhum argumento válido especificado."
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/installremove.cc:312
 msgid "removeptf (rmptf) [OPTIONS] <PTF|CAPABILITY> ..."
-msgstr ""
+msgstr "removeptf (rmptf) [OPÇÕES] <PTF|RECURSO> ..."
 
 #. translators: command summary: removeptf, rmptf
 #: src/commands/installremove.cc:314
 msgid "Remove (not only) PTFs."
-msgstr ""
+msgstr "Remover (não apenas) PTFs."
 
 #. translators: command description
 #: src/commands/installremove.cc:316
@@ -2444,6 +2444,12 @@ msgid ""
 "the install command. It is the recommended way to remove a PTF (Program "
 "Temporary Fix)."
 msgstr ""
+"Um comando de remoção que prefere substituir os pacotes dependentes em vez "
+"de removê-los. Na verdade, trata-se de um comando de instalação completo com "
+"o modificador de remoção (-) aplicado a seus argumentos simples. Portanto, "
+"\"removeptf foo\" é o mesmo que \"install -- -foo\". É por esse motivo que o "
+"comando aceita as mesmas opções que o comando de instalação. Ele é o método "
+"recomendado para remover um PTF (Program Temporary Fix)."
 
 #: src/commands/installremove.cc:317
 msgid ""
@@ -2453,6 +2459,12 @@ msgid ""
 "remove command would do. The removeptf command however will aim to replace "
 "the dependant packages by their official update versions."
 msgstr ""
+"Normalmente, um PTF é removido logo que a correção que ele oferece é "
+"aplicada à última atualização oficial dos pacotes dependentes. No entanto, "
+"você não deseja que os pacotes dependentes sejam removidos com o PTF, e é "
+"por isso que o comando de remoção é o ideal. O comando removeptf, porém, "
+"visa substituir os pacotes dependentes por suas versões oficiais de "
+"atualização."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/listpatches.cc:16
@@ -2875,14 +2887,9 @@ msgid ""
 "  \\\\\\\\\\\\\\__o\n"
 "__\\\\\\\\\\\\\\'/_"
 msgstr ""
-"                              __.----.___\n"
-"  ||            ||  (|(__)/)-'||      ;--` ||\n"
-" _||____________||___`(QQ)'___||______;____||_\n"
-" -||------------||----)  (----||-----------||-\n"
-" _||____________||___(o  o)___||______;____||_\n"
-" -||------------||----`--'----||-----------||-\n"
-"  ||            ||       `|| ||| || ||     ||\n"
-"^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^"
+"   \\\\\\\\\\\n"
+"  \\\\\\\\\\\\\\__o\n"
+"__\\\\\\\\\\\\\\'/_"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/nullcommands.cc:37
@@ -7017,11 +7024,11 @@ msgstr "MODO"
 #. wrong option in the last argument
 #: src/utils/getopt.cc:78
 msgid "Unknown option "
-msgstr "Opção desconhecida"
+msgstr "Opção desconhecida "
 
 #: src/utils/getopt.cc:98
 msgid "Missing argument for "
-msgstr "Argumento ausente para"
+msgstr "Argumento ausente para "
 
 #: src/utils/messages.cc:19
 msgid "Please file a bug report about this."
