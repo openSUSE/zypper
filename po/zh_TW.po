@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-12-22 14:35+0100\n"
-"PO-Revision-Date: 2022-03-07 10:12+0000\n"
+"PO-Revision-Date: 2023-02-08 09:14+0000\n"
 "Last-Translator: Grace Yu <grace.yu@excel-gits.com>\n"
 "Language-Team: Chinese (Taiwan) <https://l10n.opensuse.org/projects/libzypp/"
 "master/zh_TW/>\n"
@@ -3958,12 +3958,12 @@ msgstr "%s 需要驗證"
 #. just report (NO_ERROR); no interactive request to the user
 #: zypp/media/MediaCurl.cc:785
 msgid "Will try again..."
-msgstr ""
+msgstr "將重試..."
 
 #: zypp/media/MediaCurl.cc:789
 #, boost-format
 msgid "Giving up after %1% attempts."
-msgstr ""
+msgstr "已嘗試 %1% 次，即將放棄。"
 
 #: zypp/media/MediaCurl.cc:905 zypp-curl/ng/network/networkrequesterror.cc:127
 msgid ""
@@ -4384,18 +4384,18 @@ msgstr "通常情況下，您需要保留 PTF 並選擇不安裝維護修補程�
 msgid ""
 "Removing the installed %1% in this context will remove (not replace!) the "
 "included PTF-packages too."
-msgstr ""
+msgstr "移除此網路位置中安裝的 %1% 還會移除 (而不是取代) 包含的 PTF 套件。"
 
 #: zypp/solver/detail/SATResolver.cc:1318
 #, boost-format
 msgid ""
 "The PTF should be removed by calling '%1%'. This will update the included "
 "PTF-packages rather than removing them."
-msgstr ""
+msgstr "應透過呼叫 \"%1%\" 來移除 PTF。這樣將會更新包含的 PTF 套件，而不會將其移除。"
 
 #: zypp/solver/detail/SATResolver.cc:1319
 msgid "Typically you want to keep the PTF or choose to cancel the action."
-msgstr ""
+msgstr "通常，您需要保留 PTF 並選擇取消該動作。"
 
 #. translator: %1% is the name of a PTF.
 #: zypp/solver/detail/SATResolver.cc:1324
@@ -4601,11 +4601,11 @@ msgstr "移除公用金鑰 %1% 失敗"
 
 #: zypp/target/rpm/RpmDb.cc:1271
 msgid "Package header is not signed!"
-msgstr ""
+msgstr "未簽署套件標頭！"
 
 #: zypp/target/rpm/RpmDb.cc:1273
 msgid "Package payload is not signed!"
-msgstr ""
+msgstr "未簽署套件封包內容！"
 
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
@@ -5037,7 +5037,7 @@ msgstr " SSL 憑證問題，驗證 '%s' 的 CA 憑證是否正確。"
 
 #: zypp-media/mediaexception.cc:220
 msgid "No free ressources available to attach medium."
-msgstr ""
+msgstr "沒有可供連接媒體的免費資源。"
 
 #: zypp-curl/auth/curlauthdata.cc:97
 #, c-format, boost-format
