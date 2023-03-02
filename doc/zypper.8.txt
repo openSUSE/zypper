@@ -1158,8 +1158,7 @@ Also, this command does not automatically refresh the newly added repositories. 
 	*-F*, *--no-refresh*::
 		Disable auto-refresh for the repository.
 
-	*-p*, *--priority* _positive-integer_::
-		Set the priority of the repository. Priority of *1* is the highest, the higher the number the lower the priority. *-p 0* will set the priority back to the default (*99*). Packages from repositories with higher priority will be preferred even in case there is a higher installable version available in the repository with a lower priority.
+include::{incdir}/option_--priority.set.txt[]
 
 	*-k*, *--keep-packages*::
 		Enable RPM files caching for the repository.
@@ -1278,8 +1277,7 @@ To show detailed information about specific repositories, specify them as argume
 	*-F*, *--no-refresh* (legacy: -R)::
 		Disable auto-refresh for the repository.
 
-	*-p*, *--priority* _positive-integer_::
-		Set the priority of the repository. Priority of *1* is the highest, the higher the number the lower the priority. *-p 0* will set the priority back to the default (*99*). Packages from repositories with higher priority will be preferred even in case there is a higher installable version available in the repository with a lower priority.
+include::{incdir}/option_--priority.set.txt[]
 
 	*-k*, *--keep-packages*::
 		Enable RPM files caching.

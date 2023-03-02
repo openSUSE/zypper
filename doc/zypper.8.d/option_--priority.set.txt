@@ -1,0 +1,4 @@
+	*-p*, *--priority* _[1-2147483647]_|_0_::
+		Set the priority of the repository. Priority of *1* is the highest, and *2147483647* is the lowest.
+		*-p 0* will set the priority back to the default (*99*).
+		Packages from repositories with higher priority will be used even if there are better versions available in a repository with a lower priority.
