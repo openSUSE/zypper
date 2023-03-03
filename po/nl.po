@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-12-24 02:27+0100\n"
-"PO-Revision-Date: 2022-12-24 18:13+0000\n"
-"Last-Translator: Freek de Kruijf <freek@opensuse.org>\n"
+"PO-Revision-Date: 2023-03-04 00:14+0000\n"
+"Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/zypper/master/nl/>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
@@ -23,15 +23,15 @@ msgstr ""
 
 #: src/Command.cc:93
 msgid "Invalid command"
-msgstr "Ongeldig commando"
+msgstr "Ongeldige opdracht"
 
 #: src/Command.cc:111
 msgid "Repository Management:"
-msgstr "Beheer van installatiebronnen:"
+msgstr "Installatiebronbeheer:"
 
 #: src/Command.cc:119
 msgid "Service Management:"
-msgstr "Service-beheer:"
+msgstr "Dienstbeheer:"
 
 #: src/Command.cc:125
 msgid "Software Management:"
@@ -64,7 +64,7 @@ msgstr "Subopdrachten:"
 #: src/Command.cc:289
 #, c-format, boost-format
 msgid "Unknown command '%s'"
-msgstr "Onbekende opdracht '%s'"
+msgstr "Onbekende opdracht: ‘%s’"
 
 #: src/CommitSummary.cc:90
 msgid "Installation has completed with error."
@@ -73,30 +73,28 @@ msgstr "Installatie is voltooid met een fout."
 #: src/CommitSummary.cc:92
 #, boost-format
 msgid "You may run '%1%' to repair any dependency problems."
-msgstr ""
-"U zou '%1%' kunnen uitvoeren om elk probleem met afhankelijkheden te "
-"repareren."
+msgstr "‘%1%’ kan helpen afhankelijkhedsproblemen te repareren."
 
 #: src/CommitSummary.cc:125
 #, c-format, boost-format
 msgid "The following package failed to install:"
 msgid_plural "The following %d packages failed to install:"
-msgstr[0] "Het volgende pakket installeren is mislukt:"
-msgstr[1] "De volgende %d pakketten installeren is mislukt:"
+msgstr[0] "Het volgende pakket kan niet worden geïnstalleerd:"
+msgstr[1] "De volgende %d pakketten kunnen niet worden geïnstalleerd:"
 
 #: src/CommitSummary.cc:140
 #, c-format, boost-format
 msgid "The following package installation was skipped:"
 msgid_plural "The following %d package installations were skipped:"
-msgstr[0] "Het installeren van het volgende pakket is overgeslagen:"
-msgstr[1] "Het installeren van de volgende %d pakketten is overgeslagen:"
+msgstr[0] "Het volgende pakket is overgeslagen:"
+msgstr[1] "De volgende %d pakketten zijn overgeslagen:"
 
 #: src/CommitSummary.cc:155
 #, c-format, boost-format
 msgid "The following package failed to uninstall:"
 msgid_plural "The following %d packages failed to uninstall:"
-msgstr[0] "Het volgende geïnstalleerde pakket verwijderen is mislukt:"
-msgstr[1] "De volgende %d geïnstalleerde pakketten verwijderen is mislukt:"
+msgstr[0] "Het volgende pakket kan niet worden verwijderd:"
+msgstr[1] "De volgende %d pakketten kunnen niet worden verwijderd:"
 
 #: src/CommitSummary.cc:170
 #, c-format, boost-format
@@ -112,22 +110,22 @@ msgstr[1] "Het verwijderen van de volgende %d pakketten is overgeslagen:"
 #, boost-format
 msgid "... and %1% more item."
 msgid_plural "... and %1% more items."
-msgstr[0] "... en nog %1% item meer."
-msgstr[1] "... en nog %1% items meer."
+msgstr[0] "…en %1% ander item."
+msgstr[1] "…en %1% andere items."
 
 #: src/Config.cc:53
 #, c-format, boost-format
 msgid "Invalid table style %d."
-msgstr "Ongeldige tabelstijl %d."
+msgstr "Ongeldige tabelstijl: %d."
 
 #: src/Config.cc:54
 #, c-format, boost-format
 msgid " Use an integer number from %d to %d"
-msgstr " Een geheel getal van %d tot %d gebruiken"
+msgstr " Gebruik een geheel getal van %d tot %d"
 
 #: src/Config.cc:250
 msgid "The path specified in the --root option must be absolute."
-msgstr "Het pad gespecificeerd bij de --rootoptie moet absoluut zijn."
+msgstr "De bij --rootoptie opgegeven locatie dient een directe locatie te zijn."
 
 #. translators: --help, -h
 #: src/Config.cc:328
@@ -142,12 +140,13 @@ msgstr "Toon het versienummer."
 #. translators: --promptids
 #: src/Config.cc:349
 msgid "Output a list of zypper's user prompts."
-msgstr "uitvoer is een lijst met gebruikersprompts van zypper."
+msgstr "Toon een lijst met Zyppers gebruikersvragen."
 
 #. translators: --config, -c <FILE>
 #: src/Config.cc:362
 msgid "Use specified config file instead of the default."
-msgstr "gebruik het gespecificeerde configbestand in plaats van de standaard."
+msgstr ""
+"Gebruik het opgegeven configuratiebestand in plaats van het standaardbestand."
 
 #: src/Config.cc:369
 msgid "User data string must not contain nonprintable or newline characters!"
@@ -164,7 +163,7 @@ msgstr ""
 #. translators: --quiet, -q
 #: src/Config.cc:383
 msgid "Suppress normal output, print only error messages."
-msgstr "normale uitvoer onderdrukken, alleen foutmeldingen tonen ."
+msgstr "Onderdruk de normale uitvoer en toon alleen foutmeldingen."
 
 #. translators: --verbose, -v
 #: src/Config.cc:391
@@ -215,7 +214,7 @@ msgstr ""
 #. translators: --xmlout, -x
 #: src/Config.cc:449
 msgid "Switch to XML output."
-msgstr "Schakel naar XML-uitvoer."
+msgstr "Schakel over naar xml-uitvoer."
 
 #. translators: --ignore-unknown, -i
 #: src/Config.cc:454
@@ -258,7 +257,7 @@ msgstr "Gebruik alternatieve map voor pakket-cache."
 
 #: src/Config.cc:550
 msgid "Repository Options"
-msgstr "Opslagruimte-opties"
+msgstr "Installatiebronopties"
 
 #: src/Config.cc:554
 msgid "Entering 'no-gpg-checks' mode."
@@ -274,20 +273,20 @@ msgstr "Negeer fouten bij GPG-controles en ga door."
 msgid ""
 "Turning on '%s'. New repository signing keys will be automatically imported!"
 msgstr ""
-"Inschakelen van '%s'. Nieuwe ondertekeningssleutels van opslagruimte zullen "
-"automatisch worden geïmporteerd!"
+"‘%s’ wordt ingeschakeld. De nieuwe verificatiesleutels van de "
+"installatiebron worden automatisch geïmporteerd!"
 
 #. translators: --gpg-auto-import-keys
 #: src/Config.cc:569
 msgid "Automatically trust and import new repository signing keys."
 msgstr ""
-"Automatisch vertrouwen en importeren van nieuwe ondertekeningssleutels van "
-"opslagruimte."
+"Vertrouw en importeer automatisch nieuwe verificatiesleutels van "
+"installatiebronnen."
 
 #. translators: --plus-repo, -p <URI>
 #: src/Config.cc:573
 msgid "Use an additional repository."
-msgstr "Gebruik een additionele opslagruimte."
+msgstr "Gebruik een aanvullende installatiebron."
 
 #. translators: --plus-content <TAG>
 #: src/Config.cc:577
@@ -295,47 +294,47 @@ msgid ""
 "Additionally use disabled repositories providing a specific keyword. Try '--"
 "plus-content debug' to enable repos indicating to provide debug packages."
 msgstr ""
-"gebruik extra uitgeschakelde opslagruimtes met een specifiek trefwoord. "
-"Probeer '--plus-content debug' om opslagruimtes in te schakelen die aangeven "
-"debug-pakketten te leveren."
+"Gebruik aanvullende uitgeschakelde installatiebronnen met een specifiek "
+"trefwoord. Probeer ‘--plus-content debug’ om installatiebronnen met "
+"foutopsporingspakketten in te schakelen."
 
 #: src/Config.cc:583
 msgid "Repositories disabled, using the database of installed packages only."
 msgstr ""
-"Opslagruimtes uitgeschakeld, gebruikt alleen de database van geïnstalleerde "
-"pakketten."
+"De installatiebronnen zijn uitgeschakeld - er wordt alleen gebruikgemaakt "
+"van een databank met geïnstalleerde pakketten."
 
 #. translators: --disable-repositories
 #: src/Config.cc:587
 msgid "Do not read meta-data from repositories."
-msgstr "Lees geen metagegevens uit opslagruimtes."
+msgstr "Lees geen metagegevens uit installatiebronnen."
 
 #: src/Config.cc:591
 msgid "Autorefresh disabled."
-msgstr "Automatisch vernieuwen uitgezet."
+msgstr "Automatisch vernieuwen is uitgeschakeld."
 
 #. translators: --no-refresh
 #: src/Config.cc:595
 msgid "Do not refresh the repositories."
-msgstr "Opslagruimtes niet vernieuwen."
+msgstr "Vernieuw de installatiebronnen niet."
 
 #: src/Config.cc:599
 msgid "CD/DVD repositories disabled."
-msgstr "Cd/dvd-opslagruimtes uitgeschakeld."
+msgstr "De cd-/dvd-installatiebronnen zijn uitgeschakeld."
 
 #. translators: --no-cd
 #: src/Config.cc:603
 msgid "Ignore CD/DVD repositories."
-msgstr "Opslagruimtes op cd/dvd negeren."
+msgstr "Negeer cd-/dvd-installatiebronnen."
 
 #: src/Config.cc:607
 msgid "Remote repositories disabled."
-msgstr "Opslagruimtes op afstand uitgeschakeld."
+msgstr "Externe installatiebronnen zijn uitgeschakeld."
 
 #. translators: --no-remote
 #: src/Config.cc:611
 msgid "Ignore remote repositories."
-msgstr "Opslagruimtes op afstand negeren."
+msgstr "Negeer externe installatiebronnen."
 
 #. translators: --releasever
 #: src/Config.cc:618
@@ -343,8 +342,8 @@ msgid ""
 "Set the value of $releasever in all .repo files (default: distribution "
 "version)"
 msgstr ""
-"stel de waarde van $releasever in alle .repo bestanden in (standaard: versie "
-"van distributie)"
+"Stel de waarde van $releasever in alle .repo-bestanden in (standaard: "
+"distributieversie)"
 
 #: src/Config.cc:622
 msgid "Target Options"
@@ -359,7 +358,8 @@ msgstr "Werk vanuit een andere hoofdmap."
 #: src/Config.cc:633
 msgid ""
 "Operate on a different root directory, but share repositories with the host."
-msgstr "In een andere root-map werken, maar opslagruimten delen met de host."
+msgstr ""
+"Werk vanuit een andere hoofdmap, maar met gedeelde host-installatiebronnen."
 
 #: src/Config.cc:639
 msgid "Ignoring installed resolvables."
@@ -402,113 +402,115 @@ msgstr ""
 #: src/PackageArgs.cc:221
 #, c-format, boost-format
 msgid "'%s' not found in package names. Trying '%s'."
-msgstr "'%s' is niet gevonden in de pakketnamen. '%s' wordt geprobeerd."
+msgstr "‘%s’ is niet aangetroffen in pakketnamen - ‘%s’ wordt nu geprobeerd…"
 
 #: src/PackageArgs.cc:231
 #, c-format, boost-format
 msgid "'%s' is not a package name or capability."
-msgstr "'%s' is geen pakketnaam of eigenschap."
+msgstr "‘%s’ is geen pakketnaam of eigenschap."
 
 #: src/RequestFeedback.cc:40
 #, c-format, boost-format
 msgid "'%s' not found in package names. Trying capabilities."
-msgstr "'%s' is niet gevonden in de pakketnamen. Proberen in eigenschappen."
+msgstr ""
+"‘%s’ is niet aangetroffen in pakketnamen - de eigenschappen worden nu "
+"geprobeerd…"
 
 #: src/RequestFeedback.cc:46
 #, c-format, boost-format
 msgid "Package '%s' not found."
-msgstr "Pakket '%s' niet gevonden."
+msgstr "‘%s’ is niet gevonden."
 
 #: src/RequestFeedback.cc:48
 #, c-format, boost-format
 msgid "Patch '%s' not found."
-msgstr "Patch '%s' niet gevonden."
+msgstr "‘%s’ is niet gevonden."
 
 #: src/RequestFeedback.cc:50
 #, c-format, boost-format
 msgid "Product '%s' not found."
-msgstr "Product '%s' niet gevonden."
+msgstr "‘%s’ is niet gevonden."
 
 #: src/RequestFeedback.cc:52
 #, c-format, boost-format
 msgid "Pattern '%s' not found."
-msgstr "Patroon '%s' niet gevonden."
+msgstr "‘%s’ is niet gevonden."
 
 #: src/RequestFeedback.cc:54
 #, c-format, boost-format
 msgid "Source package '%s' not found."
-msgstr "Bronpakket '%s' niet gevonden."
+msgstr "‘%s’ is niet gevonden."
 
 #. just in case
 #: src/RequestFeedback.cc:56
 #, c-format, boost-format
 msgid "Object '%s' not found."
-msgstr "Object '%s' niet gevonden."
+msgstr "‘%s’ is niet gevonden."
 
 #: src/RequestFeedback.cc:61
 #, c-format, boost-format
 msgid "Package '%s' not found in specified repositories."
-msgstr "Pakket '%s' is niet gevonden in gespecificeerde opslagruimtes."
+msgstr "‘%s’ is niet aangetroffen in de opgegeven installatiebronnen."
 
 #: src/RequestFeedback.cc:63
 #, c-format, boost-format
 msgid "Patch '%s' not found in specified repositories."
-msgstr "Patch '%s' is niet gevonden in gespecificeerde opslagruimtes."
+msgstr "‘%s’ is niet aangetroffen in de opgegeven installatiebronnen."
 
 #: src/RequestFeedback.cc:65
 #, c-format, boost-format
 msgid "Product '%s' not found in specified repositories."
-msgstr "Product '%s' is niet gevonden in gespecificeerde opslagruimtes."
+msgstr "‘%s’ is niet aangetroffen in de opgegeven installatiebronnen."
 
 #: src/RequestFeedback.cc:67
 #, c-format, boost-format
 msgid "Pattern '%s' not found in specified repositories."
-msgstr "Patroon '%s' is niet gevonden in gespecificeerde opslagruimtes."
+msgstr "‘%s’ is niet aangetroffen in de opgegeven installatiebronnen."
 
 #: src/RequestFeedback.cc:69
 #, c-format, boost-format
 msgid "Source package '%s' not found in specified repositories."
-msgstr "Bronpakket '%s' is niet gevonden in gespecificeerde opslagruimtes."
+msgstr "‘%s’ is niet aangetroffen in de opgegeven installatiebronnen."
 
 #. just in case
 #: src/RequestFeedback.cc:71
 #, c-format, boost-format
 msgid "Object '%s' not found in specified repositories."
-msgstr "Object '%s' is niet gevonden in gespecificeerde opslagruimtes."
+msgstr "‘%s’ is niet aangetroffen in de opgegeven installatiebronnen."
 
 #. translators: meaning a package %s or provider of capability %s
 #: src/RequestFeedback.cc:76
 #, c-format, boost-format
 msgid "No provider of '%s' found."
-msgstr "Geen provider van '%s' gevonden."
+msgstr "Geen enkel item biedt ‘%s’ aan."
 
 #. wildcards used
 #: src/RequestFeedback.cc:85
 #, c-format, boost-format
 msgid "No package matching '%s' is installed."
-msgstr "Er is geen pakket dat overeenkomt met '%s' geïnstalleerd."
+msgstr "Er is geen pakket geïnstalleerd dat overeenkomt met ‘%s’."
 
 #: src/RequestFeedback.cc:87
 #, c-format, boost-format
 msgid "Package '%s' is not installed."
-msgstr "Pakket '%s' is niet geïnstalleerd."
+msgstr "‘%s’ is niet geïnstalleerd."
 
 #. translators: meaning provider of capability %s
 #: src/RequestFeedback.cc:91
 #, c-format, boost-format
 msgid "No provider of '%s' is installed."
-msgstr "Geen provider van '%s' is geïnstalleerd."
+msgstr "Er is geen item met ‘%s’ geïnstalleerd."
 
 #: src/RequestFeedback.cc:96
 #, c-format, boost-format
 msgid "'%s' is already installed."
-msgstr "'%s' is al geïnstalleerd."
+msgstr "‘%s’ is al geïnstalleerd."
 
 #. translators: %s are package names
 #: src/RequestFeedback.cc:99
 #, c-format, boost-format
 msgid "'%s' providing '%s' is already installed."
-msgstr "'%s' die '%s' levert, is al geïnstalleerd."
+msgstr "‘%s’, dat ‘%s’ levert, is al geïnstalleerd."
 
 #: src/RequestFeedback.cc:106
 #, c-format, boost-format
@@ -516,13 +518,13 @@ msgid ""
 "No update candidate for '%s'. The highest available version is already "
 "installed."
 msgstr ""
-"Geen updatekandidaat voor bijwerken van '%s'. De hoogst beschikbare versie "
-"is al geïnstalleerd."
+"Er is geen update gevonden voor ‘%s’ - de nieuwste versie is al "
+"geïnstalleerd."
 
 #: src/RequestFeedback.cc:109
 #, c-format, boost-format
 msgid "No update candidate for '%s'."
-msgstr "Geen updatekandidaat voor '%s'."
+msgstr "Er is geen update gevonden voor ‘%s’."
 
 #: src/RequestFeedback.cc:115
 #, c-format, boost-format
@@ -530,8 +532,8 @@ msgid ""
 "There is an update candidate '%s' for '%s', but it does not match the "
 "specified version, architecture, or repository."
 msgstr ""
-"Er is een updatekandidaat '%s' van '%s', maar deze komt niet overeen met de "
-"gespecificeerde versie, architectuur of opslagruimte."
+"Er is een update, ‘%s’, gevonden van ‘%s’, maar deze komt niet overeen met "
+"de opgegeven versie, architectuur of installatiebron."
 
 #: src/RequestFeedback.cc:124
 #, c-format, boost-format
@@ -539,9 +541,8 @@ msgid ""
 "There is an update candidate for '%s' from vendor '%s', while the current "
 "vendor is '%s'. Use '%s' to install this candidate."
 msgstr ""
-"Er is een kandidaat voor bijwerken voor '%s' van leverancier '%s', terwijl "
-"de huidige leverancier '%s' is. Gebruik '%s' om deze kandidaat te "
-"installeren."
+"Er is een update, ‘%s’, van leverancier ‘%s’, maar ‘%s’ is de huidige "
+"leverancier. Gebruik ‘%s’ om deze update te installeren."
 
 #: src/RequestFeedback.cc:133
 #, c-format, boost-format
@@ -549,9 +550,8 @@ msgid ""
 "There is an update candidate for '%s', but it comes from a repository with a "
 "lower priority. Use '%s' to install this candidate."
 msgstr ""
-"Er is een kandidaat voor het bijwerken van '%s', maar het komt van een "
-"opslagruimte met een lagere prioriteit. Gebruik '%s' om deze kandidaat te "
-"installeren."
+"Er is een update gevonden voor ‘%s’, maar deze komt uit een installatiebron "
+"met lagere prioriteit. Gebruik ‘%s’ om deze update te installeren."
 
 #: src/RequestFeedback.cc:143
 #, c-format, boost-format
@@ -559,8 +559,8 @@ msgid ""
 "There is an update candidate for '%s', but it is locked. Use '%s' to unlock "
 "it."
 msgstr ""
-"Er is een updatekandidaat voor '%s', maar deze is vergrendeld. Gebruik '%s' "
-"om te ontgrendelen."
+"Er is een update gevonden voor ‘%s’, maar deze is vergrendeld. Gebruik ‘%s’ "
+"om de update te ontgrendelen."
 
 #: src/RequestFeedback.cc:149
 #, c-format, boost-format
@@ -568,8 +568,8 @@ msgid ""
 "Package '%s' is not available in your repositories. Cannot reinstall, "
 "upgrade, or downgrade."
 msgstr ""
-"Pakket '%s' is niet beschikbaar in uw opslagruimtes. Opnieuw installeren, "
-"upgraden of downgraden kan niet."
+"‘%s’ is niet beschikbaar in de installatiebronnen. Opnieuw installeren, "
+"bijwerken of afwaarderen is hierdoor niet mogelijk."
 
 #: src/RequestFeedback.cc:159
 #, c-format, boost-format
@@ -577,24 +577,24 @@ msgid ""
 "The selected package '%s' from repository '%s' has lower version than the "
 "installed one."
 msgstr ""
-"Het geselecteerde pakket '%s' uit opslagruimte '%s' heeft een lager "
+"Het gekozen pakket, ‘%s’, uit de ‘%s’-installatiebron heeft een lager "
 "versienummer dan het geïnstalleerde pakket."
 
 #. translators: %s = "zypper install --oldpackage package-version.arch"
 #: src/RequestFeedback.cc:163
 #, c-format, boost-format
 msgid "Use '%s' to force installation of the package."
-msgstr "Gebruik '%s' om installatie van het pakket te forceren."
+msgstr "Gebruik ‘%s’ om installatie van het pakket af te dwingen."
 
 #: src/RequestFeedback.cc:170
 #, c-format, boost-format
 msgid "Patch '%s' is interactive, skipping."
-msgstr "Patch '%s' is interactief, wordt overgeslagen."
+msgstr "‘%s’ is interactief en wordt overgeslagen."
 
 #: src/RequestFeedback.cc:176
 #, c-format, boost-format
 msgid "Patch '%s' is not needed."
-msgstr "Patch '%s' is niet nodig."
+msgstr "‘%s’ is niet nodig."
 
 #: src/RequestFeedback.cc:182
 #, boost-format
@@ -602,66 +602,66 @@ msgid ""
 "Patch '%1%' is optional. Use '%2%' to install it, or '%3%' to include all "
 "optional patches."
 msgstr ""
-"Patch '%1%' is optioneel. Gebruik '%2%' om het te installeren of '%3%' om "
+"‘%1%’ is optioneel. Gebruik ‘%2%’ om de patch te installeren of ‘%3%’ om "
 "alle optionele patches mee te nemen."
 
 #: src/RequestFeedback.cc:193
 #, c-format, boost-format
 msgid "Patch '%s' is locked. Use '%s' to install it, or unlock it using '%s'."
 msgstr ""
-"Patch '%s' is vergrendeld. Gebruik '%s' om het te installeren of ontgrendel "
-"het met '%s'."
+"‘%s’ is vergrendeld. Gebruik ‘%s’ om de patch te installeren of ontgrendel "
+"met ‘%s’."
 
 #: src/RequestFeedback.cc:200
 #, c-format, boost-format
 msgid "Patch '%s' is not in the specified category."
-msgstr "Patch '%s' is niet gevonden in de gespecificeerde categorie."
+msgstr "‘%s’ is niet aangetroffen in de opgegeven categorie."
 
 #: src/RequestFeedback.cc:207
 #, c-format, boost-format
 msgid "Patch '%s' has not the specified severity."
-msgstr "Patch '%s' heeft niet de gespecificeerde ernst."
+msgstr "‘%s’ is heeft een lager kwetsbaarheidsniveau dan opgegeven."
 
 #: src/RequestFeedback.cc:214
 #, c-format, boost-format
 msgid "Patch '%s' was issued after the specified date."
-msgstr "Patch '%s' is uitgegeven na de gespecificeerde datum."
+msgstr "‘%s’ is uitgebracht ná de opgegeven datum."
 
 #: src/RequestFeedback.cc:219
 #, c-format, boost-format
 msgid "Selecting '%s' from repository '%s' for installation."
-msgstr "Selecteren van '%s' uit opslagruimte '%s' voor installatie."
+msgstr "‘%s’ wordt geïnstalleerd uit de ‘%s’-installatiebron."
 
 #: src/RequestFeedback.cc:223
 #, c-format, boost-format
 msgid "Forcing installation of '%s' from repository '%s'."
-msgstr "Installatie forceren van '%s' uit opslagruimte '%s'."
+msgstr "‘%s’ wordt gedwongen geïnstalleerd uit de ‘%s’-installatiebron."
 
 #: src/RequestFeedback.cc:227
 #, c-format, boost-format
 msgid "Selecting '%s' for removal."
-msgstr "Selecteren van '%s' voor verwijderen."
+msgstr "‘%s’ zal worden verwijderd."
 
 #: src/RequestFeedback.cc:234
 #, c-format, boost-format
 msgid "'%s' is locked. Use '%s' to unlock it."
-msgstr "'%s' is vergrendeld. Gebruik '%s' om het te ontgrendelen."
+msgstr "‘%s’ is vergrendeld. Gebruik ‘%s’ om te ontgrendelen."
 
 #: src/RequestFeedback.cc:239
 #, c-format, boost-format
 msgid "Adding requirement: '%s'."
-msgstr "Vereiste toevoegen: '%s'."
+msgstr "Er wordt een afhankelijkheid toegevoegd: ‘%s’."
 
 #: src/RequestFeedback.cc:242
 #, c-format, boost-format
 msgid "Adding conflict: '%s'."
-msgstr "Conflict toevoegen: '%s'."
+msgstr "Er wordt een conflict toegevoegd: ‘%s’."
 
 #. translators: %1% expands to a single package name or a ','-separated enumeration of names.
 #: src/RequestFeedback.cc:264
 #, boost-format
 msgid "Did you mean %1%?"
-msgstr "Bedoelde u %1%?"
+msgstr "Bedoelde u ‘%1%’?"
 
 #: src/SolverRequester.cc:487
 #, c-format, boost-format
@@ -686,7 +686,7 @@ msgstr "Verdachte waarde van ernst-filter '%1%'."
 #: src/Summary.cc:416
 #, boost-format
 msgid "Product '%1%' requires to be updated by calling '%2%'!"
-msgstr "Product '%1%' dient bijgewerkt te worden met opdracht '%2%'!"
+msgstr "‘%1%’ dient bijgewerkt te worden met de opdracht ‘%2%’!"
 
 #: src/Summary.cc:585
 #, c-format, boost-format
@@ -727,8 +727,8 @@ msgstr[1] "De volgende %d broncodepakketten zullen worden geïnstalleerd:"
 #, c-format, boost-format
 msgid "The following application is going to be installed:"
 msgid_plural "The following %d applications are going to be installed:"
-msgstr[0] "De volgende toepassing wordt geïnstalleerd:"
-msgstr[1] "De volgende %d toepassingen worden geïnstalleerd:"
+msgstr[0] "Het volgende programma zal worden geïnstalleerd:"
+msgstr[1] "De volgende %d programma's zullen worden geïnstalleerd:"
 
 #: src/Summary.cc:636
 #, c-format, boost-format
@@ -762,8 +762,8 @@ msgstr[1] "De volgende %d producten zullen worden VERWIJDERD:"
 #, c-format, boost-format
 msgid "The following application is going to be REMOVED:"
 msgid_plural "The following %d applications are going to be REMOVED:"
-msgstr[0] "De volgende toepassing zal worden VERWIJDERD:"
-msgstr[1] "De volgende %d toepassingen zullen worden VERWIJDERD:"
+msgstr[0] "Het volgende programma zal worden VERWIJDERD:"
+msgstr[1] "De volgende %d programma's zullen worden VERWIJDERD:"
 
 #: src/Summary.cc:680
 #, c-format, boost-format
@@ -804,22 +804,22 @@ msgstr[1] "De volgende %d toepassingen zullen worden opgewaardeerd:"
 #, c-format, boost-format
 msgid "The following package is going to be downgraded:"
 msgid_plural "The following %d packages are going to be downgraded:"
-msgstr[0] "Het volgende pakket wordt afgewaardeerd:"
-msgstr[1] "De volgende %d pakketten worden afgewaardeerd:"
+msgstr[0] "Het volgende pakket zal worden afgewaardeerd:"
+msgstr[1] "De volgende %d pakketten zullen worden afgewaardeerd:"
 
 #: src/Summary.cc:731
 #, c-format, boost-format
 msgid "The following patch is going to be downgraded:"
 msgid_plural "The following %d patches are going to be downgraded:"
-msgstr[0] "De volgende patch wordt afgewaardeerd:"
-msgstr[1] "De volgende %d patches worden afgewaardeerd:"
+msgstr[0] "De volgende patch zal worden afgewaardeerd:"
+msgstr[1] "De volgende %d patches zullen worden afgewaardeerd:"
 
 #: src/Summary.cc:736
 #, c-format, boost-format
 msgid "The following pattern is going to be downgraded:"
 msgid_plural "The following %d patterns are going to be downgraded:"
-msgstr[0] "Het volgende patroon wordt afgewaardeerd:"
-msgstr[1] "De volgende %d patronen worden afgewaardeerd:"
+msgstr[0] "Het volgende patroon zal worden afgewaardeerd:"
+msgstr[1] "De volgende %d patronen zullen worden afgewaardeerd:"
 
 #: src/Summary.cc:741
 #, c-format, boost-format
@@ -916,9 +916,8 @@ msgstr[1] ""
 msgid "The following recommended application was automatically selected:"
 msgid_plural ""
 "The following %d recommended applications were automatically selected:"
-msgstr[0] "De volgende aanbevolen toepassing is automatisch geselecteerd:"
-msgstr[1] ""
-"De volgende %d aanbevolen toepassingen zijn automatisch geselecteerd:"
+msgstr[0] "Het volgende aanbevolen programma is automatisch geselecteerd:"
+msgstr[1] "De volgende %d aanbevolen programma's zijn automatisch geselecteerd:"
 
 #: src/Summary.cc:1007
 #, c-format, boost-format
@@ -1097,8 +1096,8 @@ msgstr[1] "De volgende %d producten zullen van architectuur wijzigen:"
 #, c-format, boost-format
 msgid "The following application is going to change architecture:"
 msgid_plural "The following %d applications are going to change architecture:"
-msgstr[0] "De volgende toepassing zal de architectuur wijzigen:"
-msgstr[1] "De volgende %d toepassingen zullen de architectuur wijzigen:"
+msgstr[0] "Het volgende programma zal van architectuur wijzigen:"
+msgstr[1] "De volgende %d programma's zullen van architectuur wijzigen:"
 
 #: src/Summary.cc:1180
 #, c-format, boost-format
@@ -1140,17 +1139,15 @@ msgstr[1] "De volgende %d toepassingen zullen van leverancier wijzigen:"
 msgid "The following package has no support information from its vendor:"
 msgid_plural ""
 "The following %d packages have no support information from their vendor:"
-msgstr[0] "Het volgende pakket wordt niet ondersteund door zijn leverancier:"
-msgstr[1] ""
-"De volgende %d pakketten worden niet ondersteund door hun leverancier:"
+msgstr[0] "Het volgende pakket wordt niet ondersteund door de leverancier:"
+msgstr[1] "De volgende %d pakketten worden niet ondersteund door de leverancier:"
 
 #: src/Summary.cc:1242
 #, c-format, boost-format
 msgid "The following package is not supported by its vendor:"
 msgid_plural "The following %d packages are not supported by their vendor:"
-msgstr[0] "Het volgende pakket wordt niet ondersteund door zijn leverancier:"
-msgstr[1] ""
-"De volgende %d pakketten worden niet ondersteund door hun leverancier:"
+msgstr[0] "Het volgende pakket wordt niet ondersteund door de leverancier:"
+msgstr[1] "De volgende %d pakketten worden niet ondersteund door de leverancier:"
 
 #: src/Summary.cc:1260
 #, c-format, boost-format
