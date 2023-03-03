@@ -161,6 +161,9 @@ namespace zypp
   DEF_BUILTIN( i686 );
   DEF_BUILTIN( athlon );
   DEF_BUILTIN( x86_64 );
+  DEF_BUILTIN( x86_64_v2 );
+  DEF_BUILTIN( x86_64_v3 );
+  DEF_BUILTIN( x86_64_v4 );
 
   DEF_BUILTIN( pentium3 );
   DEF_BUILTIN( pentium4 );
@@ -310,6 +313,9 @@ namespace zypp
         defCompatibleWith( a_i686(),		a_noarch(),a_i386(),a_i486(),a_i586() );
         defCompatibleWith( a_athlon(),		a_noarch(),a_i386(),a_i486(),a_i586(),a_i686() );
         defCompatibleWith( a_x86_64(),		a_noarch(),a_i386(),a_i486(),a_i586(),a_i686(),a_athlon() );
+        defCompatibleWith( a_x86_64_v2(),	a_noarch(),a_i386(),a_i486(),a_i586(),a_i686(),a_athlon(),a_x86_64() );
+        defCompatibleWith( a_x86_64_v3(),	a_noarch(),a_i386(),a_i486(),a_i586(),a_i686(),a_athlon(),a_x86_64(),a_x86_64_v2() );
+        defCompatibleWith( a_x86_64_v4(),	a_noarch(),a_i386(),a_i486(),a_i586(),a_i686(),a_athlon(),a_x86_64(),a_x86_64_v2(),a_x86_64_v3() );
 
         defCompatibleWith( a_pentium3(),	a_noarch(),a_i386(),a_i486(),a_i586(),a_i686() );
         defCompatibleWith( a_pentium4(),	a_noarch(),a_i386(),a_i486(),a_i586(),a_i686(),a_pentium3() );

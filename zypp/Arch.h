@@ -170,6 +170,12 @@ namespace zypp
   extern const Arch Arch_pentium3;
 
   /** \relates Arch */
+  extern const Arch Arch_x86_64_v4;
+  /** \relates Arch */
+  extern const Arch Arch_x86_64_v3;
+  /** \relates Arch */
+  extern const Arch Arch_x86_64_v2;
+  /** \relates Arch */
   extern const Arch Arch_x86_64;
   /** \relates Arch */
   extern const Arch Arch_athlon;
