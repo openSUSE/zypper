@@ -5,8 +5,8 @@ msgstr ""
 "Project-Id-Version: opensuse-i 18n\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-12-22 14:35+0100\n"
-"PO-Revision-Date: 2019-05-21 15:55+0000\n"
-"Last-Translator: Mohammad Rezaei Seresht <m_rezaei_seresht@hotmail.com>\n"
+"PO-Revision-Date: 2023-03-03 15:14+0000\n"
+"Last-Translator: Mohammad Rezaei Seresht <m.networking@gmail.com>\n"
 "Language-Team: Persian <https://l10n.opensuse.org/projects/libzypp/master/fa/"
 ">\n"
 "Language: fa\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 3.3\n"
+"X-Generator: Weblate 4.9.1\n"
 
 #: zypp/CountryCode.cc:50
 msgid "Unknown country: "
@@ -1201,7 +1201,7 @@ msgstr "جزایر ویرجین بریتانیا"
 #. :VGB:092:
 #: zypp/CountryCode.cc:394
 msgid "Virgin Islands, U.S."
-msgstr "جزایر ویرجین ایالات متحده"
+msgstr "جزایر ویرجین ایالات متحده."
 
 #. :VIR:850:
 #: zypp/CountryCode.cc:395
@@ -1301,7 +1301,7 @@ msgstr "در حذف کلید ناموفق بود."
 #: zypp/KeyRing.cc:772
 #, c-format, boost-format
 msgid "Signature file %s not found"
-msgstr "پرونده ی امضای %s  یافت نشد"
+msgstr "پرونده ی امضای %s یافت نشد"
 
 #: zypp/LanguageCode.cc:49
 msgid "Unknown language: "
@@ -3698,16 +3698,15 @@ msgstr "(در 24 ساعت منقضی میشود)"
 #, c-format, boost-format
 msgid "(expires in %d day)"
 msgid_plural "(expires in %d days)"
-msgstr[0] "(در %d منقضی می شود)"
-msgstr[1] "(در %d منقضی می شود)"
-msgstr[2] "(در %d منقضی می شود)"
+msgstr[0] "(در %d روز منقضی می شود)"
+msgstr[1] "(در %d روز دیگر منقضی می شود)"
 
 #. translator: %1% is a gpg key ID like 3DBDC284
 #. %2% is a cache directories path
 #: zypp/RepoInfo.cc:548
 #, boost-format
 msgid "Looking for gpg key ID %1% in cache %2%."
-msgstr "در جستجوی کلید gpg %1%  در کش %2% ."
+msgstr "در جستجوی کلید gpg %1% در کش %2% ."
 
 #. translator: %1% is a gpg key ID like 3DBDC284
 #. %2% is a repositories name
@@ -3720,7 +3719,7 @@ msgstr "در جستجوی شناسه کلید gpg %1% در مخزن %2%."
 #: zypp/RepoInfo.cc:600
 #, boost-format
 msgid "Repository %1% does not define additional 'gpgkey=' URLs."
-msgstr ""
+msgstr "مخزن %1% URL های اضافی 'gpgkey=' را تعریف نمی کند."
 
 #: zypp/RepoManager.cc:317
 #, boost-format
@@ -3737,7 +3736,7 @@ msgstr "ناموفق در خواندن مسیر '%s'"
 #: zypp/RepoManager.cc:335
 #, boost-format
 msgid "Cannot read repo file '%1%': Permission denied"
-msgstr "نمیتوان پرونده ی مخزن  '%1%' را خواند: دسترسی غیرمجاز است"
+msgstr "نمیتوان پرونده ی مخزن '%1%' را خواند: دسترسی غیرمجاز است"
 
 #: zypp/RepoManager.cc:358
 msgid "Repository alias cannot start with dot."
@@ -3766,9 +3765,8 @@ msgstr "سرویس ناشناخته '%1%': در حال حذف مخزن سروی�
 #: zypp/RepoManager.cc:1142
 msgid "Valid metadata not found at specified URL"
 msgid_plural "Valid metadata not found at specified URLs"
-msgstr[0] "شبه داده ی معتبر  در آدرس تعیین شده یافت نشد"
-msgstr[1] "شبه داده ی معتبر در آدرسهای تعیین شده یافت نشد"
-msgstr[2] "شبه داده ی معتبر در آدرسهای تعیین شده یافت نشد"
+msgstr[0] "شبه داده ی معتبر در آدرس تعیین شده یافت نشد"
+msgstr[1] "شبه داده ی معتبر در آدرس های تعیین شده یافت نشد"
 
 #: zypp/RepoManager.cc:1194 zypp/RepoManager.cc:1313 zypp/RepoManager.cc:1369
 #, c-format, boost-format
@@ -3813,7 +3811,7 @@ msgstr "خطا در تلاش برای خواندن از '%s'"
 #: zypp/RepoManager.cc:1537 zypp/RepoManager.cc:2554
 #, c-format, boost-format
 msgid "Unknown error reading from '%s'"
-msgstr "خطای ناشناس در خواندن از  '%s'"
+msgstr "خطای ناشناس در خواندن از '%s'"
 
 #: zypp/RepoManager.cc:1675
 #, c-format, boost-format
@@ -3829,7 +3827,7 @@ msgstr "نام پرونده ی مخزن نامعتبر در '%s'"
 #: zypp/RepoManager.cc:1804
 #, c-format, boost-format
 msgid "Removing repository '%s'"
-msgstr "در حال حذف مخزن  '%s'"
+msgstr "در حال حذف مخزن '%s'"
 
 #: zypp/RepoManager.cc:1823 zypp/RepoManager.cc:1901
 msgid "Can't figure out where the repo is stored."
@@ -3959,18 +3957,20 @@ msgstr "احراز هویت برای '%s' مورد نیاز است"
 #. just report (NO_ERROR); no interactive request to the user
 #: zypp/media/MediaCurl.cc:785
 msgid "Will try again..."
-msgstr ""
+msgstr "دوباره تلاش خواهد کرد..."
 
 #: zypp/media/MediaCurl.cc:789
 #, boost-format
 msgid "Giving up after %1% attempts."
-msgstr ""
+msgstr "تسلیم شدن پس از %1% تلاش."
 
 #: zypp/media/MediaCurl.cc:905 zypp-curl/ng/network/networkrequesterror.cc:127
 msgid ""
 "Visit the SUSE Customer Center to check whether your registration is valid "
 "and has not expired."
 msgstr ""
+"برای بررسی اینکه آیا ثبت نام شما معتبر است و منقضی نشده است، به مرکز مشتریان "
+"SUSE مراجعه کنید."
 
 #: zypp/media/MediaCurl.cc:907 zypp-curl/ng/network/networkrequesterror.cc:129
 msgid ""
@@ -4047,7 +4047,7 @@ msgstr "هیچ آدرسی در مخزن نیست."
 #: zypp/repo/SUSEMediaVerifier.cc:104 zypp-media/ng/mediaverifier.cc:109
 #, boost-format
 msgid "Expected medium %1%/%2% identified by file '%3%' with content:"
-msgstr ""
+msgstr "محیط مورد انتظار %1%/%2% شناسایی شده توسط فایل \"%3%\" با محتوا:"
 
 #. [lhs][rhs] 0 = installed; 1 = to be installed
 #. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
@@ -4214,28 +4214,28 @@ msgstr "نادیده گرفته برخی وابستگیها به صورت عمو
 msgid ""
 "the installed %1% does not belong to a distupgrade repository and must be "
 "replaced"
-msgstr ""
+msgstr "%1% نصب شده متعلق به مخزن disupgrade نیست و باید جایگزین شود"
 
 #. just in case
 #: zypp/solver/detail/SATResolver.cc:1145
 #, boost-format
 msgid "the to be installed %1% does not belong to a distupgrade repository"
-msgstr ""
+msgstr "%1% که قرار است نصب شود به یک مخزن ارتقاء تعلق ندارد"
 
 #: zypp/solver/detail/SATResolver.cc:1149
 #, boost-format
 msgid "the installed %1% has inferior architecture"
-msgstr ""
+msgstr "%1% نصب شده دارای معماری ضعیفی است"
 
 #: zypp/solver/detail/SATResolver.cc:1151
 #, boost-format
 msgid "the to be installed %1% has inferior architecture"
-msgstr ""
+msgstr "%1% که قرار است نصب شود، معماری پایین‌تری دارد"
 
 #: zypp/solver/detail/SATResolver.cc:1154
 #, boost-format
 msgid "problem with the installed %1%"
-msgstr ""
+msgstr "مشکل با %1% نصب شده"
 
 #: zypp/solver/detail/SATResolver.cc:1157
 msgid "conflicting requests"
@@ -4248,17 +4248,17 @@ msgstr "برخی مشکلات وابستگی"
 #: zypp/solver/detail/SATResolver.cc:1163
 #, boost-format
 msgid "nothing provides the requested '%1%'"
-msgstr ""
+msgstr "هیچ چیز \"% 1%\" درخواستی را ارائه نمی دهد"
 
 #: zypp/solver/detail/SATResolver.cc:1164
 #: zypp/solver/detail/SATResolver.cc:1168
 msgid "Have you enabled all the required repositories?"
-msgstr ""
+msgstr "آیا تمام مخازن مورد نیاز را فعال کرده اید؟"
 
 #: zypp/solver/detail/SATResolver.cc:1167
 #, boost-format
 msgid "the requested package %1% does not exist"
-msgstr ""
+msgstr "بسته درخواستی %1% وجود ندارد"
 
 #: zypp/solver/detail/SATResolver.cc:1171
 msgid "unsupported request"
@@ -4267,95 +4267,95 @@ msgstr "درخواست پشتیبانی نشده"
 #: zypp/solver/detail/SATResolver.cc:1174
 #, boost-format
 msgid "'%1%' is provided by the system and cannot be erased"
-msgstr ""
+msgstr "\"%1%\" توسط سیستم ارائه شده است و قابل پاک کردن نیست"
 
 #: zypp/solver/detail/SATResolver.cc:1177
 #, boost-format
 msgid "%1% is not installable"
-msgstr ""
+msgstr "%1% قابل نصب نیست"
 
 #: zypp/solver/detail/SATResolver.cc:1182
 #, boost-format
 msgid "nothing provides '%1%' needed by the installed %2%"
-msgstr ""
+msgstr "هیچ چیز «% 1%» مورد نیاز %2% نصب شده را فراهم نمی کند"
 
 #: zypp/solver/detail/SATResolver.cc:1184
 #, boost-format
 msgid "nothing provides '%1%' needed by the to be installed %2%"
-msgstr ""
+msgstr "هیچ چیز «% 1%» مورد نیاز برای نصب %2% را فراهم نمی کند"
 
 #: zypp/solver/detail/SATResolver.cc:1187
 #, boost-format
 msgid "cannot install both %1% and %2%"
-msgstr ""
+msgstr "نمی تواند %1% و %2% را نصب کند"
 
 #: zypp/solver/detail/SATResolver.cc:1192
 #, boost-format
 msgid "the installed %1% conflicts with '%2%' provided by the installed %3%"
-msgstr ""
+msgstr "%1% نصب شده با \"%2%\" ارائه شده توسط %3% نصب شده در تضاد است"
 
 #: zypp/solver/detail/SATResolver.cc:1194
 #, boost-format
 msgid ""
 "the installed %1% conflicts with '%2%' provided by the to be installed %3%"
-msgstr ""
+msgstr "%1% نصب شده با \"%2%\" ارائه شده توسط %3% نصب شده در تضاد است"
 
 #: zypp/solver/detail/SATResolver.cc:1198
 #, boost-format
 msgid ""
 "the to be installed %1% conflicts with '%2%' provided by the installed %3%"
-msgstr ""
+msgstr "%1% برای نصب با \"%2%\" ارائه شده توسط %3% نصب شده در تضاد است"
 
 #: zypp/solver/detail/SATResolver.cc:1200
 #, boost-format
 msgid ""
 "the to be installed %1% conflicts with '%2%' provided by the to be installed "
 "%3%"
-msgstr ""
+msgstr "مورد نصب %1% با \"% 2%\" ارائه شده توسط \"%3%\" برای نصب در تضاد است"
 
 #: zypp/solver/detail/SATResolver.cc:1207
 #, boost-format
 msgid "the installed %1% obsoletes '%2%' provided by the installed %3%"
-msgstr ""
+msgstr "%1% نصب شده، \"%2%\" ارائه شده توسط %3% نصب شده منسوخ شده است"
 
 #: zypp/solver/detail/SATResolver.cc:1209
 #, boost-format
 msgid "the installed %1% obsoletes '%2%' provided by the to be installed %3%"
-msgstr ""
+msgstr "%1% نصب شده، \"%2%\" ارائه شده توسط %3% نصب شده منسوخ شده است"
 
 #: zypp/solver/detail/SATResolver.cc:1213
 #, boost-format
 msgid "the to be installed %1% obsoletes '%2%' provided by the installed %3%"
-msgstr ""
+msgstr "%1% نصب شده، \"%2%\" ارائه شده توسط %3% نصب شده منسوخ شده است"
 
 #: zypp/solver/detail/SATResolver.cc:1215
 #, boost-format
 msgid ""
 "the to be installed %1% obsoletes '%2%' provided by the to be installed %3%"
-msgstr ""
+msgstr "مورد نصب %1% منسوخ شده '%2%' ارائه شده توسط 3% برای نصب"
 
 #: zypp/solver/detail/SATResolver.cc:1220
 #, boost-format
 msgid "the installed %1% conflicts with '%2%' provided by itself"
-msgstr ""
+msgstr "%1% نصب شده با \"%2%\" ارائه شده توسط خودش در تضاد است"
 
 #: zypp/solver/detail/SATResolver.cc:1222
 #, boost-format
 msgid "the to be installed %1% conflicts with '%2%' provided by itself"
-msgstr ""
+msgstr "%1% که باید نصب شود با \"%2%\" ارائه شده توسط خودش تضاد دارد"
 
 #: zypp/solver/detail/SATResolver.cc:1254
 #, boost-format
 msgid ""
 "the installed %1% requires '%2%', but this requirement cannot be provided"
-msgstr ""
+msgstr "%1% که باید نصب شود با \"%2%\" ارائه شده توسط خودش تضاد دارد"
 
 #: zypp/solver/detail/SATResolver.cc:1256
 #, boost-format
 msgid ""
 "the to be installed %1% requires '%2%', but this requirement cannot be "
 "provided"
-msgstr ""
+msgstr "برای نصب %1% به \"%2%\" نیاز دارد، اما این نیاز قابل ارائه نیست"
 
 #: zypp/solver/detail/SATResolver.cc:1258
 msgid "deleted providers: "
@@ -4377,13 +4377,13 @@ msgstr "ارائه دهندگان غیر قابل نصب: "
 #: zypp/solver/detail/SATResolver.cc:1307
 #, boost-format
 msgid "%1% is not yet fully integrated into %2%."
-msgstr ""
+msgstr "%1% هنوز به طور کامل در %2 ادغام نشده است."
 
 #: zypp/solver/detail/SATResolver.cc:1308
 msgid ""
 "Typically you want to keep the PTF and choose to not install the maintenance "
 "patches."
-msgstr ""
+msgstr "معمولاً می‌خواهید PTF را نگه دارید و وصله‌های نگهداری را نصب نکنید."
 
 #. translator: %1% is the name of a PTF.
 #: zypp/solver/detail/SATResolver.cc:1317
@@ -4392,6 +4392,8 @@ msgid ""
 "Removing the installed %1% in this context will remove (not replace!) the "
 "included PTF-packages too."
 msgstr ""
+"حذف %1% نصب شده در این زمینه، بسته‌های PTF موجود را نیز حذف می‌کند (نه "
+"جایگزین!)."
 
 #: zypp/solver/detail/SATResolver.cc:1318
 #, boost-format
@@ -4399,42 +4401,44 @@ msgid ""
 "The PTF should be removed by calling '%1%'. This will update the included "
 "PTF-packages rather than removing them."
 msgstr ""
+"PTF باید با فراخوانی '%1%' حذف شود. این کار بسته‌های PTF ارائه شده را به‌جای "
+"حذف آن‌ها به‌روزرسانی می‌کند."
 
 #: zypp/solver/detail/SATResolver.cc:1319
 msgid "Typically you want to keep the PTF or choose to cancel the action."
-msgstr ""
+msgstr "معمولاً می‌خواهید PTF را نگه دارید یا کنش را لغو کنید."
 
 #. translator: %1% is the name of a PTF.
 #: zypp/solver/detail/SATResolver.cc:1324
 #, boost-format
 msgid "The installed %1% blocks the desired action."
-msgstr ""
+msgstr "%1% نصب شده عمل مورد نظر را مسدود می کند."
 
 #: zypp/solver/detail/SATResolver.cc:1325
 msgid "Typically you want to keep the PTF and choose to cancel the action."
-msgstr ""
+msgstr "معمولاً می‌خواهید PTF را نگه دارید و کنش را لغو کنید."
 
 #: zypp/solver/detail/SATResolver.cc:1382
 #, boost-format
 msgid "remove lock to allow removal of %1%"
-msgstr ""
+msgstr "حذف قفل برای اجازه حذف %1%"
 
 #: zypp/solver/detail/SATResolver.cc:1389
 #: zypp/solver/detail/SATResolver.cc:1427
 #, boost-format
 msgid "do not install %1%"
-msgstr ""
+msgstr "%1% را نصب نکن"
 
 #: zypp/solver/detail/SATResolver.cc:1406
 #: zypp/solver/detail/SATResolver.cc:1448
 #, boost-format
 msgid "keep %1%"
-msgstr ""
+msgstr "نگه داشتن %1%"
 
 #: zypp/solver/detail/SATResolver.cc:1411
 #, boost-format
 msgid "remove lock to allow installation of %1%"
-msgstr ""
+msgstr "حذف قفل برای اجازه نصب %1%"
 
 #: zypp/solver/detail/SATResolver.cc:1462
 #: zypp/solver/detail/SATResolver.cc:1483
@@ -4449,65 +4453,65 @@ msgstr "نادیده گرفتن هشدار سیستم شکسته شده"
 #: zypp/solver/detail/SATResolver.cc:1468
 #, boost-format
 msgid "do not ask to install a solvable providing %1%"
-msgstr ""
+msgstr "درخواستی برای نصب یک قابل حل ارائه 1% نپرسید"
 
 #: zypp/solver/detail/SATResolver.cc:1490
 #, boost-format
 msgid "do not ask to delete all solvables providing %1%"
-msgstr ""
+msgstr "درخواست حذف همه قابل حل‌های ارائه‌دهنده %1% نکنید"
 
 #: zypp/solver/detail/SATResolver.cc:1503
 #, boost-format
 msgid "do not install most recent version of %1%"
-msgstr ""
+msgstr "آخرین نسخه %1% را نصب نکنید"
 
 #: zypp/solver/detail/SATResolver.cc:1524
 #, boost-format
 msgid "keep %1% despite the inferior architecture"
-msgstr ""
+msgstr "%1% را با وجود معماری پایین نگه دارید"
 
 #: zypp/solver/detail/SATResolver.cc:1529
 #, boost-format
 msgid "install %1% despite the inferior architecture"
-msgstr ""
+msgstr "با وجود معماری ضعیف، %1% را نصب کنید"
 
 #: zypp/solver/detail/SATResolver.cc:1538
 #, boost-format
 msgid "keep obsolete %1%"
-msgstr ""
+msgstr "منسوخ نگه داشتن %1%"
 
 #: zypp/solver/detail/SATResolver.cc:1543
 #, boost-format
 msgid "install %1% from excluded repository"
-msgstr ""
+msgstr "%1% را از مخزن حذف شده نصب کنید"
 
 #. translator: %1% is a package name
 #: zypp/solver/detail/SATResolver.cc:1557
 #, boost-format
 msgid "install %1% although it has been retracted"
-msgstr ""
+msgstr "%1% را نصب کنید اگرچه پس گرفته شده است"
 
 #. translator: %1% is a package name
 #: zypp/solver/detail/SATResolver.cc:1560
 #, boost-format
 msgid "allow installing the PTF %1%"
-msgstr ""
+msgstr "اجازه نصب PTF %1%"
 
 #. translator: %1% is a package name
 #: zypp/solver/detail/SATResolver.cc:1563
 #, boost-format
 msgid "install %1% although it is blacklisted"
-msgstr ""
+msgstr "%1% را نصب کنید اگرچه در لیست سیاه قرار دارد"
 
 #: zypp/solver/detail/SATResolver.cc:1583
 #, boost-format
 msgid "downgrade of %1% to %2%"
-msgstr ""
+msgstr "کاهش %1% به %2%"
 
 #: zypp/solver/detail/SATResolver.cc:1590
 #, boost-format
 msgid "architecture change of %1% to %2%"
-msgstr ""
+msgstr "تغییر معماری %1% به %2%"
 
 #. FIXME? Actually .ident() must be eq. But the more verbose 'else' isn't bad either.
 #: zypp/solver/detail/SATResolver.cc:1601
@@ -4516,6 +4520,8 @@ msgid ""
 "install %1% (with vendor change)\n"
 "  %2%  -->  %3%"
 msgstr ""
+"نصب %1% (با تغییر vendor)\n"
+"   %2% --> %3%"
 
 #: zypp/solver/detail/SATResolver.cc:1606
 #, boost-format
@@ -4523,27 +4529,29 @@ msgid ""
 "install %1% from vendor %2%\n"
 "  replacing %3% from vendor %4%"
 msgstr ""
+"نصب %1% از vendor %2%\n"
+"   جایگزینی %3% از vendor %4%"
 
 #: zypp/solver/detail/SATResolver.cc:1615
 #, boost-format
 msgid "replacement of %1% with %2%"
-msgstr ""
+msgstr "جایگزینی %1% با %2%"
 
 #: zypp/solver/detail/SATResolver.cc:1626
 #, boost-format
 msgid "deinstallation of %1%"
-msgstr ""
+msgstr "حذف نصب %1%"
 
 #: zypp/target/RpmPostTransCollector.cc:98
 #, boost-format
 msgid "Executing %%posttrans script '%1%'"
-msgstr ""
+msgstr "در حال اجرای %%اسکریپت posttrans \"% 1%\""
 
 #. show a final message
 #: zypp/target/RpmPostTransCollector.cc:172
 #, c-format, boost-format
 msgid "Executing %posttrans scripts"
-msgstr ""
+msgstr "اجرای %posttrans scripts"
 
 #: zypp/target/TargetException.cc:27
 msgid "Installation has been aborted as directed."
@@ -4581,7 +4589,7 @@ msgstr "پیغام بروزرسانی جدید"
 
 #: zypp/target/TargetImpl.cc:2684
 msgid "Executing the transaction failed because of the following problems:"
-msgstr ""
+msgstr "اجرای تراکنش به دلیل مشکلات زیر انجام نشد:"
 
 #. TranslatorExplanation after semicolon is error message
 #. TranslatorExplanation the colon is followed by an error message
@@ -4604,11 +4612,11 @@ msgstr "ناموفق در حذف کلید عمومی %1%"
 
 #: zypp/target/rpm/RpmDb.cc:1271
 msgid "Package header is not signed!"
-msgstr ""
+msgstr "سرصفحه بسته امضا نشده است!"
 
 #: zypp/target/rpm/RpmDb.cc:1273
 msgid "Package payload is not signed!"
-msgstr ""
+msgstr "محموله بسته امضا نشده است!"
 
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
@@ -4785,7 +4793,7 @@ msgstr "شکل آدرس یک جزء میزبان را اجازه نمیدهد"
 #: zypp-core/url/UrlBase.cc:1126
 #, c-format, boost-format
 msgid "Invalid host component '%s'"
-msgstr "جزء میزبان نامعتبر  '%s'"
+msgstr "مؤلفه میزبان نامعتبر «%s»"
 
 #: zypp-core/url/UrlBase.cc:1147
 msgid "Url scheme does not allow a port"
@@ -4794,7 +4802,7 @@ msgstr "شکل آدس یک درگاه را مجاز نمیکند"
 #: zypp-core/url/UrlBase.cc:1158
 #, c-format, boost-format
 msgid "Invalid port component '%s'"
-msgstr "جزء درگاه نامعتبر  '%s'"
+msgstr "جزء درگاه نامعتبر '%s'"
 
 #: zypp-core/url/UrlBase.cc:1175
 msgid "Url scheme requires path name"
@@ -4837,11 +4845,11 @@ msgstr "دستور با خطای ناشناخته خارج شد."
 #: zypp-core/zyppng/io/forkspawnengine.cc:150
 #: zypp-core/zyppng/io/forkspawnengine.cc:392
 msgid "Invalid spawn arguments given."
-msgstr ""
+msgstr "آرگومان های ارسال نامعتبر ارائه شده است."
 
 #: zypp-core/zyppng/io/forkspawnengine.cc:206
 msgid "Unable to create control pipe."
-msgstr ""
+msgstr "ایجاد لوله کنترل امکان پذیر نیست."
 
 #: zypp-core/zyppng/io/forkspawnengine.cc:272
 #, c-format, boost-format
@@ -4856,7 +4864,7 @@ msgstr "نمیتوان chdir کرد به '%s' (%s)."
 #: zypp-core/zyppng/io/forkspawnengine.cc:283
 #, c-format, boost-format
 msgid "Can't chdir to '%s' inside chroot '%s' (%s)."
-msgstr "نمیتوان chdir کرد به '%s'  درون chroot '%s' (%s)."
+msgstr "نمیتوان chdir کرد به '%s' درون chroot '%s' (%s)."
 
 #. don't want to get here
 #: zypp-core/zyppng/io/forkspawnengine.cc:312
@@ -4873,22 +4881,22 @@ msgstr "نمیتوان fork کرد (%s)."
 #: zypp-core/zyppng/io/forkspawnengine.cc:338
 #, c-format, boost-format
 msgid "Can't exec '%s', chdir failed (%s)."
-msgstr ""
+msgstr "نمی‌توان «%s» را اجرا کرد، chdir ناموفق بود (%s)."
 
 #: zypp-core/zyppng/io/forkspawnengine.cc:341
 #, c-format, boost-format
 msgid "Can't exec '%s', chroot failed (%s)."
-msgstr ""
+msgstr "نمی‌توان «%s» را اجرا کرد، chroot ناموفق بود (%s)."
 
 #: zypp-core/zyppng/io/forkspawnengine.cc:344
 #, c-format, boost-format
 msgid "Can't exec '%s', exec failed (%s)."
-msgstr ""
+msgstr "نمی‌توان «%s» را اجرا کرد، exec ناموفق بود (%s)."
 
 #: zypp-core/zyppng/io/forkspawnengine.cc:348
 #, c-format, boost-format
 msgid "Can't exec '%s', unexpected error."
-msgstr ""
+msgstr "نمی‌توان «%s» را اجرا کرد، خطای غیرمنتظره."
 
 #: zypp-media/mediaexception.cc:33
 #, c-format, boost-format
@@ -5020,12 +5028,13 @@ msgstr "اجازه برای دسترسی به '%s' داده نشد."
 #: zypp-curl/ng/network/networkrequesterror.cc:122
 #, c-format, boost-format
 msgid "Timeout exceeded when accessing '%s'."
-msgstr "مهلت زمانی در هنگام دسترسی به '%s' به اتمام رسید."
+msgstr "مهلت زمانی در هنگام دسترسی به '%s' پایان یافت."
 
 #: zypp-media/mediaexception.cc:197
 #, c-format, boost-format
 msgid "Downloaded data exceeded the expected filesize '%s' of '%s'."
 msgstr ""
+"داده های دانلود شده از اندازه فایل مورد انتظار '%s' از '%s' فراتر رفته است."
 
 #: zypp-media/mediaexception.cc:205
 #: zypp-curl/ng/network/networkrequesterror.cc:118
@@ -5040,7 +5049,7 @@ msgstr " ایراد گواهی SSL، لطفا بررسی کنید که گواه�
 
 #: zypp-media/mediaexception.cc:220
 msgid "No free ressources available to attach medium."
-msgstr ""
+msgstr "هیچ منبع رایگانی برای پیوست کردن رسانه موجود نیست."
 
 #: zypp-curl/auth/curlauthdata.cc:97
 #, c-format, boost-format
@@ -5053,6 +5062,8 @@ msgid ""
 "Download (curl) error for '%s':\n"
 "Error code: %s\n"
 msgstr ""
+"خطای دانلود (curl) برای '%s':\n"
+"کد خطا: %s\n"
 
 #: zypp-curl/ng/network/networkrequesterror.cc:149
 #, c-format, boost-format
@@ -5060,6 +5071,8 @@ msgid ""
 "Download (curl) error for '%s':\n"
 "Unable to retrieve HTTP response\n"
 msgstr ""
+"خطای دانلود (curl) برای '%s':\n"
+"پاسخ HTTP قابل بازیابی نیست\n"
 
 #~ msgid "Package is not signed!"
 #~ msgstr "بسته مورد تایید نیست!"
