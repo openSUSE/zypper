@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: zypp.sv\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-12-22 14:35+0100\n"
-"PO-Revision-Date: 2022-05-31 18:12+0000\n"
+"PO-Revision-Date: 2023-03-05 16:14+0000\n"
 "Last-Translator: Luna  Jernberg <bittin@opensuse.org>\n"
 "Language-Team: Swedish <https://l10n.opensuse.org/projects/libzypp/master/sv/"
 ">\n"
@@ -4135,12 +4135,12 @@ msgstr "Autentisering krävs för '%s'"
 #. just report (NO_ERROR); no interactive request to the user
 #: zypp/media/MediaCurl.cc:785
 msgid "Will try again..."
-msgstr ""
+msgstr "Kommer att försöka igen..."
 
 #: zypp/media/MediaCurl.cc:789
 #, boost-format
 msgid "Giving up after %1% attempts."
-msgstr ""
+msgstr "Ger upp efter %1% försök."
 
 #: zypp/media/MediaCurl.cc:905 zypp-curl/ng/network/networkrequesterror.cc:127
 msgid ""
