@@ -12,10 +12,10 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-12-24 02:27+0100\n"
-"PO-Revision-Date: 2022-05-31 18:13+0000\n"
+"PO-Revision-Date: 2023-03-05 16:14+0000\n"
 "Last-Translator: Luna  Jernberg <bittin@opensuse.org>\n"
-"Language-Team: Swedish <https://l10n.opensuse.org/projects/zypper/master/sv/"
-">\n"
+"Language-Team: Swedish <https://l10n.opensuse.org/projects/zypper/master/sv/>"
+"\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -81,29 +81,29 @@ msgstr "Du kan köra '%1%' för att reparera eventuella beroendeproblem."
 #, c-format, boost-format
 msgid "The following package failed to install:"
 msgid_plural "The following %d packages failed to install:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Följande paket misslyckades att installera:"
+msgstr[1] "Följande paket %d misslyckades att installeras:"
 
 #: src/CommitSummary.cc:140
 #, c-format, boost-format
 msgid "The following package installation was skipped:"
 msgid_plural "The following %d package installations were skipped:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Följande paketinstallationer hoppades över:"
+msgstr[1] "Följande %d paketinstallationer hoppades över:"
 
 #: src/CommitSummary.cc:155
 #, c-format, boost-format
 msgid "The following package failed to uninstall:"
 msgid_plural "The following %d packages failed to uninstall:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Följande paket misslyckades att avinstalleras"
+msgstr[1] "Följande %d paket misslyckades att avinstalleras:"
 
 #: src/CommitSummary.cc:170
 #, c-format, boost-format
 msgid "The following package removal was skipped:"
 msgid_plural "The following %d package removal were skipped:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Följande paket borttagning hoppades över:"
+msgstr[1] "Följande %d paket borttagningar hoppades över:"
 
 #. translators: Appended when clipping a long enumeration:
 #. "ConsoleKit-devel ConsoleKit-doc ... and 20828 more items."
@@ -1688,8 +1688,8 @@ msgstr ""
 #, boost-format
 msgid "Received %1% new package signing key from repository \"%2%\":"
 msgid_plural "Received %1% new package signing keys from repository \"%2%\":"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Mottog %1% ny paket signeringsnyckel från förråd \"%2%\":"
+msgstr[1] "Mottog %1% nya paket signeringsnycklar från förråd \"%2%\":"
 
 #: src/callbacks/keyring.h:494
 msgid ""
@@ -1697,6 +1697,9 @@ msgid ""
 "repository. In order to validate those packages upon download and "
 "installation the new keys will be imported into the rpm database."
 msgstr ""
+"Dessa ytterligare nycklar används vanligtvis för att signera paket som "
+"skickas av förrådet. För att validera dessa paket vid nedladdning och "
+"installation kommer de nya nycklarna att importeras till RPM-databasen."
 
 #: src/callbacks/keyring.h:496
 msgid "New:"
@@ -1707,6 +1710,8 @@ msgid ""
 "The repository metadata introducing the new keys have been signed and "
 "validated by the trusted key:"
 msgstr ""
+"Förrådets metadata som introducerar de nya nycklarna har signerats och "
+"validerats av den pålitliga nyckeln:"
 
 #: src/callbacks/keyring.h:525
 #, c-format, boost-format
