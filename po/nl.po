@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-12-24 02:27+0100\n"
-"PO-Revision-Date: 2023-03-04 00:14+0000\n"
+"PO-Revision-Date: 2023-03-07 22:14+0000\n"
 "Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/zypper/master/nl/>\n"
 "Language: nl\n"
@@ -68,7 +68,7 @@ msgstr "Onbekende opdracht: ‘%s’"
 
 #: src/CommitSummary.cc:90
 msgid "Installation has completed with error."
-msgstr "Installatie is voltooid met een fout."
+msgstr "De installatie is afgerond met een foutmelding."
 
 #: src/CommitSummary.cc:92
 #, boost-format
@@ -188,7 +188,7 @@ msgstr "Tabelstijl (%1%)."
 
 #: src/Config.cc:426 src/commands/optionsets.cc:284
 msgid "Entering non-interactive mode."
-msgstr "Niet-interactieve modus wordt geactiveerd."
+msgstr "De niet-interactieve modus wordt geactiveerd."
 
 #. translators: --non-interactive, -n
 #: src/Config.cc:430
@@ -1211,7 +1211,7 @@ msgstr "Geïnstalleerd"
 #, boost-format
 msgid "Run '%1%' to see the complete list of locked items."
 msgstr ""
-"Voer '%1%' uit om de volledige lijst met vergrendelde items te bekijken."
+"Voer ‘%1%’ uit om de volledige lijst met vergrendelde items te bekijken."
 
 #: src/Summary.cc:1357
 #, c-format, boost-format
@@ -1224,15 +1224,13 @@ msgstr[1] "De volgende %d patches vereisen een herstart van het systeem:"
 #, c-format, boost-format
 msgid "The following package requires a system reboot:"
 msgid_plural "The following %d packages require a system reboot:"
-msgstr[0] ""
-"Het volgende pakket vereist dat het systeem opnieuw wordt opgestart:"
-msgstr[1] ""
-"De volgende %d pakketten vereisen dat het systeem opnieuw wordt opgestart:"
+msgstr[0] "Het volgende pakket vereist een herstart van het systeem:"
+msgstr[1] "De volgende %d pakketten vereisen een herstart van het systeem:"
 
 #: src/Summary.cc:1390
 #, boost-format
 msgid "Overall download size: %1%. Already cached: %2%."
-msgstr "Totale downloadgrootte: %1%. Reeds in de cache: %2%."
+msgstr "Totale downloadgrootte: %1% - Reeds in de cache: %2%."
 
 #: src/Summary.cc:1393
 msgid "Download only."
@@ -1242,7 +1240,7 @@ msgstr "Alleen downloaden."
 #: src/Summary.cc:1399
 #, c-format, boost-format
 msgid "After the operation, additional %s will be used."
-msgstr "Na de bewerking zal aanvullend %s worden gebruikt."
+msgstr "Na de bewerking zal nog eens %s worden gebruikt."
 
 #: src/Summary.cc:1401
 msgid "No additional space will be used or freed after the operation."
@@ -1365,8 +1363,8 @@ msgid ""
 "Package manager restart required. (Run this command once again after the "
 "update stack got updated)"
 msgstr ""
-"Opnieuw starten van de pakketbeheerder vereist. (Voer deze opdracht nog een "
-"keer uit nadat het de softwarestack voor bijwerken is bijgewerkt)"
+"Opnieuw starten van de pakketbeheerder vereist. (Voer deze opdracht nogmaals "
+"uit na het bijwerken van de bijwerklijst.)"
 
 #: src/Summary.cc:1612
 msgid "System reboot required."
