@@ -63,9 +63,11 @@ BOOST_AUTO_TEST_CASE(arch_test)
   BOOST_REQUIRE( ! Arch_x86_64.compatibleWith( Arch_noarch ) );
   BOOST_REQUIRE( ! Arch_x86_64.compatibleWith( Arch_i386 ) );
   BOOST_REQUIRE( Arch_x86_64.compatibleWith( Arch_x86_64 ) );
+  BOOST_REQUIRE( Arch_x86_64.compatibleWith( Arch_x86_64_v4 ) );
   //////////////////////////////////////////////////////////////////////
   //
   //////////////////////////////////////////////////////////////////////
+  BOOST_CHECK_EQUAL( Arch::baseArch( Arch_x86_64_v4 ), Arch_x86_64 );
   BOOST_CHECK_EQUAL( Arch::baseArch( Arch_x86_64 ), Arch_x86_64 );
   BOOST_CHECK_EQUAL( Arch::baseArch( Arch_i686 ), Arch_i386 );
   //////////////////////////////////////////////////////////////////////
