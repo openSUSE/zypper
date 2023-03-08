@@ -76,7 +76,6 @@ namespace zypp
     /* Features (%eax == 1) */
     /* %ecx */
     #define bit_SSE3        (1 << 0)
-    #define bit_LZCNT       (1 << 5)
     #define bit_SSSE3       (1 << 9)
     #define bit_FMA         (1 << 12)
     #define bit_CMPXCHG16B  (1 << 13)
@@ -91,6 +90,7 @@ namespace zypp
     /* Extended Features (%eax == 0x80000001) */
     /* %ecx */
     #define bit_LAHF_LM     (1 << 0)
+    #define bit_LZCNT       (1 << 5)
 
     /* Extended Features (%eax == 7) */
     /* %ebx */
@@ -116,9 +116,10 @@ namespace zypp
         if ((op_1_ecx & op_1_ecx_lv2) == op_1_ecx_lv2 && (op_80000001_ecx & bit_LAHF_LM))
             level = 2;
 
-        const unsigned int op_1_ecx_lv3 = bit_LZCNT | bit_FMA | bit_MOVBE | bit_OSXSAVE | bit_AVX | bit_F16C;
+        const unsigned int op_1_ecx_lv3 = bit_FMA | bit_MOVBE | bit_OSXSAVE | bit_AVX | bit_F16C;
         const unsigned int op_7_ebx_lv3 = bit_BMI | bit_AVX2 | bit_BMI2;
-        if (level == 2 && (op_1_ecx & op_1_ecx_lv3) == op_1_ecx_lv3 && (op_7_ebx & op_7_ebx_lv3) == op_7_ebx_lv3)
+        if (level == 2 && (op_1_ecx & op_1_ecx_lv3) == op_1_ecx_lv3 && (op_7_ebx & op_7_ebx_lv3) == op_7_ebx_lv3
+            && (op_80000001_ecx & bit_LZCNT))
             level = 3;
 
         const unsigned int op_7_ebx_lv4 = bit_AVX512F | bit_AVX512DQ | bit_AVX512CD | bit_AVX512BW | bit_AVX512VL;
