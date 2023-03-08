@@ -16,8 +16,8 @@ msgstr ""
 "Project-Id-Version: zypp.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-12-22 14:35+0100\n"
-"PO-Revision-Date: 2022-12-22 16:13+0000\n"
-"Last-Translator: Freek de Kruijf <freek@opensuse.org>\n"
+"PO-Revision-Date: 2023-03-08 20:14+0000\n"
+"Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/libzypp/master/nl/>"
 "\n"
 "Language: nl\n"
@@ -1303,21 +1303,21 @@ msgstr "Vult aan"
 #, c-format, boost-format
 msgid "Tried to import not existent key %s into keyring %s"
 msgstr ""
-"Er is een poging gedaan om een niet-bestaande sleutel %s te importeren in "
-"sleutelring %s"
+"Er is een poging gedaan om een niet-bestaande sleutel, ‘%s’, te importeren "
+"in sleutelbos %s"
 
 #: zypp/KeyRing.cc:759
 msgid "Failed to import key."
-msgstr "Importeren van sleutel is mislukt."
+msgstr "Het importeren is mislukt."
 
 #: zypp/KeyRing.cc:766
 msgid "Failed to delete key."
-msgstr "Verwijderen van sleutel is mislukt."
+msgstr "Het verwijderen is mislukt."
 
 #: zypp/KeyRing.cc:772
 #, c-format, boost-format
 msgid "Signature file %s not found"
-msgstr "Handtekeningbestand %s niet gevonden"
+msgstr "Het ondertekeningbestand, ‘%s’, is niet aangetroffen"
 
 #: zypp/LanguageCode.cc:49
 msgid "Unknown language: "
@@ -3682,56 +3682,56 @@ msgstr "De volgende acties worden uitgevoerd:"
 #. translators: an annotation to a gpg keys expiry date
 #: zypp/PublicKey.cc:64
 msgid "does not expire"
-msgstr "verloopt niet"
+msgstr "vervalt niet"
 
 #. translators: an annotation to a gpg keys expiry date: "expired: 1999-04-12"
 #: zypp/PublicKey.cc:69
 #, boost-format
 msgid "expired: %1%"
-msgstr "verlopen op: %1%"
+msgstr "vervallen op %1%"
 
 #. translators: an annotation to a gpg keys expiry date: "expires: 2111-04-12"
 #: zypp/PublicKey.cc:74
 #, boost-format
 msgid "expires: %1%"
-msgstr "verloopt op: %1%"
+msgstr "vervalt op %1%"
 
 #. translators: an annotation to a gpg keys expiry date
 #: zypp/PublicKey.cc:83
 msgid "(does not expire)"
-msgstr "(verloopt niet)"
+msgstr "(vervalt niet)"
 
 #. translators: an annotation to a gpg keys expiry date
 #: zypp/PublicKey.cc:92
 msgid "(EXPIRED)"
-msgstr "(VERLOPEN)"
+msgstr "(VERVALLEN)"
 
 #. translators: an annotation to a gpg keys expiry date
 #: zypp/PublicKey.cc:96
 msgid "(expires within 24h)"
-msgstr "(verloopt binnen 24 uur)"
+msgstr "(vervalt binnen 24 uur)"
 
 #. translators: an annotation to a gpg keys expiry date
 #: zypp/PublicKey.cc:100
 #, c-format, boost-format
 msgid "(expires in %d day)"
 msgid_plural "(expires in %d days)"
-msgstr[0] "(verloopt binnen %d dag)"
-msgstr[1] "(verloopt binnen %d dagen)"
+msgstr[0] "(vervalt binnen %d dag)"
+msgstr[1] "(vervalt binnen %d dagen)"
 
 #. translator: %1% is a gpg key ID like 3DBDC284
 #. %2% is a cache directories path
 #: zypp/RepoInfo.cc:548
 #, boost-format
 msgid "Looking for gpg key ID %1% in cache %2%."
-msgstr "Zoeken naar gpg-sleutel-ID %1% in cache %2%."
+msgstr "Bezig met zoeken naar gpg-sleutel-id ‘%1%’ in %2%-cache…"
 
 #. translator: %1% is a gpg key ID like 3DBDC284
 #. %2% is a repositories name
 #: zypp/RepoInfo.cc:576
 #, boost-format
 msgid "Looking for gpg key ID %1% in repository %2%."
-msgstr "Zoeken naar gpg-sleutel-ID %1% in opslagruimte %2%."
+msgstr "Bezig met zoeken naar gpg-sleutel-id ‘%1%’ in %2%-installatiebron…"
 
 #. translator: %1% is a repositories name
 #: zypp/RepoInfo.cc:600
@@ -3834,18 +3834,18 @@ msgstr "Onbekende fout bij lezen van '%s'"
 #: zypp/RepoManager.cc:1675
 #, c-format, boost-format
 msgid "Adding repository '%s'"
-msgstr "Opslagruimte '%s' wordt toegevoegd"
+msgstr "Bezig met toevoegen van installatiebron ‘%s’…"
 
 #. TranslatorExplanation '%s' is an URL
 #: zypp/RepoManager.cc:1763
 #, c-format, boost-format
 msgid "Invalid repo file name at '%s'"
-msgstr "Ongeldige naam van opslagruimtebestand bij '%s'"
+msgstr "Ongeldige naam van installatiebronbestand bij ‘%s’"
 
 #: zypp/RepoManager.cc:1804
 #, c-format, boost-format
 msgid "Removing repository '%s'"
-msgstr "Opslagruimte '%s' wordt verwijderd"
+msgstr "Bezig met verwijderen van installatiebron ‘%s’…"
 
 #: zypp/RepoManager.cc:1823 zypp/RepoManager.cc:1901
 msgid "Can't figure out where the repo is stored."
@@ -4035,14 +4035,14 @@ msgid ""
 "Package %s seems to be corrupted during transfer. Do you want to retry "
 "retrieval?"
 msgstr ""
-"Pakket %s lijkt beschadigd te zijn tijdens de overdracht. Wilt u het opnieuw "
-"ophalen?"
+"Het pakket, ‘%s’, lijkt beschadigd te zijn tijdens de overdracht. Wilt u het "
+"opnieuw ophalen?"
 
 #. TranslatorExplanation %s = name of the package being processed.
 #: zypp/repo/PackageProvider.cc:486
 #, c-format, boost-format
 msgid "Failed to provide Package %s. Do you want to retry retrieval?"
-msgstr "Pakket %s niet gevonden. Wilt u dit opnieuw ophalen?"
+msgstr "Het pakket, ‘%s’, is niet aangetroffen. Wilt u het opnieuw ophalen?"
 
 #: zypp/repo/PackageProvider.cc:609
 msgid "applydeltarpm check failed."
@@ -4082,10 +4082,10 @@ msgid ""
 "  conflicts with file from package\n"
 "     %3%"
 msgstr ""
-"Bestand %1%\n"
-"  van pakket\n"
+"Het bestand ‘%1%’\n"
+"  in het pakket\n"
 "     %2%\n"
-"  conflicteert met een bestand van pakket\n"
+"  botst met een bestand in het pakket\n"
 "     %3%"
 
 #. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
@@ -4098,10 +4098,10 @@ msgid ""
 "  conflicts with file from install of\n"
 "     %3%"
 msgstr ""
-"Bestand %1%\n"
-"  van pakket\n"
+"Het bestand ‘%1%’\n"
+"  in het pakket\n"
 "     %2%\n"
-"  conflicteert met een bestand van de installatie van\n"
+"  botst met een geïnstalleerd bestand van\n"
 "     %3%"
 
 #. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
@@ -4114,10 +4114,10 @@ msgid ""
 "  conflicts with file from package\n"
 "     %3%"
 msgstr ""
-"Bestand %1%\n"
+"Het bestand ‘%1%’\n"
 "  van de installatie van\n"
 "     %2%\n"
-"  conflicteert met een bestand van pakket\n"
+"  botst met een bestand van het pakket\n"
 "     %3%"
 
 #. TranslatorExplanation %1%(filename) %2%(package1) %3%(package2)
@@ -4130,10 +4130,10 @@ msgid ""
 "  conflicts with file from install of\n"
 "     %3%"
 msgstr ""
-"Bestand %1%\n"
+"Het bestand ‘%1%’\n"
 "  van de installatie van\n"
 "     %2%\n"
-"  conflicteert met een bestand van de installatie van\n"
+"  botst met een bestand van de installatie van\n"
 "     %3%"
 
 #. [lhs][rhs] 0 = installed; 1 = to be installed
@@ -4149,12 +4149,12 @@ msgid ""
 "  from package\n"
 "     %4%"
 msgstr ""
-"Bestand %1%\n"
-"  van pakket\n"
+"Het bestand ‘%1%’\n"
+"  in het pakket\n"
 "     %2%\n"
-"  conflicteert met een bestand\n"
+"  botst met het bestand\n"
 "     %3%\n"
-"  van pakket\n"
+"  in het pakket\n"
 "     %4%"
 
 #. TranslatorExplanation %1%(filename1) %2%(package1) %3%(filename2) %4%(package2)
@@ -4169,10 +4169,10 @@ msgid ""
 "  from install of\n"
 "     %4%"
 msgstr ""
-"Bestand %1%\n"
-"  van pakket\n"
+"Het bestand ‘%1%’\n"
+"  in het pakket\n"
 "     %2%\n"
-"  conflicteert met een bestand\n"
+"  botst met het bestand\n"
 "     %3%\n"
 "  van de installatie van\n"
 "     %4%"
@@ -4189,12 +4189,12 @@ msgid ""
 "  from package\n"
 "     %4%"
 msgstr ""
-"Bestand %1%\n"
+"Het bestand ‘%1%’\n"
 "  van de installatie van\n"
 "     %2%\n"
-"  conflicteert met een bestand\n"
+"  botst met het bestand\n"
 "     %3%\n"
-"  van pakket\n"
+"  in het pakket\n"
 "     %4%"
 
 #. TranslatorExplanation %1%(filename1) %2%(package1) %3%(filename2) %4%(package2)
@@ -4209,10 +4209,10 @@ msgid ""
 "  from install of\n"
 "     %4%"
 msgstr ""
-"Bestand %1%\n"
+"Het bestand ‘%1%’\n"
 "  van de installatie van\n"
 "     %2%\n"
-"  conflicteert met een bestand\n"
+"  botst met het bestand\n"
 "     %3%\n"
 "  van de installatie van\n"
 "     %4%"
@@ -4274,17 +4274,17 @@ msgstr "een afhankelijkheidsprobleem"
 #: zypp/solver/detail/SATResolver.cc:1163
 #, boost-format
 msgid "nothing provides the requested '%1%'"
-msgstr "niets levert de gevraagde '%1%'"
+msgstr "niets levert de gevraagde ‘%1%’"
 
 #: zypp/solver/detail/SATResolver.cc:1164
 #: zypp/solver/detail/SATResolver.cc:1168
 msgid "Have you enabled all the required repositories?"
-msgstr "Hebt u alle vereiste opslagruimten ingeschakeld?"
+msgstr "Zijn alle vereiste installatiebronnen ingeschakeld?"
 
 #: zypp/solver/detail/SATResolver.cc:1167
 #, boost-format
 msgid "the requested package %1% does not exist"
-msgstr "het gevraagde pakket %1% bestaat niet"
+msgstr "het gevraagde pakket, ‘%1%’, bestaat niet"
 
 #: zypp/solver/detail/SATResolver.cc:1171
 msgid "unsupported request"
