@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-12-24 02:27+0100\n"
-"PO-Revision-Date: 2023-03-07 22:14+0000\n"
+"PO-Revision-Date: 2023-03-08 13:14+0000\n"
 "Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/zypper/master/nl/>\n"
 "Language: nl\n"
@@ -1387,8 +1387,8 @@ msgid ""
 "PackageKit is blocking zypper. This happens if you have an updater applet or "
 "other software management application using PackageKit running."
 msgstr ""
-"PackageKit blokkeert zypper. Dit gebeurt als u een updater-applet of andere "
-"softwarebeheertoepassing toepast die PackageKit gebruikt bij de uitvoering."
+"PackageKit blokkeert zypper. Dit gebeurt als u een update-invoegtoepassing "
+"of andere softwarebeheerprogramma met PackageKit gebruikt."
 
 #: src/Zypper.cc:97
 msgid ""
@@ -1396,12 +1396,12 @@ msgid ""
 "but it depends on PackageKit how fast it will respond to this request."
 msgstr ""
 "We kunnen PackageKit vragen om de huidige actie zo snel mogelijk te "
-"onderbreken, maar het hangt af van PackageKit hoe snel het zal antwoorden op "
-"dit verzoek."
+"onderbreken, maar hoe snel hieraan wordt voldaan is afhankelijk van "
+"PackageKit."
 
 #: src/Zypper.cc:100
 msgid "Ask PackageKit to quit?"
-msgstr "PackageKit vertellen af te breken?"
+msgstr "Wilt u PackageKit verzoeken om af te breken?"
 
 #: src/Zypper.cc:109
 msgid "PackageKit is still running (probably busy)."
@@ -1420,12 +1420,12 @@ msgstr "Onverwachte uitzondering."
 #: src/Zypper.cc:282
 #, c-format, boost-format
 msgid "Type '%s' to get command-specific help."
-msgstr "Type '%s' om opdrachtspecifieke hulp."
+msgstr "Typ ‘%s’ voor uitleg en aanvullende opties."
 
 #: src/Zypper.cc:302
 #, c-format, boost-format
 msgid "Verbosity: %d"
-msgstr "Uitgebreidheid: %d"
+msgstr "Niveau: %d"
 
 #: src/Zypper.cc:311
 msgid "Enforced setting"
@@ -1445,7 +1445,7 @@ msgstr ""
 #: src/Zypper.cc:527 src/Zypper.cc:579
 #, c-format, boost-format
 msgid "The %s option has no effect here, ignoring."
-msgstr "De %s-optie heeft hier geen effect, genegeerd."
+msgstr "De %s-optie heeft hier geen effect en wordt genegeerd."
 
 #: src/Zypper.cc:650
 msgid "Non-option program arguments: "
@@ -1492,8 +1492,8 @@ msgid ""
 "We can't verify that no one meddled with this file, so it might not be "
 "trustworthy anymore! You should not continue unless you know it's safe."
 msgstr ""
-"We kunnen niet verifiëren dat er niet gerommeld is met dit bestand, het kan "
-"niet meer worden vertrouwd! U zou niet moeten doorgaan tenzij u weet dat het "
+"We kunnen niet verifiëren dat er niet geknoeid is met dit bestand, dus het "
+"kan niet meer worden vertrouwd! Ga niet door, tenzij u zeker weet dat het "
 "veilig is."
 
 #: src/callbacks/keyring.h:56
@@ -1502,13 +1502,13 @@ msgid ""
 "malicious change, so it might not be trustworthy anymore! You should not "
 "continue unless you know it's safe."
 msgstr ""
-"Dit bestand is na ondertekening gewijzigd. Dit kan een gevaarlijke wijziging "
-"zijn, het zou dus niet meer zijn te vertrouwen! U zou niet verder moeten "
-"gaan tenzij u weet dat het veilig is."
+"Dit bestand is na ondertekening gewijzigd. Deze wijziging kan gevaarlijk "
+"zijn, dus mogelijk niet meer te vertrouwen! Ga niet door, tenzij u zeker "
+"weet dat het veilig is."
 
 #: src/callbacks/keyring.h:85
 msgid "Repository:"
-msgstr "Opslagruimte:"
+msgstr "Installatiebron:"
 
 #: src/callbacks/keyring.h:87
 msgid "Key Fingerprint:"
@@ -1524,11 +1524,11 @@ msgstr "Sleutelalgoritme:"
 
 #: src/callbacks/keyring.h:90
 msgid "Key Created:"
-msgstr "Sleutel aangemaakt:"
+msgstr "Sleutel aangemaakt op:"
 
 #: src/callbacks/keyring.h:91
 msgid "Key Expires:"
-msgstr "Sleutel verloopt op:"
+msgstr "Sleutel vervalt op:"
 
 #: src/callbacks/keyring.h:93
 msgid "Subkey:"
@@ -1541,21 +1541,19 @@ msgstr "Rpm-naam:"
 #: src/callbacks/keyring.h:120
 #, boost-format
 msgid "The gpg key signing file '%1%' has expired."
-msgstr "De GPG-ondertekeningssleutel van bestand '%1%' is verlopen."
+msgstr "De gpg-sleutel van ‘%1%’ is vervallen."
 
 #: src/callbacks/keyring.h:126
 #, boost-format
 msgid "The gpg key signing file '%1%' will expire in %2% day."
 msgid_plural "The gpg key signing file '%1%' will expire in %2% days."
-msgstr[0] ""
-"De GPG-ondertekeningssleutel van bestand '%1%' zal verlopen na %2% dag."
-msgstr[1] ""
-"De GPG-ondertekeningssleutel van bestand '%1%' zal verlopen na %2% dagen."
+msgstr[0] "De gpg-sleutel van ‘%1%’ vervalt over %2% dag."
+msgstr[1] "De gpg-sleutel van ‘%1%’ vervalt over %2% dagen."
 
 #: src/callbacks/keyring.h:149
 #, c-format, boost-format
 msgid "Accepting an unsigned file '%s'."
-msgstr "Niet-ondertekend bestand '%s' accepteren."
+msgstr "Het niet-ondertekend bestand ‘%s’ wordt geaccepteerd."
 
 #: src/callbacks/keyring.h:153
 #, c-format, boost-format
@@ -1641,18 +1639,17 @@ msgstr "De volgende sleutel wordt automatisch vertrouwd:"
 
 #: src/callbacks/keyring.h:271
 msgid "New repository or package signing key received:"
-msgstr "Een nieuwe handtekening voor een opslagruimte of pakket is ontvangen:"
+msgstr "Er is een nieuwe installatiebron- of pakketsleutel ontvangen:"
 
 #. translators: this message is shown after showing description of the key
 #: src/callbacks/keyring.h:305
 msgid "Do you want to reject the key, trust temporarily, or trust always?"
-msgstr ""
-"Wilt u de sleutel verwerpen, tijdelijk vertrouwen of altijd vertrouwen?"
+msgstr "Wilt u de sleutel weigeren, tijdelijk vertrouwen of altijd vertrouwen?"
 
 #. translators: this message is shown after showing description of the key
 #: src/callbacks/keyring.h:308
 msgid "Do you want to reject the key, or trust always?"
-msgstr "Wilt u de sleutel verwerpen of altijd vertrouwen?"
+msgstr "Wilt u de sleutel weigeren of altijd vertrouwen?"
 
 #. translators: r/t/a stands for Reject/TrustTemporarily/trustAlways(import)
 #. translate to whatever is appropriate for your language
@@ -1661,12 +1658,12 @@ msgstr "Wilt u de sleutel verwerpen of altijd vertrouwen?"
 #. The answers should be lower case letters.
 #: src/callbacks/keyring.h:326
 msgid "r/t/a/"
-msgstr "v/t/a/"
+msgstr "w/t/a/"
 
 #. translators: the same as r/t/a, but without 'a'
 #: src/callbacks/keyring.h:329
 msgid "r/t"
-msgstr "v/t"
+msgstr "w/t"
 
 #. translators: r/a stands for Reject/trustAlways(import)
 #. translate to whatever is appropriate for your language
@@ -1675,28 +1672,27 @@ msgstr "v/t"
 #. The answers should be lower case letters.
 #: src/callbacks/keyring.h:336
 msgid "r/a/"
-msgstr "v/a/"
+msgstr "w/a/"
 
 #. translators: help text for the 'r' option in the 'r/t/a' prompt
 #: src/callbacks/keyring.h:342
 msgid "Don't trust the key."
-msgstr "Vertrouw de sleutel niet."
+msgstr "Vertrouw deze sleutel niet."
 
 #. translators: help text for the 't' option in the 'r/t/a' prompt
 #: src/callbacks/keyring.h:346
 msgid "Trust the key temporarily."
-msgstr "Vertrouw de sleutel tijdelijk."
+msgstr "Vertrouw deze sleutel tijdelijk."
 
 #. translators: help text for the 'a' option in the 'r/t/a' prompt
 #: src/callbacks/keyring.h:351
 msgid "Trust the key and import it into trusted keyring."
-msgstr "Vertrouw de sleutel en importeer deze naar de vertrouwde sleutelbos."
+msgstr "Vertrouw deze sleutel en importeer deze naar de sleutelbos."
 
 #: src/callbacks/keyring.h:389
 #, c-format, boost-format
 msgid "Ignoring failed signature verification for file '%s'!"
-msgstr ""
-"Mislukte verificatie van de ondertekening voor bestand '%s' wordt genegeerd!"
+msgstr "De mislukte verificatie van ‘%s’ wordt genegeerd!"
 
 #: src/callbacks/keyring.h:392
 #, c-format, boost-format
@@ -1897,13 +1893,12 @@ msgstr ""
 #. help text for the "Abort, retry, ignore?" prompt for media errors
 #: src/callbacks/media.cc:34
 msgid "Change current base URI and try retrieving the file again."
-msgstr ""
-"Wijzig de huidige basis-URI en probeer het bestand opnieuw op te halen."
+msgstr "Wijzig de huidige basis-uri en probeer het bestand opnieuw op te halen."
 
 #. translators: this is a prompt label, will appear as "New URI: "
 #: src/callbacks/media.cc:49
 msgid "New URI"
-msgstr "Nieuw URI"
+msgstr "Nieuwe uri"
 
 #. https options
 #. translators: a/r/i/u are replies to the "Abort, retry, ignore?" prompt.
@@ -1917,21 +1912,21 @@ msgstr "a/o/n/u/s"
 
 #: src/callbacks/media.cc:79
 msgid "Disable SSL certificate authority check and continue."
-msgstr "Schakel de controle van de SSL-certificaatautoriteit uit en ga door."
+msgstr "Schakel de controle van de ssl-certificaatautoriteit uit en ga door."
 
 #. translators: this is a prompt text
 #: src/callbacks/media.cc:82 src/callbacks/media.cc:174
 #: src/callbacks/media.cc:254 src/utils/prompt.cc:226 src/utils/prompt.cc:313
 msgid "Abort, retry, ignore?"
-msgstr "Afbreken, opnieuw proberen, negeren?"
+msgstr "Afbreken, opnieuw proberen of negeren?"
 
 #: src/callbacks/media.cc:90
 msgid "SSL certificate authority check disabled."
-msgstr "Controle SSL-certificaatautoriteit uitgeschakeld."
+msgstr "De ssl-certificaatautoriteitscontrole is uitgeschakeld."
 
 #: src/callbacks/media.cc:107
 msgid "No devices detected, cannot eject."
-msgstr "Geen apparaten gedetecteerd, kan niet uitwerpen."
+msgstr "Het uitwerpen is mislukt omdat er geen apparaten zijn aangetroffen."
 
 #: src/callbacks/media.cc:108
 msgid "Try to eject the device manually."
@@ -1939,7 +1934,7 @@ msgstr "Probeer het apparaat handmatig uit te werpen."
 
 #: src/callbacks/media.cc:119
 msgid "Detected devices:"
-msgstr "Gedetecteerde apparaten:"
+msgstr "Aangetroffen apparaten:"
 
 # cancel button label
 #: src/callbacks/media.cc:134
@@ -1948,7 +1943,7 @@ msgstr "Annuleren"
 
 #: src/callbacks/media.cc:136
 msgid "Select device to eject."
-msgstr "Selecteer het apparaat voor uitwerpen."
+msgstr "Kies het uit te werpen apparaat."
 
 #: src/callbacks/media.cc:151
 msgid "Insert the CD/DVD and press ENTER to continue."
@@ -1957,7 +1952,7 @@ msgstr "Plaats de cd/dvd en druk op ENTER om door te gaan."
 # window title for kernel loading (see txt_load_kernel)
 #: src/callbacks/media.cc:154
 msgid "Retrying..."
-msgstr "Opnieuw proberen..."
+msgstr "Bezig met opnieuw proberen…"
 
 #. cd/dvd options
 #. translators: a/r/i/u are replies to the "Abort, retry, ignore?" prompt.
@@ -1967,11 +1962,11 @@ msgstr "Opnieuw proberen..."
 #. 'e' stands for Eject medium
 #: src/callbacks/media.cc:169
 msgid "a/r/i/u/e"
-msgstr "a/o/n/u/m"
+msgstr "a/o/n/u/w"
 
 #: src/callbacks/media.cc:171
 msgid "Eject medium."
-msgstr "Medium uitwerpen."
+msgstr "Werp het medium uit."
 
 #. TranslatorExplanation translate letters 'y' and 'n' to whathever is appropriate for your language.
 #. Try to check what answers does zypper accept (it always accepts y/n at least)
@@ -1983,7 +1978,7 @@ msgid ""
 "Please insert medium [%s] #%d and type 'y' to continue or 'n' to cancel the "
 "operation."
 msgstr ""
-"Plaats medium [%s] # %d en typ 'y' om verder te gaan of 'n' om de bewerking "
+"Plaats het medium [%s] # %d en typ ‘j’ om verder te gaan of ‘n’ om de actie "
 "te annuleren."
 
 #. translators: a/r/i/u are replies to the "Abort, retry, ignore?" prompt
@@ -2015,22 +2010,22 @@ msgstr "Wachtwoord"
 
 #: src/callbacks/repo.h:60
 msgid "Retrieving delta"
-msgstr "Delta wordt opgehaald"
+msgstr "Bezig met ophalen van delta…"
 
 #. translators: this text is a progress display label e.g. "Applying delta foo [42%]"
 #: src/callbacks/repo.h:85
 msgid "Applying delta"
-msgstr "Delta wordt toegepast"
+msgstr "Bezig met toepassen van delta"
 
 #: src/callbacks/repo.h:123
 #, boost-format
 msgid "In cache %1%"
-msgstr "In de cache %1%"
+msgstr "In de cache: %1%"
 
 #: src/callbacks/repo.h:139 src/output/OutNormal.cc:250
 #: src/output/OutNormal.cc:284 src/output/OutNormal.cc:324
 msgid "Retrieving:"
-msgstr "Ophalen:"
+msgstr "Bezig met ophalen van"
 
 #: src/callbacks/repo.h:225
 msgid "Signature verification failed"
@@ -2038,7 +2033,7 @@ msgstr "Verificatie van de ondertekening is mislukt"
 
 #: src/callbacks/repo.h:245
 msgid "Accepting package despite the error."
-msgstr "Pakket wordt geaccepteerd ondanks de fout."
+msgstr "Het pakket wordt ondanks de foutmelding geaccepteerd."
 
 #. TranslatorExplanation speaking of a script - "Running: script file name (package name, script dir)"
 #: src/callbacks/rpm.h:218
@@ -2049,29 +2044,29 @@ msgstr "Wordt uitgevoerd: %s  (%s, %s)"
 #: src/callbacks/rpm.h:307
 #, c-format, boost-format
 msgid "Removal of %s failed:"
-msgstr "Verwijderen van %s is mislukt:"
+msgstr "‘%s’ kan niet worden verwijderd:"
 
 #. translators: This text is a progress display label e.g. "Removing packagename-x.x.x [42%]"
 #: src/callbacks/rpm.h:350 src/callbacks/rpm.h:631
 #, c-format, boost-format
 msgid "Removing %s"
-msgstr "Verwijderen van %s"
+msgstr "Bezig met verwijderen van ‘%s’…"
 
 #: src/callbacks/rpm.h:393
 #, c-format, boost-format
 msgid "Installation of %s failed:"
-msgstr "Installatie van %s is mislukt:"
+msgstr "‘%s’ kan niet worden geïnstalleerd:"
 
 #. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
 #: src/callbacks/rpm.h:436 src/callbacks/rpm.h:692
 #, c-format, boost-format
 msgid "Installing: %s"
-msgstr "Installeren van: %s"
+msgstr "Bezig met installeren van ‘%s’…"
 
 #. translators: A progressbar label
 #: src/callbacks/rpm.h:455
 msgid "Checking for file conflicts:"
-msgstr "Controleren op conflicten tussen bestanden:"
+msgstr "Bezig met controleren op bestandsconflicten:"
 
 #. TranslatorExplanation %1%(number of packages); detailed list follows
 #: src/callbacks/rpm.h:506
@@ -2142,13 +2137,13 @@ msgstr "%s script wordt uitgevoerd"
 #: src/callbacks/rpm.h:895
 #, c-format, boost-format
 msgid "Cleaning up: %s"
-msgstr "Opschonen van: %s"
+msgstr "‘%s’ wordt opgeschoond…"
 
 #. translator: %s is an other command: "This is an alias for 'zypper info -t patch'."
 #: src/commands/commandhelpformatter.h:94
 #, c-format, boost-format
 msgid "This is an alias for '%s'."
-msgstr "Dit is een alias voor '%s'."
+msgstr "Dit is een alias voor ‘%s’."
 
 #: src/commands/commandhelpformatter.h:107
 msgid "Examples:"
@@ -2156,7 +2151,7 @@ msgstr "Voorbeelden:"
 
 #: src/commands/commandhelpformatter.h:110
 msgid "Arguments:"
-msgstr "Argumenten:"
+msgstr "Opties:"
 
 #: src/commands/commandhelpformatter.h:123 src/utils/flags/zyppflags.cc:627
 msgid "Command options:"
@@ -2164,7 +2159,7 @@ msgstr "Opdrachtopties:"
 
 #: src/commands/commandhelpformatter.h:126
 msgid "Solver options:"
-msgstr "Opties voor Oplosser:"
+msgstr "Oplosopties:"
 
 #: src/commands/commandhelpformatter.h:129
 msgid "Expert options:"
@@ -2199,12 +2194,12 @@ msgstr "Opdrachten:"
 #. translators: --details
 #: src/commands/commonflags.h:23 src/commands/inrverify.cc:35
 msgid "Show the detailed installation summary."
-msgstr "toon de gedetailleerde installatiesamenvatting."
+msgstr "Toon de uitgebreide installatiesamenvatting."
 
 #: src/commands/commonflags.h:30
 #, boost-format
 msgid "Type of package (%1%)."
-msgstr "Type pakket (%1%)."
+msgstr "Het soort pakket (%1%)."
 
 #. translators: --best-effort
 #: src/commands/commonflags.h:38
@@ -2279,7 +2274,7 @@ msgstr "zypper <subopdracht> [--opdrachtopties] [argumenten]"
 
 #: src/commands/help.cc:80 src/commands/help.cc:81
 msgid "Print zypper help"
-msgstr "Toon zypper help"
+msgstr "Toon zyppers hulppagina"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/inrverify.cc:68
@@ -2372,7 +2367,7 @@ msgstr ""
 #: src/commands/installremove.cc:104 src/commands/installremove.cc:234
 #: src/utils/messages.cc:53
 msgid "Too few arguments."
-msgstr "Te weinig argumenten."
+msgstr "Te weinig opties."
 
 #: src/commands/installremove.cc:105 src/commands/installremove.cc:235
 msgid "At least one package name is required."
@@ -2756,11 +2751,11 @@ msgstr "Type"
 #: src/search.cc:306 src/search.cc:438 src/search.cc:482 src/update.cc:786
 #: src/utils/misc.cc:324
 msgid "Repository"
-msgstr "Opslagruimte"
+msgstr "Installatiebron"
 
 #: src/commands/locks/list.cc:138
 msgid "Comment"
-msgstr "Commentaar"
+msgstr "Opmerking"
 
 #. translators: locks table value
 #: src/commands/locks/list.cc:156 src/commands/locks/list.cc:235
@@ -2775,7 +2770,7 @@ msgstr "(elk)"
 #. translators: property name; short; used like "Name: value"
 #: src/commands/locks/list.cc:198
 msgid "Keep installed"
-msgstr "Geïnstalleerd laten"
+msgstr "Behouden"
 
 #. translators: property name; short; used like "Name: value"
 #: src/commands/locks/list.cc:206
@@ -2879,23 +2874,21 @@ msgstr ""
 #: src/commands/needs-rebooting.cc:38
 msgid ""
 "Since the last system boot core libraries or services have been updated."
-msgstr "Kernbibliotheken or -services zijn bijgewerkt."
+msgstr "Er zijn kernbibliotheken of -diensten bijgewerkt."
 
 #: src/commands/needs-rebooting.cc:39
 msgid ""
 "Reboot is suggested to ensure that your system benefits from these updates."
-msgstr ""
-"Opnieuw opstarten is vereist om te verzekeren dat uw systeem voordeel heeft "
-"bij dit bijwerken."
+msgstr "Herstart de computer om alle wijzigingen goed door te kunnen voeren."
 
 #: src/commands/needs-rebooting.cc:44
 msgid ""
 "No core libraries or services have been updated since the last system boot."
-msgstr "Er zijn geen kernbibliotheken of -services bijgewerkt."
+msgstr "Er zijn geen kernbibliotheken of -diensten bijgewerkt."
 
 #: src/commands/needs-rebooting.cc:45
 msgid "Reboot is probably not necessary."
-msgstr "Opnieuw opstarten is waarschijnlijk niet nodig."
+msgstr "Herstarten is waarschijnlijk niet nodig."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/nullcommands.cc:17
@@ -3001,12 +2994,12 @@ msgstr "alleen de pakketten downloaden, maar geen installatie."
 #. translators: -i, --installed-only
 #: src/commands/optionsets.cc:202
 msgid "Show only installed packages."
-msgstr "Alleen geïnstalleerde pakketten tonen."
+msgstr "Toon alleen geïnstalleerde pakketten."
 
 #. translators: -u, --not-installed-only
 #: src/commands/optionsets.cc:206
 msgid "Show only packages which are not installed."
-msgstr "Alleen niet geïnstalleerde pakketten tonen."
+msgstr "Toon alleen niet-geïnstalleerde pakketten."
 
 #: src/commands/optionsets.cc:239
 msgid ""
@@ -3378,17 +3371,17 @@ msgstr "Gedetailleerde informatie over producten tonen."
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/query/packages.cc:18
 msgid "packages (pa) [OPTIONS] [REPOSITORY] ..."
-msgstr "pakketten (pa) [opties] [opslagruimte] ..."
+msgstr "pakketten (pa) [opties] [opslagruimte] …"
 
 #. translators: command summary: packages, pa
 #: src/commands/query/packages.cc:20
 msgid "List all available packages."
-msgstr "Geef alle beschikbare pakketten weer."
+msgstr "Toon alle beschikbare pakketten."
 
 #. translators: command description
 #: src/commands/query/packages.cc:22
 msgid "List all packages available in specified repositories."
-msgstr "Alle beschikbare pakketten in de gespecificeerde opslagruimtes tonen."
+msgstr "Toon alle beschikbare pakketten in de gekozen installatiebronnen."
 
 #. translators: --orphaned
 #: src/commands/query/packages.cc:36
@@ -3580,7 +3573,7 @@ msgstr "Alias"
 #: src/commands/services/add.cc:83 src/commands/services/list.cc:116
 #: src/repos.cc:1254 src/utils/flags/zyppflags.h:49
 msgid "URI"
-msgstr "URI"
+msgstr "Uri"
 
 #. 'enabled' flag
 #. translators: property name; short; used like "Name: value"
@@ -3595,7 +3588,7 @@ msgstr "Ingeschakeld"
 #: src/commands/repos/list.cc:48 src/commands/repos/list.cc:235
 #: src/commands/services/list.cc:107 src/repos.cc:1258
 msgid "GPG Check"
-msgstr "GPG-controle"
+msgstr "Gpg-controle"
 
 #. translators: repository priority (in zypper repos -p or -d)
 #. translators: property name; short; used like "Name: value"
@@ -3632,7 +3625,7 @@ msgstr "Padvoorvoegsel"
 
 #: src/commands/repos/list.cc:55
 msgid "Parent Service"
-msgstr "Hoofdservice"
+msgstr "Hoofddienst"
 
 #: src/commands/repos/list.cc:56
 msgid "Keywords"
@@ -3663,7 +3656,7 @@ msgstr ""
 
 #: src/commands/repos/list.cc:118 src/repos.cc:1011
 msgid "Error reading repositories:"
-msgstr "Fout bij lezen van opslagruimtes:"
+msgstr "De installatiebronnen kunnen niet worden uitgelezen:"
 
 #: src/commands/repos/list.cc:144
 #, c-format, boost-format
@@ -3688,13 +3681,13 @@ msgstr "Vernieuwen"
 
 #: src/commands/repos/list.cc:333
 msgid "No repositories defined."
-msgstr "Geen opslagruimtes gedefinieerd."
+msgstr "Er zijn geen installatiebronnen gekozen."
 
 #: src/commands/repos/list.cc:334
 msgid "Use the 'zypper addrepo' command to add one or more repositories."
 msgstr ""
-"Gebruik de opdracht 'zypper addrepo' om één of meer opslagruimtes toe te "
-"voegen."
+"Gebruik de opdracht ‘zypper addrepo’ om een of meer installatiebronnen toe "
+"te voegen."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/repos/modify.cc:24
@@ -3792,63 +3785,64 @@ msgstr "Argumenten zijn niet toegestaan als '%s' wordt gebruikt."
 
 #: src/commands/repos/refresh.cc:195 src/repos.cc:1023
 msgid "Specified repositories: "
-msgstr "Gespecificeerde opslagruimtes: "
+msgstr "Gekozen installatiebronnen: "
 
 #: src/commands/repos/refresh.cc:218
 #, c-format, boost-format
 msgid "Refreshing repository '%s'."
-msgstr "Vernieuwen van opslagruimte '%s'."
+msgstr "Bezig met vernieuwen van ‘%s’…"
 
 #: src/commands/repos/refresh.cc:236 src/repos.cc:844
 #, c-format, boost-format
 msgid "Scanning content of disabled repository '%s'."
-msgstr "Inhoud scannen van uitgeschakelde opslagruimte '%s'."
+msgstr "Bezig met doorzoeken van inhoud van uitgeschakelde opslagruimte ‘%s’…"
 
 #: src/commands/repos/refresh.cc:247
 #, c-format, boost-format
 msgid "Skipping disabled repository '%s'"
-msgstr "Uitgeschakelde opslagruimte '%s' overslaan"
+msgstr "Uitgeschakelde opslagruimte ‘%s’ wordt overgeslagen"
 
 #: src/commands/repos/refresh.cc:262 src/repos.cc:861 src/repos.cc:904
 #, c-format, boost-format
 msgid "Skipping repository '%s' because of the above error."
-msgstr "Slaat opslagruimte '%s' over vanwege bovengenoemde fout."
+msgstr "‘%s’ wordt wegens bovenstaande foutmelding overgeslagen."
 
 #: src/commands/repos/refresh.cc:274
 msgid ""
 "Some of the repositories have not been refreshed because they were not known."
-msgstr "Enkele opslagruimtes zijn niet vernieuwd omdat ze niet bekend zijn."
+msgstr ""
+"Enkele installatiebronnen zijn niet vernieuwd omdat ze niet bekend zijn."
 
 #: src/commands/repos/refresh.cc:281
 msgid "Specified repositories are not enabled or defined."
-msgstr "Opgegeven opslagruimtes zijn niet geactiveerd of niet gedefinieerd."
+msgstr "De gekozen installatiebronnen zijn niet ingeschakeld of gekozen."
 
 #: src/commands/repos/refresh.cc:283
 msgid "There are no enabled repositories defined."
-msgstr "Er zijn geen geactiveerde opslagruimtes gedefinieerd."
+msgstr "Er zijn geen ingeschakelde installatiebronnen gekozen."
 
 #: src/commands/repos/refresh.cc:287
 #, c-format, boost-format
 msgid "Use '%s' or '%s' commands to add or enable repositories."
 msgstr ""
-"Gebruik de opdrachten '%s' of '%s' om opslagruimtes toe te voegen of te "
-"activeren."
+"Gebruik ‘%s’ of ‘%s’ om installatiebronnen toe te voegen in te schakelen."
 
 #: src/commands/repos/refresh.cc:293
 msgid "Could not refresh the repositories because of errors."
-msgstr "Kan vanwege fouten de opslagruimtes niet vernieuwen."
+msgstr ""
+"De installatiebronnen kunnen wegens foutmeldingen niet worden vernieuwd."
 
 #: src/commands/repos/refresh.cc:298 src/repos.cc:933
 msgid "Some of the repositories have not been refreshed because of an error."
-msgstr "Enkele opslagruimtes zijn vanwege fouten niet vernieuwd."
+msgstr "Enkele installatiebronnen zijn wegens foutmeldingen niet vernieuwd."
 
 #: src/commands/repos/refresh.cc:302
 msgid "Specified repositories have been refreshed."
-msgstr "De opgegeven opslagruimtes zijn vernieuwd."
+msgstr "De opgegeven installatiebronnen zijn vernieuwd."
 
 #: src/commands/repos/refresh.cc:304
 msgid "All repositories have been refreshed."
-msgstr "Alle opslagruimtes zijn vernieuwd."
+msgstr "Alle installatiebronnen zijn vernieuwd."
 
 #: src/commands/repos/remove.cc:21
 msgid "removerepo (rr) [OPTIONS] <ALIAS|#|URI>"
@@ -3933,7 +3927,7 @@ msgstr "Onvoldoende argumenten. Er is minstens een URI en alias nodig."
 #: src/commands/repos/rename.cc:114
 #, c-format, boost-format
 msgid "Repository '%s' not found."
-msgstr "Opslagruimte '%s' is niet gevonden."
+msgstr "De installatiebron ‘%s’ is niet aangetroffen."
 
 #: src/commands/reposerviceoptionsets.cc:35 src/repos.cc:107
 #, c-format, boost-format
