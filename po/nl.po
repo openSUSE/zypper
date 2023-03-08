@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-12-24 02:27+0100\n"
-"PO-Revision-Date: 2023-03-08 13:14+0000\n"
+"PO-Revision-Date: 2023-03-08 19:14+0000\n"
 "Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/zypper/master/nl/>\n"
 "Language: nl\n"
@@ -5725,7 +5725,7 @@ msgstr "Proberen netjes te eindigen..."
 #: src/misc.cc:138
 #, c-format, boost-format
 msgid "Automatically agreeing with %s %s license."
-msgstr "Gaat automatisch akkoord met licentie van %s %s."
+msgstr "Er wordt automatisch akkoord gegaan met de licentie van %s %s."
 
 #. introduction
 #. translators: the first %s is the name of the package, the second
@@ -5736,18 +5736,19 @@ msgid ""
 "In order to install '%s'%s, you must agree to terms of the following license "
 "agreement:"
 msgstr ""
-"Om '%s'%s te installeren, dient u akkoord te gaan met de voorwaarden in de "
-"volgende licentieovereenkomst:"
+"Om ‘%s’%s te kunnen installeren, dient u akkoord te gaan met de volgende "
+"licentie-overeenkomst:"
 
 #. lincense prompt
 #: src/misc.cc:187
 msgid "Do you agree with the terms of the license?"
-msgstr "Gaat u akkoord met de voorwaarden in de licentie?"
+msgstr "Gaat u akkoord met de voorwaarden?"
 
 #: src/misc.cc:193
 msgid "Aborting installation due to the need for license confirmation."
 msgstr ""
-"Installatie wordt afgebroken omdat de licentie(s) moet(en) worden bevestigd."
+"De installatie wordt afgebroken omdat de licentie(s) dient(en) te worden "
+"bevestigd."
 
 #. translators: %s is '--auto-agree-with-licenses'
 #: src/misc.cc:196
@@ -5764,8 +5765,8 @@ msgstr ""
 #, c-format, boost-format
 msgid "Aborting installation due to user disagreement with %s %s license."
 msgstr ""
-"Installatie wordt afgebroken omdat gebruiker niet akkoord gaat met de "
-"licentie %s %s."
+"De installatie wordt afgebroken omdat er niet akkoord is gegaan met de "
+"licentie van %s %s."
 
 #: src/misc.cc:248
 msgid "License"
@@ -5773,7 +5774,7 @@ msgstr "Licentie"
 
 #: src/misc.cc:267
 msgid "EULA"
-msgstr "EULA"
+msgstr "GEBRUIKERSOVEREENKOMST"
 
 #: src/misc.cc:279
 msgid "SUMMARY"
@@ -5787,37 +5788,37 @@ msgstr "Geïnstalleerde pakketten: %d"
 #: src/misc.cc:281
 #, c-format, boost-format
 msgid "Installed packages with counterparts in repositories: %d"
-msgstr "Geïnstalleerde pakketten met zusterpakketten in opslagruimtes: %d"
+msgstr "Geïnstalleerde pakketten met zusterpakketten in installatiebronnen: %d"
 
 #: src/misc.cc:282
 #, c-format, boost-format
 msgid "Installed packages with EULAs: %d"
-msgstr "Geïnstalleerde pakketten met EULA's: %d"
+msgstr "Geïnstalleerde pakketten met gebruikersovereenkomsten: %d"
 
 #: src/misc.cc:350
 #, c-format, boost-format
 msgid "Package '%s' has source package '%s'."
-msgstr "Pakket '%s' heeft broncodepakket '%s'."
+msgstr "‘%s’ heeft broncodepakket ‘%s’."
 
 #: src/misc.cc:359
 #, c-format, boost-format
 msgid "Source package '%s' for package '%s' not found."
-msgstr "Broncodepakket '%s' voor pakket '%s' niet gevonden."
+msgstr "Het broncodepakket, ‘%s’, voor pakket ‘%s’ is niet gevonden."
 
 #: src/misc.cc:433
 #, c-format, boost-format
 msgid "Installing source package %s-%s"
-msgstr "Bronpakket %s-%s wordt geïnstalleerd"
+msgstr "Bezig met installeren van %s-%s…"
 
 #: src/misc.cc:442
 #, c-format, boost-format
 msgid "Source package %s-%s successfully retrieved."
-msgstr "Bronpakket %s-%s is met succes opgehaald."
+msgstr "Het bronpakket, %s-%s, is opgehaald."
 
 #: src/misc.cc:448
 #, c-format, boost-format
 msgid "Source package %s-%s successfully installed."
-msgstr "Bronpakket %s-%s is geïnstalleerd."
+msgstr "Het bronpakket, %s-%s, is geïnstalleerd."
 
 #: src/misc.cc:454
 #, c-format, boost-format
@@ -5841,7 +5842,7 @@ msgstr "attentie"
 #: src/output/Out.cc:124 src/output/OutNormal.cc:336
 #: src/output/OutNormal.cc:342
 msgid "error"
-msgstr "fout"
+msgstr "foutmelding"
 
 #: src/output/Out.h:27 src/repos.cc:125 src/repos.cc:153
 msgid "Yes"
@@ -5860,7 +5861,7 @@ msgstr "Waarschuwing:"
 #. translator: usually followed by a ' ' and some explanatory text
 #: src/output/Out.h:45
 msgid "Error:"
-msgstr "Fout:"
+msgstr "Foutmelding:"
 
 #: src/output/Out.h:47
 msgid "Continue?"
@@ -5922,24 +5923,24 @@ msgid ""
 "Repository priorities are without effect. All enabled repositories share the "
 "same priority."
 msgstr ""
-"Prioriteiten van opslagruimtes hebben geen effect. Alle ingeschakelde "
-"opslagruimtes delen dezelfde prioriteit."
+"Prioriteiten van installatiebronnen hebben geen effect. Alle ingeschakelde "
+"installatiebronnen delen dezelfde prioriteit."
 
 #: src/repos.cc:182
 msgid "Repository priorities in effect:"
-msgstr "Prioriteiten van opslagruimtes zijn van kracht:"
+msgstr "Prioriteiten van installatiebronnen zijn van kracht:"
 
 #: src/repos.cc:183
 #, boost-format
 msgid "See '%1%' for details"
-msgstr "Zie '%1%' voor details"
+msgstr "Zie ‘%1%’ voor meer informatie"
 
 #: src/repos.cc:192
 #, boost-format
 msgid "%1% repository"
 msgid_plural "%1% repositories"
-msgstr[0] "%1% opslagruimte"
-msgstr[1] "%1% opslagruimtes"
+msgstr[0] "%1% installatiebron"
+msgstr[1] "%1% installatiebronnen"
 
 #. check whether libzypp indicates a refresh is needed, and if so,
 #. print a message
@@ -5951,36 +5952,36 @@ msgstr "Controleert of vernieuwen van metagegevens voor %s noodzakelijk is"
 #: src/repos.cc:254
 #, c-format, boost-format
 msgid "Repository '%s' is up to date."
-msgstr "Opslagruimte '%s' is actueel."
+msgstr "De ‘%s’-installatiebron is actueel."
 
 #: src/repos.cc:260
 #, c-format, boost-format
 msgid "The up-to-date check of '%s' has been delayed."
-msgstr "De controle of '%s' up-to-date is, is uitgesteld."
+msgstr "De updatecontrole van ‘%s’ is uitgesteld."
 
 #: src/repos.cc:282
 msgid "Forcing raw metadata refresh"
-msgstr "Vernieuwen onbewerkte metagegevens forceren"
+msgstr "De onbewerkte metagegevens worden gedwongen vernieuwd"
 
 #: src/repos.cc:288
 #, c-format, boost-format
 msgid "Retrieving repository '%s' metadata"
-msgstr "Ophalen van metagegevens uit opslagruimte '%s'"
+msgstr "De metagegevens van ‘%s’ worden opgehaald"
 
 #: src/repos.cc:312
 #, c-format, boost-format
 msgid "Do you want to disable the repository %s permanently?"
-msgstr "Wilt u de opslagruimte %s permanent uitschakelen?"
+msgstr "Wilt u de installatiebron ‘%s’ permanent uitschakelen?"
 
 #: src/repos.cc:328
 #, c-format, boost-format
 msgid "Error while disabling repository '%s'."
-msgstr "Fout bij het uitschakelen van opslagruimte '%s'."
+msgstr "‘%s’ kan niet worden uitgeschakeld."
 
 #: src/repos.cc:344
 #, c-format, boost-format
 msgid "Problem retrieving files from '%s'."
-msgstr "Probleem bij ophalen van bestanden van '%s'."
+msgstr "Er kunnen geen bestanden worden opgehaald uit ‘%s’."
 
 #: src/repos.cc:345 src/repos.cc:1867 src/solve-commit.cc:898
 #: src/solve-commit.cc:929 src/solve-commit.cc:953
@@ -6009,15 +6010,14 @@ msgstr "Geen alias gedefinieerd voor deze opslagruimte."
 #: src/repos.cc:388
 #, c-format, boost-format
 msgid "Repository '%s' is invalid."
-msgstr "Opslagruimte %s is ongeldig."
+msgstr "De installatiebron ‘%s’ is ongeldig."
 
 #: src/repos.cc:389
 msgid ""
 "Please check if the URIs defined for this repository are pointing to a valid "
 "repository."
 msgstr ""
-"Controleer of de gedefinieerde URI's voor deze opslagruimte verwijzen naar "
-"een geldige opslagruimte."
+"Controleer of de opgegeven uri's verwijzen naar een geldige installatiebron."
 
 #: src/repos.cc:401
 #, c-format, boost-format
@@ -6070,7 +6070,7 @@ msgstr "Gebruik '%s' voor een lijst met gedefinieerde opslagruimtes."
 #: src/repos.cc:699
 #, c-format, boost-format
 msgid "Ignoring disabled repository '%s'"
-msgstr "Negeren van uitgeschakelde opslagruimte '%s'"
+msgstr "De uitgeschakelde installatiebron ‘%s’ wordt genegeerd"
 
 #: src/repos.cc:787
 #, c-format, boost-format
@@ -6346,7 +6346,7 @@ msgstr "Opslagruimte %s wordt ongewijzigd gelaten."
 
 #: src/repos.cc:1768
 msgid "Loading repository data..."
-msgstr "Gegevens van opslagruimte laden..."
+msgstr "Bezig met ophalen van installatiebrongegevens…"
 
 #: src/repos.cc:1770
 msgid ""
@@ -6359,7 +6359,7 @@ msgstr ""
 #: src/repos.cc:1791
 #, c-format, boost-format
 msgid "Retrieving repository '%s' data..."
-msgstr "Gegevens van opslagruimte '%s' worden opgehaald..."
+msgstr "Bezic met ophalen van ‘%s’-installatiebrongegevens…"
 
 #: src/repos.cc:1797
 #, c-format, boost-format
@@ -6409,16 +6409,18 @@ msgstr ""
 
 #: src/repos.cc:1857
 msgid "Reading installed packages..."
-msgstr "Lezen van geïnstalleerde pakketten..."
+msgstr "Bezig met inlezen van geïnstalleerde pakketten…"
 
 #: src/repos.cc:1866
 msgid "Problem occurred while reading the installed packages:"
-msgstr "Er is een fout opgetreden bij het lezen van geïnstalleerde pakketten:"
+msgstr ""
+"Er is een fout opgetreden bij het inlezen van de geïnstalleerde pakketten:"
 
 #: src/repos.cc:1883
 #, c-format, boost-format
 msgid "'%s' looks like an RPM file. Will try to download it."
-msgstr "'%s' lijkt op een RPM-bestand. Er wordt geprobeerd het te downloaden."
+msgstr ""
+"‘%s’ lijkt op een rpmbestand. Er wordt getracht het bestand op te halen."
 
 #: src/repos.cc:1892
 #, c-format, boost-format
@@ -6469,7 +6471,7 @@ msgstr "Probleem: "
 
 #: src/solve-commit.cc:80
 msgid "Detailed information: "
-msgstr "Gedetailleerde informatie: "
+msgstr "Uitgebreide informatie: "
 
 #. TranslatorExplanation %d is the solution number
 #: src/solve-commit.cc:93
@@ -6481,11 +6483,11 @@ msgstr " Oplossing %d: "
 msgid "Choose the above solution using '1' or skip, retry or cancel"
 msgid_plural "Choose from above solutions by number or skip, retry or cancel"
 msgstr[0] ""
-"Kies de bovenstaande oplossing door '1' te gebruiken of kies (o)verslaan, "
-"op(n)ieuw of (a)nnuleren"
+"Druk op ‘1’ om bovenstaande oplossing te kiezen of kies voor (o)verslaan, "
+"op(n)ieuw proberen of (a)nnuleren"
 msgstr[1] ""
-"Kies uit de bovenstaande oplossingen door een nummer of kies (o)verslaan, "
-"op(n)ieuw of (a)nnuleren"
+"Druk op een numerieke toets om een van de bovenstaande oplossingen te kiezen "
+"of kies voor (o)verslaan, op(n)ieuw proberen of (a)nnuleren"
 
 #. translators: translate 'c' to whatever you translated the 'c' in
 #. "c" and "s/r/c" strings
@@ -6493,9 +6495,11 @@ msgstr[1] ""
 msgid "Choose the above solution using '1' or cancel using 'c'"
 msgid_plural "Choose from above solutions by number or cancel"
 msgstr[0] ""
-"Kies de bovenstaande oplossing door '1' te gebruiken of kies (a)nnuleren"
+"Druk op ‘1’ om bovenstaande oplossing te kiezen of druk op ‘a’ om te "
+"annuleren"
 msgstr[1] ""
-"Kies uit de bovenstaande oplossingen door een nummer of kies (a)nnuleren"
+"Druk op een numerieke toets om een van de bovenstaande oplossingen te kiezen "
+"of druk op ‘a’ om te annuleren"
 
 #. translators: answers for dependency problem solution input prompt:
 #. "Choose from above solutions by number or skip, retry or cancel"
@@ -6521,7 +6525,7 @@ msgstr "a/d"
 #: src/solve-commit.cc:165
 #, boost-format
 msgid "Choose solution %1%"
-msgstr "Oplossing %1% kiezen"
+msgstr "Oplossing ‘%1%’ kiezen"
 
 #: src/solve-commit.cc:167
 msgid "Skip problem and continue."
@@ -6563,20 +6567,20 @@ msgstr "Probleem: %s"
 
 #: src/solve-commit.cc:255
 msgid "Resolving dependencies..."
-msgstr "Afhankelijkheden oplossen..."
+msgstr "Bezig met oplossen van afhankelijkheden…"
 
 #: src/solve-commit.cc:316
 msgid "Force resolution:"
-msgstr "Forceer een oplossing:"
+msgstr "Kies een gedwongen oplossing:"
 
 #: src/solve-commit.cc:413
 msgid "Verifying dependencies..."
-msgstr "Controleren van afhankelijkheden..."
+msgstr "Bezig met controleren van afhankelijkheden…"
 
 #. Here: compute the full upgrade
 #: src/solve-commit.cc:463
 msgid "Computing upgrade..."
-msgstr "Berekenen van opwaardering.."
+msgstr "Bezig met berekenen van opwaardering…"
 
 #: src/solve-commit.cc:477
 msgid "Generating solver test case..."
@@ -6596,8 +6600,8 @@ msgid ""
 "DownloadAsNeeded can not be used with ZYPP_SINGLE_RPMTRANS=1, falling back "
 "to DownloadInAdvance"
 msgstr ""
-"DownloadAsNeeded kan niet gebruikt worden met ZYPP_SINGLE_RPMTRANS=1, wordt "
-"terugvallen op DownloadInAdvance"
+"DownloadAsNeeded kan niet in combinatie met ZYPP_SINGLE_RPMTRANS=1 worden "
+"gebruikt - er wordt terugvallen op DownloadInAdvance"
 
 #: src/solve-commit.cc:545
 #, c-format, boost-format
@@ -6648,7 +6652,7 @@ msgstr "Distributie-upgrades berekenen..."
 
 #: src/solve-commit.cc:650
 msgid "Resolving package dependencies..."
-msgstr "Pakketafhankelijkheden oplossen..."
+msgstr "Bezig met opslossen van pakketafhankelijkheden…"
 
 #: src/solve-commit.cc:709
 msgid ""
@@ -6893,16 +6897,16 @@ msgstr "De volgende items voor bijwerken zijn ook beschikbaar:"
 
 #: src/update.cc:700
 msgid "Package updates"
-msgstr "Items voor bijwerken van pakketten"
+msgstr "Pakketupdates"
 
 # /usr/lib/YaST2/clients/inst_config_x11.ycp:947
 #: src/update.cc:704
 msgid "Pattern updates"
-msgstr "Items voor bijwerken van patronen"
+msgstr "Patroonupdates"
 
 #: src/update.cc:706
 msgid "Product updates"
-msgstr "Items voor bijwerken van producten"
+msgstr "Productupdates"
 
 #: src/update.cc:794
 msgid "Current Version"
@@ -6914,7 +6918,7 @@ msgstr "Beschikbare versie"
 
 #: src/update.cc:972
 msgid "No matching issues found."
-msgstr "Geen overeenkomstige problemen gevonden."
+msgstr "Er zijn geen overeenkomstige problemen gevonden."
 
 #: src/update.cc:978
 msgid "The following matches in issue numbers have been found:"
@@ -7070,7 +7074,7 @@ msgstr "FORMAT"
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:37
 msgid "INTEGER"
-msgstr "geheel getal"
+msgstr "GEHEEL GETAL"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:39
@@ -7134,12 +7138,12 @@ msgstr "Zie http://en.opensuse.org/Zypper/Troubleshooting voor instructies."
 # /usr/lib/YaST2/clients/lan_inetd_custom.ycp:764
 #: src/utils/messages.cc:38
 msgid "Too many arguments."
-msgstr "Teveel argumenten."
+msgstr "Teveel opties."
 
 #: src/utils/messages.cc:81
 #, c-format, boost-format
 msgid "The '--%s' option has currently no effect."
-msgstr "De optie '--%s' heeft nu geen effect."
+msgstr "De optie ‘--%s’ heeft nu geen effect."
 
 #: src/utils/messages.cc:99
 #, c-format, boost-format
@@ -7148,10 +7152,10 @@ msgid ""
 "package which might lead to broken dependencies of other packages. It is "
 "recommended to run '%s' after the operation has finished."
 msgstr ""
-"U hebt ervoor gekozen om aan een probleem met het downloaden of installeren "
-"van een pakket geen aandacht te geven. Dit kan leiden tot gebroken "
-"afhankelijkheden van andere pakketten. U kunt het beste '%s' uitvoeren nadat "
-"de bewerking is beëindigd."
+"U heeft er voor gekozen om aan een probleem met het downloaden of "
+"installeren van een pakket geen aandacht te geven. Dit kan leiden tot "
+"gebroken afhankelijkheden van andere pakketten. U kunt het beste ‘%s’ "
+"uitvoeren nadat de bewerking is beëindigd."
 
 #: src/utils/messages.cc:111
 #, boost-format
@@ -7397,7 +7401,7 @@ msgstr "nee"
 #: src/utils/prompt.cc:219 src/utils/prompt.cc:267
 #, c-format, boost-format
 msgid "Retrying in %u seconds..."
-msgstr "Opnieuw proberen na %u seconden..."
+msgstr "Er wordt over %u seconden een nieuwe poging gedaan…"
 
 #. translators: "a/r/i" are the answers to the
 #. "Abort, retry, ignore?" prompt
@@ -7418,7 +7422,7 @@ msgstr[1] "'%s' automatisch selecteren na %u seconden."
 
 #: src/utils/prompt.cc:294
 msgid "Trying again..."
-msgstr "Opnieuw proberen..."
+msgstr "Bezig met opnieuw proberen…"
 
 #: src/utils/prompt.cc:331
 msgid "always"
@@ -7444,12 +7448,12 @@ msgstr ""
 #: src/utils/prompt.cc:417
 #, c-format, boost-format
 msgid "Invalid answer '%s'."
-msgstr "Ongeldig antwoord '%s'."
+msgstr "‘%s’ is een ongeldig antwoord."
 
 #: src/utils/prompt.cc:420
 #, c-format, boost-format
 msgid "Ambiguous answer '%s'."
-msgstr "Meerduidig antwoord '%s'."
+msgstr "‘%s’ is een meerduidig antwoord."
 
 #. translators: the %s are: 'y', 'yes' (translated), 'n', and 'no' (translated).
 #: src/utils/prompt.cc:428
@@ -7481,7 +7485,7 @@ msgstr "Ongeldig object"
 
 #: src/utils/prompt.h:192
 msgid "Error"
-msgstr "Fout"
+msgstr "Foutmelding"
 
 #~ msgid "(%s unpacked)"
 #~ msgstr "(%s uitgepakt)"
