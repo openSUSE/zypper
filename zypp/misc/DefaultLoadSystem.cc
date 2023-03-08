@@ -36,6 +36,9 @@ namespace zypp
 
     void defaultLoadSystem( const Pathname & sysRoot_r, LoadSystemFlags flags_r )
     {
+      if ( not flags_r && geteuid() != 0 ) {
+        flags_r |= LS_NOREFRESH;
+      }
       MIL << str::form( "*** Load system at '%s' (%lx)", sysRoot_r.c_str(), (unsigned long)flags_r ) << endl;
 
       if ( ! PathInfo( sysRoot_r ).isDir() )
