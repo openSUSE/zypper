@@ -75,6 +75,10 @@ namespace zypp
        * \a str_r is parsed to check whether it contains an <tt>[op edition]</tt> part,
        * unless the \ref PARSED flag is passed to the ctor. In that case <tt>"name[.arch]"</tt>
        * is assumed.
+       * If \a str_r starts with a \c ( it is parsed as a richdep[1]. Subsequent arguments are
+       * meaningless in that case.
+       *
+       * [1] https://rpm-software-management.github.io/rpm/manual/boolean_dependencies.html
       */
       explicit Capability( const char * str_r, const ResKind & prefix_r = ResKind(), CtorFlag flag_r = UNPARSED );
       /** \overload */
