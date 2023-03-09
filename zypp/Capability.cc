@@ -249,7 +249,7 @@ namespace zypp
   {}
 
   Capability::Capability( const std::string & str_r, const ResKind & prefix_r, CtorFlag flag_r )
-  : _id( relFromStr( myPool().getPool(), Arch_empty, str_r.c_str(), prefix_r, flag_r ) )
+  : _id( relFromStr( myPool().getPool(), Arch_empty, str_r, prefix_r, flag_r ) )
   {}
 
   Capability::Capability( const Arch & arch_r, const char * str_r, const ResKind & prefix_r, CtorFlag flag_r )
@@ -257,7 +257,7 @@ namespace zypp
   {}
 
   Capability::Capability( const Arch & arch_r, const std::string & str_r, const ResKind & prefix_r, CtorFlag flag_r )
-  : _id( relFromStr( myPool().getPool(), arch_r, str_r.c_str(), prefix_r, flag_r ) )
+  : _id( relFromStr( myPool().getPool(), arch_r, str_r, prefix_r, flag_r ) )
   {}
 
   Capability::Capability( const char * str_r, CtorFlag flag_r, const ResKind & prefix_r )
