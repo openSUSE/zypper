@@ -354,7 +354,7 @@ namespace zypp
       bool     hasArch()  const { return _archIfSimple; }
       IdString arch()     const { return _archIfSimple ? IdString( _archIfSimple ) : IdString(); }
       IdString name()     const { return isSimple()    ? IdString( _lhs ) : IdString(); }
-      Rel      op()       const { return isVersioned() ? Rel( _flag )     : Rel::ANY; }
+      Rel      op()       const { return isVersioned() ? Rel( _flag )     : isSimple() ? Rel::ANY : Rel::NONE; }
       Edition  ed()       const { return isVersioned() ? Edition( _rhs )  : Edition(); }
       //@}
 
