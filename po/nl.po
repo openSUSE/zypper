@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: zypp.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-12-22 14:35+0100\n"
-"PO-Revision-Date: 2023-03-10 15:14+0000\n"
+"PO-Revision-Date: 2023-03-10 19:14+0000\n"
 "Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/libzypp/master/nl/>"
 "\n"
@@ -4640,7 +4640,8 @@ msgstr "Nieuw updatebericht"
 
 #: zypp/target/TargetImpl.cc:2684
 msgid "Executing the transaction failed because of the following problems:"
-msgstr "Uitvoeren van de transactie is mislukt vanwege de volgende problemen:"
+msgstr ""
+"Het uitvoeren van de overdracht is vanwege de volgende problemen mislukt:"
 
 #. TranslatorExplanation after semicolon is error message
 #. TranslatorExplanation the colon is followed by an error message
@@ -4653,21 +4654,21 @@ msgstr "RPM is mislukt: "
 #: zypp/target/rpm/RpmDb.cc:792
 #, boost-format
 msgid "Failed to import public key %1%"
-msgstr "Importeren van publieke sleutel %1% is mislukt"
+msgstr "Het importeren van de publieke sleutel %1% is mislukt"
 
 #. Translator: %1% is a gpg public key
 #: zypp/target/rpm/RpmDb.cc:859
 #, boost-format
 msgid "Failed to remove public key %1%"
-msgstr "Verwijderen van publieke sleutel %1% is mislukt"
+msgstr "Het verwijderen van de publieke sleutel %1% is mislukt"
 
 #: zypp/target/rpm/RpmDb.cc:1271
 msgid "Package header is not signed!"
-msgstr "Header van pakket is niet ondertekend!"
+msgstr "De pakketkop is niet ondertekend!"
 
 #: zypp/target/rpm/RpmDb.cc:1273
 msgid "Package payload is not signed!"
-msgstr "Inhoud van pakket is niet ondertekend!"
+msgstr "De pakketinhoud is niet ondertekend!"
 
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
@@ -4729,7 +4730,7 @@ msgstr "reservekopie %s aangemaakt"
 #. translators: possible rpm package signature check result [brief]
 #: zypp/target/rpm/RpmDb.cc:2149
 msgid "Signature is OK"
-msgstr "Ondertekening is OK"
+msgstr "De ondertekening is in orde"
 
 #. translators: possible rpm package signature check result [brief]
 #: zypp/target/rpm/RpmDb.cc:2151
@@ -4887,16 +4888,16 @@ msgstr "Ongeldig scheidingsteken voor samenvoegen parametermatrix"
 #: zypp-core/zyppng/io/abstractspawnengine.cc:183
 #, c-format, boost-format
 msgid "Command exited with status %d."
-msgstr "Opdracht beëindigd met status %d."
+msgstr "De opdracht is beëindigd met status %d."
 
 #: zypp-core/zyppng/io/abstractspawnengine.cc:204
 #, c-format, boost-format
 msgid "Command was killed by signal %d (%s)."
-msgstr "Opdracht is gestopt door signaal %d (%s)."
+msgstr "De opdracht is afgebroken door signaal %d (%s)."
 
 #: zypp-core/zyppng/io/abstractspawnengine.cc:209
 msgid "Command exited with unknown error."
-msgstr "Opdracht beëindigd met onbekende fout."
+msgstr "De opdracht is beëindigd met een onbekende foutmelding."
 
 #: zypp-core/zyppng/io/forkspawnengine.cc:150
 #: zypp-core/zyppng/io/forkspawnengine.cc:392
