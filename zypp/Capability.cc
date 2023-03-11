@@ -236,11 +236,15 @@ namespace zypp
       return relFromStr( pool_r, arch_r, name, op, ed, kind_r );
     }
 
-
+    /** Parse richdeps from string, otherwise fall back to the traditional parser. */
     sat::detail::IdType richOrRelFromStr( sat::detail::CPool * pool_r, const std::string & str_r, const ResKind & prefix_r, Capability::CtorFlag flag_r )
     {
-      if ( str_r[0] == '(' )
-        return sat::detail::PoolMember::myPool().parserpmrichdep( str_r.c_str() );
+      if ( str_r[0] == '(' ) {
+        sat::detail::IdType res { sat::detail::PoolMember::myPool().parserpmrichdep( str_r.c_str() ) };
+        if ( res ) return res;
+        // else: no richdep, so fall back to the ordinary parser which in
+        // case of doubt turns the string into a NAMED cap.
+      }
       return relFromStr( pool_r, Arch_empty, str_r, prefix_r, flag_r );
     }
 

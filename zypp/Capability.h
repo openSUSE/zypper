@@ -40,10 +40,10 @@ namespace zypp
   //
   /** A sat capability.
    *
-   * A Capability: <tt>"name[.arch] [op edition]"</tt>
+   * A Capability: <tt>"name[.arch] [op edition]"</tt> or a \c richdep[1]
    *
    * If a certain \ref ResKind is specified upon construction, the
-   * capabilities name part is prefixed, unless it already conatins a
+   * capabilities name part is prefixed, unless it already contains a
    * well known kind spec. If no \ref ResKind is specified, it's assumed
    * you refer to a package or the name is already prefixed:
    * \code
@@ -55,6 +55,9 @@ namespace zypp
    * Capability( "pattern:foo", ResKind::package ) ==> 'pattern:foo'
    * Capability( "package:foo", ResKind::pattern ) ==> 'foo'
    * \endcode
+   *
+   * [1] https://rpm-software-management.github.io/rpm/manual/boolean_dependencies.html
+   * \see \ref CapDetail
    */
   class Capability: protected sat::detail::PoolMember
   {
@@ -72,14 +75,17 @@ namespace zypp
       */
       //@{
       /** Ctor from string.
+       * \a str_r is parsed to see if it forms a richdep. Subsequent arguments are meaningless
+       * in that case. If it's no richdep we continue as described below.
+       *
        * \a str_r is parsed to check whether it contains an <tt>[op edition]</tt> part,
        * unless the \ref PARSED flag is passed to the ctor. In that case <tt>"name[.arch]"</tt>
        * is assumed.
-       * If \a str_r starts with a \c ( it is parsed as a richdep[1]. Subsequent arguments are
-       * meaningless in that case.
        *
-       * [1] https://rpm-software-management.github.io/rpm/manual/boolean_dependencies.html
-      */
+       * \ref Capability legacy is to parse everything unknown into a \ref NAMED
+       * cap. This is often used to turn user supplied search strings with an optional
+       * edition range restriction into \ref PoolQuery arguments ('/gcc[0-9]+/ >= 8').
+       */
       explicit Capability( const char * str_r, const ResKind & prefix_r = ResKind(), CtorFlag flag_r = UNPARSED );
       /** \overload */
       explicit Capability( const std::string & str_r, const ResKind & prefix_r = ResKind(), CtorFlag flag_r = UNPARSED );
@@ -295,9 +301,10 @@ namespace zypp
    * \endcode
    * or formed by some \c EXPRESSION:
    * \code
-   *   left_cap op right_cap
-   *   with op := AND|OR|WITH|NAMESPACE
+   *   ( left_cap op right_cap )
+   *   with op := and|or|if|unless|else|with|without
    * \endcode
+   *
    */
   class CapDetail: protected sat::detail::PoolMember
   {
