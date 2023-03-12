@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: zypp.sv\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-12-22 14:35+0100\n"
-"PO-Revision-Date: 2023-03-05 16:14+0000\n"
+"PO-Revision-Date: 2023-03-12 08:14+0000\n"
 "Last-Translator: Luna  Jernberg <bittin@opensuse.org>\n"
 "Language-Team: Swedish <https://l10n.opensuse.org/projects/libzypp/master/sv/"
 ">\n"
@@ -4451,17 +4451,17 @@ msgstr "'%1%' tillhandahålls av systemet och kan inte raderas"
 #: zypp/solver/detail/SATResolver.cc:1177
 #, boost-format
 msgid "%1% is not installable"
-msgstr ""
+msgstr "%1% är inte installerbar"
 
 #: zypp/solver/detail/SATResolver.cc:1182
 #, boost-format
 msgid "nothing provides '%1%' needed by the installed %2%"
-msgstr ""
+msgstr "ingenting ger '%1%' som behövs av den installerade %2%"
 
 #: zypp/solver/detail/SATResolver.cc:1184
 #, boost-format
 msgid "nothing provides '%1%' needed by the to be installed %2%"
-msgstr ""
+msgstr "ingenting ger '%1%' som behövs för att %2% ska installeras"
 
 #: zypp/solver/detail/SATResolver.cc:1187
 #, boost-format
@@ -4479,12 +4479,15 @@ msgstr ""
 msgid ""
 "the installed %1% conflicts with '%2%' provided by the to be installed %3%"
 msgstr ""
+"den installerade %1% står i konflikt med '%2%' från %3% som ska installeras"
 
 #: zypp/solver/detail/SATResolver.cc:1198
 #, boost-format
 msgid ""
 "the to be installed %1% conflicts with '%2%' provided by the installed %3%"
 msgstr ""
+"den installerade %1% står i konflikt med '%2%' som tillhandahålls av den "
+"installerade %3%"
 
 #: zypp/solver/detail/SATResolver.cc:1200
 #, boost-format
@@ -4492,6 +4495,8 @@ msgid ""
 "the to be installed %1% conflicts with '%2%' provided by the to be installed "
 "%3%"
 msgstr ""
+"den installerade %1% står i konflikt med '%2%' från %3% tillhandahålls av "
+"%3% som ska installeras"
 
 #: zypp/solver/detail/SATResolver.cc:1207
 #, boost-format
@@ -4518,17 +4523,22 @@ msgstr ""
 #, boost-format
 msgid "the installed %1% conflicts with '%2%' provided by itself"
 msgstr ""
+"Den installerade %1% står i konflikt med '%2%' som tillhandahålls av sig "
+"själv"
 
 #: zypp/solver/detail/SATResolver.cc:1222
 #, boost-format
 msgid "the to be installed %1% conflicts with '%2%' provided by itself"
 msgstr ""
+"Det som ska installeras %1% står i konflikt med '%2%' som tillhandahålls av "
+"sig själv"
 
 #: zypp/solver/detail/SATResolver.cc:1254
 #, boost-format
 msgid ""
 "the installed %1% requires '%2%', but this requirement cannot be provided"
 msgstr ""
+"den installerade %1% kräver '%2%', men detta krav kan inte tillhandahållas"
 
 #: zypp/solver/detail/SATResolver.cc:1256
 #, boost-format
@@ -4536,6 +4546,7 @@ msgid ""
 "the to be installed %1% requires '%2%', but this requirement cannot be "
 "provided"
 msgstr ""
+"%1% som ska installeras kräver '%2%', men detta krav kan inte tillhandahållas"
 
 #: zypp/solver/detail/SATResolver.cc:1258
 msgid "deleted providers: "
@@ -4564,6 +4575,8 @@ msgid ""
 "Typically you want to keep the PTF and choose to not install the maintenance "
 "patches."
 msgstr ""
+"Vanligtvis vill du behålla PTF och välja att inte installera "
+"underhållspatcharna."
 
 #. translator: %1% is the name of a PTF.
 #: zypp/solver/detail/SATResolver.cc:1317
@@ -4572,6 +4585,8 @@ msgid ""
 "Removing the installed %1% in this context will remove (not replace!) the "
 "included PTF-packages too."
 msgstr ""
+"Att ta bort det installerade %1% i detta sammanhang kommer att ta bort (inte "
+"ersätta!) De inkluderade PTF-paketen också."
 
 #: zypp/solver/detail/SATResolver.cc:1318
 #, boost-format
@@ -4579,10 +4594,12 @@ msgid ""
 "The PTF should be removed by calling '%1%'. This will update the included "
 "PTF-packages rather than removing them."
 msgstr ""
+"PTF bör tas bort genom att kalla \"%1%\". Detta kommer att uppdatera de "
+"inkluderade PTF-paketen snarare än att ta bort dem."
 
 #: zypp/solver/detail/SATResolver.cc:1319
 msgid "Typically you want to keep the PTF or choose to cancel the action."
-msgstr ""
+msgstr "Vanligtvis vill du behålla PTF eller välja att avbryta åtgärden."
 
 #. translator: %1% is the name of a PTF.
 #: zypp/solver/detail/SATResolver.cc:1324
@@ -4592,7 +4609,7 @@ msgstr "Den installerade %1% blockerar önskad åtgärd."
 
 #: zypp/solver/detail/SATResolver.cc:1325
 msgid "Typically you want to keep the PTF and choose to cancel the action."
-msgstr ""
+msgstr "Vanligtvis vill du behålla PTF och välja att avbryta åtgärden."
 
 #: zypp/solver/detail/SATResolver.cc:1382
 #, boost-format
@@ -4659,25 +4676,25 @@ msgstr "behåll föråldrad %1%"
 #: zypp/solver/detail/SATResolver.cc:1543
 #, boost-format
 msgid "install %1% from excluded repository"
-msgstr ""
+msgstr "installera %1% från exkluderat förråd"
 
 #. translator: %1% is a package name
 #: zypp/solver/detail/SATResolver.cc:1557
 #, boost-format
 msgid "install %1% although it has been retracted"
-msgstr ""
+msgstr "installera %1% fast den har blivit tillbakadragen"
 
 #. translator: %1% is a package name
 #: zypp/solver/detail/SATResolver.cc:1560
 #, boost-format
 msgid "allow installing the PTF %1%"
-msgstr ""
+msgstr "Tillåt installation av PTF %1%"
 
 #. translator: %1% is a package name
 #: zypp/solver/detail/SATResolver.cc:1563
 #, boost-format
 msgid "install %1% although it is blacklisted"
-msgstr ""
+msgstr "installera %1% fast den har blivit svartlistad"
 
 #: zypp/solver/detail/SATResolver.cc:1583
 #, boost-format
@@ -4789,11 +4806,11 @@ msgstr "Det gick inte att ta bort den offentliga nyckeln %1%"
 
 #: zypp/target/rpm/RpmDb.cc:1271
 msgid "Package header is not signed!"
-msgstr ""
+msgstr "Pakethuvud är inte signerat!"
 
 #: zypp/target/rpm/RpmDb.cc:1273
 msgid "Package payload is not signed!"
-msgstr ""
+msgstr "Paket payload är inte signerad!"
 
 #. Translator: %s = name of an rpm package. A list of diffs follows
 #. this message.
@@ -5068,12 +5085,12 @@ msgstr "Kan inte köra '%s', chroot misslyckades (%s)."
 #: zypp-core/zyppng/io/forkspawnengine.cc:344
 #, c-format, boost-format
 msgid "Can't exec '%s', exec failed (%s)."
-msgstr ""
+msgstr "Kan inte köra '%s', köra misslyckades (%s)."
 
 #: zypp-core/zyppng/io/forkspawnengine.cc:348
 #, c-format, boost-format
 msgid "Can't exec '%s', unexpected error."
-msgstr ""
+msgstr "Kan inte köra '%s', oväntat fel."
 
 #: zypp-media/mediaexception.cc:33
 #, c-format, boost-format
@@ -5226,7 +5243,7 @@ msgstr " SSL-certifikatsproblem, verifiera att CA-certifikatet för '%s' är OK.
 
 #: zypp-media/mediaexception.cc:220
 msgid "No free ressources available to attach medium."
-msgstr ""
+msgstr "Inga fria resurser tillgängliga för att fästa medium."
 
 #: zypp-curl/auth/curlauthdata.cc:97
 #, c-format, boost-format
@@ -5248,6 +5265,8 @@ msgid ""
 "Download (curl) error for '%s':\n"
 "Unable to retrieve HTTP response\n"
 msgstr ""
+"Nerladdning (curl) fel för '%s':\n"
+"Kunde inte hämta HTTP-svar\n"
 
 #~ msgid "Package is not signed!"
 #~ msgstr "Paketet är inte signerat!"
