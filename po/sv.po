@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-12-24 02:27+0100\n"
-"PO-Revision-Date: 2023-03-05 16:14+0000\n"
+"PO-Revision-Date: 2023-03-12 08:14+0000\n"
 "Last-Translator: Luna  Jernberg <bittin@opensuse.org>\n"
 "Language-Team: Swedish <https://l10n.opensuse.org/projects/zypper/master/sv/>"
 "\n"
@@ -2002,7 +2002,11 @@ msgid_plural ""
 "%1% packages had to be excluded from file conflicts check because they are "
 "not yet downloaded."
 msgstr[0] ""
+"%1% paket behövde uteslutas från filkonflikter eftersom det ännu inte är "
+"nedladdade."
 msgstr[1] ""
+"%1% paket behövde uteslutas från filkonflikter eftersom det ännu inte är "
+"nedladdade."
 
 #. TranslatorExplanation %1%(commandline option)
 #: src/callbacks/rpm.h:512
@@ -2373,7 +2377,7 @@ msgstr ""
 #. translators: command summary: removeptf, rmptf
 #: src/commands/installremove.cc:314
 msgid "Remove (not only) PTFs."
-msgstr ""
+msgstr "Ta bort (inte endast) PTFs."
 
 #. translators: command description
 #: src/commands/installremove.cc:316
@@ -2543,7 +2547,7 @@ msgstr "Ta inte bort motsvarande paket för vald(a) språkversion(er)."
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
 #: src/commands/locks/add.cc:29
 msgid "addlock (al) [OPTIONS] <LOCKSPEC>..."
-msgstr ""
+msgstr "addlock (al) [ALTERNATIV] <LOCKSPEC>..."
 
 #. translators: command summary
 #: src/commands/locks/add.cc:31 src/commands/locks/add.cc:34
@@ -2557,6 +2561,9 @@ msgid ""
 "have their KIND: string prepended (e.g. 'patch:foo') or use the commands --"
 "type option."
 msgstr ""
+"LOCKSPEC bildas av '[Kind:] Name [op edition]', där NAMN också kan vara ett "
+"globmönster med * och? jokertecken. Icke-pakettyper kan ha sitt slag: sträng "
+"förberedd (t.ex. 'patch: foo') eller använda kommandon-typ."
 
 #: src/commands/locks/add.cc:36
 msgid ""
@@ -2571,7 +2578,7 @@ msgstr "Begränsa låset till det angivna arkivet."
 
 #: src/commands/locks/add.cc:48
 msgid "Reason for specific lock."
-msgstr ""
+msgstr "Anledning för specifikt lås."
 
 #: src/commands/locks/add.cc:81
 msgid "Specified lock has been successfully added."
@@ -2755,6 +2762,8 @@ msgid ""
 "This is the recommended way for scripts to test whether a system reboot is "
 "suggested."
 msgstr ""
+"Detta är det rekommenderade sättet för skript att testa om en system omstart "
+"föreslås."
 
 #: src/commands/needs-rebooting.cc:38
 msgid ""
@@ -2977,6 +2986,8 @@ msgid ""
 "When updating the affected/vulnerable packages described by a patch, zypper "
 "always aims for the latest available version."
 msgstr ""
+"Vid uppdatering av de drabbade/sårbara paketen som beskrivs av en patch "
+"siktar zypper alltid på den senaste tillgängliga versionen."
 
 #: src/commands/patch.cc:50
 msgid ""
@@ -4112,6 +4123,8 @@ msgid ""
 "Search for all packages that recommend any of the provides of the package(s) "
 "matched by the input parameters."
 msgstr ""
+"Sök efter alla paket som rekommenderar någon av de tillhandahållna paketen "
+"som matchas av ingångsparametrarna."
 
 #. translators: --supplements-pkg
 #: src/commands/search/search.cc:157
@@ -4119,6 +4132,8 @@ msgid ""
 "Search for all packages that supplement any of the provides of the "
 "package(s) matched by the input parameters."
 msgstr ""
+"Sök efter alla paket som kompletterar någon av de tillhandahållna paketen "
+"med att matcha inmatningsparametrarna."
 
 #. translators: --conflicts-pkg
 #: src/commands/search/search.cc:161
@@ -4126,6 +4141,8 @@ msgid ""
 "Search for all packages that conflict with any of the package(s) matched by "
 "the input parameters."
 msgstr ""
+"Sök efter alla paket som strider mot något av paketen som matchades av "
+"inmatningsparametrarna."
 
 #. translators: --obsoletes-pkg
 #: src/commands/search/search.cc:165
@@ -4133,6 +4150,8 @@ msgid ""
 "Search for all packages that obsolete any of the package(s) matched by the "
 "input parameters."
 msgstr ""
+"Sök efter alla paket som föråldrade något av paketen som matchades av "
+"ingångsparametrarna."
 
 #. translators: --suggests-pkg
 #: src/commands/search/search.cc:169
@@ -4140,6 +4159,8 @@ msgid ""
 "Search for all packages that suggest any of the provides of the package(s) "
 "matched by the input parameters."
 msgstr ""
+"Sök efter alla paket som föreslår någon av de tillhandahållna paketen som "
+"matchas av ingångsparametrarna."
 
 #. translators: -t, --type <TYPE>
 #: src/commands/search/search.cc:173
@@ -4245,6 +4266,7 @@ msgstr "Välj fel som matchar angiven sträng."
 msgid ""
 "Service '%1%' with URL '%2%' already exists. Just updating the settings."
 msgstr ""
+"Tjänst '%1%' med URL '%2%' existerar redan. Uppdaterar bara inställningarna."
 
 #: src/commands/services/add.cc:58
 #, boost-format
@@ -4252,6 +4274,8 @@ msgid ""
 "Service '%1%' already exists but uses a different URL '%2%'. Please use "
 "another alias."
 msgstr ""
+"Tjänst '%1%' finns redan men använder en annan URL '%2%'. Snälla använd ett "
+"annat alias."
 
 #: src/commands/services/add.cc:70
 #, c-format, boost-format
@@ -4633,7 +4657,7 @@ msgstr "Tvinga inte fram en lösning vid problem utan att."
 
 #: src/commands/solveroptionset.cc:63
 msgid "Set the solvers general attitude when resolving a job."
-msgstr ""
+msgstr "Ställ in lösarnas generella attityd när du löser ett jobb."
 
 #: src/commands/solveroptionset.cc:83
 msgid "Expert options"
@@ -4714,7 +4738,7 @@ msgstr "Avinstallation av källpaket stöds inte."
 #: src/commands/subcommand.cc:88
 #, boost-format
 msgid "No manual entry for %1%"
-msgstr ""
+msgstr "Ingen manual post för %1%"
 
 #: src/commands/subcommand.cc:103
 msgid "none"
@@ -4823,6 +4847,8 @@ msgid ""
 "Using zypper subcommands available from elsewhere on your $PATH is disabled "
 "in zypper.conf."
 msgstr ""
+"Att använda zypper-underkommandon tillgängliga från någon annanstans på din $"
+"SÖKVÄG är inaktiverat i zypper.conf."
 
 #. translators: helptext; %1% is a zypper command
 #: src/commands/subcommand.cc:485
@@ -4845,6 +4871,8 @@ msgid ""
 "Lists available subcommands. Using zypper subcommands found on your $PATH is "
 "disabled in zypper.conf."
 msgstr ""
+"Listar tillgängliga underkommandon. Att använda zypper-underkommandon som "
+"finns i din $SÖKVÄG är inaktiverat i zypper.conf."
 
 #. Currently no concept how to handle global options and ZYPPlock
 #: src/commands/subcommand.cc:626
@@ -4999,7 +5027,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/utils/purge-kernels.cc:26
 msgid "purge-kernels [OPTIONS]"
-msgstr ""
+msgstr "purge-kernels [ALTERNATIV]"
 
 #. translators: command summary: targetos, tos
 #: src/commands/utils/purge-kernels.cc:28
@@ -5013,10 +5041,13 @@ msgid ""
 "zypp/zypp.conf:multiversion.kernels which can be given as <version>, latest(-"
 "N), running, oldest(+N)."
 msgstr ""
+"Tar automatiskt bort installerade kärnor enligt lista över kärnor för att "
+"lista kärnor att behålla från /etc/zypp/zypp.conf:multiversion.kernels som "
+"kan anges som <version>, senaste (-n), körande, äldsta (+n)."
 
 #: src/commands/utils/purge-kernels.cc:51
 msgid "Preparing to purge obsolete kernels..."
-msgstr ""
+msgstr "Förbereder sig för att rensa föråldrade kärnor ..."
 
 #: src/commands/utils/purge-kernels.cc:52
 #, boost-format
@@ -5026,12 +5057,12 @@ msgstr "Konfiguration: %1%"
 #: src/commands/utils/purge-kernels.cc:53
 #, boost-format
 msgid "Running kernel release: %1%"
-msgstr ""
+msgstr "Kör kärn släpp: %1%"
 
 #: src/commands/utils/purge-kernels.cc:54
 #, boost-format
 msgid "Running kernel arch: %1%"
-msgstr ""
+msgstr "Kör kärn arkitektur: %1%"
 
 #: src/commands/utils/source-download.cc:203
 #, c-format, boost-format
@@ -5140,7 +5171,7 @@ msgstr "Hämta alla käll-RPM-filer till den här katalogen."
 #. translators: --delete/--no-delete
 #: src/commands/utils/source-download.cc:501
 msgid "Whether to delete extraneous source rpms in the local directory."
-msgstr ""
+msgstr "Huruvida du vill radera främmande käll-rpms i den lokala katalogen."
 
 #. translators: --status
 #: src/commands/utils/source-download.cc:505
@@ -5319,7 +5350,7 @@ msgstr "inte installerad"
 
 #: src/info.cc:355
 msgid "Upstream URL"
-msgstr ""
+msgstr "Uppström URL"
 
 #. translators: property name; short; used like "Name: value"
 #. translator: Table column header.
@@ -6171,7 +6202,7 @@ msgstr "Resurser från \"%s\" har inte lästs in eftersom ett fel uppstod."
 #: src/repos.cc:1827
 #, boost-format
 msgid "Repository '%1%' metadata expired since %2%."
-msgstr ""
+msgstr "Förråd '%1%' metadata löpt ut sedan %2%."
 
 #. translators: the first %s is 'zypper refresh' and the second 'zypper clean -m'
 #: src/repos.cc:1839
@@ -6280,9 +6311,8 @@ msgstr[1] "Välj numret för någon av lösningarna ovan eller avbryt"
 #. correspond to skip/retry/cancel/detailed information in that order.
 #. The answers should be lower case letters.
 #: src/solve-commit.cc:143
-#, fuzzy
 msgid "s/r/c/d"
-msgstr "s/r/c/d"
+msgstr "s/f/fo/a"
 
 #. translators: answers for dependency problem solution input prompt:
 #. "Choose from above solutions by number or cancel"
@@ -6293,7 +6323,7 @@ msgstr "s/r/c/d"
 #. please report a bug against zypper at bugzilla.suse.com, we'll try to solve it.
 #: src/solve-commit.cc:159
 msgid "c/d"
-msgstr ""
+msgstr "f/a"
 
 #: src/solve-commit.cc:165
 #, boost-format
@@ -6314,7 +6344,7 @@ msgstr "Välj ingen lösning och avbryt."
 
 #: src/solve-commit.cc:173
 msgid "Toggle show detailed conflict information."
-msgstr ""
+msgstr "Växla visa detaljerad konfliktinformation."
 
 #: src/solve-commit.cc:206
 #, c-format, boost-format
@@ -6373,6 +6403,8 @@ msgid ""
 "DownloadAsNeeded can not be used with ZYPP_SINGLE_RPMTRANS=1, falling back "
 "to DownloadInAdvance"
 msgstr ""
+"DownloadAsNeeded kan inte användas med ZYPP_SINGLE_RPMTRANS=1, faller "
+"tillbaka till DownloadInAdvance"
 
 #: src/solve-commit.cc:545
 #, c-format, boost-format
@@ -6945,6 +6977,8 @@ msgid ""
 "Abbreviated commandline options will not be supported in future versions. "
 "Please use %2% instead of %1% ."
 msgstr ""
+"Förkortade kommandoradalternativ stöds inte i framtida versioner. Använd %2% "
+"istället för %1%."
 
 #. translators: %s is "help" or "zypper help" depending on whether
 #. zypper shell is running or not
@@ -7056,7 +7090,7 @@ msgstr "obestämbar"
 #. translator: patch status
 #: src/utils/misc.cc:121
 msgid "retracted"
-msgstr ""
+msgstr "tillbakadragen"
 
 #: src/utils/misc.cc:330 src/utils/misc.cc:372
 msgid "Since"
