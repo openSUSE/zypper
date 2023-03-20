@@ -314,7 +314,7 @@ static void list_pattern_table( Zypper & zypper, SolvableFilterMode mode_r )
   {
     for ( const auto & pi : sel->picklist() )
     {
-      bool isInstalled = pi.status().isInstalled();
+      bool isInstalled = pi.status().isInstalled() || sel->identicalInstalledObj( pi );
       if ( isInstalled && notinst_only && !installed_only )
         continue;
       else if ( !isInstalled && installed_only && !notinst_only )
