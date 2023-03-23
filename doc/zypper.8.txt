@@ -476,7 +476,7 @@ include::{incdir}/option_Solver_Flags_Common.txt[]
 	*-U*, *--no-clean-deps*::
 		No automatic removal of unneeded dependencies.
 --
-*removeptf* (*rmptf*) [_options_] <PTF|CAPABILITY> ..."::
+*removeptf* (*rmptf*) [_options_] <PTF|CAPABILITY> ...::
 	Remove (not only) PTFs.
 +
 A remove command which prefers replacing dependant packages to removing them as well. In fact this is a full featured install command with the remove modifier (-) applied to its plain arguments. So 'removeptf foo' is the same as 'install -- -foo'. This is why the command accepts the same options as the install command. It is the recommended way to remove a PTF (Program Temporary Fix).
