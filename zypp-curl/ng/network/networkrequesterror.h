@@ -42,6 +42,8 @@ class NetworkRequestErrorPrivate;
       ServerReturnedError, //<< A error was returned by the server that is not explicitly handled
       MissingData,         //<< The download was a multirange download and we did not get all data that was requested, if that is returned some ranges might have been downloaded successful
       RangeFail,           //<< The download was a multirange download but the server decided to return the full file.
+      Http2Error,          //<< Special error code for HTTP2 related errors
+      Http2StreamError,    //<< Special error code for HTTP2 stream related errors
     };
 
     NetworkRequestError ();

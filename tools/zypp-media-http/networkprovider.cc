@@ -443,6 +443,9 @@ void NetworkProvider::itemFinished( NetworkProvideItemRef item )
           extra.set ( "authhint", authHint );
         break;
       }
+      //@TODO add extra codes for handling these
+      case zyppng::NetworkRequestError::Http2Error:
+      case zyppng::NetworkRequestError::Http2StreamError:
       case zyppng::NetworkRequestError::ServerReturnedError: { errCode = zyppng::ProvideMessage::Code::InternalError; break; }
       case zyppng::NetworkRequestError::MissingData: { errCode = zyppng::ProvideMessage::Code::BadRequest; break; }
     }

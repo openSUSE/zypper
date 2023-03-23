@@ -235,196 +235,217 @@ namespace zypp {
 
   void MediaNetwork::runRequest ( const zyppng::DownloadSpec &spec, callback::SendReport<DownloadProgressReport> *report ) const
   {
-    auto ev = zyppng::EventLoop::create();
-    std::vector<zyppng::connection> signalConnections;
-    OnScopeExit deferred([&](){
-      while( signalConnections.size() ) {
-        signalConnections.back().disconnect();
-        signalConnections.pop_back();
-      }
-    });
+    bool retry = true;
+    unsigned internalTry = 0;
+    static constexpr unsigned maxInternalTry = 3;
 
-    zyppng::DownloadRef dl = _shared->_downloader->downloadFile( spec );
-    std::optional<internal::ProgressTracker> progTracker;
+    while ( retry ) {
+      retry = false;
+      auto ev = zyppng::EventLoop::create();
+      std::vector<zyppng::connection> signalConnections;
+      OnScopeExit deferred([&](){
+        while( signalConnections.size() ) {
+          signalConnections.back().disconnect();
+          signalConnections.pop_back();
+        }
+      });
 
-    const auto &startedSlot = [&]( zyppng::Download &req ){
-      if ( !report) return;
-      (*report)->start( spec.url(), spec.targetPath());
-    };
+      zyppng::DownloadRef dl = _shared->_downloader->downloadFile( spec );
+      std::optional<internal::ProgressTracker> progTracker;
 
-    const auto &aliveSlot = [&]( zyppng::Download &req, off_t dlNow ){
-      if ( !report || !progTracker )
-        return;
-      progTracker->updateStats( 0.0, dlNow );
-      if ( !(*report)->progress( progTracker->_dnlPercent, spec.url(), progTracker-> _drateTotal, progTracker->_drateLast ) )
-        req.cancel();
-    };
+      const auto &startedSlot = [&]( zyppng::Download &req ){
+        if ( !report) return;
+        (*report)->start( spec.url(), spec.targetPath());
+      };
 
-    const auto &progressSlot = [&]( zyppng::Download &req, off_t dlTotal, off_t dlNow ) {
-      if ( !report || !progTracker )
-        return;
+      const auto &aliveSlot = [&]( zyppng::Download &req, off_t dlNow ){
+        if ( !report || !progTracker )
+          return;
+        progTracker->updateStats( 0.0, dlNow );
+        if ( !(*report)->progress( progTracker->_dnlPercent, spec.url(), progTracker-> _drateTotal, progTracker->_drateLast ) )
+          req.cancel();
+      };
 
-      progTracker->updateStats( dlTotal, dlNow );
-      if ( !(*report)->progress( progTracker->_dnlPercent, spec.url(), progTracker-> _drateTotal, progTracker->_drateLast ) )
-        req.cancel();
-    };
+      const auto &progressSlot = [&]( zyppng::Download &req, off_t dlTotal, off_t dlNow ) {
+        if ( !report || !progTracker )
+          return;
 
-    const auto &finishedSlot = [&]( zyppng::Download & ){
-      ev->quit();
-    };
+        progTracker->updateStats( dlTotal, dlNow );
+        if ( !(*report)->progress( progTracker->_dnlPercent, spec.url(), progTracker-> _drateTotal, progTracker->_drateLast ) )
+          req.cancel();
+      };
 
-    bool firstTry = true;
-    const auto &authRequiredSlot = [&]( zyppng::Download &req, zyppng::NetworkAuthData &auth, const std::string &availAuth ){
+      const auto &finishedSlot = [&]( zyppng::Download & ){
+        ev->quit();
+      };
 
-      //! \todo need a way to pass different CredManagerOptions here
-      CredentialManager cm(CredManagerOptions(ZConfig::instance().repoManagerRoot()));
-      CurlAuthData_Ptr credentials;
+      bool firstTry = true;
+      const auto &authRequiredSlot = [&]( zyppng::Download &req, zyppng::NetworkAuthData &auth, const std::string &availAuth ){
 
-      // get stored credentials
-      AuthData_Ptr cmcred = cm.getCred(_url);
-      if ( cmcred && auth.lastDatabaseUpdate() < cmcred->lastDatabaseUpdate() ) {
-        credentials.reset(new CurlAuthData(*cmcred));
-        DBG << "got stored credentials:" << endl << *credentials << endl;
+        //! \todo need a way to pass different CredManagerOptions here
+        CredentialManager cm(CredManagerOptions(ZConfig::instance().repoManagerRoot()));
+        CurlAuthData_Ptr credentials;
 
-      } else {
-        // if not found, ask user
-        CurlAuthData_Ptr curlcred;
-        curlcred.reset(new CurlAuthData());
-        callback::SendReport<AuthenticationReport> auth_report;
+        // get stored credentials
+        AuthData_Ptr cmcred = cm.getCred(_url);
+        if ( cmcred && auth.lastDatabaseUpdate() < cmcred->lastDatabaseUpdate() ) {
+          credentials.reset(new CurlAuthData(*cmcred));
+          DBG << "got stored credentials:" << endl << *credentials << endl;
 
-        // preset the username if present in current url
-        if (!_url.getUsername().empty() && firstTry)
-          curlcred->setUsername(_url.getUsername());
-        // if CM has found some credentials, preset the username from there
-        else if (cmcred)
-          curlcred->setUsername(cmcred->username());
+        } else {
+          // if not found, ask user
+          CurlAuthData_Ptr curlcred;
+          curlcred.reset(new CurlAuthData());
+          callback::SendReport<AuthenticationReport> auth_report;
 
-        // indicate we have no good credentials from CM
-        cmcred.reset();
+          // preset the username if present in current url
+          if (!_url.getUsername().empty() && firstTry)
+            curlcred->setUsername(_url.getUsername());
+          // if CM has found some credentials, preset the username from there
+          else if (cmcred)
+            curlcred->setUsername(cmcred->username());
 
-        std::string prompt_msg = str::Format(_("Authentication required for '%s'")) % _url.asString();
+          // indicate we have no good credentials from CM
+          cmcred.reset();
 
-        // set available authentication types from the signal
-        // might be needed in prompt
-        curlcred->setAuthType( availAuth );
+          std::string prompt_msg = str::Format(_("Authentication required for '%s'")) % _url.asString();
 
-        // ask user
-        if (auth_report->prompt(_url, prompt_msg, *curlcred))
-        {
-          DBG << "callback answer: retry" << endl
-              << "CurlAuthData: " << *curlcred << endl;
+          // set available authentication types from the signal
+          // might be needed in prompt
+          curlcred->setAuthType( availAuth );
 
-          if (curlcred->valid())
+          // ask user
+          if (auth_report->prompt(_url, prompt_msg, *curlcred))
           {
-            credentials = curlcred;
-              // if (credentials->username() != _url.getUsername())
-              //   _url.setUsername(credentials->username());
-              /**
-               *  \todo find a way to save the url with changed username
-               *  back to repoinfo or dont store urls with username
-               *  (and either forbid more repos with the same url and different
-               *  user, or return a set of credentials from CM and try them one
-               *  by one)
-               */
+            DBG << "callback answer: retry" << endl
+                << "CurlAuthData: " << *curlcred << endl;
+
+            if (curlcred->valid())
+            {
+              credentials = curlcred;
+                // if (credentials->username() != _url.getUsername())
+                //   _url.setUsername(credentials->username());
+                /**
+                 *  \todo find a way to save the url with changed username
+                 *  back to repoinfo or dont store urls with username
+                 *  (and either forbid more repos with the same url and different
+                 *  user, or return a set of credentials from CM and try them one
+                 *  by one)
+                 */
+            }
+          }
+          else
+          {
+            DBG << "callback answer: cancel" << endl;
           }
         }
-        else
-        {
-          DBG << "callback answer: cancel" << endl;
+
+        if ( !credentials  ) {
+          auth = zyppng::NetworkAuthData();
+          return;
         }
-      }
 
-      if ( !credentials  ) {
-        auth = zyppng::NetworkAuthData();
-        return;
-      }
+        auth = *credentials;
+        if (!cmcred) {
+          credentials->setUrl(_url);
+          cm.addCred(*credentials);
+          cm.save();
+        }
+      };
 
-      auth = *credentials;
-      if (!cmcred) {
-        credentials->setUrl(_url);
-        cm.addCred(*credentials);
-        cm.save();
-      }
-    };
-
-    signalConnections.insert( signalConnections.end(), {
-      dl->connectFunc( &zyppng::Download::sigStarted, startedSlot),
-      dl->connectFunc( &zyppng::Download::sigFinished, finishedSlot ),
-      dl->connectFunc( &zyppng::Download::sigAuthRequired, authRequiredSlot )
-    });
-
-    if ( report ) {
-      progTracker = internal::ProgressTracker();
       signalConnections.insert( signalConnections.end(), {
-        dl->connectFunc( &zyppng::Download::sigAlive, aliveSlot ),
-        dl->connectFunc( &zyppng::Download::sigProgress, progressSlot ),
+        dl->connectFunc( &zyppng::Download::sigStarted, startedSlot),
+        dl->connectFunc( &zyppng::Download::sigFinished, finishedSlot ),
+        dl->connectFunc( &zyppng::Download::sigAuthRequired, authRequiredSlot )
       });
-    }
 
-    dl->start();
-    ev->run();
-
-    std::for_each( signalConnections.begin(), signalConnections.end(), []( auto &conn ) { conn.disconnect(); });
-
-    if ( dl->hasError() ) {
-      auto errCode = zypp::media::DownloadProgressReport::ERROR;
-      std::exception_ptr excp;
-      const auto &error = dl->lastRequestError();
-      switch ( error.type() ) {
-        case zyppng::NetworkRequestError::InternalError:
-        case zyppng::NetworkRequestError::InvalidChecksum:
-        case zyppng::NetworkRequestError::UnsupportedProtocol:
-        case zyppng::NetworkRequestError::MalformedURL:
-        case zyppng::NetworkRequestError::PeerCertificateInvalid:
-        case zyppng::NetworkRequestError::ConnectionFailed:
-        case zyppng::NetworkRequestError::ServerReturnedError:
-        case zyppng::NetworkRequestError::MissingData:
-        case zyppng::NetworkRequestError::RangeFail: {
-          excp = ZYPP_EXCPT_PTR( zypp::media::MediaCurlException( spec.url(), error.toString(), error.nativeErrorString() ) );
-          break;
-        }
-        case zyppng::NetworkRequestError::Cancelled: {
-          excp = ZYPP_EXCPT_PTR( zypp::media::MediaRequestCancelledException( error.toString() ) );
-          break;
-        }
-        case zyppng::NetworkRequestError::ExceededMaxLen: {
-          excp = ZYPP_EXCPT_PTR( zypp::media::MediaFileSizeExceededException( spec.url(), spec.expectedFileSize() ) );
-          break;
-        }
-        case zyppng::NetworkRequestError::TemporaryProblem: {
-          excp = ZYPP_EXCPT_PTR( zypp::media::MediaTemporaryProblemException( spec.url(), error.toString() ) );
-          break;
-        }
-        case zyppng::NetworkRequestError::Timeout: {
-          excp = ZYPP_EXCPT_PTR( zypp::media::MediaTimeoutException( spec.url(), error.toString() ) );
-          break;
-        }
-        case zyppng::NetworkRequestError::Forbidden: {
-          excp = ZYPP_EXCPT_PTR( zypp::media::MediaForbiddenException( spec.url(), error.toString() ) );
-          break;
-        }
-        case zyppng::NetworkRequestError::NotFound: {
-          errCode = zypp::media::DownloadProgressReport::NOT_FOUND;
-
-          //@BUG using getPathName() can result in wrong error messages
-          excp = ZYPP_EXCPT_PTR( zypp::media::MediaFileNotFoundException( _url, spec.url().getPathName() ) );
-          break;
-        }
-        case zyppng::NetworkRequestError::Unauthorized:
-        case zyppng::NetworkRequestError::AuthFailed: {
-          errCode = zypp::media::DownloadProgressReport::ACCESS_DENIED;
-          excp = ZYPP_EXCPT_PTR( zypp::media::MediaUnauthorizedException( spec.url(), error.toString(), error.nativeErrorString(), "" ) );
-          break;
-        }
-        case zyppng::NetworkRequestError::NoError:
-          // should never happen
-          DBG << "BUG: Download error flag is set , but Error code is NoError" << std::endl;
-          break;
+      if ( report ) {
+        progTracker = internal::ProgressTracker();
+        signalConnections.insert( signalConnections.end(), {
+          dl->connectFunc( &zyppng::Download::sigAlive, aliveSlot ),
+          dl->connectFunc( &zyppng::Download::sigProgress, progressSlot ),
+        });
       }
 
-      if ( excp ) {
-        if ( report ) (*report)->finish( spec.url(), errCode, error.toString() );
-        std::rethrow_exception( excp );
+      dl->start();
+      ev->run();
+
+      std::for_each( signalConnections.begin(), signalConnections.end(), []( auto &conn ) { conn.disconnect(); });
+
+      if ( dl->hasError() ) {
+        auto errCode = zypp::media::DownloadProgressReport::ERROR;
+        std::exception_ptr excp;
+        const auto &error = dl->lastRequestError();
+        switch ( error.type() ) {
+          case zyppng::NetworkRequestError::InternalError:
+          case zyppng::NetworkRequestError::InvalidChecksum:
+          case zyppng::NetworkRequestError::UnsupportedProtocol:
+          case zyppng::NetworkRequestError::MalformedURL:
+          case zyppng::NetworkRequestError::PeerCertificateInvalid:
+          case zyppng::NetworkRequestError::ConnectionFailed:
+          case zyppng::NetworkRequestError::ServerReturnedError:
+          case zyppng::NetworkRequestError::MissingData:
+          case zyppng::NetworkRequestError::RangeFail: {
+            excp = ZYPP_EXCPT_PTR( zypp::media::MediaCurlException( spec.url(), error.toString(), error.nativeErrorString() ) );
+            break;
+          }
+          case zyppng::NetworkRequestError::Cancelled: {
+            excp = ZYPP_EXCPT_PTR( zypp::media::MediaRequestCancelledException( error.toString() ) );
+            break;
+          }
+          case zyppng::NetworkRequestError::ExceededMaxLen: {
+            excp = ZYPP_EXCPT_PTR( zypp::media::MediaFileSizeExceededException( spec.url(), spec.expectedFileSize() ) );
+            break;
+          }
+          case zyppng::NetworkRequestError::TemporaryProblem: {
+            excp = ZYPP_EXCPT_PTR( zypp::media::MediaTemporaryProblemException( spec.url(), error.toString() ) );
+            break;
+          }
+          case zyppng::NetworkRequestError::Timeout: {
+            excp = ZYPP_EXCPT_PTR( zypp::media::MediaTimeoutException( spec.url(), error.toString() ) );
+            break;
+          }
+          case zyppng::NetworkRequestError::Forbidden: {
+            excp = ZYPP_EXCPT_PTR( zypp::media::MediaForbiddenException( spec.url(), error.toString() ) );
+            break;
+          }
+          case zyppng::NetworkRequestError::NotFound: {
+            errCode = zypp::media::DownloadProgressReport::NOT_FOUND;
+
+            //@BUG using getPathName() can result in wrong error messages
+            excp = ZYPP_EXCPT_PTR( zypp::media::MediaFileNotFoundException( _url, spec.url().getPathName() ) );
+            break;
+          }
+          case zyppng::NetworkRequestError::Unauthorized:
+          case zyppng::NetworkRequestError::AuthFailed: {
+            errCode = zypp::media::DownloadProgressReport::ACCESS_DENIED;
+            excp = ZYPP_EXCPT_PTR( zypp::media::MediaUnauthorizedException( spec.url(), error.toString(), error.nativeErrorString(), "" ) );
+            break;
+          }
+          case zyppng::NetworkRequestError::NoError:
+            // should never happen
+            DBG << "BUG: Download error flag is set , but Error code is NoError" << std::endl;
+            break;
+          case zyppng::NetworkRequestError::Http2Error:
+          case zyppng::NetworkRequestError::Http2StreamError: {
+            ++internalTry;
+            if ( internalTry < maxInternalTry ) {
+              retry = true;
+              // just report (NO_ERROR); no interactive request to the user
+              (*report)->problem( spec.url(), media::DownloadProgressReport::NO_ERROR, error.toString()+" "+_("Will try again..."));
+              continue;
+            } else {
+              excp = ZYPP_EXCPT_PTR( zypp::media::MediaCurlException( spec.url(), error.toString(), error.nativeErrorString() ) );
+            }
+
+            break;
+          }
+        }
+
+        if ( excp && !retry ) {
+          if ( report ) (*report)->finish( spec.url(), errCode, error.toString() );
+          std::rethrow_exception( excp );
+        }
       }
     }
     if ( report ) (*report)->finish( spec.url(), zypp::media::DownloadProgressReport::NO_ERROR, "" );

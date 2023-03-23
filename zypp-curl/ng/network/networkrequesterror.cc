@@ -186,6 +186,12 @@ NetworkRequestError NetworkRequestErrorPrivate::fromCurlError(NetworkRequest &re
       case CURLE_PEER_FAILED_VERIFICATION:
         c = NetworkRequestError::PeerCertificateInvalid;
         break;
+      case CURLE_HTTP2:
+        c = NetworkRequestError::Http2Error;
+        break;
+      case CURLE_HTTP2_STREAM:
+        c = NetworkRequestError::Http2StreamError;
+        break;
       default:
         c = NetworkRequestError::ServerReturnedError;
         break;
@@ -283,6 +289,10 @@ std::string NetworkRequestErrorPrivate::typeToString( NetworkRequestError::Type 
       return "Server did not send all requested ranges.";
     case NetworkRequestError::RangeFail:
       return "Invalid data from server, multipart was requested but there was no range status code.";
+    case NetworkRequestError::Http2Error:
+      return "Server returned a HTTP/2 error.";
+    case NetworkRequestError::Http2StreamError:
+      return "Server returned a HTTP/2 stream error.";
   }
   return std::string();
 }
