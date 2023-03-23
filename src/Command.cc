@@ -50,6 +50,7 @@ namespace
 
       _t( INSTALL_e )		| "install"		| "in";
       _t( REMOVE_e )		| "remove"		| "rm";
+      _t( REMOVE_PTF_e )	| "removeptf"		| "rmptf";
       _t( SRC_INSTALL_e )	| "source-install"	| "si";
       _t( VERIFY_e )		| "verify"		| "ve";
       _t( INSTALL_NEW_RECOMMENDS_e )| "install-new-recommends" | "inr";
@@ -130,6 +131,7 @@ DEF_ZYPPER_COMMAND( CLEAN );
 
 DEF_ZYPPER_COMMAND( INSTALL );
 DEF_ZYPPER_COMMAND( REMOVE );
+DEF_ZYPPER_COMMAND( REMOVE_PTF );
 DEF_ZYPPER_COMMAND( SRC_INSTALL );
 DEF_ZYPPER_COMMAND( VERIFY );
 DEF_ZYPPER_COMMAND( INSTALL_NEW_RECOMMENDS );

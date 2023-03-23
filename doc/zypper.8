@@ -2,12 +2,12 @@
 .\"     Title: zypper
 .\"    Author: [see the "AUTHORS" section]
 .\" Generator: DocBook XSL Stylesheets v1.78.1 <http://docbook.sf.net/>
-.\"      Date: 08/29/2018
+.\"      Date: 03/23/2023
 .\"    Manual: ZYPPER
 .\"    Source: SUSE Linux
 .\"  Language: English
 .\"
-.TH "ZYPPER" "8" "08/29/2018" "SUSE Linux" "ZYPPER"
+.TH "ZYPPER" "8" "03/23/2023" "SUSE Linux" "ZYPPER"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -177,7 +177,7 @@ In the \fBS\fRtatus column the \fBsearch\fR command distinguishes between user i
 .sp
 File conflicts happen when two packages attempt to install files with the same name but different contents\&. This may happen if you are installing a newer version of a package without erasing the older version, of if two unrelated packages each install a file with the same name\&.
 .sp
-As checking for file conflicts requires access to the full filelist of each package being installed, zypper will check for file conflict only if all packages are downloaded in advance (see \fB\-\-download\-in\-advance\fR)\&.
+As checking for file conflicts requires access to the full filelist of each package being installed, zypper will be able to check for file conflicts only if all packages are downloaded in advance (see \fB\-\-download\-in\-advance\fR)\&. If you are doing a \fB\-\-dry\-run\fR no packages are downloaded, so the file conflict check will skip packages not available in the packages cache\&. To get a meaningful file conflict check use \fB\-\-dry\-run\fR together with \fB\-\-download\-only\fR\&.
 .sp
 As the reason for file conflicts usually is a poor package design or lack of coordination between the people building the packages, they are not easy to resolve\&. By using the \fB\-\-replacefiles\fR option you can force zypper to replace the conflicting files\&. Nevertheless this may damage the package whose file gets replaced\&.
 .SH "COMMANDS"
@@ -468,9 +468,10 @@ disables the file conflict check because access to all packages file lists is ne
 .PP
 \fB\-D\fR, \fB\-\-dry\-run\fR
 .RS 4
-Test the installation, do not actually install any package\&. This option will add the
-\fB\-\-test\fR
-option to the rpm commands run by the install command\&.
+Test the installation, do not actually install any package\&. If used together with
+\fB\-\-download\-only\fR
+a meaningful file conflict check can be performed (see section
+\fBPackage File Conflicts\fR)\&.
 .RE
 .PP
 \fB\-\-details\fR
@@ -520,12 +521,15 @@ Download\-and\-install mode options:
 .PP
 \fB\-d\fR, \fB\-\-download\-only\fR
 .RS 4
-Only download the packages for later installation\&.
+Only download the packages for later installation\&. If used together with
+\fB\-\-dry\-run\fR
+a meaningful file conflict check can be performed (see section
+\fBPackage File Conflicts\fR)\&.
 .RE
 .PP
 \fB\-\-download\-in\-advance\fR
 .RS 4
-First download all packages, then start installing\&.
+First download all packages, then start installing\&. This is the default\&.
 .RE
 .PP
 \fB\-\-download\-in\-heaps\fR
@@ -640,7 +644,10 @@ In case that any dependency problems are found, zypper suggests packages to inst
 .PP
 \fB\-D\fR, \fB\-\-dry\-run\fR
 .RS 4
-Test the repair, do not actually do anything to the system\&.
+Test the repair, do not actually do anything to the system\&. If used together with
+\fB\-\-download\-only\fR
+a meaningful file conflict check can be performed (see section
+\fBPackage File Conflicts\fR)\&.
 .RE
 .PP
 \fB\-\-details\fR
@@ -705,7 +712,10 @@ Work only with the repository specified by the alias, name, number, or URI\&. Th
 .PP
 \fB\-D\fR, \fB\-\-dry\-run\fR
 .RS 4
-Test the installation, do not actually install anything\&.
+Test the installation, do not actually install anything\&. If used together with
+\fB\-\-download\-only\fR
+a meaningful file conflict check can be performed (see section
+\fBPackage File Conflicts\fR)\&.
 .RE
 .PP
 \fB\-\-details\fR
@@ -782,9 +792,10 @@ Select packages by capabilities\&.
 .PP
 \fB\-D\fR, \fB\-\-dry\-run\fR
 .RS 4
-Test the removal of packages, do not actually remove anything\&. This option will add the
-\fB\-\-test\fR
-option to the rpm commands run by the remove command\&.
+Test the removal of packages, do not actually remove anything\&. If used together with
+\fB\-\-download\-only\fR
+a meaningful file conflict check can be performed (see section
+\fBPackage File Conflicts\fR)\&.
 .RE
 .PP
 \fB\-\-details\fR
@@ -827,6 +838,28 @@ Automatically remove dependencies which become unneeded after removal of request
 .RS 4
 No automatic removal of unneeded dependencies\&.
 .RE
+.RE
+.PP
+\fBremoveptf\fR (\fBrmptf\fR) [\fIoptions\fR] <PTF|CAPABILITY> \&...
+.RS 4
+Remove (not only) PTFs\&.
+
+A remove command which prefers replacing dependant packages to removing them as well\&. In fact this is a full featured install command with the remove modifier (\-) applied to its plain arguments\&. So
+\fIremoveptf foo\fR
+is the same as
+\fIinstall \(em \-foo\fR\&. This is why the command accepts the same options as the install command\&. It is the recommended way to remove a PTF (Program Temporary Fix)\&.
+
+A PTF is typically removed as soon as the fix it provides is applied to the latest official update of the dependant packages\&. But you don\(cqt want the dependant packages to be removed together with the PTF, which is what the remove command would do\&. The removeptf command however will aim to replace the dependant packages by their official update versions\&.
+.sp
+.if n \{\
+.RS 4
+.\}
+.nf
+*supports every option the install command supports*::{nop}
+.fi
+.if n \{\
+.RE
+.\}
 .RE
 .SS "Update Management Commands"
 .PP
@@ -933,9 +966,10 @@ disables the fileconflict check because access to all packages filelists is need
 .PP
 \fB\-D\fR, \fB\-\-dry\-run\fR
 .RS 4
-Test the update, do not actually install or update any package\&. This option will add the
-\fB\-\-test\fR
-option to the rpm commands run by the update command\&.
+Test the update, do not actually install or update any package\&. If used together with
+\fB\-\-download\-only\fR
+a meaningful file conflict check can be performed (see section
+\fBPackage File Conflicts\fR)\&.
 .RE
 .PP
 \fB\-\-details\fR
@@ -1095,9 +1129,9 @@ Check for patches only in the repository specified by the alias, name, number, o
 .RS 4
 Install all available needed patches\&.
 
-When updating the affected/vulnerable packages described by a patch, zypper always aims for the latest available version. See section
+When updating the affected/vulnerable packages described by a patch, zypper always aims for the latest available version\&. See section
 \fBPackage Types\fR
-for more details about how patches operate.\&
+for more details about how patches operate\&.
 
 If there are patches that affect the package management itself, those will be installed first and you will be asked to run the
 \fBpatch\fR
@@ -1136,7 +1170,7 @@ command to get a list of applicable patches for specific issues\&.
 .PP
 \fB\-\-cve\fR \fI#\fR[,\fI\&...\fR]
 .RS 4
-Select applicable patches for a MITRE's CVE issue specified by number\&. Use
+Select applicable patches for a MITRE\(cqs CVE issue specified by number\&. Use
 \fBlist\-patches \-\-cve\fR
 command to get a list of applicable patches for specific issues\&.
 .RE
@@ -1204,7 +1238,10 @@ disables the fileconflict check because access to all packages filelists is need
 .PP
 \fB\-D\fR, \fB\-\-dry\-run\fR
 .RS 4
-Test the update, do not actually update\&.
+Test the update, do not actually update\&. If used together with
+\fB\-\-download\-only\fR
+a meaningful file conflict check can be performed (see section
+\fBPackage File Conflicts\fR)\&.
 .RE
 .PP
 \fB\-\-details\fR
@@ -1322,9 +1359,10 @@ disables the fileconflict check because access to all packages filelists is need
 .PP
 \fB\-D\fR, \fB\-\-dry\-run\fR
 .RS 4
-Test the upgrade, do not actually install or update any package\&. This option will add the
-\fB\-\-test\fR
-option to the rpm commands run by the dist\-upgrade command\&.
+Test the upgrade, do not actually install or update any package\&. If used together with
+\fB\-\-download\-only\fR
+a meaningful file conflict check can be performed (see section
+\fBPackage File Conflicts\fR)\&.
 .RE
 .PP
 \fB\-y\fR, \fB\-\-no\-confirm\fR
@@ -1466,6 +1504,7 @@ lt lt
 lt lt
 lt lt
 lt lt
+lt lt
 lt lt.
 T{
 \fBi+\fR
@@ -1497,7 +1536,7 @@ T}
 T{
 \&.\fBP\fR
 T}:T{
-is shown in the 2nd column if the item is part of a PTF (A program temporary fix which must be explicitly selected and will otherwise not be considered in dependency resolution).
+is shown in the 2nd column if the item is part of a PTF (A program temporary fix which must be explicitly selected and will otherwise not be considered in dependency resolution)\&.
 T}
 .TE
 .sp 1

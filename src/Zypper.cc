@@ -712,6 +712,7 @@ void print_main_help( Zypper & zypper )
   static std::string help_package_commands = _("     Software Management:\n"
     "\tinstall, in\t\tInstall packages.\n"
     "\tremove, rm\t\tRemove packages.\n"
+    "\tremoveptf, rmptf\tRemove (not only) PTFs.\n"
     "\tverify, ve\t\tVerify integrity of package dependencies.\n"
     "\tsource-install, si\tInstall source packages and their build\n"
     "\t\t\t\tdependencies.\n"
@@ -1488,6 +1489,7 @@ void Zypper::shellCleanup()
   {
   case ZypperCommand::INSTALL_e:
   case ZypperCommand::REMOVE_e:
+  case ZypperCommand::REMOVE_PTF_e:
   case ZypperCommand::UPDATE_e:
   case ZypperCommand::PATCH_e:
   {
@@ -1634,6 +1636,7 @@ void Zypper::processCommandOptions()
   //! and should wrap at 79th column (bnc #423007)
 
   case ZypperCommand::INSTALL_e:
+  case ZypperCommand::REMOVE_PTF_e:
   {
     static struct option install_options[] = {
       {"repo",                      required_argument, 0, 'r'},
@@ -1669,6 +1672,22 @@ void Zypper::processCommandOptions()
       {0, 0, 0, 0}
     };
     specific_options = install_options;
+    if ( command() == ZypperCommand::REMOVE_PTF )  {
+      _command_help = CommandHelpFormater()
+      .synopsis(	// translators: command synopsis; do not translate lowercase words
+      _("removeptf (rmptf) [OPTIONS] <PTF|CAPABILITY> ...")
+      )
+      .description( str::Format(// translators: command description
+      _("A remove command which prefers replacing dependant packages to removing them as well. In fact this is a full featured install command with the remove modifier (-) applied to its plain arguments. So 'removeptf foo' is the same as 'install -- -foo'. This is why the command accepts the same options as the install command. It is the recommended way to remove a PTF (Program Temporary Fix).") )
+      )
+      .description( str::Format(// translators: command description
+      _("A PTF is typically removed as soon as the fix it provides is applied to the latest official update of the dependant packages. But you don't want the dependant packages to be removed together with the PTF, which is what the remove command would do. The removeptf command however will aim to replace the dependant packages by their official update versions.") )
+      )
+      .optionSectionCommandOptions()
+      .option( "",			_("All options the install command accepts.") )
+      ;
+      break;
+    }
     _command_help = ( CommandHelpFormater()
       << str::form(_(
       // translators: the first %s = "package, patch, pattern, product",
@@ -4114,6 +4133,7 @@ void Zypper::doCommand()
 
   case ZypperCommand::INSTALL_e:
   case ZypperCommand::REMOVE_e:
+  case ZypperCommand::REMOVE_PTF_e:
   {
     if ( _arguments.size() < 1 && !_copts.count("entire-catalog") )
     {
@@ -4131,6 +4151,15 @@ void Zypper::doCommand()
       out().error(_("Root privileges are required for installing or uninstalling packages.") );
       setExitCode( ZYPPER_EXIT_ERR_PRIVILEGES );
       return;
+    }
+
+    if ( command() == ZypperCommand::REMOVE_PTF ) {
+      static const std::string modifiers { "+~-!" }; // explicit install/remove modifiers
+      for ( auto & arg : _arguments ) {
+         if ( modifiers.find( arg[0] ) == std::string::npos )
+           arg = "-"+arg;
+      }
+      setCommand( ZypperCommand::INSTALL ); // now behave as INSTALL
     }
 
     // rug compatibility code
