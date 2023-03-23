@@ -1,4 +1,19 @@
 -------------------------------------------------------------------
+Thu Mar 23 18:03:08 CET 2023 - ma@suse.de
+
+- Provide "removeptf" command (bsc#1203249)
+  A remove command which prefers replacing dependant packages to
+  removing them as well.
+  A PTF is typically removed as soon as the fix it provides is
+  applied to the latest official update of the dependant packages.
+  But you don't want the dependant packages to be removed together
+  with the PTF, which is what the remove command would do. The
+  removeptf command however will aim to replace the dependant
+  packages by their official update versions.
+- BuildRequires:  libzypp-devel >= 16.22.6.
+- version 1.13.63
+
+-------------------------------------------------------------------
 Tue May 17 12:32:09 CEST 2022 - ma@suse.de
 
 - Return ZYPPER_EXIT_INF_RPM_SCRIPT_FAILED (107) also if %posttrans
