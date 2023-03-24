@@ -23,6 +23,19 @@
 
 using namespace zypp::base;
 
+namespace zypp::env
+{
+  /** Hack to circumvent the currently poor --root support. */
+  inline bool ZYPP_METALINK_DEBUG()
+  {
+    static bool val = [](){
+      const char * env = getenv("ZYPP_METALINK_DEBUG");
+      return( env && zypp::str::strToBool( env, true ) );
+    }();
+    return val;
+  }
+}
+
 namespace zypp::media {
   enum ParserState {
     STATE_START,
@@ -414,9 +427,7 @@ MetaLinkParser::~MetaLinkParser()
 void
 MetaLinkParser::parse(const Pathname &filename)
 {
-  MIL << "Begin parse " << filename << std::endl;
   parse(InputStream(filename));
-  MIL << "End parse " << filename << std::endl;
 }
 
 void
@@ -431,6 +442,11 @@ MetaLinkParser::parse(const InputStream &is)
       parseBytes(buf, is.stream().gcount());
     }
   parseEnd();
+  MIL << "Parsed " << pd->urls.size() << " mirrors from " << is.path() << std::endl;
+  if ( env::ZYPP_METALINK_DEBUG() ) {
+    for ( const auto &mirr : pd->urls )
+      DBG << "- " << mirr.priority << " " << mirr.url << std::endl;
+  }
 }
 
 void

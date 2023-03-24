@@ -30,8 +30,11 @@
 \li (\c ZYPP_LIBSAT_FULLLOG=1) deprecated since \c libzypp-10.x, prefer \c ZYPP_LIBSOLV_FULLLOG
 \li \c LIBSOLV_DEBUGMASK=<INT> Pass value to libsolv::pool_setdebugmask
 
+\li \c ZYPP_MEDIANETWORK=1 Turn on the media network backend (the upcoming default).
 \li \c ZYPP_MEDIA_CURL_DEBUG=<1|2> Log http headers, if \c 2 also log server responses.
 \li \c ZYPP_MEDIA_CURL_IPRESOLVE=<4|6> Tell curl to resolve names to IPv4/IPv6 addresses only.
+\li \c ZYPP_METALINK_DEBUG=1 Log URL and priority of the mirrors parsed from a metalink file.
+\li \c ZYPP_MULTICURL=0 Turn off multicurl (metalink and zsync) and fall back to plain libcurl.
 
 \li \c ZYPP_RPM_DEBUG=1 Log verbose output from all rpm commands.
 

@@ -25,6 +25,19 @@
 using std::endl;
 using namespace zypp::base;
 
+namespace zypp::env
+{
+  /** Hack to circumvent the currently poor --root support. */
+  inline bool ZYPP_METALINK_DEBUG()
+  {
+    static bool val = [](){
+      const char * env = getenv("ZYPP_METALINK_DEBUG");
+      return( env && zypp::str::strToBool( env, true ) );
+    }();
+    return val;
+  }
+}
+
 namespace zypp {
   namespace media {
 
@@ -163,6 +176,11 @@ ZsyncParser::parse( const Pathname &filename )
         }
     }
   is.close();
+  MIL << "Parsed " << urls.size() << " mirrors from " << filename << std::endl;
+  if ( env::ZYPP_METALINK_DEBUG() ) {
+    for ( const auto &url : urls )
+      DBG << "- " <<  url << std::endl;
+  }
 }
 
 std::vector<Url>
