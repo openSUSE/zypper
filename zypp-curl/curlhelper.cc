@@ -355,10 +355,11 @@ Url clearQueryString(const Url &url)
 }
 
 // bsc#933839: propagate proxy settings passed in the repo URL
+// boo#1127591: propagate ssl settings passed in the repo URL
 zypp::Url propagateQueryParams( zypp::Url url_r, const zypp::Url & template_r )
 {
   using namespace std::literals::string_literals;
-  for ( const std::string &param : { "proxy"s, "proxyport"s, "proxyuser"s, "proxypass"s} )
+  for ( const std::string &param : { "proxy"s, "proxyport"s, "proxyuser"s, "proxypass"s, "ssl_capath"s, "ssl_verify"s } )
   {
     const std::string & value( template_r.getQueryParam( param ) );
     if ( ! value.empty() )
