@@ -124,7 +124,7 @@ namespace zypp
     }
 
 #define L_ENV_CONSTR_FWD_DECLARE_FUNC(ENV) namespace zypp::log { bool has_env_constr_##ENV (); const char *empty_or_group_if_##ENV ( const char *group ); }
-#define L_ENV_CONSTR(ENV,GROUP,LEVEL) ZYPP_BASE_LOGGER_LOG( zypp::log::empty_or_group_if_##ENV( #GROUP ), LEVEL )
+#define L_ENV_CONSTR(ENV,GROUP,LEVEL) ZYPP_BASE_LOGGER_LOG( zypp::log::empty_or_group_if_##ENV( GROUP ), LEVEL )
 
 #define L_BASEFILE ( *__FILE__ == '/' ? strrchr( __FILE__, '/' ) + 1 : __FILE__ )
 
