@@ -21,6 +21,7 @@
 
 #include <zypp-core/base/Hash.h>
 #include <zypp-core/base/Logger.h>
+#include <zypp-core/base/String.h>
 #include <zypp-core/base/Iterator.h>
 #include <zypp-core/Globals.h>
 
@@ -433,7 +434,41 @@ namespace zypp
   detail::Dump<Tp> dump( const Tp & obj_r )
   { return detail::Dump<Tp>(obj_r); }
 
+  /** hexdump data on stream
+   * \code
+   * hexdump 0000000333 bytes (0x0000014d):
+   * 0000: 0c 00 01 49 03 00 17 41 04 af 7c 75 5e 4c 2d f7 ...I...A..|u^L-.
+   * 0010: c9 c9 75 bf a8 41 37 2a d0 03 2c ff 96 d2 43 89 ..u..A7*..,...C.
+   * 0020: ...
+   * \endcode
+   */
+  inline std::ostream & hexdumpOn( std::ostream & outs, const unsigned char *ptr, size_t size )
+  {
+    size_t i,c;
+    unsigned width = 0x10;
+    outs << str::form( "hexdump %10.10ld bytes (0x%8.8lx):\n", (long)size, (long)size );
 
+    for ( i = 0; i < size; i += width ) {
+      outs << str::form( "%4.4lx: ", (long)i );
+      /* show hex to the left */
+      for ( c = 0; c < width; ++c ) {
+        if ( i+c < size )
+          outs << str::form( "%02x ", ptr[i+c] );
+        else
+          outs << ("   ");
+      }
+      /* show data on the right */
+      for ( c = 0; (c < width) && (i+c < size); ++c ) {
+        char x = (ptr[i+c] >= 0x20 && ptr[i+c] < 0x7f) ? ptr[i+c] : '.';
+        outs << x;
+      }
+      outs << std::endl;
+    }
+    return outs;
+  }
+  /** \overload */
+  inline std::ostream & hexdumpOn( std::ostream & outs, const char *ptr, size_t size )
+  { return hexdumpOn( outs, (const unsigned char *)ptr, size ); }
   /////////////////////////////////////////////////////////////////
 } // namespace zypp
 ///////////////////////////////////////////////////////////////////
