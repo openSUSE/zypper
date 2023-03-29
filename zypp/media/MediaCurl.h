@@ -157,8 +157,6 @@ class MediaCurl : public MediaNetworkCommonHandler
     bool detectDirIndex() const;
 
   private:
-    long _curlDebug;
-
     std::string _currentCookieFile;
     static Pathname _cookieFile;
 

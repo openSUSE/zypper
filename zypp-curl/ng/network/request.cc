@@ -33,85 +33,6 @@
 
 namespace zyppng {
 
-  void dump(const char *text,
-      FILE *stream, unsigned char *ptr, size_t size)
-  {
-    size_t i;
-    size_t c;
-    unsigned int width=0x10;
-
-    DBG << zypp::str::form ( "%s, %10.10ld bytes (0x%8.8lx)\n", text, (long)size, (long)size );
-
-    for(i=0; i<size; i+= width) {
-
-      DBG << zypp::str::form ( "%4.4lx: ", (long)i );
-
-      /* show hex to the left */
-      for(c = 0; c < width; c++) {
-        if(i+c < size)
-          DBG << zypp::str::form("%02x ", ptr[i+c]);
-        else
-          DBG << ("   ");
-      }
-
-      /* show data on the right */
-      for(c = 0; (c < width) && (i+c < size); c++) {
-        char x = (ptr[i+c] >= 0x20 && ptr[i+c] < 0x80) ? ptr[i+c] : '.';
-        DBG << x;
-      }
-
-      DBG << std::endl;
-    }
-  }
-
-  int log_curl_all(CURL *handle, curl_infotype type,
-      char *data, size_t size,
-      void *userp)
-  {
-    const char *text;
-
-    long maxlvl = userp == nullptr ? 3 :  *((long *)userp);
-
-    (void)handle; /* prevent compiler warning */
-    (void)userp;
-
-    switch (type) {
-      case CURLINFO_TEXT:
-        DBG << handle << " " << "== Info: ";
-        DBG << handle << " " << std::string( data, size ) << std::endl;
-
-      default: /* in case a new one is introduced to shock us */
-        return 0;
-
-      case CURLINFO_HEADER_OUT:
-        text = "=> Send header: ";
-        DBG << handle << " " << std::string( data, size ) << std::endl;
-        return 0;
-      case CURLINFO_DATA_OUT:
-        text = "=> Send data";
-        break;
-      case CURLINFO_SSL_DATA_OUT:
-        text = "=> Send SSL data";
-        break;
-      case CURLINFO_HEADER_IN:
-        text = "<= Recv header: ";
-        DBG << handle << " " << std::string( data, size ) << std::endl;
-        return 0;
-      case CURLINFO_DATA_IN:
-        text = "<= Recv data";
-        break;
-      case CURLINFO_SSL_DATA_IN:
-        text = "<= Recv SSL data";
-        break;
-    }
-
-    if ( maxlvl > 4 )
-      dump(text, stderr, (unsigned char *)data, size);
-    else
-      DBG << handle << " " << " " << size << " bytes " << std::endl;
-    return 0;
-  }
-
   namespace  {
     static size_t nwr_headerCallback (  char *ptr, size_t size, size_t nmemb, void *userdata  ) {
       if ( !userdata )
@@ -214,6 +135,7 @@ namespace zyppng {
 
   bool NetworkRequestPrivate::setupHandle( std::string &errBuf )
   {
+    ::internal::setupZYPP_MEDIA_CURL_DEBUG( _easyHandle );
     curl_easy_setopt( _easyHandle, CURLOPT_ERRORBUFFER, this->_errorBuf.data() );
 
     const std::string urlScheme = _url.getScheme();
@@ -290,20 +212,6 @@ namespace zyppng {
 
       locSet.setTimeout( zypp::MediaConfig::instance().download_transfer_timeout() );
       locSet.setConnectTimeout( CONNECT_TIMEOUT );
-
-      {
-        char *ptr = getenv("ZYPP_MEDIA_CURL_DEBUG");
-        _curlDebug = (ptr && *ptr) ? zypp::str::strtonum<long>( ptr) : 0L;
-        if( _curlDebug > 0)
-        {
-          setCurlOption( CURLOPT_VERBOSE, 1L);
-          if ( _curlDebug >= 3 )
-            setCurlOption( CURLOPT_DEBUGFUNCTION, log_curl_all );
-          else
-            setCurlOption( CURLOPT_DEBUGFUNCTION, ::internal::log_curl);
-          setCurlOption( CURLOPT_DEBUGDATA, &_curlDebug);
-        }
-      }
 
       /** Force IPv4/v6 */
       switch ( zypp::env::ZYPP_MEDIA_CURL_IPRESOLVE() )
@@ -894,8 +802,6 @@ namespace zyppng {
         hdr.remove_suffix( hdr.size() - (lastNonWhitespace + 1) );
       else
         hdr = std::string_view();
-
-      DBG_MEDIA << _easyHandle << " " << "Received header: " << hdr << std::endl;
 
       auto &rmode = std::get<running_t>( _runningMode );
       if ( !hdr.size() ) {

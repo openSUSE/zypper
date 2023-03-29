@@ -340,7 +340,6 @@ MediaCurl::MediaCurl( const Url &      url_r,
       _customHeaders(0L)
 {
   _curlError[0] = '\0';
-  _curlDebug = 0L;
 
   MIL << "MediaCurl::MediaCurl(" << url_r << ", " << attach_point_hint_r << ")" << endl;
 
@@ -406,15 +405,7 @@ void MediaCurl::checkProtocol(const Url &url) const
 
 void MediaCurl::setupEasy()
 {
-  {
-    _curlDebug = env::ZYPP_MEDIA_CURL_DEBUG();
-    if( _curlDebug > 0)
-    {
-      curl_easy_setopt( _curl, CURLOPT_VERBOSE, 1L);
-      curl_easy_setopt( _curl, CURLOPT_DEBUGFUNCTION, log_curl);
-      curl_easy_setopt( _curl, CURLOPT_DEBUGDATA, &_curlDebug);
-    }
-  }
+  ::internal::setupZYPP_MEDIA_CURL_DEBUG( _curl );
 
   curl_easy_setopt(_curl, CURLOPT_HEADERFUNCTION, log_redirects_curl);
   curl_easy_setopt(_curl, CURLOPT_HEADERDATA, &_lastRedirect);

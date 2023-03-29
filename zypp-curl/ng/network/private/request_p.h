@@ -122,7 +122,6 @@ namespace zyppng {
     NetworkRequest::FileMode            _fMode = NetworkRequest::WriteExclusive;
     NetworkRequest::Priority            _priority = NetworkRequest::Normal;
 
-    long _curlDebug = 0L;
     std::string _lastRedirect;	///< to log/report redirections
     const std::string _currentCookieFile = "/var/lib/YaST2/cookies";
 
