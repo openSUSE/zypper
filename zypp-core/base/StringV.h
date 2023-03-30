@@ -14,6 +14,7 @@
 #include <string_view>
 #ifdef __cpp_lib_string_view
 
+#include <zypp/APIConfig.h>
 #include <zypp-core/base/String.h>
 #include <zypp-core/base/Regex.h>
 #include <zypp-core/base/Flags.h>
@@ -179,8 +180,10 @@ namespace zypp
       unsigned _split( std::string_view line_r, std::string_view sep_r, Trim trim_r, WordConsumer && fnc_r );
 
       /** \ref splitRx working horse */
+      unsigned _splitRx( std::string_view line_r, const regex & rx_r, WordConsumer && fnc_r );
+#if LEGACY(1722)
       unsigned _splitRx( const std::string & line_r, const regex & rx_r, WordConsumer && fnc_r );
-
+#endif
     }  // namespace detail
     ///////////////////////////////////////////////////////////////////
 
@@ -205,7 +208,7 @@ namespace zypp
      * \returns the number of words reported.
      */
     template <typename Callable = detail::WordConsumer>
-    unsigned splitRx( const std::string & line_r, const regex & rx_r, Callable && fnc_r = Callable() )
+    unsigned splitRx( std::string_view line_r, const regex & rx_r, Callable && fnc_r = Callable() )
     { return detail::_splitRx( line_r, rx_r, detail::wordConsumer( std::forward<Callable>(fnc_r) ) ); }
 
 

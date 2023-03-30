@@ -128,7 +128,11 @@ namespace zypp
       return fncCall;
     }
 
+#if LEGACY(1722)
     unsigned detail::_splitRx( const std::string & line_r, const regex & rx_r, WordConsumer && fnc_r )
+    { return _splitRx( std::string_view(line_r), rx_r, std::move(fnc_r) ); }
+#endif
+    unsigned detail::_splitRx( std::string_view line_r, const regex & rx_r, WordConsumer && fnc_r )
     {
       // callback stats
       bool fncStop = false;
