@@ -348,11 +348,7 @@ namespace zyppng {
       }
 
 #endif
-      else
-      {
-        DBG << _easyHandle << " " << "Proxy: not explicitly set" << std::endl;
-        DBG << _easyHandle << " " << "Proxy: libcurl may look into the environment" << std::endl;
-      }
+      // else: Proxy: not explicitly set; libcurl may look into the environment
 
       /** Speed limits */
       if ( locSet.minDownloadSpeed() != 0 )
