@@ -31,14 +31,11 @@ namespace zypp
 {
   namespace env
   {
-    /** Long number for setting CURLOPT_DEBUGDATA */
-    inline long ZYPP_MEDIA_CURL_DEBUG()
-    {
-      long ret = 0L;
-      if ( char *ptr = ::getenv("ZYPP_MEDIA_CURL_DEBUG"); ptr && *ptr )
-        str::strtonum( ptr, ret );
-      return ret;
-    }
+    /** \c const long& for setting CURLOPT_DEBUGDATA
+     * Returns a reference to a static variable, so it's
+     * safe to pass it's address to CURLOPT_DEBUGDATA.
+     */
+    const long & ZYPP_MEDIA_CURL_DEBUG();
 
     /** 4/6 to force IPv4/v6 */
     int ZYPP_MEDIA_CURL_IPRESOLVE();
@@ -49,7 +46,8 @@ namespace zypp
 namespace internal {
 
 void globalInitCurlOnce();
-int  log_curl(CURL *curl, curl_infotype info,  char *ptr, size_t len, void *max_lvl);
+/** Setup CURLOPT_VERBOSE and CURLOPT_DEBUGFUNCTION according to env::ZYPP_MEDIA_CURL_DEBUG. */
+void setupZYPP_MEDIA_CURL_DEBUG( CURL *curl );
 size_t log_redirects_curl( char *ptr, size_t size, size_t nmemb, void *userdata);
 
 

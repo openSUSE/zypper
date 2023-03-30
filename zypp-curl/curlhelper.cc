@@ -15,8 +15,9 @@
 
 #include <zypp-core/fs/PathInfo.h>
 #include <zypp-core/Pathname.h>
-#include <zypp-core/base/Logger.h>
+#include <zypp-core/base/LogTools.h>
 #include <zypp-core/base/String.h>
+#include <zypp-core/base/StringV.h>
 #include <zypp-curl/ProxyInfo>
 #include <zypp-curl/auth/CurlAuthData>
 #include <zypp-media/MediaException>
@@ -30,24 +31,26 @@ namespace zypp
 {
   namespace env
   {
-    namespace
+    const long & ZYPP_MEDIA_CURL_DEBUG()
     {
-      inline int getZYPP_MEDIA_CURL_IPRESOLVE()
-      {
+      static const long ret = [](){
+        const char * env = getenv("ZYPP_MEDIA_CURL_DEBUG");
+        return env && *env ? str::strtonum<ulong>( env ) : 0;
+      }();
+      return ret;
+    }
+
+    int ZYPP_MEDIA_CURL_IPRESOLVE()
+    {
+      static int _v = [](){
         int ret = 0;
-        if ( const char * envp = getenv( "ZYPP_MEDIA_CURL_IPRESOLVE" ) )
-        {
+        if ( const char * envp = getenv( "ZYPP_MEDIA_CURL_IPRESOLVE" ) ) {
           WAR << "env set: $ZYPP_MEDIA_CURL_IPRESOLVE='" << envp << "'" << std::endl;
           if (      strcmp( envp, "4" ) == 0 )	ret = 4;
           else if ( strcmp( envp, "6" ) == 0 )	ret = 6;
         }
-          return ret;
-      }
-    } //namespace
-
-    int ZYPP_MEDIA_CURL_IPRESOLVE()
-    {
-      static int _v = getZYPP_MEDIA_CURL_IPRESOLVE();
+        return ret;
+      }();
       return _v;
     }
   } // namespace env
@@ -65,38 +68,67 @@ void globalInitCurlOnce()
   } (), true );
 }
 
-int log_curl(CURL *, curl_infotype info,
-  char *ptr, size_t len, void *max_lvl)
+int log_curl( CURL * curl, curl_infotype info, char * ptr, size_t len, void * max_lvl )
 {
   if ( max_lvl == nullptr )
     return 0;
 
   long maxlvl = *((long *)max_lvl);
-
-  char pfx = ' ';
+  const char * pfx = "";
+  bool isContent = true;  // otherwise it's data
   switch( info )
   {
-    case CURLINFO_TEXT:       if ( maxlvl < 1 ) return 0; pfx = '*'; break;
-    case CURLINFO_HEADER_IN:  if ( maxlvl < 2 ) return 0; pfx = '<'; break;
-    case CURLINFO_HEADER_OUT: if ( maxlvl < 2 ) return 0; pfx = '>'; break;
+    case CURLINFO_TEXT:         if ( maxlvl < 1 ) return 0; pfx = "*"; break;
+    case CURLINFO_HEADER_IN:    if ( maxlvl < 2 ) return 0; pfx = "<"; break;
+    case CURLINFO_HEADER_OUT:   if ( maxlvl < 2 ) return 0; pfx = ">"; break;
+    case CURLINFO_SSL_DATA_IN:  if ( maxlvl < 3 ) return 0; isContent = false; pfx = "<[SSL]"; break;
+    case CURLINFO_SSL_DATA_OUT: if ( maxlvl < 3 ) return 0; isContent = false; pfx = ">[SSL]"; break;
+    case CURLINFO_DATA_IN:      if ( maxlvl < 3 ) return 0; isContent = false; pfx = "<[DTA]"; break;
+    case CURLINFO_DATA_OUT:     if ( maxlvl < 3 ) return 0; isContent = false; pfx = ">[DTA]"; break;
+
     default:
       return 0;
   }
 
-  std::vector<std::string> lines;
-  str::split( std::string(ptr,len), std::back_inserter(lines), "\r\n" );
-  for( const auto & line : lines )
-  {
-    if ( str::startsWith( line, "Authorization:" ) ) {
-      std::string::size_type pos { line.find( " ", 15 ) }; // Authorization: <type> <credentials>
-      if ( pos == std::string::npos )
-        pos = 15;
-      DBG << pfx << " " << line.substr( 0, pos ) << " <credentials removed>" << std::endl;
+  // We'd like to keep all log messages within function `log_curl`
+  // because this tag to grep for is known and communicate to users.
+  if ( isContent ) {
+    std::vector<std::string_view> lines;  // don't want log from within the lambda
+    strv::split( std::string_view( ptr, len ), "\n", [&lines]( std::string_view line, unsigned, bool last ) {
+      if ( last ) return; // empty word after final \n
+      line = strv::rtrim( line, "\r" );
+      lines.push_back( line );
+    });
+    for ( const auto & line : lines ) {
+      if ( str::hasPrefix( line, "Authorization:" ) ) {
+        std::string_view::size_type pos { line.find( " ", 15 ) }; // Authorization: <type> <credentials>
+        if ( pos == std::string::npos )
+          pos = 15;
+        DBG << curl << " " << pfx << " " << line.substr( 0, pos ) << " <credentials removed>" << endl;
+      }
+      else
+        DBG << curl << " " << pfx << " " << line << endl;
     }
+  } else {
+    if ( maxlvl < 4 )
+      DBG << curl << " " << pfx << " " << len << " byte" << endl;
     else
-      DBG << pfx << " " << line << std::endl;
+      hexdumpOn( DBG << curl << " " << pfx << " ", ptr, len );
   }
   return 0;
+}
+
+void setupZYPP_MEDIA_CURL_DEBUG( CURL *curl )
+{
+  if ( not curl ) {
+    INT << "Got a NULL curl handle" << endl;
+    return;
+  }
+  if ( env::ZYPP_MEDIA_CURL_DEBUG() > 0 ) {
+    curl_easy_setopt( curl, CURLOPT_VERBOSE, 1L );
+    curl_easy_setopt( curl, CURLOPT_DEBUGFUNCTION, log_curl );
+    curl_easy_setopt( curl, CURLOPT_DEBUGDATA, &env::ZYPP_MEDIA_CURL_DEBUG() );
+  }
 }
 
 size_t log_redirects_curl( char *ptr, size_t size, size_t nmemb, void *userdata)
