@@ -367,7 +367,7 @@ namespace zyppng {
   std::vector<RangeDownloaderBaseState::Block> RangeDownloaderBaseState::getNextBlocks( const std::string &urlScheme )
   {
     std::vector<Block> blocks;
-    const auto &prefSize = std::max<zypp::ByteCount>( _preferredChunkSize, zypp::ByteCount(4, zypp::ByteCount::K) );
+    const auto prefSize = std::max<zypp::ByteCount>( _preferredChunkSize, zypp::ByteCount(4, zypp::ByteCount::K) );
     size_t accumulatedSize = 0;
 
     bool canDoRandomBlocks = ( zypp::str::hasPrefixCI( urlScheme, "http") );
@@ -394,7 +394,7 @@ namespace zyppng {
 
   std::vector<RangeDownloaderBaseState::Block> RangeDownloaderBaseState::getNextFailedBlocks( const std::string &urlScheme )
   {
-    const auto &prefSize = std::max<zypp::ByteCount>( _preferredChunkSize, zypp::ByteCount(4, zypp::ByteCount::K) );
+    const auto prefSize = std::max<zypp::ByteCount>( _preferredChunkSize, zypp::ByteCount(4, zypp::ByteCount::K) );
     // sort the failed requests by block number, this should make sure get them in offset order as well
     _failedRanges.sort( []( const auto &a , const auto &b ){ return a.start < b.start; } );
 
