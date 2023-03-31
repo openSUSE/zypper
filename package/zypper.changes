@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Mar 31 21:00:24 CEST 2023 - ma@suse.de
+
+- Fix selecting installed patterns from picklist (bsc#1209406)
+- man: better explanation of --priority (fixes #480)
+- version 1.14.60
+
+-------------------------------------------------------------------
 Sat Dec 24 02:26:11 CET 2022 - ma@suse.de
 
 - BuildRequires:  libzypp-devel >= 17.31.7.
