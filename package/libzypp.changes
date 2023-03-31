@@ -1,4 +1,27 @@
 -------------------------------------------------------------------
+Fri Mar 31 18:35:00 CEST 2023 - ma@suse.de
+
+- Workround bsc#1195633 while libsolv <= 0.7.23 is used.
+- Fix potential endless loop in new ZYPP_MEDIANETWORK.
+- ZYPP_METALINK_DEBUG=1: Log URL and priority of the mirrors
+  parsed from a metalink file.
+- multicurl: propagate ssl settings stored in repo url
+  (boo#1127591)
+  Closes #335.
+- Teach MediaNetwork to retry on HTTP2 errors.
+- fix CapDetail to return Rel::NONE if an EXPRESSION is used as a
+  NAMED cap.
+- Capability: support parsing richdeps from string.
+- defaultLoadSystem: default to LS_NOREFRESH if not root.
+- Detect x86_64_v[234]: Fix LZCNT bit used in detection (fixes
+  #439)
+  Merges pm-software-management/rpm#2412: The bit for LZCNT is in
+  CPUID 0x80000001, not 1.
+- Detect x86_64_v[234] architecture levels (fixes #439)
+- Support x86_64_v[234] architecture levels (for #439)
+- version 17.31.9 (22)
+
+-------------------------------------------------------------------
 Mon Feb 13 16:48:56 CET 2023 - ma@suse.de
 
 - ProgressData: enforce reporting the INIT||END state
