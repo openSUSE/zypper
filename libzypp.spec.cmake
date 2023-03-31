@@ -104,6 +104,7 @@ BuildRequires:  libsolv-devel >= 0.7.17
 %if 0%{?suse_version} >= 1100
 BuildRequires:  libsolv-tools
 %requires_eq    libsolv-tools
+Requires:	( findutils if libsolv-tools <= 0.7.23 )
 %else
 Requires:       libsolv-tools
 %endif
