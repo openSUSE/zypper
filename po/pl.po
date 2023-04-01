@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-12-24 02:27+0100\n"
-"PO-Revision-Date: 2023-04-01 19:14+0000\n"
+"PO-Revision-Date: 2023-04-02 01:14+0000\n"
 "Last-Translator: Szymon Scholz <neome@posteo.me>\n"
 "Language-Team: Polish <https://l10n.opensuse.org/projects/zypper/master/pl/>"
 "\n"
@@ -299,9 +299,9 @@ msgid ""
 "Additionally use disabled repositories providing a specific keyword. Try '--"
 "plus-content debug' to enable repos indicating to provide debug packages."
 msgstr ""
-"Użycie dodatkowo wyłączonych repozytoriów po podaniu określonego słowa "
-"kluczowego. Opcja --plus-content debug powoduje włączenie repozytoriów "
-"wskazujących na konieczność podania pakietów do debugowania."
+"Dodatkowo korzystaj z wyłączonych repozytoriów dostarczających określone "
+"słowo kluczowe. Wypróbuj opcję \"--plus-content debug\", aby włączyć "
+"repozytoria, które wskazują, że dostarczają pakiety debugowania."
 
 #: src/Config.cc:583
 msgid "Repositories disabled, using the database of installed packages only."
@@ -310,7 +310,7 @@ msgstr "Repozytoria wyłączone, użyto tylko bazy zainstalowanych pakietów."
 #. translators: --disable-repositories
 #: src/Config.cc:587
 msgid "Do not read meta-data from repositories."
-msgstr "Bez odczytywania metadanych z repozytoriów."
+msgstr "Nie odczytuj metadanych z repozytoriów."
 
 #: src/Config.cc:591
 msgid "Autorefresh disabled."
@@ -319,7 +319,7 @@ msgstr "Automatyczne odświeżanie wyłączone."
 #. translators: --no-refresh
 #: src/Config.cc:595
 msgid "Do not refresh the repositories."
-msgstr "Bez odświeżania repozytoriów."
+msgstr "Nie odświeżaj repozytoriów."
 
 #: src/Config.cc:599
 msgid "CD/DVD repositories disabled."
@@ -328,7 +328,7 @@ msgstr "Repozytoria CD/DVD są wyłączone."
 #. translators: --no-cd
 #: src/Config.cc:603
 msgid "Ignore CD/DVD repositories."
-msgstr "Ignorowanie repozytoriów na CD/DVD."
+msgstr "Ignoruj repozytoria CD/DVD."
 
 #: src/Config.cc:607
 msgid "Remote repositories disabled."
@@ -337,7 +337,7 @@ msgstr "Zdalne repozytoria są wyłączone."
 #. translators: --no-remote
 #: src/Config.cc:611
 msgid "Ignore remote repositories."
-msgstr "Ignorowanie repozytoriów zdalnych."
+msgstr "Ignoruj zdalne repozytoria."
 
 #. translators: --releasever
 #: src/Config.cc:618
@@ -345,24 +345,23 @@ msgid ""
 "Set the value of $releasever in all .repo files (default: distribution "
 "version)"
 msgstr ""
-"Ustawienie wartości $releasever we wszystkich plikach .repo (domyślnie: "
-"wersja dystrybucji)"
+"Ustaw wartości $releasever we wszystkich plikach .repo (domyślnie: wersja "
+"dystrybucji)"
 
 #: src/Config.cc:622
 msgid "Target Options"
-msgstr "Opcje obiektu docelowego"
+msgstr "Opcje docelowe"
 
 #. translators: --root, -R <DIR>
 #: src/Config.cc:627
 msgid "Operate on a different root directory."
-msgstr "Praca w innym katalogu głównym."
+msgstr "Operuj na innym katalogu głównym."
 
 #. translators: --installroot <DIR>
 #: src/Config.cc:633
 msgid ""
 "Operate on a different root directory, but share repositories with the host."
-msgstr ""
-"Działanie w innym katalogu głównym, ale udostępnianie repozytoriów hostowi."
+msgstr "Operuj w innym katalogu głównym, ale współdziel repozytoria z hostem."
 
 #: src/Config.cc:639
 msgid "Ignoring installed resolvables."
@@ -371,7 +370,7 @@ msgstr "Zainstalowane obiekty rozwiązywalne zostaną zignorowane."
 #. translators: --disable-system-resolvables
 #: src/Config.cc:642
 msgid "Do not read installed packages."
-msgstr "Bez odczytywania zainstalowanych pakietów."
+msgstr "Nie odczytuj zainstalowanych pakietów."
 
 #: src/Config.cc:809
 msgid "No config file is in use. Can not save options."
