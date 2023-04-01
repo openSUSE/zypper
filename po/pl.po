@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-12-24 02:27+0100\n"
-"PO-Revision-Date: 2023-03-13 01:14+0000\n"
-"Last-Translator: neome <neome@posteo.me>\n"
+"PO-Revision-Date: 2023-04-01 19:14+0000\n"
+"Last-Translator: Szymon Scholz <neome@posteo.me>\n"
 "Language-Team: Polish <https://l10n.opensuse.org/projects/zypper/master/pl/>"
 "\n"
 "Language: pl\n"
@@ -69,45 +69,44 @@ msgstr "Nieznane polecenie '%s'"
 
 #: src/CommitSummary.cc:90
 msgid "Installation has completed with error."
-msgstr "Instalowanie zakończyło się błędem."
+msgstr "Instalacja zakończyła się błędem."
 
 #: src/CommitSummary.cc:92
 #, boost-format
 msgid "You may run '%1%' to repair any dependency problems."
-msgstr ""
-"W celu naprawienia problemów z zależnościami możesz uruchomić program „%1%”."
+msgstr "Możesz uruchomić '%1%', aby naprawić wszelkie problemy z zależnościami."
 
 #: src/CommitSummary.cc:125
 #, c-format, boost-format
 msgid "The following package failed to install:"
 msgid_plural "The following %d packages failed to install:"
-msgstr[0] "Nie udało się zainstalować następującej paczki:"
-msgstr[1] "Nie udało się zainstalować następujących %d paczek:"
-msgstr[2] "Nie udało się zainstalować następujących %d paczek:"
+msgstr[0] "Nie udało się zainstalować następującego pakietu:"
+msgstr[1] "Nie udało się zainstalować następujących %d pakietów:"
+msgstr[2] "Nie udało się zainstalować następujących %d pakietów:"
 
 #: src/CommitSummary.cc:140
 #, c-format, boost-format
 msgid "The following package installation was skipped:"
 msgid_plural "The following %d package installations were skipped:"
-msgstr[0] "Pominięto instalację następującej paczki:"
-msgstr[1] "Pominięto instalację następujących %d paczek:"
-msgstr[2] "Pominięto instalację następujących %d paczek:"
+msgstr[0] "Pominięto instalację następującego pakietu:"
+msgstr[1] "Pominięto instalację następujących %d pakietów:"
+msgstr[2] "Pominięto instalację następujących %d pakietów:"
 
 #: src/CommitSummary.cc:155
 #, c-format, boost-format
 msgid "The following package failed to uninstall:"
 msgid_plural "The following %d packages failed to uninstall:"
-msgstr[0] "Nie udało się odinstalować następującej paczki:"
-msgstr[1] "Nie udało się odinstalować następujących %d paczek:"
-msgstr[2] "Nie udało się odinstalować następujących %d paczek:"
+msgstr[0] "Nie udało się odinstalować następującego pakietu:"
+msgstr[1] "Nie udało się odinstalować następujących %d pakietów:"
+msgstr[2] "Nie udało się odinstalować następujących %d pakietów:"
 
 #: src/CommitSummary.cc:170
 #, c-format, boost-format
 msgid "The following package removal was skipped:"
 msgid_plural "The following %d package removal were skipped:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Pominięto usuwanie następującego pakietu:"
+msgstr[1] "Pominięto usuwanie następujących %d pakietów:"
+msgstr[2] "Pominięto usuwanie następujących %d pakietów:"
 
 #. translators: Appended when clipping a long enumeration:
 #. "ConsoleKit-devel ConsoleKit-doc ... and 20828 more items."
@@ -143,17 +142,17 @@ msgstr "Pomoc."
 #. translators: --version, -V
 #: src/Config.cc:337
 msgid "Output the version number."
-msgstr "Wyświetlanie numeru wersji."
+msgstr "Wyświetl numer wersji."
 
 #. translators: --promptids
 #: src/Config.cc:349
 msgid "Output a list of zypper's user prompts."
-msgstr "Wyświetlanie listy komunikatów użytkownika programu zypper."
+msgstr "Wyświetl listę komunikatów użytkownika programu zypper."
 
 #. translators: --config, -c <FILE>
 #: src/Config.cc:362
 msgid "Use specified config file instead of the default."
-msgstr "Użycie podanego pliku konfiguracyjnego zamiast domyślnego."
+msgstr "Użyj podanego pliku konfiguracyjnego zamiast domyślnego."
 
 #: src/Config.cc:369
 msgid "User data string must not contain nonprintable or newline characters!"
@@ -171,37 +170,37 @@ msgstr ""
 #. translators: --quiet, -q
 #: src/Config.cc:383
 msgid "Suppress normal output, print only error messages."
-msgstr "Tryb cichy, wyświetlanie tylko komunikatów o błędach."
+msgstr "Pomiń normalne wyjście, wyświetl tylko komunikaty o błędach."
 
 #. translators: --verbose, -v
 #: src/Config.cc:391
 msgid "Increase verbosity."
-msgstr "Wyświetlanie dodatkowych informacji."
+msgstr "Wyświetl dodatkowe informacje."
 
 #. translators: --color / --no-color
 #: src/Config.cc:412
 msgid "Whether to use colors in output if tty supports it."
-msgstr "Stosowanie kolorów w danych wyjściowych, jeśli tty je obsługuje."
+msgstr "Zastosuj kolory w danych wyjściowych, jeśli tty je obsługuje."
 
 #. translators: --no-abbrev, -A
 #: src/Config.cc:417
 msgid "Do not abbreviate text in tables."
-msgstr "Bez skracania tekstów w tabelach."
+msgstr "Nie skracaj tekstu w tabelach."
 
 #. translators: --table-style, -s, %1% denotes the supported range of the integer argument (e.g. "1-11")
 #: src/Config.cc:422
-#, fuzzy, boost-format
+#, boost-format
 msgid "Table style (%1%)."
-msgstr "Styl tabelaryczny (liczby całkowite)."
+msgstr "Styl tabeli (%1%)."
 
 #: src/Config.cc:426 src/commands/optionsets.cc:284
 msgid "Entering non-interactive mode."
-msgstr "Rozpoczęto tryb wsadowy."
+msgstr "Przechodzenie do trybu nieinteraktywnego."
 
 #. translators: --non-interactive, -n
 #: src/Config.cc:430
 msgid "Do not ask anything, use default answers automatically."
-msgstr "Bez zadawania pytań; automatyczne stosowanie odpowiedzi domyślnych."
+msgstr "Nie zadawaj pytań, automatycznie używaj domyślnych odpowiedzi."
 
 #: src/Config.cc:435
 msgid ""
@@ -216,18 +215,18 @@ msgstr ""
 msgid ""
 "Do not treat patches as interactive, which have the rebootSuggested-flag set."
 msgstr ""
-"Bez traktowania jako interaktywnych poprawek, które mają ustawioną flagę "
-"rebootSuggested."
+"Nie traktuj poprawek, które mają ustawioną flagę rebootSuggested, jako "
+"interaktywnych."
 
 #. translators: --xmlout, -x
 #: src/Config.cc:449
 msgid "Switch to XML output."
-msgstr "Przełączenie na wyjście XML."
+msgstr "Przełącz na wyjście XML."
 
 #. translators: --ignore-unknown, -i
 #: src/Config.cc:454
 msgid "Ignore unknown packages."
-msgstr "Ignorowanie nieznanych pakietów."
+msgstr "Ignoruj nieznane pakiety."
 
 #. translators: --terse, -t
 #: src/Config.cc:465
@@ -240,7 +239,7 @@ msgstr ""
 #. translators: --reposd-dir, -D <DIR>
 #: src/Config.cc:489
 msgid "Use alternative repository definition file directory."
-msgstr "Użyj alternatywnego katalogu pliku definicji repozytorium katalogu."
+msgstr "Użyj alternatywnego katalogu pliku definicji repozytorium."
 
 #. translators: --cache-dir, -C <DIR>
 #: src/Config.cc:504
@@ -269,33 +268,30 @@ msgstr "Opcje repozytoriów"
 
 #: src/Config.cc:554
 msgid "Entering 'no-gpg-checks' mode."
-msgstr "Rozpoczęto tryb \"bez sprawdzania gpg\"."
+msgstr "Wchodzenie w tryb \"bez sprawdzania gpg\"."
 
 #. translators: --no-gpg-checks
 #: src/Config.cc:558
 msgid "Ignore GPG check failures and continue."
-msgstr ""
-"Ignorowanie nieudanych weryfikacji podpisów GPG i kontynuowanie działania."
+msgstr "Zignoruj błędy sprawdzania GPG i kontynuuj."
 
 #: src/Config.cc:563
 #, c-format, boost-format
 msgid ""
 "Turning on '%s'. New repository signing keys will be automatically imported!"
 msgstr ""
-"Włączanie '%s'. Klucze podpisujące nowe repozytorium zostaną automatycznie "
+"Włączanie '%s'. Nowe klucze podpisywania repozytorium zostaną automatycznie "
 "zaimportowane!"
 
 #. translators: --gpg-auto-import-keys
 #: src/Config.cc:569
 msgid "Automatically trust and import new repository signing keys."
-msgstr ""
-"Automatyczne zaufanie i importowanie nowych kluczy podpisujących "
-"repozytorium."
+msgstr "Automatycznie ufaj i importuj nowe klucze podpisywania repozytorium."
 
 #. translators: --plus-repo, -p <URI>
 #: src/Config.cc:573
 msgid "Use an additional repository."
-msgstr "Użycie dodatkowego repozytorium."
+msgstr "Użyj dodatkowego repozytorium."
 
 #. translators: --plus-content <TAG>
 #: src/Config.cc:577
