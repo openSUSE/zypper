@@ -14,6 +14,8 @@
 #include <zypp-core/Pathname.h>
 #include <zypp-core/base/String.h>
 
+#define  CONNECT_TIMEOUT        60
+
 namespace zypp {
 
   class MediaConfigPrivate {
@@ -25,6 +27,7 @@ namespace zypp {
       , download_max_download_speed	( 0 )
       , download_max_silent_tries	( 5 )
       , download_transfer_timeout	( 180 )
+      , download_connect_timeout        ( CONNECT_TIMEOUT )
     { }
 
     Pathname credentials_global_dir_path;
@@ -35,6 +38,8 @@ namespace zypp {
     int download_max_download_speed;
     int download_max_silent_tries;
     int download_transfer_timeout;
+    int download_connect_timeout;
+
   };
 
   MediaConfig::MediaConfig() : d_ptr( new MediaConfigPrivate() )
@@ -111,6 +116,9 @@ namespace zypp {
 
   long MediaConfig::download_transfer_timeout() const
   { return d_func()->download_transfer_timeout; }
+
+  long MediaConfig::download_connect_timeout() const
+  { return d_func()->download_connect_timeout; }
 
   ZYPP_IMPL_PRIVATE(MediaConfig)
 }

@@ -85,6 +85,11 @@ namespace zypp {
      */
     long download_transfer_timeout() const;
 
+    /*!
+     * Maximum time in seconds that you allow the connection phase to the server to take.
+     */
+    long download_connect_timeout() const;
+
   private:
     MediaConfig();
     std::unique_ptr<MediaConfigPrivate> d_ptr;

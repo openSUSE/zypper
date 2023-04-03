@@ -18,9 +18,6 @@
 #include <zypp-core/Url.h>
 #include <zypp-curl/TransferSettings>
 
-#define  CONNECT_TIMEOUT        60
-#define  TRANSFER_TIMEOUT_MAX   60 * 60
-
 #define EXPLICITLY_NO_PROXY "_none_"
 
 #undef CURLVERSION_AT_LEAST

@@ -210,9 +210,6 @@ namespace zyppng {
 
       locSet.addHeader("Pragma:");
 
-      locSet.setTimeout( zypp::MediaConfig::instance().download_transfer_timeout() );
-      locSet.setConnectTimeout( CONNECT_TIMEOUT );
-
       /** Force IPv4/v6 */
       switch ( zypp::env::ZYPP_MEDIA_CURL_IPRESOLVE() )
       {

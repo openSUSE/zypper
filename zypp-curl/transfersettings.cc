@@ -37,7 +37,7 @@ namespace zypp
     public:
       Impl() : _useproxy( false ),
         _timeout( MediaConfig::instance().download_transfer_timeout() ),
-        _connect_timeout( 60 ),
+        _connect_timeout( MediaConfig::instance().download_connect_timeout() ),
         _maxConcurrentConnections( MediaConfig::instance().download_max_concurrent_connections() ),
         _minDownloadSpeed(MediaConfig::instance().download_min_download_speed()),
         _maxDownloadSpeed(MediaConfig::instance().download_max_download_speed()),

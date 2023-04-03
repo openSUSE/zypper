@@ -24,6 +24,8 @@
 #include <list>
 #include <string>
 
+#define  TRANSFER_TIMEOUT_MAX   60 * 60
+
 using std::endl;
 using namespace zypp;
 
