@@ -112,17 +112,17 @@ namespace zyppng {
         }
       }
     } catch ( const zypp::Exception &ex ) {
-      const auto &err = zypp::str::Format("Failed to parse metalink information.(%1%)" ) % ex.asUserString();
+      std::string err = zypp::str::Format("Failed to parse metalink information.(%1%)" ) % ex.asUserString();
       WAR << err << std::endl;
-      _error = NetworkRequestErrorPrivate::customError( NetworkRequestError::InternalError, err);
+      _error = NetworkRequestErrorPrivate::customError( NetworkRequestError::InternalError, std::move(err) );
       _sigFailed.emit();
       return;
     }
 
     if ( mirrs.size() == 0 ) {
-      const auto &err =  zypp::str::Format("Invalid metalink information.( No mirrors in metalink file)" );
+      std::string err =  zypp::str::Format("Invalid metalink information.( No mirrors in metalink file)" );
       WAR << err << std::endl;
-      _error = NetworkRequestErrorPrivate::customError( NetworkRequestError::InternalError, err );
+      _error = NetworkRequestErrorPrivate::customError( NetworkRequestError::InternalError, std::move(err) );
       _sigFailed.emit();
       return;
     }

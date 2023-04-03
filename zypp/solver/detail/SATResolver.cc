@@ -188,20 +188,21 @@ void establish( sat::Queue & pseudoItems_r, sat::Queue & pseudoFlags_r )
   pseudoItems_r = collectPseudoInstalled( ResPool::instance() );
   if ( ! pseudoItems_r.empty() )
   {
+    auto satPool = sat::Pool::instance();
     MIL << "Establish..." << endl;
-    sat::detail::CPool * cPool { sat::Pool::instance().get() };
+    sat::detail::CPool * cPool { satPool.get() };
     ::pool_set_custom_vendorcheck( cPool, &vendorCheck );
 
     sat::Queue jobQueue;
     // Add rules for parallel installable resolvables with different versions
-    for ( const sat::Solvable & solv : sat::Pool::instance().multiversion() )
+    for ( const sat::Solvable & solv : satPool.multiversion() )
     {
       jobQueue.push( SOLVER_NOOBSOLETES | SOLVER_SOLVABLE );
       jobQueue.push( solv.id() );
     }
 
     AutoDispose<sat::detail::CSolver*> cSolver { ::solver_create( cPool ), ::solver_free };
-    sat::Pool::instance().prepare();
+    satPool.prepare();
     if ( ::solver_solve( cSolver, jobQueue ) != 0 )
       INT << "How can establish fail?" << endl;
 

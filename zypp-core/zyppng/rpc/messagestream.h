@@ -141,7 +141,7 @@ namespace zyppng {
       static expected< T > parseMessage ( const RpcMessage &m ) {
         T p;
         if ( !p.ParseFromString( m.value() ) ) {
-          const auto &msg = zypp::str::Str() << "Failed to parse " << m.messagetypename() << " message.";
+          const std::string &msg = zypp::str::Str() << "Failed to parse " << m.messagetypename() << " message.";
           ERR << msg << std::endl ;
           return expected<T>::error( ZYPP_EXCPT_PTR ( InvalidMessageReceivedException(msg) ) );
         }
@@ -151,7 +151,7 @@ namespace zyppng {
       template<class T>
       static expected< void > parseMessageInto ( const RpcMessage &m, T &target ) {
         if ( !target.ParseFromString( m.value() ) ) {
-          const auto &msg = zypp::str::Str() << "Failed to parse " << m.messagetypename() << " message.";
+          const std::string &msg = zypp::str::Str() << "Failed to parse " << m.messagetypename() << " message.";
           ERR << msg << std::endl ;
           return expected<void>::error( ZYPP_EXCPT_PTR ( InvalidMessageReceivedException(msg) ) );
         }

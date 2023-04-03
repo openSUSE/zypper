@@ -204,7 +204,7 @@ IMPL_PTR_TYPE(MediaSetAccess);
 
     ManagedFile tmpFile = filesystem::TmpFile::asManagedFile();
 
-    bool optional { options & PROVIDE_NON_INTERACTIVE };
+    bool optional = options & PROVIDE_NON_INTERACTIVE;
     Pathname file = access.provideFile( OnMediaLocation(path, 1).setOptional( optional ), options );
 
     //prevent the file from being deleted when MediaSetAccess gets out of scope

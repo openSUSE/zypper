@@ -14,13 +14,14 @@
 
 using boost::unit_test::test_case;
 using namespace zypp;
+using namespace std::string_literals;
 
 void chksumtest( const std::string & type_r, const std::string & sum_r )
 {
   BOOST_CHECK_EQUAL( type_r, CheckSum( sum_r ).type() );	// autodetect type
   BOOST_CHECK_EQUAL( type_r, CheckSum( type_r, sum_r ).type() );
   BOOST_CHECK_EQUAL( sum_r, Digest::digest( type_r, "" ) );
-  for ( const std::string & t : { "md5", "sha1", "sha224", "sha256", "sha384", "sha512", } )
+  for ( const std::string & t : { "md5"s, "sha1"s, "sha224"s, "sha256"s, "sha384"s, "sha512"s, } )
   {
     if ( t != type_r )
     {

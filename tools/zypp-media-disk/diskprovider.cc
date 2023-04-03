@@ -131,7 +131,7 @@ zyppng::worker::AttachResult DiskProvider::mountDevice ( const uint32_t id, cons
         );
     }
 
-    const std::string &device = zypp::Pathname(attachUrl.getQueryParam("device")).asString();
+    const std::string device = zypp::Pathname(attachUrl.getQueryParam("device")).asString();
     if ( device.empty() ) {
       return zyppng::worker::AttachResult::error(
         zyppng::ProvideMessage::Code::MountFailed
