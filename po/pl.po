@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-12-24 02:27+0100\n"
-"PO-Revision-Date: 2023-04-02 01:14+0000\n"
+"PO-Revision-Date: 2023-04-03 20:29+0000\n"
 "Last-Translator: Szymon Scholz <neome@posteo.me>\n"
 "Language-Team: Polish <https://l10n.opensuse.org/projects/zypper/master/pl/>"
 "\n"
@@ -4949,7 +4949,7 @@ msgstr ""
 #: src/commands/subcommand.cc:381
 #, boost-format
 msgid "%1% was killed by signal %2% (%3%)"
-msgstr "%1% zamknięty przez sygnał %2% (%3%)"
+msgstr "%1% został zamknięty przez sygnał %2% (%3%)"
 
 #: src/commands/subcommand.cc:385
 msgid "core dumped"
