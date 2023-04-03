@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-12-24 02:27+0100\n"
-"PO-Revision-Date: 2023-04-03 20:29+0000\n"
+"PO-Revision-Date: 2023-04-04 00:14+0000\n"
 "Last-Translator: Szymon Scholz <neome@posteo.me>\n"
 "Language-Team: Polish <https://l10n.opensuse.org/projects/zypper/master/pl/>"
 "\n"
@@ -390,12 +390,16 @@ msgstr "Nie udało się zapisać opcji."
 msgid ""
 "'%s' install modifier must not be used without a package name or capability."
 msgstr ""
+"Modyfikator instalacji '%s' nie może zostać użyty bez nazwy pakietu lub "
+"możliwości."
 
 #: src/PackageArgs.cc:169
 #, c-format, boost-format
 msgid ""
 "'%s' remove modifier must not be used without a package name or capability."
 msgstr ""
+"Modyfikator usuwania '%s' nie może zostać użyty bez nazwy pakietu lub "
+"możliwości."
 
 #: src/PackageArgs.cc:221
 #, c-format, boost-format
