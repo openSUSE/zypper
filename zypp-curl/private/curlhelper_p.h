@@ -20,7 +20,6 @@
 
 #define  CONNECT_TIMEOUT        60
 #define  TRANSFER_TIMEOUT_MAX   60 * 60
-#define  DETECT_DIR_INDEX       0
 
 #define EXPLICITLY_NO_PROXY "_none_"
 

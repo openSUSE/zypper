@@ -1083,49 +1083,6 @@ bool MediaCurl::doGetDoesFileExist( const Pathname & filename ) const
 
 ///////////////////////////////////////////////////////////////////
 
-
-#if DETECT_DIR_INDEX
-bool MediaCurl::detectDirIndex() const
-{
-  if(_url.getScheme() != "http" && _url.getScheme() != "https")
-    return false;
-  //
-  // try to check the effective url and set the not_a_file flag
-  // if the url path ends with a "/", what usually means, that
-  // we've received a directory index (index.html content).
-  //
-  // Note: This may be dangerous and break file retrieving in
-  //       case of some server redirections ... ?
-  //
-  bool      not_a_file = false;
-  char     *ptr = NULL;
-  CURLcode  ret = curl_easy_getinfo( _curl,
-                                     CURLINFO_EFFECTIVE_URL,
-                                     &ptr);
-  if ( ret == CURLE_OK && ptr != NULL)
-  {
-    try
-    {
-      Url         eurl( ptr);
-      std::string path( eurl.getPathName());
-      if( !path.empty() && path != "/" && *path.rbegin() == '/')
-      {
-        DBG << "Effective url ("
-            << eurl
-            << ") seems to provide the index of a directory"
-            << endl;
-        not_a_file = true;
-      }
-    }
-    catch( ... )
-    {}
-  }
-  return not_a_file;
-}
-#endif
-
-///////////////////////////////////////////////////////////////////
-
 void MediaCurl::doGetFileCopy( const OnMediaLocation &srcFile , const Pathname & target, callback::SendReport<DownloadProgressReport> & report, RequestOptions options ) const
 {
     Pathname dest = target.absolutename();
@@ -1332,13 +1289,6 @@ void MediaCurl::doGetFileCopyFile( const OnMediaLocation & srcFile, const Pathna
         ZYPP_RETHROW(e);
       }
     }
-
-#if DETECT_DIR_INDEX
-    if (!ret && detectDirIndex())
-      {
-        ZYPP_THROW(MediaNotAFileException(_url, filename));
-      }
-#endif // DETECT_DIR_INDEX
 }
 
 ///////////////////////////////////////////////////////////////////
