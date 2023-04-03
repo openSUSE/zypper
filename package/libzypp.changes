@@ -15,7 +15,7 @@ Fri Mar 31 18:35:00 CEST 2023 - ma@suse.de
 - defaultLoadSystem: default to LS_NOREFRESH if not root.
 - Detect x86_64_v[234]: Fix LZCNT bit used in detection (fixes
   #439)
-  Merges pm-software-management/rpm#2412: The bit for LZCNT is in
+  Merges rpm-software-management/rpm#2412: The bit for LZCNT is in
   CPUID 0x80000001, not 1.
 - Detect x86_64_v[234] architecture levels (fixes #439)
 - Support x86_64_v[234] architecture levels (for #439)
