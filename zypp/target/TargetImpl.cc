@@ -232,39 +232,24 @@ namespace zypp
     ///////////////////////////////////////////////////////////////////
     namespace
     {
-      /// \brief Try to provide /proc fs if not present.
-      /// bsc#1181328: Some systemd tools require /proc to be mounted
-      class AssertProcMounted
+      class AssertMountedBase
       {
-        NON_COPYABLE(AssertProcMounted);
-        NON_MOVABLE(AssertProcMounted);
-      public:
+        NON_COPYABLE(AssertMountedBase);
+        NON_MOVABLE(AssertMountedBase);
+      protected:
+        AssertMountedBase()
+        {}
 
-        AssertProcMounted( Pathname root_r )
-        {
-          root_r /= "/proc";
-          if ( ! PathInfo(root_r/"self").isDir() ) {
-            MIL << "Try to make sure proc is mounted at" << root_r << endl;
-            if ( filesystem::assert_dir(root_r) == 0
-              && execute({ "mount", "-t", "proc", "proc", root_r.asString() }) == 0 ) {
-              _mountpoint = std::move(root_r);	// so we'll later unmount it
-            }
-            else {
-              WAR << "Mounting proc at " << root_r << " failed" << endl;
-            }
-          }
-        }
-
-        ~AssertProcMounted( )
+        ~AssertMountedBase()
         {
           if ( ! _mountpoint.empty() ) {
             // we mounted it so we unmount...
             MIL << "We mounted " << _mountpoint << " so we unmount it" << endl;
-            execute({ "umount", "-l", _mountpoint.asString() });
+            execute({ "umount", "-R", "-l", _mountpoint.asString() });
           }
         }
 
-      private:
+      protected:
         int execute( ExternalProgram::Arguments && cmd_r ) const
         {
           ExternalProgram prog( cmd_r, ExternalProgram::Stderr_To_Stdout );
@@ -273,9 +258,56 @@ namespace zypp
           return prog.close();
         }
 
-      private:
+      protected:
         Pathname _mountpoint;
+
       };
+
+      /// \brief Try to provide /proc fs if not present.
+      /// bsc#1181328: Some systemd tools require /proc to be mounted
+      class AssertProcMounted : private AssertMountedBase
+      {
+      public:
+        AssertProcMounted( Pathname root_r )
+        {
+          root_r /= "/proc";
+          if ( ! PathInfo(root_r/"self").isDir() ) {
+            MIL << "Try to make sure proc is mounted at" << root_r << endl;
+            if ( filesystem::assert_dir(root_r) == 0
+              && execute({ "mount", "-t", "proc", "/proc", root_r.asString() }) == 0 ) {
+              _mountpoint = std::move(root_r);	// so we'll later unmount it
+            }
+            else {
+              WAR << "Mounting proc at " << root_r << " failed" << endl;
+            }
+          }
+        }
+      };
+
+      /// \brief Try to provide /dev fs if not present.
+      /// #444: Some packages expect /dev to be mounted
+      class AssertDevMounted : private AssertMountedBase
+      {
+      public:
+        AssertDevMounted( Pathname root_r )
+        {
+          root_r /= "/dev";
+          if ( ! PathInfo(root_r/"null").isChr() ) {
+            MIL << "Try to make sure dev is mounted at" << root_r << endl;
+            // https://unix.stackexchange.com/questions/263972/unmount-a-rbind-mount-without-affecting-the-original-mount
+            // Without --make-rslave unmounting <sandbox-root>/dev/pts
+            // may unmount /dev/pts and you're out of ptys.
+            if ( filesystem::assert_dir(root_r) == 0
+              && execute({ "mount", "--rbind", "--make-rslave", "/dev", root_r.asString() }) == 0 ) {
+              _mountpoint = std::move(root_r);	// so we'll later unmount it
+            }
+            else {
+              WAR << "Mounting dev at " << root_r << " failed" << endl;
+            }
+          }
+        }
+      };
+
     } // namespace
     ///////////////////////////////////////////////////////////////////
 
@@ -1582,6 +1614,7 @@ namespace zypp
 
       // bsc#1181328: Some systemd tools require /proc to be mounted
       AssertProcMounted assertProcMounted( _root );
+      AssertDevMounted assertDevMounted( _root ); // also /dev
 
       RpmPostTransCollector postTransCollector( _root );
       std::vector<sat::Solvable> successfullyInstalledPackages;
@@ -1929,6 +1962,7 @@ namespace zypp
 
       // bsc#1181328: Some systemd tools require /proc to be mounted
       AssertProcMounted assertProcMounted( _root );
+      AssertDevMounted assertDevMounted( _root ); // also /dev
 
       // Why nodeps?
       //
