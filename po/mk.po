@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-12-24 02:27+0100\n"
-"PO-Revision-Date: 2023-01-31 08:14+0000\n"
+"PO-Revision-Date: 2023-04-06 07:14+0000\n"
 "Last-Translator: Kristijan Fremen Velkovski <me@krisfremen.com>\n"
 "Language-Team: Macedonian <https://l10n.opensuse.org/projects/zypper/master/"
 "mk/>\n"
@@ -238,7 +238,7 @@ msgstr "Користете алтернативен директориум за 
 #. translators: --raw-cache-dir <DIR>
 #: src/Config.cc:517
 msgid "Use alternative raw meta-data cache directory."
-msgstr ""
+msgstr "Користи алтернативен директориум за кеш на сирови мета-податоци."
 
 #. translators: --solv-cache-dir <DIR>
 #: src/Config.cc:531
@@ -252,7 +252,7 @@ msgstr ""
 
 #: src/Config.cc:550
 msgid "Repository Options"
-msgstr ""
+msgstr "Опции за Складишта"
 
 #: src/Config.cc:554
 msgid "Entering 'no-gpg-checks' mode."
