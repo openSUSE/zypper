@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-12-24 02:27+0100\n"
-"PO-Revision-Date: 2023-04-07 07:14+0000\n"
+"PO-Revision-Date: 2023-04-08 03:14+0000\n"
 "Last-Translator: Kristijan Fremen Velkovski <me@krisfremen.com>\n"
 "Language-Team: Macedonian <https://l10n.opensuse.org/projects/zypper/master/"
 "mk/>\n"
@@ -248,7 +248,7 @@ msgstr ""
 #. translators: --pkg-cache-dir <DIR>
 #: src/Config.cc:545
 msgid "Use alternative package cache directory."
-msgstr ""
+msgstr "Користи алтернативен директориум за кеш на пакети."
 
 #: src/Config.cc:550
 msgid "Repository Options"
