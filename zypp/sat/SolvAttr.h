@@ -60,10 +60,14 @@ namespace sat
       static const SolvAttr provides;
       static const SolvAttr obsoletes;
       static const SolvAttr conflicts;
+#if __GNUC__ >= 10
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wc++20-compat"
+#endif
       static const SolvAttr requires;
+#if __GNUC__ >= 10
 #pragma GCC diagnostic pop
+#endif
       static const SolvAttr recommends;
       static const SolvAttr suggests;
       static const SolvAttr supplements;
