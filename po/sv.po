@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-12-24 02:27+0100\n"
-"PO-Revision-Date: 2023-03-12 08:14+0000\n"
+"PO-Revision-Date: 2023-04-12 12:14+0000\n"
 "Last-Translator: Luna  Jernberg <bittin@opensuse.org>\n"
 "Language-Team: Swedish <https://l10n.opensuse.org/projects/zypper/master/sv/>"
 "\n"
@@ -382,12 +382,16 @@ msgstr "Det gick inte att spara alternativet."
 msgid ""
 "'%s' install modifier must not be used without a package name or capability."
 msgstr ""
+"Installationsmodifierare '%s' får inte användas utan ett paketnamn eller "
+"kapabilitet."
 
 #: src/PackageArgs.cc:169
 #, c-format, boost-format
 msgid ""
 "'%s' remove modifier must not be used without a package name or capability."
 msgstr ""
+"'%s' ta bort modifierare får inte användas utan ett paketnamn eller "
+"kapabilitet."
 
 #: src/PackageArgs.cc:221
 #, c-format, boost-format
@@ -1410,6 +1414,11 @@ msgid ""
 "the repository provider or check their web site. Many providers maintain a "
 "web page showing the fingerprints of the GPG keys they are using."
 msgstr ""
+"En GPG-pubnyckel identifieras tydligt av dess fingeravtryck. Lita inte på "
+"nyckelns namn. Om du inte är säker på om den presenterade nyckeln är "
+"autentisk, fråga förrådsleverantören eller kolla deras webbplats. Många "
+"leverantörer har en webbsida som visar fingeravtrycken för GPG-nycklarna de "
+"använder."
 
 #: src/callbacks/keyring.h:37
 msgid ""
@@ -2372,7 +2381,7 @@ msgstr "Inget giltigt argument har angetts."
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/installremove.cc:312
 msgid "removeptf (rmptf) [OPTIONS] <PTF|CAPABILITY> ..."
-msgstr ""
+msgstr "removeptf (rmptf) [ALTERNATIV] <PTF|KAPABILITET> ..."
 
 #. translators: command summary: removeptf, rmptf
 #: src/commands/installremove.cc:314
@@ -2389,6 +2398,12 @@ msgid ""
 "the install command. It is the recommended way to remove a PTF (Program "
 "Temporary Fix)."
 msgstr ""
+"Ett ta bort-kommando som föredrar att ersätta beroende paket framför att "
+"också ta bort dem. I själva verket är detta ett komplett "
+"installationskommando med ta bort modifieraren (-) applicerad på dess "
+"vanliga argument. Så 'removeptf foo' är detsamma som 'install -- -foo'. Det "
+"är därför kommandot accepterar samma alternativ som installationskommandot. "
+"Det är det rekommenderade sättet att ta bort en PTF (Program Temporär Fix)."
 
 #: src/commands/installremove.cc:317
 msgid ""
@@ -2398,6 +2413,12 @@ msgid ""
 "remove command would do. The removeptf command however will aim to replace "
 "the dependant packages by their official update versions."
 msgstr ""
+"En PTF tas vanligtvis bort så snart korrigeringen den tillhandahåller "
+"tillämpas på den senaste officiella uppdateringen av de beroende paketen. "
+"Men du vill inte att de beroende paketen ska tas bort tillsammans med PTF, "
+"vilket är vad kommandot remove skulle göra. Kommandot removeptf kommer dock "
+"att syfta till att ersätta de beroende paketen med deras officiella "
+"uppdateringsversioner."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/listpatches.cc:16
@@ -2571,6 +2592,9 @@ msgid ""
 "optionally restrict the lock to match a specific edition or edition range "
 "using =, <, <=, >, >= or != followed an EDITION."
 msgstr ""
+"Grundformen låser alla utgåvor av matchande objekt. Du kan valfritt begränsa "
+"låset för att matcha en specifik utgåva eller upplaga omfång genom att "
+"använda =, <, <=, >, >= eller != efter en UTGÅVA."
 
 #: src/commands/locks/add.cc:46
 msgid "Restrict the lock to the specified repository."
@@ -2828,6 +2852,9 @@ msgid ""
 "The command is an alias for '%1%' and performs a case-insensitive search. "
 "For a case-sensitive search call the search command and add the '%2%' option."
 msgstr ""
+"Kommandot är ett alias för '%1%' och utför en sökning som inte är "
+"skiftlägeskänslig. För en skiftlägeskänslig sökning använd sökkommandot och "
+"lägg till alternativet '%2%'."
 
 #. "what-provides" is obsolete
 #. The "what-provides" now is included in "search" command, e.g.
@@ -2854,6 +2881,8 @@ msgid ""
 "A meaningful file conflict check can only be performed if used together with "
 "'%1%'."
 msgstr ""
+"En meningsfull filkonfliktkontroll kan endast utföras om den används "
+"tillsammans med '%1%'."
 
 #. translators: -r, --repo <ALIAS|#|URI>
 #: src/commands/optionsets.cc:67
@@ -4109,6 +4138,8 @@ msgid ""
 "Search for all packages that provide any of the provides of the package(s) "
 "matched by the input parameters."
 msgstr ""
+"Sök efter alla paket som tillhandahåller något av paket/paketen som matchas "
+"av inmatningsparametrarna."
 
 #. translators: --requires-pkg
 #: src/commands/search/search.cc:149
@@ -4116,6 +4147,8 @@ msgid ""
 "Search for all packages that require any of the provides of the package(s) "
 "matched by the input parameters."
 msgstr ""
+"Sök efter alla paket som kräver någon av paketens tillhandahållande som "
+"matchas av indataparametrarna."
 
 #. translators: --recommends-pkg
 #: src/commands/search/search.cc:153
@@ -6217,6 +6250,10 @@ msgid ""
 "solve the issue, it could be that you are using a broken mirror or the "
 "server has actually discontinued to support the repository."
 msgstr ""
+"Förrådssmetadata har upphört att gälla: Kontrollera om 'autorefresh' är "
+"aktiverat (zypper lr), annars uppdaterar du förrådet manuellt (zypper ref). "
+"Om detta inte löser problemet kan det bero på att du använder en trasig "
+"spegel eller så har servern faktiskt slutat att stödja förrådet."
 
 #: src/repos.cc:1857
 msgid "Reading installed packages..."
