@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: zypp.sv\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-12-22 14:35+0100\n"
-"PO-Revision-Date: 2023-03-12 08:14+0000\n"
+"PO-Revision-Date: 2023-04-12 12:14+0000\n"
 "Last-Translator: Luna  Jernberg <bittin@opensuse.org>\n"
 "Language-Team: Swedish <https://l10n.opensuse.org/projects/libzypp/master/sv/"
 ">\n"
@@ -4394,22 +4394,23 @@ msgid ""
 "the installed %1% does not belong to a distupgrade repository and must be "
 "replaced"
 msgstr ""
+"det installerade %1% tillhör inte ett uppgraderingsförråd och måste ersättas"
 
 #. just in case
 #: zypp/solver/detail/SATResolver.cc:1145
 #, boost-format
 msgid "the to be installed %1% does not belong to a distupgrade repository"
-msgstr ""
+msgstr "det som ska installeras %1% tillhör inte ett uppgraderingsförråd"
 
 #: zypp/solver/detail/SATResolver.cc:1149
 #, boost-format
 msgid "the installed %1% has inferior architecture"
-msgstr ""
+msgstr "det installerade %1% har sämre arkitektur"
 
 #: zypp/solver/detail/SATResolver.cc:1151
 #, boost-format
 msgid "the to be installed %1% has inferior architecture"
-msgstr ""
+msgstr "det som ska installeras %1% har sämre arkitektur"
 
 #: zypp/solver/detail/SATResolver.cc:1154
 #, boost-format
@@ -4501,23 +4502,28 @@ msgstr ""
 #: zypp/solver/detail/SATResolver.cc:1207
 #, boost-format
 msgid "the installed %1% obsoletes '%2%' provided by the installed %3%"
-msgstr ""
+msgstr "det installerade %1% har föråldrat '%2%' från den installerade %3%"
 
 #: zypp/solver/detail/SATResolver.cc:1209
 #, boost-format
 msgid "the installed %1% obsoletes '%2%' provided by the to be installed %3%"
 msgstr ""
+"det installerade %1% har föråldrat '%2%' som tillhandahålls av det som ska "
+"installeras %3%"
 
 #: zypp/solver/detail/SATResolver.cc:1213
 #, boost-format
 msgid "the to be installed %1% obsoletes '%2%' provided by the installed %3%"
 msgstr ""
+"det som ska installeras %1% har föråldrat '%2%' från det installerade %3%"
 
 #: zypp/solver/detail/SATResolver.cc:1215
 #, boost-format
 msgid ""
 "the to be installed %1% obsoletes '%2%' provided by the to be installed %3%"
 msgstr ""
+"det som ska installeras %1% har föråldrats '%2%' från det som ska "
+"installeras %3%"
 
 #: zypp/solver/detail/SATResolver.cc:1220
 #, boost-format
@@ -4646,12 +4652,12 @@ msgstr "ignorera varningen om ett trasigt system"
 #: zypp/solver/detail/SATResolver.cc:1468
 #, boost-format
 msgid "do not ask to install a solvable providing %1%"
-msgstr ""
+msgstr "be inte om att installera en lösning som ger %1%"
 
 #: zypp/solver/detail/SATResolver.cc:1490
 #, boost-format
 msgid "do not ask to delete all solvables providing %1%"
-msgstr ""
+msgstr "be inte om att ta bort alla lösningar som ger %1%"
 
 #: zypp/solver/detail/SATResolver.cc:1503
 #, boost-format
@@ -4661,12 +4667,12 @@ msgstr "installera inte senaste versionen av %1%"
 #: zypp/solver/detail/SATResolver.cc:1524
 #, boost-format
 msgid "keep %1% despite the inferior architecture"
-msgstr ""
+msgstr "behåll %1% trots den sämre arkitekturen"
 
 #: zypp/solver/detail/SATResolver.cc:1529
 #, boost-format
 msgid "install %1% despite the inferior architecture"
-msgstr ""
+msgstr "installera %1% trots den sämre arkitekturen"
 
 #: zypp/solver/detail/SATResolver.cc:1538
 #, boost-format
