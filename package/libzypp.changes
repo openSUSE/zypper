@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Apr 13 16:48:40 CEST 2023 - ma@suse.de
+
+- BuildRequires: libsolv-devel >= 0.7.24 for x86_64_v[234]
+  support.
+- version 17.31.10 (22)
+
+-------------------------------------------------------------------
 Fri Mar 31 18:35:00 CEST 2023 - ma@suse.de
 
 - Workround bsc#1195633 while libsolv <= 0.7.23 is used.
