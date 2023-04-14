@@ -33,7 +33,8 @@ namespace zypp
     enum LoadSystemFlag
     {
       LS_READONLY	= (1 << 0),	//!< // Create readonly ZYpp instance.
-      LS_NOREFRESH	= (1 << 1)	//!< // Don't refresh existing repos.
+      LS_NOREFRESH	= (1 << 1),	//!< // Don't refresh existing repos.
+      LS_NOREPOS	= (1 << 2),	//!< // Don't loag existing repos (just Target).
     };
 
     /** \relates LoadSystemFlag Type-safe way of storing OR-combinations. */

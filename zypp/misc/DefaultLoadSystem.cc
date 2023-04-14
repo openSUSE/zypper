@@ -60,7 +60,7 @@ namespace zypp
         MIL << satpool.systemRepo() << endl;
       }
 
-      if ( 1 )
+      if ( not flags_r.testFlag( LS_NOREPOS ) )
       {
         RepoManager repoManager( sysRoot_r );
         RepoInfoList repos = repoManager.knownRepositories();
