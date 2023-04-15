@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-12-24 02:27+0100\n"
-"PO-Revision-Date: 2023-03-08 19:14+0000\n"
+"PO-Revision-Date: 2023-04-15 21:14+0000\n"
 "Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/zypper/master/nl/>\n"
 "Language: nl\n"
@@ -5865,7 +5865,7 @@ msgstr "Foutmelding:"
 
 #: src/output/Out.h:47
 msgid "Continue?"
-msgstr "Doorgaan?"
+msgstr "Wilt u doorgaan?"
 
 #. Since this message will be emitted before we know if the current output is XML or Normal we need to send this message to stderr
 #. to not break scripts that use xml output (bsc#1172925)
@@ -6483,23 +6483,19 @@ msgstr " Oplossing %d: "
 msgid "Choose the above solution using '1' or skip, retry or cancel"
 msgid_plural "Choose from above solutions by number or skip, retry or cancel"
 msgstr[0] ""
-"Druk op ‘1’ om bovenstaande oplossing te kiezen of kies voor (o)verslaan, "
-"op(n)ieuw proberen of (a)nnuleren"
+"Druk op ‘1’ om de oplossing te kiezen of kies voor (o)verslaan, op(n)ieuw "
+"proberen of (a)nnuleren"
 msgstr[1] ""
-"Druk op een numerieke toets om een van de bovenstaande oplossingen te kiezen "
-"of kies voor (o)verslaan, op(n)ieuw proberen of (a)nnuleren"
+"Voer het nummer van uw keuze in of kies voor (o)verslaan, op(n)ieuw proberen "
+"of (a)nnuleren"
 
 #. translators: translate 'c' to whatever you translated the 'c' in
 #. "c" and "s/r/c" strings
 #: src/solve-commit.cc:119
 msgid "Choose the above solution using '1' or cancel using 'c'"
 msgid_plural "Choose from above solutions by number or cancel"
-msgstr[0] ""
-"Druk op ‘1’ om bovenstaande oplossing te kiezen of druk op ‘a’ om te "
-"annuleren"
-msgstr[1] ""
-"Druk op een numerieke toets om een van de bovenstaande oplossingen te kiezen "
-"of druk op ‘a’ om te annuleren"
+msgstr[0] "Druk op ‘1’ om de oplossing te kiezen of ‘a’ om te annuleren"
+msgstr[1] "Voer het nummer van uw keuze in of kies ‘a’ om te annuleren"
 
 #. translators: answers for dependency problem solution input prompt:
 #. "Choose from above solutions by number or skip, retry or cancel"
@@ -6648,7 +6644,7 @@ msgstr "Meldingen nu weergeven?"
 
 #: src/solve-commit.cc:645
 msgid "Computing distribution upgrade..."
-msgstr "Distributie-upgrades berekenen..."
+msgstr "Bezig met berekenen van distributie-upgrade…"
 
 #: src/solve-commit.cc:650
 msgid "Resolving package dependencies..."
