@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-12-24 02:27+0100\n"
-"PO-Revision-Date: 2023-04-08 03:14+0000\n"
+"PO-Revision-Date: 2023-04-15 09:14+0000\n"
 "Last-Translator: Kristijan Fremen Velkovski <me@krisfremen.com>\n"
 "Language-Team: Macedonian <https://l10n.opensuse.org/projects/zypper/master/"
 "mk/>\n"
@@ -243,7 +243,7 @@ msgstr "Користи алтернативен директориум за ке
 #. translators: --solv-cache-dir <DIR>
 #: src/Config.cc:531
 msgid "Use alternative solv file cache directory."
-msgstr ""
+msgstr "Користете алтернативен solv фајл кеш директориум."
 
 #. translators: --pkg-cache-dir <DIR>
 #: src/Config.cc:545
