@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: zypp.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-12-22 14:35+0100\n"
-"PO-Revision-Date: 2023-03-10 19:14+0000\n"
+"PO-Revision-Date: 2023-04-15 21:14+0000\n"
 "Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/libzypp/master/nl/>"
 "\n"
@@ -3855,7 +3855,7 @@ msgstr "Kan niet achterhalen waar opslagruimte is opgeslagen."
 #: zypp/RepoManager.cc:1837 zypp/RepoManager.cc:2039
 #, c-format, boost-format
 msgid "Can't delete '%s'"
-msgstr "Kan '%s' niet verwijderen"
+msgstr "‘%s’ kan niet worden verwijderd"
 
 #: zypp/RepoManager.cc:2027 zypp/RepoManager.cc:2477
 msgid "Can't figure out where the service is stored."
@@ -4225,7 +4225,7 @@ msgstr "Kan sat-pool niet maken."
 #: zypp/solver/detail/ProblemSolutionIgnore.cc:42
 #, c-format, boost-format
 msgid "break %s by ignoring some of its dependencies"
-msgstr "%s afbreken door enige van zijn afhankelijkheden te negeren"
+msgstr "doorbreek ‘%s’ door enkele afhankelijkheden te negeren"
 
 #: zypp/solver/detail/ProblemSolutionIgnore.cc:48
 msgid "generally ignore of some dependencies"
@@ -4261,7 +4261,7 @@ msgstr "de te installeren %1% heeft een inferieure architectuur"
 #: zypp/solver/detail/SATResolver.cc:1154
 #, boost-format
 msgid "problem with the installed %1%"
-msgstr "probleem met de geïnstalleerde %1%"
+msgstr "er is een probleem met het geïnstalleerde pakket ‘%1%’"
 
 #: zypp/solver/detail/SATResolver.cc:1157
 msgid "conflicting requests"
@@ -4529,7 +4529,7 @@ msgstr "%1% installeren, ondanks de inferieure architectuur"
 #: zypp/solver/detail/SATResolver.cc:1538
 #, boost-format
 msgid "keep obsolete %1%"
-msgstr "verouderde %1% behouden"
+msgstr "behoud het verouderde pakket ‘%1%’"
 
 #: zypp/solver/detail/SATResolver.cc:1543
 #, boost-format
@@ -4591,7 +4591,7 @@ msgstr "%1% vervangen door %2%"
 #: zypp/solver/detail/SATResolver.cc:1626
 #, boost-format
 msgid "deinstallation of %1%"
-msgstr "%1% verwijderen"
+msgstr "verwijder ‘%1%’"
 
 #: zypp/target/RpmPostTransCollector.cc:98
 #, boost-format
