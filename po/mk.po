@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-12-24 02:27+0100\n"
-"PO-Revision-Date: 2023-04-15 09:14+0000\n"
+"PO-Revision-Date: 2023-04-16 06:14+0000\n"
 "Last-Translator: Kristijan Fremen Velkovski <me@krisfremen.com>\n"
 "Language-Team: Macedonian <https://l10n.opensuse.org/projects/zypper/master/"
 "mk/>\n"
@@ -256,18 +256,20 @@ msgstr "Опции за Складишта"
 
 #: src/Config.cc:554
 msgid "Entering 'no-gpg-checks' mode."
-msgstr ""
+msgstr "Влегување во 'no-gpg-checks' мод."
 
 #. translators: --no-gpg-checks
 #: src/Config.cc:558
 msgid "Ignore GPG check failures and continue."
-msgstr ""
+msgstr "Игнорирај GPG неуспешни проверки и продолжи."
 
 #: src/Config.cc:563
 #, c-format, boost-format
 msgid ""
 "Turning on '%s'. New repository signing keys will be automatically imported!"
 msgstr ""
+"Вклучување на '%s'. Нови клучеви за потпишвање на складишта ќе бидат "
+"автоматски увезени!"
 
 #. translators: --gpg-auto-import-keys
 #: src/Config.cc:569
