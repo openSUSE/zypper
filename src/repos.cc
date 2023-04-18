@@ -1842,7 +1842,7 @@ void load_repo_resolvables( Zypper & zypper )
   }
   if ( hintExpired ) {
     Zypper::instance().out().warningPar( 4, _("Repository metadata expired: "
-    "Check if 'autorefresh' is turned on (zypper lr), otherwise manualy refresh the repository (zypper ref). "
+    "Check if 'autorefresh' is turned on (zypper lr), otherwise manually refresh the repository (zypper ref). "
     "If this does not solve the issue, it could be that you are using a broken mirror or "
     "the server has actually discontinued to support the repository." ) );
     zypper.out().gap();
