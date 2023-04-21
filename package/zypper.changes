@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Apr 21 15:47:14 CEST 2023 - ma@suse.de
+
+- Add expert (allow-*) options to all installer commands
+  (bsc#428822)
+- version 1.13.64
+
+-------------------------------------------------------------------
 Thu Mar 23 18:03:08 CET 2023 - ma@suse.de
 
 - Provide "removeptf" command (bsc#1203249)
