@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-12-24 02:27+0100\n"
-"PO-Revision-Date: 2023-04-16 06:14+0000\n"
+"PO-Revision-Date: 2023-04-21 07:14+0000\n"
 "Last-Translator: Kristijan Fremen Velkovski <me@krisfremen.com>\n"
 "Language-Team: Macedonian <https://l10n.opensuse.org/projects/zypper/master/"
 "mk/>\n"
@@ -275,11 +275,12 @@ msgstr ""
 #: src/Config.cc:569
 msgid "Automatically trust and import new repository signing keys."
 msgstr ""
+"Автоматски верувајте и увезете нови клучеви за потпишување на складиштa."
 
 #. translators: --plus-repo, -p <URI>
 #: src/Config.cc:573
 msgid "Use an additional repository."
-msgstr ""
+msgstr "Користете дополнително складиште."
 
 #. translators: --plus-content <TAG>
 #: src/Config.cc:577
@@ -287,6 +288,9 @@ msgid ""
 "Additionally use disabled repositories providing a specific keyword. Try '--"
 "plus-content debug' to enable repos indicating to provide debug packages."
 msgstr ""
+"Дополнително користете оневозможени складишта што обезбедуваат специфичен "
+"клучен збор. Пробајте \"--plus-content debug\" за да овозможите складишта "
+"што укажуваат на обезбедување на дебаг пакети."
 
 #: src/Config.cc:583
 msgid "Repositories disabled, using the database of installed packages only."
