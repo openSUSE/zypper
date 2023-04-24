@@ -10,6 +10,7 @@
  *
 */
 #include <iostream>
+#include <climits>
 
 #include <zypp-core/base/String.h>
 #include <zypp-core/Pathname.h>
