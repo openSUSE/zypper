@@ -27,6 +27,7 @@ class SocketNotifier;
 class Timer;
 
 ZYPP_FWD_DECL_TYPE_WITH_REFS( EventDispatcher );
+ZYPP_FWD_DECL_TYPE_WITH_REFS( UnixSignalSource );
 class EventDispatcherPrivate;
 
 /*!
@@ -141,6 +142,12 @@ public:
    * \returns true if the pid was removed
    */
   bool untrackChildProcess ( int pid );
+
+  /*!
+   * Returns the currently active \ref UnixSignalSource for this EventDispatcher.
+   * It is required to keep the reference alive as long as signals need to be catched.
+   */
+  UnixSignalSourceRef unixSignalSource ();
 
 protected:
 

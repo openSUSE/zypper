@@ -20,8 +20,10 @@
 #include <functional>
 
 namespace zyppng {
+
 class TimerPrivate;
 class EventDispatcher;
+ZYPP_FWD_DECL_TYPE_WITH_REFS (Timer);
 
 /*!
  * \brief The Timer class provides repetitive and single-shot timers.

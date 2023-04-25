@@ -1,6 +1,7 @@
 ADD_TESTS(
   EventLoop
   IOBuffer
+  UnixSignalSource
 )
 
 ADD_SUBDIRECTORY( media )

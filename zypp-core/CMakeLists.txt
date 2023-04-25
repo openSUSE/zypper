@@ -200,6 +200,7 @@ SET( zyppng_base_SRCS
   zyppng/base/timer.cc
   zyppng/base/threaddata.cc
   zyppng/base/socketnotifier.cc
+  zyppng/base/unixsignalsource.cpp
 )
 
 SET( zyppng_base_HEADERS
@@ -219,6 +220,7 @@ SET( zyppng_base_HEADERS
   zyppng/base/statemachine.h
   zyppng/base/Timer
   zyppng/base/timer.h
+  zyppng/base/unixsignalsource.h
   zyppng/base/zyppglobal.h
 )
 

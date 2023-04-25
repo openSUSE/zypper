@@ -5,6 +5,7 @@
 #include <zypp-core/base/Exception.h>
 #include <zypp-core/base/Logger.h>
 #include <zypp-core/AutoDispose.h>
+#include <zypp-core/zyppng/base/UnixSignalSource>
 
 namespace zyppng {
 
@@ -509,7 +510,7 @@ bool EventDispatcher::waitForFdEvent( const int fd, int events , int &revents , 
         if ( timeout == -1 )
           continue;
 
-        timeout -= g_timer_elapsed( *timer, NULL );
+        timeout -= g_timer_elapsed( *timer, nullptr );
         if ( timeout < 0 ) timeout = 0;
         if ( timeout <= 0 )
           return false;
@@ -550,6 +551,19 @@ bool EventDispatcher::untrackChildProcess(int pid)
     return false;
   }
   return true;
+}
+
+UnixSignalSourceRef EventDispatcher::unixSignalSource()
+{
+  Z_D();
+  // lazy init
+  UnixSignalSourceRef r;
+  if ( d->_signalSource.expired ()) {
+    d->_signalSource = r = UnixSignalSource::create();
+  } else {
+    r = d->_signalSource.lock ();
+  }
+  return r;
 }
 
 bool EventDispatcher::run_once()

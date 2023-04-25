@@ -25,6 +25,8 @@ namespace zyppng {
   class EventDispatcher;
   class EventLoopPrivate;
 
+  ZYPP_FWD_DECL_TYPE_WITH_REFS(EventLoop);
+
   /*!
    * The EventDispatcher class implements the libzypp event loop.
    *
@@ -41,8 +43,8 @@ namespace zyppng {
     ZYPP_DECLARE_PRIVATE(EventLoop)
 
   public:
-    using Ptr = std::shared_ptr<EventLoop>;
-    using WeakPtr = std::shared_ptr<EventLoop>;
+    using Ptr = EventLoopRef;
+    using WeakPtr = EventLoopWeakRef;
 
     static Ptr create ();
     virtual ~EventLoop();

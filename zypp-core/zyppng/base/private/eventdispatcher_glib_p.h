@@ -10,6 +10,8 @@
 
 namespace zyppng {
 
+  ZYPP_FWD_DECL_TYPE_WITH_REFS ( UnixSignalSource );
+
 struct GUnixPollFD
 {
   GIOCondition reqEvents;
@@ -93,6 +95,7 @@ public:
   std::vector< std::shared_ptr<void> > _unrefLater;
   std::queue< EventDispatcher::IdleFunction > _idleFuncs;
   std::unordered_map<int, GlibWaitPIDData> _waitPIDs;
+  UnixSignalSourceWeakRef _signalSource;
 };
 
 }
