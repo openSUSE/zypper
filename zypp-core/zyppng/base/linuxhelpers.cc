@@ -12,6 +12,14 @@
 
 namespace zyppng {
 
+  bool blockAllSignalsForCurrentThread()
+  {
+    sigset_t set;
+    ::sigfillset(&set);
+    int res = ::pthread_sigmask(SIG_BLOCK, &set, NULL);
+    return ( res == 0 );
+  }
+
   bool blockSignalsForCurrentThread( const std::vector<int> &sigs )
   {
     sigset_t set;
@@ -80,4 +88,5 @@ namespace zyppng {
       .writeFd = zypp::AutoFD( pipeFds[1] )
     };
   }
+
 }

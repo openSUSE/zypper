@@ -26,6 +26,8 @@ namespace zyppng {
     return res;
   }
 
+  bool blockAllSignalsForCurrentThread ( );
+
   bool blockSignalsForCurrentThread ( const std::vector<int> &sigs );
 
   bool trySocketConnection (int &sockFD, const SockAddr &addr, uint64_t timeout );

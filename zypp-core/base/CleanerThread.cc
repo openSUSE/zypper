@@ -41,8 +41,8 @@ struct CleanerData
 
   void run ()
   {
-    // force the kernel to pick another thread to handle those signals
-    zyppng::blockSignalsForCurrentThread( { SIGTERM, SIGINT, SIGPIPE, } );
+    // force the kernel to pick another thread to handle signals
+    zyppng::blockAllSignalsForCurrentThread();
 
     zyppng::ThreadData::current().setName("Zypp-Cleaner");
 
