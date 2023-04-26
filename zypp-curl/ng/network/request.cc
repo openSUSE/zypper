@@ -13,6 +13,7 @@
 #include <zypp-core/zyppng/base/EventDispatcher>
 #include <zypp-core/zyppng/base/private/linuxhelpers_p.h>
 #include <zypp-core/zyppng/core/String>
+#include <zypp-core/fs/PathInfo.h>
 #include <zypp-curl/private/curlhelper_p.h>
 #include <zypp-curl/CurlConfig>
 #include <zypp-curl/auth/CurlAuthData>
@@ -360,6 +361,7 @@ namespace zyppng {
         setCurlOption(CURLOPT_MAX_RECV_SPEED_LARGE, locSet.maxDownloadSpeed());
 #endif
 
+      zypp::filesystem::assert_file_mode( _currentCookieFile, 0600 );
       if ( zypp::str::strToBool( _url.getQueryParam( "cookies" ), true ) )
         setCurlOption( CURLOPT_COOKIEFILE, _currentCookieFile.c_str() );
       else
