@@ -741,27 +741,27 @@ void MediaCurl::getFileCopy( const OnMediaLocation & srcFile , const Pathname & 
 
   Url fileurl(getFileUrl(filename));
 
-  bool retry = false;
+  bool firstAuth = true;  // bsc#1210870: authenticate must not return stored credentials more than once.
   unsigned internalTry = 0;
   static constexpr unsigned maxInternalTry = 3;
 
   do
   {
-    retry = false;
     try
     {
       doGetFileCopy( srcFile, target, report );
+      break;  // success!
     }
     // retry with proper authentication data
     catch (MediaUnauthorizedException & ex_r)
     {
-      if(authenticate(ex_r.hint(), !retry))
-        retry = true;
-      else
-      {
-        report->finish(fileurl, zypp::media::DownloadProgressReport::ACCESS_DENIED, ex_r.asUserHistory());
-        ZYPP_RETHROW(ex_r);
+      if ( authenticate(ex_r.hint(), firstAuth) ) {
+        firstAuth = false;  // must not return stored credentials again
+        continue; // retry
       }
+
+      report->finish(fileurl, zypp::media::DownloadProgressReport::ACCESS_DENIED, ex_r.asUserHistory());
+      ZYPP_RETHROW(ex_r);
     }
     // unexpected exception
     catch (MediaException & excpt_r)
@@ -771,8 +771,7 @@ void MediaCurl::getFileCopy( const OnMediaLocation & srcFile , const Pathname & 
         if ( internalTry < maxInternalTry ) {
           // just report (NO_ERROR); no interactive request to the user
           report->problem(fileurl, media::DownloadProgressReport::NO_ERROR, excpt_r.asUserHistory()+_("Will try again..."));
-          retry = true;
-          continue;
+          continue; // retry
         }
         excpt_r.addHistory( str::Format(_("Giving up after %1% attempts.")) % maxInternalTry );
       }
@@ -787,8 +786,7 @@ void MediaCurl::getFileCopy( const OnMediaLocation & srcFile , const Pathname & 
       ZYPP_RETHROW(excpt_r);
     }
   }
-  while (retry);
-
+  while ( true );
   report->finish(fileurl, zypp::media::DownloadProgressReport::NO_ERROR, "");
 }
 
