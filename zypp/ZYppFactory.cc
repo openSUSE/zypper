@@ -104,8 +104,8 @@ namespace zypp
   class ZYppGlobalLock
   {
   public:
-    ZYppGlobalLock()
-    : _zyppLockFilePath( env::ZYPP_LOCKFILE_ROOT() / "/run/zypp.pid" )
+    ZYppGlobalLock( Pathname &&lFilePath )
+      : _zyppLockFilePath( std::move(lFilePath) )
     , _zyppLockFile( NULL )
     , _lockerPid( 0 )
     , _cleanLock( false )
@@ -246,7 +246,42 @@ namespace zypp
       MIL << "write: Lockfile " << _zyppLockFilePath << " got pid " <<  getpid() << std::endl;
     }
 
+    /*!
+     * Expects the calling function to lock the access lock
+     */
+    bool safeCheckIsLocked()
+    {
+      _lockerPid = readLockFile();
+      if ( _lockerPid == 0 ) {
+        // no or empty lock file
+        return false;
+      } else if ( _lockerPid == getpid() ) {
+        // keep my own lock
+        return false;
+      } else {
+        // a foreign pid in lock
+        if ( isProcessRunning( _lockerPid ) ) {
+          WAR << _lockerPid << " is running and has a ZYpp lock. Sorry." << std::endl;
+          return true;
+        } else {
+          MIL << _lockerPid << " is dead. Ignoring the existing lock file." << std::endl;
+          return false;
+        }
+      }
+    }
+
   public:
+
+    bool isZyppLocked()
+    {
+      if ( geteuid() != 0 )
+        return false;	// no lock as non-root
+
+      // Exception safe access to the lockfile.
+      ScopedGuard closeOnReturn( accessLockFile() );
+      scoped_lock<file_lock> flock( _zyppLockFileLock );	// aquire write lock
+      return safeCheckIsLocked ();
+    }
 
     /** Try to aquire a lock.
      * \return \c true if zypp is already locked by another process.
@@ -258,38 +293,11 @@ namespace zypp
 
       // Exception safe access to the lockfile.
       ScopedGuard closeOnReturn( accessLockFile() );
-      {
-        scoped_lock<file_lock> flock( _zyppLockFileLock );	// aquire write lock
-
-        _lockerPid = readLockFile();
-        if ( _lockerPid == 0 )
-        {
-          // no or empty lock file
-          writeLockFile();
-          return false;
-        }
-        else if ( _lockerPid == getpid() )
-        {
-          // keep my own lock
-          return false;
-        }
-        else
-        {
-          // a foreign pid in lock
-          if ( isProcessRunning( _lockerPid ) )
-          {
-            WAR << _lockerPid << " is running and has a ZYpp lock. Sorry." << std::endl;
-            return true;
-          }
-          else
-          {
-            MIL << _lockerPid << " is dead. Taking the lock file." << std::endl;
-            writeLockFile();
-            return false;
-          }
-        }
+      scoped_lock<file_lock> flock( _zyppLockFileLock );	// aquire write lock
+      if ( !safeCheckIsLocked() ) {
+        writeLockFile();
+        return false;
       }
-      INT << "Oops! We should not be here!" << std::endl;
       return true;
     }
 
@@ -304,7 +312,7 @@ namespace zypp
     ZYppGlobalLock & globalLock()
     {
       if ( !_theGlobalLock )
-        _theGlobalLock.reset( new ZYppGlobalLock );
+        _theGlobalLock.reset( new ZYppGlobalLock( ZYppFactory::lockfileDir() / "zypp.pid" ) );
       return *_theGlobalLock;
     }
   } //namespace
@@ -363,6 +371,13 @@ namespace zypp
   //
   ZYpp::Ptr ZYppFactory::getZYpp() const
   {
+
+    const auto &makeLockedError = []( pid_t pid, const std::string &lockerName ){
+      const std::string &t = str::form(_("System management is locked by the application with pid %d (%s).\n"
+                                           "Close this application before trying again."), pid, lockerName.c_str() );
+      return ZYppFactoryException(t, pid, lockerName );
+    };
+
     ZYpp::Ptr _instance = _theZYppInstance.lock();
     if ( ! _instance )
     {
@@ -406,15 +421,19 @@ namespace zypp
           }
         }
         if ( failed )
-        {
-          std::string t = str::form(_("System management is locked by the application with pid %d (%s).\n"
-                                      "Close this application before trying again."),
-                                      globalLock().lockerPid(),
-                                      globalLock().lockerName().c_str()
-                                    );
-          ZYPP_THROW(ZYppFactoryException(t, globalLock().lockerPid(), globalLock().lockerName() ));
+          ZYPP_THROW( makeLockedError( globalLock().lockerPid(), globalLock().lockerName() ));
+      }
+
+      // we got the global lock, now make sure zypp-rpm is not still running
+      {
+        ZYppGlobalLock zyppRpmLock( ZYppFactory::lockfileDir() / "zypp-rpm.pid" );
+        if ( zyppRpmLock.isZyppLocked () ) {
+          // release global lock, we will exit now
+          _theGlobalLock.reset();
+          ZYPP_THROW( makeLockedError( zyppRpmLock.lockerPid(), zyppRpmLock.lockerName() ));
         }
       }
+
       // Here we go...
       static ZYpp::Impl_Ptr _theImplInstance;	// for now created once
       if ( !_theImplInstance )
@@ -430,6 +449,11 @@ namespace zypp
   //
   bool ZYppFactory::haveZYpp() const
   { return !_theZYppInstance.expired(); }
+
+  zypp::Pathname ZYppFactory::lockfileDir()
+  {
+    return env::ZYPP_LOCKFILE_ROOT() / "run";
+  }
 
   /******************************************************************
   **

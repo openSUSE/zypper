@@ -59,6 +59,8 @@ namespace zypp
     /** Whether the ZYpp instance is already created.*/
     bool haveZYpp() const;
 
+    static zypp::Pathname lockfileDir ();
+
   private:
     /** Default ctor. */
     ZYppFactory();

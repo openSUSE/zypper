@@ -8,6 +8,9 @@
 #include <zypp-core/base/String.h>
 #include <zypp-core/base/StringV.h>
 
+#include <boost/interprocess/sync/file_lock.hpp>
+#include <mutex>
+
 // we do not link against libzypp, but these are pure header only files, if that changes
 // a copy should be created directly in the zypp-rpm project
 #include <zypp/target/rpm/librpm.h>
@@ -222,6 +225,44 @@ int main( int, char ** )
       return WrongMessageFormat;
     }
 
+  }
+
+  // create or fill a pid file, if there is a existing one just take it over
+  // if we reach this place libzypp has its global lock and made sure there is
+  // no still running zypp-rpm instance. So no need to do anything complicated.
+  using namespace boost::interprocess;
+  struct s_lockinfo {
+    s_lockinfo() = default;
+    s_lockinfo( s_lockinfo && ) = default;
+    s_lockinfo( const s_lockinfo & ) = delete;
+    s_lockinfo &operator= ( s_lockinfo && ) = default;
+    s_lockinfo &operator= ( const s_lockinfo & ) = delete;
+
+    ~s_lockinfo() {
+      std::scoped_lock<file_lock> lock(fileLock);
+      clearerr( lockFile );
+      ftruncate( fileno (lockFile), 0 );
+      fflush( lockFile );
+    }
+
+    file_lock fileLock;
+    zypp::AutoFILE lockFile;
+  };
+  std::optional<s_lockinfo> lockinfo;
+  if ( !msg.lockfilepath ().empty () ) {
+    lockinfo.emplace();
+    zypp::Pathname lockFileName = zypp::Pathname( msg.lockfilepath() ) / "zypp-rpm.pid";
+    lockinfo->lockFile = std::fopen( lockFileName.c_str(), "w");
+    if ( lockinfo->lockFile == nullptr ) {
+      ZERR << "Failed to create zypp-rpm pidfile." << std::endl;
+      return FailedToCreateLock;
+    }
+
+    lockinfo->fileLock = file_lock ( lockFileName.c_str() );
+
+    std::scoped_lock<file_lock> lock(lockinfo->fileLock);
+    fprintf(lockinfo->lockFile, "%ld\n", (long)getpid() );
+    fflush( lockinfo->lockFile );
   }
 
   // we have all data ready now lets start installing

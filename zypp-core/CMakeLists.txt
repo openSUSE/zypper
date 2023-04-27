@@ -33,6 +33,7 @@ SET( zypp_toplevel_SRCS
   ExternalProgram.cc
   onmedialocation.cc
   Pathname.cc
+  ShutdownLock.cc
   Url.cc
 )
 INSTALL(  FILES ${zypp_toplevel_headers} DESTINATION "${INCLUDE_INSTALL_DIR}/zypp-core" )

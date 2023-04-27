@@ -60,6 +60,7 @@
 #include <zypp-core/base/String.h>
 #include <zypp-core/base/StringV.h>
 #include <zypp-core/zyppng/base/EventLoop>
+#include <zypp-core/zyppng/base/UnixSignalSource>
 #include <zypp-core/zyppng/io/AsyncDataSource>
 #include <zypp-core/zyppng/io/Process>
 #include <zypp-core/base/IOTools.h>
@@ -1982,6 +1983,7 @@ namespace zypp
       commit.set_arch( ZConfig::instance().systemArchitecture().asString() );
       commit.set_dbpath( rpm().dbPath().asString() );
       commit.set_root( rpm().root().asString() );
+      commit.set_lockfilepath( ZYppFactory::lockfileDir().asString() );
 
       bool abort = false;
       zypp::AutoDispose<std::unordered_map<int, ManagedFile>> locCache([]( std::unordered_map<int, ManagedFile> &data ){
@@ -2087,6 +2089,25 @@ namespace zypp
 
         attemptToModify();
 
+        const std::vector<int> interceptedSignals {
+          SIGINT,
+          SIGTERM,
+          SIGHUP,
+          SIGQUIT
+        };
+
+        auto unixSignals = loop->eventDispatcher()->unixSignalSource();
+        unixSignals->sigReceived ().connect ([]( int signum ){
+          // translator: %1% is the received unix signal name, %2% is the numerical value of the received signal
+          JobReport::error ( str::Format(_("Received signal :\"%1% (%2%)\", to ensure the consistency of the system it is not possible to cancel a running rpm transaction.") ) % strsignal(signum) % signum );
+        });
+        for( const auto &sig : interceptedSignals )
+          unixSignals->addSignal ( sig );
+
+        Deferred cleanupSigs([&](){
+          for( const auto &sig : interceptedSignals )
+            unixSignals->removeSignal ( sig );
+        });
 
         // transaction related variables:
         //
@@ -2745,6 +2766,9 @@ namespace zypp
             break;
           case zypprpm::RpmOrderFailed:
             ZYPP_THROW( rpm::RpmSubprocessException("zypp-rpm failed to order the transaction, check the logs for more information.") );
+            break;
+          case zypprpm::FailedToCreateLock:
+            ZYPP_THROW( rpm::RpmSubprocessException("zypp-rpm failed to create its lockfile, check the logs for more information.") );
             break;
         }
 

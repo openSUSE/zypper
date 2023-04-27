@@ -283,6 +283,7 @@ namespace zypp
    * \endcode
    */
   using OnScopeExit = AutoDispose<void>;
+  using Deferred    = AutoDispose<void>;
 
   ///////////////////////////////////////////////////////////////////
 

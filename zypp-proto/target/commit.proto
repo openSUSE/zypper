@@ -29,6 +29,7 @@ message Commit {
   string arch = 2;
   string root = 3;
   string dbPath = 4;
+  string lockFilePath = 7;
   bool   ignoreArch = 5;
   repeated TransactionStep steps = 6;
 }
