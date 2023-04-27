@@ -1050,20 +1050,24 @@ namespace zypp
 
   bool RepoInfo::requireStatusWithMediaFile () const
   {
+    // We skip the check for downloading media unless a local copy of the
+    // media file exists and states that there is more than one medium.
     bool canSkipMediaCheck = std::all_of( baseUrlsBegin(), baseUrlsEnd(), []( const zypp::Url &url ) { return url.schemeIsDownloading(); });
-
-    const auto &mDataPath = metadataPath();
-    if ( canSkipMediaCheck && !mDataPath.empty() ) {
-      zypp::Pathname mediafile = mDataPath/"media.1/media";
-
-      zypp::repo::SUSEMediaVerifier lverifier { mediafile };
-      if ( lverifier ) {
-        canSkipMediaCheck = lverifier.totalMedia() == 1;
+    if ( canSkipMediaCheck ) {
+      const auto &mDataPath = metadataPath();
+      if ( not mDataPath.empty() ) {
+        PathInfo mediafile { mDataPath/"media.1/media" };
+        if ( mediafile.isExist() ) {
+          repo::SUSEMediaVerifier lverifier { mediafile.path() };
+          if ( lverifier && lverifier.totalMedia() > 1 ) {
+            canSkipMediaCheck = false;
+          }
+        }
       }
     }
-
-    DBG << "Can SKIP media.1/media check for status calc: " << canSkipMediaCheck << " for repo " << alias() << std::endl;
-    return !canSkipMediaCheck;
+    if ( canSkipMediaCheck )
+      DBG << "Can SKIP media.1/media check for status calc of repo " << alias() << endl;
+    return not canSkipMediaCheck;
   }
 
   /////////////////////////////////////////////////////////////////
