@@ -1,7 +1,7 @@
 #
 # spec file for package zypper
 #
-# Copyright (c) 2006-2013 SUSE LINUX Products GmbH, Nuernberg, Germany.
+# Copyright (c) 2023 SUSE LLC
 #
 # All modifications and additions to the file contributed by third parties
 # remain the property of their copyright owners, unless otherwise agreed
@@ -12,7 +12,7 @@
 # license that conforms to the Open Source Definition (Version 1.9)
 # published by the Open Source Initiative.
 
-# Please submit bugfixes or comments via http://bugs.opensuse.org/
+# Please submit bugfixes or comments via https://bugs.opensuse.org/
 #
 
 
@@ -31,9 +31,10 @@ BuildRequires:  readline-devel >= 5.1
 BuildRequires:  libxml2-devel
 Requires:       procps
 %if 0%{?suse_version}
-Requires:	libaugeas0 >= 1.10.0
+Requires:       ibaugeas0 >= 1.10.0
 %requires_ge    libzypp
-Recommends:     logrotate zypper-log
+Recommends:     logrotate
+Recommends:     zypper-log
 %else
 Requires:       augeas >= 1.10.0
 %endif
@@ -43,7 +44,7 @@ BuildRequires:  rubygem(asciidoctor)
 
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 Summary:        Command line software manager using libzypp
-License:        GPL-2.0+
+License:        GPL-2.0-or-later
 Group:          System/Packages
 Version:        @VERSION@
 Release:        0
@@ -53,10 +54,10 @@ Url:            https://github.com/openSUSE/zypper
 Provides:       y2pmsh
 Obsoletes:      y2pmsh
 
+Provides:       zypper(auto-agree-with-product-licenses)
 Provides:       zypper(oldpackage)
-Provides:	zypper(updatestack-only)
-Provides:	zypper(auto-agree-with-product-licenses)
-Provides:	zypper(purge-kernels)
+Provides:       zypper(updatestack-only)
+Provides:       zypper(purge-kernels)
 
 %description
 Zypper is a command line tool for managing software. It can be used to add
@@ -75,9 +76,9 @@ Authors:
     Josef Reidinger <jreidinger@suse.cz>
 
 %package log
-Requires:	/bin/bash
-Requires:	/usr/bin/grep
-Requires:	/usr/bin/awk
+Requires:       /bin/bash
+Requires:       /usr/bin/awk
+Requires:       /usr/bin/grep
 BuildArch:      noarch
 Summary:        CLI for accessing the zypper logfile
 Group:          System/Packages
