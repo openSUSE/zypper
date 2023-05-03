@@ -14,6 +14,7 @@ namespace zyppng {
 
   protected:
     void mapExtraFds( int controlFd = -1 );
+    void resetSignals();
   };
 
   /*!

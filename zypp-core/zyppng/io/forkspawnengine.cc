@@ -138,6 +138,24 @@ void zyppng::AbstractDirectSpawnEngine::mapExtraFds ( int controlFd )
   }
 }
 
+void zyppng::AbstractDirectSpawnEngine::resetSignals()
+{
+  // set all signal handers to their default
+  struct sigaction act;
+  memset (&act, 0, sizeof (struct sigaction));
+  act.sa_handler = SIG_DFL;
+  for ( int i = 1; i < NSIG; i++ ) {
+    // this might return -1 and set errno for unknown signals, but
+    // thats fine for us.
+    sigaction(i, &act, NULL);
+  }
+
+  // clear the sigmask
+  sigset_t     sigMask;
+  sigemptyset ( &sigMask );
+  pthread_sigmask ( SIG_SETMASK, &sigMask, nullptr );
+}
+
 bool zyppng::ForkSpawnEngine::start( const char * const *argv, int stdin_fd, int stdout_fd, int stderr_fd )
 {
   _pid = -1;
@@ -215,6 +233,7 @@ bool zyppng::ForkSpawnEngine::start( const char * const *argv, int stdin_fd, int
   {
 
     // child process
+    resetSignals();
     controlPipe->unrefRead();
 
     const auto &writeErrAndExit = [&]( int errCode, ChildErrType type ){
@@ -482,6 +501,7 @@ void zyppng::GlibSpawnEngine::glibSpawnCallback(void *data)
 {
   GLibForkData *d = reinterpret_cast<GLibForkData *>(data);
 
+  d->that->resetSignals();
   bool doChroot = !d->that->_chroot.empty();
 
   std::string execError;
