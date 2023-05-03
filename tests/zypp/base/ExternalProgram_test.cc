@@ -2,6 +2,7 @@
 #include "TestTools.h"
 #include <zypp/ExternalProgram.h>
 #include <zypp/TmpPath.h>
+#include <zypp-core/zyppng/base/Timer>
 
 #include <chrono>
 #include <thread>
@@ -209,4 +210,14 @@ BOOST_AUTO_TEST_CASE( CloseFDs )
   ExternalProgram proc( argv, ExternalProgram::Discard_Stderr );
   const auto exitCode = proc.close();
   BOOST_REQUIRE_EQUAL( exitCode, 0 );
+}
+
+BOOST_AUTO_TEST_CASE( WaitForExit )
+{
+  ExternalProgram proc( "bash -c 'sleep 2'", ExternalProgram::Normal_Stderr );
+  BOOST_CHECK( proc.running() );
+  auto start = zyppng::Timer::now();
+  BOOST_CHECK( !proc.waitForExit( 500 ) );
+  BOOST_REQUIRE_LT( zyppng::Timer::elapsedSince( start), 1000 );
+  BOOST_CHECK( proc.waitForExit() );
 }

@@ -18,6 +18,7 @@
 #include <map>
 #include <string>
 #include <vector>
+#include <optional>
 
 #include <zypp-core/Globals.h>
 #include <zypp-core/base/ExternalDataSource.h>
@@ -149,6 +150,16 @@ namespace zypp {
 
 
       ~ExternalProgram();
+
+      /*!
+       * Wait a certain timeout for the programm to complete, if \a timeout
+       * is not set this will wait forever, 0 will check if the process is still
+       * running and return immediately with the result, any other value is the
+       * timeout in ms to wait.
+       *
+       * \returns true if the process has exited in time
+       */
+      bool waitForExit ( std::optional<uint64_t> timeout = {} );
 
       /** Wait for the progamm to complete. */
       int close();

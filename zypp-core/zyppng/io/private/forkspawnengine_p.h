@@ -10,7 +10,9 @@ namespace zyppng {
   {
   public:
     ~AbstractDirectSpawnEngine();
-    virtual bool isRunning ( bool wait = false ) override;
+
+    bool isRunning ( bool wait = false ) override;
+    bool waitForExit ( const std::optional<uint64_t> &timeout = {} ) override;
 
   protected:
     void mapExtraFds( int controlFd = -1 );

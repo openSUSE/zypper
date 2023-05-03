@@ -5,6 +5,7 @@
 #include <vector>
 #include <map>
 #include <memory>
+#include <optional>
 
 #include <zypp/Pathname.h>
 
@@ -57,6 +58,7 @@ namespace zyppng {
      */
     virtual bool start ( const char *const *argv, int stdin_fd, int stdout_fd, int stderr_fd )  = 0;
 
+    virtual bool waitForExit ( const std::optional<uint64_t> &timeout = {} ) = 0;
     virtual bool isRunning ( bool wait = false ) = 0;
 
     /*!

@@ -7,6 +7,7 @@
 #include <zypp-core/fs/PathInfo.h>
 #include <zypp-core/zyppng/core/String>
 #include <zypp-core/zyppng/base/EventDispatcher>
+#include <zypp-core/zyppng/base/Timer>
 #include <zypp-core/zyppng/base/private/linuxhelpers_p.h>
 #include <zypp-core/base/CleanerThread_p.h>
 #include <zypp-core/base/LogControl.h>
@@ -21,6 +22,11 @@
 #include <pty.h> // openpty
 #include <stdlib.h> // setenv
 #include <sys/prctl.h> // prctl(), PR_SET_PDEATHSIG
+
+#include <sys/syscall.h>
+#ifdef SYS_pidfd_open
+#include <poll.h>
+#endif
 
 #undef  ZYPP_BASE_LOGGER_LOGGROUP
 #define ZYPP_BASE_LOGGER_LOGGROUP "zypp::exec"
@@ -56,6 +62,75 @@ bool zyppng::AbstractDirectSpawnEngine::isRunning( bool wait )
   _exitStatus = checkStatus( status );
   _pid = -1;
   return false;
+}
+
+bool zyppng::AbstractDirectSpawnEngine::waitForExit( const std::optional<uint64_t> &timeout )
+{
+  if ( _pid < 0 ) return true;
+
+  // no timeout, wait forever
+  if ( !timeout.has_value () )
+    return !isRunning( true );
+
+  // busy loop polling in case pidfd is not available or fails, only called if we have a valid timout
+  const auto &fallbackPoll = [&]( uint64_t timeout ){
+    const auto start = Timer::now();
+    do {
+      if ( !isRunning(false) )
+        return true;
+      // give up the CPU, so we do not use 100% just to poll
+      std::this_thread::sleep_for( std::chrono::milliseconds(1) );
+    } while( Timer::elapsedSince ( start ) < timeout );
+
+    return !isRunning ( false );
+  };
+
+#ifdef SYS_pidfd_open
+    // we have pidfd support, but there is not yet a wrapper in glibc
+  const auto &zypp_pidfd_open = [](pid_t pid, unsigned int flags) -> int {
+    return syscall( SYS_pidfd_open, pid, flags );
+  };
+
+  zypp::AutoFD pidFd = zyppng::eintrSafeCall( zypp_pidfd_open, _pid, 0 );
+  if ( pidFd == -1 ) {
+    // fallback to manual polling
+    ERR << "pidfd_open failed, falling back to polling waidpid" << std::endl;
+    return fallbackPoll( *timeout );
+  }
+
+  struct pollfd pollfd;
+  pollfd.fd = pidFd;
+  pollfd.events = POLLIN;
+
+  // timeout always has a value set, we established that above
+  uint64_t tRemaining = *timeout;
+
+  const auto start = Timer::now();
+  do {
+    // posix using int as timeout, could in theory overflow so protect against it
+    int posixTimeout = tRemaining > INT_MAX ? INT_MAX : static_cast<int>(tRemaining);
+
+    int ready = poll(&pollfd, 1, posixTimeout );
+    tRemaining = *timeout - std::min<uint64_t>( Timer::elapsedSince( start ), *timeout );
+
+    if ( ready == -1 && errno != EINTR ) {
+      ERR << "Polling the pidfd failed with error: " << zypp::Errno() << std::endl;
+      if ( tRemaining > 0 ) {
+        ERR << "Falling back to manual polling for the remaining timeout." << std::endl;
+        return fallbackPoll( tRemaining );
+      }
+      break;
+    } else if ( pollfd.revents & POLLIN ) {
+      break;
+    }
+  } while( tRemaining > 0 );
+
+  // set exit status
+  return !isRunning ( false );
+#else
+  // we do not have pidfd support, need to busyloop on waitpid until timeout is over
+  return fallbackPoll( *timeout );
+#endif
 }
 
 void zyppng::AbstractDirectSpawnEngine::mapExtraFds ( int controlFd )
@@ -109,7 +184,7 @@ void zyppng::AbstractDirectSpawnEngine::mapExtraFds ( int controlFd )
   //If the rlimits are too high we need to use a different approach
   // in detecting how many fds we need to close, or otherwise we are too slow (bsc#1191324)
   if ( maxFds > 1024 && zypp::PathInfo( "/proc/self/fd" ).isExist() ) {
-    
+
     std::vector<int> fdsToClose;
     fdsToClose.reserve (256);
 

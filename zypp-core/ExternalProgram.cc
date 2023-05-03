@@ -344,6 +344,15 @@ namespace zypp {
       }
     }
 
+    bool ExternalProgram::waitForExit(std::optional<uint64_t> timeout)
+    {
+      if ( !_backend ) {
+        // no backend means no running progress, return true
+        return true;
+      }
+      return _backend->waitForExit( timeout );
+    }
+
     int
     ExternalProgram::close()
     {
@@ -419,7 +428,10 @@ namespace zypp {
     {
       if ( _backend && _backend->isRunning() )
       {
-        ::kill( _backend->pid(), SIGKILL);
+        if ( ::kill( _backend->pid(), SIGKILL) == -1 ) {
+          ERR << "Failed to kill PID " << _backend->pid() << " with error: " << Errno() << std::endl;
+          return false;
+        }
         close();
       }
       return true;
@@ -429,7 +441,10 @@ namespace zypp {
     {
       if ( _backend && _backend->isRunning()  )
       {
-        ::kill( _backend->pid(), sig );
+        if ( ::kill( _backend->pid(), sig ) == -1 ) {
+          ERR << "Failed to kill PID " << _backend->pid() << " with error: " << Errno() << std::endl;
+          return false;
+        }
       }
       return true;
     }
