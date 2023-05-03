@@ -15,8 +15,8 @@
 
 #include <string>
 
-#include <zypp/APIConfig.h>
-#include <zypp/base/PtrTypes.h>
+#include <zypp-core/Globals.h>
+#include <zypp-core/base/PtrTypes.h>
 
 namespace zypp
 {
@@ -31,7 +31,7 @@ class ExternalProgramWithSeperatePgid;
 class ZYPP_LOCAL ShutdownLock
 {
 public:
-   ShutdownLock( const std::string &reason );
+  ShutdownLock( const std::string &who, const std::string &reason );
    ~ShutdownLock();
 
 private:

@@ -78,7 +78,6 @@ SET( zypp_SRCS
   ServiceInfo.cc
   Signature.cc
   SrcPackage.cc
-  ShutdownLock.cc
   SysContent.cc
   Target.cc
   TmpPath.cc

@@ -39,7 +39,7 @@
 #include <zypp/RepoStatus.h>
 #include <zypp/ExternalProgram.h>
 #include <zypp/Repository.h>
-#include <zypp/ShutdownLock_p.h>
+#include <zypp-core/ShutdownLock_p.h>
 
 #include <zypp/ResFilters.h>
 #include <zypp/HistoryLog.h>
@@ -1297,7 +1297,7 @@ namespace zypp
       ZYppCommitPolicy policy_r( policy_rX );
       bool explicitDryRun = policy_r.dryRun();	// explicit dry run will trigger a fileconflict check, implicit (download-only) not.
 
-      ShutdownLock lck("Zypp commit running.");
+      ShutdownLock lck("zypp", "Zypp commit running.");
 
       // Fake outstanding YCP fix: Honour restriction to media 1
       // at installation, but install all remaining packages if post-boot.
