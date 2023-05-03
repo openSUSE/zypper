@@ -5,6 +5,7 @@
 #include <zypp-core/AutoDispose.h>
 #include <zypp-core/Pathname.h>
 #include <zypp-core/fs/PathInfo.h>
+#include <zypp-core/ShutdownLock_p.h>
 #include <zypp-core/base/String.h>
 #include <zypp-core/base/StringV.h>
 
@@ -264,6 +265,8 @@ int main( int, char ** )
     fprintf(lockinfo->lockFile, "%ld\n", (long)getpid() );
     fflush( lockinfo->lockFile );
   }
+
+  zypp::ShutdownLock lck("zypp-rpm", "Zypp commit running.");
 
   // we have all data ready now lets start installing
   // first we initialize the rpmdb
