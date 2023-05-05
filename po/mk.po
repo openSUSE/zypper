@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-12-24 02:27+0100\n"
-"PO-Revision-Date: 2023-05-05 22:14+0000\n"
+"PO-Revision-Date: 2023-05-06 02:14+0000\n"
 "Last-Translator: Kristijan Fremen Velkovski <me@krisfremen.com>\n"
 "Language-Team: Macedonian <https://l10n.opensuse.org/projects/zypper/master/"
 "mk/>\n"
@@ -312,12 +312,12 @@ msgstr "Не ажурирај складишта."
 
 #: src/Config.cc:599
 msgid "CD/DVD repositories disabled."
-msgstr ""
+msgstr "ЦД/ДВД складиштата се исклучени."
 
 #. translators: --no-cd
 #: src/Config.cc:603
 msgid "Ignore CD/DVD repositories."
-msgstr ""
+msgstr "Игнорирај ги ЦД/ДВД складиштата."
 
 #: src/Config.cc:607
 msgid "Remote repositories disabled."
