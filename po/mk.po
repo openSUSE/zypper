@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-12-24 02:27+0100\n"
-"PO-Revision-Date: 2023-05-05 06:14+0000\n"
+"PO-Revision-Date: 2023-05-05 22:14+0000\n"
 "Last-Translator: Kristijan Fremen Velkovski <me@krisfremen.com>\n"
 "Language-Team: Macedonian <https://l10n.opensuse.org/projects/zypper/master/"
 "mk/>\n"
@@ -303,12 +303,12 @@ msgstr "Не вчитување на мета-дата од складиштат
 
 #: src/Config.cc:591
 msgid "Autorefresh disabled."
-msgstr ""
+msgstr "Автоматско ажурирање е исклучено."
 
 #. translators: --no-refresh
 #: src/Config.cc:595
 msgid "Do not refresh the repositories."
-msgstr ""
+msgstr "Не ажурирај складишта."
 
 #: src/Config.cc:599
 msgid "CD/DVD repositories disabled."
