@@ -31,7 +31,7 @@ BuildRequires:  readline-devel >= 5.1
 BuildRequires:  libxml2-devel
 Requires:       procps
 %if 0%{?suse_version}
-Requires:       ibaugeas0 >= 1.10.0
+Requires:       libaugeas0 >= 1.10.0
 %requires_ge    libzypp
 Recommends:     logrotate
 Recommends:     zypper-log
