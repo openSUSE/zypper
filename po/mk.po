@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-12-24 02:27+0100\n"
-"PO-Revision-Date: 2023-04-21 07:14+0000\n"
+"PO-Revision-Date: 2023-05-05 06:14+0000\n"
 "Last-Translator: Kristijan Fremen Velkovski <me@krisfremen.com>\n"
 "Language-Team: Macedonian <https://l10n.opensuse.org/projects/zypper/master/"
 "mk/>\n"
@@ -294,12 +294,12 @@ msgstr ""
 
 #: src/Config.cc:583
 msgid "Repositories disabled, using the database of installed packages only."
-msgstr ""
+msgstr "Исклучени складишта, се користи само датабазата на инсталирани пакети."
 
 #. translators: --disable-repositories
 #: src/Config.cc:587
 msgid "Do not read meta-data from repositories."
-msgstr ""
+msgstr "Не вчитување на мета-дата од складиштата."
 
 #: src/Config.cc:591
 msgid "Autorefresh disabled."
