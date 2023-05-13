@@ -398,8 +398,6 @@ done
 %{_includedir}/zypp-media
 %{_includedir}/zypp-curl
 %{_libdir}/pkgconfig/libzypp.pc
-%{_libdir}/pkgconfig/libzypp.pc
-%{_libdir}/pkgconfig/libzypp.pc
 
 %files devel-doc
 %defattr(-,root,root)
