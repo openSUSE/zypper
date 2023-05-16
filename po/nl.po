@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-16 14:51+0200\n"
-"PO-Revision-Date: 2023-04-15 21:14+0000\n"
-"Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
+"PO-Revision-Date: 2023-05-17 00:14+0000\n"
+"Last-Translator: Freek de Kruijf <freek@opensuse.org>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/zypper/master/nl/>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
@@ -5416,7 +5416,7 @@ msgstr "Korte label: %s"
 #: src/commands/utils/targetos.cc:68
 #, c-format, boost-format
 msgid "%s does not define %s."
-msgstr ""
+msgstr "%s definieert %s niet."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/utils/versioncmp.cc:19
