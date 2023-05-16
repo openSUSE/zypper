@@ -60,8 +60,18 @@ int TargetOSCmd::execute( Zypper &zypper , const std::vector<std::string> & )
       zypper.out().info( str::form(_("Short Label: %s"), Target::distributionLabel( zypper.config().root_dir ).shortName.c_str() ) );
     }
   }
-  else
-   zypper.out().info( Target::targetDistribution( zypper.config().root_dir ) );
+  else {
+    std::string targetDistribution { Target::targetDistribution( zypper.config().root_dir ) };
+    if ( targetDistribution.empty() ) {
+      const Pathname & path { Pathname(zypper.config().root_dir) / "/etc/products.d/baseproduct" };
+      // translators: `FILE does not define TAG
+      zypper.out().error( str::form(_("%s does not define %s."), path.c_str(), "XPath:/product/register/target" ) );
+      if ( not zypper.config().terse )
+        zypper.out().info( str::form(_("Distribution Label: %s"), Target::distributionLabel( zypper.config().root_dir ).summary.c_str() ) );
+    }
+    else
+      zypper.out().info( targetDistribution );
+  }
 
   return ZYPPER_EXIT_OK;
 }
