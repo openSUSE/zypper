@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.pt\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-24 02:27+0100\n"
+"POT-Creation-Date: 2023-05-16 14:51+0200\n"
 "PO-Revision-Date: 2023-01-05 13:14+0000\n"
 "Last-Translator: Juliano Camargo <julianosc@pm.me>\n"
 "Language-Team: Portuguese <https://l10n.opensuse.org/projects/zypper/master/"
@@ -5281,7 +5281,7 @@ msgstr "Mostrar a etiqueta do sistema operativo."
 msgid "XML output not implemented for this command."
 msgstr "Saída XML não implementada para este comando."
 
-#: src/commands/utils/targetos.cc:59
+#: src/commands/utils/targetos.cc:59 src/commands/utils/targetos.cc:70
 #, c-format, boost-format
 msgid "Distribution Label: %s"
 msgstr "Etiqueta de Distribuição: %s"
@@ -5290,6 +5290,12 @@ msgstr "Etiqueta de Distribuição: %s"
 #, c-format, boost-format
 msgid "Short Label: %s"
 msgstr "Etiqueta curta: %s"
+
+#. translators: `FILE does not define TAG
+#: src/commands/utils/targetos.cc:68
+#, c-format, boost-format
+msgid "%s does not define %s."
+msgstr ""
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/utils/versioncmp.cc:19

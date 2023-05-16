@@ -17,11 +17,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-24 02:27+0100\n"
+"POT-Creation-Date: 2023-05-16 14:51+0200\n"
 "PO-Revision-Date: 2023-02-08 23:14+0000\n"
 "Last-Translator: Antonio Simón <antonio@trans-mission.com>\n"
-"Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
-"\n"
+"Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/"
+">\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2478,8 +2478,8 @@ msgstr ""
 "con todas sus funciones que incluye el modificador para eliminar (-) "
 "aplicado a sus argumentos básicos. Es decir, \"removeptf foo\" es igual que "
 "\"install -- -foo\". Por eso el comando acepta las mismas opciones que el "
-"comando de instalación. Es la forma recomendada de eliminar una PTF ("
-"solución temporal de programa)."
+"comando de instalación. Es la forma recomendada de eliminar una PTF "
+"(solución temporal de programa)."
 
 #: src/commands/installremove.cc:317
 msgid ""
@@ -5403,7 +5403,7 @@ msgstr "Muestra la etiqueta del sistema operativo."
 msgid "XML output not implemented for this command."
 msgstr "No se ha implementado el resultado XML para este comando."
 
-#: src/commands/utils/targetos.cc:59
+#: src/commands/utils/targetos.cc:59 src/commands/utils/targetos.cc:70
 #, c-format, boost-format
 msgid "Distribution Label: %s"
 msgstr "Etiqueta de distribución: %s"
@@ -5412,6 +5412,12 @@ msgstr "Etiqueta de distribución: %s"
 #, c-format, boost-format
 msgid "Short Label: %s"
 msgstr "Etiqueta corta: %s"
+
+#. translators: `FILE does not define TAG
+#: src/commands/utils/targetos.cc:68
+#, c-format, boost-format
+msgid "%s does not define %s."
+msgstr ""
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/utils/versioncmp.cc:19
@@ -6417,8 +6423,8 @@ msgid ""
 "server has actually discontinued to support the repository."
 msgstr ""
 "Los metadatos del repositorio han caducado. Compruebe si autorefresh está "
-"activado (zypper lr). Si no lo está, actualice manualmente el repositorio ("
-"zypper ref). Si esto no resuelve el problema, podría deberse a que usa un "
+"activado (zypper lr). Si no lo está, actualice manualmente el repositorio "
+"(zypper ref). Si esto no resuelve el problema, podría deberse a que usa un "
 "duplicado dañado o a que el servidor ya no admita el repositorio."
 
 #: src/repos.cc:1857

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-24 02:27+0100\n"
+"POT-Creation-Date: 2023-05-16 14:51+0200\n"
 "PO-Revision-Date: 2017-05-07 15:28+0000\n"
 "Last-Translator: Enol P <enolp@softastur.org>\n"
 "Language-Team: Asturian <https://l10n.opensuse.org/projects/zypper/master/"
@@ -4949,7 +4949,7 @@ msgstr ""
 msgid "XML output not implemented for this command."
 msgstr "Nun s'implementó la salida XML pa esti comandu."
 
-#: src/commands/utils/targetos.cc:59
+#: src/commands/utils/targetos.cc:59 src/commands/utils/targetos.cc:70
 #, c-format, boost-format
 msgid "Distribution Label: %s"
 msgstr "Etiqueta de distribución: %s"
@@ -4957,6 +4957,12 @@ msgstr "Etiqueta de distribución: %s"
 #: src/commands/utils/targetos.cc:60
 #, c-format, boost-format
 msgid "Short Label: %s"
+msgstr ""
+
+#. translators: `FILE does not define TAG
+#: src/commands/utils/targetos.cc:68
+#, c-format, boost-format
+msgid "%s does not define %s."
 msgstr ""
 
 #. translators: command synopsis; do not translate lowercase words

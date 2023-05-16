@@ -13,11 +13,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.fr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-24 02:27+0100\n"
+"POT-Creation-Date: 2023-05-16 14:51+0200\n"
 "PO-Revision-Date: 2023-02-09 13:14+0000\n"
 "Last-Translator: Sophie Leroy <sophie@stoquart.com>\n"
-"Language-Team: French <https://l10n.opensuse.org/projects/zypper/master/fr/>"
-"\n"
+"Language-Team: French <https://l10n.opensuse.org/projects/zypper/master/fr/"
+">\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -5412,7 +5412,7 @@ msgstr "Affiche l'étiquette du système d'exploitation."
 msgid "XML output not implemented for this command."
 msgstr "La sortie en XML n'est pas implémentée pour cette commande."
 
-#: src/commands/utils/targetos.cc:59
+#: src/commands/utils/targetos.cc:59 src/commands/utils/targetos.cc:70
 #, c-format, boost-format
 msgid "Distribution Label: %s"
 msgstr "Étiquette de distribution : %s"
@@ -5421,6 +5421,12 @@ msgstr "Étiquette de distribution : %s"
 #, c-format, boost-format
 msgid "Short Label: %s"
 msgstr "Étiquette courte : %s"
+
+#. translators: `FILE does not define TAG
+#: src/commands/utils/targetos.cc:68
+#, c-format, boost-format
+msgid "%s does not define %s."
+msgstr ""
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/utils/versioncmp.cc:19
@@ -6426,9 +6432,9 @@ msgid ""
 "server has actually discontinued to support the repository."
 msgstr ""
 "Métadonnées du dépôt expirées : vérifiez si l'option 'autorefresh' est "
-"activée (zypper lr), sinon, rafraîchissez manuellement le dépôt (zypper ref)"
-". Si cela ne résout pas le problème, il se peut que vous utilisez un miroir "
-"interrompu ou que le serveur a cessé de prendre en charge le dépôt."
+"activée (zypper lr), sinon, rafraîchissez manuellement le dépôt (zypper "
+"ref). Si cela ne résout pas le problème, il se peut que vous utilisez un "
+"miroir interrompu ou que le serveur a cessé de prendre en charge le dépôt."
 
 #: src/repos.cc:1857
 msgid "Reading installed packages..."

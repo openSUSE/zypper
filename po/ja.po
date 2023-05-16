@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-24 02:27+0100\n"
+"POT-Creation-Date: 2023-05-16 14:51+0200\n"
 "PO-Revision-Date: 2022-12-24 05:13+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
 "Language-Team: Japanese <https://l10n.opensuse.org/projects/zypper/master/ja/"
@@ -2320,10 +2320,11 @@ msgid ""
 "the install command. It is the recommended way to remove a PTF (Program "
 "Temporary Fix)."
 msgstr ""
-"依存関係にあるパッケージの削除よりも置換を優先する削除コマンドです。実際に、 install コマンドで削除演算子 (-) "
-"を指定してインストールした場合と同じ動作になり、たとえば 'removeptf foo' は 'install -- -foo' の意味になります。なお、"
-" install コマンドと同じオプションを指定することができます。このコマンドは PTF (プログラム一時修正; Program Temporary "
-"Fix) を削除する際の推奨コマンドです。"
+"依存関係にあるパッケージの削除よりも置換を優先する削除コマンドです。実際に、 "
+"install コマンドで削除演算子 (-) を指定してインストールした場合と同じ動作にな"
+"り、たとえば 'removeptf foo' は 'install -- -foo' の意味になります。なお、 "
+"install コマンドと同じオプションを指定することができます。このコマンドは PTF "
+"(プログラム一時修正; Program Temporary Fix) を削除する際の推奨コマンドです。"
 
 #: src/commands/installremove.cc:317
 msgid ""
@@ -2333,9 +2334,11 @@ msgid ""
 "remove command would do. The removeptf command however will aim to replace "
 "the dependant packages by their official update versions."
 msgstr ""
-"通常、 PTF は対象のパッケージに公式な更新が公開されるとすぐに削除されますが、 PTF を削除しようとして通常の削除コマンドを実行してしまうと、 "
-"PTF だけでなく対象のパッケージまで削除してしまいます。 removeptf コマンドはこのような問題に対応するためのコマンドで、 PTF "
-"を公式の更新版に置き換えることを目的としたコマンドです。"
+"通常、 PTF は対象のパッケージに公式な更新が公開されるとすぐに削除されます"
+"が、 PTF を削除しようとして通常の削除コマンドを実行してしまうと、 PTF だけで"
+"なく対象のパッケージまで削除してしまいます。 removeptf コマンドはこのような問"
+"題に対応するためのコマンドで、 PTF を公式の更新版に置き換えることを目的とした"
+"コマンドです。"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/listpatches.cc:16
@@ -5193,7 +5196,7 @@ msgstr "オペレーティングシステムのラベルを表示します。"
 msgid "XML output not implemented for this command."
 msgstr "このコマンドでは XML 形式での出力が実装されていません。"
 
-#: src/commands/utils/targetos.cc:59
+#: src/commands/utils/targetos.cc:59 src/commands/utils/targetos.cc:70
 #, c-format, boost-format
 msgid "Distribution Label: %s"
 msgstr "ディストリビューションラベル:%s"
@@ -5202,6 +5205,12 @@ msgstr "ディストリビューションラベル:%s"
 #, c-format, boost-format
 msgid "Short Label: %s"
 msgstr "短縮ラベル:%s"
+
+#. translators: `FILE does not define TAG
+#: src/commands/utils/targetos.cc:68
+#, c-format, boost-format
+msgid "%s does not define %s."
+msgstr ""
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/utils/versioncmp.cc:19

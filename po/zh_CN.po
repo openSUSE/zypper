@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-24 02:27+0100\n"
+"POT-Creation-Date: 2023-05-16 14:51+0200\n"
 "PO-Revision-Date: 2023-02-08 06:14+0000\n"
 "Last-Translator: Grace Yu <grace.yu@excel-gits.com>\n"
 "Language-Team: Chinese (China) <https://l10n.opensuse.org/projects/zypper/"
@@ -2214,9 +2214,10 @@ msgid ""
 "the install command. It is the recommended way to remove a PTF (Program "
 "Temporary Fix)."
 msgstr ""
-"将会替换依赖软件包而不是也将其移除的移除命令。事实上，这是完整的安装命令（对该命令的普通参数应用了移除修饰符 (-)）。因此 \"removeptf "
-"foo\" 与 \"install -- -foo\" 效果相同。这就是该命令接受的选项与安装命令相同的原因。建议使用此方式来移除临时修复程序（"
-"Program Temporary Fix，PTF）。"
+"将会替换依赖软件包而不是也将其移除的移除命令。事实上，这是完整的安装命令（对"
+"该命令的普通参数应用了移除修饰符 (-)）。因此 \"removeptf foo\" 与 \"install "
+"-- -foo\" 效果相同。这就是该命令接受的选项与安装命令相同的原因。建议使用此方"
+"式来移除临时修复程序（Program Temporary Fix，PTF）。"
 
 #: src/commands/installremove.cc:317
 msgid ""
@@ -2226,8 +2227,9 @@ msgid ""
 "remove command would do. The removeptf command however will aim to replace "
 "the dependant packages by their official update versions."
 msgstr ""
-"通常，PTF 在其所提供的修复应用到依赖软件包的最新正式更新后会立即移除。不过，您应该不希望依赖软件包随 PTF 一起移除，而移除命令却会如此操作。"
-"removeptf 命令的目的就是将依赖软件包替换为其正式更新版本。"
+"通常，PTF 在其所提供的修复应用到依赖软件包的最新正式更新后会立即移除。不过，"
+"您应该不希望依赖软件包随 PTF 一起移除，而移除命令却会如此操作。removeptf 命令"
+"的目的就是将依赖软件包替换为其正式更新版本。"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/listpatches.cc:16
@@ -4931,7 +4933,7 @@ msgstr "显示操作系统标签。"
 msgid "XML output not implemented for this command."
 msgstr "此命令未实现 XML 输出。"
 
-#: src/commands/utils/targetos.cc:59
+#: src/commands/utils/targetos.cc:59 src/commands/utils/targetos.cc:70
 #, c-format, boost-format
 msgid "Distribution Label: %s"
 msgstr "发行版标签: %s"
@@ -4940,6 +4942,12 @@ msgstr "发行版标签: %s"
 #, c-format, boost-format
 msgid "Short Label: %s"
 msgstr "短标签：%s"
+
+#. translators: `FILE does not define TAG
+#: src/commands/utils/targetos.cc:68
+#, c-format, boost-format
+msgid "%s does not define %s."
+msgstr ""
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/utils/versioncmp.cc:19
@@ -5897,8 +5905,9 @@ msgid ""
 "solve the issue, it could be that you are using a broken mirror or the "
 "server has actually discontinued to support the repository."
 msgstr ""
-"软件源元数据已失效：请确认已启用 \"autorefresh\" (zypper lr)，否则需手动更新软件源 (zypper "
-"ref)。如果这样无法解决问题，则可能是因为您使用的镜像已损坏或服务器实际上已停止支持该软件源。"
+"软件源元数据已失效：请确认已启用 \"autorefresh\" (zypper lr)，否则需手动更新"
+"软件源 (zypper ref)。如果这样无法解决问题，则可能是因为您使用的镜像已损坏或服"
+"务器实际上已停止支持该软件源。"
 
 #: src/repos.cc:1857
 msgid "Reading installed packages..."

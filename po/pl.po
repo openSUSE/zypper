@@ -9,11 +9,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-24 02:27+0100\n"
+"POT-Creation-Date: 2023-05-16 14:51+0200\n"
 "PO-Revision-Date: 2023-04-04 00:14+0000\n"
 "Last-Translator: Szymon Scholz <neome@posteo.me>\n"
-"Language-Team: Polish <https://l10n.opensuse.org/projects/zypper/master/pl/>"
-"\n"
+"Language-Team: Polish <https://l10n.opensuse.org/projects/zypper/master/pl/"
+">\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -74,7 +74,8 @@ msgstr "Instalacja zakończyła się błędem."
 #: src/CommitSummary.cc:92
 #, boost-format
 msgid "You may run '%1%' to repair any dependency problems."
-msgstr "Możesz uruchomić '%1%', aby naprawić wszelkie problemy z zależnościami."
+msgstr ""
+"Możesz uruchomić '%1%', aby naprawić wszelkie problemy z zależnościami."
 
 #: src/CommitSummary.cc:125
 #, c-format, boost-format
@@ -5400,7 +5401,7 @@ msgstr "Wyświetla etykietę systemu operacyjnego."
 msgid "XML output not implemented for this command."
 msgstr "Nie zaimplementowano danych wyjściowych XML dla tego polecenia."
 
-#: src/commands/utils/targetos.cc:59
+#: src/commands/utils/targetos.cc:59 src/commands/utils/targetos.cc:70
 #, c-format, boost-format
 msgid "Distribution Label: %s"
 msgstr "Nazwa dystrybucji: %s"
@@ -5409,6 +5410,12 @@ msgstr "Nazwa dystrybucji: %s"
 #, c-format, boost-format
 msgid "Short Label: %s"
 msgstr "Nazwa skrócona: %s"
+
+#. translators: `FILE does not define TAG
+#: src/commands/utils/targetos.cc:68
+#, c-format, boost-format
+msgid "%s does not define %s."
+msgstr ""
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/utils/versioncmp.cc:19

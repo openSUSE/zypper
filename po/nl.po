@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.nl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-24 02:27+0100\n"
+"POT-Creation-Date: 2023-05-16 14:51+0200\n"
 "PO-Revision-Date: 2023-04-15 21:14+0000\n"
 "Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/zypper/master/nl/>\n"
@@ -125,7 +125,8 @@ msgstr " Gebruik een geheel getal van %d tot %d"
 
 #: src/Config.cc:250
 msgid "The path specified in the --root option must be absolute."
-msgstr "De bij --rootoptie opgegeven locatie dient een directe locatie te zijn."
+msgstr ""
+"De bij --rootoptie opgegeven locatie dient een directe locatie te zijn."
 
 #. translators: --help, -h
 #: src/Config.cc:328
@@ -917,7 +918,8 @@ msgid "The following recommended application was automatically selected:"
 msgid_plural ""
 "The following %d recommended applications were automatically selected:"
 msgstr[0] "Het volgende aanbevolen programma is automatisch geselecteerd:"
-msgstr[1] "De volgende %d aanbevolen programma's zijn automatisch geselecteerd:"
+msgstr[1] ""
+"De volgende %d aanbevolen programma's zijn automatisch geselecteerd:"
 
 #: src/Summary.cc:1007
 #, c-format, boost-format
@@ -1140,14 +1142,16 @@ msgid "The following package has no support information from its vendor:"
 msgid_plural ""
 "The following %d packages have no support information from their vendor:"
 msgstr[0] "Het volgende pakket wordt niet ondersteund door de leverancier:"
-msgstr[1] "De volgende %d pakketten worden niet ondersteund door de leverancier:"
+msgstr[1] ""
+"De volgende %d pakketten worden niet ondersteund door de leverancier:"
 
 #: src/Summary.cc:1242
 #, c-format, boost-format
 msgid "The following package is not supported by its vendor:"
 msgid_plural "The following %d packages are not supported by their vendor:"
 msgstr[0] "Het volgende pakket wordt niet ondersteund door de leverancier:"
-msgstr[1] "De volgende %d pakketten worden niet ondersteund door de leverancier:"
+msgstr[1] ""
+"De volgende %d pakketten worden niet ondersteund door de leverancier:"
 
 #: src/Summary.cc:1260
 #, c-format, boost-format
@@ -1893,7 +1897,8 @@ msgstr ""
 #. help text for the "Abort, retry, ignore?" prompt for media errors
 #: src/callbacks/media.cc:34
 msgid "Change current base URI and try retrieving the file again."
-msgstr "Wijzig de huidige basis-uri en probeer het bestand opnieuw op te halen."
+msgstr ""
+"Wijzig de huidige basis-uri en probeer het bestand opnieuw op te halen."
 
 #. translators: this is a prompt label, will appear as "New URI: "
 #: src/callbacks/media.cc:49
@@ -5397,7 +5402,7 @@ msgstr "Het label van het besturingssysteem tonen."
 msgid "XML output not implemented for this command."
 msgstr "XML-uitvoer voor deze opdracht is niet geïmplementeerd."
 
-#: src/commands/utils/targetos.cc:59
+#: src/commands/utils/targetos.cc:59 src/commands/utils/targetos.cc:70
 #, c-format, boost-format
 msgid "Distribution Label: %s"
 msgstr "Distributielabel: %s"
@@ -5406,6 +5411,12 @@ msgstr "Distributielabel: %s"
 #, c-format, boost-format
 msgid "Short Label: %s"
 msgstr "Korte label: %s"
+
+#. translators: `FILE does not define TAG
+#: src/commands/utils/targetos.cc:68
+#, c-format, boost-format
+msgid "%s does not define %s."
+msgstr ""
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/utils/versioncmp.cc:19

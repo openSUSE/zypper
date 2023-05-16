@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-24 02:27+0100\n"
+"POT-Creation-Date: 2023-05-16 14:51+0200\n"
 "PO-Revision-Date: 2023-01-02 06:14+0000\n"
 "Last-Translator: Kukuh Syafaat <syafaatkukuh@gmail.com>\n"
 "Language-Team: Indonesian <https://l10n.opensuse.org/projects/zypper/master/"
@@ -5197,7 +5197,7 @@ msgstr "Tampilkan label sistem operasi."
 msgid "XML output not implemented for this command."
 msgstr "Keluaran XML tidak diimplementasikan untuk perintah ini."
 
-#: src/commands/utils/targetos.cc:59
+#: src/commands/utils/targetos.cc:59 src/commands/utils/targetos.cc:70
 #, c-format, boost-format
 msgid "Distribution Label: %s"
 msgstr "Label Distribusi: %s"
@@ -5206,6 +5206,12 @@ msgstr "Label Distribusi: %s"
 #, c-format, boost-format
 msgid "Short Label: %s"
 msgstr "Label Singkat: %s"
+
+#. translators: `FILE does not define TAG
+#: src/commands/utils/targetos.cc:68
+#, c-format, boost-format
+msgid "%s does not define %s."
+msgstr ""
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/utils/versioncmp.cc:19
@@ -6188,8 +6194,8 @@ msgid ""
 "solve the issue, it could be that you are using a broken mirror or the "
 "server has actually discontinued to support the repository."
 msgstr ""
-"Metadata repositori kedaluwarsa: Periksa apakah 'autorefresh' diaktifkan ("
-"zypper lr), jika tidak segarkan repositori secara manual (zypper ref). Jika "
+"Metadata repositori kedaluwarsa: Periksa apakah 'autorefresh' diaktifkan "
+"(zypper lr), jika tidak segarkan repositori secara manual (zypper ref). Jika "
 "ini tidak menyelesaikan masalah, bisa jadi Anda menggunakan cermin yang "
 "rusak atau peladen yang sebenarnya telah dihentikan untuk mendukung "
 "repositori."

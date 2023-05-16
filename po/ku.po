@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: memory.ku.po\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-24 02:27+0100\n"
+"POT-Creation-Date: 2023-05-16 14:51+0200\n"
 "PO-Revision-Date: 2020-01-16 16:54+0000\n"
 "Last-Translator: Yunus YAŞAR <yunus.yasar@ozguryazilim.com.tr>\n"
 "Language-Team: Kurdish <https://l10n.opensuse.org/projects/zypper/master/ku/"
@@ -4963,7 +4963,7 @@ msgstr ""
 msgid "XML output not implemented for this command."
 msgstr ""
 
-#: src/commands/utils/targetos.cc:59
+#: src/commands/utils/targetos.cc:59 src/commands/utils/targetos.cc:70
 #, fuzzy, c-format, boost-format
 msgid "Distribution Label: %s"
 msgstr "Bilindkirina Dîstribûsyonê"
@@ -4972,6 +4972,12 @@ msgstr "Bilindkirina Dîstribûsyonê"
 #, fuzzy, c-format, boost-format
 msgid "Short Label: %s"
 msgstr "Etîket: %1"
+
+#. translators: `FILE does not define TAG
+#: src/commands/utils/targetos.cc:68
+#, c-format, boost-format
+msgid "%s does not define %s."
+msgstr ""
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/utils/versioncmp.cc:19
