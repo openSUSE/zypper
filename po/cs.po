@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-16 14:51+0200\n"
-"PO-Revision-Date: 2022-12-24 18:13+0000\n"
+"PO-Revision-Date: 2023-05-17 19:14+0000\n"
 "Last-Translator: Aleš Kastner <alkas@volny.cz>\n"
 "Language-Team: Czech <https://l10n.opensuse.org/projects/zypper/master/cs/>\n"
 "Language: cs\n"
@@ -5356,7 +5356,7 @@ msgstr "Zkrácený popisek: %s"
 #: src/commands/utils/targetos.cc:68
 #, c-format, boost-format
 msgid "%s does not define %s."
-msgstr ""
+msgstr "%s nedefinuje %s."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/utils/versioncmp.cc:19
