@@ -293,20 +293,6 @@ IMPL_PTR_TYPE(MediaSetAccess);
 
         do
         {
-          if (user != media::MediaChangeReport::EJECT) // no use in calling this again
-          {
-            DBG << "Media couldn't provide file " << file << " , releasing." << endl;
-            try
-            {
-              media_mgr.release(media);
-            }
-            catch (const Exception & excpt_r)
-            {
-                ZYPP_CAUGHT(excpt_r);
-                MIL << "Failed to release media " << media << endl;
-            }
-          }
-
           // set up the reason
           media::MediaChangeReport::Error reason = media::MediaChangeReport::INVALID;
 
