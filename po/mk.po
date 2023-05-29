@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-12-22 14:35+0100\n"
-"PO-Revision-Date: 2023-01-28 08:14+0000\n"
+"PO-Revision-Date: 2023-05-29 06:14+0000\n"
 "Last-Translator: Kristijan Fremen Velkovski <me@krisfremen.com>\n"
 "Language-Team: Macedonian <https://l10n.opensuse.org/projects/libzypp/master/"
 "mk/>\n"
@@ -942,7 +942,7 @@ msgstr "KStep"
 #. :MYS:458:
 #: zypp/CountryCode.cc:315
 msgid "Mozambique"
-msgstr ""
+msgstr "Мозамбик"
 
 #. :MOZ:508:
 #: zypp/CountryCode.cc:316
@@ -1010,7 +1010,7 @@ msgstr "Науру"
 #. :NRU:520:
 #: zypp/CountryCode.cc:326
 msgid "Niue"
-msgstr ""
+msgstr "Ниуе"
 
 # NZ
 #. :NIU:570:
@@ -1021,7 +1021,7 @@ msgstr "Нов Зеланд"
 #. :NZL:554:
 #: zypp/CountryCode.cc:328
 msgid "Oman"
-msgstr ""
+msgstr "Оман"
 
 # PA
 #. :OMN:512:
@@ -1038,17 +1038,17 @@ msgstr "Перу"
 #. :PER:604:
 #: zypp/CountryCode.cc:331
 msgid "French Polynesia"
-msgstr ""
+msgstr "Француска Полинезија"
 
 #. :PYF:258:
 #: zypp/CountryCode.cc:332
 msgid "Papua New Guinea"
-msgstr ""
+msgstr "Папуа Нова Гвинеја"
 
 #. :PNG:598:
 #: zypp/CountryCode.cc:333
 msgid "Philippines"
-msgstr ""
+msgstr "Филипини"
 
 # TJ
 # fuzzy
@@ -1094,7 +1094,7 @@ msgstr "Португалија"
 #. :PRT:620:
 #: zypp/CountryCode.cc:341
 msgid "Palau"
-msgstr "Парагвај"
+msgstr "Палау"
 
 # PY
 #. :PLW:585:
