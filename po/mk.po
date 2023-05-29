@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-16 14:51+0200\n"
-"PO-Revision-Date: 2023-05-06 02:14+0000\n"
+"PO-Revision-Date: 2023-05-29 06:15+0000\n"
 "Last-Translator: Kristijan Fremen Velkovski <me@krisfremen.com>\n"
 "Language-Team: Macedonian <https://l10n.opensuse.org/projects/zypper/master/"
 "mk/>\n"
@@ -321,12 +321,12 @@ msgstr "Игнорирај ги ЦД/ДВД складиштата."
 
 #: src/Config.cc:607
 msgid "Remote repositories disabled."
-msgstr ""
+msgstr "Далечинските складишта се оневозможени."
 
 #. translators: --no-remote
 #: src/Config.cc:611
 msgid "Ignore remote repositories."
-msgstr ""
+msgstr "Игнорирање на далечинските складишта."
 
 #. translators: --releasever
 #: src/Config.cc:618
@@ -334,6 +334,8 @@ msgid ""
 "Set the value of $releasever in all .repo files (default: distribution "
 "version)"
 msgstr ""
+"Подесете ја вредноста на $releasever во сите .repo фајлови (стандардна "
+"вредност: верзија на дистрибуција)"
 
 #: src/Config.cc:622
 msgid "Target Options"
