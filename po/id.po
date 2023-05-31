@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-16 14:51+0200\n"
-"PO-Revision-Date: 2023-01-02 06:14+0000\n"
+"PO-Revision-Date: 2023-05-31 15:14+0000\n"
 "Last-Translator: Kukuh Syafaat <syafaatkukuh@gmail.com>\n"
 "Language-Team: Indonesian <https://l10n.opensuse.org/projects/zypper/master/"
 "id/>\n"
@@ -5211,7 +5211,7 @@ msgstr "Label Singkat: %s"
 #: src/commands/utils/targetos.cc:68
 #, c-format, boost-format
 msgid "%s does not define %s."
-msgstr ""
+msgstr "%s tidak mendefinisikan %s."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/utils/versioncmp.cc:19
