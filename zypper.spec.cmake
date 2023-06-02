@@ -42,12 +42,20 @@ Requires:       augeas >= 1.10.0
 # required for documentation
 BuildRequires:  rubygem(asciidoctor)
 
+# flag to signal if we are running in CI or not
+%bcond_with cimode
+
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 Summary:        Command line software manager using libzypp
 License:        GPL-2.0-or-later
 Group:          System/Packages
 Version:        @VERSION@
+
+%if %{with cimode}
+Release:	%{lua: print(os.time(os.date("!*t")))}.<RELEASE>
+%else
 Release:        0
+%endif
 Source:         %{name}-%{version}.tar.bz2
 Source1:        %{name}-rpmlintrc
 Url:            https://github.com/openSUSE/zypper
