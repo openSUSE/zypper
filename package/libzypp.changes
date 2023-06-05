@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Mon Jun  5 12:15:55 CEST 2023 - ma@suse.de
+
+- Do not unconditionally release a medium if provideFile failed
+  (bsc#1211661)
+- libzypp.spec.cmake: remove duplicate file listing.
+- version 17.31.12 (22)
+
+-------------------------------------------------------------------
 Fri Apr 28 13:40:07 CEST 2023 - ma@suse.de
 
 - MediaCurl: Fix endless loop if wrong credentials are stored in
