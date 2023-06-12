@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Mon Jun 12 16:37:13 CEST 2023 - ma@suse.de
+
+- curl: Trim user agent string (bsc#1212187)
+  HTTP/2 RFC 9113 forbids fields ending with a space. Violation
+  results in curl error: 92: HTTP/2 PROTOCOL_ERROR.
+- version 17.31.13 (22)
+
+-------------------------------------------------------------------
 Mon Jun  5 12:15:55 CEST 2023 - ma@suse.de
 
 - Do not unconditionally release a medium if provideFile failed
