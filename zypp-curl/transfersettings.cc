@@ -114,11 +114,11 @@ namespace zypp
       return _impl->_headers;
     }
 
-    void TransferSettings::setUserAgentString( const std::string && val_r )
-    { _impl->_useragent = val_r; }
+    void TransferSettings::setUserAgentString( const std::string &val_r )
+    { _impl->_useragent = str::rtrim( val_r ); }  // bsc#1212187: HTTP/2 RFC 9113 forbids fields ending with a space
 
     void TransferSettings::setUserAgentString( std::string && val_r )
-    { _impl->_useragent = std::move(val_r); }
+    { _impl->_useragent = str::rtrim( std::move(val_r) ); }  // bsc#1212187: HTTP/2 RFC 9113 forbids fields ending with a space
 
     const std::string &TransferSettings::userAgentString() const
     { return _impl->_useragent; }

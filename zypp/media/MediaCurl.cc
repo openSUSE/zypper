@@ -282,18 +282,18 @@ namespace internal {
     // agent string.
     // The target could be not initialized, and then this information
     // is guessed.
-    static const std::string _value(
-      str::form(
-        "ZYpp " LIBZYPP_VERSION_STRING " (curl %s) %s"
-        , curl_version_info(CURLVERSION_NOW)->version
-        , Target::targetDistribution( Pathname()/*guess root*/ ).c_str()
-        )
-      );
+    // bsc#1212187: HTTP/2 RFC 9113 forbids fields ending with a space
+    static const std::string _value( str::rtrim( str::form(
+      "ZYpp " LIBZYPP_VERSION_STRING " (curl %s) %s"
+      , curl_version_info(CURLVERSION_NOW)->version
+      , Target::targetDistribution( Pathname()/*guess root*/ ).c_str()
+    )));
     return _value.c_str();
   }
 
   /// Attempt to work around certain issues by autoretry in MediaCurl::getFileCopy
   /// E.g. curl error: 92: HTTP/2 PROTOCOL_ERROR as in bsc#1205843, zypper/issues/457,...
+  /// ma: These errors were caused by a space terminated user agent string (bsc#1212187)
   class MediaCurlExceptionMayRetryInternaly : public media::MediaCurlException
   {
   public:

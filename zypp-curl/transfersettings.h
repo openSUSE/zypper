@@ -46,7 +46,7 @@ namespace zypp
 
       /** sets the user agent ie: "Mozilla v3" */
       void setUserAgentString( std::string && val_r );
-      void setUserAgentString( const std::string && val_r );
+      void setUserAgentString( const std::string &val_r );
 
       /** user agent string */
       const std::string &userAgentString() const;
