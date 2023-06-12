@@ -65,6 +65,7 @@ void globalInitCurlOnce()
 {
   // function-level static <=> std::call_once
   static bool once __attribute__ ((__unused__)) = ( [] {
+    MIL << "global_init libcurl: " << curl_version_info(CURLVERSION_NOW)->version << endl;
     if ( curl_global_init( CURL_GLOBAL_ALL ) != 0 )
       WAR << "curl global init failed" << std::endl;
   } (), true );
