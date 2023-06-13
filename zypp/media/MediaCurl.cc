@@ -254,11 +254,11 @@ namespace internal {
     // agent string.
     // The target could be not initialized, and then this information
     // is guessed.
-    static const std::string _value(
-      str::trim( str::form(
-        "X-ZYpp-AnonymousId: %s",
-        Target::anonymousUniqueId( Pathname()/*guess root*/ ).c_str() ) )
-      );
+    // bsc#1212187: HTTP/2 RFC 9113 forbids fields ending with a space
+    static const std::string _value( str::trim( str::form(
+      "X-ZYpp-AnonymousId: %s",
+      Target::anonymousUniqueId( Pathname()/*guess root*/ ).c_str()
+    )));
     return _value.c_str();
   }
 
@@ -268,11 +268,11 @@ namespace internal {
     // agent string.
     // The target could be not initialized, and then this information
     // is guessed.
-    static const std::string _value(
-      str::trim( str::form(
-        "X-ZYpp-DistributionFlavor: %s",
-        Target::distributionFlavor( Pathname()/*guess root*/ ).c_str() ) )
-      );
+    // bsc#1212187: HTTP/2 RFC 9113 forbids fields ending with a space
+    static const std::string _value( str::trim( str::form(
+      "X-ZYpp-DistributionFlavor: %s",
+      Target::distributionFlavor( Pathname()/*guess root*/ ).c_str()
+    )));
     return _value.c_str();
   }
 
@@ -283,7 +283,7 @@ namespace internal {
     // The target could be not initialized, and then this information
     // is guessed.
     // bsc#1212187: HTTP/2 RFC 9113 forbids fields ending with a space
-    static const std::string _value( str::rtrim( str::form(
+    static const std::string _value( str::trim( str::form(
       "ZYpp " LIBZYPP_VERSION_STRING " (curl %s) %s"
       , curl_version_info(CURLVERSION_NOW)->version
       , Target::targetDistribution( Pathname()/*guess root*/ ).c_str()
@@ -635,18 +635,15 @@ void MediaCurl::setupEasy()
 
 #if CURLVERSION_AT_LEAST(7,18,0)
   // bnc #306272
-    SET_OPTION(CURLOPT_PROXY_TRANSFER_MODE, 1L );
+  SET_OPTION(CURLOPT_PROXY_TRANSFER_MODE, 1L );
 #endif
-  // append settings custom headers to curl
-  for ( const auto &header : vol_settings.headers() )
-  {
-    // MIL << "HEADER " << *it << std::endl;
-
-      _customHeaders = curl_slist_append(_customHeaders, header.c_str());
-      if ( !_customHeaders )
-          ZYPP_THROW(MediaCurlInitException(_url));
+  // Append settings custom headers to curl.
+  // TransferSettings assert strings are trimmed (HTTP/2 RFC 9113)
+  for ( const auto &header : vol_settings.headers() ) {
+    _customHeaders = curl_slist_append(_customHeaders, header.c_str());
+    if ( !_customHeaders )
+      ZYPP_THROW(MediaCurlInitException(_url));
   }
-
   SET_OPTION(CURLOPT_HTTPHEADER, _customHeaders);
 }
 

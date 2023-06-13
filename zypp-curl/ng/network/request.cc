@@ -371,7 +371,8 @@ namespace zyppng {
       setCurlOption(CURLOPT_PROXY_TRANSFER_MODE, 1L );
 #endif
 
-      // append settings custom headers to curl
+      // Append settings custom headers to curl.
+      // TransferSettings assert strings are trimmed (HTTP/2 RFC 9113)
       for ( const auto &header : locSet.headers() ) {
         if ( !z_func()->addRequestHeader( header.c_str() ) )
           ZYPP_THROW(zypp::media::MediaCurlInitException(_url));

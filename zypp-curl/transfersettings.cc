@@ -65,6 +65,17 @@ namespace zypp
       { return new Impl( *this ); }
 
     public:
+      void safeAddHeader( std::string val_r ) {
+        // bsc#1212187: HTTP/2 RFC 9113 forbids fields ending with a space.
+        // Trim and discard empty header.
+        val_r = str::trim( std::move(val_r) );
+        if ( not val_r.empty() )
+          _headers.push_back( std::move(val_r) );
+        else
+          WAR << "Discard empty header" << endl;
+      }
+
+    public:
       std::vector<std::string> _headers;
       std::string _useragent;
       std::string _username;
@@ -103,10 +114,9 @@ namespace zypp
 
 
     void TransferSettings::addHeader( const std::string & val_r )
-    { if ( ! val_r.empty() ) _impl->_headers.push_back(val_r); }
-
+    { _impl->safeAddHeader( val_r ); }
     void TransferSettings::addHeader( std::string && val_r )
-    { if ( ! val_r.empty() ) _impl->_headers.push_back(std::move(val_r)); }
+    { _impl->safeAddHeader( std::move(val_r) ); }
 
     const TransferSettings::Headers &TransferSettings::headers() const
     {
@@ -115,10 +125,10 @@ namespace zypp
     }
 
     void TransferSettings::setUserAgentString( const std::string &val_r )
-    { _impl->_useragent = str::rtrim( val_r ); }  // bsc#1212187: HTTP/2 RFC 9113 forbids fields ending with a space
+    { _impl->_useragent = str::trim( val_r ); }  // bsc#1212187: HTTP/2 RFC 9113 forbids fields ending with a space
 
     void TransferSettings::setUserAgentString( std::string && val_r )
-    { _impl->_useragent = str::rtrim( std::move(val_r) ); }  // bsc#1212187: HTTP/2 RFC 9113 forbids fields ending with a space
+    { _impl->_useragent = str::trim( std::move(val_r) ); }  // bsc#1212187: HTTP/2 RFC 9113 forbids fields ending with a space
 
     const std::string &TransferSettings::userAgentString() const
     { return _impl->_useragent; }

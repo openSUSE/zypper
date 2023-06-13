@@ -23,9 +23,13 @@ namespace zypp
   namespace media
   {
 
-    /**
-     * Holds transfer setting
-     */
+    ///////////////////////////////////////////////////////////////////
+    /// \brief Holds transfer setting
+    ///
+    /// \note bsc#1212187: HTTP/2 RFC 9113 forbids fields ending with a
+    /// space. The class asserts \ref headers and \ref userAgentString
+    /// return trimmed strings. Strings are trimmed when set. Empty
+    //  strings are discarded.
     class TransferSettings
     {
     public:
@@ -37,18 +41,18 @@ namespace zypp
       /** reset the settings to the defaults */
       void reset();
 
-      /** add a header, on the form "Foo: Bar" */
+      /** add a header, on the form "Foo: Bar" (trims)*/
       void addHeader( std::string && val_r );
       void addHeader( const std::string & val_r );
 
-      /** returns a list of all added headers */
+      /** returns a list of all added headers (trimmed) */
       const Headers &headers() const;
 
-      /** sets the user agent ie: "Mozilla v3" */
+      /** sets the user agent ie: "Mozilla v3" (trims) */
       void setUserAgentString( std::string && val_r );
       void setUserAgentString( const std::string &val_r );
 
-      /** user agent string */
+      /** user agent string (trimmed)*/
       const std::string &userAgentString() const;
 
 
