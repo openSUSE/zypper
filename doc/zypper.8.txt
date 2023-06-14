@@ -1606,7 +1606,16 @@ For example:
 --
 
 *targetos* (*tos*)::
-	Shows the ID string of the target operating system. The string has a form of _distroname-architecture_. The string is determined by libzypp, the _distroname_ is read from (_current-rootdir_)*/etc/products.d/baseproduct* and the _architecture_ is determined from *uname* and _CPU flags_.
+	Shows the ID string of the target operating system. The string is defined by the XPath:/product/register/target entry in (_current-rootdir_)*/etc/products.d/baseproduct*.
++
+If the baseproduct does not provide this entry, or if no baseproduct is installed at all, the value is empty if the *--terse* global option is used.
++
+In not-terse mode the distribution label is shown instead of an empty value, if a baseproduct is installed.
++
+--
+	*-l*, *--label*::
+		Show the baseproducts distribution and short label instead.
+--
 
 *licenses*::
 	Prints a report about _licenses_ and __EULA__'s of installed packages to standard output.
