@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-06-15 11:58+0200\n"
-"PO-Revision-Date: 2023-06-15 13:15+0000\n"
+"PO-Revision-Date: 2023-06-15 19:15+0000\n"
 "Last-Translator: Freek de Kruijf <freek@opensuse.org>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/zypper/master/nl/>\n"
 "Language: nl\n"
@@ -403,7 +403,7 @@ msgstr ""
 #: src/PackageArgs.cc:221
 #, c-format, boost-format
 msgid "'%s' not found in package names. Trying '%s'."
-msgstr "‘%s’ is niet aangetroffen in pakketnamen - ‘%s’ wordt nu geprobeerd…"
+msgstr "‘%s’ is niet aangetroffen in pakketnamen - ‘%s’ wordt nu geprobeerd."
 
 #: src/PackageArgs.cc:231
 #, c-format, boost-format
@@ -415,7 +415,7 @@ msgstr "‘%s’ is geen pakketnaam of eigenschap."
 msgid "'%s' not found in package names. Trying capabilities."
 msgstr ""
 "‘%s’ is niet aangetroffen in pakketnamen - de eigenschappen worden nu "
-"geprobeerd…"
+"geprobeerd."
 
 #: src/RequestFeedback.cc:46
 #, c-format, boost-format
@@ -1267,8 +1267,8 @@ msgstr[1] "op te waarderen pakketten"
 #: src/Summary.cc:1443
 msgid "to downgrade"
 msgid_plural "to downgrade"
-msgstr[0] "af te waarderen"
-msgstr[1] "af te waarderen"
+msgstr[0] "wordt afgewaardeerd"
+msgstr[1] "worden afgewaardeerd"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
 #: src/Summary.cc:1446
@@ -1295,8 +1295,8 @@ msgstr[1] "nieuwe te installeren pakketten"
 #: src/Summary.cc:1471
 msgid "to reinstall"
 msgid_plural "to reinstall"
-msgstr[0] "opnieuw te installeren"
-msgstr[1] "opnieuw te installeren"
+msgstr[0] "wordt opnieuw geïnstalleerd"
+msgstr[1] "worden opnieuw geïnstalleerd"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
 #: src/Summary.cc:1474
@@ -1309,8 +1309,8 @@ msgstr[1] "opnieuw te installeren pakketten"
 #: src/Summary.cc:1485
 msgid "to remove"
 msgid_plural "to remove"
-msgstr[0] "te verwijderen"
-msgstr[1] "te verwijderen"
+msgstr[0] "wordt verwijderd"
+msgstr[1] "worden verwijderd"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
 #: src/Summary.cc:1488
@@ -1337,8 +1337,8 @@ msgstr[1] "pakketten zullen van leverancier wijzigen"
 #: src/Summary.cc:1513
 msgid "to change arch"
 msgid_plural "to change arch"
-msgstr[0] "te wijzigen van architectuur"
-msgstr[1] "te wijzigen van architectuur"
+msgstr[0] "wordt van architectuur gewijzigd"
+msgstr[1] "worden van architectuur gewijzigd"
 
 #. translators: this text will be preceded by a number e.g. "5 packages ..."
 #: src/Summary.cc:1516
@@ -2015,7 +2015,7 @@ msgstr "Wachtwoord"
 
 #: src/callbacks/repo.h:60
 msgid "Retrieving delta"
-msgstr "Bezig met ophalen van delta…"
+msgstr "Bezig met ophalen van delta"
 
 #. translators: this text is a progress display label e.g. "Applying delta foo [42%]"
 #: src/callbacks/repo.h:85
@@ -2030,7 +2030,7 @@ msgstr "In de cache: %1%"
 #: src/callbacks/repo.h:139 src/output/OutNormal.cc:250
 #: src/output/OutNormal.cc:284 src/output/OutNormal.cc:324
 msgid "Retrieving:"
-msgstr "Bezig met ophalen van"
+msgstr "Bezig met ophalen van:"
 
 #: src/callbacks/repo.h:225
 msgid "Signature verification failed"
@@ -2055,7 +2055,7 @@ msgstr "‘%s’ kan niet worden verwijderd:"
 #: src/callbacks/rpm.h:350 src/callbacks/rpm.h:631
 #, c-format, boost-format
 msgid "Removing %s"
-msgstr "Bezig met verwijderen van ‘%s’…"
+msgstr "Bezig met verwijderen van ‘%s'"
 
 #: src/callbacks/rpm.h:393
 #, c-format, boost-format
@@ -2066,7 +2066,7 @@ msgstr "‘%s’ kan niet worden geïnstalleerd:"
 #: src/callbacks/rpm.h:436 src/callbacks/rpm.h:692
 #, c-format, boost-format
 msgid "Installing: %s"
-msgstr "Bezig met installeren van ‘%s’…"
+msgstr "Bezig met installeren van: %s"
 
 #. translators: A progressbar label
 #: src/callbacks/rpm.h:455
@@ -2142,7 +2142,7 @@ msgstr "%s script wordt uitgevoerd"
 #: src/callbacks/rpm.h:895
 #, c-format, boost-format
 msgid "Cleaning up: %s"
-msgstr "‘%s’ wordt opgeschoond…"
+msgstr "Opschonen van: %s"
 
 #. translator: %s is an other command: "This is an alias for 'zypper info -t patch'."
 #: src/commands/commandhelpformatter.h:94
@@ -3795,12 +3795,12 @@ msgstr "Gekozen installatiebronnen: "
 #: src/commands/repos/refresh.cc:218
 #, c-format, boost-format
 msgid "Refreshing repository '%s'."
-msgstr "Bezig met vernieuwen van ‘%s’…"
+msgstr "Bezig met vernieuwen van ‘%s’."
 
 #: src/commands/repos/refresh.cc:236 src/repos.cc:844
 #, c-format, boost-format
 msgid "Scanning content of disabled repository '%s'."
-msgstr "Bezig met doorzoeken van inhoud van uitgeschakelde opslagruimte ‘%s’…"
+msgstr "Bezig met doorzoeken van inhoud van uitgeschakelde opslagruimte ‘%s’."
 
 #: src/commands/repos/refresh.cc:247
 #, c-format, boost-format
@@ -5408,10 +5408,14 @@ msgid ""
 "In not-terse mode the distribution label is shown instead of an empty value, "
 "if a baseproduct is installed."
 msgstr ""
+"In modus not-terse wordt het distributielabel getoond in plaats van een lege "
+"waarde, als een basisproduct is geïnstalleerd."
 
 #: src/commands/utils/targetos.cc:36
 msgid "Show the baseproducts distribution and short label instead."
 msgstr ""
+"De distributie van de basisproducten en een kort label worden in plaats "
+"daarvan getoond."
 
 #: src/commands/utils/targetos.cc:49
 msgid "XML output not implemented for this command."
@@ -5834,7 +5838,7 @@ msgstr "Het broncodepakket, ‘%s’, voor pakket ‘%s’ is niet gevonden."
 #: src/misc.cc:433
 #, c-format, boost-format
 msgid "Installing source package %s-%s"
-msgstr "Bezig met installeren van %s-%s…"
+msgstr "Bezig met installeren van bronpakket %s-%s"
 
 #: src/misc.cc:442
 #, c-format, boost-format
