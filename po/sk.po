@@ -5,11 +5,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-16 14:51+0200\n"
+"POT-Creation-Date: 2023-06-15 11:58+0200\n"
 "PO-Revision-Date: 2023-05-17 19:14+0000\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
-"Language-Team: Slovak <https://l10n.opensuse.org/projects/zypper/master/sk/>"
-"\n"
+"Language-Team: Slovak <https://l10n.opensuse.org/projects/zypper/master/sk/"
+">\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -5331,35 +5331,44 @@ msgstr "targetos (tos) [voľby]"
 msgid "Print the target operating system ID string."
 msgstr "Vytlačiť reťazec ID cieľového systému."
 
-#. translators: command description
 #: src/commands/utils/targetos.cc:24
 msgid ""
-"Show various information about the target operating system. By default, an "
-"ID string is shown."
+"Shows the ID string of the target operating system. The string is defined by "
+"the XPath:/product/register/target entry in /etc/products.d/baseproduct."
 msgstr ""
-"Ukáže rôzne informácie o cieľovom operačnom systéme. V predvolenom nastavení "
-"sa zobrazí ID reťazec."
 
-#: src/commands/utils/targetos.cc:33
-msgid "Show the operating system label."
-msgstr "Ukázať popis operačného systému."
+#: src/commands/utils/targetos.cc:25
+msgid ""
+"If the baseproduct does not provide this entry, or if no baseproduct is "
+"installed at all, the value is empty if the --terse global option is used."
+msgstr ""
 
-#: src/commands/utils/targetos.cc:46
+#: src/commands/utils/targetos.cc:26
+msgid ""
+"In not-terse mode the distribution label is shown instead of an empty value, "
+"if a baseproduct is installed."
+msgstr ""
+
+#: src/commands/utils/targetos.cc:36
+msgid "Show the baseproducts distribution and short label instead."
+msgstr ""
+
+#: src/commands/utils/targetos.cc:49
 msgid "XML output not implemented for this command."
 msgstr "Výstup XML nie je implementovaný pre tento príkaz."
 
-#: src/commands/utils/targetos.cc:59 src/commands/utils/targetos.cc:70
+#: src/commands/utils/targetos.cc:62 src/commands/utils/targetos.cc:77
 #, c-format, boost-format
 msgid "Distribution Label: %s"
 msgstr "Popis distribúcie: %s"
 
-#: src/commands/utils/targetos.cc:60
+#: src/commands/utils/targetos.cc:63
 #, c-format, boost-format
 msgid "Short Label: %s"
 msgstr "Krátky popis: %s"
 
 #. translators: `FILE does not define TAG
-#: src/commands/utils/targetos.cc:68
+#: src/commands/utils/targetos.cc:71
 #, c-format, boost-format
 msgid "%s does not define %s."
 msgstr "%s nedefinuje %s."
@@ -7421,6 +7430,16 @@ msgstr "Neplatný objekt"
 #: src/utils/prompt.h:192
 msgid "Error"
 msgstr "Chyba"
+
+#~ msgid ""
+#~ "Show various information about the target operating system. By default, "
+#~ "an ID string is shown."
+#~ msgstr ""
+#~ "Ukáže rôzne informácie o cieľovom operačnom systéme. V predvolenom "
+#~ "nastavení sa zobrazí ID reťazec."
+
+#~ msgid "Show the operating system label."
+#~ msgstr "Ukázať popis operačného systému."
 
 #~ msgid "(%s unpacked)"
 #~ msgstr "(%s po rozbalení)"

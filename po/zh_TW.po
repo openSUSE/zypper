@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-16 14:51+0200\n"
+"POT-Creation-Date: 2023-06-15 11:58+0200\n"
 "PO-Revision-Date: 2023-02-08 09:14+0000\n"
 "Last-Translator: Grace Yu <grace.yu@excel-gits.com>\n"
 "Language-Team: Chinese (Taiwan) <https://l10n.opensuse.org/projects/zypper/"
@@ -4919,33 +4919,44 @@ msgstr "targetos (tos) [選項]"
 msgid "Print the target operating system ID string."
 msgstr "印出目標作業系統 ID 字串。"
 
-#. translators: command description
 #: src/commands/utils/targetos.cc:24
 msgid ""
-"Show various information about the target operating system. By default, an "
-"ID string is shown."
-msgstr "顯示各種關於目標作業系統的資訊。 預設會顯示 ID 字串。"
+"Shows the ID string of the target operating system. The string is defined by "
+"the XPath:/product/register/target entry in /etc/products.d/baseproduct."
+msgstr ""
 
-#: src/commands/utils/targetos.cc:33
-msgid "Show the operating system label."
-msgstr "顯示作業系統標籤。"
+#: src/commands/utils/targetos.cc:25
+msgid ""
+"If the baseproduct does not provide this entry, or if no baseproduct is "
+"installed at all, the value is empty if the --terse global option is used."
+msgstr ""
 
-#: src/commands/utils/targetos.cc:46
+#: src/commands/utils/targetos.cc:26
+msgid ""
+"In not-terse mode the distribution label is shown instead of an empty value, "
+"if a baseproduct is installed."
+msgstr ""
+
+#: src/commands/utils/targetos.cc:36
+msgid "Show the baseproducts distribution and short label instead."
+msgstr ""
+
+#: src/commands/utils/targetos.cc:49
 msgid "XML output not implemented for this command."
 msgstr "該命令未實作 XML 輸出。"
 
-#: src/commands/utils/targetos.cc:59 src/commands/utils/targetos.cc:70
+#: src/commands/utils/targetos.cc:62 src/commands/utils/targetos.cc:77
 #, c-format, boost-format
 msgid "Distribution Label: %s"
 msgstr "發行版本標籤：%s"
 
-#: src/commands/utils/targetos.cc:60
+#: src/commands/utils/targetos.cc:63
 #, c-format, boost-format
 msgid "Short Label: %s"
 msgstr "簡短標籤：%s"
 
 #. translators: `FILE does not define TAG
-#: src/commands/utils/targetos.cc:68
+#: src/commands/utils/targetos.cc:71
 #, c-format, boost-format
 msgid "%s does not define %s."
 msgstr ""
@@ -6917,6 +6928,14 @@ msgstr "無效的物件"
 #: src/utils/prompt.h:192
 msgid "Error"
 msgstr "錯誤"
+
+#~ msgid ""
+#~ "Show various information about the target operating system. By default, "
+#~ "an ID string is shown."
+#~ msgstr "顯示各種關於目標作業系統的資訊。 預設會顯示 ID 字串。"
+
+#~ msgid "Show the operating system label."
+#~ msgstr "顯示作業系統標籤。"
 
 #~ msgid "(%s unpacked)"
 #~ msgstr "(已解開 %s)"

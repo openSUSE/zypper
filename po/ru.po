@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-16 14:51+0200\n"
+"POT-Creation-Date: 2023-06-15 11:58+0200\n"
 "PO-Revision-Date: 2022-12-07 08:13+0000\n"
 "Last-Translator: Alex Minton <alex239@gmail.com>\n"
 "Language-Team: Russian <https://l10n.opensuse.org/projects/zypper/master/ru/"
@@ -5382,35 +5382,44 @@ msgstr "targetos (tos) [параметры]"
 msgid "Print the target operating system ID string."
 msgstr "Распечатать строку идентификатора целевой операционной системы."
 
-#. translators: command description
 #: src/commands/utils/targetos.cc:24
 msgid ""
-"Show various information about the target operating system. By default, an "
-"ID string is shown."
+"Shows the ID string of the target operating system. The string is defined by "
+"the XPath:/product/register/target entry in /etc/products.d/baseproduct."
 msgstr ""
-"Показывать различную информацию о целевой операционной системе. По умолчанию "
-"показывается строка ID."
 
-#: src/commands/utils/targetos.cc:33
-msgid "Show the operating system label."
-msgstr "Показывать метку операционной системы."
+#: src/commands/utils/targetos.cc:25
+msgid ""
+"If the baseproduct does not provide this entry, or if no baseproduct is "
+"installed at all, the value is empty if the --terse global option is used."
+msgstr ""
 
-#: src/commands/utils/targetos.cc:46
+#: src/commands/utils/targetos.cc:26
+msgid ""
+"In not-terse mode the distribution label is shown instead of an empty value, "
+"if a baseproduct is installed."
+msgstr ""
+
+#: src/commands/utils/targetos.cc:36
+msgid "Show the baseproducts distribution and short label instead."
+msgstr ""
+
+#: src/commands/utils/targetos.cc:49
 msgid "XML output not implemented for this command."
 msgstr "XML-вывод для этой команды еще не реализован."
 
-#: src/commands/utils/targetos.cc:59 src/commands/utils/targetos.cc:70
+#: src/commands/utils/targetos.cc:62 src/commands/utils/targetos.cc:77
 #, c-format, boost-format
 msgid "Distribution Label: %s"
 msgstr "Метка дистрибутива: %s"
 
-#: src/commands/utils/targetos.cc:60
+#: src/commands/utils/targetos.cc:63
 #, c-format, boost-format
 msgid "Short Label: %s"
 msgstr "Короткая метка: %s"
 
 #. translators: `FILE does not define TAG
-#: src/commands/utils/targetos.cc:68
+#: src/commands/utils/targetos.cc:71
 #, c-format, boost-format
 msgid "%s does not define %s."
 msgstr ""
@@ -7477,6 +7486,16 @@ msgstr "Недопустимый объект"
 #: src/utils/prompt.h:192
 msgid "Error"
 msgstr "Ошибка"
+
+#~ msgid ""
+#~ "Show various information about the target operating system. By default, "
+#~ "an ID string is shown."
+#~ msgstr ""
+#~ "Показывать различную информацию о целевой операционной системе. По "
+#~ "умолчанию показывается строка ID."
+
+#~ msgid "Show the operating system label."
+#~ msgstr "Показывать метку операционной системы."
 
 #~ msgid "(%s unpacked)"
 #~ msgstr "(%s после распаковки)"
