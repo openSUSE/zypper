@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Thu Jun 15 12:07:24 CEST 2023 - ma@suse.de
+
+- targetos: Add an error note if XPath:/product/register/target
+  is not defined in /etc/products.d/baseproduct (bsc#1211261)
+- targetos: Update help and man page (bsc#1211261)
+- version 1.14.61
+
+-------------------------------------------------------------------
 Fri Mar 31 21:00:24 CEST 2023 - ma@suse.de
 
 - Fix selecting installed patterns from picklist (bsc#1209406)
