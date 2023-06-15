@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-06-15 11:58+0200\n"
-"PO-Revision-Date: 2023-05-17 00:14+0000\n"
+"PO-Revision-Date: 2023-06-16 00:15+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
 "Language-Team: Japanese <https://l10n.opensuse.org/projects/zypper/master/ja/"
 ">\n"
@@ -5184,22 +5184,28 @@ msgid ""
 "Shows the ID string of the target operating system. The string is defined by "
 "the XPath:/product/register/target entry in /etc/products.d/baseproduct."
 msgstr ""
+"ターゲットオペレーティングシステムの ID 文字列を表示します。この文字列は /etc/products.d/baseproduct ファイル内の "
+"XPath:/product/register/target という項目で指定されているものです。"
 
 #: src/commands/utils/targetos.cc:25
 msgid ""
 "If the baseproduct does not provide this entry, or if no baseproduct is "
 "installed at all, the value is empty if the --terse global option is used."
 msgstr ""
+"baseproduct ファイル内に該当する項目が存在しない場合や、 baseproduct ファイルが存在しない場合、 --terse "
+"グローバルオプションが指定されていると、値は空になります。"
 
 #: src/commands/utils/targetos.cc:26
 msgid ""
 "In not-terse mode the distribution label is shown instead of an empty value, "
 "if a baseproduct is installed."
 msgstr ""
+"--terse オプションが指定されていない場合で baseproduct ファイルが存在する場合は、空文字の代わりに distribution "
+"ラベルが表示されます。"
 
 #: src/commands/utils/targetos.cc:36
 msgid "Show the baseproducts distribution and short label instead."
-msgstr ""
+msgstr "baseproducts ディストリビューションと短縮ラベルを代わりに表示します。"
 
 #: src/commands/utils/targetos.cc:49
 msgid "XML output not implemented for this command."
