@@ -1,4 +1,14 @@
 -------------------------------------------------------------------
+Thu Jun 15 12:00:07 CEST 2023 - ma@suse.de
+
+- build: honor libproxy.pc's includedir (bsc#1212222)
+- Curl: trim all custom headers (bsc#1212187)
+  HTTP/2 RFC 9113 forbids fields ending with a space. So we make
+  sure all custom headers are trimmed. This also includes headers
+  returned by URL-Resolver plugins.
+- version 17.31.14 (22)
+
+-------------------------------------------------------------------
 Mon Jun 12 16:37:13 CEST 2023 - ma@suse.de
 
 - curl: Trim user agent string (bsc#1212187)
