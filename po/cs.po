@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-06-15 11:58+0200\n"
-"PO-Revision-Date: 2023-05-17 19:14+0000\n"
+"PO-Revision-Date: 2023-06-16 14:15+0000\n"
 "Last-Translator: Aleš Kastner <alkas@volny.cz>\n"
 "Language-Team: Czech <https://l10n.opensuse.org/projects/zypper/master/cs/>\n"
 "Language: cs\n"
@@ -5330,22 +5330,29 @@ msgid ""
 "Shows the ID string of the target operating system. The string is defined by "
 "the XPath:/product/register/target entry in /etc/products.d/baseproduct."
 msgstr ""
+"Zobrazí řetězec ID cílového operačního systému. Řetězec je definován "
+"položkou XPath:/product/register/target v souboru /etc/products.d/"
+"baseproduct."
 
 #: src/commands/utils/targetos.cc:25
 msgid ""
 "If the baseproduct does not provide this entry, or if no baseproduct is "
 "installed at all, the value is empty if the --terse global option is used."
 msgstr ""
+"Neposkytuje-li základní produkt tuto položku nebo není-li instalován žádný "
+"základní produkt, je hodnota prázdná, je-li použita globální volba --terse."
 
 #: src/commands/utils/targetos.cc:26
 msgid ""
 "In not-terse mode the distribution label is shown instead of an empty value, "
 "if a baseproduct is installed."
 msgstr ""
+"V režimu not-terse (ne-stručném) se místo prázdné hodnoty zobrazí popisek "
+"distribuce, je-li nainstalován základní produkt."
 
 #: src/commands/utils/targetos.cc:36
 msgid "Show the baseproducts distribution and short label instead."
-msgstr ""
+msgstr "Místo toho zobrazit distribuci základních produktů a krátký štítek."
 
 #: src/commands/utils/targetos.cc:49
 msgid "XML output not implemented for this command."
