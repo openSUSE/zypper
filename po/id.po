@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-06-15 11:58+0200\n"
-"PO-Revision-Date: 2023-05-31 15:14+0000\n"
+"PO-Revision-Date: 2023-06-19 07:15+0000\n"
 "Last-Translator: Kukuh Syafaat <syafaatkukuh@gmail.com>\n"
 "Language-Team: Indonesian <https://l10n.opensuse.org/projects/zypper/master/"
 "id/>\n"
@@ -5185,22 +5185,29 @@ msgid ""
 "Shows the ID string of the target operating system. The string is defined by "
 "the XPath:/product/register/target entry in /etc/products.d/baseproduct."
 msgstr ""
+"Tampilkan string ID dari sistem operasi target. String ditentukan oleh entri "
+"XPath:/product/register/target di /etc/products.d/baseproduct."
 
 #: src/commands/utils/targetos.cc:25
 msgid ""
 "If the baseproduct does not provide this entry, or if no baseproduct is "
 "installed at all, the value is empty if the --terse global option is used."
 msgstr ""
+"Jika produk dasar tidak menyediakan entri ini, atau jika tidak ada produk "
+"dasar yang dipasang sama sekali, nilainya kosong jika opsi global --terse "
+"digunakan."
 
 #: src/commands/utils/targetos.cc:26
 msgid ""
 "In not-terse mode the distribution label is shown instead of an empty value, "
 "if a baseproduct is installed."
 msgstr ""
+"Dalam mode tidak singkat (non-terse), label distribusi ditampilkan sebagai "
+"pengganti nilai kosong, jika produk dasar dipasang."
 
 #: src/commands/utils/targetos.cc:36
 msgid "Show the baseproducts distribution and short label instead."
-msgstr ""
+msgstr "Tunjukkan distribusi produk dasar dan label pendek sebagai gantinya."
 
 #: src/commands/utils/targetos.cc:49
 msgid "XML output not implemented for this command."
