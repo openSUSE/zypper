@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-06-15 11:58+0200\n"
-"PO-Revision-Date: 2023-05-29 06:15+0000\n"
+"PO-Revision-Date: 2023-06-21 09:30+0000\n"
 "Last-Translator: Kristijan Fremen Velkovski <me@krisfremen.com>\n"
 "Language-Team: Macedonian <https://l10n.opensuse.org/projects/zypper/master/"
 "mk/>\n"
@@ -404,17 +404,17 @@ msgstr ""
 #: src/RequestFeedback.cc:46
 #, c-format, boost-format
 msgid "Package '%s' not found."
-msgstr ""
+msgstr "Пакетот '%s' не е пронајден."
 
 #: src/RequestFeedback.cc:48
 #, c-format, boost-format
 msgid "Patch '%s' not found."
-msgstr ""
+msgstr "Печот '%s' не е пронајден."
 
 #: src/RequestFeedback.cc:50
 #, c-format, boost-format
 msgid "Product '%s' not found."
-msgstr ""
+msgstr "Продуктот '%s' не е пронајден."
 
 #: src/RequestFeedback.cc:52
 #, c-format, boost-format
