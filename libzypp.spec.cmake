@@ -101,12 +101,8 @@ BuildRequires:  pkg-config
 %endif
 
 BuildRequires:  libsolv-devel >= 0.7.24
-%if 0%{?suse_version} >= 1100
 BuildRequires:  libsolv-tools
 %requires_eq    libsolv-tools
-%else
-Requires:       libsolv-tools
-%endif
 
 BuildRequires:  glib2-devel
 BuildRequires:  libsigc++2-devel
@@ -148,18 +144,12 @@ BuildRequires:	fcgi-devel
 %endif
 
 %define min_curl_version 7.19.4
-%if 0%{?suse_version}
-%if 0%{?suse_version} >= 1100
-# Code11+
 BuildRequires:  libcurl-devel >= %{min_curl_version}
+%if 0%{?suse_version}
+# Code11+
 Requires:       libcurl4   >= %{min_curl_version}
 %else
-# Code10
-BuildRequires:  curl-devel
-%endif
-%else
 # Other distros (Fedora)
-BuildRequires:  libcurl-devel >= %{min_curl_version}
 Requires:       libcurl   >= %{min_curl_version}
 %endif
 
@@ -219,18 +209,13 @@ Requires:       rpm-devel > 4.4
 Requires:       zlib-devel
 Requires:       libudev-devel
 %if 0%{?suse_version}
-%if 0%{?suse_version} >= 1100
 # Code11+
 Requires:       libcurl-devel >= %{min_curl_version}
-%else
-# Code10
-Requires:       curl-devel
-%endif
 %else
 # Other distros (Fedora)
 Requires:       libcurl-devel >= %{min_curl_version}
 %endif
-%if 0%{?suse_version} >= 1100
+%if 0%{?suse_version}
 %requires_ge    libsolv-devel
 %else
 Requires:       libsolv-devel
