@@ -5,3 +5,5 @@ ADD_LIBRARY( zypp-protobuf STATIC
 protobuf_generate( TARGET zypp-protobuf )
 
 target_include_directories ( zypp-protobuf PRIVATE ${CMAKE_CURRENT_BINARY_DIR} )
+
+target_link_libraries( zypp-protobuf PUBLIC protobuf::libprotobuf-lite )

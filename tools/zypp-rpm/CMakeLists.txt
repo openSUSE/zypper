@@ -3,8 +3,6 @@ PROJECT( zypp-rpm C CXX )
 set (CMAKE_CXX_STANDARD 17)
 SET (CMAKE_CXX_EXTENSIONS OFF)
 
-FIND_PACKAGE(Protobuf REQUIRED)
-
 FIND_PACKAGE(Rpm REQUIRED)
 IF ( NOT RPM_FOUND)
   MESSAGE( FATAL_ERROR " rpm-devel not found" )
@@ -36,7 +34,6 @@ add_executable( ${PROJECT_NAME} ${SOURCES} )
 target_link_libraries( ${PROJECT_NAME} zypp-core )
 target_link_libraries( ${PROJECT_NAME} zypp-protobuf )
 target_link_libraries( ${PROJECT_NAME} util )
-target_link_libraries( ${PROJECT_NAME} ${PROTOBUF_LITE_LIBRARIES} )
 target_link_libraries( ${PROJECT_NAME} ${RPM_LIBRARY} ${RPMIO_LIBRARY} )
 
 INSTALL( TARGETS ${PROJECT_NAME}	DESTINATION "${ZYPP_LIBEXEC_INSTALL_DIR}" )
