@@ -16,7 +16,7 @@
 
 #include "providefwd_p.h"
 #include <zypp-media/ng/Provide>
-#include <zypp-proto/provider.pb.h>
+#include <zypp-proto/media/provider.pb.h>
 #include <zypp-core/zyppng/io/Process>
 #include <zypp-core/ByteCount.h>
 

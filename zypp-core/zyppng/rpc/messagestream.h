@@ -20,7 +20,7 @@
 #include <zypp-core/zyppng/base/Timer>
 #include <zypp-core/zyppng/io/IODevice>
 #include <zypp-core/zyppng/pipelines/expected.h>
-#include <zypp-proto/envelope.pb.h>
+#include <zypp-proto/core/envelope.pb.h>
 #include <zypp-core/zyppng/rpc/rpc.h>
 
 #include <deque>

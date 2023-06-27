@@ -9,7 +9,7 @@
 #ifndef ZYPP_NG_RPC_RPC_H_INCLUDED
 #define ZYPP_NG_RPC_RPC_H_INCLUDED
 
-#include <zypp-proto/envelope.pb.h>
+#include <zypp-proto/core/envelope.pb.h>
 
 namespace zyppng::rpc {
   /*!

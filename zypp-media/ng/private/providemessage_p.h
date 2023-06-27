@@ -22,7 +22,7 @@
 #include <zypp-media/ng/HeaderValueMap>
 #include <variant>
 #include <functional>
-#include <zypp-proto/provider.pb.h>
+#include <zypp-proto/media/provider.pb.h>
 
 namespace zypp::proto {
   class ProvideMessage;

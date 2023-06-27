@@ -16,7 +16,7 @@
 #include <zypp-core/zyppng/io/AsyncDataSource>
 #include <zypp-core/zyppng/rpc/MessageStream>
 #include <zypp-core/zyppng/pipelines/Expected>
-#include <zypp-proto/provider.pb.h>
+#include <zypp-proto/media/provider.pb.h>
 #include <zypp-media/ng/provide-configvars.h>
 #include <zypp-media/ng/private/providemessage_p.h>
 #include <zypp-media/ng/HeaderValueMap>

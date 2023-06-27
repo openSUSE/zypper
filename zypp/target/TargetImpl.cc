@@ -66,8 +66,8 @@
 #include <zypp-core/zyppng/rpc/rpc.h>
 #include <zypp-core/zyppng/base/private/linuxhelpers_p.h>
 #include <zypp-core/zyppng/base/EventDispatcher>
-#include <zypp-proto/commit.pb.h>
-#include <zypp-proto/envelope.pb.h>
+#include <zypp-proto/target/commit.pb.h>
+#include <zypp-proto/core/envelope.pb.h>
 #include <zypp-core/zyppng/rpc/zerocopystreams.h>
 
 #include <zypp/target/rpm/RpmException.h>

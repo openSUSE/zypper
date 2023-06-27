@@ -1,4 +1,4 @@
-#include <zypp-proto/commit.pb.h>
+#include <zypp-proto/target/commit.pb.h>
 #include <zypp-core/zyppng/core/ByteArray>
 #include <zypp-core/zyppng/rpc/rpc.h>
 #include <zypp-core/zyppng/base/private/linuxhelpers_p.h>
