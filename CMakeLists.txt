@@ -207,7 +207,13 @@ ELSE ( NOT ZLIB_FOUND)
   INCLUDE_DIRECTORIES(${ZLIB_INCLUDE_DIR})
 ENDIF( NOT ZLIB_FOUND)
 
-FIND_PACKAGE(Protobuf REQUIRED)
+# CMake's own FindProtobuf is not compatible with protobuf >= 22,
+# so force using protobuf's own CMake module.
+FIND_PACKAGE(Protobuf CONFIG)
+if ( NOT Protobuf_FOUND)
+    # Protobuf's own CMake module not found, fall back to CMake's
+    FIND_PACKAGE(Protobuf REQUIRED)
+endif()
 SET( Protobuf_IMPORT_DIRS ${CMAKE_CURRENT_SOURCE_DIR} )
 if ( "${Protobuf_VERSION}" VERSION_LESS "3.8.0")
   message("Protobuf ${Protobuf_VERSION} has no ZeroCopyStreams, using internal version.")
