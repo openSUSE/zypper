@@ -1,4 +1,15 @@
 -------------------------------------------------------------------
+Wed Jun 28 12:34:18 CEST 2023 - ma@suse.de
+
+- Fix build against protobuf >= 22 (fixes #465, closes #466)
+  Port away from protobuf_generate_cpp. Upstream protobuf does not
+  export protobuf_generate_cpp by default anymore.
+  Use protobuf_generate instead, which is also available on older
+  versions.
+- Remove SUSE < SLE11 constructs (fixes #464).
+- version 17.31.15 (22)
+
+-------------------------------------------------------------------
 Thu Jun 15 12:00:07 CEST 2023 - ma@suse.de
 
 - build: honor libproxy.pc's includedir (bsc#1212222)
