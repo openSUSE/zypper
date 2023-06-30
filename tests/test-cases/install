@@ -23,7 +23,7 @@
     TODO make it like 'install ufo' (allow also by-capability)
   * TODO or say "Can't install 'ufo' from 'repo' because of a vendor change. Use
     --force to override."
-  * TODO or say "Better version of 'ufo' is alread installed. Use --force to install
+  * TODO or say "Better version of 'ufo' is already installed. Use --force to install
     the version from 'repo'."
 
 
