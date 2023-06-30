@@ -262,7 +262,7 @@ int ZypperBaseCommand::run( Zypper &zypper )
     return execute( zypper, _positionalArguments );
   }
 
-  // ZypperBaseCommand's should actually handle all exceptions themselfes, however
+  // ZypperBaseCommand's should actually handle all exceptions themselves, however
   // for compatibility reasons we better catch those here again
   //
   // TODO Someday redesign the Exceptions flow.
