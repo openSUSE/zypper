@@ -68,6 +68,9 @@ using namespace zypp::repo;
 ///////////////////////////////////////////////////////////////////
 namespace zypp
 {
+  namespace zypp_readonly_hack {
+    bool IGotIt(); // in readonly-mode
+  }
 
   ///////////////////////////////////////////////////////////////////
   namespace env
@@ -813,11 +816,15 @@ namespace zypp
      * \note bnc#891515: Auto-cleanup only zypp.conf default locations. Otherwise
      * we'd need some magic file to identify zypp cache directories. Without this
      * we may easily remove user data (zypper --pkg-cache-dir . download ...)
+     * \note bsc#1210740: Don't cleanup if read-only mode was promised.
      */
     inline void cleanupNonRepoMetadtaFolders( const Pathname & cachePath_r,
                                               const Pathname & defaultCachePath_r,
                                               const std::list<std::string> & repoEscAliases_r )
     {
+      if ( zypp_readonly_hack::IGotIt() )
+        return;
+
       if ( cachePath_r != defaultCachePath_r )
         return;
 
@@ -898,23 +905,26 @@ namespace zypp
         }
       }
 
-      // delete metadata folders without corresponding repo (e.g. old tmp directories)
-      //
-      // bnc#891515: Auto-cleanup only zypp.conf default locations. Otherwise
-      // we'd need somemagic file to identify zypp cache directories. Without this
-      // we may easily remove user data (zypper --pkg-cache-dir . download ...)
-      repoEscAliases.sort();
-      cleanupNonRepoMetadtaFolders( _options.repoRawCachePath,
-                                    Pathname::assertprefix( _options.rootDir, ZConfig::instance().builtinRepoMetadataPath() ),
-                                    repoEscAliases );
-      cleanupNonRepoMetadtaFolders( _options.repoSolvCachePath,
-                                    Pathname::assertprefix( _options.rootDir, ZConfig::instance().builtinRepoSolvfilesPath() ),
-                                    repoEscAliases );
-      // bsc#1204956: Tweak to prevent auto pruning package caches
-      if ( autoPruneInDir( _options.repoPackagesCachePath ) )
-        cleanupNonRepoMetadtaFolders( _options.repoPackagesCachePath,
-                                      Pathname::assertprefix( _options.rootDir, ZConfig::instance().builtinRepoPackagesPath() ),
+      // bsc#1210740: Don't cleanup if read-only mode was promised.
+      if ( not zypp_readonly_hack::IGotIt() ) {
+        // delete metadata folders without corresponding repo (e.g. old tmp directories)
+        //
+        // bnc#891515: Auto-cleanup only zypp.conf default locations. Otherwise
+        // we'd need somemagic file to identify zypp cache directories. Without this
+        // we may easily remove user data (zypper --pkg-cache-dir . download ...)
+        repoEscAliases.sort();
+        cleanupNonRepoMetadtaFolders( _options.repoRawCachePath,
+                                      Pathname::assertprefix( _options.rootDir, ZConfig::instance().builtinRepoMetadataPath() ),
                                       repoEscAliases );
+        cleanupNonRepoMetadtaFolders( _options.repoSolvCachePath,
+                                      Pathname::assertprefix( _options.rootDir, ZConfig::instance().builtinRepoSolvfilesPath() ),
+                                      repoEscAliases );
+        // bsc#1204956: Tweak to prevent auto pruning package caches
+        if ( autoPruneInDir( _options.repoPackagesCachePath ) )
+          cleanupNonRepoMetadtaFolders( _options.repoPackagesCachePath,
+                                        Pathname::assertprefix( _options.rootDir, ZConfig::instance().builtinRepoPackagesPath() ),
+                                        repoEscAliases );
+      }
     }
     MIL << "end construct known repos" << endl;
   }
