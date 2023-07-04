@@ -83,7 +83,7 @@ BOOST_AUTO_TEST_CASE( simpleOptions )
   }
 
   {
-    //write optional value explictely
+    //write optional value explicitly
     resetVals();
     const char *testArgs[] {
       "command",
@@ -97,7 +97,7 @@ BOOST_AUTO_TEST_CASE( simpleOptions )
   }
 
   {
-    //write optional value explictely , short option
+    //write optional value explicitly , short option
     resetVals();
     const char *testArgs[] {
       "command",
@@ -138,7 +138,7 @@ BOOST_AUTO_TEST_CASE( simpleOptions )
   }
 
   {
-    //uknown long flag
+    //unknown long flag
     resetVals();
     const char *testArgs[] {
       "command",
@@ -149,7 +149,7 @@ BOOST_AUTO_TEST_CASE( simpleOptions )
   }
 
   {
-    //uknown short flag
+    //unknown short flag
     resetVals();
     const char *testArgs[] {
       "command",
@@ -234,7 +234,7 @@ BOOST_AUTO_TEST_CASE( hooks )
   std::string valInCB;
   std::string valInPostHook;
   std::vector<int> notSeenInvoked;
-  std::vector<int> notSeenExcpected { 1, 2 };
+  std::vector<int> notSeenExpected { 1, 2 };
 
   CommandGroup grp {{{
         { "arg", 'a', RequiredArgument,
@@ -272,7 +272,7 @@ BOOST_AUTO_TEST_CASE( hooks )
     BOOST_CHECK_EQUAL ( valInPreHook, "test" );
     BOOST_CHECK_EQUAL ( valInCB, "test" );
     BOOST_CHECK_EQUAL ( valInPostHook, "test" );
-    BOOST_CHECK_EQUAL ( notSeenInvoked, notSeenExcpected );
+    BOOST_CHECK_EQUAL ( notSeenInvoked, notSeenExpected );
   }
 
   //notSeen must be invoked in the right order even if there are no options given
@@ -283,7 +283,7 @@ BOOST_AUTO_TEST_CASE( hooks )
     };
 
     BOOST_CHECK_NO_THROW( parseCLI( sizeof(testArgs) / sizeof(char *),  ( char *const* )testArgs, { grp } ) );
-    BOOST_CHECK_EQUAL ( notSeenInvoked, notSeenExcpected );
+    BOOST_CHECK_EQUAL ( notSeenInvoked, notSeenExpected );
   }
 }
 
