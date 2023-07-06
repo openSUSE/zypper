@@ -1,3 +1,12 @@
+/*---------------------------------------------------------------------\
+|                          ____ _   __ __ ___                          |
+|                         |__  / \ / / . \ . \                         |
+|                           / / \ V /|  _/  _/                         |
+|                          / /__ | | | | | |                           |
+|                         /_____||_| |_| |_|                           |
+|                                                                      |
+----------------------------------------------------------------------*/
+
 #include <iostream>
 #include <cstring>
 #include <cstdlib>
@@ -6,17 +15,18 @@
 #include <zypp/base/String.h>
 #include <zypp/base/DtorReset.h>
 
-#include "utils/colors.h"
-#include "utils/console.h"
-#include "utils/text.h"
+#include <zypp-tui/Application>
+#include <zypp-tui/utils/colors.h>
+#include <zypp-tui/utils/console.h>
+#include <zypp-tui/utils/text.h>
 
-#include "Zypper.h"
 #include "Table.h"
 
 // libzypp logger settings
 #undef  ZYPP_BASE_LOGGER_LOGGROUP
 #define ZYPP_BASE_LOGGER_LOGGROUP "zypper"
 
+namespace ztui {
 
 TableLineStyle Table::defaultStyle = Ascii;
 
@@ -176,7 +186,7 @@ std::ostream & TableRow::dumbDumpTo( std::ostream & stream ) const
 
     stream << *i;
   }
-  return stream << endl;
+  return stream << std::endl;
 }
 
 std::ostream & TableRow::dumpDetails( std::ostream & stream, const Table & parent ) const
@@ -222,7 +232,7 @@ std::ostream & TableRow::dumpTo( std::ostream & stream, const Table & parent ) c
       {
         // start printing the next table columns to new line,
         // indent by 2 console columns
-        stream << endl << std::string( parent._margin + 2, ' ' );
+        stream << std::endl << std::string( parent._margin + 2, ' ' );
         curpos = parent._margin + 2; // indent == 2
       }
       else
@@ -243,7 +253,7 @@ std::ostream & TableRow::dumpTo( std::ostream & stream, const Table & parent ) c
     }
     else
     {
-      if ( !parent._inHeader && parent.header().hasStyle( c, table::CStyle::Edition ) && Zypper::instance().config().do_colors )
+      if ( !parent._inHeader && parent.header().hasStyle( c, table::CStyle::Edition ) && Application::instance().config().do_colors )
       {
         const std::set<unsigned> & editionColumns { parent.header().editionColumns() };
         // Edition column
@@ -252,7 +262,7 @@ std::ostream & TableRow::dumpTo( std::ostream & stream, const Table & parent ) c
           // 2 Edition columns - highlight difference
           if ( editionSep == std::string::npos )
           {
-            editionSep = str::commonPrefix( _columns[*editionColumns.begin()],
+            editionSep = zypp::str::commonPrefix( _columns[*editionColumns.begin()],
                                             _columns[*(++editionColumns.begin())] );
           }
 
@@ -292,7 +302,7 @@ std::ostream & TableRow::dumpTo( std::ostream & stream, const Table & parent ) c
     stream << "";
     curpos += parent._max_width[c] + (parent._style == none ? 2 : 3);
   }
-  stream << endl;
+  stream << std::endl;
 
   if ( !_details.empty() )
   {
@@ -387,7 +397,7 @@ void Table::dumpRule( std::ostream &stream ) const
     for ( unsigned i = 0; i < _max_width[c]; ++i )
       stream << hline;
   }
-  stream << endl;
+  stream << std::endl;
 }
 
 std::ostream & Table::dumpTo( std::ostream & stream ) const
@@ -416,7 +426,7 @@ std::ostream & Table::dumpTo( std::ostream & stream ) const
 
   if ( _has_header )
   {
-    DtorReset inHeader( _inHeader, false );
+    zypp::DtorReset inHeader( _inHeader, false );
     _inHeader = true;
     _header.dumpTo( stream, *this );
     dumpRule (stream);
@@ -446,9 +456,10 @@ void Table::margin( unsigned margin )
   if ( margin < (unsigned)(_screen_width/2) )
     _margin = margin;
   else
-    ERR << "margin of " << margin << " is greater than half of the screen" << endl;
+    ERR << "margin of " << margin << " is greater than half of the screen" << std::endl;
 }
 
 // Local Variables:
 // c-basic-offset: 2
 // End:
+}

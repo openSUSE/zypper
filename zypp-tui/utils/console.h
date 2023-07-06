@@ -1,16 +1,26 @@
-/*---------------------------------------------------------------------------*\
-                          ____  _ _ __ _ __  ___ _ _
-                         |_ / || | '_ \ '_ \/ -_) '_|
-                         /__|\_, | .__/ .__/\___|_|
-                             |__/|_|  |_|
-\*---------------------------------------------------------------------------*/
+/*---------------------------------------------------------------------\
+|                          ____ _   __ __ ___                          |
+|                         |__  / \ / / . \ . \                         |
+|                           / / \ V /|  _/  _/                         |
+|                          / /__ | | | | | |                           |
+|                         /_____||_| |_| |_|                           |
+|                                                                      |
+----------------------------------------------------------------------/
+*
+* This file contains private API, this might break at any time between releases.
+* Strictly for internal use!
+*/
 
 /** \file console.h
  * Miscellaneous console utilities.
  */
 
-#ifndef CONSOLE_H_
-#define CONSOLE_H_
+#ifndef ZYPP_TUI_UTILS_CONSOLE_H_
+#define ZYPP_TUI_UTILS_CONSOLE_H_
+
+#include <string>
+
+namespace ztui {
 
 /** Use readline to get line of input. */
 std::string readline_getline();
@@ -24,7 +34,6 @@ std::string readline_getline();
  */
 unsigned get_screen_width();
 
-
 /**
  *  Clear the keyboard buffer.
  *  Useful before showing the user prompt message to catch any unwanted <enter>
@@ -34,5 +43,6 @@ unsigned get_screen_width();
  */
 void clear_keyboard_buffer();
 
+}
 
-#endif /* CONSOLE_H_ */
+#endif /* ZYPP_TUI_UTILS_CONSOLE_H_ */

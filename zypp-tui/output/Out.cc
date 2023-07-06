@@ -1,3 +1,12 @@
+/*---------------------------------------------------------------------\
+|                          ____ _   __ __ ___                          |
+|                         |__  / \ / / . \ . \                         |
+|                           / / \ V /|  _/  _/                         |
+|                          / /__ | | | | | |                           |
+|                         /_____||_| |_| |_|                           |
+|                                                                      |
+----------------------------------------------------------------------*/
+
 #include <unistd.h>
 
 #include <iostream>
@@ -6,16 +15,17 @@
 //#include <zypp/AutoDispose.h>
 
 #include "Out.h"
-#include "Table.h"
+#include <zypp-tui/Table.h>
+#include <zypp-tui/Application>
 #include "Utf8.h"
 
-#include "Zypper.h"
+namespace ztui {
 
 ///////////////////////////////////////////////////////////////////
 namespace out
 {
   unsigned defaultTermwidth()
-  { return Zypper::instance().out().termwidth(); }
+  { return Application::instance().out().termwidth(); }
 } // namespace out
 ///////////////////////////////////////////////////////////////////
 
@@ -29,7 +39,7 @@ std::string TermLine::get( unsigned width_r, SplitFlags flags_r, char exp_r ) co
   utf8::string r(rhs);
 
   if ( width_r == out::termwidthUnlimited )
-    return str::Str() << l << r;	// plain string if zero width
+    return zypp::str::Str() << l << r;	// plain string if zero width
 
   unsigned llen = l.size();
   unsigned rlen = r.size();
@@ -41,10 +51,10 @@ std::string TermLine::get( unsigned width_r, SplitFlags flags_r, char exp_r ) co
   {
     // expand...
     if ( ! ( flags_r.testFlag( SF_EXPAND ) && ::isatty(STDOUT_FILENO) ) )
-      return str::Str() << l << r;
+      return zypp::str::Str() << l << r;
 
     if ( percentHint < 0 || percentHint > 100 )
-      return str::Str() << l << std::string( diff, exp_r ) << r;
+      return zypp::str::Str() << l << std::string( diff, exp_r ) << r;
 
     // else:  draw % indicator
     // -------
@@ -52,17 +62,17 @@ std::string TermLine::get( unsigned width_r, SplitFlags flags_r, char exp_r ) co
     // .<99%>=
     // .<100%>
     if ( percentHint == 0 )
-      return str::Str() << l << std::string( diff, '-' ) << r;
+      return zypp::str::Str() << l << std::string( diff, '-' ) << r;
 
 
     unsigned pc = diff * percentHint / 100; // diff > 0 && percentHint > 0
     if ( diff < 6 )	// not enough space for fancy stuff
-      return str::Str() << l <<  std::string( pc, '.' ) << std::string( diff-pc, '=' ) << r;
+      return zypp::str::Str() << l <<  std::string( pc, '.' ) << std::string( diff-pc, '=' ) << r;
 
     // else: less boring
-    std::string tag( str::Str() << '<' << percentHint << "%>" );
+    std::string tag( zypp::str::Str() << '<' << percentHint << "%>" );
     pc = ( pc > tag.size() ? pc - tag.size() : 0 );
-    return str::Str() << l << std::string( pc, '.' ) << tag << std::string( diff-pc-tag.size(), '=' ) << r;
+    return zypp::str::Str() << l << std::string( pc, '.' ) << tag << std::string( diff-pc-tag.size(), '=' ) << r;
   }
   else if ( diff < 0 )
   {
@@ -71,11 +81,11 @@ std::string TermLine::get( unsigned width_r, SplitFlags flags_r, char exp_r ) co
     {
       if ( rlen > width_r )
         return r.substr( 0, width_r ).str();
-      return str::Str() << l.substr( 0, width_r - rlen ) << r;
+      return zypp::str::Str() << l.substr( 0, width_r - rlen ) << r;
     }
     else if ( flags_r.testFlag( SF_SPLIT ) )
     {
-      str::Str out;
+      zypp::str::Str out;
       if ( llen > width_r )
         mbs_write_wrapped( out.stream(), l.str(), 0, width_r );
       else
@@ -83,10 +93,10 @@ std::string TermLine::get( unsigned width_r, SplitFlags flags_r, char exp_r ) co
       return out << "\n" << ( rlen > width_r ? r.substr( 0, width_r ) : std::string( width_r - rlen, ' ' ) + r );
     }
     // else:
-    return str::Str() << l << r;
+    return zypp::str::Str() << l << r;
   }
   // else: fits exactly
-  return str::Str() << l << r;
+  return zypp::str::Str() << l << r;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -104,7 +114,7 @@ bool Out::progressFilter()
   return verbosity() < Out::NORMAL;
 }
 
-std::string Out::zyppExceptionReport(const Exception & e)
+std::string Out::zyppExceptionReport(const zypp::Exception & e)
 {
   return e.asUserHistory();
 }
@@ -131,16 +141,16 @@ void Out::progressEnd( const std::string & id, const std::string & label, Progre
 //	class Out::Error
 ////////////////////////////////////////////////////////////////////////////////
 
-int Out::Error::report( Zypper & zypper_r ) const
+int Out::Error::report( Application & app_r ) const
 {
   if ( ! ( _msg.empty() && _hint.empty() ) )
-    zypper_r.out().error( _msg, _hint );
-  if ( _exitcode != ZYPPER_EXIT_OK )	// ZYPPER_EXIT_OK indicates exitcode is already set.
-    zypper_r.setExitCode( _exitcode );
-  return zypper_r.exitCode();
+    app_r.out().error( _msg, _hint );
+  if ( _exitcode != ZTUI_EXIT_OK )	// ZTUI_EXIT_OK indicates exitcode is already set.
+    app_r.setExitCode( _exitcode );
+  return app_r.exitCode();
 }
 
-std::string Out::Error::combine( std::string && msg_r, const Exception & ex_r )
+std::string Out::Error::combine( std::string && msg_r, const zypp::Exception & ex_r )
 {
   if ( msg_r.empty() )
   {
@@ -153,5 +163,7 @@ std::string Out::Error::combine( std::string && msg_r, const Exception & ex_r )
   }
   return std::move(msg_r);
 }
-std::string Out::Error::combine( const Exception & ex_r )
-{ return Zypper::instance().out().zyppExceptionReport( ex_r ); }
+std::string Out::Error::combine( const zypp::Exception & ex_r )
+{ return Application::instance().out().zyppExceptionReport( ex_r ); }
+
+}

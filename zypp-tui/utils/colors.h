@@ -1,17 +1,25 @@
-/*---------------------------------------------------------------------------*\
-                          ____  _ _ __ _ __  ___ _ _
-                         |_ / || | '_ \ '_ \/ -_) '_|
-                         /__|\_, | .__/ .__/\___|_|
-                             |__/|_|  |_|
-\*---------------------------------------------------------------------------*/
+/*---------------------------------------------------------------------\
+|                          ____ _   __ __ ___                          |
+|                         |__  / \ / / . \ . \                         |
+|                           / / \ V /|  _/  _/                         |
+|                          / /__ | | | | | |                           |
+|                         /_____||_| |_| |_|                           |
+|                                                                      |
+----------------------------------------------------------------------/
+*
+* This file contains private API, this might break at any time between releases.
+* Strictly for internal use!
+*/
 
-#ifndef UTILS_COLORS_H_
-#define UTILS_COLORS_H_
+#ifndef ZYPP_TUI_UTILS_COLORS_H_
+#define ZYPP_TUI_UTILS_COLORS_H_
 
 #include <iostream>
 #include <string>
 
 #include "ansi.h"
+
+namespace ztui {
 
 /** True unless output is a dumb tty or file.
  * In this case we should not use any ANSI Escape sequences moving the cursor.
@@ -49,7 +57,7 @@ namespace ansi
 {
   // Enable using ColorContext as ansi::SGRSequence
   template<>
-  struct ColorTraits<::ColorContext>
+  struct ColorTraits<ztui::ColorContext>
   { enum { customColorCtor = true }; };
 }
 
@@ -79,4 +87,6 @@ typedef CCString<ColorContext::NEGATIVE>	NEGATIVEString;
 typedef CCString<ColorContext::HIGHLIGHT>	HIGHLIGHTString;
 typedef CCString<ColorContext::LOWLIGHT>	LOWLIGHTString;
 
-#endif /* UTILS_COLORS_H_ */
+}
+
+#endif /* ZYPP_TUI_UTILS_COLORS_H_ */

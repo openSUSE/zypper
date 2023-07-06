@@ -1,5 +1,18 @@
-#ifndef UTF8_H_
-#define UTF8_H_
+/*---------------------------------------------------------------------\
+|                          ____ _   __ __ ___                          |
+|                         |__  / \ / / . \ . \                         |
+|                           / / \ V /|  _/  _/                         |
+|                          / /__ | | | | | |                           |
+|                         /_____||_| |_| |_|                           |
+|                                                                      |
+----------------------------------------------------------------------/
+*
+* This file contains private API, this might break at any time between releases.
+* Strictly for internal use!
+*/
+
+#ifndef ZYPP_TUI_OUTPUT_UTF8_H_
+#define ZYPP_TUI_OUTPUT_UTF8_H_
 
 #include <cstdlib>
 #include <cstring>
@@ -7,6 +20,8 @@
 
 #include <iostream>
 #include <string>
+
+namespace ztui {
 
 ///////////////////////////////////////////////////////////////////
 namespace utf8
@@ -176,4 +191,6 @@ namespace utf8
 } // namespace utf8
 ///////////////////////////////////////////////////////////////////
 
-#endif // UTF8_H_
+}
+
+#endif // ZYPP_TUI_OUTPUT_UTF8_H_

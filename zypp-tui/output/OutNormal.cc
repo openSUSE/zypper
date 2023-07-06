@@ -1,9 +1,11 @@
-/*---------------------------------------------------------------------------*\
-                          ____  _ _ __ _ __  ___ _ _
-                         |_ / || | '_ \ '_ \/ -_) '_|
-                         /__|\_, | .__/ .__/\___|_|
-                             |__/|_|  |_|
-\*---------------------------------------------------------------------------*/
+/*---------------------------------------------------------------------\
+|                          ____ _   __ __ ___                          |
+|                         |__  / \ / / . \ . \                         |
+|                           / / \ V /|  _/  _/                         |
+|                          / /__ | | | | | |                           |
+|                         /_____||_| |_| |_|                           |
+|                                                                      |
+----------------------------------------------------------------------*/
 
 #include <iostream>
 #include <fstream>
@@ -11,20 +13,21 @@
 
 #include <unistd.h>
 
-#include <zypp/Pathname.h>
-#include <zypp/ByteCount.h> // for download progress reporting
-#include <zypp/base/Logger.h>
-#include <zypp/base/String.h> // for toUpper()
+#include <zypp-core/Pathname.h>
+#include <zypp-core/ByteCount.h> // for download progress reporting
+#include <zypp-core/base/Logger.h>
+#include <zypp-core/base/String.h> // for toUpper()
 
-#include "main.h"
-#include "utils/colors.h"
-#include "AliveCursor.h"
+#include <zypp-tui/utils/colors.h>
+#include <zypp-tui/output/AliveCursor.h>
 
 #include "OutNormal.h"
 
 using std::cout;
 using std::cerr;
 using std::endl;
+
+namespace ztui {
 
 OutNormal::OutNormal( Verbosity verbosity_r )
 : Out( TYPE_NORMAL, verbosity_r )
@@ -100,7 +103,7 @@ void OutNormal::error( const std::string & problem_desc, const std::string & hin
 
 // ----------------------------------------------------------------------------
 
-void OutNormal::error( const Exception & e, const std::string & problem_desc, const std::string & hint )
+void OutNormal::error( const zypp::Exception & e, const std::string & problem_desc, const std::string & hint )
 {
   fixupProgressNL();
 
@@ -238,7 +241,7 @@ void OutNormal::progressEnd( const std::string & id, const std::string & label, 
 }
 
 // progress with download rate
-void OutNormal::dwnldProgressStart( const Url & uri )
+void OutNormal::dwnldProgressStart( const zypp::Url & uri )
 {
   if ( verbosity() < NORMAL )
     return;
@@ -251,7 +254,7 @@ void OutNormal::dwnldProgressStart( const Url & uri )
   if ( verbosity() == DEBUG )
     outstr.lhs << uri;
   else
-    outstr.lhs << Pathname(uri.getPathName()).basename();
+    outstr.lhs << zypp::Pathname(uri.getPathName()).basename();
   outstr.lhs << ' ';
   if (_isatty)
     outstr.rhs << '[' << _("starting") << ']';
@@ -265,7 +268,7 @@ void OutNormal::dwnldProgressStart( const Url & uri )
   _newline = false;
 }
 
-void OutNormal::dwnldProgress( const Url & uri, int value, long rate )
+void OutNormal::dwnldProgress( const zypp::Url & uri, int value, long rate )
 {
   if ( verbosity() < NORMAL )
     return;
@@ -285,7 +288,7 @@ void OutNormal::dwnldProgress( const Url & uri, int value, long rate )
   if ( verbosity() == DEBUG )
     outstr.lhs << uri;
   else
-    outstr.lhs << Pathname(uri.getPathName()).basename();
+    outstr.lhs << zypp::Pathname(uri.getPathName()).basename();
    outstr.lhs << ' ';
 
   // dont display percents if invalid
@@ -296,7 +299,7 @@ void OutNormal::dwnldProgress( const Url & uri, int value, long rate )
   ++cursor;
   outstr.rhs << '[' << cursor.current();
   if ( rate > 0 )
-    outstr.rhs << " (" << ByteCount(rate) << "/s)";
+    outstr.rhs << " (" << zypp::ByteCount(rate) << "/s)";
   outstr.rhs << ']';
 
   std::string outline( outstr.get( termwidth() ) );
@@ -305,7 +308,7 @@ void OutNormal::dwnldProgress( const Url & uri, int value, long rate )
   _newline = false;
 }
 
-void OutNormal::dwnldProgressEnd( const Url & uri, long rate, TriBool error )
+void OutNormal::dwnldProgressEnd( const zypp::Url & uri, long rate, zypp::TriBool error )
 {
   if ( verbosity() < NORMAL )
     return;
@@ -325,10 +328,10 @@ void OutNormal::dwnldProgressEnd( const Url & uri, long rate, TriBool error )
     if ( verbosity() == DEBUG )
       lhs << uri;
     else
-      lhs << Pathname(uri.getPathName()).basename();
+      lhs << zypp::Pathname(uri.getPathName()).basename();
     lhs << ' ';
     rhs << '[';
-    if ( indeterminate( error ) )
+    if ( zypp::indeterminate( error ) )
       // Translator: download progress bar result: "........[not found]"
       rhs << CHANGEString(_("not found") );
     else if ( error )
@@ -339,10 +342,10 @@ void OutNormal::dwnldProgressEnd( const Url & uri, long rate, TriBool error )
       rhs << _("done");
   }
   else
-    rhs << ( indeterminate( error ) ? _("not found") : ( error ? _("error") : _("done") ) );
+    rhs << ( zypp::indeterminate( error ) ? _("not found") : ( error ? _("error") : _("done") ) );
 
   if ( rate > 0 )
-    rhs << " (" << ByteCount(rate) << "/s)";
+    rhs << " (" << zypp::ByteCount(rate) << "/s)";
   rhs << ']';
 
   std::string outline( outstr.get( termwidth() ) );
@@ -421,7 +424,7 @@ void OutNormal::promptHelp( const PromptOptions & poptions )
   // Nevertheless list all option names and their '#NUM' shortcut
   unsigned pos = 0;	// Userland counter #NUM  (starts with #1)
 
-  str::Format fopt { "#%-2d: %-10s" };
+  zypp::str::Format fopt { "#%-2d: %-10s" };
   for ( unsigned idx = 0; idx < poptions.options().size(); ++idx )
   {
     if ( poptions.isDisabled(idx) )
@@ -455,4 +458,6 @@ unsigned OutNormal::termwidth() const
       return wns.ws_col;
   }
   return Out::termwidth();	// unlimited
+}
+
 }

@@ -1,14 +1,18 @@
-/*-----------------------------------------------------------*- c++ -*-\
+/*---------------------------------------------------------------------\
 |                          ____ _   __ __ ___                          |
 |                         |__  / \ / / . \ . \                         |
 |                           / / \ V /|  _/  _/                         |
 |                          / /__ | | | | | |                           |
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
-\---------------------------------------------------------------------*/
+----------------------------------------------------------------------/
+*
+* This file contains private API, this might break at any time between releases.
+* Strictly for internal use!
+*/
 
-#ifndef ZYPPER_TABULATOR_H
-#define ZYPPER_TABULATOR_H
+#ifndef ZYPP_TUI_TABULE_H
+#define ZYPP_TUI_TABULE_H
 
 #include <iostream>
 #include <sstream>
@@ -22,15 +26,19 @@
 
 #include <zypp/base/String.h>
 #include <zypp/base/Exception.h>
+#include <zypp-core/base/Gettext.h>
 #include <zypp/sat/Solvable.h>
 #include <zypp/ui/Selectable.h>
 
-#include "main.h"
-#include "utils/ansi.h"
-#include "utils/colors.h"
+#include <zypp-tui/utils/ansi.h>
+#include <zypp-tui/utils/colors.h>
+
+namespace ztui {
+
+inline const char * asYesNo( bool val_r ) { return val_r ? _("Yes") : _("No"); }
 
 /** Custom sort index type for table rows representing solvables (like detailed search results). */
-typedef std::pair<zypp::sat::Solvable, ui::Selectable::picklist_size_type> SolvableCSI;
+typedef std::pair<zypp::sat::Solvable, zypp::ui::Selectable::picklist_size_type> SolvableCSI;
 
 ///////////////////////////////////////////////////////////////////
 // Custom sort index helpers
@@ -184,14 +192,14 @@ public:
 
   template<class Tp_>
   TableRow & add( const Tp_ & val_r )
-  { return add( asString( val_r ) ); }
+  { return add( zypp::str::asString( val_r ) ); }
 
 
   TableRow & addDetail( std::string s );
 
   template<class Tp_>
   TableRow & addDetail( const Tp_ & val_r )
-  { return addDetail( asString( val_r ) ); }
+  { return addDetail( zypp::str::asString( val_r ) ); }
 
 
   bool empty() const
@@ -244,7 +252,7 @@ private:
 /** \relates TableRow Add colummn. */
 template<class Tp_>
 TableRow & operator<<( TableRow & tr, Tp_ && val )
-{ return tr.add( asString( std::forward<Tp_>(val) ) ); }
+{ return tr.add( zypp::asString( std::forward<Tp_>(val) ) ); }
 /** \overload preserving TableRow rvalue reference. */
 template<class Tp_>
 TableRow && operator<<( TableRow && tr, Tp_ && val )
@@ -326,7 +334,7 @@ struct TableRow::Less
   bool operator()( const TableRow & a_r, const TableRow & b_r ) const
   {
     int c = 0;
-    for ( const SortParam sortParam : _by_columns ) {
+    for ( const SortParam &sortParam : _by_columns ) {
       if ( (c = compCol( sortParam, a_r, b_r )) )
         return c < 0;
     }
@@ -357,7 +365,7 @@ private:
           return 0;
 
         else if ( lUserData.type() != rUserData.type() ) {
-          ZYPP_THROW( zypp::Exception( str::form("Incompatible user types") ) );
+          ZYPP_THROW( zypp::Exception( zypp::str::form("Incompatible user types") ) );
 
         } else if ( lUserData.type() == typeid(SolvableCSI) ) {
           return simpleAnyTypeComp<SolvableCSI> ( lUserData, rUserData );
@@ -372,7 +380,7 @@ private:
           return simpleAnyTypeComp<int>( lUserData, rUserData );
 
         }
-        ZYPP_THROW( zypp::Exception( str::form("Unsupported user types") ) );
+        ZYPP_THROW( zypp::Exception( zypp::str::form("Unsupported user types") ) );
       } else
         return ( noL && ! noR ? -1 : ! noL && noR ?  1 : 0);
     }
@@ -468,7 +476,7 @@ private:
   //! Whether to wrap the table if it exceeds _screen_width
   bool _do_wrap;
 
-  DefaultIntegral<unsigned,Unsorted> _defaultSortColumn;
+  zypp::DefaultIntegral<unsigned,Unsorted> _defaultSortColumn;
 
   mutable bool _inHeader;
 
@@ -527,7 +535,7 @@ class PropertyTable
 {
 public:
   PropertyTable()
-  { _table.lineStyle( ::Colon ); }
+  { _table.lineStyle( ztui::Colon ); }
 
   static const char * emptyListTag() { return "---"; }
 
@@ -577,7 +585,7 @@ public:
           ++cnt;
           r.addDetail( *(begin_r++) );
         }
-        r << "["+str::numstring(cnt)+"]";	// size as value
+        r << "["+zypp::str::numstring(cnt)+"]";	// size as value
       }
    }
     else
@@ -630,7 +638,7 @@ private:
   Table _table;
 };
 
-
+}
 
 // Local Variables:
 // c-basic-offset: 2

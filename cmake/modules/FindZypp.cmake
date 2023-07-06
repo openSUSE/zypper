@@ -6,8 +6,8 @@ ELSE (DEFINED ZYPP_PREFIX)
 ENDIF (DEFINED ZYPP_PREFIX)
 
 if(ZYPP_INCLUDE_DIR AND ZYPP_LIBRARY)
-	# Already in cache, be silent
-	SET(ZYPP_FIND_QUIETLY TRUE)	
+        # Already in cache, be silent
+        SET(ZYPP_FIND_QUIETLY TRUE)
 endif(ZYPP_INCLUDE_DIR AND ZYPP_LIBRARY)
 
 set(ZYPP_LIBRARY)
@@ -29,6 +29,16 @@ IF (DEFINED ZYPP_PREFIX)
     NO_SYSTEM_ENVIRONMENT_PATH
     NO_CMAKE_SYSTEM_PATH
   )
+
+  FIND_LIBRARY(ZYPP_TUI_LIBRARY NAMES zypp-tui
+    PATHS
+    ${ZYPP_PREFIX}/lib
+    ${ZYPP_PREFIX}/lib64
+    NO_DEFAULT_PATH
+    NO_SYSTEM_ENVIRONMENT_PATH
+    NO_CMAKE_SYSTEM_PATH
+  )
+
 ELSE (DEFINED ZYPP_PREFIX)
   FIND_PATH(ZYPP_INCLUDE_DIR zypp/ZYpp.h
     /usr/include
@@ -39,10 +49,15 @@ ELSE (DEFINED ZYPP_PREFIX)
     /usr/lib
     /usr/local/lib
   )
+  FIND_LIBRARY(ZYPP_TUI_LIBRARY NAMES zypp-tui
+    PATHS
+    /usr/lib
+    /usr/local/lib
+  )
 ENDIF (DEFINED ZYPP_PREFIX)
 
 if(ZYPP_INCLUDE_DIR AND ZYPP_LIBRARY)
-   MESSAGE( STATUS "ZYpp found: includes in ${ZYPP_INCLUDE_DIR}, library in ${ZYPP_LIBRARY}")
+   MESSAGE( STATUS "ZYpp found: includes in ${ZYPP_INCLUDE_DIR}, library in ${ZYPP_LIBRARY}, tui library in ${ZYPP_TUI_LIBRARY}")
    set(ZYPP_FOUND TRUE)
 else(ZYPP_INCLUDE_DIR AND ZYPP_LIBRARY)
    MESSAGE( FATAL "ZYpp not found")

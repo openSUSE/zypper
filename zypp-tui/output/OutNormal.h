@@ -1,16 +1,24 @@
-/*---------------------------------------------------------------------------*\
-                          ____  _ _ __ _ __  ___ _ _
-                         |_ / || | '_ \ '_ \/ -_) '_|
-                         /__|\_, | .__/ .__/\___|_|
-                             |__/|_|  |_|
-\*---------------------------------------------------------------------------*/
+/*---------------------------------------------------------------------\
+|                          ____ _   __ __ ___                          |
+|                         |__  / \ / / . \ . \                         |
+|                           / / \ V /|  _/  _/                         |
+|                          / /__ | | | | | |                           |
+|                         /_____||_| |_| |_|                           |
+|                                                                      |
+----------------------------------------------------------------------/
+*
+* This file contains private API, this might break at any time between releases.
+* Strictly for internal use!
+*/
 
 #ifndef OUTNORMAL_H_
 #define OUTNORMAL_H_
 
-#include "Out.h"
+#include <zypp-tui/output/Out.h>
 #include <termios.h>
 #include <sys/ioctl.h>
+
+namespace ztui {
 
 class OutNormal : public Out
 {
@@ -23,7 +31,7 @@ public:
   void infoLine( const TermLine & msg, Verbosity verbosity, Type mask ) override;
   void warning( const std::string & msg, Verbosity verbosity, Type mask ) override;
   void error( const std::string & problem_desc, const std::string & hint ) override;
-  void error( const Exception & e, const std::string & problem_desc, const std::string & hint ) override;
+  void error( const zypp::Exception & e, const std::string & problem_desc, const std::string & hint ) override;
 
   // progress
   void progressStart( const std::string & id, const std::string & label, bool is_tick ) override;
@@ -31,9 +39,9 @@ public:
   void progressEnd( const std::string & id, const std::string & label, const std::string & donetag, bool error) override;
 
   // progress with download rate
-  void dwnldProgressStart( const Url & uri ) override;
-  void dwnldProgress( const Url & uri, int value, long rate ) override;
-  void dwnldProgressEnd( const Url & uri, long rate, TriBool error ) override;
+  void dwnldProgressStart( const zypp::Url & uri ) override;
+  void dwnldProgress( const zypp::Url & uri, int value, long rate ) override;
+  void dwnldProgressEnd( const zypp::Url & uri, long rate, zypp::TriBool error ) override;
 
   void prompt( PromptId id, const std::string & prompt, const PromptOptions & poptions, const std::string & startdesc ) override;
 
@@ -62,5 +70,7 @@ private:
   /* True if the last output line was longer than the terminal width */
   bool _oneup;
 };
+
+}
 
 #endif /*OUTNORMAL_H_*/

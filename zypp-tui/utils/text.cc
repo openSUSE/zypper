@@ -1,13 +1,17 @@
-/*---------------------------------------------------------------------------*\
-                          ____  _ _ __ _ __  ___ _ _
-                         |_ / || | '_ \ '_ \/ -_) '_|
-                         /__|\_, | .__/ .__/\___|_|
-                             |__/|_|  |_|
-\*---------------------------------------------------------------------------*/
+/*---------------------------------------------------------------------\
+|                          ____ _   __ __ ___                          |
+|                         |__  / \ / / . \ . \                         |
+|                           / / \ V /|  _/  _/                         |
+|                          / /__ | | | | | |                           |
+|                         /_____||_| |_| |_|                           |
+|                                                                      |
+----------------------------------------------------------------------*/
 
 #include <cstring>
 #include <boost/utility/string_ref.hpp>
-#include "utils/text.h"
+#include "text.h"
+
+namespace ztui {
 
 std::string mbs_substr_by_width( boost::string_ref text_r, std::string::size_type colpos_r, std::string::size_type collen_r )
 {
@@ -59,4 +63,6 @@ std::string mbs_substr_by_width( boost::string_ref text_r, std::string::size_typ
       ret += std::string( spos, slen );
   }
   return ret;
+}
+
 }

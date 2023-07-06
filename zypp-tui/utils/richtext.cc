@@ -1,10 +1,24 @@
+/*---------------------------------------------------------------------\
+|                          ____ _   __ __ ___                          |
+|                         |__  / \ / / . \ . \                         |
+|                           / / \ V /|  _/  _/                         |
+|                          / /__ | | | | | |                           |
+|                         /_____||_| |_| |_|                           |
+|                                                                      |
+----------------------------------------------------------------------/
+*
+* This file contains private API, this might break at any time between releases.
+* Strictly for internal use!
+*/
 #include <sstream>
 #include <map>
 #include <vector>
 #include <string>
 
-#include <zypp/base/Logger.h>
-#include <zypp/base/String.h>
+#include <zypp-core/base/Logger.h>
+#include <zypp-core/base/String.h>
+
+namespace ztui {
 
 using std::endl;
 using namespace zypp;
@@ -258,3 +272,4 @@ std::string processRichText( const std::string& text )
   return res;
 }
 
+}

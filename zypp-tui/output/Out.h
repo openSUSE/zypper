@@ -1,3 +1,16 @@
+/*---------------------------------------------------------------------\
+|                          ____ _   __ __ ___                          |
+|                         |__  / \ / / . \ . \                         |
+|                           / / \ V /|  _/  _/                         |
+|                          / /__ | | | | | |                           |
+|                         /_____||_| |_| |_|                           |
+|                                                                      |
+----------------------------------------------------------------------/
+*
+* This file contains private API, this might break at any time between releases.
+* Strictly for internal use!
+*/
+
 #ifndef OUT_H_
 #define OUT_H_
 
@@ -5,36 +18,32 @@
 #include <sstream>
 #include <optional>
 
-#include <zypp/base/Xml.h>
-#include <zypp/base/NonCopyable.h>
-#include <zypp/base/Exception.h>
-#include <zypp/base/String.h>
-#include <zypp/base/Flags.h>
-#include <zypp/base/DefaultIntegral.h>
-#include <zypp/base/DtorReset.h>
-#include <zypp/Url.h>
-#include <zypp/TriBool.h>
-#include <zypp/ProgressData.h>
-#include <zypp/ZYppCallbacks.h>
-#include <zypp/base/LogTools.h>
+#include <zypp-core/base/Xml.h>
+#include <zypp-core/base/NonCopyable.h>
+#include <zypp-core/base/Exception.h>
+#include <zypp-core/base/String.h>
+#include <zypp-core/base/Flags.h>
+#include <zypp-core/base/DefaultIntegral>
+#include <zypp-core/base/DtorReset>
+#include <zypp-core/base/Gettext.h>
+#include <zypp-core/Url.h>
+#include <zypp-core/TriBool.h>
+#include <zypp-core/ui/ProgressData>
+#include <zypp-core/base/LogTools.h>
 
-#include "utils/text.h"
-#include "utils/colors.h"
-#include "utils/prompt.h"
-#include "utils/richtext.h"
-#include "output/prompt.h"
+#include <zypp-tui/utils/text.h>
+#include <zypp-tui/utils/colors.h>
+#include <zypp-tui/utils/richtext.h>
+#include <zypp-tui/Table.h>
+#include <zypp-tui/output/PromptOptions>
 
-inline char * asYesNo( bool val_r ) { return val_r ? _("Yes") : _("No"); }
-#include "Table.h"
+namespace ztui {
 
-using namespace zypp;
-
-class Zypper;
+class Application;
 
 /// ProgressBars default end tags.
 enum class ProgressEnd { done, attention, error };
 
-///////////////////////////////////////////////////////////////////
 namespace text
 {
   // translator: usually followed by a ' ' and some explanatory text
@@ -50,7 +59,7 @@ namespace text
   /** Simple join of two string types */
   template <class Tltext, class Trtext>
   inline std::string join( const Tltext & ltext, const Trtext & rtext, const char * sep = " " )
-  { std::string ret( asString(ltext) ); ret += sep; ret += asString(rtext); return ret; }
+  { std::string ret( zypp::str::asString(ltext) ); ret += sep; ret += zypp::str::asString(rtext); return ret; }
 
   /** Whether the \a str_r ends with a WS. */
   inline bool endsOnWS( const std::string & str_r )
@@ -64,24 +73,20 @@ namespace text
   inline const char * optBlankAfter( const std::string & str_r )
   { return( endsOnWS( str_r ) ? "" : " " ); }
 }
-///////////////////////////////////////////////////////////////////
 
-///////////////////////////////////////////////////////////////////
 namespace out
 {
   static constexpr unsigned termwidthUnlimited = 0u;
   unsigned defaultTermwidth();	// Zypper::instance().out().termwidth()
 } // namespace out
-///////////////////////////////////////////////////////////////////
 
-///////////////////////////////////////////////////////////////////
 namespace out
 {
-  ///////////////////////////////////////////////////////////////////
-  /// \class ListLayout
-  /// \brief Basic list layout
-  /// \todo fix design made in eile
-  ///////////////////////////////////////////////////////////////////
+  /*!
+   * \class ListLayout
+   * \brief Basic list layout
+   * \todo fix design made in eile
+  */
   struct ListLayout
   {
     template <class TFormater> struct Writer;
@@ -111,10 +116,10 @@ namespace out
   typedef detail::ListLayoutInit<true, true, true,  2U>	IndentedGapedListLayout;///< one element per line, indented, gaped
   typedef detail::ListLayoutInit<false,true, false, 2U>	CompressedListLayout;	///< multiple elements per line, indented
 
-  ///////////////////////////////////////////////////////////////////
-  /// \class TableLayout
-  /// \brief Basic table layout
-  ///////////////////////////////////////////////////////////////////
+  /*!
+   * \class TableLayout
+   * \brief Basic table layout
+  */
   struct TableLayout
   {
     template <class TFormater> struct Writer;
@@ -122,7 +127,6 @@ namespace out
 
   typedef TableLayout	DefaultTableLayout;	///< Simple Table
 
-  ///////////////////////////////////////////////////////////////////
   // Either specialize per Type or define a custom Formater:
 
   /** \relates XmlFormater XML representation of types [no default] */
@@ -356,11 +360,11 @@ struct TermLine
   TermLine() {}
 
   SplitFlags flagsHint;				//< flags to use if not passed to \ref get
-  DefaultIntegral<char,' '> expHint;	//< expand char to use if not passed to \ref get
-  DefaultIntegral<int,-1> percentHint;	//< draw progress indicator in expanded space if in [0,100]
+  zypp::DefaultIntegral<char,' '> expHint;	//< expand char to use if not passed to \ref get
+  zypp::DefaultIntegral<int,-1> percentHint;	//< draw progress indicator in expanded space if in [0,100]
 
-  str::Str lhs;				//< left side
-  str::Str rhs;				//< right side
+  zypp::str::Str lhs;				//< left side
+  zypp::str::Str rhs;				//< right side
 
 
   /** Return plain line made of lhs + rhs */
@@ -421,7 +425,7 @@ ZYPP_DECLARE_OPERATORS_FOR_FLAGS( TermLine::SplitFlags );
  *
  * </code>
  */
-class Out : private base::NonCopyable
+class Out : private zypp::base::NonCopyable
 {
 public:
   /** Verbosity levels. */
@@ -444,6 +448,8 @@ public:
 
   static constexpr Type TYPE_NONE	= TypeBit(0x00);
   static constexpr Type TYPE_ALL	= TypeBit(0xff);
+
+  using PromptId = unsigned;
 
 protected:
   Out(TypeBit type, Verbosity verbosity = NORMAL)
@@ -477,14 +483,14 @@ public:
   /// \endcode
   struct XmlNode : protected ParentOut
   {
-    typedef xmlout::Node::Attr Attr;
+    typedef zypp::xmlout::Node::Attr Attr;
 
     /** Ctor taking nodename and attribute list. */
     XmlNode( Out & out_r, const std::string & name_r, const std::initializer_list<Attr> & attrs_r = {} )
     : ParentOut( out_r )
     {
       if ( out().typeXML() && ! name_r.empty() )
-      { _node.reset( new xmlout::Node( std::cout, name_r, attrs_r ) ); }
+      { _node.reset( new zypp::xmlout::Node( std::cout, name_r, attrs_r ) ); }
     }
 
     /** Convenience ctor for one attribute pair */
@@ -496,7 +502,7 @@ public:
     XmlNode( XmlNode && rhs ) : ParentOut( rhs ) { _node.swap( rhs._node ); }
 
   private:
-    scoped_ptr<xmlout::Node> _node;
+    zypp::scoped_ptr<zypp::xmlout::Node> _node;
   };
   ///////////////////////////////////////////////////////////////////
 
@@ -506,7 +512,7 @@ public:
    * \endcode
    */
   void xmlNode( const std::string & name_r, const std::initializer_list<XmlNode::Attr> & attrs_r = {} )
-  { if ( typeXML() ) { xmlout::node( std::cout, name_r, attrs_r ); } }
+  { if ( typeXML() ) { zypp::xmlout::node( std::cout, name_r, attrs_r ); } }
   /** \overload for one attribute pair */
   void xmlNode( const std::string & name_r, XmlNode::Attr attr_r )
   { xmlNode( name_r, { attr_r } ); }
@@ -528,15 +534,15 @@ private:
   void container( const std::string & nodeName_r, const std::string & title_r,
                   const TContainer & container_r, const TFormater & formater_r )
   {
-    TitleNode guard( XmlNode( *this, nodeName_r, XmlNode::Attr( "size", str::numstring( container_r.size() ) ) ),
-                     str::Format( title_r ) % container_r.size() );
+    TitleNode guard( XmlNode( *this, nodeName_r, XmlNode::Attr( "size", zypp::str::numstring( container_r.size() ) ) ),
+                     zypp::str::Format( title_r ) % container_r.size() );
     switch ( type() )
     {
       case TYPE_NORMAL:
         writeContainer( std::cout, container_r, formater_r );
         break;
       case TYPE_XML:
-        xmlWriteContainer( std::cout, container_r, formater_r );
+        ztui::out::xmlWriteContainer( std::cout, container_r, formater_r );
         break;
     }
   }
@@ -561,7 +567,7 @@ public:
   void gap() { if ( type() == TYPE_NORMAL ) std::cout << std::endl; }
 
   void printRichText( std::string text, unsigned indent_r = 0U )
-  { ::printRichText( std::cout, text, indent_r, termwidth() ); }
+  { ztui::printRichText( std::cout, text, indent_r, termwidth() ); }
 
 
   /** Less common Paragraph formats */
@@ -573,8 +579,8 @@ public:
   void par( size_t indent_r, const Text & text_r, ParFormat format_r = ParFormat() )
   {
     gap();	// if needed make it optional via ParFormat
-    str::Str formated;
-    mbs_write_wrapped( formated.stream(), asString(text_r), indent_r, defaultFormatWidth( 100 ) );
+    zypp::str::Str formated;
+    mbs_write_wrapped( formated.stream(), zypp::str::asString(text_r), indent_r, defaultFormatWidth( 100 ) );
     info( formated );
   }
   /** \overload  convenience for unindented */
@@ -726,7 +732,7 @@ public:
    * \param Problem description for the user.
    * \param Hint for the user how to cope with the problem.
    */
-  virtual void error(const Exception & e,
+  virtual void error(const zypp::Exception & e,
                      const std::string & problem_desc,
                      const std::string & hint = "") = 0;
 
@@ -793,7 +799,7 @@ public:
    *
    * \param uri   Uri of the file to download.
    */
-  virtual void dwnldProgressStart(const Url & uri) = 0;
+  virtual void dwnldProgressStart(const zypp::Url & uri) = 0;
 
   /**
    * Reports download progress.
@@ -802,7 +808,7 @@ public:
    * \param value Value of the progress in percents. -1 if unknown.
    * \param rate  Current download rate in B/s. -1 if unknown.
    */
-  virtual void dwnldProgress(const Url & uri,
+  virtual void dwnldProgress(const zypp::Url & uri,
                              int value = -1,
                              long rate = -1) = 0;
   /**
@@ -812,9 +818,9 @@ public:
    * \param rate  Average download rate at the end. -1 if unknown.
    * \param error Error flag - did the download finish with error? \c indeterminate == 'not found'
    */
-  virtual void dwnldProgressEnd(const Url & uri,
+  virtual void dwnldProgressEnd(const zypp::Url & uri,
                                 long rate = -1,
-                                TriBool error = false) = 0;
+                                zypp::TriBool error = false) = 0;
   //@}
 
   /**
@@ -874,10 +880,10 @@ public:
 #define SCOPED_VERBOSITY( OUT, LEVEL ) const auto & raii __attribute__ ((__unused__))( (OUT).scopedVerbosity( LEVEL ))
 
   /** Return RAII class for exception safe scoped verbosity change. */
-  DtorReset scopedVerbosity( Verbosity verbosity_r )
+  zypp::DtorReset scopedVerbosity( Verbosity verbosity_r )
   {
     std::swap( _verbosity, verbosity_r );
-    return DtorReset( _verbosity, verbosity_r );
+    return zypp::DtorReset( _verbosity, verbosity_r );
   }
 
   /** Hint for a handler whether config would allow to use colors. */
@@ -929,7 +935,7 @@ protected:
   /**
    * Return a Exception as a string suitable for output.
    */
-  virtual std::string zyppExceptionReport(const Exception & e);
+  virtual std::string zyppExceptionReport(const zypp::Exception & e);
 
 private:
   Verbosity _verbosity;
@@ -972,7 +978,7 @@ ZYPP_DECLARE_OPERATORS_FOR_FLAGS(Out::Type);
 /// \todo ProgressData provides NumericId which might be used as
 /// id for_out.progress*().
 ///////////////////////////////////////////////////////////////////
-class Out::ProgressBar : private base::NonCopyable
+class Out::ProgressBar : private zypp::base::NonCopyable
 {
 public:
   /** Indicator type for ctor not drawing an initial start bar. */
@@ -990,9 +996,9 @@ public:
     , _progressId( progressId_r )
   {
     if ( total_r )
-      _labelPrefix = str::form( "(%*u/%u) ", numDigits( total_r ), current_r, total_r );
+      _labelPrefix = zypp::str::form( "(%*u/%u) ", numDigits( total_r ), current_r, total_r );
     else if ( current_r )
-      _labelPrefix = str::form( "(%u) ", current_r );
+      _labelPrefix = zypp::str::form( "(%u) ", current_r );
     _progress.name( label_r );
     _progress.sendTo( Print( *this ) );
   }
@@ -1059,16 +1065,16 @@ public:
 public:
   /** \name Access the embedded ProgressData object */
   //@{
-  ProgressData * operator->()
+  zypp::ProgressData * operator->()
   { return &_progress; }
 
-  const ProgressData * operator->() const
+  const zypp::ProgressData * operator->() const
   { return &_progress; }
 
-  ProgressData & operator*()
+  zypp::ProgressData & operator*()
   { return _progress; }
 
-  const ProgressData & operator*() const
+  const zypp::ProgressData & operator*() const
   { return _progress; }
   //@}
 
@@ -1082,7 +1088,7 @@ private:
   struct Print
   {
     Print( ProgressBar & bar_r ) : _bar( &bar_r ) {}
-    bool operator()( const ProgressData & progress_r )
+    bool operator()( const zypp::ProgressData & progress_r )
     { _bar->_out.progress( _bar->_progressId, _bar->outLabel( progress_r.name() ), progress_r.reportValue() ); return true; }
   private:
     ProgressBar * _bar;
@@ -1097,7 +1103,7 @@ private:
 private:
   Out & _out;
   std::optional<ProgressEnd> _donetag;
-  ProgressData _progress;
+  zypp::ProgressData _progress;
   std::string _progressId;
   std::string _labelPrefix;
 };
@@ -1137,8 +1143,6 @@ private:
 ///////////////////////////////////////////////////////////////////
 struct Out::Error
 {
-  Error()
-  : _exitcode( ZYPPER_EXIT_OK ) {}
   Error( int exitcode_r )
   : _exitcode( exitcode_r ) {}
 
@@ -1147,38 +1151,29 @@ struct Out::Error
   : _exitcode( exitcode_r ), _msg( std::move(msg_r) ), _hint( std::move(hint_r) ) {}
 
   // code exception hint
-  Error( int exitcode_r, const Exception & ex_r, std::string hint_r = std::string() )
+  Error( int exitcode_r, const zypp::Exception & ex_r, std::string hint_r = std::string() )
   : _exitcode( exitcode_r ), _msg( combine( ex_r ) ), _hint( std::move(hint_r) ) {}
 
   // code (msg exception) hint
-  Error( int exitcode_r, std::string msg_r, const Exception & ex_r, std::string hint_r = std::string() )
+  Error( int exitcode_r, std::string msg_r, const zypp::Exception & ex_r, std::string hint_r = std::string() )
   : _exitcode( exitcode_r ), _msg( combine( std::move(msg_r), ex_r ) ), _hint( std::move(hint_r) ) {}
-
-  // as above but without code	ZYPPER_EXIT_OK
-  Error( std::string msg_r, std::string hint_r = std::string() )
-  : _exitcode( ZYPPER_EXIT_OK ), _msg( std::move(msg_r) ), _hint( std::move(hint_r) ) {}
-
-  Error( const Exception & ex_r, std::string hint_r = std::string() )
-  : _exitcode( ZYPPER_EXIT_OK ), _msg( combine( ex_r ) ), _hint( std::move(hint_r) ) {}
-
-  Error( std::string msg_r, const Exception & ex_r, std::string hint_r = std::string() )
-  : _exitcode( ZYPPER_EXIT_OK ), _msg( combine( std::move(msg_r), ex_r ) ), _hint( std::move(hint_r) ) {}
 
   /** Default way of processing a caught \ref Error exception.
    * \li Write error message and optional hint to screen.
    * \li Set the ZYPPER_EXIT_ code if necessary.
    * \returns the zypper exitcode.
    */
-  int report( Zypper & zypper_r ) const;
+  int report( Application & app_r ) const;
 
   int _exitcode;	//< ZYPPER_EXIT_OK indicates exitcode is already set.
   std::string _msg;
   std::string _hint;
 
 private:
-  static std::string combine( std::string && msg_r, const Exception & ex_r );
-  static std::string combine( const Exception & ex_r );
+  static std::string combine( std::string && msg_r, const zypp::Exception & ex_r );
+  static std::string combine( const zypp::Exception & ex_r );
 };
-///////////////////////////////////////////////////////////////////
+
+}
 
 #endif /*OUT_H_*/

@@ -1,8 +1,22 @@
+/*---------------------------------------------------------------------\
+|                          ____ _   __ __ ___                          |
+|                         |__  / \ / / . \ . \                         |
+|                           / / \ V /|  _/  _/                         |
+|                          / /__ | | | | | |                           |
+|                         /_____||_| |_| |_|                           |
+|                                                                      |
+----------------------------------------------------------------------/
+*
+* This file contains private API, this might break at any time between releases.
+* Strictly for internal use!
+*/
 
-#ifndef ALIVE_CURSOR_H
-#define ALIVE_CURSOR_H
+#ifndef ZYPP_TUI_OUTPUT_ALIVE_CURSOR_H
+#define ZYPP_TUI_OUTPUT_ALIVE_CURSOR_H
 
 #include <iostream>
+
+namespace ztui {
 
 class AliveCursor
 {
@@ -59,6 +73,8 @@ class AliveCursor
 /** \relates Date Stream output */
 inline std::ostream & operator<<( std::ostream & str, const AliveCursor & obj )
 { return str << obj.current(); }
+
+}
 
 #endif
 

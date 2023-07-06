@@ -1,23 +1,28 @@
-/*---------------------------------------------------------------------------*\
-                          ____  _ _ __ _ __  ___ _ _
-                         |_ / || | '_ \ '_ \/ -_) '_|
-                         /__|\_, | .__/ .__/\___|_|
-                             |__/|_|  |_|
-\*---------------------------------------------------------------------------*/
+/*---------------------------------------------------------------------\
+|                          ____ _   __ __ ___                          |
+|                         |__  / \ / / . \ . \                         |
+|                           / / \ V /|  _/  _/                         |
+|                          / /__ | | | | | |                           |
+|                         /_____||_| |_| |_|                           |
+|                                                                      |
+----------------------------------------------------------------------/
+*
+* This file contains private API, this might break at any time between releases.
+* Strictly for internal use!
+*/
 
-#ifndef ZYPPER_UTILS_TEXT_H_
-#define ZYPPER_UTILS_TEXT_H_
+
+#ifndef ZYPP_UTILS_TEXT_H_
+#define ZYPP_UTILS_TEXT_H_
 
 #include <iosfwd>
 #include <string>
 
 #include <boost/utility/string_ref.hpp>
-#include <zypp/base/DtorReset.h>
-#include <zypp/base/String.h>
+#include <zypp-core/base/DtorReset>
+#include <zypp-core/base/String.h>
 
-//#include "output/Out.h" MOVED TO THE BOTTOM
-
-using std::endl;
+namespace ztui {
 
 ///////////////////////////////////////////////////////////////////
 namespace mbs
@@ -305,9 +310,9 @@ namespace mbs
       writeout(true);
       clearIndent();
 #if ( ZYPPER_TRACE_MBS)
-      _out << "<NL>" << endl;	// "<NL>"
+      _out << "<NL>" << std::endl;	// "<NL>"
 #else
-      _out << endl;	// "<NL>"
+      _out << std::endl;	// "<NL>"
 #endif
       _lpos = 0;
     }
@@ -326,7 +331,7 @@ namespace mbs
         _gapLines += count_r;
 #if ( ZYPPER_TRACE_MBS )
         while ( count_r-- )
-          _out << "<BR>" << endl;	// "<BR>"
+          _out << "<BR>" << std::endl;	// "<BR>"
 #else
         _out << std::string( count_r, '\n' );
 #endif
@@ -498,7 +503,7 @@ namespace mbs
         // Here: did not fit on this line
         // suppress gap and write indented on next line
         clearGap();
-        _out << endl;
+        _out << std::endl;
         _lpos = 0;
       }
 
@@ -528,7 +533,7 @@ namespace mbs
         ++_lpos;
         if ( _lpos >= _defaultWrap )
         {
-          _out << endl;
+          _out << std::endl;
           _lpos = 0;
         }
       }
@@ -649,5 +654,6 @@ inline size_t mbs_width( boost::string_ref text_r )
  */
 std::string mbs_substr_by_width( boost::string_ref text_r, std::string::size_type colpos_r = 0, std::string::size_type collen_r = std::string::npos );
 
-#include "output/Out.h"
-#endif /* ZYPPER_UTILS_TEXT_H_ */
+}
+
+#endif /* ZYPP_UTILS_TEXT_H_ */

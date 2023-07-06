@@ -1,14 +1,18 @@
-/*-----------------------------------------------------------*- c++ -*-\
+/*---------------------------------------------------------------------\
 |                          ____ _   __ __ ___                          |
 |                         |__  / \ / / . \ . \                         |
 |                           / / \ V /|  _/  _/                         |
 |                          / /__ | | | | | |                           |
 |                         /_____||_| |_| |_|                           |
 |                                                                      |
-\---------------------------------------------------------------------*/
+----------------------------------------------------------------------/
+*
+* This file contains private API, this might break at any time between releases.
+* Strictly for internal use!
+*/
 
-#ifndef ZYPPER_UTILS_ANSI_H
-#define ZYPPER_UTILS_ANSI_H
+#ifndef ZYPP_TUI_UTILS_ANSI_H
+#define ZYPP_TUI_UTILS_ANSI_H
 
 #include <cstdint>
 #include <iostream>
@@ -19,7 +23,9 @@
 #include <string>
 
 #include <zypp/base/String.h>
-using namespace zypp;
+
+
+namespace ztui {
 
 /** True unless output is a dumb tty or file.
  * In this case we should not use any ANSI Escape sequences moving the cursor.
@@ -28,6 +34,12 @@ bool do_ttyout();	// implemented in colors.cc
 
 /** If output is done in colors (depends on config) */
 bool do_colors();	// implemented in colors.cc
+
+/** Simple check whether stdout is a (not dumb) tty */
+bool mayUseANSIEscapes();
+
+/** Simple check whether stdout can handle colors */
+bool hasANSIColor();
 
 ///////////////////////////////////////////////////////////////////
 namespace ansi
@@ -252,6 +264,18 @@ namespace ansi
     /** Leave everything unchanged */
     static Color nocolor()
     { return Color( UidType(0) ); }
+
+    /*!
+     * Returns the Color corresponding to the \a colorName.
+     * If \a colorName does not match a known string this returns the
+     * same as \ref nocolor.
+     *
+     * \code
+     * Color::fromString("bold red");
+     * \endcode
+     *
+     */
+    static Color fromString( const std::string &colorName );
 
     /** Evaluate in boolean context (not \ref nocolor) */
     explicit operator bool() const
@@ -586,7 +610,7 @@ namespace ansi
       std::string ret( plainstr() );
       if ( do_colors() && color_r )
       {
-        using str::replaceAll;
+        using zypp::str::replaceAll;
         replaceAll( ret, Color::SGRReset(), color_r.str() );
         ret = color_r.str() + ret + Color::SGRReset();
       }
@@ -827,15 +851,17 @@ template<class CCC_, typename = ansi::EnableIfCustomColorCtor<CCC_> >
 inline ansi::ColorStream operator<<( CCC_ && color_r, std::ostream & (*omanip)( std:: ostream & ) )
 { return std::move( ansi::ColorStream( std::forward<CCC_>(color_r) ) << omanip ); }
 
-///////////////////////////////////////////////////////////////////
+}
+
+
 namespace std
 {
-  /** \relates ansi::Color Stream oputput for ColorTraits enabled types
+/** \relates ansi::Color Stream oputput for ColorTraits enabled types
    * Defined in namespace 'std' because namespace of 'CCC_' may vary
    */
-  template<class CCC_, typename = ansi::EnableIfCustomColorCtor<CCC_>>
-  inline ostream & operator<<( ostream & str, CCC_ && color_r )
-  { return str << ansi::Color( forward<CCC_>(color_r) ); }
+template<class CCC_, typename = ztui::ansi::EnableIfCustomColorCtor<CCC_>>
+inline ostream & operator<<( ostream & str, CCC_ && color_r )
+{ return str << ztui::ansi::Color( forward<CCC_>(color_r) ); }
 } // namespace std
-///////////////////////////////////////////////////////////////////
-#endif // ZYPPER_UTILS_ANSI_H
+
+#endif // ZYPP_TUI_UTILS_ANSI_H
