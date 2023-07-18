@@ -5,11 +5,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libzypp\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-22 14:35+0100\n"
+"POT-Creation-Date: 2023-07-18 09:54+0200\n"
 "PO-Revision-Date: 2022-12-22 17:27+0000\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
-"Language-Team: Slovak <https://l10n.opensuse.org/projects/libzypp/master/sk/>"
-"\n"
+"Language-Team: Slovak <https://l10n.opensuse.org/projects/libzypp/master/sk/"
+">\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -3723,34 +3723,34 @@ msgstr "Hľadanie ID gpg kľúča %1% v repozitári %2%."
 msgid "Repository %1% does not define additional 'gpgkey=' URLs."
 msgstr "Repozitár %1% nedefinuje dodatočné URL 'gpgkey='."
 
-#: zypp/RepoManager.cc:317
+#: zypp/RepoManager.cc:320
 #, boost-format
 msgid "Cannot read repo directory '%1%': Permission denied"
 msgstr "Nie je možné čítať adresár repozitára '%1%': Prístup zamietnutý"
 
 #. TranslatorExplanation '%s' is a pathname
-#: zypp/RepoManager.cc:325 zypp/RepoManager.cc:797 zypp/RepoManager.cc:1593
+#: zypp/RepoManager.cc:328 zypp/RepoManager.cc:800 zypp/RepoManager.cc:1603
 #: zypp/repo/PluginServices.cc:49
 #, c-format, boost-format
 msgid "Failed to read directory '%s'"
 msgstr "Zlyhalo čítanie adresára '%s'"
 
-#: zypp/RepoManager.cc:335
+#: zypp/RepoManager.cc:338
 #, boost-format
 msgid "Cannot read repo file '%1%': Permission denied"
 msgstr "Nie je možné čítať súbor repozitára '%1%': Prístup zamietnutý"
 
-#: zypp/RepoManager.cc:358
+#: zypp/RepoManager.cc:361
 msgid "Repository alias cannot start with dot."
 msgstr "Alias repozitára nemôže začínať bodkou."
 
-#: zypp/RepoManager.cc:369
+#: zypp/RepoManager.cc:372
 msgid "Service alias cannot start with dot."
 msgstr "Alias služby nemôže začínať bodkou."
 
 #. TranslatorExplanation '%s' is a filename
-#: zypp/RepoManager.cc:752 zypp/RepoManager.cc:1711 zypp/RepoManager.cc:1777
-#: zypp/RepoManager.cc:1855 zypp/RepoManager.cc:1920 zypp/RepoManager.cc:2051
+#: zypp/RepoManager.cc:755 zypp/RepoManager.cc:1721 zypp/RepoManager.cc:1787
+#: zypp/RepoManager.cc:1865 zypp/RepoManager.cc:1930 zypp/RepoManager.cc:2061
 #, c-format, boost-format
 msgid "Can't open file '%s' for writing."
 msgstr "Nemôžem otvoriť súbor '%s' pre zápis."
@@ -3758,45 +3758,45 @@ msgstr "Nemôžem otvoriť súbor '%s' pre zápis."
 #. translators: Cleanup a repository previously owned by a meanwhile unknown (deleted) service.
 #. %1% = service name
 #. %2% = repository name
-#: zypp/RepoManager.cc:888
+#: zypp/RepoManager.cc:895
 #, boost-format
 msgid "Unknown service '%1%': Removing orphaned service repository '%2%'"
 msgstr "Neznámá služba '%1%': Odstraňovanie osirelého repozitára služby '%2%'"
 
 #. we will throw this later if no URL checks out fine
-#: zypp/RepoManager.cc:1142
+#: zypp/RepoManager.cc:1152
 msgid "Valid metadata not found at specified URL"
 msgid_plural "Valid metadata not found at specified URLs"
 msgstr[0] "Na stanovenej adrese URL sa nenašli platné metadáta"
 msgstr[1] "Na stanovených adresách URL sa nenašli platné metadáta"
 msgstr[2] "Na stanovených adresách URL sa nenašli platné metadáta"
 
-#: zypp/RepoManager.cc:1194 zypp/RepoManager.cc:1313 zypp/RepoManager.cc:1369
+#: zypp/RepoManager.cc:1204 zypp/RepoManager.cc:1323 zypp/RepoManager.cc:1379
 #, c-format, boost-format
 msgid "Can't create %s"
 msgstr "Nie je možné vytvoriť %s"
 
-#: zypp/RepoManager.cc:1202
+#: zypp/RepoManager.cc:1212
 msgid "Can't create metadata cache directory."
 msgstr "Nie je možné vytvoriť adresár vyrovnávacej pamäte metadát."
 
-#: zypp/RepoManager.cc:1355
+#: zypp/RepoManager.cc:1365
 #, c-format, boost-format
 msgid "Building repository '%s' cache"
 msgstr "Vytváram vyrovnávaciu pamäť repozitára '%s'"
 
-#: zypp/RepoManager.cc:1375
+#: zypp/RepoManager.cc:1385
 #, c-format, boost-format
 msgid "Can't create cache at %s - no writing permissions."
 msgstr ""
 "Nie je možné vytvoriť vyrovnávaciu pamäť v %s - žiadne práva na zapisovanie."
 
-#: zypp/RepoManager.cc:1436
+#: zypp/RepoManager.cc:1446
 #, c-format, boost-format
 msgid "Failed to cache repo (%d)."
 msgstr "Zlyhalo ukladanie do vyrovnávacej pamäti pre repozitár (%d)."
 
-#: zypp/RepoManager.cc:1447
+#: zypp/RepoManager.cc:1457
 msgid "Unhandled repository type"
 msgstr "Nepodporovaný typ repozitára"
 
@@ -3806,44 +3806,44 @@ msgstr "Nepodporovaný typ repozitára"
 #. on ftp file-not-found(bnc #335906). Instead we'll check another types
 #. before throwing.
 #. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1484 zypp/RepoManager.cc:2546
+#: zypp/RepoManager.cc:1494 zypp/RepoManager.cc:2556
 #, c-format, boost-format
 msgid "Error trying to read from '%s'"
 msgstr "Chyba pri čítaní z '%s'"
 
 #. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1537 zypp/RepoManager.cc:2554
+#: zypp/RepoManager.cc:1547 zypp/RepoManager.cc:2564
 #, c-format, boost-format
 msgid "Unknown error reading from '%s'"
 msgstr "Neznáma chyba čítania z '%s'"
 
-#: zypp/RepoManager.cc:1675
+#: zypp/RepoManager.cc:1685
 #, c-format, boost-format
 msgid "Adding repository '%s'"
 msgstr "Pridávam repozitár '%s'"
 
 #. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1763
+#: zypp/RepoManager.cc:1773
 #, c-format, boost-format
 msgid "Invalid repo file name at '%s'"
 msgstr "Neplatný názov súboru repozitára v '%s'"
 
-#: zypp/RepoManager.cc:1804
+#: zypp/RepoManager.cc:1814
 #, c-format, boost-format
 msgid "Removing repository '%s'"
 msgstr "Odstraňujem repozitár '%s'"
 
-#: zypp/RepoManager.cc:1823 zypp/RepoManager.cc:1901
+#: zypp/RepoManager.cc:1833 zypp/RepoManager.cc:1911
 msgid "Can't figure out where the repo is stored."
 msgstr "Nie je možné prísť na to, kde je uložený repozitár."
 
 #. TranslatorExplanation '%s' is a filename
-#: zypp/RepoManager.cc:1837 zypp/RepoManager.cc:2039
+#: zypp/RepoManager.cc:1847 zypp/RepoManager.cc:2049
 #, c-format, boost-format
 msgid "Can't delete '%s'"
 msgstr "Nie je možné vymazať '%s'"
 
-#: zypp/RepoManager.cc:2027 zypp/RepoManager.cc:2477
+#: zypp/RepoManager.cc:2037 zypp/RepoManager.cc:2487
 msgid "Can't figure out where the service is stored."
 msgstr "Nie je možné prísť na to, kde je uložená služba."
 
@@ -3953,23 +3953,23 @@ msgid "Invalid regular expression '%s'"
 msgstr "Neplatný regulárny výraz '%s'"
 
 #. !\todo add comma to the message for the next release
-#: zypp/media/MediaCIFS.cc:427 zypp/media/MediaCurl.cc:1503
-#: zypp/media/MediaNetwork.cc:305
+#: zypp/media/MediaCIFS.cc:427 zypp/media/MediaCurl.cc:1436
+#: zypp/media/MediaNetwork.cc:311
 #, c-format, boost-format
 msgid "Authentication required for '%s'"
 msgstr "'%s' vyžaduje autentifikáciu"
 
 #. just report (NO_ERROR); no interactive request to the user
-#: zypp/media/MediaCurl.cc:785
+#: zypp/media/MediaCurl.cc:770 zypp/media/MediaNetwork.cc:435
 msgid "Will try again..."
 msgstr "Skúste to znova..."
 
-#: zypp/media/MediaCurl.cc:789
+#: zypp/media/MediaCurl.cc:773
 #, boost-format
 msgid "Giving up after %1% attempts."
 msgstr "Vzdanie sa po %1 % pokusoch."
 
-#: zypp/media/MediaCurl.cc:905 zypp-curl/ng/network/networkrequesterror.cc:127
+#: zypp/media/MediaCurl.cc:888 zypp-curl/ng/network/networkrequesterror.cc:127
 msgid ""
 "Visit the SUSE Customer Center to check whether your registration is valid "
 "and has not expired."
@@ -3977,7 +3977,7 @@ msgstr ""
 "Navštívte SUSE Customer Center, aby ste skontrolovali, či je vaša "
 "registrácia platná a ešte nevypršala."
 
-#: zypp/media/MediaCurl.cc:907 zypp-curl/ng/network/networkrequesterror.cc:129
+#: zypp/media/MediaCurl.cc:890 zypp-curl/ng/network/networkrequesterror.cc:129
 msgid ""
 "Visit the Novell Customer Center to check whether your registration is valid "
 "and has not expired."
@@ -4214,7 +4214,7 @@ msgstr "porušiť %s ignorovaním niektorých závislostí"
 msgid "generally ignore of some dependencies"
 msgstr "všeobecne ignorovať niektoré závislosti"
 
-#: zypp/solver/detail/SATResolver.cc:1143
+#: zypp/solver/detail/SATResolver.cc:1144
 #, boost-format
 msgid ""
 "the installed %1% does not belong to a distupgrade repository and must be "
@@ -4224,88 +4224,88 @@ msgstr ""
 "byť nahradený"
 
 #. just in case
-#: zypp/solver/detail/SATResolver.cc:1145
+#: zypp/solver/detail/SATResolver.cc:1146
 #, boost-format
 msgid "the to be installed %1% does not belong to a distupgrade repository"
 msgstr ""
 "%1%, ktorý sa má inštalovať, nepatrí do repozitára zvýšenia verzie "
 "distribúcie"
 
-#: zypp/solver/detail/SATResolver.cc:1149
+#: zypp/solver/detail/SATResolver.cc:1150
 #, boost-format
 msgid "the installed %1% has inferior architecture"
 msgstr "nainštalovaný %1% má nižšiu architektúru"
 
-#: zypp/solver/detail/SATResolver.cc:1151
+#: zypp/solver/detail/SATResolver.cc:1152
 #, boost-format
 msgid "the to be installed %1% has inferior architecture"
 msgstr "%1%, ktorý sa má inštalovať, má nižšiu architektúru"
 
-#: zypp/solver/detail/SATResolver.cc:1154
+#: zypp/solver/detail/SATResolver.cc:1155
 #, boost-format
 msgid "problem with the installed %1%"
 msgstr "problém s nainštalovaným %1%"
 
-#: zypp/solver/detail/SATResolver.cc:1157
+#: zypp/solver/detail/SATResolver.cc:1158
 msgid "conflicting requests"
 msgstr "protichodné požiadavky"
 
-#: zypp/solver/detail/SATResolver.cc:1160
+#: zypp/solver/detail/SATResolver.cc:1161
 msgid "some dependency problem"
 msgstr "problém so závislosťami"
 
-#: zypp/solver/detail/SATResolver.cc:1163
+#: zypp/solver/detail/SATResolver.cc:1164
 #, boost-format
 msgid "nothing provides the requested '%1%'"
 msgstr "nič neposkytuje požadovaný '%1%'"
 
-#: zypp/solver/detail/SATResolver.cc:1164
-#: zypp/solver/detail/SATResolver.cc:1168
+#: zypp/solver/detail/SATResolver.cc:1165
+#: zypp/solver/detail/SATResolver.cc:1169
 msgid "Have you enabled all the required repositories?"
 msgstr "Máte povolené všetky požadované repozitáre?"
 
-#: zypp/solver/detail/SATResolver.cc:1167
+#: zypp/solver/detail/SATResolver.cc:1168
 #, boost-format
 msgid "the requested package %1% does not exist"
 msgstr "požadovaný balík %1% neexistuje"
 
-#: zypp/solver/detail/SATResolver.cc:1171
+#: zypp/solver/detail/SATResolver.cc:1172
 msgid "unsupported request"
 msgstr "nepodporovaná požiadavka"
 
-#: zypp/solver/detail/SATResolver.cc:1174
+#: zypp/solver/detail/SATResolver.cc:1175
 #, boost-format
 msgid "'%1%' is provided by the system and cannot be erased"
 msgstr "'%1%' poskytuje systém a nemôže sa vymazať"
 
-#: zypp/solver/detail/SATResolver.cc:1177
+#: zypp/solver/detail/SATResolver.cc:1178
 #, boost-format
 msgid "%1% is not installable"
 msgstr "%1% nie je inštalovateľný"
 
-#: zypp/solver/detail/SATResolver.cc:1182
+#: zypp/solver/detail/SATResolver.cc:1183
 #, boost-format
 msgid "nothing provides '%1%' needed by the installed %2%"
 msgstr "nič neposkytuje '%1%', ktorý je potrebný pre nainštalovaný %2%"
 
-#: zypp/solver/detail/SATResolver.cc:1184
+#: zypp/solver/detail/SATResolver.cc:1185
 #, boost-format
 msgid "nothing provides '%1%' needed by the to be installed %2%"
 msgstr ""
 "nič neposkytuje '%1%', ktorý je potrebný pre %2%, ktorý sa má inštalovať"
 
-#: zypp/solver/detail/SATResolver.cc:1187
+#: zypp/solver/detail/SATResolver.cc:1188
 #, boost-format
 msgid "cannot install both %1% and %2%"
 msgstr "nie je možné nainštalovať obidva %1% aj %2%"
 
-#: zypp/solver/detail/SATResolver.cc:1192
+#: zypp/solver/detail/SATResolver.cc:1193
 #, boost-format
 msgid "the installed %1% conflicts with '%2%' provided by the installed %3%"
 msgstr ""
 "nainštalovaný %1% je v konflikte s '%2%', ktorý poskytuje nainštalovaný %3%"
 
-#: zypp/solver/detail/SATResolver.cc:1194
+#: zypp/solver/detail/SATResolver.cc:1195
 #, boost-format
 msgid ""
 "the installed %1% conflicts with '%2%' provided by the to be installed %3%"
@@ -4313,7 +4313,7 @@ msgstr ""
 "nainštalovaný %1% je v konflikte s '%2%', ktorý poskytuje %3%, ktorý sa má "
 "inštalovať"
 
-#: zypp/solver/detail/SATResolver.cc:1198
+#: zypp/solver/detail/SATResolver.cc:1199
 #, boost-format
 msgid ""
 "the to be installed %1% conflicts with '%2%' provided by the installed %3%"
@@ -4321,7 +4321,7 @@ msgstr ""
 "%1%, ktorý sa má inštalovať, je v konflikte s '%2%', ktorý poskytuje "
 "nainštalovaný %3%"
 
-#: zypp/solver/detail/SATResolver.cc:1200
+#: zypp/solver/detail/SATResolver.cc:1201
 #, boost-format
 msgid ""
 "the to be installed %1% conflicts with '%2%' provided by the to be installed "
@@ -4330,26 +4330,26 @@ msgstr ""
 "%1%, ktorý sa má inštalovať, je v konflikte s '%2%', ktorý poskytuje %3%, "
 "ktorý sa má inštalovať"
 
-#: zypp/solver/detail/SATResolver.cc:1207
+#: zypp/solver/detail/SATResolver.cc:1208
 #, boost-format
 msgid "the installed %1% obsoletes '%2%' provided by the installed %3%"
 msgstr "nainštalovaný %1% zastaráva '%2%', ktorý poskytuje nainštalovaný %3%"
 
-#: zypp/solver/detail/SATResolver.cc:1209
+#: zypp/solver/detail/SATResolver.cc:1210
 #, boost-format
 msgid "the installed %1% obsoletes '%2%' provided by the to be installed %3%"
 msgstr ""
 "nainštalovaný %1% zastaráva '%2%', ktorý poskytuje %3%, ktorý sa má "
 "inštalovať"
 
-#: zypp/solver/detail/SATResolver.cc:1213
+#: zypp/solver/detail/SATResolver.cc:1214
 #, boost-format
 msgid "the to be installed %1% obsoletes '%2%' provided by the installed %3%"
 msgstr ""
 "%1%, ktorý sa má inštalovať, zastaráva '%2%', ktorý poskytuje nainštalovaný "
 "%3%"
 
-#: zypp/solver/detail/SATResolver.cc:1215
+#: zypp/solver/detail/SATResolver.cc:1216
 #, boost-format
 msgid ""
 "the to be installed %1% obsoletes '%2%' provided by the to be installed %3%"
@@ -4357,25 +4357,25 @@ msgstr ""
 "%1%, ktorý sa má inštalovať, zastaráva '%2%', ktorý poskytuje %3%, ktorý sa "
 "má inštalovať"
 
-#: zypp/solver/detail/SATResolver.cc:1220
+#: zypp/solver/detail/SATResolver.cc:1221
 #, boost-format
 msgid "the installed %1% conflicts with '%2%' provided by itself"
 msgstr "nainštalovaný %1% je v konflikte s '%2%', ktorý poskytuje sám"
 
-#: zypp/solver/detail/SATResolver.cc:1222
+#: zypp/solver/detail/SATResolver.cc:1223
 #, boost-format
 msgid "the to be installed %1% conflicts with '%2%' provided by itself"
 msgstr ""
 "%1%, ktorý sa má inštalovať, je v konflikte s '%2%', ktorý poskytuje sám"
 
-#: zypp/solver/detail/SATResolver.cc:1254
+#: zypp/solver/detail/SATResolver.cc:1255
 #, boost-format
 msgid ""
 "the installed %1% requires '%2%', but this requirement cannot be provided"
 msgstr ""
 "nainštalovaný %1% vyžaduje '%2%', ale túto požiadavku nie je možné splniť"
 
-#: zypp/solver/detail/SATResolver.cc:1256
+#: zypp/solver/detail/SATResolver.cc:1257
 #, boost-format
 msgid ""
 "the to be installed %1% requires '%2%', but this requirement cannot be "
@@ -4384,11 +4384,11 @@ msgstr ""
 "%1%, ktorý sa má inštalovať, vyžaduje '%2%', ale túto požiadavku nie je "
 "možné splniť"
 
-#: zypp/solver/detail/SATResolver.cc:1258
+#: zypp/solver/detail/SATResolver.cc:1259
 msgid "deleted providers: "
 msgstr "zmazaný poskytovatelia: "
 
-#: zypp/solver/detail/SATResolver.cc:1268
+#: zypp/solver/detail/SATResolver.cc:1269
 msgid ""
 "\n"
 "not installable providers: "
@@ -4396,17 +4396,17 @@ msgstr ""
 "\n"
 "neinštalovateľní poskytovatelia: "
 
-#: zypp/solver/detail/SATResolver.cc:1270
+#: zypp/solver/detail/SATResolver.cc:1271
 msgid "not installable providers: "
 msgstr "neinštalovateľní poskytovatelia: "
 
 #. translator: %1% is the name of a PTF, %2% the name of a patch.
-#: zypp/solver/detail/SATResolver.cc:1307
+#: zypp/solver/detail/SATResolver.cc:1308
 #, boost-format
 msgid "%1% is not yet fully integrated into %2%."
 msgstr "%1% ešte nie je úplne integrované do %2%."
 
-#: zypp/solver/detail/SATResolver.cc:1308
+#: zypp/solver/detail/SATResolver.cc:1309
 msgid ""
 "Typically you want to keep the PTF and choose to not install the maintenance "
 "patches."
@@ -4585,37 +4585,37 @@ msgstr "Vykonávanie %p osttrans skriptov"
 msgid "Installation has been aborted as directed."
 msgstr "Inštalácia bola podľa príkazu zrušená."
 
-#: zypp/target/TargetImpl.cc:419
+#: zypp/target/TargetImpl.cc:451
 msgid " executed"
 msgstr " spustený"
 
-#: zypp/target/TargetImpl.cc:441
+#: zypp/target/TargetImpl.cc:473
 msgid " execution failed"
 msgstr " spustenie zlyhalo"
 
 #. translators: We may find the same script content in files with different names.
 #. Only the first occurence is executed, subsequent ones are skipped. It's a one-line
 #. message for a log file. Preferably start translation with "%s"
-#: zypp/target/TargetImpl.cc:558
+#: zypp/target/TargetImpl.cc:590
 #, c-format, boost-format
 msgid "%s already executed as %s)"
 msgstr "%s už spustený ako %s)"
 
-#: zypp/target/TargetImpl.cc:568
+#: zypp/target/TargetImpl.cc:600
 msgid " execution skipped while aborting"
 msgstr " spustenie odložené kvôli prerušeniu programu"
 
-#: zypp/target/TargetImpl.cc:623 zypp/target/TargetImpl.cc:643
-#: zypp/target/TargetImpl.cc:671 zypp/target/TargetImpl.cc:708
-#: zypp/target/TargetImpl.cc:716
+#: zypp/target/TargetImpl.cc:655 zypp/target/TargetImpl.cc:675
+#: zypp/target/TargetImpl.cc:703 zypp/target/TargetImpl.cc:740
+#: zypp/target/TargetImpl.cc:748
 msgid "Error sending update message notification."
 msgstr "Chyba zasielania oznámenia o aktualizačnej správe."
 
-#: zypp/target/TargetImpl.cc:767
+#: zypp/target/TargetImpl.cc:799
 msgid "New update message"
 msgstr "Nová správa aktualizácie"
 
-#: zypp/target/TargetImpl.cc:2684
+#: zypp/target/TargetImpl.cc:2718
 msgid "Executing the transaction failed because of the following problems:"
 msgstr "Vykonanie transakcie zlyhalo z dôvodu nasledujúcich problémov:"
 
@@ -5104,6 +5104,91 @@ msgid ""
 msgstr ""
 "Chyba sťahovania (curl) pre '%s':\n"
 "Odpoveď HTTP sa nepodarilo načítať\n"
+
+#: zypp-tui/Table.h:38
+msgid "Yes"
+msgstr "Áno"
+
+#: zypp-tui/Table.h:38
+msgid "No"
+msgstr "Nie"
+
+#. translator: Shown as result tag in a progress bar: ............[done]
+#. Translator: download progress bar result: ".............[done]"
+#: zypp-tui/output/Out.cc:130 zypp-tui/output/OutNormal.cc:342
+#: zypp-tui/output/OutNormal.cc:345
+msgid "done"
+msgstr "hotovo"
+
+#. translator: Shown as result tag in a progress bar: .......[attention]
+#: zypp-tui/output/Out.cc:132
+msgid "attention"
+msgstr "pozor"
+
+#. translator: Shown as result tag in a progress bar: ...........[error]
+#. Translator: download progress bar result: "............[error]"
+#: zypp-tui/output/Out.cc:134 zypp-tui/output/OutNormal.cc:339
+#: zypp-tui/output/OutNormal.cc:345
+msgid "error"
+msgstr "chyba"
+
+#. translator: usually followed by a ' ' and some explanatory text
+#: zypp-tui/output/Out.h:50
+msgid "Note:"
+msgstr "Poznámka:"
+
+#. translator: usually followed by a ' ' and some explanatory text
+#: zypp-tui/output/Out.h:52
+msgid "Warning:"
+msgstr "Varovanie:"
+
+#. translator: usually followed by a ' ' and some explanatory text
+#: zypp-tui/output/Out.h:54
+msgid "Error:"
+msgstr "Chyba:"
+
+#: zypp-tui/output/Out.h:56
+msgid "Continue?"
+msgstr "Pokračovať?"
+
+#: zypp-tui/output/OutNormal.cc:89
+msgid "Warning: "
+msgstr "Pozor: "
+
+#: zypp-tui/output/OutNormal.cc:253 zypp-tui/output/OutNormal.cc:287
+#: zypp-tui/output/OutNormal.cc:327
+msgid "Retrieving:"
+msgstr "Sťahuje sa:"
+
+#: zypp-tui/output/OutNormal.cc:260
+msgid "starting"
+msgstr "štartovanie"
+
+#. Translator: download progress bar result: "........[not found]"
+#: zypp-tui/output/OutNormal.cc:336 zypp-tui/output/OutNormal.cc:345
+msgid "not found"
+msgstr "nenájdené"
+
+#: zypp-tui/output/OutNormal.cc:422
+msgid "No help available for this prompt."
+msgstr "Pre túto výzvu nie je k dispozícii pomocník."
+
+#: zypp-tui/output/OutNormal.cc:439
+msgid "no help available for this option"
+msgstr "pre túto voľbu nie je k dispozícii pomocník"
+
+#. translators: Press '?' to see all options embedded in this prompt: "Continue? [y/n/? shows all options] (y):"
+#: zypp-tui/output/promptoptions.cc:85
+msgid "shows all options"
+msgstr "ukazuje všetky voľby"
+
+#: zypp-tui/output/promptoptions.cc:194
+msgid "yes"
+msgstr "áno"
+
+#: zypp-tui/output/promptoptions.cc:194
+msgid "no"
+msgstr "nie"
 
 #~ msgid "Package is not signed!"
 #~ msgstr "Balík nie je podpísaný!"

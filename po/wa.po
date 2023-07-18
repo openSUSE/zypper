@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lcn memory\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-22 14:35+0100\n"
+"POT-Creation-Date: 2023-07-18 09:54+0200\n"
 "PO-Revision-Date: 2012-08-24 14:42+0200\n"
 "Last-Translator: Jean Cayron <jean.cayron@base.be>\n"
 "Language-Team: Walloon <linux-wa@walon.org>\n"
@@ -3748,34 +3748,34 @@ msgstr ""
 msgid "Repository %1% does not define additional 'gpgkey=' URLs."
 msgstr ""
 
-#: zypp/RepoManager.cc:317
+#: zypp/RepoManager.cc:320
 #, boost-format
 msgid "Cannot read repo directory '%1%': Permission denied"
 msgstr ""
 
 #. TranslatorExplanation '%s' is a pathname
-#: zypp/RepoManager.cc:325 zypp/RepoManager.cc:797 zypp/RepoManager.cc:1593
+#: zypp/RepoManager.cc:328 zypp/RepoManager.cc:800 zypp/RepoManager.cc:1603
 #: zypp/repo/PluginServices.cc:49
 #, c-format, boost-format
 msgid "Failed to read directory '%s'"
 msgstr "Li léjhaedje do ridant « %s » a fwait berwete."
 
-#: zypp/RepoManager.cc:335
+#: zypp/RepoManager.cc:338
 #, boost-format
 msgid "Cannot read repo file '%1%': Permission denied"
 msgstr ""
 
-#: zypp/RepoManager.cc:358
+#: zypp/RepoManager.cc:361
 msgid "Repository alias cannot start with dot."
 msgstr ""
 
-#: zypp/RepoManager.cc:369
+#: zypp/RepoManager.cc:372
 msgid "Service alias cannot start with dot."
 msgstr "On no metou di siervice ni s' pout cominçî avou on pont."
 
 #. TranslatorExplanation '%s' is a filename
-#: zypp/RepoManager.cc:752 zypp/RepoManager.cc:1711 zypp/RepoManager.cc:1777
-#: zypp/RepoManager.cc:1855 zypp/RepoManager.cc:1920 zypp/RepoManager.cc:2051
+#: zypp/RepoManager.cc:755 zypp/RepoManager.cc:1721 zypp/RepoManager.cc:1787
+#: zypp/RepoManager.cc:1865 zypp/RepoManager.cc:1930 zypp/RepoManager.cc:2061
 #, c-format, boost-format
 msgid "Can't open file '%s' for writing."
 msgstr "Dji n' sai nén drovi l' fitchî « %s » pol sicrire."
@@ -3783,44 +3783,44 @@ msgstr "Dji n' sai nén drovi l' fitchî « %s » pol sicrire."
 #. translators: Cleanup a repository previously owned by a meanwhile unknown (deleted) service.
 #. %1% = service name
 #. %2% = repository name
-#: zypp/RepoManager.cc:888
+#: zypp/RepoManager.cc:895
 #, boost-format
 msgid "Unknown service '%1%': Removing orphaned service repository '%2%'"
 msgstr ""
 
 #. we will throw this later if no URL checks out fine
-#: zypp/RepoManager.cc:1142
+#: zypp/RepoManager.cc:1152
 #, fuzzy
 msgid "Valid metadata not found at specified URL"
 msgid_plural "Valid metadata not found at specified URLs"
 msgstr[0] "Dji n' a trové nole meta-dnêye valåbe al/ås URL sipeciftî(s)"
 msgstr[1] "Dji n' a trové nole meta-dnêye valåbe al/ås URL sipeciftî(s)"
 
-#: zypp/RepoManager.cc:1194 zypp/RepoManager.cc:1313 zypp/RepoManager.cc:1369
+#: zypp/RepoManager.cc:1204 zypp/RepoManager.cc:1323 zypp/RepoManager.cc:1379
 #, c-format, boost-format
 msgid "Can't create %s"
 msgstr "Dji n' sai ahiver %s"
 
-#: zypp/RepoManager.cc:1202
+#: zypp/RepoManager.cc:1212
 msgid "Can't create metadata cache directory."
 msgstr "Dji n' sai ahiver l' ridant muchete des meta-dnêyes."
 
-#: zypp/RepoManager.cc:1355
+#: zypp/RepoManager.cc:1365
 #, c-format, boost-format
 msgid "Building repository '%s' cache"
 msgstr "Dji basti l' muchete do depot « %s »"
 
-#: zypp/RepoManager.cc:1375
+#: zypp/RepoManager.cc:1385
 #, c-format, boost-format
 msgid "Can't create cache at %s - no writing permissions."
 msgstr "Dji n' sai ahiver l' muchete a %s - pont d' droet di scrijhaedje."
 
-#: zypp/RepoManager.cc:1436
+#: zypp/RepoManager.cc:1446
 #, c-format, boost-format
 msgid "Failed to cache repo (%d)."
 msgstr "Li metaedje e muchete do depot (%d) a fwait berwete."
 
-#: zypp/RepoManager.cc:1447
+#: zypp/RepoManager.cc:1457
 msgid "Unhandled repository type"
 msgstr "Dji n' sai nén apougnî cisse sôre di depot la"
 
@@ -3830,44 +3830,44 @@ msgstr "Dji n' sai nén apougnî cisse sôre di depot la"
 #. on ftp file-not-found(bnc #335906). Instead we'll check another types
 #. before throwing.
 #. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1484 zypp/RepoManager.cc:2546
+#: zypp/RepoManager.cc:1494 zypp/RepoManager.cc:2556
 #, c-format, boost-format
 msgid "Error trying to read from '%s'"
 msgstr "Åk n' a nén stî come dji sayive di lére a pårti di « %s »"
 
 #. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1537 zypp/RepoManager.cc:2554
+#: zypp/RepoManager.cc:1547 zypp/RepoManager.cc:2564
 #, c-format, boost-format
 msgid "Unknown error reading from '%s'"
 msgstr "Åk di nén cnoxhou n' a nén stî come dji léjheu a pårti d' \"%s\""
 
-#: zypp/RepoManager.cc:1675
+#: zypp/RepoManager.cc:1685
 #, c-format, boost-format
 msgid "Adding repository '%s'"
 msgstr "Dji radjoute li depot « %s »"
 
 #. TranslatorExplanation '%s' is an URL
-#: zypp/RepoManager.cc:1763
+#: zypp/RepoManager.cc:1773
 #, c-format, boost-format
 msgid "Invalid repo file name at '%s'"
 msgstr "No do fitchî do depot so « %s » nén valåbe"
 
-#: zypp/RepoManager.cc:1804
+#: zypp/RepoManager.cc:1814
 #, c-format, boost-format
 msgid "Removing repository '%s'"
 msgstr ""
 
-#: zypp/RepoManager.cc:1823 zypp/RepoManager.cc:1901
+#: zypp/RepoManager.cc:1833 zypp/RepoManager.cc:1911
 msgid "Can't figure out where the repo is stored."
 msgstr "Dji n' sai nén trover ewou ç' kel depot est wårdé."
 
 #. TranslatorExplanation '%s' is a filename
-#: zypp/RepoManager.cc:1837 zypp/RepoManager.cc:2039
+#: zypp/RepoManager.cc:1847 zypp/RepoManager.cc:2049
 #, c-format, boost-format
 msgid "Can't delete '%s'"
 msgstr "Dji n' sai disfacer « %s »"
 
-#: zypp/RepoManager.cc:2027 zypp/RepoManager.cc:2477
+#: zypp/RepoManager.cc:2037 zypp/RepoManager.cc:2487
 msgid "Can't figure out where the service is stored."
 msgstr "Dji n' sai nén trover ewou ç' kel siervice est wårdé."
 
@@ -3969,29 +3969,29 @@ msgid "Invalid regular expression '%s'"
 msgstr "Erîlêye ratourneure « %s » nén valåbe"
 
 #. !\todo add comma to the message for the next release
-#: zypp/media/MediaCIFS.cc:427 zypp/media/MediaCurl.cc:1503
-#: zypp/media/MediaNetwork.cc:305
+#: zypp/media/MediaCIFS.cc:427 zypp/media/MediaCurl.cc:1436
+#: zypp/media/MediaNetwork.cc:311
 #, c-format, boost-format
 msgid "Authentication required for '%s'"
 msgstr "I s' fåt otintifyî po « %s »"
 
 #. just report (NO_ERROR); no interactive request to the user
-#: zypp/media/MediaCurl.cc:785
+#: zypp/media/MediaCurl.cc:770 zypp/media/MediaNetwork.cc:435
 msgid "Will try again..."
 msgstr ""
 
-#: zypp/media/MediaCurl.cc:789
+#: zypp/media/MediaCurl.cc:773
 #, boost-format
 msgid "Giving up after %1% attempts."
 msgstr ""
 
-#: zypp/media/MediaCurl.cc:905 zypp-curl/ng/network/networkrequesterror.cc:127
+#: zypp/media/MediaCurl.cc:888 zypp-curl/ng/network/networkrequesterror.cc:127
 msgid ""
 "Visit the SUSE Customer Center to check whether your registration is valid "
 "and has not expired."
 msgstr ""
 
-#: zypp/media/MediaCurl.cc:907 zypp-curl/ng/network/networkrequesterror.cc:129
+#: zypp/media/MediaCurl.cc:890 zypp-curl/ng/network/networkrequesterror.cc:129
 msgid ""
 "Visit the Novell Customer Center to check whether your registration is valid "
 "and has not expired."
@@ -4180,7 +4180,7 @@ msgstr "sketer %s e passant houte sacwantes di ses aloyances"
 msgid "generally ignore of some dependencies"
 msgstr "sketer %s e passant houte sacwantes di ses aloyances"
 
-#: zypp/solver/detail/SATResolver.cc:1143
+#: zypp/solver/detail/SATResolver.cc:1144
 #, boost-format
 msgid ""
 "the installed %1% does not belong to a distupgrade repository and must be "
@@ -4188,152 +4188,152 @@ msgid ""
 msgstr ""
 
 #. just in case
-#: zypp/solver/detail/SATResolver.cc:1145
+#: zypp/solver/detail/SATResolver.cc:1146
 #, boost-format
 msgid "the to be installed %1% does not belong to a distupgrade repository"
 msgstr ""
 
-#: zypp/solver/detail/SATResolver.cc:1149
+#: zypp/solver/detail/SATResolver.cc:1150
 #, boost-format
 msgid "the installed %1% has inferior architecture"
 msgstr ""
 
-#: zypp/solver/detail/SATResolver.cc:1151
+#: zypp/solver/detail/SATResolver.cc:1152
 #, boost-format
 msgid "the to be installed %1% has inferior architecture"
 msgstr ""
 
-#: zypp/solver/detail/SATResolver.cc:1154
+#: zypp/solver/detail/SATResolver.cc:1155
 #, boost-format
 msgid "problem with the installed %1%"
 msgstr ""
 
-#: zypp/solver/detail/SATResolver.cc:1157
+#: zypp/solver/detail/SATResolver.cc:1158
 msgid "conflicting requests"
 msgstr "dimandes d' afrontmints"
 
-#: zypp/solver/detail/SATResolver.cc:1160
+#: zypp/solver/detail/SATResolver.cc:1161
 msgid "some dependency problem"
 msgstr "gn des des problinmes d' aloyances"
 
-#: zypp/solver/detail/SATResolver.cc:1163
+#: zypp/solver/detail/SATResolver.cc:1164
 #, boost-format
 msgid "nothing provides the requested '%1%'"
 msgstr ""
 
-#: zypp/solver/detail/SATResolver.cc:1164
-#: zypp/solver/detail/SATResolver.cc:1168
+#: zypp/solver/detail/SATResolver.cc:1165
+#: zypp/solver/detail/SATResolver.cc:1169
 msgid "Have you enabled all the required repositories?"
 msgstr ""
 
-#: zypp/solver/detail/SATResolver.cc:1167
+#: zypp/solver/detail/SATResolver.cc:1168
 #, boost-format
 msgid "the requested package %1% does not exist"
 msgstr ""
 
-#: zypp/solver/detail/SATResolver.cc:1171
+#: zypp/solver/detail/SATResolver.cc:1172
 #, fuzzy
 msgid "unsupported request"
 msgstr "nén sopoirté"
 
-#: zypp/solver/detail/SATResolver.cc:1174
+#: zypp/solver/detail/SATResolver.cc:1175
 #, boost-format
 msgid "'%1%' is provided by the system and cannot be erased"
 msgstr ""
 
-#: zypp/solver/detail/SATResolver.cc:1177
+#: zypp/solver/detail/SATResolver.cc:1178
 #, boost-format
 msgid "%1% is not installable"
 msgstr ""
 
-#: zypp/solver/detail/SATResolver.cc:1182
+#: zypp/solver/detail/SATResolver.cc:1183
 #, boost-format
 msgid "nothing provides '%1%' needed by the installed %2%"
 msgstr ""
 
-#: zypp/solver/detail/SATResolver.cc:1184
+#: zypp/solver/detail/SATResolver.cc:1185
 #, boost-format
 msgid "nothing provides '%1%' needed by the to be installed %2%"
 msgstr ""
 
-#: zypp/solver/detail/SATResolver.cc:1187
+#: zypp/solver/detail/SATResolver.cc:1188
 #, boost-format
 msgid "cannot install both %1% and %2%"
 msgstr ""
 
-#: zypp/solver/detail/SATResolver.cc:1192
+#: zypp/solver/detail/SATResolver.cc:1193
 #, boost-format
 msgid "the installed %1% conflicts with '%2%' provided by the installed %3%"
 msgstr ""
 
-#: zypp/solver/detail/SATResolver.cc:1194
+#: zypp/solver/detail/SATResolver.cc:1195
 #, boost-format
 msgid ""
 "the installed %1% conflicts with '%2%' provided by the to be installed %3%"
 msgstr ""
 
-#: zypp/solver/detail/SATResolver.cc:1198
+#: zypp/solver/detail/SATResolver.cc:1199
 #, boost-format
 msgid ""
 "the to be installed %1% conflicts with '%2%' provided by the installed %3%"
 msgstr ""
 
-#: zypp/solver/detail/SATResolver.cc:1200
+#: zypp/solver/detail/SATResolver.cc:1201
 #, boost-format
 msgid ""
 "the to be installed %1% conflicts with '%2%' provided by the to be installed "
 "%3%"
 msgstr ""
 
-#: zypp/solver/detail/SATResolver.cc:1207
+#: zypp/solver/detail/SATResolver.cc:1208
 #, boost-format
 msgid "the installed %1% obsoletes '%2%' provided by the installed %3%"
 msgstr ""
 
-#: zypp/solver/detail/SATResolver.cc:1209
+#: zypp/solver/detail/SATResolver.cc:1210
 #, boost-format
 msgid "the installed %1% obsoletes '%2%' provided by the to be installed %3%"
 msgstr ""
 
-#: zypp/solver/detail/SATResolver.cc:1213
+#: zypp/solver/detail/SATResolver.cc:1214
 #, boost-format
 msgid "the to be installed %1% obsoletes '%2%' provided by the installed %3%"
 msgstr ""
 
-#: zypp/solver/detail/SATResolver.cc:1215
+#: zypp/solver/detail/SATResolver.cc:1216
 #, boost-format
 msgid ""
 "the to be installed %1% obsoletes '%2%' provided by the to be installed %3%"
 msgstr ""
 
-#: zypp/solver/detail/SATResolver.cc:1220
+#: zypp/solver/detail/SATResolver.cc:1221
 #, boost-format
 msgid "the installed %1% conflicts with '%2%' provided by itself"
 msgstr ""
 
-#: zypp/solver/detail/SATResolver.cc:1222
+#: zypp/solver/detail/SATResolver.cc:1223
 #, boost-format
 msgid "the to be installed %1% conflicts with '%2%' provided by itself"
 msgstr ""
 
-#: zypp/solver/detail/SATResolver.cc:1254
+#: zypp/solver/detail/SATResolver.cc:1255
 #, boost-format
 msgid ""
 "the installed %1% requires '%2%', but this requirement cannot be provided"
 msgstr ""
 
-#: zypp/solver/detail/SATResolver.cc:1256
+#: zypp/solver/detail/SATResolver.cc:1257
 #, boost-format
 msgid ""
 "the to be installed %1% requires '%2%', but this requirement cannot be "
 "provided"
 msgstr ""
 
-#: zypp/solver/detail/SATResolver.cc:1258
+#: zypp/solver/detail/SATResolver.cc:1259
 msgid "deleted providers: "
 msgstr "ahesseus disfacé : "
 
-#: zypp/solver/detail/SATResolver.cc:1268
+#: zypp/solver/detail/SATResolver.cc:1269
 msgid ""
 "\n"
 "not installable providers: "
@@ -4341,17 +4341,17 @@ msgstr ""
 "\n"
 "ahesseus nén astalåves : "
 
-#: zypp/solver/detail/SATResolver.cc:1270
+#: zypp/solver/detail/SATResolver.cc:1271
 msgid "not installable providers: "
 msgstr "ahesseus nén astalåves : "
 
 #. translator: %1% is the name of a PTF, %2% the name of a patch.
-#: zypp/solver/detail/SATResolver.cc:1307
+#: zypp/solver/detail/SATResolver.cc:1308
 #, boost-format
 msgid "%1% is not yet fully integrated into %2%."
 msgstr ""
 
-#: zypp/solver/detail/SATResolver.cc:1308
+#: zypp/solver/detail/SATResolver.cc:1309
 msgid ""
 "Typically you want to keep the PTF and choose to not install the maintenance "
 "patches."
@@ -4521,37 +4521,37 @@ msgstr ""
 msgid "Installation has been aborted as directed."
 msgstr "L' astalaedje a stî abandné come dimandé."
 
-#: zypp/target/TargetImpl.cc:419
+#: zypp/target/TargetImpl.cc:451
 msgid " executed"
 msgstr " enondé"
 
-#: zypp/target/TargetImpl.cc:441
+#: zypp/target/TargetImpl.cc:473
 msgid " execution failed"
 msgstr " a fwait berwete a l' enondaedje"
 
 #. translators: We may find the same script content in files with different names.
 #. Only the first occurence is executed, subsequent ones are skipped. It's a one-line
 #. message for a log file. Preferably start translation with "%s"
-#: zypp/target/TargetImpl.cc:558
+#: zypp/target/TargetImpl.cc:590
 #, c-format, boost-format
 msgid "%s already executed as %s)"
 msgstr ""
 
-#: zypp/target/TargetImpl.cc:568
+#: zypp/target/TargetImpl.cc:600
 msgid " execution skipped while aborting"
 msgstr " a passé l' enondaedje cwand il abandnéve"
 
-#: zypp/target/TargetImpl.cc:623 zypp/target/TargetImpl.cc:643
-#: zypp/target/TargetImpl.cc:671 zypp/target/TargetImpl.cc:708
-#: zypp/target/TargetImpl.cc:716
+#: zypp/target/TargetImpl.cc:655 zypp/target/TargetImpl.cc:675
+#: zypp/target/TargetImpl.cc:703 zypp/target/TargetImpl.cc:740
+#: zypp/target/TargetImpl.cc:748
 msgid "Error sending update message notification."
 msgstr "Åk n' a nén stî come dji meteu a djoû l' notifiaedje do messaedje."
 
-#: zypp/target/TargetImpl.cc:767
+#: zypp/target/TargetImpl.cc:799
 msgid "New update message"
 msgstr "Novea messaedje di metaedje a djoû"
 
-#: zypp/target/TargetImpl.cc:2684
+#: zypp/target/TargetImpl.cc:2718
 msgid "Executing the transaction failed because of the following problems:"
 msgstr ""
 
@@ -5041,6 +5041,101 @@ msgid ""
 "Download (curl) error for '%s':\n"
 "Unable to retrieve HTTP response\n"
 msgstr ""
+
+#: zypp-tui/Table.h:38
+msgid "Yes"
+msgstr "Oyi"
+
+#: zypp-tui/Table.h:38
+msgid "No"
+msgstr "Nonna"
+
+#
+#. translator: Shown as result tag in a progress bar: ............[done]
+#. Translator: download progress bar result: ".............[done]"
+#: zypp-tui/output/Out.cc:130 zypp-tui/output/OutNormal.cc:342
+#: zypp-tui/output/OutNormal.cc:345
+#, fuzzy
+msgid "done"
+msgstr "Indonezeye"
+
+#. translator: Shown as result tag in a progress bar: .......[attention]
+#: zypp-tui/output/Out.cc:132
+msgid "attention"
+msgstr ""
+
+#. translator: Shown as result tag in a progress bar: ...........[error]
+#. Translator: download progress bar result: "............[error]"
+#: zypp-tui/output/Out.cc:134 zypp-tui/output/OutNormal.cc:339
+#: zypp-tui/output/OutNormal.cc:345
+#, fuzzy
+msgid "error"
+msgstr "Aroke"
+
+#. translator: usually followed by a ' ' and some explanatory text
+#: zypp-tui/output/Out.h:50
+msgid "Note:"
+msgstr ""
+
+#. translator: usually followed by a ' ' and some explanatory text
+#: zypp-tui/output/Out.h:52
+#, fuzzy
+msgid "Warning:"
+msgstr "Adviertixhmint"
+
+#. translator: usually followed by a ' ' and some explanatory text
+#: zypp-tui/output/Out.h:54
+#, fuzzy
+msgid "Error:"
+msgstr "Aroke"
+
+#: zypp-tui/output/Out.h:56
+#, fuzzy
+msgid "Continue?"
+msgstr "&Continouwer"
+
+#: zypp-tui/output/OutNormal.cc:89
+#, fuzzy
+msgid "Warning: "
+msgstr "Adviertixhmint"
+
+#: zypp-tui/output/OutNormal.cc:253 zypp-tui/output/OutNormal.cc:287
+#: zypp-tui/output/OutNormal.cc:327
+#, fuzzy
+msgid "Retrieving:"
+msgstr "Oistaedje"
+
+#: zypp-tui/output/OutNormal.cc:260
+#, fuzzy
+msgid "starting"
+msgstr "Dj' enonde..."
+
+#. Translator: download progress bar result: "........[not found]"
+#: zypp-tui/output/OutNormal.cc:336 zypp-tui/output/OutNormal.cc:345
+#, fuzzy
+msgid "not found"
+msgstr "Rén trové"
+
+#: zypp-tui/output/OutNormal.cc:422
+msgid "No help available for this prompt."
+msgstr ""
+
+#: zypp-tui/output/OutNormal.cc:439
+msgid "no help available for this option"
+msgstr ""
+
+#. translators: Press '?' to see all options embedded in this prompt: "Continue? [y/n/? shows all options] (y):"
+#: zypp-tui/output/promptoptions.cc:85
+msgid "shows all options"
+msgstr ""
+
+#: zypp-tui/output/promptoptions.cc:194
+msgid "yes"
+msgstr "Oyi"
+
+#: zypp-tui/output/promptoptions.cc:194
+msgid "no"
+msgstr "Nonna"
 
 #~ msgid "%s does not belong to a distupgrade repository"
 #~ msgstr ""
