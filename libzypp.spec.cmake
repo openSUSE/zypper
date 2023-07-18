@@ -107,6 +107,7 @@ BuildRequires:  libsolv-tools
 BuildRequires:  glib2-devel
 BuildRequires:  libsigc++2-devel
 BuildRequires:  protobuf-devel
+BuildRequires:  readline-devel >= 5.1
 
 # required for testsuite
 %if %{with mediabackend_tests}
@@ -190,6 +191,7 @@ Summary:        Header files for libzypp, a library for package management
 Group:          Development/Libraries/C and C++
 Provides:       yast2-packagemanager-devel
 Obsoletes:      yast2-packagemanager-devel
+Provides:       libzypp-tui-devel = 1
 %if 0%{?suse_version} >= 1330
 Requires:       libboost_headers-devel
 Requires:       libboost_program_options-devel
@@ -377,11 +379,13 @@ done
 %files devel
 %defattr(-,root,root)
 %{_libdir}/libzypp.so
+%{_libdir}/libzypp-tui.a
 %{_datadir}/cmake/Modules/*
 %{_includedir}/zypp
 %{_includedir}/zypp-core
 %{_includedir}/zypp-media
 %{_includedir}/zypp-curl
+%{_includedir}/zypp-tui
 %{_libdir}/pkgconfig/libzypp.pc
 
 %files devel-doc
