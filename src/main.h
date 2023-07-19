@@ -2,10 +2,11 @@
 #define ZYPPERMAIN_H_
 
 #include <libintl.h>
+#include <zypp-tui/Application>
 
 // ===== exit codes ======
 
-#define ZYPPER_EXIT_OK                     0
+#define ZYPPER_EXIT_OK                     ztui::ZTUI_EXIT_OK // 0 -> no error
 
 // errors
 #define ZYPPER_EXIT_ERR_BUG                1 // undetermined error

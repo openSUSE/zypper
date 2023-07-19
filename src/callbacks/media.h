@@ -17,6 +17,7 @@
 #include <zypp/Url.h>
 
 #include "Zypper.h"
+#include "utils/prompt.h"
 
 // auto-repeat counter limit
 #define REPEAT_LIMIT 3

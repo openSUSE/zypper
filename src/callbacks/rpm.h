@@ -25,6 +25,7 @@
 #include "Zypper.h"
 #include "output/prompt.h"
 #include "global-settings.h"
+#include "utils/prompt.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace

@@ -1,6 +1,7 @@
 #include "list.h"
 #include "Zypper.h"
 #include "repos.h"
+#include "Table.h"
 #include "utils/messages.h"
 #include "utils/flags/flagtypes.h"
 

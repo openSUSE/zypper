@@ -7,6 +7,7 @@
 #include "solveroptionset.h"
 #include "utils/flags/flagtypes.h"
 
+using namespace zypp;
 namespace
 {
   // Map string argument to ResolverFocus

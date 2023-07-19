@@ -12,6 +12,7 @@
 #include "utils/misc.h"
 #include "Table.h"
 #include "Zypper.h"
+#include "utils/console.h"
 
 CommitSummary::CommitSummary( const zypp::ZYppCommitResult &result, const ViewOptions options ) :
   _viewop(options),
@@ -239,7 +240,7 @@ bool CommitSummary::writeResolvableList( std::ostream & out,
   }
 
   Table t;
-  t.lineStyle(none);
+  t.lineStyle(TableLineStyle::none);
   t.margin(2);
   t.wrap(0);
 

@@ -111,7 +111,6 @@ SET( zypper_SRCS
   misc.cc
   search.cc
   info.cc
-  Table.cc
   update.cc
   solve-commit.cc
   PackageArgs.cc
@@ -192,8 +191,6 @@ SET( zypper_out_HEADERS
 )
 
 SET( zypper_out_SRCS
-  output/Out.cc
-  output/OutNormal.cc
   output/OutXML.cc
   ${zypper_out_HEADERS}
 )
@@ -220,15 +217,11 @@ SET( zypper_utils_HEADERS
 
 SET( zypper_utils_SRCS
   utils/Augeas.cc
-  utils/colors.cc
-  utils/console.cc
   utils/getopt.cc
   utils/messages.cc
   utils/misc.cc
   utils/pager.cc
   utils/prompt.cc
-  utils/richtext.cc
-  utils/text.cc
   utils/flags/zyppflags.cc
   utils/flags/flagtypes.cc
   utils/flags/exceptions.cc
@@ -239,7 +232,7 @@ ADD_LIBRARY( zypper_lib STATIC ${zypper_SRCS} ${zypper_out_SRCS} ${zypper_utils_
 TARGET_LINK_LIBRARIES( zypper_lib ${ZYPP_LIBRARY} ${READLINE_LIBRARY} -laugeas ${AUGEAS_LIBRARY} -lxml2 )
 
 ADD_EXECUTABLE( zypper main.cc )
-TARGET_LINK_LIBRARIES( zypper zypper_lib ${ZYPP_LIBRARY} ${READLINE_LIBRARY} -laugeas ${AUGEAS_LIBRARY} -lrt )
+TARGET_LINK_LIBRARIES( zypper zypper_lib ${ZYPP_LIBRARY} ${ZYPP_TUI_LIBRARY} ${READLINE_LIBRARY} -laugeas ${AUGEAS_LIBRARY} -lrt )
 
 INSTALL(
   TARGETS zypper

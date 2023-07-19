@@ -26,6 +26,7 @@
 #include "Zypper.h"
 
 #include "Summary.h"
+#include "utils/console.h"
 
 // Suppress all application related summary messages.
 // Summary messages produce lots of false reports about deleted applications. This
@@ -499,7 +500,7 @@ bool Summary::writeResolvableList( std::ostream & out,
   }
 
   Table t;
-  t.lineStyle(none);
+  t.lineStyle(TableLineStyle::none);
   t.margin(2);
   t.wrap(0);
 

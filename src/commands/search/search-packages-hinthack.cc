@@ -14,6 +14,7 @@
 
 #include "Zypper.h"
 #include "commands/subcommand.h"
+#include "utils/prompt.h"
 
 using namespace zypp;
 

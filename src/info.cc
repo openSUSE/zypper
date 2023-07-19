@@ -20,6 +20,7 @@
 #include "Table.h"
 #include "utils/misc.h"
 #include "utils/text.h"
+#include "utils/richtext.h"
 #include "search.h"
 #include "update.h"
 #include "global-settings.h"

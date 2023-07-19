@@ -558,7 +558,7 @@ static void notify_processes_using_deleted_files( Zypper & zypper )
         if ( e.historySize() )
     zypper.out().error( e, _("Check failed:") );
         else
-    zypper.out().info( str::Str() << ( ColorContext::MSG_WARNING << _("Skip check:") ) << " " << e.asUserString() );
+            zypper.out().info( str::Str() << ( ColorContext::MSG_WARNING << _("Skip check:") ) << " " << e.asUserString() );
       }
     }
 

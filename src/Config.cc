@@ -46,12 +46,12 @@ namespace zypp
 
       unsigned s;
       str::strtonum( *in, s );
-      if ( s < TLS_End )
+      if ( s < TableLineStyle::TLS_End )
         return (TableLineStyle)s;
       else
         throw InvalidValueException ( opt.name, *in,
                                       ( str::Format(_("Invalid table style %d.")) % s ).asString() +
-                                      ( str::Format(_(" Use an integer number from %d to %d")) % 0 % ( (int)TLS_End - 1 ) ).asString()) ;
+                                      ( str::Format(_(" Use an integer number from %d to %d")) % 0 % ( (int)TableLineStyle::TLS_End - 1 ) ).asString()) ;
     }
   }
 }
@@ -59,84 +59,6 @@ namespace zypp
 //////////////////////////////////////////////////////////////////
 namespace
 {
-  namespace env
-  {
-    inline bool NO_COLOR()
-    { return ::getenv("NO_COLOR"); }
-  } // namespace env
-
-  /** Simple check whether stdout is a (not dumb) tty */
-  inline bool mayUseANSIEscapes()
-  {
-    if ( ::isatty(STDOUT_FILENO) )
-    {
-      char *term = ::getenv("TERM");
-      if ( term && ::strcmp( term, "dumb" ) )
-        return true;
-    }
-    return false;
-  }
-
-  /** Simple check whether stdout can handle colors */
-  inline bool hasANSIColor()
-  { return mayUseANSIEscapes() && not env::NO_COLOR(); }
-
-  /** Color names (case insensitive) accepted in the config file. */
-  ansi::Color namedColor( std::string name_r )
-  {
-    static const std::map<std::string, ansi::Color> _def =  {
-      { "black",	ansi::Color::Black		},
-      { "darkgrey",	ansi::Color::BrightBlack	},
-      { "red",		ansi::Color::Red		},
-      { "green",	ansi::Color::Green		},
-      { "brown",	ansi::Color::Yellow		},
-      { "yellow",	ansi::Color::BrightYellow	},
-      { "blue",		ansi::Color::Blue		},
-      { "magenta",	ansi::Color::Magenta		},
-      { "purple",	ansi::Color::Magenta		},
-      { "cyan",		ansi::Color::Cyan		},
-      { "grey",		ansi::Color::White		},
-      { "white",	ansi::Color::BrightWhite	},
-      { "default",	ansi::Color::Default		},
-      { "",		ansi::Color::Default		},  // matches "bold" "light" "bright" NOT ""
-    };
-
-    ansi::Color ret = ansi::Color::nocolor();
-
-    if ( name_r.empty() )	// "" when undefined in config file
-      return ret;
-
-    name_r = str::toLower( name_r );
-
-    if ( str::hasPrefix( name_r, "bold" ) )
-    {
-      name_r.erase( 0, 4 );
-      ret <= ansi::Color::Attr::Bright;
-    }
-    else if (str::hasPrefix( name_r, "light" ) )
-    {
-      name_r.erase( 0, 5 );
-      ret <= ansi::Color::Attr::Bright;
-    }
-    else if (str::hasPrefix( name_r, "bright" ) )
-    {
-      name_r.erase( 0, 6 );
-      ret <= ansi::Color::Attr::Bright;
-    }
-
-    auto && it = _def.find( name_r );
-    if ( it == _def.end() )
-    {
-      ERR << "Unknown color name '" << name_r << "'" << endl;
-      ret = ansi::Color::Default;
-    }
-    else
-    {
-      ret = ( it->second < ret );
-    }
-    return ret;
-  }
-
   void setColorForOut ( bool yesno_r )
   { Zypper::instance().out().setUseColors( yesno_r ); }
 
@@ -268,21 +190,7 @@ Config::Config()
   : repo_list_columns("anr")
   , solver_installRecommends(!ZConfig::instance().solver_onlyRequires())
   , psCheckAccessDeleted(true)
-  , do_ttyout		(mayUseANSIEscapes())
-  , do_colors		(false)
   , color_useColors	("autodetect")
-  , color_result	(namedColor("default"))
-  , color_msgStatus	(namedColor("default"))
-  , color_msgError	(namedColor("red"))
-  , color_msgWarning	(namedColor("purple"))
-  , color_prompt	(namedColor("bold"))
-  , color_promptOption	(ansi::Color::nocolor())	// follow color_prompt
-  , color_positive	(namedColor("green"))
-  , color_change	(namedColor("brown"))
-  , color_negative	(namedColor("red"))
-  , color_highlight	(namedColor("cyan"))
-  , color_lowlight	(namedColor("brown"))
-  , color_osdebug	(namedColor("default") < ansi::Color::Attr::Reverse)
   , color_pkglistHighlight(true)
   , color_pkglistHighlightAttribute(ansi::Color::nocolor())
   , search_runSearchPackages(indeterminate)		// ask
@@ -419,7 +327,7 @@ std::vector<ZyppFlags::CommandGroup> Config::cliOptions()
         ),
         { "table-style", 's', ZyppFlags::RequiredArgument, ZyppFlags::GenericValueType( Table::defaultStyle, ARG_INTEGER ),
               // translators: --table-style, -s, %1% denotes the supported range of the integer argument (e.g. "1-11")
-              str::Format(_("Table style (%1%).") ) % ("0-"+str::numstring((int)TLS_End-1))
+              str::Format(_("Table style (%1%).") ) % ("0-"+str::numstring((int)TableLineStyle::TLS_End-1))
         },
         { "non-interactive", 'n', ZyppFlags::NoArgument, std::move( ZyppFlags::BoolType( &non_interactive, ZyppFlags::StoreTrue, non_interactive )
               .after( []( ){
@@ -727,7 +635,7 @@ void Config::read( const std::string & file )
       { color_pkglistHighlightAttribute, ConfigOption::COLOR_PKGLISTHIGHLIGHT_ATTRIBUTE },
     } )
     {
-      c = namedColor( augeas.getOption( asString( el.second ) ) );
+      c = ansi::Color::fromString( augeas.getOption( asString( el.second ) ) );
       if ( c )
         el.first = c;
       // Fix color attributes: Default is mapped to Unchanged to allow

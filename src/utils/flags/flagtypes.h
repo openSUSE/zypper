@@ -22,8 +22,6 @@
 
 #include <boost/optional.hpp>
 
-class Out;
-
 namespace zypp {
 
 class Kind;

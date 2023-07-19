@@ -2,6 +2,7 @@
 #include "main.h"
 #include "repos.h"
 #include "common.h"
+#include "Table.h"
 
 #include "utils/flags/flagtypes.h"
 

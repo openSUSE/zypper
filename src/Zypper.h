@@ -24,6 +24,7 @@
 #include <zypp/SrcPackage.h>
 #include <zypp/TmpPath.h>
 
+#include <zypp-tui/Application>
 #include "Config.h"
 #include "Command.h"
 #include "utils/getopt.h"
@@ -130,7 +131,7 @@ struct RuntimeData
 
 typedef shared_ptr<RepoManager> RepoManager_Ptr;
 
-class Zypper : private base::NonCopyable
+class Zypper : public ztui::Application
 {
 public:
   typedef std::vector<std::string>  ArgList;
@@ -140,8 +141,7 @@ public:
   int main( int argc, char ** argv );
 
   // setters & getters
-  Out & out();
-  void setOutputWriter( Out * out );
+  Out & out() override;
 
   const Config & config()				{ return _config; }
   Config & configNoConst()			{ return _config; }
@@ -154,13 +154,6 @@ public:
 
   RepoManager & repoManager()
   { if ( !_rm ) _rm.reset( new RepoManager( _config.rm_options ) ); return *_rm; }
-
-
-  int exitCode() const				{ return _exitCode; }
-  void setExitCode( int exit )			{
-    WAR << "setExitCode " << exit << endl;
-    _exitCode = exit;
-  }
 
   int exitInfoCode() const			{ return _exitInfoCode; }
   void setExitInfoCode( int exit )		{
@@ -222,7 +215,7 @@ public:
   void commandShell();
 
 public:
-  ~Zypper();
+  virtual ~Zypper();
 
   int commandArgOffset() const;
   void stopCommandShell ();
@@ -246,11 +239,9 @@ private:
   char ** _argv;
   int     _commandArgOffset;
 
-  Out * _out_ptr;
-  Config _config;
+  Config &_config; //reference to the config object stored in ztui::Application
   ZypperCommand _command;
 
-  int   _exitCode;
   int   _exitInfoCode;	// hack for exitcodes that don't abort but are reported if the main action succeeded (e.g. 106, 107)
   bool  _running_shell;
   bool  _continue_running_shell;

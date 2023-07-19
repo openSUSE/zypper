@@ -1,64 +1,14 @@
-
+/*---------------------------------------------------------------------------*\
+                          ____  _ _ __ _ __  ___ _ _
+                         |_ / || | '_ \ '_ \/ -_) '_|
+                         /__|\_, | .__/ .__/\___|_|
+                             |__/|_|  |_|
+\*---------------------------------------------------------------------------*/
 #ifndef ALIVE_CURSOR_H
 #define ALIVE_CURSOR_H
 
-#include <iostream>
+#include <zypp-tui/output/AliveCursor.h>
 
-class AliveCursor
-{
-  public:
-  friend std::ostream & operator<<( std::ostream & str, const AliveCursor & obj );
+using ztui::AliveCursor;
 
-  AliveCursor() : _current('-')
-  {}
-
-  char current() const
-  { return _current; }
-
-  void increase()
-  {
-    switch ( _current )
-    {
-      case '-':
-        _current = '\\';
-      break;
-      case '\\':
-        _current = '|';
-      break;
-      case '|':
-        _current = '/';
-      break;
-      case '/':
-        _current = '-';
-      break;
-    }
-  }
-
-  AliveCursor & operator++()
-  {
-    increase();
-    return *this;
-  }
-
-  AliveCursor & operator++(int)
-  {
-    increase();
-    return *this;
-  }
-
-  AliveCursor & done()
-  {
-    _current = '*';
-    return *this;
-  }
-
-  private:
-  char _current;
-};
-
-/** \relates Date Stream output */
-inline std::ostream & operator<<( std::ostream & str, const AliveCursor & obj )
-{ return str << obj.current(); }
-
-#endif
-
+#endif // ALIVE_CURSOR_H

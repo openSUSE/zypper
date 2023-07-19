@@ -18,13 +18,13 @@
 #include <zypp/ZConfig.h>
 #include <zypp/Date.h>
 #include <zypp/PoolItem.h>
+#include <zypp/Patch.h>
 
 #include "Zypper.h"
 #include "PackageArgs.h"
 #include "utils/misc.h" // for ResKindSet; might make sense to move this elsewhere
 #include "global-settings.h"
 
-class Out;
 
 ///////////////////////////////////////////////////////////////////
 /// \class CliMatchPatch

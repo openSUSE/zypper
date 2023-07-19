@@ -42,28 +42,24 @@
 
 #include "Table.h"
 #include "utils/text.h"
+#include "output/OutNormal.h"
+
 #include "utils/misc.h"
 #include "utils/messages.h"
 #include "utils/getopt.h"
 #include "utils/misc.h"
+#include "utils/prompt.h"
 
 #include "repos.h"
-#include "update.h"
-#include "solve-commit.h"
 #include "misc.h"
-#include "search.h"
-#include "info.h"
 
-#include "output/OutNormal.h"
-#include "output/OutXML.h"
 
 #include "utils/flags/zyppflags.h"
 #include "utils/flags/exceptions.h"
-#include "global-settings.h"
 
 #include "commands/search/search-packages-hinthack.h"
 #include "commands/help.h"
-#include "commands/subcommand.h"
+#include "utils/console.h"
 using namespace zypp;
 
 bool sigExitOnce = true;	// Flag to prevent nested calls to Zypper::immediateExit
@@ -176,11 +172,11 @@ namespace {
 ///////////////////////////////////////////////////////////////////
 
 Zypper::Zypper()
-: _argc( 0 )
+: Application( std::make_shared<::Config>() )
+, _argc( 0 )
 , _argv( nullptr )
-, _out_ptr( nullptr )
+, _config( static_cast<::Config &>( Application::mutableConfig () ) )
 , _command( ZypperCommand::NONE )
-, _exitCode( ZYPPER_EXIT_OK )
 , _exitInfoCode( ZYPPER_EXIT_OK )
 , _running_shell( false )
 , _running_help( false )
@@ -192,7 +188,6 @@ Zypper::Zypper()
 
 Zypper::~Zypper()
 {
-  delete _out_ptr;
   MIL << "Zypper instance destroyed. Bye!" << endl;
 }
 
@@ -257,21 +252,9 @@ int Zypper::main( int argc, char ** argv )
 
 Out & Zypper::out()
 {
-  // PENDING SigINT? Some frequently called place to avoid exiting from within the signal handler?
-  immediateExitCheck();
-
-  if ( not _out_ptr ) {
-    _out_ptr = new OutNormal( Out::QUIET );
-  }
-
-  return *_out_ptr;
-}
-
-void Zypper::setOutputWriter( Out *out )
-{
-  if ( _out_ptr && _out_ptr != out )  // prevent self destruct
-    delete _out_ptr;
-  _out_ptr = out;
+    // PENDING SigINT? Some frequently called place to avoid exiting from within the signal handler?
+    immediateExitCheck();
+    return Application::out();
 }
 
 void print_command_help_hint( Zypper & zypper )

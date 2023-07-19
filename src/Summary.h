@@ -17,9 +17,9 @@
 #include <zypp/base/DefaultIntegral.h>
 #include <zypp/ResObject.h>
 #include <zypp/ResPool.h>
+#include "utils/ansi.h"
 
-
-class Summary : private base::NonCopyable
+class Summary : private zypp::base::NonCopyable
 {
 public:
   /**
@@ -27,13 +27,13 @@ public:
    *        usually only 'second' is intialized, the 'first' var is only
    *        required to track upgrades, first is the removed and second the installed package
    */
-  typedef std::pair<ResObject::constPtr, ResObject::constPtr> ResPair;
+  typedef std::pair<zypp::ResObject::constPtr, zypp::ResObject::constPtr> ResPair;
   struct ResPairNameCompare
   {
     inline bool operator()( const ResPair & p1, const ResPair & p2 ) const;
   };
   typedef std::set<ResPair, ResPairNameCompare> ResPairSet;
-  typedef std::map<ResKind, ResPairSet> KindToResPairSet;
+  typedef std::map<zypp::ResKind, ResPairSet> KindToResPairSet;
 
   enum _view_options
   {
@@ -60,7 +60,7 @@ public:
   typedef enum _view_options ViewOptions;
 
 public:
-  Summary( const ResPool & pool, const ViewOptions options = DEFAULT );
+  Summary( const zypp::ResPool & pool, const ViewOptions options = DEFAULT );
   ~Summary() {}
 
   void setViewOptions( const ViewOptions options )	{ _viewop = options; }
@@ -98,9 +98,9 @@ public:
   unsigned packagesToReInstall() const;
   unsigned packagesToRemove() const;
 
-  const ByteCount & toDownload() const		{ return _todownload; }
-  const ByteCount & inCache() const		{ return _incache; }
-  const ByteCount & installedSizeChange() const	{ return _inst_size_change; }
+  const zypp::ByteCount & toDownload() const		{ return _todownload; }
+  const zypp::ByteCount & inCache() const		{ return _incache; }
+  const zypp::ByteCount & installedSizeChange() const	{ return _inst_size_change; }
 
   /** The exposed needMachineReboot value causing ZYPPER_EXIT_INF_REBOOT_NEEDED considers patches only (zypper#237)
    * Packages cause a summary hint but will not lead to a non-zero return value.
@@ -115,7 +115,7 @@ public:
   void dumpAsXmlTo( std::ostream & out );
 
 private:
-  void readPool( const ResPool & pool );
+  void readPool( const zypp::ResPool & pool );
 
   bool writeResolvableList( std::ostream & out, const ResPairSet & resolvables, ansi::Color = ansi::Color::nocolor(), unsigned maxEntries_r = 0U, bool withKind_r = false );
   bool writeResolvableList( std::ostream & out, const ResPairSet & resolvables, unsigned maxEntries_r, bool withKind_r = false )
@@ -123,7 +123,7 @@ private:
 
   void writeXmlResolvableList( std::ostream & out, const KindToResPairSet & resolvables );
 
-  void collectInstalledRecommends( const ResObject::constPtr & obj );
+  void collectInstalledRecommends( const zypp::ResObject::constPtr & obj );
 
   bool showNeedRestartHint() const;
   bool showNeedRebootHInt() const;
@@ -138,9 +138,9 @@ private:
   bool _need_reboot_nonpatch;	// need_reboot caused by something not a patch
   bool _need_restart;		// by now patch specific
 
-  ByteCount _todownload;
-  ByteCount _incache;
-  ByteCount _inst_size_change;
+  zypp::ByteCount _todownload;
+  zypp::ByteCount _incache;
+  zypp::ByteCount _inst_size_change;
 
   // STATS
 

@@ -21,8 +21,9 @@
 #include <zypp/ZYppCommitPolicy.h>
 #include <zypp/base/Logger.h>
 
+#include "Table.h"
+
 class Zypper;
-class Table;
 
 namespace zypp
 {
