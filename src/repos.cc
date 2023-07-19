@@ -28,11 +28,13 @@
 #include "Table.h"
 #include "utils/messages.h"
 #include "utils/misc.h"
+#include "utils/prompt.h"
 #include "repos.h"
 #include "global-settings.h"
 
 #include "commands/services/common.h"
 #include "commands/repos/refresh.h"
+#include "zypp/ZYppCallbacks.h"
 
 extern ZYpp::Ptr God;
 
@@ -183,7 +185,7 @@ void repoPrioSummary( Zypper & zypper )
                             str::Format(_("See '%1%' for details")) % "zypper lr -P" );
 
     Table t;
-    t.lineStyle( ::Colon );
+    t.lineStyle( TableLineStyle::Colon );
     priomap[RepoInfo::defaultPriority()];	// show always
     for ( const auto & el : priomap )
     {

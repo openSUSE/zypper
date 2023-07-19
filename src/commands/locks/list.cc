@@ -14,11 +14,9 @@
 #include <zypp/Locks.h>
 
 #include "output/Out.h"
-#include "main.h"
 #include "Table.h"
-#include "utils/misc.h"
-#include "repos.h"
-
+#include "Zypper.h"
+#include "main.h"
 
 #include "utils/flags/zyppflags.h"
 #include "utils/flags/flagtypes.h"

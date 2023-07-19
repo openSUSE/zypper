@@ -66,7 +66,7 @@ void OutXML::error( const std::string & problem_desc, const std::string & hint )
   //! \todo hint
 }
 
-void OutXML::error( const Exception & e, const std::string & problem_desc, const std::string & hint )
+void OutXML::error(const zypp::Exception &e, const std::string & problem_desc, const std::string & hint )
 {
   std::ostringstream s;
 
@@ -148,7 +148,7 @@ void OutXML::dwnldProgressEnd( const Url & uri, long rate, TriBool error )
     << "/>" << endl;
 }
 
-void OutXML::searchResult( const Table & table_r )
+void OutXML::searchResult(const Table &table_r )
 {
   cout << "<search-result version=\"0.0\">" << endl;
   cout << "<solvable-list>" << endl;

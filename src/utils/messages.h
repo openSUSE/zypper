@@ -11,6 +11,8 @@
 #include "output/Out.h"
 
 
+class Zypper;
+
 /** Write a suggestion to report a bug to the output. */
 void report_a_bug (Out & out);
 

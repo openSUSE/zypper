@@ -4,79 +4,30 @@
                          /__|\_, | .__/ .__/\___|_|
                              |__/|_|  |_|
 \*---------------------------------------------------------------------------*/
-
 #ifndef UTILS_COLORS_H_
 #define UTILS_COLORS_H_
 
-#include <iostream>
-#include <string>
+#include <zypp-tui/utils/colors.h>
 
-#include "ansi.h"
+using ztui::do_colors;
+using ztui::do_ttyout;
+using ztui::ColorContext;
+using ztui::customColorCtor;
+using ztui::CCString;
 
-/** True unless output is a dumb tty or file.
- * In this case we should not use any ANSI Escape sequences moving the cursor.
- */
-bool do_ttyout();
+using ztui::DEFAULTString;
 
-/** If output is done in colors (depends on config) */
-bool do_colors();
+using ztui::MSG_STATUSString;
+using ztui::MSG_ERRORString;
+using ztui::MSG_WARNINGString;
 
-///////////////////////////////////////////////////////////////////
+using ztui::POSITIVEString;
+using ztui::CHANGEString;
+using ztui::NEGATIVEString;
 
-enum class ColorContext
-{
-  DEFAULT,
+using ztui::HIGHLIGHTString;
+using ztui::LOWLIGHTString;
 
-  RESULT,
-  MSG_STATUS,
-  MSG_ERROR,
-  MSG_WARNING,
-  PROMPT,
-  PROMPT_OPTION,
-  POSITIVE,
-  CHANGE,
-  NEGATIVE,
-  HIGHLIGHT,
-  LOWLIGHT,
+using ztui::operator<<;
 
-  OSDEBUG
-};
-
-/** \relates ColorContext map to \ref ansi::Color */
-ansi::Color customColorCtor( ColorContext ctxt_r );
-
-namespace ansi
-{
-  // Enable using ColorContext as ansi::SGRSequence
-  template<>
-  struct ColorTraits<::ColorContext>
-  { enum { customColorCtor = true }; };
-}
-
-// ColorString types
-template <ColorContext _ctxt>
-struct CCString : public ColorString
-{
-  CCString()						: ColorString( _ctxt ) {}
-  explicit CCString( const std::string & str_r )	: ColorString( _ctxt, str_r ) {}
-  explicit CCString( std::string && str_r )		: ColorString( _ctxt, std::move(str_r) ) {}
-};
-
-template <ColorContext _ctxt>
-inline ansi::ColorStream & operator<<( ansi::ColorStream & cstr_r, const CCString<_ctxt> & cstring_r )
-{ return cstr_r << (const ColorString &)cstring_r; }
-
-typedef CCString<ColorContext::DEFAULT>		DEFAULTString;
-
-typedef CCString<ColorContext::MSG_STATUS>	MSG_STATUSString;
-typedef CCString<ColorContext::MSG_ERROR>	MSG_ERRORString;
-typedef CCString<ColorContext::MSG_WARNING>	MSG_WARNINGString;
-
-typedef CCString<ColorContext::POSITIVE>	POSITIVEString;
-typedef CCString<ColorContext::CHANGE>		CHANGEString;
-typedef CCString<ColorContext::NEGATIVE>	NEGATIVEString;
-
-typedef CCString<ColorContext::HIGHLIGHT>	HIGHLIGHTString;
-typedef CCString<ColorContext::LOWLIGHT>	LOWLIGHTString;
-
-#endif /* UTILS_COLORS_H_ */
+#endif // UTILS_COLORS_H_

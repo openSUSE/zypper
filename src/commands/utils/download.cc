@@ -16,14 +16,12 @@
 #include <zypp/ui/SelectableTraits.h>
 #include <zypp/target/CommitPackageCache.h>
 
-#include "commands/conditions.h"
 #include "utils/flags/flagtypes.h"
 #include "utils/messages.h"
 #include "Zypper.h"
 #include "PackageArgs.h"
 #include "Table.h"
 #include "download.h"
-#include "callbacks/media.h"
 #include "global-settings.h"
 
 using namespace zypp;

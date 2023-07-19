@@ -2,6 +2,7 @@
 #define OUTXML_H_
 
 #include "Out.h"
+#include "Table.h"
 
 class OutXML : public Out
 {
@@ -13,7 +14,7 @@ public:
   void info( const std::string & msg, Verbosity verbosity, Type mask ) override;
   void warning( const std::string & msg, Verbosity verbosity, Type mask ) override;
   void error( const std::string & problem_desc, const std::string & hint ) override;
-  void error( const Exception & e, const std::string & problem_desc, const std::string & hint ) override;
+  void error( const zypp::Exception & e, const std::string & problem_desc, const std::string & hint ) override;
 
   // progress
   void progressStart( const std::string & id, const std::string & label, bool is_tick ) override;
@@ -21,9 +22,9 @@ public:
   void progressEnd( const std::string & id, const std::string & label, const std::string & donetag, bool error ) override;
 
   // progress with download rate
-  void dwnldProgressStart( const Url & uri ) override;
-  void dwnldProgress( const Url & uri, int value, long rate ) override;
-  void dwnldProgressEnd( const Url & uri, long rate, TriBool error ) override;
+  void dwnldProgressStart( const zypp::Url & uri ) override;
+  void dwnldProgress( const zypp::Url & uri, int value, long rate ) override;
+  void dwnldProgressEnd( const zypp::Url & uri, long rate, zypp::TriBool error ) override;
 
   void searchResult( const Table & table_r ) override;
 

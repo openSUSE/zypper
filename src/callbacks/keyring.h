@@ -18,6 +18,7 @@
 #include <zypp/Digest.h>
 
 #include "Zypper.h"
+#include "utils/prompt.h"
 #include "Table.h"
 
 ///////////////////////////////////////////////////////////////////
@@ -79,7 +80,7 @@ namespace zypp
       }
 
       Table t;
-      t.lineStyle( none );
+      t.lineStyle( TableLineStyle::none );
       if ( !context.empty() )
       {
         t << ( TableRow() << "" << _("Repository:") << context.repoInfo().asUserString() );

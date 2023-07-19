@@ -15,6 +15,7 @@
 #include <zypp/ZYppCallbacks.h>
 
 #include "Zypper.h"
+#include "rpm.h"
 #include "output/prompt.h"
 
 ///////////////////////////////////////////////////////////////////

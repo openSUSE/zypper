@@ -258,7 +258,7 @@ namespace Pimpl
       if ( _cmd.defaultSystemSetup( _zypper, flags ) != ZYPPER_EXIT_OK )
       {
         ERR << "Startup returns " << _zypper.exitCode() << endl;
-        throw( Out::Error(_("Failed to read download directory"),
+        throw( Out::Error( ZYPPER_EXIT_OK, _("Failed to read download directory"),
                           Errno().asString() ) );
       }
 
@@ -280,7 +280,7 @@ namespace Pimpl
   {
     {
       Table t;
-      t.lineStyle( none );
+      t.lineStyle( TableLineStyle::none );
       { TableRow tr; tr << _("Installed packages:")
                         << str::numstring( _installedPkgCount, 5 )
                         ; t << tr; }
@@ -291,7 +291,7 @@ namespace Pimpl
     }
     {
       Table t;
-      t.lineStyle( none );
+      t.lineStyle( TableLineStyle::none );
       { TableRow tr; tr << '[' + asString( SourcePkg::S_OK ) + ']'
                         << _("Required source packages available in download directory:")
                         << str::numstring( status[SourcePkg::S_OK], 5 );
@@ -385,7 +385,7 @@ namespace Pimpl
         int res = filesystem::unlink( _dnlDir / spkg._localFile );
         if ( res != 0 )
         {
-          throw( Out::Error( str::Format(_("Failed to remove source package '%s'")) % (_dnlDir / spkg._localFile),
+          throw( Out::Error( ZYPPER_EXIT_OK, str::Format(_("Failed to remove source package '%s'")) % (_dnlDir / spkg._localFile),
                              Errno().asString() ) );
         }
         MIL << spkg << endl;

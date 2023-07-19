@@ -2,6 +2,7 @@
 #define ZYPPER_COMMANDS_COMMANDHELPFORMATTER_INCLUDED
 
 #include "Zypper.h"
+#include "utils/text.h"
 
 ///////////////////////////////////////////////////////////////////
 /// \class CommandHelpFormater
