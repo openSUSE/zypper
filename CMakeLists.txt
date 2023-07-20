@@ -2,7 +2,10 @@ cmake_minimum_required(VERSION 3.1)
 PROJECT(LIBZYPP)
 SET( PACKAGE "libzypp" )
 # where to look first for cmake modules, before ${CMAKE_ROOT}/Modules/ is checked
-SET( CMAKE_MODULE_PATH ${LIBZYPP_SOURCE_DIR}/cmake/modules )
+SET( CMAKE_MODULE_PATH
+    ${LIBZYPP_SOURCE_DIR}/cmake/modules
+    ${CMAKE_MODULE_PATH}
+)
 INCLUDE(ZyppCommon)
 
 OPTION (ENABLE_BUILD_DOCS "Build documentation by default?" OFF)
