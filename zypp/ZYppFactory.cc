@@ -392,32 +392,42 @@ namespace zypp
       else if ( globalLock().zyppLocked() )
       {
         bool failed = true;
+        // bsc#1184399,1213231: A negative ZYPP_LOCK_TIMEOUT will wait forever.
         const long LOCK_TIMEOUT = str::strtonum<long>( getenv( "ZYPP_LOCK_TIMEOUT" ) );
-        if ( LOCK_TIMEOUT > 0 )
+        if ( LOCK_TIMEOUT != 0 )
         {
-          MIL << "Waiting whether pid " << globalLock().lockerPid() << " ends within $LOCK_TIMEOUT=" << LOCK_TIMEOUT << " sec." << endl;
-          unsigned delay = 1;
-          Pathname procdir( Pathname("/proc")/str::numstring(globalLock().lockerPid()) );
-          for ( long i = 0; i < LOCK_TIMEOUT; i += delay )
-          {
-            if ( PathInfo( procdir ).isDir() )	// wait for /proc/pid to disapear
-              sleep( delay );
-            else
-            {
-              MIL << "Retry after " << i << " sec." << endl;
-              failed = globalLock().zyppLocked();
-              if ( failed )
-              {
-                // another proc locked faster. maybe it ends fast as well....
-                MIL << "Waiting whether pid " << globalLock().lockerPid() << " ends within " << (LOCK_TIMEOUT-i) << " sec." << endl;
-                procdir = Pathname( Pathname("/proc")/str::numstring(globalLock().lockerPid()) );
-              }
-              else
-              {
-                MIL << "Finally got the lock!" << endl;
-                break;	// gotcha
+          Date logwait = Date::now();
+          Date giveup; /* 0 = forever */
+          if ( LOCK_TIMEOUT > 0 ) {
+            giveup = logwait+LOCK_TIMEOUT;
+            MIL << "$ZYPP_LOCK_TIMEOUT=" << LOCK_TIMEOUT << " sec. Waiting for the zypp lock until " << giveup << endl;
+          }
+          else
+            MIL << "$ZYPP_LOCK_TIMEOUT=" << LOCK_TIMEOUT << " sec. Waiting for the zypp lock..." << endl;
+
+          unsigned delay = 0;
+          do {
+            if ( delay < 60 )
+              delay += 1;
+            else {
+              Date now { Date::now() };
+              if ( now - logwait > Date::day ) {
+                WAR << "$ZYPP_LOCK_TIMEOUT=" << LOCK_TIMEOUT << " sec. Another day has passed waiting for the zypp lock..." << endl;
+                logwait = now;
               }
             }
+            sleep( delay );
+            {
+              zypp::base::LogControl::TmpLineWriter shutUp;     // be quiet
+              failed = globalLock().zyppLocked();
+            }
+          } while ( failed && ( not giveup || Date::now() <= giveup ) );
+
+          if ( failed ) {
+            MIL << "$ZYPP_LOCK_TIMEOUT=" << LOCK_TIMEOUT << " sec. Gave up waiting for the zypp lock." << endl;
+          }
+          else {
+            MIL << "$ZYPP_LOCK_TIMEOUT=" << LOCK_TIMEOUT << " sec. Finally got the zypp lock." << endl;
           }
         }
         if ( failed )
