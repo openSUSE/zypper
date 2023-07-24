@@ -6,23 +6,43 @@ INCLUDE_DIRECTORIES ( ${LIBZYPP_SOURCE_DIR} )
 
 ADD_DEFINITIONS( -DLOCALEDIR="${CMAKE_INSTALL_PREFIX}/share/locale" -DTEXTDOMAIN="zypp" -DZYPP_DLL )
 
-SET( zypp_tui_headers
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(READLINE REQUIRED readline)
+
+
+SET( zypp_tui_toplevel_headers
   Application
   application.h
   Config
   config.h
   Table.h
+)
+INSTALL(  FILES ${zypp_tui_toplevel_headers} DESTINATION "${INCLUDE_INSTALL_DIR}/zypp-tui" )
+
+SET( zypp_tui_output_headers
   output/AliveCursor.h
   output/Out.h
   output/OutNormal.h
   output/PromptOptions
   output/promptoptions.h
   output/Utf8.h
+)
+INSTALL(  FILES ${zypp_tui_output_headers} DESTINATION "${INCLUDE_INSTALL_DIR}/zypp-tui/output" )
+
+SET( zypp_tui_utils_headers
   utils/ansi.h
   utils/colors.h
   utils/console.h
   utils/richtext.h
   utils/text.h
+)
+INSTALL(  FILES ${zypp_tui_utils_headers} DESTINATION "${INCLUDE_INSTALL_DIR}/zypp-tui/utils" )
+
+
+SET( zypp_tui_headers
+  ${zypp_tui_toplevel_headers}
+  ${zypp_tui_output_headers}
+  ${zypp_tui_utils_headers}
 )
 
 SET( zypp_tui_SRCS
@@ -37,7 +57,6 @@ SET( zypp_tui_SRCS
   utils/richtext.cc
   utils/text.cc
 )
-INSTALL(  FILES ${zypp_tui_headers} DESTINATION "${INCLUDE_INSTALL_DIR}/zypp-tui" )
 
 SET ( zypp_HEADERS
   ${zypp_tui_headers}
@@ -51,6 +70,11 @@ ADD_LIBRARY( zypp-tui ${zypp_SRCS} ${zypp_HEADERS} )
 add_dependencies( zypp-tui zypp-core )
 
 set_target_properties( zypp-tui PROPERTIES COMPILE_FLAGS "-ffat-lto-objects")
+
+
+target_link_libraries( zypp-tui ${READLINE_LIBRARIES})
+target_include_directories( zypp-tui PUBLIC ${READLINE_INCLUDE_DIRS})
+target_compile_options( zypp-tui PUBLIC ${READLINE_CFLAGS_OTHER})
 
 INSTALL(TARGETS zypp-tui ARCHIVE DESTINATION ${LIB_INSTALL_DIR} )
 

@@ -26,7 +26,7 @@ namespace ztui {
   class Application : private zypp::base::NonCopyable
   {
   public:
-
+    Application();
     virtual ~Application();
 
     /*!
@@ -48,7 +48,6 @@ namespace ztui {
     Application ( std::shared_ptr<Config> &&cfg );
 
   private:
-    Application();
     void init();
     int   _exitCode;
     std::shared_ptr<Config> _config;
