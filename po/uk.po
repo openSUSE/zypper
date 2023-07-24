@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypp.uk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-18 09:54+0200\n"
+"POT-Creation-Date: 2023-07-24 17:02+0200\n"
 "PO-Revision-Date: 2021-03-11 21:56+0000\n"
 "Last-Translator: Lesath <4lesath@gmail.com>\n"
 "Language-Team: Ukrainian <https://l10n.opensuse.org/projects/libzypp/master/"
@@ -22,8 +22,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Weblate 3.6.1\n"
 
 #: zypp/CountryCode.cc:50
@@ -4113,7 +4113,7 @@ msgstr "Для отримання підтримки потрібний дода
 msgid "Unknown support option. Description not available"
 msgstr "Невідомий параметр підтримки. Немає опису"
 
-#: zypp/ZYppFactory.cc:410
+#: zypp/ZYppFactory.cc:376
 #, c-format, boost-format
 msgid ""
 "System management is locked by the application with pid %d (%s).\n"
@@ -4743,37 +4743,45 @@ msgstr "Виконання сценаріїв %posttrans"
 msgid "Installation has been aborted as directed."
 msgstr "Встановлення перервано відповідно до вказівки."
 
-#: zypp/target/TargetImpl.cc:451
+#: zypp/target/TargetImpl.cc:452
 msgid " executed"
 msgstr " виконано"
 
-#: zypp/target/TargetImpl.cc:473
+#: zypp/target/TargetImpl.cc:474
 msgid " execution failed"
 msgstr " виконання зазнало невдачі"
 
 #. translators: We may find the same script content in files with different names.
 #. Only the first occurence is executed, subsequent ones are skipped. It's a one-line
 #. message for a log file. Preferably start translation with "%s"
-#: zypp/target/TargetImpl.cc:590
+#: zypp/target/TargetImpl.cc:591
 #, c-format, boost-format
 msgid "%s already executed as %s)"
 msgstr "%s вже виконаний як %s)"
 
-#: zypp/target/TargetImpl.cc:600
+#: zypp/target/TargetImpl.cc:601
 msgid " execution skipped while aborting"
 msgstr " виконання пропущено під час переривання"
 
-#: zypp/target/TargetImpl.cc:655 zypp/target/TargetImpl.cc:675
-#: zypp/target/TargetImpl.cc:703 zypp/target/TargetImpl.cc:740
-#: zypp/target/TargetImpl.cc:748
+#: zypp/target/TargetImpl.cc:656 zypp/target/TargetImpl.cc:676
+#: zypp/target/TargetImpl.cc:704 zypp/target/TargetImpl.cc:741
+#: zypp/target/TargetImpl.cc:749
 msgid "Error sending update message notification."
 msgstr "Помилка відсилання сповіщення про оновлення."
 
-#: zypp/target/TargetImpl.cc:799
+#: zypp/target/TargetImpl.cc:800
 msgid "New update message"
 msgstr "Нове повідомлення про оновлення"
 
-#: zypp/target/TargetImpl.cc:2718
+#. translator: %1% is the received unix signal name, %2% is the numerical value of the received signal
+#: zypp/target/TargetImpl.cc:2102
+#, boost-format
+msgid ""
+"Received signal :\"%1% (%2%)\", to ensure the consistency of the system it "
+"is not possible to cancel a running rpm transaction."
+msgstr ""
+
+#: zypp/target/TargetImpl.cc:2739
 msgid "Executing the transaction failed because of the following problems:"
 msgstr ""
 
@@ -5028,58 +5036,58 @@ msgstr "Команду було вбито за сигналом %d (%s)."
 msgid "Command exited with unknown error."
 msgstr "Команда завершила роботу з невідомою помилкою."
 
-#: zypp-core/zyppng/io/forkspawnengine.cc:150
-#: zypp-core/zyppng/io/forkspawnengine.cc:392
+#: zypp-core/zyppng/io/forkspawnengine.cc:243
+#: zypp-core/zyppng/io/forkspawnengine.cc:486
 msgid "Invalid spawn arguments given."
 msgstr ""
 
-#: zypp-core/zyppng/io/forkspawnengine.cc:206
+#: zypp-core/zyppng/io/forkspawnengine.cc:299
 msgid "Unable to create control pipe."
 msgstr ""
 
-#: zypp-core/zyppng/io/forkspawnengine.cc:272
+#: zypp-core/zyppng/io/forkspawnengine.cc:366
 #, c-format, boost-format
 msgid "Can't chroot to '%s' (%s)."
 msgstr "Не вдалося створити chroot для «%s» (%s)."
 
-#: zypp-core/zyppng/io/forkspawnengine.cc:282
+#: zypp-core/zyppng/io/forkspawnengine.cc:376
 #, c-format, boost-format
 msgid "Can't chdir to '%s' (%s)."
 msgstr "Неможливо змінити директорію на «%s» (%s)."
 
-#: zypp-core/zyppng/io/forkspawnengine.cc:283
+#: zypp-core/zyppng/io/forkspawnengine.cc:377
 #, c-format, boost-format
 msgid "Can't chdir to '%s' inside chroot '%s' (%s)."
 msgstr "Неможливо зробити chdir «%s» всередині chroot «%s» (%s)."
 
 #. don't want to get here
-#: zypp-core/zyppng/io/forkspawnengine.cc:312
+#: zypp-core/zyppng/io/forkspawnengine.cc:406
 #, c-format, boost-format
 msgid "Can't exec '%s' (%s)."
 msgstr "Не вдалося виконати «%s» (%s)."
 
-#: zypp-core/zyppng/io/forkspawnengine.cc:319
-#: zypp-core/zyppng/io/forkspawnengine.cc:473
+#: zypp-core/zyppng/io/forkspawnengine.cc:413
+#: zypp-core/zyppng/io/forkspawnengine.cc:567
 #, c-format, boost-format
 msgid "Can't fork (%s)."
 msgstr "Не вдалося відгалузити (%s)."
 
-#: zypp-core/zyppng/io/forkspawnengine.cc:338
+#: zypp-core/zyppng/io/forkspawnengine.cc:432
 #, c-format, boost-format
 msgid "Can't exec '%s', chdir failed (%s)."
 msgstr ""
 
-#: zypp-core/zyppng/io/forkspawnengine.cc:341
+#: zypp-core/zyppng/io/forkspawnengine.cc:435
 #, c-format, boost-format
 msgid "Can't exec '%s', chroot failed (%s)."
 msgstr ""
 
-#: zypp-core/zyppng/io/forkspawnengine.cc:344
+#: zypp-core/zyppng/io/forkspawnengine.cc:438
 #, c-format, boost-format
 msgid "Can't exec '%s', exec failed (%s)."
 msgstr ""
 
-#: zypp-core/zyppng/io/forkspawnengine.cc:348
+#: zypp-core/zyppng/io/forkspawnengine.cc:442
 #, c-format, boost-format
 msgid "Can't exec '%s', unexpected error."
 msgstr ""

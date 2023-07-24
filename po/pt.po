@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypp.pt\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-18 09:54+0200\n"
+"POT-Creation-Date: 2023-07-24 17:02+0200\n"
 "PO-Revision-Date: 2020-12-06 18:26+0000\n"
 "Last-Translator: Luís Tiago Favas <al62006@utad.eu>\n"
 "Language-Team: Portuguese <https://l10n.opensuse.org/projects/libzypp/master/"
@@ -4148,7 +4148,7 @@ msgstr ""
 msgid "Unknown support option. Description not available"
 msgstr ""
 
-#: zypp/ZYppFactory.cc:410
+#: zypp/ZYppFactory.cc:376
 #, fuzzy, c-format, boost-format
 msgid ""
 "System management is locked by the application with pid %d (%s).\n"
@@ -4726,12 +4726,12 @@ msgstr ""
 msgid "Installation has been aborted as directed."
 msgstr "A instalação foi interrompida conforme indicado."
 
-#: zypp/target/TargetImpl.cc:451
+#: zypp/target/TargetImpl.cc:452
 #, fuzzy
 msgid " executed"
 msgstr "Executar"
 
-#: zypp/target/TargetImpl.cc:473
+#: zypp/target/TargetImpl.cc:474
 #, fuzzy
 msgid " execution failed"
 msgstr "Falhou a Execução DBI: %s"
@@ -4739,26 +4739,34 @@ msgstr "Falhou a Execução DBI: %s"
 #. translators: We may find the same script content in files with different names.
 #. Only the first occurence is executed, subsequent ones are skipped. It's a one-line
 #. message for a log file. Preferably start translation with "%s"
-#: zypp/target/TargetImpl.cc:590
+#: zypp/target/TargetImpl.cc:591
 #, c-format, boost-format
 msgid "%s already executed as %s)"
 msgstr ""
 
-#: zypp/target/TargetImpl.cc:600
+#: zypp/target/TargetImpl.cc:601
 msgid " execution skipped while aborting"
 msgstr ""
 
-#: zypp/target/TargetImpl.cc:655 zypp/target/TargetImpl.cc:675
-#: zypp/target/TargetImpl.cc:703 zypp/target/TargetImpl.cc:740
-#: zypp/target/TargetImpl.cc:748
+#: zypp/target/TargetImpl.cc:656 zypp/target/TargetImpl.cc:676
+#: zypp/target/TargetImpl.cc:704 zypp/target/TargetImpl.cc:741
+#: zypp/target/TargetImpl.cc:749
 msgid "Error sending update message notification."
 msgstr ""
 
-#: zypp/target/TargetImpl.cc:799
+#: zypp/target/TargetImpl.cc:800
 msgid "New update message"
 msgstr ""
 
-#: zypp/target/TargetImpl.cc:2718
+#. translator: %1% is the received unix signal name, %2% is the numerical value of the received signal
+#: zypp/target/TargetImpl.cc:2102
+#, boost-format
+msgid ""
+"Received signal :\"%1% (%2%)\", to ensure the consistency of the system it "
+"is not possible to cancel a running rpm transaction."
+msgstr ""
+
+#: zypp/target/TargetImpl.cc:2739
 msgid "Executing the transaction failed because of the following problems:"
 msgstr ""
 
@@ -5015,58 +5023,58 @@ msgstr "Comando foi morto pelo sinal %d (%s)."
 msgid "Command exited with unknown error."
 msgstr "Comando terminou com erro desconhecido."
 
-#: zypp-core/zyppng/io/forkspawnengine.cc:150
-#: zypp-core/zyppng/io/forkspawnengine.cc:392
+#: zypp-core/zyppng/io/forkspawnengine.cc:243
+#: zypp-core/zyppng/io/forkspawnengine.cc:486
 msgid "Invalid spawn arguments given."
 msgstr ""
 
-#: zypp-core/zyppng/io/forkspawnengine.cc:206
+#: zypp-core/zyppng/io/forkspawnengine.cc:299
 msgid "Unable to create control pipe."
 msgstr ""
 
-#: zypp-core/zyppng/io/forkspawnengine.cc:272
+#: zypp-core/zyppng/io/forkspawnengine.cc:366
 #, c-format, boost-format
 msgid "Can't chroot to '%s' (%s)."
 msgstr "Não é possível fazer chroot para '%s' (%s)."
 
-#: zypp-core/zyppng/io/forkspawnengine.cc:282
+#: zypp-core/zyppng/io/forkspawnengine.cc:376
 #, c-format, boost-format
 msgid "Can't chdir to '%s' (%s)."
 msgstr "Não foi possível fazer chdir a '%s' (%s)."
 
-#: zypp-core/zyppng/io/forkspawnengine.cc:283
+#: zypp-core/zyppng/io/forkspawnengine.cc:377
 #, c-format, boost-format
 msgid "Can't chdir to '%s' inside chroot '%s' (%s)."
 msgstr "Não foi possível fazer chdir a  '%s' dentro de chroot '%s' (%s)."
 
 #. don't want to get here
-#: zypp-core/zyppng/io/forkspawnengine.cc:312
+#: zypp-core/zyppng/io/forkspawnengine.cc:406
 #, c-format, boost-format
 msgid "Can't exec '%s' (%s)."
 msgstr "Não é possível executar '%s' (%s)."
 
-#: zypp-core/zyppng/io/forkspawnengine.cc:319
-#: zypp-core/zyppng/io/forkspawnengine.cc:473
+#: zypp-core/zyppng/io/forkspawnengine.cc:413
+#: zypp-core/zyppng/io/forkspawnengine.cc:567
 #, c-format, boost-format
 msgid "Can't fork (%s)."
 msgstr "Não é possível bifurcar (%s)."
 
-#: zypp-core/zyppng/io/forkspawnengine.cc:338
+#: zypp-core/zyppng/io/forkspawnengine.cc:432
 #, c-format, boost-format
 msgid "Can't exec '%s', chdir failed (%s)."
 msgstr ""
 
-#: zypp-core/zyppng/io/forkspawnengine.cc:341
+#: zypp-core/zyppng/io/forkspawnengine.cc:435
 #, c-format, boost-format
 msgid "Can't exec '%s', chroot failed (%s)."
 msgstr ""
 
-#: zypp-core/zyppng/io/forkspawnengine.cc:344
+#: zypp-core/zyppng/io/forkspawnengine.cc:438
 #, c-format, boost-format
 msgid "Can't exec '%s', exec failed (%s)."
 msgstr ""
 
-#: zypp-core/zyppng/io/forkspawnengine.cc:348
+#: zypp-core/zyppng/io/forkspawnengine.cc:442
 #, c-format, boost-format
 msgid "Can't exec '%s', unexpected error."
 msgstr ""

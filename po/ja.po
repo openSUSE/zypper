@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-18 09:54+0200\n"
+"POT-Creation-Date: 2023-07-24 17:02+0200\n"
 "PO-Revision-Date: 2022-12-23 00:13+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
 "Language-Team: Japanese <https://l10n.opensuse.org/projects/libzypp/master/"
@@ -3923,7 +3923,7 @@ msgstr "サポートを得るには、追加の顧客契約が必要です。"
 msgid "Unknown support option. Description not available"
 msgstr "不明なサポートオプションです。説明は利用できません"
 
-#: zypp/ZYppFactory.cc:410
+#: zypp/ZYppFactory.cc:376
 #, c-format, boost-format
 msgid ""
 "System management is locked by the application with pid %d (%s).\n"
@@ -4590,37 +4590,45 @@ msgstr "%postrans スクリプトを実行しています"
 msgid "Installation has been aborted as directed."
 msgstr "指示通りにインストールが中止されました。"
 
-#: zypp/target/TargetImpl.cc:451
+#: zypp/target/TargetImpl.cc:452
 msgid " executed"
 msgstr " 実行済み"
 
-#: zypp/target/TargetImpl.cc:473
+#: zypp/target/TargetImpl.cc:474
 msgid " execution failed"
 msgstr " 実行失敗"
 
 #. translators: We may find the same script content in files with different names.
 #. Only the first occurence is executed, subsequent ones are skipped. It's a one-line
 #. message for a log file. Preferably start translation with "%s"
-#: zypp/target/TargetImpl.cc:590
+#: zypp/target/TargetImpl.cc:591
 #, c-format, boost-format
 msgid "%s already executed as %s)"
 msgstr "%s は %s として実行済みです)"
 
-#: zypp/target/TargetImpl.cc:600
+#: zypp/target/TargetImpl.cc:601
 msgid " execution skipped while aborting"
 msgstr " 中止しているため実行をスキップ"
 
-#: zypp/target/TargetImpl.cc:655 zypp/target/TargetImpl.cc:675
-#: zypp/target/TargetImpl.cc:703 zypp/target/TargetImpl.cc:740
-#: zypp/target/TargetImpl.cc:748
+#: zypp/target/TargetImpl.cc:656 zypp/target/TargetImpl.cc:676
+#: zypp/target/TargetImpl.cc:704 zypp/target/TargetImpl.cc:741
+#: zypp/target/TargetImpl.cc:749
 msgid "Error sending update message notification."
 msgstr "更新メッセージ通知の送信時にエラーが発生しました。"
 
-#: zypp/target/TargetImpl.cc:799
+#: zypp/target/TargetImpl.cc:800
 msgid "New update message"
 msgstr "新しい更新メッセージ"
 
-#: zypp/target/TargetImpl.cc:2718
+#. translator: %1% is the received unix signal name, %2% is the numerical value of the received signal
+#: zypp/target/TargetImpl.cc:2102
+#, boost-format
+msgid ""
+"Received signal :\"%1% (%2%)\", to ensure the consistency of the system it "
+"is not possible to cancel a running rpm transaction."
+msgstr ""
+
+#: zypp/target/TargetImpl.cc:2739
 msgid "Executing the transaction failed because of the following problems:"
 msgstr "下記の問題が発生したことによって処理が失敗しました:"
 
@@ -4876,59 +4884,59 @@ msgstr "コマンドはシグナル %d (%s)で終了しました。"
 msgid "Command exited with unknown error."
 msgstr "コマンドは不明なエラーで終了しました。"
 
-#: zypp-core/zyppng/io/forkspawnengine.cc:150
-#: zypp-core/zyppng/io/forkspawnengine.cc:392
+#: zypp-core/zyppng/io/forkspawnengine.cc:243
+#: zypp-core/zyppng/io/forkspawnengine.cc:486
 msgid "Invalid spawn arguments given."
 msgstr "正しくない実行パラメータが指定されました。"
 
-#: zypp-core/zyppng/io/forkspawnengine.cc:206
+#: zypp-core/zyppng/io/forkspawnengine.cc:299
 msgid "Unable to create control pipe."
 msgstr "制御パイプを作成できませんでした。"
 
-#: zypp-core/zyppng/io/forkspawnengine.cc:272
+#: zypp-core/zyppng/io/forkspawnengine.cc:366
 #, c-format, boost-format
 msgid "Can't chroot to '%s' (%s)."
 msgstr "'%s' (%s)にchrootすることができません。"
 
-#: zypp-core/zyppng/io/forkspawnengine.cc:282
+#: zypp-core/zyppng/io/forkspawnengine.cc:376
 #, c-format, boost-format
 msgid "Can't chdir to '%s' (%s)."
 msgstr "ディレクトリを '%s' (%s)に変更できません。"
 
-#: zypp-core/zyppng/io/forkspawnengine.cc:283
+#: zypp-core/zyppng/io/forkspawnengine.cc:377
 #, c-format, boost-format
 msgid "Can't chdir to '%s' inside chroot '%s' (%s)."
 msgstr ""
 "chroot '%s' (%s)の実行中にディレクトリを '%s' に変更することはできません。"
 
 #. don't want to get here
-#: zypp-core/zyppng/io/forkspawnengine.cc:312
+#: zypp-core/zyppng/io/forkspawnengine.cc:406
 #, c-format, boost-format
 msgid "Can't exec '%s' (%s)."
 msgstr "'%s' (%s)を実行することができません。"
 
-#: zypp-core/zyppng/io/forkspawnengine.cc:319
-#: zypp-core/zyppng/io/forkspawnengine.cc:473
+#: zypp-core/zyppng/io/forkspawnengine.cc:413
+#: zypp-core/zyppng/io/forkspawnengine.cc:567
 #, c-format, boost-format
 msgid "Can't fork (%s)."
 msgstr "fork (%s)することができません。"
 
-#: zypp-core/zyppng/io/forkspawnengine.cc:338
+#: zypp-core/zyppng/io/forkspawnengine.cc:432
 #, c-format, boost-format
 msgid "Can't exec '%s', chdir failed (%s)."
 msgstr "'%s' を実行できません。 chdir が失敗しました (%s) 。"
 
-#: zypp-core/zyppng/io/forkspawnengine.cc:341
+#: zypp-core/zyppng/io/forkspawnengine.cc:435
 #, c-format, boost-format
 msgid "Can't exec '%s', chroot failed (%s)."
 msgstr "'%s' を実行できません。 chroot が失敗しました (%s) 。"
 
-#: zypp-core/zyppng/io/forkspawnengine.cc:344
+#: zypp-core/zyppng/io/forkspawnengine.cc:438
 #, c-format, boost-format
 msgid "Can't exec '%s', exec failed (%s)."
 msgstr "'%s' を実行できません。 exec が失敗しました (%s) 。"
 
-#: zypp-core/zyppng/io/forkspawnengine.cc:348
+#: zypp-core/zyppng/io/forkspawnengine.cc:442
 #, c-format, boost-format
 msgid "Can't exec '%s', unexpected error."
 msgstr "'%s' を実行できません。予期しないエラーです。"
@@ -5069,8 +5077,8 @@ msgstr "'%s' にアクセスする際にタイムアウトになりました。"
 #, c-format, boost-format
 msgid "Downloaded data exceeded the expected filesize '%s' of '%s'."
 msgstr ""
-"ダウンロードしたデータが期待するファイルサイズを超えています (期待するサイズ"
-"=%s, 実際のサイズ=%s) 。"
+"ダウンロードしたデータが期待するファイルサイズを超えています (期待するサイズ="
+"%s, 実際のサイズ=%s) 。"
 
 #: zypp-media/mediaexception.cc:205
 #: zypp-curl/ng/network/networkrequesterror.cc:118
