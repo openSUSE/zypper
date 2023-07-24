@@ -20,10 +20,10 @@ msgstr ""
 "Project-Id-Version: zypp\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-07-24 17:02+0200\n"
-"PO-Revision-Date: 2022-12-22 17:27+0000\n"
+"PO-Revision-Date: 2023-07-24 20:15+0000\n"
 "Last-Translator: Aleš Kastner <alkas@volny.cz>\n"
-"Language-Team: Czech <https://l10n.opensuse.org/projects/libzypp/master/cs/"
-">\n"
+"Language-Team: Czech <https://l10n.opensuse.org/projects/libzypp/master/cs/>"
+"\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -4012,7 +4012,7 @@ msgstr "Vytváří se vyrovnávací paměť úložiště '%s'"
 #: zypp/RepoManager.cc:1385
 #, c-format, boost-format
 msgid "Can't create cache at %s - no writing permissions."
-msgstr "Nelze vytvořit mezipaměť v adresáři %s - chybí oprávnění k zápisu."
+msgstr "Nelze vytvořit mezipaměť v %s - chybí oprávnění k zápisu."
 
 #: zypp/RepoManager.cc:1446
 #, c-format, boost-format
@@ -4831,6 +4831,8 @@ msgid ""
 "Received signal :\"%1% (%2%)\", to ensure the consistency of the system it "
 "is not possible to cancel a running rpm transaction."
 msgstr ""
+"Přijat signál: \"%1% (%2%)\" - kvůli konzistenci systému nelze zrušit "
+"probíhající transakci RPM."
 
 #: zypp/target/TargetImpl.cc:2739
 msgid "Executing the transaction failed because of the following problems:"
