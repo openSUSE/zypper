@@ -6,9 +6,7 @@ INCLUDE_DIRECTORIES ( ${LIBZYPP_SOURCE_DIR} )
 
 ADD_DEFINITIONS( -DLOCALEDIR="${CMAKE_INSTALL_PREFIX}/share/locale" -DTEXTDOMAIN="zypp" -DZYPP_DLL )
 
-find_package(PkgConfig REQUIRED)
-pkg_check_modules(READLINE REQUIRED readline)
-
+FIND_PACKAGE( Readline REQUIRED )
 
 SET( zypp_tui_toplevel_headers
   Application
@@ -72,9 +70,9 @@ add_dependencies( zypp-tui zypp-core )
 set_target_properties( zypp-tui PROPERTIES COMPILE_FLAGS "-ffat-lto-objects")
 
 
-target_link_libraries( zypp-tui ${READLINE_LIBRARIES})
-target_include_directories( zypp-tui PUBLIC ${READLINE_INCLUDE_DIRS})
-target_compile_options( zypp-tui PUBLIC ${READLINE_CFLAGS_OTHER})
+target_link_libraries( zypp-tui ${READLINE_LIBRARY})
+target_include_directories( zypp-tui PUBLIC ${READLINE_INCLUDE_DIR})
+# target_compile_options( zypp-tui PUBLIC ${READLINE_CFLAGS_OTHER})
 
 INSTALL(TARGETS zypp-tui ARCHIVE DESTINATION ${LIB_INSTALL_DIR} )
 
