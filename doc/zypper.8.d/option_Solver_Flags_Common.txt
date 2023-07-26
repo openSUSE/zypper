@@ -2,7 +2,11 @@
 	Create solver test case for debugging. Use this option if you think the dependencies were not solved correctly. When using this option no packages will be installed or removed. Instead a solver test case is written to /var/log/zypper.solverTestCase. You can pack the directory and attach it to your bug report.
 
 *--force-resolution*::
-	Force the solver to find a solution by allowing to remove packages with unfulfilled requirements. This is the default when removing packages (*zypper remove*). This option overrides *--no-force-resolution* in case both are specified on the command line.
+	Force the solver to find a solution (_even an aggressive one_) rather than asking.
++
+In order to perform the requested job the solver is allowed to violate any otherwise active policy. This includes the allowance to remove packages but also not to respect even explicitly set policies (by *--no-allow*-_policy_ or in config files). *It is not recommended to use this option in unattended environments*.
++
+The allowance to remove dependent packages is the default when removing packages (zypper remove).
 
 *-R*, *--no-force-resolution*::
 	Do not force the solver to find a solution. Instead, report dependency problems and prompt the user to resolve them manually. This is the default except when removing packages (*zypper remove*).
