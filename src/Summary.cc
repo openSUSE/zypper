@@ -38,6 +38,32 @@
 
 // --------------------------------------------------------------------------
 
+extern ZYpp::Ptr God;
+namespace {
+  using ResolverOption = bool (zypp::Resolver::*)() const;
+
+  /** Hint if solver policy violations may be caused by --force-resolution */
+  std::string _resolverForceResolutionHint( ResolverOption option_r )
+  {
+    std::string ret;
+    if ( God->resolver()->forceResolve() && not ((*God->resolver()).*option_r)() ) {
+      ret = MSG_WARNINGString( " [--force-resolution]" ).str();
+    }
+    return ret;
+  }
+
+  std::string resolverForceResolutionHintDowngrade()
+  { return _resolverForceResolutionHint( &zypp::Resolver::allowDowngrade ); }
+
+  std::string resolverForceResolutionHintArchChange()
+  { return _resolverForceResolutionHint( &zypp::Resolver::allowArchChange ); }
+
+  std::string resolverForceResolutionHintVendorChange()
+  { return _resolverForceResolutionHint( &zypp::Resolver::allowVendorChange ); }
+} // namespace
+
+// --------------------------------------------------------------------------
+
 bool Summary::ResPairNameCompare::operator()( const ResPair & p1, const ResPair & p2 ) const
 {
   int ret = ::strcoll( p1.second->name().c_str(), p2.second->name().c_str() );
@@ -753,7 +779,7 @@ void Summary::writeDowngraded( std::ostream & out )
 #endif
     label = str::form( label.c_str(), it->second.size() );
 
-    out << endl << ( ColorContext::NEGATIVE << label ) << endl;
+    out << endl << ( ColorContext::NEGATIVE << label ) << resolverForceResolutionHintDowngrade() << endl;
     writeResolvableList( out, it->second, ColorContext::NEGATIVE );
   }
 }
@@ -1161,7 +1187,7 @@ void Summary::writeChangedArch( std::ostream & out )
 #endif
     label = str::form( label.c_str(), it->second.size() );
 
-    out << endl << ( ColorContext::CHANGE << label ) << endl;
+    out << endl << ( ColorContext::CHANGE << label ) << resolverForceResolutionHintArchChange() << endl;
     writeResolvableList( out, it->second, ColorContext::CHANGE );
   }
 }
@@ -1207,7 +1233,7 @@ void Summary::writeChangedVendor( std::ostream & out )
 #endif
     label = str::form( label.c_str(), it->second.size() );
 
-    out << endl << ( ColorContext::CHANGE << label ) << endl;
+    out << endl << ( ColorContext::CHANGE << label ) << resolverForceResolutionHintVendorChange() << endl;
     writeResolvableList( out, it->second, ColorContext::CHANGE );
   }
 }
