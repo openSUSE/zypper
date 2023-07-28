@@ -262,7 +262,7 @@ void OutNormal::dwnldProgressStart( const zypp::Url & uri )
     outstr.rhs << '[' ;
 
   std::string outline( outstr.get( termwidth() ) );
-  cout << (ColorContext::HIGHLIGHT << outline) << PROGRESS_FLUSH;
+  cout << outline << PROGRESS_FLUSH;
   // no _oneup if CRUSHed // _oneup = (outline.length() > termwidth());
 
   _newline = false;
@@ -303,7 +303,7 @@ void OutNormal::dwnldProgress( const zypp::Url & uri, int value, long rate )
   outstr.rhs << ']';
 
   std::string outline( outstr.get( termwidth() ) );
-  cout << (ColorContext::HIGHLIGHT << outline) << PROGRESS_FLUSH;
+  cout << outline << PROGRESS_FLUSH;
   // no _oneup if CRUSHed // _oneup = (outline.length() > termwidth());
   _newline = false;
 }
@@ -317,36 +317,34 @@ void OutNormal::dwnldProgressEnd( const zypp::Url & uri, long rate, zypp::TriBoo
     cout << ColorContext::MSG_STATUS;
 
   TermLine outstr( TermLine::SF_CRUSH | TermLine::SF_EXPAND, '.' );
-  ColorStream lhs { outstr.lhs.stream(), ColorContext::HIGHLIGHT };
-  ColorStream rhs { outstr.rhs.stream(), ColorContext::HIGHLIGHT };
   if ( _isatty )
   {
     if( _oneup )
       cout << ansi::tty::clearLN << ansi::tty::cursorUP;
     cout << ansi::tty::clearLN;
-    lhs << _("Retrieving:") << " ";
+    outstr.lhs << _("Retrieving:") << " ";
     if ( verbosity() == DEBUG )
-      lhs << uri;
+      outstr.lhs << uri;
     else
-      lhs << zypp::Pathname(uri.getPathName()).basename();
-    lhs << ' ';
-    rhs << '[';
+      outstr.lhs << zypp::Pathname(uri.getPathName()).basename();
+    outstr.lhs << ' ';
+    outstr.rhs << '[';
     if ( zypp::indeterminate( error ) )
       // Translator: download progress bar result: "........[not found]"
-      rhs << CHANGEString(_("not found") );
+      outstr.rhs << CHANGEString(_("not found") );
     else if ( error )
       // Translator: download progress bar result: "............[error]"
-      rhs << NEGATIVEString(_("error") );
+      outstr.rhs << NEGATIVEString(_("error") );
     else
       // Translator: download progress bar result: ".............[done]"
-      rhs << _("done");
+      outstr.rhs << _("done");
   }
   else
-    rhs << ( zypp::indeterminate( error ) ? _("not found") : ( error ? _("error") : _("done") ) );
+    outstr.rhs << ( zypp::indeterminate( error ) ? _("not found") : ( error ? _("error") : _("done") ) );
 
   if ( rate > 0 )
-    rhs << " (" << zypp::ByteCount(rate) << "/s)";
-  rhs << ']';
+    outstr.rhs << " (" << zypp::ByteCount(rate) << "/s)";
+  outstr.rhs << ']';
 
   std::string outline( outstr.get( termwidth() ) );
   cout << outline << endl << std::flush;
