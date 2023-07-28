@@ -143,7 +143,7 @@ namespace zyppng {
 
     if ( _detectedMetaType != MetaDataType::None ) {
       // this is a metalink file change the expected filesize
-      if ( zypp::ByteCount( 2, zypp::ByteCount::MB) < static_cast<zypp::ByteCount::SizeType>( dlnow ) ) {
+      if ( zypp::ByteCount( 2, zypp::ByteCount::MB) < req.downloadedByteCount() ) {
         WAR << "Metadata file exceeds 2MB in filesize, aborting."<<std::endl;
         sm._requestDispatcher->cancel( req, NetworkRequestErrorPrivate::customError( NetworkRequestError::ExceededMaxLen ) );
         return;

@@ -167,7 +167,7 @@ namespace zyppng {
   {
     auto &sm = stateMachine();
     const off_t expFSize = sm._spec.expectedFileSize();
-    if ( expFSize  > 0 && expFSize < dlnow ) {
+    if ( expFSize  > 0 && expFSize < req.downloadedByteCount() ) {
       sm._requestDispatcher->cancel( req, NetworkRequestErrorPrivate::customError( NetworkRequestError::ExceededMaxLen ) );
       return;
     }
