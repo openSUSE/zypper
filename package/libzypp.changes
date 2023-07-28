@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Fri Jul 28 12:26:54 CEST 2023 - ma@suse.de
+
+- Fix wrong filesize exceeded dl abort in zyppng::Downloader
+  (bsc#1213673)
+  In some cases when downloading very small files we can run into
+  issues when the URL is protected by credentials.
+- version 17.31.17 (22)
+
+-------------------------------------------------------------------
 Mon Jul 24 16:58:18 CEST 2023 - ma@suse.de
 
 - Fix negative ZYPP_LOCK_TIMEOUT not waiting forever (bsc#1213231)
