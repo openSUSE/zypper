@@ -110,9 +110,10 @@ int main( int argc, char * argv[] )
     message( "Use test system at " + mroot.asString() );
   }
   filesystem::assert_dir( mroot );
+  base::LogControl::instance().logfile( mroot/"ToolScanRepos.log" );
+  message( "Use logfile " + (mroot/"ToolScanRepos.log").asString() );
 
   message( "Use archiecture " + march.asString() );
-  base::LogControl::instance().logfile( mroot/"ToolScanRepos.log" );
   TestSetup test( mroot, march );
 
   int ret = 0;
