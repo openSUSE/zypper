@@ -1,4 +1,16 @@
 -------------------------------------------------------------------
+Fri Jul 28 12:29:23 CEST 2023 - ma@suse.de
+
+- man: revised explanation of --force-resolution (bsc#1213557)
+  Point out that the option not only allows to remove packages but
+  may also violate any other active policy if there is no other way
+  to resolve the job.
+- Print summary hint if policies were violated due to
+  --force-resolution (bsc#1213557)
+- BuildRequires:  libzypp-devel >= 17.31.16 (for zypp-tui)
+- version 1.14.62
+
+-------------------------------------------------------------------
 Thu Jun 15 12:07:24 CEST 2023 - ma@suse.de
 
 - targetos: Add an error note if XPath:/product/register/target
