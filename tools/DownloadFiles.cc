@@ -22,6 +22,7 @@ namespace po = boost::program_options;
 struct DLEntry {
   zypp::Url _url;
   zypp::Pathname _deltaFile;
+  zypp::ByteCount _dlSize;
 };
 
 // progress for downloading a file
@@ -168,6 +169,7 @@ int main ( int argc, char *argv[] )
 
       zypp::Url dlUrl( url.as<std::string> () );
       zypp::Pathname deltaFile;
+      zypp::ByteCount downloadSize;
 
       const auto &delta = dlFile["delta"];
       if ( delta ) {
@@ -177,7 +179,16 @@ int main ( int argc, char *argv[] )
         deltaFile = zypp::Pathname( delta.as<std::string>() );
       }
 
-      entries.push_back ( { std::move(dlUrl), std::move(deltaFile) } );
+      const auto &dlSize = dlFile["dlSize"];
+      if ( dlSize ) {
+        if ( dlSize.Type() != YAML::NodeType::Scalar )
+          return makeError("Field 'delta' must be a scalar.");
+
+        downloadSize = zypp::ByteCount( dlSize.as<long>() );
+      }
+
+
+      entries.push_back ( { std::move(dlUrl), std::move(deltaFile), std::move(downloadSize) } );
     }
   } catch ( YAML::Exception &e ) {
     std::cerr << "YAML exception: " << e.what() << std::endl;
@@ -215,13 +226,14 @@ int main ( int argc, char *argv[] )
         url.setPathName ("/");
         zypp::MediaSetAccess access(url);
 
-        zypp::ManagedFile locFile( targetDir.path().realpath() / path.dirname(), zypp::filesystem::unlink );
+        zypp::ManagedFile locFile( targetDir.path().realpath() / path, zypp::filesystem::unlink );
         zypp::filesystem::assert_dir( locFile->dirname() );
 
         auto file = access.provideFile(
           zypp::OnMediaLocation(path, 1)
             .setOptional  ( false )
-            .setDeltafile ( e._deltaFile ));
+            .setDeltafile ( e._deltaFile )
+            .setDownloadSize ( e._dlSize ) );
 
         //prevent the file from being deleted when MediaSetAccess gets out of scope
         if ( zypp::filesystem::hardlinkCopy(file, locFile) != 0 )
