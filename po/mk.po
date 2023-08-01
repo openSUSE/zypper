@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-06-15 11:58+0200\n"
-"PO-Revision-Date: 2023-06-21 09:30+0000\n"
+"PO-Revision-Date: 2023-08-01 10:15+0000\n"
 "Last-Translator: Kristijan Fremen Velkovski <me@krisfremen.com>\n"
 "Language-Team: Macedonian <https://l10n.opensuse.org/projects/zypper/master/"
 "mk/>\n"
@@ -339,27 +339,28 @@ msgstr ""
 
 #: src/Config.cc:622
 msgid "Target Options"
-msgstr ""
+msgstr "Целни Опции"
 
 #. translators: --root, -R <DIR>
 #: src/Config.cc:627
 msgid "Operate on a different root directory."
-msgstr ""
+msgstr "Оперирај на различен рут директориум."
 
 #. translators: --installroot <DIR>
 #: src/Config.cc:633
 msgid ""
 "Operate on a different root directory, but share repositories with the host."
 msgstr ""
+"Оперирај на различен рут директориум, споделувајќи ги складиштата со хостот."
 
 #: src/Config.cc:639
 msgid "Ignoring installed resolvables."
-msgstr ""
+msgstr "Игнорирање на инсталираните решеници."
 
 #. translators: --disable-system-resolvables
 #: src/Config.cc:642
 msgid "Do not read installed packages."
-msgstr ""
+msgstr "Не ги читај инсталираните пакети."
 
 #: src/Config.cc:809
 msgid "No config file is in use. Can not save options."
