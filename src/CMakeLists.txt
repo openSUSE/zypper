@@ -259,7 +259,7 @@ INSTALL(
 # bash completion script
 INSTALL(
   FILES bash-completion.sh
-  DESTINATION ${SYSCONFDIR}/bash_completion.d
+  DESTINATION ${CMAKE_INSTALL_DATADIR}/bash-completion/completions
   RENAME zypper.sh
 )
 
