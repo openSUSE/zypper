@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Wed Aug 16 16:55:29 CEST 2023 - ma@suse.de
+
+- Changed location of bash-complication (bsc#1213854).
+  This changes the location of zypper.sh bash completion script
+  from /usr/share/bash-completion/completions/.
+- version 1.14.63
+
+-------------------------------------------------------------------
 Fri Jul 28 12:29:23 CEST 2023 - ma@suse.de
 
 - man: revised explanation of --force-resolution (bsc#1213557)
