@@ -31,30 +31,19 @@ namespace env
   }
 }
 
+static const char* exit_requested_once_str;
+static const char* exit_requested_twice_str;
+
 void signal_handler( int sig )
 {
-  Zypper & zypper( Zypper::instance() );
-  if ( zypper.runtimeData().waiting_for_input )
-  {
-    /// \todo try to get rid of this by improving the ^C handling when prompting
-    zypper.immediateExit();
-  }
-  else if ( zypper.exitRequested() > 1 )
-  {
-    // translators: this will show up if you press ctrl+c twice
-    cerr << endl << _("OK OK! Exiting immediately...") << endl;
-    WAR << "Immediate Exit requested." << endl;
-    zypper.immediateExit();
-  }
-  else if ( zypper.exitRequested() == 1 )
-  {
-    // translators: this will show up if you press ctrl+c twice
-    cerr << endl << _("Trying to exit gracefully...") << endl;
-    WAR << "Trying to exit gracefully..." << endl;
+  // Do NOT write to the logfiles or use a iostream, we can NOT call into malloc here and
+  // building a string always does that.
+  Zypper & zypper( Zypper::instance( true ) );
+  if ( zypper.exitRequested() >= 1 ) {
+    write ( STDERR_FILENO, exit_requested_twice_str, strlen(exit_requested_twice_str) );
     zypper.requestImmediateExit();
-  }
-  else
-  {
+  } else {
+    write ( STDERR_FILENO, exit_requested_once_str, strlen(exit_requested_once_str) );
     zypper.requestExit();
   }
 }
@@ -125,6 +114,17 @@ int main( int argc, char **argv )
   MIL << "===== Hi, me zypper " VERSION << endl;
   dumpRange( MIL, argv, argv+argc, (sudo ? "===== 'sudo' ": "===== "), "'", "' '", "'", " =====" ) << endl;
   Zypper & zypper( Zypper::instance() );
+
+  // set up our strings we want to output in case SIGINT was triggered
+  // we can not allocate memory there, so we do it in advance and remember the translated strings
+
+  // translators: this will show up if you press ctrl+c once
+  std::string exit_requested_once_str  = zypp::str::Format("\n%1%\n") % _("Trying to exit gracefully...");
+  ::exit_requested_once_str = exit_requested_once_str.data();
+
+  // translators: this will show up if you press ctrl+c twice
+  std::string exit_requested_twice_str = zypp::str::Format("\n%1%\n") % _("Zypper is currently cleaning up, exiting as soon as possible.");
+  ::exit_requested_twice_str = exit_requested_twice_str.data();
 
   if ( ::signal( SIGINT, signal_handler ) == SIG_ERR )
     zypper.out().error("Failed to set SIGINT handler.");
