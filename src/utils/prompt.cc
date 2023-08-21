@@ -21,8 +21,6 @@
 
 #include "prompt.h"
 
-
-
 // ----------------------------------------------------------------------------
 
 //! \todo The default values seems to be useless - we always want to auto-return 'retry' in case of no user input.
@@ -64,8 +62,11 @@ int read_action_ari_with_timeout( PromptId pid, unsigned timeout, int default_ac
     //!       is there a way to do this without waiting for newline?
     while ( const auto pollRes = poll( &pollfds, 1, 5 ) ) // some user input, timeout 5msec
     {
-      if ( pollRes == -1 && errno == EINTR )
+      if ( pollRes == -1 && errno == EINTR ) {
+        // check for sigint
+        zypper.immediateExitCheck();
         continue;
+      }
 
       reply = getchar();
       char reply_str[2] = { reply, 0 };
@@ -99,6 +100,9 @@ int read_action_ari_with_timeout( PromptId pid, unsigned timeout, int default_ac
       else
         WAR << pid << " Unknown char " << reply << endl;
     }
+
+    // check for sigint
+    zypper.immediateExitCheck();
 
     std::string msg = str::Format(PL_("Autoselecting '%s' after %u second.",
                                       "Autoselecting '%s' after %u seconds.",
@@ -176,36 +180,67 @@ unsigned get_prompt_reply( Zypper & zypper, PromptId pid, const PromptOptions & 
 
   clear_keyboard_buffer();
 
-  // set runtimeData().waiting_for_input flag while in this function
-  struct Bye
-  {
-    Bye( bool & flag ) : _flag( flag ) { _flag = true; }
-    ~Bye() { _flag = false; }
-    bool & _flag;
-  } say_goodbye( zypper.runtimeData().waiting_for_input );
-
   // PENDING SigINT? Some frequently called place to avoid exiting from within the signal handler?
   zypper.immediateExitCheck();
 
+  const auto &bailOut = [&](){
+    WAR << "Could not read the answer - bad stream or EOF" << endl;
+    zypper.out().error( _("Cannot read input: bad stream or EOF."),
+                        str::Format(_("If you run zypper without a terminal, use '%s' global\n"
+                        "option to make zypper use default answers to prompts."))
+                        % "--non-interactive" );
+    zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
+    ZYPP_THROW( ExitRequestException("Cannot read input. Bad stream or EOF.") );
+  };
+
   // open a terminal for input (bnc #436963)
-  std::ifstream stm( "/dev/tty" );
+  zypp::AutoFILE stm( fopen("/dev/tty", "r") );
+  if (!stm) bailOut();
 
   std::string reply;
   int reply_int = -1;
   unsigned loopcnt = 0;
-  while ( /*true*/++loopcnt )
-  {
-    reply = str::getline( stm, str::TRIM );
-    // if we cannot read input or it is at EOF (bnc #436963), exit
-    if ( ! stm.good() )
+  while ( /*true*/++loopcnt ) {
+    pollfd pollfds;
+    pollfds.fd = fileno(stm);
+    pollfds.events = POLLIN; // wait only for data to read
+
+    while ( true )
     {
-      WAR << "Could not read the answer - bad stream or EOF" << endl;
-      zypper.out().error( _("Cannot read input: bad stream or EOF."),
-                          str::Format(_("If you run zypper without a terminal, use '%s' global\n"
-                          "option to make zypper use default answers to prompts."))
-                          % "--non-interactive" );
-      zypper.setExitCode(ZYPPER_EXIT_ERR_ZYPP);
-      ZYPP_THROW( ExitRequestException("Cannot read input. Bad stream or EOF.") );
+      //! Since we are operating on a tty, which is line based, poll will only
+      //! return if there is a line to read in the buffer.
+      //! We can use that behavior with a timeout to check for the ctrl+c flag
+      const auto pollRes = poll( &pollfds, 1, 1 * 1000 ); // wait for user input, timeout 1 sec
+      if ( pollRes == -1 ) {
+        if ( errno == EINTR ) {
+          // check for sigint
+          zypper.immediateExitCheck();
+          continue;
+        }
+        else bailOut();
+      }
+
+      // timeout, check for SIGINT, then continue to wait for input
+      if ( pollRes == 0 ) {
+        zypper.immediateExitCheck();
+        continue;
+      }
+
+      zypp::AutoFREE<char> rawLine((char *)nullptr);
+      size_t len = 0;
+
+      ssize_t nread = ::getline( &rawLine.value(), &len, stm );
+      // if we cannot read input or it is at EOF (bnc #436963), exit
+      if ( nread == -1 ) bailOut();
+
+      //getline returns the \n so we need to remove that
+      if ( nread == 1 ) {
+        reply = "";
+      } else {
+        reply = str::trim( std::string( rawLine.value(), 0, nread - 1) );
+      }
+
+      break;
     }
 
     // empty reply is a good reply (on enter)

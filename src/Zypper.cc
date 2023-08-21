@@ -192,11 +192,12 @@ Zypper::~Zypper()
 }
 
 
-Zypper & Zypper::instance()
+Zypper & Zypper::instance(bool inSignalHandler)
 {
   static Zypper _instance;
   // PENDING SigINT? Some frequently called place to avoid exiting from within the signal handler?
-  _instance.immediateExitCheck();
+  if ( !inSignalHandler )
+    _instance.immediateExitCheck();
   return _instance;
 }
 
@@ -255,6 +256,24 @@ Out & Zypper::out()
     // PENDING SigINT? Some frequently called place to avoid exiting from within the signal handler?
     immediateExitCheck();
     return Application::out();
+}
+
+/*!
+ * This function sets the exit requested flag. It must be safe to be
+ * called from a signal handler, so it must obey the rules for it https://man7.org/linux/man-pages/man7/signal-safety.7.html
+ */
+void Zypper::requestExit(bool do_exit)
+{
+  _exit_requested = do_exit ? 1 : 0;
+}
+
+/*!
+ * This function sets the exit requested flag. It must be safe to be
+ * called from a signal handler, so it must obey the rules for it https://man7.org/linux/man-pages/man7/signal-safety.7.html
+ */
+void Zypper::requestImmediateExit()
+{
+  _exit_requested = 2;
 }
 
 void print_command_help_hint( Zypper & zypper )

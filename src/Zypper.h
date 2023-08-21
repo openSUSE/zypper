@@ -72,7 +72,6 @@ struct RuntimeData
   , rpm_pkg_current( 0 )
   , seen_verify_hint( false )
   , action_rpm_download( false )
-  , waiting_for_input( false )
   , entered_commit( false )
   , tmpdir( zypp::myTmpDir() / "zypper" )
   {
@@ -121,8 +120,6 @@ struct RuntimeData
   bool seen_verify_hint;
   bool action_rpm_download;
 
-  //! \todo move this to a separate Status struct
-  bool waiting_for_input;
   bool entered_commit;	// bsc#946750 - give ZYPPER_EXIT_ERR_COMMIT priority over ZYPPER_EXIT_ON_SIGNAL
 
   //! Temporary directory for any use, e.g. for temporary repositories.
@@ -136,7 +133,7 @@ class Zypper : public ztui::Application
 public:
   typedef std::vector<std::string>  ArgList;
 
-  static Zypper & instance();
+  static Zypper & instance( bool inSignalHandler = false );
 
   int main( int argc, char ** argv );
 
@@ -165,8 +162,8 @@ public:
   bool runningHelp() const			{ return _running_help; }
 
   unsigned exitRequested() const		{ return _exit_requested; }
-  void requestExit( bool do_exit = true )	{ _exit_requested = do_exit ? 1 : 0; }
-  void requestImmediateExit()			{ _exit_requested = 2; }
+  void requestExit( bool do_exit = true );
+  void requestImmediateExit();
 
 private:
   struct SigExitTreasureT {
