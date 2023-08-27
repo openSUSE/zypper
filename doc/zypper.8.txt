@@ -95,7 +95,7 @@ Zypper works with several types of resource objects, called _resolvables_. A res
 +
 Selecting the patch, the conflict is resolved by updating all installed and affected/vulnerable packages to a version providing the fix. When updating the packages zypper always aims for the latest available version. Resolved patches are classified as either *applied* or *not needed*, depending on whether they refer to actually installed packages.
 +
-So installation, update or removal of packages may change the classification of patches refering to these packages. Since libyzpp-17.23.0 the /var/log/zypp/history remembers if a commited transaction changes a patchs classification. If history data are available, patch tables show a column telling _since_ when the patch is in it's current state.
+So installation, update or removal of packages may change the classification of patches referring to these packages. Since libyzpp-17.23.0 the /var/log/zypp/history remembers if a committed transaction changes a patchs classification. If history data are available, patch tables show a column telling _since_ when the patch is in it's current state.
 +
 Depending on the kind of defect, patches are classified by _category_ and _severity_. Commonly used values for _category_ are *security*, (*recommended*, *bugfix*), (*optional*, *feature*, *enhancement*) *document* or *yast*. Commonly used values for _severity_ are *critical*, *important*, *moderate*, *low* or *unspecified*. Names listed in parentheses are used synonymously.
 +
@@ -115,7 +115,7 @@ If the issuer decides to retract a released patch, the patch status will be show
 *application*::
 	Legacy: Since libzypp-17.7.0 this type is no longer available.
 
-Throughout this manual we will often refer to resolvables simply as _packages_ and to resolvable types as _package type_ or _kind_. These type names can be used as arguments of *--type* option in several commands like *install*, *info*, or *search*. Commands should also allow to specify resolvables as __KIND__**:**__NAME__ (e.g. *patch:openSUSE-2014-7*).
+Throughout this manual we will often refer to resolvables simply as _packages_ and to resolvable types as _package type_ or _kind_. These type names can be used as arguments of *--type* option in several commands like *install*, *info*, or *search*. Commands should also allow one to specify resolvables as __KIND__**:**__NAME__ (e.g. *patch:openSUSE-2014-7*).
 
 
 Package Dependencies
@@ -273,7 +273,7 @@ If _product_ or _pattern_ are specified, zypper ensures that all required (and o
 		Install even if the item is already installed (reinstall), downgraded or changes vendor or architecture.
 
 	*--oldpackage*::
-		Allow to replace a newer item with an older one. Handy if you are doing a rollback. Unlike --force it will not enforce a reinstall, if the item is already installed with the requested version.
+		Allows one to replace a newer item with an older one. Handy if you are doing a rollback. Unlike --force it will not enforce a reinstall, if the item is already installed with the requested version.
 
 	*--from* _alias_|_name_|_#_|_URI_::
 		Select packages from specified repository. If strings specified as arguments to the install command match packages in repositories specified in this option, they will be marked for installation. This option currently implies *--name*, but allows using wildcards for specifying packages.
@@ -412,7 +412,7 @@ include::{incdir}/option_Solver_Flags_Installs.txt[]
 *install-new-recommends* (*inr*) [_options_]::
 	Install newly added packages recommended by already installed ones. This command basically re-evaluates the recommendations of all installed packages and fills up the system accordingly. _You don't want to call this unconditionally_ on small or minimal systems, as it may easily add a large number of packages.
 +
-Called as *zypper inr --no-recommends*, it restricts the command to just look for packages supporting available hardware, languages or filesystems. Usefull after having added e.g. new hardware or driver repos. This is also the default behavior if you have set [zypp.conf:solver.onlyRequires].
+Called as *zypper inr --no-recommends*, it restricts the command to just look for packages supporting available hardware, languages or filesystems. Useful after having added e.g. new hardware or driver repos. This is also the default behavior if you have set [zypp.conf:solver.onlyRequires].
 +
 --
 	*-r*, *--repo* _alias_|_name_|_#_|_URI_::
@@ -1538,7 +1538,7 @@ This command looks for locks that do not currently (with regard to repositories 
 
 Locale Management
 ~~~~~~~~~~~~~~~~~
-These commands give information about requested locales and the possibilty to manage those. A locale is defined by a language code. For many packages there are locale dependent packages available which provide translations or dictionaries. To get these installed, the locale for the desired language must be marked as requested by the package manager library.
+These commands give information about requested locales and the possibility to manage those. A locale is defined by a language code. For many packages there are locale dependent packages available which provide translations or dictionaries. To get these installed, the locale for the desired language must be marked as requested by the package manager library.
 
 *locales* (*lloc*) [OPTIONS] [LOCALE] ...::
  List requested locales. Called without argument, lists the locales which are already marked as requested. Specifying certain locale(s) prints information only for this(these).
@@ -1744,7 +1744,7 @@ The order of preference with *--config* is as follows:
 	. [*/etc/zypp/zypp.conf*] (system-wide defaults for all libzypp based applications)
 --
 +
-NOTE: Use and location of the system-wide */etc/zypp/zypp.conf* can not be changed this way. It's mentioned here just because some zypper command line options allow to overwrite system-wide defaults defined in *zypp.conf*.
+NOTE: Use and location of the system-wide */etc/zypp/zypp.conf* can not be changed this way. It's mentioned here just because some zypper command line options allow one to overwrite system-wide defaults defined in *zypp.conf*.
 +
 See also *FILES* section for more information.
 
@@ -1890,7 +1890,7 @@ User's settings are preferred over global settings. Similarly, command line opti
 +
 See the comments in */etc/zypp/zypper.conf* for a list and description of available options.
 +
-NOTE: The system-wide */etc/zypp/zypp.conf* is mentioned here just because some zypper command line options allow to overwrite system-wide defaults defined there. *zypp.conf* and *zypper.conf* have different content and serve different purpose.
+NOTE: The system-wide */etc/zypp/zypp.conf* is mentioned here just because some zypper command line options allow one to overwrite system-wide defaults defined there. *zypp.conf* and *zypper.conf* have different content and serve different purpose.
 
 */etc/zypp/zypp.conf*::
 	ZYpp configuration file affecting all libzypp based applications. See the comments in the file for description of configurable properties. Many locations of files and directories listed in this section are configurable via zypp.conf. The location for this file itself can be redefined only by setting *$ZYPP_CONF* in the environment.

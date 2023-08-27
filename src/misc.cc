@@ -383,7 +383,7 @@ void build_deps_install( Zypper & zypper, const PackageSpec &spec, bool buildDep
 
   for ( SrcPackage::constPtr srcpkg : srcpkgs )
   {
-    DBG << "Injecting build requieres for " << srcpkg << endl;
+    DBG << "Injecting build requires for " << srcpkg << endl;
 
     // install build depenendcies only
     if ( buildDepsOnly_r )
