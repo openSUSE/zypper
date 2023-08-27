@@ -118,8 +118,8 @@ ConfigTestCmd::ConfigTestCmd(std::vector<std::string> &&commandAliases_r):
   ZypperBaseCommand (
     std::move( commandAliases_r ),
     "configtest",
-    "This command is for debuging purposes only.",
-    "This command is for debuging purposes only.",
+    "This command is for debugging purposes only.",
+    "This command is for debugging purposes only.",
     DisableAll
         )
 { }
