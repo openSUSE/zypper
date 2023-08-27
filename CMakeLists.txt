@@ -3,8 +3,19 @@ PROJECT( ZYPPER C CXX )
 SET( PACKAGE "zypper" )
 
 # where to look first for cmake modules, before ${CMAKE_ROOT}/Modules/ is checked
+IF (DEFINED ZYPP_PREFIX)
+  SET( CMAKE_MODULE_PATH
+    ${ZYPP_PREFIX}/${LIB}/cmake/Zypp/
+    ${CMAKE_MODULE_PATH}
+  )
+ELSE (DEFINED ZYPP_PREFIX)
+  SET( CMAKE_MODULE_PATH
+    ${CMAKE_INSTALL_PREFIX}/${LIB}/cmake/Zypp/
+    ${CMAKE_MODULE_PATH}
+  )
+ENDIF (DEFINED ZYPP_PREFIX)
+
 SET( CMAKE_MODULE_PATH
-  ${ZYPP_PREFIX}/share/cmake/Modules
   ${ZYPPER_SOURCE_DIR}/cmake/modules
   ${CMAKE_MODULE_PATH}
 )
