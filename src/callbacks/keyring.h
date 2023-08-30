@@ -55,6 +55,8 @@ namespace zypp
     inline void warnFileModifiedAfterSigning()
     {
       Zypper::instance().out().warningPar( 4, str::Format(_("This file was modified after it has been signed. This may have been a malicious change, so it might not be trustworthy anymore! You should not continue unless you know it's safe.") ) );
+
+      Zypper::instance().out().notePar( 4, str::Format(_("This might be a transient issue if the server is in the midst of receiving new data. The data file and its signature are two files which must fit together. In case the request hit the server in the midst of updating them, the signature verification might fail. After a few minutes, when the server has updated its data, it should work again.") ) );
     }
 
     std::ostream & dumpKeyInfo( std::ostream & str, const PublicKeyData & key, const KeyContext & context = KeyContext() )
