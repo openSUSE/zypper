@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-08-30 14:01+0200\n"
-"PO-Revision-Date: 2023-07-13 18:15+0000\n"
+"PO-Revision-Date: 2023-08-30 15:15+0000\n"
 "Last-Translator: Freek de Kruijf <freek@opensuse.org>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/zypper/master/nl/>\n"
 "Language: nl\n"
@@ -1518,6 +1518,12 @@ msgid ""
 "the signature verification might fail. After a few minutes, when the server "
 "has updated its data, it should work again."
 msgstr ""
+"Dit kan een tijdelijk probleem zijn als de server in het midden is van het "
+"ontvangen van nieuwe gegevens. Het gegevensbestand en zijn ondertekening "
+"zijn twee bestanden die samen moeten passen. In gevat het verzoek de server "
+"inkomt midden tijdens het bijwerken, dan kan de verificatie van de "
+"ondertekening mislukken. Na een paar minuten, wanneer de server zijn "
+"gegevens heeft bijgewerkt, zou het weer moeten werken."
 
 #: src/callbacks/keyring.h:88
 msgid "Repository:"
@@ -5758,7 +5764,7 @@ msgstr "Proberen netjes te eindigen..."
 #. translators: this will show up if you press ctrl+c twice
 #: src/main.cc:126
 msgid "Zypper is currently cleaning up, exiting as soon as possible."
-msgstr ""
+msgstr "Zypper is nu bezig met opschonen, zal zo spoedig mogelijk eindigen."
 
 #. translators: the first %s is name of the resolvable,
 #. the second is its kind (e.g. 'zypper package')
