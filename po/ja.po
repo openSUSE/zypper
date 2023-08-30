@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-08-30 14:01+0200\n"
-"PO-Revision-Date: 2023-06-16 00:15+0000\n"
+"PO-Revision-Date: 2023-08-31 01:15+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
 "Language-Team: Japanese <https://l10n.opensuse.org/projects/zypper/master/ja/"
 ">\n"
@@ -1383,6 +1383,9 @@ msgid ""
 "the signature verification might fail. After a few minutes, when the server "
 "has updated its data, it should work again."
 msgstr ""
+"サーバ側で新しいデータを受信途中の場合、一時的に問題が発生する場合があります。これは、データファイルと署名が別々のファイルでありながら、互いに合致していな"
+"ければならない仕組みであるためです。データファイルと署名のどちらか片方だけが受信済みの場合、署名検証は失敗します。しばらくして両方が受信済みになると、署名"
+"検証が成功するようになるはずです。"
 
 #: src/callbacks/keyring.h:88
 msgid "Repository:"
@@ -5548,7 +5551,7 @@ msgstr "終了処理中です。しばらくお待ちください..."
 #. translators: this will show up if you press ctrl+c twice
 #: src/main.cc:126
 msgid "Zypper is currently cleaning up, exiting as soon as possible."
-msgstr ""
+msgstr "zypper はクリーンアップ処理を実行中です。できる限り速やかに終了します。"
 
 #. translators: the first %s is name of the resolvable,
 #. the second is its kind (e.g. 'zypper package')
