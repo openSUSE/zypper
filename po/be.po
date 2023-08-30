@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-15 11:58+0200\n"
+"POT-Creation-Date: 2023-08-30 14:01+0200\n"
 "PO-Revision-Date: 2020-03-01 14:55+0000\n"
 "Last-Translator: Yahor Pravdikov <mocachin@protonmail.com>\n"
 "Language-Team: Belarusian <https://l10n.opensuse.org/projects/zypper/master/"
@@ -64,16 +64,16 @@ msgstr "Падкаманды:"
 msgid "Unknown command '%s'"
 msgstr "Невядомая каманда: '%s'"
 
-#: src/CommitSummary.cc:90
+#: src/CommitSummary.cc:91
 msgid "Installation has completed with error."
 msgstr ""
 
-#: src/CommitSummary.cc:92
+#: src/CommitSummary.cc:93
 #, boost-format
 msgid "You may run '%1%' to repair any dependency problems."
 msgstr ""
 
-#: src/CommitSummary.cc:125
+#: src/CommitSummary.cc:126
 #, c-format, boost-format
 msgid "The following package failed to install:"
 msgid_plural "The following %d packages failed to install:"
@@ -81,7 +81,7 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/CommitSummary.cc:140
+#: src/CommitSummary.cc:141
 #, c-format, boost-format
 msgid "The following package installation was skipped:"
 msgid_plural "The following %d package installations were skipped:"
@@ -89,7 +89,7 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/CommitSummary.cc:155
+#: src/CommitSummary.cc:156
 #, c-format, boost-format
 msgid "The following package failed to uninstall:"
 msgid_plural "The following %d packages failed to uninstall:"
@@ -97,7 +97,7 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/CommitSummary.cc:170
+#: src/CommitSummary.cc:171
 #, c-format, boost-format
 msgid "The following package removal was skipped:"
 msgid_plural "The following %d package removal were skipped:"
@@ -107,8 +107,8 @@ msgstr[2] ""
 
 #. translators: Appended when clipping a long enumeration:
 #. "ConsoleKit-devel ConsoleKit-doc ... and 20828 more items."
-#: src/CommitSummary.cc:231 src/CommitSummary.cc:277 src/Summary.cc:491
-#: src/Summary.cc:567
+#: src/CommitSummary.cc:232 src/CommitSummary.cc:278 src/Summary.cc:518
+#: src/Summary.cc:594
 #, boost-format
 msgid "... and %1% more item."
 msgid_plural "... and %1% more items."
@@ -126,83 +126,83 @@ msgstr "Несапраўдны стыль табліцы %d."
 msgid " Use an integer number from %d to %d"
 msgstr " Выкарыстоўвайце цэлы лік у дыапазоне ад %d да %d"
 
-#: src/Config.cc:250
+#: src/Config.cc:172
 msgid "The path specified in the --root option must be absolute."
 msgstr ""
 "Шлях, які вы ўказалі з дапамогай параметру \"--root option\", павінен быць "
 "абсалютным."
 
 #. translators: --help, -h
-#: src/Config.cc:328
+#: src/Config.cc:236
 msgid "Help."
 msgstr "Даведка."
 
 #. translators: --version, -V
-#: src/Config.cc:337
+#: src/Config.cc:245
 msgid "Output the version number."
 msgstr "Вывесці нумар версіі."
 
 #. translators: --promptids
-#: src/Config.cc:349
+#: src/Config.cc:257
 msgid "Output a list of zypper's user prompts."
 msgstr "Вывесці спіс карыстальніцкіх запытаў zypper."
 
 #. translators: --config, -c <FILE>
-#: src/Config.cc:362
+#: src/Config.cc:270
 msgid "Use specified config file instead of the default."
 msgstr "Выкарыстоўваць абраны файл канфігурацыі замест стандартнага."
 
-#: src/Config.cc:369
+#: src/Config.cc:277
 msgid "User data string must not contain nonprintable or newline characters!"
 msgstr ""
 "Страка інфармацыі а карыстальніках не павінна складацца з непечатных "
 "сімвалаў або пераводаў на новую страку!"
 
 #. translators: --userdata <STRING>
-#: src/Config.cc:375
+#: src/Config.cc:283
 msgid "User defined transaction id used in history and plugins."
 msgstr ""
 "Вызначаны карыстальнікам ідэнтыфікатар транзакцыі, які выкарыстоўваецца ў "
 "гісторыі і модулях."
 
 #. translators: --quiet, -q
-#: src/Config.cc:383
+#: src/Config.cc:291
 msgid "Suppress normal output, print only error messages."
 msgstr ""
 "Выключышь звычайны вывад дзеянняў, вывадзіць толькі паведамленія аб памылках."
 
 #. translators: --verbose, -v
-#: src/Config.cc:391
+#: src/Config.cc:299
 msgid "Increase verbosity."
 msgstr "Павялічыць падрабязнасць уводу."
 
 #. translators: --color / --no-color
-#: src/Config.cc:412
+#: src/Config.cc:320
 msgid "Whether to use colors in output if tty supports it."
 msgstr ""
 "Выкарыстоўваць лі падсветку вываду. Працуе толькі калі tty падтрымлівае гэта."
 
 #. translators: --no-abbrev, -A
-#: src/Config.cc:417
+#: src/Config.cc:325
 msgid "Do not abbreviate text in tables."
 msgstr "Не выкарыстоўваць абрэвіатуры ў табліцах."
 
 #. translators: --table-style, -s, %1% denotes the supported range of the integer argument (e.g. "1-11")
-#: src/Config.cc:422
+#: src/Config.cc:330
 #, boost-format
 msgid "Table style (%1%)."
 msgstr "Стыль табліцы (%1%)."
 
-#: src/Config.cc:426 src/commands/optionsets.cc:284
+#: src/Config.cc:334 src/commands/optionsets.cc:284
 msgid "Entering non-interactive mode."
 msgstr "Пераход ў неінтэрактыўны рэжым."
 
 #. translators: --non-interactive, -n
-#: src/Config.cc:430
+#: src/Config.cc:338
 msgid "Do not ask anything, use default answers automatically."
 msgstr "Не пытацца ні аб чым, адразу выкарыстоўваць адказы."
 
-#: src/Config.cc:435
+#: src/Config.cc:343
 msgid ""
 "Patches having the flag rebootSuggested set will not be treated as "
 "interactive."
@@ -210,24 +210,24 @@ msgstr ""
 "Выпраўлення з флагам rebootSuggested не будуць выконвацца яе інтэрактыўныя."
 
 #. translators: --non-interactive-include-reboot-patches
-#: src/Config.cc:439
+#: src/Config.cc:347
 msgid ""
 "Do not treat patches as interactive, which have the rebootSuggested-flag set."
 msgstr ""
 "Не лічыць інтэрактыўнымі выпраўлення з пастаўленным флагам rebootSuggested."
 
 #. translators: --xmlout, -x
-#: src/Config.cc:449
+#: src/Config.cc:357
 msgid "Switch to XML output."
 msgstr "Змяніць вывад на XML."
 
 #. translators: --ignore-unknown, -i
-#: src/Config.cc:454
+#: src/Config.cc:362
 msgid "Ignore unknown packages."
 msgstr "Ігнараваць невядомыя пакеты."
 
 #. translators: --terse, -t
-#: src/Config.cc:465
+#: src/Config.cc:373
 msgid ""
 "Terse output for machine consumption. Implies --no-abbrev and --no-color."
 msgstr ""
@@ -235,62 +235,62 @@ msgstr ""
 "параметраў --no-abbrev і --no-color."
 
 #. translators: --reposd-dir, -D <DIR>
-#: src/Config.cc:489
+#: src/Config.cc:397
 msgid "Use alternative repository definition file directory."
 msgstr ""
 "Выкарыстоўваць альтэрнатыўны каталог файлаў з азначэннямі рэпазіторыяў."
 
 #. translators: --cache-dir, -C <DIR>
-#: src/Config.cc:504
+#: src/Config.cc:412
 msgid "Use alternative directory for all caches."
 msgstr "Выкарыстоўваць альтэрнатыўны каталог для ўсіх кэшаў."
 
 #. translators: --raw-cache-dir <DIR>
-#: src/Config.cc:517
+#: src/Config.cc:425
 msgid "Use alternative raw meta-data cache directory."
 msgstr "Выкарыстоўваць альтэрнатыўны каталог кэшу неапрацованных метададзеных."
 
 #. translators: --solv-cache-dir <DIR>
-#: src/Config.cc:531
+#: src/Config.cc:439
 msgid "Use alternative solv file cache directory."
 msgstr "Выкарыстоўваць альтэрнатыўны каталог кэша файлаў вырашальніка."
 
 #. translators: --pkg-cache-dir <DIR>
-#: src/Config.cc:545
+#: src/Config.cc:453
 msgid "Use alternative package cache directory."
 msgstr "Выкарыстоўваць альтэрнатыўны каталог кэша пакетаў."
 
-#: src/Config.cc:550
+#: src/Config.cc:458
 msgid "Repository Options"
 msgstr "Параметры рэпазіторыяў"
 
-#: src/Config.cc:554
+#: src/Config.cc:462
 msgid "Entering 'no-gpg-checks' mode."
 msgstr "Пераход ў рэжым no-gpg-checks."
 
 #. translators: --no-gpg-checks
-#: src/Config.cc:558
+#: src/Config.cc:466
 msgid "Ignore GPG check failures and continue."
 msgstr "Ігнараваць няўдалыя праверкі GPG і працягваць."
 
-#: src/Config.cc:563
+#: src/Config.cc:471
 #, c-format, boost-format
 msgid ""
 "Turning on '%s'. New repository signing keys will be automatically imported!"
 msgstr "Уключэнне '%s'. Ключы новых рэпазіторыяў імпартыруюцца аўтаматычна!"
 
 #. translators: --gpg-auto-import-keys
-#: src/Config.cc:569
+#: src/Config.cc:477
 msgid "Automatically trust and import new repository signing keys."
 msgstr "Аўмататычна давяраць і імпартыраваць ключы новых рэпазіторыяў."
 
 #. translators: --plus-repo, -p <URI>
-#: src/Config.cc:573
+#: src/Config.cc:481
 msgid "Use an additional repository."
 msgstr "Скарыстацца дадатаковым рэпазіторыем."
 
 #. translators: --plus-content <TAG>
-#: src/Config.cc:577
+#: src/Config.cc:485
 msgid ""
 "Additionally use disabled repositories providing a specific keyword. Try '--"
 "plus-content debug' to enable repos indicating to provide debug packages."
@@ -299,45 +299,45 @@ msgstr ""
 "слова. Паспрабуйце ўказаць --plus-content debug каб уключыць рэпазіторыі, "
 "якія прадстаўляюць пакеты для адладкі."
 
-#: src/Config.cc:583
+#: src/Config.cc:491
 msgid "Repositories disabled, using the database of installed packages only."
 msgstr ""
 "Рэпазіторыі адключаны, выкарыстоўваецца толькі база усталяваных пакетаў."
 
 #. translators: --disable-repositories
-#: src/Config.cc:587
+#: src/Config.cc:495
 msgid "Do not read meta-data from repositories."
 msgstr "Не чытаць метададзеныя з рэпазіторыяў."
 
-#: src/Config.cc:591
+#: src/Config.cc:499
 msgid "Autorefresh disabled."
 msgstr "Аўтаматычнае аднаўленне адключана."
 
 #. translators: --no-refresh
-#: src/Config.cc:595
+#: src/Config.cc:503
 msgid "Do not refresh the repositories."
 msgstr "Не аднаўляць рэпазіторыі."
 
-#: src/Config.cc:599
+#: src/Config.cc:507
 msgid "CD/DVD repositories disabled."
 msgstr "Рэпазіторыі на CD/DVD адключаны."
 
 #. translators: --no-cd
-#: src/Config.cc:603
+#: src/Config.cc:511
 msgid "Ignore CD/DVD repositories."
 msgstr "Ігнараваць рэпазіторыі на CD/DVD."
 
-#: src/Config.cc:607
+#: src/Config.cc:515
 msgid "Remote repositories disabled."
 msgstr "Удалённыя рэпазіторыі адключаны."
 
 #. translators: --no-remote
-#: src/Config.cc:611
+#: src/Config.cc:519
 msgid "Ignore remote repositories."
 msgstr "Ігнараваць удалённыя рэпазіторыі."
 
 #. translators: --releasever
-#: src/Config.cc:618
+#: src/Config.cc:526
 msgid ""
 "Set the value of $releasever in all .repo files (default: distribution "
 "version)"
@@ -345,43 +345,43 @@ msgstr ""
 "Задаць значэнне $releasever ва ўсіх файлах .repo (па стандарту: версія "
 "дыстрыбутыва)"
 
-#: src/Config.cc:622
+#: src/Config.cc:530
 msgid "Target Options"
 msgstr "Параметры цэлявога аб'екту"
 
 #. translators: --root, -R <DIR>
-#: src/Config.cc:627
+#: src/Config.cc:535
 msgid "Operate on a different root directory."
 msgstr "Працаваць ў іншым карневым каталозе."
 
 #. translators: --installroot <DIR>
-#: src/Config.cc:633
+#: src/Config.cc:541
 msgid ""
 "Operate on a different root directory, but share repositories with the host."
 msgstr ""
 "Работа з рознымі карнявымі каталогамі, но выкарыстоўванне адных рэпазіторыяў "
 "разам з хастом."
 
-#: src/Config.cc:639
+#: src/Config.cc:547
 msgid "Ignoring installed resolvables."
 msgstr "Ігнараванне ўсталяванных аб'ектаў дазвола залежнасцей."
 
 #. translators: --disable-system-resolvables
-#: src/Config.cc:642
+#: src/Config.cc:550
 msgid "Do not read installed packages."
 msgstr "Не выконваць чытанне ўстаноўленных пакетаў."
 
-#: src/Config.cc:809
+#: src/Config.cc:717
 msgid "No config file is in use. Can not save options."
 msgstr ""
 "Адсутнічае выкарыстоўваемы файл канфігурацыі. Немажліва захаваць параметры."
 
-#: src/Config.cc:820
+#: src/Config.cc:728
 #, boost-format
 msgid "Option '%1%' saved in '%2%'."
 msgstr "Параметар '%1%' захаваны ў '%2%'."
 
-#: src/Config.cc:827
+#: src/Config.cc:735
 msgid "Failed to save option."
 msgstr "Не атрымалася захаваць параметар."
 
@@ -678,47 +678,47 @@ msgstr "Падазроннае значэнне фільтра важлівас�
 #. translator: '%1%' is a products name
 #. '%2%' is a command to call (like 'zypper dup')
 #. Both may contain whitespace and should be enclosed by quotes!
-#: src/Summary.cc:416
+#: src/Summary.cc:443
 #, boost-format
 msgid "Product '%1%' requires to be updated by calling '%2%'!"
 msgstr ""
 
-#: src/Summary.cc:585
+#: src/Summary.cc:612
 #, c-format, boost-format
 msgid "The following NEW package is going to be installed:"
 msgid_plural "The following %d NEW packages are going to be installed:"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Summary.cc:590
+#: src/Summary.cc:617
 #, c-format, boost-format
 msgid "The following NEW patch is going to be installed:"
 msgid_plural "The following %d NEW patches are going to be installed:"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Summary.cc:595
+#: src/Summary.cc:622
 #, c-format, boost-format
 msgid "The following NEW pattern is going to be installed:"
 msgid_plural "The following %d NEW patterns are going to be installed:"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Summary.cc:600
+#: src/Summary.cc:627
 #, c-format, boost-format
 msgid "The following NEW product is going to be installed:"
 msgid_plural "The following %d NEW products are going to be installed:"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Summary.cc:605
+#: src/Summary.cc:632
 #, c-format, boost-format
 msgid "The following source package is going to be installed:"
 msgid_plural "The following %d source packages are going to be installed:"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Summary.cc:611
+#: src/Summary.cc:638
 #, c-format, boost-format
 msgid "The following application is going to be installed:"
 msgid_plural "The following %d applications are going to be installed:"
@@ -726,35 +726,35 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/Summary.cc:636
+#: src/Summary.cc:663
 #, c-format, boost-format
 msgid "The following package is going to be REMOVED:"
 msgid_plural "The following %d packages are going to be REMOVED:"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Summary.cc:641
+#: src/Summary.cc:668
 #, c-format, boost-format
 msgid "The following patch is going to be REMOVED:"
 msgid_plural "The following %d patches are going to be REMOVED:"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Summary.cc:646
+#: src/Summary.cc:673
 #, c-format, boost-format
 msgid "The following pattern is going to be REMOVED:"
 msgid_plural "The following %d patterns are going to be REMOVED:"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Summary.cc:651
+#: src/Summary.cc:678
 #, c-format, boost-format
 msgid "The following product is going to be REMOVED:"
 msgid_plural "The following %d products are going to be REMOVED:"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Summary.cc:657
+#: src/Summary.cc:684
 #, c-format, boost-format
 msgid "The following application is going to be REMOVED:"
 msgid_plural "The following %d applications are going to be REMOVED:"
@@ -762,35 +762,35 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/Summary.cc:680
+#: src/Summary.cc:707
 #, c-format, boost-format
 msgid "The following package is going to be upgraded:"
 msgid_plural "The following %d packages are going to be upgraded:"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Summary.cc:685
+#: src/Summary.cc:712
 #, c-format, boost-format
 msgid "The following patch is going to be upgraded:"
 msgid_plural "The following %d patches are going to be upgraded:"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Summary.cc:690
+#: src/Summary.cc:717
 #, c-format, boost-format
 msgid "The following pattern is going to be upgraded:"
 msgid_plural "The following %d patterns are going to be upgraded:"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Summary.cc:696
+#: src/Summary.cc:723
 #, c-format, boost-format
 msgid "The following product is going to be upgraded:"
 msgid_plural "The following %d products are going to be upgraded:"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Summary.cc:704
+#: src/Summary.cc:731
 #, c-format, boost-format
 msgid "The following application is going to be upgraded:"
 msgid_plural "The following %d applications are going to be upgraded:"
@@ -798,35 +798,35 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/Summary.cc:726
+#: src/Summary.cc:753
 #, c-format, boost-format
 msgid "The following package is going to be downgraded:"
 msgid_plural "The following %d packages are going to be downgraded:"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Summary.cc:731
+#: src/Summary.cc:758
 #, c-format, boost-format
 msgid "The following patch is going to be downgraded:"
 msgid_plural "The following %d patches are going to be downgraded:"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Summary.cc:736
+#: src/Summary.cc:763
 #, c-format, boost-format
 msgid "The following pattern is going to be downgraded:"
 msgid_plural "The following %d patterns are going to be downgraded:"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Summary.cc:741
+#: src/Summary.cc:768
 #, c-format, boost-format
 msgid "The following product is going to be downgraded:"
 msgid_plural "The following %d products are going to be downgraded:"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Summary.cc:747
+#: src/Summary.cc:774
 #, c-format, boost-format
 msgid "The following application is going to be downgraded:"
 msgid_plural "The following %d applications are going to be downgraded:"
@@ -834,35 +834,35 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/Summary.cc:769
+#: src/Summary.cc:796
 #, c-format, boost-format
 msgid "The following package is going to be reinstalled:"
 msgid_plural "The following %d packages are going to be reinstalled:"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Summary.cc:774
+#: src/Summary.cc:801
 #, c-format, boost-format
 msgid "The following patch is going to be reinstalled:"
 msgid_plural "The following %d patches are going to be reinstalled:"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Summary.cc:779
+#: src/Summary.cc:806
 #, c-format, boost-format
 msgid "The following pattern is going to be reinstalled:"
 msgid_plural "The following %d patterns are going to be reinstalled:"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Summary.cc:784
+#: src/Summary.cc:811
 #, c-format, boost-format
 msgid "The following product is going to be reinstalled:"
 msgid_plural "The following %d products are going to be reinstalled:"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Summary.cc:797
+#: src/Summary.cc:824
 #, c-format, boost-format
 msgid "The following application is going to be reinstalled:"
 msgid_plural "The following %d applications are going to be reinstalled:"
@@ -870,7 +870,7 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/Summary.cc:934
+#: src/Summary.cc:961
 #, c-format, boost-format
 msgid "The following recommended package was automatically selected:"
 msgid_plural ""
@@ -879,7 +879,7 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/Summary.cc:939
+#: src/Summary.cc:966
 #, c-format, boost-format
 msgid "The following recommended patch was automatically selected:"
 msgid_plural ""
@@ -888,7 +888,7 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/Summary.cc:944
+#: src/Summary.cc:971
 #, c-format, boost-format
 msgid "The following recommended pattern was automatically selected:"
 msgid_plural ""
@@ -897,7 +897,7 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/Summary.cc:949
+#: src/Summary.cc:976
 #, c-format, boost-format
 msgid "The following recommended product was automatically selected:"
 msgid_plural ""
@@ -906,7 +906,7 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/Summary.cc:954
+#: src/Summary.cc:981
 #, c-format, boost-format
 msgid "The following recommended source package was automatically selected:"
 msgid_plural ""
@@ -915,7 +915,7 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/Summary.cc:960
+#: src/Summary.cc:987
 #, c-format, boost-format
 msgid "The following recommended application was automatically selected:"
 msgid_plural ""
@@ -924,7 +924,7 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/Summary.cc:1007
+#: src/Summary.cc:1034
 #, c-format, boost-format
 msgid ""
 "The following package is recommended, but will not be installed (only "
@@ -936,7 +936,7 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/Summary.cc:1019
+#: src/Summary.cc:1046
 #, c-format, boost-format
 msgid ""
 "The following package is recommended, but will not be installed because it's "
@@ -948,7 +948,7 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/Summary.cc:1029
+#: src/Summary.cc:1056
 #, c-format, boost-format
 msgid ""
 "The following package is recommended, but will not be installed due to "
@@ -960,7 +960,7 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/Summary.cc:1042
+#: src/Summary.cc:1069
 #, c-format, boost-format
 msgid "The following patch is recommended, but will not be installed:"
 msgid_plural ""
@@ -969,7 +969,7 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/Summary.cc:1046
+#: src/Summary.cc:1073
 #, c-format, boost-format
 msgid "The following pattern is recommended, but will not be installed:"
 msgid_plural ""
@@ -978,7 +978,7 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/Summary.cc:1050
+#: src/Summary.cc:1077
 #, c-format, boost-format
 msgid "The following product is recommended, but will not be installed:"
 msgid_plural ""
@@ -987,7 +987,7 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/Summary.cc:1055
+#: src/Summary.cc:1082
 #, c-format, boost-format
 msgid "The following application is recommended, but will not be installed:"
 msgid_plural ""
@@ -996,7 +996,7 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/Summary.cc:1088
+#: src/Summary.cc:1115
 #, c-format, boost-format
 msgid "The following package is suggested, but will not be installed:"
 msgid_plural ""
@@ -1005,7 +1005,7 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/Summary.cc:1093
+#: src/Summary.cc:1120
 #, c-format, boost-format
 msgid "The following patch is suggested, but will not be installed:"
 msgid_plural ""
@@ -1014,7 +1014,7 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/Summary.cc:1098
+#: src/Summary.cc:1125
 #, c-format, boost-format
 msgid "The following pattern is suggested, but will not be installed:"
 msgid_plural ""
@@ -1023,7 +1023,7 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/Summary.cc:1103
+#: src/Summary.cc:1130
 #, c-format, boost-format
 msgid "The following product is suggested, but will not be installed:"
 msgid_plural ""
@@ -1032,7 +1032,7 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/Summary.cc:1109
+#: src/Summary.cc:1136
 #, c-format, boost-format
 msgid "The following application is suggested, but will not be installed:"
 msgid_plural ""
@@ -1041,35 +1041,35 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/Summary.cc:1134
+#: src/Summary.cc:1161
 #, c-format, boost-format
 msgid "The following package is going to change architecture:"
 msgid_plural "The following %d packages are going to change architecture:"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Summary.cc:1139
+#: src/Summary.cc:1166
 #, c-format, boost-format
 msgid "The following patch is going to change architecture:"
 msgid_plural "The following %d patches are going to change architecture:"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Summary.cc:1144
+#: src/Summary.cc:1171
 #, c-format, boost-format
 msgid "The following pattern is going to change architecture:"
 msgid_plural "The following %d patterns are going to change architecture:"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Summary.cc:1149
+#: src/Summary.cc:1176
 #, c-format, boost-format
 msgid "The following product is going to change architecture:"
 msgid_plural "The following %d products are going to change architecture:"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Summary.cc:1155
+#: src/Summary.cc:1182
 #, c-format, boost-format
 msgid "The following application is going to change architecture:"
 msgid_plural "The following %d applications are going to change architecture:"
@@ -1077,35 +1077,35 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/Summary.cc:1180
+#: src/Summary.cc:1207
 #, c-format, boost-format
 msgid "The following package is going to change vendor:"
 msgid_plural "The following %d packages are going to change vendor:"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Summary.cc:1185
+#: src/Summary.cc:1212
 #, c-format, boost-format
 msgid "The following patch is going to change vendor:"
 msgid_plural "The following %d patches are going to change vendor:"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Summary.cc:1190
+#: src/Summary.cc:1217
 #, c-format, boost-format
 msgid "The following pattern is going to change vendor:"
 msgid_plural "The following %d patterns are going to change vendor:"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Summary.cc:1195
+#: src/Summary.cc:1222
 #, c-format, boost-format
 msgid "The following product is going to change vendor:"
 msgid_plural "The following %d products are going to change vendor:"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Summary.cc:1201
+#: src/Summary.cc:1228
 #, c-format, boost-format
 msgid "The following application is going to change vendor:"
 msgid_plural "The following %d applications are going to change vendor:"
@@ -1113,7 +1113,7 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/Summary.cc:1224
+#: src/Summary.cc:1251
 #, c-format, boost-format
 msgid "The following package has no support information from its vendor:"
 msgid_plural ""
@@ -1122,14 +1122,14 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/Summary.cc:1242
+#: src/Summary.cc:1269
 #, c-format, boost-format
 msgid "The following package is not supported by its vendor:"
 msgid_plural "The following %d packages are not supported by their vendor:"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Summary.cc:1260
+#: src/Summary.cc:1287
 #, c-format, boost-format
 msgid ""
 "The following package needs additional customer contract to get support:"
@@ -1139,7 +1139,7 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/Summary.cc:1280
+#: src/Summary.cc:1307
 #, c-format, boost-format
 msgid "The following package update will NOT be installed:"
 msgid_plural "The following %d package updates will NOT be installed:"
@@ -1147,7 +1147,7 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/Summary.cc:1285
+#: src/Summary.cc:1312
 #, c-format, boost-format
 msgid "The following product update will NOT be installed:"
 msgid_plural "The following %d product updates will NOT be installed:"
@@ -1155,7 +1155,7 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/Summary.cc:1291
+#: src/Summary.cc:1318
 #, c-format, boost-format
 msgid "The following application update will NOT be installed:"
 msgid_plural "The following %d application updates will NOT be installed:"
@@ -1163,7 +1163,7 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/Summary.cc:1324
+#: src/Summary.cc:1351
 #, c-format, boost-format
 msgid "The following item is locked and will not be changed by any action:"
 msgid_plural ""
@@ -1174,22 +1174,22 @@ msgstr[2] ""
 
 #. always as plain name list
 #. translators: used as 'tag:' (i.e. followed by ':')
-#: src/Summary.cc:1337
+#: src/Summary.cc:1364
 msgid "Available"
 msgstr ""
 
 #. translators: used as 'tag:' (i.e. followed by ':')
 #. translators: property name; short; used like "Name: value"
-#: src/Summary.cc:1343 src/info.cc:340 src/info.cc:433 src/info.cc:553
+#: src/Summary.cc:1370 src/info.cc:341 src/info.cc:434 src/info.cc:554
 msgid "Installed"
 msgstr "Усталявана"
 
-#: src/Summary.cc:1348
+#: src/Summary.cc:1375
 #, boost-format
 msgid "Run '%1%' to see the complete list of locked items."
 msgstr ""
 
-#: src/Summary.cc:1357
+#: src/Summary.cc:1384
 #, c-format, boost-format
 msgid "The following patch requires a system reboot:"
 msgid_plural "The following %d patches require a system reboot:"
@@ -1197,7 +1197,7 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/Summary.cc:1361
+#: src/Summary.cc:1388
 #, c-format, boost-format
 msgid "The following package requires a system reboot:"
 msgid_plural "The following %d packages require a system reboot:"
@@ -1205,125 +1205,125 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/Summary.cc:1390
+#: src/Summary.cc:1417
 #, boost-format
 msgid "Overall download size: %1%. Already cached: %2%."
 msgstr ""
 
-#: src/Summary.cc:1393
+#: src/Summary.cc:1420
 #, fuzzy
 msgid "Download only."
 msgstr "Запампаваць"
 
 #. TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
-#: src/Summary.cc:1399
+#: src/Summary.cc:1426
 #, c-format, boost-format
 msgid "After the operation, additional %s will be used."
 msgstr ""
 
-#: src/Summary.cc:1401
+#: src/Summary.cc:1428
 msgid "No additional space will be used or freed after the operation."
 msgstr ""
 
 #. TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
-#: src/Summary.cc:1408
+#: src/Summary.cc:1435
 #, c-format, boost-format
 msgid "After the operation, %s will be freed."
 msgstr ""
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
-#: src/Summary.cc:1432
+#: src/Summary.cc:1459
 msgid "package to upgrade"
 msgid_plural "packages to upgrade"
 msgstr[0] ""
 msgstr[1] ""
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: src/Summary.cc:1443
+#: src/Summary.cc:1470
 msgid "to downgrade"
 msgid_plural "to downgrade"
 msgstr[0] ""
 msgstr[1] ""
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
-#: src/Summary.cc:1446
+#: src/Summary.cc:1473
 msgid "package to downgrade"
 msgid_plural "packages to downgrade"
 msgstr[0] ""
 msgstr[1] ""
 
 #. translators: this text will be preceded by a number e.g. "5 new"
-#: src/Summary.cc:1457
+#: src/Summary.cc:1484
 msgid "new"
 msgid_plural "new"
 msgstr[0] ""
 msgstr[1] ""
 
 #. translators: this text will be preceded by a number e.g. "5 new to install"
-#: src/Summary.cc:1460
+#: src/Summary.cc:1487
 msgid "new package to install"
 msgid_plural "new packages to install"
 msgstr[0] ""
 msgstr[1] ""
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: src/Summary.cc:1471
+#: src/Summary.cc:1498
 msgid "to reinstall"
 msgid_plural "to reinstall"
 msgstr[0] ""
 msgstr[1] ""
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
-#: src/Summary.cc:1474
+#: src/Summary.cc:1501
 msgid "package to reinstall"
 msgid_plural "packages to reinstall"
 msgstr[0] ""
 msgstr[1] ""
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: src/Summary.cc:1485
+#: src/Summary.cc:1512
 msgid "to remove"
 msgid_plural "to remove"
 msgstr[0] ""
 msgstr[1] ""
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
-#: src/Summary.cc:1488
+#: src/Summary.cc:1515
 msgid "package to remove"
 msgid_plural "packages to remove"
 msgstr[0] ""
 msgstr[1] ""
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: src/Summary.cc:1499
+#: src/Summary.cc:1526
 msgid "to change vendor"
 msgid_plural " to change vendor"
 msgstr[0] ""
 msgstr[1] ""
 
 #. translators: this text will be preceded by a number e.g. "5 packages ..."
-#: src/Summary.cc:1502
+#: src/Summary.cc:1529
 msgid "package will change vendor"
 msgid_plural "packages will change vendor"
 msgstr[0] ""
 msgstr[1] ""
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: src/Summary.cc:1513
+#: src/Summary.cc:1540
 msgid "to change arch"
 msgid_plural "to change arch"
 msgstr[0] ""
 msgstr[1] ""
 
 #. translators: this text will be preceded by a number e.g. "5 packages ..."
-#: src/Summary.cc:1516
+#: src/Summary.cc:1543
 msgid "package will change arch"
 msgid_plural "packages will change arch"
 msgstr[0] ""
 msgstr[1] ""
 
 #. translators: this text will be preceded by a number e.g. "5 new"
-#: src/Summary.cc:1527
+#: src/Summary.cc:1554
 #, fuzzy
 msgid "source package"
 msgid_plural "source packages"
@@ -1332,7 +1332,7 @@ msgstr[1] "Усталяванне пакетаў..."
 msgstr[2] "Усталяванне пакетаў..."
 
 #. translators: this text will be preceded by a number e.g. "5 new to install"
-#: src/Summary.cc:1530
+#: src/Summary.cc:1557
 msgid "source package to install"
 msgid_plural "source packages to install"
 msgstr[0] ""
@@ -1340,13 +1340,13 @@ msgstr[1] ""
 msgstr[2] ""
 
 #. patch command (auto)restricted to update stack patches
-#: src/Summary.cc:1609
+#: src/Summary.cc:1636
 msgid ""
 "Package manager restart required. (Run this command once again after the "
 "update stack got updated)"
 msgstr ""
 
-#: src/Summary.cc:1612
+#: src/Summary.cc:1639
 msgid "System reboot required."
 msgstr ""
 
@@ -1358,56 +1358,56 @@ msgstr ""
 #. Consider to cancel:
 #. Product 'opennSUSE Tumbleweed' requires to be updated by calling 'zypper dup'!
 #. Continue? [y/n/...? shows all options] (y):
-#: src/Summary.cc:1629
+#: src/Summary.cc:1656
 msgid "Consider to cancel:"
 msgstr ""
 
-#: src/Zypper.cc:91
+#: src/Zypper.cc:87
 msgid ""
 "PackageKit is blocking zypper. This happens if you have an updater applet or "
 "other software management application using PackageKit running."
 msgstr ""
 
-#: src/Zypper.cc:97
+#: src/Zypper.cc:93
 msgid ""
 "We can ask PackageKit to interrupt the current action as soon as possible, "
 "but it depends on PackageKit how fast it will respond to this request."
 msgstr ""
 
-#: src/Zypper.cc:100
+#: src/Zypper.cc:96
 msgid "Ask PackageKit to quit?"
 msgstr ""
 
-#: src/Zypper.cc:109
+#: src/Zypper.cc:105
 msgid "PackageKit is still running (probably busy)."
 msgstr ""
 
-#: src/Zypper.cc:110
+#: src/Zypper.cc:106
 #, fuzzy
 msgid "Try again?"
 msgstr "Запуск усталёўкі..."
 
-#: src/Zypper.cc:248 src/Zypper.cc:707 src/commands/basecommand.cc:289
+#: src/Zypper.cc:244 src/Zypper.cc:709 src/commands/basecommand.cc:289
 msgid "Unexpected exception."
 msgstr ""
 
 #. translators: %s is "help" or "zypper help" depending on whether
 #. zypper shell is running or not
-#: src/Zypper.cc:282
+#: src/Zypper.cc:284
 #, c-format, boost-format
 msgid "Type '%s' to get command-specific help."
 msgstr ""
 
-#: src/Zypper.cc:302
+#: src/Zypper.cc:304
 #, c-format, boost-format
 msgid "Verbosity: %d"
 msgstr ""
 
-#: src/Zypper.cc:311
+#: src/Zypper.cc:313
 msgid "Enforced setting"
 msgstr ""
 
-#: src/Zypper.cc:334
+#: src/Zypper.cc:336
 msgid ""
 "The /etc/products.d/baseproduct symlink is dangling or missing!\n"
 "The link must point to your core products .prod file in /etc/products.d.\n"
@@ -1415,16 +1415,16 @@ msgstr ""
 
 #. TranslatorExplanation The %s is "--plus-repo"
 #. TranslatorExplanation The %s is "--option-name"
-#: src/Zypper.cc:527 src/Zypper.cc:579
+#: src/Zypper.cc:529 src/Zypper.cc:581
 #, c-format, boost-format
 msgid "The %s option has no effect here, ignoring."
 msgstr ""
 
-#: src/Zypper.cc:650
+#: src/Zypper.cc:652
 msgid "Non-option program arguments: "
 msgstr ""
 
-#: src/callbacks/keyring.h:32
+#: src/callbacks/keyring.h:33
 msgid ""
 "A GPG pubkey is clearly identified by its fingerprint. Do not rely on the "
 "key's name. If you are not sure whether the presented key is authentic, ask "
@@ -1432,7 +1432,7 @@ msgid ""
 "web page showing the fingerprints of the GPG keys they are using."
 msgstr ""
 
-#: src/callbacks/keyring.h:37
+#: src/callbacks/keyring.h:38
 msgid ""
 "Signing data enables the recipient to verify that no modifications occurred "
 "after the data were signed. Accepting data with no, wrong or unknown "
@@ -1445,7 +1445,7 @@ msgstr ""
 "і, таксама да яе кампраментацыі."
 
 #. translator: %1% is a file name
-#: src/callbacks/keyring.h:45
+#: src/callbacks/keyring.h:46
 #, boost-format
 msgid ""
 "File '%1%' is the repositories master index file. It ensures the integrity "
@@ -1454,7 +1454,7 @@ msgstr ""
 "Файл '%1%' — гэта асноўны індэкс рэпазіторыю. Ён кіруе над цэласнасцю ўсяго "
 "рэпазіторыю."
 
-#: src/callbacks/keyring.h:51
+#: src/callbacks/keyring.h:52
 msgid ""
 "We can't verify that no one meddled with this file, so it might not be "
 "trustworthy anymore! You should not continue unless you know it's safe."
@@ -1463,7 +1463,7 @@ msgstr ""
 "больш не давяраць! Калі вы не ўпэўнены што гэты файл бяспечны, не "
 "працягвайце ўсталёўку."
 
-#: src/callbacks/keyring.h:56
+#: src/callbacks/keyring.h:57
 msgid ""
 "This file was modified after it has been signed. This may have been a "
 "malicious change, so it might not be trustworthy anymore! You should not "
@@ -1473,44 +1473,53 @@ msgstr ""
 "яму больш не давяраць! Калі вы не ўпэўнены што гэты файл бяспечны, не "
 "працягвайце ўсталёўку."
 
-#: src/callbacks/keyring.h:85
+#: src/callbacks/keyring.h:59
+msgid ""
+"This might be a transient issue if the server is in the midst of receiving "
+"new data. The data file and its signature are two files which must fit "
+"together. In case the request hit the server in the midst of updating them, "
+"the signature verification might fail. After a few minutes, when the server "
+"has updated its data, it should work again."
+msgstr ""
+
+#: src/callbacks/keyring.h:88
 msgid "Repository:"
 msgstr "Рэпазітар:"
 
-#: src/callbacks/keyring.h:87
+#: src/callbacks/keyring.h:90
 msgid "Key Fingerprint:"
 msgstr "Адбітак ключа:"
 
-#: src/callbacks/keyring.h:88
+#: src/callbacks/keyring.h:91
 msgid "Key Name:"
 msgstr "Імя ключа:"
 
-#: src/callbacks/keyring.h:89
+#: src/callbacks/keyring.h:92
 msgid "Key Algorithm:"
 msgstr ""
 
-#: src/callbacks/keyring.h:90
+#: src/callbacks/keyring.h:93
 msgid "Key Created:"
 msgstr "Дата стварэння ключа:"
 
-#: src/callbacks/keyring.h:91
+#: src/callbacks/keyring.h:94
 msgid "Key Expires:"
 msgstr "Дата заканчэння тэрміну дзеяння ключа:"
 
-#: src/callbacks/keyring.h:93
+#: src/callbacks/keyring.h:96
 msgid "Subkey:"
 msgstr "Падключ:"
 
-#: src/callbacks/keyring.h:94
+#: src/callbacks/keyring.h:97
 msgid "Rpm Name:"
 msgstr "Назва пакета:"
 
-#: src/callbacks/keyring.h:120
+#: src/callbacks/keyring.h:123
 #, boost-format
 msgid "The gpg key signing file '%1%' has expired."
 msgstr "Тэрмін дзеяння gpg-ключа, якім падпісаны файл '% 1%', мінуў."
 
-#: src/callbacks/keyring.h:126
+#: src/callbacks/keyring.h:129
 #, boost-format
 msgid "The gpg key signing file '%1%' will expire in %2% day."
 msgid_plural "The gpg key signing file '%1%' will expire in %2% days."
@@ -1522,46 +1531,46 @@ msgstr[1] ""
 msgstr[2] ""
 "Тэрмін дзеяння gpg-ключа, якім падпісаны файл '%1%', скончыцца праз %2% дзён."
 
-#: src/callbacks/keyring.h:149
+#: src/callbacks/keyring.h:152
 #, c-format, boost-format
 msgid "Accepting an unsigned file '%s'."
 msgstr "Прыём непадпісанага файла '%s'."
 
-#: src/callbacks/keyring.h:153
+#: src/callbacks/keyring.h:156
 #, c-format, boost-format
 msgid "Accepting an unsigned file '%s' from repository '%s'."
 msgstr "Прыём непадпісанага файла '%s' з рэпазітара '%s'."
 
 #. translator: %1% is a file name
-#: src/callbacks/keyring.h:163
+#: src/callbacks/keyring.h:166
 #, fuzzy, boost-format
 msgid "File '%1%' is unsigned."
 msgstr "Файлы \"%s\" не падпісаны, працягнуць?"
 
 #. translator: %1% is a file name, %2% a repositories name
-#: src/callbacks/keyring.h:166
+#: src/callbacks/keyring.h:169
 #, fuzzy, boost-format
 msgid "File '%1%' from repository '%2%' is unsigned."
 msgstr "Файл \"%s\" з рэпазітара \"%s\" не падпісаны, працягнуць?"
 
 #. TranslatorExplanation: speaking of a file
-#: src/callbacks/keyring.h:183
+#: src/callbacks/keyring.h:186
 #, c-format, boost-format
 msgid "File '%s' is unsigned, continue?"
 msgstr "Файлы \"%s\" не падпісаны, працягнуць?"
 
 #. TranslatorExplanation: speaking of a file
-#: src/callbacks/keyring.h:187
+#: src/callbacks/keyring.h:190
 #, c-format, boost-format
 msgid "File '%s' from repository '%s' is unsigned, continue?"
 msgstr "Файл \"%s\" з рэпазітара \"%s\" не падпісаны, працягнуць?"
 
-#: src/callbacks/keyring.h:210
+#: src/callbacks/keyring.h:213
 #, c-format, boost-format
 msgid "Accepting file '%s' signed with an unknown key '%s'."
 msgstr "Прыём файла \"%s\", падпісанага невядомым ключом \"%s\"."
 
-#: src/callbacks/keyring.h:214
+#: src/callbacks/keyring.h:217
 #, c-format, boost-format
 msgid ""
 "Accepting file '%s' from repository '%s' signed with an unknown key '%s'."
@@ -1569,13 +1578,13 @@ msgstr ""
 "Прыём файла \"%s\" з рэпазітара \"%s\", падпісанага невядомым ключом \"%s\"."
 
 #. translator: %1% is a file name, %2% is a gpg key ID
-#: src/callbacks/keyring.h:223
+#: src/callbacks/keyring.h:226
 #, fuzzy, boost-format
 msgid "File '%1%' is signed with an unknown key '%2%'."
 msgstr "Файл \"%s\" падпісаны невядомым ключом \"%s\". Працягнуць?"
 
 #. translator: %1% is a file name, %2% is a gpg key ID, %3% a repositories name
-#: src/callbacks/keyring.h:226
+#: src/callbacks/keyring.h:229
 #, fuzzy, boost-format
 msgid "File '%1%' from repository '%3%' is signed with an unknown key '%2%'."
 msgstr ""
@@ -1583,13 +1592,13 @@ msgstr ""
 "Працягнуць?"
 
 #. translators: the last %s is gpg key ID
-#: src/callbacks/keyring.h:243
+#: src/callbacks/keyring.h:246
 #, c-format, boost-format
 msgid "File '%s' is signed with an unknown key '%s'. Continue?"
 msgstr "Файл \"%s\" падпісаны невядомым ключом \"%s\". Працягнуць?"
 
 #. translators: the last %s is gpg key ID
-#: src/callbacks/keyring.h:247
+#: src/callbacks/keyring.h:250
 #, c-format, boost-format
 msgid ""
 "File '%s' from repository '%s' is signed with an unknown key '%s'. Continue?"
@@ -1597,26 +1606,26 @@ msgstr ""
 "Файл \"%s\" з рэпазітара \"%s\" падпісаны невядомым ключом \"%s\". "
 "Працягнуць?"
 
-#: src/callbacks/keyring.h:267
+#: src/callbacks/keyring.h:270
 msgid "Automatically importing the following key:"
 msgstr "Аўтаматычны імпарт наступнака ключа:"
 
-#: src/callbacks/keyring.h:269
+#: src/callbacks/keyring.h:272
 msgid "Automatically trusting the following key:"
 msgstr "Аўтаматычна давяраць наступнаму ключу:"
 
-#: src/callbacks/keyring.h:271
+#: src/callbacks/keyring.h:274
 msgid "New repository or package signing key received:"
 msgstr "Атрыман ключ подпісу новага рэпазіторыю або пакету:"
 
 #. translators: this message is shown after showing description of the key
-#: src/callbacks/keyring.h:305
+#: src/callbacks/keyring.h:308
 msgid "Do you want to reject the key, trust temporarily, or trust always?"
 msgstr ""
 "Вы хочаце адкланіць ключ[r], давяраць часова[t], або заўсёды давяраць[a]?"
 
 #. translators: this message is shown after showing description of the key
-#: src/callbacks/keyring.h:308
+#: src/callbacks/keyring.h:311
 msgid "Do you want to reject the key, or trust always?"
 msgstr "Вы хочаце адкланіць ключ[r] або заўсёды давяраць[a]?"
 
@@ -1625,12 +1634,12 @@ msgstr "Вы хочаце адкланіць ключ[r] або заўсёды �
 #. The anserws must be separated by slash characters '/' and must
 #. correspond to reject/trusttemporarily/trustalways in that order.
 #. The answers should be lower case letters.
-#: src/callbacks/keyring.h:326
+#: src/callbacks/keyring.h:329
 msgid "r/t/a/"
 msgstr "r/t/a/"
 
 #. translators: the same as r/t/a, but without 'a'
-#: src/callbacks/keyring.h:329
+#: src/callbacks/keyring.h:332
 msgid "r/t"
 msgstr "r/t"
 
@@ -1639,55 +1648,55 @@ msgstr "r/t"
 #. The anserws must be separated by slash characters '/' and must
 #. correspond to reject/trusttemporarily/trustalways in that order.
 #. The answers should be lower case letters.
-#: src/callbacks/keyring.h:336
+#: src/callbacks/keyring.h:339
 msgid "r/a/"
 msgstr "r/a/"
 
 #. translators: help text for the 'r' option in the 'r/t/a' prompt
-#: src/callbacks/keyring.h:342
+#: src/callbacks/keyring.h:345
 msgid "Don't trust the key."
 msgstr "Не давяраць гэтаму ключу."
 
 #. translators: help text for the 't' option in the 'r/t/a' prompt
-#: src/callbacks/keyring.h:346
+#: src/callbacks/keyring.h:349
 msgid "Trust the key temporarily."
 msgstr "Часова давяраць гэтаму ключу."
 
 #. translators: help text for the 'a' option in the 'r/t/a' prompt
-#: src/callbacks/keyring.h:351
+#: src/callbacks/keyring.h:354
 msgid "Trust the key and import it into trusted keyring."
 msgstr "Давяраць ключу заўсёды і дадаць яго ў сховішча даверанных ключоў."
 
-#: src/callbacks/keyring.h:389
+#: src/callbacks/keyring.h:392
 #, c-format, boost-format
 msgid "Ignoring failed signature verification for file '%s'!"
 msgstr "Збой праверкі подпісу файлу '%s' ігнаруецца!"
 
-#: src/callbacks/keyring.h:392
+#: src/callbacks/keyring.h:395
 #, c-format, boost-format
 msgid ""
 "Ignoring failed signature verification for file '%s' from repository '%s'!"
 msgstr "Збой праверкі подпісу файлу '%s' з рэпазіторыю '%s' ігнаруецца!"
 
-#: src/callbacks/keyring.h:398
+#: src/callbacks/keyring.h:401
 msgid "Double-check this is not caused by some malicious changes in the file!"
 msgstr ""
 "Праверце двойчы, не выклікала лі гэта якімі-небудь зламыснымі зменамі ў "
 "файле!"
 
 #. translator: %1% is a file name
-#: src/callbacks/keyring.h:408
+#: src/callbacks/keyring.h:411
 #, boost-format
 msgid "Signature verification failed for file '%1%'."
 msgstr "Збой праверкі подпісу файлу '%1%'."
 
 #. translator: %1% is a file name, %2% a repositories name
-#: src/callbacks/keyring.h:411
+#: src/callbacks/keyring.h:414
 #, boost-format
 msgid "Signature verification failed for file '%1%' from repository '%2%'."
 msgstr "Збой праверкі подпісу файлу '%1%' з рэпазіторыю '%2%'."
 
-#: src/callbacks/keyring.h:460
+#: src/callbacks/keyring.h:463
 msgid ""
 "The rpm database seems to contain old V3 version gpg keys which are "
 "meanwhile obsolete and considered insecure:"
@@ -1695,12 +1704,12 @@ msgstr ""
 "База дадзеных rpm мае старыя ключы gpg V3, якія ўжо лічацца пастарэлымі і "
 "небяспечнымі:"
 
-#: src/callbacks/keyring.h:467
+#: src/callbacks/keyring.h:470
 #, boost-format
 msgid "To see details about a key call '%1%'."
 msgstr "Каб пагледзець больш гл. вывад '%1%'."
 
-#: src/callbacks/keyring.h:471
+#: src/callbacks/keyring.h:474
 #, boost-format
 msgid ""
 "Unless you believe the key in question is still in use, you can remove it "
@@ -1710,7 +1719,7 @@ msgstr ""
 "камандай '%1%'."
 
 #. translator: %1% is the number of keys, %2% the name of a repository
-#: src/callbacks/keyring.h:490
+#: src/callbacks/keyring.h:493
 #, boost-format
 msgid "Received %1% new package signing key from repository \"%2%\":"
 msgid_plural "Received %1% new package signing keys from repository \"%2%\":"
@@ -1718,34 +1727,34 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/callbacks/keyring.h:494
+#: src/callbacks/keyring.h:497
 msgid ""
 "Those additional keys are usually used to sign packages shipped by the "
 "repository. In order to validate those packages upon download and "
 "installation the new keys will be imported into the rpm database."
 msgstr ""
 
-#: src/callbacks/keyring.h:496
+#: src/callbacks/keyring.h:499
 msgid "New:"
 msgstr ""
 
-#: src/callbacks/keyring.h:502
+#: src/callbacks/keyring.h:505
 msgid ""
 "The repository metadata introducing the new keys have been signed and "
 "validated by the trusted key:"
 msgstr ""
 
-#: src/callbacks/keyring.h:525
+#: src/callbacks/keyring.h:528
 #, c-format, boost-format
 msgid "No digest for file %s."
 msgstr "Няма дайджэста для файлу %s."
 
-#: src/callbacks/keyring.h:533
+#: src/callbacks/keyring.h:536
 #, c-format, boost-format
 msgid "Unknown digest %s for file %s."
 msgstr "Невядомы дайджэст %s для файлу %s."
 
-#: src/callbacks/keyring.h:550
+#: src/callbacks/keyring.h:553
 #, boost-format
 msgid ""
 "Digest verification failed for file '%1%'\n"
@@ -1760,7 +1769,7 @@ msgstr ""
 "  Чакалася %3%\n"
 "  Но атрымана %4%\n"
 
-#: src/callbacks/keyring.h:562
+#: src/callbacks/keyring.h:565
 msgid ""
 "Accepting packages with wrong checksums can lead to a corrupted system and "
 "in extreme cases even to a system compromise."
@@ -1768,7 +1777,7 @@ msgstr ""
 "Згода на выкарыстанне пакетаў з некарэктнай кантрольнай сумай можа прывесці "
 "да пашкоджання сістэмы і ў рэдкіх з'явах да яе кампраментыраванія."
 
-#: src/callbacks/keyring.h:570
+#: src/callbacks/keyring.h:573
 #, boost-format
 msgid ""
 "However if you made certain that the file with checksum '%1%..' is secure, "
@@ -1786,22 +1795,22 @@ msgstr ""
 "ўведзена, файл будзе адкінуты.\n"
 
 #. translators: A prompt option
-#: src/callbacks/keyring.h:577
+#: src/callbacks/keyring.h:580
 msgid "discard"
 msgstr "адкінуць"
 
 #. translators: A prompt option help text
-#: src/callbacks/keyring.h:579
+#: src/callbacks/keyring.h:582
 msgid "Unblock using this file on your own risk."
 msgstr "Разблакаваць выкарыстоўванне гэтага файла на ваш рыск."
 
 #. translators: A prompt option help text
-#: src/callbacks/keyring.h:581
+#: src/callbacks/keyring.h:584
 msgid "Discard the file."
 msgstr "Адкінуць файл."
 
 #. translators: A prompt text
-#: src/callbacks/keyring.h:585
+#: src/callbacks/keyring.h:588
 msgid "Unblock or discard?"
 msgstr "Разблакаваць або адкінуць?"
 
@@ -1867,7 +1876,7 @@ msgstr ""
 
 #. translators: this is a prompt text
 #: src/callbacks/media.cc:82 src/callbacks/media.cc:174
-#: src/callbacks/media.cc:254 src/utils/prompt.cc:226 src/utils/prompt.cc:313
+#: src/callbacks/media.cc:254 src/utils/prompt.cc:50 src/utils/prompt.cc:143
 msgid "Abort, retry, ignore?"
 msgstr ""
 
@@ -1969,8 +1978,7 @@ msgstr "Ужыванне рознасці"
 msgid "In cache %1%"
 msgstr "У кэше %1%"
 
-#: src/callbacks/repo.h:139 src/output/OutNormal.cc:250
-#: src/output/OutNormal.cc:284 src/output/OutNormal.cc:324
+#: src/callbacks/repo.h:139
 msgid "Retrieving:"
 msgstr ""
 
@@ -1983,40 +1991,40 @@ msgid "Accepting package despite the error."
 msgstr "Прыняццё пакета, не гледзя на памылку."
 
 #. TranslatorExplanation speaking of a script - "Running: script file name (package name, script dir)"
-#: src/callbacks/rpm.h:218
+#: src/callbacks/rpm.h:219
 #, c-format, boost-format
 msgid "Running: %s  (%s, %s)"
 msgstr "Выкананне скрыпту: %s  (%s, %s)"
 
-#: src/callbacks/rpm.h:307
+#: src/callbacks/rpm.h:308
 #, c-format, boost-format
 msgid "Removal of %s failed:"
 msgstr "Збой пры спробе выдаліць %s:"
 
 #. translators: This text is a progress display label e.g. "Removing packagename-x.x.x [42%]"
-#: src/callbacks/rpm.h:350 src/callbacks/rpm.h:631
+#: src/callbacks/rpm.h:351 src/callbacks/rpm.h:632
 #, c-format, boost-format
 msgid "Removing %s"
 msgstr "Выдаляецца %s"
 
-#: src/callbacks/rpm.h:393
+#: src/callbacks/rpm.h:394
 #, c-format, boost-format
 msgid "Installation of %s failed:"
 msgstr "Збой пры спробе ўсталяваць %s:"
 
 #. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
-#: src/callbacks/rpm.h:436 src/callbacks/rpm.h:692
+#: src/callbacks/rpm.h:437 src/callbacks/rpm.h:693
 #, c-format, boost-format
 msgid "Installing: %s"
 msgstr "Ўстаноўка: %s"
 
 #. translators: A progressbar label
-#: src/callbacks/rpm.h:455
+#: src/callbacks/rpm.h:456
 msgid "Checking for file conflicts:"
 msgstr "Праверка на канфлікты паміж файламі:"
 
 #. TranslatorExplanation %1%(number of packages); detailed list follows
-#: src/callbacks/rpm.h:506
+#: src/callbacks/rpm.h:507
 #, boost-format
 msgid ""
 "%1% package had to be excluded from file conflicts check because it is not "
@@ -2034,7 +2042,7 @@ msgstr[2] ""
 "спампованы."
 
 #. TranslatorExplanation %1%(commandline option)
-#: src/callbacks/rpm.h:512
+#: src/callbacks/rpm.h:513
 #, boost-format
 msgid ""
 "Checking for file conflicts requires not installed packages to be downloaded "
@@ -2046,7 +2054,7 @@ msgstr ""
 "больш, глядзіце ў '%1%' на старонке кіраўніцтва zypper."
 
 #. TranslatorExplanation %1%(number of conflicts); detailed list follows
-#: src/callbacks/rpm.h:522
+#: src/callbacks/rpm.h:523
 #, boost-format
 msgid "Detected %1% file conflict:"
 msgid_plural "Detected %1% file conflicts:"
@@ -2054,12 +2062,12 @@ msgstr[0] "Знойдзены %1% канфлікт паміж фалйамі:"
 msgstr[1] "Знойдзена %1% канфлікта паміж файламі:"
 msgstr[2] "Знойдзена %1% канфліктаў паміж файламі:"
 
-#: src/callbacks/rpm.h:530
+#: src/callbacks/rpm.h:531
 msgid "Conflicting files will be replaced."
 msgstr "Канфліктуючыя файлы будуць замененыя."
 
 #. TranslatorExplanation Problem description before asking whether to "Continue? [yes/no] (no):"
-#: src/callbacks/rpm.h:536
+#: src/callbacks/rpm.h:537
 msgid ""
 "File conflicts happen when two packages attempt to install files with the "
 "same name but different contents. If you continue, conflicting files will be "
@@ -2070,72 +2078,72 @@ msgstr ""
 "замененыя, а папярэдні склад страціцца."
 
 #. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
-#: src/callbacks/rpm.h:759 src/callbacks/rpm.h:766
+#: src/callbacks/rpm.h:760 src/callbacks/rpm.h:767
 #, c-format, boost-format
 msgid "Executing %s script for: %s"
 msgstr ""
 
 #. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
-#: src/callbacks/rpm.h:773
+#: src/callbacks/rpm.h:774
 #, c-format, boost-format
 msgid "Executing %s script"
 msgstr ""
 
 #. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
-#: src/callbacks/rpm.h:895
+#: src/callbacks/rpm.h:896
 #, c-format, boost-format
 msgid "Cleaning up: %s"
 msgstr ""
 
 #. translator: %s is an other command: "This is an alias for 'zypper info -t patch'."
-#: src/commands/commandhelpformatter.h:94
+#: src/commands/commandhelpformatter.h:95
 #, c-format, boost-format
 msgid "This is an alias for '%s'."
 msgstr "Гэта псеўданім для '%s'."
 
-#: src/commands/commandhelpformatter.h:107
+#: src/commands/commandhelpformatter.h:108
 msgid "Examples:"
 msgstr "Прыклады:"
 
-#: src/commands/commandhelpformatter.h:110
+#: src/commands/commandhelpformatter.h:111
 msgid "Arguments:"
 msgstr "Аргументы:"
 
-#: src/commands/commandhelpformatter.h:123 src/utils/flags/zyppflags.cc:627
+#: src/commands/commandhelpformatter.h:124 src/utils/flags/zyppflags.cc:627
 msgid "Command options:"
 msgstr "Параметры каманды:"
 
-#: src/commands/commandhelpformatter.h:126
+#: src/commands/commandhelpformatter.h:127
 msgid "Solver options:"
 msgstr "Параметры вырашальніка:"
 
-#: src/commands/commandhelpformatter.h:129
+#: src/commands/commandhelpformatter.h:130
 msgid "Expert options:"
 msgstr "Параметры для экспертаў:"
 
-#: src/commands/commandhelpformatter.h:132
+#: src/commands/commandhelpformatter.h:133
 msgid "This command has no additional options."
 msgstr "У гэтай каманды няма дадатковых параметраў."
 
-#: src/commands/commandhelpformatter.h:135
+#: src/commands/commandhelpformatter.h:136
 msgid "Legacy options:"
 msgstr "Старыя параметры:"
 
 #. translator: '-r             The same as -f.
-#: src/commands/commandhelpformatter.h:139
+#: src/commands/commandhelpformatter.h:140
 #, boost-format
 msgid "The same as %1%."
 msgstr "Тое ж, як і %1%."
 
-#: src/commands/commandhelpformatter.h:187
+#: src/commands/commandhelpformatter.h:188
 msgid "Usage:"
 msgstr "Выкарыстоўванне:"
 
-#: src/commands/commandhelpformatter.h:189
+#: src/commands/commandhelpformatter.h:190
 msgid "Global Options:"
 msgstr "Глабальныя параметры:"
 
-#: src/commands/commandhelpformatter.h:191
+#: src/commands/commandhelpformatter.h:192
 msgid "Commands:"
 msgstr "Каманды:"
 
@@ -2331,7 +2339,7 @@ msgid ""
 msgstr ""
 
 #. translators: --from <ALIAS|#|URI>
-#: src/commands/installremove.cc:195 src/commands/utils/download.cc:172
+#: src/commands/installremove.cc:195 src/commands/utils/download.cc:170
 msgid "Select packages from the specified repository."
 msgstr ""
 
@@ -2605,81 +2613,81 @@ msgstr[2] ""
 #. translators: Table column header
 #. translators: header of table column - the name of the package
 #. translators: name (general header)
-#: src/commands/locks/list.cc:135 src/commands/repos/list.cc:41
-#: src/commands/repos/list.cc:223 src/commands/services/list.cc:105
-#: src/info.cc:88 src/info.cc:456 src/info.cc:691 src/locales.cc:201
+#: src/commands/locks/list.cc:133 src/commands/repos/list.cc:42
+#: src/commands/repos/list.cc:224 src/commands/services/list.cc:106
+#: src/info.cc:89 src/info.cc:457 src/info.cc:692 src/locales.cc:201
 #: src/search.cc:48 src/search.cc:199 src/search.cc:304 src/search.cc:439
 #: src/search.cc:486 src/update.cc:789 src/utils/misc.cc:325
 msgid "Name"
 msgstr ""
 
-#: src/commands/locks/list.cc:137
+#: src/commands/locks/list.cc:135
 msgid "Matches"
 msgstr ""
 
 #. translators: Table column header
 #. translators: type (general header)
-#: src/commands/locks/list.cc:138 src/commands/repos/list.cc:52
-#: src/commands/repos/list.cc:262 src/commands/services/list.cc:114
-#: src/info.cc:457 src/search.cc:50 src/search.cc:202
+#: src/commands/locks/list.cc:136 src/commands/repos/list.cc:53
+#: src/commands/repos/list.cc:263 src/commands/services/list.cc:115
+#: src/info.cc:458 src/search.cc:50 src/search.cc:202
 msgid "Type"
 msgstr "Тып"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: package's repository (header)
-#: src/commands/locks/list.cc:138 src/info.cc:86 src/search.cc:56
+#: src/commands/locks/list.cc:136 src/info.cc:87 src/search.cc:56
 #: src/search.cc:306 src/search.cc:438 src/search.cc:482 src/update.cc:786
 #: src/utils/misc.cc:324
 msgid "Repository"
 msgstr "Сховішча"
 
-#: src/commands/locks/list.cc:138
+#: src/commands/locks/list.cc:136
 msgid "Comment"
 msgstr ""
 
 #. translators: locks table value
-#: src/commands/locks/list.cc:156 src/commands/locks/list.cc:235
+#: src/commands/locks/list.cc:154 src/commands/locks/list.cc:233
 msgid "(multiple)"
 msgstr ""
 
 #. translators: locks table value
-#: src/commands/locks/list.cc:159 src/commands/locks/list.cc:233
+#: src/commands/locks/list.cc:157 src/commands/locks/list.cc:231
 msgid "(any)"
 msgstr ""
 
 #. translators: property name; short; used like "Name: value"
-#: src/commands/locks/list.cc:198
+#: src/commands/locks/list.cc:196
 #, fuzzy
 msgid "Keep installed"
 msgstr "Усталяваць"
 
 #. translators: property name; short; used like "Name: value"
-#: src/commands/locks/list.cc:206
+#: src/commands/locks/list.cc:204
 msgid "Do not install"
 msgstr ""
 
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
-#: src/commands/locks/list.cc:259
+#: src/commands/locks/list.cc:257
 msgid "locks (ll) [OPTIONS]"
 msgstr ""
 
-#: src/commands/locks/list.cc:260
+#: src/commands/locks/list.cc:258
 msgid "List current package locks."
 msgstr ""
 
-#: src/commands/locks/list.cc:288
+#: src/commands/locks/list.cc:286
 msgid "Show the number of resolvables matched by each lock."
 msgstr ""
 
-#: src/commands/locks/list.cc:289
+#: src/commands/locks/list.cc:287
 msgid "List the resolvables matched by each lock."
 msgstr ""
 
-#: src/commands/locks/list.cc:303
+#: src/commands/locks/list.cc:301
 msgid "Error reading the locks file:"
 msgstr ""
 
-#: src/commands/locks/list.cc:310
+#: src/commands/locks/list.cc:308
 msgid "There are no package locks defined."
 msgstr ""
 
@@ -3043,7 +3051,7 @@ msgid "Command"
 msgstr "Каманды:"
 
 #. "/etc/init.d/ script that might be used to restart the command (guessed)
-#: src/commands/ps.cc:152 src/commands/repos/list.cc:278
+#: src/commands/ps.cc:152 src/commands/repos/list.cc:279
 #, fuzzy
 msgid "Service"
 msgstr "Прыстасаванне"
@@ -3373,114 +3381,114 @@ msgstr ""
 msgid "Clean both metadata and package caches."
 msgstr ""
 
-#: src/commands/repos/list.cc:40 src/commands/repos/list.cc:212
-#: src/commands/services/list.cc:104
+#: src/commands/repos/list.cc:41 src/commands/repos/list.cc:213
+#: src/commands/services/list.cc:105
 msgid "Alias"
 msgstr ""
 
 #. translators: property name; short; used like "Name: value"
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/commands/repos/list.cc:42 src/commands/repos/list.cc:269
-#: src/commands/services/add.cc:83 src/commands/services/list.cc:116
-#: src/repos.cc:1254 src/utils/flags/zyppflags.h:49
+#: src/commands/repos/list.cc:43 src/commands/repos/list.cc:270
+#: src/commands/services/add.cc:83 src/commands/services/list.cc:117
+#: src/repos.cc:1256 src/utils/flags/zyppflags.h:49
 msgid "URI"
 msgstr "URI"
 
 #. 'enabled' flag
 #. translators: property name; short; used like "Name: value"
-#: src/commands/repos/list.cc:47 src/commands/repos/list.cc:231
-#: src/commands/services/add.cc:85 src/commands/services/list.cc:106
-#: src/repos.cc:1256
+#: src/commands/repos/list.cc:48 src/commands/repos/list.cc:232
+#: src/commands/services/add.cc:85 src/commands/services/list.cc:107
+#: src/repos.cc:1258
 msgid "Enabled"
 msgstr "Уключаны"
 
 #. GPG Check
 #. translators: property name; short; used like "Name: value"
-#: src/commands/repos/list.cc:48 src/commands/repos/list.cc:235
-#: src/commands/services/list.cc:107 src/repos.cc:1258
+#: src/commands/repos/list.cc:49 src/commands/repos/list.cc:236
+#: src/commands/services/list.cc:108 src/repos.cc:1260
 msgid "GPG Check"
 msgstr ""
 
 #. translators: repository priority (in zypper repos -p or -d)
 #. translators: property name; short; used like "Name: value"
-#: src/commands/repos/list.cc:49 src/commands/repos/list.cc:253
-#: src/commands/services/list.cc:113 src/repos.cc:1262
+#: src/commands/repos/list.cc:50 src/commands/repos/list.cc:254
+#: src/commands/services/list.cc:114 src/repos.cc:1264
 msgid "Priority"
 msgstr ""
 
 #. translators: property name; short; used like "Name: value"
-#: src/commands/repos/list.cc:50 src/commands/services/add.cc:87
-#: src/repos.cc:1260
+#: src/commands/repos/list.cc:51 src/commands/services/add.cc:87
+#: src/repos.cc:1262
 #, fuzzy
 msgid "Autorefresh"
 msgstr "Абнавіць"
 
-#: src/commands/repos/list.cc:50 src/commands/repos/list.cc:51
+#: src/commands/repos/list.cc:51 src/commands/repos/list.cc:52
 #, fuzzy
 msgid "On"
 msgstr "Аман"
 
-#: src/commands/repos/list.cc:50 src/commands/repos/list.cc:51
+#: src/commands/repos/list.cc:51 src/commands/repos/list.cc:52
 msgid "Off"
 msgstr ""
 
-#: src/commands/repos/list.cc:51
+#: src/commands/repos/list.cc:52
 msgid "Keep Packages"
 msgstr ""
 
-#: src/commands/repos/list.cc:53
+#: src/commands/repos/list.cc:54
 msgid "GPG Key URI"
 msgstr ""
 
-#: src/commands/repos/list.cc:54
+#: src/commands/repos/list.cc:55
 msgid "Path Prefix"
 msgstr ""
 
-#: src/commands/repos/list.cc:55
+#: src/commands/repos/list.cc:56
 #, fuzzy
 msgid "Parent Service"
 msgstr "Прыстасаванне"
 
-#: src/commands/repos/list.cc:56
+#: src/commands/repos/list.cc:57
 msgid "Keywords"
 msgstr ""
 
-#: src/commands/repos/list.cc:57
+#: src/commands/repos/list.cc:58
 msgid "Repo Info Path"
 msgstr ""
 
-#: src/commands/repos/list.cc:58
+#: src/commands/repos/list.cc:59
 msgid "MD Cache Path"
 msgstr ""
 
-#: src/commands/repos/list.cc:74
+#: src/commands/repos/list.cc:75
 msgid "repos (lr) [OPTIONS] [REPO] ..."
 msgstr ""
 
-#: src/commands/repos/list.cc:75 src/commands/repos/list.cc:76
+#: src/commands/repos/list.cc:76 src/commands/repos/list.cc:77
 msgid "List all defined repositories."
 msgstr ""
 
 #. translators: -e, --export <FILE.repo>
-#: src/commands/repos/list.cc:87
+#: src/commands/repos/list.cc:88
 msgid "Export all defined repositories as a single local .repo file."
 msgstr ""
 
-#: src/commands/repos/list.cc:118 src/repos.cc:1011
+#: src/commands/repos/list.cc:119 src/repos.cc:1013
 #, fuzzy
 msgid "Error reading repositories:"
 msgstr "Дадаць уключаныя сховішчы"
 
-#: src/commands/repos/list.cc:144
+#: src/commands/repos/list.cc:145
 #, c-format, boost-format
 msgid "Can't open %s for writing."
 msgstr ""
 
-#: src/commands/repos/list.cc:145
+#: src/commands/repos/list.cc:146
 msgid "Maybe you do not have write permissions?"
 msgstr ""
 
-#: src/commands/repos/list.cc:151
+#: src/commands/repos/list.cc:152
 #, c-format, boost-format
 msgid "Repositories have been successfully exported to %s."
 msgstr ""
@@ -3488,17 +3496,17 @@ msgstr ""
 #. translators: 'zypper repos' column - whether autorefresh is enabled
 #. for the repository
 #. translators: 'zypper repos' column - whether autorefresh is enabled for the repository
-#: src/commands/repos/list.cc:243 src/commands/services/list.cc:109
+#: src/commands/repos/list.cc:244 src/commands/services/list.cc:110
 #, fuzzy
 msgid "Refresh"
 msgstr "Абнавіць"
 
-#: src/commands/repos/list.cc:333
+#: src/commands/repos/list.cc:334
 #, fuzzy
 msgid "No repositories defined."
 msgstr "Выдаліць непатрэбныя сховішчы"
 
-#: src/commands/repos/list.cc:334
+#: src/commands/repos/list.cc:335
 msgid "Use the 'zypper addrepo' command to add one or more repositories."
 msgstr ""
 
@@ -3592,7 +3600,7 @@ msgstr ""
 msgid "Arguments are not allowed if '%s' is used."
 msgstr ""
 
-#: src/commands/repos/refresh.cc:195 src/repos.cc:1023
+#: src/commands/repos/refresh.cc:195 src/repos.cc:1025
 #, fuzzy
 msgid "Specified repositories: "
 msgstr "Дадаць уключаныя сховішчы"
@@ -3602,7 +3610,7 @@ msgstr "Дадаць уключаныя сховішчы"
 msgid "Refreshing repository '%s'."
 msgstr "Дадаць выключаныя сховішчы"
 
-#: src/commands/repos/refresh.cc:236 src/repos.cc:844
+#: src/commands/repos/refresh.cc:236 src/repos.cc:846
 #, fuzzy, c-format, boost-format
 msgid "Scanning content of disabled repository '%s'."
 msgstr "Даданне выключаных сховішчаў..."
@@ -3612,7 +3620,7 @@ msgstr "Даданне выключаных сховішчаў..."
 msgid "Skipping disabled repository '%s'"
 msgstr "Даданне выключаных сховішчаў..."
 
-#: src/commands/repos/refresh.cc:262 src/repos.cc:861 src/repos.cc:904
+#: src/commands/repos/refresh.cc:262 src/repos.cc:863 src/repos.cc:906
 #, c-format, boost-format
 msgid "Skipping repository '%s' because of the above error."
 msgstr ""
@@ -3640,7 +3648,7 @@ msgstr ""
 msgid "Could not refresh the repositories because of errors."
 msgstr ""
 
-#: src/commands/repos/refresh.cc:298 src/repos.cc:933
+#: src/commands/repos/refresh.cc:298 src/repos.cc:935
 msgid "Some of the repositories have not been refreshed because of an error."
 msgstr ""
 
@@ -3693,12 +3701,12 @@ msgstr ""
 msgid "Repository '%s' renamed to '%s'."
 msgstr ""
 
-#: src/commands/repos/rename.cc:47 src/repos.cc:1202
+#: src/commands/repos/rename.cc:47 src/repos.cc:1204
 #, c-format, boost-format
 msgid "Repository named '%s' already exists. Please use another alias."
 msgstr ""
 
-#: src/commands/repos/rename.cc:52 src/repos.cc:1680
+#: src/commands/repos/rename.cc:52 src/repos.cc:1682
 msgid "Error while modifying the repository:"
 msgstr ""
 
@@ -3730,7 +3738,7 @@ msgstr ""
 msgid "Repository '%s' not found."
 msgstr ""
 
-#: src/commands/reposerviceoptionsets.cc:35 src/repos.cc:107
+#: src/commands/reposerviceoptionsets.cc:35 src/repos.cc:109
 #, c-format, boost-format
 msgid ""
 "Invalid priority '%s'. Use a positive integer number. The greater the "
@@ -3921,7 +3929,7 @@ msgid "Sort the list by repository priority."
 msgstr ""
 
 #. translator: %1% denotes a zypper command to execute. Like 'zypper search-packages'.
-#: src/commands/search/search-packages-hinthack.cc:81
+#: src/commands/search/search-packages-hinthack.cc:82
 #, boost-format
 msgid ""
 "For an extended search including not yet activated remote resources please "
@@ -3929,26 +3937,26 @@ msgid ""
 msgstr ""
 
 #. translator: %1% denotes a zypper command to execute. Like 'zypper search-packages'.
-#: src/commands/search/search-packages-hinthack.cc:85
+#: src/commands/search/search-packages-hinthack.cc:86
 #, boost-format
 msgid ""
 "The package providing this subcommand is currently not installed. You can "
 "install it by calling '%1%'."
 msgstr ""
 
-#: src/commands/search/search-packages-hinthack.cc:98
+#: src/commands/search/search-packages-hinthack.cc:99
 #, boost-format
 msgid ""
 "For an extended search including not yet activated remote resources you may "
 "run '%1%' at any time."
 msgstr ""
 
-#: src/commands/search/search-packages-hinthack.cc:99
+#: src/commands/search/search-packages-hinthack.cc:100
 #, boost-format
 msgid "Do you want to run '%1%' now?"
 msgstr ""
 
-#: src/commands/search/search-packages-hinthack.cc:115
+#: src/commands/search/search-packages-hinthack.cc:116
 #, boost-format
 msgid "Run '%1%' to search in not yet activated remote resources."
 msgstr ""
@@ -4113,7 +4121,7 @@ msgid ""
 "(useful for search in dependencies)."
 msgstr ""
 
-#: src/commands/search/search.cc:290 src/repos.cc:781
+#: src/commands/search/search.cc:290 src/repos.cc:783
 #, fuzzy, c-format, boost-format
 msgid "Specified repository '%s' is disabled."
 msgstr "Выдаліць непатрэбныя сховішчы"
@@ -4131,7 +4139,7 @@ msgstr ""
 msgid "See the above message for a hint."
 msgstr ""
 
-#: src/commands/search/search.cc:495 src/repos.cc:990
+#: src/commands/search/search.cc:495 src/repos.cc:992
 msgid "Running 'zypper refresh' as root might resolve the problem."
 msgstr ""
 
@@ -4221,7 +4229,7 @@ msgid "Problem retrieving the repository index file for service '%s':"
 msgstr ""
 
 #: src/commands/services/common.cc:138 src/commands/services/refresh.cc:226
-#: src/repos.cc:1732
+#: src/repos.cc:1734
 #, c-format, boost-format
 msgid "Skipping service '%s' because of the above error."
 msgstr ""
@@ -4240,19 +4248,19 @@ msgstr "Запускаюцца сервісы..."
 msgid "Service '%s' has been removed."
 msgstr ""
 
-#: src/commands/services/list.cc:81
+#: src/commands/services/list.cc:82
 msgid "services (ls) [OPTIONS]"
 msgstr ""
 
-#: src/commands/services/list.cc:82
+#: src/commands/services/list.cc:83
 msgid "List all defined services."
 msgstr ""
 
-#: src/commands/services/list.cc:83
+#: src/commands/services/list.cc:84
 msgid "List defined services."
 msgstr ""
 
-#: src/commands/services/list.cc:169
+#: src/commands/services/list.cc:170
 #, c-format, boost-format
 msgid "No services defined. Use the '%s' command to add one or more services."
 msgstr ""
@@ -4513,69 +4521,69 @@ msgstr ""
 msgid "This command only makes sense in the zypper shell."
 msgstr ""
 
-#: src/commands/solveroptionset.cc:23
+#: src/commands/solveroptionset.cc:24
 #, boost-format
 msgid "Valid values: %1%"
 msgstr ""
 
-#: src/commands/solveroptionset.cc:35 src/commands/solveroptionset.cc:58
+#: src/commands/solveroptionset.cc:36 src/commands/solveroptionset.cc:59
 msgid "Solver options"
 msgstr ""
 
-#: src/commands/solveroptionset.cc:37
+#: src/commands/solveroptionset.cc:38
 msgid "Install also recommended packages in addition to the required ones."
 msgstr ""
 
-#: src/commands/solveroptionset.cc:38
+#: src/commands/solveroptionset.cc:39
 msgid "Do not install recommended packages, only required ones."
 msgstr ""
 
-#: src/commands/solveroptionset.cc:60
+#: src/commands/solveroptionset.cc:61
 msgid "Create a solver test case for debugging."
 msgstr ""
 
-#: src/commands/solveroptionset.cc:61
+#: src/commands/solveroptionset.cc:62
 msgid ""
 "Force the solver to find a solution (even an aggressive one) rather than "
 "asking."
 msgstr ""
 
-#: src/commands/solveroptionset.cc:62
+#: src/commands/solveroptionset.cc:63
 msgid "Do not force the solver to find a solution, let it ask."
 msgstr ""
 
-#: src/commands/solveroptionset.cc:63
+#: src/commands/solveroptionset.cc:64
 msgid "Set the solvers general attitude when resolving a job."
 msgstr ""
 
-#: src/commands/solveroptionset.cc:83
+#: src/commands/solveroptionset.cc:84
 msgid "Expert options"
 msgstr ""
 
-#: src/commands/solveroptionset.cc:86
+#: src/commands/solveroptionset.cc:87
 #, fuzzy
 msgid "Whether to allow downgrading installed resolvables."
 msgstr "Перанос ва ўсталяваную сістэму"
 
-#: src/commands/solveroptionset.cc:88
+#: src/commands/solveroptionset.cc:89
 msgid "Whether to allow changing the names of installed resolvables."
 msgstr ""
 
-#: src/commands/solveroptionset.cc:90
+#: src/commands/solveroptionset.cc:91
 msgid "Whether to allow changing the architecture of installed resolvables."
 msgstr ""
 
-#: src/commands/solveroptionset.cc:92
+#: src/commands/solveroptionset.cc:93
 msgid "Whether to allow changing the vendor of installed resolvables."
 msgstr ""
 
 #. translators: -u, --clean-deps
-#: src/commands/solveroptionset.cc:116
+#: src/commands/solveroptionset.cc:117
 msgid "Automatically remove unneeded dependencies."
 msgstr ""
 
 #. translators: -U, --no-clean-deps
-#: src/commands/solveroptionset.cc:120
+#: src/commands/solveroptionset.cc:121
 msgid "No automatic removal of unneeded dependencies."
 msgstr ""
 
@@ -4793,23 +4801,23 @@ msgid ""
 "Cannot use multiple types when specific packages are given as arguments."
 msgstr ""
 
-#: src/commands/utils/download.cc:131 src/commands/utils/source-download.cc:212
+#: src/commands/utils/download.cc:129 src/commands/utils/source-download.cc:212
 #, c-format, boost-format
 msgid "Insufficient privileges to use download directory '%s'."
 msgstr ""
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/commands/utils/download.cc:144
+#: src/commands/utils/download.cc:142
 msgid "download [OPTIONS] <PACKAGES>..."
 msgstr ""
 
 #. translators: command summary: download
-#: src/commands/utils/download.cc:146
+#: src/commands/utils/download.cc:144
 msgid "Download rpms specified on the commandline to a local directory."
 msgstr ""
 
 #. translators: command description
-#: src/commands/utils/download.cc:150
+#: src/commands/utils/download.cc:148
 msgid ""
 "Download rpms specified on the commandline to a local directory. Per default "
 "packages are downloaded to the libzypp package cache (/var/cache/zypp/"
@@ -4818,7 +4826,7 @@ msgid ""
 msgstr ""
 
 #. translators: command description
-#: src/commands/utils/download.cc:153
+#: src/commands/utils/download.cc:151
 msgid ""
 "In XML output a <download-result> node is written for each package zypper "
 "tried to download. Upon success the local path is is found in 'download-"
@@ -4826,39 +4834,39 @@ msgid ""
 msgstr ""
 
 #. translators: --all-matches
-#: src/commands/utils/download.cc:168
+#: src/commands/utils/download.cc:166
 msgid ""
 "Download all versions matching the commandline arguments. Otherwise only the "
 "best version of each matching package is downloaded."
 msgstr ""
 
 #. translators: Label text; is followed by ': cmdline argument'
-#: src/commands/utils/download.cc:238
+#: src/commands/utils/download.cc:236
 msgid "Argument resolves to no package"
 msgstr ""
 
-#: src/commands/utils/download.cc:254 src/solve-commit.cc:1023
+#: src/commands/utils/download.cc:252 src/solve-commit.cc:1023
 msgid "Nothing to do."
 msgstr ""
 
-#: src/commands/utils/download.cc:261
+#: src/commands/utils/download.cc:259
 msgid "No prune to best version."
 msgstr ""
 
-#: src/commands/utils/download.cc:267
+#: src/commands/utils/download.cc:265
 msgid "Prune to best version..."
 msgstr ""
 
-#: src/commands/utils/download.cc:273
+#: src/commands/utils/download.cc:271
 msgid "Not downloading anything..."
 msgstr ""
 
-#: src/commands/utils/download.cc:315
+#: src/commands/utils/download.cc:313
 #, fuzzy, c-format, boost-format
 msgid "Error downloading package '%s'."
 msgstr "Усталяванне пакетаў..."
 
-#: src/commands/utils/download.cc:329
+#: src/commands/utils/download.cc:327
 #, fuzzy, c-format, boost-format
 msgid "Not downloading package '%s'."
 msgstr "Усталяванне пакетаў..."
@@ -4963,7 +4971,7 @@ msgstr ""
 
 #. translators: table headers
 #. translators: property name; short; used like "Name: value"
-#: src/commands/utils/source-download.cc:318 src/info.cc:353
+#: src/commands/utils/source-download.cc:318 src/info.cc:354
 #, fuzzy
 msgid "Source package"
 msgstr "Усталяванне пакетаў..."
@@ -5135,41 +5143,41 @@ msgstr ""
 #. translators: property name; short; used like "Name: value"
 #. translators: Table column header
 #. translators: package version (header)
-#: src/info.cc:90 src/info.cc:692 src/search.cc:52 src/search.cc:305
+#: src/info.cc:91 src/info.cc:693 src/search.cc:52 src/search.cc:305
 #: src/search.cc:440 src/search.cc:487
 msgid "Version"
 msgstr ""
 
 #. translators: property name; short; used like "Name: value"
 #. translators: package architecture (header)
-#: src/info.cc:92 src/search.cc:54 src/search.cc:441 src/search.cc:488
+#: src/info.cc:93 src/search.cc:54 src/search.cc:441 src/search.cc:488
 #: src/update.cc:795
 msgid "Arch"
 msgstr ""
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:94
+#: src/info.cc:95
 msgid "Vendor"
 msgstr ""
 
 #. translators: property name; short; used like "Name: value"
 #. translators: package summary (header)
-#: src/info.cc:100 src/search.cc:201 src/utils/misc.cc:331
+#: src/info.cc:101 src/search.cc:201 src/utils/misc.cc:331
 #: src/utils/misc.cc:373
 msgid "Summary"
 msgstr ""
 
 #. translators: property name; short; used like "Name: value"
 #. translators: header of table column - the package summary
-#: src/info.cc:102 src/locales.cc:203
+#: src/info.cc:103 src/locales.cc:203
 msgid "Description"
 msgstr ""
 
-#: src/info.cc:129
+#: src/info.cc:130
 msgid "automatically"
 msgstr ""
 
-#: src/info.cc:201
+#: src/info.cc:202
 #, boost-format
 msgid "There would be %1% match for '%2%'."
 msgid_plural "There would be %1% matches for '%2%'."
@@ -5178,83 +5186,83 @@ msgstr[1] ""
 msgstr[2] ""
 
 #. TranslatorExplanation E.g. "package 'zypper' not found."
-#: src/info.cc:251
+#: src/info.cc:252
 #, c-format, boost-format
 msgid "%s '%s' not found."
 msgstr ""
 
 #. TranslatorExplanation E.g. "Information for package zypper:"
-#: src/info.cc:275
+#: src/info.cc:276
 #, c-format, boost-format
 msgid "Information for %s %s:"
 msgstr ""
 
-#: src/info.cc:335
+#: src/info.cc:336
 msgid "Support Level"
 msgstr ""
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:338
+#: src/info.cc:339
 msgid "Installed Size"
 msgstr "Размер пасля ўстаноўкі"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:342 src/info.cc:392 src/info.cc:556 src/utils/misc.cc:329
+#: src/info.cc:343 src/info.cc:393 src/info.cc:557 src/utils/misc.cc:329
 #: src/utils/misc.cc:371
 msgid "Status"
 msgstr "Статус"
 
-#: src/info.cc:346 src/info.cc:560
+#: src/info.cc:347 src/info.cc:561
 #, c-format, boost-format
 msgid "out-of-date (version %s installed)"
 msgstr ""
 
-#: src/info.cc:348 src/info.cc:562
+#: src/info.cc:349 src/info.cc:563
 msgid "up-to-date"
 msgstr "актуальны"
 
-#: src/info.cc:351 src/info.cc:565
+#: src/info.cc:352 src/info.cc:566
 msgid "not installed"
 msgstr ""
 
-#: src/info.cc:355
+#: src/info.cc:356
 msgid "Upstream URL"
 msgstr ""
 
 #. translators: property name; short; used like "Name: value"
 #. translator: Table column header.
 #. Name
-#: src/info.cc:394 src/update.cc:406 src/utils/misc.cc:326
+#: src/info.cc:395 src/update.cc:406 src/utils/misc.cc:326
 #: src/utils/misc.cc:368
 msgid "Category"
 msgstr ""
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:396 src/utils/misc.cc:327 src/utils/misc.cc:369
+#: src/info.cc:397 src/utils/misc.cc:327 src/utils/misc.cc:369
 msgid "Severity"
 msgstr ""
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:398
+#: src/info.cc:399
 msgid "Created On"
 msgstr "Створаны"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:400 src/utils/misc.cc:328 src/utils/misc.cc:370
+#: src/info.cc:401 src/utils/misc.cc:328 src/utils/misc.cc:370
 msgid "Interactive"
 msgstr ""
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:435
+#: src/info.cc:436
 msgid "Visible to User"
 msgstr ""
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:449 src/info.cc:485
+#: src/info.cc:450 src/info.cc:486
 msgid "Contents"
 msgstr ""
 
-#: src/info.cc:449
+#: src/info.cc:450
 msgid "(empty)"
 msgstr "(пуста)"
 
@@ -5263,91 +5271,91 @@ msgstr "(пуста)"
 #. translators: S for 'installed Status'
 #. translators: S for installed Status
 #. TranslatorExplanation S stands for Status
-#: src/info.cc:455 src/info.cc:690 src/locales.cc:199 src/search.cc:46
+#: src/info.cc:456 src/info.cc:691 src/locales.cc:199 src/search.cc:46
 #: src/search.cc:198 src/search.cc:303 src/search.cc:437 src/search.cc:481
 #: src/update.cc:784
 msgid "S"
 msgstr ""
 
 #. translators: Table column header
-#: src/info.cc:458 src/search.cc:307
+#: src/info.cc:459 src/search.cc:307
 msgid "Dependency"
 msgstr ""
 
-#: src/info.cc:463 src/info.cc:477
+#: src/info.cc:464 src/info.cc:478
 msgid "Required"
 msgstr ""
 
-#: src/info.cc:468 src/info.cc:477 src/search.cc:243
+#: src/info.cc:469 src/info.cc:478 src/search.cc:243
 msgid "Recommended"
 msgstr ""
 
-#: src/info.cc:474 src/info.cc:477 src/search.cc:245
+#: src/info.cc:475 src/info.cc:478 src/search.cc:245
 msgid "Suggested"
 msgstr ""
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:533
+#: src/info.cc:534
 msgid "End of Support"
 msgstr ""
 
-#: src/info.cc:538
+#: src/info.cc:539
 msgid "unknown"
 msgstr "невядомы"
 
 #. translators: %1% is an URL or Path pointing to some document
-#: src/info.cc:543
+#: src/info.cc:544
 #, boost-format
 msgid "See %1%"
 msgstr ""
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:549
+#: src/info.cc:550
 msgid "Flavor"
 msgstr ""
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:551 src/search.cc:489
+#: src/info.cc:552 src/search.cc:489
 msgid "Is Base"
 msgstr ""
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:572 src/info.cc:599
+#: src/info.cc:573 src/info.cc:600
 msgid "Update Repositories"
 msgstr "Рэпазітар абнаўленняў"
 
-#: src/info.cc:577
+#: src/info.cc:578
 msgid "Content Id"
 msgstr ""
 
-#: src/info.cc:589
+#: src/info.cc:590
 msgid "Provided by enabled repository"
 msgstr "Прадастаўлены уключаным рэпазітаром"
 
-#: src/info.cc:594
+#: src/info.cc:595
 msgid "Not provided by any enabled repository"
 msgstr "Адсутнічае ва уключаных рэпазітарах"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:604
+#: src/info.cc:605
 msgid "CPE Name"
 msgstr ""
 
-#: src/info.cc:609
+#: src/info.cc:610
 msgid "undefined"
 msgstr ""
 
-#: src/info.cc:611
+#: src/info.cc:612
 msgid "invalid CPE Name"
 msgstr ""
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:614
+#: src/info.cc:615
 msgid "Short Name"
 msgstr ""
 
 #. translators: property name; short; used like "Name: value"; is followed by a list of binary packages built from this source package
-#: src/info.cc:700
+#: src/info.cc:701
 msgid "Builds binary package"
 msgstr ""
 
@@ -5360,7 +5368,7 @@ msgstr ""
 msgid "Fallback"
 msgstr ""
 
-#: src/locales.cc:72 src/output/Out.h:27 src/repos.cc:131 src/repos.cc:159
+#: src/locales.cc:72 src/repos.cc:133 src/repos.cc:161
 msgid "No"
 msgstr "Не"
 
@@ -5399,14 +5407,16 @@ msgstr ""
 msgid "%s was not requested."
 msgstr ""
 
-#. translators: this will show up if you press ctrl+c twice
-#: src/main.cc:45
-msgid "OK OK! Exiting immediately..."
+#. set up our strings we want to output in case SIGINT was triggered
+#. we can not allocate memory there, so we do it in advance and remember the translated strings
+#. translators: this will show up if you press ctrl+c once
+#: src/main.cc:122
+msgid "Trying to exit gracefully..."
 msgstr ""
 
 #. translators: this will show up if you press ctrl+c twice
-#: src/main.cc:52
-msgid "Trying to exit gracefully..."
+#: src/main.cc:126
+msgid "Zypper is currently cleaning up, exiting as soon as possible."
 msgstr ""
 
 #. translators: the first %s is name of the resolvable,
@@ -5506,117 +5516,51 @@ msgstr ""
 msgid "Problem installing source package %s-%s:"
 msgstr ""
 
-#. translator: Shown as result tag in a progress bar: ............[done]
-#. Translator: download progress bar result: ".............[done]"
-#: src/output/Out.cc:120 src/output/OutNormal.cc:339
-#: src/output/OutNormal.cc:342
-#, fuzzy
-msgid "done"
-msgstr "Інданэзія"
-
-#. translator: Shown as result tag in a progress bar: .......[attention]
-#: src/output/Out.cc:122
-msgid "attention"
-msgstr ""
-
-#. translator: Shown as result tag in a progress bar: ...........[error]
-#. Translator: download progress bar result: "............[error]"
-#: src/output/Out.cc:124 src/output/OutNormal.cc:336
-#: src/output/OutNormal.cc:342
-#, fuzzy
-msgid "error"
-msgstr "Памылка"
-
-#: src/output/Out.h:27 src/repos.cc:125 src/repos.cc:153
-msgid "Yes"
-msgstr "Так"
-
-#. translator: usually followed by a ' ' and some explanatory text
-#: src/output/Out.h:41
-msgid "Note:"
-msgstr "Заўвага:"
-
-#. translator: usually followed by a ' ' and some explanatory text
-#: src/output/Out.h:43
-msgid "Warning:"
-msgstr "Папярэджванне:"
-
-#. translator: usually followed by a ' ' and some explanatory text
-#: src/output/Out.h:45
-msgid "Error:"
-msgstr "Памылка:"
-
-#: src/output/Out.h:47
-msgid "Continue?"
-msgstr "Працягнуць?"
-
-#. Since this message will be emitted before we know if the current output is XML or Normal we need to send this message to stderr
-#. to not break scripts that use xml output (bsc#1172925)
-#: src/output/OutNormal.cc:86 src/utils/flags/zyppflags.cc:392
-#, fuzzy
-msgid "Warning: "
-msgstr "Папярэджванне"
-
-#: src/output/OutNormal.cc:257
-msgid "starting"
-msgstr ""
-
-#. Translator: download progress bar result: "........[not found]"
-#: src/output/OutNormal.cc:333 src/output/OutNormal.cc:342
-msgid "not found"
-msgstr ""
-
-#: src/output/OutNormal.cc:419
-#, fuzzy
-msgid "No help available for this prompt."
-msgstr "Даведка не даступна"
-
-#: src/output/OutNormal.cc:436
-#, fuzzy
-msgid "no help available for this option"
-msgstr "Даведка не даступна"
-
 #. translators: used as 'XYZ changed to SOMETHING [volatile]' to tag specific property changes.
-#: src/repos.cc:51
+#: src/repos.cc:53
 msgid "volatile"
 msgstr ""
 
 #. translators: 'Volatile' refers to changes we previously tagged as 'XYZ changed to SOMETHING [volatile]'
-#: src/repos.cc:57
+#: src/repos.cc:59
 #, boost-format
 msgid ""
 "Repo '%1%' is managed by service '%2%'. Volatile changes are reset by the "
 "next service refresh!"
 msgstr ""
 
-#: src/repos.cc:73
+#: src/repos.cc:75
 msgid "default priority"
 msgstr ""
 
-#: src/repos.cc:74
+#: src/repos.cc:76
 msgid "raised priority"
 msgstr ""
 
-#: src/repos.cc:74
+#: src/repos.cc:76
 msgid "lowered priority"
 msgstr ""
 
-#: src/repos.cc:178
+#: src/repos.cc:127 src/repos.cc:155
+msgid "Yes"
+msgstr "Так"
+
+#: src/repos.cc:180
 msgid ""
 "Repository priorities are without effect. All enabled repositories share the "
 "same priority."
 msgstr ""
 
-#: src/repos.cc:182
+#: src/repos.cc:184
 msgid "Repository priorities in effect:"
 msgstr ""
 
-#: src/repos.cc:183
+#: src/repos.cc:185
 #, boost-format
 msgid "See '%1%' for details"
 msgstr ""
 
-#: src/repos.cc:192
+#: src/repos.cc:194
 #, fuzzy, boost-format
 msgid "%1% repository"
 msgid_plural "%1% repositories"
@@ -5626,95 +5570,95 @@ msgstr[2] "Сховішча"
 
 #. check whether libzypp indicates a refresh is needed, and if so,
 #. print a message
-#: src/repos.cc:225
+#: src/repos.cc:227
 #, c-format, boost-format
 msgid "Checking whether to refresh metadata for %s"
 msgstr ""
 
-#: src/repos.cc:254
+#: src/repos.cc:256
 #, c-format, boost-format
 msgid "Repository '%s' is up to date."
 msgstr ""
 
-#: src/repos.cc:260
+#: src/repos.cc:262
 #, c-format, boost-format
 msgid "The up-to-date check of '%s' has been delayed."
 msgstr ""
 
-#: src/repos.cc:282
+#: src/repos.cc:284
 msgid "Forcing raw metadata refresh"
 msgstr ""
 
-#: src/repos.cc:288
+#: src/repos.cc:290
 #, c-format, boost-format
 msgid "Retrieving repository '%s' metadata"
 msgstr ""
 
-#: src/repos.cc:312
+#: src/repos.cc:314
 #, c-format, boost-format
 msgid "Do you want to disable the repository %s permanently?"
 msgstr ""
 
-#: src/repos.cc:328
+#: src/repos.cc:330
 #, fuzzy, c-format, boost-format
 msgid "Error while disabling repository '%s'."
 msgstr "Дадаць выключаныя сховішчы"
 
-#: src/repos.cc:344
+#: src/repos.cc:346
 #, c-format, boost-format
 msgid "Problem retrieving files from '%s'."
 msgstr ""
 
-#: src/repos.cc:345 src/repos.cc:1867 src/solve-commit.cc:898
+#: src/repos.cc:347 src/repos.cc:1869 src/solve-commit.cc:898
 #: src/solve-commit.cc:929 src/solve-commit.cc:953
 msgid "Please see the above error message for a hint."
 msgstr ""
 
-#: src/repos.cc:357
+#: src/repos.cc:359
 #, c-format, boost-format
 msgid "No URIs defined for '%s'."
 msgstr ""
 
 #. TranslatorExplanation the first %s is a .repo file path
-#: src/repos.cc:362
+#: src/repos.cc:364
 #, c-format, boost-format
 msgid ""
 "Please add one or more base URI (baseurl=URI) entries to %s for repository "
 "'%s'."
 msgstr ""
 
-#: src/repos.cc:376
+#: src/repos.cc:378
 #, fuzzy
 msgid "No alias defined for this repository."
 msgstr "Не вызначана паслядоўнасць для гэтага рэжыму ўсталёўкі."
 
-#: src/repos.cc:388
+#: src/repos.cc:390
 #, c-format, boost-format
 msgid "Repository '%s' is invalid."
 msgstr ""
 
-#: src/repos.cc:389
+#: src/repos.cc:391
 msgid ""
 "Please check if the URIs defined for this repository are pointing to a valid "
 "repository."
 msgstr ""
 
-#: src/repos.cc:401
+#: src/repos.cc:403
 #, c-format, boost-format
 msgid "Error retrieving metadata for '%s':"
 msgstr ""
 
-#: src/repos.cc:414
+#: src/repos.cc:416
 msgid "Forcing building of repository cache"
 msgstr ""
 
-#: src/repos.cc:439
+#: src/repos.cc:441
 #, c-format, boost-format
 msgid "Error parsing metadata for '%s':"
 msgstr ""
 
 #. TranslatorExplanation Don't translate the URL unless it is translated, too
-#: src/repos.cc:441
+#: src/repos.cc:443
 msgid ""
 "This may be caused by invalid metadata in the repository, or by a bug in the "
 "metadata parser. In the latter case, or if in doubt, please, file a bug "
@@ -5722,335 +5666,335 @@ msgid ""
 "Troubleshooting"
 msgstr ""
 
-#: src/repos.cc:450
+#: src/repos.cc:452
 #, c-format, boost-format
 msgid "Repository metadata for '%s' not found in local cache."
 msgstr ""
 
-#: src/repos.cc:458
+#: src/repos.cc:460
 msgid "Error building the cache:"
-msgstr ""
-
-#: src/repos.cc:677
-#, c-format, boost-format
-msgid "Repository '%s' not found by its alias, number, or URI."
 msgstr ""
 
 #: src/repos.cc:679
 #, c-format, boost-format
+msgid "Repository '%s' not found by its alias, number, or URI."
+msgstr ""
+
+#: src/repos.cc:681
+#, c-format, boost-format
 msgid "Use '%s' to get the list of defined repositories."
 msgstr ""
 
-#: src/repos.cc:699
+#: src/repos.cc:701
 #, fuzzy, c-format, boost-format
 msgid "Ignoring disabled repository '%s'"
 msgstr "Даданне выключаных сховішчаў..."
 
-#: src/repos.cc:787
+#: src/repos.cc:789
 #, c-format, boost-format
 msgid "Global option '%s' can be used to temporarily enable repositories."
 msgstr ""
 
-#: src/repos.cc:803 src/repos.cc:809
+#: src/repos.cc:805 src/repos.cc:811
 #, c-format, boost-format
 msgid "Ignoring repository '%s' because of '%s' option."
 msgstr ""
 
-#: src/repos.cc:830 src/repos.cc:918
+#: src/repos.cc:832 src/repos.cc:920
 #, fuzzy, c-format, boost-format
 msgid "Temporarily enabling repository '%s'."
 msgstr "Дадаць выключаныя сховішчы"
 
-#: src/repos.cc:882
+#: src/repos.cc:884
 #, c-format, boost-format
 msgid ""
 "Repository '%s' is out-of-date. You can run 'zypper refresh' as root to "
 "update it."
 msgstr ""
 
-#: src/repos.cc:899
+#: src/repos.cc:901
 #, c-format, boost-format
 msgid ""
 "The metadata cache needs to be built for the '%s' repository. You can run "
 "'zypper refresh' as root to do this."
 msgstr ""
 
-#: src/repos.cc:925
+#: src/repos.cc:927
 #, fuzzy, c-format, boost-format
 msgid "Repository '%s' stays disabled."
 msgstr "Выдаліць непатрэбныя сховішчы"
 
-#: src/repos.cc:981
+#: src/repos.cc:983
 #, fuzzy
 msgid "Initializing Target"
 msgstr "Ініцыялізацыя"
 
-#: src/repos.cc:989
+#: src/repos.cc:991
 msgid "Target initialization failed:"
 msgstr ""
 
-#: src/repos.cc:1071
+#: src/repos.cc:1073
 #, c-format, boost-format
 msgid "Cleaning metadata cache for '%s'."
 msgstr ""
 
-#: src/repos.cc:1079
+#: src/repos.cc:1081
 #, c-format, boost-format
 msgid "Cleaning raw metadata cache for '%s'."
 msgstr ""
 
-#: src/repos.cc:1085
+#: src/repos.cc:1087
 #, c-format, boost-format
 msgid "Keeping raw metadata cache for %s '%s'."
 msgstr ""
 
 #. translators: meaning the cached rpm files
-#: src/repos.cc:1092
+#: src/repos.cc:1094
 #, c-format, boost-format
 msgid "Cleaning packages for '%s'."
 msgstr ""
 
-#: src/repos.cc:1100
+#: src/repos.cc:1102
 #, c-format, boost-format
 msgid "Cannot clean repository '%s' because of an error."
 msgstr ""
 
-#: src/repos.cc:1111
+#: src/repos.cc:1113
 msgid "Cleaning installed packages cache."
 msgstr ""
 
-#: src/repos.cc:1120
+#: src/repos.cc:1122
 msgid "Cannot clean installed packages cache because of an error."
 msgstr ""
 
-#: src/repos.cc:1138
+#: src/repos.cc:1140
 msgid "Could not clean the repositories because of errors."
 msgstr ""
 
-#: src/repos.cc:1144
+#: src/repos.cc:1146
 msgid "Some of the repositories have not been cleaned up because of an error."
 msgstr ""
 
-#: src/repos.cc:1149
+#: src/repos.cc:1151
 msgid "Specified repositories have been cleaned up."
 msgstr ""
 
-#: src/repos.cc:1151
+#: src/repos.cc:1153
 msgid "All repositories have been cleaned up."
 msgstr ""
 
-#: src/repos.cc:1173
+#: src/repos.cc:1175
 msgid "This is a changeable read-only media (CD/DVD), disabling autorefresh."
 msgstr ""
 
-#: src/repos.cc:1194
+#: src/repos.cc:1196
 #, fuzzy, c-format, boost-format
 msgid "Invalid repository alias: '%s'"
 msgstr "Дадаць выключаныя сховішчы"
 
-#: src/repos.cc:1211
+#: src/repos.cc:1213
 msgid ""
 "Could not determine the type of the repository. Please check if the defined "
 "URIs (see below) point to a valid repository:"
 msgstr ""
 
-#: src/repos.cc:1217
+#: src/repos.cc:1219
 msgid "Can't find a valid repository at given location:"
 msgstr ""
 
-#: src/repos.cc:1225
+#: src/repos.cc:1227
 msgid "Problem transferring repository data from specified URI:"
 msgstr ""
 
-#: src/repos.cc:1226
+#: src/repos.cc:1228
 msgid "Please check whether the specified URI is accessible."
 msgstr ""
 
-#: src/repos.cc:1233
+#: src/repos.cc:1235
 msgid "Unknown problem when adding repository:"
 msgstr ""
 
 #. translators: BOOST STYLE POSITIONAL DIRECTIVES ( %N% )
 #. translators: %1% - a repository name
-#: src/repos.cc:1243
+#: src/repos.cc:1245
 #, boost-format
 msgid ""
 "GPG checking is disabled in configuration of repository '%1%'. Integrity and "
 "origin of packages cannot be verified."
 msgstr ""
 
-#: src/repos.cc:1248
+#: src/repos.cc:1250
 #, c-format, boost-format
 msgid "Repository '%s' successfully added"
 msgstr ""
 
-#: src/repos.cc:1274
+#: src/repos.cc:1276
 #, c-format, boost-format
 msgid "Reading data from '%s' media"
 msgstr ""
 
-#: src/repos.cc:1280
+#: src/repos.cc:1282
 #, c-format, boost-format
 msgid "Problem reading data from '%s' media"
 msgstr ""
 
-#: src/repos.cc:1281
+#: src/repos.cc:1283
 msgid "Please check if your installation media is valid and readable."
 msgstr ""
 
-#: src/repos.cc:1288
+#: src/repos.cc:1290
 #, c-format, boost-format
 msgid "Reading data from '%s' media is delayed until next refresh."
 msgstr ""
 
-#: src/repos.cc:1357
+#: src/repos.cc:1359
 msgid "Problem accessing the file at the specified URI"
 msgstr ""
 
-#: src/repos.cc:1358
+#: src/repos.cc:1360
 msgid "Please check if the URI is valid and accessible."
 msgstr ""
 
-#: src/repos.cc:1365
+#: src/repos.cc:1367
 msgid "Problem parsing the file at the specified URI"
 msgstr ""
 
 #. TranslatorExplanation Don't translate the '.repo' string.
-#: src/repos.cc:1367
+#: src/repos.cc:1369
 msgid "Is it a .repo file?"
 msgstr ""
 
-#: src/repos.cc:1374
+#: src/repos.cc:1376
 msgid "Problem encountered while trying to read the file at the specified URI"
 msgstr ""
 
-#: src/repos.cc:1387
+#: src/repos.cc:1389
 msgid "Repository with no alias defined found in the file, skipping."
 msgstr ""
 
-#: src/repos.cc:1393
+#: src/repos.cc:1395
 #, c-format, boost-format
 msgid "Repository '%s' has no URI defined, skipping."
 msgstr ""
 
-#: src/repos.cc:1441
+#: src/repos.cc:1443
 #, c-format, boost-format
 msgid "Repository '%s' has been removed."
 msgstr ""
 
-#: src/repos.cc:1589
+#: src/repos.cc:1591
 #, c-format, boost-format
 msgid "Repository '%s' priority has been left unchanged (%d)"
 msgstr ""
 
-#: src/repos.cc:1622
+#: src/repos.cc:1624
 #, c-format, boost-format
 msgid "Repository '%s' has been successfully enabled."
 msgstr ""
 
-#: src/repos.cc:1624
+#: src/repos.cc:1626
 #, c-format, boost-format
 msgid "Repository '%s' has been successfully disabled."
 msgstr ""
 
-#: src/repos.cc:1631
+#: src/repos.cc:1633
 #, c-format, boost-format
 msgid "Autorefresh has been enabled for repository '%s'."
 msgstr ""
 
-#: src/repos.cc:1633
+#: src/repos.cc:1635
 #, c-format, boost-format
 msgid "Autorefresh has been disabled for repository '%s'."
 msgstr ""
 
-#: src/repos.cc:1640
+#: src/repos.cc:1642
 #, c-format, boost-format
 msgid "RPM files caching has been enabled for repository '%s'."
 msgstr ""
 
-#: src/repos.cc:1642
+#: src/repos.cc:1644
 #, c-format, boost-format
 msgid "RPM files caching has been disabled for repository '%s'."
 msgstr ""
 
-#: src/repos.cc:1649
+#: src/repos.cc:1651
 #, fuzzy, c-format, boost-format
 msgid "GPG check has been enabled for repository '%s'."
 msgstr "Даданне выключаных сховішчаў..."
 
-#: src/repos.cc:1651
+#: src/repos.cc:1653
 #, fuzzy, c-format, boost-format
 msgid "GPG check has been disabled for repository '%s'."
 msgstr "Даданне выключаных сховішчаў..."
 
-#: src/repos.cc:1657
+#: src/repos.cc:1659
 #, c-format, boost-format
 msgid "Repository '%s' priority has been set to %d."
 msgstr ""
 
-#: src/repos.cc:1663
+#: src/repos.cc:1665
 #, c-format, boost-format
 msgid "Name of repository '%s' has been set to '%s'."
 msgstr ""
 
-#: src/repos.cc:1674
+#: src/repos.cc:1676
 #, c-format, boost-format
 msgid "Nothing to change for repository '%s'."
 msgstr ""
 
-#: src/repos.cc:1681
+#: src/repos.cc:1683
 #, c-format, boost-format
 msgid "Leaving repository %s unchanged."
 msgstr ""
 
-#: src/repos.cc:1768
+#: src/repos.cc:1770
 #, fuzzy
 msgid "Loading repository data..."
 msgstr "<p>Чытанне сховішчаў. Калі ласка,пачакайце...</p>"
 
-#: src/repos.cc:1770
+#: src/repos.cc:1772
 msgid ""
 "No repositories defined. Operating only with the installed resolvables. "
 "Nothing can be installed."
 msgstr ""
 
-#: src/repos.cc:1791
+#: src/repos.cc:1793
 #, fuzzy, c-format, boost-format
 msgid "Retrieving repository '%s' data..."
 msgstr "Выдаленне непатрэбных сховішчаў..."
 
-#: src/repos.cc:1797
+#: src/repos.cc:1799
 #, c-format, boost-format
 msgid "Repository '%s' not cached. Caching..."
 msgstr ""
 
-#: src/repos.cc:1803 src/repos.cc:1837
+#: src/repos.cc:1805 src/repos.cc:1839
 #, c-format, boost-format
 msgid "Problem loading data from '%s'"
 msgstr ""
 
-#: src/repos.cc:1807
+#: src/repos.cc:1809
 #, c-format, boost-format
 msgid "Repository '%s' could not be refreshed. Using old cache."
 msgstr ""
 
-#: src/repos.cc:1811 src/repos.cc:1840
+#: src/repos.cc:1813 src/repos.cc:1842
 #, c-format, boost-format
 msgid "Resolvables from '%s' not loaded because of error."
 msgstr ""
 
-#: src/repos.cc:1827
+#: src/repos.cc:1829
 #, boost-format
 msgid "Repository '%1%' metadata expired since %2%."
 msgstr ""
 
 #. translators: the first %s is 'zypper refresh' and the second 'zypper clean -m'
-#: src/repos.cc:1839
+#: src/repos.cc:1841
 #, c-format, boost-format
 msgid "Try '%s', or even '%s' before doing so."
 msgstr ""
 
-#: src/repos.cc:1844
+#: src/repos.cc:1846
 msgid ""
 "Repository metadata expired: Check if 'autorefresh' is turned on (zypper "
 "lr), otherwise manualy refresh the repository (zypper ref). If this does not "
@@ -6058,32 +6002,32 @@ msgid ""
 "server has actually discontinued to support the repository."
 msgstr ""
 
-#: src/repos.cc:1857
+#: src/repos.cc:1859
 #, fuzzy
 msgid "Reading installed packages..."
 msgstr "Усталяванне пакетаў..."
 
-#: src/repos.cc:1866
+#: src/repos.cc:1868
 #, fuzzy
 msgid "Problem occurred while reading the installed packages:"
 msgstr "Усталяванне пакетаў..."
 
-#: src/repos.cc:1883
+#: src/repos.cc:1885
 #, c-format, boost-format
 msgid "'%s' looks like an RPM file. Will try to download it."
 msgstr ""
 
-#: src/repos.cc:1892
+#: src/repos.cc:1894
 #, c-format, boost-format
 msgid "Problem with the RPM file specified as '%s', skipping."
 msgstr ""
 
-#: src/repos.cc:1914
+#: src/repos.cc:1916
 #, c-format, boost-format
 msgid "Problem reading the RPM header of %s. Is it an RPM file?"
 msgstr ""
 
-#: src/repos.cc:1934
+#: src/repos.cc:1936
 msgid "Plain RPM files cache"
 msgstr ""
 
@@ -6647,6 +6591,13 @@ msgstr ""
 msgid "Unknown error while assigning the value %1% to flag %2%."
 msgstr ""
 
+#. Since this message will be emitted before we know if the current output is XML or Normal we need to send this message to stderr
+#. to not break scripts that use xml output (bsc#1172925)
+#: src/utils/flags/zyppflags.cc:392
+#, fuzzy
+msgid "Warning: "
+msgstr "Папярэджванне"
+
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:23
 msgid "ALIAS"
@@ -6976,22 +6927,7 @@ msgstr ""
 msgid "Use the Enter or Space key to scroll the text by lines or pages."
 msgstr ""
 
-#. translators: Press '?' to see all options embedded in this prompt: "Continue? [y/n/? shows all options] (y):"
-#: src/utils/prompt.cc:91
-msgid "shows all options"
-msgstr ""
-
-#: src/utils/prompt.cc:201 src/utils/prompt.cc:322 src/utils/prompt.cc:331
-#: src/utils/prompt.cc:429
-msgid "yes"
-msgstr "да"
-
-#: src/utils/prompt.cc:201 src/utils/prompt.cc:322 src/utils/prompt.cc:331
-#: src/utils/prompt.cc:429
-msgid "no"
-msgstr "не"
-
-#: src/utils/prompt.cc:219 src/utils/prompt.cc:267
+#: src/utils/prompt.cc:43 src/utils/prompt.cc:94
 #, c-format, boost-format
 msgid "Retrying in %u seconds..."
 msgstr ""
@@ -7002,79 +6938,115 @@ msgstr ""
 #. the answers must be separated by slash characters '/' and must
 #. correspond to abort/retry/ignore in that order.
 #. The answers should be lower case letters.
-#: src/utils/prompt.cc:225 src/utils/prompt.cc:312
+#: src/utils/prompt.cc:49 src/utils/prompt.cc:142
 msgid "a/r/i"
 msgstr ""
 
-#: src/utils/prompt.cc:277
+#: src/utils/prompt.cc:107
 #, c-format, boost-format
 msgid "Autoselecting '%s' after %u second."
 msgid_plural "Autoselecting '%s' after %u seconds."
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/utils/prompt.cc:294
+#: src/utils/prompt.cc:124
 #, fuzzy
 msgid "Trying again..."
 msgstr "Запуск усталёўкі..."
 
-#: src/utils/prompt.cc:331
+#: src/utils/prompt.cc:152 src/utils/prompt.cc:161 src/utils/prompt.cc:290
+msgid "yes"
+msgstr "да"
+
+#: src/utils/prompt.cc:152 src/utils/prompt.cc:161 src/utils/prompt.cc:290
+msgid "no"
+msgstr "не"
+
+#: src/utils/prompt.cc:161
 msgid "always"
 msgstr ""
 
-#: src/utils/prompt.cc:331
+#: src/utils/prompt.cc:161
 msgid "never"
 msgstr ""
 
-#: src/utils/prompt.cc:377
+#: src/utils/prompt.cc:188
 msgid "Cannot read input: bad stream or EOF."
 msgstr ""
 
-#: src/utils/prompt.cc:378
+#: src/utils/prompt.cc:189
 #, c-format, boost-format
 msgid ""
 "If you run zypper without a terminal, use '%s' global\n"
 "option to make zypper use default answers to prompts."
 msgstr ""
 
-#: src/utils/prompt.cc:417
+#: src/utils/prompt.cc:278
 #, c-format, boost-format
 msgid "Invalid answer '%s'."
 msgstr ""
 
-#: src/utils/prompt.cc:420
+#: src/utils/prompt.cc:281
 #, c-format, boost-format
 msgid "Ambiguous answer '%s'."
 msgstr ""
 
 #. translators: the %s are: 'y', 'yes' (translated), 'n', and 'no' (translated).
-#: src/utils/prompt.cc:428
+#: src/utils/prompt.cc:289
 #, c-format, boost-format
 msgid "Enter '%s' for '%s' or '%s' for '%s' if nothing else works for you."
 msgstr ""
 
-#: src/utils/prompt.cc:433
+#: src/utils/prompt.cc:294
 msgid ""
 "If nothing else works enter '#1' to select the 1st option, '#2' for the 2nd "
 "one, ..."
 msgstr ""
 
 #. TranslatorExplanation These are reasons for various failures.
-#: src/utils/prompt.h:185
+#: src/utils/prompt.h:95
 msgid "Not found"
 msgstr "Не знойдзена"
 
-#: src/utils/prompt.h:185
+#: src/utils/prompt.h:95
 msgid "I/O error"
 msgstr "Памылка уводу/вываду"
 
-#: src/utils/prompt.h:185
+#: src/utils/prompt.h:95
 msgid "Invalid object"
 msgstr "Несапраўдны аб'ект"
 
-#: src/utils/prompt.h:192
+#: src/utils/prompt.h:102
 msgid "Error"
 msgstr "Памылка"
+
+#, fuzzy
+#~ msgid "done"
+#~ msgstr "Інданэзія"
+
+#, fuzzy
+#~ msgid "error"
+#~ msgstr "Памылка"
+
+#~ msgid "Note:"
+#~ msgstr "Заўвага:"
+
+#~ msgid "Warning:"
+#~ msgstr "Папярэджванне:"
+
+#~ msgid "Error:"
+#~ msgstr "Памылка:"
+
+#~ msgid "Continue?"
+#~ msgstr "Працягнуць?"
+
+#, fuzzy
+#~ msgid "No help available for this prompt."
+#~ msgstr "Даведка не даступна"
+
+#, fuzzy
+#~ msgid "no help available for this option"
+#~ msgstr "Даведка не даступна"
 
 #~ msgid "(%s unpacked)"
 #~ msgstr "(%s пасля распакоўкі)"
