@@ -1,4 +1,22 @@
 -------------------------------------------------------------------
+Tue Sep  5 18:35:23 CEST 2023 - ma@suse.de
+
+- Fix name of the bash completion script (bsc#1215007)
+  In 1.14.63 the location of the bash completion script was changed
+  to /usr/share/bash-completion/completions/. But the patch failed
+  to also rename the completion script. The original script name
+  zypper.sh is not recognized at the new location.
+- Update notes about failing signature checks (bsc#1214395)
+  It might be a transient issue if the server is in the midst of
+  receiving new data. Retry after a few minutes might work.
+- Improve the SIGINT handler to be signal safe (bsc#1214292)
+  This patch updates the SIGINT handling strategy to be signal
+  safe. Meaning the signal handler will do not much more than
+  setting a flag, which we are going to check in the normal program
+  flow as much as possible.
+- version 1.14.64
+
+-------------------------------------------------------------------
 Wed Aug 16 16:55:29 CEST 2023 - ma@suse.de
 
 - Changed location of bash-complication (bsc#1213854).
