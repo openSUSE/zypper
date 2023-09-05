@@ -19,7 +19,7 @@ Tue Sep  5 18:35:23 CEST 2023 - ma@suse.de
 -------------------------------------------------------------------
 Wed Aug 16 16:55:29 CEST 2023 - ma@suse.de
 
-- Changed location of bash-complication (bsc#1213854).
+- Changed location of bash completion script (bsc#1213854).
   This changes the location of zypper.sh bash completion script
   from /usr/share/bash-completion/completions/.
 - version 1.14.63
