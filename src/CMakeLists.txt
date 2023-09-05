@@ -260,7 +260,7 @@ INSTALL(
 INSTALL(
   FILES bash-completion.sh
   DESTINATION ${CMAKE_INSTALL_DATADIR}/bash-completion/completions
-  RENAME zypper.sh
+  RENAME zypper
 )
 
 

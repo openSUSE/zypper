@@ -209,7 +209,7 @@ done
 %config(noreplace) %{_sysconfdir}/logrotate.d/zypper.lr
 %config(noreplace) %{_sysconfdir}/logrotate.d/zypp-refresh.lr
 %endif
-%{_datadir}/bash-completion/completions/zypper.sh
+%{_datadir}/bash-completion/completions/zypper
 %{_bindir}/zypper
 %{_bindir}/yzpper
 %{_bindir}/installation_sources
