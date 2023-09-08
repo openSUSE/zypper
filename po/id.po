@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-08-30 14:01+0200\n"
-"PO-Revision-Date: 2023-06-19 07:15+0000\n"
+"PO-Revision-Date: 2023-09-08 06:15+0000\n"
 "Last-Translator: Kukuh Syafaat <syafaatkukuh@gmail.com>\n"
 "Language-Team: Indonesian <https://l10n.opensuse.org/projects/zypper/master/"
 "id/>\n"
@@ -1395,6 +1395,11 @@ msgid ""
 "the signature verification might fail. After a few minutes, when the server "
 "has updated its data, it should work again."
 msgstr ""
+"Ini mungkin masalah sementara jika peladen sedang menerima data baru. Berkas "
+"data dan tanda tangannya adalah dua berkas yang harus cocok satu sama lain. "
+"Jika permintaan masuk ke peladen saat sedang memutakhirkannya, verifikasi "
+"tanda tangan mungkin gagal. Setelah beberapa menit, ketika peladen telah "
+"memperbarui datanya, peladen akan berfungsi kembali."
 
 #: src/callbacks/keyring.h:88
 msgid "Repository:"
@@ -2098,7 +2103,7 @@ msgid ""
 "This is a transactional-server, please use transactional-update to update or "
 "modify the system."
 msgstr ""
-"Ini adalah server transaksional, silakan gunakan transactional-update untuk "
+"Ini adalah peladen transaksional, silakan gunakan transactional-update untuk "
 "memutakhirkan atau memodifikasi sistem."
 
 #: src/commands/conditions.cc:49
@@ -5547,7 +5552,7 @@ msgstr "Mencoba keluar dengan lancar..."
 #. translators: this will show up if you press ctrl+c twice
 #: src/main.cc:126
 msgid "Zypper is currently cleaning up, exiting as soon as possible."
-msgstr ""
+msgstr "Zypper saat ini sedang membersihkan, keluar sesegera mungkin."
 
 #. translators: the first %s is name of the resolvable,
 #. the second is its kind (e.g. 'zypper package')
