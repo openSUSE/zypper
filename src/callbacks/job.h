@@ -46,6 +46,12 @@ namespace ZmartRecipients
         case MsgType::info:
           if ( userData_r.type() == rpmPosttrans )
           {
+            if ( userData_r.hasvalue( "ripoff" ) ) {  // A headline to prepend/separate output lines
+              const std::string & ripoff { userData_r.get<std::reference_wrapper<const std::string>>("ripoff").get() };
+              if ( not ripoff.empty() ) {
+                out.info( ripoff );
+              }
+            }
             processAdditionalRpmOutput( msg_r );
           }
           else if ( userData_r.type().type() == "cmdout" )
