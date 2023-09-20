@@ -196,7 +196,7 @@ ZyppFlags::CommandGroup InstallCmd::cmdOptions() const
     },
     { "oldpackage", '\0', ZyppFlags::NoArgument, ZyppFlags::BoolType( &that->_oldPackage, ZyppFlags::StoreTrue, _oldPackage ),
       // translators: --oldpackage
-      _("Allow to replace a newer item with an older one. Handy if you are doing a rollback. Unlike --force it will not enforce a reinstall.")
+      _("Allows one to replace a newer item with an older one. Handy if you are doing a rollback. Unlike --force it will not enforce a reinstall.")
     },
     // disable gpg checks for directly passed rpms
     { "allow-unsigned-rpm", '\0', ZyppFlags::NoArgument, ZyppFlags::BoolType( &that->_allowUnsignedRPM, ZyppFlags::StoreTrue, _allowUnsignedRPM ),

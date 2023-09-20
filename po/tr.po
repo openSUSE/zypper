@@ -2385,7 +2385,7 @@ msgstr "Paketleri belirtilen depodan seç."
 #. translators: --oldpackage
 #: src/commands/installremove.cc:199
 msgid ""
-"Allow to replace a newer item with an older one. Handy if you are doing a "
+"Allows one to replace a newer item with an older one. Handy if you are doing a "
 "rollback. Unlike --force it will not enforce a reinstall."
 msgstr ""
 "Daha yeni bir öğeyi eskisiyle değiştirmeye izin verin. Geri alma işlemi "
