@@ -1,4 +1,15 @@
 -------------------------------------------------------------------
+Thu Sep 21 14:55:56 CEST 2023 - ma@suse.de
+
+- Fix some typos and spelling errors found by Lintian (fixes #501)
+- Prefer unaliased `grep` to avoid unexpected/wrong completions.
+  (#503)
+- commit: Insert a headline to separate output of different rpm
+  scripts (bsc#1041742)
+- Fix typo in changes file.
+- version 1.14.65
+
+-------------------------------------------------------------------
 Tue Sep  5 18:35:23 CEST 2023 - ma@suse.de
 
 - Fix name of the bash completion script (bsc#1215007)
