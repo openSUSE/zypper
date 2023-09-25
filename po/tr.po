@@ -687,7 +687,7 @@ msgstr "Şüpheli önem filtre değeri '%1%'."
 #. Both may contain whitespace and should be enclosed by quotes!
 #: src/Summary.cc:443
 #, boost-format
-msgid "Product '%1%' requires to be updated by calling '%2%'!"
+msgid "Product '%1%' requires to be upgraded by calling '%2%'!"
 msgstr "'%1%' ürünü '%2%' komutu ile güncellenmeyi gerektiriyor!"
 
 #: src/Summary.cc:612
@@ -1357,7 +1357,7 @@ msgstr "Sistemin yeniden başlatılması gerekiyor."
 #. # zypper up
 #. ...
 #. Consider to cancel:
-#. Product 'opennSUSE Tumbleweed' requires to be updated by calling 'zypper dup'!
+#. Product 'opennSUSE Tumbleweed' requires to be upgraded by calling 'zypper dup'!
 #. Continue? [y/n/...? shows all options] (y):
 #: src/Summary.cc:1656
 msgid "Consider to cancel:"

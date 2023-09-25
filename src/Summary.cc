@@ -440,7 +440,7 @@ namespace
           // translator: '%1%' is a products name
           //             '%2%' is a command to call (like 'zypper dup')
           //             Both may contain whitespace and should be enclosed by quotes!
-          std::string ctcmsg( str::Format( _("Product '%1%' requires to be updated by calling '%2%'!") ) % obj_r->summary() % DEFAULTString("zypper dup") );
+          std::string ctcmsg( str::Format( _("Product '%1%' requires to be upgraded by calling '%2%'!") ) % obj_r->summary() % DEFAULTString("zypper dup") );
           // ^^^ summary() for products like in ResPair2Name
           //     DEFAULTString to prevent the command string from being colored in MSG_WARNINGString below
           tr_r.addDetail( MSG_WARNINGString( ctcmsg ) );
@@ -1651,7 +1651,7 @@ void Summary::dumpTo( std::ostream & out )
     // # zypper up
     // ...
     //    Consider to cancel:
-    //    Product 'opennSUSE Tumbleweed' requires to be updated by calling 'zypper dup'!
+    //    Product 'opennSUSE Tumbleweed' requires to be upgraded by calling 'zypper dup'!
     // Continue? [y/n/...? shows all options] (y):
     Zypper::instance().out().taggedPar( 4, MSG_WARNINGString(_("Consider to cancel:") ), s );
   }

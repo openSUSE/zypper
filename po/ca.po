@@ -680,7 +680,7 @@ msgstr "Valor de filtre de severitat sospitós: \"%1%\"."
 #. Both may contain whitespace and should be enclosed by quotes!
 #: src/Summary.cc:443
 #, boost-format
-msgid "Product '%1%' requires to be updated by calling '%2%'!"
+msgid "Product '%1%' requires to be upgraded by calling '%2%'!"
 msgstr "Cal que el producte \"%1%\" s'actualitzi amb \"%2%\"!"
 
 #: src/Summary.cc:612
@@ -1349,7 +1349,7 @@ msgstr "Caldrà reiniciar el sistema."
 #. # zypper up
 #. ...
 #. Consider to cancel:
-#. Product 'opennSUSE Tumbleweed' requires to be updated by calling 'zypper dup'!
+#. Product 'opennSUSE Tumbleweed' requires to be upgraded by calling 'zypper dup'!
 #. Continue? [y/n/...? shows all options] (y):
 #: src/Summary.cc:1656
 msgid "Consider to cancel:"

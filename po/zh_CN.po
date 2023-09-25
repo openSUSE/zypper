@@ -640,7 +640,7 @@ msgstr "可疑的严重性过滤器值 '%1%'。"
 #. Both may contain whitespace and should be enclosed by quotes!
 #: src/Summary.cc:443
 #, boost-format
-msgid "Product '%1%' requires to be updated by calling '%2%'!"
+msgid "Product '%1%' requires to be upgraded by calling '%2%'!"
 msgstr "产品“%1%”需要调用“%2%”来升级！"
 
 #: src/Summary.cc:612
@@ -1202,7 +1202,7 @@ msgstr "需要重启。"
 #. # zypper up
 #. ...
 #. Consider to cancel:
-#. Product 'opennSUSE Tumbleweed' requires to be updated by calling 'zypper dup'!
+#. Product 'opennSUSE Tumbleweed' requires to be upgraded by calling 'zypper dup'!
 #. Continue? [y/n/...? shows all options] (y):
 #: src/Summary.cc:1656
 msgid "Consider to cancel:"

@@ -686,7 +686,7 @@ msgstr "Verdachte waarde van ernst-filter '%1%'."
 #. Both may contain whitespace and should be enclosed by quotes!
 #: src/Summary.cc:443
 #, boost-format
-msgid "Product '%1%' requires to be updated by calling '%2%'!"
+msgid "Product '%1%' requires to be upgraded by calling '%2%'!"
 msgstr "‘%1%’ dient bijgewerkt te worden met de opdracht ‘%2%’!"
 
 #: src/Summary.cc:612
@@ -1380,7 +1380,7 @@ msgstr "Systeemherstart vereist."
 #. # zypper up
 #. ...
 #. Consider to cancel:
-#. Product 'opennSUSE Tumbleweed' requires to be updated by calling 'zypper dup'!
+#. Product 'opennSUSE Tumbleweed' requires to be upgraded by calling 'zypper dup'!
 #. Continue? [y/n/...? shows all options] (y):
 #: src/Summary.cc:1656
 msgid "Consider to cancel:"

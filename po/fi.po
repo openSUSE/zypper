@@ -686,7 +686,7 @@ msgstr "Epäilyttävä vakavuussuodattimen arvo \"%1%\"."
 #. Both may contain whitespace and should be enclosed by quotes!
 #: src/Summary.cc:443
 #, boost-format
-msgid "Product '%1%' requires to be updated by calling '%2%'!"
+msgid "Product '%1%' requires to be upgraded by calling '%2%'!"
 msgstr "Tuote \"%1%\" pitää päivittää suorittamalla \"%2%\"!"
 
 #: src/Summary.cc:612
@@ -1351,7 +1351,7 @@ msgstr "Järjestelmä on käynnistettävä uudelleen."
 #. # zypper up
 #. ...
 #. Consider to cancel:
-#. Product 'opennSUSE Tumbleweed' requires to be updated by calling 'zypper dup'!
+#. Product 'opennSUSE Tumbleweed' requires to be upgraded by calling 'zypper dup'!
 #. Continue? [y/n/...? shows all options] (y):
 #: src/Summary.cc:1656
 msgid "Consider to cancel:"
