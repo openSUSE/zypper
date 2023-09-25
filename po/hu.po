@@ -6269,7 +6269,7 @@ msgstr "Próbálja ki ezt: '%s', vagy ezt: '%s', mielőtt tovább lép."
 #: src/repos.cc:1846
 msgid ""
 "Repository metadata expired: Check if 'autorefresh' is turned on (zypper "
-"lr), otherwise manualy refresh the repository (zypper ref). If this does not "
+"lr), otherwise manually refresh the repository (zypper ref). If this does not "
 "solve the issue, it could be that you are using a broken mirror or the "
 "server has actually discontinued to support the repository."
 msgstr ""

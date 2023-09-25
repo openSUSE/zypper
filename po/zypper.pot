@@ -5474,7 +5474,7 @@ msgid "Try '%s', or even '%s' before doing so."
 msgstr ""
 
 #: src/repos.cc:1846
-msgid "Repository metadata expired: Check if 'autorefresh' is turned on (zypper lr), otherwise manualy refresh the repository (zypper ref). If this does not solve the issue, it could be that you are using a broken mirror or the server has actually discontinued to support the repository."
+msgid "Repository metadata expired: Check if 'autorefresh' is turned on (zypper lr), otherwise manually refresh the repository (zypper ref). If this does not solve the issue, it could be that you are using a broken mirror or the server has actually discontinued to support the repository."
 msgstr ""
 
 #: src/repos.cc:1859

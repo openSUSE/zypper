@@ -5862,7 +5862,7 @@ msgstr "这么做前请先尝试 '%s'，甚至在那之前先尝试一下 '%s'�
 #: src/repos.cc:1846
 msgid ""
 "Repository metadata expired: Check if 'autorefresh' is turned on (zypper "
-"lr), otherwise manualy refresh the repository (zypper ref). If this does not "
+"lr), otherwise manually refresh the repository (zypper ref). If this does not "
 "solve the issue, it could be that you are using a broken mirror or the "
 "server has actually discontinued to support the repository."
 msgstr ""
