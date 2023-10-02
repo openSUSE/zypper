@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-08-30 14:01+0200\n"
-"PO-Revision-Date: 2023-08-31 16:15+0000\n"
+"PO-Revision-Date: 2023-10-02 11:15+0000\n"
 "Last-Translator: David Medina <medipas@gmail.com>\n"
 "Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/>"
 "\n"
@@ -1561,13 +1561,13 @@ msgstr "El fitxer \"%1%\" del repositori \"%2%\" no està signat."
 #: src/callbacks/keyring.h:186
 #, c-format, boost-format
 msgid "File '%s' is unsigned, continue?"
-msgstr "El fitxer %s està sense signar, voleu continuar?"
+msgstr "El fitxer %s està sense signar, continuo?"
 
 #. TranslatorExplanation: speaking of a file
 #: src/callbacks/keyring.h:190
 #, c-format, boost-format
 msgid "File '%s' from repository '%s' is unsigned, continue?"
-msgstr "El fitxer %s del repositori %s està sense signar, voleu continuar?"
+msgstr "El fitxer %s del repositori %s està sense signar, continuo?"
 
 #: src/callbacks/keyring.h:213
 #, c-format, boost-format
@@ -1862,7 +1862,7 @@ msgid ""
 "Skip retrieval of the file and try to continue with the operation without "
 "the file."
 msgstr ""
-"Salta't l'obtenció del fitxer i intenta continuar l'operació sense aquest "
+"Omet l'obtenció del fitxer i intenta continuar l'operació sense aquest "
 "fitxer."
 
 #. help text for the "Abort, retry, ignore?" prompt for media errors
@@ -6413,7 +6413,7 @@ msgstr "Trieu la solució %1%"
 
 #: src/solve-commit.cc:167
 msgid "Skip problem and continue."
-msgstr "Salta't el problema i continua."
+msgstr "Omet el problema i continua."
 
 #: src/solve-commit.cc:170
 msgid "Retry solving immediately."
