@@ -297,7 +297,8 @@ void ListReposCmd::printRepoList( Zypper & zypper, const std::list<RepoInfo> & r
     RepoGpgCheckStrings repoGpgCheck( repo );	// color strings for tag/enabled/gpgcheck
 
     // number
-    tr << ColorString( repoGpgCheck._tagColor, str::numstring( i, nindent ) ).str();
+    // minus sign in '-nident' aligns the number to the left of the field.
+    tr << ColorString( repoGpgCheck._tagColor, str::numstring( i, -nindent ) ).str();
     // alias
     if ( all || showalias ) tr << ColorString( repoGpgCheck._tagColor, repo.alias() );
     // name
