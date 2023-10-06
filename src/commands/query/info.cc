@@ -127,7 +127,7 @@ int InfoCmd::execute( Zypper &zypper, const std::vector<std::string> &positional
   }
 
   printInfo( zypper, positionalArgs_r, _options );
-  return ZYPPER_EXIT_OK;
+  return zypper.exitInfoCode();
 }
 
 std::string InfoCmd::summary() const

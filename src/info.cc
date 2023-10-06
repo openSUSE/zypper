@@ -240,6 +240,7 @@ void printInfo(Zypper & zypper, const std::vector<std::string> &names_r, const P
 
     if ( q.empty() )
     {
+      zypper.setExitInfoCode( ZYPPER_EXIT_INF_CAP_NOT_FOUND );
       ResKind oneKind( kn._kind );
       if ( !oneKind )
       {
