@@ -35,6 +35,6 @@ struct PrintInfoOptions {
   InfoFlags _flags;
 };
 
-void printInfo(Zypper & zypper, const std::vector<std::string> &names_r, const PrintInfoOptions &options_r );
+void printInfo(Zypper & zypper, const std::vector<std::string> &names_r, const PrintInfoOptions &options_r, bool & all_caps_exist );
 
 #endif /*ZYPPERINFO_H_*/

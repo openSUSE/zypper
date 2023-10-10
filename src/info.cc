@@ -177,7 +177,7 @@ namespace
 ///////////////////////////////////////////////////////////////////
 namespace {
   // PoolQuery does no COW :( - build and return the basic query
-  inline PoolQuery printInfo_BasicQuery( Zypper & zypper, const PrintInfoOptions &options_r )
+  inline PoolQuery printInfo_BasicQuery( Zypper & zypper, const PrintInfoOptions &options_r)
   {
     PoolQuery baseQ;
     if ( options_r._matchSubstrings )
@@ -210,9 +210,12 @@ namespace {
 } // namespace
 ///////////////////////////////////////////////////////////////////
 
-void printInfo(Zypper & zypper, const std::vector<std::string> &names_r, const PrintInfoOptions &options_r )
+void printInfo(Zypper & zypper, const std::vector<std::string> &names_r, const PrintInfoOptions &options_r, bool &all_caps_exist )
 {
   zypper.out().gap();
+
+  all_caps_exist = false;
+  std::vector<bool> cap_existence_flags;
 
   for ( const std::string & rawarg : names_r )
   {
@@ -256,14 +259,23 @@ void printInfo(Zypper & zypper, const std::vector<std::string> &names_r, const P
       h.addAttribute( sat::SolvAttr::name, kn._name );
 
       if ( h.empty() )
-        continue;
+      {
+	cap_existence_flags.push_back(false);
+      }
       else if ( !fallBackToAny )
       {
         logOtherKindMatches( h, kn._name );
         continue;
       }
       else
+      {
         q = h;
+	cap_existence_flags.push_back(true);
+      }
+    }
+    else
+    {
+      cap_existence_flags.push_back(true);
     }
 
     for_( it, q.selectableBegin(), q.selectableEnd() )
@@ -289,6 +301,9 @@ void printInfo(Zypper & zypper, const std::vector<std::string> &names_r, const P
       else 						{ printDefaultInfo( zypper, sel, options_r ); }
     }
   }
+
+  if ( std::all_of(cap_existence_flags.cbegin(), cap_existence_flags.cend(), [](bool flag){ return flag; } ))
+    all_caps_exist = true;
 }
 
 /** Information for kinds which don't have a extra needs... */

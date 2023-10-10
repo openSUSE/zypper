@@ -125,9 +125,11 @@ int InfoCmd::execute( Zypper &zypper, const std::vector<std::string> &positional
     case Mode::Default:
       break;
   }
-
-  printInfo( zypper, positionalArgs_r, _options );
-  return ZYPPER_EXIT_OK;
+  bool all_caps_exist = false;
+  printInfo( zypper, positionalArgs_r, _options, all_caps_exist );
+  if (all_caps_exist)
+    return ZYPPER_EXIT_OK;
+  return ZYPPER_EXIT_INF_CAP_NOT_FOUND;
 }
 
 std::string InfoCmd::summary() const
