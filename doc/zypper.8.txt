@@ -1580,9 +1580,33 @@ Examples: :: {nop}
 
 	$ *zypper locales en**:::
 	Get all locales with lang code _en_ with or without country code.
-	
+
 	$ *zypper aloc --packages de_CH*:::
 	Request *de_CH* and install language dependent packages.
+
+Key Management
+~~~~~~~~~~~~~~
+The *keys*, *addkey*, and *removekey* commands serve for manipulating the trusted key database. A key is specified by its ID, which is the last 16 characters of its fingerprint.
+
+*keys* (*lk*) ['options'] ['part-of-keyid-or-name'] ['key-filename'] ...::
+	List all trusted keys or show detailed information about those specified as arguments, supports also keyfiles as argument.
++
+--
+	*-d*, *--detail*::
+		Shows the keys in a more detailed multiline output, also shows subkey information
+--
+
+*addkey* (*ak*) ['options'] 'url'...::
+	Imports a new key into the trusted database, the file can be specified as a URL.
+
+*removekey* (*rk*) ['options'] 'string' ::
+	Remove specified key from the trusted database. The query string can be the beginning or end of the key ID, or any part of the key name.
++
+--
+	*--all-matches*::
+		Continue with removing even if the query matches multiple keys.
+--
+
 
 
 Other Commands
@@ -1845,7 +1869,7 @@ Target Options: :: {nop}
 
 *-R*, *--root* _dir_::
 	Operates on a different root directory. This option influences the location of the repos.d directory and the metadata cache directory and also causes rpm to be run with the *--root* option to do the actual installation or removal of packages. See also the *FILES* section.
-	
+
 *--installroot* _dir_::
 	Behaves like *--root* but shares the repositories with the host system.
 

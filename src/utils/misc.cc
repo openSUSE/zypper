@@ -808,7 +808,6 @@ void packagekit_suggest_quit()
   pkcall.close();
 }
 
-
 bool iType( const ui::Selectable::constPtr & sel_r )
 {
   return sel_r->hasInstalledObj() ||
@@ -895,4 +894,66 @@ const char * computeStatusIndicator( const ui::Selectable & sel_r, bool tagForei
   if ( sel_r.locked() )
     return stem[1];
   return stem[0];
+}
+
+std::ostream &dumpKeyInfo(std::ostream &str, const PublicKeyData &key, const KeyContext &context)
+{
+  Zypper & zypper = Zypper::instance();
+  if ( zypper.out().type() == Out::TYPE_XML )
+  {
+    {
+      xmlout::Node parent( str, "gpgkey-info", xmlout::Node::optionalContent );
+
+      if ( !context.empty() )
+      {
+        dumpAsXmlOn( *parent, context.repoInfo().asUserString(), "repository" );
+      }
+      dumpAsXmlOn( *parent, key.id(), "key-id" );
+      dumpAsXmlOn( *parent, key.name(), "key-name" );
+      dumpAsXmlOn( *parent, key.fingerprint(), "key-fingerprint" );
+      dumpAsXmlOn( *parent, key.algoName(), "key-algorithm" );
+      dumpAsXmlOn( *parent, key.created(), "key-created" );
+      dumpAsXmlOn( *parent, key.expires(), "key-expires" );
+      dumpAsXmlOn( *parent, key.rpmName(), "rpm-name" );
+    }
+    return str;
+  }
+
+  Table t;
+  t.lineStyle( TableLineStyle::none );
+  if ( !context.empty() )
+  {
+    t << ( TableRow() << "" << _("Repository:") << context.repoInfo().asUserString() );
+  }
+  t << ( TableRow() << "" << _("Key ID:")   << key.id() )
+
+    << ( TableRow() << "" << _("Key Fingerprint:") << str::gapify( key.fingerprint(), 4 ) )
+    << ( TableRow() << "" << _("Key Name:") << key.name() )
+    << ( TableRow() << "" << _("Key Algorithm:") << key.algoName() )
+    << ( TableRow() << "" << _("Key Created:") << key.created() )
+    << ( TableRow() << "" << _("Key Expires:") << key.expiresAsString() );
+  for ( const PublicSubkeyData & sub : key.subkeys() )
+    t << ( TableRow() << "" << _("Subkey:") << sub.asString() );
+  t << ( TableRow() << "" << _("Rpm Name:") << key.rpmName() );
+
+  return str << t;
+}
+
+bool userMayUseDir(const Pathname &dir_r)
+{
+  bool mayuse = true;
+  if ( dir_r.empty()  )
+    mayuse = false;
+  else
+  {
+    PathInfo pi( dir_r );
+    if ( pi.isExist() )
+    {
+      if ( ! ( pi.isDir() && pi.userMayRWX() ) )
+        mayuse = false;
+    }
+    else
+      mayuse = userMayUseDir( dir_r.dirname() );
+  }
+  return mayuse;
 }

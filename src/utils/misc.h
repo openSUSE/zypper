@@ -20,6 +20,8 @@
 #include <zypp/ui/Selectable.h>
 #include <zypp/ZYppCommitPolicy.h>
 #include <zypp/base/Logger.h>
+#include <zypp/KeyContext.h>
+#include <zypp/PublicKey.h>
 
 #include "Table.h"
 
@@ -250,5 +252,14 @@ bool packagekit_running();
 
 /** Send suggestion to quit to PackageKit via DBus */
 void packagekit_suggest_quit();
+
+/** Dump information about a Key for the current output format */
+std::ostream & dumpKeyInfo( std::ostream & str, const PublicKeyData & key, const KeyContext & context = KeyContext() );
+inline std::ostream & dumpKeyInfo( std::ostream & str, const PublicKey & key, const KeyContext & context = KeyContext() )
+{ return dumpKeyInfo( str, key.keyData(), context ); }
+
+/** Whether user may create \a dir_r or has rw-access to it. */
+bool userMayUseDir( const Pathname & dir_r );
+
 
 #endif /*ZYPPER_UTILS_H*/
