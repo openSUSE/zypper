@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Thu Oct 12 14:30:36 CEST 2023 - ma@suse.de
+
+- Return 104 also if info suggests near matches (fixes #504)
+- Rephrase upgrade message for openSUSE Tumbleweed (bsc#1212422)
+- Fix typo (fixes #484)
+- version 1.14.66
+
+-------------------------------------------------------------------
 Thu Sep 21 14:55:56 CEST 2023 - ma@suse.de
 
 - Fix some typos and spelling errors found by Lintian (fixes #501)
