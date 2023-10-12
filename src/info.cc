@@ -255,15 +255,18 @@ void printInfo(Zypper & zypper, const std::vector<std::string> &names_r, const P
       PoolQuery h( printInfo_BasicQuery( zypper, options_r ) );
       h.addAttribute( sat::SolvAttr::name, kn._name );
 
-      if ( h.empty() )
+      if ( h.empty() ) {
+        zypper.setExitInfoCode( ZYPPER_EXIT_INF_CAP_NOT_FOUND );
         continue;
+      }
       else if ( !fallBackToAny )
       {
         logOtherKindMatches( h, kn._name );
         continue;
       }
-      else
+      else {
         q = h;
+      }
     }
 
     for_( it, q.selectableBegin(), q.selectableEnd() )
