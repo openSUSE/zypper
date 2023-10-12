@@ -262,6 +262,7 @@ void printInfo(Zypper & zypper, const std::vector<std::string> &names_r, const P
       else if ( !fallBackToAny )
       {
         logOtherKindMatches( h, kn._name );
+        zypper.setExitInfoCode( ZYPPER_EXIT_INF_CAP_NOT_FOUND );
         continue;
       }
       else {
