@@ -130,8 +130,8 @@ _zypper() {
 			;;
 			removerepo | rr | modifyrepo | mr | renamerepo | nr | refresh | ref)
 				opts=(${opts[@]}$(echo; LC_ALL=POSIX $ZYPPER -q lr | \
-					sed -rn '/^[0-9]/{
-						s/^[0-9]+[[:blank:]]*\|[[:blank:]]*([^|]+).*/\1/
+					sed -rn '/[[:blank:]]*[0-9]/{
+						s/[[:blank:]]*[0-9]+[[:blank:]]*\|[[:blank:]]*([^|]+).*/\1/
 						s/[[:blank:]]*$//
 						/^$/d
 						p
@@ -139,8 +139,8 @@ _zypper() {
 			;;
 			addservice | as | modifyservice | ms | removeservice | rs)
 				opts=(${opts[@]}$(echo; LC_ALL=POSIX $ZYPPER -q ls | \
-					sed -rn '/^[0-9]/{
-						s/^[0-9]+[[:blank:]]*\|[[:blank:]]*([^|]+).*/\1/
+					sed -rn '/[[:blank:]]*[0-9]/{
+						s/[[:blank:]]*[0-9]+[[:blank:]]*\|[[:blank:]]*([^|]+).*/\1/
 						s/[[:blank:]]*$//
 						/^$/d
 						p
@@ -148,8 +148,8 @@ _zypper() {
 			;;
 			removelock | rl)
 				opts=(${opts[@]}$(echo; LC_ALL=POSIX $ZYPPER -q ll | \
-					sed -rn '/^[0-9]/{
-						s/^[0-9]+[[:blank:]]*\|[[:blank:]]*([^|]+).*/\1/p
+					sed -rn '/[[:blank:]]*[0-9]/{
+						s/[[:blank:]]*[0-9]+[[:blank:]]*\|[[:blank:]]*([^|]+).*/\1/p
 						s/[[:blank:]]*$//
 						/^$/d
 						p
