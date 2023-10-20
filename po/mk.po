@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-08-30 14:01+0200\n"
-"PO-Revision-Date: 2023-10-20 05:15+0000\n"
+"PO-Revision-Date: 2023-10-21 01:15+0000\n"
 "Last-Translator: Kristijan Fremen Velkovski <me@krisfremen.com>\n"
 "Language-Team: Macedonian <https://l10n.opensuse.org/projects/zypper/master/"
 "mk/>\n"
@@ -373,7 +373,7 @@ msgstr ""
 
 #: src/Config.cc:735
 msgid "Failed to save option."
-msgstr ""
+msgstr "Не успеа да се зачува опцијата."
 
 #: src/PackageArgs.cc:159
 #, c-format, boost-format
@@ -425,7 +425,7 @@ msgstr ""
 #: src/RequestFeedback.cc:54
 #, c-format, boost-format
 msgid "Source package '%s' not found."
-msgstr ""
+msgstr "Изворниот пакет '%s' не е пронајден."
 
 #. just in case
 #: src/RequestFeedback.cc:56
@@ -479,7 +479,7 @@ msgstr ""
 #: src/RequestFeedback.cc:87
 #, c-format, boost-format
 msgid "Package '%s' is not installed."
-msgstr ""
+msgstr "Пакетот '%s' не е инсталиран."
 
 #. translators: meaning provider of capability %s
 #: src/RequestFeedback.cc:91
