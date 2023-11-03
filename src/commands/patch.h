@@ -32,6 +32,7 @@ private:
   NoConfirmRugOption _noConfirmOpts { *this };
   OptionalPatchesOptionSet _optionalPatchesOpts { *this };
   InteractiveUpdatesOptionSet _interactiveUpdatesOpts { *this };
+  SkipManualResolvablePatchesOptionSet _skipManualResolvablePatchesOpts { *this };
   LicensePolicyOptionSet _licensePolicyOpts { *this };
   DryRunOptionSet _dryRunOpts { *this };
   DownloadOptionSet _downloadModeOpts { *this };

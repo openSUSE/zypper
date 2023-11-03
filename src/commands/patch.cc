@@ -86,8 +86,12 @@ int PatchCmd::execute( Zypper &zypper, const std::vector<std::string> &positiona
   bool skip_interactive = _interactiveUpdatesOpts.skipInteractive();
   MIL << "Skipping interactive patches: " << (skip_interactive ? "yes" : "no") << endl;
 
+  bool skip_manual_resolvable_patches = _skipManualResolvablePatchesOpts.skipManualResolvablePatches();
+  MIL << "Skipping patches that require manual choises: " << (skip_manual_resolvable_patches ? "yes" : "no") << endl;
+
   SolverRequester::Options srOpts;
   srOpts.skip_interactive = skip_interactive; // bcn #647214
+  srOpts.skip_manual_resolvable_patches = skip_manual_resolvable_patches;
   srOpts.skip_optional_patches = zypper.config().exclude_optional_patches && !_withUpdate;	// bsc#1102261: --with update" should implicitly assume "--with-optional"
   srOpts.cliMatchPatch = CliMatchPatch( zypper,
                                         _selectPatchOpts._select._requestedPatchDates,

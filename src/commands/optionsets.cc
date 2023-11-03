@@ -363,6 +363,39 @@ void InteractiveUpdatesOptionSet::reset()
   _withInteractive = zypp::indeterminate;
 }
 
+bool SkipManualResolvablePatchesOptionSet::skipManualResolvablePatches () const {
+  bool skip_manual = false;
+  if ( !indeterminate (_skipManualResolvablePatches ) )
+    skip_manual = ! bool(_skipManualResolvablePatches);
+  else if ( Zypper::instance().config().non_interactive_skip_manual_patches )
+    skip_manual = true;
+  return skip_manual;
+}
+
+std::vector<ZyppFlags::CommandGroup> SkipManualResolvablePatchesOptionSet::options()
+{
+  return {{
+      {
+        {"skip-manual-resolvable-patches", '\0', ZyppFlags::NoArgument, ZyppFlags::TriBoolType( _skipManualResolvablePatches, ZyppFlags::StoreFalse ),
+              // translators: --skip-manual-resolvable-patches
+              _("Skip Patches that require manual choices from the user.")
+        }
+        // ,
+        // {"skip-interactive", '\0', ZyppFlags::NoArgument, ZyppFlags::TriBoolType( _withInteractive, ZyppFlags::StoreFalse ),
+        //      // translators: --skip-interactive
+        //      _("Skip interactive updates.")
+        // }
+      },{
+        //conflicting flags
+        { "with-interactive", "skip-manual-resolvable-patches" }
+      }
+  }};
+}
+
+void SkipManualResolvablePatchesOptionSet::reset()
+{
+    _skipManualResolvablePatches = zypp::indeterminate;
+}
 
 std::vector<ZyppFlags::CommandGroup> SortResultOptionSet::options()
 {

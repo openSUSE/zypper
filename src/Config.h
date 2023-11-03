@@ -68,6 +68,7 @@ struct Config : public ztui::Config
   bool disable_system_sources;
   bool disable_system_resolvables;
   bool non_interactive;
+  bool non_interactive_skip_manual_patches;
   bool reboot_req_non_interactive;
   bool no_gpg_checks;
   bool gpg_auto_import_keys;

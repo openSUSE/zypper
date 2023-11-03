@@ -156,6 +156,20 @@ public:
   void reset() override;
 };
 
+class SkipManualResolvablePatchesOptionSet: public BaseCommandOptionSet
+{
+public:
+  using BaseCommandOptionSet::BaseCommandOptionSet;
+
+  bool skipManualResolvablePatches () const;
+private:
+  TriBool _skipManualResolvablePatches;
+public:
+  std::vector<ZyppFlags::CommandGroup> options() override;
+  void reset() override;
+};
+
+
 class SortResultOptionSet : public BaseCommandOptionSet, public RugCompatModeMixin
 {
 public:

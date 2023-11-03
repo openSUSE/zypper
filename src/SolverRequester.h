@@ -128,6 +128,7 @@ public:
       , force_by_name( false )
       , best_effort( false )
       , skip_interactive( false )
+      , skip_manual_resolvable_patches( false )
       , skip_optional_patches( false )
       , allow_vendor_change( tri2bool( SolverSettings::instance()._allowVendorChange, ZConfig::instance().solver_allowVendorChange() ) )
     {}
@@ -172,6 +173,11 @@ public:
      * Whether to skip installs/updates that need user interaction.
      */
     bool skip_interactive;
+
+    /**
+     * Whether to skip patches that will require manual choice
+     */
+    bool skip_manual_resolvable_patches;
 
     /**
      * Whether to skip optional patches (might be requested by PATCH commands).
