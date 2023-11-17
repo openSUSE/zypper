@@ -1876,7 +1876,7 @@ Using zypper _global-options_ together with subcommands, as well as executing su
 
 FILES
 -----
-*/etc/zypp/zypper.conf*, *$HOME/.zypper.conf*::
+*/usr/etc/zypp/zypper.conf*, */etc/zypp/zypper.conf*, *$HOME/.zypper.conf*::
 	Global (system-wide) and user's configuration file for _zypper_. These files are read when zypper starts up and *--config* option is not used.
 +
 User's settings are preferred over global settings. Similarly, command line options override the settings in either of these files. To sum it up, the order of preference is as follows (from highest to lowest):
@@ -1884,16 +1884,21 @@ User's settings are preferred over global settings. Similarly, command line opti
 --
 	. _Command line options_
 	. *$HOME/.zypper.conf*
-	. */etc/zypp/zypper.conf*
-	. [*/etc/zypp/zypp.conf*] (system-wide defaults for all libzypp based applications)
+	. */etc/zypp/zypper.conf* (system-wide defaults, defined by the admin)
+	. */usr/etc/zypp/zypper.conf* (system-wide defaults)
+	. [*/etc/zypp/zypp.conf*] (system-wide defaults for all libzypp based applications, defined by the admin)
+	. [*/usr/etc/zypp/zypp.conf*] (system-wide defaults for all libzypp based applications)
 --
 +
-See the comments in */etc/zypp/zypper.conf* for a list and description of available options.
+See the comments in */usr/etc/zypp/zypper.conf* for a list and description of available options.
 +
-NOTE: The system-wide */etc/zypp/zypp.conf* is mentioned here just because some zypper command line options allow one to overwrite system-wide defaults defined there. *zypp.conf* and *zypper.conf* have different content and serve different purpose.
+NOTE: The system-wide */usr/etc/zypp/zypp.conf* and */etc/zypp/zypp.conf* are mentioned here just because some zypper command line options allow one to overwrite system-wide defaults defined there. *zypp.conf* and *zypper.conf* have different content and serve different purpose.
 
 */etc/zypp/zypp.conf*::
-	ZYpp configuration file affecting all libzypp based applications. See the comments in the file for description of configurable properties. Many locations of files and directories listed in this section are configurable via zypp.conf. The location for this file itself can be redefined only by setting *$ZYPP_CONF* in the environment.
+	ZYpp configuration file affecting all libzypp based applications. See the comments in the file for description of configurable properties. Many locations of files and directories listed in this section are configurable via zypp.conf. The location for this file itself can be redefined only by setting *$ZYPP_CONF* in the environment. This file can be changed.
+
+*/usr/etc/zypp/zypp.conf*::
+        This file will be taken if */etc/zypp/zypp.conf* does not exist.
 
 */etc/zypp/locks*::
 	File with package lock definitions. The package lock commands (*locks*, *addlock*, *removelock*, etc.) should be used to manipulate this file.
