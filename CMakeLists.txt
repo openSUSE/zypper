@@ -23,6 +23,7 @@ INCLUDE(ZyppCommon)
 
 OPTION (ENABLE_BUILD_TRANS "Build translation files by default?" ON)
 OPTION (ENABLE_BUILD_TESTS "Build and run test suite by default?" OFF)
+OPTION (DISTCONFDIR "Vendor defined */etc directory. E.g. /usr/etc")
 
 # VERSION
 INCLUDE( ${ZYPPER_SOURCE_DIR}/VERSION.cmake )
