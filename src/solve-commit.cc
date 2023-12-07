@@ -990,6 +990,11 @@ void solve_and_commit ( Zypper &zypper, SolveAndCommitPolicy policy )
             zypper.setExitCode( ZYPPER_EXIT_INF_REBOOT_NEEDED );
             zypper.out().warning(_("One of the installed patches requires a reboot of"
             " your machine. Reboot as soon as possible."), Out::QUIET );
+
+            // bsc#1217873: Make sure reboot-needed is remembered until next boot.
+            Pathname file { Pathname(Zypper::instance().config().root_dir)/"/run/reboot-needed" };
+            if ( filesystem::assert_file( file ) == EEXIST )
+              filesystem::touch( file );
           }
           // set return value to 'restart needed' (restart of package manager)
           // however, 'reboot needed' takes precedence
