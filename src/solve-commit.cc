@@ -24,6 +24,7 @@
 #include "utils/misc.h"
 #include "utils/prompt.h"	// Continue? and solver problem prompt
 #include "utils/pager.h"	// to view the summary
+#include "utils/messages.h"
 #include "global-settings.h"
 #include "CommitSummary.h"
 
@@ -223,9 +224,10 @@ static bool show_problems( Zypper & zypper )
   else if ( rproblems.empty() )
   {
     // should not happen! If solve() failed at least one problem must be set!
-    zypper.out().error(_("Specified capability not found") );
-    zypper.setExitCode( ZYPPER_EXIT_INF_CAP_NOT_FOUND );
-    return false;
+    INT << "Resolver failed but reported no problems." << endl;
+    zypper.out().error(_("Resolver failed but reported no problems.") );
+    report_a_bug( zypper.out() );
+    return false; // will cancel the transaction
   }
 
   // for many problems, list them shortly first
