@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Dec  8 13:11:10 CET 2023 - ma@suse.de
+
+- patch: Make sure reboot-needed is remembered until next boot
+  (bsc#1217873)
+- version 1.14.67
+
+-------------------------------------------------------------------
 Thu Oct 12 14:30:36 CEST 2023 - ma@suse.de
 
 - Return 104 also if info suggests near matches (fixes #504)
