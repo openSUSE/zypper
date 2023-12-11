@@ -8,10 +8,8 @@
 #define ZYPPER_COMMANDS_PATCH_INCLUDED
 
 #include "commands/basecommand.h"
-#include "utils/flags/zyppflags.h"
+#include "commands/installremove.h" // not (yet) baseclass, but provides tooling
 #include "selectpatchoptionset.h"
-#include "optionsets.h"
-#include "solveroptionset.h"
 #include "issue.h"
 
 #include <zypp/Patch.h>

@@ -403,7 +403,7 @@ void build_deps_install( Zypper & zypper, const PackageSpec &spec, bool buildDep
 
   if ( srcpkgs.empty() && !zypper.config().ignore_unknown )
   {
-    zypper.setExitCode( ZYPPER_EXIT_INF_CAP_NOT_FOUND );
+    zypper.setExitInfoCode( ZYPPER_EXIT_INF_CAP_NOT_FOUND );
   }
 }
 

@@ -1053,7 +1053,7 @@ void mark_updates_by_issue( Zypper & zypper, const std::set<Issue> &issues, Solv
       else
         // translators: keep '%s issue' together, it's something like 'CVE issue' or 'Bugzilla issue'
         zypper.out().info(str::form(_("Fix for %s issue number %s was not found or is not needed."), itype.c_str(), issue.id().c_str() ));
-      zypper.setExitCode( ZYPPER_EXIT_INF_CAP_NOT_FOUND );
+      zypper.setExitInfoCode( ZYPPER_EXIT_INF_CAP_NOT_FOUND );  // try to use InstallRemoveBase::printAndHandleSolverRequesterFeedback
     }
   } // next issue from --bz --cve
 }
