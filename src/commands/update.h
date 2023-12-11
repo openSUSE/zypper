@@ -8,9 +8,7 @@
 #define ZYPPER_COMMANDS_UPDATE_INCLUDED
 
 #include "commands/basecommand.h"
-#include "commands/optionsets.h"
-#include "commands/solveroptionset.h"
-#include "utils/flags/zyppflags.h"
+#include "commands/installremove.h" // not (yet) baseclass, but provides tooling
 
 #include <zypp/ResKind.h>
 

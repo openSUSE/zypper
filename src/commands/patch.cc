@@ -97,21 +97,13 @@ int PatchCmd::execute( Zypper &zypper, const std::vector<std::string> &positiona
   // patch --bugzilla/--cve
   if ( _selectPatchOpts._select._requestedIssues.size() ) {
     mark_updates_by_issue( zypper, _selectPatchOpts._select._requestedIssues, srOpts );
+    // mark_updates_by_issue still has it's own way of reporting, different from printAndHandleSolverRequesterFeedback
   } else {
     SolverRequester sr(srOpts);
     zypper.runtimeData().plain_patch_command = true;
     sr.updatePatches( _updateStackOnly );
 
-    sr.printFeedback( zypper.out() );
-
-    if ( !zypper.config().ignore_unknown
-      && ( sr.hasFeedback( SolverRequester::Feedback::NOT_FOUND_NAME )
-        || sr.hasFeedback( SolverRequester::Feedback::NOT_FOUND_CAP ) ) )
-    {
-      zypper.setExitCode( ZYPPER_EXIT_INF_CAP_NOT_FOUND );
-      if ( zypper.config().non_interactive )
-        ZYPP_THROW( ExitRequestException("name or capability not found") );
-    }
+    InstallRemoveBase::printAndHandleSolverRequesterFeedback( zypper, sr );
   }
 
   Summary::ViewOptions viewOpts = static_cast<Summary::ViewOptions>( Summary::ViewOptions::DEFAULT | Summary::ViewOptions::SHOW_LOCKS );

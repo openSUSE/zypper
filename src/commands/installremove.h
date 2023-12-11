@@ -8,9 +8,9 @@
 #define ZYPPER_COMMANDS_INSTALLREMOVE_INCLUDED
 
 #include "commands/basecommand.h"
-#include "utils/flags/zyppflags.h"
 #include "commands/optionsets.h"
 #include "commands/solveroptionset.h"
+#include "utils/flags/zyppflags.h"
 #include "SolverRequester.h"
 
 #include <zypp/ResObject.h>
@@ -19,9 +19,18 @@ class InstallRemoveBase : public ZypperBaseCommand
 {
 public:
   using ZypperBaseCommand::ZypperBaseCommand;
+
+  /** The attempt to provide a common way of handling (104) exit info for all install commands.
+   *
+   * Indicates 104 unless \c ignore-unknown is set. In \c non-interactive mode
+   * this is treated as an error (ExitRequestException) except for remove commands.
+   *
+   * \throws ExitRequestException In \c non-interactive mode unless \c ignore-unknown
+   */
+  static void printAndHandleSolverRequesterFeedback( Zypper &zypper, const SolverRequester &sr_r, bool failOnCapNotFound = true );
+
 protected:
   void fillSrOpts (SolverRequester::Options &sropts_r ) const;
-  void handleFeedback(Zypper &zypper, const SolverRequester &sr_r, bool failOnCapNotFound = true ) const;
 
   std::set<zypp::ResKind> _kinds;
 

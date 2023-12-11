@@ -132,16 +132,7 @@ int UpdateCmd::execute( Zypper &zypper, const std::vector<std::string> &position
     sr.update( args );
   }
 
-  sr.printFeedback( zypper.out() );
-
-  if ( !zypper.config().ignore_unknown
-    && ( sr.hasFeedback( SolverRequester::Feedback::NOT_FOUND_NAME )
-      || sr.hasFeedback( SolverRequester::Feedback::NOT_FOUND_CAP ) ) )
-  {
-    zypper.setExitCode( ZYPPER_EXIT_INF_CAP_NOT_FOUND );
-    if ( zypper.config().non_interactive )
-      ZYPP_THROW( ExitRequestException("name or capability not found") );
-  }
+  InstallRemoveBase::printAndHandleSolverRequesterFeedback( zypper, sr );
 
   Summary::ViewOptions viewOpts = static_cast<Summary::ViewOptions>( Summary::ViewOptions::DEFAULT | Summary::ViewOptions::SHOW_LOCKS );
   if ( _details ) {

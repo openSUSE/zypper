@@ -24,7 +24,7 @@ void InstallRemoveBase::fillSrOpts(SolverRequester::Options &sropts_r ) const
   sropts_r.force_by_name = _selectByName;
 }
 
-void InstallRemoveBase::handleFeedback(Zypper &zypper, const SolverRequester &sr_r, bool failOnCapNotFound ) const
+void InstallRemoveBase::printAndHandleSolverRequesterFeedback( Zypper &zypper, const SolverRequester &sr_r, bool failOnCapNotFound )
 {
   sr_r.printFeedback( zypper.out() );
 
@@ -147,7 +147,7 @@ int RemoveCmd::execute(Zypper &zypper, const std::vector<std::string> &positiona
 
   // bsc#980263: relax if removing packages
   // only store exit code but continue with solving
-  handleFeedback( zypper, sr, false );
+  printAndHandleSolverRequesterFeedback( zypper, sr, false );
 
   Summary::ViewOptions opts = Summary::DEFAULT;
   if ( _details )
@@ -288,7 +288,7 @@ int InstallCmd::execute( Zypper &zypper, const std::vector<std::string> &positio
   PackageArgs rpm_args( rpms_files_caps );
   sr.install( rpm_args );
 
-  handleFeedback( zypper, sr );
+  printAndHandleSolverRequesterFeedback( zypper, sr );
 
   Summary::ViewOptions opts = Summary::DEFAULT;
   if ( _details )

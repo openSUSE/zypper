@@ -234,7 +234,9 @@ int DownloadCmd::execute( Zypper &zypper , const std::vector<std::string> &posit
       {
         // translators: Label text; is followed by ': cmdline argument'
         zypper.out().error( str::Str() << _("Argument resolves to no package") << ": " << pkgspec.orig_str );
-        zypper.setExitInfoCode( ZYPPER_EXIT_INF_CAP_NOT_FOUND );
+        if ( !zypper.config().ignore_unknown ) {
+          zypper.setExitInfoCode( ZYPPER_EXIT_INF_CAP_NOT_FOUND );
+        }
         continue;
       }
 
