@@ -180,7 +180,7 @@ Package Management Commands
 *info* (*if*) [_options_] _name_...::
 	Displays detailed information about the specified packages.
 +
-For each specified package, zypper finds the best available version in defined repositories and shows information for this package.
+For each specified package, zypper finds the best available version in defined repositories and shows information for this package. In case the query result is empty zypper returns *ZYPPER_EXIT_INF_CAP_NOT_FOUND*, unless the *--ignore-unknown* global option is set.
 +
 --
 	*-r*, *--repo* _alias_|_name_|_#_|_URI_::
@@ -774,7 +774,7 @@ Query Commands
 *search* (*se*) [_options_] [_querystring_|_capability_]...::
 	Search for packages matching any of the given search strings. *** and *?* _wildcard_ characters can be used within search strings. If the search string is enclosed in */*  (e.g. */^k.*e$/*) it's interpreted as a _regular expression_. See the *install* command for details about how to specify a _capability_.
 +
-Results of the search are printed in a table with columns **S**tatus, *Name*, *Summary* and *Type* of package.
+Results of the search are printed in a table with columns **S**tatus, *Name*, *Summary* and *Type* of package. In case the query result is empty zypper returns *ZYPPER_EXIT_INF_CAP_NOT_FOUND*, unless the *--ignore-unknown* global option is set.
 +
 In the detailed view (*se -s*) all available instances of matching packages are shown; each version in each repository on a separate line, with columns **S**tatus, *Name*, *Type*, *Version*, **Arch**itecture and *Repository*. For installed packages *Repository* shows either a repository that provides exactly the installed version of the package, or, if the exact version is not provided by any known repo, *(System Packages)* (or *@System*). Those installed packages not provided by any repo are often denoted as being _unwanted_, _orphaned_ or _dropped_.
 +
@@ -1778,6 +1778,8 @@ See also *FILES* section for more information.
 
 *-i*, *--ignore-unknown*::
 	Ignore unknown packages. This option is useful for scripts, because when installing in *--non-interactive* mode zypper expects each command line argument to match at least one known package. Unknown names or globbing expressions with no match are treated as an error unless this option is used.
++
+For *search* and *info* commands the option makes zypper return *ZYPPER_EXIT_OK* rather than *ZYPPER_EXIT_INF_CAP_NOT_FOUND* if the query did not produce at least one match.
 
 *-D*, *--reposd-dir* _dir_::
 	Use the specified directory to look for the repository definition (*.repo*) files. The default value is */etc/zypp/repos.d*.
@@ -1986,7 +1988,7 @@ There are several exit codes defined for zypper built-in commands for use e.g. w
 *103* - *ZYPPER_EXIT_INF_RESTART_NEEDED*::
 	Returned after a successful installation of a patch which requires restart of the package manager itself. This means that one of patches to be installed affects the package manager itself and the command used (e.g. *zypper update*) needs to be executed once again to install any remaining patches.
 *104* - *ZYPPER_EXIT_INF_CAP_NOT_FOUND*::
-	Returned by the *install* and the *remove* command in case any of the arguments does not match any of the available (or installed) package names or other capabilities.
+	Returned by the *install* and the *remove* command in case any of the arguments does not match any of the available (or installed) package names or other capabilities. In *search* and *info* commands it indicates that no match was found. See also the *--ignore-unknown* global option.
 *105* - *ZYPPER_EXIT_ON_SIGNAL*::
 	Returned upon exiting after receiving a SIGINT or SIGTERM.
 *106* - *ZYPPER_EXIT_INF_REPOS_SKIPPED*::
