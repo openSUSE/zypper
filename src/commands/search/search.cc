@@ -461,7 +461,9 @@ int SearchCmd::execute( Zypper &zypper, const std::vector<std::string> &position
     {
       // translators: empty search result message
       zypper.out().info(_("No matching items found."), Out::QUIET );
-      zypper.setExitCode( ZYPPER_EXIT_INF_CAP_NOT_FOUND );
+      if ( !zypper.config().ignore_unknown ) {
+        zypper.setExitInfoCode( ZYPPER_EXIT_INF_CAP_NOT_FOUND );
+      }
     }
     else
     {

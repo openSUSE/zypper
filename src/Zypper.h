@@ -154,9 +154,10 @@ public:
 
   int exitInfoCode() const			{ return _exitInfoCode; }
   void setExitInfoCode( int exit )		{
-    WAR << "setExitInfoCode " << exit << endl;
-    _exitInfoCode = exit;
+    WAR << "setExitInfoCode " << exit << " (" << _exitInfoCode << ")" << endl;
+    if ( _exitInfoCode == ZYPPER_EXIT_OK ) _exitInfoCode = exit;
   }
+  void clearExitInfoCode()                      { _exitInfoCode = ZYPPER_EXIT_OK; } // mainly used by tests
 
   bool runningShell() const			{ return _running_shell; }
   bool runningHelp() const			{ return _running_help; }

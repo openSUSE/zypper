@@ -210,9 +210,10 @@ namespace {
 } // namespace
 ///////////////////////////////////////////////////////////////////
 
-void printInfo(Zypper & zypper, const std::vector<std::string> &names_r, const PrintInfoOptions &options_r )
+void printInfo( Zypper & zypper, const std::vector<std::string> &names_r, const PrintInfoOptions &options_r )
 {
   zypper.out().gap();
+  bool noMatches = true;
 
   for ( const std::string & rawarg : names_r )
   {
@@ -256,13 +257,10 @@ void printInfo(Zypper & zypper, const std::vector<std::string> &names_r, const P
       h.addAttribute( sat::SolvAttr::name, kn._name );
 
       if ( h.empty() ) {
-        zypper.setExitInfoCode( ZYPPER_EXIT_INF_CAP_NOT_FOUND );
         continue;
       }
-      else if ( !fallBackToAny )
-      {
+      else if ( !fallBackToAny ) {
         logOtherKindMatches( h, kn._name );
-        zypper.setExitInfoCode( ZYPPER_EXIT_INF_CAP_NOT_FOUND );
         continue;
       }
       else {
@@ -272,6 +270,7 @@ void printInfo(Zypper & zypper, const std::vector<std::string> &names_r, const P
 
     for_( it, q.selectableBegin(), q.selectableEnd() )
     {
+      if ( noMatches ) noMatches = false;
       const ui::Selectable & sel( *(*it) );
 
       if ( zypper.out().type() != Out::TYPE_XML )
@@ -291,6 +290,13 @@ void printInfo(Zypper & zypper, const std::vector<std::string> &names_r, const P
       else if ( sel.kind() == ResKind::product )	{ printProductInfo( zypper, sel, options_r ); }
       else if ( sel.kind() == ResKind::srcpackage)	{ printSrcPackageInfo( zypper, sel, options_r ); }
       else 						{ printDefaultInfo( zypper, sel, options_r ); }
+    }
+  }
+
+  if ( noMatches ) {
+    zypper.out().info(_("No matching items found."), Out::QUIET );
+    if ( !zypper.config().ignore_unknown ) {
+      zypper.setExitInfoCode( ZYPPER_EXIT_INF_CAP_NOT_FOUND );
     }
   }
 }
