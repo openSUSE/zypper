@@ -84,6 +84,7 @@ namespace
       _t( PS_e )		| "ps";
       _t( DOWNLOAD_e )		| "download";
       _t( SOURCE_DOWNLOAD_e )	| "source-download";
+      _t( NEEDS_REBOOTING_e )	| "needs-rebooting";
 
       _t( HELP_e )		| "help"		| "?";
       _t( SHELL_e )		| "shell"		| "sh";
@@ -165,6 +166,7 @@ DEF_ZYPPER_COMMAND( LICENSES );
 DEF_ZYPPER_COMMAND( PS );
 DEF_ZYPPER_COMMAND( DOWNLOAD );
 DEF_ZYPPER_COMMAND( SOURCE_DOWNLOAD );
+DEF_ZYPPER_COMMAND( NEEDS_REBOOTING );
 
 DEF_ZYPPER_COMMAND( HELP );
 DEF_ZYPPER_COMMAND( SHELL );

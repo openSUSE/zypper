@@ -2,12 +2,12 @@
 .\"     Title: zypper
 .\"    Author: [see the "AUTHORS" section]
 .\" Generator: DocBook XSL Stylesheets v1.78.1 <http://docbook.sf.net/>
-.\"      Date: 04/21/2023
+.\"      Date: 12/14/2023
 .\"    Manual: ZYPPER
 .\"    Source: SUSE Linux
 .\"  Language: English
 .\"
-.TH "ZYPPER" "8" "04/21/2023" "SUSE Linux" "ZYPPER"
+.TH "ZYPPER" "8" "12/14/2023" "SUSE Linux" "ZYPPER"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -3343,6 +3343,20 @@ Do not delete extraneous source rpms\&.
 .RS 4
 Don\(cqt download any source rpms, but show which source rpms are missing or extraneous\&.
 .RE
+.RE
+.PP
+\fBneeds\-rebooting\fR
+.RS 4
+Checks if the reboot\-needed flag was set by a previous update or install of a core library or service\&.
+
+The exit code
+\fBZYPPER_EXIT_INF_REBOOT_NEEDED\fR
+indicates that a reboot is suggested, otherwise the exit code is set to
+\fBZYPPER_EXIT_OK\fR\&.
+
+It is recommended for scripts to use this command to test whether a system reboot is suggested\&. Use
+\fB\-\-quiet\fR
+to suppress the normal output\&.
 .RE
 .PP
 \fBps\fR

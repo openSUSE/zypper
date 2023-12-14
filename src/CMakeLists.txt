@@ -25,6 +25,7 @@ SET (zypper_HEADERS
   update.h
   download.h
   source-download.h
+  needs-rebooting.h
   subcommand.h
   configtest.h
   solve-commit.h
@@ -52,6 +53,7 @@ SET( zypper_SRCS
   update.cc
   download.cc
   source-download.cc
+  needs-rebooting.cc
   subcommand.cc
   configtest.cc
   solve-commit.cc

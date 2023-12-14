@@ -57,6 +57,7 @@
 #include "ps.h"
 #include "download.h"
 #include "source-download.h"
+#include "needs-rebooting.h"
 #include "configtest.h"
 #include "subcommand.h"
 
@@ -772,7 +773,7 @@ void print_main_help( Zypper & zypper )
     "\tcleanlocks, cl\t\tRemove unused locks.\n"
   );
 
-  static std::string help_other_commands = _("     Other Commands:\n"
+  static std::string help_other_commands = std::string( _("     Other Commands:\n"
     "\tversioncmp, vcmp\tCompare two version strings.\n"
     "\ttargetos, tos\t\tPrint the target operating system ID string.\n"
     "\tlicenses\t\tPrint report about licenses and EULAs of\n"
@@ -780,7 +781,8 @@ void print_main_help( Zypper & zypper )
     "\tdownload\t\tDownload rpms specified on the commandline to a local directory.\n"
     "\tsource-download\t\tDownload source rpms for all installed packages\n"
     "\t\t\t\tto a local directory.\n"
-  );
+  ) ) +
+  _("\tneeds-rebooting\t\tCheck if the reboot-needed flag was set.\n") ;
 
   static std::string help_subcommands = _("     Subcommands:\n"
     "\tsubcommand\t\tLists available subcommands.\n"
@@ -3329,6 +3331,31 @@ void Zypper::processCommandOptions()
   }
 
 
+  case ZypperCommand::NEEDS_REBOOTING_e:
+  {
+    shared_ptr<NeedsRebootingOptions> myOpts( new NeedsRebootingOptions() );
+    _commandOptions = myOpts;
+    static struct option options[] =
+    {
+      {"help",			no_argument, 0, 'h'},
+      {0, 0, 0, 0}
+    };
+    specific_options = options;
+    _command_help = _(
+      "needs-rebooting\n"
+      "\n"
+      "Checks if the reboot-needed flag was set by a previous update or install of\n"
+      "a core library or service.\n"
+      "Exit code ZYPPER_EXIT_INF_REBOOT_NEEDED indicates that a reboot is suggested,\n"
+      "otherwise the exit code is set to ZYPPER_EXIT_OK.\n"
+      "\n"
+      "This is the recommended way for scripts to test whether a system reboot is\n"
+      "suggested.\n"
+    );
+    break;
+  }
+
+
   case ZypperCommand::SHELL_QUIT_e:
   {
     static struct option quit_options[] = {
@@ -5496,6 +5523,22 @@ void Zypper::doCommand()
       myOpts->_dryrun = true;
 
     sourceDownload( *this );
+
+    break;
+  }
+
+  case ZypperCommand::NEEDS_REBOOTING_e:
+  {
+    if ( !_arguments.empty() )
+    {
+      report_too_many_arguments( _command_help );
+      setExitCode( ZYPPER_EXIT_ERR_INVALID_ARGS );
+      return;
+    }
+
+    shared_ptr<NeedsRebootingOptions> myOpts( assertCommandOptions<NeedsRebootingOptions>() );
+
+    needsRebooting( *this );
 
     break;
   }

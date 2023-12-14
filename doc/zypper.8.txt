@@ -1538,6 +1538,13 @@ Other Commands
 		Don't download any source rpms, but show which source rpms are missing or extraneous.
 --
 
+*needs-rebooting*::
+	Checks if the reboot-needed flag was set by a previous update or install of a core library or service.
+	+
+	The exit code *ZYPPER_EXIT_INF_REBOOT_NEEDED* indicates that a reboot is suggested, otherwise the exit code is set to *ZYPPER_EXIT_OK*.
+	+
+	It is recommended for scripts to use this command to test whether a system reboot is suggested. Use *--quiet* to suppress the normal output.
+
 *ps*::
 	After each upgrade or removal of packages, there may be running processes on the system which continue to use meanwhile deleted files. *zypper ps* lists all processes using deleted files, together with the corresponding files, and a service name hint, in case it's a known service. This gives a hint which services may need to be restarted after an update. Usually programs which continue to use deleted shared libraries. The list contains the following information:
 +

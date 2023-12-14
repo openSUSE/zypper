@@ -72,6 +72,7 @@ struct ZypperCommand
   static const ZypperCommand PS;
   static const ZypperCommand DOWNLOAD;
   static const ZypperCommand SOURCE_DOWNLOAD;
+  static const ZypperCommand NEEDS_REBOOTING;
 
   static const ZypperCommand HELP;
   static const ZypperCommand SHELL;
@@ -150,6 +151,7 @@ struct ZypperCommand
     PS_e,
     DOWNLOAD_e,
     SOURCE_DOWNLOAD_e,
+    NEEDS_REBOOTING_e,
 
     HELP_e,
     SHELL_e,
