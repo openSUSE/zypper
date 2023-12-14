@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.uk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-30 14:01+0200\n"
+"POT-Creation-Date: 2023-12-14 11:10+0100\n"
 "PO-Revision-Date: 2022-04-08 20:12+0000\n"
 "Last-Translator: Taras Panchenko <top39@ukr.net>\n"
 "Language-Team: Ukrainian <https://l10n.opensuse.org/projects/zypper/master/"
@@ -1244,7 +1244,7 @@ msgstr "Наявний"
 
 #. translators: used as 'tag:' (i.e. followed by ':')
 #. translators: property name; short; used like "Name: value"
-#: src/Summary.cc:1370 src/info.cc:341 src/info.cc:434 src/info.cc:554
+#: src/Summary.cc:1370 src/info.cc:351 src/info.cc:444 src/info.cc:564
 msgid "Installed"
 msgstr "Встановлені"
 
@@ -2464,8 +2464,8 @@ msgstr "Вибрати пакунки з вказаного сховища."
 #. translators: --oldpackage
 #: src/commands/installremove.cc:199
 msgid ""
-"Allows one to replace a newer item with an older one. Handy if you are doing a "
-"rollback. Unlike --force it will not enforce a reinstall."
+"Allows one to replace a newer item with an older one. Handy if you are doing "
+"a rollback. Unlike --force it will not enforce a reinstall."
 msgstr ""
 "Дозволити заміну новішого елемента на старіший. Зручно для відкочування. На "
 "відміну від --force перевстановлення не виконується."
@@ -2755,7 +2755,7 @@ msgstr[2] "Вилучено %lu блокувань."
 #. translators: name (general header)
 #: src/commands/locks/list.cc:133 src/commands/repos/list.cc:42
 #: src/commands/repos/list.cc:224 src/commands/services/list.cc:106
-#: src/info.cc:89 src/info.cc:457 src/info.cc:692 src/locales.cc:201
+#: src/info.cc:89 src/info.cc:467 src/info.cc:702 src/locales.cc:201
 #: src/search.cc:48 src/search.cc:199 src/search.cc:304 src/search.cc:439
 #: src/search.cc:486 src/update.cc:789 src/utils/misc.cc:325
 msgid "Name"
@@ -2769,7 +2769,7 @@ msgstr "Відповідники"
 #. translators: type (general header)
 #: src/commands/locks/list.cc:136 src/commands/repos/list.cc:53
 #: src/commands/repos/list.cc:263 src/commands/services/list.cc:115
-#: src/info.cc:458 src/search.cc:50 src/search.cc:202
+#: src/info.cc:468 src/search.cc:50 src/search.cc:202
 msgid "Type"
 msgstr "Тип"
 
@@ -3195,12 +3195,12 @@ msgstr ""
 msgid "Write debug output to file <path>."
 msgstr "Записати вивід налагодження у файл <шлях>."
 
-#: src/commands/ps.cc:72 src/solve-commit.cc:559
+#: src/commands/ps.cc:72 src/solve-commit.cc:561
 msgid "Check failed:"
 msgstr "Перевірка зазнала невдачі:"
 
 #. Here: Table output
-#: src/commands/ps.cc:127 src/solve-commit.cc:548
+#: src/commands/ps.cc:127 src/solve-commit.cc:550
 msgid "Checking for running processes using deleted libraries..."
 msgstr "Перевірка запущених процесів на використання видалених бібліотек…"
 
@@ -4362,19 +4362,19 @@ msgid "Specified repository '%s' is disabled."
 msgstr "Віддалене сховище \"%s\" вимкнено."
 
 #. translators: empty search result message
-#: src/commands/search/search.cc:463
+#: src/commands/search/search.cc:463 src/info.cc:297
 msgid "No matching items found."
 msgstr "Збігів не знайдено."
 
-#: src/commands/search/search.cc:493
+#: src/commands/search/search.cc:495
 msgid "Problem occurred initializing or executing the search query"
 msgstr "Під час започаткування та виконання пошукового запиту сталася помилка"
 
-#: src/commands/search/search.cc:494
+#: src/commands/search/search.cc:496
 msgid "See the above message for a hint."
 msgstr "Дивись підказку у вищенаведеному повідомленні."
 
-#: src/commands/search/search.cc:495 src/repos.cc:992
+#: src/commands/search/search.cc:497 src/repos.cc:992
 msgid "Running 'zypper refresh' as root might resolve the problem."
 msgstr ""
 "Виконання команди \"zypper refresh\" від адміністратора може зарадити "
@@ -5124,28 +5124,28 @@ msgstr ""
 msgid "Argument resolves to no package"
 msgstr "Аргумент не відповідає жодному пакунку"
 
-#: src/commands/utils/download.cc:252 src/solve-commit.cc:1023
+#: src/commands/utils/download.cc:254 src/solve-commit.cc:1030
 msgid "Nothing to do."
 msgstr "Нема що робити."
 
-#: src/commands/utils/download.cc:259
+#: src/commands/utils/download.cc:261
 msgid "No prune to best version."
 msgstr "Не тільки найкраща версія."
 
-#: src/commands/utils/download.cc:265
+#: src/commands/utils/download.cc:267
 msgid "Prune to best version..."
 msgstr "Обрізування до кращої версії…"
 
-#: src/commands/utils/download.cc:271
+#: src/commands/utils/download.cc:273
 msgid "Not downloading anything..."
 msgstr "Не завантажую нічого…"
 
-#: src/commands/utils/download.cc:313
+#: src/commands/utils/download.cc:315
 #, c-format, boost-format
 msgid "Error downloading package '%s'."
 msgstr "Помилка завантаження пакунка \"%s\"."
 
-#: src/commands/utils/download.cc:327
+#: src/commands/utils/download.cc:329
 #, c-format, boost-format
 msgid "Not downloading package '%s'."
 msgstr "Не завантажується пакунок \"%s\"."
@@ -5251,7 +5251,7 @@ msgstr "Зайві сирцеві пакунки у директорії зав�
 
 #. translators: table headers
 #. translators: property name; short; used like "Name: value"
-#: src/commands/utils/source-download.cc:318 src/info.cc:354
+#: src/commands/utils/source-download.cc:318 src/info.cc:364
 msgid "Source package"
 msgstr "Сирцевий пакунок"
 
@@ -5423,7 +5423,7 @@ msgstr "%s старіший за %s"
 #. translators: property name; short; used like "Name: value"
 #. translators: Table column header
 #. translators: package version (header)
-#: src/info.cc:91 src/info.cc:693 src/search.cc:52 src/search.cc:305
+#: src/info.cc:91 src/info.cc:703 src/search.cc:52 src/search.cc:305
 #: src/search.cc:440 src/search.cc:487
 msgid "Version"
 msgstr "Версія"
@@ -5466,83 +5466,83 @@ msgstr[1] "Там буде %1% збіги для \"%2%\"."
 msgstr[2] "Там буде %1% збігів для \"%2%\"."
 
 #. TranslatorExplanation E.g. "package 'zypper' not found."
-#: src/info.cc:252
+#: src/info.cc:253
 #, c-format, boost-format
 msgid "%s '%s' not found."
 msgstr "%s \"%s\" не знайдено."
 
 #. TranslatorExplanation E.g. "Information for package zypper:"
-#: src/info.cc:276
+#: src/info.cc:279
 #, c-format, boost-format
 msgid "Information for %s %s:"
 msgstr "Інформація для %s %s:"
 
-#: src/info.cc:336
+#: src/info.cc:346
 msgid "Support Level"
 msgstr "Рівень підтримки"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:339
+#: src/info.cc:349
 msgid "Installed Size"
 msgstr "Встановлений розмір"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:343 src/info.cc:393 src/info.cc:557 src/utils/misc.cc:329
+#: src/info.cc:353 src/info.cc:403 src/info.cc:567 src/utils/misc.cc:329
 #: src/utils/misc.cc:371
 msgid "Status"
 msgstr "Стан"
 
-#: src/info.cc:347 src/info.cc:561
+#: src/info.cc:357 src/info.cc:571
 #, c-format, boost-format
 msgid "out-of-date (version %s installed)"
 msgstr "застаріло (встановлено версію %s)"
 
-#: src/info.cc:349 src/info.cc:563
+#: src/info.cc:359 src/info.cc:573
 msgid "up-to-date"
 msgstr "оновлений"
 
-#: src/info.cc:352 src/info.cc:566
+#: src/info.cc:362 src/info.cc:576
 msgid "not installed"
 msgstr "не встановлено"
 
-#: src/info.cc:356
+#: src/info.cc:366
 msgid "Upstream URL"
 msgstr "URL адреса джерела"
 
 #. translators: property name; short; used like "Name: value"
 #. translator: Table column header.
 #. Name
-#: src/info.cc:395 src/update.cc:406 src/utils/misc.cc:326
+#: src/info.cc:405 src/update.cc:406 src/utils/misc.cc:326
 #: src/utils/misc.cc:368
 msgid "Category"
 msgstr "Категорія"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:397 src/utils/misc.cc:327 src/utils/misc.cc:369
+#: src/info.cc:407 src/utils/misc.cc:327 src/utils/misc.cc:369
 msgid "Severity"
 msgstr "Важливість"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:399
+#: src/info.cc:409
 msgid "Created On"
 msgstr "Створено"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:401 src/utils/misc.cc:328 src/utils/misc.cc:370
+#: src/info.cc:411 src/utils/misc.cc:328 src/utils/misc.cc:370
 msgid "Interactive"
 msgstr "Інтерактивний"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:436
+#: src/info.cc:446
 msgid "Visible to User"
 msgstr "Видимість для користувача"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:450 src/info.cc:486
+#: src/info.cc:460 src/info.cc:496
 msgid "Contents"
 msgstr "Вміст"
 
-#: src/info.cc:450
+#: src/info.cc:460
 msgid "(empty)"
 msgstr "(порожній)"
 
@@ -5551,91 +5551,91 @@ msgstr "(порожній)"
 #. translators: S for 'installed Status'
 #. translators: S for installed Status
 #. TranslatorExplanation S stands for Status
-#: src/info.cc:456 src/info.cc:691 src/locales.cc:199 src/search.cc:46
+#: src/info.cc:466 src/info.cc:701 src/locales.cc:199 src/search.cc:46
 #: src/search.cc:198 src/search.cc:303 src/search.cc:437 src/search.cc:481
 #: src/update.cc:784
 msgid "S"
 msgstr "S"
 
 #. translators: Table column header
-#: src/info.cc:459 src/search.cc:307
+#: src/info.cc:469 src/search.cc:307
 msgid "Dependency"
 msgstr "Залежність"
 
-#: src/info.cc:464 src/info.cc:478
+#: src/info.cc:474 src/info.cc:488
 msgid "Required"
 msgstr "Вимагає"
 
-#: src/info.cc:469 src/info.cc:478 src/search.cc:243
+#: src/info.cc:479 src/info.cc:488 src/search.cc:243
 msgid "Recommended"
 msgstr "Рекомендовано"
 
-#: src/info.cc:475 src/info.cc:478 src/search.cc:245
+#: src/info.cc:485 src/info.cc:488 src/search.cc:245
 msgid "Suggested"
 msgstr "Пропонується"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:534
+#: src/info.cc:544
 msgid "End of Support"
 msgstr "Кінець підтримки"
 
-#: src/info.cc:539
+#: src/info.cc:549
 msgid "unknown"
 msgstr "невідомий"
 
 #. translators: %1% is an URL or Path pointing to some document
-#: src/info.cc:544
+#: src/info.cc:554
 #, boost-format
 msgid "See %1%"
 msgstr "Див. %1%"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:550
+#: src/info.cc:560
 msgid "Flavor"
 msgstr "Вид"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:552 src/search.cc:489
+#: src/info.cc:562 src/search.cc:489
 msgid "Is Base"
 msgstr "Базується"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:573 src/info.cc:600
+#: src/info.cc:583 src/info.cc:610
 msgid "Update Repositories"
 msgstr "Сховища оновлень"
 
-#: src/info.cc:578
+#: src/info.cc:588
 msgid "Content Id"
 msgstr "ID вмісту"
 
-#: src/info.cc:590
+#: src/info.cc:600
 msgid "Provided by enabled repository"
 msgstr "Надано увімкненим сховищем"
 
-#: src/info.cc:595
+#: src/info.cc:605
 msgid "Not provided by any enabled repository"
 msgstr "Не надано увімкненим сховищем"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:605
+#: src/info.cc:615
 msgid "CPE Name"
 msgstr "Назва CPE"
 
-#: src/info.cc:610
+#: src/info.cc:620
 msgid "undefined"
 msgstr "невизначено"
 
-#: src/info.cc:612
+#: src/info.cc:622
 msgid "invalid CPE Name"
 msgstr "недійсна назва CPE"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:615
+#: src/info.cc:625
 msgid "Short Name"
 msgstr "Скорочена назва"
 
 #. translators: property name; short; used like "Name: value"; is followed by a list of binary packages built from this source package
-#: src/info.cc:701
+#: src/info.cc:711
 msgid "Builds binary package"
 msgstr "Збирає двійковий пакунок"
 
@@ -5899,8 +5899,8 @@ msgstr "Помилка вимикання сховища \"%s\"."
 msgid "Problem retrieving files from '%s'."
 msgstr "Проблема зі звантаженням файлів з \"%s\"."
 
-#: src/repos.cc:347 src/repos.cc:1869 src/solve-commit.cc:898
-#: src/solve-commit.cc:929 src/solve-commit.cc:953
+#: src/repos.cc:347 src/repos.cc:1869 src/solve-commit.cc:900
+#: src/solve-commit.cc:931 src/solve-commit.cc:955
 msgid "Please see the above error message for a hint."
 msgstr ""
 "Будь ласка, прочитайте повідомлення про помилку, розміщене вище, щоб краще "
@@ -6310,8 +6310,8 @@ msgstr "Спробуйте \"%s\" або, навіть, \"%s\" перш, ніж 
 #: src/repos.cc:1846
 msgid ""
 "Repository metadata expired: Check if 'autorefresh' is turned on (zypper "
-"lr), otherwise manually refresh the repository (zypper ref). If this does not "
-"solve the issue, it could be that you are using a broken mirror or the "
+"lr), otherwise manually refresh the repository (zypper ref). If this does "
+"not solve the issue, it could be that you are using a broken mirror or the "
 "server has actually discontinued to support the repository."
 msgstr ""
 
@@ -6369,21 +6369,21 @@ msgid "No products found."
 msgstr "Не знайдено продуктів."
 
 #. translators: meaning 'dependency problem' found during solving
-#: src/solve-commit.cc:74
+#: src/solve-commit.cc:75
 msgid "Problem: "
 msgstr "Проблема: "
 
-#: src/solve-commit.cc:80
+#: src/solve-commit.cc:81
 msgid "Detailed information: "
 msgstr "Детальна інформація: "
 
 #. TranslatorExplanation %d is the solution number
-#: src/solve-commit.cc:93
+#: src/solve-commit.cc:94
 #, c-format, boost-format
 msgid " Solution %d: "
 msgstr " Вирішення %d: "
 
-#: src/solve-commit.cc:112
+#: src/solve-commit.cc:113
 msgid "Choose the above solution using '1' or skip, retry or cancel"
 msgid_plural "Choose from above solutions by number or skip, retry or cancel"
 msgstr[0] ""
@@ -6398,7 +6398,7 @@ msgstr[2] ""
 
 #. translators: translate 'c' to whatever you translated the 'c' in
 #. "c" and "s/r/c" strings
-#: src/solve-commit.cc:119
+#: src/solve-commit.cc:120
 msgid "Choose the above solution using '1' or cancel using 'c'"
 msgid_plural "Choose from above solutions by number or cancel"
 msgstr[0] ""
@@ -6417,7 +6417,7 @@ msgstr[2] ""
 #. The anserws must be separated by slash characters '/' and must
 #. correspond to skip/retry/cancel/detailed information in that order.
 #. The answers should be lower case letters.
-#: src/solve-commit.cc:143
+#: src/solve-commit.cc:144
 msgid "s/r/c/d"
 msgstr "s/r/c/d"
 
@@ -6428,37 +6428,37 @@ msgstr "s/r/c/d"
 #. See the "s/r/c/d" comment for other details.
 #. One letter string  for translation can be tricky, so in case of problems,
 #. please report a bug against zypper at bugzilla.suse.com, we'll try to solve it.
-#: src/solve-commit.cc:159
+#: src/solve-commit.cc:160
 msgid "c/d"
 msgstr "c/d"
 
-#: src/solve-commit.cc:165
+#: src/solve-commit.cc:166
 #, boost-format
 msgid "Choose solution %1%"
 msgstr "Оберіть вирішення %1%"
 
-#: src/solve-commit.cc:167
+#: src/solve-commit.cc:168
 msgid "Skip problem and continue."
 msgstr "Пропустити проблему та продовжувати."
 
-#: src/solve-commit.cc:170
+#: src/solve-commit.cc:171
 msgid "Retry solving immediately."
 msgstr "Негайно спробувати вирішення знову."
 
-#: src/solve-commit.cc:172
+#: src/solve-commit.cc:173
 msgid "Choose no solution and cancel."
 msgstr "Не обирати вирішення."
 
-#: src/solve-commit.cc:173
+#: src/solve-commit.cc:174
 msgid "Toggle show detailed conflict information."
 msgstr "Увімкнути показ детальної конфліктної інформації."
 
-#: src/solve-commit.cc:206
+#: src/solve-commit.cc:207
 #, c-format, boost-format
 msgid "Applying solution %s"
 msgstr "Застосування вирішення %s"
 
-#: src/solve-commit.cc:222
+#: src/solve-commit.cc:223
 #, c-format, boost-format
 msgid "%d Problem:"
 msgid_plural "%d Problems:"
@@ -6466,47 +6466,46 @@ msgstr[0] "%d проблема:"
 msgstr[1] "%d проблеми:"
 msgstr[2] "%d проблем:"
 
-#. should not happen! If solve() failed at least one problem must be set!
-#: src/solve-commit.cc:226
-msgid "Specified capability not found"
-msgstr "Вказану здатність не знайдено"
+#: src/solve-commit.cc:228
+msgid "Resolver failed but reported no problems."
+msgstr ""
 
-#: src/solve-commit.cc:236
+#: src/solve-commit.cc:238
 #, c-format, boost-format
 msgid "Problem: %s"
 msgstr "Проблема: %s"
 
-#: src/solve-commit.cc:255
+#: src/solve-commit.cc:257
 msgid "Resolving dependencies..."
 msgstr "Розв'язання залежностей…"
 
-#: src/solve-commit.cc:316
+#: src/solve-commit.cc:318
 msgid "Force resolution:"
 msgstr "Примусова роздільна здатність:"
 
-#: src/solve-commit.cc:413
+#: src/solve-commit.cc:415
 msgid "Verifying dependencies..."
 msgstr "Перевірка залежностей…"
 
 #. Here: compute the full upgrade
-#: src/solve-commit.cc:463
+#: src/solve-commit.cc:465
 msgid "Computing upgrade..."
 msgstr "Підрахування оновлення…"
 
-#: src/solve-commit.cc:477
+#: src/solve-commit.cc:479
 msgid "Generating solver test case..."
 msgstr "Створення тесту…"
 
-#: src/solve-commit.cc:479
+#: src/solve-commit.cc:481
 #, c-format, boost-format
 msgid "Solver test case generated successfully at %s."
 msgstr "Тест створено успішно у %s."
 
-#: src/solve-commit.cc:482
+#: src/solve-commit.cc:484
 msgid "Error creating the solver test case."
 msgstr "Помилка створення тесту."
 
-#: src/solve-commit.cc:527
+#: src/solve-commit.cc:529
 msgid ""
 "DownloadAsNeeded can not be used with ZYPP_SINGLE_RPMTRANS=1, falling back "
 "to DownloadInAdvance"
@@ -6514,7 +6513,7 @@ msgstr ""
 "DownloadAsNeeded не можна використовувати із ZYPP_SINGLE_RPMTRANS=1, "
 "повертаємось до DownloadInAdvance"
 
-#: src/solve-commit.cc:545
+#: src/solve-commit.cc:547
 #, c-format, boost-format
 msgid ""
 "Check for running processes using deleted libraries is disabled in zypper."
@@ -6523,11 +6522,11 @@ msgstr ""
 "Перевірка запущених процесів на використання видалених бібліотек вимкнена у "
 "zypper.conf. Запустіть \"%s\" для ручної перевірки."
 
-#: src/solve-commit.cc:561
+#: src/solve-commit.cc:563
 msgid "Skip check:"
 msgstr "Пропустити перевірку:"
 
-#: src/solve-commit.cc:568
+#: src/solve-commit.cc:570
 #, boost-format
 msgid ""
 "There are running programs which still use files and libraries deleted or "
@@ -6539,32 +6538,32 @@ msgstr ""
 "скористатися останніми оновленнями. Запустіть \"%1%\", щоб отримати список "
 "цих програм."
 
-#: src/solve-commit.cc:582
+#: src/solve-commit.cc:584
 msgid "Update notifications were received from the following packages:"
 msgstr "Сповіщення про оновлення було отримано від наступних пакунків:"
 
-#: src/solve-commit.cc:591
+#: src/solve-commit.cc:593
 #, c-format, boost-format
 msgid "Message from package %s:"
 msgstr "Повідомлення від пакунка %s:"
 
-#: src/solve-commit.cc:599
+#: src/solve-commit.cc:601
 msgid "y/n"
 msgstr "y/n"
 
-#: src/solve-commit.cc:600
+#: src/solve-commit.cc:602
 msgid "View the notifications now?"
 msgstr "Переглянути сповіщення?"
 
-#: src/solve-commit.cc:645
+#: src/solve-commit.cc:647
 msgid "Computing distribution upgrade..."
 msgstr "Підрахування оновлення дистрибутиву…"
 
-#: src/solve-commit.cc:650
+#: src/solve-commit.cc:652
 msgid "Resolving package dependencies..."
 msgstr "Розв'язання залежностей пакунків…"
 
-#: src/solve-commit.cc:709
+#: src/solve-commit.cc:711
 msgid ""
 "Some of the dependencies of installed packages are broken. In order to fix "
 "these dependencies, the following actions need to be taken:"
@@ -6572,7 +6571,7 @@ msgstr ""
 "Деякі з залежностей встановлених пакунків порушено. З метою виправити ці "
 "залежності слід виконати наступні дії:"
 
-#: src/solve-commit.cc:716
+#: src/solve-commit.cc:718
 msgid "Root privileges are required to fix broken package dependencies."
 msgstr ""
 "Для виправлення порушених залежностей пакунків потрібні привілеї "
@@ -6588,24 +6587,24 @@ msgstr ""
 #. The answers should be lower case letters, but in general, any UTF-8
 #. string will do.
 #. ! \todo add c for changelog and x for explain (show the dep tree)
-#: src/solve-commit.cc:738
+#: src/solve-commit.cc:740
 msgid "y/n/p/v/a/r/m/d/g"
 msgstr "y/n/p/v/a/r/m/d/g"
 
 #. translators: help text for 'y' option in the 'Continue?' prompt
-#: src/solve-commit.cc:743
+#: src/solve-commit.cc:745
 msgid ""
 "Yes, accept the summary and proceed with installation/removal of packages."
 msgstr ""
 "Так, взяти до уваги резюме і продовжити встановлення або вилучення пакунків."
 
 #. translators: help text for 'n' option in the 'Continue?' prompt
-#: src/solve-commit.cc:745
+#: src/solve-commit.cc:747
 msgid "No, cancel the operation."
 msgstr "Ні, скасувати дію."
 
 #. translators: help text for 'p' option in the 'Continue?' prompt
-#: src/solve-commit.cc:747
+#: src/solve-commit.cc:749
 msgid ""
 "Restart solver in no-force-resolution mode in order to show dependency "
 "problems."
@@ -6614,55 +6613,55 @@ msgstr ""
 "подивитися на проблеми у залежностях."
 
 #. translators: help text for 'v' option in the 'Continue?' prompt
-#: src/solve-commit.cc:749
+#: src/solve-commit.cc:751
 msgid "Toggle display of package versions."
 msgstr "Перемкнути показ версій пакунків."
 
 #. translators: help text for 'a' option in the 'Continue?' prompt
-#: src/solve-commit.cc:751
+#: src/solve-commit.cc:753
 msgid "Toggle display of package architectures."
 msgstr "Перемкнути показ архітектур пакунків."
 
 #. translators: help text for 'r' option in the 'Continue?' prompt
-#: src/solve-commit.cc:753
+#: src/solve-commit.cc:755
 msgid ""
 "Toggle display of repositories from which the packages will be installed."
 msgstr "Перемкнути показ сховищ, з яких буде встановлено пакунки."
 
 #. translators: help text for 'm' option in the 'Continue?' prompt
-#: src/solve-commit.cc:755
+#: src/solve-commit.cc:757
 msgid "Toggle display of package vendor names."
 msgstr "Перемкнути показ назв постачальників пакунків."
 
 #. translators: help text for 'd' option in the 'Continue?' prompt
-#: src/solve-commit.cc:757
+#: src/solve-commit.cc:759
 msgid "Toggle between showing all details and as few details as possible."
 msgstr "Перемкнути показ всіх подробиць або мало подробиць."
 
 #. translators: help text for 'g' option in the 'Continue?' prompt
-#: src/solve-commit.cc:759
+#: src/solve-commit.cc:761
 msgid "View the summary in pager."
 msgstr "Перегляд зведення в пейджері."
 
-#: src/solve-commit.cc:867
+#: src/solve-commit.cc:869
 msgid "committing"
 msgstr "передається"
 
-#: src/solve-commit.cc:869
+#: src/solve-commit.cc:871
 msgid "(dry run)"
 msgstr "(пробний прогін)"
 
-#: src/solve-commit.cc:897 src/solve-commit.cc:930
+#: src/solve-commit.cc:899 src/solve-commit.cc:932
 msgid "Problem retrieving the package file from the repository:"
 msgstr "Проблема зі звантаженням файла пакунка зі сховища:"
 
 #. translators: the first %s is 'zypper refresh' and the second is repo alias
-#: src/solve-commit.cc:927
+#: src/solve-commit.cc:929
 #, c-format, boost-format
 msgid "Repository '%s' is out of date. Running '%s' might help."
 msgstr "Дані сховища \"%s\" застаріли. Запуск \"%s\" має допомогти."
 
-#: src/solve-commit.cc:938
+#: src/solve-commit.cc:940
 msgid ""
 "The package integrity check failed. This may be a problem with the "
 "repository or media. Try one of the following:\n"
@@ -6680,11 +6679,11 @@ msgstr ""
 "- замініть носій встановлення (якщо пошкоджений)\n"
 "- скористайтесь іншим сховищем"
 
-#: src/solve-commit.cc:952
+#: src/solve-commit.cc:954
 msgid "Problem occurred during or after installation or removal of packages:"
 msgstr "Під час або після встановлення або вилучення пакунків сталася помилка:"
 
-#: src/solve-commit.cc:991
+#: src/solve-commit.cc:993
 msgid ""
 "One of the installed patches requires a reboot of your machine. Reboot as "
 "soon as possible."
@@ -6692,7 +6691,7 @@ msgstr ""
 "Одна з встановлених латок потребує перезапуску вашого комп'ютера. Будь "
 "ласка, зробіть це якомога швидше."
 
-#: src/solve-commit.cc:999
+#: src/solve-commit.cc:1006
 msgid ""
 "One of the installed patches affects the package manager itself. Run this "
 "command once more to install any other needed patches."
@@ -6700,7 +6699,7 @@ msgstr ""
 "Одна з встановлених латок стосується самого менеджера пакунків. Знову "
 "запустіть цю команду, щоб встановити інші потрібні пакунки."
 
-#: src/solve-commit.cc:1021
+#: src/solve-commit.cc:1028
 msgid "Dependencies of all installed packages are satisfied."
 msgstr "Залежності всіх встановлених пакунків задоволено."
 
@@ -7395,6 +7394,9 @@ msgstr "Недійсний об'єкт"
 msgid "Error"
 msgstr "Помилка"
 
+#~ msgid "Specified capability not found"
+#~ msgstr "Вказану здатність не знайдено"
+
 #~ msgid "OK OK! Exiting immediately..."
 #~ msgstr "Добре, добре! Негайно виходжу…"
 
@@ -7832,8 +7834,8 @@ msgstr "Помилка"
 #~ "(reinstall),\n"
 #~ "                            downgraded or changes vendor or "
 #~ "architecture.\n"
-#~ "    --oldpackage            Allows one to replace a newer item with an older "
-#~ "one.\n"
+#~ "    --oldpackage            Allows one to replace a newer item with an "
+#~ "older one.\n"
 #~ "                            Handy if you are doing a rollback. Unlike --"
 #~ "force\n"
 #~ "                            it will not enforce a reinstall.\n"

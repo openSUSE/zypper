@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-30 14:01+0200\n"
+"POT-Creation-Date: 2023-12-14 11:10+0100\n"
 "PO-Revision-Date: 2016-05-23 12:39+0000\n"
 "Last-Translator: Sarah O'Farrell <sarah.ofarrell@vistatec.com>\n"
 "Language-Team: English (United Kingdom) <http://l10n.opensuse.org/projects/"
@@ -1111,7 +1111,7 @@ msgstr "Available Memory"
 
 #. translators: used as 'tag:' (i.e. followed by ':')
 #. translators: property name; short; used like "Name: value"
-#: src/Summary.cc:1370 src/info.cc:341 src/info.cc:434 src/info.cc:554
+#: src/Summary.cc:1370 src/info.cc:351 src/info.cc:444 src/info.cc:564
 msgid "Installed"
 msgstr "Installed"
 
@@ -2262,8 +2262,8 @@ msgstr ""
 #. translators: --oldpackage
 #: src/commands/installremove.cc:199
 msgid ""
-"Allows one to replace a newer item with an older one. Handy if you are doing a "
-"rollback. Unlike --force it will not enforce a reinstall."
+"Allows one to replace a newer item with an older one. Handy if you are doing "
+"a rollback. Unlike --force it will not enforce a reinstall."
 msgstr ""
 
 #: src/commands/installremove.cc:203
@@ -2533,7 +2533,7 @@ msgstr[1] ""
 #. translators: name (general header)
 #: src/commands/locks/list.cc:133 src/commands/repos/list.cc:42
 #: src/commands/repos/list.cc:224 src/commands/services/list.cc:106
-#: src/info.cc:89 src/info.cc:457 src/info.cc:692 src/locales.cc:201
+#: src/info.cc:89 src/info.cc:467 src/info.cc:702 src/locales.cc:201
 #: src/search.cc:48 src/search.cc:199 src/search.cc:304 src/search.cc:439
 #: src/search.cc:486 src/update.cc:789 src/utils/misc.cc:325
 msgid "Name"
@@ -2548,7 +2548,7 @@ msgstr "Patches"
 #. translators: type (general header)
 #: src/commands/locks/list.cc:136 src/commands/repos/list.cc:53
 #: src/commands/repos/list.cc:263 src/commands/services/list.cc:115
-#: src/info.cc:458 src/search.cc:50 src/search.cc:202
+#: src/info.cc:468 src/search.cc:50 src/search.cc:202
 msgid "Type"
 msgstr "Type"
 
@@ -2948,13 +2948,13 @@ msgstr ""
 msgid "Write debug output to file <path>."
 msgstr ""
 
-#: src/commands/ps.cc:72 src/solve-commit.cc:559
+#: src/commands/ps.cc:72 src/solve-commit.cc:561
 #, fuzzy
 msgid "Check failed:"
 msgstr "failed"
 
 #. Here: Table output
-#: src/commands/ps.cc:127 src/solve-commit.cc:548
+#: src/commands/ps.cc:127 src/solve-commit.cc:550
 msgid "Checking for running processes using deleted libraries..."
 msgstr ""
 
@@ -4076,21 +4076,21 @@ msgid "Specified repository '%s' is disabled."
 msgstr "Autorefresh"
 
 #. translators: empty search result message
-#: src/commands/search/search.cc:463
+#: src/commands/search/search.cc:463 src/info.cc:297
 #, fuzzy
 msgid "No matching items found."
 msgstr "No matches found"
 
-#: src/commands/search/search.cc:493
+#: src/commands/search/search.cc:495
 msgid "Problem occurred initializing or executing the search query"
 msgstr ""
 
-#: src/commands/search/search.cc:494
+#: src/commands/search/search.cc:496
 #, fuzzy
 msgid "See the above message for a hint."
 msgstr "Please, see the above error message to for a hint."
 
-#: src/commands/search/search.cc:495 src/repos.cc:992
+#: src/commands/search/search.cc:497 src/repos.cc:992
 msgid "Running 'zypper refresh' as root might resolve the problem."
 msgstr ""
 
@@ -4812,28 +4812,28 @@ msgstr ""
 msgid "Argument resolves to no package"
 msgstr ""
 
-#: src/commands/utils/download.cc:252 src/solve-commit.cc:1023
+#: src/commands/utils/download.cc:254 src/solve-commit.cc:1030
 msgid "Nothing to do."
 msgstr "Nothing to do."
 
-#: src/commands/utils/download.cc:259
+#: src/commands/utils/download.cc:261
 msgid "No prune to best version."
 msgstr ""
 
-#: src/commands/utils/download.cc:265
+#: src/commands/utils/download.cc:267
 msgid "Prune to best version..."
 msgstr ""
 
-#: src/commands/utils/download.cc:271
+#: src/commands/utils/download.cc:273
 msgid "Not downloading anything..."
 msgstr ""
 
-#: src/commands/utils/download.cc:313
+#: src/commands/utils/download.cc:315
 #, fuzzy, c-format, boost-format
 msgid "Error downloading package '%s'."
 msgstr "Error downloading metadata for '%s':"
 
-#: src/commands/utils/download.cc:327
+#: src/commands/utils/download.cc:329
 #, fuzzy, c-format, boost-format
 msgid "Not downloading package '%s'."
 msgstr "Error downloading metadata for '%s':"
@@ -4939,7 +4939,7 @@ msgstr ""
 
 #. translators: table headers
 #. translators: property name; short; used like "Name: value"
-#: src/commands/utils/source-download.cc:318 src/info.cc:354
+#: src/commands/utils/source-download.cc:318 src/info.cc:364
 #, fuzzy
 msgid "Source package"
 msgstr "package"
@@ -5111,7 +5111,7 @@ msgstr ""
 #. translators: property name; short; used like "Name: value"
 #. translators: Table column header
 #. translators: package version (header)
-#: src/info.cc:91 src/info.cc:693 src/search.cc:52 src/search.cc:305
+#: src/info.cc:91 src/info.cc:703 src/search.cc:52 src/search.cc:305
 #: src/search.cc:440 src/search.cc:487
 msgid "Version"
 msgstr "Version"
@@ -5154,85 +5154,85 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. TranslatorExplanation E.g. "package 'zypper' not found."
-#: src/info.cc:252
+#: src/info.cc:253
 #, fuzzy, c-format, boost-format
 msgid "%s '%s' not found."
 msgstr "%s '%s' not found"
 
 #. TranslatorExplanation E.g. "Information for package zypper:"
-#: src/info.cc:276
+#: src/info.cc:279
 #, c-format, boost-format
 msgid "Information for %s %s:"
 msgstr "Information for %s %s:"
 
-#: src/info.cc:336
+#: src/info.cc:346
 #, fuzzy
 msgid "Support Level"
 msgstr "Security Level"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:339
+#: src/info.cc:349
 msgid "Installed Size"
 msgstr "Installed Size"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:343 src/info.cc:393 src/info.cc:557 src/utils/misc.cc:329
+#: src/info.cc:353 src/info.cc:403 src/info.cc:567 src/utils/misc.cc:329
 #: src/utils/misc.cc:371
 msgid "Status"
 msgstr "Status"
 
-#: src/info.cc:347 src/info.cc:561
+#: src/info.cc:357 src/info.cc:571
 #, fuzzy, c-format, boost-format
 msgid "out-of-date (version %s installed)"
 msgstr "out-of-date (version "
 
-#: src/info.cc:349 src/info.cc:563
+#: src/info.cc:359 src/info.cc:573
 msgid "up-to-date"
 msgstr "up-to-date"
 
-#: src/info.cc:352 src/info.cc:566
+#: src/info.cc:362 src/info.cc:576
 msgid "not installed"
 msgstr "not installed"
 
-#: src/info.cc:356
+#: src/info.cc:366
 msgid "Upstream URL"
 msgstr ""
 
 #. translators: property name; short; used like "Name: value"
 #. translator: Table column header.
 #. Name
-#: src/info.cc:395 src/update.cc:406 src/utils/misc.cc:326
+#: src/info.cc:405 src/update.cc:406 src/utils/misc.cc:326
 #: src/utils/misc.cc:368
 msgid "Category"
 msgstr "Category"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:397 src/utils/misc.cc:327 src/utils/misc.cc:369
+#: src/info.cc:407 src/utils/misc.cc:327 src/utils/misc.cc:369
 msgid "Severity"
 msgstr "Severity"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:399
+#: src/info.cc:409
 msgid "Created On"
 msgstr "Created On"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:401 src/utils/misc.cc:328 src/utils/misc.cc:370
+#: src/info.cc:411 src/utils/misc.cc:328 src/utils/misc.cc:370
 #, fuzzy
 msgid "Interactive"
 msgstr "Interactive: "
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:436
+#: src/info.cc:446
 msgid "Visible to User"
 msgstr ""
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:450 src/info.cc:486
+#: src/info.cc:460 src/info.cc:496
 msgid "Contents"
 msgstr "Contents"
 
-#: src/info.cc:450
+#: src/info.cc:460
 msgid "(empty)"
 msgstr ""
 
@@ -5241,102 +5241,102 @@ msgstr ""
 #. translators: S for 'installed Status'
 #. translators: S for installed Status
 #. TranslatorExplanation S stands for Status
-#: src/info.cc:456 src/info.cc:691 src/locales.cc:199 src/search.cc:46
+#: src/info.cc:466 src/info.cc:701 src/locales.cc:199 src/search.cc:46
 #: src/search.cc:198 src/search.cc:303 src/search.cc:437 src/search.cc:481
 #: src/update.cc:784
 msgid "S"
 msgstr "S"
 
 #. translators: Table column header
-#: src/info.cc:459 src/search.cc:307
+#: src/info.cc:469 src/search.cc:307
 #, fuzzy
 msgid "Dependency"
 msgstr "Dependencies"
 
-#: src/info.cc:464 src/info.cc:478
+#: src/info.cc:474 src/info.cc:488
 #, fuzzy
 msgid "Required"
 msgstr "Requires"
 
-#: src/info.cc:469 src/info.cc:478 src/search.cc:243
+#: src/info.cc:479 src/info.cc:488 src/search.cc:243
 #, fuzzy
 msgid "Recommended"
 msgstr "Recommends"
 
-#: src/info.cc:475 src/info.cc:478 src/search.cc:245
+#: src/info.cc:485 src/info.cc:488 src/search.cc:245
 #, fuzzy
 msgid "Suggested"
 msgstr "Suggests"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:534
+#: src/info.cc:544
 msgid "End of Support"
 msgstr ""
 
-#: src/info.cc:539
+#: src/info.cc:549
 msgid "unknown"
 msgstr "unknown"
 
 #. translators: %1% is an URL or Path pointing to some document
-#: src/info.cc:544
+#: src/info.cc:554
 #, boost-format
 msgid "See %1%"
 msgstr ""
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:550
+#: src/info.cc:560
 msgid "Flavor"
 msgstr ""
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:552 src/search.cc:489
+#: src/info.cc:562 src/search.cc:489
 msgid "Is Base"
 msgstr ""
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:573 src/info.cc:600
+#: src/info.cc:583 src/info.cc:610
 #, fuzzy
 msgid "Update Repositories"
 msgstr "Specified repositories have been refreshed."
 
-#: src/info.cc:578
+#: src/info.cc:588
 #, fuzzy
 msgid "Content Id"
 msgstr "Contents"
 
-#: src/info.cc:590
+#: src/info.cc:600
 #, fuzzy
 msgid "Provided by enabled repository"
 msgstr "Uploaded %s to repository."
 
-#: src/info.cc:595
+#: src/info.cc:605
 #, fuzzy
 msgid "Not provided by any enabled repository"
 msgstr "Source package '%s' not found."
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:605
+#: src/info.cc:615
 #, fuzzy
 msgid "CPE Name"
 msgstr "Name"
 
-#: src/info.cc:610
+#: src/info.cc:620
 msgid "undefined"
 msgstr ""
 
-#: src/info.cc:612
+#: src/info.cc:622
 #, fuzzy
 msgid "invalid CPE Name"
 msgstr "Invalid caName: %1."
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:615
+#: src/info.cc:625
 #, fuzzy
 msgid "Short Name"
 msgstr "Short names:"
 
 #. translators: property name; short; used like "Name: value"; is followed by a list of binary packages built from this source package
-#: src/info.cc:701
+#: src/info.cc:711
 msgid "Builds binary package"
 msgstr ""
 
@@ -5597,8 +5597,8 @@ msgstr "Skipping disabled repository '%s'"
 msgid "Problem retrieving files from '%s'."
 msgstr "Problem downloading files from '%s'."
 
-#: src/repos.cc:347 src/repos.cc:1869 src/solve-commit.cc:898
-#: src/solve-commit.cc:929 src/solve-commit.cc:953
+#: src/repos.cc:347 src/repos.cc:1869 src/solve-commit.cc:900
+#: src/solve-commit.cc:931 src/solve-commit.cc:955
 #, fuzzy
 msgid "Please see the above error message for a hint."
 msgstr "Please, see the above error message to for a hint."
@@ -6023,8 +6023,8 @@ msgstr ""
 #: src/repos.cc:1846
 msgid ""
 "Repository metadata expired: Check if 'autorefresh' is turned on (zypper "
-"lr), otherwise manually refresh the repository (zypper ref). If this does not "
-"solve the issue, it could be that you are using a broken mirror or the "
+"lr), otherwise manually refresh the repository (zypper ref). If this does "
+"not solve the issue, it could be that you are using a broken mirror or the "
 "server has actually discontinued to support the repository."
 msgstr ""
 
@@ -6089,21 +6089,21 @@ msgid "No products found."
 msgstr "No updates found."
 
 #. translators: meaning 'dependency problem' found during solving
-#: src/solve-commit.cc:74
+#: src/solve-commit.cc:75
 msgid "Problem: "
 msgstr "Problem: "
 
-#: src/solve-commit.cc:80
+#: src/solve-commit.cc:81
 msgid "Detailed information: "
 msgstr ""
 
 #. TranslatorExplanation %d is the solution number
-#: src/solve-commit.cc:93
+#: src/solve-commit.cc:94
 #, c-format, boost-format
 msgid " Solution %d: "
 msgstr " Solution %d: "
 
-#: src/solve-commit.cc:112
+#: src/solve-commit.cc:113
 #, fuzzy
 msgid "Choose the above solution using '1' or skip, retry or cancel"
 msgid_plural "Choose from above solutions by number or skip, retry or cancel"
@@ -6112,7 +6112,7 @@ msgstr[1] "number, (r)etry or (c)ancel> "
 
 #. translators: translate 'c' to whatever you translated the 'c' in
 #. "c" and "s/r/c" strings
-#: src/solve-commit.cc:119
+#: src/solve-commit.cc:120
 #, fuzzy
 msgid "Choose the above solution using '1' or cancel using 'c'"
 msgid_plural "Choose from above solutions by number or cancel"
@@ -6125,7 +6125,7 @@ msgstr[1] "number, (r)etry or (c)ancel> "
 #. The anserws must be separated by slash characters '/' and must
 #. correspond to skip/retry/cancel/detailed information in that order.
 #. The answers should be lower case letters.
-#: src/solve-commit.cc:143
+#: src/solve-commit.cc:144
 msgid "s/r/c/d"
 msgstr ""
 
@@ -6136,104 +6136,103 @@ msgstr ""
 #. See the "s/r/c/d" comment for other details.
 #. One letter string  for translation can be tricky, so in case of problems,
 #. please report a bug against zypper at bugzilla.suse.com, we'll try to solve it.
-#: src/solve-commit.cc:159
+#: src/solve-commit.cc:160
 msgid "c/d"
 msgstr ""
 
-#: src/solve-commit.cc:165
+#: src/solve-commit.cc:166
 #, boost-format
 msgid "Choose solution %1%"
 msgstr ""
 
-#: src/solve-commit.cc:167
+#: src/solve-commit.cc:168
 msgid "Skip problem and continue."
 msgstr ""
 
-#: src/solve-commit.cc:170
+#: src/solve-commit.cc:171
 msgid "Retry solving immediately."
 msgstr ""
 
-#: src/solve-commit.cc:172
+#: src/solve-commit.cc:173
 msgid "Choose no solution and cancel."
 msgstr ""
 
-#: src/solve-commit.cc:173
+#: src/solve-commit.cc:174
 msgid "Toggle show detailed conflict information."
 msgstr ""
 
-#: src/solve-commit.cc:206
+#: src/solve-commit.cc:207
 #, c-format, boost-format
 msgid "Applying solution %s"
 msgstr "Applying solution %s"
 
-#: src/solve-commit.cc:222
+#: src/solve-commit.cc:223
 #, fuzzy, c-format, boost-format
 msgid "%d Problem:"
 msgid_plural "%d Problems:"
 msgstr[0] "%s Problems:"
 msgstr[1] "%s Problems:"
 
-#. should not happen! If solve() failed at least one problem must be set!
-#: src/solve-commit.cc:226
-msgid "Specified capability not found"
-msgstr "Specified capability not found"
+#: src/solve-commit.cc:228
+msgid "Resolver failed but reported no problems."
+msgstr ""
 
-#: src/solve-commit.cc:236
+#: src/solve-commit.cc:238
 #, fuzzy, c-format, boost-format
 msgid "Problem: %s"
 msgstr "Problem: "
 
-#: src/solve-commit.cc:255
+#: src/solve-commit.cc:257
 msgid "Resolving dependencies..."
 msgstr "Resolving dependencies..."
 
-#: src/solve-commit.cc:316
+#: src/solve-commit.cc:318
 #, fuzzy
 msgid "Force resolution:"
 msgstr "Resolution"
 
-#: src/solve-commit.cc:413
+#: src/solve-commit.cc:415
 #, fuzzy
 msgid "Verifying dependencies..."
 msgstr "Resolving dependencies..."
 
 #. Here: compute the full upgrade
-#: src/solve-commit.cc:463
+#: src/solve-commit.cc:465
 msgid "Computing upgrade..."
 msgstr ""
 
-#: src/solve-commit.cc:477
+#: src/solve-commit.cc:479
 msgid "Generating solver test case..."
 msgstr "Generating solver test case..."
 
-#: src/solve-commit.cc:479
+#: src/solve-commit.cc:481
 #, fuzzy, c-format, boost-format
 msgid "Solver test case generated successfully at %s."
 msgstr "Solver test case generated successfully."
 
-#: src/solve-commit.cc:482
+#: src/solve-commit.cc:484
 msgid "Error creating the solver test case."
 msgstr "Error creating the solver test case."
 
-#: src/solve-commit.cc:527
+#: src/solve-commit.cc:529
 msgid ""
 "DownloadAsNeeded can not be used with ZYPP_SINGLE_RPMTRANS=1, falling back "
 "to DownloadInAdvance"
 msgstr ""
 
-#: src/solve-commit.cc:545
+#: src/solve-commit.cc:547
 #, c-format, boost-format
 msgid ""
 "Check for running processes using deleted libraries is disabled in zypper."
 "conf. Run '%s' to check manually."
 msgstr ""
 
-#: src/solve-commit.cc:561
+#: src/solve-commit.cc:563
 #, fuzzy
 msgid "Skip check:"
 msgstr "DNS Check"
 
-#: src/solve-commit.cc:568
+#: src/solve-commit.cc:570
 #, boost-format
 msgid ""
 "There are running programs which still use files and libraries deleted or "
@@ -6241,40 +6240,40 @@ msgid ""
 "latest updates. Run '%1%' to list these programs."
 msgstr ""
 
-#: src/solve-commit.cc:582
+#: src/solve-commit.cc:584
 msgid "Update notifications were received from the following packages:"
 msgstr ""
 
-#: src/solve-commit.cc:591
+#: src/solve-commit.cc:593
 #, c-format, boost-format
 msgid "Message from package %s:"
 msgstr ""
 
-#: src/solve-commit.cc:599
+#: src/solve-commit.cc:601
 msgid "y/n"
 msgstr ""
 
-#: src/solve-commit.cc:600
+#: src/solve-commit.cc:602
 #, fuzzy
 msgid "View the notifications now?"
 msgstr "Disable Notifications"
 
-#: src/solve-commit.cc:645
+#: src/solve-commit.cc:647
 msgid "Computing distribution upgrade..."
 msgstr ""
 
-#: src/solve-commit.cc:650
+#: src/solve-commit.cc:652
 #, fuzzy
 msgid "Resolving package dependencies..."
 msgstr "Resolving dependencies..."
 
-#: src/solve-commit.cc:709
+#: src/solve-commit.cc:711
 msgid ""
 "Some of the dependencies of installed packages are broken. In order to fix "
 "these dependencies, the following actions need to be taken:"
 msgstr ""
 
-#: src/solve-commit.cc:716
+#: src/solve-commit.cc:718
 #, fuzzy
 msgid "Root privileges are required to fix broken package dependencies."
 msgstr "Root privileges are required for updating packages."
@@ -6289,81 +6288,81 @@ msgstr "Root privileges are required for updating packages."
 #. The answers should be lower case letters, but in general, any UTF-8
 #. string will do.
 #. ! \todo add c for changelog and x for explain (show the dep tree)
-#: src/solve-commit.cc:738
+#: src/solve-commit.cc:740
 msgid "y/n/p/v/a/r/m/d/g"
 msgstr ""
 
 #. translators: help text for 'y' option in the 'Continue?' prompt
-#: src/solve-commit.cc:743
+#: src/solve-commit.cc:745
 #, fuzzy
 msgid ""
 "Yes, accept the summary and proceed with installation/removal of packages."
 msgstr "An error occurred during the installation."
 
 #. translators: help text for 'n' option in the 'Continue?' prompt
-#: src/solve-commit.cc:745
+#: src/solve-commit.cc:747
 msgid "No, cancel the operation."
 msgstr ""
 
 #. translators: help text for 'p' option in the 'Continue?' prompt
-#: src/solve-commit.cc:747
+#: src/solve-commit.cc:749
 msgid ""
 "Restart solver in no-force-resolution mode in order to show dependency "
 "problems."
 msgstr ""
 
 #. translators: help text for 'v' option in the 'Continue?' prompt
-#: src/solve-commit.cc:749
+#: src/solve-commit.cc:751
 msgid "Toggle display of package versions."
 msgstr ""
 
 #. translators: help text for 'a' option in the 'Continue?' prompt
-#: src/solve-commit.cc:751
+#: src/solve-commit.cc:753
 msgid "Toggle display of package architectures."
 msgstr ""
 
 #. translators: help text for 'r' option in the 'Continue?' prompt
-#: src/solve-commit.cc:753
+#: src/solve-commit.cc:755
 #, fuzzy
 msgid ""
 "Toggle display of repositories from which the packages will be installed."
 msgstr "The following packages will be installed:\n"
 
 #. translators: help text for 'm' option in the 'Continue?' prompt
-#: src/solve-commit.cc:755
+#: src/solve-commit.cc:757
 msgid "Toggle display of package vendor names."
 msgstr ""
 
 #. translators: help text for 'd' option in the 'Continue?' prompt
-#: src/solve-commit.cc:757
+#: src/solve-commit.cc:759
 msgid "Toggle between showing all details and as few details as possible."
 msgstr ""
 
 #. translators: help text for 'g' option in the 'Continue?' prompt
-#: src/solve-commit.cc:759
+#: src/solve-commit.cc:761
 msgid "View the summary in pager."
 msgstr ""
 
-#: src/solve-commit.cc:867
+#: src/solve-commit.cc:869
 msgid "committing"
 msgstr "committing"
 
-#: src/solve-commit.cc:869
+#: src/solve-commit.cc:871
 msgid "(dry run)"
 msgstr ""
 
-#: src/solve-commit.cc:897 src/solve-commit.cc:930
+#: src/solve-commit.cc:899 src/solve-commit.cc:932
 #, fuzzy
 msgid "Problem retrieving the package file from the repository:"
 msgstr "Problem downloading files from '%s'."
 
 #. translators: the first %s is 'zypper refresh' and the second is repo alias
-#: src/solve-commit.cc:927
+#: src/solve-commit.cc:929
 #, fuzzy, c-format, boost-format
 msgid "Repository '%s' is out of date. Running '%s' might help."
 msgstr "Repository '%s' is up to date."
 
-#: src/solve-commit.cc:938
+#: src/solve-commit.cc:940
 msgid ""
 "The package integrity check failed. This may be a problem with the "
 "repository or media. Try one of the following:\n"
@@ -6381,12 +6380,12 @@ msgstr ""
 "- use another installation medium (if e.g. damaged)\n"
 "- use another repository"
 
-#: src/solve-commit.cc:952
+#: src/solve-commit.cc:954
 #, fuzzy
 msgid "Problem occurred during or after installation or removal of packages:"
 msgstr "An error occurred during the installation."
 
-#: src/solve-commit.cc:991
+#: src/solve-commit.cc:993
 #, fuzzy
 msgid ""
 "One of the installed patches requires a reboot of your machine. Reboot as "
@@ -6395,7 +6394,7 @@ msgstr ""
 "One of the installed patches requires a reboot of your machine. Please, do "
 "it as soon as possible."
 
-#: src/solve-commit.cc:999
+#: src/solve-commit.cc:1006
 #, fuzzy
 msgid ""
 "One of the installed patches affects the package manager itself. Run this "
@@ -6404,7 +6403,7 @@ msgstr ""
 "WARNING: One of the installed patches affects the package manager itself, "
 "thus it requires its restart before executing any further operations."
 
-#: src/solve-commit.cc:1021
+#: src/solve-commit.cc:1028
 msgid "Dependencies of all installed packages are satisfied."
 msgstr ""
 
@@ -7086,6 +7085,9 @@ msgstr "Invalid object"
 msgid "Error"
 msgstr "Error"
 
+#~ msgid "Specified capability not found"
+#~ msgstr "Specified capability not found"
+
 #~ msgid "done"
 #~ msgstr "done"
 
@@ -7211,8 +7213,8 @@ msgstr "Error"
 #~ "(reinstall),\n"
 #~ "                            downgraded or changes vendor or "
 #~ "architecture.\n"
-#~ "    --oldpackage            Allows one to replace a newer item with an older "
-#~ "one.\n"
+#~ "    --oldpackage            Allows one to replace a newer item with an "
+#~ "older one.\n"
 #~ "                            Handy if you are doing a rollback. Unlike --"
 #~ "force\n"
 #~ "                            it will not enforce a reinstall.\n"

@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-30 14:01+0200\n"
+"POT-Creation-Date: 2023-12-14 11:10+0100\n"
 "PO-Revision-Date: 2023-07-08 22:15+0000\n"
 "Last-Translator: dragon mrao <x123456789fy@outlook.com>\n"
 "Language-Team: Chinese (China) <https://l10n.opensuse.org/projects/zypper/"
@@ -1049,7 +1049,7 @@ msgstr "可用版本"
 
 #. translators: used as 'tag:' (i.e. followed by ':')
 #. translators: property name; short; used like "Name: value"
-#: src/Summary.cc:1370 src/info.cc:341 src/info.cc:434 src/info.cc:554
+#: src/Summary.cc:1370 src/info.cc:351 src/info.cc:444 src/info.cc:564
 msgid "Installed"
 msgstr "已安装"
 
@@ -2175,8 +2175,8 @@ msgstr "从指定软件源选择软件包。"
 #. translators: --oldpackage
 #: src/commands/installremove.cc:199
 msgid ""
-"Allows one to replace a newer item with an older one. Handy if you are doing a "
-"rollback. Unlike --force it will not enforce a reinstall."
+"Allows one to replace a newer item with an older one. Handy if you are doing "
+"a rollback. Unlike --force it will not enforce a reinstall."
 msgstr ""
 "允许使用旧软件包替换新软件包。 若您正在做回滚那么该选项超有用。不像 --force "
 "那样，它不强行重装。"
@@ -2455,7 +2455,7 @@ msgstr[0] "已移除 %lu 锁定。"
 #. translators: name (general header)
 #: src/commands/locks/list.cc:133 src/commands/repos/list.cc:42
 #: src/commands/repos/list.cc:224 src/commands/services/list.cc:106
-#: src/info.cc:89 src/info.cc:457 src/info.cc:692 src/locales.cc:201
+#: src/info.cc:89 src/info.cc:467 src/info.cc:702 src/locales.cc:201
 #: src/search.cc:48 src/search.cc:199 src/search.cc:304 src/search.cc:439
 #: src/search.cc:486 src/update.cc:789 src/utils/misc.cc:325
 msgid "Name"
@@ -2469,7 +2469,7 @@ msgstr "匹配"
 #. translators: type (general header)
 #: src/commands/locks/list.cc:136 src/commands/repos/list.cc:53
 #: src/commands/repos/list.cc:263 src/commands/services/list.cc:115
-#: src/info.cc:458 src/search.cc:50 src/search.cc:202
+#: src/info.cc:468 src/search.cc:50 src/search.cc:202
 msgid "Type"
 msgstr "类型"
 
@@ -2871,12 +2871,12 @@ msgstr ""
 msgid "Write debug output to file <path>."
 msgstr "将侦错输出写入到文件 <path>。"
 
-#: src/commands/ps.cc:72 src/solve-commit.cc:559
+#: src/commands/ps.cc:72 src/solve-commit.cc:561
 msgid "Check failed:"
 msgstr "检查失败："
 
 #. Here: Table output
-#: src/commands/ps.cc:127 src/solve-commit.cc:548
+#: src/commands/ps.cc:127 src/solve-commit.cc:550
 msgid "Checking for running processes using deleted libraries..."
 msgstr "正在检查使用了已删除库文件的运行中进程..."
 
@@ -3980,19 +3980,19 @@ msgid "Specified repository '%s' is disabled."
 msgstr "已禁用指定软件源 '%s'。"
 
 #. translators: empty search result message
-#: src/commands/search/search.cc:463
+#: src/commands/search/search.cc:463 src/info.cc:297
 msgid "No matching items found."
 msgstr "未找到匹配项。"
 
-#: src/commands/search/search.cc:493
+#: src/commands/search/search.cc:495
 msgid "Problem occurred initializing or executing the search query"
 msgstr "初始化或执行搜索查询出现问题"
 
-#: src/commands/search/search.cc:494
+#: src/commands/search/search.cc:496
 msgid "See the above message for a hint."
 msgstr "请参考以上消息汲取灵感。"
 
-#: src/commands/search/search.cc:495 src/repos.cc:992
+#: src/commands/search/search.cc:497 src/repos.cc:992
 msgid "Running 'zypper refresh' as root might resolve the problem."
 msgstr "以 root 身份运行 'zypper refresh' 或许会解决该问题。"
 
@@ -4713,28 +4713,28 @@ msgstr ""
 msgid "Argument resolves to no package"
 msgstr "参数解析为无软件包"
 
-#: src/commands/utils/download.cc:252 src/solve-commit.cc:1023
+#: src/commands/utils/download.cc:254 src/solve-commit.cc:1030
 msgid "Nothing to do."
 msgstr "无事可做。"
 
-#: src/commands/utils/download.cc:259
+#: src/commands/utils/download.cc:261
 msgid "No prune to best version."
 msgstr "不调整为最佳版本。"
 
-#: src/commands/utils/download.cc:265
+#: src/commands/utils/download.cc:267
 msgid "Prune to best version..."
 msgstr "调整为最佳版本..."
 
-#: src/commands/utils/download.cc:271
+#: src/commands/utils/download.cc:273
 msgid "Not downloading anything..."
 msgstr "什么都没有下载..."
 
-#: src/commands/utils/download.cc:313
+#: src/commands/utils/download.cc:315
 #, c-format, boost-format
 msgid "Error downloading package '%s'."
 msgstr "下载软件包 '%s' 出错。"
 
-#: src/commands/utils/download.cc:327
+#: src/commands/utils/download.cc:329
 #, c-format, boost-format
 msgid "Not downloading package '%s'."
 msgstr "未下载软件包 '%s'。"
@@ -4838,7 +4838,7 @@ msgstr "下载文件夹中冗余的源代码包："
 
 #. translators: table headers
 #. translators: property name; short; used like "Name: value"
-#: src/commands/utils/source-download.cc:318 src/info.cc:354
+#: src/commands/utils/source-download.cc:318 src/info.cc:364
 msgid "Source package"
 msgstr "源代码包"
 
@@ -5009,7 +5009,7 @@ msgstr "%s 较 %s 旧"
 #. translators: property name; short; used like "Name: value"
 #. translators: Table column header
 #. translators: package version (header)
-#: src/info.cc:91 src/info.cc:693 src/search.cc:52 src/search.cc:305
+#: src/info.cc:91 src/info.cc:703 src/search.cc:52 src/search.cc:305
 #: src/search.cc:440 src/search.cc:487
 msgid "Version"
 msgstr "版本"
@@ -5050,83 +5050,83 @@ msgid_plural "There would be %1% matches for '%2%'."
 msgstr[0] "针对 '%2%' 将有 %1% 个匹配。"
 
 #. TranslatorExplanation E.g. "package 'zypper' not found."
-#: src/info.cc:252
+#: src/info.cc:253
 #, c-format, boost-format
 msgid "%s '%s' not found."
 msgstr "%s '%s' 未找到。"
 
 #. TranslatorExplanation E.g. "Information for package zypper:"
-#: src/info.cc:276
+#: src/info.cc:279
 #, c-format, boost-format
 msgid "Information for %s %s:"
 msgstr "%s %s 的信息："
 
-#: src/info.cc:336
+#: src/info.cc:346
 msgid "Support Level"
 msgstr "支持级别"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:339
+#: src/info.cc:349
 msgid "Installed Size"
 msgstr "已安装大小"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:343 src/info.cc:393 src/info.cc:557 src/utils/misc.cc:329
+#: src/info.cc:353 src/info.cc:403 src/info.cc:567 src/utils/misc.cc:329
 #: src/utils/misc.cc:371
 msgid "Status"
 msgstr "状态"
 
-#: src/info.cc:347 src/info.cc:561
+#: src/info.cc:357 src/info.cc:571
 #, c-format, boost-format
 msgid "out-of-date (version %s installed)"
 msgstr "过时（已安装版本 %s）"
 
-#: src/info.cc:349 src/info.cc:563
+#: src/info.cc:359 src/info.cc:573
 msgid "up-to-date"
 msgstr "最新"
 
-#: src/info.cc:352 src/info.cc:566
+#: src/info.cc:362 src/info.cc:576
 msgid "not installed"
 msgstr "未安装"
 
-#: src/info.cc:356
+#: src/info.cc:366
 msgid "Upstream URL"
 msgstr "上游网址"
 
 #. translators: property name; short; used like "Name: value"
 #. translator: Table column header.
 #. Name
-#: src/info.cc:395 src/update.cc:406 src/utils/misc.cc:326
+#: src/info.cc:405 src/update.cc:406 src/utils/misc.cc:326
 #: src/utils/misc.cc:368
 msgid "Category"
 msgstr "分类"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:397 src/utils/misc.cc:327 src/utils/misc.cc:369
+#: src/info.cc:407 src/utils/misc.cc:327 src/utils/misc.cc:369
 msgid "Severity"
 msgstr "严重性"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:399
+#: src/info.cc:409
 msgid "Created On"
 msgstr "创建于"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:401 src/utils/misc.cc:328 src/utils/misc.cc:370
+#: src/info.cc:411 src/utils/misc.cc:328 src/utils/misc.cc:370
 msgid "Interactive"
 msgstr "交互的"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:436
+#: src/info.cc:446
 msgid "Visible to User"
 msgstr "对用户可见"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:450 src/info.cc:486
+#: src/info.cc:460 src/info.cc:496
 msgid "Contents"
 msgstr "内容"
 
-#: src/info.cc:450
+#: src/info.cc:460
 msgid "(empty)"
 msgstr "（空）"
 
@@ -5135,91 +5135,91 @@ msgstr "（空）"
 #. translators: S for 'installed Status'
 #. translators: S for installed Status
 #. TranslatorExplanation S stands for Status
-#: src/info.cc:456 src/info.cc:691 src/locales.cc:199 src/search.cc:46
+#: src/info.cc:466 src/info.cc:701 src/locales.cc:199 src/search.cc:46
 #: src/search.cc:198 src/search.cc:303 src/search.cc:437 src/search.cc:481
 #: src/update.cc:784
 msgid "S"
 msgstr "S"
 
 #. translators: Table column header
-#: src/info.cc:459 src/search.cc:307
+#: src/info.cc:469 src/search.cc:307
 msgid "Dependency"
 msgstr "依赖关系"
 
-#: src/info.cc:464 src/info.cc:478
+#: src/info.cc:474 src/info.cc:488
 msgid "Required"
 msgstr "必需"
 
-#: src/info.cc:469 src/info.cc:478 src/search.cc:243
+#: src/info.cc:479 src/info.cc:488 src/search.cc:243
 msgid "Recommended"
 msgstr "推荐"
 
-#: src/info.cc:475 src/info.cc:478 src/search.cc:245
+#: src/info.cc:485 src/info.cc:488 src/search.cc:245
 msgid "Suggested"
 msgstr "建议"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:534
+#: src/info.cc:544
 msgid "End of Support"
 msgstr "支持终止"
 
-#: src/info.cc:539
+#: src/info.cc:549
 msgid "unknown"
 msgstr "未知"
 
 #. translators: %1% is an URL or Path pointing to some document
-#: src/info.cc:544
+#: src/info.cc:554
 #, boost-format
 msgid "See %1%"
 msgstr "参考 %1%"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:550
+#: src/info.cc:560
 msgid "Flavor"
 msgstr "风格"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:552 src/search.cc:489
+#: src/info.cc:562 src/search.cc:489
 msgid "Is Base"
 msgstr "是基础"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:573 src/info.cc:600
+#: src/info.cc:583 src/info.cc:610
 msgid "Update Repositories"
 msgstr "更新软件源"
 
-#: src/info.cc:578
+#: src/info.cc:588
 msgid "Content Id"
 msgstr "内容 ID"
 
-#: src/info.cc:590
+#: src/info.cc:600
 msgid "Provided by enabled repository"
 msgstr "由已启用的软件源提供"
 
-#: src/info.cc:595
+#: src/info.cc:605
 msgid "Not provided by any enabled repository"
 msgstr "任何已启用的软件源均未提供"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:605
+#: src/info.cc:615
 msgid "CPE Name"
 msgstr "CPE 名称"
 
-#: src/info.cc:610
+#: src/info.cc:620
 msgid "undefined"
 msgstr "未定义"
 
-#: src/info.cc:612
+#: src/info.cc:622
 msgid "invalid CPE Name"
 msgstr "无效的 CPE 名称"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:615
+#: src/info.cc:625
 msgid "Short Name"
 msgstr "短名称"
 
 #. translators: property name; short; used like "Name: value"; is followed by a list of binary packages built from this source package
-#: src/info.cc:701
+#: src/info.cc:711
 msgid "Builds binary package"
 msgstr "构建二进制包"
 
@@ -5471,8 +5471,8 @@ msgstr "禁用软件源 '%s' 时出错。"
 msgid "Problem retrieving files from '%s'."
 msgstr "从 '%s'检索文件时出现问题。"
 
-#: src/repos.cc:347 src/repos.cc:1869 src/solve-commit.cc:898
-#: src/solve-commit.cc:929 src/solve-commit.cc:953
+#: src/repos.cc:347 src/repos.cc:1869 src/solve-commit.cc:900
+#: src/solve-commit.cc:931 src/solve-commit.cc:955
 msgid "Please see the above error message for a hint."
 msgstr "请参考以上错误消息汲取灵感。"
 
@@ -5862,8 +5862,8 @@ msgstr "这么做前请先尝试 '%s'，甚至在那之前先尝试一下 '%s'�
 #: src/repos.cc:1846
 msgid ""
 "Repository metadata expired: Check if 'autorefresh' is turned on (zypper "
-"lr), otherwise manually refresh the repository (zypper ref). If this does not "
-"solve the issue, it could be that you are using a broken mirror or the "
+"lr), otherwise manually refresh the repository (zypper ref). If this does "
+"not solve the issue, it could be that you are using a broken mirror or the "
 "server has actually discontinued to support the repository."
 msgstr ""
 "软件源元数据已失效：请确认已启用 \"autorefresh\" (zypper lr)，否则需手动更新"
@@ -5924,28 +5924,28 @@ msgid "No products found."
 msgstr "未找到产品。"
 
 #. translators: meaning 'dependency problem' found during solving
-#: src/solve-commit.cc:74
+#: src/solve-commit.cc:75
 msgid "Problem: "
 msgstr "问题： "
 
-#: src/solve-commit.cc:80
+#: src/solve-commit.cc:81
 msgid "Detailed information: "
 msgstr "详细信息： "
 
 #. TranslatorExplanation %d is the solution number
-#: src/solve-commit.cc:93
+#: src/solve-commit.cc:94
 #, c-format, boost-format
 msgid " Solution %d: "
 msgstr " 解决方案 %d： "
 
-#: src/solve-commit.cc:112
+#: src/solve-commit.cc:113
 msgid "Choose the above solution using '1' or skip, retry or cancel"
 msgid_plural "Choose from above solutions by number or skip, retry or cancel"
 msgstr[0] "请通过数字从以上解决方案中选择，或者跳过、重试或取消"
 
 #. translators: translate 'c' to whatever you translated the 'c' in
 #. "c" and "s/r/c" strings
-#: src/solve-commit.cc:119
+#: src/solve-commit.cc:120
 msgid "Choose the above solution using '1' or cancel using 'c'"
 msgid_plural "Choose from above solutions by number or cancel"
 msgstr[0] "请通过数字从以上解决方案中选择，或取消"
@@ -5956,7 +5956,7 @@ msgstr[0] "请通过数字从以上解决方案中选择，或取消"
 #. The anserws must be separated by slash characters '/' and must
 #. correspond to skip/retry/cancel/detailed information in that order.
 #. The answers should be lower case letters.
-#: src/solve-commit.cc:143
+#: src/solve-commit.cc:144
 msgid "s/r/c/d"
 msgstr "s/r/c/d"
 
@@ -5967,83 +5967,82 @@ msgstr "s/r/c/d"
 #. See the "s/r/c/d" comment for other details.
 #. One letter string  for translation can be tricky, so in case of problems,
 #. please report a bug against zypper at bugzilla.suse.com, we'll try to solve it.
-#: src/solve-commit.cc:159
+#: src/solve-commit.cc:160
 msgid "c/d"
 msgstr "c/d"
 
-#: src/solve-commit.cc:165
+#: src/solve-commit.cc:166
 #, boost-format
 msgid "Choose solution %1%"
 msgstr "选择解决方案 %1%"
 
-#: src/solve-commit.cc:167
+#: src/solve-commit.cc:168
 msgid "Skip problem and continue."
 msgstr "跳过该问题并继续。"
 
-#: src/solve-commit.cc:170
+#: src/solve-commit.cc:171
 msgid "Retry solving immediately."
 msgstr "立即尝试解决。"
 
-#: src/solve-commit.cc:172
+#: src/solve-commit.cc:173
 msgid "Choose no solution and cancel."
 msgstr "不选择解决方案并取消。"
 
-#: src/solve-commit.cc:173
+#: src/solve-commit.cc:174
 msgid "Toggle show detailed conflict information."
 msgstr "切换显示详细的冲突信息。"
 
-#: src/solve-commit.cc:206
+#: src/solve-commit.cc:207
 #, c-format, boost-format
 msgid "Applying solution %s"
 msgstr "正在应用解决方案 %s"
 
-#: src/solve-commit.cc:222
+#: src/solve-commit.cc:223
 #, c-format, boost-format
 msgid "%d Problem:"
 msgid_plural "%d Problems:"
 msgstr[0] "%d 个问题："
 
-#. should not happen! If solve() failed at least one problem must be set!
-#: src/solve-commit.cc:226
-msgid "Specified capability not found"
-msgstr "未找到指定的功能"
+#: src/solve-commit.cc:228
+msgid "Resolver failed but reported no problems."
+msgstr ""
 
-#: src/solve-commit.cc:236
+#: src/solve-commit.cc:238
 #, c-format, boost-format
 msgid "Problem: %s"
 msgstr "问题：%s"
 
-#: src/solve-commit.cc:255
+#: src/solve-commit.cc:257
 msgid "Resolving dependencies..."
 msgstr "正在解决依赖关系..."
 
-#: src/solve-commit.cc:316
+#: src/solve-commit.cc:318
 msgid "Force resolution:"
 msgstr "强制解决："
 
-#: src/solve-commit.cc:413
+#: src/solve-commit.cc:415
 msgid "Verifying dependencies..."
 msgstr "正在校验依赖关系..."
 
 #. Here: compute the full upgrade
-#: src/solve-commit.cc:463
+#: src/solve-commit.cc:465
 msgid "Computing upgrade..."
 msgstr "正在计算升级..."
 
-#: src/solve-commit.cc:477
+#: src/solve-commit.cc:479
 msgid "Generating solver test case..."
 msgstr "正在生成解算器试例..."
 
-#: src/solve-commit.cc:479
+#: src/solve-commit.cc:481
 #, c-format, boost-format
 msgid "Solver test case generated successfully at %s."
 msgstr "在 %s 成功生成了解算器试例。"
 
-#: src/solve-commit.cc:482
+#: src/solve-commit.cc:484
 msgid "Error creating the solver test case."
 msgstr "创建解算器试例出错。"
 
-#: src/solve-commit.cc:527
+#: src/solve-commit.cc:529
 msgid ""
 "DownloadAsNeeded can not be used with ZYPP_SINGLE_RPMTRANS=1, falling back "
 "to DownloadInAdvance"
@@ -6051,7 +6050,7 @@ msgstr ""
 "DownloadAsNeeded 不能与 ZYPP_SINGLE_RPMTRANS=1 一起使用，将回退为 "
 "DownloadInAdvance"
 
-#: src/solve-commit.cc:545
+#: src/solve-commit.cc:547
 #, c-format, boost-format
 msgid ""
 "Check for running processes using deleted libraries is disabled in zypper."
@@ -6060,11 +6059,11 @@ msgstr ""
 "检查使用了已删除函数库的运行中进程的功能在 zypper.conf 中禁用了。运行 '%s' 手"
 "动检查。"
 
-#: src/solve-commit.cc:561
+#: src/solve-commit.cc:563
 msgid "Skip check:"
 msgstr "跳过检查："
 
-#: src/solve-commit.cc:568
+#: src/solve-commit.cc:570
 #, boost-format
 msgid ""
 "There are running programs which still use files and libraries deleted or "
@@ -6074,39 +6073,39 @@ msgstr ""
 "某些运行中的程序仍在使用被最近升级所删除或更新的文件和函数库。应重启它们使其"
 "也能从最新更新中获益。运行 ‘%1%’ 列出这些程序。"
 
-#: src/solve-commit.cc:582
+#: src/solve-commit.cc:584
 msgid "Update notifications were received from the following packages:"
 msgstr "接收到了来自以下软件包的更新通知："
 
-#: src/solve-commit.cc:591
+#: src/solve-commit.cc:593
 #, c-format, boost-format
 msgid "Message from package %s:"
 msgstr "来自软件包 %s 的消息："
 
-#: src/solve-commit.cc:599
+#: src/solve-commit.cc:601
 msgid "y/n"
 msgstr "y/n"
 
-#: src/solve-commit.cc:600
+#: src/solve-commit.cc:602
 msgid "View the notifications now?"
 msgstr "现在查看通知吗？"
 
-#: src/solve-commit.cc:645
+#: src/solve-commit.cc:647
 msgid "Computing distribution upgrade..."
 msgstr "正在计算发行版升级..."
 
-#: src/solve-commit.cc:650
+#: src/solve-commit.cc:652
 msgid "Resolving package dependencies..."
 msgstr "正在解决软件包依赖关系..."
 
-#: src/solve-commit.cc:709
+#: src/solve-commit.cc:711
 msgid ""
 "Some of the dependencies of installed packages are broken. In order to fix "
 "these dependencies, the following actions need to be taken:"
 msgstr ""
 "已安装软件包的某些依赖关系已损坏。要修复这些依赖关系，需要执行以下动作："
 
-#: src/solve-commit.cc:716
+#: src/solve-commit.cc:718
 msgid "Root privileges are required to fix broken package dependencies."
 msgstr "修复受损的软件包依赖关系需要有 root 特权。"
 
@@ -6120,78 +6119,78 @@ msgstr "修复受损的软件包依赖关系需要有 root 特权。"
 #. The answers should be lower case letters, but in general, any UTF-8
 #. string will do.
 #. ! \todo add c for changelog and x for explain (show the dep tree)
-#: src/solve-commit.cc:738
+#: src/solve-commit.cc:740
 msgid "y/n/p/v/a/r/m/d/g"
 msgstr "y/n/p/v/a/r/m/d/g"
 
 #. translators: help text for 'y' option in the 'Continue?' prompt
-#: src/solve-commit.cc:743
+#: src/solve-commit.cc:745
 msgid ""
 "Yes, accept the summary and proceed with installation/removal of packages."
 msgstr "是，接受摘要并继续安装/移除软件包。"
 
 #. translators: help text for 'n' option in the 'Continue?' prompt
-#: src/solve-commit.cc:745
+#: src/solve-commit.cc:747
 msgid "No, cancel the operation."
 msgstr "否，取消操作。"
 
 #. translators: help text for 'p' option in the 'Continue?' prompt
-#: src/solve-commit.cc:747
+#: src/solve-commit.cc:749
 msgid ""
 "Restart solver in no-force-resolution mode in order to show dependency "
 "problems."
 msgstr "以不强行解决模式重启解算器以便显示依赖关系问题。"
 
 #. translators: help text for 'v' option in the 'Continue?' prompt
-#: src/solve-commit.cc:749
+#: src/solve-commit.cc:751
 msgid "Toggle display of package versions."
 msgstr "切换显示软件包版本。"
 
 #. translators: help text for 'a' option in the 'Continue?' prompt
-#: src/solve-commit.cc:751
+#: src/solve-commit.cc:753
 msgid "Toggle display of package architectures."
 msgstr "切换显示软件包架构。"
 
 #. translators: help text for 'r' option in the 'Continue?' prompt
-#: src/solve-commit.cc:753
+#: src/solve-commit.cc:755
 msgid ""
 "Toggle display of repositories from which the packages will be installed."
 msgstr "切换显示待安装软件包所属软件源。"
 
 #. translators: help text for 'm' option in the 'Continue?' prompt
-#: src/solve-commit.cc:755
+#: src/solve-commit.cc:757
 msgid "Toggle display of package vendor names."
 msgstr "切换显示软件包出品方名称。"
 
 #. translators: help text for 'd' option in the 'Continue?' prompt
-#: src/solve-commit.cc:757
+#: src/solve-commit.cc:759
 msgid "Toggle between showing all details and as few details as possible."
 msgstr "切换显示全部细节和最少细节。"
 
 #. translators: help text for 'g' option in the 'Continue?' prompt
-#: src/solve-commit.cc:759
+#: src/solve-commit.cc:761
 msgid "View the summary in pager."
 msgstr "在分页器中查看摘要。"
 
-#: src/solve-commit.cc:867
+#: src/solve-commit.cc:869
 msgid "committing"
 msgstr "正在提交"
 
-#: src/solve-commit.cc:869
+#: src/solve-commit.cc:871
 msgid "(dry run)"
 msgstr "(演习)"
 
-#: src/solve-commit.cc:897 src/solve-commit.cc:930
+#: src/solve-commit.cc:899 src/solve-commit.cc:932
 msgid "Problem retrieving the package file from the repository:"
 msgstr "从软件源检索软件包文件出现问题："
 
 #. translators: the first %s is 'zypper refresh' and the second is repo alias
-#: src/solve-commit.cc:927
+#: src/solve-commit.cc:929
 #, c-format, boost-format
 msgid "Repository '%s' is out of date. Running '%s' might help."
 msgstr "软件源 '%s' 已过时。运行 '%s' 可能有帮助。"
 
-#: src/solve-commit.cc:938
+#: src/solve-commit.cc:940
 msgid ""
 "The package integrity check failed. This may be a problem with the "
 "repository or media. Try one of the following:\n"
@@ -6208,17 +6207,17 @@ msgstr ""
 "－ 使用其它安装介质 (若当前介质已损坏)\n"
 "－ 使用其它软件源"
 
-#: src/solve-commit.cc:952
+#: src/solve-commit.cc:954
 msgid "Problem occurred during or after installation or removal of packages:"
 msgstr "安装/移除以下软件包期间或之后发生问题："
 
-#: src/solve-commit.cc:991
+#: src/solve-commit.cc:993
 msgid ""
 "One of the installed patches requires a reboot of your machine. Reboot as "
 "soon as possible."
 msgstr "已安装的某个补丁需要重启计算机。请尽快重启。"
 
-#: src/solve-commit.cc:999
+#: src/solve-commit.cc:1006
 msgid ""
 "One of the installed patches affects the package manager itself. Run this "
 "command once more to install any other needed patches."
@@ -6226,7 +6225,7 @@ msgstr ""
 "已安装的某个补丁影响到了软件包管理器自身。请再次运行此命令来安装全部其它所需"
 "补丁。"
 
-#: src/solve-commit.cc:1021
+#: src/solve-commit.cc:1028
 msgid "Dependencies of all installed packages are satisfied."
 msgstr "已满足全部已安装软件包的依赖关系。"
 
@@ -6876,6 +6875,9 @@ msgstr "无效对象"
 msgid "Error"
 msgstr "错误"
 
+#~ msgid "Specified capability not found"
+#~ msgstr "未找到指定的功能"
+
 #~ msgid "OK OK! Exiting immediately..."
 #~ msgstr "好好！这就退啦 :-)..."
 
@@ -7327,8 +7329,8 @@ msgstr "错误"
 #~ "(reinstall),\n"
 #~ "                            downgraded or changes vendor or "
 #~ "architecture.\n"
-#~ "    --oldpackage            Allows one to replace a newer item with an older "
-#~ "one.\n"
+#~ "    --oldpackage            Allows one to replace a newer item with an "
+#~ "older one.\n"
 #~ "                            Handy if you are doing a rollback. Unlike --"
 #~ "force\n"
 #~ "                            it will not enforce a reinstall.\n"
