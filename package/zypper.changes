@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Thu Dec 14 10:55:34 CET 2023 - ma@suse.de
+
+- Fix search/info commands ignoring --ignore-unknown (bsc#1217593)
+  The switch makes search commands return 0 rather than 104 for
+  empty search results.
+- version 1.14.68
+
+-------------------------------------------------------------------
 Fri Dec  8 13:11:10 CET 2023 - ma@suse.de
 
 - patch: Make sure reboot-needed is remembered until next boot
