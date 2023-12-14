@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-12-14 11:10+0100\n"
-"PO-Revision-Date: 2023-08-30 15:15+0000\n"
+"PO-Revision-Date: 2023-12-14 13:01+0000\n"
 "Last-Translator: Freek de Kruijf <freek@opensuse.org>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/zypper/master/nl/>\n"
 "Language: nl\n"
@@ -6537,7 +6537,7 @@ msgstr[1] "%d problemen:"
 
 #: src/solve-commit.cc:228
 msgid "Resolver failed but reported no problems."
-msgstr ""
+msgstr "Oplosser mislukte, maar rapporteerde geen problemen."
 
 #: src/solve-commit.cc:238
 #, c-format, boost-format
