@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-12-14 11:10+0100\n"
-"PO-Revision-Date: 2023-08-31 01:15+0000\n"
+"PO-Revision-Date: 2023-12-15 00:06+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
 "Language-Team: Japanese <https://l10n.opensuse.org/projects/zypper/master/ja/"
 ">\n"
@@ -6325,7 +6325,7 @@ msgstr[0] "%d 個の問題点:"
 
 #: src/solve-commit.cc:228
 msgid "Resolver failed but reported no problems."
-msgstr ""
+msgstr "解決器の処理が失敗しましたが、問題点は報告されませんでした。"
 
 #: src/solve-commit.cc:238
 #, c-format, boost-format
