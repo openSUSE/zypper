@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Dec 14 22:44:49 CET 2023 - ma@suse.de
+
+- Backport needs-rebooting command from Code15 (bsc#1217948)
+- BuildRequires:  libzypp-devel >= 16.22.11.
+- version 1.13.65
+
+-------------------------------------------------------------------
 Fri Apr 21 15:47:14 CEST 2023 - ma@suse.de
 
 - Add expert (allow-*) options to all installer commands
