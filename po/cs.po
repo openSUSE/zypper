@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-12-14 11:10+0100\n"
-"PO-Revision-Date: 2023-08-30 18:15+0000\n"
+"PO-Revision-Date: 2023-12-15 13:02+0000\n"
 "Last-Translator: Aleš Kastner <alkas@volny.cz>\n"
 "Language-Team: Czech <https://l10n.opensuse.org/projects/zypper/master/cs/>\n"
 "Language: cs\n"
@@ -6459,7 +6459,7 @@ msgstr[2] "%d problémů:"
 
 #: src/solve-commit.cc:228
 msgid "Resolver failed but reported no problems."
-msgstr ""
+msgstr "Řešitel selhal, ale neohlásil žádné problémy."
 
 #: src/solve-commit.cc:238
 #, c-format, boost-format
