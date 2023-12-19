@@ -40,11 +40,14 @@ void print_repo_details( Zypper & zypper, std::list<RepoInfo> & repos )
 
     p.add( _("Alias"),		repo.alias() );
     p.add( _("Name"),		repo.name() );
-    p.add( _("URI"),		(repo.baseUrlSet()
-                                 ? repo.url().asString()
-                                 : (repo.mirrorListUrl().asString().empty()
-                                    ? "n/a"
-                                    : repo.mirrorListUrl().asString())) );
+    if ( repo.baseUrlSet() ) {
+      p.add( _("URI"),		repo.baseUrls() );
+    }
+    else {
+      p.add( _("URI"),		(repo.mirrorListUrl().asString().empty()
+                                    ? "N/A"
+                                    : repo.mirrorListUrl().asString()) );
+    }
     p.add( _("Enabled"),	repoGpgCheck._enabledYN.str() );
     p.add( _("GPG Check"),	repoGpgCheck._gpgCheckYN.str() );
     p.add( _("Priority"),	repoPriorityNumberAnnotated( repo.priority() ) );
@@ -317,11 +320,9 @@ void ListReposCmd::printRepoList( Zypper & zypper, const std::list<RepoInfo> & r
     if ( all )
       tr << repo.type().asString();
     // url
-    /**
-     * \todo properly handle multiple baseurls - show "(multiple)"
-     */
     if ( all || showuri )
-      tr << (repo.baseUrlSet() ? repo.url().asString() : (repo.mirrorListUrl().asString().empty() ? "n/a" : repo.mirrorListUrl().asString()) );
+      // Maybe indicate multiple baseurls; OTOH `lr REPO` shows them all
+      tr << (repo.baseUrlSet() ? repo.url().asString() : (repo.mirrorListUrl().asString().empty() ? "N/A" : repo.mirrorListUrl().asString()) );
 
     if ( all || showservice )
       tr << repo.service();
