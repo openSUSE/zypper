@@ -12,10 +12,10 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-12-14 11:10+0100\n"
-"PO-Revision-Date: 2023-09-09 05:15+0000\n"
+"PO-Revision-Date: 2023-12-23 07:02+0000\n"
 "Last-Translator: Luna  Jernberg <bittin@opensuse.org>\n"
-"Language-Team: Swedish <https://l10n.opensuse.org/projects/zypper/master/sv/"
-">\n"
+"Language-Team: Swedish <https://l10n.opensuse.org/projects/zypper/master/sv/>"
+"\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -6371,7 +6371,7 @@ msgstr[1] "%d problem:"
 
 #: src/solve-commit.cc:228
 msgid "Resolver failed but reported no problems."
-msgstr ""
+msgstr "Lösaren misslyckades men rapporterade inga problem."
 
 #: src/solve-commit.cc:238
 #, c-format, boost-format
