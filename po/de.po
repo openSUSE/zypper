@@ -17,10 +17,10 @@ msgstr ""
 "Project-Id-Version: zypper.de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-12-14 11:10+0100\n"
-"PO-Revision-Date: 2023-02-09 13:14+0000\n"
-"Last-Translator: Gemineo <vistatec@gemineo.de>\n"
-"Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/"
-">\n"
+"PO-Revision-Date: 2024-01-06 01:59+0000\n"
+"Last-Translator: Ettore Atalan <atalanttore@googlemail.com>\n"
+"Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/>"
+"\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2216,7 +2216,7 @@ msgid ""
 "Do a 'best effort' approach to update. Updates to a lower than the latest "
 "version are also acceptable."
 msgstr ""
-"Einen 'bestmöglichen' Ansatz zur Aktualisierung durchführen. "
+"Einen ‚bestmöglichen‘ Ansatz zur Aktualisierung durchführen. "
 "Aktualisierungen zu einer älteren als der neuesten Version sind auch "
 "akzeptabel."
 
@@ -2890,19 +2890,23 @@ msgstr ""
 #: src/commands/needs-rebooting.cc:38
 msgid ""
 "Since the last system boot core libraries or services have been updated."
-msgstr "Core-Bibliotheken oder Dienste wurden aktualisiert."
+msgstr ""
+"Seit dem letzten Systemstart wurden zentrale Bibliotheken oder Dienste "
+"aktualisiert."
 
 #: src/commands/needs-rebooting.cc:39
 msgid ""
 "Reboot is suggested to ensure that your system benefits from these updates."
 msgstr ""
-"Ein Neustart wird benötigt, um sicher zu stellen, dass ihr System von diesen "
-"Updates profitiert."
+"Ein Neustart wird empfohlen, um sicherzustellen, dass Ihr System von diesen "
+"Aktualisierungen profitiert."
 
 #: src/commands/needs-rebooting.cc:44
 msgid ""
 "No core libraries or services have been updated since the last system boot."
-msgstr "Keine Core-Bibliotheken oder Dienste wurden aktualisiert."
+msgstr ""
+"Seit dem letzten Systemstart sind keine zentralen Bibliotheken oder Dienste "
+"aktualisiert worden."
 
 #: src/commands/needs-rebooting.cc:45
 msgid "Reboot is probably not necessary."
@@ -5098,7 +5102,7 @@ msgstr "update (up) [OPTIONEN] [PAKETNAME] ..."
 #. translators: command summary: update, up
 #: src/commands/update.cc:24
 msgid "Update installed packages with newer versions."
-msgstr "Inst. Pakete mit neueren Vers. aktualisieren."
+msgstr "Installierte Pakete mit neueren Versionen aktualisieren."
 
 #. translators: command description
 #: src/commands/update.cc:26
@@ -5116,7 +5120,7 @@ msgstr "Operation wird nicht unterstützt."
 #: src/commands/update.cc:70
 #, c-format, boost-format
 msgid "To update installed products use '%s'."
-msgstr "Verwenden Sie '%s' zur Aktualisierung installierter Produkte."
+msgstr "Verwenden Sie ‚%s‘ zur Aktualisierung installierter Produkte."
 
 #: src/commands/update.cc:77
 #, c-format, boost-format
@@ -5769,6 +5773,7 @@ msgstr "Versucht sich höflich zu beenden..."
 #: src/main.cc:126
 msgid "Zypper is currently cleaning up, exiting as soon as possible."
 msgstr ""
+"Zypper ist gerade dabei, aufzuräumen und beendet sich so schnell wie möglich."
 
 #. translators: the first %s is name of the resolvable,
 #. the second is its kind (e.g. 'zypper package')
@@ -6086,7 +6091,7 @@ msgid ""
 "Repository '%s' is out-of-date. You can run 'zypper refresh' as root to "
 "update it."
 msgstr ""
-"Repository '%s' ist veraltet. Sie können 'zypper refresh' als root "
+"Repository ‚%s‘ ist veraltet. Sie können 'zypper refresh' als root "
 "ausführen, um es zu aktualisieren."
 
 #: src/repos.cc:901
@@ -6556,7 +6561,7 @@ msgstr[1] "%d Probleme:"
 
 #: src/solve-commit.cc:228
 msgid "Resolver failed but reported no problems."
-msgstr ""
+msgstr "Auflöser ist fehlgeschlagen, hat aber keine Probleme gemeldet."
 
 #: src/solve-commit.cc:238
 #, c-format, boost-format
@@ -6858,7 +6863,7 @@ msgstr[1] "%d Sicherheits-Patches"
 #. translator: Table column header.
 #: src/update.cc:408
 msgid "Updatestack"
-msgstr "Stapel-Update"
+msgstr "Aktualisierungsstapel"
 
 #. translator: Table column header.
 #: src/update.cc:410 src/update.cc:702
@@ -6883,8 +6888,7 @@ msgstr "Berücksichtigte Kategorien"
 #: src/update.cc:592
 msgid "Needed software management updates will be installed first:"
 msgstr ""
-"Die benötigten Softwareverwaltungs-Aktualisierungen werden zuerst "
-"installiert:"
+"Benötigte Softwareverwaltungs-Aktualisierungen werden zuerst installiert:"
 
 #: src/update.cc:600 src/update.cc:842
 msgid "No updates found."
@@ -6901,7 +6905,7 @@ msgstr "Paketaktualisierungen"
 
 #: src/update.cc:704
 msgid "Pattern updates"
-msgstr "Pattern-Aktualisierungen"
+msgstr "Muster-Aktualisierungen"
 
 #: src/update.cc:706
 msgid "Product updates"
