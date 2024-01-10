@@ -262,9 +262,15 @@ Out & Zypper::out()
  * This function sets the exit requested flag. It must be safe to be
  * called from a signal handler, so it must obey the rules for it https://man7.org/linux/man-pages/man7/signal-safety.7.html
  */
-void Zypper::requestExit(bool do_exit)
+void Zypper::requestExit( bool do_exit )
 {
-  _exit_requested = do_exit ? 1 : 0;
+  if ( do_exit ) {
+    _exit_requested = 1;
+    ZYpp::setShutdownSignal();
+  } else {
+    _exit_requested = 0;
+    ZYpp::clearShutdownSignal();
+  }
 }
 
 /*!
@@ -274,6 +280,7 @@ void Zypper::requestExit(bool do_exit)
 void Zypper::requestImmediateExit()
 {
   _exit_requested = 2;
+  ZYpp::setShutdownSignal();
 }
 
 void print_command_help_hint( Zypper & zypper )
