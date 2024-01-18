@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-12-14 11:10+0100\n"
-"PO-Revision-Date: 2023-07-08 22:15+0000\n"
-"Last-Translator: dragon mrao <x123456789fy@outlook.com>\n"
+"PO-Revision-Date: 2024-01-18 04:59+0000\n"
+"Last-Translator: Foo Bar <foobarcc@segfault.net>\n"
 "Language-Team: Chinese (China) <https://l10n.opensuse.org/projects/zypper/"
 "master/zh_CN/>\n"
 "Language: zh_CN\n"
@@ -1322,6 +1322,7 @@ msgstr ""
 "您知道它是安全的，否则不应继续使用它。"
 
 #: src/callbacks/keyring.h:59
+#, fuzzy
 msgid ""
 "This might be a transient issue if the server is in the midst of receiving "
 "new data. The data file and its signature are two files which must fit "
@@ -1329,6 +1330,8 @@ msgid ""
 "the signature verification might fail. After a few minutes, when the server "
 "has updated its data, it should work again."
 msgstr ""
+"如果服务器正在接收新数据的过程中，这可能是一个暂时的问题。数据文件和它的签名文件必须匹配。如果网络请求在更新这两个文件的过程中抵达服务器，签名验证可能会失"
+"败。当服务器在几分钟后完成数据更新，它就会重新工作起来。"
 
 #: src/callbacks/keyring.h:88
 msgid "Repository:"
@@ -4931,6 +4934,8 @@ msgid ""
 "Shows the ID string of the target operating system. The string is defined by "
 "the XPath:/product/register/target entry in /etc/products.d/baseproduct."
 msgstr ""
+"它显示目标操作系统的 ID 字符串。这个字符串由 /etc/products.d/baseproduct 里面的 XPath:/product/"
+"register/target 条目来定义。"
 
 #: src/commands/utils/targetos.cc:25
 #, fuzzy
@@ -4938,14 +4943,14 @@ msgid ""
 "If the baseproduct does not provide this entry, or if no baseproduct is "
 "installed at all, the value is empty if the --terse global option is used."
 msgstr ""
-"如果出现以下情况：baseproduct 没有提供这个条目、完全没有安装 baseproduct、使"
-"用 --terse 全局选项，皆会导致该值为空。"
+"下列的情况都会导致这个值为空值：baseproduct 没有提供这一条目、baseproduct 根本没有被安装、或者是打开了 --terse "
+"全局命令行选项。"
 
 #: src/commands/utils/targetos.cc:26
 msgid ""
 "In not-terse mode the distribution label is shown instead of an empty value, "
 "if a baseproduct is installed."
-msgstr ""
+msgstr "如果安装了 baseproduct，则会在不显示模式 (non-terse) 下显示发行标签，而不是一个空值。"
 
 #: src/commands/utils/targetos.cc:36
 msgid "Show the baseproducts distribution and short label instead."
