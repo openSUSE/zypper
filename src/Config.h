@@ -70,7 +70,7 @@ struct Config : public ztui::Config
   bool non_interactive;
   bool reboot_req_non_interactive;
   bool no_gpg_checks;
-  bool gpg_auto_import_keys;
+  std::vector<std::string> gpg_auto_import_keys;
   bool machine_readable;
   /** Whether to disable autorefresh. */
   bool no_refresh;
