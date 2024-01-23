@@ -14,6 +14,7 @@ void service_list_tr( Zypper & zypper,
                       Table & tbl,
                       const repo::RepoInfoBase_Ptr & srv,
                       unsigned reponumber,
+                      unsigned reponumberfieldw,
                       const RSCommonListOptions::RSCommonListFlags & flags )
 {
   ServiceInfo_Ptr service = dynamic_pointer_cast<ServiceInfo>(srv);
@@ -29,12 +30,12 @@ void service_list_tr( Zypper & zypper,
   if ( flags & RSCommonListOptions::ServiceRepo )
   {
     if ( repo && ! repo->enabled() )
-      tr << ColorString( repoGpgCheck._tagColor, "-" ).str();
+      tr << ColorString( repoGpgCheck._tagColor, str::form( "%*c", reponumberfieldw, '-' ) ).str();
     else
       tr << "";
   }
   else
-    tr << ColorString( repoGpgCheck._tagColor, str::numstring(reponumber) ).str();
+    tr << ColorString( repoGpgCheck._tagColor, str::numstring(reponumber, reponumberfieldw) ).str();
 
   // alias
   tr << ColorString( repoGpgCheck._tagColor, srv->alias() );
@@ -123,6 +124,7 @@ void ListServicesCmd::printServiceList( Zypper &zypper )
   bool show_enabled_only = _listOptions._flags.testFlag( RSCommonListOptions::ShowEnabledOnly );
 
   int i = 0;
+  unsigned nindent = services.size() > 9 ? services.size() > 99 ? 3 : 2 : 1;
   for_( it, services.begin(), services.end() )
   {
     ++i; // continuous numbering including skipped ones
@@ -148,11 +150,11 @@ void ListServicesCmd::printServiceList( Zypper &zypper )
 
         if ( !servicePrinted )
         {
-          service_list_tr( zypper, tbl, *it, i, _listOptions._flags );
+          service_list_tr( zypper, tbl, *it, i, nindent, _listOptions._flags );
           servicePrinted = true;
         }
         // ServiceRepo: we print repos of the current service
-        service_list_tr( zypper, tbl, ptr, i, _listOptions._flags | RSCommonListOptions::ServiceRepo );
+        service_list_tr( zypper, tbl, ptr, i, nindent, _listOptions._flags | RSCommonListOptions::ServiceRepo );
       }
     }
     if ( servicePrinted )
@@ -163,7 +165,7 @@ void ListServicesCmd::printServiceList( Zypper &zypper )
     if ( show_enabled_only && !(*it)->enabled() )
       continue;
 
-    service_list_tr( zypper, tbl, *it, i, _listOptions._flags );
+    service_list_tr( zypper, tbl, *it, i, nindent, _listOptions._flags );
   }
 
   if ( tbl.empty() )
