@@ -1635,7 +1635,7 @@ void Summary::dumpTo( std::ostream & out )
     // patch command (auto)restricted to update stack patches
     Zypper::instance().out().notePar( 4, _("Package manager restart required. (Run this command once again after the update stack got updated)") );
   }
-  if ( showNeedRebootHInt() )
+  if ( showNeedRebootHInt() && !_download_only)
   {   Zypper::instance().out().notePar( 4, _("System reboot required.") ); }
 
   if ( !_ctc.empty() )
