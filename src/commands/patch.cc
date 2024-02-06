@@ -46,6 +46,9 @@ zypp::ZyppFlags::CommandGroup PatchCmd::cmdOptions() const
   return {
     {
       CommonFlags::updateStackOnlyFlag( that->_updateStackOnly),
+      { "skip-not-applicable-patches", '\0', ZyppFlags::NoArgument, ZyppFlags::BoolType( &that->_skipNotApplicablePatches, ZyppFlags::StoreTrue, _skipNotApplicablePatches ),
+            _("Skip needed patches which do not apply without conflict.")
+      },
       { "with-update", '\0', ZyppFlags::NoArgument, ZyppFlags::BoolType( &that->_withUpdate, ZyppFlags::StoreTrue, _withUpdate ),
             _("Additionally try to update all packages not covered by patches. The option is ignored, if the patch command must update the update stack first. Can not be combined with --updatestack-only.")
       },
@@ -120,6 +123,11 @@ int PatchCmd::execute( Zypper &zypper, const std::vector<std::string> &positiona
     viewOpts = static_cast<Summary::ViewOptions> ( viewOpts | Summary::ViewOptions::PATCH_REBOOT_RULES );
   }
 
-  solve_and_commit( zypper, SolveAndCommitPolicy( ).summaryOptions( viewOpts ).downloadMode( _downloadModeOpts.mode() ) );
+  SolveAndCommitPolicy p;
+  p.summaryOptions( viewOpts );
+  p.downloadMode( _downloadModeOpts.mode() );
+  p.skipNotApplicablePatches( _skipNotApplicablePatches );
+  solve_and_commit( zypper, std::move(p) );
+
   return zypper.exitCode();
 }

@@ -236,16 +236,12 @@ static TriBool show_problem( Zypper & zypper, unsigned nr, const ResolverProblem
 }
 
 // return true to retry solving, false to cancel transaction
-static bool show_problems( Zypper & zypper )
+static bool show_problems( Zypper & zypper, SolveAndCommitPolicy & policy )
 {
+  //! \todo handle resolver problems caused by --capability mode arguments specially to give proper output (bnc #337007)
   Resolver_Ptr resolver = getZYpp()->resolver();
   const ResolverProblemList & rproblems( resolver->problems() );
-
-  // display the number of problems
-  if ( rproblems.size() > 1 )
-    zypper.out().info( MSG_WARNINGString(str::Format(PL_("%d Problem:", "%d Problems:", rproblems.size())) % rproblems.size()).str() );
-  else if ( rproblems.empty() )
-  {
+  if ( rproblems.empty() ) {
     // should not happen! If solve() failed at least one problem must be set!
     INT << "Resolver failed but reported no problems." << endl;
     zypper.out().error(_("Resolver failed but reported no problems.") );
@@ -253,34 +249,77 @@ static bool show_problems( Zypper & zypper )
     return false; // will cancel the transaction
   }
 
-  // for many problems, list them shortly first
-  //! \todo handle resolver problems caused by --capability mode arguments specially to give proper output (bnc #337007)
-  if (rproblems.size() > 1)
-  {
-    unsigned n = 0;
-    for ( const auto & probPtr : rproblems )
-      zypper.out().info() << tagProblem(++n) << probPtr->description() <<endl;
+  ProblemSolutionList pendingSolutions; // List of solutions to apply before retrying.
+
+  bool printAbstract = rproblems.size() > 1;              // print all problems in advance, not just auto-resolvable ones
+  bool mayAutoResolve = policy.skipNotApplicablePatches(); // by now just NotApplicablePatches
+
+  if ( printAbstract ) {
+    // display the number of problems
+    zypper.out().info( MSG_WARNINGString(str::Format(PL_("%d Problem:", "%d Problems:", rproblems.size())) % rproblems.size()).str() );
   }
 
-  unsigned n = 0;
+  // If there are multiple problems or if any kind of auto-resolution is enabled,
+  // go through the list of problems and list them shortly and/or try to auto-resolve.
+  if ( printAbstract || mayAutoResolve ) {
+    unsigned p = 0;
+    for ( const auto & probPtr : rproblems ) {
+      ++p;
+
+      if ( printAbstract ) {
+        dumpProblem( zypper.out().info(), p, *probPtr );
+      }
+
+      if ( mayAutoResolve ) {
+        unsigned s = 0;
+        for ( const auto & solPtr : probPtr->solutions() )
+        {
+          if ( policy.skipNotApplicablePatches() ) {
+            std::optional<std::set<PoolItem>> items { solPtr->getIfSkipsPatchesOnly() };
+            if ( items ) {
+              pendingSolutions.push_back( solPtr );
+              policy.summaryHints.skippedPatchesSet().merge( std::move(*items) );
+              items.reset();  // moved out
+              if ( not printAbstract ) { // was not printed before
+                dumpProblem( zypper.out().info(), p, *probPtr );
+              } else {
+                // Once we auto-resolved at least one problem, we will solve again before
+                // asking the user anything. So we stop printing any summary and list only
+                // auto-resolved problems.
+                printAbstract = false;
+              }
+              // translator: The tag says that the preceding dependency problem is auto-resolved by applying the following solution
+              zypper.out().infoLRHint( HIGHLIGHTString(indent( _("Autoresolve:"), 1 )).str(), "--skip-not-applicable-patches" );
+              dumpSolution( zypper.out().info(), ++s, *solPtr );
+            }
+          }
+        }
+      }
+    }
+  }
+  // NOTE: summaryHints for auto-resolved pendingSolutions were already collected above,
+  // knowing that the solutions will actually be applied below.
   bool retry = true;
-  ProblemSolutionList todo;
-  // now list all problems with solution proposals
-  for ( const auto & probPtr : rproblems )
-  {
-    zypper.out().info( "", Out::NORMAL, Out::TYPE_NORMAL );	// visual separator
-    TriBool stopnow = show_problem( zypper, ++n, *probPtr, todo );
-    if ( !indeterminate( stopnow ) )
+
+  if ( pendingSolutions.empty() ) {
+    // If nothing's been auto applied so far: ask!
+    unsigned n = 0;
+    // now list all problems with solution proposals
+    for ( const auto & probPtr : rproblems )
     {
-      retry = bool(stopnow);
-      break;
+      zypper.out().info( "", Out::NORMAL, Out::TYPE_NORMAL );	// visual separator
+      TriBool stopnow = show_problem( zypper, ++n, *probPtr, pendingSolutions );
+      if ( not indeterminate(stopnow) ) {
+        retry = bool(stopnow);
+        break;
+      }
     }
   }
 
-  if ( retry )
-  {
+  if ( retry ) {
+    zypper.out().gap();
     zypper.out().info(_("Resolving dependencies...") );
-    resolver->applySolutions( todo );
+    resolver->applySolutions( pendingSolutions );
   }
   return retry;
 }
@@ -529,6 +568,12 @@ bool SolveAndCommitPolicy::forceCommit() const
 SolveAndCommitPolicy &SolveAndCommitPolicy::forceCommit(bool enable)
 { _forceCommit = enable; return *this; }
 
+bool SolveAndCommitPolicy::skipNotApplicablePatches() const
+{ return _skipNotApplicablePatches; }
+
+SolveAndCommitPolicy & SolveAndCommitPolicy::skipNotApplicablePatches( bool enable )
+{ _skipNotApplicablePatches = enable; return *this; }
+
 const Summary::ViewOptions &SolveAndCommitPolicy::summaryOptions() const
 { return _summaryOptions; }
 
@@ -653,6 +698,7 @@ void solve_and_commit ( Zypper &zypper, SolveAndCommitPolicy policy )
 {
   bool need_another_solver_run = true;
   bool dryRunEtc = policy.zyppCommitPolicy().dryRun() || ( policy.zyppCommitPolicy().downloadMode() == DownloadOnly );
+  policy.summaryHints.clear();  // just in case ther's garbage from a previous use
   do
   {
     // CALL SOLVER
@@ -682,7 +728,7 @@ void solve_and_commit ( Zypper &zypper, SolveAndCommitPolicy policy )
         if ( success || SolverSettings::instance()._debugSolver )
           break;
 
-        success = show_problems( zypper );
+        success = show_problems( zypper, policy );
         if (!success)
         {
           zypper.setExitCode( ZYPPER_EXIT_ERR_ZYPP ); // bnc #242736
@@ -705,7 +751,7 @@ void solve_and_commit ( Zypper &zypper, SolveAndCommitPolicy policy )
 
     // SHOW SUMMARY
 
-    Summary summary( God->pool(), policy.summaryOptions() );
+    Summary summary( God->pool(), std::move(policy.summaryHints), policy.summaryOptions() );
 
     if ( zypper.out().verbosity() == Out::HIGH )
       summary.setViewOption( Summary::SHOW_VERSION );

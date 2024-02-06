@@ -19,6 +19,22 @@
 #include <zypp/ResPool.h>
 #include "utils/ansi.h"
 
+/// \brief Information collected in SolveAndCommit which is to be shown in the summary.
+struct SummaryHints
+{
+  void clear() { *this = SummaryHints(); }
+
+  bool haveSkippedPatches() const
+  { return _skippedPatches && not _skippedPatches->empty(); }
+
+  std::set<PoolItem> & skippedPatchesSet()
+  { if ( not _skippedPatches ) _skippedPatches = std::set<PoolItem>(); return *_skippedPatches; }
+
+private:
+  std::optional<std::set<PoolItem>> _skippedPatches; ///< --skip-not-applicable-patches
+};
+
+
 class Summary : private zypp::base::NonCopyable
 {
 public:
@@ -60,7 +76,7 @@ public:
   typedef enum _view_options ViewOptions;
 
 public:
-  Summary( const zypp::ResPool & pool, const ViewOptions options = DEFAULT );
+  Summary( const zypp::ResPool & pool, SummaryHints summaryHints, const ViewOptions options = DEFAULT );
   ~Summary() {}
 
   void setViewOptions( const ViewOptions options )	{ _viewop = options; }
@@ -89,6 +105,7 @@ public:
   void writeDownloadAndInstalledSizeSummary( std::ostream & out );
   void writeLocked( std::ostream & out );
   void writeRebootNeeded( std::ostream & out );
+  void writeAutoResolved( std::ostream & out );
 
   unsigned packagesToGetAndInstall() const		{ return _inst_pkg_total; }
 
@@ -129,6 +146,7 @@ private:
   bool showNeedRebootHInt() const;
 
 private:
+  SummaryHints _summaryHints;   ///< additional info collected during dependency resolution
   ViewOptions _viewop;
   mutable unsigned _wrap_width;
   bool _force_no_color;

@@ -8,6 +8,7 @@
 #include <string.h>
 #include <iostream>
 #include <sstream>
+#include <string_view>
 
 #include <zypp/ZYppFactory.h>
 #include <zypp/base/LogTools.h>
@@ -60,6 +61,98 @@ namespace {
 
   std::string resolverForceResolutionHintVendorChange()
   { return _resolverForceResolutionHint( &zypp::Resolver::allowVendorChange ); }
+
+
+  // --------------------------------------------------------------------------
+  struct SolvableSummaryItemFormater
+  {
+    SolvableSummaryItemFormater( ansi::Color color_r, bool withKind_r = false )
+    : _configHighlight { Zypper::instance().config().color_pkglistHighlight }
+    , _configAttr { Zypper::instance().config().color_pkglistHighlightAttribute }
+    , _contextColor { color_r }
+    , _withKind { withKind_r }
+    {
+      if ( _withKind )
+        _extractFn = &SolvableSummaryItemFormater::extractIdent;
+      if ( _configHighlight )
+        _formatFn = &SolvableSummaryItemFormater::formatHighlightFirst;
+      else if ( indeterminate(_configHighlight) )
+        _formatFn = &SolvableSummaryItemFormater::formatHighlightIfChanged;
+    }
+
+    template<class TSolv>
+    std::ostream & operator()( std::ostream & str, const sat::SolvableType<TSolv> & slv_r ) const
+    { return operator()( str, slv_r.satSolvable() ); }
+
+    std::ostream & operator()( std::ostream & str, sat::Solvable slv_r ) const
+    { return quoteIf( str, (this->*_extractFn)( slv_r ) ); }
+
+ private:
+    std::ostream & quoteIf( std::ostream & str, const std::string & txt_r ) const
+    {
+      if ( txt_r.find_first_of( " " ) == std::string::npos )
+        return (this->*_formatFn)( str, txt_r );
+      else {
+        static const HIGHLIGHTString quoteCh( "\"" );
+        return (this->*_formatFn)( str << quoteCh, txt_r ) << quoteCh;
+      }
+    }
+
+  private:
+    using ExtractFn = std::string (SolvableSummaryItemFormater::*)( sat::Solvable slv_r ) const;
+    using FormatFn = std::ostream & (SolvableSummaryItemFormater::*)( std::ostream &, const std::string & ) const;
+
+  private:
+    std::string extractName( sat::Solvable slv_r ) const
+    { return slv_r.name(); }
+
+    std::string extractIdent( sat::Solvable slv_r ) const
+    { return slv_r.ident().asString(); }
+
+  private:
+    std::ostream & formatPlain( std::ostream & str, const std::string & txt_r ) const
+    { return str << txt_r; }
+
+    std::ostream & formatHighlightFirst( std::ostream & str, const std::string & txt_r ) const
+    {
+      std::string_view txt { txt_r };
+      return str << ( _contextColor << _configAttr << txt.substr( 0, 1 ) ) << txt.substr( 1 ); }
+
+    std::ostream & formatHighlightIfChanged( std::ostream & str, const std::string & txt_r ) const
+    {
+      if ( txt_r[0] != _first ) {
+        _first = txt_r[0];
+        return formatHighlightFirst( str, txt_r );
+      }
+      return formatPlain( str, txt_r );
+    }
+
+   private:
+    TriBool _configHighlight;   ///< always/never or on a changed first char
+    ansi::Color _configAttr;    ///< highlight attribute from config
+    ansi::Color _contextColor;  ///< list color may be overwritten by _configAttr
+    bool _withKind = false;     ///< prefix names by kind
+
+    mutable char _first = '\0'; ///< for changed first char highlighting
+
+    ExtractFn _extractFn = &SolvableSummaryItemFormater::extractName;
+    FormatFn _formatFn = &SolvableSummaryItemFormater::formatPlain;
+  };
+
+  template <typename TContainer>  // sat::SolvableType
+  std::ostream & writeSolvableList( std::ostream & str, const TContainer & container_r, ansi::Color color_r, bool withKind_r=false )
+  {
+    constexpr unsigned indent = 2;
+    SolvableSummaryItemFormater format { color_r, withKind_r };
+
+    std::ostringstream s;
+    for ( const auto & slv : container_r ) {
+      format( s, slv ) << " "; // don't mind trailing WS, it's eaten in mbs_write_wrapped
+    }
+    mbs_write_wrapped( str, s.str(), indent, get_screen_width() );
+    return str << endl;
+  }
+
 } // namespace
 
 // --------------------------------------------------------------------------
@@ -74,8 +167,9 @@ bool Summary::ResPairNameCompare::operator()( const ResPair & p1, const ResPair 
 
 // --------------------------------------------------------------------------
 
-Summary::Summary( const ResPool & pool, const ViewOptions options )
-: _viewop( options )
+Summary::Summary( const ResPool & pool, SummaryHints summaryHints, const ViewOptions options )
+: _summaryHints { std::move(summaryHints) }
+, _viewop( options )
 , _wrap_width( 80 )
 , _force_no_color( false )
 , _download_only( false )
@@ -1404,6 +1498,15 @@ void Summary::writeRebootNeeded( std::ostream & out )
   checkAndPrintRebootNeeded( ResKind::package );
 }
 
+void Summary::writeAutoResolved( std::ostream & out )
+{
+  if ( _summaryHints.haveSkippedPatches() ) {
+    std::string label { _("Skipped needed patches which do not apply without conflict:") };
+    out << endl << ( ColorContext::MSG_WARNING << label << " [-skip-not-applicable-patches]" ) << endl;
+    writeSolvableList( out, _summaryHints.skippedPatchesSet(), ColorContext::MSG_WARNING );
+  }
+}
+
 // --------------------------------------------------------------------------
 
 void Summary::writeDownloadAndInstalledSizeSummary( std::ostream & out )
@@ -1621,6 +1724,7 @@ void Summary::dumpTo( std::ostream & out )
   writeChangedVendor(out);
   writeNewlyInstalled( out );
   writeRemoved( out );
+  writeAutoResolved( out );
   if ( _viewop & SHOW_UNSUPPORTED )
   {
     writeSupportUnknown( out );

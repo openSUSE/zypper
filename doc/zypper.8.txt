@@ -650,6 +650,12 @@ This command is similar to *zypper update -t patch*.
 	*--updatestack-only*::
 		Install only patches which affect the package management itself and exit.
 
+	*--skip-not-applicable-patches*::
+		Skip needed patches which do not apply without conflict. In normal operation mode those conflicts have to be resolved interactively, otherwise the *patch* command fails.
++
+In scripted and unattended environments it may be desired to try to apply at least as many patches as possible so the system is not left completely without updates. It is highly recommended to run *zypper patch-check* afterwards in order to
+see whether needed patches are still waiting to be resolved interactively.
+
 	*--with-update*::
 		Additionally try to update all packages not covered by patches. This is basically the same as running *zypper update* afterwards.
 +
