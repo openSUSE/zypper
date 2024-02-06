@@ -657,14 +657,12 @@ Pathname cache_rpm( const std::string & rpm_uri_str, const Pathname & cache_dir 
   return Pathname();
 }
 
-std::string & indent( std::string & text, int columns )
+std::string indent( std::string text, int columns )
 {
-  std::string indent( columns, ' ');
+  std::string indent( columns, ' ' );
+  text.insert( 0, indent );
   indent.insert( 0, 1, '\n' );
-  DBG << "to: '" << indent << "'" << endl;
-  text = str::gsub( text, "\n", indent );
-  text.insert( 0, std::string( columns, ' ' ) );
-  return text;
+  return str::replaceAll( text, "\n", indent );
 }
 
 /**

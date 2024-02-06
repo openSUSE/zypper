@@ -217,7 +217,8 @@ bool looks_like_rpm_file( const std::string & s );
  */
 Pathname cache_rpm( const std::string & rpm_uri_str, const Pathname & cache_dir );
 
-std::string & indent( std::string & text, int columns );
+/// Indent each line in \a text to \a columns
+std::string indent( std::string text, int columns );
 
 // comparator for RepoInfo set
 struct RepoInfoAliasComparator
