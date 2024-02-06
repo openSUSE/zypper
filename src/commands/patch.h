@@ -21,6 +21,7 @@ public:
 
 private:
   bool _updateStackOnly = false;
+  bool _skipNotApplicablePatches = false;
   bool _withUpdate = false;
   bool _details = false;
 

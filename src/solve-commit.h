@@ -37,6 +37,12 @@ struct SolveAndCommitPolicy {
   bool forceCommit () const;
   SolveAndCommitPolicy &forceCommit ( bool enable );
 
+  /**
+   * Auto skip not applicable patches.
+   */
+  bool skipNotApplicablePatches() const;
+  SolveAndCommitPolicy & skipNotApplicablePatches( bool enable );
+
   /*!
    * Changes the amount of information included by the summary
    */
@@ -50,8 +56,12 @@ struct SolveAndCommitPolicy {
   SolveAndCommitPolicy &downloadMode(DownloadMode dlMode);
   DownloadMode downloadMode() const;
 
+  /** Information collected in SolveAndCommit which is to be shown in the Summary. */
+  SummaryHints summaryHints;
+
 private:
-  bool _forceCommit    = false;
+  bool _forceCommit = false;
+  bool _skipNotApplicablePatches = false;
   Summary::ViewOptions _summaryOptions = Summary::DEFAULT;
   ZYppCommitPolicy _zyppCommitPolicy;
 };
