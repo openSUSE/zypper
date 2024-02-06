@@ -79,6 +79,47 @@ namespace {
     // TranslatorExplanation %d is the solution number
     return HIGHLIGHTString(str::Format(_(" Solution %d: ")) % i);
   }
+
+  // Print a problems description (optionally verbose)
+  inline std::ostream & dumpProblem( std::ostream & str, unsigned nr, const ResolverProblem & problem_r, bool verbose_r = false )
+  {
+    MLSep sep;
+    // description() is one out of all in completeProblemInfo()
+    // picked by the resolver to represent the problem.
+    if ( not verbose_r ) {
+      str << sep << tagProblem(nr) << problem_r.description();
+    } else {
+      str << sep << tagProblem(nr) << _("Detailed information: ");
+      for ( const std::string & pRule : problem_r.completeProblemInfo() ) {
+        str << sep << "- " << pRule;
+      }
+    }
+    const std::string & details { problem_r.details() };
+    if ( not details.empty() )
+      str << endl << details << endl;
+    return str;
+  }
+
+  // Print a single problem solution
+  inline std::ostream & dumpSolution( std::ostream & str, unsigned nr, const ProblemSolution & solution_r )
+  {
+    MLSep sep;
+    str << sep << tagSolution(nr) << solution_r.description();
+    const std::string & details { solution_r.details() };
+    if ( not details.empty() )
+      str << sep << indent( details, 2 );
+    return str;
+  }
+
+  // Print a problems solutions
+  inline std::ostream & dumpSolutions( std::ostream & str, const ProblemSolutionList & solutions_r )
+  {
+    MLSep sep;
+    unsigned n = 0;
+    for ( const auto & solPtr : solutions_r )
+      dumpSolution( str << sep, ++n, *solPtr );
+    return str;
+  }
 } // namespace
 ///////////////////////////////////////////////////////////////////
 
@@ -87,41 +128,9 @@ namespace {
 //!         indeterminate to continue
 static TriBool show_problem( Zypper & zypper, unsigned nr, const ResolverProblem & prob, ProblemSolutionList & todo )
 {
-  std::string tmp;
-  std::ostringstream desc_stm;
-  desc_stm << tagProblem(nr) << prob.description() << endl;
-  tmp = prob.details();
-  if ( !tmp.empty() )
-    desc_stm << "  " << tmp << endl;
-
-  std::ostringstream desc_ext_stm;
-  desc_ext_stm << _("Detailed information: ") << endl;
-  for ( const std::string &pRule : prob.completeProblemInfo() ) {
-    desc_ext_stm << "\t" << pRule << endl;
-  }
-
-  const ProblemSolutionList & solutions = prob.solutions();
-
-  unsigned n = 0;
-  std::ostringstream solution_stm;
-  for ( const auto & solPtr : solutions )
-  {
-    ++n;
-    solution_stm << tagSolution(n) << solPtr->description() << endl;
-    tmp = solPtr->details ();
-    if ( !tmp.empty () )
-      solution_stm << indent( tmp, 2 ) << endl;
-  }
-
+  const ProblemSolutionList & solutions { prob.solutions() };
   unsigned problem_count = God->resolver()->problems().size();
   unsigned solution_count = solutions.size();
-
-  // without solutions, its useless to prompt
-  if ( solutions.empty() )
-  {
-    zypper.out().error( desc_stm.str() + solution_stm.str() );
-    return false;
-  }
 
   std::string prompt_text;
   if ( problem_count > 1 )
@@ -195,10 +204,8 @@ static TriBool show_problem( Zypper & zypper, unsigned nr, const ResolverProblem
   while ( true ) {
 
     std::ostringstream fulltext;
-    fulltext << desc_stm.str();
-    if ( showExtInfo )
-      fulltext << desc_ext_stm.str();
-    fulltext << solution_stm.str();
+    dumpProblem( fulltext, nr, prob, showExtInfo ) << endl;
+    dumpSolutions( fulltext, solutions ) << endl;
 
     zypper.out().prompt( PROMPT_DEP_RESOLVE, prompt_text, popts, fulltext.str() );
     reply = get_prompt_reply( zypper, PROMPT_DEP_RESOLVE, popts );
