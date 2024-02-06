@@ -63,16 +63,33 @@ private:
   Pathname _watch;
 };
 
+///////////////////////////////////////////////////////////////////
+namespace {
+  inline ColorString tagProblem() {
+    // translators: meaning 'dependency problem' found during solving
+    return MSG_WARNINGString(_("Problem: "));
+  }
+  inline ColorString tagProblem( unsigned i ) {
+    std::string s { std::to_string(i)+": " };
+    // TODO: fixup .po files "Problem: %s" to fit here
+    // TranslatorExplanation %d is the problem number
+    return MSG_WARNINGString(str::Format(_("Problem: %s")) % s);
+  }
+  inline ColorString tagSolution( unsigned i ) {
+    // TranslatorExplanation %d is the solution number
+    return HIGHLIGHTString(str::Format(_(" Solution %d: ")) % i);
+  }
+} // namespace
+///////////////////////////////////////////////////////////////////
 
 //! @return true to retry solving now,
 //!         false to cancel,
 //!         indeterminate to continue
-static TriBool show_problem( Zypper & zypper, const ResolverProblem & prob, ProblemSolutionList & todo )
+static TriBool show_problem( Zypper & zypper, unsigned nr, const ResolverProblem & prob, ProblemSolutionList & todo )
 {
   std::string tmp;
   std::ostringstream desc_stm;
-  // translators: meaning 'dependency problem' found during solving
-  desc_stm << _("Problem: ") << prob.description() << endl;
+  desc_stm << tagProblem(nr) << prob.description() << endl;
   tmp = prob.details();
   if ( !tmp.empty() )
     desc_stm << "  " << tmp << endl;
@@ -90,8 +107,7 @@ static TriBool show_problem( Zypper & zypper, const ResolverProblem & prob, Prob
   for ( const auto & solPtr : solutions )
   {
     ++n;
-    // TranslatorExplanation %d is the solution number
-    solution_stm << str::Format(_(" Solution %d: ")) % n << solPtr->description() << endl;
+    solution_stm << tagSolution(n) << solPtr->description() << endl;
     tmp = solPtr->details ();
     if ( !tmp.empty () )
       solution_stm << indent( tmp, 2 ) << endl;
@@ -220,7 +236,7 @@ static bool show_problems( Zypper & zypper )
 
   // display the number of problems
   if ( rproblems.size() > 1 )
-    zypper.out().info( str::Format(PL_("%d Problem:", "%d Problems:", rproblems.size())) % rproblems.size() );
+    zypper.out().info( MSG_WARNINGString(str::Format(PL_("%d Problem:", "%d Problems:", rproblems.size())) % rproblems.size()).str() );
   else if ( rproblems.empty() )
   {
     // should not happen! If solve() failed at least one problem must be set!
@@ -234,17 +250,19 @@ static bool show_problems( Zypper & zypper )
   //! \todo handle resolver problems caused by --capability mode arguments specially to give proper output (bnc #337007)
   if (rproblems.size() > 1)
   {
+    unsigned n = 0;
     for ( const auto & probPtr : rproblems )
-      zypper.out().info( str::Format(_("Problem: %s")) % probPtr->description() );
+      zypper.out().info() << tagProblem(++n) << probPtr->description() <<endl;
   }
 
+  unsigned n = 0;
   bool retry = true;
   ProblemSolutionList todo;
   // now list all problems with solution proposals
   for ( const auto & probPtr : rproblems )
   {
     zypper.out().info( "", Out::NORMAL, Out::TYPE_NORMAL );	// visual separator
-    TriBool stopnow = show_problem( zypper, *probPtr, todo );
+    TriBool stopnow = show_problem( zypper, ++n, *probPtr, todo );
     if ( !indeterminate( stopnow ) )
     {
       retry = bool(stopnow);
