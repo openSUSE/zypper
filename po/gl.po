@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: zypper.gl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-12-14 11:10+0100\n"
-"PO-Revision-Date: 2024-02-13 15:08+0000\n"
+"PO-Revision-Date: 2024-02-13 17:42+0000\n"
 "Last-Translator: Manuel Vazquez <xixirei@yahoo.es>\n"
 "Language-Team: Galician <https://l10n.opensuse.org/projects/zypper/master/gl/"
 ">\n"
@@ -92,22 +92,22 @@ msgstr[1] "Fallou a instalación dos %d paquetes:"
 #, c-format, boost-format
 msgid "The following package installation was skipped:"
 msgid_plural "The following %d package installations were skipped:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Ignorouse a instalación do seguinte paquete:"
+msgstr[1] "Ignorouse a instalación dos %d seguintes paquetes:"
 
 #: src/CommitSummary.cc:156
 #, c-format, boost-format
 msgid "The following package failed to uninstall:"
 msgid_plural "The following %d packages failed to uninstall:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Fallou a desintalación do seguinte paquete:"
+msgstr[1] "Fallou a desinstalación dos %d seguinte paquetes:"
 
 #: src/CommitSummary.cc:171
 #, c-format, boost-format
 msgid "The following package removal was skipped:"
 msgid_plural "The following %d package removal were skipped:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Ignorouse a eliminación do seguinte paquete:"
+msgstr[1] "Ignorouse a eliminación dos %d seguintes paquetes:"
 
 #. translators: Appended when clipping a long enumeration:
 #. "ConsoleKit-devel ConsoleKit-doc ... and 20828 more items."
@@ -116,8 +116,8 @@ msgstr[1] ""
 #, boost-format
 msgid "... and %1% more item."
 msgid_plural "... and %1% more items."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "... e %1% elemento máis."
+msgstr[1] "... e %1% elementos máis."
 
 #: src/Config.cc:53
 #, c-format, boost-format
@@ -127,7 +127,7 @@ msgstr "Estilo de táboa incorrecto %d."
 #: src/Config.cc:54
 #, c-format, boost-format
 msgid " Use an integer number from %d to %d"
-msgstr ""
+msgstr " Use un número enteiro de %d a %d"
 
 #: src/Config.cc:172
 msgid "The path specified in the --root option must be absolute."
@@ -136,26 +136,29 @@ msgstr "A ruta especificada na opción --root debe ser absoluta."
 #. translators: --help, -h
 #: src/Config.cc:236
 msgid "Help."
-msgstr ""
+msgstr "Axuda."
 
 #. translators: --version, -V
 #: src/Config.cc:245
 msgid "Output the version number."
-msgstr ""
+msgstr "Amosa o número de versión."
 
 #. translators: --promptids
 #: src/Config.cc:257
 msgid "Output a list of zypper's user prompts."
-msgstr ""
+msgstr "Amosa unha lista dos indicadores de usuario de zypper."
 
 #. translators: --config, -c <FILE>
 #: src/Config.cc:270
 msgid "Use specified config file instead of the default."
 msgstr ""
+"Usar o ficheiro de configuración especificado en lugar do predeterminado."
 
 #: src/Config.cc:277
 msgid "User data string must not contain nonprintable or newline characters!"
 msgstr ""
+"A cadea de datos do usuario non debe conter caracteres non imprimíbeis nin "
+"saltos de liña!"
 
 #. translators: --userdata <STRING>
 #: src/Config.cc:283
