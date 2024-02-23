@@ -833,12 +833,25 @@ void solve_and_commit ( Zypper &zypper, SolveAndCommitPolicy policy )
       // translators: help text for 'x' option in the 'Continue?' prompt
       // popts.setOptionHelp( 8, _("Explain why the packages are going to be installed.") );
 
-      std::string prompt_text( text::qContinue() );
+      std::string prompt_text;
+      {
+        str::Str str;
+        str << _("Backend") << ": ";
+        str << " " << ( policy.zyppCommitPolicy().singleTransModeEnabled() ? "single_rpmtrans" : "classic_rpmtrans" );
+        if ( policy.zyppCommitPolicy().dryRun() )
+          str << " " << "--dry-run";
+        if ( policy.zyppCommitPolicy().downloadMode() == DownloadOnly )
+          str << " " << "--download-only";
+        str << endl;
+        str << text::qContinue();
+        prompt_text = str;
+      }
 
       bool do_commit = false;
       unsigned reply;
       do
       {
+        zypper.out().gap();
         zypper.out().prompt( PROMPT_YN_INST_REMOVE_CONTINUE, prompt_text, popts );
         reply = get_prompt_reply( zypper, PROMPT_YN_INST_REMOVE_CONTINUE, popts );
 
