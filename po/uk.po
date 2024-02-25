@@ -14,8 +14,8 @@ msgstr ""
 "Project-Id-Version: zypper.uk\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-12-14 11:10+0100\n"
-"PO-Revision-Date: 2022-04-08 20:12+0000\n"
-"Last-Translator: Taras Panchenko <top39@ukr.net>\n"
+"PO-Revision-Date: 2024-02-25 22:42+0000\n"
+"Last-Translator: Oleksii <oleksiimnz@proton.me>\n"
 "Language-Team: Ukrainian <https://l10n.opensuse.org/projects/zypper/master/"
 "uk/>\n"
 "Language: uk\n"
@@ -396,12 +396,16 @@ msgstr "Помилка запису опції."
 msgid ""
 "'%s' install modifier must not be used without a package name or capability."
 msgstr ""
+"'%s' install модифікатор не повинен використовуватися без ім'я пакунку або "
+"здатності."
 
 #: src/PackageArgs.cc:169
 #, c-format, boost-format
 msgid ""
 "'%s' remove modifier must not be used without a package name or capability."
 msgstr ""
+"'%s' remove модифікатор не повинен використовуватися без ім'я пакунку або "
+"здатності."
 
 #: src/PackageArgs.cc:221
 #, c-format, boost-format
@@ -1570,6 +1574,11 @@ msgid ""
 "the signature verification might fail. After a few minutes, when the server "
 "has updated its data, it should work again."
 msgstr ""
+"Це може бути перехідною проблемою якщо сервер в середині отримання нових "
+"даних. Файли даних та їхні підписи це два файли які повинні підходити один "
+"до одного. У випадку з'явлення запиту на сервері в середині їх оновлення, "
+"перевірка підпису може провалитися. Через декілька хвилин, коли сервер "
+"оновив свої дані, це повинно запрацювати знову."
 
 #: src/callbacks/keyring.h:88
 msgid "Repository:"
@@ -2498,12 +2507,12 @@ msgstr "Не вказано дійсні аргументи."
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/installremove.cc:312
 msgid "removeptf (rmptf) [OPTIONS] <PTF|CAPABILITY> ..."
-msgstr ""
+msgstr "removeptf (rmptf) [ПАРАМЕТРИ] <ТВП|ЗДАСТНІСТЬ> ..."
 
 #. translators: command summary: removeptf, rmptf
 #: src/commands/installremove.cc:314
 msgid "Remove (not only) PTFs."
-msgstr ""
+msgstr "Видаляє (не тільки) ТВП."
 
 #. translators: command description
 #: src/commands/installremove.cc:316
@@ -2515,6 +2524,12 @@ msgid ""
 "the install command. It is the recommended way to remove a PTF (Program "
 "Temporary Fix)."
 msgstr ""
+"Команда remove яка надає перевагу заміною залежних пакунків понад їх "
+"видаленням. Насправді це повнофункціональна команда install з remove "
+"модифікатором (-) застосований до її звичайних аргументів. Тому 'removeptf "
+"foo' є таким самим як і 'install -- -foo'. Через це команда приймає ті ж "
+"самі опції як і команда install. Це пропонований спосіб для видалення ТВП ("
+"Тимчасові виправлення програми, або ж PTF)."
 
 #: src/commands/installremove.cc:317
 msgid ""
@@ -2524,6 +2539,11 @@ msgid ""
 "remove command would do. The removeptf command however will aim to replace "
 "the dependant packages by their official update versions."
 msgstr ""
+"ТВП зазвичай видалені як тільки виправлення які він надає додані до "
+"останнього офіційного оновлення залежних пакетів. Але ви не хочете видалити "
+"залежні пакети разом з ТВП, що команда remove і зробила би. Проте команда "
+"removeptf буде націлена на заміну залежних пакетів на їх офіційні оновлені "
+"версії."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/listpatches.cc:16
@@ -4415,7 +4435,7 @@ msgstr "Обрати проблеми що відповідають вказан
 #, boost-format
 msgid ""
 "Service '%1%' with URL '%2%' already exists. Just updating the settings."
-msgstr ""
+msgstr "Сервіс '%1%' з адресою '%2' вже існує. Оновляться лише налаштування."
 
 #: src/commands/services/add.cc:58
 #, boost-format
@@ -4423,6 +4443,8 @@ msgid ""
 "Service '%1%' already exists but uses a different URL '%2%'. Please use "
 "another alias."
 msgstr ""
+"Сервіс '%1%' вже існує але використовує іншу адресу '%2%'. Будь ласка "
+"використайте інший псевдонім."
 
 #: src/commands/services/add.cc:70
 #, c-format, boost-format
@@ -5348,22 +5370,30 @@ msgid ""
 "Shows the ID string of the target operating system. The string is defined by "
 "the XPath:/product/register/target entry in /etc/products.d/baseproduct."
 msgstr ""
+"Показує ID рядка націленої операційної системи. Рядок визначений за "
+"допомогою XPath:/product/register/target запису у /etc/products.d/"
+"baseproduct."
 
 #: src/commands/utils/targetos.cc:25
 msgid ""
 "If the baseproduct does not provide this entry, or if no baseproduct is "
 "installed at all, the value is empty if the --terse global option is used."
 msgstr ""
+"Якщо базовий продукт не надає цього запиту, або ж ніякого базового продукту "
+"взагалі не завантажено, значення пусте якщо опція --terse global "
+"використовується."
 
 #: src/commands/utils/targetos.cc:26
 msgid ""
 "In not-terse mode the distribution label is shown instead of an empty value, "
 "if a baseproduct is installed."
 msgstr ""
+"В not-terse режимі позначка дистрибутиву показано замість пустого значення, "
+"якщо базовий продукт інстальовано."
 
 #: src/commands/utils/targetos.cc:36
 msgid "Show the baseproducts distribution and short label instead."
-msgstr ""
+msgstr "Показати дистрибутив і коротку позначку базових продуктів натомість."
 
 #: src/commands/utils/targetos.cc:49
 msgid "XML output not implemented for this command."
@@ -5383,7 +5413,7 @@ msgstr "Скорочена мітка: %s"
 #: src/commands/utils/targetos.cc:71
 #, c-format, boost-format
 msgid "%s does not define %s."
-msgstr ""
+msgstr "%s не визначає %s."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/utils/versioncmp.cc:19
@@ -5697,7 +5727,7 @@ msgstr "Намагаємося коректно вийти…"
 #. translators: this will show up if you press ctrl+c twice
 #: src/main.cc:126
 msgid "Zypper is currently cleaning up, exiting as soon as possible."
-msgstr ""
+msgstr "Zypper наразі очищається, виходимо якомога скоріше."
 
 #. translators: the first %s is name of the resolvable,
 #. the second is its kind (e.g. 'zypper package')
@@ -6299,7 +6329,7 @@ msgstr "Потрібні пакунки з \"%s\" не завантажено ч
 #: src/repos.cc:1829
 #, boost-format
 msgid "Repository '%1%' metadata expired since %2%."
-msgstr ""
+msgstr "Репозиторій '%1%' метадані застаріли з %2%."
 
 #. translators: the first %s is 'zypper refresh' and the second 'zypper clean -m'
 #: src/repos.cc:1841
@@ -6314,6 +6344,10 @@ msgid ""
 "not solve the issue, it could be that you are using a broken mirror or the "
 "server has actually discontinued to support the repository."
 msgstr ""
+"Метадані репозиторія застаріли: Перевірте чи 'autorefresh' ввімкнений ("
+"zypper lr), інакше вручну оновіть репозиторії (zypper ref). Якщо це не "
+"вирішує проблему, можливо те, що ви використовуєте несправне дзеркало або "
+"сервер припинив підтримку репозиторія."
 
 #: src/repos.cc:1859
 msgid "Reading installed packages..."
@@ -6468,7 +6502,7 @@ msgstr[2] "%d проблем:"
 
 #: src/solve-commit.cc:228
 msgid "Resolver failed but reported no problems."
-msgstr ""
+msgstr "Резолвер провалився але не повідомив проблем."
 
 #: src/solve-commit.cc:238
 #, c-format, boost-format
