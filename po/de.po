@@ -17,8 +17,8 @@ msgstr ""
 "Project-Id-Version: zypper.de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-12-14 11:10+0100\n"
-"PO-Revision-Date: 2024-01-06 01:59+0000\n"
-"Last-Translator: Ignaz Forster <iforster@suse.com>\n"
+"PO-Revision-Date: 2024-02-29 16:42+0000\n"
+"Last-Translator: Gemineo <vistatec@gemineo.de>\n"
 "Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/>"
 "\n"
 "Language: de\n"
@@ -1521,6 +1521,12 @@ msgid ""
 "the signature verification might fail. After a few minutes, when the server "
 "has updated its data, it should work again."
 msgstr ""
+"Dies ist möglicherweise ein vorübergehendes Problem, wenn der Server gerade "
+"neue Daten empfängt. Die Datendatei und ihre Signatur sind zwei Dateien, die "
+"zusammenpassen müssen. Falls Sie Anforderung eingegangen ist, während der "
+"Server die Dateien gerade aktualisiert hat, tritt bei der "
+"Signaturüberprüfung möglicherweise ein Fehler auf. Nach ein paar Minuten, "
+"wenn der Server sie aktualisiert hat, sollte es wieder funktionieren."
 
 #: src/callbacks/keyring.h:88
 msgid "Repository:"
@@ -5424,22 +5430,31 @@ msgid ""
 "Shows the ID string of the target operating system. The string is defined by "
 "the XPath:/product/register/target entry in /etc/products.d/baseproduct."
 msgstr ""
+"Zeigt den ID-String des Zielbetrienssystems an. Der String wird durch den "
+"Eintrag XPath:/product/register/target unter /etc/products.d/baseproduct "
+"definiert."
 
 #: src/commands/utils/targetos.cc:25
 msgid ""
 "If the baseproduct does not provide this entry, or if no baseproduct is "
 "installed at all, the value is empty if the --terse global option is used."
 msgstr ""
+"Falls das Basisprodukt diesen Pfad nicht bereitstellt oder falls überhaupt "
+"kein Basisprodukt installiert ist, ist der Wert leer, wenn die globale "
+"Option --terse verwendet wird."
 
 #: src/commands/utils/targetos.cc:26
 msgid ""
 "In not-terse mode the distribution label is shown instead of an empty value, "
 "if a baseproduct is installed."
 msgstr ""
+"Im Modus 'not-terse' wird das Distributions-Label anstelle eines leeren "
+"Werts angezeigt, wenn ein Basisprodukt installiert wurde."
 
 #: src/commands/utils/targetos.cc:36
 msgid "Show the baseproducts distribution and short label instead."
 msgstr ""
+"Stattdessen die Basisproduktedistribution und ein kurzes Label anzeigen."
 
 #: src/commands/utils/targetos.cc:49
 msgid "XML output not implemented for this command."
@@ -5459,7 +5474,7 @@ msgstr "Kurzname: %s"
 #: src/commands/utils/targetos.cc:71
 #, c-format, boost-format
 msgid "%s does not define %s."
-msgstr ""
+msgstr "%s definiert %s nicht."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/utils/versioncmp.cc:19
