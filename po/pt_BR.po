@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-12-14 11:10+0100\n"
-"PO-Revision-Date: 2023-10-04 23:15+0000\n"
-"Last-Translator: Luiz Fernando Ranghetti <elchevive68@gmail.com>\n"
+"PO-Revision-Date: 2024-03-01 19:42+0000\n"
+"Last-Translator: Samanta Magalhaes <samanta_texttrans@outlook.com>\n"
 "Language-Team: Portuguese (Brazil) <https://l10n.opensuse.org/projects/"
 "zypper/master/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -5332,16 +5332,21 @@ msgid ""
 "If the baseproduct does not provide this entry, or if no baseproduct is "
 "installed at all, the value is empty if the --terse global option is used."
 msgstr ""
+"Se o produto base não fornecer esta entrada, ou se não houver um produto "
+"base instalado, o valor ficará vazio se a opção --terse global for usada."
 
 #: src/commands/utils/targetos.cc:26
 msgid ""
 "In not-terse mode the distribution label is shown instead of an empty value, "
 "if a baseproduct is installed."
 msgstr ""
+"No modo not-terse, o rótulo de distribuição é mostrado em vez de um valor "
+"vazio, se houver um produto base instalado."
 
 #: src/commands/utils/targetos.cc:36
 msgid "Show the baseproducts distribution and short label instead."
 msgstr ""
+"Em vez disso, mostrar a distribuição dos produtos base e o rótulo abreviado."
 
 #: src/commands/utils/targetos.cc:49
 msgid "XML output not implemented for this command."
@@ -6433,7 +6438,7 @@ msgstr[1] "%d problemas:"
 
 #: src/solve-commit.cc:228
 msgid "Resolver failed but reported no problems."
-msgstr ""
+msgstr "Falha no Resolver, mas sem relatar problemas."
 
 #: src/solve-commit.cc:238
 #, c-format, boost-format
