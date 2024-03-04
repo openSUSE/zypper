@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-12-14 11:10+0100\n"
-"PO-Revision-Date: 2024-02-11 08:42+0000\n"
-"Last-Translator: Jie Sheng <jie.sheng@suse.com>\n"
+"PO-Revision-Date: 2024-03-04 02:03+0000\n"
+"Last-Translator: Grace Yu <grace.yu@excel-gits.com>\n"
 "Language-Team: Chinese (China) <https://l10n.opensuse.org/projects/zypper/"
 "master/zh_CN/>\n"
 "Language: zh_CN\n"
@@ -1322,7 +1322,6 @@ msgstr ""
 "您知道它是安全的，否则不应继续使用它。"
 
 #: src/callbacks/keyring.h:59
-#, fuzzy
 msgid ""
 "This might be a transient issue if the server is in the midst of receiving "
 "new data. The data file and its signature are two files which must fit "
@@ -1330,8 +1329,8 @@ msgid ""
 "the signature verification might fail. After a few minutes, when the server "
 "has updated its data, it should work again."
 msgstr ""
-"如果服务器正在接收新数据的过程中，这可能是一个暂时的问题。数据文件和它的签名文件必须匹配。如果网络请求在更新这两个文件的过程中抵达服务器，签名验证可能会失"
-"败。当服务器在几分钟后完成数据更新，它就会重新工作起来。"
+"如果服务器正在接收新数据，这可能会造成暂时的问题。数据文件和其签名文件必须相匹配。如果网络请求在更新这两个文件的过程中传到服务器，签名验证可能会失败。当服"
+"务器在几分钟后完成数据更新，它就会重新恢复正常。"
 
 #: src/callbacks/keyring.h:88
 msgid "Repository:"
@@ -4934,17 +4933,14 @@ msgid ""
 "Shows the ID string of the target operating system. The string is defined by "
 "the XPath:/product/register/target entry in /etc/products.d/baseproduct."
 msgstr ""
-"它显示目标操作系统的 ID 字符串。这个字符串由 /etc/products.d/baseproduct 里面的 XPath:/product/"
+"显示目标操作系统的 ID 字符串。这个字符串由 /etc/products.d/baseproduct 里面的 XPath:/product/"
 "register/target 条目来定义。"
 
 #: src/commands/utils/targetos.cc:25
-#, fuzzy
 msgid ""
 "If the baseproduct does not provide this entry, or if no baseproduct is "
 "installed at all, the value is empty if the --terse global option is used."
-msgstr ""
-"下列的情况都会导致这个值为空值：baseproduct 没有提供这一条目、baseproduct 根本没有被安装、或者是打开了 --terse "
-"全局命令行选项。"
+msgstr "以下情况都会导致这个值为空：基础产品没有提供这一条目、根本没有安装基础产品、或者使用了 --terse 全局选项。"
 
 #: src/commands/utils/targetos.cc:26
 msgid ""
@@ -4954,7 +4950,7 @@ msgstr "如果安装了 baseproduct，则会在不显示模式 (non-terse) 下�
 
 #: src/commands/utils/targetos.cc:36
 msgid "Show the baseproducts distribution and short label instead."
-msgstr ""
+msgstr "显示基础产品发行版和短标签。"
 
 #: src/commands/utils/targetos.cc:49
 msgid "XML output not implemented for this command."
@@ -4972,9 +4968,9 @@ msgstr "短标签：%s"
 
 #. translators: `FILE does not define TAG
 #: src/commands/utils/targetos.cc:71
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "%s does not define %s."
-msgstr "%s 未定义 %s"
+msgstr "%s 未定义 %s。"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/utils/versioncmp.cc:19
@@ -5285,9 +5281,8 @@ msgstr "正在尝试正常退出..."
 
 #. translators: this will show up if you press ctrl+c twice
 #: src/main.cc:126
-#, fuzzy
 msgid "Zypper is currently cleaning up, exiting as soon as possible."
-msgstr "当前Zypper正在清理，会尽快退出。"
+msgstr "Zypper 目前正在执行清理，会尽快退出。"
 
 #. translators: the first %s is name of the resolvable,
 #. the second is its kind (e.g. 'zypper package')
@@ -6011,7 +6006,7 @@ msgstr[0] "%d 个问题："
 
 #: src/solve-commit.cc:228
 msgid "Resolver failed but reported no problems."
-msgstr ""
+msgstr "解析器失败，但未报告任何问题。"
 
 #: src/solve-commit.cc:238
 #, c-format, boost-format
