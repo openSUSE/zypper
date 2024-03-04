@@ -14,10 +14,10 @@ msgstr ""
 "Project-Id-Version: zypper.fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-12-14 11:10+0100\n"
-"PO-Revision-Date: 2023-05-16 16:14+0000\n"
-"Last-Translator: Guillaume GARDET <guillaume.gardet@opensuse.org>\n"
-"Language-Team: French <https://l10n.opensuse.org/projects/zypper/master/fr/"
-">\n"
+"PO-Revision-Date: 2024-03-04 16:42+0000\n"
+"Last-Translator: Sophie Leroy <sophie@stoquart.com>\n"
+"Language-Team: French <https://l10n.opensuse.org/projects/zypper/master/fr/>"
+"\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1532,6 +1532,12 @@ msgid ""
 "the signature verification might fail. After a few minutes, when the server "
 "has updated its data, it should work again."
 msgstr ""
+"Il peut s'agir d'un problème passager si le serveur est en train de recevoir "
+"de nouvelles données. Le fichier de données et sa signature sont deux "
+"fichiers qui doivent être compatibles. Si la demande atteint le serveur "
+"alors qu'il est en train de les mettre à jour, la vérification de la "
+"signature risque d'échouer. Après quelques minutes, lorsque le serveur a mis "
+"à jour ses données, il devrait fonctionner à nouveau."
 
 #: src/callbacks/keyring.h:88
 msgid "Repository:"
@@ -5408,22 +5414,32 @@ msgid ""
 "Shows the ID string of the target operating system. The string is defined by "
 "the XPath:/product/register/target entry in /etc/products.d/baseproduct."
 msgstr ""
+"Affiche la chaîne d'identification du système d'exploitation cible. La "
+"chaîne est définie par l'entrée XPath:/product/register/target dans /etc/"
+"products.d/baseproduct."
 
 #: src/commands/utils/targetos.cc:25
 msgid ""
 "If the baseproduct does not provide this entry, or if no baseproduct is "
 "installed at all, the value is empty if the --terse global option is used."
 msgstr ""
+"Si le produit de base ne fournit pas cette entrée, ou si aucun produit de "
+"base n'est installé, la valeur est vide si l'option globale --terse est "
+"utilisée."
 
 #: src/commands/utils/targetos.cc:26
 msgid ""
 "In not-terse mode the distribution label is shown instead of an empty value, "
 "if a baseproduct is installed."
 msgstr ""
+"En mode non succinct, l'étiquette de distribution est affichée à la place "
+"d'une valeur vide, si un produit de base est installé."
 
 #: src/commands/utils/targetos.cc:36
 msgid "Show the baseproducts distribution and short label instead."
 msgstr ""
+"Affiche à la place la distribution des produits de base et une étiquette "
+"courte."
 
 #: src/commands/utils/targetos.cc:49
 msgid "XML output not implemented for this command."
@@ -5761,7 +5777,7 @@ msgstr "Tentative de fermeture normale..."
 #. translators: this will show up if you press ctrl+c twice
 #: src/main.cc:126
 msgid "Zypper is currently cleaning up, exiting as soon as possible."
-msgstr ""
+msgstr "Zypper est en cours de nettoyage. Fermeture dès que possible."
 
 #. translators: the first %s is name of the resolvable,
 #. the second is its kind (e.g. 'zypper package')
@@ -6539,7 +6555,7 @@ msgstr[1] "%d problèmes :"
 
 #: src/solve-commit.cc:228
 msgid "Resolver failed but reported no problems."
-msgstr ""
+msgstr "Le résolveur a échoué, mais n'a signalé aucun problème."
 
 #: src/solve-commit.cc:238
 #, c-format, boost-format
