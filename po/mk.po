@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-12-14 11:10+0100\n"
-"PO-Revision-Date: 2023-10-21 23:15+0000\n"
+"PO-Revision-Date: 2024-03-05 08:43+0000\n"
 "Last-Translator: Kristijan Fremen Velkovski <me@krisfremen.com>\n"
 "Language-Team: Macedonian <https://l10n.opensuse.org/projects/zypper/master/"
 "mk/>\n"
@@ -364,12 +364,12 @@ msgstr "Не ги читај инсталираните пакети."
 
 #: src/Config.cc:717
 msgid "No config file is in use. Can not save options."
-msgstr ""
+msgstr "Не се користи конфигурациски фајл. Не може да се зачуваат опциите."
 
 #: src/Config.cc:728
 #, boost-format
 msgid "Option '%1%' saved in '%2%'."
-msgstr ""
+msgstr "Опцијата \"%1%\" е зачувана во \"%2%\"."
 
 #: src/Config.cc:735
 msgid "Failed to save option."
@@ -380,6 +380,8 @@ msgstr "Не успеа да се зачува опцијата."
 msgid ""
 "'%s' install modifier must not be used without a package name or capability."
 msgstr ""
+"Модификаторот за инсталирање \"%s\" не смее да се користи без име на пакет "
+"или можност."
 
 #: src/PackageArgs.cc:169
 #, c-format, boost-format
