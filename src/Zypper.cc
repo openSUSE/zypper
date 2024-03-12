@@ -143,8 +143,6 @@ void Zypper::assertZYppPtrGod()
   }
 }
 
-///////////////////////////////////////////////////////////////////
-
 namespace {
 
   /** Whether user may create \a dir_r or has rw-access to it. */
@@ -169,7 +167,6 @@ namespace {
 
 } //namespace
 
-///////////////////////////////////////////////////////////////////
 
 Zypper::Zypper()
 : Application( std::make_shared<::Config>() )

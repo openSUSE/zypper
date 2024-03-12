@@ -40,6 +40,7 @@
 #include "commands/locale/localescmd.h"
 #include "commands/locale/addlocalecmd.h"
 #include "commands/locale/removelocalecmd.h"
+#include "commands/keycmds.h"
 
 using namespace zypp;
 
@@ -156,6 +157,10 @@ namespace
       makeCmd<AddLocaleCmd> ( ZypperCommand::ADD_LOCALE_e , std::string(), { "addlocale", "aloc" } ),
       makeCmd<RemoveLocaleCmd> ( ZypperCommand::REMOVE_LOCALE_e , std::string(), { "removelocale", "rloc" } ),
 
+      makeCmd<KeysCmd> ( ZypperCommand::KEYS_e, _("Key Management:"), { "keys", "lk" } ),
+      makeCmd<AddKeyCmd> ( ZypperCommand::ADDKEY_e, std::string(),    { "addkey", "ak" } ),
+      makeCmd<RemoveKeyCmd> ( ZypperCommand::REMOVEKEY_e, std::string(), { "removekey", "rk" } ),
+
       makeCmd<VersionCompareCmd> ( ZypperCommand::VERSION_CMP_e , _("Other Commands:"), { "versioncmp", "vcmp" } ),
       makeCmd<TargetOSCmd> ( ZypperCommand::TARGET_OS_e , std::string(), { "targetos", "tos" } ),
       makeCmd<LicensesCmd> ( ZypperCommand::LICENSES_e , std::string(), { "licenses" } ),
@@ -262,6 +267,10 @@ DEF_ZYPPER_COMMAND( ADD_LOCALE );
 DEF_ZYPPER_COMMAND( REMOVE_LOCALE );
 
 DEF_ZYPPER_COMMAND( NEEDS_REBOOTING );
+
+DEF_ZYPPER_COMMAND( KEYS );
+DEF_ZYPPER_COMMAND( ADDKEY );
+DEF_ZYPPER_COMMAND( REMOVEKEY );
 
 #undef DEF_ZYPPER_COMMAND
 ///////////////////////////////////////////////////////////////////

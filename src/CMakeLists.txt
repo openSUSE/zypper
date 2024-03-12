@@ -29,6 +29,7 @@ SET (zypper_HEADERS
   SolverRequester.h
   Summary.h
   CommitSummary.h
+  keys.h
   global-settings.h
   issue.h
   callbacks/keyring.h
@@ -40,6 +41,10 @@ SET (zypper_HEADERS
   commands/commandhelpformatter.h
   commands/conditions.h
   commands/basecommand.h
+  commands/keycmds.h
+  commands/keys/keyscmd.h
+  commands/keys/addkeycmd.h
+  commands/keys/removekeycmd.h
   commands/locks.h
   commands/locks/common.h
   commands/locks/add.h
@@ -118,6 +123,7 @@ SET( zypper_SRCS
   SolverRequester.cc
   Summary.cc
   CommitSummary.cc
+  keys.cc
   global-settings.cc
   issue.cc
   callbacks/media.cc
@@ -125,6 +131,9 @@ SET( zypper_SRCS
   commands/commandhelpformatter.cc
   commands/conditions.cc
   commands/basecommand.cc
+  commands/keys/keyscmd.cc
+  commands/keys/addkeycmd.cc
+  commands/keys/removekeycmd.cc
   commands/locks/common.cc
   commands/locks/add.cc
   commands/locks/clean.cc
