@@ -16,6 +16,10 @@
 #include "Zypper.h"
 #include "utils/Augeas.h"
 
+#ifdef DISTCONFDIR
+#define DISTCONFZYPPER DISTCONFDIR "/zypp/zypper.conf"
+#endif
+
 ///////////////////////////////////////////////////////////////////
 namespace env
 {
@@ -547,6 +551,9 @@ Augeas::Augeas( Pathname customcfg_r, bool readmode_r  )
 
     // add /etc/zypp/zypper.conf
     _pimpl->_cfgFiles.push_back( "/etc/zypp/zypper.conf" );
+#ifdef DISTCONFDIR
+    _pimpl->_cfgFiles.push_back( DISTCONFZYPPER );
+#endif
   }
   else
   {
