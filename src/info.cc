@@ -14,6 +14,7 @@
 #include <zypp/Pattern.h>
 #include <zypp/Product.h>
 #include <zypp/PoolQuery.h>
+#include <zypp/base/LogTools.h>
 
 #include "Zypper.h"
 #include "main.h"
@@ -131,6 +132,23 @@ namespace
       ret += ")";
     }
     return ret;
+  }
+
+  inline bool identIsInstalled( IdString ident_r )
+  {
+    if ( auto sel = ui::Selectable::get( ident_r ) )
+      return not sel->installedEmpty();
+    return false;
+  }
+
+  template <typename TContainer>
+  inline bool anyIdentIsInstalled( const TContainer & idents_r )
+  {
+    for ( IdString ident : idents_r ) {
+      if ( identIsInstalled( ident ) )
+        return true;
+    }
+    return false;
   }
 
 } // namespace
@@ -341,10 +359,37 @@ void printPkgInfo(Zypper & zypper, const ui::Selectable & s , const PrintInfoOpt
   printCommonData( theone, p );
 
   //bnc#764147 Show Support Status always if not unknown, not only on SLE
-  VendorSupportOption supportOpt = theone->asKind<Package>()->vendorSupport();
-  if ( runningOnEnterprise() || supportOpt != VendorSupportOption::VendorSupportUnknown )
-    p.add( _("Support Level"),	asUserString( supportOpt ) );
+  VendorSupportOption supportOpt = package->vendorSupport();
+  if ( runningOnEnterprise() || supportOpt != VendorSupportOption::VendorSupportUnknown ) {
+    if ( supportOpt == VendorSupportSuperseded ) {
+      // jsc#OBS-301, jsc#PED-8014: add the superseding package(s)
+      // and some hint how to proceed
+      const std::pair<std::vector<IdString>,std::vector<std::string>> & supersededByItems { package->supersededByItems() };
+      const std::vector<IdString> & superseding { supersededByItems.first };
+      if ( not superseding.empty() ) {
+        // add the known successor package(s)
+        str::Str str;
+        dumpRangeLine( str.stream() << asUserString( supportOpt ) << " ", superseding );
+        p.add( _("Support Level"), HIGHLIGHTString( str ) );
+        if ( anyIdentIsInstalled( superseding ) )
+          p.addDetail( HIGHLIGHTString(_("The successor package is already installed.")) );
+        else
+          p.addDetail( HIGHLIGHTString(_("The successor package should be installed as soon as possible to receive continued support.")) );
+      } else {
+        const std::vector<std::string> & missing { supersededByItems.second };
+        // kind of repo metadata oops (can't find the superseding package(s))
+        str::Str str;
+        dumpRangeLine( str.stream() << asUserString( supportOpt ) << " ", missing );
+        p.add( _("Support Level"), HIGHLIGHTString( str ) );
+        p.addDetail( HIGHLIGHTString(_("Unfortunately the successor package is not provided by any repository.")) );
+        //
+      }
 
+    } else {
+      p.add( _("Support Level"), asUserString( supportOpt ) );
+    }
+
+  }
   // translators: property name; short; used like "Name: value"
   p.add( _("Installed Size"),	theone.installSize() );
   // translators: property name; short; used like "Name: value"
