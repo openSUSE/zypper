@@ -153,6 +153,20 @@ namespace {
     return str << endl;
   }
 
+  template <typename TContainer>  // std::pair<sat::SolvableType,std::string>
+  std::ostream & writeSolvableDetailsList( std::ostream & str, const TContainer & container_r, ansi::Color color_r, bool withKind_r=false )
+  {
+    constexpr unsigned indent = 2;
+    SolvableSummaryItemFormater format { color_r, withKind_r };
+
+
+    std::ostringstream s;
+    for ( const auto & pair : container_r ) {
+      format( s, pair.first ) << " " << pair.second << endl;
+    }
+    mbs_write_wrapped( str, s.str(), indent, get_screen_width() );
+    return str << endl;
+  }
 } // namespace
 
 // --------------------------------------------------------------------------
@@ -299,8 +313,8 @@ void Summary::readPool( const ResPool & pool )
     for_( resit, it->second.begin(), it->second.end() )
     {
       ResObject::constPtr res(*resit);
-
       Package::constPtr pkg = asKind<Package>(res);
+
       if ( pkg )
       {
         switch ( pkg->vendorSupport() )
@@ -314,6 +328,8 @@ void Summary::readPool( const ResPool & pool )
           case VendorSupportACC:
             _supportNeedACC[res->kind()].insert( ResPair( nullptr, res ) );
             break;
+          case VendorSupportSuperseded:
+            _supportSuperseded[res->kind()].insert( ResPair( nullptr, res ) );
           default:
             // L1, L2 or L3 support are not reported
             break;
@@ -1388,6 +1404,46 @@ void Summary::writeSupportNeedACC( std::ostream & out )
   }
 }
 
+void Summary::writeSupportSuperseded( std::ostream & out )
+{
+  auto highlightColor = ColorContext::HIGHLIGHT;
+  auto supersedingAsString = []( Package::constPtr package_r ) -> std::string {
+    const std::pair<std::vector<IdString>,std::vector<std::string>> & supersededByItems { package_r->supersededByItems() };
+    const std::vector<IdString> & superseding { supersededByItems.first };
+    str::Str ret;
+    ret << _("was superseded by");
+    if ( not superseding.empty() )  // names resolved to existing packages
+      dumpRange( ret.stream(), superseding.begin(), superseding.end(), " ", "", ", ", "", "" );
+    else  // print at least the plain names
+      dumpRange( ret.stream(), supersededByItems.second.begin(), supersededByItems.second.end(), " ", "", ", ", "", "" );
+    return ret.str();
+  };
+
+  for_( it, _supportSuperseded.begin(), _supportSuperseded.end() )
+  {
+    // we only look at vendor support in packages
+    if ( it->first == ResKind::package ) {
+      std::string label = PL_(
+        "The following package was discontinued and has been superseded by a new package with a different name.",
+        "The following %d packages were discontinued and have been superseded by a new packages with different names.",
+        it->second.size() );
+      label = str::form( label.c_str(), it->second.size() );
+      std::string labelHint = PL_(
+        "The successor package should be installed as soon as possible to receive continued support:",
+        "The successor packages should be installed as soon as possible to receive continued support:",
+        it->second.size() );
+      out << endl << ( highlightColor << label << endl << labelHint ) << endl;
+
+      std::vector<std::pair<sat::Solvable,std::string>> itemsdetails;
+      for ( const auto & pair : it->second ) {
+        Package::constPtr package = pair.second->asKind<Package>();
+        itemsdetails.push_back( std::make_pair( package->satSolvable(), supersedingAsString( package ) ) );
+      }
+      writeSolvableDetailsList( out, itemsdetails, highlightColor );
+    }
+  }
+}
+
 // --------------------------------------------------------------------------
 
 void Summary::writeNotUpdated( std::ostream & out )
@@ -1730,6 +1786,7 @@ void Summary::dumpTo( std::ostream & out )
     writeSupportUnknown( out );
     writeSupportUnsupported( out );
     writeSupportNeedACC( out );
+    writeSupportSuperseded( out );
   }
   writeRebootNeeded( out );
   writePackageCounts( out );

@@ -100,6 +100,7 @@ public:
   void writeSupportUnknown( std::ostream & out );
   void writeSupportUnsupported( std::ostream & out );
   void writeSupportNeedACC( std::ostream & out );
+  void writeSupportSuperseded( std::ostream & out );
   void writeNotUpdated( std::ostream & out );
   void writePackageCounts( std::ostream & out );
   void writeDownloadAndInstalledSizeSummary( std::ostream & out );
@@ -179,6 +180,7 @@ private:
   KindToResPairSet _supportUnknown;
   KindToResPairSet _supportUnsupported;	///< known to be unsupported
   KindToResPairSet _supportNeedACC;	///< need additional contract
+  KindToResPairSet _supportSuperseded;  ///< discontinued and superseded by a new package
   /** Patches and Packages which require a reboot */
   KindToResPairSet _rebootNeeded;
 
