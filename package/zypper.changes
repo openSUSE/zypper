@@ -1,4 +1,25 @@
 -------------------------------------------------------------------
+Fri Mar 22 18:09:02 CET 2024 - ma@suse.de
+
+- info,summary: Support VendorSupportOption flag
+  VendorSupportSuperseded (jsc#OBS-301, jsc#PED-8014)
+- BuildRequires:  libzypp-devel >= 17.32.0.
+  API cleanup and changes for VendorSupportSuperseded.
+- Show active dry-run/download-only at the commit propmpt.
+- patch: Add --skip-not-applicable-patches option (closes #514)
+- Fix printing detailed solver problem description.
+  The problem description() is one rule out possibly many in
+  completeProblemInfo() the solver has chosen to represent the
+  problem. So either description or completeProblemInfo should be
+  printed, but not both.
+- Fix bash-completion to work with right adjusted numbers in the
+  1st column too (closes #505)
+- Set libzypp shutdown request signal on Ctrl+C (fixes #522)
+- lr REPO: In the detailed view show all baseurls not just the
+  first one (bsc#1218171)
+- version 1.14.69
+
+-------------------------------------------------------------------
 Thu Dec 14 10:55:34 CET 2023 - ma@suse.de
 
 - Fix search/info commands ignoring --ignore-unknown (bsc#1217593)
