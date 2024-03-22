@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-03-22 18:04+0100\n"
-"PO-Revision-Date: 2023-12-14 13:01+0000\n"
+"PO-Revision-Date: 2024-03-23 01:43+0000\n"
 "Last-Translator: Freek de Kruijf <freek@opensuse.org>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/zypper/master/nl/>\n"
 "Language: nl\n"
@@ -1168,7 +1168,7 @@ msgstr[1] ""
 
 #: src/Summary.cc:1414
 msgid "was superseded by"
-msgstr ""
+msgstr "is opgevolgd door"
 
 #: src/Summary.cc:1427
 #, c-format, boost-format
@@ -1179,7 +1179,11 @@ msgid_plural ""
 "The following %d packages were discontinued and have been superseded by a "
 "new packages with different names."
 msgstr[0] ""
+"Het volgende pakket is gestopt en is opgevolgd door een nieuw pakket met een "
+"andere naam."
 msgstr[1] ""
+"De volgende %d pakketten zijn gestopt en zijn opgevolgd door nieuwe "
+"pakketten met andere namen."
 
 #: src/Summary.cc:1432
 msgid ""
@@ -1189,7 +1193,11 @@ msgid_plural ""
 "The successor packages should be installed as soon as possible to receive "
 "continued support:"
 msgstr[0] ""
+"Het opvolgende pakket zou zo spoedig mogelijk geïnstalleerd moeten worden om "
+"doorgaande ondersteuning te krijgen:"
 msgstr[1] ""
+"De opvolgende pakketten zouden zo spoedig mogelijk geïnstalleerd moeten "
+"worden om doorgaande ondersteuning te krijgen:"
 
 #: src/Summary.cc:1457
 #, c-format, boost-format
@@ -1259,6 +1267,8 @@ msgstr[1] "De volgende %d pakketten vereisen een herstart van het systeem:"
 #: src/Summary.cc:1560
 msgid "Skipped needed patches which do not apply without conflict:"
 msgstr ""
+"Benodigde patches zijn overgeslagen die niet van toepassing zijn zonder "
+"conflict:"
 
 #: src/Summary.cc:1576
 #, boost-format
@@ -3149,6 +3159,7 @@ msgstr ""
 #: src/commands/patch.cc:50
 msgid "Skip needed patches which do not apply without conflict."
 msgstr ""
+"Benodigde patches die niet zijn toe te passen zonder conflict overslaan."
 
 #: src/commands/patch.cc:53
 msgid ""
@@ -5582,17 +5593,20 @@ msgstr "Ondersteuningsniveau"
 
 #: src/info.cc:375
 msgid "The successor package is already installed."
-msgstr ""
+msgstr "Het opvolgende pakket is al geïnstalleerd."
 
 #: src/info.cc:377
 msgid ""
 "The successor package should be installed as soon as possible to receive "
 "continued support."
 msgstr ""
+"Het opvolgende pakket zou zo spoedig mogelijk geïnstalleerd moeten worden om "
+"ondersteuning te krijgen."
 
 #: src/info.cc:384
 msgid "Unfortunately the successor package is not provided by any repository."
 msgstr ""
+"Helaas wordt het opvolgende pakket door geen enkele opslagruimte geleverd."
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:394
@@ -6598,7 +6612,7 @@ msgstr[1] "%d problemen:"
 #. translator: The tag says that the preceding dependency problem is auto-resolved by applying the following solution
 #: src/solve-commit.cc:292
 msgid "Autoresolve:"
-msgstr ""
+msgstr "Automatisch oplossen:"
 
 #: src/solve-commit.cc:321
 msgid "Resolving dependencies..."
@@ -6774,7 +6788,7 @@ msgstr "Geef samenvatting weer in de pager."
 
 #: src/solve-commit.cc:839
 msgid "Backend"
-msgstr ""
+msgstr "Backend"
 
 #: src/solve-commit.cc:953
 msgid "committing"
