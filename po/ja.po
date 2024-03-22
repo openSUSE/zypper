@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-03-22 18:04+0100\n"
-"PO-Revision-Date: 2023-12-15 00:06+0000\n"
+"PO-Revision-Date: 2024-03-23 01:43+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
 "Language-Team: Japanese <https://l10n.opensuse.org/projects/zypper/master/ja/"
 ">\n"
@@ -1061,7 +1061,7 @@ msgstr[0] ""
 
 #: src/Summary.cc:1414
 msgid "was superseded by"
-msgstr ""
+msgstr "は以下によって置き換えられました"
 
 #: src/Summary.cc:1427
 #, c-format, boost-format
@@ -1071,7 +1071,7 @@ msgid ""
 msgid_plural ""
 "The following %d packages were discontinued and have been superseded by a "
 "new packages with different names."
-msgstr[0] ""
+msgstr[0] "以下の %d 個のパッケージは廃止済みとなり、異なる名前の新しいパッケージによって置き換えられました。"
 
 #: src/Summary.cc:1432
 msgid ""
@@ -1080,7 +1080,7 @@ msgid ""
 msgid_plural ""
 "The successor packages should be installed as soon as possible to receive "
 "continued support:"
-msgstr[0] ""
+msgstr[0] "サポートを受け続けるには、できる限り速やかに後継パッケージをインストールする必要があります:"
 
 #: src/Summary.cc:1457
 #, c-format, boost-format
@@ -1139,7 +1139,7 @@ msgstr[0] ""
 
 #: src/Summary.cc:1560
 msgid "Skipped needed patches which do not apply without conflict:"
-msgstr ""
+msgstr "矛盾無しでは適用できないため、必要なパッチを飛ばしました:"
 
 #: src/Summary.cc:1576
 #, boost-format
@@ -2979,7 +2979,7 @@ msgstr ""
 
 #: src/commands/patch.cc:50
 msgid "Skip needed patches which do not apply without conflict."
-msgstr ""
+msgstr "矛盾無しには適用できないため、必要なパッチを飛ばします。"
 
 #: src/commands/patch.cc:53
 msgid ""
@@ -5371,17 +5371,17 @@ msgstr "サポートレベル"
 
 #: src/info.cc:375
 msgid "The successor package is already installed."
-msgstr ""
+msgstr "後継パッケージは既にインストール済みです。"
 
 #: src/info.cc:377
 msgid ""
 "The successor package should be installed as soon as possible to receive "
 "continued support."
-msgstr ""
+msgstr "サポートを受け続けるには、できる限り速やかに後継パッケージをインストールする必要があります。"
 
 #: src/info.cc:384
 msgid "Unfortunately the successor package is not provided by any repository."
-msgstr ""
+msgstr "残念ながら、後継パッケージはどのリポジトリ内においても提供されていません。"
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:394
@@ -6384,7 +6384,7 @@ msgstr[0] "%d 個の問題点:"
 #. translator: The tag says that the preceding dependency problem is auto-resolved by applying the following solution
 #: src/solve-commit.cc:292
 msgid "Autoresolve:"
-msgstr ""
+msgstr "自動解決:"
 
 #: src/solve-commit.cc:321
 msgid "Resolving dependencies..."
@@ -6552,7 +6552,7 @@ msgstr "ページャで詳細を表示します。"
 
 #: src/solve-commit.cc:839
 msgid "Backend"
-msgstr ""
+msgstr "バックエンド"
 
 #: src/solve-commit.cc:953
 msgid "committing"
