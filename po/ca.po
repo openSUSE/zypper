@@ -9,10 +9,10 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-03-22 18:04+0100\n"
-"PO-Revision-Date: 2024-02-15 13:42+0000\n"
+"PO-Revision-Date: 2024-03-22 21:43+0000\n"
 "Last-Translator: David Medina <medipas@gmail.com>\n"
-"Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/"
-">\n"
+"Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/>"
+"\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1141,7 +1141,7 @@ msgstr[1] ""
 
 #: src/Summary.cc:1414
 msgid "was superseded by"
-msgstr ""
+msgstr "s'ha substituït per"
 
 #: src/Summary.cc:1427
 #, c-format, boost-format
@@ -1152,7 +1152,11 @@ msgid_plural ""
 "The following %d packages were discontinued and have been superseded by a "
 "new packages with different names."
 msgstr[0] ""
+"El paquet següent s'ha descatalogat i s'ha substituït per un paquet nou amb "
+"un nom diferent."
 msgstr[1] ""
+"Els %d paquets següents s'han descatalogat i s'han substituït per paquets "
+"nous amb noms diferents."
 
 #: src/Summary.cc:1432
 msgid ""
@@ -1162,7 +1166,11 @@ msgid_plural ""
 "The successor packages should be installed as soon as possible to receive "
 "continued support:"
 msgstr[0] ""
+"El paquet successor s'ha d'instal·lar tan aviat com sigui possible per rebre "
+"suport continu:"
 msgstr[1] ""
+"Els paquets successors s'han d'instal·lar tan aviat com sigui possible per "
+"rebre suport continu:"
 
 #: src/Summary.cc:1457
 #, c-format, boost-format
@@ -1226,7 +1234,7 @@ msgstr[1] "Els %d paquets següents requereixen un reinici del sistema:"
 
 #: src/Summary.cc:1560
 msgid "Skipped needed patches which do not apply without conflict:"
-msgstr ""
+msgstr "S'han omès pedaços necessaris que no s'apliquen sense conflicte:"
 
 #: src/Summary.cc:1576
 #, boost-format
@@ -3101,7 +3109,7 @@ msgstr ""
 
 #: src/commands/patch.cc:50
 msgid "Skip needed patches which do not apply without conflict."
-msgstr ""
+msgstr "Omet els pedaços necessaris que no s'apliquin sense conflicte."
 
 #: src/commands/patch.cc:53
 msgid ""
@@ -5493,17 +5501,19 @@ msgstr "Nivell de suport"
 
 #: src/info.cc:375
 msgid "The successor package is already installed."
-msgstr ""
+msgstr "El paquet successor ja està instal·lat."
 
 #: src/info.cc:377
 msgid ""
 "The successor package should be installed as soon as possible to receive "
 "continued support."
 msgstr ""
+"El paquet successor s'ha d'instal·lar tan aviat com sigui possible per rebre "
+"suport continu."
 
 #: src/info.cc:384
 msgid "Unfortunately the successor package is not provided by any repository."
-msgstr ""
+msgstr "Malauradament, cap repositori no en proporciona el paquet successor."
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:394
@@ -6502,7 +6512,7 @@ msgstr[1] "%d problemes:"
 #. translator: The tag says that the preceding dependency problem is auto-resolved by applying the following solution
 #: src/solve-commit.cc:292
 msgid "Autoresolve:"
-msgstr ""
+msgstr "Resolució automàtica:"
 
 #: src/solve-commit.cc:321
 msgid "Resolving dependencies..."
@@ -6677,7 +6687,7 @@ msgstr "Visualitzar el resum al paginador."
 
 #: src/solve-commit.cc:839
 msgid "Backend"
-msgstr ""
+msgstr "Fons"
 
 #: src/solve-commit.cc:953
 msgid "committing"
