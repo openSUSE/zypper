@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-03-22 18:04+0100\n"
-"PO-Revision-Date: 2023-12-15 13:02+0000\n"
+"PO-Revision-Date: 2024-03-23 13:42+0000\n"
 "Last-Translator: Aleš Kastner <alkas@volny.cz>\n"
 "Language-Team: Czech <https://l10n.opensuse.org/projects/zypper/master/cs/>\n"
 "Language: cs\n"
@@ -1201,7 +1201,7 @@ msgstr[2] ""
 
 #: src/Summary.cc:1414
 msgid "was superseded by"
-msgstr ""
+msgstr "byl nahrazen"
 
 #: src/Summary.cc:1427
 #, c-format, boost-format
@@ -1212,8 +1212,13 @@ msgid_plural ""
 "The following %d packages were discontinued and have been superseded by a "
 "new packages with different names."
 msgstr[0] ""
+"Následující balíček byl ukončen a nahrazen novým balíčkem s jiným názvem."
 msgstr[1] ""
+"Následující %d balíčky byly ukončeny a nahrazeny novými balíčky s jinými "
+"názvy."
 msgstr[2] ""
+"Následujících %d balíčků bylo ukončeno a nahrazeno novými balíčky s jinými "
+"názvy."
 
 #: src/Summary.cc:1432
 msgid ""
@@ -1223,8 +1228,14 @@ msgid_plural ""
 "The successor packages should be installed as soon as possible to receive "
 "continued support:"
 msgstr[0] ""
+"Nástupnický balíček by měl být nainstalován co nejdříve, abyste získali "
+"pokračující podporu:"
 msgstr[1] ""
+"Nástupnické balíčky by měly být nainstalovány co nejdříve, abyste získali "
+"pokračující podporu:"
 msgstr[2] ""
+"Nástupnické balíčky by měly být nainstalovány co nejdříve, abyste získali "
+"pokračující podporu:"
 
 #: src/Summary.cc:1457
 #, c-format, boost-format
@@ -1294,7 +1305,7 @@ msgstr[2] "Těchto %d balíčků vyžaduje restart systému:"
 
 #: src/Summary.cc:1560
 msgid "Skipped needed patches which do not apply without conflict:"
-msgstr ""
+msgstr "Přeskočeny potřebné záplaty, jejichž použití však vyvolá konflikt:"
 
 #: src/Summary.cc:1576
 #, boost-format
@@ -3159,7 +3170,7 @@ msgstr ""
 
 #: src/commands/patch.cc:50
 msgid "Skip needed patches which do not apply without conflict."
-msgstr ""
+msgstr "Přeskočit potřebné záplaty, které způsobí konflikt."
 
 #: src/commands/patch.cc:53
 msgid ""
@@ -5521,17 +5532,19 @@ msgstr "Úroveň podpory"
 
 #: src/info.cc:375
 msgid "The successor package is already installed."
-msgstr ""
+msgstr "Nástupnický balíček je již instalován."
 
 #: src/info.cc:377
 msgid ""
 "The successor package should be installed as soon as possible to receive "
 "continued support."
 msgstr ""
+"Nástupnický balíček by měl být nainstalován co nejdříve, abyste získali "
+"pokračující podporu."
 
 #: src/info.cc:384
 msgid "Unfortunately the successor package is not provided by any repository."
-msgstr ""
+msgstr "Nástupnický balíček bohužel není k dispozici v žádném úložišti."
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:394
@@ -6522,7 +6535,7 @@ msgstr[2] "%d problémů:"
 #. translator: The tag says that the preceding dependency problem is auto-resolved by applying the following solution
 #: src/solve-commit.cc:292
 msgid "Autoresolve:"
-msgstr ""
+msgstr "Automatické řešení:"
 
 #: src/solve-commit.cc:321
 msgid "Resolving dependencies..."
@@ -6692,7 +6705,7 @@ msgstr "Zobrazit souhrn v pageru."
 
 #: src/solve-commit.cc:839
 msgid "Backend"
-msgstr ""
+msgstr "Zadní konec"
 
 #: src/solve-commit.cc:953
 msgid "committing"
