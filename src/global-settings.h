@@ -73,6 +73,7 @@ struct SolverSettingsData
   zypp::TriBool _allowVendorChange = zypp::indeterminate;
   zypp::TriBool _allowArchChange = zypp::indeterminate;
   zypp::TriBool _cleanDeps = zypp::indeterminate;
+  zypp::TriBool _removeOrphaned = zypp::indeterminate;  // by now libsolv supports it in distupgrade only
 };
 using SolverSettings = GlobalSettingSingleton<SolverSettingsData>;
 

@@ -448,6 +448,8 @@ static void set_solver_flags( Zypper & zypper )
     if ( !indeterminate( solverSettings._allowNameChange ) ) God->resolver()->dupSetAllowNameChange( bool(solverSettings._allowNameChange) );
     if ( !indeterminate( solverSettings._allowArchChange ) ) God->resolver()->dupSetAllowArchChange( bool(solverSettings._allowArchChange) );
     if ( !indeterminate( solverSettings._allowVendorChange ) ) God->resolver()->dupSetAllowVendorChange( bool(solverSettings._allowVendorChange) );
+    // by now libsolv supports it in distupgrade only:
+    if ( !indeterminate( solverSettings._removeOrphaned ) ) God->resolver()->setRemoveOrphaned( bool(solverSettings._removeOrphaned) );
   }
   else
   {
