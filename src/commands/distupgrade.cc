@@ -31,10 +31,14 @@ DistUpgradeCmd::DistUpgradeCmd(std::vector<std::string> &&commandAliases_r ) :
 zypp::ZyppFlags::CommandGroup DistUpgradeCmd::cmdOptions() const
 {
   auto that = const_cast<DistUpgradeCmd *>(this);
+  auto & set = SolverSettings::instanceNoConst();
   return zypp::ZyppFlags::CommandGroup({
     { "from", '\0', ZyppFlags::Repeatable | ZyppFlags::RequiredArgument, ZyppFlags::StringVectorType( &DupSettings::instanceNoConst()._fromRepos, ARG_REPOSITORY),
         // translators: --from <ALIAS|#|URI>
         _("Restrict upgrade to specified repository.")
+    },
+    { "remove-orphaned", '\0', ZyppFlags::NoArgument, ZyppFlags::TriBoolType( set._removeOrphaned, ZyppFlags::StoreTrue ),
+      _("Remove unneeded orphaned packages.")
     },
     CommonFlags::detailsFlag( that->_details )
   });

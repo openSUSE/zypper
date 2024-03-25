@@ -736,6 +736,9 @@ It might be less tedious to persistently set *$releasever* to the target distrib
 	*--from* _alias_|_name_|_#_|_URI_::
 		The option can be used multiple times and restricts the upgrade to the specified repositories only. Nevertheless all enabled repositories are visible to the resolver and will be considered to satisfy dependency problems.
 
+	*--remove-orphaned*::
+		Remove orphaned packages. Installed packages which are not provided by at least one of the available repositories are considered to be orphaned or dropped. *dist-upgrade* removes orphaned packages if they prevent the upgrade of wanted packages. With this option all unneeded orphaned packages are removed.
+
 	-r, --repo alias|name|#|URI::
 		Work only with the repository specified by the alias, name, number, or URI.
 +
