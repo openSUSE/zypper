@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Mon Mar 25 17:48:54 CET 2024 - ma@suse.de
+
+- dup: New option --remove-orphaned to remove all orphaned
+  packages in dup (bsc#1221525)
+- version 1.14.70
+
+-------------------------------------------------------------------
 Fri Mar 22 18:09:02 CET 2024 - ma@suse.de
 
 - info,summary: Support VendorSupportOption flag
