@@ -355,6 +355,14 @@ void list_patterns(Zypper & zypper , SolvableFilterMode mode_r)
 
 void list_packages(Zypper & zypper , ListPackagesFlags flags_r )
 {
+  // These flags need a solver run to be computed
+  static constexpr ListPackagesFlags maskNeedSolv = {
+    ListPackagesBits::ShowOrphaned
+    | ListPackagesBits::ShowSuggested
+    | ListPackagesBits::ShowRecommended
+    | ListPackagesBits::ShowUnneeded
+  };
+
   MIL << "Going to list packages." << std::endl;
   Table tbl;
 
@@ -366,16 +374,23 @@ void list_packages(Zypper & zypper , ListPackagesFlags flags_r )
   bool suggested = flags_r.testFlag( ListPackagesBits::ShowSuggested );
   bool recommended = flags_r.testFlag( ListPackagesBits::ShowRecommended );
   bool unneeded = flags_r.testFlag( ListPackagesBits::ShowUnneeded );
-  bool check = ( orphaned || suggested || recommended || unneeded );
-  if ( check )
-  {
+  bool byAuto = flags_r.testFlag( ListPackagesBits::ShowByAuto );
+  bool byUser = flags_r.testFlag( ListPackagesBits::ShowByUser );
+  bool check = ( flags_r & ( maskNeedSolv | ListPackagesBits::ShowByAuto | ListPackagesBits::ShowByUser ) );
+  if ( flags_r & maskNeedSolv ) {
     God->resolver()->resolvePool();
   }
-  auto checkStatus = [=]( ResStatus status_r )->bool {
-    return ( ( orphaned && status_r.isOrphaned() )
-          || ( suggested && status_r.isSuggested() )
-          || ( recommended && status_r.isRecommended() )
-          || ( unneeded && status_r.isUnneeded() ) );
+  auto checkStatus = [=]( const PoolItem & pi_r )->bool {
+    const ResStatus & status { pi_r.status() };
+    if ( ( orphaned && status.isOrphaned() )
+      || ( suggested && status.isSuggested() )
+      || ( recommended && status.isRecommended() )
+      || ( unneeded && status.isUnneeded() ) ) {
+      return true;
+    } else if ( status.isInstalled() ) {
+      return ( byAuto && pi_r.identIsAutoInstalled() ) || ( byUser && not pi_r.identIsAutoInstalled() );
+    }
+    return false;
   };
 
   for( const auto & sel : God->pool().proxy().byKind<Package>() )
@@ -401,14 +416,14 @@ void list_packages(Zypper & zypper , ListPackagesFlags flags_r )
         // not whole selectables
         if ( pi.status().isInstalled() )
         {
-          if ( ! checkStatus( pi.status() ) )
+          if ( ! checkStatus( pi ) )
             continue;
         }
         else
         {
           PoolItem ipi( sel->identicalInstalledObj( pi ) );
-          if ( !ipi || !checkStatus( ipi.status() ) )
-            if ( ! checkStatus( pi.status() ) )
+          if ( !ipi || !checkStatus( ipi ) )
+            if ( ! checkStatus( pi ) )
               continue;
         }
       }
