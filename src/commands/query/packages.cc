@@ -26,11 +26,18 @@ PackagesCmdBase::PackagesCmdBase(std::vector<std::string> &&commandAliases_r) :
   _initRepoFlags.setCompatibilityMode( CompatModeBits::EnableRugOpt | CompatModeBits::EnableNewOpt );
 }
 
-
 zypp::ZyppFlags::CommandGroup PackagesCmdBase::cmdOptions() const
 {
   auto that = const_cast<PackagesCmdBase *>(this);
   return {{
+      {"autoinstalled", '\0', ZyppFlags::NoArgument, ZyppFlags::BitFieldType( that->_flags, ListPackagesBits::ShowByAuto ),
+            // translators: --autoinstalled
+            _("Show installed packages which were automatically selected by the resolver.")
+      },
+      {"userinstalled", '\0', ZyppFlags::NoArgument, ZyppFlags::BitFieldType( that->_flags, ListPackagesBits::ShowByUser ),
+            // translators: --userinstalled
+            _("Show installed packages which were explicitly selected by the user.")
+      },
       {"orphaned", '\0', ZyppFlags::NoArgument, ZyppFlags::BitFieldType( that->_flags, ListPackagesBits::ShowOrphaned ),
             // translators: --orphaned
             _("Show packages which are orphaned (without repository).")
@@ -74,3 +81,4 @@ int PackagesCmdBase::execute( Zypper &zypper, const std::vector<std::string> & )
 
   return ZYPPER_EXIT_OK;
 }
+

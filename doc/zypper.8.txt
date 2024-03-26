@@ -923,6 +923,12 @@ See also the type-specific query commands like *packages*, *patterns*, etc.
 +
 The old option name --uninstalled-only is still acceptable, but should be considered deprecated.
 
+	*--autoinstalled::
+		Show installed packages which were automatically selected by the resolver.
+
+	*--userinstalled*::
+		Show installed packages which were explicitly selected by the user.
+
 	*--orphaned*::
 		Show packages which are orphaned (without repository).
 
