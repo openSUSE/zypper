@@ -282,7 +282,7 @@ static void list_patterns_xml( Zypper & zypper, SolvableFilterMode mode_r )
       continue;
     if ( !isInstalled && installed_only && !notinst_only )
       continue;
-    if ( repofilter && pi.repository().info().name() == "@System" )
+    if ( repofilter && pi.repository().isSystemRepo() )
       continue;
 
     Pattern::constPtr pattern = asKind<Pattern>(pi.resolvable());
@@ -320,8 +320,7 @@ static void list_pattern_table( Zypper & zypper, SolvableFilterMode mode_r )
       else if ( !isInstalled && installed_only && !notinst_only )
         continue;
 
-      const std::string & piRepoName( pi.repoInfo().name() );
-      if ( repofilter && piRepoName == "@System" )
+      if ( repofilter && pi.repository().isSystemRepo() )
         continue;
 
       Pattern::constPtr pattern = asKind<Pattern>(pi.resolvable());
@@ -333,7 +332,7 @@ static void list_pattern_table( Zypper & zypper, SolvableFilterMode mode_r )
           << computeStatusIndicator( pi )
           << pi.name()
           << pi.edition()
-          << piRepoName
+          << pi.repository().asUserString()
           << string_weak_status(pi.status()) );
     }
   }
@@ -414,16 +413,15 @@ void list_packages(Zypper & zypper , ListPackagesFlags flags_r )
         }
       }
 
-      const std::string & piRepoName( pi->repository().info().name() );
-      if ( repofilter && piRepoName == "@System" )
+      if ( repofilter && pi.repository().isSystemRepo() )
         continue;
 
       tbl << ( TableRow()
           << computeStatusIndicator( pi, sel )
-          << piRepoName
-          << pi->name()
-          << pi->edition().asString()
-          << pi->arch().asString() );
+          << pi.repository().asUserString()
+          << pi.name()
+          << pi.edition().asString()
+          << pi.arch().asString() );
     }
   }
 
@@ -462,7 +460,7 @@ void list_products_xml( Zypper & zypper, SolvableFilterMode mode_r, const std::v
       continue;
     else if ( !pi.status().isInstalled() && installed_only )
       continue;
-    if ( repofilter && pi.repository().info().name() == "@System" )
+    if ( repofilter && pi.repository().isSystemRepo() )
       continue;
     Product::constPtr product = asKind<Product>(pi.resolvable());
     cout << asXML( *product, pi.status().isInstalled(), fwdTags ) << endl;
@@ -501,14 +499,13 @@ void list_product_table(Zypper & zypper , SolvableFilterMode mode_r)
       if ( ( installed_only && !iType ) || ( notinst_only && iType) )
         continue;
 
-      const std::string & piRepoName( pi.repoInfo().name() );
-      if ( repofilter && piRepoName == "@System" )
+      if ( repofilter && pi.repository().isSystemRepo() )
         continue;
 
       // NOTE: 'Is Base' is available in the installed object only.
       tbl << ( TableRow()
           << statusIndicator
-          << piRepoName
+          << pi.repository().asUserString()
           << pi.name()
           << pi.summary()	// full name (bnc #589333)
           << pi.edition()
