@@ -77,6 +77,8 @@ enum class ListPackagesBits {
   ShowSuggested     = 1 << 3,
   ShowRecommended   = 1 << 4,
   ShowUnneeded      = 1 << 5,
+  ShowByAuto        = 1 << 6,
+  ShowByUser        = 1 << 7,
   SortByRepo        = 1 << 20  //< Result will be sorted by repo, not by name
 };
 ZYPP_DECLARE_FLAGS( ListPackagesFlags, ListPackagesBits );
