@@ -185,19 +185,6 @@ BOOST_AUTO_TEST_CASE( simpleOptions )
     BOOST_REQUIRE_THROW( parseCLI( sizeof(testArgs) / sizeof(char *),  ( char* const* )testArgs, { grp } ), UnknownFlagException );
   }
 
-#if 0 // Test disabled due to bsc#1123865: don't throw, just warn
-  {
-    //flag repeated, but is not repeatable
-    resetVals();
-    const char *testArgs[] {
-      "command",
-       "--reqArg", "10",
-       "--reqArg", "10"
-    };
-
-    BOOST_REQUIRE_THROW( parseCLI( sizeof(testArgs) / sizeof(char *),  ( char* const* )testArgs, { grp } ), FlagRepeatedException );
-  }
-#endif
 }
 
 BOOST_AUTO_TEST_CASE( getopt_workaround )

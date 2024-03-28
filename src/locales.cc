@@ -217,11 +217,6 @@ namespace
     cout << tbl;
   }
 
-#if 0
-  void printXmlLocaleList( Zypper & zypper, const zypp::LocaleSet &locales )
-  {
-  }
-#endif
 } // namespace
 /////////////////////////////////////////////////////////////////
 

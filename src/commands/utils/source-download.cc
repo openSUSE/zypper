@@ -504,17 +504,6 @@ ZyppFlags::CommandGroup SourceDownloadCmd::cmdOptions() const
             // translators: --status
             _("Don't download any source rpms, but show which source rpms are missing or extraneous.")
       },
-#if 0
-      {
-        "manifest", '\0', ZyppFlags::NoArgument, ZyppFlags::BoolType( &that->_manifest, ZyppFlags::StoreTrue, _manifest ),
-            // translators: --status
-            _("Write a manifest file.")
-      }, {
-        "no-manifest", '\0', ZyppFlags::NoArgument, ZyppFlags::BoolType( &that->_manifest, ZyppFlags::StoreFalse, _manifest ),
-            // translators: --status
-            _("Disable writing a manifest file.")
-      }
-#endif
   },
   {
     //conflicting flags
