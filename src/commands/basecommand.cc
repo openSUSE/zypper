@@ -193,15 +193,6 @@ int ZypperBaseCommand::defaultSystemSetup( Zypper &zypper, SetupSystemFlags flag
   if ( zypper.exitCode() != ZYPPER_EXIT_OK )
     return zypper.exitCode();
 
-#if 0 // since libzypp 17.23.0 the Resolver auto establishes the PPP status.
-  if ( flags_r.testFlag ( Resolve ) ) {
-    // have REPOS and TARGET
-    // compute status of PPP
-    MIL << "-------------- Calling SAT Solver to establish the PPP status -------------------" << endl;
-    base::LogControl::TmpLineWriter shutUp;	// reduce logging; some day libzypp/libsolv may offer a shotcut to establish
-    resolve( zypper );
-  }
-#endif
 
   return zypper.exitCode();
 }
