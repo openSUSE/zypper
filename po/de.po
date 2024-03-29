@@ -17,10 +17,10 @@ msgstr ""
 "Project-Id-Version: zypper.de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-03-22 18:04+0100\n"
-"PO-Revision-Date: 2024-02-29 16:42+0000\n"
-"Last-Translator: Gemineo <vistatec@gemineo.de>\n"
-"Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/"
-">\n"
+"PO-Revision-Date: 2024-03-29 23:43+0000\n"
+"Last-Translator: Ettore Atalan <atalanttore@googlemail.com>\n"
+"Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/>"
+"\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1170,7 +1170,7 @@ msgstr[1] ""
 
 #: src/Summary.cc:1414
 msgid "was superseded by"
-msgstr ""
+msgstr "wurde ersetzt durch"
 
 #: src/Summary.cc:1427
 #, c-format, boost-format
@@ -1181,7 +1181,11 @@ msgid_plural ""
 "The following %d packages were discontinued and have been superseded by a "
 "new packages with different names."
 msgstr[0] ""
+"Das folgende Paket wurde abgekündigt und durch ein neues Paket mit einem "
+"anderen Namen ersetzt."
 msgstr[1] ""
+"Die folgenden %d Pakete wurden abgekündigt und durch neue Pakete mit anderen "
+"Namen ersetzt."
 
 #: src/Summary.cc:1432
 msgid ""
@@ -1191,7 +1195,11 @@ msgid_plural ""
 "The successor packages should be installed as soon as possible to receive "
 "continued support:"
 msgstr[0] ""
+"Das Nachfolgepaket sollte so bald wie möglich installiert werden, um "
+"weiterhin Unterstützung zu erhalten:"
 msgstr[1] ""
+"Die Nachfolgepakete sollten so bald wie möglich installiert werden, um "
+"weiterhin Unterstützung zu erhalten:"
 
 #: src/Summary.cc:1457
 #, c-format, boost-format
@@ -1259,6 +1267,8 @@ msgstr[1] "Die folgenden %d Pakete erfordern einen Systemneustart:"
 #: src/Summary.cc:1560
 msgid "Skipped needed patches which do not apply without conflict:"
 msgstr ""
+"Notwendige Patches, die nicht ohne Konflikt anwendbar sind, wurden "
+"übersprungen:"
 
 #: src/Summary.cc:1576
 #, boost-format
@@ -3159,6 +3169,7 @@ msgstr ""
 #: src/commands/patch.cc:50
 msgid "Skip needed patches which do not apply without conflict."
 msgstr ""
+"Notwendige Patches, die nicht ohne Konflikt anwendbar sind, überspringen."
 
 #: src/commands/patch.cc:53
 msgid ""
@@ -5607,17 +5618,19 @@ msgstr "Support Level"
 
 #: src/info.cc:375
 msgid "The successor package is already installed."
-msgstr ""
+msgstr "Das Nachfolgepaket ist bereits installiert."
 
 #: src/info.cc:377
 msgid ""
 "The successor package should be installed as soon as possible to receive "
 "continued support."
 msgstr ""
+"Das Nachfolgepaket sollte so bald wie möglich installiert werden, um "
+"weiterhin Unterstützung zu erhalten."
 
 #: src/info.cc:384
 msgid "Unfortunately the successor package is not provided by any repository."
-msgstr ""
+msgstr "Leider wird das Nachfolgepaket von keinem Repository bereitgestellt."
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:394
