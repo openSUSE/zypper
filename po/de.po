@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: zypper.de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-03-22 18:04+0100\n"
-"PO-Revision-Date: 2024-03-29 23:43+0000\n"
+"PO-Revision-Date: 2024-03-30 20:43+0000\n"
 "Last-Translator: Ettore Atalan <atalanttore@googlemail.com>\n"
 "Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/>"
 "\n"
@@ -6650,7 +6650,7 @@ msgstr[1] "%d Probleme:"
 #. translator: The tag says that the preceding dependency problem is auto-resolved by applying the following solution
 #: src/solve-commit.cc:292
 msgid "Autoresolve:"
-msgstr ""
+msgstr "Automatisch auflösen:"
 
 #: src/solve-commit.cc:321
 msgid "Resolving dependencies..."
@@ -6828,7 +6828,7 @@ msgstr "Zusammenfassung im Pager anzeigen."
 
 #: src/solve-commit.cc:839
 msgid "Backend"
-msgstr ""
+msgstr "Backend"
 
 #: src/solve-commit.cc:953
 msgid "committing"
