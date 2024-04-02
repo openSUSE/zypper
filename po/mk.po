@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-03-22 18:04+0100\n"
-"PO-Revision-Date: 2024-03-05 08:43+0000\n"
+"PO-Revision-Date: 2024-04-02 06:43+0000\n"
 "Last-Translator: Kristijan Fremen Velkovski <me@krisfremen.com>\n"
 "Language-Team: Macedonian <https://l10n.opensuse.org/projects/zypper/master/"
 "mk/>\n"
@@ -388,11 +388,13 @@ msgstr ""
 msgid ""
 "'%s' remove modifier must not be used without a package name or capability."
 msgstr ""
+"Модификаторот за отстранување '%s' не смее да се користи без име или можност "
+"за пакет."
 
 #: src/PackageArgs.cc:221
 #, c-format, boost-format
 msgid "'%s' not found in package names. Trying '%s'."
-msgstr ""
+msgstr "'%s' не е пронајден во имињата на пакетите. Се обидуваме со '%s'."
 
 #: src/PackageArgs.cc:231
 #, c-format, boost-format
