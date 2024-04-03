@@ -769,6 +769,9 @@ void solve_and_commit ( Zypper &zypper, SolveAndCommitPolicy policy )
     if ( policy.zyppCommitPolicy().downloadMode() == DownloadOnly )
       summary.setDownloadOnly( true );
 
+    if ( policy.zyppCommitPolicy().dryRun() )
+      summary.setDryRun( true );
+
     // show the summary
     if ( zypper.out().type() == Out::TYPE_XML )
       summary.dumpAsXmlTo( cout );

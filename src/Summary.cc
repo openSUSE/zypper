@@ -187,6 +187,7 @@ Summary::Summary( const ResPool & pool, SummaryHints summaryHints, const ViewOpt
 , _wrap_width( 80 )
 , _force_no_color( false )
 , _download_only( false )
+, _dryRun( false )
 {
   readPool( pool );
 }
@@ -1797,7 +1798,15 @@ void Summary::dumpTo( std::ostream & out )
     Zypper::instance().out().notePar( 4, _("Package manager restart required. (Run this command once again after the update stack got updated)") );
   }
   if ( showNeedRebootHInt() )
-  {   Zypper::instance().out().notePar( 4, _("System reboot required.") ); }
+  {
+    if ( _download_only || _dryRun ) {
+      std::string_view opt { _dryRun ? "--dry-run" : "--download-only" };
+      // translator: %1% is an option string like  "--dry-run"
+      Zypper::instance().out().notePar( 4, str::Format( _("%1% is set, otherwise a system reboot would be required.") ) % opt );
+    } else {
+      Zypper::instance().out().notePar( 4, _("System reboot required.") );
+    }
+  }
 
   if ( !_ctc.empty() )
   {
