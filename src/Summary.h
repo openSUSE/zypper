@@ -87,6 +87,7 @@ public:
   bool hasViewOption( const ViewOptions option ) const  { return _viewop & option; }
   void setForceNoColor( bool value = true )		{ _force_no_color = value; }
   void setDownloadOnly( bool value = true )		{ _download_only = value; }
+  void setDryRun( bool value = true )			{ _dryRun = value; }
 
   void writeNewlyInstalled( std::ostream & out );
   void writeRemoved( std::ostream & out );
@@ -152,6 +153,7 @@ private:
   mutable unsigned _wrap_width;
   bool _force_no_color;
   bool _download_only;
+  bool _dryRun;
 
   bool _need_reboot_patch;	// need_reboot caused by a patch
   bool _need_reboot_nonpatch;	// need_reboot caused by something not a patch
