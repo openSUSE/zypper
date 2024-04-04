@@ -43,15 +43,6 @@ inline std::string timestamp()
 { return Date::now().form("%Y%m%d-%H%M%S"); }
 
 /**
- * The same as \ref init_repos(), but allows to specify repos to initialize.
- *
- * \param zypper    The zypper instance.
- * \param container A string container of identifier (alias|#|URI) to init.
-  */
-template <typename Container>
-void init_repos( Zypper & zypper, const Container & container = Container() );
-
-/**
  * Say "Repository %s not found" for all strings in \a not_found list.
  */
 void report_unknown_repos( Out & out, const std::list<std::string> & not_found );
