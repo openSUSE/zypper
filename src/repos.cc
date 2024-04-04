@@ -712,8 +712,7 @@ int repo_specs_to_aliases( Zypper & zypper, const std::vector<std::string> & rsp
  * \sa InitRepoSettings
  */
 
-template <class Container>
-void do_init_repos( Zypper & zypper, const Container & container )
+void do_init_repos( Zypper & zypper )
 {
   // load gpg keys & get target info
   // the target must be known before refreshing services so that repo manager
@@ -739,15 +738,12 @@ void do_init_repos( Zypper & zypper, const Container & container )
   RepoManager & manager = zypper.repoManager();
   RuntimeData & gData = zypper.runtimeData();
 
-  // get repositories specified with --repo or --catalog or in the container
+  // get repositories specified with --repo or --catalog
 
   std::list<std::string> not_found;
   const auto &repoFilter = InitRepoSettings::instance()._repoFilter;
   if ( !repoFilter.empty() )
     get_repos( zypper, repoFilter.begin(), repoFilter.end(), gData.repos, not_found );
-  // container
-  if ( !container.empty() )
-    get_repos( zypper, container.begin(), container.end(), gData.repos, not_found );
   if ( !not_found.empty() )
   {
     report_unknown_repos( zypper.out(), not_found );
@@ -849,6 +845,7 @@ void do_init_repos( Zypper & zypper, const Container & container )
       }
     }
 
+
     bool do_refresh = repo.enabled() && repo.autorefresh() && !zypper.config().no_refresh;
     if ( do_refresh )
     {
@@ -881,6 +878,11 @@ void do_init_repos( Zypper & zypper, const Container & container )
         catch ( const Exception & ex )
         {
           MIL << "We're running as non-root, skipping refresh of " << repo.alias() << endl;
+
+          //./src/Config.cc:    std::cerr << e.asUserHistory() << endl;
+          zypper.out().error( ex, "Problem", "hint" );
+
+
           zypper.out().info( str::Format(_( "Repository '%s' is out-of-date. You can run 'zypper refresh' as root to update it.")) % repo.asUserString() );
         }
       }
@@ -948,8 +950,7 @@ void do_init_repos( Zypper & zypper, const Container & container )
  * Initialize the repositories
  * \sa InitRepoSettings
  */
-template <typename Container>
-void init_repos( Zypper & zypper, const Container & container )
+void init_repos( Zypper & zypper )
 {
   static bool done = false;
   //! \todo this has to be done so that it works in zypper shell
@@ -957,20 +958,10 @@ void init_repos( Zypper & zypper, const Container & container )
     return;
 
   if ( !zypper.config().disable_system_sources )
-    do_init_repos( zypper, container );
+    do_init_repos( zypper );
 
   done = true;
 }
-
-// Explicit instantiation required for versions used outside repos.o
-template void init_repos<std::vector<std::string>>( Zypper &, const std::vector<std::string> & );
-
-/**
- * Initialize the repositories
- * \sa InitRepoSettings
- */
-void init_repos( Zypper & zypper )
-{ init_repos( zypper, std::vector<std::string>() ); }
 
 // ----------------------------------------------------------------------------
 
