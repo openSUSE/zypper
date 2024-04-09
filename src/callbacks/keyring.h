@@ -177,19 +177,7 @@ namespace zypp
         warnCanNotVerifyFile();
 
         Zypper::instance().out().gap();
-        // TODO: use text::join( msg, text::qContinue() )
-        // once the above texts for mgs are translated
-        std::string question;
-        if (context.empty())
-          question = str::Format(
-            // TranslatorExplanation: speaking of a file
-            _("File '%s' is unsigned, continue?")) % file;
-        else
-          question = str::Format(
-            // TranslatorExplanation: speaking of a file
-            _("File '%s' from repository '%s' is unsigned, continue?"))
-            % file % context.repoInfo().asUserString();
-
+        const std::string & question { text::join( msg, text::qContinue(), "\n" ) };
         return read_bool_answer(PROMPT_YN_GPG_UNSIGNED_FILE_ACCEPT, question, false);
       }
 
@@ -237,19 +225,7 @@ namespace zypp
         warnCanNotVerifyFile();
 
         Zypper::instance().out().gap();
-        std::string question;
-        // TODO: use text::join( msg, text::qContinue() )
-        // once the above texts for mgs are translated
-        if (context.empty())
-          question = str::Format(
-            // translators: the last %s is gpg key ID
-            _("File '%s' is signed with an unknown key '%s'. Continue?")) % file % id;
-        else
-          question = str::Format(
-            // translators: the last %s is gpg key ID
-            _("File '%s' from repository '%s' is signed with an unknown key '%s'. Continue?"))
-             % file % context.repoInfo().asUserString() % id;
-
+        const std::string & question { text::join( msg, text::qContinue(), "\n" ) };
         return read_bool_answer(PROMPT_YN_GPG_UNKNOWN_KEY_ACCEPT, question, false);
       }
 
@@ -354,8 +330,7 @@ namespace zypp
           popts.setOptionHelp( (++off), _("Trust the key and import it into trusted keyring.") );
 
         zypper.out().prompt(PROMPT_YN_GPG_KEY_TRUST, s.str(), popts);
-        unsigned prep =
-          get_prompt_reply(zypper, PROMPT_YN_GPG_KEY_TRUST, popts);
+        unsigned prep = get_prompt_reply(zypper, PROMPT_YN_GPG_KEY_TRUST, popts);
 
         if ( !canTrustTemporarily_r && prep == 1 )
           return KeyRingReport::KEY_TRUST_AND_IMPORT;
