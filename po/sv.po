@@ -12,10 +12,10 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-03-22 18:04+0100\n"
-"PO-Revision-Date: 2023-12-23 07:02+0000\n"
+"PO-Revision-Date: 2024-04-10 09:43+0000\n"
 "Last-Translator: Luna  Jernberg <bittin@opensuse.org>\n"
-"Language-Team: Swedish <https://l10n.opensuse.org/projects/zypper/master/sv/"
-">\n"
+"Language-Team: Swedish <https://l10n.opensuse.org/projects/zypper/master/sv/>"
+"\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1123,7 +1123,7 @@ msgstr[1] "Följande %d paket behöver ytterligare kundavtal för att få suppor
 
 #: src/Summary.cc:1414
 msgid "was superseded by"
-msgstr ""
+msgstr "ersattes av"
 
 #: src/Summary.cc:1427
 #, c-format, boost-format
@@ -1134,7 +1134,10 @@ msgid_plural ""
 "The following %d packages were discontinued and have been superseded by a "
 "new packages with different names."
 msgstr[0] ""
+"Följande paket har utgått och har ersatts av ett nytt paket med ett annat "
+"namn."
 msgstr[1] ""
+"Följande %d paket har utgått och har ersatts av nya paket med andra namn."
 
 #: src/Summary.cc:1432
 msgid ""
@@ -1144,7 +1147,11 @@ msgid_plural ""
 "The successor packages should be installed as soon as possible to receive "
 "continued support:"
 msgstr[0] ""
+"Efterföljarpaketet bör installeras så snart som möjligt för att få fortsatt "
+"stöd:"
 msgstr[1] ""
+"Efterföljarpaketen bör installeras så snart som möjligt för att få fortsatt "
+"stöd:"
 
 #: src/Summary.cc:1457
 #, c-format, boost-format
@@ -1210,7 +1217,7 @@ msgstr[1] "Följande %d paket kräver en omstart av systemet:"
 
 #: src/Summary.cc:1560
 msgid "Skipped needed patches which do not apply without conflict:"
-msgstr ""
+msgstr "Hoppade över nödvändiga patchar som inte gäller utan konflikt:"
 
 #: src/Summary.cc:1576
 #, boost-format
@@ -3062,7 +3069,7 @@ msgstr ""
 
 #: src/commands/patch.cc:50
 msgid "Skip needed patches which do not apply without conflict."
-msgstr ""
+msgstr "Hoppa över nödvändiga patchar som inte appliceras utan konflikt."
 
 #: src/commands/patch.cc:53
 msgid ""
@@ -5427,17 +5434,19 @@ msgstr "Supportnivå"
 
 #: src/info.cc:375
 msgid "The successor package is already installed."
-msgstr ""
+msgstr "Efterföljarpaketet är redan installerat."
 
 #: src/info.cc:377
 msgid ""
 "The successor package should be installed as soon as possible to receive "
 "continued support."
 msgstr ""
+"Efterföljarpaketet bör installeras så snart som möjligt för att få fortsatt "
+"få stöd."
 
 #: src/info.cc:384
 msgid "Unfortunately the successor package is not provided by any repository."
-msgstr ""
+msgstr "Tyvärr tillhandahålls inte efterföljarpaketet av något förråd."
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:394
@@ -6432,7 +6441,7 @@ msgstr[1] "%d problem:"
 #. translator: The tag says that the preceding dependency problem is auto-resolved by applying the following solution
 #: src/solve-commit.cc:292
 msgid "Autoresolve:"
-msgstr ""
+msgstr "Automatisk lösning:"
 
 #: src/solve-commit.cc:321
 msgid "Resolving dependencies..."
@@ -6605,7 +6614,7 @@ msgstr "Visa sammanfattning i sökaren."
 
 #: src/solve-commit.cc:839
 msgid "Backend"
-msgstr ""
+msgstr "Backend"
 
 #: src/solve-commit.cc:953
 msgid "committing"
