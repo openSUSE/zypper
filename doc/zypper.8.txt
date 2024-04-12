@@ -37,6 +37,18 @@ System Packages
 ~~~~~~~~~~~~~~~
 The set of installed packages on a system is sometimes denoted as repository *@System* or *System Packages*. In contrast to available repositories providing packages which can be installed, *@System* provides packages which can only be deleted. Installed packages which are not also provided by at least one of the available repositories are often denoted as being _unwanted_, _orphaned_ or _dropped_.
 
+'Note:' If you install packages which are not shipped within a repository - manually built or downloaded ones -, collect them within a local directory and add this directory as a 'plaindir repository' to your system. This way the packages will not be seen as being orphaned and are protected during a *dist-upgrade*.
+
+Creating such a plaindir repo is quite easy: +
+$ *mkdir /LocalRepo* +
+$ *zypper addrepo --refresh /LocalRepo LocalRepo* +
+
+If you need to make sure the package to install is taken from LocalRepo, simply use a 'REPO:PACKAGE' style argument: +
+$ *cp example.rpm /LocalRepo* +
+$ *zypper install LocalRepo:example* +
+
+
+Depending on the kind of packages you keep in a local repo you may want to adjust the way GPG signature checks are performed. See section *GPG checks* for details.
 
 Repositories
 ~~~~~~~~~~~~
@@ -233,6 +245,8 @@ The _NAME_ component of a capability is not only a package name but any symbol p
 If _EDITION_ is not specified, the newest installable version will be installed. This also means that if the package is already installed and newer versions are available, it will get upgraded to the newest installable version.
 +
 If _ARCH_ is not specified, or the last dot of the capability name string is not followed by known architecture, the solver will treat the whole string as a capability name. If the ARCH is known, the solver will select a package matching that architecture and complain if such package cannot be found.
++
+If you want to make sure a package from a specific _REPOSITORY_ is picked, use 'REPOSITORY:PACKAGENAME' as argument.
 
 Zypper is also able to install _plain RPM files_ while trying to satisfy their dependencies using packages from defined repositories. You can install a plain RPM file by specifying its location in the install command arguments either as a local path or an URI. E.g.: :::
 +
@@ -258,6 +272,8 @@ $ *zypper install --{nbsp} -boring-game great-game great-game-manual*{nbsp}
 		Work only with the repository specified by the alias, name, number or URI. This option can be used multiple times.
 +
 Using --repo is _discouraged_ as it currently hides unmentioned repositories from the resolver, leading to inexpertly decisions. In the future --repo will become an alias for *--from*.
++
+If you want to install a package from a specific repository, use 'REPOSITORY:PACKAGENAME' as argument.
 
 	*-t*, *--type* _type_::
 		Type of package to install (default: package). See section *Package Types* for list of available package types. Use *zypper se -t* _type_ [_name_] to look for available items of this type and *zypper info -t* _type name_ to display more detailed information about the item.
@@ -738,6 +754,8 @@ It might be less tedious to persistently set *$releasever* to the target distrib
 
 	*--remove-orphaned*::
 		Remove orphaned packages. Installed packages which are not provided by at least one of the available repositories are considered to be orphaned or dropped. *dist-upgrade* removes orphaned packages if they prevent the upgrade of wanted packages. With this option all unneeded orphaned packages are removed.
++
+		'Note:' Packages which are not shipped within a repository - manually built or downloaded ones -, can be collected in a plaindir repository to prevent them from being treated as orphaned. See section *System Packages* for details.
 
 	-r, --repo alias|name|#|URI::
 		Work only with the repository specified by the alias, name, number, or URI.
