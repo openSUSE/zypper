@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <optional>
 #include <iterator>
 #include <list>
 
@@ -44,6 +45,46 @@ typedef std::set<RepoInfo, RepoInfoAliasComparator> RepoInfoSet;
 
 static RepoInfoSet collect_repos_by_option( Zypper & zypper, const RepoServiceCommonSelectOptions &selectOpts );
 
+// ----------------------------------------------------------------------------
+inline std::string age2str( time_t age_r )
+{
+  static constexpr std::pair<time_t,const char*> units[] = {
+    { 31556952, "Y" },
+    { 2629746, "M" },
+    { 86400, "D" },
+    { 3600, "h" },
+    { 60, "min" },
+    { 1, "s" },
+  };
+
+  if ( not age_r ) {
+    return "0 s";
+  }
+
+  bool inFuture = age_r < 0;
+  if ( inFuture ) age_r = -age_r;
+
+  str::Str str;
+  bool oneMore = false; // print at most the 2 highest units
+  for ( auto [mult,unit] : units ) {
+    time_t v = age_r % mult;
+    time_t r = age_r / mult;
+    if ( r || oneMore ) {
+      str << r << " " << unit << " ";
+      age_r = v;
+      if ( oneMore )
+        break;
+      oneMore = true;
+    }
+  }
+
+  if ( inFuture ) {
+    // translator: used like "1h 12min in the future!"
+    str << _("in the future!");
+    return MSG_WARNINGString( str ).str();
+  }
+  return str;
+}
 
 // ----------------------------------------------------------------------------
 
@@ -738,6 +779,23 @@ void do_init_repos( Zypper & zypper )
   RepoManager & manager = zypper.repoManager();
   RuntimeData & gData = zypper.runtimeData();
 
+  // bsc#1222086: No need to try actions for non-root user which will not perform.
+  // Repos from the host system are not touched. Print repo metadata stats instead.
+  // For a chroot we proceed as usual. If the user created it, he may be able to refresh
+  // the repos.-
+  bool noUserRefresh = geteuid() != 0 && ZConfig::instance().repoManagerRoot() == "/";
+  std::optional<Date> now;
+  std::optional<PropertyTable> mdstats;
+  if ( noUserRefresh ) {
+    MIL << "turn off refresh for not-root user" << endl;
+    zypper.configNoConst().no_refresh = true;
+    now = Date::now();
+    mdstats = PropertyTable();
+    mdstats->add( _("Repository"),
+                  // translator: used as a table header
+                  _("Time since last refresh") );
+  }
+
   // get repositories specified with --repo or --catalog
 
   std::list<std::string> not_found;
@@ -845,7 +903,6 @@ void do_init_repos( Zypper & zypper )
       }
     }
 
-
     bool do_refresh = repo.enabled() && repo.autorefresh() && !zypper.config().no_refresh;
     if ( do_refresh )
     {
@@ -887,30 +944,57 @@ void do_init_repos( Zypper & zypper )
         }
       }
     }
-    // even if refresh is not required, try to build the cache
-    // for the case of non-existing cache
+    // Even if refresh is not required, try to build the cache
+    // for the case of non-existing cache. Or print repo metadata
+    // stats in case of noUserRefresh==true.
     else if ( repo.enabled() )
     {
-      if ( build_cache( zypper, repo, false ) )
-      {
-        // If an error is returned, it means zypp attempted to build the metadata
-        // cache for the repo and failed.  For non-root probably because writing
-        // is not allowed. Display a refresh hint then.
-        if ( geteuid() != 0 )
-        {
-          MIL <<  "We're running as non-root, skipping building of " << repo.alias() + "cache" << endl;
-          zypper.out().warning(
-            str::Format(_( "The metadata cache needs to be built for the '%s' repository. You can run 'zypper refresh' as root to do this."))
-            % repo.asUserString(), Out::QUIET );
+      if ( noUserRefresh ) {
+        // For non-root user: Show stats and hints about the enabled repos.
+        const auto & repostatus = manager.metadataStatus( repo );
+        if ( not repostatus.empty() ) {
+          Date age = *now - repostatus.timestamp();
+          mdstats->add( repo.label(), age2str( age ) );
+        } else {
+          PathInfo mddir { repo.metadataPath() };
+          DBG << "noUserRefresh: " << mddir << endl;
+          if ( mddir.error() == ENOENT ) {
+            // translator: Used as status in a table "RepoName: MetadataStatus"
+            mdstats->add( MSG_ERRORString(repo.label()), MSG_ERRORString(_("No metadata available! Skipping it!")) );
+          } else if ( mddir.error() == EACCES || ( mddir.isDir() && not mddir.userMayRX() ) ) {
+            // translator: Used as status in a table "RepoName: MetadataStatus"
+            mdstats->add( MSG_ERRORString(repo.label()), MSG_ERRORString(_("No permission to read metadata! Skipping it!")) );
+          } else {
+            // translator: Used as status in a table "RepoName: MetadataStatus"
+            mdstats->add( MSG_ERRORString(repo.label()), MSG_ERRORString(_("Cannot access metadata! Skipping it!")) );
+          }
+          it->setEnabled( false );
+          postContentcheck = false;
+          ++skip_count;
         }
 
-        WAR << "Skipping repository '" << repo.alias() << "' because of the above error." << endl;
-        zypper.out().warning( str::Format(_("Skipping repository '%s' because of the above error.")) % repo.asUserString(),
-                              Out::QUIET );
+      } else {
+        if ( build_cache( zypper, repo, false ) )
+        {
+          // If an error is returned, it means zypp attempted to build the metadata
+          // cache for the repo and failed.  For non-root probably because writing
+          // is not allowed. Display a refresh hint then.
+          if ( geteuid() != 0 )
+          {
+            MIL <<  "We're running as non-root, skipping building of " << repo.alias() + "cache" << endl;
+            zypper.out().warning(
+              str::Format(_( "The metadata cache needs to be built for the '%s' repository. You can run 'zypper refresh' as root to do this."))
+              % repo.asUserString(), Out::QUIET );
+          }
 
-        it->setEnabled( false );
-        postContentcheck = false;
-        ++skip_count;
+          WAR << "Skipping repository '" << repo.alias() << "' because of the above error." << endl;
+          zypper.out().warning( str::Format(_("Skipping repository '%s' because of the above error.")) % repo.asUserString(),
+                                Out::QUIET );
+
+          it->setEnabled( false );
+          postContentcheck = false;
+          ++skip_count;
+        }
       }
     }
 
@@ -932,15 +1016,28 @@ void do_init_repos( Zypper & zypper )
     }
   }
 
+  if ( noUserRefresh ) {
+    zypper.out().info( str::Str() << *mdstats );
+  }
+
   if ( skip_count )
   {
-    zypper.out().error(_("Some of the repositories have not been refreshed because of an error.") );
+    if ( noUserRefresh ) {
+      zypper.out().error(_("Some of the repositories had to be skipped due to missing metadata.") );
+    } else {
+      zypper.out().error(_("Some of the repositories have not been refreshed because of an error.") );
+    }
     // TODO: A user abort during repo refresh as well as unavailable metadata
     // should probably lead to ZYPPER_EXIT_ERR_ZYPP right here. Ignored refresh
     // errors may continue. For now at least remember the refresh error to prevent
     // a 0 exit code after the action completed. (bsc#961719, bsc#961724, et.al.)
     // zypper.setExitCode( ZYPPER_EXIT_ERR_ZYPP );
     zypper.setExitInfoCode( ZYPPER_EXIT_INF_REPOS_SKIPPED );
+  }
+
+  if ( noUserRefresh ) {
+    zypper.out().notePar( 4, _("Running with user privileges. From time to time run 'zypper refresh' as root to make sure the repository metadata are complete and up-to-date.") );
+    zypper.out().gap();
   }
 }
 
