@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-04-15 13:01+0200\n"
-"PO-Revision-Date: 2024-03-23 01:43+0000\n"
+"PO-Revision-Date: 2024-04-16 00:47+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
 "Language-Team: Japanese <https://l10n.opensuse.org/projects/zypper/master/ja/"
 ">\n"
@@ -1273,7 +1273,7 @@ msgstr ""
 #: src/Summary.cc:1805
 #, boost-format
 msgid "%1% is set, otherwise a system reboot would be required."
-msgstr ""
+msgstr "今回は %1% が指定されているためシステムの再起動は不要ですが、これを指定しない場合、システムの再起動が必要となります。"
 
 #: src/Summary.cc:1807
 msgid "System reboot required."
@@ -2122,7 +2122,7 @@ msgstr "指定したリポジトリのアップグレードに限定します。
 
 #: src/commands/distupgrade.cc:41
 msgid "Remove unneeded orphaned packages."
-msgstr ""
+msgstr "不要な孤立パッケージを削除します。"
 
 #: src/commands/distupgrade.cc:72
 #, c-format, boost-format
@@ -3249,12 +3249,12 @@ msgstr "指定したリポジトリ内で利用可能なすべてのパッケー
 #: src/commands/query/packages.cc:35
 msgid ""
 "Show installed packages which were automatically selected by the resolver."
-msgstr ""
+msgstr "解決器によって自動的に選択され、インストールされたパッケージを表示します。"
 
 #. translators: --userinstalled
 #: src/commands/query/packages.cc:39
 msgid "Show installed packages which were explicitly selected by the user."
-msgstr ""
+msgstr "明示的にインストールするよう指定したパッケージを表示します。"
 
 #. translators: --orphaned
 #: src/commands/query/packages.cc:43
@@ -5701,7 +5701,7 @@ msgstr "ソースパッケージ %s-%s のインストール中に問題が発�
 #. translator: used like "1h 12min in the future!"
 #: src/repos.cc:83
 msgid "in the future!"
-msgstr ""
+msgstr "(未来の日時になっています!)"
 
 #. translators: used as 'XYZ changed to SOMETHING [volatile]' to tag specific property changes.
 #: src/repos.cc:94
@@ -5891,7 +5891,7 @@ msgstr "無効化されたリポジトリ「%s」を無視しています"
 #. translator: used as a table header
 #: src/repos.cc:796
 msgid "Time since last refresh"
-msgstr ""
+msgstr "最終更新からの経過時間"
 
 #: src/repos.cc:843
 #, c-format, boost-format
@@ -5922,17 +5922,17 @@ msgstr ""
 #. translator: Used as status in a table "RepoName: MetadataStatus"
 #: src/repos.cc:963
 msgid "No metadata available! Skipping it!"
-msgstr ""
+msgstr "メタデータがありません！ 読み飛ばしています！"
 
 #. translator: Used as status in a table "RepoName: MetadataStatus"
 #: src/repos.cc:966
 msgid "No permission to read metadata! Skipping it!"
-msgstr ""
+msgstr "メタデータを読み込む権限がありません！ 読み飛ばしています！"
 
 #. translator: Used as status in a table "RepoName: MetadataStatus"
 #: src/repos.cc:969
 msgid "Cannot access metadata! Skipping it!"
-msgstr ""
+msgstr "メタデータにアクセスできません！ 読み飛ばしています！"
 
 #: src/repos.cc:986
 #, c-format, boost-format
@@ -5950,13 +5950,15 @@ msgstr "リポジトリ '%s' は無効なままです。"
 
 #: src/repos.cc:1026
 msgid "Some of the repositories had to be skipped due to missing metadata."
-msgstr ""
+msgstr "メタデータが存在しないために読み飛ばしたリポジトリがあります。"
 
 #: src/repos.cc:1039
 msgid ""
 "Running with user privileges. From time to time run 'zypper refresh' as root "
 "to make sure the repository metadata are complete and up-to-date."
 msgstr ""
+"一般ユーザ権限で動作させています。定期的に root で 'zypper refresh' "
+"を実行し、リポジトリのメタデータを最新の状態に更新してください。"
 
 #: src/repos.cc:1071
 msgid "Initializing Target"
