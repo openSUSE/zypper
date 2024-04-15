@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-04-15 13:01+0200\n"
-"PO-Revision-Date: 2024-03-23 01:43+0000\n"
+"PO-Revision-Date: 2024-04-16 00:47+0000\n"
 "Last-Translator: Freek de Kruijf <freek@opensuse.org>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/zypper/master/nl/>\n"
 "Language: nl\n"
@@ -1413,7 +1413,7 @@ msgstr ""
 #: src/Summary.cc:1805
 #, boost-format
 msgid "%1% is set, otherwise a system reboot would be required."
-msgstr ""
+msgstr "%1% is ingesteld, anders zou een herstart van het systeen vereist zijn."
 
 #: src/Summary.cc:1807
 msgid "System reboot required."
@@ -2289,7 +2289,7 @@ msgstr "beperkt de upgrade tot de gespecificeerde opslagruimte."
 
 #: src/commands/distupgrade.cc:41
 msgid "Remove unneeded orphaned packages."
-msgstr ""
+msgstr "Onnodige verweesde pakketten verwijderen."
 
 #: src/commands/distupgrade.cc:72
 #, c-format, boost-format
@@ -3434,11 +3434,15 @@ msgstr "Toon alle beschikbare pakketten in de gekozen installatiebronnen."
 msgid ""
 "Show installed packages which were automatically selected by the resolver."
 msgstr ""
+"Geïnstalleerde pakketten, die automatisch geselecteerd zijn door de "
+"oplosser, tonen."
 
 #. translators: --userinstalled
 #: src/commands/query/packages.cc:39
 msgid "Show installed packages which were explicitly selected by the user."
 msgstr ""
+"Geïnstalleerde pakketten, die expliciet door de gebruiker zijn geselecteerd, "
+"tonen."
 
 #. translators: --orphaned
 #: src/commands/query/packages.cc:43
@@ -5920,7 +5924,7 @@ msgstr "Probleem bij installeren van bronpakket %s-%s:"
 #. translator: used like "1h 12min in the future!"
 #: src/repos.cc:83
 msgid "in the future!"
-msgstr ""
+msgstr "in de toekomst!"
 
 #. translators: used as 'XYZ changed to SOMETHING [volatile]' to tag specific property changes.
 #: src/repos.cc:94
@@ -6110,7 +6114,7 @@ msgstr "De uitgeschakelde installatiebron ‘%s’ wordt genegeerd"
 #. translator: used as a table header
 #: src/repos.cc:796
 msgid "Time since last refresh"
-msgstr ""
+msgstr "Tijd sinds de laatste vernieuwing"
 
 #: src/repos.cc:843
 #, c-format, boost-format
@@ -6141,17 +6145,17 @@ msgstr ""
 #. translator: Used as status in a table "RepoName: MetadataStatus"
 #: src/repos.cc:963
 msgid "No metadata available! Skipping it!"
-msgstr ""
+msgstr "Geen metagegevens beschikbaar! Dit wordt overgeslagen!"
 
 #. translator: Used as status in a table "RepoName: MetadataStatus"
 #: src/repos.cc:966
 msgid "No permission to read metadata! Skipping it!"
-msgstr ""
+msgstr "Geen rechten om metagegevens te lezen! Dit wordt overgeslagen!"
 
 #. translator: Used as status in a table "RepoName: MetadataStatus"
 #: src/repos.cc:969
 msgid "Cannot access metadata! Skipping it!"
-msgstr ""
+msgstr "Geen toegang tot metagegevens! Dit wordt overgeslagen!"
 
 #: src/repos.cc:986
 #, c-format, boost-format
@@ -6170,12 +6174,17 @@ msgstr "Opslagruimte '%s' blijft uitgeschakeld."
 #: src/repos.cc:1026
 msgid "Some of the repositories had to be skipped due to missing metadata."
 msgstr ""
+"Sommigen van de opslagruimten moesten overgeslagen worden vanwege "
+"ontbrekende metagegevens."
 
 #: src/repos.cc:1039
 msgid ""
 "Running with user privileges. From time to time run 'zypper refresh' as root "
 "to make sure the repository metadata are complete and up-to-date."
 msgstr ""
+"Draait met gebruikersrechten. Voer van tijd tot tijd 'zypper refresh' uit "
+"als root om er zeker van te zijn dat de metagegevens van de opslagruimten "
+"volledig zijn en bijgewerkt."
 
 #: src/repos.cc:1071
 msgid "Initializing Target"
