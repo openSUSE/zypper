@@ -1,4 +1,24 @@
 -------------------------------------------------------------------
+Mon Apr 15 13:02:18 CEST 2024 - ma@suse.de
+
+- Do not try to refresh repo metadata as non-root user
+  (bsc#1222086)
+  Instead show refresh stats and hint how to update them.
+- man: Explain how to protect orphaned packages by collecting
+  them in a plaindir repo.
+- packages: Add --autoinstalled and --userinstalled options to
+  list them.
+- Don't print 'reboot required' message if download-only or
+  dry-run (fixes #529)
+  Instead point out that a reboot would be required if the option
+  was not used.
+- Resepect zypper.conf option `showAlias` search commands
+  (bsc#1221963)
+  Repository::asUserString (or Repository::label) respects the
+  zypper.conf option, while name/alias return the property.
+- version 1.14.71
+
+-------------------------------------------------------------------
 Mon Mar 25 17:48:54 CET 2024 - ma@suse.de
 
 - dup: New option --remove-orphaned to remove all orphaned
