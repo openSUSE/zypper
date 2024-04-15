@@ -9,10 +9,10 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-04-15 13:01+0200\n"
-"PO-Revision-Date: 2024-03-22 21:43+0000\n"
+"PO-Revision-Date: 2024-04-15 16:43+0000\n"
 "Last-Translator: David Medina <medipas@gmail.com>\n"
-"Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/"
-">\n"
+"Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/>"
+"\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1380,7 +1380,7 @@ msgstr ""
 #: src/Summary.cc:1805
 #, boost-format
 msgid "%1% is set, otherwise a system reboot would be required."
-msgstr ""
+msgstr "S'ha establert %1%. En cas contrari, caldria reiniciar el sistema."
 
 #: src/Summary.cc:1807
 msgid "System reboot required."
@@ -2239,7 +2239,7 @@ msgstr "Restringeix l'actualització a un repositori especificat."
 
 #: src/commands/distupgrade.cc:41
 msgid "Remove unneeded orphaned packages."
-msgstr ""
+msgstr "Suprimeix els paquets orfes innecessaris."
 
 #: src/commands/distupgrade.cc:72
 #, c-format, boost-format
@@ -3382,11 +3382,12 @@ msgstr "Llista tots els paquets disponibles als repositoris especificats."
 msgid ""
 "Show installed packages which were automatically selected by the resolver."
 msgstr ""
+"Mostra els paquets instal·lats seleccionats automàticament pel resolutor."
 
 #. translators: --userinstalled
 #: src/commands/query/packages.cc:39
 msgid "Show installed packages which were explicitly selected by the user."
-msgstr ""
+msgstr "Mostra els paquets instal·lats seleccionats explícitament per l'usuari."
 
 #. translators: --orphaned
 #: src/commands/query/packages.cc:43
@@ -5827,7 +5828,7 @@ msgstr "Problema instal·lant el paquet de codi font %s-%s:"
 #. translator: used like "1h 12min in the future!"
 #: src/repos.cc:83
 msgid "in the future!"
-msgstr ""
+msgstr "en el futur!"
 
 #. translators: used as 'XYZ changed to SOMETHING [volatile]' to tag specific property changes.
 #: src/repos.cc:94
@@ -6017,7 +6018,7 @@ msgstr "Ignorant el repositori inhabilitat %s"
 #. translator: used as a table header
 #: src/repos.cc:796
 msgid "Time since last refresh"
-msgstr ""
+msgstr "Temps des del darrer refresc"
 
 #: src/repos.cc:843
 #, c-format, boost-format
@@ -6047,17 +6048,17 @@ msgstr ""
 #. translator: Used as status in a table "RepoName: MetadataStatus"
 #: src/repos.cc:963
 msgid "No metadata available! Skipping it!"
-msgstr ""
+msgstr "No hi ha metadades disponibles! S'omet!"
 
 #. translator: Used as status in a table "RepoName: MetadataStatus"
 #: src/repos.cc:966
 msgid "No permission to read metadata! Skipping it!"
-msgstr ""
+msgstr "No hi ha permís per llegir les metadades! S'omet!"
 
 #. translator: Used as status in a table "RepoName: MetadataStatus"
 #: src/repos.cc:969
 msgid "Cannot access metadata! Skipping it!"
-msgstr ""
+msgstr "No es pot accedir a les metadades! S'omet!"
 
 #: src/repos.cc:986
 #, c-format, boost-format
@@ -6076,12 +6077,17 @@ msgstr "El repositori %s roman inhabilitat."
 #: src/repos.cc:1026
 msgid "Some of the repositories had to be skipped due to missing metadata."
 msgstr ""
+"Alguns dels repositoris s'han hagut d'ometre a causa de la manca de "
+"metadades."
 
 #: src/repos.cc:1039
 msgid ""
 "Running with user privileges. From time to time run 'zypper refresh' as root "
 "to make sure the repository metadata are complete and up-to-date."
 msgstr ""
+"S'executa amb privilegis d'usuari. De tant en tant, executeu zypper refresh "
+"com a arrel per assegurar que les metadades del repositori estiguin "
+"completes i actualitzades."
 
 #: src/repos.cc:1071
 msgid "Initializing Target"
