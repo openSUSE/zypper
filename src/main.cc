@@ -81,7 +81,7 @@ void signal_nopipe( int sig )
 }
 
 int main( int argc, char **argv )
-{
+try {
   struct Bye {
     ~Bye() {
       MIL << "===== Exiting main("<<exitcode<<") =====" << endl;
@@ -164,4 +164,11 @@ int main( int argc, char **argv )
   if ( !exitcode )
     exitcode = zypper.exitInfoCode();	// propagate refresh errors even if main action succeeded
   return exitcode;
+}
+catch (...) {
+  // https://en.cppreference.com/w/cpp/language/throw#stack_unwinding
+  // ... It is implementation-defined whether any stack unwinding
+  //     takes place for uncaught exceptions. ...
+  // And so we catch them to allow any RAII driven cleanup to perform.
+  throw;
 }
