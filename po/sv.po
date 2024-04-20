@@ -12,10 +12,10 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-04-15 13:01+0200\n"
-"PO-Revision-Date: 2024-04-10 09:43+0000\n"
+"PO-Revision-Date: 2024-04-20 12:43+0000\n"
 "Last-Translator: Luna  Jernberg <bittin@opensuse.org>\n"
-"Language-Team: Swedish <https://l10n.opensuse.org/projects/zypper/master/sv/"
-">\n"
+"Language-Team: Swedish <https://l10n.opensuse.org/projects/zypper/master/sv/>"
+"\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1362,7 +1362,7 @@ msgstr ""
 #: src/Summary.cc:1805
 #, boost-format
 msgid "%1% is set, otherwise a system reboot would be required."
-msgstr ""
+msgstr "%1% är inställt, annars skulle en omstart av systemet krävas."
 
 #: src/Summary.cc:1807
 msgid "System reboot required."
@@ -2211,7 +2211,7 @@ msgstr "Begränsa uppgraderingen till det angivna arkivet."
 
 #: src/commands/distupgrade.cc:41
 msgid "Remove unneeded orphaned packages."
-msgstr ""
+msgstr "Ta bort onödiga föräldralösa paket."
 
 #: src/commands/distupgrade.cc:72
 #, c-format, boost-format
@@ -3334,12 +3334,12 @@ msgstr "Lista alla paket som är tillgängliga i angivna arkiv."
 #: src/commands/query/packages.cc:35
 msgid ""
 "Show installed packages which were automatically selected by the resolver."
-msgstr ""
+msgstr "Visa installerade paket som valdes automatiskt av upplösaren."
 
 #. translators: --userinstalled
 #: src/commands/query/packages.cc:39
 msgid "Show installed packages which were explicitly selected by the user."
-msgstr ""
+msgstr "Visa installerade paket som uttryckligen valts ut av användaren."
 
 #. translators: --orphaned
 #: src/commands/query/packages.cc:43
@@ -5757,7 +5757,7 @@ msgstr "Ett problem uppstod vid installationen av källpaket %s-%s:"
 #. translator: used like "1h 12min in the future!"
 #: src/repos.cc:83
 msgid "in the future!"
-msgstr ""
+msgstr "i framtiden!"
 
 #. translators: used as 'XYZ changed to SOMETHING [volatile]' to tag specific property changes.
 #: src/repos.cc:94
@@ -5947,7 +5947,7 @@ msgstr "Hoppar över inaktiverad lagringsplats \"%s\""
 #. translator: used as a table header
 #: src/repos.cc:796
 msgid "Time since last refresh"
-msgstr ""
+msgstr "Tid sedan senaste uppdatering"
 
 #: src/repos.cc:843
 #, c-format, boost-format
@@ -5978,17 +5978,17 @@ msgstr ""
 #. translator: Used as status in a table "RepoName: MetadataStatus"
 #: src/repos.cc:963
 msgid "No metadata available! Skipping it!"
-msgstr ""
+msgstr "Ingen metadata tillgänglig! Hoppar över det!"
 
 #. translator: Used as status in a table "RepoName: MetadataStatus"
 #: src/repos.cc:966
 msgid "No permission to read metadata! Skipping it!"
-msgstr ""
+msgstr "Ingen behörighet att läsa metadata! Hoppar över det!"
 
 #. translator: Used as status in a table "RepoName: MetadataStatus"
 #: src/repos.cc:969
 msgid "Cannot access metadata! Skipping it!"
-msgstr ""
+msgstr "Kan inte komma åt metadata! Hoppar över det!"
 
 #: src/repos.cc:986
 #, c-format, boost-format
@@ -6007,12 +6007,15 @@ msgstr "Arkivet %s är ogiltigt."
 #: src/repos.cc:1026
 msgid "Some of the repositories had to be skipped due to missing metadata."
 msgstr ""
+"Vissa av förråden var tvungna att hoppas över på grund av saknad metadata."
 
 #: src/repos.cc:1039
 msgid ""
 "Running with user privileges. From time to time run 'zypper refresh' as root "
 "to make sure the repository metadata are complete and up-to-date."
 msgstr ""
+"Körs med användarrättigheter. Kör då och då \"zypper refresh\" som root för "
+"att se till att metadata från förrådet är komplett och uppdaterad."
 
 #: src/repos.cc:1071
 msgid "Initializing Target"
