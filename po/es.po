@@ -18,10 +18,10 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-04-15 13:01+0200\n"
-"PO-Revision-Date: 2024-02-29 23:42+0000\n"
-"Last-Translator: Antonio Simón <antonio@trans-mission.com>\n"
-"Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/"
-">\n"
+"PO-Revision-Date: 2024-04-21 22:43+0000\n"
+"Last-Translator: Jonatan Porras <jonatanpc8@gmail.com>\n"
+"Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
+"\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1167,7 +1167,7 @@ msgstr[1] ""
 
 #: src/Summary.cc:1415
 msgid "was superseded by"
-msgstr ""
+msgstr "Fue reemplazado por"
 
 #: src/Summary.cc:1428
 #, c-format, boost-format
@@ -1178,7 +1178,11 @@ msgid_plural ""
 "The following %d packages were discontinued and have been superseded by a "
 "new packages with different names."
 msgstr[0] ""
+"El siguiente paquete se ha descontinuado y ha sido reemplazado por un nuevo "
+"paquete con un nombre diferente."
 msgstr[1] ""
+"Los siguientes paquetes %d fueron descontinuados y reemplazados por nuevos "
+"paquetes con nombres diferentes."
 
 #: src/Summary.cc:1433
 msgid ""
@@ -1188,7 +1192,11 @@ msgid_plural ""
 "The successor packages should be installed as soon as possible to receive "
 "continued support:"
 msgstr[0] ""
+"El paquete sucesor debe instalarse lo antes posible para seguir recibiendo "
+"soporte:"
 msgstr[1] ""
+"Los paquetes sucesores deben instalarse lo antes posible para seguir "
+"recibiendo soporte:"
 
 #: src/Summary.cc:1458
 #, c-format, boost-format
@@ -1256,7 +1264,7 @@ msgstr[1] "Los %d paquetes siguientes requieren que se reinicie el sistema:"
 
 #: src/Summary.cc:1561
 msgid "Skipped needed patches which do not apply without conflict:"
-msgstr ""
+msgstr "Se han omitido parches necesarios que no se aplican sin conflicto:"
 
 #: src/Summary.cc:1577
 #, boost-format
@@ -1403,6 +1411,7 @@ msgstr ""
 #, boost-format
 msgid "%1% is set, otherwise a system reboot would be required."
 msgstr ""
+"%1% está configurado, de lo contrario sería necesario reiniciar el sistema."
 
 #: src/Summary.cc:1807
 msgid "System reboot required."
@@ -2268,7 +2277,7 @@ msgstr "Restringe la actualización al repositorio especificado."
 
 #: src/commands/distupgrade.cc:41
 msgid "Remove unneeded orphaned packages."
-msgstr ""
+msgstr "Elimine los paquetes huérfanos innecesarios."
 
 #: src/commands/distupgrade.cc:72
 #, c-format, boost-format
