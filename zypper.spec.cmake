@@ -29,7 +29,6 @@ BuildRequires:  gettext-devel >= 0.15
 BuildRequires:  libzypp-devel >= 17.32.3
 BuildRequires:  readline-devel >= 5.1
 BuildRequires:  libxml2-devel
-Requires:       procps
 %if 0%{?suse_version}
 Requires:       libaugeas0 >= 1.10.0
 %requires_ge    libzypp

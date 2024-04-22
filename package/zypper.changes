@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Apr 22 13:11:49 UTC 2024 - Dirk Müller <dmueller@suse.com>
+
+- remove procps requires (was only for ZMD which is dropped)
+  (jsc#PED-8153)
+
+-------------------------------------------------------------------
 Mon Apr 15 13:02:18 CEST 2024 - ma@suse.de
 
 - Do not try to refresh repo metadata as non-root user
