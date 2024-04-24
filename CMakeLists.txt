@@ -32,13 +32,15 @@ ADD_DEFINITIONS( -DVERSION="${VERSION}" )
 
 SET( CMAKE_CXX_STANDARD ${ZYPPCOMMON_CXX_STANDARD} )
 SET( CMAKE_CXX_EXTENSIONS OFF )
-SET( CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3" )
-SET( CMAKE_C_FLAGS_RELEASE   "${CMAKE_C_FLAGS_RELEASE}   -O3" )
+SET( CMAKE_CXX_FLAGS_RELEASE "-O3" )
+SET( CMAKE_CXX_FLAGS_RELWITHDEBUGINFO "-g -O2" )
+SET( CMAKE_C_FLAGS_RELEASE   "-O3" )
+SET( CMAKE_C_FLAGS_RELWITHDEBUGINFO "-g -O2" )
 
-SET( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC -g -Wall -Woverloaded-virtual -Wnon-virtual-dtor -fstack-protector -fvisibility-inlines-hidden" )
-SET( CMAKE_C_FLAGS   "${CMAKE_C_FLAGS}   -fPIC -g -Wall -fstack-protector" )
+SET( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fpie -Wall -Woverloaded-virtual -Wnon-virtual-dtor -fvisibility=hidden" )
+SET( CMAKE_C_FLAGS   "${CMAKE_C_FLAGS}   -fpie -Wall" )
 
-SET( CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -pie" )
+SET( CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fpie -fvisibility=hidden" )
 
 IF ( LEGACY_ENABLE_LONGOPT_ABBREV )
   # Fixed in 1.14.34: Do not allow the abbreviation of cli arguments (bsc#1164543)

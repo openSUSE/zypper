@@ -1,7 +1,7 @@
 #
-# spec file for package zypper
+# spec file for package zypper.spec
 #
-# Copyright (c) 2023 SUSE LLC
+# Copyright (c) 2024 SUSE LLC
 #
 # All modifications and additions to the file contributed by third parties
 # remain the property of their copyright owners, unless otherwise agreed
@@ -17,6 +17,11 @@
 
 
 Name:           zypper
+Version:        @VERSION@
+Release:        0
+Source:         %{name}-%{version}.tar.bz2
+Source1:        %{name}-rpmlintrc
+URL:            https://github.com/openSUSE/zypper
 BuildRequires:  augeas-devel >= 1.10.0
 %if 0%{?suse_version} > 1325
 BuildRequires:  libboost_headers-devel
@@ -29,14 +34,6 @@ BuildRequires:  gettext-devel >= 0.15
 BuildRequires:  libzypp-devel >= 17.32.3
 BuildRequires:  readline-devel >= 5.1
 BuildRequires:  libxml2-devel
-%if 0%{?suse_version}
-Requires:       libaugeas0 >= 1.10.0
-%requires_ge    libzypp
-Recommends:     logrotate
-Recommends:     zypper-log
-%else
-Requires:       augeas >= 1.10.0
-%endif
 
 # required for documentation
 BuildRequires:  rubygem(asciidoctor)
@@ -48,18 +45,22 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 Summary:        Command line software manager using libzypp
 License:        GPL-2.0-or-later
 Group:          System/Packages
-Version:        @VERSION@
-Release:        0
-Source:         %{name}-%{version}.tar.bz2
-Source1:        %{name}-rpmlintrc
-Url:            https://github.com/openSUSE/zypper
+
 Provides:       y2pmsh
 Obsoletes:      y2pmsh
-
 Provides:       zypper(auto-agree-with-product-licenses)
 Provides:       zypper(oldpackage)
 Provides:       zypper(updatestack-only)
 Provides:       zypper(purge-kernels)
+%if 0%{?suse_version}
+Requires:       libaugeas0 >= 1.10.0
+%requires_ge    libzypp
+Recommends:     logrotate
+Recommends:     zypper-log
+%else
+Requires:       augeas >= 1.10.0
+%endif
+
 
 %description
 Zypper is a command line tool for managing software. It can be used to add
@@ -69,21 +70,13 @@ install patches, hardware drivers, verify dependencies, and more.
 Zypper can be used interactively or non-interactively by user, from scripts,
 or front-ends.
 
-Authors:
---------
-    Jan Kupec <jkupec@suse.cz>
-    Michael Andres <ma@suse.de>
-    Duncan Mac-Vicar <dmacvicar@suse.de>
-    Martin Vidner <mvidner@suse.cz>
-    Josef Reidinger <jreidinger@suse.cz>
-
 %package log
-Requires:       /bin/bash
-Requires:       /usr/bin/awk
-Requires:       /usr/bin/grep
-BuildArch:      noarch
 Summary:        CLI for accessing the zypper logfile
 Group:          System/Packages
+Requires:       %{_bindir}/awk
+Requires:       %{_bindir}/grep
+Requires:       /bin/bash
+BuildArch:      noarch
 
 %description -n zypper-log
 CLI for accessing the zypper logfile
@@ -98,28 +91,20 @@ BuildArch:      noarch
 %description aptitude
 provides compatibility to Debian's aptitude command using zypper
 
-Authors:
---------
-    Bernhard M. Wiedemann <bernhard+aptitude4zypp lsmod de>
-
 %package needs-restarting
 Summary:        needs-restarting compatibility with zypper
 Group:          System/Packages
 Requires:       zypper
+BuildArch:      noarch
 %if 0%{?suse_version}
 Supplements:    zypper
 %endif
-BuildArch:      noarch
 
 %description needs-restarting
 provides compatibility to YUM needs-restarting command using zypper
 
-Authors:
---------
-    Michael Andres <ma@suse.de>
-
 %prep
-%setup -q
+%autosetup -p1
 
 %build
 mkdir -p build
@@ -134,19 +119,21 @@ CMAKE_FLAGS=
   CMAKE_FLAGS="$CMAKE_FLAGS -DLEGACY_ENABLE_LONGOPT_ABBREV=1"
 %endif
 
+export CFLAGS="%{optflags}"
+export CXXFLAGS="%{optflags}"
+export LDFLAGS="-Wl,--as-needed -fpie %{optflags}"
+
 cmake $CMAKE_FLAGS \
       -DCMAKE_INSTALL_PREFIX=%{_prefix} \
       -DSYSCONFDIR=%{_sysconfdir} \
       -DMANDIR=%{_mandir} \
       -DCMAKE_VERBOSE_MAKEFILE=TRUE \
-      -DCMAKE_C_FLAGS_RELEASE:STRING="$RPM_OPT_FLAGS" \
-      -DCMAKE_CXX_FLAGS_RELEASE:STRING="$RPM_OPT_FLAGS" \
-      -DCMAKE_BUILD_TYPE=Release \
+      -DCMAKE_BUILD_TYPE=RelWithDebInfo \
       -DENABLE_BUILD_TESTS=ON \
       ..
 
 #gettextize -f
-make %{?_smp_mflags}
+%make_build
 
 %check
 pushd build/tests
@@ -155,19 +142,19 @@ popd
 
 %install
 cd build
-make install DESTDIR=$RPM_BUILD_ROOT
+%make_install
 
-mkdir -p $RPM_BUILD_ROOT%{_prefix}/lib/zypper
-mkdir -p $RPM_BUILD_ROOT%{_prefix}/lib/zypper/commands
+mkdir -p %{buildroot}%{_prefix}/lib/zypper
+mkdir -p %{buildroot}%{_prefix}/lib/zypper/commands
 
 # yzpper symlink
-ln -s zypper $RPM_BUILD_ROOT%{_bindir}/yzpper
+ln -s zypper %{buildroot}%{_bindir}/yzpper
 
 # Create filelist with translations
 cd ..
-%{find_lang} zypper
-%{__install} -d -m755 $RPM_BUILD_ROOT%{_var}/log
-touch $RPM_BUILD_ROOT%{_var}/log/zypper.log
+%find_lang zypper
+install -d -m755 %{buildroot}%{_var}/log
+touch %{buildroot}%{_var}/log/zypper.log
 
 %if %{defined _distconfdir}
 # Move logratate files form /etc/logrotate.d to /usr/etc/logrotate.d
@@ -175,9 +162,6 @@ mkdir -p %{buildroot}/%{_distconfdir}/logrotate.d
 mv %{buildroot}/%{_sysconfdir}/logrotate.d/zypper.lr %{buildroot}%{_distconfdir}/logrotate.d
 mv %{buildroot}/%{_sysconfdir}/logrotate.d/zypp-refresh.lr %{buildroot}%{_distconfdir}/logrotate.d
 %endif
-
-%clean
-rm -rf "$RPM_BUILD_ROOT"
 
 %if %{defined _distconfdir}
 %pre
@@ -218,10 +202,10 @@ done
 %dir %{_datadir}/zypper/xml
 %{_datadir}/zypper/xml/xmlout.rnc
 %{_prefix}/lib/zypper
-%doc %{_mandir}/man8/zypper.8*
-%doc %{_mandir}/man8/zypp-refresh.8*
-%doc %dir %{_datadir}/doc/packages/zypper
-%doc %{_datadir}/doc/packages/zypper/HACKING
+%{_mandir}/man8/zypper.8%{?ext_man}
+%{_mandir}/man8/zypp-refresh.8%{?ext_man}
+%doc %dir %{_docdir}/zypper
+%doc %{_docdir}/zypper/HACKING
 # declare ownership of the log file but prevent
 # it from being erased by rpm -e
 %ghost %config(noreplace) %attr (640,root,root) %{_var}/log/zypper.log
@@ -229,10 +213,9 @@ done
 %files log
 %defattr(-,root,root)
 %{_sbindir}/zypper-log
-%doc %{_mandir}/man8/zypper-log.8*
+%{_mandir}/man8/zypper-log.8%{?ext_man}
 
 %files aptitude
-%defattr(-,root,root)
 %{_bindir}/aptitude
 %{_bindir}/apt-get
 %{_bindir}/apt
@@ -242,6 +225,6 @@ done
 %files needs-restarting
 %defattr(-,root,root)
 %{_bindir}/needs-restarting
-%doc %{_mandir}/man1/needs-restarting.1*
+%{_mandir}/man1/needs-restarting.1%{?ext_man}
 
 %changelog

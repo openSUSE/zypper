@@ -1,4 +1,18 @@
 -------------------------------------------------------------------
+Wed Apr 24 07:42:28 UTC 2024 - Dirk Müller <dmueller@suse.com>
+
+- switch cmake build type to RelWithDebInfo
+- modernize spec file (remove Authors section, use proper macros,
+  remove redundant clean section, don't mark man pages as doc)
+- switch to -O2 -fvisibility=hidden -fpie:
+  * PIC is not needed as no shared lib is built
+  * fstack-protector-strong is default on modern dists and would
+    be downgraded by fstack-protector
+  * default visibility hidden allows better optimisation
+  * O2 is reducing inlining bloat
+  -> 18% reduced binary size
+
+-------------------------------------------------------------------
 Mon Apr 22 13:11:49 UTC 2024 - Dirk Müller <dmueller@suse.com>
 
 - remove procps requires (was only for ZMD which is dropped)
