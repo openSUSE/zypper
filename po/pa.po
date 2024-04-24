@@ -1920,7 +1920,7 @@ msgstr "%s ਨੂੰ ਹਟਾਉਣਾ ਫੇਲ੍ਹ:"
 #. translators: This text is a progress display label e.g. "Removing packagename-x.x.x [42%]"
 #: src/callbacks/rpm.h:351 src/callbacks/rpm.h:632
 #, fuzzy, c-format, boost-format
-msgid "Removing %s"
+msgid "Removing: %s"
 msgstr "%s-%s ਹਟਾਇਆ ਜਾ ਰਿਹਾ ਹੈ"
 
 # %s is either BOOTP or DHCP

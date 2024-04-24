@@ -348,7 +348,7 @@ private:
     _progress.reset( new Out::ProgressBar( zypper.out(),
                                            "remove-resolvable",
                                            // translators: This text is a progress display label e.g. "Removing packagename-x.x.x [42%]"
-                                           str::Format(_("Removing %s") ) % resolvable_r->asString(),
+                                           str::Format(_("Removing: %s") ) % resolvable_r->asString(),
                                            zypper.runtimeData().rpm_pkg_current,
                                            zypper.runtimeData().rpm_pkgs_total ) );
     (*_progress)->range( 100 );	// progress reports percent
@@ -629,7 +629,7 @@ private:
     _progress.reset( new Out::ProgressBar( zypper.out(),
                                            "remove-resolvable",
                                            // translators: This text is a progress display label e.g. "Removing packagename-x.x.x [42%]"
-                                           str::Format(_("Removing %s") ) % resolvable_r->asString(),
+                                           str::Format(_("Removing: %s") ) % resolvable_r->asString(),
                                            zypper.runtimeData().rpm_pkg_current,
                                            zypper.runtimeData().rpm_pkgs_total ) );
     (*_progress)->range( 100 );	// progress reports percent

@@ -1912,7 +1912,7 @@ msgstr "Rakirina pakêta %1 pêk nehat."
 #. translators: This text is a progress display label e.g. "Removing packagename-x.x.x [42%]"
 #: src/callbacks/rpm.h:351 src/callbacks/rpm.h:632
 #, fuzzy, c-format, boost-format
-msgid "Removing %s"
+msgid "Removing: %s"
 msgstr "%1$s tê rakirin"
 
 #: src/callbacks/rpm.h:394
