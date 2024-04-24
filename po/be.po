@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-04-15 13:01+0200\n"
-"PO-Revision-Date: 2020-03-01 14:55+0000\n"
-"Last-Translator: Yahor Pravdikov <mocachin@protonmail.com>\n"
+"PO-Revision-Date: 2024-04-24 12:29+0000\n"
+"Last-Translator: Dzmitryi Halyava <dzmitryi.halyava@gmail.com>\n"
 "Language-Team: Belarusian <https://l10n.opensuse.org/projects/zypper/master/"
 "be/>\n"
 "Language: be\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 3.6.1\n"
+"X-Generator: Weblate 4.9.1\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -6823,7 +6823,7 @@ msgstr ""
 #: src/utils/messages.cc:141
 #, c-format, boost-format
 msgid "Type '%s' to get a list of global options and commands."
-msgstr ""
+msgstr "Увядзіце '%s' каб атрымаць спіс глабальных параметраў і каманд."
 
 #. translators: %1% is the name of an (unknown) command
 #. translators: %2% something providing more info (like 'zypper help subcommand')
@@ -6847,8 +6847,9 @@ msgstr ""
 #: src/utils/misc.cc:94
 msgid "package"
 msgid_plural "packages"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "пакет"
+msgstr[1] "пакетаў"
+msgstr[2] "пакеты"
 
 #: src/utils/misc.cc:96
 msgid "pattern"
@@ -6899,12 +6900,12 @@ msgstr ""
 #. translator: patch status
 #: src/utils/misc.cc:116
 msgid "optional"
-msgstr ""
+msgstr "неабявязковы"
 
 #. translator: patch status
 #: src/utils/misc.cc:117
 msgid "needed"
-msgstr ""
+msgstr "патрэбны"
 
 #. translator: patch status
 #: src/utils/misc.cc:118
@@ -7048,7 +7049,7 @@ msgstr ""
 
 #: src/utils/prompt.cc:161
 msgid "never"
-msgstr ""
+msgstr "ніколі"
 
 #: src/utils/prompt.cc:188
 msgid "Cannot read input: bad stream or EOF."
