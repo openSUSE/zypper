@@ -326,7 +326,7 @@ struct TableRow::Less
   bool operator()( const TableRow & a_r, const TableRow & b_r ) const
   {
     int c = 0;
-    for ( const SortParam sortParam : _by_columns ) {
+    for ( const SortParam& sortParam : _by_columns ) {
       if ( (c = compCol( sortParam, a_r, b_r )) )
         return c < 0;
     }
