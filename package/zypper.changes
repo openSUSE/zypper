@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Apr 29 12:41:23 CEST 2024 - ma@suse.de
+
+- Unify message format(fixes #485)
+- version 1.14.72
+
+-------------------------------------------------------------------
 Wed Apr 24 07:42:28 UTC 2024 - Dirk Müller <dmueller@suse.com>
 
 - switch cmake build type to RelWithDebInfo
