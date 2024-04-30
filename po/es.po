@@ -18,8 +18,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-04-15 13:01+0200\n"
-"PO-Revision-Date: 2024-04-21 22:43+0000\n"
-"Last-Translator: Jonatan Porras <jonatanpc8@gmail.com>\n"
+"PO-Revision-Date: 2024-04-30 21:43+0000\n"
+"Last-Translator: Antonio Simón <antonio@trans-mission.com>\n"
 "Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
 "\n"
 "Language: es\n"
@@ -1167,7 +1167,7 @@ msgstr[1] ""
 
 #: src/Summary.cc:1415
 msgid "was superseded by"
-msgstr "Fue reemplazado por"
+msgstr "fue reemplazado por"
 
 #: src/Summary.cc:1428
 #, c-format, boost-format
@@ -3149,7 +3149,7 @@ msgstr ""
 
 #: src/commands/patch.cc:50
 msgid "Skip needed patches which do not apply without conflict."
-msgstr ""
+msgstr "Omite parches necesarios que no se aplican sin conflicto."
 
 #: src/commands/patch.cc:53
 msgid ""
@@ -3440,11 +3440,14 @@ msgstr ""
 msgid ""
 "Show installed packages which were automatically selected by the resolver."
 msgstr ""
+"Muestra los paquetes instalados que el solucionador ha seleccionado "
+"automáticamente."
 
 #. translators: --userinstalled
 #: src/commands/query/packages.cc:39
 msgid "Show installed packages which were explicitly selected by the user."
 msgstr ""
+"Muestra los paquetes instalados que el usuario ha seleccionado expresamente."
 
 #. translators: --orphaned
 #: src/commands/query/packages.cc:43
@@ -5572,17 +5575,20 @@ msgstr "Nivel de asistencia"
 
 #: src/info.cc:375
 msgid "The successor package is already installed."
-msgstr ""
+msgstr "El paquete sucesor ya está instalado."
 
 #: src/info.cc:377
 msgid ""
 "The successor package should be installed as soon as possible to receive "
 "continued support."
 msgstr ""
+"El paquete sucesor debe instalarse en cuanto sea posible para seguir "
+"recibiendo asistencia."
 
 #: src/info.cc:384
 msgid "Unfortunately the successor package is not provided by any repository."
 msgstr ""
+"Desafortunadamente, ningún repositorio ha proporcionado el paquete sucesor."
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:394
@@ -5913,7 +5919,7 @@ msgstr "Se ha producido un problema al instalar el paquete de origen %s-%s:"
 #. translator: used like "1h 12min in the future!"
 #: src/repos.cc:83
 msgid "in the future!"
-msgstr ""
+msgstr "en el futuro."
 
 #. translators: used as 'XYZ changed to SOMETHING [volatile]' to tag specific property changes.
 #: src/repos.cc:94
@@ -6103,7 +6109,7 @@ msgstr "Se va a ignorar el repositorio inhabilitado '%s'"
 #. translator: used as a table header
 #: src/repos.cc:796
 msgid "Time since last refresh"
-msgstr ""
+msgstr "Tiempo desde la última actualización"
 
 #: src/repos.cc:843
 #, c-format, boost-format
@@ -6134,17 +6140,17 @@ msgstr ""
 #. translator: Used as status in a table "RepoName: MetadataStatus"
 #: src/repos.cc:963
 msgid "No metadata available! Skipping it!"
-msgstr ""
+msgstr "No hay metadatos disponibles. Se va a omitir."
 
 #. translator: Used as status in a table "RepoName: MetadataStatus"
 #: src/repos.cc:966
 msgid "No permission to read metadata! Skipping it!"
-msgstr ""
+msgstr "No tiene permisos para leer metadatos. Se va a omitir."
 
 #. translator: Used as status in a table "RepoName: MetadataStatus"
 #: src/repos.cc:969
 msgid "Cannot access metadata! Skipping it!"
-msgstr ""
+msgstr "No es posible acceder a los metadatos. Se va a omitir."
 
 #: src/repos.cc:986
 #, c-format, boost-format
@@ -6162,13 +6168,16 @@ msgstr "El repositorio '%s' permanece inhabilitado."
 
 #: src/repos.cc:1026
 msgid "Some of the repositories had to be skipped due to missing metadata."
-msgstr ""
+msgstr "Ha habido que omitir algunos repositorios porque faltaban metadatos."
 
 #: src/repos.cc:1039
 msgid ""
 "Running with user privileges. From time to time run 'zypper refresh' as root "
 "to make sure the repository metadata are complete and up-to-date."
 msgstr ""
+"Se está ejecutando con privilegios de usuario. Ejecute de vez en cuando "
+"zypper refresh como usuario root para asegurarse de que los metadatos del "
+"repositorio estén completos y actualizados."
 
 #: src/repos.cc:1071
 msgid "Initializing Target"
@@ -6625,7 +6634,7 @@ msgstr[1] "%d problemas:"
 #. translator: The tag says that the preceding dependency problem is auto-resolved by applying the following solution
 #: src/solve-commit.cc:292
 msgid "Autoresolve:"
-msgstr ""
+msgstr "Resolver automáticamente:"
 
 #: src/solve-commit.cc:321
 msgid "Resolving dependencies..."
@@ -6805,7 +6814,7 @@ msgstr "Muestra el resumen en el paginador."
 
 #: src/solve-commit.cc:844
 msgid "Backend"
-msgstr ""
+msgstr "Backend"
 
 #: src/solve-commit.cc:958
 msgid "committing"
