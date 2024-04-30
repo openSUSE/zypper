@@ -2028,7 +2028,7 @@ msgstr "%s kaldırma başarısz:"
 #. translators: This text is a progress display label e.g. "Removing packagename-x.x.x [42%]"
 #: src/callbacks/rpm.h:351 src/callbacks/rpm.h:632
 #, c-format, boost-format
-msgid "Removing %s"
+msgid "Removing: %s"
 msgstr "%s kaldırılıyor"
 
 #: src/callbacks/rpm.h:394
