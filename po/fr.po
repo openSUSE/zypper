@@ -14,10 +14,10 @@ msgstr ""
 "Project-Id-Version: zypper.fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-04-15 13:01+0200\n"
-"PO-Revision-Date: 2024-03-04 16:42+0000\n"
+"PO-Revision-Date: 2024-05-01 17:43+0000\n"
 "Last-Translator: Sophie Leroy <sophie@stoquart.com>\n"
-"Language-Team: French <https://l10n.opensuse.org/projects/zypper/master/fr/"
-">\n"
+"Language-Team: French <https://l10n.opensuse.org/projects/zypper/master/fr/>"
+"\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1176,7 +1176,7 @@ msgstr[1] ""
 
 #: src/Summary.cc:1415
 msgid "was superseded by"
-msgstr ""
+msgstr "a été remplacé par"
 
 #: src/Summary.cc:1428
 #, c-format, boost-format
@@ -1187,7 +1187,11 @@ msgid_plural ""
 "The following %d packages were discontinued and have been superseded by a "
 "new packages with different names."
 msgstr[0] ""
+"Le paquet suivant est obsolète et a été remplacé par un nouveau paquet "
+"portant un autre nom."
 msgstr[1] ""
+"Les %d paquets suivants sont obsolètes et ont été remplacés par de nouveaux "
+"paquets portant d'autres noms."
 
 #: src/Summary.cc:1433
 msgid ""
@@ -1197,7 +1201,11 @@ msgid_plural ""
 "The successor packages should be installed as soon as possible to receive "
 "continued support:"
 msgstr[0] ""
+"Le paquet successeur doit être installé dès que possible pour assurer la "
+"continuité du support :"
 msgstr[1] ""
+"Les paquets successeurs doivent être installés dès que possible pour assurer "
+"la continuité du support :"
 
 #: src/Summary.cc:1458
 #, c-format, boost-format
@@ -1268,6 +1276,8 @@ msgstr[1] "Les %d paquets suivants requièrent un redémarrage du système :"
 #: src/Summary.cc:1561
 msgid "Skipped needed patches which do not apply without conflict:"
 msgstr ""
+"Des correctifs requis ont été ignorés, car ils ne pouvaient pas être "
+"appliqués sans conflit :"
 
 #: src/Summary.cc:1577
 #, boost-format
@@ -1414,6 +1424,7 @@ msgstr ""
 #, boost-format
 msgid "%1% is set, otherwise a system reboot would be required."
 msgstr ""
+"%1% est défini car, sans cela, un redémarrage système serait nécessaire."
 
 #: src/Summary.cc:1807
 msgid "System reboot required."
@@ -2296,7 +2307,7 @@ msgstr "Restreindre la mise à niveau au dépôt spécifié."
 
 #: src/commands/distupgrade.cc:41
 msgid "Remove unneeded orphaned packages."
-msgstr ""
+msgstr "Supprimer les paquets orphelins inutiles."
 
 #: src/commands/distupgrade.cc:72
 #, c-format, boost-format
@@ -3161,6 +3172,7 @@ msgstr ""
 #: src/commands/patch.cc:50
 msgid "Skip needed patches which do not apply without conflict."
 msgstr ""
+"Ignorer les correctifs requis qui ne peuvent pas être appliqués sans conflit."
 
 #: src/commands/patch.cc:53
 msgid ""
@@ -3453,11 +3465,15 @@ msgstr "Lister tous les paquets disponibles dans les dépôts spécifiés."
 msgid ""
 "Show installed packages which were automatically selected by the resolver."
 msgstr ""
+"Afficher les paquets installés qui ont été sélectionnés automatiquement par "
+"le résolveur."
 
 #. translators: --userinstalled
 #: src/commands/query/packages.cc:39
 msgid "Show installed packages which were explicitly selected by the user."
 msgstr ""
+"Afficher les paquets installés qui ont été sélectionnés explicitement par "
+"l'utilisateur."
 
 #. translators: --orphaned
 #: src/commands/query/packages.cc:43
@@ -5578,17 +5594,19 @@ msgstr "Niveau de support "
 
 #: src/info.cc:375
 msgid "The successor package is already installed."
-msgstr ""
+msgstr "Le paquet successeur est déjà installé."
 
 #: src/info.cc:377
 msgid ""
 "The successor package should be installed as soon as possible to receive "
 "continued support."
 msgstr ""
+"Le paquet successeur doit être installé dès que possible pour garantir la "
+"continuité du support."
 
 #: src/info.cc:384
 msgid "Unfortunately the successor package is not provided by any repository."
-msgstr ""
+msgstr "Malheureusement, le paquet successeur n'est fourni par aucun dépôt."
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:394
@@ -5914,7 +5932,7 @@ msgstr "Problème lors de l'installation du paquet source %s-%s :"
 #. translator: used like "1h 12min in the future!"
 #: src/repos.cc:83
 msgid "in the future!"
-msgstr ""
+msgstr "dans le futur !"
 
 #. translators: used as 'XYZ changed to SOMETHING [volatile]' to tag specific property changes.
 #: src/repos.cc:94
@@ -6110,7 +6128,7 @@ msgstr "Dépôt désactivé '%s' ignoré"
 #. translator: used as a table header
 #: src/repos.cc:796
 msgid "Time since last refresh"
-msgstr ""
+msgstr "Délai écoulé depuis le dernier rafraîchissement"
 
 #: src/repos.cc:843
 #, c-format, boost-format
@@ -6139,17 +6157,18 @@ msgstr ""
 #. translator: Used as status in a table "RepoName: MetadataStatus"
 #: src/repos.cc:963
 msgid "No metadata available! Skipping it!"
-msgstr ""
+msgstr "Aucune métadonnée disponible ! L'élément va être ignoré."
 
 #. translator: Used as status in a table "RepoName: MetadataStatus"
 #: src/repos.cc:966
 msgid "No permission to read metadata! Skipping it!"
 msgstr ""
+"Aucune autorisation de lecture des métadonnées ! L'élément va être ignoré."
 
 #. translator: Used as status in a table "RepoName: MetadataStatus"
 #: src/repos.cc:969
 msgid "Cannot access metadata! Skipping it!"
-msgstr ""
+msgstr "Impossible d'accéder aux métadonnées ! L'élément va être ignoré."
 
 #: src/repos.cc:986
 #, c-format, boost-format
@@ -6168,12 +6187,16 @@ msgstr "Le dépôt '%s' reste désactivé."
 #: src/repos.cc:1026
 msgid "Some of the repositories had to be skipped due to missing metadata."
 msgstr ""
+"Certains dépôts ont dû être ignorés en raison de métadonnées manquantes."
 
 #: src/repos.cc:1039
 msgid ""
 "Running with user privileges. From time to time run 'zypper refresh' as root "
 "to make sure the repository metadata are complete and up-to-date."
 msgstr ""
+"Exécution avec les privilèges utilisateur. Exécutez de temps à autre la "
+"commande 'zypper refresh' en tant que root afin de garantir que les "
+"métadonnées de dépôt sont complètes et à jour."
 
 #: src/repos.cc:1071
 msgid "Initializing Target"
@@ -6635,7 +6658,7 @@ msgstr[1] "%d problèmes :"
 #. translator: The tag says that the preceding dependency problem is auto-resolved by applying the following solution
 #: src/solve-commit.cc:292
 msgid "Autoresolve:"
-msgstr ""
+msgstr "Résolution automatique :"
 
 #: src/solve-commit.cc:321
 msgid "Resolving dependencies..."
@@ -6811,7 +6834,7 @@ msgstr "Afficher le résumé dans le pager."
 
 #: src/solve-commit.cc:844
 msgid "Backend"
-msgstr ""
+msgstr "Back-end"
 
 #: src/solve-commit.cc:958
 msgid "committing"
