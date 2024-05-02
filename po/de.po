@@ -17,10 +17,10 @@ msgstr ""
 "Project-Id-Version: zypper.de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-04-15 13:01+0200\n"
-"PO-Revision-Date: 2024-03-30 20:43+0000\n"
-"Last-Translator: Ettore Atalan <atalanttore@googlemail.com>\n"
-"Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/"
-">\n"
+"PO-Revision-Date: 2024-05-02 10:43+0000\n"
+"Last-Translator: Gemineo <vistatec@gemineo.de>\n"
+"Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/>"
+"\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1415,7 +1415,7 @@ msgstr ""
 #: src/Summary.cc:1805
 #, boost-format
 msgid "%1% is set, otherwise a system reboot would be required."
-msgstr ""
+msgstr "%1% wurde festgelegt, andernfalls wäre ein Systemneustart erforderlich."
 
 #: src/Summary.cc:1807
 msgid "System reboot required."
@@ -2287,7 +2287,7 @@ msgstr "Aktualisierung auf angegebenes Repository beschränken."
 
 #: src/commands/distupgrade.cc:41
 msgid "Remove unneeded orphaned packages."
-msgstr ""
+msgstr "Entfernen Sie nicht benötigte verwaiste Pakete."
 
 #: src/commands/distupgrade.cc:72
 #, c-format, boost-format
@@ -3443,11 +3443,15 @@ msgstr "Alle verfügbaren Pakete in den angegebenen Repositorys auflisten."
 msgid ""
 "Show installed packages which were automatically selected by the resolver."
 msgstr ""
+"Zeigen Sie installierte Pakete an, die vom Resolver automatisch ausgewählt "
+"wurden."
 
 #. translators: --userinstalled
 #: src/commands/query/packages.cc:39
 msgid "Show installed packages which were explicitly selected by the user."
 msgstr ""
+"Zeigen Sie installierte Pakete an, die vom Benutzer explizit ausgewählt "
+"wurden."
 
 #. translators: --orphaned
 #: src/commands/query/packages.cc:43
@@ -5944,7 +5948,7 @@ msgstr "Problem beim Installieren des Quellpakets %s-%s:"
 #. translator: used like "1h 12min in the future!"
 #: src/repos.cc:83
 msgid "in the future!"
-msgstr ""
+msgstr "in der Zukunft!"
 
 #. translators: used as 'XYZ changed to SOMETHING [volatile]' to tag specific property changes.
 #: src/repos.cc:94
@@ -6136,7 +6140,7 @@ msgstr "Deaktiviertes Repository '%s' wird ignoriert"
 #. translator: used as a table header
 #: src/repos.cc:796
 msgid "Time since last refresh"
-msgstr ""
+msgstr "Zeit seit der letzten Aktualisierung"
 
 #: src/repos.cc:843
 #, c-format, boost-format
@@ -6167,17 +6171,17 @@ msgstr ""
 #. translator: Used as status in a table "RepoName: MetadataStatus"
 #: src/repos.cc:963
 msgid "No metadata available! Skipping it!"
-msgstr ""
+msgstr "Keine Metadaten verfügbar! Wird übersprungen."
 
 #. translator: Used as status in a table "RepoName: MetadataStatus"
 #: src/repos.cc:966
 msgid "No permission to read metadata! Skipping it!"
-msgstr ""
+msgstr "Keine Berechtigung zum Lesen von Metadaten! Wird übersprungen."
 
 #. translator: Used as status in a table "RepoName: MetadataStatus"
 #: src/repos.cc:969
 msgid "Cannot access metadata! Skipping it!"
-msgstr ""
+msgstr "Zugriff auf Metadaten nicht möglich. Wird übersprungen."
 
 #: src/repos.cc:986
 #, c-format, boost-format
@@ -6196,12 +6200,17 @@ msgstr "Repository '%s' bleibt weiterhin ungültig."
 #: src/repos.cc:1026
 msgid "Some of the repositories had to be skipped due to missing metadata."
 msgstr ""
+"Einige der Repositorys mussten aufgrund fehlender Metadaten übersprungen "
+"werden."
 
 #: src/repos.cc:1039
 msgid ""
 "Running with user privileges. From time to time run 'zypper refresh' as root "
 "to make sure the repository metadata are complete and up-to-date."
 msgstr ""
+"Wird mit Benutzerberechtigungen ausgeführt. Führen Sie 'zypper refresh' von "
+"Zeit zu Zeit als Stamm aus, um sicherzustellen, dass die Metadaten des "
+"Repositorys vollständig und aktuell sind."
 
 #: src/repos.cc:1071
 msgid "Initializing Target"
