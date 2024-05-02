@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-04-15 13:01+0200\n"
-"PO-Revision-Date: 2024-03-04 10:43+0000\n"
+"PO-Revision-Date: 2024-05-02 05:43+0000\n"
 "Last-Translator: Grace Yu <grace.yu@excel-gits.com>\n"
 "Language-Team: Chinese (China) <https://l10n.opensuse.org/projects/zypper/"
 "master/zh_CN/>\n"
@@ -1018,7 +1018,7 @@ msgstr[0] "以下 %d 个软件包需要额外的客户合同以获取支持："
 
 #: src/Summary.cc:1415
 msgid "was superseded by"
-msgstr ""
+msgstr "已被以下对象替代"
 
 #: src/Summary.cc:1428
 #, c-format, boost-format
@@ -1028,7 +1028,7 @@ msgid ""
 msgid_plural ""
 "The following %d packages were discontinued and have been superseded by a "
 "new packages with different names."
-msgstr[0] ""
+msgstr[0] "以下 %d 个软件包已停产且已被一个使用其他名称的新软件包替代。"
 
 #: src/Summary.cc:1433
 msgid ""
@@ -1037,7 +1037,7 @@ msgid ""
 msgid_plural ""
 "The successor packages should be installed as soon as possible to receive "
 "continued support:"
-msgstr[0] ""
+msgstr[0] "应尽快安装替换软件包以便获享持续的支持服务："
 
 #: src/Summary.cc:1458
 #, c-format, boost-format
@@ -1095,7 +1095,7 @@ msgstr[0] "以下 %d 个软件包需要重启系统："
 
 #: src/Summary.cc:1561
 msgid "Skipped needed patches which do not apply without conflict:"
-msgstr ""
+msgstr "已跳过无法在应用后不产生冲突的所需补丁："
 
 #: src/Summary.cc:1577
 #, boost-format
@@ -1223,7 +1223,7 @@ msgstr "需要重启包管理器。(请在更新堆栈获得更新后再次运�
 #: src/Summary.cc:1805
 #, boost-format
 msgid "%1% is set, otherwise a system reboot would be required."
-msgstr ""
+msgstr "已设置 %1%，否则将需要重引导系统。"
 
 #: src/Summary.cc:1807
 msgid "System reboot required."
@@ -2029,7 +2029,7 @@ msgstr "限制从指定软件源升级。"
 
 #: src/commands/distupgrade.cc:41
 msgid "Remove unneeded orphaned packages."
-msgstr ""
+msgstr "去除不需要的或孤立的软件包。"
 
 #: src/commands/distupgrade.cc:72
 #, c-format, boost-format
@@ -2822,7 +2822,7 @@ msgstr ""
 
 #: src/commands/patch.cc:50
 msgid "Skip needed patches which do not apply without conflict."
-msgstr ""
+msgstr "跳过无法在应用后不产生冲突的所需补丁。"
 
 #: src/commands/patch.cc:53
 msgid ""
@@ -3096,12 +3096,12 @@ msgstr "列出指定软件源中可用的全部软件包。"
 #: src/commands/query/packages.cc:35
 msgid ""
 "Show installed packages which were automatically selected by the resolver."
-msgstr ""
+msgstr "显示解析器自动选择且已安装的软件包。"
 
 #. translators: --userinstalled
 #: src/commands/query/packages.cc:39
 msgid "Show installed packages which were explicitly selected by the user."
-msgstr ""
+msgstr "显示用户明确选择且已安装的软件包。"
 
 #. translators: --orphaned
 #: src/commands/query/packages.cc:43
@@ -5090,17 +5090,17 @@ msgstr "支持级别"
 
 #: src/info.cc:375
 msgid "The successor package is already installed."
-msgstr ""
+msgstr "已安装替代软件包。"
 
 #: src/info.cc:377
 msgid ""
 "The successor package should be installed as soon as possible to receive "
 "continued support."
-msgstr ""
+msgstr "应尽快安装替代软件包以便获享持续的支持服务。"
 
 #: src/info.cc:384
 msgid "Unfortunately the successor package is not provided by any repository."
-msgstr ""
+msgstr "抱歉，所有储存库都未提供该替代软件包。"
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:394
@@ -5420,7 +5420,7 @@ msgstr "安装源代码包 %s-%s 出现问题："
 #. translator: used like "1h 12min in the future!"
 #: src/repos.cc:83
 msgid "in the future!"
-msgstr ""
+msgstr "将来！"
 
 #. translators: used as 'XYZ changed to SOMETHING [volatile]' to tag specific property changes.
 #: src/repos.cc:94
@@ -5600,7 +5600,7 @@ msgstr "正在忽略已禁用的软件源 '%s'"
 #. translator: used as a table header
 #: src/repos.cc:796
 msgid "Time since last refresh"
-msgstr ""
+msgstr "自上次刷新经过的时间"
 
 #: src/repos.cc:843
 #, c-format, boost-format
@@ -5627,17 +5627,17 @@ msgstr "软件源 '%s' 已经过时。您可以 root 身份运行 'zypper refres
 #. translator: Used as status in a table "RepoName: MetadataStatus"
 #: src/repos.cc:963
 msgid "No metadata available! Skipping it!"
-msgstr ""
+msgstr "没有可用的元数据。将会跳过！"
 
 #. translator: Used as status in a table "RepoName: MetadataStatus"
 #: src/repos.cc:966
 msgid "No permission to read metadata! Skipping it!"
-msgstr ""
+msgstr "无权读取元数据。将会跳过！"
 
 #. translator: Used as status in a table "RepoName: MetadataStatus"
 #: src/repos.cc:969
 msgid "Cannot access metadata! Skipping it!"
-msgstr ""
+msgstr "无法访问元数据。将会跳过！"
 
 #: src/repos.cc:986
 #, c-format, boost-format
@@ -5655,13 +5655,13 @@ msgstr "软件源 '%s' 保持禁用。"
 
 #: src/repos.cc:1026
 msgid "Some of the repositories had to be skipped due to missing metadata."
-msgstr ""
+msgstr "由于缺少元数据，必须跳过部分储存库。"
 
 #: src/repos.cc:1039
 msgid ""
 "Running with user privileges. From time to time run 'zypper refresh' as root "
 "to make sure the repository metadata are complete and up-to-date."
-msgstr ""
+msgstr "正在使用用户权限运行。请不时以 root 身份运行 \"zypper refresh\" 来确保储存库元数据是完整且最新的。"
 
 #: src/repos.cc:1071
 msgid "Initializing Target"
@@ -6090,7 +6090,7 @@ msgstr[0] "%d 个问题："
 #. translator: The tag says that the preceding dependency problem is auto-resolved by applying the following solution
 #: src/solve-commit.cc:292
 msgid "Autoresolve:"
-msgstr ""
+msgstr "自动解决："
 
 #: src/solve-commit.cc:321
 msgid "Resolving dependencies..."
@@ -6254,7 +6254,7 @@ msgstr "在分页器中查看摘要。"
 
 #: src/solve-commit.cc:844
 msgid "Backend"
-msgstr ""
+msgstr "后端"
 
 #: src/solve-commit.cc:958
 msgid "committing"
