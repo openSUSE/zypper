@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Fri May  3 12:37:42 CEST 2024 - ma@suse.de
+
+- Fixed check for outdated repo metadata as non-root user
+  (bsc#1222086)
+- BuildRequires:  libzypp-devel >= 17.33.0.
+- Delay zypp lock until command options are parsed (bsc#1223766)
+- version 1.14.73
+
+-------------------------------------------------------------------
 Mon Apr 29 12:41:23 CEST 2024 - ma@suse.de
 
 - Unify message format(fixes #485)
