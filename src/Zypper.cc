@@ -596,36 +596,7 @@ void Zypper::doCommand( int cmdArgc, char **cmdArgv, int firstFlag )
       _config.plusContentFromCLI.clear();
     }
 
-    // === ZYpp lock ===
-    switch ( command().toEnum() )
-    {
-      case ZypperCommand::PS_e:
-      case ZypperCommand::SUBCOMMAND_e:
-        // bnc#703598: Quick fix as few commands do not need a zypp lock
-        break;
-
-      default:
-        if ( _config.changedRoot && _config.root_dir != "/" )
-        {
-          // bnc#575096: Quick fix
-          ::setenv( "ZYPP_LOCKFILE_ROOT", _config.root_dir.c_str(), 0 );
-        }
-        {
-          const char *roh = getenv( "ZYPP_READONLY_HACK" );
-          if ( roh != NULL && roh[0] == '1' )
-            zypp_readonly_hack::IWantIt ();
-
-        else if ( command() == ZypperCommand::LIST_REPOS
-                    || command() == ZypperCommand::LIST_SERVICES
-                    || command() == ZypperCommand::HELP
-                    || command() == ZypperCommand::VERSION_CMP
-                    || command() == ZypperCommand::TARGET_OS )
-          zypp_readonly_hack::IWantIt (); // #247001, #302152
-        }
-        assertZYppPtrGod();
-    }
-
-    // === execute command ===
+    // === process command ===
 
     MIL << "Going to process command " << command() << endl;
 
@@ -638,7 +609,7 @@ void Zypper::doCommand( int cmdArgc, char **cmdArgv, int firstFlag )
 
       MIL << "Found new style command << " << newStyleCmd->command().front() << endl;
 
-      // parse command options
+      // ===  parse command options ===
       try {
         //align argc and argv to the first flag
         //Remember that parseArguments will always ignore the very first argument in the array due to how getopt works
@@ -674,6 +645,40 @@ void Zypper::doCommand( int cmdArgc, char **cmdArgv, int firstFlag )
         return;
       }
 
+      // === ZYpp lock ===
+      // bsc#1223766:
+      // Delay assertZYppPtrGod until command options are parsed.
+      // Legacy command options -y, --no-confirm are aliased to
+      // --non-interactive. In case PK holds the lock and we prompt
+      // whather to abort it, --non-interactive must be set-up.
+      switch ( command().toEnum() )
+      {
+        case ZypperCommand::PS_e:
+        case ZypperCommand::SUBCOMMAND_e:
+          // bnc#703598: Quick fix as few commands do not need a zypp lock
+          break;
+
+        default:
+          if ( _config.changedRoot && _config.root_dir != "/" )
+          {
+            // bnc#575096: Quick fix
+            ::setenv( "ZYPP_LOCKFILE_ROOT", _config.root_dir.c_str(), 0 );
+          }
+          {
+            const char *roh = getenv( "ZYPP_READONLY_HACK" );
+            if ( roh != NULL && roh[0] == '1' )
+              zypp_readonly_hack::IWantIt ();
+            else if ( command() == ZypperCommand::LIST_REPOS
+              || command() == ZypperCommand::LIST_SERVICES
+              || command() == ZypperCommand::HELP
+              || command() == ZypperCommand::VERSION_CMP
+              || command() == ZypperCommand::TARGET_OS )
+              zypp_readonly_hack::IWantIt (); // #247001, #302152
+          }
+          assertZYppPtrGod();
+      }
+
+      // === execute command ===
       if ( newStyleCmd->helpRequested() ) {
         ZypperCommand helpCmd ( ZypperCommand::HELP_e );
         HelpCmd &help = helpCmd.assertCommandObject<HelpCmd>();
