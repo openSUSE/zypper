@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-04-15 13:01+0200\n"
-"PO-Revision-Date: 2024-04-02 06:43+0000\n"
+"PO-Revision-Date: 2024-05-09 06:43+0000\n"
 "Last-Translator: Kristijan Fremen Velkovski <me@krisfremen.com>\n"
 "Language-Team: Macedonian <https://l10n.opensuse.org/projects/zypper/master/"
 "mk/>\n"
@@ -399,12 +399,12 @@ msgstr "'%s' не е пронајден во имињата на пакетит�
 #: src/PackageArgs.cc:231
 #, c-format, boost-format
 msgid "'%s' is not a package name or capability."
-msgstr ""
+msgstr "'%s' не е име на пакет или способности."
 
 #: src/RequestFeedback.cc:40
 #, c-format, boost-format
 msgid "'%s' not found in package names. Trying capabilities."
-msgstr ""
+msgstr "'%s' не е пронајден во имињата на пакетите. Се пробуваат способности."
 
 #: src/RequestFeedback.cc:46
 #, c-format, boost-format
@@ -424,7 +424,7 @@ msgstr "Продуктот '%s' не е пронајден."
 #: src/RequestFeedback.cc:52
 #, c-format, boost-format
 msgid "Pattern '%s' not found."
-msgstr ""
+msgstr "Шаблонот '%s' не беше пронајден."
 
 #: src/RequestFeedback.cc:54
 #, c-format, boost-format
