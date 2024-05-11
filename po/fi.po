@@ -23,10 +23,10 @@ msgstr ""
 "Project-Id-Version: zypper.fi\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-04-15 13:01+0200\n"
-"PO-Revision-Date: 2022-03-04 11:12+0000\n"
+"PO-Revision-Date: 2024-05-11 13:43+0000\n"
 "Last-Translator: Tommi Nieminen <software@legisign.org>\n"
-"Language-Team: Finnish <https://l10n.opensuse.org/projects/zypper/master/fi/"
-">\n"
+"Language-Team: Finnish <https://l10n.opensuse.org/projects/zypper/master/fi/>"
+"\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -56,11 +56,11 @@ msgstr "Päivitysten hallinta:"
 
 #: src/Command.cc:139
 msgid "Querying:"
-msgstr "Haku:"
+msgstr "Kysely:"
 
 #: src/Command.cc:150
 msgid "Package Locks:"
-msgstr "Lukitukset:"
+msgstr "Pakettilukitukset:"
 
 #: src/Command.cc:155
 msgid "Locale Management:"
@@ -68,7 +68,7 @@ msgstr "Maa-asetusten hallinta:"
 
 #: src/Command.cc:159
 msgid "Other Commands:"
-msgstr "Muita valintoja:"
+msgstr "Muut komennot:"
 
 #: src/Command.cc:168
 msgid "Subcommands:"
@@ -77,7 +77,7 @@ msgstr "Alikomennot:"
 #: src/Command.cc:289
 #, c-format, boost-format
 msgid "Unknown command '%s'"
-msgstr "Tuntematon komento \"%s\""
+msgstr "Tuntematon komento ”%s”"
 
 #: src/CommitSummary.cc:91
 msgid "Installation has completed with error."
@@ -86,7 +86,7 @@ msgstr "Asennus päättyi virheeseen."
 #: src/CommitSummary.cc:93
 #, boost-format
 msgid "You may run '%1%' to repair any dependency problems."
-msgstr "Mahdolliset riippuvuusongelmat voi korjata komennolla \"%1%”."
+msgstr "Mahdolliset riippuvuusongelmat voi korjata komennolla ”%1%”."
 
 #: src/CommitSummary.cc:126
 #, c-format, boost-format
@@ -123,13 +123,13 @@ msgstr[1] "Seuraavien %d paketin poistaminen sivuutettiin:"
 #, boost-format
 msgid "... and %1% more item."
 msgid_plural "... and %1% more items."
-msgstr[0] "...ja %1% muu kohde."
-msgstr[1] "...ja %1% muuta kohdetta."
+msgstr[0] "…ja %1% muu kohde."
+msgstr[1] "…ja %1% muuta kohdetta."
 
 #: src/Config.cc:53
 #, c-format, boost-format
 msgid "Invalid table style %d."
-msgstr "Virheellinen taulukon tyyli %d."
+msgstr "Virheellinen taulukkotyyli %d."
 
 #: src/Config.cc:54
 #, c-format, boost-format
@@ -138,7 +138,7 @@ msgstr " Käytä kokonaislukua väliltä %d–%d"
 
 #: src/Config.cc:172
 msgid "The path specified in the --root option must be absolute."
-msgstr "--root -valinnan polku täytyy olla absoluuttinen."
+msgstr "--root-valitsimen sijainnin on oltava absoluuttinen."
 
 #. translators: --help, -h
 #: src/Config.cc:236
@@ -158,71 +158,69 @@ msgstr "Näytä zypperin käyttäjäkehotteet."
 #. translators: --config, -c <FILE>
 #: src/Config.cc:270
 msgid "Use specified config file instead of the default."
-msgstr "Käytä annettua asetustiedostoa oletuksen sijaan."
+msgstr "Käytä oletuksen sijaan annettua asetustiedostoa."
 
 #: src/Config.cc:277
 msgid "User data string must not contain nonprintable or newline characters!"
 msgstr ""
-"Käyttäjä tiedon merkkijono ei saa sisältää tulostumattomia tai uusirivi "
-"merkkejä!"
+"Käyttäjätietojono ei saa sisältää tulostumattomia tai rivinvaihtomerkkejä!"
 
 #. translators: --userdata <STRING>
 #: src/Config.cc:283
 msgid "User defined transaction id used in history and plugins."
 msgstr ""
-"Käyttäjän määrittämä toimintotunniste, jota käytetään historiatiedoissa ja "
-"lisäosissa."
+"HIstoriassa ja liitännäisissä käytettävä käyttäjän määrittämä "
+"toimenpidetunniste."
 
 #. translators: --quiet, -q
 #: src/Config.cc:291
 msgid "Suppress normal output, print only error messages."
-msgstr "Näytä vain virheilmoitukset."
+msgstr "Estä tavallinen tuloste ja näytä vain virheilmoitukset."
 
 #. translators: --verbose, -v
 #: src/Config.cc:299
 msgid "Increase verbosity."
-msgstr "Lisää näytettävien viestien määrää."
+msgstr "Lisää näytettäviä viestejä."
 
 #. translators: --color / --no-color
 #: src/Config.cc:320
 msgid "Whether to use colors in output if tty supports it."
-msgstr "Käytetäänkö tulosteessa värejä, jos pääte tukee sitä."
+msgstr "Käytetäänkö tulosteessa värejä, jos pääte tukee."
 
 #. translators: --no-abbrev, -A
 #: src/Config.cc:325
 msgid "Do not abbreviate text in tables."
-msgstr "Älä lyhenne taulukon tekstejä."
+msgstr "Älä lyhennä taulukon tekstejä."
 
 #. translators: --table-style, -s, %1% denotes the supported range of the integer argument (e.g. "1-11")
 #: src/Config.cc:330
 #, boost-format
 msgid "Table style (%1%)."
-msgstr "Taulukon tyyli (%1%)."
+msgstr "Taulukkotyyli (%1%)."
 
 #: src/Config.cc:334 src/commands/optionsets.cc:284
 msgid "Entering non-interactive mode."
-msgstr "Siirrytään ei-vuorovaikutteiseen -tilaan."
+msgstr "Siirrytään ei-vuorovaikutteiseen tilaan."
 
 #. translators: --non-interactive, -n
 #: src/Config.cc:338
 msgid "Do not ask anything, use default answers automatically."
-msgstr "Älä kysy mitään, käytä oletusvastauksia automaattisesti."
+msgstr "Älä kysy mitään vaan käytä automaattisesti oletusvastauksia."
 
 #: src/Config.cc:343
 msgid ""
 "Patches having the flag rebootSuggested set will not be treated as "
 "interactive."
 msgstr ""
-"Korjauspäivitystä, jossa on rebootSuggested-lippu ei käsitellä "
-"vuorovaikutteisesti."
+"rebootSuggested-lippuisia korjauspäivityksiä ei käsitellä vuorovaikutteisina."
 
 #. translators: --non-interactive-include-reboot-patches
 #: src/Config.cc:347
 msgid ""
 "Do not treat patches as interactive, which have the rebootSuggested-flag set."
 msgstr ""
-"Älä käsittele vuorovaikutteisesti korjauspäivityksiä, joille on asetettu "
-"rebootSuggested-lippu."
+"Älä käsittele vuorovaikutteisesti rebootSuggested-lippuisia "
+"korjauspäivityksiä."
 
 #. translators: --xmlout, -x
 #: src/Config.cc:357
@@ -232,15 +230,15 @@ msgstr "Vaihda XML-tulosmuotoon."
 #. translators: --ignore-unknown, -i
 #: src/Config.cc:362
 msgid "Ignore unknown packages."
-msgstr "Jätä huomiotta tuntemattomat paketit."
+msgstr "Sivuuta tuntemattomat paketit."
 
 #. translators: --terse, -t
 #: src/Config.cc:373
 msgid ""
 "Terse output for machine consumption. Implies --no-abbrev and --no-color."
 msgstr ""
-"Niukka tuloste ohjelmalliseen käyttöön. Asettaa myös --no-abbrev ja --no-"
-"color."
+"Niukka tuloste ohjelmalliseen käyttöön. Asettaa valitsimet --no-abbrev ja "
+"--no-color."
 
 #. translators: --reposd-dir, -D <DIR>
 #: src/Config.cc:397
@@ -273,7 +271,7 @@ msgstr "Asennuslähdevalinnat"
 
 #: src/Config.cc:462
 msgid "Entering 'no-gpg-checks' mode."
-msgstr "Siirrytään \"ei tarkisteta GPG-avaimia\" -tilaan."
+msgstr "Siirrytään ”ei tarkisteta GPG-avaimia” -tilaan."
 
 #. translators: --no-gpg-checks
 #: src/Config.cc:466
@@ -285,14 +283,14 @@ msgstr "Jätä GPG-tarkistusvirheet huomiotta ja jatka."
 msgid ""
 "Turning on '%s'. New repository signing keys will be automatically imported!"
 msgstr ""
-"Otetaan käyttöön \"%s\". Uudet asennuslähteiden allekirjoitukset tuodaan "
-"järjestelmään automaattisesti!"
+"Otetaan ”%s” käyttöön. Asennuslähteiden uudet allekirjoitukset tuodaan "
+"automaattisesti!"
 
 #. translators: --gpg-auto-import-keys
 #: src/Config.cc:477
 msgid "Automatically trust and import new repository signing keys."
 msgstr ""
-"Luota automaattisesti uusiin asennuslähteiden allekirjoitusavaimiin ja tuo "
+"Luota automaattisesti uusien asennuslähteiden allekirjoitusavaimiin ja tuo "
 "ne."
 
 #. translators: --plus-repo, -p <URI>
@@ -312,8 +310,8 @@ msgstr ""
 #: src/Config.cc:491
 msgid "Repositories disabled, using the database of installed packages only."
 msgstr ""
-"Asennuslähteet poistettu käytöstä. Käytetään tietokantaa asennetuista "
-"paketeista."
+"Asennuslähteet poistettu käytöstä. Käytetään vain asennettujen pakettien "
+"tietokantaa."
 
 #. translators: --disable-repositories
 #: src/Config.cc:495
@@ -322,7 +320,7 @@ msgstr "Älä lue asennuslähteiden metatietoja."
 
 #: src/Config.cc:499
 msgid "Autorefresh disabled."
-msgstr "Automaattinen päivitys poistettu käytöstä."
+msgstr "Automaattivirkistys ei käytössä."
 
 #. translators: --no-refresh
 #: src/Config.cc:503
@@ -340,12 +338,12 @@ msgstr "Jätä CD/DVD-asennuslähteet huomiotta."
 
 #: src/Config.cc:515
 msgid "Remote repositories disabled."
-msgstr "Verkkoasennuslähteet poistettiin käytöstä."
+msgstr "Etäasennuslähteet eivät käytössä."
 
 #. translators: --no-remote
 #: src/Config.cc:519
 msgid "Ignore remote repositories."
-msgstr "Jätä etäasennuslähteet huomiotta."
+msgstr "Sivuuta etäasennuslähteet."
 
 #. translators: --releasever
 #: src/Config.cc:526
@@ -353,7 +351,7 @@ msgid ""
 "Set the value of $releasever in all .repo files (default: distribution "
 "version)"
 msgstr ""
-"Aseta $releasever-arvo kaikkiin .repo-tiedostoihin (oletus: jakelun versio)"
+"Aseta kaikkiin .repo-tiedostoihin $releasever-arvo (oletus: jakeluversio)"
 
 #: src/Config.cc:530
 msgid "Target Options"
@@ -362,7 +360,7 @@ msgstr "Kohdevalinnat"
 #. translators: --root, -R <DIR>
 #: src/Config.cc:535
 msgid "Operate on a different root directory."
-msgstr "Käytä vaihtoehtoista juurihakemistoa."
+msgstr "Käytä vaihtoehtoista juurikansiota."
 
 #. translators: --installroot <DIR>
 #: src/Config.cc:541
@@ -372,16 +370,16 @@ msgstr "Toimi eri juurikansiossa mutta jaa asennuslähteet isännän kanssa."
 
 #: src/Config.cc:547
 msgid "Ignoring installed resolvables."
-msgstr "Jätetään asennetut huomioimatta."
+msgstr "Sivuutetaan asennetut ratkaistavat."
 
 #. translators: --disable-system-resolvables
 #: src/Config.cc:550
 msgid "Do not read installed packages."
-msgstr "Älä lue järjestelmään asennettuja paketteja."
+msgstr "Älä lue asennettuja paketteja."
 
 #: src/Config.cc:717
 msgid "No config file is in use. Can not save options."
-msgstr "Määritystiedostoa ei ole käytössä: asetuksia ei voi tallentaa."
+msgstr "Asetustiedosto ei käytössä: asetuksia ei voi tallentaa."
 
 #: src/Config.cc:728
 #, boost-format
@@ -397,123 +395,125 @@ msgstr "Asetuksen tallentaminen epäonnistui."
 msgid ""
 "'%s' install modifier must not be used without a package name or capability."
 msgstr ""
+"Asennusvalitsinta ”%s” ei voi käyttää ilman paketin nimeä tai ominaisuutta."
 
 #: src/PackageArgs.cc:169
 #, c-format, boost-format
 msgid ""
 "'%s' remove modifier must not be used without a package name or capability."
 msgstr ""
+"Poistovalitsinta ”%s” ei voi käyttää ilman paketin nimeä tai ominaisuutta."
 
 #: src/PackageArgs.cc:221
 #, c-format, boost-format
 msgid "'%s' not found in package names. Trying '%s'."
-msgstr "\"%s\" ei löytynyt pakettien nimistä. Yritetään \"%s\"."
+msgstr "Ei löytynyt pakettien nimistä: ”%s”. Kokeillaan: ”%s”."
 
 #: src/PackageArgs.cc:231
 #, c-format, boost-format
 msgid "'%s' is not a package name or capability."
-msgstr "\"%s\" ei ole paketin nimi tai ominaisuus."
+msgstr "”%s” ei ole paketin nimi tai ominaisuus."
 
 #: src/RequestFeedback.cc:40
 #, c-format, boost-format
 msgid "'%s' not found in package names. Trying capabilities."
-msgstr "\"%s\" ei löytynyt pakettien nimistä. Yritetään ominaisuuksia."
+msgstr "Ei löytynyt pakettien nimistä: ”%s”. Kokeillaan ominaisuuksia."
 
 #: src/RequestFeedback.cc:46
 #, c-format, boost-format
 msgid "Package '%s' not found."
-msgstr "Pakettia \"%s\" ei löytynyt."
+msgstr "Pakettia ”%s” ei löytynyt."
 
 #: src/RequestFeedback.cc:48
 #, c-format, boost-format
 msgid "Patch '%s' not found."
-msgstr "Paikkausta \"%s\" ei löytynyt."
+msgstr "Korjauspäivitystä ”%s” ei löytynyt."
 
 #: src/RequestFeedback.cc:50
 #, c-format, boost-format
 msgid "Product '%s' not found."
-msgstr "Tuotetta \"%s\" ei löytynyt."
+msgstr "Tuotetta ”%s” ei löytynyt."
 
 #: src/RequestFeedback.cc:52
 #, c-format, boost-format
 msgid "Pattern '%s' not found."
-msgstr "Ohjelmistoryhmää \"%s\" ei löytynyt."
+msgstr "Kuviota ”%s” ei löytynyt."
 
 #: src/RequestFeedback.cc:54
 #, c-format, boost-format
 msgid "Source package '%s' not found."
-msgstr "Lähdekoodipakettia \"%s\" ei löydetty."
+msgstr "Lähdepakettia ”%s” ei löydetty."
 
 #. just in case
 #: src/RequestFeedback.cc:56
 #, c-format, boost-format
 msgid "Object '%s' not found."
-msgstr "Kohdetta \"%s\"  ei löytynyt."
+msgstr "Kohdetta ”%s” ei löytynyt."
 
 #: src/RequestFeedback.cc:61
 #, c-format, boost-format
 msgid "Package '%s' not found in specified repositories."
-msgstr "Pakettia \"%s\" ei löytynyt annetuista asennuslähteistä."
+msgstr "Annetuista asennuslähteistä ei löytynyt pakettia ”%s”."
 
 #: src/RequestFeedback.cc:63
 #, c-format, boost-format
 msgid "Patch '%s' not found in specified repositories."
-msgstr "Korjausta \"%s\" ei löytynyt annetuista asennuslähteistä."
+msgstr "Annetuista asennuslähteistä ei löytynyt korjauspäivitystä ”%s”."
 
 #: src/RequestFeedback.cc:65
 #, c-format, boost-format
 msgid "Product '%s' not found in specified repositories."
-msgstr "Tuotetta \"%s\" ei löytynyt annetuista asennuslähteistä."
+msgstr "Annetuista asennuslähteistä ei löytynyt tuotetta ”%s”."
 
 #: src/RequestFeedback.cc:67
 #, c-format, boost-format
 msgid "Pattern '%s' not found in specified repositories."
-msgstr "Ohjelmistoryhmää \"%s\" ei löytynyt annetuista asennuslähteistä."
+msgstr "Annetuista asennuslähteistä ei löytynyt kuviota ”%s”."
 
 #: src/RequestFeedback.cc:69
 #, c-format, boost-format
 msgid "Source package '%s' not found in specified repositories."
-msgstr "Lähdekoodipakettia \"%s\" ei löytynyt annetuista asennuslähteistä."
+msgstr "Annetuista asennuslähteistä ei löytynyt lähdepakettia ”%s”."
 
 #. just in case
 #: src/RequestFeedback.cc:71
 #, c-format, boost-format
 msgid "Object '%s' not found in specified repositories."
-msgstr "Kohdetta \"%s\" ei löytynyt annetuista asennuslähteistä."
+msgstr "Annetuista asennuslähteistä ei löytynyt kohdetta ”%s”."
 
 #. translators: meaning a package %s or provider of capability %s
 #: src/RequestFeedback.cc:76
 #, c-format, boost-format
 msgid "No provider of '%s' found."
-msgstr "\"%s\" tarjoajia ei löytynyt."
+msgstr "”%s”: tarjoajia ei löytynyt."
 
 #. wildcards used
 #: src/RequestFeedback.cc:85
 #, c-format, boost-format
 msgid "No package matching '%s' is installed."
-msgstr "\"%s\"  vastaavia paketteja ei ole asennettu."
+msgstr "”%s”: vastaavia paketteja ei ole asennettu."
 
 #: src/RequestFeedback.cc:87
 #, c-format, boost-format
 msgid "Package '%s' is not installed."
-msgstr "Pakettia \"%s\" ei ole asennettu."
+msgstr "Pakettia ”%s” ei ole asennettu."
 
 #. translators: meaning provider of capability %s
 #: src/RequestFeedback.cc:91
 #, c-format, boost-format
 msgid "No provider of '%s' is installed."
-msgstr "\"%s\" tarjoajia ei ole asennettu."
+msgstr "”%s”: tarjoajia ei ole asennettu."
 
 #: src/RequestFeedback.cc:96
 #, c-format, boost-format
 msgid "'%s' is already installed."
-msgstr "Kohde \"%s\" on jo asennettu."
+msgstr "”%s” on jo asennettu."
 
 #. translators: %s are package names
 #: src/RequestFeedback.cc:99
 #, c-format, boost-format
 msgid "'%s' providing '%s' is already installed."
-msgstr "\"%s\" (%s) on jo asennettu."
+msgstr "”%s”, joka tarjoaa kohteen %s, on jo asennettu."
 
 #: src/RequestFeedback.cc:106
 #, c-format, boost-format
@@ -521,12 +521,12 @@ msgid ""
 "No update candidate for '%s'. The highest available version is already "
 "installed."
 msgstr ""
-"Ei päivitysehdotuksia \"%s\". Uusin saatavilla oleva versio on jo asennettu."
+"”%s”: ei päivitysehdotuksia. Uusin saatavilla oleva versio on jo asennettu."
 
 #: src/RequestFeedback.cc:109
 #, c-format, boost-format
 msgid "No update candidate for '%s'."
-msgstr "Kohteelle \"%s\" ei löydy päivitysehdotuksia."
+msgstr "”%s”: ei päivitysehdotuksia."
 
 #: src/RequestFeedback.cc:115
 #, c-format, boost-format
@@ -534,8 +534,8 @@ msgid ""
 "There is an update candidate '%s' for '%s', but it does not match the "
 "specified version, architecture, or repository."
 msgstr ""
-"Löytyy päivitysehdokas '%s' paketille '%s', mutta se ei täsmää annettuun "
-"versioon, arkkitehtuuriin tai asennuslähteeseen."
+"Löytyy päivitysehdokas ”%s” paketille ”%s”, mutta se ei vastaa annettua "
+"versiota, arkkitehtuuria tai asennuslähdettä."
 
 #: src/RequestFeedback.cc:124
 #, c-format, boost-format
@@ -544,7 +544,7 @@ msgid ""
 "vendor is '%s'. Use '%s' to install this candidate."
 msgstr ""
 "Paketille ”%s” on päivitysehdokas päivityslähteestä ”%s”, mutta "
-"päivityslähde on nyt ”%s”. Asenna tämä ehdokas komennolla ”%s”."
+"päivityslähde on nyt ”%s”. Asenna ehdotus komennolla ”%s”."
 
 #: src/RequestFeedback.cc:133
 #, c-format, boost-format
@@ -552,9 +552,8 @@ msgid ""
 "There is an update candidate for '%s', but it comes from a repository with a "
 "lower priority. Use '%s' to install this candidate."
 msgstr ""
-"Löytyi päivitysehdokas paketille '%s', mutta se löytyy asennuslähteestä, "
-"jolla on alhaisempi tärkeysjärjestys. Käytä '%s' asentaaksesi tämän "
-"ehdokkaan."
+"Löytyi päivitysehdotus paketille ”%s” mutta alemman ensisijaisuuden "
+"asennuslähteestä. Asenna ehdotus komennolla ”%s”."
 
 #: src/RequestFeedback.cc:143
 #, c-format, boost-format
@@ -562,8 +561,8 @@ msgid ""
 "There is an update candidate for '%s', but it is locked. Use '%s' to unlock "
 "it."
 msgstr ""
-"Löytyi päivitysehdokas paketille \"%s\", mutta se on lukittu. Käytä \"%s\" "
-"avaamaan lukitus."
+"Löytyi päivitysehdokas paketille ”%s”, mutta se on lukittu. Avaa lukitus "
+"komennolla ”%s”."
 
 #: src/RequestFeedback.cc:149
 #, c-format, boost-format
@@ -571,8 +570,8 @@ msgid ""
 "Package '%s' is not available in your repositories. Cannot reinstall, "
 "upgrade, or downgrade."
 msgstr ""
-"Paketti \"%s\" ei ole saatavilla asennuslähteistäsi. Uudelleen asentaminen, "
-"päivitys tai paketin vanhentaminen ei onnistu."
+"Pakettia ”%s” ei ole asennuslähteissäsi. Ei voida asentaa uudelleen eikä "
+"päivittää ylös- tai alaspäin."
 
 #: src/RequestFeedback.cc:159
 #, c-format, boost-format
@@ -580,14 +579,13 @@ msgid ""
 "The selected package '%s' from repository '%s' has lower version than the "
 "installed one."
 msgstr ""
-"Valittu paketti \"%s\" asennuslähteestä \"%s\" on alempi versio kuin "
-"asennettuna oleva."
+"Valittu paketti ”%s” asennuslähteestä ”%s” on asennettua varhaisempi versio."
 
 #. translators: %s = "zypper install --oldpackage package-version.arch"
 #: src/RequestFeedback.cc:163
 #, c-format, boost-format
 msgid "Use '%s' to force installation of the package."
-msgstr "Käytä \"%s\" pakottaaksesi paketin asennus."
+msgstr "Pakota paketin asennus komennolla ”%s”."
 
 #: src/RequestFeedback.cc:170
 #, c-format, boost-format
