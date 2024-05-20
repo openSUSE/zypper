@@ -10,17 +10,17 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-04-15 13:01+0200\n"
-"PO-Revision-Date: 2022-12-07 08:13+0000\n"
-"Last-Translator: Alex Minton <alex239@gmail.com>\n"
-"Language-Team: Russian <https://l10n.opensuse.org/projects/zypper/master/ru/"
-">\n"
+"PO-Revision-Date: 2024-05-20 12:46+0000\n"
+"Last-Translator: Aleksey Fedorov <Aleksejfedorov963@gmail.com>\n"
+"Language-Team: Russian <https://l10n.opensuse.org/projects/zypper/master/ru/>"
+"\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 4.9.1\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 5.5.5\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -1203,7 +1203,7 @@ msgstr[2] ""
 
 #: src/Summary.cc:1415
 msgid "was superseded by"
-msgstr ""
+msgstr "был заменен"
 
 #: src/Summary.cc:1428
 #, c-format, boost-format
@@ -1214,8 +1214,14 @@ msgid_plural ""
 "The following %d packages were discontinued and have been superseded by a "
 "new packages with different names."
 msgstr[0] ""
+"Разработка следующего пакета была прекращена и он заменён новым пакетом с "
+"другим именем."
 msgstr[1] ""
+"Разработка следующих %d пакетов была прекращена и они заменены новыми "
+"пакетами с другими именами."
 msgstr[2] ""
+"Разработка следующих %d пакетов была прекращена и они заменены новыми "
+"пакетами с другими именами."
 
 #: src/Summary.cc:1433
 msgid ""
@@ -1225,8 +1231,14 @@ msgid_plural ""
 "The successor packages should be installed as soon as possible to receive "
 "continued support:"
 msgstr[0] ""
+"Пакет-преемник должен быть установлен как можно скорее, чтобы получить "
+"дальнейшую поддержку:"
 msgstr[1] ""
+"Пакеты-преемники должны быть установлены как можно скорее, чтобы получить "
+"дальнейшую поддержку:"
 msgstr[2] ""
+"Пакеты-преемники должны быть установлены как можно скорее, чтобы получить "
+"дальнейшую поддержку:"
 
 #: src/Summary.cc:1458
 #, c-format, boost-format
@@ -1298,6 +1310,7 @@ msgstr[2] "Для %d пакетов требуется перезагрузка 
 #: src/Summary.cc:1561
 msgid "Skipped needed patches which do not apply without conflict:"
 msgstr ""
+"Пропущены необходимые исправления, которые не применяются без конфликтов:"
 
 #: src/Summary.cc:1577
 #, boost-format
@@ -1400,9 +1413,9 @@ msgstr[2] "пакетов для удаления"
 #: src/Summary.cc:1686
 msgid "to change vendor"
 msgid_plural " to change vendor"
-msgstr[0] "для смены поставщика"
-msgstr[1] "для смены поставщика"
-msgstr[2] "для смены поставщика"
+msgstr[0] " для смены поставщика"
+msgstr[1] " для смены поставщика"
+msgstr[2] " для смены поставщика"
 
 #. translators: this text will be preceded by a number e.g. "5 packages ..."
 #: src/Summary.cc:1689
@@ -1457,7 +1470,7 @@ msgstr ""
 #: src/Summary.cc:1805
 #, boost-format
 msgid "%1% is set, otherwise a system reboot would be required."
-msgstr ""
+msgstr "%1% установлено, иначе потребуется перезагрузка системы."
 
 #: src/Summary.cc:1807
 msgid "System reboot required."
@@ -1603,6 +1616,11 @@ msgid ""
 "the signature verification might fail. After a few minutes, when the server "
 "has updated its data, it should work again."
 msgstr ""
+"Это может быть временной проблемой, если сервер находится в процессе "
+"получения новых данных. Файл данных и его подпись - это два файла, которые "
+"должны соответствовать друг другу. Если запрос попал на сервер в процессе их "
+"обновления, проверка подписи может не пройти. Через несколько минут, когда "
+"сервер обновит свои данные, он снова должен работать."
 
 #: src/callbacks/keyring.h:88
 msgid "Repository:"
@@ -2315,7 +2333,7 @@ msgstr "Ограничить обновление указанным репоз�
 
 #: src/commands/distupgrade.cc:41
 msgid "Remove unneeded orphaned packages."
-msgstr ""
+msgstr "Удалите ненужные осиротевшие пакеты."
 
 #: src/commands/distupgrade.cc:72
 #, c-format, boost-format
@@ -2522,12 +2540,12 @@ msgstr "Не указано допустимых аргументов."
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/installremove.cc:312
 msgid "removeptf (rmptf) [OPTIONS] <PTF|CAPABILITY> ..."
-msgstr ""
+msgstr "removeptf (rmptf) [ОПЦИИ] <PTF|ПРИВИЛЕГИЯ> ..."
 
 #. translators: command summary: removeptf, rmptf
 #: src/commands/installremove.cc:314
 msgid "Remove (not only) PTFs."
-msgstr ""
+msgstr "Удаление (не только) PTF."
 
 #. translators: command description
 #: src/commands/installremove.cc:316
@@ -2539,6 +2557,12 @@ msgid ""
 "the install command. It is the recommended way to remove a PTF (Program "
 "Temporary Fix)."
 msgstr ""
+"Команда удаления, которая предпочитает заменять зависимые пакеты, а не "
+"удалять их. Фактически это полнофункциональная команда install с "
+"модификатором remove (-), примененным к ее простым аргументам. Таким "
+"образом, 'removeptf foo' - это то же самое, что и 'install -- -foo'. Поэтому "
+"команда принимает те же параметры, что и команда install. Это рекомендуемый "
+"способ удаления PTF (Program Temporary Fix)."
 
 #: src/commands/installremove.cc:317
 msgid ""
@@ -2548,6 +2572,11 @@ msgid ""
 "remove command would do. The removeptf command however will aim to replace "
 "the dependant packages by their official update versions."
 msgstr ""
+"PTF обычно удаляется, как только исправление, которое в нем содержится, "
+"применяется к последнему официальному обновлению зависимых пакетов. Но вы не "
+"хотите, чтобы зависимые пакеты были удалены вместе с PTF, что и сделает "
+"команда remove. Команда removeptf, однако, будет направлена на замену "
+"зависимых пакетов их официальными версиями обновлений."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/listpatches.cc:16
@@ -3158,6 +3187,7 @@ msgstr ""
 #: src/commands/patch.cc:50
 msgid "Skip needed patches which do not apply without conflict."
 msgstr ""
+"Пропустить необходимые исправления, которые не применяются без конфликтов."
 
 #: src/commands/patch.cc:53
 msgid ""
@@ -3441,11 +3471,13 @@ msgstr "Вывести все пакеты из указанных репози�
 msgid ""
 "Show installed packages which were automatically selected by the resolver."
 msgstr ""
+"Показать установленные пакеты, которые были автоматически выбраны "
+"разрешителем."
 
 #. translators: --userinstalled
 #: src/commands/query/packages.cc:39
 msgid "Show installed packages which were explicitly selected by the user."
-msgstr ""
+msgstr "Показать установленные пакеты, которые были явно выбраны пользователем."
 
 #. translators: --orphaned
 #: src/commands/query/packages.cc:43
@@ -5415,22 +5447,30 @@ msgid ""
 "Shows the ID string of the target operating system. The string is defined by "
 "the XPath:/product/register/target entry in /etc/products.d/baseproduct."
 msgstr ""
+"Показывает строку идентификатора целевой операционной системы. Строка "
+"определяется записью XPath:/product/register/target в файле /etc/products.d/"
+"baseproduct."
 
 #: src/commands/utils/targetos.cc:25
 msgid ""
 "If the baseproduct does not provide this entry, or if no baseproduct is "
 "installed at all, the value is empty if the --terse global option is used."
 msgstr ""
+"Если базовый продукт не предоставляет эту запись, или если базовый продукт "
+"вообще не установлен, значение будет пустым, если используется глобальная "
+"опция --terse."
 
 #: src/commands/utils/targetos.cc:26
 msgid ""
 "In not-terse mode the distribution label is shown instead of an empty value, "
 "if a baseproduct is installed."
 msgstr ""
+"В режиме not-terse вместо пустого значения отображается метка дистрибутива, "
+"если установлен базовый продукт."
 
 #: src/commands/utils/targetos.cc:36
 msgid "Show the baseproducts distribution and short label instead."
-msgstr ""
+msgstr "Вместо этого показать распределение базовых продуктов и короткую метку."
 
 #: src/commands/utils/targetos.cc:49
 msgid "XML output not implemented for this command."
@@ -5450,7 +5490,7 @@ msgstr "Короткая метка: %s"
 #: src/commands/utils/targetos.cc:71
 #, c-format, boost-format
 msgid "%s does not define %s."
-msgstr ""
+msgstr "%s не определяет %s."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/utils/versioncmp.cc:19
@@ -5550,17 +5590,19 @@ msgstr "Уровень поддержки"
 
 #: src/info.cc:375
 msgid "The successor package is already installed."
-msgstr ""
+msgstr "Пакет-преемник уже установлен."
 
 #: src/info.cc:377
 msgid ""
 "The successor package should be installed as soon as possible to receive "
 "continued support."
 msgstr ""
+"Пакет-преемник должен быть установлен как можно скорее, чтобы получить "
+"дальнейшую поддержку."
 
 #: src/info.cc:384
 msgid "Unfortunately the successor package is not provided by any repository."
-msgstr ""
+msgstr "К сожалению, пакет-преемник не предоставляется ни одним репозиторием."
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:394
@@ -5778,7 +5820,7 @@ msgstr "Попытка корректного выхода..."
 #. translators: this will show up if you press ctrl+c twice
 #: src/main.cc:126
 msgid "Zypper is currently cleaning up, exiting as soon as possible."
-msgstr ""
+msgstr "Zypper в данный момент выполняет очистку, вскоре он закроется."
 
 #. translators: the first %s is name of the resolvable,
 #. the second is its kind (e.g. 'zypper package')
@@ -5884,7 +5926,7 @@ msgstr "Проблема при установке пакета с исходн�
 #. translator: used like "1h 12min in the future!"
 #: src/repos.cc:83
 msgid "in the future!"
-msgstr ""
+msgstr "в будущее!"
 
 #. translators: used as 'XYZ changed to SOMETHING [volatile]' to tag specific property changes.
 #: src/repos.cc:94
@@ -6075,7 +6117,7 @@ msgstr "Отключенный репозиторий \"%s\" игнорируе�
 #. translator: used as a table header
 #: src/repos.cc:796
 msgid "Time since last refresh"
-msgstr ""
+msgstr "Время с момента последнего обновления"
 
 #: src/repos.cc:843
 #, c-format, boost-format
@@ -6104,17 +6146,17 @@ msgstr ""
 #. translator: Used as status in a table "RepoName: MetadataStatus"
 #: src/repos.cc:963
 msgid "No metadata available! Skipping it!"
-msgstr ""
+msgstr "Метаданные отсутствуют! Пропуск!"
 
 #. translator: Used as status in a table "RepoName: MetadataStatus"
 #: src/repos.cc:966
 msgid "No permission to read metadata! Skipping it!"
-msgstr ""
+msgstr "Нет разрешения на чтение метаданных! Пропуск!"
 
 #. translator: Used as status in a table "RepoName: MetadataStatus"
 #: src/repos.cc:969
 msgid "Cannot access metadata! Skipping it!"
-msgstr ""
+msgstr "Невозможно получить доступ к метаданным! Пропуск!"
 
 #: src/repos.cc:986
 #, c-format, boost-format
@@ -6132,13 +6174,16 @@ msgstr "Репозиторий \"%s\" отключен."
 
 #: src/repos.cc:1026
 msgid "Some of the repositories had to be skipped due to missing metadata."
-msgstr ""
+msgstr "Некоторые репозитории пришлось пропустить из-за отсутствия метаданных."
 
 #: src/repos.cc:1039
 msgid ""
 "Running with user privileges. From time to time run 'zypper refresh' as root "
 "to make sure the repository metadata are complete and up-to-date."
 msgstr ""
+"Работает с привилегиями пользователя. Время от времени запускайте 'zypper "
+"refresh' от имени root, чтобы убедиться, что метаданные репозитория полны и "
+"актуальны."
 
 #: src/repos.cc:1071
 msgid "Initializing Target"
@@ -6575,7 +6620,7 @@ msgstr "Применение решения %s"
 
 #: src/solve-commit.cc:247
 msgid "Resolver failed but reported no problems."
-msgstr ""
+msgstr "Разрешитель дал сбой, но сообщил об отсутствии проблем."
 
 #. display the number of problems
 #: src/solve-commit.cc:259
@@ -6589,7 +6634,7 @@ msgstr[2] "%d проблем:"
 #. translator: The tag says that the preceding dependency problem is auto-resolved by applying the following solution
 #: src/solve-commit.cc:292
 msgid "Autoresolve:"
-msgstr ""
+msgstr "Авторазрешение:"
 
 #: src/solve-commit.cc:321
 msgid "Resolving dependencies..."
@@ -6762,7 +6807,7 @@ msgstr "Посмотреть сводку в пейджере."
 
 #: src/solve-commit.cc:844
 msgid "Backend"
-msgstr ""
+msgstr "Бэкэнд"
 
 #: src/solve-commit.cc:958
 msgid "committing"
