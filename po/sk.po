@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-04-15 13:01+0200\n"
-"PO-Revision-Date: 2024-04-15 20:43+0000\n"
+"PO-Revision-Date: 2024-05-28 17:46+0000\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
 "Language-Team: Slovak <https://l10n.opensuse.org/projects/zypper/master/sk/>"
 "\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Weblate 4.9.1\n"
+"X-Generator: Weblate 5.5.5\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -3953,7 +3953,7 @@ msgstr "Chyba pri zmene repozitára:"
 #: src/commands/repos/rename.cc:53
 #, c-format, boost-format
 msgid "Leaving repository '%s' unchanged."
-msgstr "Ponechávam repozitár '%s' v nezmenenom stave."
+msgstr "Ponechanie repozitára '%s' bez zmeny."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/repos/rename.cc:64
@@ -6344,7 +6344,7 @@ msgstr "Na repozitári '%s' nie je potrebné nič meniť."
 #: src/repos.cc:1771
 #, c-format, boost-format
 msgid "Leaving repository %s unchanged."
-msgstr "Ponechávam repozitár '%s' v nezmenenom stave."
+msgstr "Ponechanie repozitára %s bez zmeny."
 
 #: src/repos.cc:1858
 msgid "Loading repository data..."
