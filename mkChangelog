@@ -64,9 +64,6 @@ test -f "$CHANGESFILE" || errexit "No changes file '$CHANGESFILE'"
 VERSIONFILE="VERSION.cmake"
 test -f "$VERSIONFILE" || errexit "No version file '$VERSIONFILE'"
 
-SPECFILE=$(ls *.spec.cmake)
-grep -q "^# Copyright (c) $(date +"%Y")" "$SPECFILE" || errexit "Fix copyright date in spec file '$SPECFILE'"
-
 function getversion() {
   cat "$VERSIONFILE" \
   | awk '
