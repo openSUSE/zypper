@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Jun  4 12:46:39 CEST 2024 - ma@suse.de
+
+- clean: Do not report an error if no repos are defined at all
+  (bsc#1223971)
+- version 1.13.66
+
+-------------------------------------------------------------------
 Thu Dec 14 22:44:49 CET 2023 - ma@suse.de
 
 - Backport needs-rebooting command from Code15 (bsc#1217948)
