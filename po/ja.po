@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-04-15 13:01+0200\n"
-"PO-Revision-Date: 2024-04-16 00:47+0000\n"
+"PO-Revision-Date: 2024-06-10 03:46+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
 "Language-Team: Japanese <https://l10n.opensuse.org/projects/zypper/master/ja/"
 ">\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.9.1\n"
+"X-Generator: Weblate 5.5.5\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -1228,7 +1228,7 @@ msgstr[0] "個のパッケージ削除"
 #: src/Summary.cc:1686
 msgid "to change vendor"
 msgid_plural " to change vendor"
-msgstr[0] "個のベンダ変更"
+msgstr[0] " 個のベンダ変更"
 
 #. translators: this text will be preceded by a number e.g. "5 packages ..."
 #: src/Summary.cc:1689
