@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-04-15 13:01+0200\n"
-"PO-Revision-Date: 2024-06-11 21:46+0000\n"
+"PO-Revision-Date: 2024-06-12 01:46+0000\n"
 "Last-Translator: Jure Repinc <jlp@holodeck1.com>\n"
 "Language-Team: Slovenian <https://l10n.opensuse.org/projects/zypper/master/"
 "sl/>\n"
@@ -3670,74 +3670,80 @@ msgid ""
 "Add a repository to the system. The repository can be specified by its URI "
 "or can be read from specified .repo file (even remote)."
 msgstr ""
+"Doda vir na sistem. Vir lahko navedete z njegovim URI-jem ali pa se prebere "
+"iz navedene datoteke .repo (tudi oddaljene)."
 
 #: src/commands/repos/add.cc:40
 msgid "Just another means to specify a .repo file to read."
-msgstr ""
+msgstr "Samo drug način za navedbo datoteke .repo, ki bo prebrana."
 
 #: src/commands/repos/add.cc:41
 msgid "Probe URI."
-msgstr ""
+msgstr "Preveri URI."
 
 #: src/commands/repos/add.cc:42
 msgid "Don't probe URI, probe later during refresh."
-msgstr ""
+msgstr "Ne preveri URI-ja, preveri kasneje med osvežitvijo."
 
 #: src/commands/repos/add.cc:46
 msgid "The repository type is always autodetected. This option is ignored."
-msgstr ""
+msgstr "Vrsto vira se vedno zazna samodejno. Ta možnost bo prezrta."
 
 #: src/commands/repos/add.cc:70
 #, c-format, boost-format
 msgid "Cannot use %s together with %s. Using the %s setting."
 msgstr ""
+"Možnosti »%s« ni mogoče uporabiti skupaj z »%s«. Uporabljena bo nastavitev "
+"iz %s."
 
 #: src/commands/repos/add.cc:93
 msgid ""
 "If only one argument is used, it must be a URI pointing to a .repo file."
 msgstr ""
+"Če je uporabljen samo en argument, mora to biti URI, ki kaže na datoteko ."
+"repo."
 
 #: src/commands/repos/add.cc:130
 msgid "Specified type is not a valid repository type:"
-msgstr ""
+msgstr "Navedena vrsta ni veljavna vrsta vira:"
 
 #: src/commands/repos/add.cc:131
 #, c-format, boost-format
 msgid "See '%s' or '%s' to get a list of known repository types."
-msgstr ""
+msgstr "Da dobite seznam znanih vrst vira, si oglejte »%s« ali »%s«."
 
 #: src/commands/repos/clean.cc:16
 msgid "clean (cc) [ALIAS|#|URI] ..."
-msgstr ""
+msgstr "clean (cc) [DRUGO_IME|#|URI] …"
 
 #: src/commands/repos/clean.cc:17 src/commands/repos/clean.cc:18
 msgid "Clean local caches."
-msgstr ""
+msgstr "Počisti krajevne medpomnilnike."
 
 #. translators: -r, --repo <ALIAS|#|URI>
 #: src/commands/repos/clean.cc:37
 msgid "Clean only specified repositories."
-msgstr ""
+msgstr "Počisti samo navedene vire."
 
 #. translators: -m, --metadata
 #: src/commands/repos/clean.cc:42
 msgid "Clean metadata cache."
-msgstr ""
+msgstr "Počisti predpomnilnik metapodatkov."
 
 #. translators: -M, --raw-metadata
 #: src/commands/repos/clean.cc:48
 msgid "Clean raw metadata cache."
-msgstr ""
+msgstr "Počisti pomnilnik neobdelanih metapodatkov."
 
 #. translators: -a, --all
 #: src/commands/repos/clean.cc:53
 msgid "Clean both metadata and package caches."
-msgstr ""
+msgstr "Počisti predpomnilnika metapodatkov in paketov."
 
 #: src/commands/repos/list.cc:41 src/commands/repos/list.cc:216
 #: src/commands/services/list.cc:106
 msgid "Alias"
-msgstr "Vzdevek"
+msgstr "Drugo ime"
 
 #. translators: property name; short; used like "Name: value"
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
@@ -3746,7 +3752,7 @@ msgstr "Vzdevek"
 #: src/commands/services/list.cc:118 src/repos.cc:1344
 #: src/utils/flags/zyppflags.h:49
 msgid "URI"
-msgstr ""
+msgstr "URI"
 
 #. 'enabled' flag
 #. translators: property name; short; used like "Name: value"
@@ -3754,133 +3760,125 @@ msgstr ""
 #: src/commands/services/add.cc:85 src/commands/services/list.cc:108
 #: src/repos.cc:1346
 msgid "Enabled"
-msgstr "omogočeno"
+msgstr "Omogočeno"
 
 #. GPG Check
 #. translators: property name; short; used like "Name: value"
 #: src/commands/repos/list.cc:52 src/commands/repos/list.cc:239
 #: src/commands/services/list.cc:109 src/repos.cc:1348
-#, fuzzy
 msgid "GPG Check"
-msgstr "DNS preverjanje"
+msgstr "Preverjanje GPG"
 
 #. translators: repository priority (in zypper repos -p or -d)
 #. translators: property name; short; used like "Name: value"
 #: src/commands/repos/list.cc:53 src/commands/repos/list.cc:257
 #: src/commands/services/list.cc:115 src/repos.cc:1352
 msgid "Priority"
-msgstr ""
+msgstr "Prednost"
 
 #. translators: property name; short; used like "Name: value"
 #: src/commands/repos/list.cc:54 src/commands/services/add.cc:87
 #: src/repos.cc:1350
-#, fuzzy
 msgid "Autorefresh"
-msgstr "Samodejna osvežitev"
+msgstr "Samoosvežitev"
 
 #: src/commands/repos/list.cc:54 src/commands/repos/list.cc:55
-#, fuzzy
 msgid "On"
-msgstr "Oman"
+msgstr "Omogočen"
 
 #: src/commands/repos/list.cc:54 src/commands/repos/list.cc:55
 msgid "Off"
-msgstr ""
+msgstr "Onemogočen"
 
 #: src/commands/repos/list.cc:55
-#, fuzzy
 msgid "Keep Packages"
-msgstr "Paket"
+msgstr "Obdrži pakete"
 
 #: src/commands/repos/list.cc:57
 msgid "GPG Key URI"
-msgstr ""
+msgstr "URI ključa GPG"
 
 #: src/commands/repos/list.cc:58
-#, fuzzy
 msgid "Path Prefix"
-msgstr "Predpona za klicanje"
+msgstr "Predpona poti"
 
 #: src/commands/repos/list.cc:59
-#, fuzzy
 msgid "Parent Service"
-msgstr "Strežnik"
+msgstr "Nadrejena storitev"
 
 #: src/commands/repos/list.cc:60
 msgid "Keywords"
-msgstr ""
+msgstr "Ključne besede"
 
 #: src/commands/repos/list.cc:61
 msgid "Repo Info Path"
-msgstr ""
+msgstr "Pot podatkov o viru"
 
 #: src/commands/repos/list.cc:62
 msgid "MD Cache Path"
-msgstr ""
+msgstr "Pot predpom. MP"
 
 #: src/commands/repos/list.cc:78
 msgid "repos (lr) [OPTIONS] [REPO] ..."
-msgstr ""
+msgstr "repos (lr) [MOŽNOSTI] [VIR] …"
 
 #: src/commands/repos/list.cc:79 src/commands/repos/list.cc:80
 msgid "List all defined repositories."
-msgstr ""
+msgstr "Izpiše vse določene vire."
 
 #. translators: -e, --export <FILE.repo>
 #: src/commands/repos/list.cc:91
 msgid "Export all defined repositories as a single local .repo file."
-msgstr ""
+msgstr "Izvozi vse določene vire v eno krajevno datoteko .repo."
 
 #: src/commands/repos/list.cc:122 src/repos.cc:1101
-#, fuzzy
 msgid "Error reading repositories:"
-msgstr "Napaka pri branju odseka %u."
+msgstr "Napaka branja virov:"
 
 #: src/commands/repos/list.cc:148
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Can't open %s for writing."
-msgstr "Datoteke ni mogoče odpreti za pisanje."
+msgstr "Datoteke %s ni moč odpreti za pisanje."
 
 #: src/commands/repos/list.cc:149
 msgid "Maybe you do not have write permissions?"
-msgstr ""
+msgstr "Morda nimate dovoljenja za pisanje?"
 
 #: src/commands/repos/list.cc:155
 #, c-format, boost-format
 msgid "Repositories have been successfully exported to %s."
-msgstr ""
+msgstr "Viri so bili uspešno izvoženi v datoteko %s."
 
 #. translators: 'zypper repos' column - whether autorefresh is enabled
 #. for the repository
 #. translators: 'zypper repos' column - whether autorefresh is enabled for the repository
 #: src/commands/repos/list.cc:247 src/commands/services/list.cc:111
 msgid "Refresh"
-msgstr "Osveži"
+msgstr "Osvežitev"
 
 #: src/commands/repos/list.cc:335
-#, fuzzy
 msgid "No repositories defined."
-msgstr "Samodejna osvežitev"
+msgstr "Določen ni noben vir."
 
 #: src/commands/repos/list.cc:336
 msgid "Use the 'zypper addrepo' command to add one or more repositories."
-msgstr ""
+msgstr "Za dodajanje enega ali več virov uporabite ukaz »zypper addrepo«."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/repos/modify.cc:24
 msgid "modifyrepo (mr) <OPTIONS> <ALIAS|#|URI>"
-msgstr ""
+msgstr "modifyrepo (mr) <MOŽNOSTI> <DRUGO_IME|#|URI>"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/repos/modify.cc:26
 #, boost-format
 msgid "modifyrepo (mr) <OPTIONS> <%1%>"
-msgstr ""
+msgstr "modifyrepo (mr) <MOŽNOSTI> <%1%>"
 
 #. translators: command summary
 #: src/commands/repos/modify.cc:29
 msgid "Modify specified repository."
-msgstr ""
+msgstr "Spremeni navedeni vir."
 
 #. translators: command description
 #: src/commands/repos/modify.cc:31
@@ -3889,20 +3887,22 @@ msgid ""
 "Modify properties of repositories specified by alias, number, or URI, or by "
 "the '%1%' aggregate options."
 msgstr ""
+"Spremeni lastnosti vira, ki je naveden z uporabo drugega imena, številke ali "
+"URI-ja ali z združitvijo možnosti »%1%«."
 
 #: src/commands/repos/modify.cc:89
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Repository %s not found."
-msgstr "Gostitelja %s ni."
+msgstr "Vir %s ni bil najden."
 
 #: src/commands/repos/refresh.cc:24
 msgid "refresh (ref) [ALIAS|#|URI] ..."
-msgstr ""
+msgstr "refresh (ref) [DRUGO_IME|#|URI] …"
 
 #. translators: command summary: refresh, ref
 #: src/commands/repos/refresh.cc:26
 msgid "Refresh all repositories."
-msgstr ""
+msgstr "Osveži vse vire."
 
 #. translators: command description
 #: src/commands/repos/refresh.cc:28
@@ -3910,143 +3910,141 @@ msgid ""
 "Refresh repositories specified by their alias, number or URI. If none are "
 "specified, all enabled repositories will be refreshed."
 msgstr ""
+"Osveži vire, ki so navedeni z uporabo drugega imena, številke ali URI-ja. Če "
+"ni naveden noben, so osveženi vsi omogočeni viri."
 
 #. translators: -f, --force
 #: src/commands/repos/refresh.cc:49 src/commands/services/refresh.cc:113
 msgid "Force a complete refresh."
-msgstr ""
+msgstr "Vsili popolno osvežitev."
 
 #. translators: -b, --force-build
 #: src/commands/repos/refresh.cc:54
 msgid "Force rebuild of the database."
-msgstr ""
+msgstr "Vsili ponovno izgradnjo podatkovne zbirke."
 
 #. translators: -d, --force-download
 #: src/commands/repos/refresh.cc:59
 msgid "Force download of raw metadata."
-msgstr ""
+msgstr "Vsili prejem neobdelanih metapodatkov."
 
 #. translators: -B, --build-only
 #: src/commands/repos/refresh.cc:64
 msgid "Only build the database, don't download metadata."
-msgstr ""
+msgstr "Samo izgradi podatkovno zbirko in ne prenese metapodatkov."
 
 #. translators: -D, --download-only
 #: src/commands/repos/refresh.cc:69
 msgid "Only download raw metadata, don't build the database."
-msgstr ""
+msgstr "Samo prenese neobdelane metapodatke in ne izgradi podatkovne zbirke."
 
 #. translators: -r, --repo <ALIAS|#|URI>
 #: src/commands/repos/refresh.cc:74
 msgid "Refresh only specified repositories."
-msgstr ""
+msgstr "Osveži samo navedene vire."
 
 #. translators: -s, --services
 #: src/commands/repos/refresh.cc:80
 msgid "Refresh also services before refreshing repos."
-msgstr ""
+msgstr "Osveži tudi storitve pred osveževanjem virov."
 
 #: src/commands/repos/refresh.cc:95
 #, c-format, boost-format
 msgid "The '%s' global option has no effect here."
-msgstr ""
+msgstr "Splošna možnost »%s« tu nima vpliva."
 
 #: src/commands/repos/refresh.cc:103
 #, c-format, boost-format
 msgid "Arguments are not allowed if '%s' is used."
-msgstr ""
+msgstr "Če je uporabljena možnost »%s«, argumenti niso dovoljeni."
 
 #: src/commands/repos/refresh.cc:195 src/repos.cc:1113
-#, fuzzy
 msgid "Specified repositories: "
-msgstr "%s je potrebno odstraniti."
+msgstr "Navedeni viri: "
 
 #: src/commands/repos/refresh.cc:218
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Refreshing repository '%s'."
-msgstr "Napaka pri branju odseka %u."
+msgstr "Osveževanje vira »%s«."
 
 #: src/commands/repos/refresh.cc:236 src/repos.cc:900
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Scanning content of disabled repository '%s'."
-msgstr "Napaka pri branju odseka %u."
+msgstr "Pregledovanje vsebine onemogočenega vira »%s«."
 
 #: src/commands/repos/refresh.cc:247
 #, c-format, boost-format
 msgid "Skipping disabled repository '%s'"
-msgstr ""
+msgstr "Onemogočen vir »%s« bo preskočen"
 
 #: src/commands/repos/refresh.cc:262 src/repos.cc:917 src/repos.cc:991
 #, c-format, boost-format
 msgid "Skipping repository '%s' because of the above error."
-msgstr ""
+msgstr "Zaradi napake zgoraj bo vir »%s« preskočen."
 
 #: src/commands/repos/refresh.cc:274
-#, fuzzy
 msgid ""
 "Some of the repositories have not been refreshed because they were not known."
-msgstr "Izbranega vnosa ni možno odstraniti."
+msgstr "Nekateri viri niso bili osveženi, ker niso bili znani."
 
 #: src/commands/repos/refresh.cc:281
 msgid "Specified repositories are not enabled or defined."
-msgstr ""
+msgstr "Navedeni viri niso omogočeni ali določeni."
 
 #: src/commands/repos/refresh.cc:283
 msgid "There are no enabled repositories defined."
-msgstr ""
+msgstr "Določen ni noben omogočen vir."
 
 #: src/commands/repos/refresh.cc:287
 #, c-format, boost-format
 msgid "Use '%s' or '%s' commands to add or enable repositories."
-msgstr ""
+msgstr "Za dodajanje ali omogočanje virov uporabite ukaza »%s« ali »%s«."
 
 #: src/commands/repos/refresh.cc:293
-#, fuzzy
 msgid "Could not refresh the repositories because of errors."
-msgstr "Izbranega vnosa ni možno odstraniti."
+msgstr "Zaradi napak virov ni bilo moč osvežiti."
 
 #: src/commands/repos/refresh.cc:298 src/repos.cc:1028
-#, fuzzy
 msgid "Some of the repositories have not been refreshed because of an error."
-msgstr "Izbranega vnosa ni možno odstraniti."
+msgstr "Zaradi napake nekateri izmed virov niso bili osveženi."
 
 #: src/commands/repos/refresh.cc:302
-#, fuzzy
 msgid "Specified repositories have been refreshed."
-msgstr "%s je potrebno odstraniti."
+msgstr "Navedeni viri so bili osveženi."
 
 #: src/commands/repos/refresh.cc:304
 msgid "All repositories have been refreshed."
-msgstr ""
+msgstr "Vsi viri so bili osveženi."
 
 #: src/commands/repos/remove.cc:21
 msgid "removerepo (rr) [OPTIONS] <ALIAS|#|URI>"
-msgstr ""
+msgstr "removerepo (rr) [MOŽNOSTI] <DRUGO_IME|#|URI>"
 
 #: src/commands/repos/remove.cc:22
 msgid "Remove specified repository."
-msgstr ""
+msgstr "Odstrani navedeni vir."
 
 #: src/commands/repos/remove.cc:23
 msgid "Remove repository specified by alias, number or URI."
 msgstr ""
+"Odstrani vir, ki je naveden z uporabo drugega imena, številke ali URI-ja."
 
 #. translators: --loose-auth
 #: src/commands/repos/remove.cc:44 src/commands/services/remove.cc:40
 msgid "Ignore user authentication data in the URI."
-msgstr ""
+msgstr "Prezre podatke za overjanje uporabnika v URI-ju."
 
 #. translators: --loose-query
 #: src/commands/repos/remove.cc:47 src/commands/services/remove.cc:43
 msgid "Ignore query string in the URI."
-msgstr ""
+msgstr "Prezre poizvedovalni niz v URI-ju."
 
 #. translators: %s is the supplied command line argument which
 #. for which no repository counterpart was found
 #: src/commands/repos/remove.cc:96
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Repository '%s' not found by alias, number or URI."
-msgstr "Gostitelja %s ni."
+msgstr "Vira »%s« po drugem imenu, številki ali URI-ju ni bilo moč najti."
 
 #: src/commands/repos/rename.cc:33
 #, c-format, boost-format
@@ -4054,52 +4052,52 @@ msgid ""
 "Cannot change alias of '%s' repository. The repository belongs to service "
 "'%s' which is responsible for setting its alias."
 msgstr ""
+"Drugega imena vira »%s« ni moč spremeniti. Vir pripada storitvi »%s«, ki je "
+"zadolžena za nastavljanje drugega imena."
 
 #: src/commands/repos/rename.cc:43
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Repository '%s' renamed to '%s'."
-msgstr "Gostitelja %s ni."
+msgstr "Vir »%s« je bil preimenovan v »%s«."
 
 #: src/commands/repos/rename.cc:47 src/repos.cc:1292
 #, c-format, boost-format
 msgid "Repository named '%s' already exists. Please use another alias."
-msgstr ""
+msgstr "Vir z imenom »%s« že obstaja. Uporabite drugačno drugo ime."
 
 #: src/commands/repos/rename.cc:52 src/repos.cc:1770
-#, fuzzy
 msgid "Error while modifying the repository:"
-msgstr ""
-"Napaka pri dostopu do FTP strežnika:\n"
-"\n"
-"%s"
+msgstr "Napaka med spreminjanjem vira:"
 
 #: src/commands/repos/rename.cc:53
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Leaving repository '%s' unchanged."
-msgstr "Shranjevanje zbirke podatkov"
+msgstr "Vir »%s« bo ostal nespremenjen."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/repos/rename.cc:64
 msgid "renamerepo (nr) [OPTIONS] <ALIAS|#|URI> <NEW-ALIAS>"
-msgstr ""
+msgstr "renamerepo (nr) [MOŽNOSTI] <DRUGO_IME|#|URI> <NOVO_DRUGO_IME>"
 
 #: src/commands/repos/rename.cc:65
 msgid "Rename specified repository."
-msgstr ""
+msgstr "Preimenuje navedeni vir."
 
 #. translators: command description
 #: src/commands/repos/rename.cc:67
 msgid "Assign new alias to the repository specified by alias, number or URI."
 msgstr ""
+"Dodeli novo drugo ime viru, ki je naveden z uporabo drugega imena, številke "
+"ali URI-ja."
 
 #: src/commands/repos/rename.cc:92
 msgid "Too few arguments. At least URI and alias are required."
-msgstr ""
+msgstr "Argumentov je premalo. Zahtevana sta vsa URI in drugo ime."
 
 #: src/commands/repos/rename.cc:114
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Repository '%s' not found."
-msgstr "Gostitelja %s ni."
+msgstr "Vira »%s« ni bilo moč najti."
 
 #: src/commands/reposerviceoptionsets.cc:35 src/repos.cc:150
 #, c-format, boost-format
@@ -4107,125 +4105,120 @@ msgid ""
 "Invalid priority '%s'. Use a positive integer number. The greater the "
 "number, the lower the priority."
 msgstr ""
+"Prednost »%s« ni veljavna. Uporabite pozitivno celo število. Višja kot je "
+"številka, nižja je prednost."
 
 #: src/commands/reposerviceoptionsets.cc:72
 msgid "Set a descriptive name for the service."
-msgstr ""
+msgstr "Nastavi opisno ime za storitev."
 
 #: src/commands/reposerviceoptionsets.cc:72
-#, fuzzy
 msgid "Set a descriptive name for the repository."
-msgstr "Za to dejanje ni določene pomoči."
+msgstr "Nastavi opisno ime za vir."
 
 #: src/commands/reposerviceoptionsets.cc:75
 msgid "Enable a disabled service."
-msgstr ""
+msgstr "Omogoči onemogočeno storitev."
 
 #: src/commands/reposerviceoptionsets.cc:75
-#, fuzzy
 msgid "Enable a disabled repository."
-msgstr "Napaka pri branju odseka %u."
+msgstr "Omogoči onemogočen vir."
 
 #: src/commands/reposerviceoptionsets.cc:78
 msgid "Disable the service (but don't remove it)."
-msgstr ""
+msgstr "Onemogoči storitev (a je ne odstrani)."
 
 #: src/commands/reposerviceoptionsets.cc:78
 msgid "Disable the repository (but don't remove it)."
-msgstr ""
+msgstr "Onemogoči vir (a ga ne odstrani)."
 
 #: src/commands/reposerviceoptionsets.cc:81
 msgid "Enable auto-refresh of the service."
-msgstr ""
+msgstr "Omogoči samodejno osvežitev storitve."
 
 #: src/commands/reposerviceoptionsets.cc:81
-#, fuzzy
 msgid "Enable auto-refresh of the repository."
-msgstr "Za to dejanje ni določene pomoči."
+msgstr "Omogoči samodejno osvežitev vira."
 
 #: src/commands/reposerviceoptionsets.cc:84
 msgid "Disable auto-refresh of the service."
-msgstr ""
+msgstr "Onemogoči samodejno osvežitev storitve."
 
 #: src/commands/reposerviceoptionsets.cc:84
-#, fuzzy
 msgid "Disable auto-refresh of the repository."
-msgstr "Za to dejanje ni določene pomoči."
+msgstr "Onemogoči samodejno osvežitev vira."
 
 #: src/commands/reposerviceoptionsets.cc:111
 msgid "Apply changes to all services."
-msgstr ""
+msgstr "Uveljavi spremembe za vse storitve."
 
 #: src/commands/reposerviceoptionsets.cc:111
 msgid "Apply changes to all repositories."
-msgstr ""
+msgstr "Uveljavi spremembe za vse vire."
 
 #: src/commands/reposerviceoptionsets.cc:114
 msgid "Apply changes to all local services."
-msgstr ""
+msgstr "Uveljavi spremembe za vse krajevne storitve."
 
 #: src/commands/reposerviceoptionsets.cc:114
 msgid "Apply changes to all local repositories."
-msgstr ""
+msgstr "Uveljavi spremembe za vse krajevne vire."
 
 #: src/commands/reposerviceoptionsets.cc:117
 msgid "Apply changes to all remote services."
-msgstr ""
+msgstr "Uveljavi spremembe za vse oddaljene storitve."
 
 #: src/commands/reposerviceoptionsets.cc:117
 msgid "Apply changes to all remote repositories."
-msgstr ""
+msgstr "Uveljavi spremembe za vse oddaljene vire."
 
 #: src/commands/reposerviceoptionsets.cc:120
 msgid "Apply changes to services of specified type."
-msgstr ""
+msgstr "Uveljavi spremembe za storitve navedene vrste."
 
 #: src/commands/reposerviceoptionsets.cc:120
 msgid "Apply changes to repositories of specified type."
-msgstr ""
+msgstr "Uveljavi spremembe za vire navedene vrste."
 
 #: src/commands/reposerviceoptionsets.cc:137
-#, fuzzy
 msgid "Set priority of the repository."
-msgstr ""
-"Napaka pri dostopu do FTP strežnika:\n"
-"\n"
-"%s"
+msgstr "Nastavi prednost vira."
 
 #: src/commands/reposerviceoptionsets.cc:138
 msgid "Enable RPM files caching."
-msgstr ""
+msgstr "Omogoči predpomnjenje datotek RPM."
 
 #: src/commands/reposerviceoptionsets.cc:139
 msgid "Disable RPM files caching."
-msgstr ""
+msgstr "Onemogoči predpomnjenje datotek RPM."
 
 #: src/commands/reposerviceoptionsets.cc:140
 msgid "Enable GPG check for this repository."
-msgstr ""
+msgstr "Omogoči preverjanje GPG za ta vir."
 
 #: src/commands/reposerviceoptionsets.cc:141
-#, fuzzy
 msgid "Enable strict GPG check for this repository."
-msgstr "Za to dejanje ni določene pomoči."
+msgstr "Omogoči strogo preverjanje GPG za ta vir."
 
 #: src/commands/reposerviceoptionsets.cc:142
-#, fuzzy, boost-format
+#, boost-format
 msgid "Short hand for '%1%'."
-msgstr "Za to dejanje ni določene pomoči."
+msgstr "Krajše za »%1%«."
 
 #: src/commands/reposerviceoptionsets.cc:143
 msgid "Enable GPG check but allow the repository metadata to be unsigned."
-msgstr ""
+msgstr "Omogoči preverjanje GPG, a dovoli nepodpisane metapodatke vira."
 
 #: src/commands/reposerviceoptionsets.cc:144
 msgid ""
 "Enable GPG check but allow installing unsigned packages from this repository."
 msgstr ""
+"Omogoči preverjanje GPG, a dovoli nameščanje nepodpisanih paketov iz tega "
+"vira."
 
 #: src/commands/reposerviceoptionsets.cc:145
 msgid "Disable GPG check for this repository."
-msgstr ""
+msgstr "Onemogoči preverjanje GPG tega vira."
 
 #: src/commands/reposerviceoptionsets.cc:146
 msgid ""
