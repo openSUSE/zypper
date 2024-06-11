@@ -815,11 +815,11 @@ bool iType( const ui::Selectable::constPtr & sel_r )
 
 const char * computeStatusIndicator( const PoolItem & pi_r, ui::Selectable::constPtr sel_r, bool * iType_r )
 {
-  static const char * _[] = { " ",  " l", " P", " R" };	// not installed / not relevant
-  static const char * i[] = { "i",  "il", "iP", "iR" };	// installed     / satisfied
+  static const char * _[] = { "  ", " l", " P", " R" };	// not installed / not relevant
+  static const char * i[] = { "i ", "il", "iP", "iR" };	// installed     / satisfied
   static const char * I[] = { "i+", "il", "iP", "iR" };	// user installed
-  static const char * v[] = { "v",  "vl", "vP", "vR" };	// different version installed
-  static const char * b[] = { "!",  "!l", "!P", "!R" };	//               / broken
+  static const char * v[] = { "v ", "vl", "vP", "vR" };	// different version installed
+  static const char * b[] = { "! ", "!l", "!P", "!R" };	//               / broken
 
   const char ** stem = _;
   const ResStatus & status { pi_r.status() };
@@ -859,12 +859,12 @@ const char * computeStatusIndicator( const PoolItem & pi_r, ui::Selectable::cons
 
 const char * computeStatusIndicator( const ui::Selectable & sel_r, bool tagForeign_r, bool * iType_r )
 {
-  static const char * _[] = { " ",  " l", " P", " R" };	// not installed / not relevant
-  static const char * i[] = { "i",  "il", "iP", "iR" };	// installed     / satisfied
+  static const char * _[] = { "  ", " l", " P", " R" };	// not installed / not relevant
+  static const char * i[] = { "i ", "il", "iP", "iR" };	// installed     / satisfied
   static const char * I[] = { "i+", "il", "iP", "iR" };	// user installed
-  static const char * v[] = { "v",  "vl", "vP", "vR" };	// foreign installed
+  static const char * v[] = { "v ", "vl", "vP", "vR" };	// foreign installed
   static const char * V[] = { "v+", "vl", "vP", "vR" };	// foreign user installed
-  static const char * b[] = { "!",  "!l", "!P", "!R" };	//               / broken
+  static const char * b[] = { "! ", "!l", "!P", "!R" };	//               / broken
 
   const char ** stem = _;
 
