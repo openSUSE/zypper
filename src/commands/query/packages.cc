@@ -38,9 +38,13 @@ zypp::ZyppFlags::CommandGroup PackagesCmdBase::cmdOptions() const
             // translators: --userinstalled
             _("Show installed packages which were explicitly selected by the user.")
       },
+      {"system", '\0', ZyppFlags::NoArgument, ZyppFlags::BitFieldType( that->_flags, ListPackagesBits::ShowSystem ),
+            // translators: --system
+            _("Show installed packages which are not provided by any repository.")
+      },
       {"orphaned", '\0', ZyppFlags::NoArgument, ZyppFlags::BitFieldType( that->_flags, ListPackagesBits::ShowOrphaned ),
             // translators: --orphaned
-            _("Show packages which are orphaned (without repository).")
+            _("Show system packages which are orphaned (without repository and without update candidate).")
       },
       {"suggested", '\0', ZyppFlags::NoArgument, ZyppFlags::BitFieldType( that->_flags, ListPackagesBits::ShowSuggested ),
             // translators: --suggested

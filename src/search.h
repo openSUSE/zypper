@@ -73,12 +73,13 @@ enum class ListPackagesBits {
   Default           = 0,
   HideInstalled     = 1 << 0,
   HideNotInstalled  = 1 << 1,
-  ShowOrphaned      = 1 << 2,
-  ShowSuggested     = 1 << 3,
-  ShowRecommended   = 1 << 4,
-  ShowUnneeded      = 1 << 5,
-  ShowByAuto        = 1 << 6,
-  ShowByUser        = 1 << 7,
+  ShowSystem        = 1 << 2,
+  ShowOrphaned      = 1 << 3,
+  ShowSuggested     = 1 << 4,
+  ShowRecommended   = 1 << 5,
+  ShowUnneeded      = 1 << 6,
+  ShowByAuto        = 1 << 7,
+  ShowByUser        = 1 << 8,
   SortByRepo        = 1 << 20  //< Result will be sorted by repo, not by name
 };
 ZYPP_DECLARE_FLAGS( ListPackagesFlags, ListPackagesBits );
