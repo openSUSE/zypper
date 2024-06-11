@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-04-15 13:01+0200\n"
-"PO-Revision-Date: 2024-06-11 12:46+0000\n"
+"PO-Revision-Date: 2024-06-11 15:46+0000\n"
 "Last-Translator: Jure Repinc <jlp@holodeck1.com>\n"
 "Language-Team: Slovenian <https://l10n.opensuse.org/projects/zypper/master/"
 "sl/>\n"
@@ -2534,20 +2534,21 @@ msgid ""
 "Remove packages with specified capabilities. A capability is NAME[.ARCH]"
 "[OP<VERSION>], where OP is one of <, <=, =, >=, >."
 msgstr ""
+"Odstrani pakete z navedenimi zmožnostmi. Zmožnost je IME[."
+"ARHITEKTURA][OP<RAZLIČICA>], kjer je OP en izmed <, <=, =, >=, >."
 
 #: src/commands/installremove.cc:104 src/commands/installremove.cc:234
 #: src/utils/messages.cc:53
 msgid "Too few arguments."
-msgstr ""
+msgstr "Argumentov je premalo."
 
 #: src/commands/installremove.cc:105 src/commands/installremove.cc:235
 msgid "At least one package name is required."
-msgstr ""
+msgstr "Zahtevano je vsaj eno ime paketa."
 
 #: src/commands/installremove.cc:116
-#, fuzzy
 msgid "Cannot uninstall patches."
-msgstr "Nameščeni paketi"
+msgstr "Popravkov ni moč odstraniti."
 
 #: src/commands/installremove.cc:117
 msgid ""
@@ -2555,20 +2556,24 @@ msgid ""
 "Patches are not installed in sense of copied files, database records,\n"
 "or similar."
 msgstr ""
+"Stanje nameščenosti popravka je določeno samo na osnovi njegovih odvisnosti."
+"\n"
+"Popravki niso nameščeni v smislu skopiranih datotek, zapisov v podatkovnih\n"
+"zbirkah ali podobno."
 
 #: src/commands/installremove.cc:126
 msgid "Uninstallation of a source package not defined and implemented."
-msgstr ""
+msgstr "Odstranitev paketa z izvorno kodo ni določena in implementirana."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/installremove.cc:166
 msgid "install (in) [OPTIONS] <CAPABILITY|RPM_FILE_URI> ..."
-msgstr ""
+msgstr "install (in) [MOŽNOSTI] <ZMOŽNOST|URI_DATOTEKE_RPM> …"
 
 #. translators: command summary: install, in
 #: src/commands/installremove.cc:168
 msgid "Install packages."
-msgstr ""
+msgstr "Namesti pakete."
 
 #. translators: command description
 #: src/commands/installremove.cc:170
@@ -2577,11 +2582,14 @@ msgid ""
 "location. A capability is NAME[.ARCH][OP<VERSION>], where OP is one of <, "
 "<=, =, >=, >."
 msgstr ""
+"Namesti pakete z navedenimi zmožnostmi ali datoteke RPM z navedenim mestom. "
+"Zmožnost je IME[.ARHITEKTURA][OP<RAZLIČICA>], kjer je OP en izmed <, <=, =, "
+">=, >."
 
 #. translators: --from <ALIAS|#|URI>
 #: src/commands/installremove.cc:195 src/commands/utils/download.cc:170
 msgid "Select packages from the specified repository."
-msgstr ""
+msgstr "Izbira paketov iz navedenega vira."
 
 #. translators: --oldpackage
 #: src/commands/installremove.cc:199
@@ -2589,10 +2597,13 @@ msgid ""
 "Allows one to replace a newer item with an older one. Handy if you are doing "
 "a rollback. Unlike --force it will not enforce a reinstall."
 msgstr ""
+"Omogoči nadomestitev novejšega predmeta s starejšim. Uporabno, če izvajate "
+"vračanje nazaj. Za razliko od »--force« ne bo vsiljena ponovna namestitev."
 
 #: src/commands/installremove.cc:203
 msgid "Silently install unsigned rpm packages given as commandline parameters."
 msgstr ""
+"Tiho namesti nepodpisane pakete RPM, ki so navedeni kot parametri ukaza."
 
 #. translators: -f, --force
 #: src/commands/installremove.cc:208
@@ -2600,26 +2611,28 @@ msgid ""
 "Install even if the item is already installed (reinstall), downgraded or "
 "changes vendor or architecture."
 msgstr ""
+"Izvede namestitev, tudi če je predmet že nameščen (ponovna namestitev) ali "
+"pa spremeni izdelovalca ali arhitekturo."
 
 #. translators: rug related message, shown if
 #. 'zypper in --entire-catalog foorepo someargument' is specified
 #: src/commands/installremove.cc:246
 msgid "Ignoring arguments, marking the entire repository."
-msgstr ""
+msgstr "Prezre argumente in označi celoten vir."
 
 #: src/commands/installremove.cc:259 src/commands/sourceinstall.cc:92
 msgid "No valid arguments specified."
-msgstr ""
+msgstr "Naveden ni noben veljaven argument."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/installremove.cc:312
 msgid "removeptf (rmptf) [OPTIONS] <PTF|CAPABILITY> ..."
-msgstr ""
+msgstr "removeptf (rmptf) [MOŽNOSTI] <PTF|ZMOŽNOST> …"
 
 #. translators: command summary: removeptf, rmptf
 #: src/commands/installremove.cc:314
 msgid "Remove (not only) PTFs."
-msgstr ""
+msgstr "Odstrani (ne samo) PTF-je."
 
 #. translators: command description
 #: src/commands/installremove.cc:316
@@ -2631,6 +2644,12 @@ msgid ""
 "the install command. It is the recommended way to remove a PTF (Program "
 "Temporary Fix)."
 msgstr ""
+"Ukaz za odstranjevanje, ki daje prednost nadomeščanju odvisnih paketov pred "
+"njihovim odstranjevanjem. To je ukaz »install« z vsemi možnostmi s "
+"spremenilnikom za odstranitev (-) uporabljenim za navadne argumente. Tako je "
+"ukaz »removeptf nekaj« nek ukazu »install -- -nekaj«. To je razlog, da ukaz "
+"sprejme enake možnosti kot ukaz »install«. Ta ukaz je priporočljiv za "
+"odstranjevanje začasnih popravkov programov (PTF, Program Temporary Fix)."
 
 #: src/commands/installremove.cc:317
 msgid ""
