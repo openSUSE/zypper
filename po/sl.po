@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-04-15 13:01+0200\n"
-"PO-Revision-Date: 2024-06-11 01:46+0000\n"
+"PO-Revision-Date: 2024-06-11 09:46+0000\n"
 "Last-Translator: Jure Repinc <jlp@holodeck1.com>\n"
 "Language-Team: Slovenian <https://l10n.opensuse.org/projects/zypper/master/"
 "sl/>\n"
@@ -749,231 +749,234 @@ msgstr[3] "Nameščenih bo naslednjih %d NOVIH programov:"
 #, c-format, boost-format
 msgid "The following package is going to be REMOVED:"
 msgid_plural "The following %d packages are going to be REMOVED:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Naslednji %d paket bo ODSTRANJEN:"
+msgstr[1] "Naslednja %d paketa bosta ODSTRANJENA:"
+msgstr[2] "Naslednji %d paketi bodo ODSTRANJENI:"
+msgstr[3] "Naslednjih %d paketov bo ODSTRANJENIH:"
 
 #: src/Summary.cc:779
 #, c-format, boost-format
 msgid "The following patch is going to be REMOVED:"
 msgid_plural "The following %d patches are going to be REMOVED:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Naslednji %d popravek bo ODSTRANJEN:"
+msgstr[1] "Naslednja %d popravka bosta ODSTRANJENA:"
+msgstr[2] "Naslednji %d popravki bodo ODSTRANJENI:"
+msgstr[3] "Naslednjih %d popravkov bo ODSTRANJENIH:"
 
 #: src/Summary.cc:784
 #, c-format, boost-format
 msgid "The following pattern is going to be REMOVED:"
 msgid_plural "The following %d patterns are going to be REMOVED:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Naslednji %d vzorec bo ODSTRANJEN:"
+msgstr[1] "Naslednja %d vzorca bosta ODSTRANJENA:"
+msgstr[2] "Naslednji %d vzorci bodo ODSTRANJENI:"
+msgstr[3] "Naslednjih %d vzorcev bo ODSTRANJENIH:"
 
 #: src/Summary.cc:789
 #, c-format, boost-format
 msgid "The following product is going to be REMOVED:"
 msgid_plural "The following %d products are going to be REMOVED:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Naslednji %d izdelek bo ODSTRANJEN:"
+msgstr[1] "Naslednja %d izdelka bosta ODSTRANJENA:"
+msgstr[2] "Naslednji %d izdelki bodo ODSTRANJENI:"
+msgstr[3] "Naslednjih %d izdelkov bo ODSTRANJENIH:"
 
 #: src/Summary.cc:795
 #, c-format, boost-format
 msgid "The following application is going to be REMOVED:"
 msgid_plural "The following %d applications are going to be REMOVED:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Naslednji %d program bo ODSTRANJEN:"
+msgstr[1] "Naslednja %d programa bosta ODSTRANJENA:"
+msgstr[2] "Naslednji %d programi bodo ODSTRANJENI:"
+msgstr[3] "Naslednjih %d programov bo ODSTRANJENIH:"
 
 #: src/Summary.cc:818
 #, c-format, boost-format
 msgid "The following package is going to be upgraded:"
 msgid_plural "The following %d packages are going to be upgraded:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Naslednji %d paket bo nadgrajen:"
+msgstr[1] "Naslednja %d paketa bosta nadgrajena:"
+msgstr[2] "Naslednji %d paketi bodo nadgrajeni:"
+msgstr[3] "Naslednjih %d paketov bo nadgrajenih:"
 
 #: src/Summary.cc:823
 #, c-format, boost-format
 msgid "The following patch is going to be upgraded:"
 msgid_plural "The following %d patches are going to be upgraded:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Naslednji %d popravek bo nadgrajen:"
+msgstr[1] "Naslednja %d popravka bosta nadgrajena:"
+msgstr[2] "Naslednji %d popravki bodo nadgrajeni:"
+msgstr[3] "Naslednjih %d popravkov bo nadgrajenih:"
 
 #: src/Summary.cc:828
 #, c-format, boost-format
 msgid "The following pattern is going to be upgraded:"
 msgid_plural "The following %d patterns are going to be upgraded:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Naslednji %d vzorec bo nadgrajen:"
+msgstr[1] "Naslednja %d vzorca bosta nadgrajena:"
+msgstr[2] "Naslednji %d vzorci bodo nadgrajeni:"
+msgstr[3] "Naslednjih %d vzorcev bo nadgrajenih:"
 
 #: src/Summary.cc:834
 #, c-format, boost-format
 msgid "The following product is going to be upgraded:"
 msgid_plural "The following %d products are going to be upgraded:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Naslednji %d izdelek bo nadgrajen:"
+msgstr[1] "Naslednja %d izdelka bosta nadgrajena:"
+msgstr[2] "Naslednji %d izdelki bodo nadgrajeni:"
+msgstr[3] "Naslednjih %d izdelkov bo nadgrajenih:"
 
 #: src/Summary.cc:842
 #, c-format, boost-format
 msgid "The following application is going to be upgraded:"
 msgid_plural "The following %d applications are going to be upgraded:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Naslednji %d program bo nadgrajen:"
+msgstr[1] "Naslednja %d programa bosta nadgrajena:"
+msgstr[2] "Naslednji %d programi bodo nadgrajeni:"
+msgstr[3] "Naslednjih %d programov bo nadgrajenih:"
 
 #: src/Summary.cc:864
 #, c-format, boost-format
 msgid "The following package is going to be downgraded:"
 msgid_plural "The following %d packages are going to be downgraded:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Naslednji %d paket bo vrnjen na staro različico:"
+msgstr[1] "Naslednja %d paketa bosta vrnjena na staro različico:"
+msgstr[2] "Naslednji %d paketi bodo vrnjeni na staro različico:"
+msgstr[3] "Naslednjih %d paketov bo vrnjenih na staro različico:"
 
 #: src/Summary.cc:869
 #, c-format, boost-format
 msgid "The following patch is going to be downgraded:"
 msgid_plural "The following %d patches are going to be downgraded:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Naslednji %d popravek bo vrnjen na staro različico:"
+msgstr[1] "Naslednja %d popravka bosta vrnjena na staro različico:"
+msgstr[2] "Naslednji %d popravki bodo vrnjeni na staro različico:"
+msgstr[3] "Naslednjih %d popravkov bo vrnjenih na staro različico:"
 
 #: src/Summary.cc:874
 #, c-format, boost-format
 msgid "The following pattern is going to be downgraded:"
 msgid_plural "The following %d patterns are going to be downgraded:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Naslednji %d vzorec bo vrnjen na staro različico:"
+msgstr[1] "Naslednja %d vzorca bosta vrnjena na staro različico:"
+msgstr[2] "Naslednji %d vzorci bodo vrnjeni na staro različico:"
+msgstr[3] "Naslednjih %d vzorcev bo vrnjenih na staro različico:"
 
 #: src/Summary.cc:879
 #, c-format, boost-format
 msgid "The following product is going to be downgraded:"
 msgid_plural "The following %d products are going to be downgraded:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Naslednji %d izdelek bo vrnjen na staro različico:"
+msgstr[1] "Naslednja %d izdelka bosta vrnjena na staro različico:"
+msgstr[2] "Naslednji %d izdelki bodo vrnjeni na staro različico:"
+msgstr[3] "Naslednjih %d izdelkov bo vrnjenih na staro različico:"
 
 #: src/Summary.cc:885
 #, c-format, boost-format
 msgid "The following application is going to be downgraded:"
 msgid_plural "The following %d applications are going to be downgraded:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Naslednji %d program bo vrnjen na staro različico:"
+msgstr[1] "Naslednja %d programa bosta vrnjena na staro različico:"
+msgstr[2] "Naslednji %d programi bodo vrnjeni na staro različico:"
+msgstr[3] "Naslednjih %d programov bo vrnjenih na staro različico:"
 
 #: src/Summary.cc:907
 #, c-format, boost-format
 msgid "The following package is going to be reinstalled:"
 msgid_plural "The following %d packages are going to be reinstalled:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Naslednji %d paket bo znova nameščen:"
+msgstr[1] "Naslednja %d paketa bosta znova nameščena:"
+msgstr[2] "Naslednji %d paketi bodo znova nameščeni:"
+msgstr[3] "Naslednjih %d paketov bo znova nameščenih:"
 
 #: src/Summary.cc:912
 #, c-format, boost-format
 msgid "The following patch is going to be reinstalled:"
 msgid_plural "The following %d patches are going to be reinstalled:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Naslednji %d popravek bo znova nameščen:"
+msgstr[1] "Naslednja %d popravka bosta znova nameščena:"
+msgstr[2] "Naslednji %d popravki bodo znova nameščeni:"
+msgstr[3] "Naslednjih %d popravkov bo znova nameščenih:"
 
 #: src/Summary.cc:917
 #, c-format, boost-format
 msgid "The following pattern is going to be reinstalled:"
 msgid_plural "The following %d patterns are going to be reinstalled:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Naslednji %d vzorec bo znova nameščen:"
+msgstr[1] "Naslednja %d vzorca bosta znova nameščena:"
+msgstr[2] "Naslednji %d vzorci bodo znova nameščeni:"
+msgstr[3] "Naslednjih %d vzorcev bo znova nameščenih:"
 
 #: src/Summary.cc:922
 #, c-format, boost-format
 msgid "The following product is going to be reinstalled:"
 msgid_plural "The following %d products are going to be reinstalled:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Naslednji %d izdelek bo znova nameščen:"
+msgstr[1] "Naslednja %d izdelka bosta znova nameščena:"
+msgstr[2] "Naslednji %d izdelki bodo znova nameščeni:"
+msgstr[3] "Naslednjih %d izdelkov bo znova nameščenih:"
 
 #: src/Summary.cc:935
 #, c-format, boost-format
 msgid "The following application is going to be reinstalled:"
 msgid_plural "The following %d applications are going to be reinstalled:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Naslednji %d program bo znova nameščen:"
+msgstr[1] "Naslednja %d programa bosta znova nameščena:"
+msgstr[2] "Naslednji %d programi bodo znova nameščeni:"
+msgstr[3] "Naslednjih %d programov bo znova nameščenih:"
 
 #: src/Summary.cc:1072
 #, c-format, boost-format
 msgid "The following recommended package was automatically selected:"
 msgid_plural ""
 "The following %d recommended packages were automatically selected:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Naslednji %d priporočeni paket je bil izbran samodejno:"
+msgstr[1] "Naslednja %d priporočena paketa sta bila izbrana samodejno:"
+msgstr[2] "Naslednji %d priporočeni paketi so bili izbrani samodejno:"
+msgstr[3] "Naslednjih %d priporočenih paketov je bilo izbranih samodejno:"
 
 #: src/Summary.cc:1077
 #, c-format, boost-format
 msgid "The following recommended patch was automatically selected:"
 msgid_plural ""
 "The following %d recommended patches were automatically selected:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Naslednji %d priporočeni popravek je bil izbran samodejno:"
+msgstr[1] "Naslednja %d priporočena popravka sta bila izbrana samodejno:"
+msgstr[2] "Naslednji %d priporočeni popravki so bili izbrani samodejno:"
+msgstr[3] "Naslednjih %d priporočenih popravkov je bilo izbranih samodejno:"
 
 #: src/Summary.cc:1082
 #, c-format, boost-format
 msgid "The following recommended pattern was automatically selected:"
 msgid_plural ""
 "The following %d recommended patterns were automatically selected:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Naslednji %d priporočeni vzorec je bil izbran samodejno:"
+msgstr[1] "Naslednja %d priporočena vzorca sta bila izbrana samodejno:"
+msgstr[2] "Naslednji %d priporočeni vzorci so bili izbrani samodejno:"
+msgstr[3] "Naslednjih %d priporočenih vzorcev je bilo izbranih samodejno:"
 
 #: src/Summary.cc:1087
 #, c-format, boost-format
 msgid "The following recommended product was automatically selected:"
 msgid_plural ""
 "The following %d recommended products were automatically selected:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Naslednji %d priporočeni izdelek je bil izbran samodejno:"
+msgstr[1] "Naslednja %d priporočena izdelka sta bila izbrana samodejno:"
+msgstr[2] "Naslednji %d priporočeni izdelki so bili izbrani samodejno:"
+msgstr[3] "Naslednjih %d priporočenih izdelkov je bilo izbranih samodejno:"
 
 #: src/Summary.cc:1092
 #, c-format, boost-format
 msgid "The following recommended source package was automatically selected:"
 msgid_plural ""
 "The following %d recommended source packages were automatically selected:"
-msgstr[0] ""
+msgstr[0] "Naslednji %d priporočeni paket z izvorno kodo je bil izbran samodejno:"
 msgstr[1] ""
+"Naslednja %d priporočena paketa z izvorno kodo sta bila izbrana samodejno:"
 msgstr[2] ""
+"Naslednji %d priporočeni paketi z izvorno kodo so bili izbrani samodejno:"
 msgstr[3] ""
+"Naslednjih %d priporočenih paketov z izvorno kodo je bilo izbranih samodejno:"
 
 #: src/Summary.cc:1098
 #, c-format, boost-format
@@ -981,9 +984,14 @@ msgid "The following recommended application was automatically selected:"
 msgid_plural ""
 "The following %d recommended applications were automatically selected:"
 msgstr[0] ""
+"Naslednji %d priporočeni program z izvorno kodo je bil izbran samodejno:"
 msgstr[1] ""
+"Naslednja %d priporočena programa z izvorno kodo sta bila izbrana samodejno:"
 msgstr[2] ""
+"Naslednji %d priporočeni programi z izvorno kodo so bili izbrani samodejno:"
 msgstr[3] ""
+"Naslednjih %d priporočenih programov z izvorno kodo je bilo izbranih "
+"samodejno:"
 
 #: src/Summary.cc:1145
 #, c-format, boost-format
@@ -994,9 +1002,17 @@ msgid_plural ""
 "The following %d packages are recommended, but will not be installed (only "
 "required packages will be installed):"
 msgstr[0] ""
+"Naslednji %d paket je priporočen, vendar ne bo nameščen (nameščeni bodo samo "
+"zahtevani paketi):"
 msgstr[1] ""
+"Naslednja %d paketa sta priporočena, vendar ne bosta nameščena (nameščeni "
+"bodo samo zahtevani paketi):"
 msgstr[2] ""
+"Naslednji %d paketi so priporočeni, vendar ne bodo nameščeni (nameščeni bodo "
+"samo zahtevani paketi):"
 msgstr[3] ""
+"Naslednjih %d paketov je priporočenih, vendar ne bodo nameščeni (nameščeni "
+"bodo samo zahtevani paketi):"
 
 #: src/Summary.cc:1157
 #, c-format, boost-format
@@ -1007,9 +1023,17 @@ msgid_plural ""
 "The following %d packages are recommended, but will not be installed because "
 "they are unwanted (were manually removed before):"
 msgstr[0] ""
+"Naslednji %d paket je priporočen, vendar ne bo nameščen, ker ni želen (je "
+"bil prej ročno odstranjen):"
 msgstr[1] ""
+"Naslednja %d paketa sta priporočena, vendar ne bosta nameščena, ker nista "
+"želena (sta bila prej ročno odstranjena):"
 msgstr[2] ""
+"Naslednji %d paketi so priporočeni, vendar ne bodo nameščeni, ker niso "
+"želeni (so bili prej ročno odstranjeni):"
 msgstr[3] ""
+"Naslednjih %d paketov je priporočenih, vendar ne bodo nameščeni, ker niso "
+"želeni (so bili prej ročno odstranjeni):"
 
 #: src/Summary.cc:1167
 #, c-format, boost-format
@@ -1020,208 +1044,216 @@ msgid_plural ""
 "The following %d packages are recommended, but will not be installed due to "
 "conflicts or dependency issues:"
 msgstr[0] ""
+"Naslednji %d paket je priporočen, vendar ne bo nameščen, zaradi sporov ali "
+"težav odvisnosti:"
 msgstr[1] ""
+"Naslednja %d paketa sta priporočena, vendar ne bosta nameščena, zaradi "
+"sporov ali težav odvisnosti:"
 msgstr[2] ""
+"Naslednji %d paketi so priporočeni, vendar ne bodo nameščeni, zaradi sporov "
+"ali težav odvisnosti:"
 msgstr[3] ""
+"Naslednjih %d paketov je priporočenih, vendar ne bodo nameščeni, zaradi "
+"sporov ali težav odvisnosti:"
 
 #: src/Summary.cc:1180
 #, c-format, boost-format
 msgid "The following patch is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d patches are recommended, but will not be installed:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Naslednji %d popravek je priporočen, vendar ne bo nameščen:"
+msgstr[1] "Naslednja %d popravka sta priporočena, vendar ne bosta nameščena:"
+msgstr[2] "Naslednji %d popravki so priporočeni, vendar ne bodo nameščeni:"
+msgstr[3] "Naslednjih %d popravkov je priporočenih, vendar ne bodo nameščeni:"
 
 #: src/Summary.cc:1184
 #, c-format, boost-format
 msgid "The following pattern is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d patterns are recommended, but will not be installed:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Naslednji %d vzorec je priporočen, vendar ne bo nameščen:"
+msgstr[1] "Naslednja %d vzorca sta priporočena, vendar ne bosta nameščena:"
+msgstr[2] "Naslednji %d vzorci so priporočeni, vendar ne bodo nameščeni:"
+msgstr[3] "Naslednjih %d vzorcev je priporočenih, vendar ne bodo nameščeni:"
 
 #: src/Summary.cc:1188
 #, c-format, boost-format
 msgid "The following product is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d products are recommended, but will not be installed:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Naslednji %d izdelek je priporočen, vendar ne bo nameščen:"
+msgstr[1] "Naslednja %d izdelka sta priporočena, vendar ne bosta nameščena:"
+msgstr[2] "Naslednji %d izdelki so priporočeni, vendar ne bodo nameščeni:"
+msgstr[3] "Naslednjih %d izdelkov je priporočenih, vendar ne bodo nameščeni:"
 
 #: src/Summary.cc:1193
 #, c-format, boost-format
 msgid "The following application is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d applications are recommended, but will not be installed:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Naslednji %d program je priporočen, vendar ne bo nameščen:"
+msgstr[1] "Naslednja %d programa sta priporočena, vendar ne bosta nameščena:"
+msgstr[2] "Naslednji %d programi so priporočeni, vendar ne bodo nameščeni:"
+msgstr[3] "Naslednjih %d programov je priporočenih, vendar ne bodo nameščeni:"
 
 #: src/Summary.cc:1226
 #, c-format, boost-format
 msgid "The following package is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d packages are suggested, but will not be installed:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Naslednji %d paket je predlagan, vendar ne bo nameščen:"
+msgstr[1] "Naslednja %d paketa sta predlagana, vendar ne bosta nameščena:"
+msgstr[2] "Naslednji %d paketi so predlagani, vendar ne bodo nameščeni:"
+msgstr[3] "Naslednjih %d paketov je predlaganih, vendar ne bodo nameščeni:"
 
 #: src/Summary.cc:1231
 #, c-format, boost-format
 msgid "The following patch is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d patches are suggested, but will not be installed:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Naslednji %d popravek je predlagan, vendar ne bo nameščen:"
+msgstr[1] "Naslednja %d popravka sta predlagana, vendar ne bosta nameščena:"
+msgstr[2] "Naslednji %d popravki so predlagani, vendar ne bodo nameščeni:"
+msgstr[3] "Naslednjih %d popravkov je predlaganih, vendar ne bodo nameščeni:"
 
 #: src/Summary.cc:1236
 #, c-format, boost-format
 msgid "The following pattern is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d patterns are suggested, but will not be installed:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Naslednji %d vzorec je predlagan, vendar ne bo nameščen:"
+msgstr[1] "Naslednja %d vzorca sta predlagana, vendar ne bosta nameščena:"
+msgstr[2] "Naslednji %d vzorci so predlagani, vendar ne bodo nameščeni:"
+msgstr[3] "Naslednjih %d vzorcev je predlaganih, vendar ne bodo nameščeni:"
 
 #: src/Summary.cc:1241
 #, c-format, boost-format
 msgid "The following product is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d products are suggested, but will not be installed:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Naslednji %d izdelek je predlagan, vendar ne bo nameščen:"
+msgstr[1] "Naslednja %d izdelka sta predlagana, vendar ne bosta nameščena:"
+msgstr[2] "Naslednji %d izdelki so predlagani, vendar ne bodo nameščeni:"
+msgstr[3] "Naslednjih %d izdelkov je predlaganih, vendar ne bodo nameščeni:"
 
 #: src/Summary.cc:1247
 #, c-format, boost-format
 msgid "The following application is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d applications are suggested, but will not be installed:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Naslednji %d program je predlagan, vendar ne bo nameščen:"
+msgstr[1] "Naslednja %d programa sta predlagana, vendar ne bosta nameščena:"
+msgstr[2] "Naslednji %d programi so predlagani, vendar ne bodo nameščeni:"
+msgstr[3] "Naslednjih %d programov je predlaganih, vendar ne bodo nameščeni:"
 
 #: src/Summary.cc:1272
 #, c-format, boost-format
 msgid "The following package is going to change architecture:"
 msgid_plural "The following %d packages are going to change architecture:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Naslednji %d paket bo spremenil arhitekturo:"
+msgstr[1] "Naslednja %d paketa bosta spremenila arhitekturo:"
+msgstr[2] "Naslednji %d paketi bodo spremenili arhitekturo:"
+msgstr[3] "Naslednjih %d paketov bo spremenilo arhitekturo:"
 
 #: src/Summary.cc:1277
 #, c-format, boost-format
 msgid "The following patch is going to change architecture:"
 msgid_plural "The following %d patches are going to change architecture:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Naslednji %d popravek bo spremenil arhitekturo:"
+msgstr[1] "Naslednja %d popravka bosta spremenila arhitekturo:"
+msgstr[2] "Naslednji %d popravki bodo spremenili arhitekturo:"
+msgstr[3] "Naslednjih %d popravkov bo spremenilo arhitekturo:"
 
 #: src/Summary.cc:1282
 #, c-format, boost-format
 msgid "The following pattern is going to change architecture:"
 msgid_plural "The following %d patterns are going to change architecture:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Naslednji %d vzorec bo spremenil arhitekturo:"
+msgstr[1] "Naslednja %d vzorca bosta spremenila arhitekturo:"
+msgstr[2] "Naslednji %d vzorci bodo spremenili arhitekturo:"
+msgstr[3] "Naslednjih %d vzorcev bo spremenilo arhitekturo:"
 
 #: src/Summary.cc:1287
 #, c-format, boost-format
 msgid "The following product is going to change architecture:"
 msgid_plural "The following %d products are going to change architecture:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Naslednji %d izdelek bo spremenil arhitekturo:"
+msgstr[1] "Naslednja %d izdelka bosta spremenila arhitekturo:"
+msgstr[2] "Naslednji %d izdelki bodo spremenili arhitekturo:"
+msgstr[3] "Naslednjih %d izdelkov bo spremenilo arhitekturo:"
 
 #: src/Summary.cc:1293
 #, c-format, boost-format
 msgid "The following application is going to change architecture:"
 msgid_plural "The following %d applications are going to change architecture:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Naslednji %d program bo spremenil arhitekturo:"
+msgstr[1] "Naslednja %d programa bosta spremenila arhitekturo:"
+msgstr[2] "Naslednji %d programi bodo spremenili arhitekturo:"
+msgstr[3] "Naslednjih %d programov bo spremenilo arhitekturo:"
 
 #: src/Summary.cc:1318
 #, c-format, boost-format
 msgid "The following package is going to change vendor:"
 msgid_plural "The following %d packages are going to change vendor:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Naslednji %d paket bo spremenil izdelovalca:"
+msgstr[1] "Naslednja %d paketa bosta spremenila izdelovalca:"
+msgstr[2] "Naslednji %d paketi bodo spremenili izdelovalca:"
+msgstr[3] "Naslednjih %d paketov bo spremenilo izdelovalca:"
 
 #: src/Summary.cc:1323
 #, c-format, boost-format
 msgid "The following patch is going to change vendor:"
 msgid_plural "The following %d patches are going to change vendor:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Naslednji %d popravek bo spremenil izdelovalca:"
+msgstr[1] "Naslednja %d popravka bosta spremenila izdelovalca:"
+msgstr[2] "Naslednji %d popravki bodo spremenili izdelovalca:"
+msgstr[3] "Naslednjih %d popravkov bo spremenilo izdelovalca:"
 
 #: src/Summary.cc:1328
 #, c-format, boost-format
 msgid "The following pattern is going to change vendor:"
 msgid_plural "The following %d patterns are going to change vendor:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Naslednji %d vzorec bo spremenil izdelovalca:"
+msgstr[1] "Naslednja %d vzorca bosta spremenila izdelovalca:"
+msgstr[2] "Naslednji %d vzorci bodo spremenili izdelovalca:"
+msgstr[3] "Naslednjih %d vzorcev bo spremenilo izdelovalca:"
 
 #: src/Summary.cc:1333
 #, c-format, boost-format
 msgid "The following product is going to change vendor:"
 msgid_plural "The following %d products are going to change vendor:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Naslednji %d izdelek bo spremenil izdelovalca:"
+msgstr[1] "Naslednja %d izdelka bosta spremenila izdelovalca:"
+msgstr[2] "Naslednji %d izdelki bodo spremenili izdelovalca:"
+msgstr[3] "Naslednjih %d izdelkov bo spremenilo izdelovalca:"
 
 #: src/Summary.cc:1339
 #, c-format, boost-format
 msgid "The following application is going to change vendor:"
 msgid_plural "The following %d applications are going to change vendor:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Naslednji %d program bo spremenil izdelovalca:"
+msgstr[1] "Naslednja %d programa bosta spremenila izdelovalca:"
+msgstr[2] "Naslednji %d programi bodo spremenili izdelovalca:"
+msgstr[3] "Naslednjih %d programov bo spremenilo izdelovalca:"
 
 #: src/Summary.cc:1362
 #, c-format, boost-format
 msgid "The following package has no support information from its vendor:"
 msgid_plural ""
 "The following %d packages have no support information from their vendor:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Naslednji %d paket nima podatkov o podpori od njegovega izdelovalca:"
+msgstr[1] "Naslednja %d paketa nimata podatkov o podpori od njihovega izdelovalca:"
+msgstr[2] "Naslednji %d paketi nimajo podatkov o podpori od njihovega izdelovalca:"
+msgstr[3] "Naslednjih %d paketov nima podatkov o podpori od njihovega izdelovalca:"
 
 #: src/Summary.cc:1380
 #, c-format, boost-format
 msgid "The following package is not supported by its vendor:"
 msgid_plural "The following %d packages are not supported by their vendor:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Naslednjega %d paketa njegov izdelovalec ne podira:"
+msgstr[1] "Naslednjih %d paketov njihov izdelovalec ne podira:"
+msgstr[2] "Naslednjih %d paketov njihov izdelovalec ne podira:"
+msgstr[3] "Naslednjih %d paketov njihov izdelovalec ne podira:"
 
 #: src/Summary.cc:1398
 #, c-format, boost-format
@@ -1229,14 +1261,14 @@ msgid ""
 "The following package needs additional customer contract to get support:"
 msgid_plural ""
 "The following %d packages need additional customer contract to get support:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Naslednji %d paket za podporo potrebuje dodatno uporabniško pogodbo:"
+msgstr[1] "Naslednja %d paketa za podporo potrebujeta dodatno uporabniško pogodbo:"
+msgstr[2] "Naslednji %d paketi za podporo potrebujejo dodatno uporabniško pogodbo:"
+msgstr[3] "Naslednjih %d paketov za podporo potrebuje dodatno uporabniško pogodbo:"
 
 #: src/Summary.cc:1415
 msgid "was superseded by"
-msgstr ""
+msgstr "je bil nadomeščen z"
 
 #: src/Summary.cc:1428
 #, c-format, boost-format
@@ -1247,9 +1279,17 @@ msgid_plural ""
 "The following %d packages were discontinued and have been superseded by a "
 "new packages with different names."
 msgstr[0] ""
+"Naslednji %d paket je bil opuščen in je bil nadomeščen z novim paketom z "
+"drugim imenom."
 msgstr[1] ""
+"Naslednja %d paketa sta bila opuščena in sta bila nadomeščena z novima "
+"paketoma z drugima imenoma."
 msgstr[2] ""
+"Naslednji %d paketi so bili opuščeni in so bili nadomeščeni z novimi paketi "
+"z drugimi imeni."
 msgstr[3] ""
+"Naslednjih %d paketov je bilo opuščenih in je bilo nadomeščenih z novimi "
+"paketi z drugimi imeni."
 
 #: src/Summary.cc:1433
 msgid ""
@@ -1259,36 +1299,43 @@ msgid_plural ""
 "The successor packages should be installed as soon as possible to receive "
 "continued support:"
 msgstr[0] ""
+"Nadomestni paket bi moral biti nameščen čim prej, da naprej prejema podporo:"
 msgstr[1] ""
+"Nadomestna paketa bi morala biti nameščena čim prej, da naprej prejemata "
+"podporo:"
 msgstr[2] ""
+"Nadomestni paketi bi morali biti nameščeni čim prej, da naprej prejemajo "
+"podporo:"
 msgstr[3] ""
+"Nadomestni paketi bi morali biti nameščeni čim prej, da naprej prejemajo "
+"podporo:"
 
 #: src/Summary.cc:1458
 #, c-format, boost-format
 msgid "The following package update will NOT be installed:"
 msgid_plural "The following %d package updates will NOT be installed:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Naslednja %d posodobitev paketa NE bo nameščena:"
+msgstr[1] "Naslednji %d posodobitvi paketov NE bosta nameščeni:"
+msgstr[2] "Naslednje %d posodobitve paketov NE bodo nameščene:"
+msgstr[3] "Naslednjih %d posodobitev paketa NE bo nameščenih:"
 
 #: src/Summary.cc:1463
 #, c-format, boost-format
 msgid "The following product update will NOT be installed:"
 msgid_plural "The following %d product updates will NOT be installed:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Naslednja %d posodobitev izdelka NE bo nameščena:"
+msgstr[1] "Naslednji %d posodobitvi izdelka NE bosta nameščeni:"
+msgstr[2] "Naslednje %d posodobitve izdelka NE bodo nameščene:"
+msgstr[3] "Naslednjih %d posodobitev izdelka NE bo nameščenih:"
 
 #: src/Summary.cc:1469
 #, c-format, boost-format
 msgid "The following application update will NOT be installed:"
 msgid_plural "The following %d application updates will NOT be installed:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Naslednja %d posodobitev programa NE bo nameščena:"
+msgstr[1] "Naslednji %d posodobitvi programa NE bosta nameščeni:"
+msgstr[2] "Naslednje %d posodobitve programa NE bodo nameščene:"
+msgstr[3] "Naslednjih %d posodobitev programa NE bo nameščenih:"
 
 #: src/Summary.cc:1502
 #, c-format, boost-format
@@ -1296,16 +1343,22 @@ msgid "The following item is locked and will not be changed by any action:"
 msgid_plural ""
 "The following %d items are locked and will not be changed by any action:"
 msgstr[0] ""
+"Naslednji %d predmet je zaklenjen in ne bo spremenjen z nobenim dejanjem:"
 msgstr[1] ""
+"Naslednja %d predmeta sta zaklenjena in ne bosta spremenjena z nobenim "
+"dejanjem:"
 msgstr[2] ""
+"Naslednji %d predmeti so zaklenjeni in ne bodo spremenjeni z nobenim "
+"dejanjem:"
 msgstr[3] ""
+"Naslednjih %d predmetov je zaklenjenih in ne bodo spremenjeni z nobenim "
+"dejanjem:"
 
 #. always as plain name list
 #. translators: used as 'tag:' (i.e. followed by ':')
 #: src/Summary.cc:1515
-#, fuzzy
 msgid "Available"
-msgstr "Razpoložljive posodobitve"
+msgstr "Razpoložljivo"
 
 #. translators: used as 'tag:' (i.e. followed by ':')
 #. translators: property name; short; used like "Name: value"
@@ -1316,198 +1369,190 @@ msgstr "Nameščeno"
 #: src/Summary.cc:1526
 #, boost-format
 msgid "Run '%1%' to see the complete list of locked items."
-msgstr ""
+msgstr "Da vidite celoten seznam zaklenjenih predmetov, zaženite »%1%«."
 
 #: src/Summary.cc:1535
 #, c-format, boost-format
 msgid "The following patch requires a system reboot:"
 msgid_plural "The following %d patches require a system reboot:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Naslednji %d popravek zahteva ponoven zagon sistema:"
+msgstr[1] "Naslednja %d popravka zahtevata ponoven zagon sistema:"
+msgstr[2] "Naslednji %d popravki zahtevajo ponoven zagon sistema:"
+msgstr[3] "Naslednjih %d popravkov zahteva ponoven zagon sistema:"
 
 #: src/Summary.cc:1539
 #, c-format, boost-format
 msgid "The following package requires a system reboot:"
 msgid_plural "The following %d packages require a system reboot:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Naslednji %d paket zahteva ponoven zagon sistema:"
+msgstr[1] "Naslednja %d paketa zahtevata ponoven zagon sistema:"
+msgstr[2] "Naslednji %d paketi zahtevajo ponoven zagon sistema:"
+msgstr[3] "Naslednjih %d paketov zahteva ponoven zagon sistema:"
 
 #: src/Summary.cc:1561
 msgid "Skipped needed patches which do not apply without conflict:"
-msgstr ""
+msgstr "Preskočeni potrebni popravki, ki jih ni moč uveljaviti brez spora:"
 
 #: src/Summary.cc:1577
 #, boost-format
 msgid "Overall download size: %1%. Already cached: %2%."
-msgstr ""
+msgstr "Skupna velikost prejema: %1%. Že v predpomnilniku: %2%."
 
 #: src/Summary.cc:1580
-#, fuzzy
 msgid "Download only."
-msgstr "Napaka pri nalaganju %1"
+msgstr "Samo prejemanje."
 
 #. TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
 #: src/Summary.cc:1586
 #, c-format, boost-format
 msgid "After the operation, additional %s will be used."
-msgstr ""
+msgstr "Po dejanju bo porabljenega %s dodatnega prostora."
 
 #: src/Summary.cc:1588
 msgid "No additional space will be used or freed after the operation."
 msgstr ""
+"Po dejanju ne bo porabljenega dodatnega ali sproščenega obstoječega prostora."
 
 #. TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
 #: src/Summary.cc:1595
 #, c-format, boost-format
 msgid "After the operation, %s will be freed."
-msgstr ""
+msgstr "Po dejanju bo sproščenega %s prostora."
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
 #: src/Summary.cc:1619
-#, fuzzy
 msgid "package to upgrade"
 msgid_plural "packages to upgrade"
-msgstr[0] "Upravitelj paketov"
-msgstr[1] "Upravitelj paketov"
-msgstr[2] "Upravitelj paketov"
-msgstr[3] "Upravitelj paketov"
+msgstr[0] "paket za nadgraditi"
+msgstr[1] "paketa za nadgraditi"
+msgstr[2] "paketi za nadgraditi"
+msgstr[3] "paketov za nadgraditi"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
 #: src/Summary.cc:1630
 msgid "to downgrade"
 msgid_plural "to downgrade"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "za vrniti na staro različico"
+msgstr[1] "za vrniti na staro različico"
+msgstr[2] "za vrniti na staro različico"
+msgstr[3] "za vrniti na staro različico"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
 #: src/Summary.cc:1633
 msgid "package to downgrade"
 msgid_plural "packages to downgrade"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "paket za vrniti na staro različico"
+msgstr[1] "paketa za vrniti na staro različico"
+msgstr[2] "paketi za vrniti na staro različico"
+msgstr[3] "paketov za vrniti na staro različico"
 
 #. translators: this text will be preceded by a number e.g. "5 new"
 #: src/Summary.cc:1644
 msgid "new"
 msgid_plural "new"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "nov"
+msgstr[1] "nova"
+msgstr[2] "novi"
+msgstr[3] "novih"
 
 #. translators: this text will be preceded by a number e.g. "5 new to install"
 #: src/Summary.cc:1647
-#, fuzzy
 msgid "new package to install"
 msgid_plural "new packages to install"
-msgstr[0] "Namestitev paketa"
-msgstr[1] "Namestitev paketa"
-msgstr[2] "Namestitev paketa"
-msgstr[3] "Namestitev paketa"
+msgstr[0] "nov paket za namestiti"
+msgstr[1] "nova paketa za namestiti"
+msgstr[2] "novi paketi za namestiti"
+msgstr[3] "novih paketov za namestiti"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
 #: src/Summary.cc:1658
-#, fuzzy
 msgid "to reinstall"
 msgid_plural "to reinstall"
-msgstr[0] "Nameščeno"
-msgstr[1] "Nameščeno"
-msgstr[2] "Nameščeno"
-msgstr[3] "Nameščeno"
+msgstr[0] "za znova namestiti"
+msgstr[1] "za znova namestiti"
+msgstr[2] "za znova namestiti"
+msgstr[3] "za znova namestiti"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
 #: src/Summary.cc:1661
-#, fuzzy
 msgid "package to reinstall"
 msgid_plural "packages to reinstall"
-msgstr[0] "Namestitev paketa"
-msgstr[1] "Namestitev paketa"
-msgstr[2] "Namestitev paketa"
-msgstr[3] "Namestitev paketa"
+msgstr[0] "paket za znova namestiti"
+msgstr[1] "paketa za znova namestiti"
+msgstr[2] "paketi za znova namestiti"
+msgstr[3] "paketov za znova namestiti"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
 #: src/Summary.cc:1672
-#, fuzzy
 msgid "to remove"
 msgid_plural "to remove"
-msgstr[0] "Odstrani"
-msgstr[1] "Odstrani"
-msgstr[2] "Odstrani"
-msgstr[3] "Odstrani"
+msgstr[0] "za odstraniti"
+msgstr[1] "za odstraniti"
+msgstr[2] "za odstraniti"
+msgstr[3] "za odstraniti"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
 #: src/Summary.cc:1675
 msgid "package to remove"
 msgid_plural "packages to remove"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "paket za odstraniti"
+msgstr[1] "paketa za odstraniti"
+msgstr[2] "paketi za odstraniti"
+msgstr[3] "paketov za odstraniti"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
 #: src/Summary.cc:1686
 msgid "to change vendor"
 msgid_plural " to change vendor"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] " za spremeniti izdelovalca"
+msgstr[1] " za spremeniti izdelovalca"
+msgstr[2] " za spremeniti izdelovalca"
+msgstr[3] " za spremeniti izdelovalca"
 
 #. translators: this text will be preceded by a number e.g. "5 packages ..."
 #: src/Summary.cc:1689
 msgid "package will change vendor"
 msgid_plural "packages will change vendor"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "paket bo spremenil izdelovalca"
+msgstr[1] "paketa bosta spremenila izdelovalca"
+msgstr[2] "paketi bodo spremenili izdelovalca"
+msgstr[3] "paketov bo spremenilo izdelovalca"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
 #: src/Summary.cc:1700
-#, fuzzy
 msgid "to change arch"
 msgid_plural "to change arch"
-msgstr[0] "Opusti spremembe"
-msgstr[1] "Opusti spremembe"
-msgstr[2] "Opusti spremembe"
-msgstr[3] "Opusti spremembe"
+msgstr[0] "za spremeniti arhitekturo"
+msgstr[1] "za spremeniti arhitekturo"
+msgstr[2] "za spremeniti arhitekturo"
+msgstr[3] "za spremeniti arhitekturo"
 
 #. translators: this text will be preceded by a number e.g. "5 packages ..."
 #: src/Summary.cc:1703
 msgid "package will change arch"
 msgid_plural "packages will change arch"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "paket bo spremenil arhitekturo"
+msgstr[1] "paketa bosta spremenila arhitekturo"
+msgstr[2] "paketi bodo spremenili arhitekturo"
+msgstr[3] "paketov bo spremenilo arhitekturo"
 
 #. translators: this text will be preceded by a number e.g. "5 new"
 #: src/Summary.cc:1714
-#, fuzzy
 msgid "source package"
 msgid_plural "source packages"
-msgstr[0] "Paket"
-msgstr[1] "Paket"
-msgstr[2] "Paket"
-msgstr[3] "Paket"
+msgstr[0] "paket z izvorno kodo"
+msgstr[1] "paketa z izvorno kodo"
+msgstr[2] "paketi z izvorno kodo"
+msgstr[3] "paketov z izvorno kodo"
 
 #. translators: this text will be preceded by a number e.g. "5 new to install"
 #: src/Summary.cc:1717
-#, fuzzy
 msgid "source package to install"
 msgid_plural "source packages to install"
-msgstr[0] "Namestitev paketa"
-msgstr[1] "Namestitev paketa"
-msgstr[2] "Namestitev paketa"
-msgstr[3] "Namestitev paketa"
+msgstr[0] "paket z izvorno kodo za namestiti"
+msgstr[1] "paketa z izvorno kodo za namestiti"
+msgstr[2] "paketi z izvorno kodo za namestiti"
+msgstr[3] "paketov z izvorno kodo za namestiti"
 
 #. patch command (auto)restricted to update stack patches
 #: src/Summary.cc:1798
@@ -1515,17 +1560,18 @@ msgid ""
 "Package manager restart required. (Run this command once again after the "
 "update stack got updated)"
 msgstr ""
+"Potreben je ponoven zagon upravljalnika paketov. (Po posodobitvi "
+"posodobitvenega sklada znova zaženite ta ukaz)"
 
 #. translator: %1% is an option string like  "--dry-run"
 #: src/Summary.cc:1805
 #, boost-format
 msgid "%1% is set, otherwise a system reboot would be required."
-msgstr ""
+msgstr "Podano je %1%, drugače bi bil potreben ponoven zagon sistema."
 
 #: src/Summary.cc:1807
-#, fuzzy
 msgid "System reboot required."
-msgstr "Zahteva:"
+msgstr "Potreben je ponoven zagon sistema."
 
 #. translator: Printed after the summary but before the prompt to start the installation.
 #. Followed by some explanatory text telling it might be a good idea NOT to continue:
@@ -1537,7 +1583,7 @@ msgstr "Zahteva:"
 #. Continue? [y/n/...? shows all options] (y):
 #: src/Summary.cc:1826
 msgid "Consider to cancel:"
-msgstr ""
+msgstr "Razmislite o preklicu:"
 
 #: src/Zypper.cc:87
 msgid ""
