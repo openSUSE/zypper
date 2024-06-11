@@ -370,19 +370,22 @@ void list_packages(Zypper & zypper , ListPackagesFlags flags_r )
   bool showInstalled = !flags_r.testFlag( ListPackagesBits::HideInstalled ); //installed_only || !uninstalled_only;
   bool showUninstalled = !flags_r.testFlag( ListPackagesBits::HideNotInstalled ); //uninstalled_only || !installed_only;
 
+  bool system = flags_r.testFlag( ListPackagesBits::ShowSystem );
   bool orphaned = flags_r.testFlag( ListPackagesBits::ShowOrphaned );
   bool suggested = flags_r.testFlag( ListPackagesBits::ShowSuggested );
   bool recommended = flags_r.testFlag( ListPackagesBits::ShowRecommended );
   bool unneeded = flags_r.testFlag( ListPackagesBits::ShowUnneeded );
   bool byAuto = flags_r.testFlag( ListPackagesBits::ShowByAuto );
   bool byUser = flags_r.testFlag( ListPackagesBits::ShowByUser );
-  bool check = ( flags_r & ( maskNeedSolv | ListPackagesBits::ShowByAuto | ListPackagesBits::ShowByUser ) );
+  bool check = ( flags_r & ( maskNeedSolv | ListPackagesBits::ShowSystem | ListPackagesBits::ShowByAuto | ListPackagesBits::ShowByUser ) );
   if ( flags_r & maskNeedSolv ) {
     God->resolver()->resolvePool();
   }
-  auto checkStatus = [=]( const PoolItem & pi_r )->bool {
+  auto checkStatus = [=]( const PoolItem & pi_r, bool isipi=false )->bool {
+    // isipi : prevent returning true if identical installed items are tested.
     const ResStatus & status { pi_r.status() };
-    if ( ( orphaned && status.isOrphaned() )
+    if ( ( system && !isipi && pi_r.repository().isSystemRepo() )
+      || ( orphaned && status.isOrphaned() )
       || ( suggested && status.isSuggested() )
       || ( recommended && status.isRecommended() )
       || ( unneeded && status.isUnneeded() ) ) {
@@ -392,6 +395,9 @@ void list_packages(Zypper & zypper , ListPackagesFlags flags_r )
     }
     return false;
   };
+
+  // if both --system and --orphaned are given, tag orphaned system packages
+  bool tagOrphaned = system && orphaned;
 
   for( const auto & sel : God->pool().proxy().byKind<Package>() )
   {
@@ -422,7 +428,7 @@ void list_packages(Zypper & zypper , ListPackagesFlags flags_r )
         else
         {
           PoolItem ipi( sel->identicalInstalledObj( pi ) );
-          if ( !ipi || !checkStatus( ipi ) )
+          if ( !ipi || !checkStatus( ipi, true ) )
             if ( ! checkStatus( pi ) )
               continue;
         }
@@ -432,7 +438,7 @@ void list_packages(Zypper & zypper , ListPackagesFlags flags_r )
         continue;
 
       tbl << ( TableRow()
-          << computeStatusIndicator( pi, sel )
+          << (computeStatusIndicator( pi, sel )+std::string(tagOrphaned && pi.status().isOrphaned()?" (o)":""))
           << pi.repository().asUserString()
           << pi.name()
           << pi.edition().asString()
@@ -459,6 +465,9 @@ void list_packages(Zypper & zypper , ListPackagesFlags flags_r )
       tbl.sort( 2 ); // Name
 
     cout << tbl;
+
+    if ( tagOrphaned )
+      Zypper::instance().out().notePar( 4, "(o) = orphaned" );
   }
 }
 

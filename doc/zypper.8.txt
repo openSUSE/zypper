@@ -35,7 +35,7 @@ Most of the following concepts are common for all applications based on the libz
 
 System Packages
 ~~~~~~~~~~~~~~~
-The set of installed packages on a system is sometimes denoted as repository *@System* or *System Packages*. In contrast to available repositories providing packages which can be installed, *@System* provides packages which can only be deleted. Installed packages which are not also provided by at least one of the available repositories are often denoted as being _unwanted_, _orphaned_ or _dropped_.
+The set of installed packages on a system is sometimes denoted as repository *@System* or *System Packages*. In contrast to available repositories providing packages which can be installed, *@System* provides packages which can only be deleted. Installed packages which are not provided by at least one of the available repositories (neither in different version or as renamed package) are often denoted as being _unwanted_, _orphaned_ or _dropped_.
 
 'Note:' If you install packages which are not shipped within a repository - manually built or downloaded ones -, collect them within a local directory and add this directory as a 'plaindir repository' to your system. This way the packages will not be seen as being orphaned and are protected during a *dist-upgrade*.
 
@@ -947,8 +947,11 @@ The old option name --uninstalled-only is still acceptable, but should be consid
 	*--userinstalled*::
 		Show installed packages which were explicitly selected by the user.
 
+	*--system*::
+		Show installed packages which are not provided by any repository. If combined with *--orphaned*, the status of orphaned packages is tagged with *(o)*.
+
 	*--orphaned*::
-		Show packages which are orphaned (without repository).
+		Show system packages which are orphaned (without repository and without update candidate).
 
 	*--suggested*::
 		Show packages which are suggested.
