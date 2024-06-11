@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-04-15 13:01+0200\n"
-"PO-Revision-Date: 2024-06-11 15:46+0000\n"
+"PO-Revision-Date: 2024-06-11 18:46+0000\n"
 "Last-Translator: Jure Repinc <jlp@holodeck1.com>\n"
 "Language-Team: Slovenian <https://l10n.opensuse.org/projects/zypper/master/"
 "sl/>\n"
@@ -2659,41 +2659,46 @@ msgid ""
 "remove command would do. The removeptf command however will aim to replace "
 "the dependant packages by their official update versions."
 msgstr ""
+"PTF je običajno odstranjen takoj, ko je za najnovejšo uradno posodobitev "
+"odvisnih paketov uveljavljen popravek, ki ga PTF ponuja. Vendar morda ne "
+"želite, da bi se odvisni paketi odstranili skupaj s PTF-om, kar stori ukaz "
+"»remove«. Ukaz »removeptf« pa bo poskusil odvisne pakete nadomestiti z "
+"njihovimi uradnimi posodobitvenimi različicami."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/listpatches.cc:16
 msgid "list-patches (lp) [OPTIONS]"
-msgstr ""
+msgstr "list-patches (lp) [MOŽNOSTI]"
 
 #. translators: command summary: list-patches, lp
 #: src/commands/listpatches.cc:18
 msgid "List available patches."
-msgstr ""
+msgstr "Izpiše razpoložljive popravke."
 
 #. translators: command description
 #: src/commands/listpatches.cc:20
 msgid "List all applicable patches."
-msgstr ""
+msgstr "Izpiše seznam popravkov, ki jih je mogoče uveljaviti."
 
 #. translators: -a, --all
 #: src/commands/listpatches.cc:31
 msgid "List all patches, not only applicable ones."
-msgstr ""
+msgstr "Izpiše vse popravke, ne samo tistih, ki jih je mogoče uveljaviti."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/listupdates.cc:16
 msgid "list-updates (lu) [OPTIONS]"
-msgstr ""
+msgstr "list-updates (lu) [MOŽNOSTI]"
 
 #. translators: command summary: list-updates, lu
 #: src/commands/listupdates.cc:18
 msgid "List available updates."
-msgstr ""
+msgstr "Izpiše razpoložljive posodobitve."
 
 #. translators: command description
 #: src/commands/listupdates.cc:20
 msgid "List all available updates."
-msgstr ""
+msgstr "Izpiše vse razpoložljive posodobitve."
 
 #. translators: -a, --all
 #: src/commands/listupdates.cc:35
@@ -2701,23 +2706,25 @@ msgid ""
 "List all packages for which newer versions are available, regardless whether "
 "they are installable or not."
 msgstr ""
+"Izpiše vse pakete, za katere so na voljo novejše različice, ne glede na to, "
+"ali jih je možno namestiti."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/addlocalecmd.cc:20
 msgid "addlocale (aloc) [OPTIONS] <LOCALE> ..."
-msgstr ""
+msgstr "addlocale (aloc) [MOŽNOSTI] <JEZIK> …"
 
 #: src/commands/locale/addlocalecmd.cc:21
 msgid "Add locale(s) to requested locales."
-msgstr ""
+msgstr "Doda jezik(e) med zahtevane jezike."
 
 #: src/commands/locale/addlocalecmd.cc:22
 msgid "Add given locale(s) to the list of requested locales."
-msgstr ""
+msgstr "Doda navedene jezike na seznam zahtevanih jezikov."
 
 #: src/commands/locale/addlocalecmd.cc:33
 msgid "Do not install corresponding packages for given locale(s)."
-msgstr ""
+msgstr "Ne namesti povezanih paketov za navedene jezike."
 
 #: src/commands/locale/addlocalecmd.cc:57
 #, c-format, boost-format
@@ -2725,66 +2732,71 @@ msgid ""
 "Specify locale which shall be supported by the language code. Get a list of "
 "all available locales by calling '%s'."
 msgstr ""
+"Navedite jezik, ki naj bo podprt, z uporabo kode jezika. Seznam vseh "
+"razpoložljivih jezikov dobite z ukazom »%s«."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/localescmd.cc:17
 msgid "locales (lloc) [OPTIONS] [LOCALE] ..."
-msgstr ""
+msgstr "locales (lloc) [MOŽNOSTI] [JEZIK] …"
 
 #: src/commands/locale/localescmd.cc:18
 msgid "List requested locales (languages codes)."
-msgstr ""
+msgstr "Izpiše zahtevane jezike (kode jezikov)."
 
 #: src/commands/locale/localescmd.cc:20
 msgid "List requested locales and corresponding packages."
-msgstr ""
+msgstr "Izpiše zahtevane jezike in povezane pakete."
 
 #: src/commands/locale/localescmd.cc:34
 msgid "Show corresponding packages."
-msgstr ""
+msgstr "Prikaže povezane pakete."
 
 #: src/commands/locale/localescmd.cc:35
 msgid "List all available locales."
-msgstr ""
+msgstr "Prikaže vse razpoložljive jezike."
 
 #: src/commands/locale/localescmd.cc:48
 msgid "Ignoring positional arguments because --all argument was provided."
 msgstr ""
+"Položajni argumenti bodo prezrti, ker je bil uporabljen argument »--all«."
 
 #: src/commands/locale/localescmd.cc:75
 msgid "The locale(s) for which the information shall be printed."
-msgstr ""
+msgstr "Jeziki, za katere naj bodo izpisani podatki."
 
 #: src/commands/locale/localescmd.cc:79
 msgid ""
 "Get all locales with lang code 'en' that have their own country code, "
 "excluding the fallback 'en':"
 msgstr ""
+"Dobi vse jezike s kodo »en«, ki imajo tudi svojo kodo države in brez "
+"splošnega »en«:"
 
 #: src/commands/locale/localescmd.cc:86
 msgid "Get all locales with lang code 'en' with or without country code:"
-msgstr ""
+msgstr "Dobi vse jezike s kodo »en« s kodo države ali brez nje:"
 
 #: src/commands/locale/localescmd.cc:93
 msgid "Get the locale matching the argument exactly: "
-msgstr ""
+msgstr "Dobi jezik, ki se natančno ujema z argumentom: "
 
 #: src/commands/locale/localescmd.cc:100
 msgid "Get the list of packages which are available for 'de' and 'en':"
-msgstr ""
+msgstr "Dobi seznam paketov, ki so na voljo za »de« in »en«:"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/removelocalecmd.cc:18
 msgid "removelocale (rloc) [OPTIONS] <LOCALE> ..."
-msgstr ""
+msgstr "removelocale (rloc) [MOŽNOSTI] <JEZIK> …"
 
 #: src/commands/locale/removelocalecmd.cc:19
 msgid "Remove locale(s) from requested locales."
-msgstr ""
+msgstr "Odstrani jezik(e) iz zahtevanih jezikov."
 
 #: src/commands/locale/removelocalecmd.cc:20
 msgid "Remove given locale(s) from the list of supported languages."
-msgstr ""
+msgstr "Odstrani navedene jezike s seznama podprtih jezikov."
 
 #: src/commands/locale/removelocalecmd.cc:35
 #, c-format, boost-format
@@ -2792,20 +2804,22 @@ msgid ""
 "Specify locales which shall be removed by the language code. Get the list of "
 "requested locales by calling '%s'."
 msgstr ""
+"Navedite jezike, ki naj bodo odstranjeni, z uporabo kode jezika. Seznam vseh "
+"razpoložljivih jezikov dobite z ukazom »%s«."
 
 #: src/commands/locale/removelocalecmd.cc:46
 msgid "Do not remove corresponding packages for given locale(s)."
-msgstr ""
+msgstr "Ne odstrani povezanih paketov za navedene jezike."
 
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
 #: src/commands/locks/add.cc:29
 msgid "addlock (al) [OPTIONS] <LOCKSPEC>..."
-msgstr ""
+msgstr "addlock (al) [MOŽNOSTI] <SPEC_ZAKLEPA> …"
 
 #. translators: command summary
 #: src/commands/locks/add.cc:31 src/commands/locks/add.cc:34
 msgid "Add a package lock."
-msgstr ""
+msgstr "Doda zaklep paketa."
 
 #: src/commands/locks/add.cc:35
 msgid ""
@@ -2814,6 +2828,10 @@ msgid ""
 "have their KIND: string prepended (e.g. 'patch:foo') or use the commands --"
 "type option."
 msgstr ""
+"SPEC_ZAKLEPA je oblike »«[VRSTA:]IME[ OP IZDAJA], kjer je IME lahko tudi "
+"vzorec z uporabo nadomestnih znakov * in ?. Vrste, ki niso paketi, morajo "
+"imeti spredaj dodano VRSTO: (npr. »patch:nekaj«) ali pa uporabiti ukazno "
+"možnost »--type«."
 
 #: src/commands/locks/add.cc:36
 msgid ""
@@ -2821,57 +2839,58 @@ msgid ""
 "optionally restrict the lock to match a specific edition or edition range "
 "using =, <, <=, >, >= or != followed an EDITION."
 msgstr ""
+"Osnovna oblika bo zaklenila vse izdaje ujemajočih predmetov. Zaklep lahko "
+"omejite tudi na ujemanje z določeno izdajo ali obsegom izdaj z uporabo »OP "
+"IZDAJA«, kjer je OP =, <, <=, >, >= ali !=."
 
 #: src/commands/locks/add.cc:46
 msgid "Restrict the lock to the specified repository."
-msgstr ""
+msgstr "Omeji zaklep na določen vir."
 
 #: src/commands/locks/add.cc:48
 msgid "Reason for specific lock."
-msgstr ""
+msgstr "Razlog za posamezen zaklep."
 
 #: src/commands/locks/add.cc:81
-#, fuzzy
 msgid "Specified lock has been successfully added."
 msgid_plural "Specified locks have been successfully added."
-msgstr[0] "%s je potrebno odstraniti."
-msgstr[1] "%s je potrebno odstraniti."
-msgstr[2] "%s je potrebno odstraniti."
-msgstr[3] "%s je potrebno odstraniti."
+msgstr[0] "Navedeni zaklep je bil uspešno dodan."
+msgstr[1] "Navedena zaklepa sta bila uspešno dodana."
+msgstr[2] "Navedeni zaklepi so bili uspešno dodani."
+msgstr[3] "Navedeni zaklepi so bili uspešno dodani."
 
 #: src/commands/locks/add.cc:88
-#, fuzzy
 msgid "Problem adding the package lock:"
-msgstr "Shranjevanje zbirke podatkov"
+msgstr "Težava dodajanje zaklepa paketa:"
 
 # =============================================================================
 #: src/commands/locks/clean.cc:16
 msgid "cleanlocks (cl)"
-msgstr ""
+msgstr "cleanlocks (cl)"
 
 #. translators: command summary
 #: src/commands/locks/clean.cc:18
 msgid "Remove useless locks."
-msgstr ""
+msgstr "Odstrani neuporabne zaklepe."
 
 #. translators: -d, --only-duplicates
 #: src/commands/locks/clean.cc:36
 msgid "Clean only duplicate locks."
-msgstr ""
+msgstr "Počisti samo podvojene zaklepe."
 
 #. translators: -e, --only-empty
 #: src/commands/locks/clean.cc:39
 msgid "Clean only locks which doesn't lock anything."
-msgstr ""
+msgstr "Počisti samo zaklepe, ki ne zaklepajo ničesar."
 
 #: src/commands/locks/clean.cc:66
 #, c-format, boost-format
 msgid "Removed %lu lock."
 msgid_plural "Removed %lu locks."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Odstranjen %lu zaklep."
+msgstr[1] "Odstranjena %lu zaklepa."
+msgstr[2] "Odstranjeni %lu zaklepi."
+msgstr[3] "Odstranjenih %lu zaklepov."
 
 #. translators: property name; short; used like "Name: value"
 #. translators: Table column header
@@ -2886,9 +2905,8 @@ msgid "Name"
 msgstr "Ime"
 
 #: src/commands/locks/list.cc:135
-#, fuzzy
 msgid "Matches"
-msgstr "popravi"
+msgstr "Ujemanja"
 
 #. translators: Table column header
 #. translators: type (general header)
@@ -2896,7 +2914,7 @@ msgstr "popravi"
 #: src/commands/repos/list.cc:266 src/commands/services/list.cc:116
 #: src/info.cc:513 src/search.cc:50 src/search.cc:202
 msgid "Type"
-msgstr "Tip"
+msgstr "Vrsta"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: package's repository (header)
@@ -2904,68 +2922,65 @@ msgstr "Tip"
 #: src/search.cc:56 src/search.cc:306 src/search.cc:451 src/search.cc:495
 #: src/update.cc:786 src/utils/misc.cc:324
 msgid "Repository"
-msgstr ""
+msgstr "Vir"
 
 #: src/commands/locks/list.cc:136
 msgid "Comment"
-msgstr ""
+msgstr "Komentar"
 
 #. translators: locks table value
 #: src/commands/locks/list.cc:154 src/commands/locks/list.cc:233
 msgid "(multiple)"
-msgstr ""
+msgstr "(več)"
 
 #. translators: locks table value
 #: src/commands/locks/list.cc:157 src/commands/locks/list.cc:231
 msgid "(any)"
-msgstr ""
+msgstr "(katerikoli)"
 
 #. translators: property name; short; used like "Name: value"
 #: src/commands/locks/list.cc:196
-#, fuzzy
 msgid "Keep installed"
-msgstr "Nameščeno"
+msgstr "Obdrži nameščeno"
 
 #. translators: property name; short; used like "Name: value"
 #: src/commands/locks/list.cc:204
-#, fuzzy
 msgid "Do not install"
-msgstr "Nameščeno"
+msgstr "Ne namesti"
 
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
 #: src/commands/locks/list.cc:257
 msgid "locks (ll) [OPTIONS]"
-msgstr ""
+msgstr "locks (ll) [MOŽNOSTI]"
 
 #: src/commands/locks/list.cc:258
 msgid "List current package locks."
-msgstr ""
+msgstr "Izpiše trenutne zaklepe paketov."
 
 #: src/commands/locks/list.cc:286
 msgid "Show the number of resolvables matched by each lock."
-msgstr ""
+msgstr "Prikaže število razrešitev, ki se ujemajo z vsakim zaklepom."
 
 #: src/commands/locks/list.cc:287
 msgid "List the resolvables matched by each lock."
-msgstr ""
+msgstr "Izpiše razrešitve, ki se ujemajo z vsakim zaklepom."
 
 #: src/commands/locks/list.cc:301
-#, fuzzy
 msgid "Error reading the locks file:"
-msgstr "Napaka pri branju odseka %u."
+msgstr "Napaka branja datoteke zaklepov:"
 
 #: src/commands/locks/list.cc:308
 msgid "There are no package locks defined."
-msgstr ""
+msgstr "Določenega ni nobenega zaklepa paketa."
 
 # =============================================================================
 #: src/commands/locks/remove.cc:25
 msgid "removelock (rl) [OPTIONS] <LOCK-NUMBER|PACKAGENAME> ..."
-msgstr ""
+msgstr "removelock (rl) [MOŽNOSTI] <ŠTEVILKA_ZAKLEPA|IME_PAKETA> …"
 
 #: src/commands/locks/remove.cc:26
 msgid "Remove a package lock."
-msgstr ""
+msgstr "Odstrani zaklep paketa."
 
 #. translators: command description; %1% is acoomand like 'zypper locks'
 #: src/commands/locks/remove.cc:28
@@ -2974,39 +2989,38 @@ msgid ""
 "Remove a package lock. Specify the lock to remove by its number obtained "
 "with '%1%' or by package name."
 msgstr ""
+"Odstrani zaklep paketa. Navedite zaklep, ki naj se odstrani, z uporabo "
+"njegove številke (dobite jo z ukazom »%1%«) ali z uporabo imena paketa."
 
 #: src/commands/locks/remove.cc:45
 msgid "Remove only locks with specified repository."
-msgstr ""
+msgstr "Odstrani samo zaklepe z določenim virom."
 
 #: src/commands/locks/remove.cc:81
-#, fuzzy
 msgid "Specified lock has been successfully removed."
-msgstr "%s je potrebno odstraniti."
+msgstr "Navedeni zaklep je bil uspešno odstranjen."
 
 #: src/commands/locks/remove.cc:94
-#, fuzzy
 msgid "No lock has been removed."
-msgstr "%s je potrebno odstraniti."
+msgstr "Odstranjen ni bil noben zaklep."
 
 #: src/commands/locks/remove.cc:98
-#, fuzzy, c-format
+#, c-format
 msgid "%zu lock has been successfully removed."
 msgid_plural "%zu locks have been successfully removed."
-msgstr[0] "%s je potrebno odstraniti."
-msgstr[1] "%s je potrebno odstraniti."
-msgstr[2] "%s je potrebno odstraniti."
-msgstr[3] "%s je potrebno odstraniti."
+msgstr[0] "%zu zaklep je bil uspešno odstranjen."
+msgstr[1] "%zu zaklepa sta bila uspešno odstranjena."
+msgstr[2] "%zu zaklepi so bili uspešno odstranjeni."
+msgstr[3] "%zu zaklepov je bilo uspešno odstranjenih."
 
 #: src/commands/locks/remove.cc:105
-#, fuzzy
 msgid "Problem removing the package lock:"
-msgstr "Shranjevanje zbirke podatkov"
+msgstr "Težava odstranjevanja zaklepa paketa:"
 
 #. translators: command summary: needs-rebooting
 #: src/commands/needs-rebooting.cc:22
 msgid "Check if the reboot-needed flag was set."
-msgstr ""
+msgstr "Preveri, ali je bila nastavljena zastavica za potreben ponovni zagon."
 
 #: src/commands/needs-rebooting.cc:24
 msgid ""
