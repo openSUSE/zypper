@@ -9,17 +9,17 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-04-15 13:01+0200\n"
-"PO-Revision-Date: 2022-07-21 09:13+0000\n"
-"Last-Translator: Maja Reberc <maja.reberc@freedommail.ch>\n"
+"PO-Revision-Date: 2024-06-11 01:46+0000\n"
+"Last-Translator: Jure Repinc <jlp@holodeck1.com>\n"
 "Language-Team: Slovenian <https://l10n.opensuse.org/projects/zypper/master/"
 "sl/>\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n"
-"%100==4 ? 2 : 3;\n"
-"X-Generator: Weblate 4.9.1\n"
+"Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
+"n%100==4 ? 2 : 3;\n"
+"X-Generator: Weblate 5.5.5\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -43,15 +43,15 @@ msgstr "Upravljanje posodobitev:"
 
 #: src/Command.cc:139
 msgid "Querying:"
-msgstr "Poizvedba:"
+msgstr "Poizvedovanje:"
 
 #: src/Command.cc:150
 msgid "Package Locks:"
-msgstr "Ključavnice paketa:"
+msgstr "Zaklenjeni paketi:"
 
 #: src/Command.cc:155
 msgid "Locale Management:"
-msgstr "Lokalno upravljanje:"
+msgstr "Upravljanje jezikov:"
 
 #: src/Command.cc:159
 msgid "Other Commands:"
@@ -64,7 +64,7 @@ msgstr "Podukazi:"
 #: src/Command.cc:289
 #, c-format, boost-format
 msgid "Unknown command '%s'"
-msgstr "Neznani ukaz '%s'"
+msgstr "Neznan ukaz »%s«"
 
 #: src/CommitSummary.cc:91
 msgid "Installation has completed with error."
@@ -73,43 +73,43 @@ msgstr "Namestitev se je končala z napako."
 #: src/CommitSummary.cc:93
 #, boost-format
 msgid "You may run '%1%' to repair any dependency problems."
-msgstr "Za popravilo morebitnih težav z odvisnostjo lahko zaženete '%1%'."
+msgstr "Za popravilo morebitnih težav z odvisnostmi lahko zaženete »%1%«."
 
 #: src/CommitSummary.cc:126
 #, c-format, boost-format
 msgid "The following package failed to install:"
 msgid_plural "The following %d packages failed to install:"
-msgstr[0] "Namestitev sledečega paketa je spodletela:"
-msgstr[1] "Namestitev sledečih %d paketov je spodletela:"
-msgstr[2] "Namestitev sledečih %d paketov je spodletela:"
-msgstr[3] "Namestitev sledečih %d paketov je spodletela:"
+msgstr[0] "Namestitev naslednjega %d paketa je spodletela:"
+msgstr[1] "Namestitev naslednjih %d paketov je spodletela:"
+msgstr[2] "Namestitev naslednjih %d paketov je spodletela:"
+msgstr[3] "Namestitev naslednjih %d paketov je spodletela:"
 
 #: src/CommitSummary.cc:141
 #, c-format, boost-format
 msgid "The following package installation was skipped:"
 msgid_plural "The following %d package installations were skipped:"
-msgstr[0] "Namestitev sledečega paketa je bila izpuščena:"
-msgstr[1] "Namestitev sledečih %d paketov je bila izpuščena:"
-msgstr[2] "Namestitev sledečih %d paketov je bila izpuščena:"
-msgstr[3] "Namestitev sledečih %d paketov je bila izpuščena:"
+msgstr[0] "Namestitev naslednjega %d paketa je bila izpuščena:"
+msgstr[1] "Namestitev naslednjih %d paketov je bila izpuščena:"
+msgstr[2] "Namestitev naslednjih %d paketov je bila izpuščena:"
+msgstr[3] "Namestitev naslednjih %d paketov je bila izpuščena:"
 
 #: src/CommitSummary.cc:156
 #, c-format, boost-format
 msgid "The following package failed to uninstall:"
 msgid_plural "The following %d packages failed to uninstall:"
-msgstr[0] "Odstranitev sledeča paketa je spodletela:"
-msgstr[1] "Odstranitev sledečih %d paketov je spodletela:"
-msgstr[2] "Odstranitev sledečih %d paketov je spodletela:"
-msgstr[3] "Odstranitev sledečih %d paketov je spodletela:"
+msgstr[0] "Odstranitev naslednjega %d paketa je spodletela:"
+msgstr[1] "Odstranitev naslednjih %d paketov je spodletela:"
+msgstr[2] "Odstranitev naslednjih %d paketov je spodletela:"
+msgstr[3] "Odstranitev naslednjih %d paketov je spodletela:"
 
 #: src/CommitSummary.cc:171
 #, c-format, boost-format
 msgid "The following package removal was skipped:"
 msgid_plural "The following %d package removal were skipped:"
-msgstr[0] "Odstranitev sledečega paketa je bila izpuščena:"
-msgstr[1] "Odstranitev sledečih %d paketov je bila izpuščena:"
-msgstr[2] "Odstranitev sledečih %d paketov je bila izpuščena:"
-msgstr[3] "Odstranitev sledečih %d paketov je bila izpuščena:"
+msgstr[0] "Odstranitev naslednjega %d paketa je bila izpuščena:"
+msgstr[1] "Odstranitev naslednjih %d paketov je bila izpuščena:"
+msgstr[2] "Odstranitev naslednjih %d paketov je bila izpuščena:"
+msgstr[3] "Odstranitev naslednjih %d paketov je bila izpuščena:"
 
 #. translators: Appended when clipping a long enumeration:
 #. "ConsoleKit-devel ConsoleKit-doc ... and 20828 more items."
@@ -118,15 +118,15 @@ msgstr[3] "Odstranitev sledečih %d paketov je bila izpuščena:"
 #, boost-format
 msgid "... and %1% more item."
 msgid_plural "... and %1% more items."
-msgstr[0] "... in %1% dodaten element."
-msgstr[1] "... in %1% dodatna elementa."
-msgstr[2] "... in %1% dodatnih elementov."
-msgstr[3] "... in %1% dodatnih elementov."
+msgstr[0] "… in %1% dodaten element."
+msgstr[1] "… in %1% dodatna elementa."
+msgstr[2] "… in %1% dodatni elementi."
+msgstr[3] "… in %1% dodatnih elementov."
 
 #: src/Config.cc:53
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Invalid table style %d."
-msgstr "Napačna privzeta pot (default route):"
+msgstr "Neveljaven slog razpredelnice %d."
 
 #: src/Config.cc:54
 #, c-format, boost-format
@@ -155,7 +155,7 @@ msgstr "Izpišite seznam uporabniških pozivov zypperja."
 #. translators: --config, -c <FILE>
 #: src/Config.cc:270
 msgid "Use specified config file instead of the default."
-msgstr "Namesto privzete uporabite določeno konfiguracijsko datoteko."
+msgstr "Namesto privzete uporabite določeno nastavitveno datoteko."
 
 #: src/Config.cc:277
 msgid "User data string must not contain nonprintable or newline characters!"
@@ -167,7 +167,8 @@ msgstr ""
 #: src/Config.cc:283
 msgid "User defined transaction id used in history and plugins."
 msgstr ""
-"Uporabniško določen ID transakcije, ki se uporablja v zgodovini in vtičnikih."
+"Uporabniško določen določilnik transakcije, ki se uporablja v zgodovini in "
+"vtičnikih."
 
 #. translators: --quiet, -q
 #: src/Config.cc:291
@@ -177,23 +178,23 @@ msgstr "Preprečite običajen izpis, natisnite samo sporočila o napakah."
 #. translators: --verbose, -v
 #: src/Config.cc:299
 msgid "Increase verbosity."
-msgstr "Razvleči izpis."
+msgstr "Poveča količino izpisa."
 
 #. translators: --color / --no-color
 #: src/Config.cc:320
 msgid "Whether to use colors in output if tty supports it."
-msgstr "Ali naj bo izpis barven, če tty to omogoča."
+msgstr "Ali naj bo izpis barven, če terminal to omogoča."
 
 #. translators: --no-abbrev, -A
 #: src/Config.cc:325
 msgid "Do not abbreviate text in tables."
-msgstr "Ne okrajšaj besedila v tabelah."
+msgstr "Ne okrajšuj besedila v razpredelnicah."
 
 #. translators: --table-style, -s, %1% denotes the supported range of the integer argument (e.g. "1-11")
 #: src/Config.cc:330
 #, boost-format
 msgid "Table style (%1%)."
-msgstr "Slog preglednice (%1%)."
+msgstr "Slog razpredelnice (%1%)."
 
 #: src/Config.cc:334 src/commands/optionsets.cc:284
 msgid "Entering non-interactive mode."
@@ -202,7 +203,7 @@ msgstr "Prehajam v neinteraktiven način."
 #. translators: --non-interactive, -n
 #: src/Config.cc:338
 msgid "Do not ask anything, use default answers automatically."
-msgstr "Ne sprašuj, samodejno uporabi privzete odgovore."
+msgstr "Ne vprašuj, samodejno uporabi privzete odgovore."
 
 #: src/Config.cc:343
 msgid ""
@@ -217,8 +218,8 @@ msgstr ""
 msgid ""
 "Do not treat patches as interactive, which have the rebootSuggested-flag set."
 msgstr ""
-"Popravkov, ki imajo postavljeno zastavico rebootSuggested, ne obravnavaj kot "
-"interaktivne."
+"Popravkov s postavljeno zastavico rebootSuggested ne obravnavaj kot "
+"interaktivnih."
 
 #. translators: --xmlout, -x
 #: src/Config.cc:357
@@ -241,12 +242,12 @@ msgstr ""
 #. translators: --reposd-dir, -D <DIR>
 #: src/Config.cc:397
 msgid "Use alternative repository definition file directory."
-msgstr "Uporabi drugo mapo z datotekami za definicijo repozitorija."
+msgstr "Uporabi drugo mapo z datotekami za določanje virov."
 
 #. translators: --cache-dir, -C <DIR>
 #: src/Config.cc:412
 msgid "Use alternative directory for all caches."
-msgstr "Uporabi drugo mapo za vse vrste predpomnilnika."
+msgstr "Uporabi drugo mapo za vse vrste predpomnilnikov."
 
 #. translators: --raw-cache-dir <DIR>
 #: src/Config.cc:425
@@ -265,11 +266,11 @@ msgstr "Uporabi drugo mapo za predpomnilnik paketov."
 
 #: src/Config.cc:458
 msgid "Repository Options"
-msgstr "Nastavitve repozitorija"
+msgstr "Možnosti vira"
 
 #: src/Config.cc:462
 msgid "Entering 'no-gpg-checks' mode."
-msgstr "Prehajam v način 'no-gpg-checks'."
+msgstr "Prehajam v način »no-gpg-checks«."
 
 #. translators: --no-gpg-checks
 #: src/Config.cc:466
@@ -281,18 +282,17 @@ msgstr "Prezri spodletele preizkuse GPG in nadaljuj."
 msgid ""
 "Turning on '%s'. New repository signing keys will be automatically imported!"
 msgstr ""
-"Vklapljam '%s'. Novi ključi za podpisovanje repozitorija bodo samodejno "
-"uvoženi!"
+"Vklapljam »%s«. Novi ključi za podpisovanje virov bodo samodejno uvoženi!"
 
 #. translators: --gpg-auto-import-keys
 #: src/Config.cc:477
 msgid "Automatically trust and import new repository signing keys."
-msgstr "Samodejno zaupaj in uvozi nove ključe za podpisovanje repozitorijev."
+msgstr "Samodejno zaupaj in uvozi nove ključe za podpisovanje virov."
 
 #. translators: --plus-repo, -p <URI>
 #: src/Config.cc:481
 msgid "Use an additional repository."
-msgstr "Uporabi dodatni repozitorij."
+msgstr "Uporabi dodatni vir."
 
 #. translators: --plus-content <TAG>
 #: src/Config.cc:485
@@ -300,45 +300,47 @@ msgid ""
 "Additionally use disabled repositories providing a specific keyword. Try '--"
 "plus-content debug' to enable repos indicating to provide debug packages."
 msgstr ""
+"Dodatno uporabljaj onemogočene vire, ki ponujajo določeno ključno besedo. "
+"Poskusite z »--plus-content debug«, da omogočite vire, ki ponujajo "
+"razhroščevalne pakete."
 
 #: src/Config.cc:491
 msgid "Repositories disabled, using the database of installed packages only."
 msgstr ""
+"Viri so onemogočeni, uporabljena bo samo podatkovna zbirka nameščenih "
+"paketov."
 
 #. translators: --disable-repositories
 #: src/Config.cc:495
 msgid "Do not read meta-data from repositories."
-msgstr ""
+msgstr "Ne beri metpodatkov iz virov."
 
 #: src/Config.cc:499
-#, fuzzy
 msgid "Autorefresh disabled."
-msgstr "Samodejna osvežitev"
+msgstr "Samodejna osvežitev je onemogočena."
 
 #. translators: --no-refresh
 #: src/Config.cc:503
 msgid "Do not refresh the repositories."
-msgstr ""
+msgstr "Ne osvežuj virov."
 
 #: src/Config.cc:507
-#, fuzzy
 msgid "CD/DVD repositories disabled."
-msgstr "Samodejna osvežitev"
+msgstr "Viri CD/DVD so onemogočeni."
 
 #. translators: --no-cd
 #: src/Config.cc:511
 msgid "Ignore CD/DVD repositories."
-msgstr ""
+msgstr "Prezri vire CD/DVD."
 
 #: src/Config.cc:515
-#, fuzzy
 msgid "Remote repositories disabled."
-msgstr "Samodejna osvežitev"
+msgstr "Oddaljeni viri so onemogočeni."
 
 #. translators: --no-remote
 #: src/Config.cc:519
 msgid "Ignore remote repositories."
-msgstr ""
+msgstr "Prezri oddaljene vire."
 
 #. translators: --releasever
 #: src/Config.cc:526
@@ -346,181 +348,189 @@ msgid ""
 "Set the value of $releasever in all .repo files (default: distribution "
 "version)"
 msgstr ""
+"Nastavi vrednost $releasever v vseh datotekah .repo (privzeto: različica "
+"distribucije)"
 
 #: src/Config.cc:530
 msgid "Target Options"
-msgstr ""
+msgstr "Možnosti cilja"
 
 #. translators: --root, -R <DIR>
 #: src/Config.cc:535
 msgid "Operate on a different root directory."
-msgstr ""
+msgstr "Deluj v drugi korenski mapi."
 
 #. translators: --installroot <DIR>
 #: src/Config.cc:541
 msgid ""
 "Operate on a different root directory, but share repositories with the host."
-msgstr ""
+msgstr "Deluj v drugi korenski mapi, vendar dali vire z gostiteljem."
 
 #: src/Config.cc:547
 msgid "Ignoring installed resolvables."
-msgstr ""
+msgstr "Nameščene rešitve bodo prezrte."
 
 #. translators: --disable-system-resolvables
 #: src/Config.cc:550
 msgid "Do not read installed packages."
-msgstr ""
+msgstr "Ne beri nameščenih paketov."
 
 #: src/Config.cc:717
 msgid "No config file is in use. Can not save options."
-msgstr ""
+msgstr "V uporabi ni nobena nastavitvena datoteka. Možnosti ni moč shraniti."
 
 #: src/Config.cc:728
 #, boost-format
 msgid "Option '%1%' saved in '%2%'."
-msgstr ""
+msgstr "Možnost »%1%« je bila shranjena v »%2%«."
 
 #: src/Config.cc:735
 msgid "Failed to save option."
-msgstr ""
+msgstr "Shranjevanje možnosti ni uspelo."
 
 #: src/PackageArgs.cc:159
 #, c-format, boost-format
 msgid ""
 "'%s' install modifier must not be used without a package name or capability."
 msgstr ""
+"Spremenilnika namestitve »%s« se ne sme uporabljati brez imena ali zmožnosti "
+"paketa."
 
 #: src/PackageArgs.cc:169
 #, c-format, boost-format
 msgid ""
 "'%s' remove modifier must not be used without a package name or capability."
 msgstr ""
+"Spremenilnika odstranitve »%s« se ne sme uporabljati brez imena ali "
+"zmožnosti paketa."
 
 # e.g 'not a SUSE LINUX CD-ROM'
 #: src/PackageArgs.cc:221
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "'%s' not found in package names. Trying '%s'."
-msgstr "To ni veljaven CCW naslov."
+msgstr "»%s« v imenih paketa ni bilo moč najti. Poskušanje z »%s«."
 
 # e.g 'not a SUSE LINUX CD-ROM'
 #: src/PackageArgs.cc:231
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "'%s' is not a package name or capability."
-msgstr "To ni veljaven CCW naslov."
+msgstr "»%s« ni ime ali zmožnost paketa."
 
 # e.g 'not a SUSE LINUX CD-ROM'
 #: src/RequestFeedback.cc:40
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "'%s' not found in package names. Trying capabilities."
-msgstr "To ni veljaven CCW naslov."
+msgstr "»%s« v imenih paketa ni bilo moč najti. Poskušanje v zmožnostih."
 
 #: src/RequestFeedback.cc:46
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Package '%s' not found."
-msgstr "Gostitelja %s ni."
+msgstr "Paketa »%s« ni bilo moč najti."
 
 #: src/RequestFeedback.cc:48
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Patch '%s' not found."
-msgstr "Gostitelja %s ni."
+msgstr "Popravka »%s« ni bilo moč najti."
 
 #: src/RequestFeedback.cc:50
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Product '%s' not found."
-msgstr "Gostitelja %s ni."
+msgstr "Izdelka »%s« ni bilo moč najti."
 
 #: src/RequestFeedback.cc:52
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Pattern '%s' not found."
-msgstr "Gostitelja %s ni."
+msgstr "Vzorca »%s« ni bilo moč najti."
 
 #: src/RequestFeedback.cc:54
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Source package '%s' not found."
-msgstr "Gostitelja %s ni."
+msgstr "Paketa »%s« z izvorno kodo ni bilo moč najti."
 
 #. just in case
 #: src/RequestFeedback.cc:56
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Object '%s' not found."
-msgstr "Gostitelja %s ni."
+msgstr "Objekta »%s« ni bilo moč najti."
 
 #: src/RequestFeedback.cc:61
 #, c-format, boost-format
 msgid "Package '%s' not found in specified repositories."
-msgstr ""
+msgstr "Paketa »%s« v navedenih virih ni bilo moč najti."
 
 #: src/RequestFeedback.cc:63
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Patch '%s' not found in specified repositories."
-msgstr "Gostitelja %s ni."
+msgstr "Popravka »%s« v navedenih virih ni bilo moč najti."
 
 #: src/RequestFeedback.cc:65
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Product '%s' not found in specified repositories."
-msgstr "Priklop razdelka ni uspel."
+msgstr "Izdelka »%s« v navedenih virih ni bilo moč najti."
 
 #: src/RequestFeedback.cc:67
 #, c-format, boost-format
 msgid "Pattern '%s' not found in specified repositories."
-msgstr ""
+msgstr "Vzorca »%s« v navedenih virih ni bilo moč najti."
 
 #: src/RequestFeedback.cc:69
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Source package '%s' not found in specified repositories."
-msgstr "Gostitelja %s ni."
+msgstr "Paketa »%s« z izvorno kodo v navedenih virih ni bilo moč najti."
 
 #. just in case
 #: src/RequestFeedback.cc:71
 #, c-format, boost-format
 msgid "Object '%s' not found in specified repositories."
-msgstr ""
+msgstr "Objekta »%s« v navedenih virih ni bilo moč najti."
 
 #. translators: meaning a package %s or provider of capability %s
 #: src/RequestFeedback.cc:76
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "No provider of '%s' found."
-msgstr "Ni napak."
+msgstr "Najden ni bil noben ponudnik »%s«."
 
 #. wildcards used
 #: src/RequestFeedback.cc:85
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "No package matching '%s' is installed."
-msgstr "Ni napak."
+msgstr "Nameščen ni noben paket, ki bi se ujemal z »%s«."
 
 #: src/RequestFeedback.cc:87
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Package '%s' is not installed."
-msgstr "Gostitelja %s ni."
+msgstr "Paket »%s« ni nameščen."
 
 #. translators: meaning provider of capability %s
 #: src/RequestFeedback.cc:91
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "No provider of '%s' is installed."
-msgstr "Ni napak."
+msgstr "Nameščen ni noben ponudnik »%s«."
 
 #: src/RequestFeedback.cc:96
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "'%s' is already installed."
-msgstr "SCPM je že onemogočen."
+msgstr "»%s« je že nameščen."
 
 #. translators: %s are package names
 #: src/RequestFeedback.cc:99
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "'%s' providing '%s' is already installed."
-msgstr "SCPM je že onemogočen."
+msgstr "»%s«, ki ponuja »%s«, je že nameščen."
 
 #: src/RequestFeedback.cc:106
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid ""
 "No update candidate for '%s'. The highest available version is already "
 "installed."
-msgstr "SCPM je že onemogočen."
+msgstr ""
+"Za »%s« ni kandidata za posodobitev. Najnovejša razpoložljiva različica je "
+"že nameščena."
 
 #: src/RequestFeedback.cc:109
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "No update candidate for '%s'."
-msgstr "Za to dejanje ni določene pomoči."
+msgstr "Za »%s« ni kandidata za posodobitev."
 
 #: src/RequestFeedback.cc:115
 #, c-format, boost-format
@@ -528,6 +538,8 @@ msgid ""
 "There is an update candidate '%s' for '%s', but it does not match the "
 "specified version, architecture, or repository."
 msgstr ""
+"Na voljo je »%s«, ki je kandidat za posodobitev »%s«, vendar se ne ujema z "
+"navedeno različico, arhitekturo ali virom."
 
 #: src/RequestFeedback.cc:124
 #, c-format, boost-format
@@ -535,6 +547,8 @@ msgid ""
 "There is an update candidate for '%s' from vendor '%s', while the current "
 "vendor is '%s'. Use '%s' to install this candidate."
 msgstr ""
+"Na voljo je kandidat za posodobitev »%s« izdelovalca »%s«, med tem ko je "
+"trenutni izdelovalec »%s«. Da namestite tega kandidata, uporabite »%s«."
 
 #: src/RequestFeedback.cc:133
 #, c-format, boost-format
@@ -542,6 +556,8 @@ msgid ""
 "There is an update candidate for '%s', but it comes from a repository with a "
 "lower priority. Use '%s' to install this candidate."
 msgstr ""
+"Na voljo je kandidat za posodobitev »%s«, vendar prihaja iz vira z nižjo "
+"prednostjo. Da namestite tega kandidata, uporabite »%s«."
 
 #: src/RequestFeedback.cc:143
 #, c-format, boost-format
@@ -549,6 +565,8 @@ msgid ""
 "There is an update candidate for '%s', but it is locked. Use '%s' to unlock "
 "it."
 msgstr ""
+"Na voljo je kandidat za posodobitev »%s«, vendar je zaklenjen. Za odklenitev "
+"uporabite »%s«."
 
 #: src/RequestFeedback.cc:149
 #, c-format, boost-format
@@ -556,6 +574,8 @@ msgid ""
 "Package '%s' is not available in your repositories. Cannot reinstall, "
 "upgrade, or downgrade."
 msgstr ""
+"Paket »%s« v nastavljenih virih ni na voljo. Ni ga mogoče znova namestiti, "
+"nadgraditi, ali ga vrniti na starejšo različico."
 
 #: src/RequestFeedback.cc:159
 #, c-format, boost-format
@@ -563,22 +583,23 @@ msgid ""
 "The selected package '%s' from repository '%s' has lower version than the "
 "installed one."
 msgstr ""
+"Izbrani paket »%s« iz vira »%s« ima nižjo različico kot nameščeni paket."
 
 #. translators: %s = "zypper install --oldpackage package-version.arch"
 #: src/RequestFeedback.cc:163
 #, c-format, boost-format
 msgid "Use '%s' to force installation of the package."
-msgstr ""
+msgstr "Za vsiljeno namestitev paketa uporabite »%s«."
 
 #: src/RequestFeedback.cc:170
 #, c-format, boost-format
 msgid "Patch '%s' is interactive, skipping."
-msgstr ""
+msgstr "Popravek »%s« je interaktiven. Preskočen bo."
 
 #: src/RequestFeedback.cc:176
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Patch '%s' is not needed."
-msgstr "Gostitelja %s ni."
+msgstr "Popravek »%s« ni potreben."
 
 #: src/RequestFeedback.cc:182
 #, boost-format
@@ -586,77 +607,81 @@ msgid ""
 "Patch '%1%' is optional. Use '%2%' to install it, or '%3%' to include all "
 "optional patches."
 msgstr ""
+"Popravek »%1%« ni obvezen. Da ga namestite, uporabite »%2%«, ali pa "
+"uporabite »%3%« za vključitev vseh neobveznih popravkov."
 
 #: src/RequestFeedback.cc:193
 #, c-format, boost-format
 msgid "Patch '%s' is locked. Use '%s' to install it, or unlock it using '%s'."
 msgstr ""
+"Popravek »%s« je zaklenjen. Da ga namestite, uporabite »%s«, ali pa ga "
+"odklenite z »%s«."
 
 #: src/RequestFeedback.cc:200
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Patch '%s' is not in the specified category."
-msgstr "Gostitelja %s ni."
+msgstr "Popravek »%s« ne spada v navedeno kategorijo."
 
 #: src/RequestFeedback.cc:207
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Patch '%s' has not the specified severity."
-msgstr "Gostitelja %s ni."
+msgstr "Popravek »%s« nima navedene resnosti."
 
 #: src/RequestFeedback.cc:214
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Patch '%s' was issued after the specified date."
-msgstr "Gostitelja %s ni."
+msgstr "Popravek »%s« je bil izdan po navedenem datumu."
 
 #: src/RequestFeedback.cc:219
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Selecting '%s' from repository '%s' for installation."
-msgstr "Napaka pri branju odseka %u."
+msgstr "Izbiranje »%s« iz vira »%s« za namestiti."
 
 #: src/RequestFeedback.cc:223
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Forcing installation of '%s' from repository '%s'."
-msgstr "Napaka pri branju odseka %u."
+msgstr "Vsiljevanje namestitve »%s« iz vira »%s«."
 
 #: src/RequestFeedback.cc:227
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Selecting '%s' for removal."
-msgstr "Izbran vnos je odstranjen."
+msgstr "Izbiranje »%s« za odstraniti."
 
 #: src/RequestFeedback.cc:234
 #, c-format, boost-format
 msgid "'%s' is locked. Use '%s' to unlock it."
-msgstr ""
+msgstr "»%s« je zaklenjen. Da ga odklenite, uporabite »%s«."
 
 #: src/RequestFeedback.cc:239
 #, c-format, boost-format
 msgid "Adding requirement: '%s'."
-msgstr ""
+msgstr "Dodajanje zahteve: »%s«."
 
 #: src/RequestFeedback.cc:242
 #, c-format, boost-format
 msgid "Adding conflict: '%s'."
-msgstr ""
+msgstr "Dodajanje spora: »%s«."
 
 #. translators: %1% expands to a single package name or a ','-separated enumeration of names.
 #: src/RequestFeedback.cc:264
 #, boost-format
 msgid "Did you mean %1%?"
-msgstr ""
+msgstr "Ali ste mislili %1%?"
 
 #: src/SolverRequester.cc:487
 #, c-format, boost-format
 msgid "Ignoring option %s when updating the update stack first."
-msgstr ""
+msgstr "Možnost %s bo prezrta, ko se najprej posodablja posodobitveni sklad."
 
 #: src/SolverRequester.h:53
 #, boost-format
 msgid "Suspicious category filter value '%1%'."
-msgstr ""
+msgstr "Sumljiva vrednost filtra po kategorijah: »%1%«."
 
 #: src/SolverRequester.h:61
 #, boost-format
 msgid "Suspicious severity filter value '%1%'."
-msgstr ""
+msgstr "Sumljiva vrednost filtra po resnostih: »%1%«."
 
 #. translator: '%1%' is a products name
 #. '%2%' is a command to call (like 'zypper dup')
@@ -664,61 +689,61 @@ msgstr ""
 #: src/Summary.cc:554
 #, boost-format
 msgid "Product '%1%' requires to be upgraded by calling '%2%'!"
-msgstr ""
+msgstr "Izdelek »%1%« zahteva posodobitev s klicem ukaza »%2%«."
 
 #: src/Summary.cc:723
 #, c-format, boost-format
 msgid "The following NEW package is going to be installed:"
 msgid_plural "The following %d NEW packages are going to be installed:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Nameščen bo naslednji %d NOVI paket:"
+msgstr[1] "Nameščena bosta naslednja %d NOVA paketa:"
+msgstr[2] "Nameščeni bodo naslednji %d NOVI paketi:"
+msgstr[3] "Nameščenih bo naslednjih %d NOVIH paketov:"
 
 #: src/Summary.cc:728
 #, c-format, boost-format
 msgid "The following NEW patch is going to be installed:"
 msgid_plural "The following %d NEW patches are going to be installed:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Nameščen bo naslednji %d NOVI popravek:"
+msgstr[1] "Nameščena bosta naslednja %d NOVA popravka:"
+msgstr[2] "Nameščeni bodo naslednji %d NOVI popravki:"
+msgstr[3] "Nameščenih bo naslednjih %d NOVIH popravkov:"
 
 #: src/Summary.cc:733
 #, c-format, boost-format
 msgid "The following NEW pattern is going to be installed:"
 msgid_plural "The following %d NEW patterns are going to be installed:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Nameščen bo naslednji %d NOVI vzorec:"
+msgstr[1] "Nameščena bosta naslednja %d NOVA vzorca:"
+msgstr[2] "Nameščeni bodo naslednji %d NOVI vzorci:"
+msgstr[3] "Nameščenih bo naslednjih %d NOVIH vzorcev:"
 
 #: src/Summary.cc:738
 #, c-format, boost-format
 msgid "The following NEW product is going to be installed:"
 msgid_plural "The following %d NEW products are going to be installed:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Nameščen bo naslednji %d NOVI izdelek:"
+msgstr[1] "Nameščena bosta naslednja %d NOVA izdelka:"
+msgstr[2] "Nameščeni bodo naslednji %d NOVI izdelki:"
+msgstr[3] "Nameščenih bo naslednjih %d NOVIH izdelkov:"
 
 #: src/Summary.cc:743
 #, c-format, boost-format
 msgid "The following source package is going to be installed:"
 msgid_plural "The following %d source packages are going to be installed:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Nameščen bo naslednji %d NOVI paket z izvorno kodo:"
+msgstr[1] "Nameščena bosta naslednja %d NOVA paketa z izvorno kodo:"
+msgstr[2] "Nameščeni bodo naslednji %d NOVI paketi z izvorno kodo:"
+msgstr[3] "Nameščenih bo naslednjih %d NOVIH paketov z izvorno kodo:"
 
 #: src/Summary.cc:749
 #, c-format, boost-format
 msgid "The following application is going to be installed:"
 msgid_plural "The following %d applications are going to be installed:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Nameščen bo naslednji %d NOVI program:"
+msgstr[1] "Nameščena bosta naslednja %d NOVA programa:"
+msgstr[2] "Nameščeni bodo naslednji %d NOVI programi:"
+msgstr[3] "Nameščenih bo naslednjih %d NOVIH programov:"
 
 #: src/Summary.cc:774
 #, c-format, boost-format
