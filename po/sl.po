@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-04-15 13:01+0200\n"
-"PO-Revision-Date: 2024-06-11 09:46+0000\n"
+"PO-Revision-Date: 2024-06-11 12:46+0000\n"
 "Last-Translator: Jure Repinc <jlp@holodeck1.com>\n"
 "Language-Team: Slovenian <https://l10n.opensuse.org/projects/zypper/master/"
 "sl/>\n"
@@ -1590,63 +1590,68 @@ msgid ""
 "PackageKit is blocking zypper. This happens if you have an updater applet or "
 "other software management application using PackageKit running."
 msgstr ""
+"PackageKit blokira zypper. To se zgodi, ko teče posodobitveni programč ali "
+"drug program za upravljanje programske opreme, ki uporablja PackageKit."
 
 #: src/Zypper.cc:93
 msgid ""
 "We can ask PackageKit to interrupt the current action as soon as possible, "
 "but it depends on PackageKit how fast it will respond to this request."
 msgstr ""
+"Od PackageKit se lahko zahteva, da čim prej prekine trenutno opravilo, "
+"vendar je od PackageKit odvisno, kako hitro se bo odzval na to zahtevo."
 
 #: src/Zypper.cc:96
-#, fuzzy
 msgid "Ask PackageKit to quit?"
-msgstr "Namestitev paketa"
+msgstr "Ali želite od PackageKit zahtevati naj konča?"
 
 #: src/Zypper.cc:105
 msgid "PackageKit is still running (probably busy)."
-msgstr ""
+msgstr "PackageKit še vedno teče (verjetno je zaposlen)."
 
 #: src/Zypper.cc:106
-#, fuzzy
 msgid "Try again?"
-msgstr "Priprava namestitve..."
+msgstr "Ali želite poskusiti znova?"
 
 #: src/Zypper.cc:244 src/Zypper.cc:716 src/commands/basecommand.cc:280
 msgid "Unexpected exception."
-msgstr ""
+msgstr "Nepričakovana izjema."
 
 #. translators: %s is "help" or "zypper help" depending on whether
 #. zypper shell is running or not
 #: src/Zypper.cc:291
 #, c-format, boost-format
 msgid "Type '%s' to get command-specific help."
-msgstr ""
+msgstr "Natipkajte »%s« za prikaz pomoči specifične za ukaz."
 
 #: src/Zypper.cc:311
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Verbosity: %d"
-msgstr "Verzija"
+msgstr "Podrobnost: %d"
 
 #: src/Zypper.cc:320
 msgid "Enforced setting"
-msgstr ""
+msgstr "Vsiljena nastavitev"
 
 #: src/Zypper.cc:343
 msgid ""
 "The /etc/products.d/baseproduct symlink is dangling or missing!\n"
 "The link must point to your core products .prod file in /etc/products.d.\n"
 msgstr ""
+"Simbolna povezava /etc/products.d/baseproduct nima cilja ali pa manjka.\n"
+"Povezava mora kazati na datoteko .prod iz /etc/products.d, ki ustreza "
+"osrednjemu izdelku.\n"
 
 #. TranslatorExplanation The %s is "--plus-repo"
 #. TranslatorExplanation The %s is "--option-name"
 #: src/Zypper.cc:536 src/Zypper.cc:588
 #, c-format, boost-format
 msgid "The %s option has no effect here, ignoring."
-msgstr ""
+msgstr "Možnost %s tu nima učinka in bo prezrta."
 
 #: src/Zypper.cc:659
 msgid "Non-option program arguments: "
-msgstr ""
+msgstr "Argumenti programa, ki niso možnosti: "
 
 #: src/callbacks/keyring.h:33
 msgid ""
@@ -1655,6 +1660,11 @@ msgid ""
 "the repository provider or check their web site. Many providers maintain a "
 "web page showing the fingerprints of the GPG keys they are using."
 msgstr ""
+"Javni ključ GPG je jasno določen s svojim prstnim odtisom. Ne zanašajte se "
+"na ime ključa. Če niste prepričani, da je predstavljeni ključ pristen, "
+"vprašajte ponudnika vira ali pa preverite njihovo spletno stran. Mnogi "
+"ponudniki vzdržujejo spletno stran s prikazanimi prstnimi odtisi ključev "
+"GPG, ki jih uporabljajo."
 
 #: src/callbacks/keyring.h:38
 msgid ""
@@ -1663,6 +1673,10 @@ msgid ""
 "signature can lead to a corrupted system and in extreme cases even to a "
 "system compromise."
 msgstr ""
+"Podpisovanje podatkov prejemniku zagotavlja, da po podpisu podatki niso bili "
+"spremenjeni. Sprejetje podatkov brez podpisa, z napačnim podpisom ali z "
+"neznanim podpisom lahko vodi v pokvarjen sistem in v skrajnih primerih celo "
+"v ogrozitev sistema."
 
 #. translator: %1% is a file name
 #: src/callbacks/keyring.h:46
@@ -1671,12 +1685,16 @@ msgid ""
 "File '%1%' is the repositories master index file. It ensures the integrity "
 "of the whole repo."
 msgstr ""
+"Datoteka »%1%« je glavno kazalo vira. Zagotavlja celovitost celotnega vira."
 
 #: src/callbacks/keyring.h:52
 msgid ""
 "We can't verify that no one meddled with this file, so it might not be "
 "trustworthy anymore! You should not continue unless you know it's safe."
 msgstr ""
+"Ne moremo potrditi, da nihče ni spreminjal te datoteke, zato ji morda ne gre "
+"več zaupati. Priporočamo, da ne nadaljujete, razen če ste prepričani, da je "
+"to varno."
 
 #: src/callbacks/keyring.h:57
 msgid ""
@@ -1684,6 +1702,9 @@ msgid ""
 "malicious change, so it might not be trustworthy anymore! You should not "
 "continue unless you know it's safe."
 msgstr ""
+"Ta datoteka je bila po podpisu spremenjena. Sprememba je bila morda "
+"zlonamerna, zato datoteki morda ne gre več zaupati. Priporočamo, da ne "
+"nadaljujemo, razen če ste prepričani, da je to varno."
 
 #: src/callbacks/keyring.h:59
 msgid ""
@@ -1693,125 +1714,126 @@ msgid ""
 "the signature verification might fail. After a few minutes, when the server "
 "has updated its data, it should work again."
 msgstr ""
+"Težava je morda začasna, če je strežnik ravno sredi prejemanja novih "
+"podatkov. Podatkovne datoteke in njihovi podpisi morajo biti usklajeni. Če "
+"je zahteva strežnik dosegla med posodabljanjem, potrjevanje s podpisom lahko "
+"spodleti. Po nekaj minutah, ko bodo vsi podatki na strežniku posodobljeni, "
+"bi moralo preverjanje biti uspešno."
 
 #: src/callbacks/keyring.h:88
-#, fuzzy
 msgid "Repository:"
-msgstr "Gostitelja %s ni."
+msgstr "Vir:"
 
 #: src/callbacks/keyring.h:90
 msgid "Key Fingerprint:"
-msgstr ""
+msgstr "Prstni odtis ključa:"
 
 #: src/callbacks/keyring.h:91
-#, fuzzy
 msgid "Key Name:"
-msgstr "Ime"
+msgstr "Ime ključa:"
 
 #: src/callbacks/keyring.h:92
 msgid "Key Algorithm:"
-msgstr ""
+msgstr "Algoritem ključa:"
 
 #: src/callbacks/keyring.h:93
-#, fuzzy
 msgid "Key Created:"
-msgstr "Ime"
+msgstr "Ključ ustvarjen:"
 
 #: src/callbacks/keyring.h:94
-#, fuzzy
 msgid "Key Expires:"
-msgstr "Ime"
+msgstr "Ključ poteče:"
 
 #: src/callbacks/keyring.h:96
 msgid "Subkey:"
-msgstr ""
+msgstr "Podključ:"
 
 #: src/callbacks/keyring.h:97
-#, fuzzy
 msgid "Rpm Name:"
-msgstr "Ime"
+msgstr "Ime RPM-ja:"
 
 #: src/callbacks/keyring.h:123
 #, boost-format
 msgid "The gpg key signing file '%1%' has expired."
-msgstr ""
+msgstr "Datoteka »%1%« za podpisovanje s ključem GPG je potekla."
 
 #: src/callbacks/keyring.h:129
 #, boost-format
 msgid "The gpg key signing file '%1%' will expire in %2% day."
 msgid_plural "The gpg key signing file '%1%' will expire in %2% days."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Datoteka »%1%« za podpisovanje s ključem GPG bo potekla čez %2% dan."
+msgstr[1] "Datoteka »%1%« za podpisovanje s ključem GPG bo potekla čez %2% dneva."
+msgstr[2] "Datoteka »%1%« za podpisovanje s ključem GPG bo potekla čez %2% dni."
+msgstr[3] "Datoteka »%1%« za podpisovanje s ključem GPG bo potekla čez %2% dni."
 
 #: src/callbacks/keyring.h:152
 #, c-format, boost-format
 msgid "Accepting an unsigned file '%s'."
-msgstr ""
+msgstr "Sprejetje nepodpisane datoteke »%s«."
 
 #: src/callbacks/keyring.h:156
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Accepting an unsigned file '%s' from repository '%s'."
-msgstr "Napaka pri branju odseka %u."
+msgstr "Sprejetje nepodpisane datoteke »%s« iz vira »%s«."
 
 #. translator: %1% is a file name
 #: src/callbacks/keyring.h:166
 #, boost-format
 msgid "File '%1%' is unsigned."
-msgstr ""
+msgstr "Datoteka »%1%« ni podpisana."
 
 #. translator: %1% is a file name, %2% a repositories name
 #: src/callbacks/keyring.h:169
-#, fuzzy, boost-format
+#, boost-format
 msgid "File '%1%' from repository '%2%' is unsigned."
-msgstr "Napaka pri branju odseka %u."
+msgstr "Datoteka »%1%« iz vira »%2%« ni podpisana."
 
 #: src/callbacks/keyring.h:201
 #, c-format, boost-format
 msgid "Accepting file '%s' signed with an unknown key '%s'."
-msgstr ""
+msgstr "Sprejetje datoteke »%s«, ki je podpisana z neznanim ključem »%s«."
 
 #: src/callbacks/keyring.h:205
 #, c-format, boost-format
 msgid ""
 "Accepting file '%s' from repository '%s' signed with an unknown key '%s'."
 msgstr ""
+"Sprejetje datoteke »%s« iz vira »%s«, ki je podpisana z neznanim ključem "
+"»%s«."
 
 #. translator: %1% is a file name, %2% is a gpg key ID
 #: src/callbacks/keyring.h:214
 #, boost-format
 msgid "File '%1%' is signed with an unknown key '%2%'."
-msgstr ""
+msgstr "Datoteka »%1%« je podpisana z neznanim ključem »%2%«."
 
 #. translator: %1% is a file name, %2% is a gpg key ID, %3% a repositories name
 #: src/callbacks/keyring.h:217
 #, boost-format
 msgid "File '%1%' from repository '%3%' is signed with an unknown key '%2%'."
-msgstr ""
+msgstr "Datoteka »%1%« iz vira »%3%« je podpisana z neznanim ključem »%2%«."
 
 #: src/callbacks/keyring.h:246
 msgid "Automatically importing the following key:"
-msgstr ""
+msgstr "Samodejno uvažanje naslednjega ključa:"
 
 #: src/callbacks/keyring.h:248
 msgid "Automatically trusting the following key:"
-msgstr ""
+msgstr "Samodejno zaupanje naslednjemu ključu:"
 
 #: src/callbacks/keyring.h:250
 msgid "New repository or package signing key received:"
-msgstr ""
+msgstr "Prejet je bil nov ključ za podpisovanje virov ali paketov:"
 
 #. translators: this message is shown after showing description of the key
 #: src/callbacks/keyring.h:284
 msgid "Do you want to reject the key, trust temporarily, or trust always?"
-msgstr ""
+msgstr "Ali želite ključ zavrniti, mu zaupati trenutno ali vedno zaupati?"
 
 #. translators: this message is shown after showing description of the key
 #: src/callbacks/keyring.h:287
-#, fuzzy
 msgid "Do you want to reject the key, or trust always?"
-msgstr "Želite zaustaviti sistem?"
+msgstr "Ali želite ključ zavrniti ali mu vedno zaupati?"
 
 #. translators: r/t/a stands for Reject/TrustTemporarily/trustAlways(import)
 #. translate to whatever is appropriate for your language
@@ -1820,12 +1842,12 @@ msgstr "Želite zaustaviti sistem?"
 #. The answers should be lower case letters.
 #: src/callbacks/keyring.h:305
 msgid "r/t/a/"
-msgstr ""
+msgstr "z/t/v/"
 
 #. translators: the same as r/t/a, but without 'a'
 #: src/callbacks/keyring.h:308
 msgid "r/t"
-msgstr ""
+msgstr "z/t"
 
 #. translators: r/a stands for Reject/trustAlways(import)
 #. translate to whatever is appropriate for your language
@@ -1834,60 +1856,63 @@ msgstr ""
 #. The answers should be lower case letters.
 #: src/callbacks/keyring.h:315
 msgid "r/a/"
-msgstr ""
+msgstr "z/v/"
 
 #. translators: help text for the 'r' option in the 'r/t/a' prompt
 #: src/callbacks/keyring.h:321
 msgid "Don't trust the key."
-msgstr ""
+msgstr "Ne zaupaj ključu."
 
 #. translators: help text for the 't' option in the 'r/t/a' prompt
 #: src/callbacks/keyring.h:325
 msgid "Trust the key temporarily."
-msgstr ""
+msgstr "Ključu zaupaj trenutno."
 
 #. translators: help text for the 'a' option in the 'r/t/a' prompt
 #: src/callbacks/keyring.h:330
 msgid "Trust the key and import it into trusted keyring."
-msgstr ""
+msgstr "Zaupaj ključu in ga uvozi v zbirko zaupanih."
 
 #: src/callbacks/keyring.h:367
 #, c-format, boost-format
 msgid "Ignoring failed signature verification for file '%s'!"
-msgstr ""
+msgstr "Prezrtje spodletelega preverjanja podpisa datoteke »%s«."
 
 #: src/callbacks/keyring.h:370
 #, c-format, boost-format
 msgid ""
 "Ignoring failed signature verification for file '%s' from repository '%s'!"
-msgstr ""
+msgstr "Prezrtje spodletelega preverjanja podpisa datoteke »%s« iz vira »%s«."
 
 #: src/callbacks/keyring.h:376
 msgid "Double-check this is not caused by some malicious changes in the file!"
 msgstr ""
+"Dvakrat preverite, ali ni to morda posledica zlonamerne spremembe datoteke."
 
 #. translator: %1% is a file name
 #: src/callbacks/keyring.h:386
 #, boost-format
 msgid "Signature verification failed for file '%1%'."
-msgstr ""
+msgstr "Spodletelo preverjanje podpisa datoteke »%1%«."
 
 #. translator: %1% is a file name, %2% a repositories name
 #: src/callbacks/keyring.h:389
 #, boost-format
 msgid "Signature verification failed for file '%1%' from repository '%2%'."
-msgstr ""
+msgstr "Spodletelo preverjanje podpisa datoteke »%1%« iz vira »%2%«."
 
 #: src/callbacks/keyring.h:438
 msgid ""
 "The rpm database seems to contain old V3 version gpg keys which are "
 "meanwhile obsolete and considered insecure:"
 msgstr ""
+"Videti je, da podatkovna zbirka RPM vsebuje ključe GPG stare različice v3, "
+"ki so bili opuščeni in se ne štejejo več za varne:"
 
 #: src/callbacks/keyring.h:445
 #, boost-format
 msgid "To see details about a key call '%1%'."
-msgstr ""
+msgstr "Da vidite podrobnosti ključa, izvedite ukaz »%1%«."
 
 #: src/callbacks/keyring.h:449
 #, boost-format
@@ -1895,16 +1920,18 @@ msgid ""
 "Unless you believe the key in question is still in use, you can remove it "
 "from the rpm database calling '%1%'."
 msgstr ""
+"Ključ lahko odstranite iz zbirke RPM z izvedbo ukaza »%1%«, razen če "
+"verjamete, da se ključ še vedno uporablja."
 
 #. translator: %1% is the number of keys, %2% the name of a repository
 #: src/callbacks/keyring.h:468
 #, boost-format
 msgid "Received %1% new package signing key from repository \"%2%\":"
 msgid_plural "Received %1% new package signing keys from repository \"%2%\":"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Iz vira »%2%« prejet %1% nov ključ za podpisovanje paketov:"
+msgstr[1] "Iz vira »%2%« prejeta %1% nova ključa za podpisovanje paketov:"
+msgstr[2] "Iz vira »%2%« prejeti %1% novi ključi za podpisovanje paketov:"
+msgstr[3] "Iz vira »%2%« prejetih %1% novih ključev za podpisovanje paketov:"
 
 #: src/callbacks/keyring.h:472
 msgid ""
@@ -1912,42 +1939,54 @@ msgid ""
 "repository. In order to validate those packages upon download and "
 "installation the new keys will be imported into the rpm database."
 msgstr ""
+"Te dodatne ključe se običajno uporablja za podpisovanje paketov, ki so na "
+"voljo v viru. Da bi se lahko pakete po prejemu in namestitvi potrdilo, bodo "
+"novi ključi uvoženi v podatkovno zbirko RPM."
 
 #: src/callbacks/keyring.h:474
 msgid "New:"
-msgstr ""
+msgstr "Novi:"
 
 #: src/callbacks/keyring.h:480
 msgid ""
 "The repository metadata introducing the new keys have been signed and "
 "validated by the trusted key:"
 msgstr ""
+"Metapodatki vira, ki so uvedli nove ključe, so bili podpisani in potrjeni z "
+"zaupanim ključem:"
 
 #: src/callbacks/keyring.h:503
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "No digest for file %s."
-msgstr "Couldn't open file: %s."
+msgstr "Ni izvlečka za datoteko %s."
 
 #: src/callbacks/keyring.h:511
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Unknown digest %s for file %s."
-msgstr "Neznan monitor:"
+msgstr "Neznan izvleček %s za datoteko %s."
 
 #: src/callbacks/keyring.h:528
-#, fuzzy, boost-format
+#, boost-format
 msgid ""
 "Digest verification failed for file '%1%'\n"
 "[%2%]\n"
 "\n"
 "  expected %3%\n"
 "  but got  %4%\n"
-msgstr "Priprava ni uspela"
+msgstr ""
+"Potrjevanje datoteke »%1%« z izvlečkom ni uspelo\n"
+"[%2%]\n"
+"\n"
+"  pričakovan %3%\n"
+"  a dobljen  %4%\n"
 
 #: src/callbacks/keyring.h:540
 msgid ""
 "Accepting packages with wrong checksums can lead to a corrupted system and "
 "in extreme cases even to a system compromise."
 msgstr ""
+"Sprejetje paketov z napačno nadzorno vsoto lahko vodi v pokvarjen sistem in "
+"v skrajnih primerih celo v grožnjo sistemu."
 
 #: src/callbacks/keyring.h:548
 #, boost-format
@@ -1959,54 +1998,60 @@ msgid ""
 "to unblock using this file on your own risk. Empty input will discard the "
 "file.\n"
 msgstr ""
+"Če ste se prepričali, da je datoteka z nadzorno vsoto »%1%« varna, prava in "
+"se lahko\n"
+"uporabi za to dejanje, vnesite prve 4 znake nadzorne vsote. S tem na lastno "
+"odgovornost\n"
+"odstranite blokado uporabe te datoteke. Prazen vnos zavrže to datoteko.\n"
 
 #. translators: A prompt option
 #: src/callbacks/keyring.h:555
 msgid "discard"
-msgstr ""
+msgstr "zavrži"
 
 #. translators: A prompt option help text
 #: src/callbacks/keyring.h:557
 msgid "Unblock using this file on your own risk."
-msgstr ""
+msgstr "Na lastno odgovornost odstranite blokado uporabe te datoteke."
 
 #. translators: A prompt option help text
 #: src/callbacks/keyring.h:559
 msgid "Discard the file."
-msgstr ""
+msgstr "Zavrzi datoteko."
 
 #. translators: A prompt text
 #: src/callbacks/keyring.h:563
 msgid "Unblock or discard?"
-msgstr ""
+msgstr "Ali želite odstraniti blokado ali zavreči?"
 
 #: src/callbacks/locks.h:27
 msgid ""
 "The following query locks the same objects as the one you want to remove:"
 msgstr ""
+"Naslednja poizvedba zaklene enake objekte kot je ta, ki ga želite odstraniti:"
 
 #: src/callbacks/locks.h:30
 msgid "The following query locks some of the objects you want to unlock:"
 msgstr ""
+"Naslednja poizvedba zaklene nekatere izmed objektov, ki jih želite odkleniti:"
 
 #: src/callbacks/locks.h:35 src/callbacks/locks.h:50
-#, fuzzy
 msgid "Do you want to remove this lock?"
-msgstr "Želite zaustaviti sistem?"
+msgstr "Ali želite odstraniti ta zaklep?"
 
 #: src/callbacks/locks.h:45
 msgid "The following query does not lock anything:"
-msgstr ""
+msgstr "Naslednja poizvedba ne zaklene ničesar:"
 
 #. help text for the "Abort, retry, ignore?" prompt for media errors
 #: src/callbacks/media.cc:28
 msgid "Skip retrieval of the file and abort current operation."
-msgstr ""
+msgstr "Preskoči prejemanje datoteke in prekini trenutno opravilo."
 
 #. help text for the "Abort, retry, ignore?" prompt for media errors
 #: src/callbacks/media.cc:30
 msgid "Try to retrieve the file again."
-msgstr ""
+msgstr "Znova poskusi prejeti datoteko."
 
 #. help text for the "Abort, retry, ignore?" prompt for media errors
 #: src/callbacks/media.cc:32
@@ -2014,16 +2059,18 @@ msgid ""
 "Skip retrieval of the file and try to continue with the operation without "
 "the file."
 msgstr ""
+"Preskoči prejemanje datoteke in poskusi nadaljevati opravilo brez te "
+"datoteke."
 
 #. help text for the "Abort, retry, ignore?" prompt for media errors
 #: src/callbacks/media.cc:34
 msgid "Change current base URI and try retrieving the file again."
-msgstr ""
+msgstr "Spremeni trenutni osnovni URI in znova poskusi prejeti datoteko."
 
 #. translators: this is a prompt label, will appear as "New URI: "
 #: src/callbacks/media.cc:49
 msgid "New URI"
-msgstr ""
+msgstr "Novi URI"
 
 #. https options
 #. translators: a/r/i/u are replies to the "Abort, retry, ignore?" prompt.
@@ -2033,54 +2080,51 @@ msgstr ""
 #. 's' stands for Disable SSL certificate authority check
 #: src/callbacks/media.cc:77
 msgid "a/r/i/u/s"
-msgstr ""
+msgstr "p/z/i/u/s"
 
 #: src/callbacks/media.cc:79
 msgid "Disable SSL certificate authority check and continue."
-msgstr ""
+msgstr "Onemogoči preverjanje avtoritete potrdila SSL in nadaljuj."
 
 #. translators: this is a prompt text
 #: src/callbacks/media.cc:82 src/callbacks/media.cc:174
 #: src/callbacks/media.cc:254 src/utils/prompt.cc:50 src/utils/prompt.cc:143
 msgid "Abort, retry, ignore?"
-msgstr ""
+msgstr "Ali želite prekiniti, znova poskusiti ali ignorirati?"
 
 #: src/callbacks/media.cc:90
 msgid "SSL certificate authority check disabled."
-msgstr ""
+msgstr "Preverjanje avtoritete potrdila SSL je bilo onemogočeno."
 
 #: src/callbacks/media.cc:107
 msgid "No devices detected, cannot eject."
-msgstr ""
+msgstr "Zaznana ni bila nobena naprava, ni moč izvreči."
 
 #: src/callbacks/media.cc:108
 msgid "Try to eject the device manually."
-msgstr ""
+msgstr "Poskusite ročno izvreči napravo."
 
 #: src/callbacks/media.cc:119
 msgid "Detected devices:"
-msgstr ""
+msgstr "Zaznane naprave:"
 
 # cancel button label
 #: src/callbacks/media.cc:134
 msgid "Cancel"
-msgstr "Prekini"
+msgstr "Prekliči"
 
 #: src/callbacks/media.cc:136
-#, fuzzy
 msgid "Select device to eject."
-msgstr "Pred brisanjem, najprej izberite profil."
+msgstr "Izberite napravo za izvreči."
 
 #: src/callbacks/media.cc:151
-#, fuzzy
 msgid "Insert the CD/DVD and press ENTER to continue."
-msgstr "Vstavite disketo in pritisnite ENTER."
+msgstr "Vstavite CD/DVD in za nadaljevanje pritisnite Vnašalko."
 
 # window title for kernel loading (see txt_load_kernel)
 #: src/callbacks/media.cc:154
-#, fuzzy
 msgid "Retrying..."
-msgstr "Zagon..."
+msgstr "Ponovno poskušanje …"
 
 #. cd/dvd options
 #. translators: a/r/i/u are replies to the "Abort, retry, ignore?" prompt.
@@ -2090,11 +2134,11 @@ msgstr "Zagon..."
 #. 'e' stands for Eject medium
 #: src/callbacks/media.cc:169
 msgid "a/r/i/u/e"
-msgstr ""
+msgstr "p/z/i/u/v"
 
 #: src/callbacks/media.cc:171
 msgid "Eject medium."
-msgstr ""
+msgstr "Izvrzi nosilec."
 
 #. TranslatorExplanation translate letters 'y' and 'n' to whathever is appropriate for your language.
 #. Try to check what answers does zypper accept (it always accepts y/n at least)
@@ -2106,13 +2150,15 @@ msgid ""
 "Please insert medium [%s] #%d and type 'y' to continue or 'n' to cancel the "
 "operation."
 msgstr ""
+"Vstavite nosilec [%s] št. %d in vnesite »d« za nadaljevanje ali »n« za "
+"preklic opravila."
 
 #. translators: a/r/i/u are replies to the "Abort, retry, ignore?" prompt
 #. Translate the a/r/i part exactly as you did the a/r/i string.
 #. the 'u' reply means 'Change URI'.
 #: src/callbacks/media.cc:250
 msgid "a/r/i/u"
-msgstr ""
+msgstr "p/z/i/u"
 
 #: src/callbacks/media.cc:292
 #, c-format, boost-format
@@ -2120,11 +2166,12 @@ msgid ""
 "Authentication required to access %s. You need to be root to be able to read "
 "the credentials from %s."
 msgstr ""
+"Za dostop do %s je zahtevano overjanje. Za branje poveril iz %s morate biti "
+"uporabnik root."
 
 #: src/callbacks/media.cc:314 src/callbacks/media.cc:321
-#, fuzzy
 msgid "User Name"
-msgstr "Ime storitve"
+msgstr "Uporabniško ime"
 
 # password dialog title
 #. password
@@ -2134,63 +2181,62 @@ msgstr "Geslo"
 
 #: src/callbacks/repo.h:60
 msgid "Retrieving delta"
-msgstr ""
+msgstr "Prejemanje razlik"
 
 #. translators: this text is a progress display label e.g. "Applying delta foo [42%]"
 #: src/callbacks/repo.h:85
 msgid "Applying delta"
-msgstr ""
+msgstr "Uveljavljanje razlik"
 
 #: src/callbacks/repo.h:123
 #, boost-format
 msgid "In cache %1%"
-msgstr ""
+msgstr "V predpomnilniku %1%"
 
 #: src/callbacks/repo.h:139
 msgid "Retrieving:"
-msgstr ""
+msgstr "Prejemanje:"
 
 #: src/callbacks/repo.h:225
-#, fuzzy
 msgid "Signature verification failed"
-msgstr "Priprava ni uspela"
+msgstr "Potrjevanje s podpisom ni uspelo"
 
 #: src/callbacks/repo.h:245
 msgid "Accepting package despite the error."
-msgstr ""
+msgstr "Sprejetje pakete kljub napaki."
 
 #. TranslatorExplanation speaking of a script - "Running: script file name (package name, script dir)"
 #: src/callbacks/rpm.h:219
 #, c-format, boost-format
 msgid "Running: %s  (%s, %s)"
-msgstr ""
+msgstr "Poganjanje: %s  (%s, %s)"
 
 #: src/callbacks/rpm.h:308
 #, c-format, boost-format
 msgid "Removal of %s failed:"
-msgstr ""
+msgstr "Odstranjevanje %s ni uspelo:"
 
 #. translators: This text is a progress display label e.g. "Removing packagename-x.x.x [42%]"
 #: src/callbacks/rpm.h:351 src/callbacks/rpm.h:632
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Removing: %s"
-msgstr "Odst&rani povezavo"
+msgstr "Odstranjevanje: %s"
 
 #: src/callbacks/rpm.h:394
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Installation of %s failed:"
-msgstr "Priprava ni uspela"
+msgstr "Nameščanje %s ni uspelo:"
 
 #. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
 #: src/callbacks/rpm.h:437 src/callbacks/rpm.h:693
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Installing: %s"
-msgstr "Nameščanje popravkov"
+msgstr "Nameščanje: %s"
 
 #. translators: A progressbar label
 #: src/callbacks/rpm.h:456
 msgid "Checking for file conflicts:"
-msgstr ""
+msgstr "Preverjanje sporov med datotekama:"
 
 #. TranslatorExplanation %1%(number of packages); detailed list follows
 #: src/callbacks/rpm.h:507
@@ -2202,9 +2248,17 @@ msgid_plural ""
 "%1% packages had to be excluded from file conflicts check because they are "
 "not yet downloaded."
 msgstr[0] ""
+"%1% paket je bilo potrebno izločiti iz preverjanja sporov med datotekama, "
+"ker še ni prejet."
 msgstr[1] ""
+"%1% paketa je bilo potrebno izločiti iz preverjanja sporov med datotekama, "
+"ker še nista prejeta."
 msgstr[2] ""
+"%1% pakete je bilo potrebno izločiti iz preverjanja sporov med datotekama "
+"ker še niso prejeti."
 msgstr[3] ""
+"%1% paketov je bilo potrebno izločiti iz preverjanja sporov med datotekama, "
+"ker še niso prejeti."
 
 #. TranslatorExplanation %1%(commandline option)
 #: src/callbacks/rpm.h:513
@@ -2214,20 +2268,23 @@ msgid ""
 "in advance in order to access their file lists. See option '%1%' in the "
 "zypper manual page for details."
 msgstr ""
+"Preverjanje sporov med datotekama zahteva, da so nenameščeni paketi že "
+"prejeti in se tako lahko dostopa do njihovih seznamov datotek. Za "
+"podrobnosti si oglejte možnost »%1%« v priročniku za zypper."
 
 #. TranslatorExplanation %1%(number of conflicts); detailed list follows
 #: src/callbacks/rpm.h:523
 #, boost-format
 msgid "Detected %1% file conflict:"
 msgid_plural "Detected %1% file conflicts:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Zaznan je bil %1% spor med datotekama:"
+msgstr[1] "Zaznana sta bila %1% spora med datotekama:"
+msgstr[2] "Zaznani so bili %1% spori med datotekama:"
+msgstr[3] "Zaznanih je bilo %1% sporov med datotekama:"
 
 #: src/callbacks/rpm.h:531
 msgid "Conflicting files will be replaced."
-msgstr ""
+msgstr "Datoteke v sporu bodo nadomeščene."
 
 #. TranslatorExplanation Problem description before asking whether to "Continue? [yes/no] (no):"
 #: src/callbacks/rpm.h:537
@@ -2236,86 +2293,89 @@ msgid ""
 "same name but different contents. If you continue, conflicting files will be "
 "replaced losing the previous content."
 msgstr ""
+"Do sporov med datotekama pride, ko dva paketa poskušata namestiti datoteki z "
+"isto potjo in imenom ter različnima vsebinama. Če nadaljujete, bodo datoteke "
+"s sporu nadomeščene in prejšnja vsebina bo izgubljena."
 
 #. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
 #: src/callbacks/rpm.h:760 src/callbacks/rpm.h:767
 #, c-format, boost-format
 msgid "Executing %s script for: %s"
-msgstr ""
+msgstr "Izvajanje skripta %s za: %s"
 
 #. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
 #: src/callbacks/rpm.h:774
 #, c-format, boost-format
 msgid "Executing %s script"
-msgstr ""
+msgstr "Izvajanje skripta %s"
 
 #. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
 #: src/callbacks/rpm.h:896
 #, c-format, boost-format
 msgid "Cleaning up: %s"
-msgstr ""
+msgstr "Čiščenje: %s"
 
 #. translator: %s is an other command: "This is an alias for 'zypper info -t patch'."
 #: src/commands/commandhelpformatter.h:95
 #, c-format, boost-format
 msgid "This is an alias for '%s'."
-msgstr ""
+msgstr "To je drugo ime za ukaz »%s«."
 
 #: src/commands/commandhelpformatter.h:108
 msgid "Examples:"
-msgstr ""
+msgstr "Primeri:"
 
 #: src/commands/commandhelpformatter.h:111
 msgid "Arguments:"
-msgstr ""
+msgstr "Argumenti:"
 
 #: src/commands/commandhelpformatter.h:124 src/utils/flags/zyppflags.cc:627
 msgid "Command options:"
-msgstr ""
+msgstr "Možnosti ukaza:"
 
 #: src/commands/commandhelpformatter.h:127
 msgid "Solver options:"
-msgstr ""
+msgstr "Možnosti reševalnika:"
 
 #: src/commands/commandhelpformatter.h:130
 msgid "Expert options:"
-msgstr ""
+msgstr "Možnosti za strokovnjake:"
 
 #: src/commands/commandhelpformatter.h:133
 msgid "This command has no additional options."
-msgstr ""
+msgstr "Ta ukaz nima dodatnih možnosti."
 
 #: src/commands/commandhelpformatter.h:136
 msgid "Legacy options:"
-msgstr ""
+msgstr "Možnosti iz zapuščine:"
 
 #. translator: '-r             The same as -f.
 #: src/commands/commandhelpformatter.h:140
 #, boost-format
 msgid "The same as %1%."
-msgstr ""
+msgstr "Enako kot %1%."
 
 #: src/commands/commandhelpformatter.h:188
 msgid "Usage:"
-msgstr ""
+msgstr "Uporaba:"
 
 #: src/commands/commandhelpformatter.h:190
 msgid "Global Options:"
-msgstr ""
+msgstr "Splošne možnosti:"
 
 #: src/commands/commandhelpformatter.h:192
 msgid "Commands:"
-msgstr ""
+msgstr "Ukazi:"
 
 #. translators: --details
 #: src/commands/commonflags.h:23 src/commands/inrverify.cc:35
 msgid "Show the detailed installation summary."
-msgstr ""
+msgstr "Prikaže podroben povzetek namestitve."
 
 #: src/commands/commonflags.h:30
 #, boost-format
 msgid "Type of package (%1%)."
-msgstr ""
+msgstr "Vrsta paketa (%1%)."
 
 #. translators: --best-effort
 #: src/commands/commonflags.h:38
@@ -2323,46 +2383,52 @@ msgid ""
 "Do a 'best effort' approach to update. Updates to a lower than the latest "
 "version are also acceptable."
 msgstr ""
+"Izvede posodobitev »po najboljših močeh«. Sprejemljive so posodobitve na "
+"različice, ki niso najnovejše."
 
 #: src/commands/commonflags.h:45
 msgid "Consider only patches which affect the package management itself."
-msgstr ""
+msgstr "Upošteva le popravke, ki vplivajo na samo upravljanje paketov."
 
 #: src/commands/conditions.cc:19
 msgid "Root privileges are required to run this command."
-msgstr ""
+msgstr "Za zagon tega ukaza so zahtevana dovoljenja uporabnika root."
 
 #: src/commands/conditions.cc:47
 msgid ""
 "This is a transactional-server, please use transactional-update to update or "
 "modify the system."
 msgstr ""
+"To je transakcijski strežnik. Za posodabljanje ali spreminjanje sistema "
+"uporabite transactional-update."
 
 #: src/commands/conditions.cc:49
 msgid ""
 "The target filesystem is mounted as read-only. Please make sure the target "
 "filesystem is writeable."
 msgstr ""
+"Ciljni datotečni sistem je priklopljen samo za branje. Prepričajte se, da bo "
+"ciljni datotečni sistem zapisljiv."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/distupgrade.cc:20
 msgid "dist-upgrade (dup) [OPTIONS]"
-msgstr ""
+msgstr "dist-upgrade (dup) [MOŽNOSTI]"
 
 #. translators: command summary: dist-upgrade, dup
 #. translators: command description
 #: src/commands/distupgrade.cc:22 src/commands/distupgrade.cc:24
 msgid "Perform a distribution upgrade."
-msgstr ""
+msgstr "Izvede nadgradnjo distribucije."
 
 #. translators: --from <ALIAS|#|URI>
 #: src/commands/distupgrade.cc:38
 msgid "Restrict upgrade to specified repository."
-msgstr ""
+msgstr "Omeji nadgradnjo na navedeni vir."
 
 #: src/commands/distupgrade.cc:41
 msgid "Remove unneeded orphaned packages."
-msgstr ""
+msgstr "Odstrani nepotrebne osirotele pakete."
 
 #: src/commands/distupgrade.cc:72
 #, c-format, boost-format
@@ -2371,40 +2437,43 @@ msgid ""
 "Make sure these repositories are compatible before you continue. See '%s' "
 "for more information about this command."
 msgstr ""
+"Izvedli boste nadgradnjo distribucije z omogočenimi vsemi viri. Pred "
+"nadaljevanjem se prepričajte, da so vsi viri združljivi in usklajeni. Za več "
+"informacij o tem ukazu si oglejte »%s«."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/help.cc:22
 msgid "zypper [--GLOBAL-OPTIONS] <COMMAND> [--COMMAND-OPTIONS] [ARGUMENTS]"
-msgstr ""
+msgstr "zypper [SPLOŠNE_MOŽNOSTI] <UKAZ> [MOŽNOSTI_UKAZA] [ARGUMENTI]"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/help.cc:25
 msgid "zypper <SUBCOMMAND> [--COMMAND-OPTIONS] [ARGUMENTS]"
-msgstr ""
+msgstr "zypper <PODUKAZ> [MOŽNOSTI_UKAZA] [ARGUMENTI]"
 
 #: src/commands/help.cc:80 src/commands/help.cc:81
 msgid "Print zypper help"
-msgstr ""
+msgstr "Izpiše pomoč za zypper"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/inrverify.cc:68
 msgid "install-new-recommends (inr) [OPTIONS]"
-msgstr ""
+msgstr "install-new-recommends (inr) [MOŽNOSTI]"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/inrverify.cc:71
 msgid "verify (ve) [OPTIONS]"
-msgstr ""
+msgstr "verify (ve) [MOŽNOSTI]"
 
 #. translators: command summary: install-new-recommends, inr
 #: src/commands/inrverify.cc:81
 msgid "Install newly added packages recommended by installed packages."
-msgstr ""
+msgstr "Namesti novo dodane pakete, ki jih priporočajo nameščeni paketi."
 
 #. translators: command summary: verify, ve
 #: src/commands/inrverify.cc:84
 msgid "Verify integrity of package dependencies."
-msgstr ""
+msgstr "Potrdi celovitost odvisnosti paketov."
 
 #. translators: command description
 #: src/commands/inrverify.cc:95
@@ -2415,6 +2484,10 @@ msgid ""
 "unconditionally on small or minimal systems, as it may easily add a large "
 "number of packages."
 msgstr ""
+"Namesti novo dodane pakete, ki jih priporočajo že nameščeni paketi. Ta ukaz "
+"v osnovi znova ovrednoti priporočila vseh nameščenih paketov in namesti novo "
+"priporočene pakete. Tega na malih ali minimalnih sistemih ne poganjajte "
+"brezpogojno, ker lahko hitro namesti veliko dodatnih paketov."
 
 #. translators: command description, %1% is a zypper command
 #: src/commands/inrverify.cc:98
@@ -2424,6 +2497,9 @@ msgid ""
 "supporting available hardware, languages or filesystems. Useful after having "
 "added e.g. new hardware or driver repos."
 msgstr ""
+"Izveden kot »%1%« omeji ukaz na iskanje samo paketov, ki podpirajo "
+"razpoložljivo strojno opremo, jezike ali datotečne sisteme. Na primer "
+"uporabno po dodajanju nove strojne opreme ali virov."
 
 #. translators: command description
 #: src/commands/inrverify.cc:101
@@ -2431,24 +2507,26 @@ msgid ""
 "Check whether dependencies of installed packages are satisfied and suggest "
 "to install or remove packages in order to repair the dependency problems."
 msgstr ""
+"Preveri, ali so odvisnosti nameščenih paketov izpolnjene in predlaga "
+"namestitev ali odstranitev paketov, da bi se odpravilo težave z odvisnostmi."
 
 #: src/commands/installremove.cc:62
 msgid "Select packages by plain name, not by capability."
-msgstr ""
+msgstr "Izbira paketov po navadnih imenih in ne po zmožnostih."
 
 #: src/commands/installremove.cc:63
 msgid "Select packages solely by capability."
-msgstr ""
+msgstr "Izbor paketov samo po zmožnostih."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/installremove.cc:82
 msgid "remove (rm) [OPTIONS] <CAPABILITY> ..."
-msgstr ""
+msgstr "remove (rm) [MOŽNOSTI] <ZMOŽNOST> …"
 
 #. translators: command summary: remove, rm
 #: src/commands/installremove.cc:84
 msgid "Remove packages."
-msgstr ""
+msgstr "Odstrani pakete."
 
 #. translators: command description
 #: src/commands/installremove.cc:86
