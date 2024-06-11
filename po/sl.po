@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-04-15 13:01+0200\n"
-"PO-Revision-Date: 2024-06-11 18:46+0000\n"
+"PO-Revision-Date: 2024-06-11 21:46+0000\n"
 "Last-Translator: Jure Repinc <jlp@holodeck1.com>\n"
 "Language-Team: Slovenian <https://l10n.opensuse.org/projects/zypper/master/"
 "sl/>\n"
@@ -3029,42 +3029,54 @@ msgid ""
 "Exit code ZYPPER_EXIT_INF_REBOOT_NEEDED indicates that a reboot is "
 "suggested, otherwise the exit code is set to ZYPPER_EXIT_OK."
 msgstr ""
+"Preveri, ali je prejšnja posodobitev/namestitev osnovne knjižnice ali "
+"storitve nastavila zastavico za potreben ponovni zagon.\n"
+"Izhodna koda ZYPPER_EXIT_INF_REBOOT_NEEDED nakazuje predlog za ponoven "
+"zagon, drugače je izhodna koda nastavljena na ZYPPER_EXIT_OK."
 
 #: src/commands/needs-rebooting.cc:26
 msgid ""
 "This is the recommended way for scripts to test whether a system reboot is "
 "suggested."
 msgstr ""
+"To je priporočeni način za skripte, da preverijo, ali je predlagan ponovni "
+"zagon."
 
 #: src/commands/needs-rebooting.cc:38
 msgid ""
 "Since the last system boot core libraries or services have been updated."
 msgstr ""
+"Od zadnjega zagona sistema so bile posodobljene osnovne knjižnice ali "
+"storitve."
 
 #: src/commands/needs-rebooting.cc:39
 msgid ""
 "Reboot is suggested to ensure that your system benefits from these updates."
 msgstr ""
+"Da sistemu zagotovite koristi od teh posodobitev, je predlagan ponoven zagon "
+"sistema."
 
 #: src/commands/needs-rebooting.cc:44
 msgid ""
 "No core libraries or services have been updated since the last system boot."
 msgstr ""
+"Od zadnjega zagona sistema ni bila posodobljena nobena osnovna knjižnica ali "
+"storitev."
 
 #: src/commands/needs-rebooting.cc:45
 msgid "Reboot is probably not necessary."
-msgstr ""
+msgstr "Ponovni zagon verjetno ni potreben."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/nullcommands.cc:17
 msgid "moo"
-msgstr ""
+msgstr "moo"
 
 #. translators: command summary
 #. translators: command description
 #: src/commands/nullcommands.cc:19 src/commands/nullcommands.cc:21
 msgid "Show an animal."
-msgstr ""
+msgstr "Prikaže žival."
 
 #. TranslatorExplanation this is a hedgehog, paint another animal, if you want
 #: src/commands/nullcommands.cc:29
@@ -3073,20 +3085,23 @@ msgid ""
 "  \\\\\\\\\\\\\\__o\n"
 "__\\\\\\\\\\\\\\'/_"
 msgstr ""
+"   \\\\\\\\\\\n"
+"  \\\\\\\\\\\\\\__o\n"
+"__\\\\\\\\\\\\\\'/_"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/nullcommands.cc:37
 msgid "what-provides (wp) <CAPABILITY>"
-msgstr ""
+msgstr "what-provides (wp) <ZMOŽNOST>"
 
 #. translators: command summary: what-provides, wp
 #: src/commands/nullcommands.cc:39
 msgid "List packages providing specified capability."
-msgstr ""
+msgstr "Izpiše pakete, ki ponujajo navedeno zmožnost."
 
 #: src/commands/nullcommands.cc:42
 msgid "List all packages providing the specified capability."
-msgstr ""
+msgstr "Izpiše vse pakete, ki ponujajo navedeno zmožnost."
 
 #. translators: command description what-provides: %1% is a zypper command line, %2% a command line option
 #: src/commands/nullcommands.cc:44
@@ -3095,6 +3110,9 @@ msgid ""
 "The command is an alias for '%1%' and performs a case-insensitive search. "
 "For a case-sensitive search call the search command and add the '%2%' option."
 msgstr ""
+"Ukaz je drugo ime za »%1%« in izvede iskanje, ki ne upošteva velikosti črk. "
+"Za iskanje, ki upošteva velikost črk, ukaz »search« zaženite z dodano "
+"možnostjo »%2%«."
 
 #. "what-provides" is obsolete
 #. The "what-provides" now is included in "search" command, e.g.
@@ -3103,16 +3121,16 @@ msgstr ""
 #: src/commands/nullcommands.cc:57
 #, c-format, boost-format
 msgid "Command '%s' is replaced by '%s'."
-msgstr ""
+msgstr "Ukaz »%s« je bil nadomeščen z ukazom »%s«."
 
 #: src/commands/nullcommands.cc:58
 #, c-format, boost-format
 msgid "See '%s' for all available options."
-msgstr ""
+msgstr "Za vse razpoložljive možnosti si oglejte »%s«."
 
 #: src/commands/optionsets.cc:33
 msgid "Don't change anything, just report what would be done."
-msgstr ""
+msgstr "Ne spremeni nič in samo izpiše, kaj bi bilo storjeno."
 
 #. translators: %1% is a commandline option (like "--download-only")
 #: src/commands/optionsets.cc:35
@@ -3121,54 +3139,59 @@ msgid ""
 "A meaningful file conflict check can only be performed if used together with "
 "'%1%'."
 msgstr ""
+"Preverjanje sporov med datotekama je smiselno samo z uporabo možnosti »%1%«."
 
 #. translators: -r, --repo <ALIAS|#|URI>
 #: src/commands/optionsets.cc:67
 msgid "Work only with the specified repository."
-msgstr ""
+msgstr "Uporablja samo navedeni vir."
 
 #: src/commands/optionsets.cc:87
 #, c-format, boost-format
 msgid "Option '--%s' overrides a previously set download mode."
-msgstr ""
+msgstr "Možnost »--%s« povozi predhodno nastavljen način prejemanja."
 
 #: src/commands/optionsets.cc:116
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Available download modes: %s"
-msgstr "Napaka pri nalaganju modula \"%s\"."
+msgstr "Razpoložljivi načini prejemanja: %s"
 
 #. translators: --download
 #: src/commands/optionsets.cc:178
 #, c-format, boost-format
 msgid "Set the download-install mode. Available modes: %s"
-msgstr ""
+msgstr "Nastavi način prejemanje-namestitev. Razpoložljivi načini: %s"
 
 #. translators: -d, --download-only
 #: src/commands/optionsets.cc:182
 msgid "Only download the packages, do not install."
-msgstr ""
+msgstr "Samo prejme pakete, a jih ne namesti."
 
 #. translators: -i, --installed-only
 #: src/commands/optionsets.cc:202
 msgid "Show only installed packages."
-msgstr ""
+msgstr "Prikaže samo nameščene pakete."
 
 #. translators: -u, --not-installed-only
 #: src/commands/optionsets.cc:206
 msgid "Show only packages which are not installed."
-msgstr ""
+msgstr "Prikaže samo pakete, ki niso nameščeni."
 
 #: src/commands/optionsets.cc:239
 msgid ""
 "Automatically say 'yes' to third party license confirmation prompt. See 'man "
 "zypper' for more details."
 msgstr ""
+"Na pozive za potrditev licenc tretjih oseb samodejno odgovori z »da«. Za "
+"podrobnosti si oglejte »man zypper«."
 
 #: src/commands/optionsets.cc:244
 msgid ""
 "Automatically accept product licenses only. See 'man zypper' for more "
 "details."
 msgstr ""
+"Samodejno sprejme samo licence izdelkov. Za podrobnosti si oglejte »man "
+"zypper«."
 
 #. translators: --replacefiles
 #: src/commands/optionsets.cc:264
@@ -3177,6 +3200,9 @@ msgid ""
 "installed, packages. Default is to treat file conflicts as an error. --"
 "download-as-needed disables the fileconflict check."
 msgstr ""
+"Namesti pakete, čeprav nadomestijo datoteke iz drugih paketov, ki so že "
+"nameščeni. Privzeto se spore med datotekama obravnava kot napake. Možnost "
+"»--download-as-needed« onemogoči preverjanje sporov med datotekama."
 
 #. translators: -y, --no-confirm
 #: src/commands/optionsets.cc:291
@@ -3184,66 +3210,72 @@ msgid ""
 "Don't require user interaction. Alias for the --non-interactive global "
 "option."
 msgstr ""
+"Ne zahteva uporabniške interakcije. Drugo ime za splošno možnost »--non-"
+"interactive«."
 
 #: src/commands/optionsets.cc:309
 msgid ""
 "Whether applicable optional patches should be treated as needed or be "
 "excluded."
 msgstr ""
+"Ali naj se neobvezne popravke, ki jih je moč uveljaviti, obravnava kot "
+"potrebne ali se jih izključi."
 
 #: src/commands/optionsets.cc:312
 msgid "The default is to exclude optional patches."
-msgstr ""
+msgstr "Privzeto se neobvezne popravke izključi."
 
 #: src/commands/optionsets.cc:313
 msgid "The default is to include optional patches."
-msgstr ""
+msgstr "Privzeto se neobvezne popravke vključi."
 
 #. translators: --with-interactive
 #: src/commands/optionsets.cc:348
 msgid "Do not skip interactive updates."
-msgstr ""
+msgstr "Ne preskoči interaktivnih posodobitev."
 
 #. translators: --skip-interactive
 #: src/commands/optionsets.cc:352
 msgid "Skip interactive updates."
-msgstr ""
+msgstr "Preskoči interaktivne posodobitve."
 
 #. translators: --sort-by-name
 #: src/commands/optionsets.cc:372
 msgid "Sort packages by name (default)."
-msgstr ""
+msgstr "Razvrsti pakete po imenu (privzeto)."
 
 #. translators: --sort-by-repo
 #. translators: --sort-by-catalog
 #: src/commands/optionsets.cc:382 src/commands/optionsets.cc:393
 msgid "Sort packages by repository."
-msgstr ""
+msgstr "Razvrsti pakete po viru."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/patch.cc:24
 msgid "patch [OPTIONS]"
-msgstr ""
+msgstr "patch [MOŽNOSTI]"
 
 #. translators: command summary: patch
 #: src/commands/patch.cc:26
 msgid "Install needed patches."
-msgstr ""
+msgstr "Namesti potrebne popravke."
 
 #. translators: command description
 #: src/commands/patch.cc:28
 msgid "Install all available needed patches."
-msgstr ""
+msgstr "Namesti vse razpoložljive potrebne popravke."
 
 #: src/commands/patch.cc:30
 msgid ""
 "When updating the affected/vulnerable packages described by a patch, zypper "
 "always aims for the latest available version."
 msgstr ""
+"Ko zypper posodablja prizadete/ranljive pakete, ki jih opisuje popravek, bo "
+"vedno poskusil namestiti zadnjo razpoložljivo različico."
 
 #: src/commands/patch.cc:50
 msgid "Skip needed patches which do not apply without conflict."
-msgstr ""
+msgstr "Preskoči potrebne popravke, ki se ne uveljavijo brez spora."
 
 #: src/commands/patch.cc:53
 msgid ""
@@ -3251,16 +3283,19 @@ msgid ""
 "is ignored, if the patch command must update the update stack first. Can not "
 "be combined with --updatestack-only."
 msgstr ""
+"Dodatno poskusi posodobiti vse pakete, na katere se ne nanašajo popravki. To "
+"možnost se prezre, če mora ukaz »patch« najprej posodobiti posodobitveni "
+"sklad. Ne more biti uporabljena skupaj z možnostjo »--updatestack-only«."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/patchcheck.cc:17
 msgid "patch-check (pchk) [OPTIONS]"
-msgstr ""
+msgstr "patch-check (pchk) [MOŽNOSTI]"
 
 #. translators: command summary: patch-check, pchk
 #: src/commands/patchcheck.cc:19
 msgid "Check for patches."
-msgstr ""
+msgstr "Preveri obstoj popravkov."
 
 #. translators: command description
 #: src/commands/patchcheck.cc:21
@@ -3268,11 +3303,14 @@ msgid ""
 "Display stats about applicable patches. The command returns 100 if needed "
 "patches were found, 101 if there is at least one needed security patch."
 msgstr ""
+"Prikaže statistiko popravkov, ki jih je moč uveljaviti. Ukaz vrne 100, če so "
+"bili najdeni potrebni popravki, in 101, če obstaja vsaj en potreben "
+"varnostni popravek."
 
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
 #: src/commands/ps.cc:27
 msgid "ps [OPTIONS]"
-msgstr ""
+msgstr "ps [MOŽNOSTI]"
 
 #. translators: command description
 #: src/commands/ps.cc:29
@@ -3280,6 +3318,8 @@ msgid ""
 "List running processes which might still use files and libraries deleted by "
 "recent upgrades."
 msgstr ""
+"Prikaže tekoče procese, ki morda še vedno uporabljajo datoteke in knjižnice, "
+"ki jih je nedavna posodobitev izbrisala."
 
 #. translators: -s, --short
 #: src/commands/ps.cc:46
@@ -3288,6 +3328,10 @@ msgid ""
 "processes which are associated with a system service. Given three times, "
 "list the associated system service names only."
 msgstr ""
+"Prikaže kratko razpredelnico, ki ne prikazuje izbrisanih datotek. Če je "
+"podana dvakrat, prikaže samo procese, ki so povezani s sistemskimi "
+"storitvami. Če je podana trikrat, prikaže samo imena povezanih sistemskih "
+"storitev."
 
 #. translators: --print <format>
 #: src/commands/ps.cc:49
@@ -3297,78 +3341,77 @@ msgid ""
 "followed by a newline. Any '%s' directive in <format> is replaced by the "
 "system service name."
 msgstr ""
+"Za vsako povezano sistemsko storitev na standardni izhod izpiše <format>, ki "
+"mu sledi nova vrstica. Vsak vsebnik »%s« v <format> bo nadomeščen z imenom "
+"sistemske storitve."
 
 #. translators: -d, --debugFile <path>
 #: src/commands/ps.cc:52
 msgid "Write debug output to file <path>."
-msgstr ""
+msgstr "Zapiše razhroščevalni izhod v datoteko <pot>."
 
 #: src/commands/ps.cc:72 src/solve-commit.cc:633
-#, fuzzy
 msgid "Check failed:"
-msgstr "Datoteka za zaklepanje _modema:"
+msgstr "Preverjanje ni uspelo:"
 
 #. Here: Table output
 #: src/commands/ps.cc:127 src/solve-commit.cc:622
 msgid "Checking for running processes using deleted libraries..."
-msgstr ""
+msgstr "Preverjanje tekočih procesov, ki uporabljajo izbrisane datoteke …"
 
 #. process ID
 #: src/commands/ps.cc:142
-#, fuzzy
 msgid "PID"
-msgstr "PCI"
+msgstr "PID"
 
 #. parent process ID
 #: src/commands/ps.cc:144
 msgid "PPID"
-msgstr ""
+msgstr "PPID"
 
 #. process user ID
 #: src/commands/ps.cc:146
 msgid "UID"
-msgstr ""
+msgstr "UID"
 
 #. process login name
 #: src/commands/ps.cc:148
-#, fuzzy
 msgid "User"
-msgstr "Ime storitve"
+msgstr "Uporabnik"
 
 #. process command name
 #: src/commands/ps.cc:150
 msgid "Command"
-msgstr ""
+msgstr "Ukaz"
 
 #. "/etc/init.d/ script that might be used to restart the command (guessed)
 #: src/commands/ps.cc:152 src/commands/repos/list.cc:282
-#, fuzzy
 msgid "Service"
-msgstr "Strežnik"
+msgstr "Storitev"
 
 #. "list of deleted files or libraries accessed"
 #: src/commands/ps.cc:156
-#, fuzzy
 msgid "Files"
-msgstr "Datotečni sistem"
+msgstr "Datoteke"
 
 #: src/commands/ps.cc:187
 msgid "No processes using deleted files found."
-msgstr ""
+msgstr "Najden ni bil noben proces, ki bi uporabljal izbrisane datoteke."
 
 #: src/commands/ps.cc:191
 msgid "The following running processes use deleted files:"
-msgstr ""
+msgstr "Naslednji tekoči procesi uporabljajo izbrisane datoteke:"
 
 #: src/commands/ps.cc:194
 msgid "You may wish to restart these processes."
-msgstr ""
+msgstr "Morda bi želeli te procese zagnati znova."
 
 #: src/commands/ps.cc:195
 #, c-format, boost-format
 msgid ""
 "See '%s' for information about the meaning of values in the above table."
 msgstr ""
+"Za informacije o pomenu vrednosti v razpredelnici zgoraj si oglejte »%s«."
 
 #: src/commands/ps.cc:208
 msgid ""
@@ -3376,16 +3419,19 @@ msgid ""
 "permission to examine with the system stat(2) function. The result might be "
 "incomplete."
 msgstr ""
+"Opomba: Če tega ne izvajate kot uporabnik root, ste omejeni na iskanje "
+"datotek, za katere imate dovoljenje za preverjanje s sistemsko funkcijo "
+"stat(2). Rezultat v tem primeru morda ni popoln."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/query/info.cc:19
 msgid "info (if) [OPTIONS] <NAME> ..."
-msgstr ""
+msgstr "info (if) [MOŽNOSTI] <IME> …"
 
 #. translators: command summary: info, if
 #: src/commands/query/info.cc:21
 msgid "Show full information for specified packages."
-msgstr ""
+msgstr "Prikaže vse podatke o navedenih paketih."
 
 #. translators: command description
 #: src/commands/query/info.cc:23
@@ -3395,225 +3441,229 @@ msgid ""
 "partially matching use option '--match-substrings' or use wildcards (*?) in "
 "name."
 msgstr ""
+"Prikaže podrobne podatke o navedenih paketih. Privzeto so prikazan paketi, "
+"ki se točno ujemajo z navedenimi imeni. Da dobite tudi pakete, ki se delno "
+"ujemajo, uporabite možnost »--match-substrings« ali v imenu uporabite "
+"nadomestna znaka (*?)."
 
 #. translators: -s, --match-substrings
 #: src/commands/query/info.cc:62
 msgid "Print information for packages partially matching name."
-msgstr ""
+msgstr "Izpiše podatke o paketih, ki se delno ujemajo z imenom."
 
 #. translators: --provides
 #: src/commands/query/info.cc:67
 msgid "Show provides."
-msgstr ""
+msgstr "Prikaže ponujeno."
 
 #. translators: --requires
 #: src/commands/query/info.cc:71
 msgid "Show requires and prerequires."
-msgstr ""
+msgstr "Prikaže zahtevano in predzahtevano."
 
 #. translators: --conflicts
 #: src/commands/query/info.cc:75
 msgid "Show conflicts."
-msgstr ""
+msgstr "Prikaže spore."
 
 #. translators: --obsoletes
 #: src/commands/query/info.cc:79
 msgid "Show obsoletes."
-msgstr ""
+msgstr "Prikaže nadomeščanja."
 
 #. translators: --recommends
 #: src/commands/query/info.cc:83
 msgid "Show recommends."
-msgstr ""
+msgstr "Prikaže priporočeno."
 
 #. translators: --supplements
 #: src/commands/query/info.cc:87
 msgid "Show supplements."
-msgstr ""
+msgstr "Prikaže dopolnjeno."
 
 #. translators: --suggests
 #: src/commands/query/info.cc:91
 msgid "Show suggests."
-msgstr ""
+msgstr "Prikaže predlagano."
 
 #: src/commands/query/info.cc:105 src/utils/messages.cc:70
 msgid "Required argument missing."
-msgstr ""
+msgstr "Manjka potreben argument."
 
 #: src/commands/query/info.cc:108 src/utils/messages.cc:37
 #: src/utils/messages.cc:52 src/utils/messages.cc:72 src/utils/messages.cc:89
-#, fuzzy
 msgid "Usage"
-msgstr "Sporočilo"
+msgstr "Uporaba"
 
 #. translators: command summary: patch-info
 #: src/commands/query/info.cc:138
 msgid "Show full information for specified patches."
-msgstr ""
+msgstr "Prikaže vse podatke o navedenih popravkih."
 
 #. translators: command summary: pattern-info
 #: src/commands/query/info.cc:141
 msgid "Show full information for specified patterns."
-msgstr ""
+msgstr "Prikaže vse podatke o navedenih vzorcih."
 
 #. translators: command summary: product-info
 #: src/commands/query/info.cc:144
 msgid "Show full information for specified products."
-msgstr ""
+msgstr "Prikaže vse podatke o navedenih izdelkih."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/query/info.cc:157
 msgid "patch-info <PATCHNAME> ..."
-msgstr ""
+msgstr "patch-info <IME_POPRAVKA> …"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/query/info.cc:160
 msgid "pattern-info <PATTERN_NAME> ..."
-msgstr ""
+msgstr "pattern-info <IME_VZORCA> …"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/query/info.cc:163
 msgid "product-info <PRODUCT_NAME> ..."
-msgstr ""
+msgstr "product-info <IME_IZDELKA> …"
 
 #. translators: command description
 #: src/commands/query/info.cc:175
 msgid "Show detailed information for patches."
-msgstr ""
+msgstr "Prikaže podrobne podatke o popravkih."
 
 #. translators: command description
 #: src/commands/query/info.cc:178
 msgid "Show detailed information for patterns."
-msgstr ""
+msgstr "Prikaže podrobne podatke o vzorcih."
 
 #. translators: command description
 #: src/commands/query/info.cc:181
 msgid "Show detailed information for products."
-msgstr ""
+msgstr "Prikaže podrobne podatke o izdelkih."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/query/packages.cc:18
 msgid "packages (pa) [OPTIONS] [REPOSITORY] ..."
-msgstr ""
+msgstr "packages (pa) [MOŽNOSTI] [VIR] …"
 
 #. translators: command summary: packages, pa
 #: src/commands/query/packages.cc:20
 msgid "List all available packages."
-msgstr ""
+msgstr "Izpiše vse razpoložljive pakete."
 
 #. translators: command description
 #: src/commands/query/packages.cc:22
 msgid "List all packages available in specified repositories."
-msgstr ""
+msgstr "Izpiše vse pakete, ki so na voljo v navedenih virih."
 
 #. translators: --autoinstalled
 #: src/commands/query/packages.cc:35
 msgid ""
 "Show installed packages which were automatically selected by the resolver."
-msgstr ""
+msgstr "Prikaže nameščene pakete, ki jih je samodejno izbral razreševalnik."
 
 #. translators: --userinstalled
 #: src/commands/query/packages.cc:39
 msgid "Show installed packages which were explicitly selected by the user."
-msgstr ""
+msgstr "Prikaže nameščene pakete, ki jih je izrecno izbral uporabnik."
 
 #. translators: --orphaned
 #: src/commands/query/packages.cc:43
 msgid "Show packages which are orphaned (without repository)."
-msgstr ""
+msgstr "Prikaže pakete, ki so osiroteli (nimajo vira)."
 
 #. translators: --suggested
 #: src/commands/query/packages.cc:47
 msgid "Show packages which are suggested."
-msgstr ""
+msgstr "Prikaže pakete, ki so predlagani."
 
 #. translators: --recommended
 #: src/commands/query/packages.cc:51
 msgid "Show packages which are recommended."
-msgstr ""
+msgstr "Prikaže pakete, ki so priporočeni."
 
 #. translators: --unneeded
 #: src/commands/query/packages.cc:55
 msgid "Show packages which are unneeded."
-msgstr ""
+msgstr "Prikaže pakete, ki niso potrebni."
 
 #. translators: -N, --sort-by-name
 #: src/commands/query/packages.cc:59
 msgid "Sort the list by package name."
-msgstr ""
+msgstr "Seznam razvrsti po imenu paketa."
 
 #. translators: -R, --sort-by-repo
 #: src/commands/query/packages.cc:63
 msgid "Sort the list by repository."
-msgstr ""
+msgstr "Seznam razvrsti po viru."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/query/patches.cc:18
 msgid "patches (pch) [REPOSITORY] ..."
-msgstr ""
+msgstr "patches (pch) [VIR] …"
 
 #. translators: command summary: patches, pch
 #: src/commands/query/patches.cc:20
 msgid "List all available patches."
-msgstr ""
+msgstr "Izpiše vse razpoložljive popravke."
 
 #. translators: command description
 #: src/commands/query/patches.cc:22
 msgid "List all patches available in specified repositories."
-msgstr ""
+msgstr "Izpiše vse popravke, ki so na voljo v navedenih virih."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/query/patterns.cc:18
 msgid "patterns (pt) [OPTIONS] [REPOSITORY] ..."
-msgstr ""
+msgstr "patterns (pt) [MOŽNOSTI] [VIR] …"
 
 #. translators: command summary: patterns, pt
 #: src/commands/query/patterns.cc:20
 msgid "List all available patterns."
-msgstr ""
+msgstr "Izpiše vse razpoložljive vzorce."
 
 #. translators: command description
 #: src/commands/query/patterns.cc:22
 msgid "List all patterns available in specified repositories."
-msgstr ""
+msgstr "Izpiše vse vzorce, ki so na voljo v navedenih virih."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/query/products.cc:18
 msgid "products (pd) [OPTIONS] [REPOSITORY] ..."
-msgstr ""
+msgstr "products (pd) [MOŽNOSTI] [VIR] …"
 
 #. translators: command summary: products, pd
 #: src/commands/query/products.cc:20
 msgid "List all available products."
-msgstr ""
+msgstr "Izpiše vse razpoložljive izdelke."
 
 #. translators: command description
 #: src/commands/query/products.cc:22
 msgid "List all products available in specified repositories."
-msgstr ""
+msgstr "Izpiše vse izdelke, ki so na voljo v navedenih virih."
 
 #. translators: --xmlfwd <TAG>
 #: src/commands/query/products.cc:36
 msgid ""
 "XML output only: Literally forward the XML tags found in a product file."
 msgstr ""
+"Samo izhod XML: dobesedno posreduje vse oznake XML, ki so v datoteki izdelka."
 
 #: src/commands/query/products.cc:50
 #, boost-format
 msgid "Option %1% has no effect without the %2% global option."
-msgstr ""
+msgstr "Možnost »%1%« nima učinka brez splošne možnosti »%2%«."
 
 #: src/commands/repos/add.cc:23
 msgid "addrepo (ar) [OPTIONS] <URI> <ALIAS>"
-msgstr ""
+msgstr "addrepo (ar) [MOŽNOSTI] <URI> <DRUGO_IME>"
 
 #: src/commands/repos/add.cc:23
 msgid "addrepo (ar) [OPTIONS] <FILE.repo>"
-msgstr ""
+msgstr "addrepo (ar) [MOŽNOSTI] <DATOTEKA.repo>"
 
 #: src/commands/repos/add.cc:24
 msgid "Add a new repository."
-msgstr ""
+msgstr "Doda nov vir."
 
 #: src/commands/repos/add.cc:25
 msgid ""
