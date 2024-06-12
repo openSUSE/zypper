@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-04-15 13:01+0200\n"
-"PO-Revision-Date: 2024-06-12 13:46+0000\n"
+"PO-Revision-Date: 2024-06-12 22:00+0000\n"
 "Last-Translator: Jure Repinc <jlp@holodeck1.com>\n"
 "Language-Team: Slovenian <https://l10n.opensuse.org/projects/zypper/master/"
 "sl/>\n"
@@ -4520,52 +4520,54 @@ msgstr "Najden ni bil noben predmet."
 
 #: src/commands/search/search.cc:495
 msgid "Problem occurred initializing or executing the search query"
-msgstr ""
+msgstr "Med pripravljanjem ali izvajanjem iskalne poizvedbe je prišlo do napake"
 
 #: src/commands/search/search.cc:496
 msgid "See the above message for a hint."
-msgstr ""
+msgstr "Za namig glejte zgornje sporočilo."
 
 #: src/commands/search/search.cc:497 src/repos.cc:1080
 msgid "Running 'zypper refresh' as root might resolve the problem."
-msgstr ""
+msgstr "Težav morda razreši izvedba ukaza »zypper refresh« kot uporabnik root."
 
 #. translators: -g, --category <CATEGORY>
 #: src/commands/selectpatchoptionset.cc:24
 msgid "Select patches with the specified category."
-msgstr ""
+msgstr "Izbor popravkov iz navedene kategorije."
 
 #. translators: --severity <SEVERITY>
 #: src/commands/selectpatchoptionset.cc:28
 msgid "Select patches with the specified severity."
-msgstr ""
+msgstr "Izbor popravkov z navedeno resnostjo."
 
 #. translators: --date <YYYY-MM-DD>
 #: src/commands/selectpatchoptionset.cc:32
 msgid "Select patches issued up to, but not including, the specified date"
-msgstr ""
+msgstr "Izbor popravkov, ki so bili izdani do navedenega datuma (izključno)"
 
 #. translators: -b, --bugzilla
 #: src/commands/selectpatchoptionset.cc:36
 msgid "Select applicable patches for the specified Bugzilla issues."
-msgstr ""
+msgstr "Izbor popravkov, ki so uporabni za navedena poročila v Bugzilli."
 
 #. translators: --cve
 #: src/commands/selectpatchoptionset.cc:41
 msgid "Select applicable patches for the specified CVE issues."
-msgstr ""
+msgstr "Izbor popravkov, ki so uporabni za navedene težave CVE."
 
 #. any
 #. translators: --cve
 #: src/commands/selectpatchoptionset.cc:50
 msgid "Select issues matching the specified string."
-msgstr ""
+msgstr "Izbor težav, ki se ujemajo z navedenim nizom."
 
 #: src/commands/services/add.cc:53
 #, boost-format
 msgid ""
 "Service '%1%' with URL '%2%' already exists. Just updating the settings."
 msgstr ""
+"Storitev »%1%« z URL-jem »%2%« že obstaja. Izvedene bodo samo spremembe "
+"nastavitev."
 
 #: src/commands/services/add.cc:58
 #, boost-format
@@ -4573,100 +4575,103 @@ msgid ""
 "Service '%1%' already exists but uses a different URL '%2%'. Please use "
 "another alias."
 msgstr ""
+"Storitev »%1%« že obstaja, vendar uporablja drug URL »%2%«. Uporabite "
+"drugačno drugo ime."
 
 #: src/commands/services/add.cc:70
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Error occurred while adding service '%s'."
-msgstr "Napaka pri branju odseka %u."
+msgstr "Med dodajanjem storitve »%s« je prišlo do napake."
 
 #: src/commands/services/add.cc:77
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Service '%s' has been successfully added."
-msgstr "%s je potrebno odstraniti."
+msgstr "Storitev »%s« je bila uspešno dodana."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/services/add.cc:124
 msgid "addservice (as) [OPTIONS] <URI> <ALIAS>"
-msgstr ""
+msgstr "addservice (as) [MOŽNOSTI] <URI> <DRUGO_IME>"
 
 #: src/commands/services/add.cc:125
 msgid "Add a new service."
-msgstr ""
+msgstr "Doda novo storitev."
 
 #: src/commands/services/add.cc:126
 msgid "Add a repository index service to the system."
-msgstr ""
+msgstr "Doda storitev kazala za vir na sistem."
 
 #: src/commands/services/add.cc:140
 msgid "The type of service is always autodetected. This option is ignored."
-msgstr ""
+msgstr "Vrsto storitve se vedno zazna samodejno. Ta možnost bo prezrta."
 
 #: src/commands/services/common.cc:37
-#, fuzzy
 msgid "Error reading services:"
-msgstr "Napaka pri branju odseka %u."
+msgstr "Napaka pri branju storitev:"
 
 #: src/commands/services/common.cc:129
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Refreshing service '%s'."
-msgstr "Osvežitev"
+msgstr "Osveževanje storitve »%s«."
 
 #: src/commands/services/common.cc:136 src/commands/services/common.cc:146
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Problem retrieving the repository index file for service '%s':"
-msgstr "Napaka pri branju odseka %u."
+msgstr "Težava pridobivanja datoteke kazala za vir za storitev »%s«."
 
 #: src/commands/services/common.cc:138 src/commands/services/refresh.cc:226
 #: src/repos.cc:1822
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Skipping service '%s' because of the above error."
-msgstr "Izbranega vnosa ni možno odstraniti."
+msgstr "Zaradi zgornje napake bo storitev »%s« preskočena."
 
 #: src/commands/services/common.cc:148
 msgid "Check if the URI is valid and accessible."
-msgstr ""
+msgstr "Preverite, ali je URI veljaven in dostopen."
 
 #: src/commands/services/common.cc:159
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Removing service '%s':"
-msgstr "Odst&rani povezavo"
+msgstr "Odstranjevanje storitve »%s«."
 
 #: src/commands/services/common.cc:162
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Service '%s' has been removed."
-msgstr "%s je potrebno odstraniti."
+msgstr "Storitev »%s« je bila odstranjena."
 
 #: src/commands/services/list.cc:83
 msgid "services (ls) [OPTIONS]"
-msgstr ""
+msgstr "services (ls) [MOŽNOSTI]"
 
 #: src/commands/services/list.cc:84
 msgid "List all defined services."
-msgstr ""
+msgstr "Izpiše vse določene storitve."
 
 #: src/commands/services/list.cc:85
 msgid "List defined services."
-msgstr ""
+msgstr "Izpiše določene storitve."
 
 #: src/commands/services/list.cc:172
 #, c-format, boost-format
 msgid "No services defined. Use the '%s' command to add one or more services."
 msgstr ""
+"Določene ni nobene storitve. Za dodajanje ene ali več storitev uporabite "
+"ukaz »%s«."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/services/modify.cc:18
 msgid "modifyservice (ms) <OPTIONS> <ALIAS|#|URI>"
-msgstr ""
+msgstr "modifyservice (ms) <MOŽNOSTI> <DRUGO_IME|#|URI>"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/services/modify.cc:20
 #, boost-format
 msgid "modifyservice (ms) <OPTIONS> <%1%>"
-msgstr ""
+msgstr "modifyservice (ms) <MOŽNOSTI> <%1%>"
 
 #: src/commands/services/modify.cc:22
 msgid "Modify specified service."
-msgstr ""
+msgstr "Spremeni navedeno storitev."
 
 #: src/commands/services/modify.cc:23
 #, boost-format
@@ -4674,37 +4679,36 @@ msgid ""
 "Modify properties of services specified by alias, number, or URI, or by the "
 "'%1%' aggregate options."
 msgstr ""
+"Spremeni lastnosti storitve, navedene z uporabo drugega imena, številke ali "
+"URI-ja ali z združitvijo možnosti »%1%«."
 
 #: src/commands/services/modify.cc:41
 msgid "Advanced:"
-msgstr ""
+msgstr "Napredno:"
 
 #: src/commands/services/modify.cc:43
 msgid "Add a RIS service repository to enable."
-msgstr ""
+msgstr "Doda vir storitve RIS za omogočiti."
 
 #: src/commands/services/modify.cc:44
-#, fuzzy
 msgid "Add a RIS service repository to disable."
-msgstr "Samodejna osvežitev"
+msgstr "Doda vir storitve RIS za onemogočiti."
 
 #: src/commands/services/modify.cc:45
 msgid "Remove a RIS service repository to enable."
-msgstr ""
+msgstr "Odstrani vir storitve RIS za omogočiti."
 
 #: src/commands/services/modify.cc:46
-#, fuzzy
 msgid "Remove a RIS service repository to disable."
-msgstr "Samodejna osvežitev"
+msgstr "Odstrani vir storitve RIS za onemogočiti."
 
 #: src/commands/services/modify.cc:47
 msgid "Clear the list of RIS repositories to enable."
-msgstr ""
+msgstr "Počisti seznam virov RIS za omogočiti."
 
 #: src/commands/services/modify.cc:48
-#, fuzzy
 msgid "Clear the list of RIS repositories to disable."
-msgstr "Samodejna osvežitev"
+msgstr "Počisti seznam virov RIS za onemogočiti."
 
 #. translators: aggregate option is e.g. "--all". This message will be
 #. followed by ms command help text which will explain it
@@ -4712,300 +4716,293 @@ msgstr "Samodejna osvežitev"
 #. followed by mr command help text which will explain it
 #: src/commands/services/modify.cc:73 src/utils/messages.cc:62
 msgid "Alias or an aggregate option is required."
-msgstr ""
+msgstr "Zahtevano je drugo ime ali združena možnost."
 
 #: src/commands/services/modify.cc:104
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Service '%s' not found."
-msgstr "Gostitelja %s ni."
+msgstr "Storitev »%s« ni bila najdena."
 
 #: src/commands/services/modify.cc:235
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Service '%s' has been successfully enabled."
-msgstr "%s je potrebno odstraniti."
+msgstr "Storitev »%s« je bila uspešno omogočena."
 
 #: src/commands/services/modify.cc:237
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Service '%s' has been successfully disabled."
-msgstr "%s je potrebno odstraniti."
+msgstr "Storitev »%s« je bila uspešno onemogočena."
 
 #: src/commands/services/modify.cc:243
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Autorefresh has been enabled for service '%s'."
-msgstr "Napaka pri branju odseka %u."
+msgstr "Samodejna osvežitev je bila omogočena za storitev »%s«."
 
 #: src/commands/services/modify.cc:245
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Autorefresh has been disabled for service '%s'."
-msgstr "Napaka pri branju odseka %u."
+msgstr "Samodejna osvežitev je bila onemogočena za storitev »%s«."
 
 #: src/commands/services/modify.cc:250
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Name of service '%s' has been set to '%s'."
-msgstr "%s je potrebno odstraniti."
+msgstr "Ime storitve »%s« je bilo nastavljeno v »%s«."
 
 #: src/commands/services/modify.cc:255
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Repository '%s' has been added to enabled repositories of service '%s'"
 msgid_plural ""
 "Repositories '%s' have been added to enabled repositories of service '%s'"
-msgstr[0] "Napaka pri branju odseka %u."
-msgstr[1] "Napaka pri branju odseka %u."
-msgstr[2] "Napaka pri branju odseka %u."
-msgstr[3] "Napaka pri branju odseka %u."
+msgstr[0] "Vir »%s« je bil dodan med omogočene vire storitve »%s«"
+msgstr[1] "Vira »%s« sta bila dodana med omogočene vire storitve »%s«"
+msgstr[2] "Viri »%s« so bili dodani med omogočene vire storitve »%s«"
+msgstr[3] "Viri »%s« so bili dodani med omogočene vire storitve »%s«"
 
 #: src/commands/services/modify.cc:262
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Repository '%s' has been added to disabled repositories of service '%s'"
 msgid_plural ""
 "Repositories '%s' have been added to disabled repositories of service '%s'"
-msgstr[0] "Napaka pri branju odseka %u."
-msgstr[1] "Napaka pri branju odseka %u."
-msgstr[2] "Napaka pri branju odseka %u."
-msgstr[3] "Napaka pri branju odseka %u."
+msgstr[0] "Vir »%s« je bil dodan med onemogočene vire storitve »%s«"
+msgstr[1] "Vira »%s« sta bila dodana med onemogočene vire storitve »%s«"
+msgstr[2] "Viri »%s« so bili dodani med onemogočene vire storitve »%s«"
+msgstr[3] "Viri »%s« so bili dodani med onemogočene vire storitve »%s«"
 
 #: src/commands/services/modify.cc:269
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid ""
 "Repository '%s' has been removed from enabled repositories of service '%s'"
 msgid_plural ""
 "Repositories '%s' have been removed from enabled repositories of service '%s'"
-msgstr[0] "Napaka pri branju odseka %u."
-msgstr[1] "Napaka pri branju odseka %u."
-msgstr[2] "Napaka pri branju odseka %u."
-msgstr[3] "Napaka pri branju odseka %u."
+msgstr[0] "Vir »%s« je bil odstranjen iz omogočenih virov storitve »%s«"
+msgstr[1] "Vira »%s« sta bila odstranjena iz omogočenih virov storitve »%s«"
+msgstr[2] "Viri »%s« so bili odstranjeni iz omogočenih virov storitve »%s«"
+msgstr[3] "Viri »%s« so bili odstranjeni iz omogočenih virov storitve »%s«"
 
 #: src/commands/services/modify.cc:276
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid ""
 "Repository '%s' has been removed from disabled repositories of service '%s'"
 msgid_plural ""
 "Repositories '%s' have been removed from disabled repositories of service "
 "'%s'"
-msgstr[0] "Napaka pri branju odseka %u."
-msgstr[1] "Napaka pri branju odseka %u."
-msgstr[2] "Napaka pri branju odseka %u."
-msgstr[3] "Napaka pri branju odseka %u."
+msgstr[0] "Vir »%s« je bil odstranjen iz onemogočenih virov storitve »%s«"
+msgstr[1] "Vira »%s« sta bila odstranjena iz onemogočenih virov storitve »%s«"
+msgstr[2] "Viri »%s« so bili odstranjeni iz onemogočenih virov storitve »%s«"
+msgstr[3] "Viri »%s« so bili odstranjeni iz onemogočenih virov storitve »%s«"
 
 #: src/commands/services/modify.cc:285
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Nothing to change for service '%s'."
-msgstr "Napaka pri branju odseka %u."
+msgstr "Za storitev »%s« ni sprememb."
 
 #: src/commands/services/modify.cc:291
-#, fuzzy
 msgid "Error while modifying the service:"
-msgstr ""
-"Napaka pri dostopu do FTP strežnika:\n"
-"\n"
-"%s"
+msgstr "Napaka med spreminjanjem storitve:"
 
 #: src/commands/services/modify.cc:292
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Leaving service %s unchanged."
-msgstr "Shranjevanje zbirke podatkov"
+msgstr "Storitev »%s« bo ostala nespremenjena."
 
 #: src/commands/services/refresh.cc:86
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Service '%s' not found by its alias, number, or URI."
-msgstr "Gostitelja %s ni."
+msgstr ""
+"Storitev »%s« po njenem drugem imenu, številki ali URI-ju ni bila najdena."
 
 #: src/commands/services/refresh.cc:89
 #, c-format, boost-format
 msgid "Use '%s' to get the list of defined services."
-msgstr ""
+msgstr "Da dobite seznam storitev, ki so določene, uporabite ukaz »%s«."
 
 #: src/commands/services/refresh.cc:95
 msgid "refresh-services (refs) [OPTIONS]"
-msgstr ""
+msgstr "refresh-services (refs) [MOŽNOSTI]"
 
 #: src/commands/services/refresh.cc:96
 msgid "Refresh all services."
-msgstr ""
+msgstr "Osveži vse storitve."
 
 #: src/commands/services/refresh.cc:97
 msgid "Refresh defined repository index services."
-msgstr ""
+msgstr "Osveži storitve kazal za vire, ki so določene."
 
 #: src/commands/services/refresh.cc:114
 msgid "Refresh also the service repositories."
-msgstr ""
+msgstr "Osveži tudi vire storitev."
 
 #: src/commands/services/refresh.cc:115
 msgid "Also restore service repositories enabled/disabled state."
-msgstr ""
+msgstr "Obnovi tudi stanje omogočeno/onemogočeno za vire storitev."
 
 #: src/commands/services/refresh.cc:179
 #, c-format, boost-format
 msgid "Skipping disabled service '%s'"
-msgstr ""
+msgstr "Onemogočena storitev »%s« bo preskočena"
 
 #: src/commands/services/refresh.cc:237
 #, c-format, boost-format
 msgid "Use '%s' or '%s' commands to add or enable services."
-msgstr ""
+msgstr "Za dodajanje ali omogočanje storitev uporabite ukaza »%s« ali »%s«."
 
 #: src/commands/services/refresh.cc:240
-#, fuzzy
 msgid "Specified services are not enabled or defined."
-msgstr "%s je potrebno odstraniti."
+msgstr "Navedene storitve niso omogočene ali pa niso določene."
 
 #: src/commands/services/refresh.cc:242
 msgid "There are no enabled services defined."
-msgstr ""
+msgstr "Ne obstaja nobena določena in omogočena storitev."
 
 #: src/commands/services/refresh.cc:246
-#, fuzzy
 msgid "Could not refresh the services because of errors."
-msgstr "Izbranega vnosa ni možno odstraniti."
+msgstr "Storitev zaradi napak ni bilo mogoče osvežiti."
 
 #: src/commands/services/refresh.cc:251
-#, fuzzy
 msgid "Some of the services have not been refreshed because of an error."
-msgstr "Izbranega vnosa ni možno odstraniti."
+msgstr "Nekatere storitve zaradi napak niso bile osvežene."
 
 #: src/commands/services/refresh.cc:255
-#, fuzzy
 msgid "Specified services have been refreshed."
-msgstr "%s je potrebno odstraniti."
+msgstr "Navedene storitve so bile osvežene."
 
 #: src/commands/services/refresh.cc:257
-#, fuzzy
 msgid "All services have been refreshed."
-msgstr "%s je potrebno odstraniti."
+msgstr "Vse storitve so bile osvežene."
 
 #: src/commands/services/remove.cc:20
 msgid "removeservice (rs) [OPTIONS] <ALIAS|#|URI>"
-msgstr ""
+msgstr "removeservice (rs) [MOŽNOSTI] <DRUGO_IME|#|URI>"
 
 #: src/commands/services/remove.cc:21
 msgid "Remove specified service."
-msgstr ""
+msgstr "Odstrani navedeno storitev."
 
 #: src/commands/services/remove.cc:22
 msgid "Remove specified repository index service from the system."
-msgstr ""
+msgstr "Odstrani navedeno storitev kazala za vir s sistema."
 
 #. translators: %s is the supplied command line argument which
 #. for which no service counterpart was found
 #: src/commands/services/remove.cc:76
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Service '%s' not found by alias, number or URI."
-msgstr "Gostitelja %s ni."
+msgstr "Storitve »%s« po drugem imenu, številki ali URI-ju ni bilo moč najti."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/shell.cc:20
 msgid "shell (sh)"
-msgstr ""
+msgstr "shell (sh)"
 
 #. translators: command summary: shell, sh
 #: src/commands/shell.cc:22
 msgid "Accept multiple commands at once."
-msgstr ""
+msgstr "Sprejme več ukazov naenkrat."
 
 #. translators: command description
 #: src/commands/shell.cc:24
 msgid "Enter the zypper command shell."
-msgstr ""
+msgstr "Vstopi v ukazno lupino za zypper."
 
 #: src/commands/shell.cc:40
 msgid "You already are running zypper's shell."
-msgstr ""
+msgstr "Ukazna lupina za zypper že teče."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/shell.cc:52
 msgid "quit (exit, ^D)"
-msgstr ""
+msgstr "quit (exit, ^D)"
 
 #. translators: command description
 #: src/commands/shell.cc:54 src/commands/shell.cc:56
 msgid "Quit the current zypper shell."
-msgstr ""
+msgstr "Konča trenutno ukazno lupino za zypper."
 
 #: src/commands/shell.cc:74
 msgid "This command only makes sense in the zypper shell."
-msgstr ""
+msgstr "Ta ukaz je smiseln le v ukazni lupini za zypper."
 
 #: src/commands/solveroptionset.cc:24
 #, boost-format
 msgid "Valid values: %1%"
-msgstr ""
+msgstr "Veljavne vrednosti: %1%"
 
 #: src/commands/solveroptionset.cc:36 src/commands/solveroptionset.cc:59
 msgid "Solver options"
-msgstr ""
+msgstr "Možnosti reševalnika"
 
 #: src/commands/solveroptionset.cc:38
 msgid "Install also recommended packages in addition to the required ones."
-msgstr ""
+msgstr "Poleg zahtevanih paketov namesti tudi priporočene."
 
 #: src/commands/solveroptionset.cc:39
 msgid "Do not install recommended packages, only required ones."
-msgstr ""
+msgstr "Ne namesti priporočenih paketov, ampak samo zahtevane."
 
 #: src/commands/solveroptionset.cc:61
-#, fuzzy
 msgid "Create a solver test case for debugging."
-msgstr "Napaka pri branju odseka %u."
+msgstr "Ustvari preizkusni primer za razhroščevanje reševalnika."
 
 #: src/commands/solveroptionset.cc:62
 msgid ""
 "Force the solver to find a solution (even an aggressive one) rather than "
 "asking."
 msgstr ""
+"Prisili reševalnik, da najde rešitev (tudi če je agresivna) brez vprašanj."
 
 #: src/commands/solveroptionset.cc:63
 msgid "Do not force the solver to find a solution, let it ask."
-msgstr ""
+msgstr "Ne prisili reševalnika, da najde rešitev, ampak da vpraša."
 
 #: src/commands/solveroptionset.cc:64
 msgid "Set the solvers general attitude when resolving a job."
-msgstr ""
+msgstr "Nastavi splošen odnos reševalnika med reševanjem opravila."
 
 #: src/commands/solveroptionset.cc:84
 msgid "Expert options"
-msgstr ""
+msgstr "Možnosti za strokovnjake"
 
 #: src/commands/solveroptionset.cc:87
 msgid "Whether to allow downgrading installed resolvables."
-msgstr ""
+msgstr "Ali se dovoli vračanje nameščenih rešitev na staro različico."
 
 #: src/commands/solveroptionset.cc:89
 msgid "Whether to allow changing the names of installed resolvables."
-msgstr ""
+msgstr "Ali se dovoli spreminjanje imen nameščenih rešitev."
 
 #: src/commands/solveroptionset.cc:91
 msgid "Whether to allow changing the architecture of installed resolvables."
-msgstr ""
+msgstr "Ali se dovoli spreminjanje arhitekture nameščenih storitev."
 
 #: src/commands/solveroptionset.cc:93
 msgid "Whether to allow changing the vendor of installed resolvables."
-msgstr ""
+msgstr "Ali se dovoli spreminjanje izdelovalca nameščenih rešitev."
 
 #. translators: -u, --clean-deps
 #: src/commands/solveroptionset.cc:117
 msgid "Automatically remove unneeded dependencies."
-msgstr ""
+msgstr "Samodejno odstrani nepotrebne odvisnosti."
 
 #. translators: -U, --no-clean-deps
 #: src/commands/solveroptionset.cc:121
 msgid "No automatic removal of unneeded dependencies."
-msgstr ""
+msgstr "Brez samodejnega odstranjevanja nepotrebnih odvisnosti."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/sourceinstall.cc:21
 msgid "source-install (si) [OPTIONS] <NAME> ..."
-msgstr ""
+msgstr "source-install (si) [MOŽNOSTI] <IME> …"
 
 #. translators: command summary: source-install, si
 #: src/commands/sourceinstall.cc:23
 msgid "Install source packages and their build dependencies."
-msgstr ""
+msgstr "Namesti pakete z izvorno kodo in njihove odvisnosti za gradnjo."
 
 #. translators: command description
 #: src/commands/sourceinstall.cc:25
 msgid "Install specified source packages and their build dependencies."
 msgstr ""
+"Namesti navedene pakete z izvorno kodo in njihove odvisnosti za gradnjo."
 
 #: src/commands/sourceinstall.cc:26
 #, boost-format
@@ -5014,53 +5011,56 @@ msgid ""
 "value can be changed in your local rpm configuration. In case of doubt try "
 "executing '%2%'."
 msgstr ""
+"Privzeto mesto, kamor RPM namesti pakete z izvorno kodo je »%1%«, vendar to "
+"lahko spremenite v krajevnih nastavitvah za RPM. V primeru dvoma, poskusite "
+"izvesti ukaz »%2%«."
 
 #. translators: -d, --build-deps-only
 #: src/commands/sourceinstall.cc:48
 msgid "Install only build dependencies of specified packages."
-msgstr ""
+msgstr "Namesti samo odvisnosti za gradnjo navedenih paketov."
 
 #. translators: -D, --no-build-deps
 #: src/commands/sourceinstall.cc:52
 msgid "Don't install build dependencies."
-msgstr ""
+msgstr "Ne namesti odvisnosti za gradnjo."
 
 #: src/commands/sourceinstall.cc:70
 msgid "Source package name is a required argument."
-msgstr ""
+msgstr "Ime paketa z izvorno kodo je zahtevan argument."
 
 #: src/commands/sourceinstall.cc:86
 msgid "Uninstalling source packages is not supported."
-msgstr ""
+msgstr "Odstranjevanje paketov z izvorno kodo ni podprto."
 
 #. translators: %1% is the name of the command which has no man page available.
 #: src/commands/subcommand.cc:88
 #, boost-format
 msgid "No manual entry for %1%"
-msgstr ""
+msgstr "Priročnik za ukaz »%1%« ni na voljo"
 
 #: src/commands/subcommand.cc:103
 msgid "none"
-msgstr ""
+msgstr "brez"
 
 #: src/commands/subcommand.cc:332
 #, boost-format
 msgid "cannot exec %1% (%2%)"
-msgstr ""
+msgstr "ukaza »%1%« ni moč izvesti (%2%)"
 
 #. translators: %1% - command name or path
 #. translators: %2% - system error message
 #: src/commands/subcommand.cc:341
 #, boost-format
 msgid "fork for %1% failed (%2%)"
-msgstr ""
+msgstr "fork za »%1%« ni uspel (%2%)"
 
 #. translators: %1% - command name or path
 #. translators: %2% - system error message
 #: src/commands/subcommand.cc:360
 #, boost-format
 msgid "waitpid for %1% failed (%2%)"
-msgstr ""
+msgstr "waitpid za %1% ni uspel (%2%)"
 
 #. translators: %1% - command name or path
 #. translators: %2% - returned PID (number)
@@ -5069,6 +5069,7 @@ msgstr ""
 #, boost-format
 msgid "waitpid for %1% returns unexpected pid %2% while waiting for %3%"
 msgstr ""
+"waitpid za %1% vrne nepričakovan določilnik procesa %2% med čakanjem na %3%"
 
 #. translators: %1% - command name or path
 #. translators: %2% - signal number
@@ -5076,25 +5077,25 @@ msgstr ""
 #: src/commands/subcommand.cc:381
 #, boost-format
 msgid "%1% was killed by signal %2% (%3%)"
-msgstr ""
+msgstr "%1% je bil ubit s signalom %2% (%3%)"
 
 #: src/commands/subcommand.cc:385
 msgid "core dumped"
-msgstr ""
+msgstr "izpis jedra"
 
 #. translators: %1% - command name or path
 #. translators: %2% - exit code (number)
 #: src/commands/subcommand.cc:395
 #, boost-format
 msgid "%1% exited with status %2%"
-msgstr ""
+msgstr "%1% je končal s stanjem %2%"
 
 #. translators: %1% - command name or path
 #. translators: %2% - status (number)
 #: src/commands/subcommand.cc:410
 #, boost-format
 msgid "waitpid for %1% returns unexpected exit status %2%"
-msgstr ""
+msgstr "waitpid za %1% je vrnil nepričakovano stanje končanja %2%"
 
 #: src/commands/subcommand.cc:443
 #, boost-format
