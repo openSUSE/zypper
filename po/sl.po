@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-04-15 13:01+0200\n"
-"PO-Revision-Date: 2024-06-12 01:46+0000\n"
+"PO-Revision-Date: 2024-06-12 13:46+0000\n"
 "Last-Translator: Jure Repinc <jlp@holodeck1.com>\n"
 "Language-Team: Slovenian <https://l10n.opensuse.org/projects/zypper/master/"
 "sl/>\n"
@@ -4225,67 +4225,69 @@ msgid ""
 "Use the global GPG check setting defined in /etc/zypp/zypp.conf. This is the "
 "default."
 msgstr ""
+"Uporabi splošno nastavitev preverjanja GPG, ki je določena v /etc/zypp/"
+"zypp.conf. To je privzeto."
 
 #. translators: -a, --alias
 #: src/commands/reposerviceoptionsets.cc:182
 msgid "Show also repository alias."
-msgstr ""
+msgstr "Prikaže tudi drugo ime vira."
 
 #. translators: -n, --name
 #: src/commands/reposerviceoptionsets.cc:185
 msgid "Show also repository name."
-msgstr ""
+msgstr "Prikaže tudi ime vira."
 
 #. translators: -r, --refresh
 #: src/commands/reposerviceoptionsets.cc:188
 msgid "Show also the autorefresh flag."
-msgstr ""
+msgstr "Prikaže tudi zastavico samoosvežitve."
 
 #. translators: -u, --uri
 #: src/commands/reposerviceoptionsets.cc:198
 msgid "Show also base URI of repositories."
-msgstr ""
+msgstr "Prikaže tudi URI vira."
 
 #. translators: -p, --priority
 #: src/commands/reposerviceoptionsets.cc:202
 msgid "Show also repository priority."
-msgstr ""
+msgstr "Prikaže tudi prednost vira."
 
 #. translators: -d, --details
 #: src/commands/reposerviceoptionsets.cc:205
 msgid "Show more information like URI, priority, type."
-msgstr ""
+msgstr "Prikaže več podatkov, npr. URI, prednost, vrsto."
 
 #: src/commands/reposerviceoptionsets.cc:212
 msgid "Show also repositories belonging to the services."
-msgstr ""
+msgstr "Prikaže tudi vire, ki pripadajo storitvam."
 
 #. translators: -s, --service
 #. translators: -A, --sort-by-alias
 #: src/commands/reposerviceoptionsets.cc:218
 #: src/commands/reposerviceoptionsets.cc:241
 msgid "Show also alias of parent service."
-msgstr ""
+msgstr "Prikaže tudi drugo ime nadrejene storitve."
 
 #. translators: -E, --show-enabled-only
 #: src/commands/reposerviceoptionsets.cc:225
 msgid "Show enabled repos only."
-msgstr ""
+msgstr "Prikaže samo omogočene vire."
 
 #. translators: -U, --sort-by-uri
 #: src/commands/reposerviceoptionsets.cc:228
 msgid "Sort the list by URI."
-msgstr ""
+msgstr "Razvrsti seznam po URI-ju."
 
 #. translators: -N, --sort-by-name
 #: src/commands/reposerviceoptionsets.cc:231
 msgid "Sort the list by name."
-msgstr ""
+msgstr "Razvrsti seznam po imenu."
 
 #. translators: -P, --sort-by-priority
 #: src/commands/reposerviceoptionsets.cc:234
 msgid "Sort the list by repository priority."
-msgstr ""
+msgstr "Razvrsti seznam po prednosti vira."
 
 #. translator: %1% denotes a zypper command to execute. Like 'zypper search-packages'.
 #: src/commands/search/search-packages-hinthack.cc:82
@@ -4294,6 +4296,8 @@ msgid ""
 "For an extended search including not yet activated remote resources please "
 "use '%1%'."
 msgstr ""
+"Za razširjeno iskanje, ki vključuje oddaljene vire, ki še niso omogočeni, "
+"uporabite »%1%«."
 
 #. translator: %1% denotes a zypper command to execute. Like 'zypper search-packages'.
 #: src/commands/search/search-packages-hinthack.cc:86
@@ -4302,6 +4306,8 @@ msgid ""
 "The package providing this subcommand is currently not installed. You can "
 "install it by calling '%1%'."
 msgstr ""
+"Paket, ki ponuja ta podukaz trenutno ni nameščen. Namestite ga lahko z "
+"ukazom »%1%«."
 
 #: src/commands/search/search-packages-hinthack.cc:99
 #, boost-format
@@ -4309,31 +4315,34 @@ msgid ""
 "For an extended search including not yet activated remote resources you may "
 "run '%1%' at any time."
 msgstr ""
+"Za razširjeno iskanje, ki vključuje oddaljene vire, ki še niso omogočeni, "
+"lahko kadarkoli zaženete ukaz »%1%«."
 
 #: src/commands/search/search-packages-hinthack.cc:100
 #, boost-format
 msgid "Do you want to run '%1%' now?"
-msgstr ""
+msgstr "Ali želite zagnati »%1%« sedaj?"
 
 #: src/commands/search/search-packages-hinthack.cc:116
 #, boost-format
 msgid "Run '%1%' to search in not yet activated remote resources."
 msgstr ""
+"Za iskanje po oddaljenih virih, ki še niso omogočeni, zaženite ukaz »%1%«."
 
 #. translators: command summary: search, se
 #: src/commands/search/search.cc:76
 msgid "Search for packages matching a pattern."
-msgstr ""
+msgstr "Iskanje paketov, ki se ujemajo z vzorcem."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/search/search.cc:83
 msgid "search (se) [OPTIONS] [QUERYSTRING] ..."
-msgstr ""
+msgstr "search (se) [MOŽNOSTI] [POIZVEDBENI_NIZ] …"
 
 #. translators: command description
 #: src/commands/search/search.cc:91
 msgid "Search for packages matching any of the given search strings."
-msgstr ""
+msgstr "Iskanje paketov, ki se ujemajo s katerimkoli navedenim iskalnim nizom."
 
 #. translators: command description
 #: src/commands/search/search.cc:93
@@ -4341,56 +4350,58 @@ msgid ""
 "* and ? wildcards can also be used within search strings. If a search string "
 "is enclosed in '/', it's interpreted as a regular expression."
 msgstr ""
+"V iskalnih nizih lahko uporabite nadomestna znaka »*« in »?«. Če je iskalni "
+"niz med »/« na obeh straneh, se ga obravnava kot regularni izraz."
 
 #. translators: --match-substrings
 #: src/commands/search/search.cc:105
 msgid "Search for a match to partial words (default)."
-msgstr ""
+msgstr "Iskanje z ujemanjem dela besede (privzeto)."
 
 #. translators: --match-words
 #: src/commands/search/search.cc:109
 msgid "Search for a match to whole words only."
-msgstr ""
+msgstr "Iskanje z ujemanjem cele besede."
 
 #. translators: -x, --match-exact
 #: src/commands/search/search.cc:113
 msgid "Searches for an exact match of the search strings."
-msgstr ""
+msgstr "Iskanje s točnim ujemanjem z iskalnimi nizi."
 
 #. translators: --provides
 #: src/commands/search/search.cc:117
 msgid "Search for packages which provide the search strings."
-msgstr ""
+msgstr "Iskanje paketov, kjer se ponujeno ujema z iskalnimi nizi."
 
 #. translators: --requires
 #: src/commands/search/search.cc:121
 msgid "Search for packages which require the search strings."
-msgstr ""
+msgstr "Iskanje paketov, kjer se zahtevano ujema z iskalnimi nizi."
 
 #. translators: --recommends
 #: src/commands/search/search.cc:125
 msgid "Search for packages which recommend the search strings."
-msgstr ""
+msgstr "Iskanje paketov, kjer se priporočeno ujema z iskalnimi nizi."
 
 #. translators: --supplements
 #: src/commands/search/search.cc:129
 msgid "Search for packages which supplement the search strings."
-msgstr ""
+msgstr "Iskanje paketov, kjer se dopolnjeno ujema z iskalnimi nizi."
 
 #. translators: --conflicts
 #: src/commands/search/search.cc:133
 msgid "Search packages conflicting with search strings."
-msgstr ""
+msgstr "Iskanje paketov, kjer se spori ujemajo z iskalnimi nizi."
 
 #. translators: --obsoletes
 #: src/commands/search/search.cc:137
 msgid "Search for packages which obsolete the search strings."
-msgstr ""
+msgstr "Iskanje paketov, kjer se nadomeščeno ujema z iskalnimi nizi."
 
 #. translators: --suggests
 #: src/commands/search/search.cc:141
 msgid "Search for packages which suggest the search strings."
-msgstr ""
+msgstr "Iskanje paketov, kjer se predlogi ujemajo z iskalnimi nizi."
 
 #. translators: --provides-pkg
 #: src/commands/search/search.cc:145
@@ -4398,6 +4409,8 @@ msgid ""
 "Search for all packages that provide any of the provides of the package(s) "
 "matched by the input parameters."
 msgstr ""
+"Iskanje vseh paketov, ki ponujajo katerikoli paket, ki se ujema z vhodnimi "
+"parametri."
 
 #. translators: --requires-pkg
 #: src/commands/search/search.cc:149
@@ -4405,6 +4418,8 @@ msgid ""
 "Search for all packages that require any of the provides of the package(s) "
 "matched by the input parameters."
 msgstr ""
+"Iskanje vseh paketov, ki zahtevajo katerikoli paket, ki se ujema z vhodnimi "
+"parametri."
 
 #. translators: --recommends-pkg
 #: src/commands/search/search.cc:153
@@ -4412,6 +4427,8 @@ msgid ""
 "Search for all packages that recommend any of the provides of the package(s) "
 "matched by the input parameters."
 msgstr ""
+"Iskanje vseh paketov, ki priporočajo katerikoli paket, ki se ujema z "
+"vhodnimi parametri."
 
 #. translators: --supplements-pkg
 #: src/commands/search/search.cc:157
@@ -4419,6 +4436,8 @@ msgid ""
 "Search for all packages that supplement any of the provides of the "
 "package(s) matched by the input parameters."
 msgstr ""
+"Iskanje vseh paketov, ki dopolnjujejo katerikoli paket, ki se ujema z "
+"vhodnimi parametri."
 
 #. translators: --conflicts-pkg
 #: src/commands/search/search.cc:161
@@ -4426,6 +4445,8 @@ msgid ""
 "Search for all packages that conflict with any of the package(s) matched by "
 "the input parameters."
 msgstr ""
+"Iskanje vseh paketov, ki so v sporu s katerimkoli paketetom, ki se ujema z "
+"vhodnimi parametri."
 
 #. translators: --obsoletes-pkg
 #: src/commands/search/search.cc:165
@@ -4433,6 +4454,8 @@ msgid ""
 "Search for all packages that obsolete any of the package(s) matched by the "
 "input parameters."
 msgstr ""
+"Iskanje vseh paketov, ki nadomeščajo katerikoli paket, ki se ujema z "
+"vhodnimi parametri."
 
 #. translators: --suggests-pkg
 #: src/commands/search/search.cc:169
@@ -4440,11 +4463,13 @@ msgid ""
 "Search for all packages that suggest any of the provides of the package(s) "
 "matched by the input parameters."
 msgstr ""
+"Iskanje vseh paketov, ki predlagajo katerikoli paket, ki se ujema z vhodnimi "
+"parametri."
 
 #. translators: -t, --type <TYPE>
 #: src/commands/search/search.cc:173
 msgid "Search only for packages of the specified type."
-msgstr ""
+msgstr "Iskanje paketov navedene vrste."
 
 #. translators: -n, --name
 #: src/commands/search/search.cc:177
@@ -4452,26 +4477,27 @@ msgid ""
 "Useful together with dependency options, otherwise searching in package name "
 "is default."
 msgstr ""
+"Uporabno z možnostmi odvisnosti, drugače je iskanje po imenu paketa privzeto."
 
 #. translators: -f, --file-list
 #: src/commands/search/search.cc:181
 msgid "Search for a match in the file list of packages."
-msgstr ""
+msgstr "Iskanje ujemanja na seznamu datotek v paketih."
 
 #. translators: -d, --search-descriptions
 #: src/commands/search/search.cc:185
 msgid "Search also in package summaries and descriptions."
-msgstr ""
+msgstr "Iskanje tudi po povzetkih in opisih paketov."
 
 #. translators: -C, --case-sensitive
 #: src/commands/search/search.cc:189
 msgid "Perform case-sensitive search."
-msgstr ""
+msgstr "Izvede iskanje občutljivo na velikost črk."
 
 #. translators: -s, --details
 #: src/commands/search/search.cc:193
 msgid "Show each available version in each repository on a separate line."
-msgstr ""
+msgstr "Vsako razpoložljivo različico v vsakem viru prikaže v svoji vrstici."
 
 #. translators: -v, --verbose
 #: src/commands/search/search.cc:197
@@ -4479,17 +4505,18 @@ msgid ""
 "Like --details, with additional information where the search has matched "
 "(useful for search in dependencies)."
 msgstr ""
+"Kot možnost »--details«, a z dodatnimi informacijami, kje je bilo ujemanje ("
+"uporabno za iskanja po odvisnostih)."
 
 #: src/commands/search/search.cc:290 src/repos.cc:837
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Specified repository '%s' is disabled."
-msgstr "Samodejna osvežitev"
+msgstr "Navedeni vir »%s« je onemogočen."
 
 #. translators: empty search result message
 #: src/commands/search/search.cc:463 src/info.cc:315
-#, fuzzy
 msgid "No matching items found."
-msgstr "Ni napak."
+msgstr "Najden ni bil noben predmet."
 
 #: src/commands/search/search.cc:495
 msgid "Problem occurred initializing or executing the search query"
