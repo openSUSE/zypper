@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-04-15 13:01+0200\n"
-"PO-Revision-Date: 2024-06-12 22:00+0000\n"
+"PO-Revision-Date: 2024-06-13 00:46+0000\n"
 "Last-Translator: Jure Repinc <jlp@holodeck1.com>\n"
 "Language-Team: Slovenian <https://l10n.opensuse.org/projects/zypper/master/"
 "sl/>\n"
@@ -1299,15 +1299,16 @@ msgid_plural ""
 "The successor packages should be installed as soon as possible to receive "
 "continued support:"
 msgstr[0] ""
-"Nadomestni paket bi moral biti nameščen čim prej, da naprej prejema podporo:"
+"Nadomestni paket bi moral biti nameščen čim prej, da še naprej prejema "
+"podporo:"
 msgstr[1] ""
-"Nadomestna paketa bi morala biti nameščena čim prej, da naprej prejemata "
+"Nadomestna paketa bi morala biti nameščena čim prej, da še naprej prejemata "
 "podporo:"
 msgstr[2] ""
-"Nadomestni paketi bi morali biti nameščeni čim prej, da naprej prejemajo "
+"Nadomestni paketi bi morali biti nameščeni čim prej, da še naprej prejemajo "
 "podporo:"
 msgstr[3] ""
-"Nadomestni paketi bi morali biti nameščeni čim prej, da naprej prejemajo "
+"Nadomestni paketi bi morali biti nameščeni čim prej, da še naprej prejemajo "
 "podporo:"
 
 #: src/Summary.cc:1458
@@ -5111,6 +5112,15 @@ msgid ""
 "will look in the rest of your $PATH for it. Thus, it's possible\n"
 "to write local zypper extensions that don't live in system space.\n"
 msgstr ""
+"Podukazi zypper so samostojne izvedljive datoteke, ki se nahajajo\n"
+"v zypper_execdir (»%1%«).\n"
+"\n"
+"Za podukaze zypper ponuja ovijalnik, ki ve, kje se podukazi nahajajo,\n"
+"in jih zažene s posredovanjem argumentov ukazne vrstice.\n"
+"\n"
+"Če podukaz v zypper_execdir ni najden, ga bo ovijalnik poskusil najti\n"
+"v preostanku poti v $PATH. Tako je možno pisati krajevne razširitve\n"
+"za zypper, ki se ne nahajajo v sistemskem prostoru.\n"
 
 #: src/commands/subcommand.cc:458
 #, boost-format
@@ -5118,82 +5128,90 @@ msgid ""
 "Using zypper global-options together with subcommands, as well as\n"
 "executing subcommands in '%1%' is currently not supported.\n"
 msgstr ""
+"Uporaba splošnih možnosti za zypper skupaj s podukazi in izvajanjem\n"
+"podukazov v »%1%« trenutno ni podprta.\n"
 
 #. translators: headline of an enumeration; %1% is a directory name
 #: src/commands/subcommand.cc:469
 #, boost-format
 msgid "Available zypper subcommands in '%1%'"
-msgstr ""
+msgstr "Razpoložljivi podukazi za zypper v mapi »%1%«"
 
 #. translators: headline of an enumeration
 #: src/commands/subcommand.cc:475
 msgid "Zypper subcommands available from elsewhere on your $PATH"
-msgstr ""
+msgstr "Podukazi za zypper, ki so na voljo v drugih mapah iz $PATH"
 
 #: src/commands/subcommand.cc:480
 msgid ""
 "Using zypper subcommands available from elsewhere on your $PATH is disabled "
 "in zypper.conf."
 msgstr ""
+"Uporaba podukazov za zypper, ki so na voljo v drugih mapah iz $PATH, je "
+"onemogočena v zypper.conf."
 
 #. translators: helptext; %1% is a zypper command
 #: src/commands/subcommand.cc:485
 #, boost-format
 msgid "Type '%1%' to get subcommand-specific help if available."
 msgstr ""
+"Da dobite pomoč specifično za podukaz (če je na voljo), uporabite ukaz »%1%«."
 
 #. translators: %1% - command name
 #: src/commands/subcommand.cc:508
 #, boost-format
 msgid "Manual entry for %1% can't be shown"
-msgstr ""
+msgstr "Priročnika za ukaz »%1%« ni moč prikazati"
 
 #: src/commands/subcommand.cc:522
 msgid "Lists available subcommands."
-msgstr ""
+msgstr "Izpiše razpoložljive podukaze."
 
 #: src/commands/subcommand.cc:523
 msgid ""
 "Lists available subcommands. Using zypper subcommands found on your $PATH is "
 "disabled in zypper.conf."
 msgstr ""
+"Izpiše razpoložljive podukaze. Uporaba podukazov za zypper, ki so na voljo v "
+"drugih mapah iz $PATH, je onemogočena v zypper.conf."
 
 #. Currently no concept how to handle global options and ZYPPlock
 #: src/commands/subcommand.cc:626
 msgid "Zypper shell does not support execution of subcommands."
-msgstr ""
+msgstr "Ukazna lupina za zypper ne podpira izvajanja podukazov."
 
 #. translators: %1%  - is the name of a subcommand
 #: src/commands/subcommand.cc:640
 #, boost-format
 msgid "Subcommand %1% does not support zypper global options."
-msgstr ""
+msgstr "Podukaz »%1%« ne podpira splošnih možnosti za zypper."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/update.cc:22
 msgid "update (up) [OPTIONS] [PACKAGENAME] ..."
-msgstr ""
+msgstr "update (up) [MOŽNOSTI] [IME_PAKETA] …"
 
 #. translators: command summary: update, up
 #: src/commands/update.cc:24
 msgid "Update installed packages with newer versions."
-msgstr ""
+msgstr "Posodobi nameščene pakete na novejše različice."
 
 #. translators: command description
 #: src/commands/update.cc:26
 msgid ""
 "Update all or specified installed packages with newer versions, if possible."
 msgstr ""
+"Posodobi vse navedene nameščene pakete na novejše različice, če je to možno."
 
 #: src/commands/update.cc:69 src/commands/update.cc:76
 #: src/commands/update.cc:123
 msgid "Operation not supported."
-msgstr ""
+msgstr "Dejanje ni podprto."
 
 #: src/commands/update.cc:70
 #, c-format, boost-format
 msgid "To update installed products use '%s'."
-msgstr ""
+msgstr "Da posodobite nameščene izdelke, uporabite ukaz »%s«."
 
 #: src/commands/update.cc:77
 #, c-format, boost-format
@@ -5201,26 +5219,30 @@ msgid ""
 "Zypper does not keep track of installed source packages. To install the "
 "latest source package and its build dependencies, use '%s'."
 msgstr ""
+"Zypper ne spremlja nameščenih paketov z izvorno kodo. Da namestite "
+"najnovejši paket z izvorno kodo in njegove odvisnosti za gradnjo, uporabite "
+"ukaz »%s«."
 
 #: src/commands/update.cc:83
 msgid ""
 "Cannot use multiple types when specific packages are given as arguments."
 msgstr ""
+"Ko so specifični paketi navedeni kot argumenti, ni moč uporabiti več vrst."
 
 #: src/commands/utils/download.cc:129 src/commands/utils/source-download.cc:212
 #, c-format, boost-format
 msgid "Insufficient privileges to use download directory '%s'."
-msgstr ""
+msgstr "Za uporabo mape za prejemanje »%s« ni zadostnih dovoljenj."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/utils/download.cc:142
 msgid "download [OPTIONS] <PACKAGES>..."
-msgstr ""
+msgstr "download [MOŽNOSTI] <PAKETI> …"
 
 #. translators: command summary: download
 #: src/commands/utils/download.cc:144
 msgid "Download rpms specified on the commandline to a local directory."
-msgstr ""
+msgstr "Prenese navedene pakete v krajevno mapo."
 
 #. translators: command description
 #: src/commands/utils/download.cc:148
@@ -5230,6 +5252,10 @@ msgid ""
 "packages; for non-root users $XDG_CACHE_HOME/zypp/packages), but this can be "
 "changed by using the global --pkg-cache-dir option."
 msgstr ""
+"Prenese navedene pakete v krajevno mapo.. Privzeto so paketi preneseni v "
+"predpomnilnik paketov za libzypp (/var/cache/zypp/packages; za ne-root "
+"uporabnike $XDG_CACHE_HOME/zypp/packages). To lahko spremenite z uporabo "
+"splošne možnosti »--pkg-cache-dir«."
 
 #. translators: command description
 #: src/commands/utils/download.cc:151
@@ -5238,6 +5264,9 @@ msgid ""
 "tried to download. Upon success the local path is is found in 'download-"
 "result/localpath@path'."
 msgstr ""
+"V izpisu XML je za vsak paket, ki ga je zypper poskusil prejeti, zapisan "
+"vnos <download-result>. Po uspešnem prejemu krajevno pot najdete v »download-"
+"result/localpath@path«."
 
 #. translators: --all-matches
 #: src/commands/utils/download.cc:166
@@ -5245,63 +5274,68 @@ msgid ""
 "Download all versions matching the commandline arguments. Otherwise only the "
 "best version of each matching package is downloaded."
 msgstr ""
+"Prenese vse različice, ki se ujemajo z argumenti ukazne vrstice. V "
+"nasprotnem se prenese le najnovejša različica vsakega ujemajočega paketa."
 
 #. translators: Label text; is followed by ': cmdline argument'
 #: src/commands/utils/download.cc:236
 msgid "Argument resolves to no package"
-msgstr ""
+msgstr "Argument se ne razreši v noben paket"
 
 #: src/commands/utils/download.cc:254 src/solve-commit.cc:1119
 msgid "Nothing to do."
-msgstr ""
+msgstr "Nič ni za storiti."
 
 #: src/commands/utils/download.cc:261
-#, fuzzy
 msgid "No prune to best version."
-msgstr "Izberite korenski (root) razdelek."
+msgstr "Brez kleščenja na najnovejšo različico."
 
 #: src/commands/utils/download.cc:267
 msgid "Prune to best version..."
-msgstr ""
+msgstr "Kleščenje na najnovejšo različico …"
 
 #: src/commands/utils/download.cc:273
 msgid "Not downloading anything..."
-msgstr ""
+msgstr "Nič ne bo prejetega."
 
 #: src/commands/utils/download.cc:315
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Error downloading package '%s'."
-msgstr "Napaka pri branju odseka %u."
+msgstr "Napaka prejemanja paketa »%s«."
 
 #: src/commands/utils/download.cc:329
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Not downloading package '%s'."
-msgstr "Napaka pri branju odseka %u."
+msgstr "Paket »%s« ne bo prejet."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/utils/licenses.cc:19
 msgid "licenses"
-msgstr ""
+msgstr "licenses"
 
 #. translators: command summary: licenses
 #: src/commands/utils/licenses.cc:21
 msgid "Print report about licenses and EULAs of installed packages."
 msgstr ""
+"Izpiše poročilo o licencah in uporabniških licenčnih dogovorih za nameščene "
+"pakete."
 
 #. translators: command description
 #: src/commands/utils/licenses.cc:23
 msgid "Report licenses and EULAs of currently installed software packages."
 msgstr ""
+"Poroča o licencah in uporabniških licenčnih dogovorih za trenutno nameščene "
+"pakete programske opreme."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/utils/purge-kernels.cc:26
 msgid "purge-kernels [OPTIONS]"
-msgstr ""
+msgstr "purge-kernels [MOŽNOSTI]"
 
 #. translators: command summary: targetos, tos
 #: src/commands/utils/purge-kernels.cc:28
 msgid "Remove old kernels."
-msgstr ""
+msgstr "Odstrani stara jedra Linux."
 
 #. translators: command description
 #: src/commands/utils/purge-kernels.cc:30
@@ -5310,138 +5344,137 @@ msgid ""
 "zypp/zypp.conf:multiversion.kernels which can be given as <version>, latest(-"
 "N), running, oldest(+N)."
 msgstr ""
+"Samodejno odstrani nameščena jedra Linux, upoštevajoč seznam tistih za "
+"obdržati v /etc/zypp/zypp.conf:multiversion.kernels, ki je lahko nastavljen "
+"kot <različica>, latest(-N), running, oldest(+N). Kjer »latest« pomeni "
+"najnovejši, »running« pomeni trenutno zagnani in »oldest« pomeni najstarejši."
 
 #: src/commands/utils/purge-kernels.cc:51
 msgid "Preparing to purge obsolete kernels..."
-msgstr ""
+msgstr "Pripravljanje na izbris nepotrebnih jeder Linux …"
 
 #: src/commands/utils/purge-kernels.cc:52
 #, boost-format
 msgid "Configuration: %1%"
-msgstr ""
+msgstr "Nastavitve: %1%"
 
 #: src/commands/utils/purge-kernels.cc:53
 #, boost-format
 msgid "Running kernel release: %1%"
-msgstr ""
+msgstr "Različica zagnanega jedra: %1%"
 
 #: src/commands/utils/purge-kernels.cc:54
 #, boost-format
 msgid "Running kernel arch: %1%"
-msgstr ""
+msgstr "Arhitektura zagnanega jedra: %1%"
 
 #: src/commands/utils/source-download.cc:203
 #, c-format, boost-format
 msgid "Can't create or access download directory '%s'."
-msgstr ""
+msgstr "Ni moč ustvariti ali dostopati do mape za prejeme »%s«."
 
 #: src/commands/utils/source-download.cc:216
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Using download directory at '%s'."
-msgstr "Neznan monitor:"
+msgstr "Uporablja se mapa za prejeme »%s«."
 
 #: src/commands/utils/source-download.cc:226
 #: src/commands/utils/source-download.cc:261
 msgid "Failed to read download directory"
-msgstr ""
+msgstr "Branje mape za prejeme ni uspelo"
 
 #: src/commands/utils/source-download.cc:231
 msgid "Scanning download directory"
-msgstr ""
+msgstr "Pregledovanje mape za prejeme"
 
 #: src/commands/utils/source-download.cc:265
-#, fuzzy
 msgid "Scanning installed packages"
-msgstr "Nameščeni paketi"
+msgstr "Pregledovanje nameščenih paketov"
 
 #: src/commands/utils/source-download.cc:284
-#, fuzzy
 msgid "Installed packages:"
-msgstr "Nameščeni paketi"
+msgstr "Nameščeni paketi:"
 
 #: src/commands/utils/source-download.cc:287
-#, fuzzy
 msgid "Required source packages:"
-msgstr "Paket"
+msgstr "Zahtevani paketi z izvorno kodo:"
 
 #: src/commands/utils/source-download.cc:296
 msgid "Required source packages available in download directory:"
-msgstr ""
+msgstr "Zahtevani paketi z izvorno kodo, ki so v mapi za prejeme:"
 
 #: src/commands/utils/source-download.cc:300
 msgid "Required source packages to be downloaded:"
-msgstr ""
+msgstr "Zahtevani paketi z izvorno kodo, ki bodo prejeti:"
 
 #: src/commands/utils/source-download.cc:304
 msgid "Superfluous source packages in download directory:"
-msgstr ""
+msgstr "Odvečni paketi z izvorno kodo v mapi za prejeme:"
 
 #. translators: table headers
 #. translators: property name; short; used like "Name: value"
 #: src/commands/utils/source-download.cc:318 src/info.cc:409
-#, fuzzy
 msgid "Source package"
-msgstr "Paket"
+msgstr "Paket z izvorno kodo"
 
 #: src/commands/utils/source-download.cc:318
-#, fuzzy
 msgid "Installed package"
-msgstr "Nameščeni paketi"
+msgstr "Nameščen paket"
 
 #: src/commands/utils/source-download.cc:368
 msgid "Use '--verbose' option for a full list of required source packages."
 msgstr ""
+"Za celoten seznam zahtevanih paketov z izvorno kodo uporabite možnost "
+"»--verbose«."
 
 #: src/commands/utils/source-download.cc:377
 msgid "Deleting superfluous source packages"
-msgstr ""
+msgstr "Brisanje odvečnih paketov z izvorno kodo"
 
 #: src/commands/utils/source-download.cc:388
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Failed to remove source package '%s'"
-msgstr "Napaka pri nalaganju modula \"%s\"."
+msgstr "Izbris paketa z izvorno kodo »%s« ni uspel"
 
 #: src/commands/utils/source-download.cc:399
 msgid "No superfluous source packages to delete."
-msgstr ""
+msgstr "Ni nobenega odvečnega paketa z izvorno kodo."
 
 #: src/commands/utils/source-download.cc:409
-#, fuzzy
 msgid "Downloading required source packages..."
-msgstr "Nameščeni paketi"
+msgstr "Prejemanje zahtevanih paketov z izvorno kodo …"
 
 #: src/commands/utils/source-download.cc:428
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Source package '%s' is not provided by any repository."
-msgstr "Gostitelja %s ni."
+msgstr "Paket z izvorno kodo »%s« ni v nobenem viru."
 
 #: src/commands/utils/source-download.cc:446
 #: src/commands/utils/source-download.cc:460
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Error downloading source package '%s'."
-msgstr "Napaka pri branju odseka %u."
+msgstr "Napaka prejemanja paketa z izvorno kodo »%s«."
 
 #: src/commands/utils/source-download.cc:471
-#, fuzzy
 msgid "No source packages to download."
-msgstr "Namestitev paketa"
+msgstr "Ni nobenega paketa z izvorno kodo za prejeti."
 
 #. translators: command summary: source-download
 #. translators: command description
 #: src/commands/utils/source-download.cc:481
 #: src/commands/utils/source-download.cc:483
 msgid "Download source rpms for all installed packages to a local directory."
-msgstr ""
+msgstr "Prejme pakete z izvorno kodo za vse nameščene pakete v krajevno mapo."
 
 #. translators: -d, --directory <DIR>
 #: src/commands/utils/source-download.cc:495
 msgid "Download all source rpms to this directory."
-msgstr ""
+msgstr "Prejme vse pakete z izvorno kodo v navedeno mapo."
 
 #. translators: --delete/--no-delete
 #: src/commands/utils/source-download.cc:501
 msgid "Whether to delete extraneous source rpms in the local directory."
-msgstr ""
+msgstr "Ali naj se iz krajevne mape izbriše odvečne pakete z izvorno kodo."
 
 #. translators: --status
 #: src/commands/utils/source-download.cc:505
@@ -5449,93 +5482,101 @@ msgid ""
 "Don't download any source rpms, but show which source rpms are missing or "
 "extraneous."
 msgstr ""
+"Ne prejme se noben paket z izvorno kodo, ampak se prikaže kateri manjkajo "
+"ali so odvečni."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/utils/targetos.cc:20
 msgid "targetos (tos) [OPTIONS]"
-msgstr ""
+msgstr "targetos (tos) [MOŽNOSTI]"
 
 #. translators: command summary: targetos, tos
 #: src/commands/utils/targetos.cc:22
 msgid "Print the target operating system ID string."
-msgstr ""
+msgstr "Izpiše določilni niz ciljnega operacijskega sistema."
 
 #: src/commands/utils/targetos.cc:24
 msgid ""
 "Shows the ID string of the target operating system. The string is defined by "
 "the XPath:/product/register/target entry in /etc/products.d/baseproduct."
 msgstr ""
+"Prikaže določilni niz ciljnega operacijskega sistema. Niz je določen z "
+"vnosom XPath:/product/register/target v datoteki /etc/products.d/baseproduct."
 
 #: src/commands/utils/targetos.cc:25
 msgid ""
 "If the baseproduct does not provide this entry, or if no baseproduct is "
 "installed at all, the value is empty if the --terse global option is used."
 msgstr ""
+"Če datoteka baseproduct tega vnosa ne vsebuje, ali če ni nameščen noben "
+"osnovni izdelek, je vrednost prazna, če se uporabi splošna možnost »--terse«."
 
 #: src/commands/utils/targetos.cc:26
 msgid ""
 "In not-terse mode the distribution label is shown instead of an empty value, "
 "if a baseproduct is installed."
 msgstr ""
+"Če možnost »--terse« ni v uporabi in je osnovni izdelek nameščen, se namesto "
+"prazne vrednosti uporabi oznaka distribucije."
 
 #: src/commands/utils/targetos.cc:36
 msgid "Show the baseproducts distribution and short label instead."
-msgstr ""
+msgstr "Prikaži raje distribucijo osnovnih izdelkov in kratko oznako."
 
 #: src/commands/utils/targetos.cc:49
 msgid "XML output not implemented for this command."
-msgstr ""
+msgstr "Izpis XML za ta ukaz ni implementiran."
 
 #: src/commands/utils/targetos.cc:62 src/commands/utils/targetos.cc:77
 #, c-format, boost-format
 msgid "Distribution Label: %s"
-msgstr ""
+msgstr "Oznaka distribucije: %s"
 
 #: src/commands/utils/targetos.cc:63
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Short Label: %s"
-msgstr "Ime"
+msgstr "Kratka oznaka: %s"
 
 #. translators: `FILE does not define TAG
 #: src/commands/utils/targetos.cc:71
 #, c-format, boost-format
 msgid "%s does not define %s."
-msgstr ""
+msgstr "%s ne določa %s."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/utils/versioncmp.cc:19
 msgid "versioncmp (vcmp) <VERSION1> <VERSION2>"
-msgstr ""
+msgstr "versioncmp (vcmp) <RAZLIČICA1> <RAZLIČICA2>"
 
 #. translators: command summary
 #: src/commands/utils/versioncmp.cc:21
 msgid "Compare two version strings."
-msgstr ""
+msgstr "Primerja dva niza različic."
 
 #. translators: command description
 #: src/commands/utils/versioncmp.cc:23
 msgid "Compare the versions supplied as arguments."
-msgstr ""
+msgstr "Primerja različici podani kot argumenta."
 
 #. translators: -m, --match
 #: src/commands/utils/versioncmp.cc:35
 msgid "Takes missing release number as any release."
-msgstr ""
+msgstr "Manjkajočo številko izdaje obravnava kot katerokoli izdajo."
 
 #: src/commands/utils/versioncmp.cc:75
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "%s matches %s"
-msgstr "popravi"
+msgstr "%s je enaka kot %s"
 
 #: src/commands/utils/versioncmp.cc:77
 #, c-format, boost-format
 msgid "%s is newer than %s"
-msgstr ""
+msgstr "%s je novejša od %s"
 
 #: src/commands/utils/versioncmp.cc:79
 #, c-format, boost-format
 msgid "%s is older than %s"
-msgstr ""
+msgstr "%s je starejša od %s"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: Table column header
@@ -5543,20 +5584,19 @@ msgstr ""
 #: src/info.cc:92 src/info.cc:748 src/search.cc:52 src/search.cc:305
 #: src/search.cc:453 src/search.cc:500
 msgid "Version"
-msgstr "Verzija"
+msgstr "Različica"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: package architecture (header)
 #: src/info.cc:94 src/search.cc:54 src/search.cc:454 src/search.cc:501
 #: src/update.cc:795
 msgid "Arch"
-msgstr ""
+msgstr "Arhitektura"
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:96
-#, fuzzy
 msgid "Vendor"
-msgstr "Proizvajalec"
+msgstr "Izdelovalec"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: package summary (header)
@@ -5573,78 +5613,76 @@ msgstr "Opis"
 
 #: src/info.cc:131
 msgid "automatically"
-msgstr ""
+msgstr "samodejno"
 
 #: src/info.cc:220
 #, boost-format
 msgid "There would be %1% match for '%2%'."
 msgid_plural "There would be %1% matches for '%2%'."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Za %2% bi obstajalo %1% ujemanje."
+msgstr[1] "Za %2% bi obstajali %1% ujemanji."
+msgstr[2] "Za %2% bi obstajala %1% ujemanja."
+msgstr[3] "Za %2% bi obstajalo %1% ujemanj."
 
 #. TranslatorExplanation E.g. "package 'zypper' not found."
 #: src/info.cc:271
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "%s '%s' not found."
-msgstr "Gostitelja %s ni."
+msgstr "%s »%s« ni najden."
 
 #. TranslatorExplanation E.g. "Information for package zypper:"
 #: src/info.cc:297
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Information for %s %s:"
-msgstr "Informacije"
+msgstr "Podatki za %s »%s«:"
 
 #: src/info.cc:373 src/info.cc:383 src/info.cc:389
-#, fuzzy
 msgid "Support Level"
-msgstr "Ime"
+msgstr "Stopnja podpore"
 
 #: src/info.cc:375
 msgid "The successor package is already installed."
-msgstr ""
+msgstr "Nadomestni paket je že nameščen."
 
 #: src/info.cc:377
 msgid ""
 "The successor package should be installed as soon as possible to receive "
 "continued support."
 msgstr ""
+"Nadomestni paket bi moral biti nameščen čim prej, da še naprej prejema "
+"podporo."
 
 #: src/info.cc:384
 msgid "Unfortunately the successor package is not provided by any repository."
-msgstr ""
+msgstr "Nadomestnega paketa ne ponuja noben vir."
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:394
-#, fuzzy
 msgid "Installed Size"
-msgstr "Nameščene posodobitve"
+msgstr "Nameščena velikost"
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:398 src/info.cc:448 src/info.cc:612 src/utils/misc.cc:329
 #: src/utils/misc.cc:371
 msgid "Status"
-msgstr "Status"
+msgstr "Stanje"
 
 #: src/info.cc:402 src/info.cc:616
 #, c-format, boost-format
 msgid "out-of-date (version %s installed)"
-msgstr ""
+msgstr "star (nameščena različica %s)"
 
 #: src/info.cc:404 src/info.cc:618
-#, fuzzy
 msgid "up-to-date"
-msgstr "Posodobi"
+msgstr "najnovejši"
 
 #: src/info.cc:407 src/info.cc:621
-#, fuzzy
 msgid "not installed"
-msgstr "Nameščeno"
+msgstr "ni nameščen"
 
 #: src/info.cc:411
 msgid "Upstream URL"
-msgstr ""
+msgstr "Domača stran"
 
 #. translators: property name; short; used like "Name: value"
 #. translator: Table column header.
@@ -5652,29 +5690,27 @@ msgstr ""
 #: src/info.cc:450 src/update.cc:406 src/utils/misc.cc:326
 #: src/utils/misc.cc:368
 msgid "Category"
-msgstr ""
+msgstr "Kategorija"
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:452 src/utils/misc.cc:327 src/utils/misc.cc:369
-#, fuzzy
 msgid "Severity"
-msgstr "Varnost"
+msgstr "Resnost"
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:454
 msgid "Created On"
-msgstr ""
+msgstr "Ustvarjen"
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:456 src/utils/misc.cc:328 src/utils/misc.cc:370
-#, fuzzy
 msgid "Interactive"
-msgstr "Vmesnik"
+msgstr "Interaktiven"
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:491
 msgid "Visible to User"
-msgstr ""
+msgstr "Viden uporabniku"
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:505 src/info.cc:541
@@ -5683,7 +5719,7 @@ msgstr "Vsebina"
 
 #: src/info.cc:505
 msgid "(empty)"
-msgstr ""
+msgstr "(prazno)"
 
 #. translators: Table column header
 #. translators: header of table column - S is for 'Status' (package installed or not)
@@ -5694,31 +5730,29 @@ msgstr ""
 #: src/search.cc:198 src/search.cc:303 src/search.cc:450 src/search.cc:494
 #: src/update.cc:784
 msgid "S"
-msgstr ""
+msgstr "S"
 
 #. translators: Table column header
 #: src/info.cc:514 src/search.cc:307
-#, fuzzy
 msgid "Dependency"
 msgstr "Odvisnosti"
 
 #: src/info.cc:519 src/info.cc:533
-#, fuzzy
 msgid "Required"
-msgstr "Zahteva"
+msgstr "Zahtevani"
 
 #: src/info.cc:524 src/info.cc:533 src/search.cc:243
 msgid "Recommended"
-msgstr ""
+msgstr "Priporočeni"
 
 #: src/info.cc:530 src/info.cc:533 src/search.cc:245
 msgid "Suggested"
-msgstr ""
+msgstr "Predlagani"
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:589
 msgid "End of Support"
-msgstr ""
+msgstr "Konec podpore"
 
 #: src/info.cc:594
 msgid "unknown"
@@ -5728,73 +5762,66 @@ msgstr "neznano"
 #: src/info.cc:599
 #, boost-format
 msgid "See %1%"
-msgstr ""
+msgstr "Glejte %1%"
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:605
 msgid "Flavor"
-msgstr ""
+msgstr "Inačica"
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:607 src/search.cc:502
 msgid "Is Base"
-msgstr ""
+msgstr "Je osnovni"
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:628 src/info.cc:655
-#, fuzzy
 msgid "Update Repositories"
-msgstr "%s je potrebno odstraniti."
+msgstr "Viri posodobitev"
 
 #: src/info.cc:633
-#, fuzzy
 msgid "Content Id"
-msgstr "Vsebina"
+msgstr "Določilnik vsebine"
 
 #: src/info.cc:645
-#, fuzzy
 msgid "Provided by enabled repository"
-msgstr "Napaka pri branju odseka %u."
+msgstr "Ponuja ga omogočen vir"
 
 #: src/info.cc:650
-#, fuzzy
 msgid "Not provided by any enabled repository"
-msgstr "Gostitelja %s ni."
+msgstr "Ga ne ponuja omogočen vir"
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:660
-#, fuzzy
 msgid "CPE Name"
-msgstr "Ime"
+msgstr "Ime CPE"
 
 #: src/info.cc:665
 msgid "undefined"
-msgstr ""
+msgstr "nedoločeno"
 
 #: src/info.cc:667
-#, fuzzy
 msgid "invalid CPE Name"
-msgstr "Nepravilno ime naprave."
+msgstr "Neveljavno ime CPE"
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:670
-#, fuzzy
 msgid "Short Name"
-msgstr "Ime"
+msgstr "Kratko ime"
 
 #. translators: property name; short; used like "Name: value"; is followed by a list of binary packages built from this source package
 #: src/info.cc:756
 msgid "Builds binary package"
-msgstr ""
+msgstr "Izgradi dvojiške pakete"
 
 #. translators: header of table column - is the language requested? (Yes/No)
 #: src/locales.cc:68 src/locales.cc:178
 msgid "Requested"
-msgstr ""
+msgstr "Zahtevan"
 
 #: src/locales.cc:70
 msgid "Fallback"
-msgstr ""
+msgstr "Zasilni"
 
 #: src/locales.cc:72 src/repos.cc:174 src/repos.cc:202
 msgid "No"
@@ -5803,56 +5830,56 @@ msgstr "Ne"
 #. translators: header of table column - the language code, e.g. en_US
 #: src/locales.cc:174
 msgid "Code"
-msgstr ""
+msgstr "Koda"
 
 #. translators: header of table column - the language, e.g. English (United States)
 #: src/locales.cc:176
 msgid "Language"
-msgstr ""
+msgstr "Jezik"
 
 #: src/locales.cc:235
 #, c-format, boost-format
 msgid "Packages for %s (locale '%s', requested: %s):"
-msgstr ""
+msgstr "Paketi za %s (jezik »%s«, zahtevan: %s):"
 
 #: src/locales.cc:248
 #, c-format, boost-format
 msgid "Added locale: %s"
-msgstr ""
+msgstr "Dodan jezik: %s"
 
 #: src/locales.cc:253
 #, c-format, boost-format
 msgid " %s is already requested."
-msgstr ""
+msgstr " %s je že zahtevan."
 
 #: src/locales.cc:276
 #, c-format, boost-format
 msgid "Removed locale: %s"
-msgstr ""
+msgstr "Odstranjen jezik: %s"
 
 #: src/locales.cc:281
 #, c-format, boost-format
 msgid "%s was not requested."
-msgstr ""
+msgstr "%s ni bil zahtevan."
 
 #. set up our strings we want to output in case SIGINT was triggered
 #. we can not allocate memory there, so we do it in advance and remember the translated strings
 #. translators: this will show up if you press ctrl+c once
 #: src/main.cc:122
 msgid "Trying to exit gracefully..."
-msgstr ""
+msgstr "Poskušanje elegantnega končanja …"
 
 #. translators: this will show up if you press ctrl+c twice
 #: src/main.cc:126
 msgid "Zypper is currently cleaning up, exiting as soon as possible."
-msgstr ""
+msgstr "Zypper trenutno čisti in bo končan kakor hitro je možno."
 
 #. translators: the first %s is name of the resolvable,
 #. the second is its kind (e.g. 'zypper package')
 #: src/misc.cc:138
 #, c-format, boost-format
 msgid "Automatically agreeing with %s %s license."
-msgstr ""
+msgstr "Samodejno strinjanje z licenco za %s %s."
 
 #. introduction
 #. translators: the first %s is the name of the package, the second
@@ -5863,15 +5890,17 @@ msgid ""
 "In order to install '%s'%s, you must agree to terms of the following license "
 "agreement:"
 msgstr ""
+"Da bi lahko namestili »%s« %s, se morate strinjati s pogoji naslednjega "
+"licenčnega sporazuma:"
 
 #. lincense prompt
 #: src/misc.cc:187
 msgid "Do you agree with the terms of the license?"
-msgstr ""
+msgstr "Ali se strinjate s pogoji licence?"
 
 #: src/misc.cc:193
 msgid "Aborting installation due to the need for license confirmation."
-msgstr ""
+msgstr "Prekinitev namestitve zaradi potrebe po potrditvi licence."
 
 #. translators: %s is '--auto-agree-with-licenses'
 #: src/misc.cc:196
@@ -5880,79 +5909,81 @@ msgid ""
 "Please restart the operation in interactive mode and confirm your agreement "
 "with required licenses, or use the %s option."
 msgstr ""
+"Ponovno zaženite dejanje v interaktivnem načinu in potrdite svoje strinjanje "
+"z zahtevanimi licencami, ali pa uporabite možnost »%s«."
 
 #. translators: e.g. "... with flash package license."
 #: src/misc.cc:209
 #, c-format, boost-format
 msgid "Aborting installation due to user disagreement with %s %s license."
-msgstr ""
+msgstr "Prekinitev namestitve zaradi nestrinjanja z licenco za %s %s."
 
 #: src/misc.cc:248
 msgid "License"
-msgstr ""
+msgstr "Licenca"
 
 #: src/misc.cc:267
 msgid "EULA"
-msgstr ""
+msgstr "Licenčni dogovor"
 
 #: src/misc.cc:279
 msgid "SUMMARY"
-msgstr ""
+msgstr "POVZETEK"
 
 #: src/misc.cc:280
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Installed packages: %d"
-msgstr "Nameščeni paketi"
+msgstr "Nameščeni paketi: %d"
 
 #: src/misc.cc:281
 #, c-format, boost-format
 msgid "Installed packages with counterparts in repositories: %d"
-msgstr ""
+msgstr "Nameščeni paketi z ustrezniki v virih: %d"
 
 #: src/misc.cc:282
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Installed packages with EULAs: %d"
-msgstr "Namesti paket z YaST2"
+msgstr "Nameščeni paketi z licenčnimi dogovori: %d"
 
 #: src/misc.cc:350
 #, c-format, boost-format
 msgid "Package '%s' has source package '%s'."
-msgstr ""
+msgstr "Paket »%s« ima paket z izvorno kodo »%s«."
 
 #: src/misc.cc:359
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Source package '%s' for package '%s' not found."
-msgstr "Gostitelja %s ni."
+msgstr "Paket z izvorno kodo »%s« za paket »%s« ni bil najden."
 
 #: src/misc.cc:433
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Installing source package %s-%s"
-msgstr "Namesti pakete"
+msgstr "Nameščanje paketa z izvorno kodo %s-%s"
 
 #: src/misc.cc:442
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Source package %s-%s successfully retrieved."
-msgstr "%s je potrebno odstraniti."
+msgstr "Paket z izvorno kodo %s-%s je bil uspešno pridobljen."
 
 #: src/misc.cc:448
 #, c-format, boost-format
 msgid "Source package %s-%s successfully installed."
-msgstr ""
+msgstr "Paket z izvorno kodo %s-%s je bil uspešno nameščen."
 
 #: src/misc.cc:454
 #, c-format, boost-format
 msgid "Problem installing source package %s-%s:"
-msgstr ""
+msgstr "Težava nameščanja paketa z izvorno kodo %s-%s:"
 
 #. translator: used like "1h 12min in the future!"
 #: src/repos.cc:83
 msgid "in the future!"
-msgstr ""
+msgstr "v prihodnosti!"
 
 #. translators: used as 'XYZ changed to SOMETHING [volatile]' to tag specific property changes.
 #: src/repos.cc:94
 msgid "volatile"
-msgstr ""
+msgstr "nestanovitno"
 
 #. translators: 'Volatile' refers to changes we previously tagged as 'XYZ changed to SOMETHING [volatile]'
 #: src/repos.cc:100
@@ -5961,18 +5992,20 @@ msgid ""
 "Repo '%1%' is managed by service '%2%'. Volatile changes are reset by the "
 "next service refresh!"
 msgstr ""
+"Z virom »%1%« upravlja storitev »%2%«. Nestanovitne spremembe bodo "
+"ponastavljene ob naslednji osvežitvi storitve!"
 
 #: src/repos.cc:116
 msgid "default priority"
-msgstr ""
+msgstr "privzeta prednost"
 
 #: src/repos.cc:117
 msgid "raised priority"
-msgstr ""
+msgstr "zvišana prednost"
 
 #: src/repos.cc:117
 msgid "lowered priority"
-msgstr ""
+msgstr "znižana prednost"
 
 #: src/repos.cc:168 src/repos.cc:196
 msgid "Yes"
@@ -5983,76 +6016,76 @@ msgid ""
 "Repository priorities are without effect. All enabled repositories share the "
 "same priority."
 msgstr ""
+"Prednosti virov nimajo učinka. Vsi omogočeni viri si delijo isto prednost."
 
 #: src/repos.cc:225
-#, fuzzy
 msgid "Repository priorities in effect:"
-msgstr "%s je potrebno odstraniti."
+msgstr "Prednosti virov v veljavi:"
 
 #: src/repos.cc:226
-#, fuzzy, boost-format
+#, boost-format
 msgid "See '%1%' for details"
-msgstr "Izbran vnos je odstranjen."
+msgstr "Za podrobnosti si oglejte »%1%«"
 
 #: src/repos.cc:235
-#, fuzzy, boost-format
+#, boost-format
 msgid "%1% repository"
 msgid_plural "%1% repositories"
-msgstr[0] "Gostitelja %s ni."
-msgstr[1] "Gostitelja %s ni."
-msgstr[2] "Gostitelja %s ni."
-msgstr[3] "Gostitelja %s ni."
+msgstr[0] "%1% vir"
+msgstr[1] "%1% vira"
+msgstr[2] "%1% viri"
+msgstr[3] "%1% virov"
 
 #. check whether libzypp indicates a refresh is needed, and if so,
 #. print a message
 #: src/repos.cc:268
 #, c-format, boost-format
 msgid "Checking whether to refresh metadata for %s"
-msgstr ""
+msgstr "Preverjanje, ali je potrebno osvežiti metapodatke za %s"
 
 #: src/repos.cc:297
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Repository '%s' is up to date."
-msgstr "Gostitelja %s ni."
+msgstr "Vir »%s« je ažuren."
 
 #: src/repos.cc:303
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "The up-to-date check of '%s' has been delayed."
-msgstr "%s je potrebno odstraniti."
+msgstr "Preverjanje ažurnosti »%s« je bilo zamaknjeno."
 
 #: src/repos.cc:325
 msgid "Forcing raw metadata refresh"
-msgstr ""
+msgstr "Vsiljevanje osvežitve surovih metapodatkov"
 
 #: src/repos.cc:331
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Retrieving repository '%s' metadata"
-msgstr "Napaka pri branju odseka %u."
+msgstr "Pridobivanje metapodatkov za vir »%s«"
 
 #: src/repos.cc:355
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Do you want to disable the repository %s permanently?"
-msgstr "Želite zaustaviti sistem?"
+msgstr "Ali želite za vedno onemogočiti vir »%s«?"
 
 #: src/repos.cc:371
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Error while disabling repository '%s'."
-msgstr "Napaka pri branju odseka %u."
+msgstr "Napaka med onemogočanjem vira »%s«."
 
 #: src/repos.cc:387
 #, c-format, boost-format
 msgid "Problem retrieving files from '%s'."
-msgstr ""
+msgstr "Težava pridobivanja datotek iz »%s«."
 
 #: src/repos.cc:388 src/repos.cc:1957 src/solve-commit.cc:989
 #: src/solve-commit.cc:1020 src/solve-commit.cc:1044
 msgid "Please see the above error message for a hint."
-msgstr ""
+msgstr "Za namig glejte zgornje sporočilo napake."
 
 #: src/repos.cc:400
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "No URIs defined for '%s'."
-msgstr "Za to dejanje ni določene pomoči."
+msgstr "Za »%s« ni določenega nobenega URI-ja."
 
 #. TranslatorExplanation the first %s is a .repo file path
 #: src/repos.cc:405
@@ -6061,37 +6094,37 @@ msgid ""
 "Please add one or more base URI (baseurl=URI) entries to %s for repository "
 "'%s'."
 msgstr ""
+"V %s dodajte enega ali več vnosov osnovnih URI-jev (baseurl=URI) za vir »%s«."
 
 #: src/repos.cc:419
-#, fuzzy
 msgid "No alias defined for this repository."
-msgstr "Za to dejanje ni določene pomoči."
+msgstr "Za ta vir ni določeno nobeno drugo ime."
 
 #: src/repos.cc:431
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Repository '%s' is invalid."
-msgstr "Gostitelja %s ni."
+msgstr "Vir »%s« ni veljaven."
 
 #: src/repos.cc:432
 msgid ""
 "Please check if the URIs defined for this repository are pointing to a valid "
 "repository."
 msgstr ""
+"Preverite, ali URI-ji, ki so določeni za ta vir, kažejo na veljaven vir."
 
 #: src/repos.cc:444
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Error retrieving metadata for '%s':"
-msgstr "Napaka pri branju odseka %u."
+msgstr "Napaka pridobivanja metapodatkov za »%s«:"
 
 #: src/repos.cc:457
-#, fuzzy
 msgid "Forcing building of repository cache"
-msgstr "Shranjevanje zbirke podatkov"
+msgstr "Vsiljevanje izgradnje predpomnilnika za vir"
 
 #: src/repos.cc:482
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Error parsing metadata for '%s':"
-msgstr "Napaka pri branju odseka %u."
+msgstr "Napaka razčlenjevanja metapodatkov za »%s«:"
 
 #. TranslatorExplanation Don't translate the URL unless it is translated, too
 #: src/repos.cc:484
@@ -6101,54 +6134,54 @@ msgid ""
 "report by following instructions at http://en.opensuse.org/Zypper/"
 "Troubleshooting"
 msgstr ""
+"To so morda povzročili neveljavni metapodatki v viru, ali pa napaka v "
+"razčlenjevalniku metapodatkov. V drugem primeru, ali če ste v dvomih, "
+"poročajte o napaki s sledenjem navodilom na http://en.opensuse.org/Zypper/"
+"Troubleshooting"
 
 #: src/repos.cc:493
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Repository metadata for '%s' not found in local cache."
-msgstr "Gostitelja %s ni."
+msgstr "Metapodatkov za vir »%s« v krajevnem predpomnilniku ni bilo moč najti."
 
 #: src/repos.cc:501
-#, fuzzy
 msgid "Error building the cache:"
-msgstr ""
-"Napaka pri dostopu do FTP strežnika:\n"
-"\n"
-"%s"
+msgstr "Napaka izgrajevanja predpomnilnika:"
 
 #: src/repos.cc:720
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Repository '%s' not found by its alias, number, or URI."
-msgstr "Gostitelja %s ni."
+msgstr "Vir »%s« po njegovem drugem imenu, številki ali URI-ju ni bil najden."
 
 #: src/repos.cc:722
 #, c-format, boost-format
 msgid "Use '%s' to get the list of defined repositories."
-msgstr ""
+msgstr "Da dobite seznam virov, ki so določeni, uporabite ukaz »%s«."
 
 #: src/repos.cc:742
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Ignoring disabled repository '%s'"
-msgstr "Napaka pri branju odseka %u."
+msgstr "Onemogočen vir »%s« bo prezrt"
 
 #. translator: used as a table header
 #: src/repos.cc:796
 msgid "Time since last refresh"
-msgstr ""
+msgstr "Čas od zadnje osvežitve"
 
 #: src/repos.cc:843
 #, c-format, boost-format
 msgid "Global option '%s' can be used to temporarily enable repositories."
-msgstr ""
+msgstr "Splošno možnost »%s« lahko uporabite za začasno omogočanje virov."
 
 #: src/repos.cc:859 src/repos.cc:865
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Ignoring repository '%s' because of '%s' option."
-msgstr "Izbranega vnosa ni možno odstraniti."
+msgstr "Vir »%s« bo zaradi možnosti »%s« prezrt."
 
 #: src/repos.cc:886 src/repos.cc:1006
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Temporarily enabling repository '%s'."
-msgstr "Napaka pri branju odseka %u."
+msgstr "Vir »%s« bo začasno omogočen."
 
 #: src/repos.cc:943
 #, c-format, boost-format
@@ -6156,21 +6189,23 @@ msgid ""
 "Repository '%s' is out-of-date. You can run 'zypper refresh' as root to "
 "update it."
 msgstr ""
+"Vir »%s« ni ažuren. Da ga osvežite, lahko kot uporabnik root zaženete ukaz »"
+"zypper refresh«."
 
 #. translator: Used as status in a table "RepoName: MetadataStatus"
 #: src/repos.cc:963
 msgid "No metadata available! Skipping it!"
-msgstr ""
+msgstr "Metapodatki niso na voljo! Preskočen!"
 
 #. translator: Used as status in a table "RepoName: MetadataStatus"
 #: src/repos.cc:966
 msgid "No permission to read metadata! Skipping it!"
-msgstr ""
+msgstr "Ni dovoljenja za branje metapodatkov! Preskočen!"
 
 #. translator: Used as status in a table "RepoName: MetadataStatus"
 #: src/repos.cc:969
 msgid "Cannot access metadata! Skipping it!"
-msgstr ""
+msgstr "Do metapodatkov ni moč dostopati! Preskočen!"
 
 #: src/repos.cc:986
 #, c-format, boost-format
@@ -6178,120 +6213,119 @@ msgid ""
 "The metadata cache needs to be built for the '%s' repository. You can run "
 "'zypper refresh' as root to do this."
 msgstr ""
+"Predpomnilnik metapodatkov za vir »%s« mora biti izgrajen. Da to storite, "
+"lahko kot uporabnik root zaženete ukaz »zypper refresh«."
 
 #: src/repos.cc:1013
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Repository '%s' stays disabled."
-msgstr "Gostitelja %s ni."
+msgstr "Vir »%s« bo ostal onemogočen."
 
 #: src/repos.cc:1026
 msgid "Some of the repositories had to be skipped due to missing metadata."
-msgstr ""
+msgstr "Nekatere vire je bilo potrebno preskočiti, ker so manjkali metapodatki."
 
 #: src/repos.cc:1039
 msgid ""
 "Running with user privileges. From time to time run 'zypper refresh' as root "
 "to make sure the repository metadata are complete and up-to-date."
 msgstr ""
+"Poganjanje z dovoljenji običajnega uporabnika. Občasno zaženite ukaz »zypper "
+"refresh« kot uporabnik root, da bodo metapodatki vira zagotovo popolni in "
+"ažurni."
 
 #: src/repos.cc:1071
-#, fuzzy
 msgid "Initializing Target"
-msgstr "Prva priprava"
+msgstr "Pripravljanje cilja"
 
 #: src/repos.cc:1079
-#, fuzzy
 msgid "Target initialization failed:"
-msgstr "Priprava ni uspela"
+msgstr "Pripravljanje cilja ni uspelo:"
 
 #: src/repos.cc:1161
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Cleaning metadata cache for '%s'."
-msgstr "Napaka pri branju odseka %u."
+msgstr "Čiščenje predpomnilnika metapodatkov za »%s«."
 
 #: src/repos.cc:1169
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Cleaning raw metadata cache for '%s'."
-msgstr "Napaka pri branju odseka %u."
+msgstr "Čiščenje predpomnilnika surovih metapodatkov za »%s«."
 
 #: src/repos.cc:1175
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Keeping raw metadata cache for %s '%s'."
-msgstr "Napaka pri branju odseka %u."
+msgstr "Predpomnilnik surovih metapodatkov za %s »%s« bo obdržan."
 
 #. translators: meaning the cached rpm files
 #: src/repos.cc:1182
 #, c-format, boost-format
 msgid "Cleaning packages for '%s'."
-msgstr ""
+msgstr "Čiščenje paketov za »%s«."
 
 #: src/repos.cc:1190
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Cannot clean repository '%s' because of an error."
-msgstr "Izbranega vnosa ni možno odstraniti."
+msgstr "Vira »%s« ni moč očistiti zaradi napake."
 
 #: src/repos.cc:1201
-#, fuzzy
 msgid "Cleaning installed packages cache."
-msgstr "Nameščeni paketi"
+msgstr "Čiščenje predpomnilnika nameščenih paketov."
 
 #: src/repos.cc:1210
-#, fuzzy
 msgid "Cannot clean installed packages cache because of an error."
-msgstr "Izbranega vnosa ni možno odstraniti."
+msgstr "Predpomnilnika nameščenih paketov ni moč očistiti zaradi napake."
 
 #: src/repos.cc:1228
-#, fuzzy
 msgid "Could not clean the repositories because of errors."
-msgstr "Izbranega vnosa ni možno odstraniti."
+msgstr "Virov ni bilo moč očistiti zaradi napak."
 
 #: src/repos.cc:1234
-#, fuzzy
 msgid "Some of the repositories have not been cleaned up because of an error."
-msgstr "Izbranega vnosa ni možno odstraniti."
+msgstr "Nekateri viri niso bili očiščeni zaradi napake."
 
 #: src/repos.cc:1239
-#, fuzzy
 msgid "Specified repositories have been cleaned up."
-msgstr "%s je potrebno odstraniti."
+msgstr "Navedeni viri so bili očiščeni."
 
 #: src/repos.cc:1241
-#, fuzzy
 msgid "All repositories have been cleaned up."
-msgstr "%s je potrebno odstraniti."
+msgstr "Vsi viri so bili očiščeni."
 
 #: src/repos.cc:1263
 msgid "This is a changeable read-only media (CD/DVD), disabling autorefresh."
 msgstr ""
+"To je zamenljiv nosilec samo za branje (CD/DVD). Samoosvežitev bo "
+"onemogočena."
 
 #: src/repos.cc:1284
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Invalid repository alias: '%s'"
-msgstr "Napaka pri branju odseka %u."
+msgstr "Neveljavno drugo ime vira: »%s«"
 
 #: src/repos.cc:1301
 msgid ""
 "Could not determine the type of the repository. Please check if the defined "
 "URIs (see below) point to a valid repository:"
 msgstr ""
+"Ni bilo moč določiti vrste vira. Preverite, ali URI-ji, ki so določeni ("
+"glejte spodaj), kažejo na veljaven vir:"
 
 #: src/repos.cc:1307
 msgid "Can't find a valid repository at given location:"
-msgstr ""
+msgstr "Na danem mestu ni moč najti veljavnega vira:"
 
 #: src/repos.cc:1315
-#, fuzzy
 msgid "Problem transferring repository data from specified URI:"
-msgstr "Shranjevanje zbirke podatkov"
+msgstr "Težava prenašanja podatkov vira z URI-ja, ki je določen:"
 
 #: src/repos.cc:1316
 msgid "Please check whether the specified URI is accessible."
-msgstr ""
+msgstr "Preverite, ali je URI, ki je določen, dosegljiv."
 
 #: src/repos.cc:1323
-#, fuzzy
 msgid "Unknown problem when adding repository:"
-msgstr "Shranjevanje zbirke podatkov"
+msgstr "Neznana težava med dodajanjem vira:"
 
 #. translators: BOOST STYLE POSITIONAL DIRECTIVES ( %N% )
 #. translators: %1% - a repository name
