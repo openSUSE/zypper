@@ -948,10 +948,10 @@ The old option name --uninstalled-only is still acceptable, but should be consid
 		Show installed packages which were explicitly selected by the user.
 
 	*--system*::
-		Show installed packages which are not provided by any repository. If combined with *--orphaned*, the status of orphaned packages is tagged with *(o)*.
+		Show installed packages which are not provided by any repository.
 
 	*--orphaned*::
-		Show system packages which are orphaned (without repository and without update candidate).
+		Show system packages which are orphaned (without repository and without update candidate). If combined with *--system*, the status of orphaned packages is tagged with *(o)*.
 
 	*--suggested*::
 		Show packages which are suggested.
