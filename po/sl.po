@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-04-15 13:01+0200\n"
-"PO-Revision-Date: 2024-06-13 09:46+0000\n"
+"PO-Revision-Date: 2024-06-13 12:46+0000\n"
 "Last-Translator: Jure Repinc <jlp@holodeck1.com>\n"
 "Language-Team: Slovenian <https://l10n.opensuse.org/projects/zypper/master/"
 "sl/>\n"
@@ -4618,7 +4618,7 @@ msgstr "Osveževanje storitve »%s«."
 #: src/commands/services/common.cc:136 src/commands/services/common.cc:146
 #, boost-format, c-format
 msgid "Problem retrieving the repository index file for service '%s':"
-msgstr "Težava pridobivanja datoteke kazala za vir za storitev »%s«."
+msgstr "Težava pridobivanja datoteke kazala za vir za storitev »%s«:"
 
 #: src/commands/services/common.cc:138 src/commands/services/refresh.cc:226
 #: src/repos.cc:1822
@@ -4633,7 +4633,7 @@ msgstr "Preverite, ali je URI veljaven in dostopen."
 #: src/commands/services/common.cc:159
 #, boost-format, c-format
 msgid "Removing service '%s':"
-msgstr "Odstranjevanje storitve »%s«."
+msgstr "Odstranjevanje storitve »%s«:"
 
 #: src/commands/services/common.cc:162
 #, boost-format, c-format
@@ -6940,73 +6940,72 @@ msgstr[3] "Upoštevanje %1% od %2% veljavnih popravkov:"
 #, boost-format
 msgid "Found %1% applicable patch:"
 msgid_plural "Found %1% applicable patches:"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Najden %1% veljaven popravek:"
+msgstr[1] "Najdena %1% veljavna popravka:"
+msgstr[2] "Najdeni %1% veljavni popravki:"
+msgstr[3] "Najdenih %1% veljavnih popravkov:"
 
 #. translator: stats summary
 #: src/update.cc:350
 #, c-format, boost-format
 msgid "%d patch locked"
 msgid_plural "%d patches locked"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%d zaklenjen popravek"
+msgstr[1] "%d zaklenjena popravka"
+msgstr[2] "%d zaklenjeni popravki"
+msgstr[3] "%d zaklenjenih popravkov"
 
 #. translator: stats summary
 #: src/update.cc:358
 #, c-format, boost-format
 msgid "%d patch optional"
 msgid_plural "%d patches optional"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%d neobvezen popravek"
+msgstr[1] "%d neobvezna popravka"
+msgstr[2] "%d neobvezni popravki"
+msgstr[3] "%d neobveznih popravkov"
 
 #. translator: Hint displayed right adjusted; %1% is a CLI option
 #. "42 patches optional                  (use --with-optional to include optional patches)"
 #: src/update.cc:362
 #, boost-format
 msgid "use '%1%' to include optional patches"
-msgstr ""
+msgstr "da vključite neobvezne popravke, uporabite »%1%«"
 
 #. translator: stats summary
 #: src/update.cc:371
 #, c-format, boost-format
 msgid "%d patch needed"
 msgid_plural "%d patches needed"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "potreben %d popravek"
+msgstr[1] "potrebna %d popravka"
+msgstr[2] "potrebni %d popravki"
+msgstr[3] "potrebnih %d popravkov"
 
 #. translator: stats summary
 #: src/update.cc:374
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "%d security patch"
 msgid_plural "%d security patches"
-msgstr[0] "Varnostne posodobitve"
-msgstr[1] "Varnostne posodobitve"
-msgstr[2] "Varnostne posodobitve"
-msgstr[3] "Varnostne posodobitve"
+msgstr[0] "%d varnostni popravek"
+msgstr[1] "%d varnostna popravka"
+msgstr[2] "%d varnostni popravki"
+msgstr[3] "%d varnostnih popravkov"
 
 #. translator: Table column header.
 #: src/update.cc:408
 msgid "Updatestack"
-msgstr ""
+msgstr "Posodobitveni sklad"
 
 #. translator: Table column header.
 #: src/update.cc:410 src/update.cc:702
-#, fuzzy
 msgid "Patches"
-msgstr "popravi"
+msgstr "Popravki"
 
 #. translator: Table column header.
 #: src/update.cc:412
 msgid "Locked"
-msgstr ""
+msgstr "Zaklenjeno"
 
 #. translator: Table column header
 #. Used if stats collect data for more than one category name.
@@ -7015,148 +7014,146 @@ msgstr ""
 #. optional   | ...                      ..... | enhancement, feature
 #: src/update.cc:418
 msgid "Included categories"
-msgstr ""
+msgstr "Vključene kategorije"
 
 #. translator: Table headline; 'Needed' refers to patches with status 'needed'
 #: src/update.cc:592
 msgid "Needed software management updates will be installed first:"
-msgstr ""
+msgstr "Potrebne posodobitve upravljalnika programov bodo nameščene najprej:"
 
 #: src/update.cc:600 src/update.cc:842
-#, fuzzy
 msgid "No updates found."
-msgstr "Ni napak."
+msgstr "Najdena ni bila nobena posodobitev."
 
 #. translator: Table headline
 #: src/update.cc:607
 msgid "The following updates are also available:"
-msgstr ""
+msgstr "Na voljo so tudi naslednje posodobitve:"
 
 #: src/update.cc:700
-#, fuzzy
 msgid "Package updates"
-msgstr "Upravitelj paketov"
+msgstr "Posodobitve paketov"
 
 #: src/update.cc:704
-#, fuzzy
 msgid "Pattern updates"
-msgstr "Išči v posodobitvah"
+msgstr "Posodobitve vzorcev"
 
 #: src/update.cc:706
-#, fuzzy
 msgid "Product updates"
-msgstr "Verzija izdelka"
+msgstr "Posodobitve izdelkov"
 
 #: src/update.cc:794
-#, fuzzy
 msgid "Current Version"
-msgstr "Trenutni uporabnik:"
+msgstr "Trenutna različica"
 
 #: src/update.cc:795
-#, fuzzy
 msgid "Available Version"
-msgstr "Razpoložljive posodobitve"
+msgstr "Razpoložljiva različica"
 
 #: src/update.cc:972
-#, fuzzy
 msgid "No matching issues found."
-msgstr "Ni napak."
+msgstr "Najdeno ni bilo nobeno ujemajoče poročilo o napaki."
 
 #: src/update.cc:978
 msgid "The following matches in issue numbers have been found:"
-msgstr ""
+msgstr "Najdene so bile naslednje ujemajoče številke poročil o napakah:"
 
 #: src/update.cc:988
 msgid "Matches in patch descriptions of the following patches have been found:"
-msgstr ""
+msgstr "Najdeni so bili ujemajoči opisi v naslednjih popravkih:"
 
 #: src/update.cc:1050
 #, c-format, boost-format
 msgid "Fix for bugzilla issue number %s was not found or is not needed."
 msgstr ""
+"Popravek za številko poročila Bugzilla o napaki %s ni bil najden ali pa ni "
+"potreben."
 
 #: src/update.cc:1052
 #, c-format, boost-format
 msgid "Fix for CVE issue number %s was not found or is not needed."
 msgstr ""
+"Popravek za številko poročila CVE o napaki %s ni bil najden ali pa ni "
+"potreben."
 
 #. translators: keep '%s issue' together, it's something like 'CVE issue' or 'Bugzilla issue'
 #: src/update.cc:1055
 #, c-format, boost-format
 msgid "Fix for %s issue number %s was not found or is not needed."
 msgstr ""
+"Popravek za številko poročila %s o napaki %s ni bil najden ali pa ni "
+"potreben."
 
 #: src/utils/Augeas.cc:102
-#, fuzzy
 msgid "Cannot initialize configuration file parser."
-msgstr "Priprava ni uspela"
+msgstr "Ni moč pripraviti razčlenjevalnika nastavitvene datoteke."
 
 #: src/utils/Augeas.cc:508
 #, boost-format
 msgid "Malformed option name '%1%'."
-msgstr ""
+msgstr "Napačno oblikovano ime možnosti »%1%«."
 
 #: src/utils/Augeas.cc:520
 msgid "Could not save the config file."
-msgstr ""
+msgstr "Nastavitvene datoteke ni bilo moč shraniti."
 
 #: src/utils/Augeas.cc:562
 #, boost-format
 msgid "Config file '%1%' exists but is not a file."
-msgstr ""
+msgstr "Nastavitvena datoteka »%1%« obstaja, vendar ni datoteka."
 
 #: src/utils/Augeas.cc:578
 msgid "Could not load the config files."
-msgstr ""
+msgstr "Nastavitvenih datotek ni bilo moč naložiti."
 
 #: src/utils/Augeas.cc:604
 #, boost-format
 msgid "Config file '%1%' does not exist."
-msgstr ""
+msgstr "Nastavitvena datoteka »%1%« ne obstaja."
 
 #. translator: %1% is the path to a config file, %2% is the name of an options inside the file
 #: src/utils/Augeas.cc:635
 #, boost-format
 msgid "%1%: Option '%2%' is defined multiple times. Using the last one."
-msgstr ""
+msgstr "%1%: Možnost %2% je določena večkrat. Uporabljena bo zadnja."
 
 #: src/utils/Augeas.cc:656
 msgid "No config file is in use."
-msgstr ""
+msgstr "V rabi ni nobena nastavitvena datoteka."
 
 #: src/utils/flags/exceptions.cc:22
 #, boost-format
 msgid "The flag %1% is not known."
-msgstr ""
+msgstr "Zastavica %1% ni znana."
 
 #: src/utils/flags/exceptions.cc:28
 #, boost-format
 msgid "The flag %1% is not compatible with argument %2% (%3%)."
-msgstr ""
+msgstr "Zastavica %1% ni združljiva z argumentom %2% (%3%)."
 
 #: src/utils/flags/exceptions.cc:34
 #, boost-format
 msgid "The flag %1% requires a argument."
-msgstr ""
+msgstr "Zastavica %1% zahteva argument."
 
 #: src/utils/flags/exceptions.cc:40
 #, boost-format
 msgid "The flag %1% can only be used once."
-msgstr ""
+msgstr "Zastavico %1% je mogoče uporabiti samo enkrat."
 
 #: src/utils/flags/exceptions.cc:46
 #, c-format, boost-format
 msgid "%s used together with %s, which contradict each other."
-msgstr ""
+msgstr "%s je uporabljena skupaj z %s in si nasprotujeta."
 
 #: src/utils/flags/flagtypes.cc:24
 msgid "Unknown package type"
-msgstr ""
+msgstr "Neznana vrsta paketa"
 
 #: src/utils/flags/flagtypes.cc:100
 #, boost-format
 msgid "The flag '%1%' can only be used a maximum of %2% times."
-msgstr ""
+msgstr "Zastavico »%1%« je možno uporabiti največ %2% krat."
 
 #: src/utils/flags/flagtypes.cc:195
 #, c-format, boost-format
@@ -7164,97 +7161,98 @@ msgid ""
 "Ignoring %s without argument because similar option with an argument has "
 "been specified."
 msgstr ""
+"Možnost »%s« brez argumenta bo prezrta, ker je bila navedena podobna možnost "
+"z argumentom."
 
 #: src/utils/flags/flagtypes.cc:235
 msgid "Out of range"
-msgstr ""
+msgstr "Izven obsega"
 
 #: src/utils/flags/flagtypes.cc:237
 #, boost-format
 msgid "Unknown error while assigning the value %1% to flag %2%."
-msgstr ""
+msgstr "Neznana napaka med prirejanjem vrednosti %1% zastavici %2%."
 
 #. Since this message will be emitted before we know if the current output is XML or Normal we need to send this message to stderr
 #. to not break scripts that use xml output (bsc#1172925)
 #: src/utils/flags/zyppflags.cc:392
-#, fuzzy
 msgid "Warning: "
-msgstr "Opozorilo"
+msgstr "Opozorilo: "
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:23
 msgid "ALIAS"
-msgstr ""
+msgstr "DRUGO_IME"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:25
 msgid "ALIAS|#|URI"
-msgstr ""
+msgstr "DRUGO_IME|#|URI"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:27
 msgid "CATEGORY"
-msgstr ""
+msgstr "KATEGORIJA"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:29
 msgid "DIR"
-msgstr ""
+msgstr "MAPA"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:31
 msgid "FILE"
-msgstr ""
+msgstr "DATOTEKA"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:33
 msgid "FILE.repo"
-msgstr ""
+msgstr "DATOTEKA.repo"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:35
 msgid "FORMAT"
-msgstr ""
+msgstr "OBLIKA"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:37
 msgid "INTEGER"
-msgstr ""
+msgstr "CELO_ŠTEVILO"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:39
 msgid "PATH"
-msgstr ""
+msgstr "POT"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:41
 msgid "SEVERITY"
-msgstr ""
+msgstr "RESNOST"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:43
 msgid "STRING"
-msgstr ""
+msgstr "NIZ"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:45
 msgid "TAG"
-msgstr ""
+msgstr "OZNAKA"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:47
 msgid "TYPE"
-msgstr ""
+msgstr "VRSTA"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:51
 msgid "YYYY-MM-DD"
-msgstr ""
+msgstr "LLLL-MM-DD"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:53
 msgid "MODE"
-msgstr ""
+msgstr "NAČIN"
 
 #. For '-garbage' argument, with 'a', 'b', and 'e' as known options,
 #. getopt_long reports 'a', 'b', and 'e' as known options.
@@ -7263,32 +7261,31 @@ msgstr ""
 #. argument. (bnc #299375)
 #. wrong option in the last argument
 #: src/utils/getopt.cc:78
-#, fuzzy
 msgid "Unknown option "
-msgstr "Neznan monitor:"
+msgstr "Neznana možnost: "
 
 #: src/utils/getopt.cc:98
 msgid "Missing argument for "
-msgstr ""
+msgstr "Manjka argumenta za "
 
 #: src/utils/messages.cc:19
 msgid "Please file a bug report about this."
-msgstr ""
+msgstr "Prosimo, poročajte nam o tej napaki."
 
 #. TranslatorExplanation remember not to translate the URL
 #. unless you translate the actual page :)
 #: src/utils/messages.cc:22
 msgid "See http://en.opensuse.org/Zypper/Troubleshooting for instructions."
-msgstr ""
+msgstr "Za navodila si oglejte http://en.opensuse.org/Zypper/Troubleshooting."
 
 #: src/utils/messages.cc:38
 msgid "Too many arguments."
-msgstr ""
+msgstr "Preveč argumentov."
 
 #: src/utils/messages.cc:81
 #, c-format, boost-format
 msgid "The '--%s' option has currently no effect."
-msgstr ""
+msgstr "Možnost »--%s« trenutno nima učinka."
 
 #: src/utils/messages.cc:99
 #, c-format, boost-format
@@ -7297,22 +7294,31 @@ msgid ""
 "package which might lead to broken dependencies of other packages. It is "
 "recommended to run '%s' after the operation has finished."
 msgstr ""
+"Izbrali ste prezrtje težave s prejemanjem ali nameščanjem paketa. To lahko "
+"vodi v neizpolnjene odvisnosti drugih paketov. Priporočamo, da po zaključku "
+"dejanja zaženete ukaz »%s«."
 
 #: src/utils/messages.cc:111
 #, boost-format
 msgid ""
 "Legacy commandline option %1% detected. Please use global option %2% instead."
 msgstr ""
+"Zaznana je bila zastarela možnost ukazne vrstice »%1%«. Namesto nje "
+"uporabite splošno možnost »%2%«."
 
 #: src/utils/messages.cc:112
 #, boost-format
 msgid "Legacy commandline option %1% detected. Please use %2% instead."
 msgstr ""
+"Zaznana je bila zastarela možnost ukazne vrstice »%1%«. Namesto nje "
+"uporabite »%2%«."
 
 #: src/utils/messages.cc:118
 #, boost-format
 msgid "Legacy commandline option %1% detected. This option is ignored."
 msgstr ""
+"Zaznana je bila zastarela možnost ukazne vrstice »%1%«. Ta možnost bo "
+"prezrta."
 
 #: src/utils/messages.cc:123
 #, boost-format
@@ -7320,13 +7326,15 @@ msgid ""
 "Abbreviated commandline options will not be supported in future versions. "
 "Please use %2% instead of %1% ."
 msgstr ""
+"Okrajšane možnosti ukazne vrstice v prihodnosti ne bodo več podprte. Namesto "
+"»%1%« uporabite »%2%«."
 
 #. translators: %s is "help" or "zypper help" depending on whether
 #. zypper shell is running or not
 #: src/utils/messages.cc:141
 #, c-format, boost-format
 msgid "Type '%s' to get a list of global options and commands."
-msgstr ""
+msgstr "Da dobite seznam splošnih možnosti in ukazov uporabite ukaz »%s«."
 
 #. translators: %1% is the name of an (unknown) command
 #. translators: %2% something providing more info (like 'zypper help subcommand')
@@ -7337,6 +7345,8 @@ msgid ""
 "In case '%1%' is not a typo it's probably not a built-in command, but "
 "provided as a subcommand or plug-in (see '%2%')."
 msgstr ""
+"V primeru, da »%1%« ni zatipkano, je to verjetno ukaz, ki ni vgrajen, ampak "
+"ponujen kot podukaz ali vstavek (glejte »%2%«)."
 
 #. translators: %1% and %2% are plug-in packages which might provide it.
 #. translators: The word 'subcommand' also refers to a zypper command and should not be translated.
@@ -7346,196 +7356,188 @@ msgid ""
 "In this case a specific package providing the subcommand needs to be "
 "installed first. Those packages are often named '%1%' or '%2%'."
 msgstr ""
+"V tem primeru je potrebno najprej namestiti paket, ki ponuja ta podukaz. Ti "
+"paketi so pogosto imenovani »%1%« ali »%2%«."
 
 #: src/utils/misc.cc:94
-#, fuzzy
 msgid "package"
 msgid_plural "packages"
-msgstr[0] "Paket"
-msgstr[1] "Paket"
-msgstr[2] "Paket"
-msgstr[3] "Paket"
+msgstr[0] "paket"
+msgstr[1] "paketa"
+msgstr[2] "paketi"
+msgstr[3] "paketov"
 
 #: src/utils/misc.cc:96
 msgid "pattern"
 msgid_plural "patterns"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "vzorec"
+msgstr[1] "vzorca"
+msgstr[2] "vzorci"
+msgstr[3] "vzorcev"
 
 #: src/utils/misc.cc:98
-#, fuzzy
 msgid "product"
 msgid_plural "product"
-msgstr[0] "ID izdelka"
-msgstr[1] "ID izdelka"
-msgstr[2] "ID izdelka"
-msgstr[3] "ID izdelka"
+msgstr[0] "izdelek"
+msgstr[1] "izdelka"
+msgstr[2] "izdelki"
+msgstr[3] "izdelkov"
 
 #: src/utils/misc.cc:100
-#, fuzzy
 msgid "patch"
 msgid_plural "patches"
-msgstr[0] "popravi"
-msgstr[1] "popravi"
-msgstr[2] "popravi"
-msgstr[3] "popravi"
+msgstr[0] "popravek"
+msgstr[1] "popravka"
+msgstr[2] "popravki"
+msgstr[3] "popravkov"
 
 #: src/utils/misc.cc:102
-#, fuzzy
 msgid "srcpackage"
 msgid_plural "srcpackages"
-msgstr[0] "Paket"
-msgstr[1] "Paket"
-msgstr[2] "Paket"
-msgstr[3] "Paket"
+msgstr[0] "paket z izvorno kodo"
+msgstr[1] "paketa z izvorno kodo"
+msgstr[2] "paketi z izvorno kodo"
+msgstr[3] "paketov z izvorno kodo"
 
 #: src/utils/misc.cc:104
 msgid "application"
 msgid_plural "applications"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "program"
+msgstr[1] "programa"
+msgstr[2] "programi"
+msgstr[3] "programov"
 
 #. default
 #: src/utils/misc.cc:106
-#, fuzzy
 msgid "resolvable"
 msgid_plural "resolvables"
-msgstr[0] "Ni dodatnih novih modulov."
-msgstr[1] "Ni dodatnih novih modulov."
-msgstr[2] "Ni dodatnih novih modulov."
-msgstr[3] "Ni dodatnih novih modulov."
+msgstr[0] "rešitev"
+msgstr[1] "rešitvi"
+msgstr[2] "rešitve"
+msgstr[3] "rešitev"
 
 #. Patch status: i18n + color
 #. translator: patch status
 #: src/utils/misc.cc:115
 msgid "unwanted"
-msgstr ""
+msgstr "neželen"
 
 #. translator: patch status
 #: src/utils/misc.cc:116
 msgid "optional"
-msgstr ""
+msgstr "neobvezen"
 
 #. translator: patch status
 #: src/utils/misc.cc:117
 msgid "needed"
-msgstr ""
+msgstr "potreben"
 
 #. translator: patch status
 #: src/utils/misc.cc:118
-#, fuzzy
 msgid "applied"
-msgstr "Uvelj&avi"
+msgstr "uveljavljen"
 
 #. translator: patch status
 #: src/utils/misc.cc:119
-#, fuzzy
 msgid "not needed"
-msgstr "ni povezave"
+msgstr "nepotreben"
 
 #. translator: patch status
 #: src/utils/misc.cc:120
 msgid "undetermined"
-msgstr ""
+msgstr "nedoločeno"
 
 #. pi_r is no patch!
 #. translator: patch status
 #: src/utils/misc.cc:121
 msgid "retracted"
-msgstr ""
+msgstr "opuščen"
 
 #: src/utils/misc.cc:330 src/utils/misc.cc:372
 msgid "Since"
-msgstr ""
+msgstr "Od"
 
 #. << _("Repository")
 #: src/utils/misc.cc:365
 msgid "Issue"
-msgstr ""
+msgstr "Poročilo o napaki"
 
 #: src/utils/misc.cc:366
-#, fuzzy
 msgid "No."
-msgstr "Ne"
+msgstr "Št."
 
 #: src/utils/misc.cc:367
-#, fuzzy
 msgid "Patch"
-msgstr "popravi"
+msgstr "Popravek"
 
 #: src/utils/misc.cc:445
 msgid "Specified local path does not exist or is not accessible."
-msgstr ""
+msgstr "Navedena krajevna pot ne obstaja ali pa ni dostopna."
 
 #: src/utils/misc.cc:457
 msgid "Given URI is invalid"
-msgstr ""
+msgstr "Navedeni URI ni veljaven"
 
 #. Guess failed:
 #. translators: don't translate '<platform>'
 #: src/utils/misc.cc:549
 msgid "Unable to guess a value for <platform>."
-msgstr ""
+msgstr "Ni moč uganiti vrednosti za <platform>."
 
 #: src/utils/misc.cc:550
 msgid "Please use obs://<project>/<platform>"
-msgstr ""
+msgstr "Uporabite obs://<project>/<platform>"
 
 #: src/utils/misc.cc:551 src/utils/misc.cc:597
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Example: %s"
-msgstr ""
-"\n"
-"\n"
-"Primer: "
+msgstr "Primer: %s"
 
 #: src/utils/misc.cc:596
-#, fuzzy
 msgid "Invalid OBS URI."
-msgstr "Napačen vnos."
+msgstr "Neveljaven URI za OBS."
 
 #: src/utils/misc.cc:596
 msgid "Correct form is obs://<project>/[platform]"
-msgstr ""
+msgstr "Pravilna oblika je obs://<project>/[platform]"
 
 #: src/utils/misc.cc:644
 msgid "Problem copying the specified RPM file to the cache directory."
-msgstr ""
+msgstr "Težava kopiranja navedene datoteke RPM v mapo predpomnilnika."
 
 #: src/utils/misc.cc:645
 msgid "Perhaps you are running out of disk space."
-msgstr ""
+msgstr "Morda vam zmanjkuje prostora na disku."
 
 #: src/utils/misc.cc:653
-#, fuzzy
 msgid "Problem retrieving the specified RPM file"
-msgstr "Shranjevanje zbirke podatkov"
+msgstr "Težava prejemanja navedene datoteke RPM"
 
 #: src/utils/misc.cc:654
 msgid "Please check whether the file is accessible."
-msgstr ""
+msgstr "Preverite, ali je datoteka dostopna."
 
 #: src/utils/pager.cc:32
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Press '%c' to exit the pager."
-msgstr "Za iskanje pritisnite '/'..."
+msgstr "Da zaprete prikaz strani, pritisnite »%c«."
 
 #: src/utils/pager.cc:42
 msgid "Use arrows or pgUp/pgDown keys to scroll the text by lines or pages."
 msgstr ""
+"Za pomikanje besedila po vrsticah ali straneh uporabite smerne tipke ali "
+"tipki Stran gor/dol (Pg Up/Dn)."
 
 #: src/utils/pager.cc:44
 msgid "Use the Enter or Space key to scroll the text by lines or pages."
 msgstr ""
+"Za pomikanje besedila po straneh uporabite tipko Vnos (Enter) ali "
+"Preslednico."
 
 #: src/utils/prompt.cc:43 src/utils/prompt.cc:94
 #, c-format, boost-format
 msgid "Retrying in %u seconds..."
-msgstr ""
+msgstr "Ponovno poskušanje čez %u s …"
 
 #. translators: "a/r/i" are the answers to the
 #. "Abort, retry, ignore?" prompt
@@ -7545,43 +7547,40 @@ msgstr ""
 #. The answers should be lower case letters.
 #: src/utils/prompt.cc:49 src/utils/prompt.cc:142
 msgid "a/r/i"
-msgstr ""
+msgstr "p/z/i"
 
 #: src/utils/prompt.cc:107
 #, c-format, boost-format
 msgid "Autoselecting '%s' after %u second."
 msgid_plural "Autoselecting '%s' after %u seconds."
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Možnost »%s« bo samodejno izbrana čez %u sekundo."
+msgstr[1] "Možnost »%s« bo samodejno izbrana čez %u sekundi."
+msgstr[2] "Možnost »%s« bo samodejno izbrana čez %u sekunde."
+msgstr[3] "Možnost »%s« bo samodejno izbrana čez %u sekund."
 
 #: src/utils/prompt.cc:124
-#, fuzzy
 msgid "Trying again..."
-msgstr "Priprava namestitve..."
+msgstr "Ponovno poskušanje …"
 
 #: src/utils/prompt.cc:152 src/utils/prompt.cc:161 src/utils/prompt.cc:290
-#, fuzzy
 msgid "yes"
-msgstr "Da"
+msgstr "da"
 
 #: src/utils/prompt.cc:152 src/utils/prompt.cc:161 src/utils/prompt.cc:290
-#, fuzzy
 msgid "no"
-msgstr "priključen"
+msgstr "ne"
 
 #: src/utils/prompt.cc:161
 msgid "always"
-msgstr ""
+msgstr "vedno"
 
 #: src/utils/prompt.cc:161
 msgid "never"
-msgstr ""
+msgstr "nikoli"
 
 #: src/utils/prompt.cc:188
 msgid "Cannot read input: bad stream or EOF."
-msgstr ""
+msgstr "Ni moč brati vhoda: pokvarjen tok ali konec datoteke."
 
 #: src/utils/prompt.cc:189
 #, c-format, boost-format
@@ -7589,34 +7588,38 @@ msgid ""
 "If you run zypper without a terminal, use '%s' global\n"
 "option to make zypper use default answers to prompts."
 msgstr ""
+"Če zypper zaganjate brez terminala, uporabite splošno možnost\n"
+"»%s«, da bo zypper za pozive uporabil privzete odgovore."
 
 #: src/utils/prompt.cc:278
-#, fuzzy, c-format, boost-format
+#, boost-format, c-format
 msgid "Invalid answer '%s'."
-msgstr "Napačna privzeta pot (default route):"
+msgstr "Neveljaven odgovor »%s«."
 
 #: src/utils/prompt.cc:281
 #, c-format, boost-format
 msgid "Ambiguous answer '%s'."
-msgstr ""
+msgstr "Dvoumen odgovor »%s«."
 
 #. translators: the %s are: 'y', 'yes' (translated), 'n', and 'no' (translated).
 #: src/utils/prompt.cc:289
 #, c-format, boost-format
 msgid "Enter '%s' for '%s' or '%s' for '%s' if nothing else works for you."
 msgstr ""
+"Če vam nič drugega ne ustreza, vnesite »%s« za »%s« ali pa »%s« za »%s«."
 
 #: src/utils/prompt.cc:294
 msgid ""
 "If nothing else works enter '#1' to select the 1st option, '#2' for the 2nd "
 "one, ..."
 msgstr ""
+"Če nič drugega ne deluje, vnesite »#1« da izberete prvo možnost, »#2« za "
+"drugo možnost, …"
 
 #. TranslatorExplanation These are reasons for various failures.
 #: src/utils/prompt.h:95
-#, fuzzy
 msgid "Not found"
-msgstr "Ni napak."
+msgstr "Ni najdeno"
 
 # error box title
 #: src/utils/prompt.h:95
@@ -7624,9 +7627,8 @@ msgid "I/O error"
 msgstr "V/I napaka"
 
 #: src/utils/prompt.h:95
-#, fuzzy
 msgid "Invalid object"
-msgstr "Napačna privzeta pot (default route):"
+msgstr "Neveljaven predmet"
 
 #: src/utils/prompt.h:102
 msgid "Error"
