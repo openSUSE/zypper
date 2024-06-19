@@ -219,7 +219,8 @@ void Summary::readPool( const ResPool & pool )
 
   _todownload = ByteCount();
   _incache = ByteCount();
-  _inst_size_change = ByteCount();
+  _inst_size_install = ByteCount();
+  _inst_size_remove = ByteCount();
 
   _ctc.clear();
 
@@ -384,7 +385,8 @@ void Summary::readPool( const ResPool & pool )
               _tochangevendor[res->kind()].insert( rp );
           }
 
-          _inst_size_change += res->installSize() - (*rmit)->installSize();
+          _inst_size_install += res->installSize();
+          _inst_size_remove += (*rmit)->installSize();
 
           // this turned out to be an upgrade/downgrade
           to_be_removed[res->kind()].erase( *rmit );
@@ -396,7 +398,7 @@ void Summary::readPool( const ResPool & pool )
       if ( !upgrade_downgrade )
       {
         _toinstall[res->kind()].insert( ResPair( nullptr, res ) );
-        _inst_size_change += res->installSize();
+        _inst_size_install += res->installSize();
       }
 
       if ( pkg && pkg->isCached() )
@@ -423,7 +425,7 @@ void Summary::readPool( const ResPool & pool )
           _toremove_by_solver = true;
       }*/
       _toremove[it->first].insert( ResPair( nullptr, *resit ) );
-      _inst_size_change -= (*resit)->installSize();
+      _inst_size_remove += (*resit)->installSize();
     }
 
   m.elapsed();
@@ -1571,33 +1573,50 @@ void Summary::writeDownloadAndInstalledSizeSummary( std::ostream & out )
   if ( !_inst_pkg_total && _toremove.empty() )
     return; // nothing to do, keep silent
 
-  // download size info
-  std::ostringstream s;
-  if ( _todownload || _incache )
-    s << str::Format(_("Overall download size: %1%. Already cached: %2%.")) % _todownload % _incache << " ";
+  auto fmtBC = []( ByteCount bc_r, const char * sign = " " ) {
+    return sign + bc_r.asString( 7 );
+  };
 
-  if ( _download_only )
-    s << _("Download only.");
-  else
-  {
-    // installed size change info
-    if ( _inst_size_change > 0 )
-      // TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
-      s << str::Format(_("After the operation, additional %s will be used.")) % _inst_size_change.asString( 0 , 1, 1 );
-    else if ( _inst_size_change == 0 )
-      s << _("No additional space will be used or freed after the operation.");
-    else
-    {
-      // get the absolute size
-      ByteCount abs;
-      abs = (-_inst_size_change);
-      // TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
-      s << str::Format(_("After the operation, %s will be freed.")) % abs.asString( 0, 1, 1 );
+  out << endl;
+
+  if ( _todownload || _incache ) {
+    //   Package download size:   99.2 MiB
+    // or
+    //   Package download size:
+    //                 |     105.7 MiB  overall download size
+    //       99.2 MiB  |  -    6.4 MiB  already in cache
+    const auto & tagstr = _("Package download size:");
+    if ( not _incache ) {
+      out << tagstr << fmtBC( _todownload+_incache ) << endl;
+    } else {
+      out << tagstr << endl;
+      Table t;
+      t.lineStyle( TableLineStyle::none );
+      // translator: rendered as "105.7 MiB  overall download size"
+      t << ( TableRow() << ""                   <<"|"<< fmtBC( _todownload+_incache ) << _("overall package size") );
+      // translator: rendered as "  6.4 MiB  already in cache"
+      t << ( TableRow() << fmtBC( _todownload ) <<"|"<< fmtBC( _incache, "-" ) << _("already in cache") );
+      out << t; // NL terminated
     }
+    out << endl;
   }
 
-  mbs_write_wrapped( out, s.str(), 0, _wrap_width );
-  out << endl;
+  if ( _download_only ) {
+    out << _("Download only.") << endl;
+  } else {
+    // Package install size change:
+    //               |     349.1 MiB  required by to be installed packages
+    //      1.9 MiB  |  -  347.3 MiB  released by to be removed packages
+    out << _("Package install size change:") << endl;
+    ByteCount inst_diff = _inst_size_install-_inst_size_remove;
+    Table t;
+    t.lineStyle( TableLineStyle::none );
+    // translator: rendered as "349.1 MiB  required by to be installed packages"
+    t << ( TableRow() << ""                 <<"|"<< fmtBC( _inst_size_install ) << _("required by to be installed packages") );
+    // translator: rendered as "347.3 MiB  released by to be removed packages"
+    t << ( TableRow() << fmtBC( inst_diff ) <<"|"<< fmtBC( _inst_size_remove, "-" ) << _("released by to be removed packages") );
+    out << t; // NL terminated
+  }
 }
 
 void Summary::writePackageCounts( std::ostream & out )
@@ -1873,10 +1892,13 @@ void Summary::dumpAsXmlTo( std::ostream & out )
   const auto & iter = _toremove.find( ResKind::package );
   if ( iter != _toremove.end() )
     pkgchanged += iter->second.size();
+  zypp::ByteCount _inst_size_change = _inst_size_install - _inst_size_remove;
 
   out << "<install-summary";
   out << " download-size=\"" << ((ByteCount::SizeType)_todownload) << "\"";
   out << " space-usage-diff=\"" << ((ByteCount::SizeType)_inst_size_change) << "\"";
+  out << " space-usage-installed=\"" << ((ByteCount::SizeType)_inst_size_install) << "\"";
+  out << " space-usage-removed=\"" << ((ByteCount::SizeType)_inst_size_remove) << "\"";
   out << " packages-to-change=\"" << pkgchanged << "\"";	// bsc#1102429: CaaSP requires it to detect 'nothing to do'
   out << " need-restart=\"" << showNeedRestartHint() << "\"";	// bsc#1188435: show need reboot/restart hints
   out << " need-reboot=\"" << showNeedRebootHInt() << "\"";	// -"-

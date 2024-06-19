@@ -117,10 +117,6 @@ public:
   unsigned packagesToReInstall() const;
   unsigned packagesToRemove() const;
 
-  const zypp::ByteCount & toDownload() const		{ return _todownload; }
-  const zypp::ByteCount & inCache() const		{ return _incache; }
-  const zypp::ByteCount & installedSizeChange() const	{ return _inst_size_change; }
-
   /** The exposed needMachineReboot value causing ZYPPER_EXIT_INF_REBOOT_NEEDED considers patches only (zypper#237)
    * Packages cause a summary hint but will not lead to a non-zero return value.
    */
@@ -161,7 +157,8 @@ private:
 
   zypp::ByteCount _todownload;
   zypp::ByteCount _incache;
-  zypp::ByteCount _inst_size_change;
+  zypp::ByteCount _inst_size_install;
+  zypp::ByteCount _inst_size_remove;
 
   // STATS
 
