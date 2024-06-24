@@ -1,7 +1,7 @@
 #include <iostream>
 #include <signal.h>
 #include <poll.h>
-//#include <readline/readline.h>
+#include <readline/readline.h>
 
 #include <zypp/base/LogTools.h>
 #include <zypp/base/LogControl.h>
@@ -46,6 +46,15 @@ void signal_handler( int sig )
     write ( STDERR_FILENO, exit_requested_once_str, strlen(exit_requested_once_str) );
     zypper.requestExit();
   }
+}
+
+int hook_func( void )
+{
+  Zypper & zypper( Zypper::instance( true ) );
+  if ( zypper.exitRequested() ) {
+    ::rl_done = 1;
+  }
+  return 0;
 }
 
 bool testPipe( int fd_r )
@@ -133,6 +142,8 @@ try {
 
   if ( ::signal( SIGPIPE, signal_nopipe ) == SIG_ERR )
     zypper.out().error("Failed to set SIGPIPE handler.");
+
+  rl_event_hook = &hook_func; // bsc#1226493# let readline abort on Ctrl-C
 
   try
   {
