@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Wed Jun 26 17:16:26 CEST 2024 - ma@suse.de
+
+- Let_readline_abort_on_Ctrl-C (bsc#1226493)
+- packages: add '--system' to show @System packages (bsc#222971)
+- version 1.14.74
+
+-------------------------------------------------------------------
 Fri May  3 12:37:42 CEST 2024 - ma@suse.de
 
 - Fixed check for outdated repo metadata as non-root user
