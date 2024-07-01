@@ -34,6 +34,34 @@ namespace env
 static const char* exit_requested_once_str;
 static const char* exit_requested_twice_str;
 
+int my_getc_function( FILE * f )
+{
+  struct pollfd fds[1];
+  Zypper & zypper( Zypper::instance( true ) );
+
+  while ( true ) {
+    fds[0].fd = fileno(f);
+    fds[0].events = POLLIN;
+
+    int retval = poll( fds, 1, 500 );
+
+    if ( retval == -1 ) {
+      return 0;             // make readline evaluate any pending signals
+    } else if ( retval ) {
+      return rl_getc( f );  // get next char
+    } else {
+      if ( zypper.exitRequested() ) {
+        return -1;          // exit
+      }
+    }
+  }
+}
+
+void readline_setup()
+{
+  rl_getc_function = &my_getc_function;
+}
+
 void signal_handler( int sig )
 {
   // Do NOT write to the logfiles or use a iostream, we can NOT call into malloc here and
@@ -46,15 +74,6 @@ void signal_handler( int sig )
     write ( STDERR_FILENO, exit_requested_once_str, strlen(exit_requested_once_str) );
     zypper.requestExit();
   }
-}
-
-int hook_func( void )
-{
-  Zypper & zypper( Zypper::instance( true ) );
-  if ( zypper.exitRequested() ) {
-    ::rl_done = 1;
-  }
-  return 0;
 }
 
 bool testPipe( int fd_r )
@@ -143,7 +162,7 @@ try {
   if ( ::signal( SIGPIPE, signal_nopipe ) == SIG_ERR )
     zypper.out().error("Failed to set SIGPIPE handler.");
 
-  rl_event_hook = &hook_func; // bsc#1226493# let readline abort on Ctrl-C
+  readline_setup(); // bsc#1226493# let readline abort on Ctrl-C
 
   try
   {
