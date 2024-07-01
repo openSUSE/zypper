@@ -1582,8 +1582,8 @@ void Summary::writeDownloadAndInstalledSizeSummary( std::ostream & out )
   {
     // installed size change info
     if ( _inst_size_change > 0 )
-      // TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
-      s << str::Format(_("After the operation, additional %s will be used.")) % _inst_size_change.asString( 0 , 1, 1 );
+      // TranslatorExplanation %s will be substituted by a byte count e.g. 212 K
+      s << str::Format(_("After the operation, an additional %s will be used.")) % _inst_size_change.asString( 0 , 1, 1 );
     else if ( _inst_size_change == 0 )
       s << _("No additional space will be used or freed after the operation.");
     else
@@ -1591,7 +1591,7 @@ void Summary::writeDownloadAndInstalledSizeSummary( std::ostream & out )
       // get the absolute size
       ByteCount abs;
       abs = (-_inst_size_change);
-      // TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
+      // TranslatorExplanation %s will be substituted by a byte count e.g. 212 K
       s << str::Format(_("After the operation, %s will be freed.")) % abs.asString( 0, 1, 1 );
     }
   }
