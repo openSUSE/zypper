@@ -146,6 +146,8 @@ install-summary-element =
   element install-summary {
     attribute download-size { xsd:integer },    # download size in bytes
     attribute space-usage-diff { xsd:integer }, # used space before vs. after install difference in bytes
+    attribute space-usage-installed { xsd:integer }, # space required by to be installed packages
+    attribute space-usage-removed { xsd:integer }, # space released by to be removed packages (unless snapshotted)
     (
       element to-install { solvable-element+ } |
       element to-remove { solvable-element+ } |

@@ -89,9 +89,9 @@ public:
   unsigned packagesToReInstall() const;
   unsigned packagesToRemove() const;
 
-  const ByteCount & toDownload() const		{ return _todownload; }
-  const ByteCount & inCache() const		{ return _incache; }
-  const ByteCount & installedSizeChange() const	{ return _inst_size_change; }
+//   const ByteCount & toDownload() const		{ return _todownload; }
+//   const ByteCount & inCache() const		{ return _incache; }
+//   const ByteCount & installedSizeChange() const	{ return _inst_size_change; }
 
   bool needMachineReboot() const			{ return _need_reboot; }
 
@@ -123,7 +123,8 @@ private:
 
   ByteCount _todownload;
   ByteCount _incache;
-  ByteCount _inst_size_change;
+  ByteCount _inst_size_install;
+  ByteCount _inst_size_remove;
 
   // STATS
 
