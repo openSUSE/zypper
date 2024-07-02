@@ -1,4 +1,15 @@
 -------------------------------------------------------------------
+Tue Jul  2 16:05:02 CEST 2024 - ma@suse.de
+
+- Show rpm install size before installing (bsc#1224771)
+  If filesystem snapshots are taken before the installation (e.g.
+  by snapper) no disk space is freed by removing old packages. In
+  this case the install size of all packages is a hint how much
+  additional disk space is needed by the new packages static
+  content.
+- version 1.14.76
+
+-------------------------------------------------------------------
 Tue Jul  2 14:06:51 CEST 2024 - ma@suse.de
 
 - Fix readline setup to handle Ctrl-C and Ctrl-D corrrectly
