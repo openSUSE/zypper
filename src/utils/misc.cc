@@ -11,7 +11,6 @@
 
 #include <zypp/base/Logger.h>
 #include <zypp/base/String.h>
-#include <zypp/base/Easy.h>
 #include <zypp/base/Regex.h>
 #include <zypp/media/MediaManager.h>
 #include <zypp/ExternalProgram.h>
