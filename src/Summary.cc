@@ -1605,16 +1605,16 @@ void Summary::writeDownloadAndInstalledSizeSummary( std::ostream & out )
     out << _("Download only.") << endl;
   } else {
     // Package install size change:
-    //               |     349.1 MiB  required by to be installed packages
-    //      1.9 MiB  |  -  347.3 MiB  released by to be removed packages
+    //               |     349.1 MiB  required by packages that will be installed
+    //      1.9 MiB  |  -  347.3 MiB  released by packages that will be removed
     out << _("Package install size change:") << endl;
     ByteCount inst_diff = _inst_size_install-_inst_size_remove;
     Table t;
     t.lineStyle( TableLineStyle::none );
-    // translator: rendered as "349.1 MiB  required by to be installed packages"
-    t << ( TableRow() << ""                 <<"|"<< fmtBC( _inst_size_install ) << _("required by to be installed packages") );
-    // translator: rendered as "347.3 MiB  released by to be removed packages"
-    t << ( TableRow() << fmtBC( inst_diff ) <<"|"<< fmtBC( _inst_size_remove, "-" ) << _("released by to be removed packages") );
+    // translator: rendered as "349.1 MiB  required by packages that will be installed"
+    t << ( TableRow() << ""                 <<"|"<< fmtBC( _inst_size_install ) << _("required by packages that will be installed") );
+    // translator: rendered as "347.3 MiB  released by packages that will be removed"
+    t << ( TableRow() << fmtBC( inst_diff ) <<"|"<< fmtBC( _inst_size_remove, "-" ) << _("released by packages that will be removed") );
     out << t; // NL terminated
   }
 }
