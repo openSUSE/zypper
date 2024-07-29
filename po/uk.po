@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.uk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-15 13:01+0200\n"
+"POT-Creation-Date: 2024-07-29 15:47+0200\n"
 "PO-Revision-Date: 2024-02-25 22:42+0000\n"
 "Last-Translator: Oleksii <oleksiimnz@proton.me>\n"
 "Language-Team: Ukrainian <https://l10n.opensuse.org/projects/zypper/master/"
@@ -116,8 +116,8 @@ msgstr[2] "Вилучення %d пакунків було пропущено:"
 
 #. translators: Appended when clipping a long enumeration:
 #. "ConsoleKit-devel ConsoleKit-doc ... and 20828 more items."
-#: src/CommitSummary.cc:232 src/CommitSummary.cc:278 src/Summary.cc:629
-#: src/Summary.cc:705
+#: src/CommitSummary.cc:232 src/CommitSummary.cc:278 src/Summary.cc:631
+#: src/Summary.cc:707
 #, boost-format
 msgid "... and %1% more item."
 msgid_plural "... and %1% more items."
@@ -688,12 +688,12 @@ msgstr "Підозріле значення фільтру важливості 
 #. translator: '%1%' is a products name
 #. '%2%' is a command to call (like 'zypper dup')
 #. Both may contain whitespace and should be enclosed by quotes!
-#: src/Summary.cc:554
+#: src/Summary.cc:556
 #, boost-format
 msgid "Product '%1%' requires to be upgraded by calling '%2%'!"
 msgstr "Продукт \"%1%\" вимагає оновлення командою \"%2%\"!"
 
-#: src/Summary.cc:723
+#: src/Summary.cc:725
 #, c-format, boost-format
 msgid "The following NEW package is going to be installed:"
 msgid_plural "The following %d NEW packages are going to be installed:"
@@ -701,7 +701,7 @@ msgstr[0] "Буде встановлено наступний %d НОВИЙ па
 msgstr[1] "Буде встановлено наступні %d НОВІ пакунки:"
 msgstr[2] "Буде встановлено наступні %d НОВИХ пакунків:"
 
-#: src/Summary.cc:728
+#: src/Summary.cc:730
 #, c-format, boost-format
 msgid "The following NEW patch is going to be installed:"
 msgid_plural "The following %d NEW patches are going to be installed:"
@@ -709,7 +709,7 @@ msgstr[0] "Буде встановлено наступна %d НОВА латк
 msgstr[1] "Буде встановлено наступні %d НОВІ латки:"
 msgstr[2] "Буде встановлено наступні %d НОВИХ латок:"
 
-#: src/Summary.cc:733
+#: src/Summary.cc:735
 #, c-format, boost-format
 msgid "The following NEW pattern is going to be installed:"
 msgid_plural "The following %d NEW patterns are going to be installed:"
@@ -717,7 +717,7 @@ msgstr[0] "Буде встановлено наступний %d НОВИЙ ша
 msgstr[1] "Буде встановлено наступні %d НОВІ шаблони:"
 msgstr[2] "Буде встановлено наступних %d НОВИХ шаблонів:"
 
-#: src/Summary.cc:738
+#: src/Summary.cc:740
 #, c-format, boost-format
 msgid "The following NEW product is going to be installed:"
 msgid_plural "The following %d NEW products are going to be installed:"
@@ -725,7 +725,7 @@ msgstr[0] "Буде встановлено наступний %d НОВИЙ пр
 msgstr[1] "Буде встановлено наступні %d НОВІ продукти:"
 msgstr[2] "Буде встановлено наступних %d НОВИХ продуктів:"
 
-#: src/Summary.cc:743
+#: src/Summary.cc:745
 #, c-format, boost-format
 msgid "The following source package is going to be installed:"
 msgid_plural "The following %d source packages are going to be installed:"
@@ -733,7 +733,7 @@ msgstr[0] "Буде встановлено наступний %d сирцеви�
 msgstr[1] "Буде встановлено наступних %d сирцевих пакунки:"
 msgstr[2] "Буде встановлено наступні %d сирцевих пакунків:"
 
-#: src/Summary.cc:749
+#: src/Summary.cc:751
 #, c-format, boost-format
 msgid "The following application is going to be installed:"
 msgid_plural "The following %d applications are going to be installed:"
@@ -741,7 +741,7 @@ msgstr[0] "Буде перевстановлено наступний %d шаб�
 msgstr[1] "Буде перевстановлено наступних %d шаблони:"
 msgstr[2] "Буде перевстановлено наступні %d шаблонів:"
 
-#: src/Summary.cc:774
+#: src/Summary.cc:776
 #, c-format, boost-format
 msgid "The following package is going to be REMOVED:"
 msgid_plural "The following %d packages are going to be REMOVED:"
@@ -749,7 +749,7 @@ msgstr[0] "Буде ВИЛУЧЕНО наступний %d пакунок:"
 msgstr[1] "Буде ВИЛУЧЕНО наступні %d пакунки:"
 msgstr[2] "Буде ВИЛУЧЕНО наступні %d пакунків:"
 
-#: src/Summary.cc:779
+#: src/Summary.cc:781
 #, c-format, boost-format
 msgid "The following patch is going to be REMOVED:"
 msgid_plural "The following %d patches are going to be REMOVED:"
@@ -757,7 +757,7 @@ msgstr[0] "Буде ВИЛУЧЕНО наступну %d латку:"
 msgstr[1] "Буде ВИЛУЧЕНО наступні %d латки:"
 msgstr[2] "Буде ВИЛУЧЕНО наступних %d латок:"
 
-#: src/Summary.cc:784
+#: src/Summary.cc:786
 #, c-format, boost-format
 msgid "The following pattern is going to be REMOVED:"
 msgid_plural "The following %d patterns are going to be REMOVED:"
@@ -765,7 +765,7 @@ msgstr[0] "Буде ВИЛУЧЕНО наступний %d шаблон:"
 msgstr[1] "Буде ВИЛУЧЕНО наступні %d шаблони:"
 msgstr[2] "Буде ВИЛУЧЕНО наступних %d шаблонів:"
 
-#: src/Summary.cc:789
+#: src/Summary.cc:791
 #, c-format, boost-format
 msgid "The following product is going to be REMOVED:"
 msgid_plural "The following %d products are going to be REMOVED:"
@@ -773,7 +773,7 @@ msgstr[0] "Буде ВИЛУЧЕНО наступний %d продукт:"
 msgstr[1] "Буде ВИЛУЧЕНО наступні %d продукти:"
 msgstr[2] "Буде ВИЛУЧЕНО наступних %d продуктів:"
 
-#: src/Summary.cc:795
+#: src/Summary.cc:797
 #, c-format, boost-format
 msgid "The following application is going to be REMOVED:"
 msgid_plural "The following %d applications are going to be REMOVED:"
@@ -781,7 +781,7 @@ msgstr[0] "Буде ВИЛУЧЕНО наступну %d програму:"
 msgstr[1] "Буде ВИЛУЧЕНО наступні %d програми:"
 msgstr[2] "Буде ВИЛУЧЕНО наступних %d програм:"
 
-#: src/Summary.cc:818
+#: src/Summary.cc:820
 #, c-format, boost-format
 msgid "The following package is going to be upgraded:"
 msgid_plural "The following %d packages are going to be upgraded:"
@@ -789,7 +789,7 @@ msgstr[0] "Буде оновлено наступний %d пакунок:"
 msgstr[1] "Буде оновлено наступні %d пакунки:"
 msgstr[2] "Буде оновлено наступних %d пакунків:"
 
-#: src/Summary.cc:823
+#: src/Summary.cc:825
 #, c-format, boost-format
 msgid "The following patch is going to be upgraded:"
 msgid_plural "The following %d patches are going to be upgraded:"
@@ -797,7 +797,7 @@ msgstr[0] "Буде оновлено наступну %d латку:"
 msgstr[1] "Буде оновлено наступні %d латки:"
 msgstr[2] "Буде оновлено наступних %d латок:"
 
-#: src/Summary.cc:828
+#: src/Summary.cc:830
 #, c-format, boost-format
 msgid "The following pattern is going to be upgraded:"
 msgid_plural "The following %d patterns are going to be upgraded:"
@@ -805,7 +805,7 @@ msgstr[0] "Буде оновлено наступний %d шаблон:"
 msgstr[1] "Буде оновлено наступні %d шаблони:"
 msgstr[2] "Буде оновлено наступних %d шаблонів:"
 
-#: src/Summary.cc:834
+#: src/Summary.cc:836
 #, c-format, boost-format
 msgid "The following product is going to be upgraded:"
 msgid_plural "The following %d products are going to be upgraded:"
@@ -813,7 +813,7 @@ msgstr[0] "Буде оновлено наступний %d продукт:"
 msgstr[1] "Буде оновлено наступні %d продукти:"
 msgstr[2] "Буде оновлено наступних %d продуктів:"
 
-#: src/Summary.cc:842
+#: src/Summary.cc:844
 #, c-format, boost-format
 msgid "The following application is going to be upgraded:"
 msgid_plural "The following %d applications are going to be upgraded:"
@@ -821,7 +821,7 @@ msgstr[0] "Буде оновлено наступну %d програму:"
 msgstr[1] "Буде оновлено наступні %d програми:"
 msgstr[2] "Буде оновлено наступних %d програм:"
 
-#: src/Summary.cc:864
+#: src/Summary.cc:866
 #, c-format, boost-format
 msgid "The following package is going to be downgraded:"
 msgid_plural "The following %d packages are going to be downgraded:"
@@ -829,7 +829,7 @@ msgstr[0] "Буде повернено до старішої версії нас
 msgstr[1] "Буде повернено до старішої версії наступні %d пакунки:"
 msgstr[2] "Буде повернено до старішої версії наступних %d пакунків:"
 
-#: src/Summary.cc:869
+#: src/Summary.cc:871
 #, c-format, boost-format
 msgid "The following patch is going to be downgraded:"
 msgid_plural "The following %d patches are going to be downgraded:"
@@ -837,7 +837,7 @@ msgstr[0] "Буде повернено до старішої версії нас
 msgstr[1] "Буде повернено до старішої версії наступні %d латки:"
 msgstr[2] "Буде повернено до старішої версії наступних %d латок:"
 
-#: src/Summary.cc:874
+#: src/Summary.cc:876
 #, c-format, boost-format
 msgid "The following pattern is going to be downgraded:"
 msgid_plural "The following %d patterns are going to be downgraded:"
@@ -845,7 +845,7 @@ msgstr[0] "Буде повернено до старішої версії нас
 msgstr[1] "Буде повернено до старішої версії наступні %d шаблони:"
 msgstr[2] "Буде повернено до старішої версії наступних %d шаблонів:"
 
-#: src/Summary.cc:879
+#: src/Summary.cc:881
 #, c-format, boost-format
 msgid "The following product is going to be downgraded:"
 msgid_plural "The following %d products are going to be downgraded:"
@@ -853,7 +853,7 @@ msgstr[0] "Буде повернено до старішої версії нас
 msgstr[1] "Буде повернено до старішої версії наступні %d продукти:"
 msgstr[2] "Буде повернено до старішої версії наступних %d продуктів:"
 
-#: src/Summary.cc:885
+#: src/Summary.cc:887
 #, c-format, boost-format
 msgid "The following application is going to be downgraded:"
 msgid_plural "The following %d applications are going to be downgraded:"
@@ -861,7 +861,7 @@ msgstr[0] "Буде повернено до старішої версії нас
 msgstr[1] "Буде повернено до старішої версії наступні %d програми:"
 msgstr[2] "Буде повернено до старішої версії наступних %d програм:"
 
-#: src/Summary.cc:907
+#: src/Summary.cc:909
 #, c-format, boost-format
 msgid "The following package is going to be reinstalled:"
 msgid_plural "The following %d packages are going to be reinstalled:"
@@ -869,7 +869,7 @@ msgstr[0] "Буде перевстановлено наступний %d пак�
 msgstr[1] "Буде перевстановлено наступних %d пакунки:"
 msgstr[2] "Буде перевстановлено наступних %d пакунків:"
 
-#: src/Summary.cc:912
+#: src/Summary.cc:914
 #, c-format, boost-format
 msgid "The following patch is going to be reinstalled:"
 msgid_plural "The following %d patches are going to be reinstalled:"
@@ -877,7 +877,7 @@ msgstr[0] "Буде перевстановлено наступну %d латк�
 msgstr[1] "Буде перевстановлено наступні %d латки:"
 msgstr[2] "Буде перевстановлено наступних %d латок:"
 
-#: src/Summary.cc:917
+#: src/Summary.cc:919
 #, c-format, boost-format
 msgid "The following pattern is going to be reinstalled:"
 msgid_plural "The following %d patterns are going to be reinstalled:"
@@ -885,7 +885,7 @@ msgstr[0] "Буде перевстановлено наступний %d шаб�
 msgstr[1] "Буде перевстановлено наступні %d шаблони:"
 msgstr[2] "Буде перевстановлено наступних %d шаблонів:"
 
-#: src/Summary.cc:922
+#: src/Summary.cc:924
 #, c-format, boost-format
 msgid "The following product is going to be reinstalled:"
 msgid_plural "The following %d products are going to be reinstalled:"
@@ -893,7 +893,7 @@ msgstr[0] "Буде перевстановлено наступний %d про�
 msgstr[1] "Буде перевстановлено наступні %d продукти:"
 msgstr[2] "Буде перевстановлено наступних %d продуктів:"
 
-#: src/Summary.cc:935
+#: src/Summary.cc:937
 #, c-format, boost-format
 msgid "The following application is going to be reinstalled:"
 msgid_plural "The following %d applications are going to be reinstalled:"
@@ -901,7 +901,7 @@ msgstr[0] "Буде перевстановлено наступну %d прог�
 msgstr[1] "Буде перевстановлено наступні %d програми:"
 msgstr[2] "Буде перевстановлено наступних %d програм:"
 
-#: src/Summary.cc:1072
+#: src/Summary.cc:1074
 #, c-format, boost-format
 msgid "The following recommended package was automatically selected:"
 msgid_plural ""
@@ -910,7 +910,7 @@ msgstr[0] "Було автоматично вибрано наступний %d 
 msgstr[1] "Було автоматично вибрано наступні %d рекомендовані пакунки:"
 msgstr[2] "Було автоматично вибрано наступних %d рекомендованих пакунків:"
 
-#: src/Summary.cc:1077
+#: src/Summary.cc:1079
 #, c-format, boost-format
 msgid "The following recommended patch was automatically selected:"
 msgid_plural ""
@@ -919,7 +919,7 @@ msgstr[0] "Було автоматично вибрано наступну %d р
 msgstr[1] "Було автоматично вибрано наступні %d рекомендовані латки:"
 msgstr[2] "Було автоматично вибрано наступних %d рекомендованих латок:"
 
-#: src/Summary.cc:1082
+#: src/Summary.cc:1084
 #, c-format, boost-format
 msgid "The following recommended pattern was automatically selected:"
 msgid_plural ""
@@ -928,7 +928,7 @@ msgstr[0] "Було автоматично вибрано наступний %d 
 msgstr[1] "Було автоматично вибрано наступні %d рекомендовані шаблони:"
 msgstr[2] "Було автоматично вибрано наступних %d рекомендованих шаблонів:"
 
-#: src/Summary.cc:1087
+#: src/Summary.cc:1089
 #, c-format, boost-format
 msgid "The following recommended product was automatically selected:"
 msgid_plural ""
@@ -937,7 +937,7 @@ msgstr[0] "Було автоматично вибрано наступний %d 
 msgstr[1] "Було автоматично вибрано наступні %d рекомендовані продукти:"
 msgstr[2] "Було автоматично вибрано наступних %d рекомендованих продуктів:"
 
-#: src/Summary.cc:1092
+#: src/Summary.cc:1094
 #, c-format, boost-format
 msgid "The following recommended source package was automatically selected:"
 msgid_plural ""
@@ -948,7 +948,7 @@ msgstr[1] "Було автоматично вибрано наступні %d р
 msgstr[2] ""
 "Було автоматично вибрано наступних %d рекомендованих сирцевих пакунків:"
 
-#: src/Summary.cc:1098
+#: src/Summary.cc:1100
 #, c-format, boost-format
 msgid "The following recommended application was automatically selected:"
 msgid_plural ""
@@ -957,7 +957,7 @@ msgstr[0] "Було автоматично вибрано наступну %d р
 msgstr[1] "Було автоматично вибрано наступні %d рекомендовані програми:"
 msgstr[2] "Було автоматично вибрано наступних %d рекомендованих програм:"
 
-#: src/Summary.cc:1145
+#: src/Summary.cc:1147
 #, c-format, boost-format
 msgid ""
 "The following package is recommended, but will not be installed (only "
@@ -975,7 +975,7 @@ msgstr[2] ""
 "Наступних %d пакунків рекомендовано, але не буде встановлено (встановимо "
 "лише потрібні пакунки):"
 
-#: src/Summary.cc:1157
+#: src/Summary.cc:1159
 #, c-format, boost-format
 msgid ""
 "The following package is recommended, but will not be installed because it's "
@@ -993,7 +993,7 @@ msgstr[2] ""
 "Наступних %d пакунків рекомендовано, але не буде встановлено (раніше вже "
 "видалили вручну):"
 
-#: src/Summary.cc:1167
+#: src/Summary.cc:1169
 #, c-format, boost-format
 msgid ""
 "The following package is recommended, but will not be installed due to "
@@ -1011,7 +1011,7 @@ msgstr[2] ""
 "Наступних %d пакунків рекомендовано, але не буде встановлено через конфлікти "
 "або проблеми з залежностями:"
 
-#: src/Summary.cc:1180
+#: src/Summary.cc:1182
 #, c-format, boost-format
 msgid "The following patch is recommended, but will not be installed:"
 msgid_plural ""
@@ -1020,7 +1020,7 @@ msgstr[0] "Наступна %d латка рекомендована, але н�
 msgstr[1] "Наступні %d латки рекомендовано, але не буде встановлено:"
 msgstr[2] "Наступні %d латок рекомендовано, але не буде встановлено:"
 
-#: src/Summary.cc:1184
+#: src/Summary.cc:1186
 #, c-format, boost-format
 msgid "The following pattern is recommended, but will not be installed:"
 msgid_plural ""
@@ -1029,7 +1029,7 @@ msgstr[0] "Наступний %d шаблон рекомендовано, але
 msgstr[1] "Наступні %d шаблони рекомендовано, але не буде встановлено:"
 msgstr[2] "Наступних %d шаблонів рекомендовано, але не буде встановлено:"
 
-#: src/Summary.cc:1188
+#: src/Summary.cc:1190
 #, c-format, boost-format
 msgid "The following product is recommended, but will not be installed:"
 msgid_plural ""
@@ -1038,7 +1038,7 @@ msgstr[0] "Наступний %d продукт рекомендовано, ал
 msgstr[1] "Наступні %d продукти рекомендовано, але не буде встановлено:"
 msgstr[2] "Наступних %d продуктів рекомендовано, але не буде встановлено:"
 
-#: src/Summary.cc:1193
+#: src/Summary.cc:1195
 #, c-format, boost-format
 msgid "The following application is recommended, but will not be installed:"
 msgid_plural ""
@@ -1047,7 +1047,7 @@ msgstr[0] "Наступну %d програму рекомендовано, ал
 msgstr[1] "Наступні %d програми рекомендовано, але не буде встановлено:"
 msgstr[2] "Наступних %d програм рекомендовано, але не буде встановлено:"
 
-#: src/Summary.cc:1226
+#: src/Summary.cc:1228
 #, c-format, boost-format
 msgid "The following package is suggested, but will not be installed:"
 msgid_plural ""
@@ -1056,7 +1056,7 @@ msgstr[0] "Наступний %d пакунок запропоновано, ал
 msgstr[1] "Наступні %d пакунки запропоновано, але не буде встановлено:"
 msgstr[2] "Наступних %d пакунків запропоновано, але не буде встановлено:"
 
-#: src/Summary.cc:1231
+#: src/Summary.cc:1233
 #, c-format, boost-format
 msgid "The following patch is suggested, but will not be installed:"
 msgid_plural ""
@@ -1067,7 +1067,7 @@ msgstr[1] ""
 msgstr[2] ""
 "Було запропоновано наступних %d латок, але вони не будуть встановлені:"
 
-#: src/Summary.cc:1236
+#: src/Summary.cc:1238
 #, c-format, boost-format
 msgid "The following pattern is suggested, but will not be installed:"
 msgid_plural ""
@@ -1076,7 +1076,7 @@ msgstr[0] "Наступний %d шаблон було запропонован�
 msgstr[1] "Наступні %d шаблони було запропоновано, але не буде встановлено:"
 msgstr[2] "Наступних %d шаблонів було запропоновано, але не буде встановлено:"
 
-#: src/Summary.cc:1241
+#: src/Summary.cc:1243
 #, c-format, boost-format
 msgid "The following product is suggested, but will not be installed:"
 msgid_plural ""
@@ -1085,7 +1085,7 @@ msgstr[0] "Наступний %d продукт запропоновано, ал
 msgstr[1] "Наступні %d продукти запропоновано, але не буде встановлено:"
 msgstr[2] "Наступних %d продуктів запропоновано, але не буде встановлено:"
 
-#: src/Summary.cc:1247
+#: src/Summary.cc:1249
 #, c-format, boost-format
 msgid "The following application is suggested, but will not be installed:"
 msgid_plural ""
@@ -1094,7 +1094,7 @@ msgstr[0] "Наступну %d програму запропоновано, ал
 msgstr[1] "Наступні %d програми запропоновано, але не буде встановлено:"
 msgstr[2] "Наступних %d програм запропоновано, але не буде встановлено:"
 
-#: src/Summary.cc:1272
+#: src/Summary.cc:1274
 #, c-format, boost-format
 msgid "The following package is going to change architecture:"
 msgid_plural "The following %d packages are going to change architecture:"
@@ -1102,7 +1102,7 @@ msgstr[0] "У наступного %d пакунку буде змінено а�
 msgstr[1] "У наступних %d пакунків буде змінено архітектуру:"
 msgstr[2] "У наступних %d пакунках буде змінено архітектуру:"
 
-#: src/Summary.cc:1277
+#: src/Summary.cc:1279
 #, c-format, boost-format
 msgid "The following patch is going to change architecture:"
 msgid_plural "The following %d patches are going to change architecture:"
@@ -1110,7 +1110,7 @@ msgstr[0] "У наступній %d латці буде змінено архі�
 msgstr[1] "У наступних %d латках буде змінено архітектуру:"
 msgstr[2] "У наступних %d латках буде змінено архітектуру:"
 
-#: src/Summary.cc:1282
+#: src/Summary.cc:1284
 #, c-format, boost-format
 msgid "The following pattern is going to change architecture:"
 msgid_plural "The following %d patterns are going to change architecture:"
@@ -1118,7 +1118,7 @@ msgstr[0] "У наступного %d шаблону буде змінено а�
 msgstr[1] "У наступних %d шаблонів буде змінено архітектуру:"
 msgstr[2] "У наступних %d шаблонів буде змінено архітектуру:"
 
-#: src/Summary.cc:1287
+#: src/Summary.cc:1289
 #, c-format, boost-format
 msgid "The following product is going to change architecture:"
 msgid_plural "The following %d products are going to change architecture:"
@@ -1126,7 +1126,7 @@ msgstr[0] "У наступного %d продукту буде змінено �
 msgstr[1] "У наступних %d продуктів буде змінено архітектуру:"
 msgstr[2] "У наступних %d продуктів буде змінено архітектуру:"
 
-#: src/Summary.cc:1293
+#: src/Summary.cc:1295
 #, c-format, boost-format
 msgid "The following application is going to change architecture:"
 msgid_plural "The following %d applications are going to change architecture:"
@@ -1134,7 +1134,7 @@ msgstr[0] "У наступній %d програмі буде змінено а�
 msgstr[1] "У наступних %d програмах буде змінено архітектуру:"
 msgstr[2] "У наступних %d програмах буде змінено архітектуру:"
 
-#: src/Summary.cc:1318
+#: src/Summary.cc:1320
 #, c-format, boost-format
 msgid "The following package is going to change vendor:"
 msgid_plural "The following %d packages are going to change vendor:"
@@ -1142,7 +1142,7 @@ msgstr[0] "У наступного %d пакунка буде змінено п�
 msgstr[1] "У наступних %d пакунків буде змінено постачальника:"
 msgstr[2] "У наступних %d пакунків буде змінено постачальника:"
 
-#: src/Summary.cc:1323
+#: src/Summary.cc:1325
 #, c-format, boost-format
 msgid "The following patch is going to change vendor:"
 msgid_plural "The following %d patches are going to change vendor:"
@@ -1150,7 +1150,7 @@ msgstr[0] "У наступній %d латці буде змінено пост�
 msgstr[1] "У наступних %d латках буде змінено постачальника:"
 msgstr[2] "У наступних %d латках буде змінено постачальника:"
 
-#: src/Summary.cc:1328
+#: src/Summary.cc:1330
 #, c-format, boost-format
 msgid "The following pattern is going to change vendor:"
 msgid_plural "The following %d patterns are going to change vendor:"
@@ -1158,7 +1158,7 @@ msgstr[0] "У наступного %d шаблона буде змінено п�
 msgstr[1] "У наступних %d шаблонів буде змінено постачальника:"
 msgstr[2] "У наступних %d шаблонів буде змінено постачальника:"
 
-#: src/Summary.cc:1333
+#: src/Summary.cc:1335
 #, c-format, boost-format
 msgid "The following product is going to change vendor:"
 msgid_plural "The following %d products are going to change vendor:"
@@ -1166,7 +1166,7 @@ msgstr[0] "У наступного %d продукта буде змінено �
 msgstr[1] "У наступних %d продуктах буде змінено постачальника:"
 msgstr[2] "У наступних %d продуктах буде змінено постачальника:"
 
-#: src/Summary.cc:1339
+#: src/Summary.cc:1341
 #, c-format, boost-format
 msgid "The following application is going to change vendor:"
 msgid_plural "The following %d applications are going to change vendor:"
@@ -1174,7 +1174,7 @@ msgstr[0] "У наступної %d програми буде змінено п�
 msgstr[1] "У наступних %d програмах буде змінено постачальника:"
 msgstr[2] "У наступних %d програмах буде змінено постачальника:"
 
-#: src/Summary.cc:1362
+#: src/Summary.cc:1364
 #, c-format, boost-format
 msgid "The following package has no support information from its vendor:"
 msgid_plural ""
@@ -1183,7 +1183,7 @@ msgstr[0] "Наступний %d пакунок не підтримується 
 msgstr[1] "Наступні %d пакунки не підтримуються постачальником:"
 msgstr[2] "Наступних %d пакунків не підтримуються постачальником:"
 
-#: src/Summary.cc:1380
+#: src/Summary.cc:1382
 #, c-format, boost-format
 msgid "The following package is not supported by its vendor:"
 msgid_plural "The following %d packages are not supported by their vendor:"
@@ -1191,7 +1191,7 @@ msgstr[0] "Наступний %d пакунок не підтримується 
 msgstr[1] "Наступні %d пакунки не підтримуються постачальником:"
 msgstr[2] "Наступних %d пакунків не підтримуються постачальником:"
 
-#: src/Summary.cc:1398
+#: src/Summary.cc:1400
 #, c-format, boost-format
 msgid ""
 "The following package needs additional customer contract to get support:"
@@ -1207,11 +1207,11 @@ msgstr[2] ""
 "Наступних %d пакунків потребують додаткового договору з клієнтом для "
 "отримання підтримки:"
 
-#: src/Summary.cc:1415
+#: src/Summary.cc:1417
 msgid "was superseded by"
 msgstr ""
 
-#: src/Summary.cc:1428
+#: src/Summary.cc:1430
 #, c-format, boost-format
 msgid ""
 "The following package was discontinued and has been superseded by a new "
@@ -1223,7 +1223,7 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/Summary.cc:1433
+#: src/Summary.cc:1435
 msgid ""
 "The successor package should be installed as soon as possible to receive "
 "continued support:"
@@ -1234,7 +1234,7 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: src/Summary.cc:1458
+#: src/Summary.cc:1460
 #, c-format, boost-format
 msgid "The following package update will NOT be installed:"
 msgid_plural "The following %d package updates will NOT be installed:"
@@ -1242,7 +1242,7 @@ msgstr[0] "Наступне %d оновлення пакунків НЕ буде
 msgstr[1] "Наступних %d оновлення пакунків НЕ буде встановлено:"
 msgstr[2] "Наступних %d оновлень пакунків НЕ буде встановлено:"
 
-#: src/Summary.cc:1463
+#: src/Summary.cc:1465
 #, c-format, boost-format
 msgid "The following product update will NOT be installed:"
 msgid_plural "The following %d product updates will NOT be installed:"
@@ -1250,7 +1250,7 @@ msgstr[0] "Наступне %d оновлення продукту НЕ буде
 msgstr[1] "Наступних %d оновлення продукту НЕ буде встановлено:"
 msgstr[2] "Наступних %d оновлень продукту НЕ буде встановлено:"
 
-#: src/Summary.cc:1469
+#: src/Summary.cc:1471
 #, c-format, boost-format
 msgid "The following application update will NOT be installed:"
 msgid_plural "The following %d application updates will NOT be installed:"
@@ -1258,7 +1258,7 @@ msgstr[0] "Наступне %d оновлення програм НЕ буде �
 msgstr[1] "Наступні %d оновлення програм НЕ буде встановлено:"
 msgstr[2] "Наступні %d оновлень програм НЕ буде встановлено:"
 
-#: src/Summary.cc:1502
+#: src/Summary.cc:1504
 #, c-format, boost-format
 msgid "The following item is locked and will not be changed by any action:"
 msgid_plural ""
@@ -1269,23 +1269,23 @@ msgstr[2] "Наступних %d пунктів заблоковано і не �
 
 #. always as plain name list
 #. translators: used as 'tag:' (i.e. followed by ':')
-#: src/Summary.cc:1515
+#: src/Summary.cc:1517
 msgid "Available"
 msgstr "Наявний"
 
 #. translators: used as 'tag:' (i.e. followed by ':')
 #. translators: property name; short; used like "Name: value"
-#: src/Summary.cc:1521 src/info.cc:396 src/info.cc:489 src/info.cc:609
+#: src/Summary.cc:1523 src/info.cc:396 src/info.cc:489 src/info.cc:609
 msgid "Installed"
 msgstr "Встановлені"
 
-#: src/Summary.cc:1526
+#: src/Summary.cc:1528
 #, boost-format
 msgid "Run '%1%' to see the complete list of locked items."
 msgstr ""
 "Запустіть \"%1%\", щоб переглянути повний список заблокованих елементів."
 
-#: src/Summary.cc:1535
+#: src/Summary.cc:1537
 #, c-format, boost-format
 msgid "The following patch requires a system reboot:"
 msgid_plural "The following %d patches require a system reboot:"
@@ -1293,7 +1293,7 @@ msgstr[0] "Наступна %d латка вимагає перезаванта�
 msgstr[1] "Наступні %d латки вимагають перезавантаження системи:"
 msgstr[2] "Наступні %d латок вимагають перезавантаження системи:"
 
-#: src/Summary.cc:1539
+#: src/Summary.cc:1541
 #, c-format, boost-format
 msgid "The following package requires a system reboot:"
 msgid_plural "The following %d packages require a system reboot:"
@@ -1301,38 +1301,52 @@ msgstr[0] "Наступний %d пакунок потребує перезав�
 msgstr[1] "Наступні %d пакунки потребують перезавантаження системи:"
 msgstr[2] "Наступні %d пакунків потребують перезавантаження системи:"
 
-#: src/Summary.cc:1561
+#: src/Summary.cc:1563
 msgid "Skipped needed patches which do not apply without conflict:"
 msgstr ""
 
-#: src/Summary.cc:1577
-#, boost-format
-msgid "Overall download size: %1%. Already cached: %2%."
-msgstr "Загальний розмір завантаження: %1%. Вже кешовано: %2%."
+#. Package download size:   99.2 MiB
+#. or
+#. Package download size:
+#. |     105.7 MiB  overall download size
+#. 99.2 MiB  |  -    6.4 MiB  already in cache
+#: src/Summary.cc:1588
+msgid "Package download size:"
+msgstr ""
 
-#: src/Summary.cc:1580
+#. translator: rendered as "105.7 MiB  overall download size"
+#: src/Summary.cc:1596
+msgid "overall package size"
+msgstr ""
+
+#. translator: rendered as "  6.4 MiB  already in cache"
+#: src/Summary.cc:1598
+msgid "already in cache"
+msgstr ""
+
+#: src/Summary.cc:1605
 msgid "Download only."
 msgstr "Тільки завантажити."
 
-#. TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
-#: src/Summary.cc:1586
-#, c-format, boost-format
-msgid "After the operation, additional %s will be used."
-msgstr "Після дії, буде додатково використано %s."
-
-#: src/Summary.cc:1588
-msgid "No additional space will be used or freed after the operation."
+#. Package install size change:
+#. |     349.1 MiB  required by packages that will be installed
+#. 1.9 MiB  |  -  347.3 MiB  released by packages that will be removed
+#: src/Summary.cc:1610
+msgid "Package install size change:"
 msgstr ""
-"Після операції не буде додатково зайнято або вивільнено дискового простору."
 
-#. TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
-#: src/Summary.cc:1595
-#, c-format, boost-format
-msgid "After the operation, %s will be freed."
-msgstr "Після дії, %s буде вивільнено."
+#. translator: rendered as "349.1 MiB  required by packages that will be installed"
+#: src/Summary.cc:1615
+msgid "required by packages that will be installed"
+msgstr ""
+
+#. translator: rendered as "347.3 MiB  released by packages that will be removed"
+#: src/Summary.cc:1617
+msgid "released by packages that will be removed"
+msgstr ""
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
-#: src/Summary.cc:1619
+#: src/Summary.cc:1638
 msgid "package to upgrade"
 msgid_plural "packages to upgrade"
 msgstr[0] "пакунок оновити"
@@ -1340,7 +1354,7 @@ msgstr[1] "пакунки оновити"
 msgstr[2] "пакунків оновити"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: src/Summary.cc:1630
+#: src/Summary.cc:1649
 msgid "to downgrade"
 msgid_plural "to downgrade"
 msgstr[0] "вернути до старішої версії"
@@ -1348,7 +1362,7 @@ msgstr[1] "вернути до старіших версій"
 msgstr[2] "вернути до старіших версій"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
-#: src/Summary.cc:1633
+#: src/Summary.cc:1652
 msgid "package to downgrade"
 msgid_plural "packages to downgrade"
 msgstr[0] "пакунок вернути до старішої версії"
@@ -1356,7 +1370,7 @@ msgstr[1] "пакунки вернути до старішої версії"
 msgstr[2] "пакунків вернути до старішої версії"
 
 #. translators: this text will be preceded by a number e.g. "5 new"
-#: src/Summary.cc:1644
+#: src/Summary.cc:1663
 msgid "new"
 msgid_plural "new"
 msgstr[0] "новий"
@@ -1364,7 +1378,7 @@ msgstr[1] "нові"
 msgstr[2] "нових"
 
 #. translators: this text will be preceded by a number e.g. "5 new to install"
-#: src/Summary.cc:1647
+#: src/Summary.cc:1666
 msgid "new package to install"
 msgid_plural "new packages to install"
 msgstr[0] "новий пакунок встановити"
@@ -1372,7 +1386,7 @@ msgstr[1] "нові пакунки встановити"
 msgstr[2] "нових пакунків встановити"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: src/Summary.cc:1658
+#: src/Summary.cc:1677
 msgid "to reinstall"
 msgid_plural "to reinstall"
 msgstr[0] "до перевстановлення"
@@ -1380,7 +1394,7 @@ msgstr[1] "до перевстановлення"
 msgstr[2] "до перевстановлення"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
-#: src/Summary.cc:1661
+#: src/Summary.cc:1680
 msgid "package to reinstall"
 msgid_plural "packages to reinstall"
 msgstr[0] "пакунок перевстановити"
@@ -1388,7 +1402,7 @@ msgstr[1] "пакунки перевстановити"
 msgstr[2] "пакунків перевстановити"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: src/Summary.cc:1672
+#: src/Summary.cc:1691
 msgid "to remove"
 msgid_plural "to remove"
 msgstr[0] "до вилучення"
@@ -1396,7 +1410,7 @@ msgstr[1] "до вилучення"
 msgstr[2] "до вилучення"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
-#: src/Summary.cc:1675
+#: src/Summary.cc:1694
 msgid "package to remove"
 msgid_plural "packages to remove"
 msgstr[0] "пакунок вилучити"
@@ -1404,7 +1418,7 @@ msgstr[1] "пакунки вилучити"
 msgstr[2] "пакунків вилучити"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: src/Summary.cc:1686
+#: src/Summary.cc:1705
 msgid "to change vendor"
 msgid_plural " to change vendor"
 msgstr[0] "до зміни постачальника"
@@ -1412,7 +1426,7 @@ msgstr[1] "до зміни постачальників"
 msgstr[2] "до зміни постачальників"
 
 #. translators: this text will be preceded by a number e.g. "5 packages ..."
-#: src/Summary.cc:1689
+#: src/Summary.cc:1708
 msgid "package will change vendor"
 msgid_plural "packages will change vendor"
 msgstr[0] "пакунок змінить постачальника"
@@ -1420,7 +1434,7 @@ msgstr[1] "пакунки змінить постачальника"
 msgstr[2] "пакунків змінить постачальника"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: src/Summary.cc:1700
+#: src/Summary.cc:1719
 msgid "to change arch"
 msgid_plural "to change arch"
 msgstr[0] "змінить архітектуру"
@@ -1428,7 +1442,7 @@ msgstr[1] "змінить архітектуру"
 msgstr[2] "змінять архітектуру"
 
 #. translators: this text will be preceded by a number e.g. "5 packages ..."
-#: src/Summary.cc:1703
+#: src/Summary.cc:1722
 msgid "package will change arch"
 msgid_plural "packages will change arch"
 msgstr[0] "пакунок змінить архітектуру"
@@ -1436,7 +1450,7 @@ msgstr[1] "пакунки змінять архітектуру"
 msgstr[2] "пакунків змінять архітектуру"
 
 #. translators: this text will be preceded by a number e.g. "5 new"
-#: src/Summary.cc:1714
+#: src/Summary.cc:1733
 msgid "source package"
 msgid_plural "source packages"
 msgstr[0] "сирцевий пакунок"
@@ -1444,7 +1458,7 @@ msgstr[1] "сирцевих пакунки"
 msgstr[2] "сирцевих пакунків"
 
 #. translators: this text will be preceded by a number e.g. "5 new to install"
-#: src/Summary.cc:1717
+#: src/Summary.cc:1736
 msgid "source package to install"
 msgid_plural "source packages to install"
 msgstr[0] "сирцевий пакунок для установки"
@@ -1452,7 +1466,7 @@ msgstr[1] "сирцеві пакунки для установки"
 msgstr[2] "сирцевих пакунків для установки"
 
 #. patch command (auto)restricted to update stack patches
-#: src/Summary.cc:1798
+#: src/Summary.cc:1817
 msgid ""
 "Package manager restart required. (Run this command once again after the "
 "update stack got updated)"
@@ -1461,12 +1475,12 @@ msgstr ""
 "того як оновиться стек оновлень.)"
 
 #. translator: %1% is an option string like  "--dry-run"
-#: src/Summary.cc:1805
+#: src/Summary.cc:1824
 #, boost-format
 msgid "%1% is set, otherwise a system reboot would be required."
 msgstr ""
 
-#: src/Summary.cc:1807
+#: src/Summary.cc:1826
 msgid "System reboot required."
 msgstr "Потрібне перезавантаження системи."
 
@@ -1478,7 +1492,7 @@ msgstr "Потрібне перезавантаження системи."
 #. Consider to cancel:
 #. Product 'opennSUSE Tumbleweed' requires to be upgraded by calling 'zypper dup'!
 #. Continue? [y/n/...? shows all options] (y):
-#: src/Summary.cc:1826
+#: src/Summary.cc:1845
 msgid "Consider to cancel:"
 msgstr "Можливо скасуйте:"
 
@@ -1510,7 +1524,7 @@ msgstr "PackageKit досі запущений (ймовірно, зайняти
 msgid "Try again?"
 msgstr "Спробувати знову?"
 
-#: src/Zypper.cc:244 src/Zypper.cc:716 src/commands/basecommand.cc:280
+#: src/Zypper.cc:244 src/Zypper.cc:721 src/commands/basecommand.cc:280
 msgid "Unexpected exception."
 msgstr "Непередбачений виняток."
 
@@ -1545,7 +1559,7 @@ msgstr ""
 msgid "The %s option has no effect here, ignoring."
 msgstr "Параметр %s у цьому випадку не працюватиме, його пропущено."
 
-#: src/Zypper.cc:659
+#: src/Zypper.cc:630
 msgid "Non-option program arguments: "
 msgstr "Аргументи програми (не-параметри): "
 
@@ -2791,8 +2805,8 @@ msgstr[2] "Вилучено %lu блокувань."
 #: src/commands/locks/list.cc:133 src/commands/repos/list.cc:42
 #: src/commands/repos/list.cc:227 src/commands/services/list.cc:107
 #: src/info.cc:90 src/info.cc:512 src/info.cc:747 src/locales.cc:201
-#: src/search.cc:48 src/search.cc:199 src/search.cc:304 src/search.cc:452
-#: src/search.cc:499 src/update.cc:789 src/utils/misc.cc:325
+#: src/search.cc:48 src/search.cc:199 src/search.cc:304 src/search.cc:458
+#: src/search.cc:508 src/update.cc:789 src/utils/misc.cc:324
 msgid "Name"
 msgstr "Назва"
 
@@ -2810,9 +2824,9 @@ msgstr "Тип"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: package's repository (header)
-#: src/commands/locks/list.cc:136 src/info.cc:88 src/repos.cc:794
-#: src/search.cc:56 src/search.cc:306 src/search.cc:451 src/search.cc:495
-#: src/update.cc:786 src/utils/misc.cc:324
+#: src/commands/locks/list.cc:136 src/info.cc:88 src/search.cc:56
+#: src/search.cc:306 src/search.cc:457 src/search.cc:504 src/update.cc:786
+#: src/utils/misc.cc:323
 msgid "Repository"
 msgstr "Сховище"
 
@@ -3450,33 +3464,40 @@ msgstr ""
 msgid "Show installed packages which were explicitly selected by the user."
 msgstr ""
 
-#. translators: --orphaned
+#. translators: --system
 #: src/commands/query/packages.cc:43
-msgid "Show packages which are orphaned (without repository)."
-msgstr "Показати осиротілі пакунки (не мають сховища)."
+msgid "Show installed packages which are not provided by any repository."
+msgstr ""
+
+#. translators: --orphaned
+#: src/commands/query/packages.cc:47
+msgid ""
+"Show system packages which are orphaned (without repository and without "
+"update candidate)."
+msgstr ""
 
 #. translators: --suggested
-#: src/commands/query/packages.cc:47
+#: src/commands/query/packages.cc:51
 msgid "Show packages which are suggested."
 msgstr "Показати запропоновані пакунки."
 
 #. translators: --recommended
-#: src/commands/query/packages.cc:51
+#: src/commands/query/packages.cc:55
 msgid "Show packages which are recommended."
 msgstr "Показати рекомендовані пакунки."
 
 #. translators: --unneeded
-#: src/commands/query/packages.cc:55
+#: src/commands/query/packages.cc:59
 msgid "Show packages which are unneeded."
 msgstr "Показувати непотрібні пакунки."
 
 #. translators: -N, --sort-by-name
-#: src/commands/query/packages.cc:59
+#: src/commands/query/packages.cc:63
 msgid "Sort the list by package name."
 msgstr "Впорядкувати список за назвами пакунків."
 
 #. translators: -R, --sort-by-repo
-#: src/commands/query/packages.cc:63
+#: src/commands/query/packages.cc:67
 msgid "Sort the list by repository."
 msgstr "Впорядкувати список за сховищами."
 
@@ -3632,7 +3653,7 @@ msgstr "Псевдонім"
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/commands/repos/list.cc:44 src/commands/repos/list.cc:47
 #: src/commands/repos/list.cc:273 src/commands/services/add.cc:83
-#: src/commands/services/list.cc:118 src/repos.cc:1344
+#: src/commands/services/list.cc:118 src/repos.cc:1247
 #: src/utils/flags/zyppflags.h:49
 msgid "URI"
 msgstr "URI"
@@ -3641,27 +3662,27 @@ msgstr "URI"
 #. translators: property name; short; used like "Name: value"
 #: src/commands/repos/list.cc:51 src/commands/repos/list.cc:235
 #: src/commands/services/add.cc:85 src/commands/services/list.cc:108
-#: src/repos.cc:1346
+#: src/repos.cc:1249
 msgid "Enabled"
 msgstr "Увімкнено"
 
 #. GPG Check
 #. translators: property name; short; used like "Name: value"
 #: src/commands/repos/list.cc:52 src/commands/repos/list.cc:239
-#: src/commands/services/list.cc:109 src/repos.cc:1348
+#: src/commands/services/list.cc:109 src/repos.cc:1251
 msgid "GPG Check"
 msgstr "Перевірка GPG"
 
 #. translators: repository priority (in zypper repos -p or -d)
 #. translators: property name; short; used like "Name: value"
 #: src/commands/repos/list.cc:53 src/commands/repos/list.cc:257
-#: src/commands/services/list.cc:115 src/repos.cc:1352
+#: src/commands/services/list.cc:115 src/repos.cc:1255
 msgid "Priority"
 msgstr "Пріоритет"
 
 #. translators: property name; short; used like "Name: value"
 #: src/commands/repos/list.cc:54 src/commands/services/add.cc:87
-#: src/repos.cc:1350
+#: src/repos.cc:1253
 msgid "Autorefresh"
 msgstr "Самооновлення"
 
@@ -3714,7 +3735,7 @@ msgstr "Надає список всіх визначених сховищ."
 msgid "Export all defined repositories as a single local .repo file."
 msgstr "Експортувати всі визначені сховища до одного локального файла .repo."
 
-#: src/commands/repos/list.cc:122 src/repos.cc:1101
+#: src/commands/repos/list.cc:122 src/repos.cc:1004
 msgid "Error reading repositories:"
 msgstr "Помилка читання сховищ:"
 
@@ -3842,7 +3863,7 @@ msgstr "Глобальний параметр \"%s\" тут не працюва�
 msgid "Arguments are not allowed if '%s' is used."
 msgstr "Аргументи не дозволені, якщо використовується \"%s\"."
 
-#: src/commands/repos/refresh.cc:195 src/repos.cc:1113
+#: src/commands/repos/refresh.cc:195 src/repos.cc:1016
 msgid "Specified repositories: "
 msgstr "Вказані сховища: "
 
@@ -3851,7 +3872,7 @@ msgstr "Вказані сховища: "
 msgid "Refreshing repository '%s'."
 msgstr "Оновлення сховища \"%s\"."
 
-#: src/commands/repos/refresh.cc:236 src/repos.cc:900
+#: src/commands/repos/refresh.cc:236 src/repos.cc:842
 #, c-format, boost-format
 msgid "Scanning content of disabled repository '%s'."
 msgstr "Сканування вмісту вимкненого сховища \"%s\"."
@@ -3861,7 +3882,7 @@ msgstr "Сканування вмісту вимкненого сховища \"
 msgid "Skipping disabled repository '%s'"
 msgstr "Пропускається вимкнене сховище \"%s\""
 
-#: src/commands/repos/refresh.cc:262 src/repos.cc:917 src/repos.cc:991
+#: src/commands/repos/refresh.cc:262 src/repos.cc:860 src/repos.cc:908
 #, c-format, boost-format
 msgid "Skipping repository '%s' because of the above error."
 msgstr "Пропускається сховище \"%s\" через помилку вище."
@@ -3889,7 +3910,7 @@ msgstr ""
 msgid "Could not refresh the repositories because of errors."
 msgstr "Через помилки не вдалось оновити сховища."
 
-#: src/commands/repos/refresh.cc:298 src/repos.cc:1028
+#: src/commands/repos/refresh.cc:298 src/repos.cc:937
 msgid "Some of the repositories have not been refreshed because of an error."
 msgstr "Деякі сховища не було оновлено через помилку."
 
@@ -3944,13 +3965,13 @@ msgstr ""
 msgid "Repository '%s' renamed to '%s'."
 msgstr "Сховище \"%s\" перейменоване на \"%s\"."
 
-#: src/commands/repos/rename.cc:47 src/repos.cc:1292
+#: src/commands/repos/rename.cc:47 src/repos.cc:1195
 #, c-format, boost-format
 msgid "Repository named '%s' already exists. Please use another alias."
 msgstr ""
 "Вже існує сховище з назвою \"%s\". Будь ласка, введіть інший псевдонім."
 
-#: src/commands/repos/rename.cc:52 src/repos.cc:1770
+#: src/commands/repos/rename.cc:52 src/repos.cc:1673
 msgid "Error while modifying the repository:"
 msgstr "Помилка під час зміни сховища:"
 
@@ -3984,7 +4005,7 @@ msgstr "Замало аргументів. Потрібні, принаймні,
 msgid "Repository '%s' not found."
 msgstr "Сховище \"%s\" не знайдено."
 
-#: src/commands/reposerviceoptionsets.cc:35 src/repos.cc:150
+#: src/commands/reposerviceoptionsets.cc:35 src/repos.cc:109
 #, c-format, boost-format
 msgid ""
 "Invalid priority '%s'. Use a positive integer number. The greater the "
@@ -4407,7 +4428,7 @@ msgstr ""
 "Аналогічно --details, з додатковими відомостями про місце збігу (корисно для "
 "пошуку в залежностях)."
 
-#: src/commands/search/search.cc:290 src/repos.cc:837
+#: src/commands/search/search.cc:290 src/repos.cc:779
 #, c-format, boost-format
 msgid "Specified repository '%s' is disabled."
 msgstr "Віддалене сховище \"%s\" вимкнено."
@@ -4425,7 +4446,7 @@ msgstr "Під час започаткування та виконання по�
 msgid "See the above message for a hint."
 msgstr "Дивись підказку у вищенаведеному повідомленні."
 
-#: src/commands/search/search.cc:497 src/repos.cc:1080
+#: src/commands/search/search.cc:497 src/repos.cc:983
 msgid "Running 'zypper refresh' as root might resolve the problem."
 msgstr ""
 "Виконання команди \"zypper refresh\" від адміністратора може зарадити "
@@ -4519,7 +4540,7 @@ msgid "Problem retrieving the repository index file for service '%s':"
 msgstr "Проблема отримання файлу індексу сховища для сервісу \"%s\":"
 
 #: src/commands/services/common.cc:138 src/commands/services/refresh.cc:226
-#: src/repos.cc:1822
+#: src/repos.cc:1725
 #, c-format, boost-format
 msgid "Skipping service '%s' because of the above error."
 msgstr "Пропуск сервісу \"%s\" через помилку вище."
@@ -5475,13 +5496,13 @@ msgstr "%s старіший за %s"
 #. translators: Table column header
 #. translators: package version (header)
 #: src/info.cc:92 src/info.cc:748 src/search.cc:52 src/search.cc:305
-#: src/search.cc:453 src/search.cc:500
+#: src/search.cc:459 src/search.cc:509
 msgid "Version"
 msgstr "Версія"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: package architecture (header)
-#: src/info.cc:94 src/search.cc:54 src/search.cc:454 src/search.cc:501
+#: src/info.cc:94 src/search.cc:54 src/search.cc:460 src/search.cc:510
 #: src/update.cc:795
 msgid "Arch"
 msgstr "Арх."
@@ -5493,8 +5514,8 @@ msgstr "Постачальник"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: package summary (header)
-#: src/info.cc:102 src/search.cc:201 src/utils/misc.cc:331
-#: src/utils/misc.cc:373
+#: src/info.cc:102 src/search.cc:201 src/utils/misc.cc:330
+#: src/utils/misc.cc:372
 msgid "Summary"
 msgstr "Підсумок"
 
@@ -5552,8 +5573,8 @@ msgid "Installed Size"
 msgstr "Встановлений розмір"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:398 src/info.cc:448 src/info.cc:612 src/utils/misc.cc:329
-#: src/utils/misc.cc:371
+#: src/info.cc:398 src/info.cc:448 src/info.cc:612 src/utils/misc.cc:328
+#: src/utils/misc.cc:370
 msgid "Status"
 msgstr "Стан"
 
@@ -5577,13 +5598,13 @@ msgstr "URL адреса джерела"
 #. translators: property name; short; used like "Name: value"
 #. translator: Table column header.
 #. Name
-#: src/info.cc:450 src/update.cc:406 src/utils/misc.cc:326
-#: src/utils/misc.cc:368
+#: src/info.cc:450 src/update.cc:406 src/utils/misc.cc:325
+#: src/utils/misc.cc:367
 msgid "Category"
 msgstr "Категорія"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:452 src/utils/misc.cc:327 src/utils/misc.cc:369
+#: src/info.cc:452 src/utils/misc.cc:326 src/utils/misc.cc:368
 msgid "Severity"
 msgstr "Важливість"
 
@@ -5593,7 +5614,7 @@ msgid "Created On"
 msgstr "Створено"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:456 src/utils/misc.cc:328 src/utils/misc.cc:370
+#: src/info.cc:456 src/utils/misc.cc:327 src/utils/misc.cc:369
 msgid "Interactive"
 msgstr "Інтерактивний"
 
@@ -5617,7 +5638,7 @@ msgstr "(порожній)"
 #. translators: S for installed Status
 #. TranslatorExplanation S stands for Status
 #: src/info.cc:511 src/info.cc:746 src/locales.cc:199 src/search.cc:46
-#: src/search.cc:198 src/search.cc:303 src/search.cc:450 src/search.cc:494
+#: src/search.cc:198 src/search.cc:303 src/search.cc:456 src/search.cc:503
 #: src/update.cc:784
 msgid "S"
 msgstr "S"
@@ -5660,7 +5681,7 @@ msgid "Flavor"
 msgstr "Вид"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:607 src/search.cc:502
+#: src/info.cc:607 src/search.cc:511
 msgid "Is Base"
 msgstr "Базується"
 
@@ -5713,7 +5734,7 @@ msgstr "Запропоновано"
 msgid "Fallback"
 msgstr "Відкотитись назад"
 
-#: src/locales.cc:72 src/repos.cc:174 src/repos.cc:202
+#: src/locales.cc:72 src/repos.cc:133 src/repos.cc:161
 msgid "No"
 msgstr "Ні"
 
@@ -5755,12 +5776,12 @@ msgstr "%s не запропоновано."
 #. set up our strings we want to output in case SIGINT was triggered
 #. we can not allocate memory there, so we do it in advance and remember the translated strings
 #. translators: this will show up if you press ctrl+c once
-#: src/main.cc:122
+#: src/main.cc:150
 msgid "Trying to exit gracefully..."
 msgstr "Намагаємося коректно вийти…"
 
 #. translators: this will show up if you press ctrl+c twice
-#: src/main.cc:126
+#: src/main.cc:154
 msgid "Zypper is currently cleaning up, exiting as soon as possible."
 msgstr "Zypper наразі очищається, виходимо якомога скоріше."
 
@@ -5867,18 +5888,13 @@ msgstr "Сирцевий пакунок %s-%s було успішно встан
 msgid "Problem installing source package %s-%s:"
 msgstr "Проблема встановлення сирцевого пакунку %s-%s:"
 
-#. translator: used like "1h 12min in the future!"
-#: src/repos.cc:83
-msgid "in the future!"
-msgstr ""
-
 #. translators: used as 'XYZ changed to SOMETHING [volatile]' to tag specific property changes.
-#: src/repos.cc:94
+#: src/repos.cc:53
 msgid "volatile"
 msgstr "тимчасово"
 
 #. translators: 'Volatile' refers to changes we previously tagged as 'XYZ changed to SOMETHING [volatile]'
-#: src/repos.cc:100
+#: src/repos.cc:59
 #, boost-format
 msgid ""
 "Repo '%1%' is managed by service '%2%'. Volatile changes are reset by the "
@@ -5887,39 +5903,39 @@ msgstr ""
 "Сховище \"%1%\" керується службою \"%2%\". Нестійкі зміни очищаються при "
 "наступному оновленні сервісу!"
 
-#: src/repos.cc:116
+#: src/repos.cc:75
 msgid "default priority"
 msgstr "усталений пріоритет"
 
-#: src/repos.cc:117
+#: src/repos.cc:76
 msgid "raised priority"
 msgstr "піднятий пріоритет"
 
-#: src/repos.cc:117
+#: src/repos.cc:76
 msgid "lowered priority"
 msgstr "понижений пріоритет"
 
-#: src/repos.cc:168 src/repos.cc:196
+#: src/repos.cc:127 src/repos.cc:155
 msgid "Yes"
 msgstr "Так"
 
-#: src/repos.cc:221
+#: src/repos.cc:180
 msgid ""
 "Repository priorities are without effect. All enabled repositories share the "
 "same priority."
 msgstr ""
 "Пріоритети сховищ не діють. Усі увімкнені сховища мають однаковий пріоритет."
 
-#: src/repos.cc:225
+#: src/repos.cc:184
 msgid "Repository priorities in effect:"
 msgstr "Пріоритети сховищ діють:"
 
-#: src/repos.cc:226
+#: src/repos.cc:185
 #, boost-format
 msgid "See '%1%' for details"
 msgstr "Див. \"%1%\" за подробицями"
 
-#: src/repos.cc:235
+#: src/repos.cc:194
 #, boost-format
 msgid "%1% repository"
 msgid_plural "%1% repositories"
@@ -5929,60 +5945,60 @@ msgstr[2] "%1% сховищ"
 
 #. check whether libzypp indicates a refresh is needed, and if so,
 #. print a message
-#: src/repos.cc:268
+#: src/repos.cc:227
 #, c-format, boost-format
 msgid "Checking whether to refresh metadata for %s"
 msgstr "Перевірка чи освіжати метадані для %s"
 
-#: src/repos.cc:297
+#: src/repos.cc:256
 #, c-format, boost-format
 msgid "Repository '%s' is up to date."
 msgstr "Сховище \"%s\" не потребує оновлення."
 
-#: src/repos.cc:303
+#: src/repos.cc:262
 #, c-format, boost-format
 msgid "The up-to-date check of '%s' has been delayed."
 msgstr "Перевірку сховища \"%s\" на відповідність було відкладено."
 
-#: src/repos.cc:325
+#: src/repos.cc:284
 msgid "Forcing raw metadata refresh"
 msgstr "Примусове оновлення сирих метаданих"
 
-#: src/repos.cc:331
+#: src/repos.cc:290
 #, c-format, boost-format
 msgid "Retrieving repository '%s' metadata"
 msgstr "Отримання метаданих сховища \"%s\""
 
 # power-off message
-#: src/repos.cc:355
+#: src/repos.cc:314
 #, c-format, boost-format
 msgid "Do you want to disable the repository %s permanently?"
 msgstr "Хочете назавжди вимкнути сховище %s?"
 
-#: src/repos.cc:371
+#: src/repos.cc:330
 #, c-format, boost-format
 msgid "Error while disabling repository '%s'."
 msgstr "Помилка вимикання сховища \"%s\"."
 
-#: src/repos.cc:387
+#: src/repos.cc:346
 #, c-format, boost-format
 msgid "Problem retrieving files from '%s'."
 msgstr "Проблема зі звантаженням файлів з \"%s\"."
 
-#: src/repos.cc:388 src/repos.cc:1957 src/solve-commit.cc:989
+#: src/repos.cc:347 src/repos.cc:1860 src/solve-commit.cc:989
 #: src/solve-commit.cc:1020 src/solve-commit.cc:1044
 msgid "Please see the above error message for a hint."
 msgstr ""
 "Будь ласка, прочитайте повідомлення про помилку, розміщене вище, щоб краще "
 "зрозуміти ситуацію."
 
-#: src/repos.cc:400
+#: src/repos.cc:359
 #, c-format, boost-format
 msgid "No URIs defined for '%s'."
 msgstr "Не визначено жодної адреси URI для \"%s\"."
 
 #. TranslatorExplanation the first %s is a .repo file path
-#: src/repos.cc:405
+#: src/repos.cc:364
 #, c-format, boost-format
 msgid ""
 "Please add one or more base URI (baseurl=URI) entries to %s for repository "
@@ -5991,16 +6007,16 @@ msgstr ""
 "Будь ласка, додайте один або декілька записів базових URI (baseurl=URI) до "
 "%s для сховища \"%s\"."
 
-#: src/repos.cc:419
+#: src/repos.cc:378
 msgid "No alias defined for this repository."
 msgstr "Для цього сховища немає псевдоніму."
 
-#: src/repos.cc:431
+#: src/repos.cc:390
 #, c-format, boost-format
 msgid "Repository '%s' is invalid."
 msgstr "Сховище \"%s\" недійсне."
 
-#: src/repos.cc:432
+#: src/repos.cc:391
 msgid ""
 "Please check if the URIs defined for this repository are pointing to a valid "
 "repository."
@@ -6008,22 +6024,22 @@ msgstr ""
 "Будь ласка, перевірте чи адреси URI, які визначені для цього сховища, "
 "вказують на існуюче сховище."
 
-#: src/repos.cc:444
+#: src/repos.cc:403
 #, c-format, boost-format
 msgid "Error retrieving metadata for '%s':"
 msgstr "Помилка отримання метаданих для \"%s\":"
 
-#: src/repos.cc:457
+#: src/repos.cc:416
 msgid "Forcing building of repository cache"
 msgstr "Примусово створюється кеш сховища"
 
-#: src/repos.cc:482
+#: src/repos.cc:441
 #, c-format, boost-format
 msgid "Error parsing metadata for '%s':"
 msgstr "Помилка аналізу метаданих для \"%s\":"
 
 #. TranslatorExplanation Don't translate the URL unless it is translated, too
-#: src/repos.cc:484
+#: src/repos.cc:443
 msgid ""
 "This may be caused by invalid metadata in the repository, or by a bug in the "
 "metadata parser. In the latter case, or if in doubt, please, file a bug "
@@ -6035,51 +6051,46 @@ msgstr ""
 "ласка, надішліть звіт про помилку згідно до вказівок на сторінці http://en."
 "opensuse.org/Zypper/Troubleshooting"
 
-#: src/repos.cc:493
+#: src/repos.cc:452
 #, c-format, boost-format
 msgid "Repository metadata for '%s' not found in local cache."
 msgstr "Метадані сховища \"%s\" не знайдено в локальному кешу."
 
-#: src/repos.cc:501
+#: src/repos.cc:460
 msgid "Error building the cache:"
 msgstr "Помилка створення кешу:"
 
-#: src/repos.cc:720
+#: src/repos.cc:679
 #, c-format, boost-format
 msgid "Repository '%s' not found by its alias, number, or URI."
 msgstr "Сховище \"%s\" не знайдено за його псевдонімом або URI."
 
-#: src/repos.cc:722
+#: src/repos.cc:681
 #, c-format, boost-format
 msgid "Use '%s' to get the list of defined repositories."
 msgstr "Вживайте \"%s\", щоб отримати список визначених сховищ."
 
-#: src/repos.cc:742
+#: src/repos.cc:701
 #, c-format, boost-format
 msgid "Ignoring disabled repository '%s'"
 msgstr "Нехтується вимкнене сховище \"%s\""
 
-#. translator: used as a table header
-#: src/repos.cc:796
-msgid "Time since last refresh"
-msgstr ""
-
-#: src/repos.cc:843
+#: src/repos.cc:785
 #, c-format, boost-format
 msgid "Global option '%s' can be used to temporarily enable repositories."
 msgstr "Глобальний параметр \"%s\" дозволяє тимчасово увімкнути сховища."
 
-#: src/repos.cc:859 src/repos.cc:865
+#: src/repos.cc:801 src/repos.cc:807
 #, c-format, boost-format
 msgid "Ignoring repository '%s' because of '%s' option."
 msgstr "Ігнорується сховище \"%s\" через параметр \"%s\"."
 
-#: src/repos.cc:886 src/repos.cc:1006
+#: src/repos.cc:828 src/repos.cc:922
 #, c-format, boost-format
 msgid "Temporarily enabling repository '%s'."
 msgstr "Тимчасове вмикання сховища \"%s\"."
 
-#: src/repos.cc:943
+#: src/repos.cc:886
 #, c-format, boost-format
 msgid ""
 "Repository '%s' is out-of-date. You can run 'zypper refresh' as root to "
@@ -6088,22 +6099,7 @@ msgstr ""
 "Сховище \"%s\" — застаріле. Щоб його оновити, можете виконати \"zypper "
 "refresh\"."
 
-#. translator: Used as status in a table "RepoName: MetadataStatus"
-#: src/repos.cc:963
-msgid "No metadata available! Skipping it!"
-msgstr ""
-
-#. translator: Used as status in a table "RepoName: MetadataStatus"
-#: src/repos.cc:966
-msgid "No permission to read metadata! Skipping it!"
-msgstr ""
-
-#. translator: Used as status in a table "RepoName: MetadataStatus"
-#: src/repos.cc:969
-msgid "Cannot access metadata! Skipping it!"
-msgstr ""
-
-#: src/repos.cc:986
+#: src/repos.cc:903
 #, c-format, boost-format
 msgid ""
 "The metadata cache needs to be built for the '%s' repository. You can run "
@@ -6112,90 +6108,80 @@ msgstr ""
 "Для сховища \"%s\" слід спочатку побудувати кеш метаданих. Ви можете "
 "виконати цю дію командою \"zypper refresh\", відданою адміністратором."
 
-#: src/repos.cc:1013
+#: src/repos.cc:929
 #, c-format, boost-format
 msgid "Repository '%s' stays disabled."
 msgstr "Сховище \"%s\" досі вимкнене."
 
-#: src/repos.cc:1026
-msgid "Some of the repositories had to be skipped due to missing metadata."
-msgstr ""
-
-#: src/repos.cc:1039
-msgid ""
-"Running with user privileges. From time to time run 'zypper refresh' as root "
-"to make sure the repository metadata are complete and up-to-date."
-msgstr ""
-
-#: src/repos.cc:1071
+#: src/repos.cc:974
 msgid "Initializing Target"
 msgstr "Започаткування цілі"
 
-#: src/repos.cc:1079
+#: src/repos.cc:982
 msgid "Target initialization failed:"
 msgstr "Не вдалося започаткувати ціль:"
 
-#: src/repos.cc:1161
+#: src/repos.cc:1064
 #, c-format, boost-format
 msgid "Cleaning metadata cache for '%s'."
 msgstr "Очищення кешу метаданих для \"%s\"."
 
-#: src/repos.cc:1169
+#: src/repos.cc:1072
 #, c-format, boost-format
 msgid "Cleaning raw metadata cache for '%s'."
 msgstr "Очищення кешу сирих метаданих для \"%s\"."
 
-#: src/repos.cc:1175
+#: src/repos.cc:1078
 #, c-format, boost-format
 msgid "Keeping raw metadata cache for %s '%s'."
 msgstr "Збереження кешу сирих метаданих для %s \"%s\"."
 
 #. translators: meaning the cached rpm files
-#: src/repos.cc:1182
+#: src/repos.cc:1085
 #, c-format, boost-format
 msgid "Cleaning packages for '%s'."
 msgstr "Очищення пакунків з \"%s\"."
 
-#: src/repos.cc:1190
+#: src/repos.cc:1093
 #, c-format, boost-format
 msgid "Cannot clean repository '%s' because of an error."
 msgstr "Неможливо очистити сховище \"%s\" через помилку."
 
-#: src/repos.cc:1201
+#: src/repos.cc:1104
 msgid "Cleaning installed packages cache."
 msgstr "Очищення кешу встановлених пакунків."
 
-#: src/repos.cc:1210
+#: src/repos.cc:1113
 msgid "Cannot clean installed packages cache because of an error."
 msgstr "Неможливо очистити кеш встановлених пакунків через помилку."
 
-#: src/repos.cc:1228
+#: src/repos.cc:1131
 msgid "Could not clean the repositories because of errors."
 msgstr "Через помилки не вдалось очистити сховища."
 
-#: src/repos.cc:1234
+#: src/repos.cc:1137
 msgid "Some of the repositories have not been cleaned up because of an error."
 msgstr "Деякі сховища не було очищено через помилку."
 
-#: src/repos.cc:1239
+#: src/repos.cc:1142
 msgid "Specified repositories have been cleaned up."
 msgstr "Вказані сховища було очищено."
 
-#: src/repos.cc:1241
+#: src/repos.cc:1144
 msgid "All repositories have been cleaned up."
 msgstr "Всі сховища було очищено."
 
-#: src/repos.cc:1263
+#: src/repos.cc:1166
 msgid "This is a changeable read-only media (CD/DVD), disabling autorefresh."
 msgstr ""
 "Це змінний носій тільки для читання (CD/DVD), автооновлення буде вимкнено."
 
-#: src/repos.cc:1284
+#: src/repos.cc:1187
 #, c-format, boost-format
 msgid "Invalid repository alias: '%s'"
 msgstr "Недійсний псевдонім сховища: \"%s\""
 
-#: src/repos.cc:1301
+#: src/repos.cc:1204
 msgid ""
 "Could not determine the type of the repository. Please check if the defined "
 "URIs (see below) point to a valid repository:"
@@ -6203,25 +6189,25 @@ msgstr ""
 "Не вдалося визначити тип сховища. Будь ласка, перевірте чи зазначені адреси "
 "URI (див. нижче) вказують на чинне сховище:"
 
-#: src/repos.cc:1307
+#: src/repos.cc:1210
 msgid "Can't find a valid repository at given location:"
 msgstr "Не вдається знайти в цьому місці чинне сховище:"
 
-#: src/repos.cc:1315
+#: src/repos.cc:1218
 msgid "Problem transferring repository data from specified URI:"
 msgstr "Помилка перенесення даних сховища з вказаної адреси URI:"
 
-#: src/repos.cc:1316
+#: src/repos.cc:1219
 msgid "Please check whether the specified URI is accessible."
 msgstr "Будь ласка, перевірте чи доступна вказана адреса URI."
 
-#: src/repos.cc:1323
+#: src/repos.cc:1226
 msgid "Unknown problem when adding repository:"
 msgstr "Виникла невідома проблема при додаванні сховища:"
 
 #. translators: BOOST STYLE POSITIONAL DIRECTIVES ( %N% )
 #. translators: %1% - a repository name
-#: src/repos.cc:1333
+#: src/repos.cc:1236
 #, boost-format
 msgid ""
 "GPG checking is disabled in configuration of repository '%1%'. Integrity and "
@@ -6230,140 +6216,140 @@ msgstr ""
 "Перевірка GPG вимкнена у конфігурації сховища \"%1%\". Цілісність та "
 "походження пакунків не можна перевірити."
 
-#: src/repos.cc:1338
+#: src/repos.cc:1241
 #, c-format, boost-format
 msgid "Repository '%s' successfully added"
 msgstr "Сховище \"%s\" успішно додано"
 
-#: src/repos.cc:1364
+#: src/repos.cc:1267
 #, c-format, boost-format
 msgid "Reading data from '%s' media"
 msgstr "Читання даних з носія \"%s\""
 
-#: src/repos.cc:1370
+#: src/repos.cc:1273
 #, c-format, boost-format
 msgid "Problem reading data from '%s' media"
 msgstr "Проблема з читанням даних з носія \"%s\""
 
-#: src/repos.cc:1371
+#: src/repos.cc:1274
 msgid "Please check if your installation media is valid and readable."
 msgstr ""
 "Перевірте чи носій, з якого проводилося встановлення, правильно записаний і "
 "придатний до читання."
 
-#: src/repos.cc:1378
+#: src/repos.cc:1281
 #, c-format, boost-format
 msgid "Reading data from '%s' media is delayed until next refresh."
 msgstr "Читання даних з носія \"%s\" відкладено до наступного оновлення."
 
-#: src/repos.cc:1447
+#: src/repos.cc:1350
 msgid "Problem accessing the file at the specified URI"
 msgstr "Помилка доступу до файла за вказаною адресою URI"
 
-#: src/repos.cc:1448
+#: src/repos.cc:1351
 msgid "Please check if the URI is valid and accessible."
 msgstr "Будь ласка, перевірте чи чинна і доступна вказана адреса URI."
 
-#: src/repos.cc:1455
+#: src/repos.cc:1358
 msgid "Problem parsing the file at the specified URI"
 msgstr "Помилка аналізу файла за вказаною адресою URI"
 
 #. TranslatorExplanation Don't translate the '.repo' string.
-#: src/repos.cc:1457
+#: src/repos.cc:1360
 msgid "Is it a .repo file?"
 msgstr "Чи це файл .repo?"
 
-#: src/repos.cc:1464
+#: src/repos.cc:1367
 msgid "Problem encountered while trying to read the file at the specified URI"
 msgstr ""
 "Трапилась проблема під час спроби читання файла за вказаною адресою URI"
 
-#: src/repos.cc:1477
+#: src/repos.cc:1380
 msgid "Repository with no alias defined found in the file, skipping."
 msgstr ""
 "У файлі знайдено запис для сховища без встановленого псевдоніма, його "
 "пропущено."
 
-#: src/repos.cc:1483
+#: src/repos.cc:1386
 #, c-format, boost-format
 msgid "Repository '%s' has no URI defined, skipping."
 msgstr "Сховище \"%s\" не має визначеного URI, його пропущено."
 
-#: src/repos.cc:1531
+#: src/repos.cc:1434
 #, c-format, boost-format
 msgid "Repository '%s' has been removed."
 msgstr "Сховище \"%s\" було вилучено."
 
-#: src/repos.cc:1679
+#: src/repos.cc:1582
 #, c-format, boost-format
 msgid "Repository '%s' priority has been left unchanged (%d)"
 msgstr "Пріоритет сховища \"%s\" було залишено без змін (%d)"
 
-#: src/repos.cc:1712
+#: src/repos.cc:1615
 #, c-format, boost-format
 msgid "Repository '%s' has been successfully enabled."
 msgstr "Сховище \"%s\" було успішно увімкнено."
 
-#: src/repos.cc:1714
+#: src/repos.cc:1617
 #, c-format, boost-format
 msgid "Repository '%s' has been successfully disabled."
 msgstr "Сховище \"%s\" було успішно вимкнено."
 
-#: src/repos.cc:1721
+#: src/repos.cc:1624
 #, c-format, boost-format
 msgid "Autorefresh has been enabled for repository '%s'."
 msgstr "Для сховища \"%s\" було увімкнено автоматичне оновлення."
 
-#: src/repos.cc:1723
+#: src/repos.cc:1626
 #, c-format, boost-format
 msgid "Autorefresh has been disabled for repository '%s'."
 msgstr "Для сховища \"%s\" було вимкнено автоматичне оновлення."
 
-#: src/repos.cc:1730
+#: src/repos.cc:1633
 #, c-format, boost-format
 msgid "RPM files caching has been enabled for repository '%s'."
 msgstr "Для сховища \"%s\" було увімкнено кешування файлів RPM."
 
-#: src/repos.cc:1732
+#: src/repos.cc:1635
 #, c-format, boost-format
 msgid "RPM files caching has been disabled for repository '%s'."
 msgstr "Для сховища \"%s\" було вимкнено кешування файлів RPM."
 
-#: src/repos.cc:1739
+#: src/repos.cc:1642
 #, c-format, boost-format
 msgid "GPG check has been enabled for repository '%s'."
 msgstr "Для сховища \"%s\" було увімкнено перевірку GPG."
 
-#: src/repos.cc:1741
+#: src/repos.cc:1644
 #, c-format, boost-format
 msgid "GPG check has been disabled for repository '%s'."
 msgstr "Для сховища \"%s\" було вимкнено перевірку GPG."
 
-#: src/repos.cc:1747
+#: src/repos.cc:1650
 #, c-format, boost-format
 msgid "Repository '%s' priority has been set to %d."
 msgstr "Пріоритет сховища \"%s\" було встановлено у значення %d."
 
-#: src/repos.cc:1753
+#: src/repos.cc:1656
 #, c-format, boost-format
 msgid "Name of repository '%s' has been set to '%s'."
 msgstr "Назву сховища \"%s\" було встановлено у значення \"%s\"."
 
-#: src/repos.cc:1764
+#: src/repos.cc:1667
 #, c-format, boost-format
 msgid "Nothing to change for repository '%s'."
 msgstr "Нічого не змінено для сховища \"%s\"."
 
-#: src/repos.cc:1771
+#: src/repos.cc:1674
 #, c-format, boost-format
 msgid "Leaving repository %s unchanged."
 msgstr "Сховище %s буде залишене без змін."
 
-#: src/repos.cc:1858
+#: src/repos.cc:1761
 msgid "Loading repository data..."
 msgstr "Завантаження даних сховища..."
 
-#: src/repos.cc:1860
+#: src/repos.cc:1763
 msgid ""
 "No repositories defined. Operating only with the installed resolvables. "
 "Nothing can be installed."
@@ -6371,43 +6357,43 @@ msgstr ""
 "Немає визначених сховищ. Дії тільки з встановленими об'єктами розв'язання "
 "залежностей. Нічого неможливо встановити."
 
-#: src/repos.cc:1881
+#: src/repos.cc:1784
 #, c-format, boost-format
 msgid "Retrieving repository '%s' data..."
 msgstr "Отримання даних сховища \"%s\"..."
 
-#: src/repos.cc:1887
+#: src/repos.cc:1790
 #, c-format, boost-format
 msgid "Repository '%s' not cached. Caching..."
 msgstr "Сховище \"%s\" відсутнє у кеші. Кешування…"
 
-#: src/repos.cc:1893 src/repos.cc:1927
+#: src/repos.cc:1796 src/repos.cc:1830
 #, c-format, boost-format
 msgid "Problem loading data from '%s'"
 msgstr "Проблема завантаження даних з \"%s\""
 
-#: src/repos.cc:1897
+#: src/repos.cc:1800
 #, c-format, boost-format
 msgid "Repository '%s' could not be refreshed. Using old cache."
 msgstr "Неможливо оновити сховище \"%s\". Використовується старий кеш."
 
-#: src/repos.cc:1901 src/repos.cc:1930
+#: src/repos.cc:1804 src/repos.cc:1833
 #, c-format, boost-format
 msgid "Resolvables from '%s' not loaded because of error."
 msgstr "Потрібні пакунки з \"%s\" не завантажено через помилку."
 
-#: src/repos.cc:1917
+#: src/repos.cc:1820
 #, boost-format
 msgid "Repository '%1%' metadata expired since %2%."
 msgstr "Репозиторій '%1%' метадані застаріли з %2%."
 
 #. translators: the first %s is 'zypper refresh' and the second 'zypper clean -m'
-#: src/repos.cc:1929
+#: src/repos.cc:1832
 #, c-format, boost-format
 msgid "Try '%s', or even '%s' before doing so."
 msgstr "Спробуйте \"%s\" або, навіть, \"%s\" перш, ніж це робити."
 
-#: src/repos.cc:1934
+#: src/repos.cc:1837
 msgid ""
 "Repository metadata expired: Check if 'autorefresh' is turned on (zypper "
 "lr), otherwise manually refresh the repository (zypper ref). If this does "
@@ -6419,30 +6405,30 @@ msgstr ""
 "вирішує проблему, можливо те, що ви використовуєте несправне дзеркало або "
 "сервер припинив підтримку репозиторія."
 
-#: src/repos.cc:1947
+#: src/repos.cc:1850
 msgid "Reading installed packages..."
 msgstr "Читання встановлених пакунків..."
 
-#: src/repos.cc:1956
+#: src/repos.cc:1859
 msgid "Problem occurred while reading the installed packages:"
 msgstr "Під час читання встановлених пакунків виникла проблема:"
 
-#: src/repos.cc:1973
+#: src/repos.cc:1876
 #, c-format, boost-format
 msgid "'%s' looks like an RPM file. Will try to download it."
 msgstr "\"%s\" схожий на файл RPM. Спробуємо його звантажити."
 
-#: src/repos.cc:1982
+#: src/repos.cc:1885
 #, c-format, boost-format
 msgid "Problem with the RPM file specified as '%s', skipping."
 msgstr "Проблема з файлом RPM, заданим як \"%s\", його пропущено."
 
-#: src/repos.cc:2004
+#: src/repos.cc:1907
 #, c-format, boost-format
 msgid "Problem reading the RPM header of %s. Is it an RPM file?"
 msgstr "Проблема під час читання заголовка RPM %s. Можливо, це не файл RPM?"
 
-#: src/repos.cc:2024
+#: src/repos.cc:1927
 msgid "Plain RPM files cache"
 msgstr "Кеш простих файлів RPM"
 
@@ -6458,17 +6444,17 @@ msgstr "Не знайдено потрібних латок."
 msgid "No patterns found."
 msgstr "Не знайдено шаблонів."
 
-#: src/search.cc:444
+#: src/search.cc:450
 msgid "No packages found."
 msgstr "Не знайдено пакунків."
 
 #. translators: used in products. Internal Name is the unix name of the
 #. product whereas simply Name is the official full name of the product.
-#: src/search.cc:498
+#: src/search.cc:507
 msgid "Internal Name"
 msgstr "Внутрішня назва"
 
-#: src/search.cc:535
+#: src/search.cc:544
 msgid "No products found."
 msgstr "Не знайдено продуктів."
 
@@ -7243,42 +7229,42 @@ msgstr ""
 "У цьому випадку повинен бути встановлений певний пакунок, який забезпечує "
 "підкоманди. Ці пакунки часто називають \"%1%\" або \"%2%\"."
 
-#: src/utils/misc.cc:94
+#: src/utils/misc.cc:93
 msgid "package"
 msgid_plural "packages"
 msgstr[0] "пакунок"
 msgstr[1] "пакунки"
 msgstr[2] "пакунків"
 
-#: src/utils/misc.cc:96
+#: src/utils/misc.cc:95
 msgid "pattern"
 msgid_plural "patterns"
 msgstr[0] "шаблон"
 msgstr[1] "шаблони"
 msgstr[2] "шаблонів"
 
-#: src/utils/misc.cc:98
+#: src/utils/misc.cc:97
 msgid "product"
 msgid_plural "product"
 msgstr[0] "продукт"
 msgstr[1] "продукти"
 msgstr[2] "продуктів"
 
-#: src/utils/misc.cc:100
+#: src/utils/misc.cc:99
 msgid "patch"
 msgid_plural "patches"
 msgstr[0] "латка"
 msgstr[1] "латки"
 msgstr[2] "латок"
 
-#: src/utils/misc.cc:102
+#: src/utils/misc.cc:101
 msgid "srcpackage"
 msgid_plural "srcpackages"
 msgstr[0] "сирцевий пакунок"
 msgstr[1] "сирцевих пакунки"
 msgstr[2] "сирцевих пакунків"
 
-#: src/utils/misc.cc:104
+#: src/utils/misc.cc:103
 msgid "application"
 msgid_plural "applications"
 msgstr[0] "програма"
@@ -7286,7 +7272,7 @@ msgstr[1] "програми"
 msgstr[2] "програм"
 
 #. default
-#: src/utils/misc.cc:106
+#: src/utils/misc.cc:105
 msgid "resolvable"
 msgid_plural "resolvables"
 msgstr[0] "потрібний"
@@ -7295,102 +7281,102 @@ msgstr[2] "потрібних"
 
 #. Patch status: i18n + color
 #. translator: patch status
-#: src/utils/misc.cc:115
+#: src/utils/misc.cc:114
 msgid "unwanted"
 msgstr "небажано"
 
 #. translator: patch status
-#: src/utils/misc.cc:116
+#: src/utils/misc.cc:115
 msgid "optional"
 msgstr "необов'язково"
 
 #. translator: patch status
-#: src/utils/misc.cc:117
+#: src/utils/misc.cc:116
 msgid "needed"
 msgstr "потрібні"
 
 #. translator: patch status
-#: src/utils/misc.cc:118
+#: src/utils/misc.cc:117
 msgid "applied"
 msgstr "застосовано"
 
 #. translator: patch status
-#: src/utils/misc.cc:119
+#: src/utils/misc.cc:118
 msgid "not needed"
 msgstr "не потрібні"
 
 #. translator: patch status
-#: src/utils/misc.cc:120
+#: src/utils/misc.cc:119
 msgid "undetermined"
 msgstr "невизначено"
 
 #. pi_r is no patch!
 #. translator: patch status
-#: src/utils/misc.cc:121
+#: src/utils/misc.cc:120
 msgid "retracted"
 msgstr "відкликаний"
 
-#: src/utils/misc.cc:330 src/utils/misc.cc:372
+#: src/utils/misc.cc:329 src/utils/misc.cc:371
 msgid "Since"
 msgstr "Від"
 
 #. << _("Repository")
-#: src/utils/misc.cc:365
+#: src/utils/misc.cc:364
 msgid "Issue"
 msgstr "Проблема"
 
-#: src/utils/misc.cc:366
+#: src/utils/misc.cc:365
 msgid "No."
 msgstr "№."
 
-#: src/utils/misc.cc:367
+#: src/utils/misc.cc:366
 msgid "Patch"
 msgstr "Латка"
 
-#: src/utils/misc.cc:445
+#: src/utils/misc.cc:444
 msgid "Specified local path does not exist or is not accessible."
 msgstr "Вказаний локальний шлях або не існує, або доступ до нього неможливий."
 
-#: src/utils/misc.cc:457
+#: src/utils/misc.cc:456
 msgid "Given URI is invalid"
 msgstr "Вказана адреса URI - недійсна"
 
 #. Guess failed:
 #. translators: don't translate '<platform>'
-#: src/utils/misc.cc:549
+#: src/utils/misc.cc:548
 msgid "Unable to guess a value for <platform>."
 msgstr "Неможливо вгадати значення для <platform>."
 
-#: src/utils/misc.cc:550
+#: src/utils/misc.cc:549
 msgid "Please use obs://<project>/<platform>"
 msgstr "Вживайте obs://<проект>/<платформа>"
 
-#: src/utils/misc.cc:551 src/utils/misc.cc:597
+#: src/utils/misc.cc:550 src/utils/misc.cc:596
 #, c-format, boost-format
 msgid "Example: %s"
 msgstr "Приклад: %s"
 
-#: src/utils/misc.cc:596
+#: src/utils/misc.cc:595
 msgid "Invalid OBS URI."
 msgstr "Недійсний OBS URI."
 
-#: src/utils/misc.cc:596
+#: src/utils/misc.cc:595
 msgid "Correct form is obs://<project>/[platform]"
 msgstr "Коректна форма — obs://<проект>/[платформа]"
 
-#: src/utils/misc.cc:644
+#: src/utils/misc.cc:643
 msgid "Problem copying the specified RPM file to the cache directory."
 msgstr "Проблема з копіюванням зазначеного файлу RPM до директорії кешу."
 
-#: src/utils/misc.cc:645
+#: src/utils/misc.cc:644
 msgid "Perhaps you are running out of disk space."
 msgstr "Можливо, ви вичерпали вільне місце на диску."
 
-#: src/utils/misc.cc:653
+#: src/utils/misc.cc:652
 msgid "Problem retrieving the specified RPM file"
 msgstr "Проблема із звантаженням зазначеного файла RPM"
 
-#: src/utils/misc.cc:654
+#: src/utils/misc.cc:653
 msgid "Please check whether the file is accessible."
 msgstr "Будь ласка, перевірте чи доступний файл."
 
@@ -7509,6 +7495,26 @@ msgstr "Недійсний об'єкт"
 #: src/utils/prompt.h:102
 msgid "Error"
 msgstr "Помилка"
+
+#, boost-format
+#~ msgid "Overall download size: %1%. Already cached: %2%."
+#~ msgstr "Загальний розмір завантаження: %1%. Вже кешовано: %2%."
+
+#, c-format, boost-format
+#~ msgid "After the operation, additional %s will be used."
+#~ msgstr "Після дії, буде додатково використано %s."
+
+#~ msgid "No additional space will be used or freed after the operation."
+#~ msgstr ""
+#~ "Після операції не буде додатково зайнято або вивільнено дискового "
+#~ "простору."
+
+#, c-format, boost-format
+#~ msgid "After the operation, %s will be freed."
+#~ msgstr "Після дії, %s буде вивільнено."
+
+#~ msgid "Show packages which are orphaned (without repository)."
+#~ msgstr "Показати осиротілі пакунки (не мають сховища)."
 
 #, c-format, boost-format
 #~ msgid "File '%s' is unsigned, continue?"

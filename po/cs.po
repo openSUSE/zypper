@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-15 13:01+0200\n"
+"POT-Creation-Date: 2024-07-29 15:47+0200\n"
 "PO-Revision-Date: 2024-04-15 16:43+0000\n"
 "Last-Translator: Aleš Kastner <alkas@volny.cz>\n"
 "Language-Team: Czech <https://l10n.opensuse.org/projects/zypper/master/cs/>\n"
@@ -119,8 +119,8 @@ msgstr[2] "Bylo přeskočeno odstranění těchto %d balíčků:"
 
 #. translators: Appended when clipping a long enumeration:
 #. "ConsoleKit-devel ConsoleKit-doc ... and 20828 more items."
-#: src/CommitSummary.cc:232 src/CommitSummary.cc:278 src/Summary.cc:629
-#: src/Summary.cc:705
+#: src/CommitSummary.cc:232 src/CommitSummary.cc:278 src/Summary.cc:631
+#: src/Summary.cc:707
 #, boost-format
 msgid "... and %1% more item."
 msgid_plural "... and %1% more items."
@@ -687,12 +687,12 @@ msgstr "Podezřelá hodnota filtru závažnosti '%1%'."
 #. translator: '%1%' is a products name
 #. '%2%' is a command to call (like 'zypper dup')
 #. Both may contain whitespace and should be enclosed by quotes!
-#: src/Summary.cc:554
+#: src/Summary.cc:556
 #, boost-format
 msgid "Product '%1%' requires to be upgraded by calling '%2%'!"
 msgstr "Produkt '%1%' musí být aktualizován spuštěním příkazu '%2%'!"
 
-#: src/Summary.cc:723
+#: src/Summary.cc:725
 #, c-format, boost-format
 msgid "The following NEW package is going to be installed:"
 msgid_plural "The following %d NEW packages are going to be installed:"
@@ -700,7 +700,7 @@ msgstr[0] "Bude nainstalován NOVÝ balíček:"
 msgstr[1] "Budou nainstalovány %d NOVÉ balíčky:"
 msgstr[2] "Bude nainstalováno %d NOVÝCH balíčků:"
 
-#: src/Summary.cc:728
+#: src/Summary.cc:730
 #, c-format, boost-format
 msgid "The following NEW patch is going to be installed:"
 msgid_plural "The following %d NEW patches are going to be installed:"
@@ -708,7 +708,7 @@ msgstr[0] "Bude nainstalována NOVÁ oprava:"
 msgstr[1] "Budou nainstalovány %d NOVÉ opravy:"
 msgstr[2] "Bude nainstalováno %d NOVÝCH oprav:"
 
-#: src/Summary.cc:733
+#: src/Summary.cc:735
 #, c-format, boost-format
 msgid "The following NEW pattern is going to be installed:"
 msgid_plural "The following %d NEW patterns are going to be installed:"
@@ -716,7 +716,7 @@ msgstr[0] "Bude nainstalován NOVÝ profil:"
 msgstr[1] "Budou nainstalovány %d NOVÉ profily:"
 msgstr[2] "Bude nainstalováno %d NOVÝCH profilů:"
 
-#: src/Summary.cc:738
+#: src/Summary.cc:740
 #, c-format, boost-format
 msgid "The following NEW product is going to be installed:"
 msgid_plural "The following %d NEW products are going to be installed:"
@@ -724,7 +724,7 @@ msgstr[0] "Bude nainstalován NOVÝ produkt:"
 msgstr[1] "Budou nainstalovány %d NOVÉ produkty:"
 msgstr[2] "Bude nainstalováno %d NOVÝCH produktů:"
 
-#: src/Summary.cc:743
+#: src/Summary.cc:745
 #, c-format, boost-format
 msgid "The following source package is going to be installed:"
 msgid_plural "The following %d source packages are going to be installed:"
@@ -732,7 +732,7 @@ msgstr[0] "Bude nainstalován zdrojový balíček:"
 msgstr[1] "Budou nainstalovány %d zdrojové balíčky:"
 msgstr[2] "Bude nainstalováno %d zdrojových balíčků:"
 
-#: src/Summary.cc:749
+#: src/Summary.cc:751
 #, c-format, boost-format
 msgid "The following application is going to be installed:"
 msgid_plural "The following %d applications are going to be installed:"
@@ -740,7 +740,7 @@ msgstr[0] "Bude nainstalována následující aplikace:"
 msgstr[1] "Budou nainstalovány následující %d aplikace:"
 msgstr[2] "Bude nainstalováno následujících %d aplikací:"
 
-#: src/Summary.cc:774
+#: src/Summary.cc:776
 #, c-format, boost-format
 msgid "The following package is going to be REMOVED:"
 msgid_plural "The following %d packages are going to be REMOVED:"
@@ -748,7 +748,7 @@ msgstr[0] "Bude ODSTRANĚN balíček:"
 msgstr[1] "Budou ODSTRANĚNY %d balíčky:"
 msgstr[2] "Bude ODSTRANĚNO %d balíčků:"
 
-#: src/Summary.cc:779
+#: src/Summary.cc:781
 #, c-format, boost-format
 msgid "The following patch is going to be REMOVED:"
 msgid_plural "The following %d patches are going to be REMOVED:"
@@ -756,7 +756,7 @@ msgstr[0] "Bude ODSTRANĚNA oprava:"
 msgstr[1] "Budou ODSTRANĚNY %d opravy:"
 msgstr[2] "Bude ODSTRANĚNO %d oprav:"
 
-#: src/Summary.cc:784
+#: src/Summary.cc:786
 #, c-format, boost-format
 msgid "The following pattern is going to be REMOVED:"
 msgid_plural "The following %d patterns are going to be REMOVED:"
@@ -764,7 +764,7 @@ msgstr[0] "Bude ODSTRANĚN profil:"
 msgstr[1] "Budou ODSTRANĚNY %d profily:"
 msgstr[2] "Bude ODSTRANĚNO %d profilů:"
 
-#: src/Summary.cc:789
+#: src/Summary.cc:791
 #, c-format, boost-format
 msgid "The following product is going to be REMOVED:"
 msgid_plural "The following %d products are going to be REMOVED:"
@@ -772,7 +772,7 @@ msgstr[0] "Bude ODSTRANĚN produkt:"
 msgstr[1] "Budou ODSTRANĚNY %d produkty:"
 msgstr[2] "Bude ODSTRANĚNO %d produktů:"
 
-#: src/Summary.cc:795
+#: src/Summary.cc:797
 #, c-format, boost-format
 msgid "The following application is going to be REMOVED:"
 msgid_plural "The following %d applications are going to be REMOVED:"
@@ -780,7 +780,7 @@ msgstr[0] "Bude ODSTRANĚNA aplikace:"
 msgstr[1] "Budou ODSTRANĚNY %d aplikace:"
 msgstr[2] "Bude ODSTRANĚNO %d aplikací:"
 
-#: src/Summary.cc:818
+#: src/Summary.cc:820
 #, c-format, boost-format
 msgid "The following package is going to be upgraded:"
 msgid_plural "The following %d packages are going to be upgraded:"
@@ -788,7 +788,7 @@ msgstr[0] "Bude povýšen balíček:"
 msgstr[1] "Budou povýšeny %d balíčky:"
 msgstr[2] "Bude povýšeno %d balíčků:"
 
-#: src/Summary.cc:823
+#: src/Summary.cc:825
 #, c-format, boost-format
 msgid "The following patch is going to be upgraded:"
 msgid_plural "The following %d patches are going to be upgraded:"
@@ -796,7 +796,7 @@ msgstr[0] "Bude povýšena oprava:"
 msgstr[1] "Budou povýšeny %d opravy:"
 msgstr[2] "Bude povýšeno %d oprav:"
 
-#: src/Summary.cc:828
+#: src/Summary.cc:830
 #, c-format, boost-format
 msgid "The following pattern is going to be upgraded:"
 msgid_plural "The following %d patterns are going to be upgraded:"
@@ -804,7 +804,7 @@ msgstr[0] "Bude povýšen profil:"
 msgstr[1] "Budou povýšeny %d profily:"
 msgstr[2] "Bude povýšeno %d profilů:"
 
-#: src/Summary.cc:834
+#: src/Summary.cc:836
 #, c-format, boost-format
 msgid "The following product is going to be upgraded:"
 msgid_plural "The following %d products are going to be upgraded:"
@@ -812,7 +812,7 @@ msgstr[0] "Bude povýšen produkt:"
 msgstr[1] "Budou povýšeny %d produkty:"
 msgstr[2] "Bude povýšeno %d produktů:"
 
-#: src/Summary.cc:842
+#: src/Summary.cc:844
 #, c-format, boost-format
 msgid "The following application is going to be upgraded:"
 msgid_plural "The following %d applications are going to be upgraded:"
@@ -820,7 +820,7 @@ msgstr[0] "Bude povýšena aplikace:"
 msgstr[1] "Budou povýšeny %d aplikace:"
 msgstr[2] "Bude povýšeno %d aplikací:"
 
-#: src/Summary.cc:864
+#: src/Summary.cc:866
 #, c-format, boost-format
 msgid "The following package is going to be downgraded:"
 msgid_plural "The following %d packages are going to be downgraded:"
@@ -828,7 +828,7 @@ msgstr[0] "Bude ponížen balíček:"
 msgstr[1] "Budou poníženy %d balíčky:"
 msgstr[2] "Bude poníženo %d balíčků:"
 
-#: src/Summary.cc:869
+#: src/Summary.cc:871
 #, c-format, boost-format
 msgid "The following patch is going to be downgraded:"
 msgid_plural "The following %d patches are going to be downgraded:"
@@ -836,7 +836,7 @@ msgstr[0] "Bude ponížena oprava:"
 msgstr[1] "Budou poníženy %d opravy:"
 msgstr[2] "Bude poníženo %d oprav:"
 
-#: src/Summary.cc:874
+#: src/Summary.cc:876
 #, c-format, boost-format
 msgid "The following pattern is going to be downgraded:"
 msgid_plural "The following %d patterns are going to be downgraded:"
@@ -844,7 +844,7 @@ msgstr[0] "Bude ponížen profil:"
 msgstr[1] "Budou poníženy %d profily:"
 msgstr[2] "Bude poníženo %d profilů:"
 
-#: src/Summary.cc:879
+#: src/Summary.cc:881
 #, c-format, boost-format
 msgid "The following product is going to be downgraded:"
 msgid_plural "The following %d products are going to be downgraded:"
@@ -852,7 +852,7 @@ msgstr[0] "Bude ponížen produkt:"
 msgstr[1] "Budou poníženy %d produkty:"
 msgstr[2] "Bude ponížené %d produktů:"
 
-#: src/Summary.cc:885
+#: src/Summary.cc:887
 #, c-format, boost-format
 msgid "The following application is going to be downgraded:"
 msgid_plural "The following %d applications are going to be downgraded:"
@@ -860,7 +860,7 @@ msgstr[0] "Bude ponížena aplikace:"
 msgstr[1] "Budou poníženy %d aplikace:"
 msgstr[2] "Bude poníženo %d aplikací:"
 
-#: src/Summary.cc:907
+#: src/Summary.cc:909
 #, c-format, boost-format
 msgid "The following package is going to be reinstalled:"
 msgid_plural "The following %d packages are going to be reinstalled:"
@@ -868,7 +868,7 @@ msgstr[0] "Bude přeinstalován balíček:"
 msgstr[1] "Budou přeinstalovány %d balíčky:"
 msgstr[2] "Bude přeinstalováno %d balíčků:"
 
-#: src/Summary.cc:912
+#: src/Summary.cc:914
 #, c-format, boost-format
 msgid "The following patch is going to be reinstalled:"
 msgid_plural "The following %d patches are going to be reinstalled:"
@@ -876,7 +876,7 @@ msgstr[0] "Bude přeinstalována oprava:"
 msgstr[1] "Budou přeinstalovány %d opravy:"
 msgstr[2] "Bude přeinstalováno %d oprav:"
 
-#: src/Summary.cc:917
+#: src/Summary.cc:919
 #, c-format, boost-format
 msgid "The following pattern is going to be reinstalled:"
 msgid_plural "The following %d patterns are going to be reinstalled:"
@@ -884,7 +884,7 @@ msgstr[0] "Bude přeinstalován profil:"
 msgstr[1] "Budou přeinstalovány %d profily:"
 msgstr[2] "Bude přeinstalováno %d profilů:"
 
-#: src/Summary.cc:922
+#: src/Summary.cc:924
 #, c-format, boost-format
 msgid "The following product is going to be reinstalled:"
 msgid_plural "The following %d products are going to be reinstalled:"
@@ -892,7 +892,7 @@ msgstr[0] "Bude přeinstalován produkt:"
 msgstr[1] "Budou přeinstalovány %d produkty:"
 msgstr[2] "Bude přeinstalováno %d produktů:"
 
-#: src/Summary.cc:935
+#: src/Summary.cc:937
 #, c-format, boost-format
 msgid "The following application is going to be reinstalled:"
 msgid_plural "The following %d applications are going to be reinstalled:"
@@ -900,7 +900,7 @@ msgstr[0] "Bude přeinstalována aplikace:"
 msgstr[1] "Budou přeinstalovány %d aplikace:"
 msgstr[2] "Bude přeinstalováno %d aplikací:"
 
-#: src/Summary.cc:1072
+#: src/Summary.cc:1074
 #, c-format, boost-format
 msgid "The following recommended package was automatically selected:"
 msgid_plural ""
@@ -909,7 +909,7 @@ msgstr[0] "Byl automaticky vybrán doporučený balíček:"
 msgstr[1] "Byly automaticky vybrány %d doporučené balíčky:"
 msgstr[2] "Bylo automaticky vybráno %d doporučených balíčků:"
 
-#: src/Summary.cc:1077
+#: src/Summary.cc:1079
 #, c-format, boost-format
 msgid "The following recommended patch was automatically selected:"
 msgid_plural ""
@@ -918,7 +918,7 @@ msgstr[0] "Byla automaticky vybrána doporučená oprava:"
 msgstr[1] "Byly automaticky vybrány %d doporučené opravy:"
 msgstr[2] "Bylo automaticky vybráno %d doporučených oprav:"
 
-#: src/Summary.cc:1082
+#: src/Summary.cc:1084
 #, c-format, boost-format
 msgid "The following recommended pattern was automatically selected:"
 msgid_plural ""
@@ -927,7 +927,7 @@ msgstr[0] "Byl automaticky vybrán doporučený profil:"
 msgstr[1] "Byly automaticky vybrány %d doporučené profily:"
 msgstr[2] "Bylo automaticky vybráno %d doporučených profilů:"
 
-#: src/Summary.cc:1087
+#: src/Summary.cc:1089
 #, c-format, boost-format
 msgid "The following recommended product was automatically selected:"
 msgid_plural ""
@@ -936,7 +936,7 @@ msgstr[0] "Byl automaticky vybrán doporučený produkt:"
 msgstr[1] "Byly automaticky vybrány %d doporučené produkty:"
 msgstr[2] "Bylo automaticky vybráno %d doporučených produktů:"
 
-#: src/Summary.cc:1092
+#: src/Summary.cc:1094
 #, c-format, boost-format
 msgid "The following recommended source package was automatically selected:"
 msgid_plural ""
@@ -945,7 +945,7 @@ msgstr[0] "Byl automaticky vybrán doporučený zdrojový balíček:"
 msgstr[1] "Byly automaticky vybrány %d doporučené zdrojové balíčky:"
 msgstr[2] "Bylo automaticky vybráno %d doporučených zdrojových balíčků:"
 
-#: src/Summary.cc:1098
+#: src/Summary.cc:1100
 #, c-format, boost-format
 msgid "The following recommended application was automatically selected:"
 msgid_plural ""
@@ -954,7 +954,7 @@ msgstr[0] "Byla automaticky vybrána doporučená aplikace:"
 msgstr[1] "Byly automaticky vybrány %d doporučené aplikace:"
 msgstr[2] "Bylo automaticky vybráno %d doporučených aplikací:"
 
-#: src/Summary.cc:1145
+#: src/Summary.cc:1147
 #, c-format, boost-format
 msgid ""
 "The following package is recommended, but will not be installed (only "
@@ -972,7 +972,7 @@ msgstr[2] ""
 "Je doporučeno %d balíčků, ale nebudou nainstalovány (budou nainstalovány "
 "pouze vyžadované balíčky):"
 
-#: src/Summary.cc:1157
+#: src/Summary.cc:1159
 #, c-format, boost-format
 msgid ""
 "The following package is recommended, but will not be installed because it's "
@@ -990,7 +990,7 @@ msgstr[2] ""
 "Je doporučeno %d balíčků, ale nebudou nainstalovány, protože jsou nežádoucí "
 "(byly dříve ručně odebrány):"
 
-#: src/Summary.cc:1167
+#: src/Summary.cc:1169
 #, c-format, boost-format
 msgid ""
 "The following package is recommended, but will not be installed due to "
@@ -1008,7 +1008,7 @@ msgstr[2] ""
 "Je doporučeno %d balíčků, ale nebudou nainstalovány z důvodu konfliktu nebo "
 "chyby závislostí:"
 
-#: src/Summary.cc:1180
+#: src/Summary.cc:1182
 #, c-format, boost-format
 msgid "The following patch is recommended, but will not be installed:"
 msgid_plural ""
@@ -1017,7 +1017,7 @@ msgstr[0] "Tato oprava je doporučena, ale nebude nainstalována:"
 msgstr[1] "Jsou doporučeny %d opravy, ale nebudou nainstalovány:"
 msgstr[2] "Je doporučeno %d oprav, ale nebudou nainstalovány:"
 
-#: src/Summary.cc:1184
+#: src/Summary.cc:1186
 #, c-format, boost-format
 msgid "The following pattern is recommended, but will not be installed:"
 msgid_plural ""
@@ -1026,7 +1026,7 @@ msgstr[0] "Tento profil je doporučen, ale nebude nainstalován:"
 msgstr[1] "Jsou doporučeny %d profily, ale nebudou nainstalovány:"
 msgstr[2] "Je doporučeno %d profilů, ale nebude nainstalováno:"
 
-#: src/Summary.cc:1188
+#: src/Summary.cc:1190
 #, c-format, boost-format
 msgid "The following product is recommended, but will not be installed:"
 msgid_plural ""
@@ -1035,7 +1035,7 @@ msgstr[0] "Tento produkt je doporučen, ale nebude nainstalován:"
 msgstr[1] "Jsou doporučeny %d produkty, ale nebudou nainstalovány:"
 msgstr[2] "Je doporučeno %d produktů, ale nebudou nainstalovány:"
 
-#: src/Summary.cc:1193
+#: src/Summary.cc:1195
 #, c-format, boost-format
 msgid "The following application is recommended, but will not be installed:"
 msgid_plural ""
@@ -1044,7 +1044,7 @@ msgstr[0] "Tato aplikace je doporučena, ale nebude nainstalována:"
 msgstr[1] "Jsou doporučeny %d aplikace, ale nebudou nainstalovány:"
 msgstr[2] "Je doporučeno %d aplikací, ale nebude nainstalováno:"
 
-#: src/Summary.cc:1226
+#: src/Summary.cc:1228
 #, c-format, boost-format
 msgid "The following package is suggested, but will not be installed:"
 msgid_plural ""
@@ -1053,7 +1053,7 @@ msgstr[0] "Tento balíček je navržen, ale nebude nainstalován:"
 msgstr[1] "Jsou navrženy %d balíčky, ale nebudou nainstalovány:"
 msgstr[2] "Je navrženo %d balíčků, ale nebudou nainstalovány:"
 
-#: src/Summary.cc:1231
+#: src/Summary.cc:1233
 #, c-format, boost-format
 msgid "The following patch is suggested, but will not be installed:"
 msgid_plural ""
@@ -1062,7 +1062,7 @@ msgstr[0] "Tato oprava je navržena, ale nebude nainstalována:"
 msgstr[1] "Jsou navrženy %d opravy, ale nebudou nainstalovány:"
 msgstr[2] "Je navrženo %d oprav, ale nebudou nainstalovány:"
 
-#: src/Summary.cc:1236
+#: src/Summary.cc:1238
 #, c-format, boost-format
 msgid "The following pattern is suggested, but will not be installed:"
 msgid_plural ""
@@ -1071,7 +1071,7 @@ msgstr[0] "Tento profil je navržen, ale nebude nainstalován:"
 msgstr[1] "Jsou navrženy %d profily, ale nebudou nainstalovány:"
 msgstr[2] "Je navrženo %d profilů, ale nebudou nainstalovány:"
 
-#: src/Summary.cc:1241
+#: src/Summary.cc:1243
 #, c-format, boost-format
 msgid "The following product is suggested, but will not be installed:"
 msgid_plural ""
@@ -1080,7 +1080,7 @@ msgstr[0] "Tento produkt je navržen, ale nebude nainstalován:"
 msgstr[1] "Jsou navrženy %d produkty, ale nebudou nainstalovány:"
 msgstr[2] "Je navrženo %d produktů, ale nebudou nainstalovány:"
 
-#: src/Summary.cc:1247
+#: src/Summary.cc:1249
 #, c-format, boost-format
 msgid "The following application is suggested, but will not be installed:"
 msgid_plural ""
@@ -1089,7 +1089,7 @@ msgstr[0] "Tato aplikace je navržena, ale nebude nainstalována:"
 msgstr[1] "Jsou navrženy %d aplikace, ale nebudou nainstalovány:"
 msgstr[2] "Je navrženo %d aplikací, ale nebudou nainstalovány:"
 
-#: src/Summary.cc:1272
+#: src/Summary.cc:1274
 #, c-format, boost-format
 msgid "The following package is going to change architecture:"
 msgid_plural "The following %d packages are going to change architecture:"
@@ -1097,7 +1097,7 @@ msgstr[0] "Tento balíček změní architekturu:"
 msgstr[1] "%d balíčky změní architekturu:"
 msgstr[2] "%d balíčků změní architekturu:"
 
-#: src/Summary.cc:1277
+#: src/Summary.cc:1279
 #, c-format, boost-format
 msgid "The following patch is going to change architecture:"
 msgid_plural "The following %d patches are going to change architecture:"
@@ -1105,7 +1105,7 @@ msgstr[0] "Tato oprava změní architekturu:"
 msgstr[1] "%d opravy změní architekturu:"
 msgstr[2] "%d oprav změní architekturu:"
 
-#: src/Summary.cc:1282
+#: src/Summary.cc:1284
 #, c-format, boost-format
 msgid "The following pattern is going to change architecture:"
 msgid_plural "The following %d patterns are going to change architecture:"
@@ -1113,7 +1113,7 @@ msgstr[0] "Tento profil změní architekturu:"
 msgstr[1] "%d profily změní architekturu:"
 msgstr[2] "%d profilů změní architekturu:"
 
-#: src/Summary.cc:1287
+#: src/Summary.cc:1289
 #, c-format, boost-format
 msgid "The following product is going to change architecture:"
 msgid_plural "The following %d products are going to change architecture:"
@@ -1121,7 +1121,7 @@ msgstr[0] "Tento produkt změní architekturu:"
 msgstr[1] "%d produkty změní architekturu:"
 msgstr[2] "%d produktů změní architekturu:"
 
-#: src/Summary.cc:1293
+#: src/Summary.cc:1295
 #, c-format, boost-format
 msgid "The following application is going to change architecture:"
 msgid_plural "The following %d applications are going to change architecture:"
@@ -1129,7 +1129,7 @@ msgstr[0] "Tato aplikace změní architekturu:"
 msgstr[1] "%d aplikace změní architekturu:"
 msgstr[2] "%d aplikací změní architekturu:"
 
-#: src/Summary.cc:1318
+#: src/Summary.cc:1320
 #, c-format, boost-format
 msgid "The following package is going to change vendor:"
 msgid_plural "The following %d packages are going to change vendor:"
@@ -1137,7 +1137,7 @@ msgstr[0] "Tento balíček změní dodavatele:"
 msgstr[1] "%d balíčky změní dodavatele:"
 msgstr[2] "%d balíčků změní dodavatele:"
 
-#: src/Summary.cc:1323
+#: src/Summary.cc:1325
 #, c-format, boost-format
 msgid "The following patch is going to change vendor:"
 msgid_plural "The following %d patches are going to change vendor:"
@@ -1145,7 +1145,7 @@ msgstr[0] "Tato oprava změní dodavatele:"
 msgstr[1] "%d opravy změní dodavatele:"
 msgstr[2] "%d oprav změní dodavatele:"
 
-#: src/Summary.cc:1328
+#: src/Summary.cc:1330
 #, c-format, boost-format
 msgid "The following pattern is going to change vendor:"
 msgid_plural "The following %d patterns are going to change vendor:"
@@ -1153,7 +1153,7 @@ msgstr[0] "Tento profil změní dodavatele:"
 msgstr[1] "%d profily změní dodavatele:"
 msgstr[2] "%d profilů změní dodavatele:"
 
-#: src/Summary.cc:1333
+#: src/Summary.cc:1335
 #, c-format, boost-format
 msgid "The following product is going to change vendor:"
 msgid_plural "The following %d products are going to change vendor:"
@@ -1161,7 +1161,7 @@ msgstr[0] "Tento produkt změní dodavatele:"
 msgstr[1] "%d produkty změní dodavatele:"
 msgstr[2] "%d produktů změní dodavatele:"
 
-#: src/Summary.cc:1339
+#: src/Summary.cc:1341
 #, c-format, boost-format
 msgid "The following application is going to change vendor:"
 msgid_plural "The following %d applications are going to change vendor:"
@@ -1169,7 +1169,7 @@ msgstr[0] "Tato aplikace změní dodavatele:"
 msgstr[1] "%d aplikace změní dodavatele:"
 msgstr[2] "%d aplikací změní dodavatele:"
 
-#: src/Summary.cc:1362
+#: src/Summary.cc:1364
 #, c-format, boost-format
 msgid "The following package has no support information from its vendor:"
 msgid_plural ""
@@ -1178,7 +1178,7 @@ msgstr[0] "Vydavatel neposkytl informace o podpoře tohoto balíčku:"
 msgstr[1] "Pro tyto %d balíčky neposkytl vydavatel informace o podpoře:"
 msgstr[2] "Pro těchto %d balíčků neposkytl vydavatel informace o podpoře:"
 
-#: src/Summary.cc:1380
+#: src/Summary.cc:1382
 #, c-format, boost-format
 msgid "The following package is not supported by its vendor:"
 msgid_plural "The following %d packages are not supported by their vendor:"
@@ -1186,7 +1186,7 @@ msgstr[0] "Tento balíček není svým vydavatelem podporován:"
 msgstr[1] "%d balíčky nejsou svým vydavatelem podporovány:"
 msgstr[2] "%d balíčků není svým vydavatelem podporováno:"
 
-#: src/Summary.cc:1398
+#: src/Summary.cc:1400
 #, c-format, boost-format
 msgid ""
 "The following package needs additional customer contract to get support:"
@@ -1199,11 +1199,11 @@ msgstr[1] ""
 msgstr[2] ""
 "%d balíčků potřebuje k získání podpory dodatečnou zákaznickou smlouvu:"
 
-#: src/Summary.cc:1415
+#: src/Summary.cc:1417
 msgid "was superseded by"
 msgstr "byl nahrazen"
 
-#: src/Summary.cc:1428
+#: src/Summary.cc:1430
 #, c-format, boost-format
 msgid ""
 "The following package was discontinued and has been superseded by a new "
@@ -1220,7 +1220,7 @@ msgstr[2] ""
 "Následujících %d balíčků bylo ukončeno a nahrazeno novými balíčky s jinými "
 "názvy."
 
-#: src/Summary.cc:1433
+#: src/Summary.cc:1435
 msgid ""
 "The successor package should be installed as soon as possible to receive "
 "continued support:"
@@ -1237,7 +1237,7 @@ msgstr[2] ""
 "Nástupnické balíčky by měly být nainstalovány co nejdříve, abyste získali "
 "pokračující podporu:"
 
-#: src/Summary.cc:1458
+#: src/Summary.cc:1460
 #, c-format, boost-format
 msgid "The following package update will NOT be installed:"
 msgid_plural "The following %d package updates will NOT be installed:"
@@ -1245,7 +1245,7 @@ msgstr[0] "Tato aktualizace balíčku NEBUDE nainstalována:"
 msgstr[1] "%d aktualizace balíčků NEBUDOU nainstalovány:"
 msgstr[2] "%d aktualizací balíčků NEBUDE nainstalováno:"
 
-#: src/Summary.cc:1463
+#: src/Summary.cc:1465
 #, c-format, boost-format
 msgid "The following product update will NOT be installed:"
 msgid_plural "The following %d product updates will NOT be installed:"
@@ -1253,7 +1253,7 @@ msgstr[0] "Tato aktualizace produktu NEBUDE nainstalována:"
 msgstr[1] "%d aktualizace produktů NEBUDOU nainstalovány:"
 msgstr[2] "%d aktualizací produktů NEBUDE nainstalováno:"
 
-#: src/Summary.cc:1469
+#: src/Summary.cc:1471
 #, c-format, boost-format
 msgid "The following application update will NOT be installed:"
 msgid_plural "The following %d application updates will NOT be installed:"
@@ -1261,7 +1261,7 @@ msgstr[0] "Tato aktualizace aplikace NEBUDE nainstalována:"
 msgstr[1] "%d aktualizace aplikací NEBUDOU nainstalovány:"
 msgstr[2] "%d aktualizací aplikací NEBUDE nainstalováno:"
 
-#: src/Summary.cc:1502
+#: src/Summary.cc:1504
 #, c-format, boost-format
 msgid "The following item is locked and will not be changed by any action:"
 msgid_plural ""
@@ -1272,22 +1272,22 @@ msgstr[2] "Následujících %d položek je uzamčeno a nebude žádnou akcí zm�
 
 #. always as plain name list
 #. translators: used as 'tag:' (i.e. followed by ':')
-#: src/Summary.cc:1515
+#: src/Summary.cc:1517
 msgid "Available"
 msgstr "Dostupné"
 
 #. translators: used as 'tag:' (i.e. followed by ':')
 #. translators: property name; short; used like "Name: value"
-#: src/Summary.cc:1521 src/info.cc:396 src/info.cc:489 src/info.cc:609
+#: src/Summary.cc:1523 src/info.cc:396 src/info.cc:489 src/info.cc:609
 msgid "Installed"
 msgstr "Nainstalováno"
 
-#: src/Summary.cc:1526
+#: src/Summary.cc:1528
 #, boost-format
 msgid "Run '%1%' to see the complete list of locked items."
 msgstr "Použijte '%1%' k získání kompletního seznamu uzamčených položek."
 
-#: src/Summary.cc:1535
+#: src/Summary.cc:1537
 #, c-format, boost-format
 msgid "The following patch requires a system reboot:"
 msgid_plural "The following %d patches require a system reboot:"
@@ -1295,7 +1295,7 @@ msgstr[0] "Následující oprava vyžaduje restart systému:"
 msgstr[1] "Následující %d opravy vyžadují restart systému:"
 msgstr[2] "Následujících %d oprav vyžaduje restart systému:"
 
-#: src/Summary.cc:1539
+#: src/Summary.cc:1541
 #, c-format, boost-format
 msgid "The following package requires a system reboot:"
 msgid_plural "The following %d packages require a system reboot:"
@@ -1303,37 +1303,52 @@ msgstr[0] "Tento balíček vyžaduje restart systému:"
 msgstr[1] "Tyto %d balíčky vyžadují restart systému:"
 msgstr[2] "Těchto %d balíčků vyžaduje restart systému:"
 
-#: src/Summary.cc:1561
+#: src/Summary.cc:1563
 msgid "Skipped needed patches which do not apply without conflict:"
 msgstr "Přeskočeny potřebné záplaty, jejichž použití však vyvolá konflikt:"
 
-#: src/Summary.cc:1577
-#, boost-format
-msgid "Overall download size: %1%. Already cached: %2%."
-msgstr "Celková velikost stahování: %1%. Již v keši: %2%."
+#. Package download size:   99.2 MiB
+#. or
+#. Package download size:
+#. |     105.7 MiB  overall download size
+#. 99.2 MiB  |  -    6.4 MiB  already in cache
+#: src/Summary.cc:1588
+msgid "Package download size:"
+msgstr ""
 
-#: src/Summary.cc:1580
+#. translator: rendered as "105.7 MiB  overall download size"
+#: src/Summary.cc:1596
+msgid "overall package size"
+msgstr ""
+
+#. translator: rendered as "  6.4 MiB  already in cache"
+#: src/Summary.cc:1598
+msgid "already in cache"
+msgstr ""
+
+#: src/Summary.cc:1605
 msgid "Download only."
 msgstr "Pouze stažení."
 
-#. TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
-#: src/Summary.cc:1586
-#, c-format, boost-format
-msgid "After the operation, additional %s will be used."
-msgstr "Po operaci bude dodatečně využito %s."
+#. Package install size change:
+#. |     349.1 MiB  required by packages that will be installed
+#. 1.9 MiB  |  -  347.3 MiB  released by packages that will be removed
+#: src/Summary.cc:1610
+msgid "Package install size change:"
+msgstr ""
 
-#: src/Summary.cc:1588
-msgid "No additional space will be used or freed after the operation."
-msgstr "Po operaci nebude použito ani uvolněno žádné další místo."
+#. translator: rendered as "349.1 MiB  required by packages that will be installed"
+#: src/Summary.cc:1615
+msgid "required by packages that will be installed"
+msgstr ""
 
-#. TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
-#: src/Summary.cc:1595
-#, c-format, boost-format
-msgid "After the operation, %s will be freed."
-msgstr "Po operaci bude uvolněno %s."
+#. translator: rendered as "347.3 MiB  released by packages that will be removed"
+#: src/Summary.cc:1617
+msgid "released by packages that will be removed"
+msgstr ""
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
-#: src/Summary.cc:1619
+#: src/Summary.cc:1638
 msgid "package to upgrade"
 msgid_plural "packages to upgrade"
 msgstr[0] "balíček k aktualizaci"
@@ -1341,7 +1356,7 @@ msgstr[1] "balíčky k aktualizaci"
 msgstr[2] "balíčky k aktualizaci"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: src/Summary.cc:1630
+#: src/Summary.cc:1649
 msgid "to downgrade"
 msgid_plural "to downgrade"
 msgstr[0] "k downgradu"
@@ -1349,7 +1364,7 @@ msgstr[1] "k downgradu"
 msgstr[2] "k downgradu"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
-#: src/Summary.cc:1633
+#: src/Summary.cc:1652
 msgid "package to downgrade"
 msgid_plural "packages to downgrade"
 msgstr[0] "balíček k downgradu"
@@ -1357,7 +1372,7 @@ msgstr[1] "balíčky k downgradu"
 msgstr[2] "balíčků k downgradu"
 
 #. translators: this text will be preceded by a number e.g. "5 new"
-#: src/Summary.cc:1644
+#: src/Summary.cc:1663
 msgid "new"
 msgid_plural "new"
 msgstr[0] "Nový"
@@ -1365,7 +1380,7 @@ msgstr[1] "Nový"
 msgstr[2] "nový"
 
 #. translators: this text will be preceded by a number e.g. "5 new to install"
-#: src/Summary.cc:1647
+#: src/Summary.cc:1666
 msgid "new package to install"
 msgid_plural "new packages to install"
 msgstr[0] "nový balíček k instalaci"
@@ -1373,7 +1388,7 @@ msgstr[1] "nové balíčky k instalaci"
 msgstr[2] "nové balíčky k instalaci"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: src/Summary.cc:1658
+#: src/Summary.cc:1677
 msgid "to reinstall"
 msgid_plural "to reinstall"
 msgstr[0] "k přeinstalaci"
@@ -1381,7 +1396,7 @@ msgstr[1] "k přeinstalaci"
 msgstr[2] "k přeinstalaci"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
-#: src/Summary.cc:1661
+#: src/Summary.cc:1680
 msgid "package to reinstall"
 msgid_plural "packages to reinstall"
 msgstr[0] "balíček k přeinstalaci"
@@ -1389,7 +1404,7 @@ msgstr[1] "balíčky k přeinstalaci"
 msgstr[2] "balíčky k přeinstalaci"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: src/Summary.cc:1672
+#: src/Summary.cc:1691
 msgid "to remove"
 msgid_plural "to remove"
 msgstr[0] "k odstranění"
@@ -1397,7 +1412,7 @@ msgstr[1] "k odstranění"
 msgstr[2] "k odstranění"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
-#: src/Summary.cc:1675
+#: src/Summary.cc:1694
 msgid "package to remove"
 msgid_plural "packages to remove"
 msgstr[0] "balíček k odstranění"
@@ -1405,7 +1420,7 @@ msgstr[1] "balíčky k odstranění"
 msgstr[2] "balíčky k odstranění"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: src/Summary.cc:1686
+#: src/Summary.cc:1705
 msgid "to change vendor"
 msgid_plural " to change vendor"
 msgstr[0] "ke změně poskytovatele"
@@ -1413,7 +1428,7 @@ msgstr[1] "ke změně poskytovatele"
 msgstr[2] "ke změně poskytovatele"
 
 #. translators: this text will be preceded by a number e.g. "5 packages ..."
-#: src/Summary.cc:1689
+#: src/Summary.cc:1708
 msgid "package will change vendor"
 msgid_plural "packages will change vendor"
 msgstr[0] "balíček změní dodavatele"
@@ -1421,7 +1436,7 @@ msgstr[1] "balíčky změní dodavatele"
 msgstr[2] "balíčky změní dodavatele"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: src/Summary.cc:1700
+#: src/Summary.cc:1719
 msgid "to change arch"
 msgid_plural "to change arch"
 msgstr[0] "ke změně architektury"
@@ -1429,7 +1444,7 @@ msgstr[1] "ke změně architektury"
 msgstr[2] "ke změně architektury"
 
 #. translators: this text will be preceded by a number e.g. "5 packages ..."
-#: src/Summary.cc:1703
+#: src/Summary.cc:1722
 msgid "package will change arch"
 msgid_plural "packages will change arch"
 msgstr[0] "balíček změní architekturu"
@@ -1437,7 +1452,7 @@ msgstr[1] "balíčky změní architekturu"
 msgstr[2] "balíčky změní architekturu"
 
 #. translators: this text will be preceded by a number e.g. "5 new"
-#: src/Summary.cc:1714
+#: src/Summary.cc:1733
 msgid "source package"
 msgid_plural "source packages"
 msgstr[0] "zdrojový balíček"
@@ -1445,7 +1460,7 @@ msgstr[1] "zdrojové balíčky"
 msgstr[2] "zdrojových balíčků"
 
 #. translators: this text will be preceded by a number e.g. "5 new to install"
-#: src/Summary.cc:1717
+#: src/Summary.cc:1736
 msgid "source package to install"
 msgid_plural "source packages to install"
 msgstr[0] "zdrojový balíček k instalaci"
@@ -1453,7 +1468,7 @@ msgstr[1] "zdrojové balíčky k instalaci"
 msgstr[2] "zdrojových balíčků k instalaci"
 
 #. patch command (auto)restricted to update stack patches
-#: src/Summary.cc:1798
+#: src/Summary.cc:1817
 msgid ""
 "Package manager restart required. (Run this command once again after the "
 "update stack got updated)"
@@ -1462,12 +1477,12 @@ msgstr ""
 "tento příkaz znovu.)"
 
 #. translator: %1% is an option string like  "--dry-run"
-#: src/Summary.cc:1805
+#: src/Summary.cc:1824
 #, boost-format
 msgid "%1% is set, otherwise a system reboot would be required."
 msgstr "Nastaven %1%, jinak by byl nutný restart systému."
 
-#: src/Summary.cc:1807
+#: src/Summary.cc:1826
 msgid "System reboot required."
 msgstr "Vyžadován restart systému."
 
@@ -1479,7 +1494,7 @@ msgstr "Vyžadován restart systému."
 #. Consider to cancel:
 #. Product 'opennSUSE Tumbleweed' requires to be upgraded by calling 'zypper dup'!
 #. Continue? [y/n/...? shows all options] (y):
-#: src/Summary.cc:1826
+#: src/Summary.cc:1845
 msgid "Consider to cancel:"
 msgstr "Zvažte zrušení:"
 
@@ -1511,7 +1526,7 @@ msgstr "PackageKit stále běží (pravděpodobně je zaneprázdněn)."
 msgid "Try again?"
 msgstr "Zkusit znovu?"
 
-#: src/Zypper.cc:244 src/Zypper.cc:716 src/commands/basecommand.cc:280
+#: src/Zypper.cc:244 src/Zypper.cc:721 src/commands/basecommand.cc:280
 msgid "Unexpected exception."
 msgstr "Neočekávaná výjimka."
 
@@ -1547,7 +1562,7 @@ msgstr ""
 msgid "The %s option has no effect here, ignoring."
 msgstr "Volba %s zde nemá žádný efekt, ignoruji ji."
 
-#: src/Zypper.cc:659
+#: src/Zypper.cc:630
 msgid "Non-option program arguments: "
 msgstr "Parametry programu mimo volby: "
 
@@ -2784,8 +2799,8 @@ msgstr[2] "Odstraněno %lu zámků."
 #: src/commands/locks/list.cc:133 src/commands/repos/list.cc:42
 #: src/commands/repos/list.cc:227 src/commands/services/list.cc:107
 #: src/info.cc:90 src/info.cc:512 src/info.cc:747 src/locales.cc:201
-#: src/search.cc:48 src/search.cc:199 src/search.cc:304 src/search.cc:452
-#: src/search.cc:499 src/update.cc:789 src/utils/misc.cc:325
+#: src/search.cc:48 src/search.cc:199 src/search.cc:304 src/search.cc:458
+#: src/search.cc:508 src/update.cc:789 src/utils/misc.cc:324
 msgid "Name"
 msgstr "Název"
 
@@ -2803,9 +2818,9 @@ msgstr "Typ"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: package's repository (header)
-#: src/commands/locks/list.cc:136 src/info.cc:88 src/repos.cc:794
-#: src/search.cc:56 src/search.cc:306 src/search.cc:451 src/search.cc:495
-#: src/update.cc:786 src/utils/misc.cc:324
+#: src/commands/locks/list.cc:136 src/info.cc:88 src/search.cc:56
+#: src/search.cc:306 src/search.cc:457 src/search.cc:504 src/update.cc:786
+#: src/utils/misc.cc:323
 msgid "Repository"
 msgstr "Úložiště"
 
@@ -3445,33 +3460,40 @@ msgstr ""
 msgid "Show installed packages which were explicitly selected by the user."
 msgstr "Zobrazit instalované balíčky, které uživatel výslovně vybral."
 
-#. translators: --orphaned
+#. translators: --system
 #: src/commands/query/packages.cc:43
-msgid "Show packages which are orphaned (without repository)."
-msgstr "Zobrazit balíčky, které jsou osiřelé (bez repozitáře)."
+msgid "Show installed packages which are not provided by any repository."
+msgstr ""
+
+#. translators: --orphaned
+#: src/commands/query/packages.cc:47
+msgid ""
+"Show system packages which are orphaned (without repository and without "
+"update candidate)."
+msgstr ""
 
 #. translators: --suggested
-#: src/commands/query/packages.cc:47
+#: src/commands/query/packages.cc:51
 msgid "Show packages which are suggested."
 msgstr "Zobrazit balíčky, které jsou navrhované."
 
 #. translators: --recommended
-#: src/commands/query/packages.cc:51
+#: src/commands/query/packages.cc:55
 msgid "Show packages which are recommended."
 msgstr "Zobrazit balíčky, které jsou doporučené."
 
 #. translators: --unneeded
-#: src/commands/query/packages.cc:55
+#: src/commands/query/packages.cc:59
 msgid "Show packages which are unneeded."
 msgstr "Zobrazit balíčky, které jsou nepotřebné."
 
 #. translators: -N, --sort-by-name
-#: src/commands/query/packages.cc:59
+#: src/commands/query/packages.cc:63
 msgid "Sort the list by package name."
 msgstr "Seřadit seznam podle názvu balíčku."
 
 #. translators: -R, --sort-by-repo
-#: src/commands/query/packages.cc:63
+#: src/commands/query/packages.cc:67
 msgid "Sort the list by repository."
 msgstr "Seřadit seznam podle repozitáře."
 
@@ -3634,7 +3656,7 @@ msgstr "Alias"
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/commands/repos/list.cc:44 src/commands/repos/list.cc:47
 #: src/commands/repos/list.cc:273 src/commands/services/add.cc:83
-#: src/commands/services/list.cc:118 src/repos.cc:1344
+#: src/commands/services/list.cc:118 src/repos.cc:1247
 #: src/utils/flags/zyppflags.h:49
 msgid "URI"
 msgstr "Adresa URI"
@@ -3643,27 +3665,27 @@ msgstr "Adresa URI"
 #. translators: property name; short; used like "Name: value"
 #: src/commands/repos/list.cc:51 src/commands/repos/list.cc:235
 #: src/commands/services/add.cc:85 src/commands/services/list.cc:108
-#: src/repos.cc:1346
+#: src/repos.cc:1249
 msgid "Enabled"
 msgstr "povoleno"
 
 #. GPG Check
 #. translators: property name; short; used like "Name: value"
 #: src/commands/repos/list.cc:52 src/commands/repos/list.cc:239
-#: src/commands/services/list.cc:109 src/repos.cc:1348
+#: src/commands/services/list.cc:109 src/repos.cc:1251
 msgid "GPG Check"
 msgstr "Kontrola GPG"
 
 #. translators: repository priority (in zypper repos -p or -d)
 #. translators: property name; short; used like "Name: value"
 #: src/commands/repos/list.cc:53 src/commands/repos/list.cc:257
-#: src/commands/services/list.cc:115 src/repos.cc:1352
+#: src/commands/services/list.cc:115 src/repos.cc:1255
 msgid "Priority"
 msgstr "Priorita"
 
 #. translators: property name; short; used like "Name: value"
 #: src/commands/repos/list.cc:54 src/commands/services/add.cc:87
-#: src/repos.cc:1350
+#: src/repos.cc:1253
 msgid "Autorefresh"
 msgstr "Automatické obnovení"
 
@@ -3717,7 +3739,7 @@ msgid "Export all defined repositories as a single local .repo file."
 msgstr ""
 "Exportovat všechny definované repozitáře jako jeden místní .repo soubor."
 
-#: src/commands/repos/list.cc:122 src/repos.cc:1101
+#: src/commands/repos/list.cc:122 src/repos.cc:1004
 msgid "Error reading repositories:"
 msgstr "Chyba při čtení repozitářů:"
 
@@ -3845,7 +3867,7 @@ msgstr "Globální volba '%s' zde nemá žádný účinek."
 msgid "Arguments are not allowed if '%s' is used."
 msgstr "Pokud je použito '%s', argumenty nejsou povoleny."
 
-#: src/commands/repos/refresh.cc:195 src/repos.cc:1113
+#: src/commands/repos/refresh.cc:195 src/repos.cc:1016
 msgid "Specified repositories: "
 msgstr "Zadané repozitáře: "
 
@@ -3854,7 +3876,7 @@ msgstr "Zadané repozitáře: "
 msgid "Refreshing repository '%s'."
 msgstr "Obnovuje se repozitář '%s'."
 
-#: src/commands/repos/refresh.cc:236 src/repos.cc:900
+#: src/commands/repos/refresh.cc:236 src/repos.cc:842
 #, c-format, boost-format
 msgid "Scanning content of disabled repository '%s'."
 msgstr "Prohledávání obsahu zakázaného repozitáře '%s'."
@@ -3864,7 +3886,7 @@ msgstr "Prohledávání obsahu zakázaného repozitáře '%s'."
 msgid "Skipping disabled repository '%s'"
 msgstr "Přeskakuji zakázaný repozitář '%s'"
 
-#: src/commands/repos/refresh.cc:262 src/repos.cc:917 src/repos.cc:991
+#: src/commands/repos/refresh.cc:262 src/repos.cc:860 src/repos.cc:908
 #, c-format, boost-format
 msgid "Skipping repository '%s' because of the above error."
 msgstr "Přeskakuji repozitář '%s' z důvodu uvedené chyby."
@@ -3891,7 +3913,7 @@ msgstr "Použijte příkazy '%s' nebo '%s' k přidání a povolení repozitář�
 msgid "Could not refresh the repositories because of errors."
 msgstr "Repozitáře nelze z důvodu chyby obnovit."
 
-#: src/commands/repos/refresh.cc:298 src/repos.cc:1028
+#: src/commands/repos/refresh.cc:298 src/repos.cc:937
 msgid "Some of the repositories have not been refreshed because of an error."
 msgstr "Některé repozitáře nebyly z důvodu chyby obnoveny."
 
@@ -3946,12 +3968,12 @@ msgstr ""
 msgid "Repository '%s' renamed to '%s'."
 msgstr "Repozitář '%s' byl přejmenován na '%s'."
 
-#: src/commands/repos/rename.cc:47 src/repos.cc:1292
+#: src/commands/repos/rename.cc:47 src/repos.cc:1195
 #, c-format, boost-format
 msgid "Repository named '%s' already exists. Please use another alias."
 msgstr "Repozitář s názvem '%s' již existuje. Použijte jiný alias."
 
-#: src/commands/repos/rename.cc:52 src/repos.cc:1770
+#: src/commands/repos/rename.cc:52 src/repos.cc:1673
 msgid "Error while modifying the repository:"
 msgstr "Chyba při změně repozitáře:"
 
@@ -3983,7 +4005,7 @@ msgstr "Příliš málo argumentů. Je vyžadována přinejmenším adresa URI a
 msgid "Repository '%s' not found."
 msgstr "Repozitář '%s' nebyl nalezen."
 
-#: src/commands/reposerviceoptionsets.cc:35 src/repos.cc:150
+#: src/commands/reposerviceoptionsets.cc:35 src/repos.cc:109
 #, c-format, boost-format
 msgid ""
 "Invalid priority '%s'. Use a positive integer number. The greater the "
@@ -4394,7 +4416,7 @@ msgstr ""
 "Má podobnou funkci jako parametr --details s dalšími informacemi o shodách "
 "vyhledávání (užitečné při vyhledávání v závislostech)."
 
-#: src/commands/search/search.cc:290 src/repos.cc:837
+#: src/commands/search/search.cc:290 src/repos.cc:779
 #, c-format, boost-format
 msgid "Specified repository '%s' is disabled."
 msgstr "Zadaný repozitář '%s' je zakázán."
@@ -4412,7 +4434,7 @@ msgstr "Problém nastal při inicializaci nebo spouštění vyhledávacího dota
 msgid "See the above message for a hint."
 msgstr "Nápovědu naleznete v předchozí zprávě."
 
-#: src/commands/search/search.cc:497 src/repos.cc:1080
+#: src/commands/search/search.cc:497 src/repos.cc:983
 msgid "Running 'zypper refresh' as root might resolve the problem."
 msgstr "Spuštění 'zypper refresh' jako root by mohlo vyřešit problém."
 
@@ -4503,7 +4525,7 @@ msgid "Problem retrieving the repository index file for service '%s':"
 msgstr "Problém při získávání souboru se seznamem repozitáře pro službu '%s':"
 
 #: src/commands/services/common.cc:138 src/commands/services/refresh.cc:226
-#: src/repos.cc:1822
+#: src/repos.cc:1725
 #, c-format, boost-format
 msgid "Skipping service '%s' because of the above error."
 msgstr "Přeskakuji službu '%s' z důvodu výše uvedené chyby."
@@ -5458,13 +5480,13 @@ msgstr "%s je starší než %s"
 #. translators: Table column header
 #. translators: package version (header)
 #: src/info.cc:92 src/info.cc:748 src/search.cc:52 src/search.cc:305
-#: src/search.cc:453 src/search.cc:500
+#: src/search.cc:459 src/search.cc:509
 msgid "Version"
 msgstr "Verze"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: package architecture (header)
-#: src/info.cc:94 src/search.cc:54 src/search.cc:454 src/search.cc:501
+#: src/info.cc:94 src/search.cc:54 src/search.cc:460 src/search.cc:510
 #: src/update.cc:795
 msgid "Arch"
 msgstr "Architektura"
@@ -5476,8 +5498,8 @@ msgstr "Poskytovatel"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: package summary (header)
-#: src/info.cc:102 src/search.cc:201 src/utils/misc.cc:331
-#: src/utils/misc.cc:373
+#: src/info.cc:102 src/search.cc:201 src/utils/misc.cc:330
+#: src/utils/misc.cc:372
 msgid "Summary"
 msgstr "Shrnutí"
 
@@ -5537,8 +5559,8 @@ msgid "Installed Size"
 msgstr "Instalovaná velikost"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:398 src/info.cc:448 src/info.cc:612 src/utils/misc.cc:329
-#: src/utils/misc.cc:371
+#: src/info.cc:398 src/info.cc:448 src/info.cc:612 src/utils/misc.cc:328
+#: src/utils/misc.cc:370
 msgid "Status"
 msgstr "Stav"
 
@@ -5562,13 +5584,13 @@ msgstr "Upstreamová URL adresa"
 #. translators: property name; short; used like "Name: value"
 #. translator: Table column header.
 #. Name
-#: src/info.cc:450 src/update.cc:406 src/utils/misc.cc:326
-#: src/utils/misc.cc:368
+#: src/info.cc:450 src/update.cc:406 src/utils/misc.cc:325
+#: src/utils/misc.cc:367
 msgid "Category"
 msgstr "Kategorie"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:452 src/utils/misc.cc:327 src/utils/misc.cc:369
+#: src/info.cc:452 src/utils/misc.cc:326 src/utils/misc.cc:368
 msgid "Severity"
 msgstr "Závažnost"
 
@@ -5578,7 +5600,7 @@ msgid "Created On"
 msgstr "Vytvořeno"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:456 src/utils/misc.cc:328 src/utils/misc.cc:370
+#: src/info.cc:456 src/utils/misc.cc:327 src/utils/misc.cc:369
 msgid "Interactive"
 msgstr "Interaktivní"
 
@@ -5602,7 +5624,7 @@ msgstr "(žádné)"
 #. translators: S for installed Status
 #. TranslatorExplanation S stands for Status
 #: src/info.cc:511 src/info.cc:746 src/locales.cc:199 src/search.cc:46
-#: src/search.cc:198 src/search.cc:303 src/search.cc:450 src/search.cc:494
+#: src/search.cc:198 src/search.cc:303 src/search.cc:456 src/search.cc:503
 #: src/update.cc:784
 msgid "S"
 msgstr "S"
@@ -5645,7 +5667,7 @@ msgid "Flavor"
 msgstr "Varianta"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:607 src/search.cc:502
+#: src/info.cc:607 src/search.cc:511
 msgid "Is Base"
 msgstr "V základu"
 
@@ -5698,7 +5720,7 @@ msgstr "Žádaný"
 msgid "Fallback"
 msgstr "Nouzové řešení"
 
-#: src/locales.cc:72 src/repos.cc:174 src/repos.cc:202
+#: src/locales.cc:72 src/repos.cc:133 src/repos.cc:161
 msgid "No"
 msgstr "Ne"
 
@@ -5740,12 +5762,12 @@ msgstr "%s nebylo vyžádáno."
 #. set up our strings we want to output in case SIGINT was triggered
 #. we can not allocate memory there, so we do it in advance and remember the translated strings
 #. translators: this will show up if you press ctrl+c once
-#: src/main.cc:122
+#: src/main.cc:150
 msgid "Trying to exit gracefully..."
 msgstr "Pokus o řádné ukončení..."
 
 #. translators: this will show up if you press ctrl+c twice
-#: src/main.cc:126
+#: src/main.cc:154
 msgid "Zypper is currently cleaning up, exiting as soon as possible."
 msgstr "Zypper právě uklízí, ukončete co nejdříve."
 
@@ -5850,18 +5872,13 @@ msgstr "Zdrojový balíček %s-%s byl nainstalován úspěšně."
 msgid "Problem installing source package %s-%s:"
 msgstr "Problém při instalaci zdrojového balíku %s-%s:"
 
-#. translator: used like "1h 12min in the future!"
-#: src/repos.cc:83
-msgid "in the future!"
-msgstr "v budoucnosti!"
-
 #. translators: used as 'XYZ changed to SOMETHING [volatile]' to tag specific property changes.
-#: src/repos.cc:94
+#: src/repos.cc:53
 msgid "volatile"
 msgstr "nestálý"
 
 #. translators: 'Volatile' refers to changes we previously tagged as 'XYZ changed to SOMETHING [volatile]'
-#: src/repos.cc:100
+#: src/repos.cc:59
 #, boost-format
 msgid ""
 "Repo '%1%' is managed by service '%2%'. Volatile changes are reset by the "
@@ -5870,23 +5887,23 @@ msgstr ""
 "Repozitář '%1%' je spravován službou '%2%'. Nestálé změny budou přestaveny s "
 "dalším obnovením služby!"
 
-#: src/repos.cc:116
+#: src/repos.cc:75
 msgid "default priority"
 msgstr "výchozí priorita"
 
-#: src/repos.cc:117
+#: src/repos.cc:76
 msgid "raised priority"
 msgstr "zvýšená priorita"
 
-#: src/repos.cc:117
+#: src/repos.cc:76
 msgid "lowered priority"
 msgstr "snížená priorita"
 
-#: src/repos.cc:168 src/repos.cc:196
+#: src/repos.cc:127 src/repos.cc:155
 msgid "Yes"
 msgstr "Ano"
 
-#: src/repos.cc:221
+#: src/repos.cc:180
 msgid ""
 "Repository priorities are without effect. All enabled repositories share the "
 "same priority."
@@ -5894,16 +5911,16 @@ msgstr ""
 "Priority repozitářů jsou bez efektu. Všechny povolené repozitáře sdílejí "
 "stejnou prioritu."
 
-#: src/repos.cc:225
+#: src/repos.cc:184
 msgid "Repository priorities in effect:"
 msgstr "Efektivní priority repozitářů:"
 
-#: src/repos.cc:226
+#: src/repos.cc:185
 #, boost-format
 msgid "See '%1%' for details"
 msgstr "Další podrobnosti viz '%1%'"
 
-#: src/repos.cc:235
+#: src/repos.cc:194
 #, boost-format
 msgid "%1% repository"
 msgid_plural "%1% repositories"
@@ -5913,57 +5930,57 @@ msgstr[2] "%1% repozitářů"
 
 #. check whether libzypp indicates a refresh is needed, and if so,
 #. print a message
-#: src/repos.cc:268
+#: src/repos.cc:227
 #, c-format, boost-format
 msgid "Checking whether to refresh metadata for %s"
 msgstr "Kontroluje se, zda je třeba obnovit metadata pro %s"
 
-#: src/repos.cc:297
+#: src/repos.cc:256
 #, c-format, boost-format
 msgid "Repository '%s' is up to date."
 msgstr "Repozitář '%s' je aktuální."
 
-#: src/repos.cc:303
+#: src/repos.cc:262
 #, c-format, boost-format
 msgid "The up-to-date check of '%s' has been delayed."
 msgstr "Kontrola aktuálnosti '%s' byla odložena."
 
-#: src/repos.cc:325
+#: src/repos.cc:284
 msgid "Forcing raw metadata refresh"
 msgstr "Vynucuje se obnovení nezpracovaných metadat"
 
-#: src/repos.cc:331
+#: src/repos.cc:290
 #, c-format, boost-format
 msgid "Retrieving repository '%s' metadata"
 msgstr "Načítání metadat repozitáře '%s'"
 
-#: src/repos.cc:355
+#: src/repos.cc:314
 #, c-format, boost-format
 msgid "Do you want to disable the repository %s permanently?"
 msgstr "Chcete zakázat repozitář %s trvale?"
 
-#: src/repos.cc:371
+#: src/repos.cc:330
 #, c-format, boost-format
 msgid "Error while disabling repository '%s'."
 msgstr "Chyba při zakazování repozitáře '%s'."
 
-#: src/repos.cc:387
+#: src/repos.cc:346
 #, c-format, boost-format
 msgid "Problem retrieving files from '%s'."
 msgstr "Problém při stahování souborů z '%s'."
 
-#: src/repos.cc:388 src/repos.cc:1957 src/solve-commit.cc:989
+#: src/repos.cc:347 src/repos.cc:1860 src/solve-commit.cc:989
 #: src/solve-commit.cc:1020 src/solve-commit.cc:1044
 msgid "Please see the above error message for a hint."
 msgstr "Nápovědu naleznete v uvedené chybové zprávě."
 
-#: src/repos.cc:400
+#: src/repos.cc:359
 #, c-format, boost-format
 msgid "No URIs defined for '%s'."
 msgstr "Pro '%s' nejsou definovány žádné adresy URI."
 
 #. TranslatorExplanation the first %s is a .repo file path
-#: src/repos.cc:405
+#: src/repos.cc:364
 #, c-format, boost-format
 msgid ""
 "Please add one or more base URI (baseurl=URI) entries to %s for repository "
@@ -5972,16 +5989,16 @@ msgstr ""
 "Přidejte jednu nebo více základních adres URI (baseurl=URI) do %s pro "
 "repozitář '%s'."
 
-#: src/repos.cc:419
+#: src/repos.cc:378
 msgid "No alias defined for this repository."
 msgstr "Pro tento repozitář není definovaný žádný alias."
 
-#: src/repos.cc:431
+#: src/repos.cc:390
 #, c-format, boost-format
 msgid "Repository '%s' is invalid."
 msgstr "Repozitář '%s' je neplatný."
 
-#: src/repos.cc:432
+#: src/repos.cc:391
 msgid ""
 "Please check if the URIs defined for this repository are pointing to a valid "
 "repository."
@@ -5989,22 +6006,22 @@ msgstr ""
 "Zkontrolujte, zda adresy URI definované pro tento repozitář ukazují na "
 "platný repozitář."
 
-#: src/repos.cc:444
+#: src/repos.cc:403
 #, c-format, boost-format
 msgid "Error retrieving metadata for '%s':"
 msgstr "Chyba při získávání metadat pro '%s':"
 
-#: src/repos.cc:457
+#: src/repos.cc:416
 msgid "Forcing building of repository cache"
 msgstr "Vynucuje se vytvoření vyrovnávací paměti repozitáře"
 
-#: src/repos.cc:482
+#: src/repos.cc:441
 #, c-format, boost-format
 msgid "Error parsing metadata for '%s':"
 msgstr "Chyba při analýze metadat pro '%s':"
 
 #. TranslatorExplanation Don't translate the URL unless it is translated, too
-#: src/repos.cc:484
+#: src/repos.cc:443
 msgid ""
 "This may be caused by invalid metadata in the repository, or by a bug in the "
 "metadata parser. In the latter case, or if in doubt, please, file a bug "
@@ -6015,51 +6032,46 @@ msgstr ""
 "metadat. Ve druhém případě a v případě pochybností odešlete zprávu o chybě "
 "podle pokynů na stránce http://en.opensuse.org/Zypper/Troubleshooting"
 
-#: src/repos.cc:493
+#: src/repos.cc:452
 #, c-format, boost-format
 msgid "Repository metadata for '%s' not found in local cache."
 msgstr "Metadata repozitáře '%s' nebyla nalezena v místní vyrovnávací paměti."
 
-#: src/repos.cc:501
+#: src/repos.cc:460
 msgid "Error building the cache:"
 msgstr "Chyba při vytváření vyrovnávací paměti:"
 
-#: src/repos.cc:720
+#: src/repos.cc:679
 #, c-format, boost-format
 msgid "Repository '%s' not found by its alias, number, or URI."
 msgstr "Repozitář '%s' nebyl podle aliasu, čísla, nebo URI nalezen."
 
-#: src/repos.cc:722
+#: src/repos.cc:681
 #, c-format, boost-format
 msgid "Use '%s' to get the list of defined repositories."
 msgstr "Použijte '%s' pro získání seznamu definovaných repozitářů."
 
-#: src/repos.cc:742
+#: src/repos.cc:701
 #, c-format, boost-format
 msgid "Ignoring disabled repository '%s'"
 msgstr "Ignoruji zakázaný repozitář '%s'"
 
-#. translator: used as a table header
-#: src/repos.cc:796
-msgid "Time since last refresh"
-msgstr "Doba od poslední aktualizace"
-
-#: src/repos.cc:843
+#: src/repos.cc:785
 #, c-format, boost-format
 msgid "Global option '%s' can be used to temporarily enable repositories."
 msgstr "Lze použít globální možnost %s k dočasnému povolení repozitářů."
 
-#: src/repos.cc:859 src/repos.cc:865
+#: src/repos.cc:801 src/repos.cc:807
 #, c-format, boost-format
 msgid "Ignoring repository '%s' because of '%s' option."
 msgstr "Ignoruji repozitář '%s' z důvodu volby '%s'."
 
-#: src/repos.cc:886 src/repos.cc:1006
+#: src/repos.cc:828 src/repos.cc:922
 #, c-format, boost-format
 msgid "Temporarily enabling repository '%s'."
 msgstr "Dočasné povolování repozitáře '%s'."
 
-#: src/repos.cc:943
+#: src/repos.cc:886
 #, c-format, boost-format
 msgid ""
 "Repository '%s' is out-of-date. You can run 'zypper refresh' as root to "
@@ -6068,22 +6080,7 @@ msgstr ""
 "Repozitář '%s' není aktuální. Můžete ho aktualizovat spuštěním příkazu "
 "'zypper refresh' jako uživatel root."
 
-#. translator: Used as status in a table "RepoName: MetadataStatus"
-#: src/repos.cc:963
-msgid "No metadata available! Skipping it!"
-msgstr "Nedostupná metadata! Přeskočit!"
-
-#. translator: Used as status in a table "RepoName: MetadataStatus"
-#: src/repos.cc:966
-msgid "No permission to read metadata! Skipping it!"
-msgstr "Chybí oprávnění číst metadata! Přeskočit!"
-
-#. translator: Used as status in a table "RepoName: MetadataStatus"
-#: src/repos.cc:969
-msgid "Cannot access metadata! Skipping it!"
-msgstr "Nedostupná metadata! Přeskakujeme!"
-
-#: src/repos.cc:986
+#: src/repos.cc:903
 #, c-format, boost-format
 msgid ""
 "The metadata cache needs to be built for the '%s' repository. You can run "
@@ -6092,93 +6089,81 @@ msgstr ""
 "Pro repozitář '%s' je třeba vytvořit mezipaměť metadat. Můžete ji vytvořit "
 "spuštěním příkazu 'zypper refresh' jako uživatel root."
 
-#: src/repos.cc:1013
+#: src/repos.cc:929
 #, c-format, boost-format
 msgid "Repository '%s' stays disabled."
 msgstr "Repozitář '%s' zůstává zakázaný."
 
-#: src/repos.cc:1026
-msgid "Some of the repositories had to be skipped due to missing metadata."
-msgstr "Některá úložiště musela být vynechána kvůli chybějícím metadatům."
-
-#: src/repos.cc:1039
-msgid ""
-"Running with user privileges. From time to time run 'zypper refresh' as root "
-"to make sure the repository metadata are complete and up-to-date."
-msgstr ""
-"Spuštění s uživatelskými právy. Spusťte občas 'zypper refresh' jako root, "
-"abyste se ujistili, že jsou metadata úložiště kompletní a aktuální."
-
-#: src/repos.cc:1071
+#: src/repos.cc:974
 msgid "Initializing Target"
 msgstr "Inicializace cíle"
 
-#: src/repos.cc:1079
+#: src/repos.cc:982
 msgid "Target initialization failed:"
 msgstr "Inicializace cíle selhala:"
 
-#: src/repos.cc:1161
+#: src/repos.cc:1064
 #, c-format, boost-format
 msgid "Cleaning metadata cache for '%s'."
 msgstr "Čistí se paměť metadat pro '%s'."
 
-#: src/repos.cc:1169
+#: src/repos.cc:1072
 #, c-format, boost-format
 msgid "Cleaning raw metadata cache for '%s'."
 msgstr "Čistí se paměť nezpracovaných metadat pro '%s'."
 
-#: src/repos.cc:1175
+#: src/repos.cc:1078
 #, c-format, boost-format
 msgid "Keeping raw metadata cache for %s '%s'."
 msgstr "Zachovávám surová metadata pro %s '%s'."
 
 #. translators: meaning the cached rpm files
-#: src/repos.cc:1182
+#: src/repos.cc:1085
 #, c-format, boost-format
 msgid "Cleaning packages for '%s'."
 msgstr "Čistí se balíčky pro '%s'."
 
-#: src/repos.cc:1190
+#: src/repos.cc:1093
 #, c-format, boost-format
 msgid "Cannot clean repository '%s' because of an error."
 msgstr "Repozitář '%s' nelze z důvodu chyby vyčistit."
 
-#: src/repos.cc:1201
+#: src/repos.cc:1104
 msgid "Cleaning installed packages cache."
 msgstr "Čistí se mezipaměť nainstalovaných balíčků."
 
-#: src/repos.cc:1210
+#: src/repos.cc:1113
 msgid "Cannot clean installed packages cache because of an error."
 msgstr "Z důvodu chyby nelze vyčistit mezipaměť nainstalovaných balíčků."
 
-#: src/repos.cc:1228
+#: src/repos.cc:1131
 msgid "Could not clean the repositories because of errors."
 msgstr "Repozitáře nelze z důvodu chyby vyčistit."
 
-#: src/repos.cc:1234
+#: src/repos.cc:1137
 msgid "Some of the repositories have not been cleaned up because of an error."
 msgstr "Některé repozitáře nebyly z důvodu chyby vyčištěny."
 
-#: src/repos.cc:1239
+#: src/repos.cc:1142
 msgid "Specified repositories have been cleaned up."
 msgstr "Zadané repozitáře byly vyčištěny."
 
-#: src/repos.cc:1241
+#: src/repos.cc:1144
 msgid "All repositories have been cleaned up."
 msgstr "Všechny repozitáře byly vyčištěny."
 
-#: src/repos.cc:1263
+#: src/repos.cc:1166
 msgid "This is a changeable read-only media (CD/DVD), disabling autorefresh."
 msgstr ""
 "Toto médium je výměnné a pouze pro čtení (CD/DVD), vypíná se automatické "
 "obnovení."
 
-#: src/repos.cc:1284
+#: src/repos.cc:1187
 #, c-format, boost-format
 msgid "Invalid repository alias: '%s'"
 msgstr "Neplatný alias repozitáře: '%s'"
 
-#: src/repos.cc:1301
+#: src/repos.cc:1204
 msgid ""
 "Could not determine the type of the repository. Please check if the defined "
 "URIs (see below) point to a valid repository:"
@@ -6186,25 +6171,25 @@ msgstr ""
 "Typ repozitáře se nepodařilo určit. Zkontrolujte, zda definované adresy URI "
 "(uvedené níže) ukazují na platný repozitář:"
 
-#: src/repos.cc:1307
+#: src/repos.cc:1210
 msgid "Can't find a valid repository at given location:"
 msgstr "Na zadaném umístění nelze najít platný repozitář:"
 
-#: src/repos.cc:1315
+#: src/repos.cc:1218
 msgid "Problem transferring repository data from specified URI:"
 msgstr "Problém při přenosu dat repozitáře ze zadané adresy URI:"
 
-#: src/repos.cc:1316
+#: src/repos.cc:1219
 msgid "Please check whether the specified URI is accessible."
 msgstr "Zkontrolujte, zda je zadaná adresa URI přístupná."
 
-#: src/repos.cc:1323
+#: src/repos.cc:1226
 msgid "Unknown problem when adding repository:"
 msgstr "Neznámý problém při přidávání repozitáře:"
 
 #. translators: BOOST STYLE POSITIONAL DIRECTIVES ( %N% )
 #. translators: %1% - a repository name
-#: src/repos.cc:1333
+#: src/repos.cc:1236
 #, boost-format
 msgid ""
 "GPG checking is disabled in configuration of repository '%1%'. Integrity and "
@@ -6213,135 +6198,135 @@ msgstr ""
 "Kontrola GPG je v konfiguraci repozitáře '%1%' zakázána. Integritu a původ "
 "balíčků nelze ověřit."
 
-#: src/repos.cc:1338
+#: src/repos.cc:1241
 #, c-format, boost-format
 msgid "Repository '%s' successfully added"
 msgstr "Repozitář '%s' byl úspěšně přidán"
 
-#: src/repos.cc:1364
+#: src/repos.cc:1267
 #, c-format, boost-format
 msgid "Reading data from '%s' media"
 msgstr "Načítání dat z média '%s'"
 
-#: src/repos.cc:1370
+#: src/repos.cc:1273
 #, c-format, boost-format
 msgid "Problem reading data from '%s' media"
 msgstr "Problém při načítání dat z média '%s'"
 
-#: src/repos.cc:1371
+#: src/repos.cc:1274
 msgid "Please check if your installation media is valid and readable."
 msgstr "Ověřte, zda je instalační médium platné a čitelné."
 
-#: src/repos.cc:1378
+#: src/repos.cc:1281
 #, c-format, boost-format
 msgid "Reading data from '%s' media is delayed until next refresh."
 msgstr "Čtení dat z média '%s' je zpožděno do dalšího obnovení."
 
-#: src/repos.cc:1447
+#: src/repos.cc:1350
 msgid "Problem accessing the file at the specified URI"
 msgstr "Problém při přístupu k souboru na zadané adrese URI"
 
-#: src/repos.cc:1448
+#: src/repos.cc:1351
 msgid "Please check if the URI is valid and accessible."
 msgstr "Zkontrolujte, zda je zadaná adresa URI platná a přístupná."
 
-#: src/repos.cc:1455
+#: src/repos.cc:1358
 msgid "Problem parsing the file at the specified URI"
 msgstr "Problém při analýze souboru na zadané adrese URI"
 
 #. TranslatorExplanation Don't translate the '.repo' string.
-#: src/repos.cc:1457
+#: src/repos.cc:1360
 msgid "Is it a .repo file?"
 msgstr "Jedná se opravdu o soubor .repo?"
 
-#: src/repos.cc:1464
+#: src/repos.cc:1367
 msgid "Problem encountered while trying to read the file at the specified URI"
 msgstr "Problém při pokusu o načtení souboru na zadané adrese URI"
 
-#: src/repos.cc:1477
+#: src/repos.cc:1380
 msgid "Repository with no alias defined found in the file, skipping."
 msgstr "V souboru byl nalezen repozitář bez zadaného aliasu a bude přeskočen."
 
-#: src/repos.cc:1483
+#: src/repos.cc:1386
 #, c-format, boost-format
 msgid "Repository '%s' has no URI defined, skipping."
 msgstr "Repozitář '%s' nemá definovanou adresu URI a bude přeskočen."
 
-#: src/repos.cc:1531
+#: src/repos.cc:1434
 #, c-format, boost-format
 msgid "Repository '%s' has been removed."
 msgstr "Repozitář '%s' byl odstraněn."
 
-#: src/repos.cc:1679
+#: src/repos.cc:1582
 #, c-format, boost-format
 msgid "Repository '%s' priority has been left unchanged (%d)"
 msgstr "Priorita repozitáře '%s' byla ponechána na původní hodnotě (%d)"
 
-#: src/repos.cc:1712
+#: src/repos.cc:1615
 #, c-format, boost-format
 msgid "Repository '%s' has been successfully enabled."
 msgstr "Repozitář '%s' byl úspěšně povolen."
 
-#: src/repos.cc:1714
+#: src/repos.cc:1617
 #, c-format, boost-format
 msgid "Repository '%s' has been successfully disabled."
 msgstr "Repozitář '%s' byl úspěšně zakázán."
 
-#: src/repos.cc:1721
+#: src/repos.cc:1624
 #, c-format, boost-format
 msgid "Autorefresh has been enabled for repository '%s'."
 msgstr "Automatické obnovení bylo pro repozitář '%s' povoleno."
 
-#: src/repos.cc:1723
+#: src/repos.cc:1626
 #, c-format, boost-format
 msgid "Autorefresh has been disabled for repository '%s'."
 msgstr "Automatické obnovení bylo pro repozitář '%s' zakázáno."
 
-#: src/repos.cc:1730
+#: src/repos.cc:1633
 #, c-format, boost-format
 msgid "RPM files caching has been enabled for repository '%s'."
 msgstr "Ukládání souborů RPM do mezipaměti bylo pro repozitář '%s' povoleno."
 
-#: src/repos.cc:1732
+#: src/repos.cc:1635
 #, c-format, boost-format
 msgid "RPM files caching has been disabled for repository '%s'."
 msgstr "Ukládání souborů RPM do mezipaměti bylo pro repozitář '%s' zakázáno."
 
-#: src/repos.cc:1739
+#: src/repos.cc:1642
 #, c-format, boost-format
 msgid "GPG check has been enabled for repository '%s'."
 msgstr "Kontrola GPG pro repozitář '%s' byla povolena."
 
-#: src/repos.cc:1741
+#: src/repos.cc:1644
 #, c-format, boost-format
 msgid "GPG check has been disabled for repository '%s'."
 msgstr "Kontrola GPG pro repozitář '%s' byla zakázána."
 
-#: src/repos.cc:1747
+#: src/repos.cc:1650
 #, c-format, boost-format
 msgid "Repository '%s' priority has been set to %d."
 msgstr "Priorita repozitáře '%s' byla nastavena na %d."
 
-#: src/repos.cc:1753
+#: src/repos.cc:1656
 #, c-format, boost-format
 msgid "Name of repository '%s' has been set to '%s'."
 msgstr "Název repozitáře '%s' byl nastaven na '%s'."
 
-#: src/repos.cc:1764
+#: src/repos.cc:1667
 #, c-format, boost-format
 msgid "Nothing to change for repository '%s'."
 msgstr "V repozitáři '%s' není třeba provést žádné změny."
 
-#: src/repos.cc:1771
+#: src/repos.cc:1674
 #, c-format, boost-format
 msgid "Leaving repository %s unchanged."
 msgstr "Repozitář %s bude ponechán nezměněný."
 
-#: src/repos.cc:1858
+#: src/repos.cc:1761
 msgid "Loading repository data..."
 msgstr "Načítání dat repozitáře..."
 
-#: src/repos.cc:1860
+#: src/repos.cc:1763
 msgid ""
 "No repositories defined. Operating only with the installed resolvables. "
 "Nothing can be installed."
@@ -6349,44 +6334,44 @@ msgstr ""
 "Nejsou definovány žádné repozitáře. Pracuje se pouze s nainstalovanými "
 "řešeními. Nic nemůže být nainstalováno."
 
-#: src/repos.cc:1881
+#: src/repos.cc:1784
 #, c-format, boost-format
 msgid "Retrieving repository '%s' data..."
 msgstr "Načítání dat repozitáře '%s'..."
 
-#: src/repos.cc:1887
+#: src/repos.cc:1790
 #, c-format, boost-format
 msgid "Repository '%s' not cached. Caching..."
 msgstr "Repozitář '%s' není uložen ve vyrovnávací paměti. Ukládá se..."
 
-#: src/repos.cc:1893 src/repos.cc:1927
+#: src/repos.cc:1796 src/repos.cc:1830
 #, c-format, boost-format
 msgid "Problem loading data from '%s'"
 msgstr "Problém při načítání dat z '%s'"
 
-#: src/repos.cc:1897
+#: src/repos.cc:1800
 #, c-format, boost-format
 msgid "Repository '%s' could not be refreshed. Using old cache."
 msgstr ""
 "Repozitář '%s' nemohl být aktualizován. Používá se stará vyrovnávací paměť."
 
-#: src/repos.cc:1901 src/repos.cc:1930
+#: src/repos.cc:1804 src/repos.cc:1833
 #, c-format, boost-format
 msgid "Resolvables from '%s' not loaded because of error."
 msgstr "Závislosti z '%s' nebyly načteny, protože došlo k chybě."
 
-#: src/repos.cc:1917
+#: src/repos.cc:1820
 #, boost-format
 msgid "Repository '%1%' metadata expired since %2%."
 msgstr "Metadata úložiště '%1%' vypršela %2%."
 
 #. translators: the first %s is 'zypper refresh' and the second 'zypper clean -m'
-#: src/repos.cc:1929
+#: src/repos.cc:1832
 #, c-format, boost-format
 msgid "Try '%s', or even '%s' before doing so."
 msgstr "Než tak učiníte, vyzkoušejte příkaz '%s' nebo i příkaz '%s'."
 
-#: src/repos.cc:1934
+#: src/repos.cc:1837
 msgid ""
 "Repository metadata expired: Check if 'autorefresh' is turned on (zypper "
 "lr), otherwise manually refresh the repository (zypper ref). If this does "
@@ -6398,30 +6383,30 @@ msgstr ""
 "Nevyřeší-li to problém, asi používáte nefunkční zrcadlo nebo server skutečně "
 "přestal úložiště podporovat."
 
-#: src/repos.cc:1947
+#: src/repos.cc:1850
 msgid "Reading installed packages..."
 msgstr "Načítají se nainstalované balíčky..."
 
-#: src/repos.cc:1956
+#: src/repos.cc:1859
 msgid "Problem occurred while reading the installed packages:"
 msgstr "Během čtení instalovaných balíčků nastal problém:"
 
-#: src/repos.cc:1973
+#: src/repos.cc:1876
 #, c-format, boost-format
 msgid "'%s' looks like an RPM file. Will try to download it."
 msgstr "'%s' vypadá jako soubor RPM. Proběhne pokus o jeho stáhnutí."
 
-#: src/repos.cc:1982
+#: src/repos.cc:1885
 #, c-format, boost-format
 msgid "Problem with the RPM file specified as '%s', skipping."
 msgstr "Problém se souborem RPM určeným jako '%s', soubor bude vynechán."
 
-#: src/repos.cc:2004
+#: src/repos.cc:1907
 #, c-format, boost-format
 msgid "Problem reading the RPM header of %s. Is it an RPM file?"
 msgstr "Problém při čtení RPM hlaviček %s. Jedná se o RPM soubor?"
 
-#: src/repos.cc:2024
+#: src/repos.cc:1927
 msgid "Plain RPM files cache"
 msgstr "Vyrovnávací paměť souborů RPM"
 
@@ -6437,17 +6422,17 @@ msgstr "Nebyly nalezeny žádné vyžadované opravy."
 msgid "No patterns found."
 msgstr "Nebyly nalezeny žádné profily."
 
-#: src/search.cc:444
+#: src/search.cc:450
 msgid "No packages found."
 msgstr "Nebyly nalezeny žádné balíčky."
 
 #. translators: used in products. Internal Name is the unix name of the
 #. product whereas simply Name is the official full name of the product.
-#: src/search.cc:498
+#: src/search.cc:507
 msgid "Internal Name"
 msgstr "Vnitřní jméno"
 
-#: src/search.cc:535
+#: src/search.cc:544
 msgid "No products found."
 msgstr "Nebyly nalezeny žádné produkty."
 
@@ -7212,42 +7197,42 @@ msgstr ""
 "V tomto případě nejprve nainstalujte specifický balíček, který dodá "
 "podpříkaz. Tyto balíčky se často nazývají '%1%' nebo '%2%'."
 
-#: src/utils/misc.cc:94
+#: src/utils/misc.cc:93
 msgid "package"
 msgid_plural "packages"
 msgstr[0] "balíček"
 msgstr[1] "balíčky"
 msgstr[2] "balíčků"
 
-#: src/utils/misc.cc:96
+#: src/utils/misc.cc:95
 msgid "pattern"
 msgid_plural "patterns"
 msgstr[0] "profil"
 msgstr[1] "profily"
 msgstr[2] "profilů"
 
-#: src/utils/misc.cc:98
+#: src/utils/misc.cc:97
 msgid "product"
 msgid_plural "product"
 msgstr[0] "produkt"
 msgstr[1] "produkty"
 msgstr[2] "produktů"
 
-#: src/utils/misc.cc:100
+#: src/utils/misc.cc:99
 msgid "patch"
 msgid_plural "patches"
 msgstr[0] "patch"
 msgstr[1] "patche"
 msgstr[2] "patchů"
 
-#: src/utils/misc.cc:102
+#: src/utils/misc.cc:101
 msgid "srcpackage"
 msgid_plural "srcpackages"
 msgstr[0] "zdrojový balíček"
 msgstr[1] "zdrojové balíčky"
 msgstr[2] "zdrojových balíčků"
 
-#: src/utils/misc.cc:104
+#: src/utils/misc.cc:103
 msgid "application"
 msgid_plural "applications"
 msgstr[0] "aplikace"
@@ -7255,7 +7240,7 @@ msgstr[1] "aplikace"
 msgstr[2] "aplikací"
 
 #. default
-#: src/utils/misc.cc:106
+#: src/utils/misc.cc:105
 msgid "resolvable"
 msgid_plural "resolvables"
 msgstr[0] "závislost"
@@ -7264,102 +7249,102 @@ msgstr[2] "závislostí"
 
 #. Patch status: i18n + color
 #. translator: patch status
-#: src/utils/misc.cc:115
+#: src/utils/misc.cc:114
 msgid "unwanted"
 msgstr "nechtěné"
 
 #. translator: patch status
-#: src/utils/misc.cc:116
+#: src/utils/misc.cc:115
 msgid "optional"
 msgstr "nepovinné"
 
 #. translator: patch status
-#: src/utils/misc.cc:117
+#: src/utils/misc.cc:116
 msgid "needed"
 msgstr "potřebné"
 
 #. translator: patch status
-#: src/utils/misc.cc:118
+#: src/utils/misc.cc:117
 msgid "applied"
 msgstr "aplikováno"
 
 #. translator: patch status
-#: src/utils/misc.cc:119
+#: src/utils/misc.cc:118
 msgid "not needed"
 msgstr "nepotřebné"
 
 #. translator: patch status
-#: src/utils/misc.cc:120
+#: src/utils/misc.cc:119
 msgid "undetermined"
 msgstr "neurčené"
 
 #. pi_r is no patch!
 #. translator: patch status
-#: src/utils/misc.cc:121
+#: src/utils/misc.cc:120
 msgid "retracted"
 msgstr "odvoláno"
 
-#: src/utils/misc.cc:330 src/utils/misc.cc:372
+#: src/utils/misc.cc:329 src/utils/misc.cc:371
 msgid "Since"
 msgstr "Od"
 
 #. << _("Repository")
-#: src/utils/misc.cc:365
+#: src/utils/misc.cc:364
 msgid "Issue"
 msgstr "Problém"
 
-#: src/utils/misc.cc:366
+#: src/utils/misc.cc:365
 msgid "No."
 msgstr "Číslo"
 
-#: src/utils/misc.cc:367
+#: src/utils/misc.cc:366
 msgid "Patch"
 msgstr "Oprava"
 
-#: src/utils/misc.cc:445
+#: src/utils/misc.cc:444
 msgid "Specified local path does not exist or is not accessible."
 msgstr "Zadaná místní cesta neexistuje nebo je nedostupná."
 
-#: src/utils/misc.cc:457
+#: src/utils/misc.cc:456
 msgid "Given URI is invalid"
 msgstr "Zadaná adresa URI je neplatná"
 
 #. Guess failed:
 #. translators: don't translate '<platform>'
-#: src/utils/misc.cc:549
+#: src/utils/misc.cc:548
 msgid "Unable to guess a value for <platform>."
 msgstr "Není možné odhadnout hodnotu pro <platform>."
 
-#: src/utils/misc.cc:550
+#: src/utils/misc.cc:549
 msgid "Please use obs://<project>/<platform>"
 msgstr "Použijte obs://<projekt>/<platforma>"
 
-#: src/utils/misc.cc:551 src/utils/misc.cc:597
+#: src/utils/misc.cc:550 src/utils/misc.cc:596
 #, c-format, boost-format
 msgid "Example: %s"
 msgstr "Příklad: %s"
 
-#: src/utils/misc.cc:596
+#: src/utils/misc.cc:595
 msgid "Invalid OBS URI."
 msgstr "Neplatné URI OBS."
 
-#: src/utils/misc.cc:596
+#: src/utils/misc.cc:595
 msgid "Correct form is obs://<project>/[platform]"
 msgstr "Správný tvar je obs://<projekt>/[platforma]"
 
-#: src/utils/misc.cc:644
+#: src/utils/misc.cc:643
 msgid "Problem copying the specified RPM file to the cache directory."
 msgstr "Problém při kopírování zadaného RPM souboru do cache adresáře."
 
-#: src/utils/misc.cc:645
+#: src/utils/misc.cc:644
 msgid "Perhaps you are running out of disk space."
 msgstr "Možná vám dochází místo na disku."
 
-#: src/utils/misc.cc:653
+#: src/utils/misc.cc:652
 msgid "Problem retrieving the specified RPM file"
 msgstr "Problém při stahování zadaného souboru RPM"
 
-#: src/utils/misc.cc:654
+#: src/utils/misc.cc:653
 msgid "Please check whether the file is accessible."
 msgstr "Zkontrolujte, zda je soubor přístupný."
 
@@ -7477,6 +7462,49 @@ msgstr "Neplatný objekt"
 #: src/utils/prompt.h:102
 msgid "Error"
 msgstr "Chyba"
+
+#, boost-format
+#~ msgid "Overall download size: %1%. Already cached: %2%."
+#~ msgstr "Celková velikost stahování: %1%. Již v keši: %2%."
+
+#, c-format, boost-format
+#~ msgid "After the operation, additional %s will be used."
+#~ msgstr "Po operaci bude dodatečně využito %s."
+
+#~ msgid "No additional space will be used or freed after the operation."
+#~ msgstr "Po operaci nebude použito ani uvolněno žádné další místo."
+
+#, c-format, boost-format
+#~ msgid "After the operation, %s will be freed."
+#~ msgstr "Po operaci bude uvolněno %s."
+
+#~ msgid "Show packages which are orphaned (without repository)."
+#~ msgstr "Zobrazit balíčky, které jsou osiřelé (bez repozitáře)."
+
+#~ msgid "in the future!"
+#~ msgstr "v budoucnosti!"
+
+#~ msgid "Time since last refresh"
+#~ msgstr "Doba od poslední aktualizace"
+
+#~ msgid "No metadata available! Skipping it!"
+#~ msgstr "Nedostupná metadata! Přeskočit!"
+
+#~ msgid "No permission to read metadata! Skipping it!"
+#~ msgstr "Chybí oprávnění číst metadata! Přeskočit!"
+
+#~ msgid "Cannot access metadata! Skipping it!"
+#~ msgstr "Nedostupná metadata! Přeskakujeme!"
+
+#~ msgid "Some of the repositories had to be skipped due to missing metadata."
+#~ msgstr "Některá úložiště musela být vynechána kvůli chybějícím metadatům."
+
+#~ msgid ""
+#~ "Running with user privileges. From time to time run 'zypper refresh' as "
+#~ "root to make sure the repository metadata are complete and up-to-date."
+#~ msgstr ""
+#~ "Spuštění s uživatelskými právy. Spusťte občas 'zypper refresh' jako root, "
+#~ "abyste se ujistili, že jsou metadata úložiště kompletní a aktuální."
 
 #, c-format, boost-format
 #~ msgid "File '%s' is unsigned, continue?"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-15 13:01+0200\n"
+"POT-Creation-Date: 2024-07-29 15:47+0200\n"
 "PO-Revision-Date: 2018-07-13 21:04+0000\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <https://l10n.opensuse.org/projects/zypper/"
@@ -102,8 +102,8 @@ msgstr[1] ""
 
 #. translators: Appended when clipping a long enumeration:
 #. "ConsoleKit-devel ConsoleKit-doc ... and 20828 more items."
-#: src/CommitSummary.cc:232 src/CommitSummary.cc:278 src/Summary.cc:629
-#: src/Summary.cc:705
+#: src/CommitSummary.cc:232 src/CommitSummary.cc:278 src/Summary.cc:631
+#: src/Summary.cc:707
 #, boost-format
 msgid "... and %1% more item."
 msgid_plural "... and %1% more items."
@@ -658,194 +658,194 @@ msgstr "Mistenkjeleg verdi på alvorsgradsfilter: «%1%»."
 #. translator: '%1%' is a products name
 #. '%2%' is a command to call (like 'zypper dup')
 #. Both may contain whitespace and should be enclosed by quotes!
-#: src/Summary.cc:554
+#: src/Summary.cc:556
 #, boost-format
 msgid "Product '%1%' requires to be upgraded by calling '%2%'!"
 msgstr ""
 
-#: src/Summary.cc:723
+#: src/Summary.cc:725
 #, c-format, boost-format
 msgid "The following NEW package is going to be installed:"
 msgid_plural "The following %d NEW packages are going to be installed:"
 msgstr[0] "Denne NYE pakken vert installert:"
 msgstr[1] "Desse %d NYE pakkane vert installerte:"
 
-#: src/Summary.cc:728
+#: src/Summary.cc:730
 #, c-format, boost-format
 msgid "The following NEW patch is going to be installed:"
 msgid_plural "The following %d NEW patches are going to be installed:"
 msgstr[0] "Denne NYE programfiksen vert installert:"
 msgstr[1] "Desse %d NYE programfiksane vert installerte:"
 
-#: src/Summary.cc:733
+#: src/Summary.cc:735
 #, c-format, boost-format
 msgid "The following NEW pattern is going to be installed:"
 msgid_plural "The following %d NEW patterns are going to be installed:"
 msgstr[0] "Dette NYE mønsteret vert installert:"
 msgstr[1] "Desse %d NYE mønstera vert installerte:"
 
-#: src/Summary.cc:738
+#: src/Summary.cc:740
 #, c-format, boost-format
 msgid "The following NEW product is going to be installed:"
 msgid_plural "The following %d NEW products are going to be installed:"
 msgstr[0] "Dette NYE produktet vert installert:"
 msgstr[1] "Desse %d NYE produkta vert installerte:"
 
-#: src/Summary.cc:743
+#: src/Summary.cc:745
 #, c-format, boost-format
 msgid "The following source package is going to be installed:"
 msgid_plural "The following %d source packages are going to be installed:"
 msgstr[0] "Denne kjeldepakken vert installert:"
 msgstr[1] "Desse %d kjeldepakkane vert installerte:"
 
-#: src/Summary.cc:749
+#: src/Summary.cc:751
 #, c-format, boost-format
 msgid "The following application is going to be installed:"
 msgid_plural "The following %d applications are going to be installed:"
 msgstr[0] "Dette programmet vert installert:"
 msgstr[1] "Desse %d programma vert installerte:"
 
-#: src/Summary.cc:774
+#: src/Summary.cc:776
 #, c-format, boost-format
 msgid "The following package is going to be REMOVED:"
 msgid_plural "The following %d packages are going to be REMOVED:"
 msgstr[0] "Denne pakken vert FJERNA:"
 msgstr[1] "Desse %d pakkane vert FJERNA:"
 
-#: src/Summary.cc:779
+#: src/Summary.cc:781
 #, c-format, boost-format
 msgid "The following patch is going to be REMOVED:"
 msgid_plural "The following %d patches are going to be REMOVED:"
 msgstr[0] "Denne programfiksen vert FJERNA:"
 msgstr[1] "Desse %d programfiksane vert FJERNA:"
 
-#: src/Summary.cc:784
+#: src/Summary.cc:786
 #, c-format, boost-format
 msgid "The following pattern is going to be REMOVED:"
 msgid_plural "The following %d patterns are going to be REMOVED:"
 msgstr[0] "Dette mønsteret vert FJERNA:"
 msgstr[1] "Desse %d mønstera vert FJERNA:"
 
-#: src/Summary.cc:789
+#: src/Summary.cc:791
 #, c-format, boost-format
 msgid "The following product is going to be REMOVED:"
 msgid_plural "The following %d products are going to be REMOVED:"
 msgstr[0] "Dette produktet vert FJERNA:"
 msgstr[1] "Desse %d produkta vert FJERNA:"
 
-#: src/Summary.cc:795
+#: src/Summary.cc:797
 #, c-format, boost-format
 msgid "The following application is going to be REMOVED:"
 msgid_plural "The following %d applications are going to be REMOVED:"
 msgstr[0] "Dette programmet vert FJERNA:"
 msgstr[1] "Desse %d programma vert FJERNA:"
 
-#: src/Summary.cc:818
+#: src/Summary.cc:820
 #, c-format, boost-format
 msgid "The following package is going to be upgraded:"
 msgid_plural "The following %d packages are going to be upgraded:"
 msgstr[0] "Denne pakken vert oppgradert:"
 msgstr[1] "Desse %d pakkane vert oppgraderte:"
 
-#: src/Summary.cc:823
+#: src/Summary.cc:825
 #, c-format, boost-format
 msgid "The following patch is going to be upgraded:"
 msgid_plural "The following %d patches are going to be upgraded:"
 msgstr[0] "Denne programfiksen vert oppgradert:"
 msgstr[1] "Desse %d programfiksane vert oppgraderte:"
 
-#: src/Summary.cc:828
+#: src/Summary.cc:830
 #, c-format, boost-format
 msgid "The following pattern is going to be upgraded:"
 msgid_plural "The following %d patterns are going to be upgraded:"
 msgstr[0] "Dette mønsteret vert oppgradert:"
 msgstr[1] "Desse %d mønstera vert oppgraderte:"
 
-#: src/Summary.cc:834
+#: src/Summary.cc:836
 #, c-format, boost-format
 msgid "The following product is going to be upgraded:"
 msgid_plural "The following %d products are going to be upgraded:"
 msgstr[0] "Dette produktet vert oppgradert:"
 msgstr[1] "Desse %d produkta vert oppgraderte:"
 
-#: src/Summary.cc:842
+#: src/Summary.cc:844
 #, c-format, boost-format
 msgid "The following application is going to be upgraded:"
 msgid_plural "The following %d applications are going to be upgraded:"
 msgstr[0] "Dette programmet vert oppgradert:"
 msgstr[1] "Desse %d programma vert oppgraderte:"
 
-#: src/Summary.cc:864
+#: src/Summary.cc:866
 #, c-format, boost-format
 msgid "The following package is going to be downgraded:"
 msgid_plural "The following %d packages are going to be downgraded:"
 msgstr[0] "Denne pakken vert nedgradert:"
 msgstr[1] "Desse %d pakkane vert nedgraderte:"
 
-#: src/Summary.cc:869
+#: src/Summary.cc:871
 #, c-format, boost-format
 msgid "The following patch is going to be downgraded:"
 msgid_plural "The following %d patches are going to be downgraded:"
 msgstr[0] "Denne programfiksen vert nedgradert:"
 msgstr[1] "Desse %d programfiksane vert nedgraderte:"
 
-#: src/Summary.cc:874
+#: src/Summary.cc:876
 #, c-format, boost-format
 msgid "The following pattern is going to be downgraded:"
 msgid_plural "The following %d patterns are going to be downgraded:"
 msgstr[0] "Dette mønsteret vert nedgradert:"
 msgstr[1] "Desse %d mønstera vert nedgraderte:"
 
-#: src/Summary.cc:879
+#: src/Summary.cc:881
 #, c-format, boost-format
 msgid "The following product is going to be downgraded:"
 msgid_plural "The following %d products are going to be downgraded:"
 msgstr[0] "Dette produktet vert nedgradert:"
 msgstr[1] "Desse %d mønstera vert nedgraderte:"
 
-#: src/Summary.cc:885
+#: src/Summary.cc:887
 #, c-format, boost-format
 msgid "The following application is going to be downgraded:"
 msgid_plural "The following %d applications are going to be downgraded:"
 msgstr[0] "Dette programmet vert nedgradert:"
 msgstr[1] "Desse %d programma vert nedgraderte:"
 
-#: src/Summary.cc:907
+#: src/Summary.cc:909
 #, c-format, boost-format
 msgid "The following package is going to be reinstalled:"
 msgid_plural "The following %d packages are going to be reinstalled:"
 msgstr[0] "Denne pakken vert installert på nytt:"
 msgstr[1] "Desse %d pakkane vert installerte på nytt:"
 
-#: src/Summary.cc:912
+#: src/Summary.cc:914
 #, c-format, boost-format
 msgid "The following patch is going to be reinstalled:"
 msgid_plural "The following %d patches are going to be reinstalled:"
 msgstr[0] "Denne programfiksen vert installert på nytt:"
 msgstr[1] "Desse %d programfiksane vert installerte på nytt:"
 
-#: src/Summary.cc:917
+#: src/Summary.cc:919
 #, c-format, boost-format
 msgid "The following pattern is going to be reinstalled:"
 msgid_plural "The following %d patterns are going to be reinstalled:"
 msgstr[0] "Dette mønsteret vert installert på nytt:"
 msgstr[1] "Desse %d mønstera vert installerte på nytt:"
 
-#: src/Summary.cc:922
+#: src/Summary.cc:924
 #, c-format, boost-format
 msgid "The following product is going to be reinstalled:"
 msgid_plural "The following %d products are going to be reinstalled:"
 msgstr[0] "Dette produktet vert installert på nytt:"
 msgstr[1] "Desse %d produkta vert installerte på nytt:"
 
-#: src/Summary.cc:935
+#: src/Summary.cc:937
 #, c-format, boost-format
 msgid "The following application is going to be reinstalled:"
 msgid_plural "The following %d applications are going to be reinstalled:"
 msgstr[0] "Dette programmet vert installert på nytt;"
 msgstr[1] "Desse %d programma vert installerte på nytt:"
 
-#: src/Summary.cc:1072
+#: src/Summary.cc:1074
 #, c-format, boost-format
 msgid "The following recommended package was automatically selected:"
 msgid_plural ""
@@ -853,7 +853,7 @@ msgid_plural ""
 msgstr[0] "Denne anbefalte pakken vart automatisk vald:"
 msgstr[1] "Desse %d anbefalte pakkane vart automatisk valde:"
 
-#: src/Summary.cc:1077
+#: src/Summary.cc:1079
 #, c-format, boost-format
 msgid "The following recommended patch was automatically selected:"
 msgid_plural ""
@@ -861,7 +861,7 @@ msgid_plural ""
 msgstr[0] "Denne anbefalte programfiksen vart automatisk vald:"
 msgstr[1] "Desse %d anbefalte programfiksane vart automatisk valde:"
 
-#: src/Summary.cc:1082
+#: src/Summary.cc:1084
 #, c-format, boost-format
 msgid "The following recommended pattern was automatically selected:"
 msgid_plural ""
@@ -869,7 +869,7 @@ msgid_plural ""
 msgstr[0] "Dette anbefalte mønsteret vart automatisk vald:"
 msgstr[1] "Desse %d anbefalte mønstera vart automatisk valde:"
 
-#: src/Summary.cc:1087
+#: src/Summary.cc:1089
 #, c-format, boost-format
 msgid "The following recommended product was automatically selected:"
 msgid_plural ""
@@ -877,7 +877,7 @@ msgid_plural ""
 msgstr[0] "Dette anbefalte produktet vart automatisk valt:"
 msgstr[1] "Desse %d anbefalte produkta vart automatisk valde:"
 
-#: src/Summary.cc:1092
+#: src/Summary.cc:1094
 #, c-format, boost-format
 msgid "The following recommended source package was automatically selected:"
 msgid_plural ""
@@ -885,7 +885,7 @@ msgid_plural ""
 msgstr[0] "Denne anbefalte kjeldepakken vart automatisk vald:"
 msgstr[1] "Desse %d anbefalte kjeldepakkane vart automatisk valde:"
 
-#: src/Summary.cc:1098
+#: src/Summary.cc:1100
 #, c-format, boost-format
 msgid "The following recommended application was automatically selected:"
 msgid_plural ""
@@ -893,7 +893,7 @@ msgid_plural ""
 msgstr[0] "Dette anbefalte programmet vart automatisk valt:"
 msgstr[1] "Desse %d anbefalte programma vert automatisk valde:"
 
-#: src/Summary.cc:1145
+#: src/Summary.cc:1147
 #, c-format, boost-format
 msgid ""
 "The following package is recommended, but will not be installed (only "
@@ -908,7 +908,7 @@ msgstr[1] ""
 "Desse %d pakkane er anbefalte, men vert ikkje installerte (berre "
 "obligatoriske pakkar vert installerte):"
 
-#: src/Summary.cc:1157
+#: src/Summary.cc:1159
 #, c-format, boost-format
 msgid ""
 "The following package is recommended, but will not be installed because it's "
@@ -923,7 +923,7 @@ msgstr[1] ""
 "Desse %d pakkane er anbefalte, men vert ikkje installerte, sidan dei er "
 "uønskte (dei har blitt manuelt avinstallerte før):"
 
-#: src/Summary.cc:1167
+#: src/Summary.cc:1169
 #, c-format, boost-format
 msgid ""
 "The following package is recommended, but will not be installed due to "
@@ -938,7 +938,7 @@ msgstr[1] ""
 "Desse %d pakkane er anbefalte, men vert ikkje installerte (på grunn av "
 "konfliktar eller avhengnadsproblem):"
 
-#: src/Summary.cc:1180
+#: src/Summary.cc:1182
 #, c-format, boost-format
 msgid "The following patch is recommended, but will not be installed:"
 msgid_plural ""
@@ -946,7 +946,7 @@ msgid_plural ""
 msgstr[0] "Denne programfiksen er anbefalt, men vert ikkje installert:"
 msgstr[1] "Desse %d programfiksane er anbefalte, men vert ikkje installerte:"
 
-#: src/Summary.cc:1184
+#: src/Summary.cc:1186
 #, c-format, boost-format
 msgid "The following pattern is recommended, but will not be installed:"
 msgid_plural ""
@@ -954,7 +954,7 @@ msgid_plural ""
 msgstr[0] "Dette mønsteret er anbefalt, men vert ikkje installert:"
 msgstr[1] "Desse %d mønstera er anbefalte, men vert ikkje installerte:"
 
-#: src/Summary.cc:1188
+#: src/Summary.cc:1190
 #, c-format, boost-format
 msgid "The following product is recommended, but will not be installed:"
 msgid_plural ""
@@ -962,7 +962,7 @@ msgid_plural ""
 msgstr[0] "Dette produktet er anbefalt, men vert ikkje installert:"
 msgstr[1] "Desse %d produkta er anbefalte, men vert ikkje installerte:"
 
-#: src/Summary.cc:1193
+#: src/Summary.cc:1195
 #, c-format, boost-format
 msgid "The following application is recommended, but will not be installed:"
 msgid_plural ""
@@ -970,7 +970,7 @@ msgid_plural ""
 msgstr[0] "Dette programmet er anbefalt, men vert ikkje installert:"
 msgstr[1] "Desse %d programma er anbefalte, men vert ikkje installerte:"
 
-#: src/Summary.cc:1226
+#: src/Summary.cc:1228
 #, c-format, boost-format
 msgid "The following package is suggested, but will not be installed:"
 msgid_plural ""
@@ -978,7 +978,7 @@ msgid_plural ""
 msgstr[0] "Dette pakken er føreslått, men vert ikkje installert:"
 msgstr[1] "Desse %d pakkane er føreslåtte, men vert ikkje installerte:"
 
-#: src/Summary.cc:1231
+#: src/Summary.cc:1233
 #, c-format, boost-format
 msgid "The following patch is suggested, but will not be installed:"
 msgid_plural ""
@@ -986,7 +986,7 @@ msgid_plural ""
 msgstr[0] "Denne programfiksen er føreslått, men vert ikkje installert:"
 msgstr[1] "Desse %d programfiksane er føreslåtte, men vert ikkje installerte:"
 
-#: src/Summary.cc:1236
+#: src/Summary.cc:1238
 #, c-format, boost-format
 msgid "The following pattern is suggested, but will not be installed:"
 msgid_plural ""
@@ -994,7 +994,7 @@ msgid_plural ""
 msgstr[0] "Dette mønsteret er føreslått, men vert ikkje installert:"
 msgstr[1] "Desse %d mønstera er føreslåtte, men vert ikkje installerte:"
 
-#: src/Summary.cc:1241
+#: src/Summary.cc:1243
 #, c-format, boost-format
 msgid "The following product is suggested, but will not be installed:"
 msgid_plural ""
@@ -1002,7 +1002,7 @@ msgid_plural ""
 msgstr[0] "Dette produktet er føreslått, men vert ikkje installert:"
 msgstr[1] "Desse %d produkta er føreslåtte, men vert ikkje installerte:"
 
-#: src/Summary.cc:1247
+#: src/Summary.cc:1249
 #, c-format, boost-format
 msgid "The following application is suggested, but will not be installed:"
 msgid_plural ""
@@ -1010,77 +1010,77 @@ msgid_plural ""
 msgstr[0] "Dette programmet er føreslått, men vert ikkje installert:"
 msgstr[1] "Desse %d programma er føreslåtte, men vert ikkje installerte:"
 
-#: src/Summary.cc:1272
+#: src/Summary.cc:1274
 #, c-format, boost-format
 msgid "The following package is going to change architecture:"
 msgid_plural "The following %d packages are going to change architecture:"
 msgstr[0] "Denne pakken vil endra arkitektur:"
 msgstr[1] "Desse %d pakkane vil endra arkitektur:"
 
-#: src/Summary.cc:1277
+#: src/Summary.cc:1279
 #, c-format, boost-format
 msgid "The following patch is going to change architecture:"
 msgid_plural "The following %d patches are going to change architecture:"
 msgstr[0] "Denne programfiksen vil endra arkitektur:"
 msgstr[1] "Desse %d programfiksane vil endra arkitektur:"
 
-#: src/Summary.cc:1282
+#: src/Summary.cc:1284
 #, c-format, boost-format
 msgid "The following pattern is going to change architecture:"
 msgid_plural "The following %d patterns are going to change architecture:"
 msgstr[0] "Dette mønsteret vil endra arkitektur:"
 msgstr[1] "Desse %d mønstera vil endra arkitektur:"
 
-#: src/Summary.cc:1287
+#: src/Summary.cc:1289
 #, c-format, boost-format
 msgid "The following product is going to change architecture:"
 msgid_plural "The following %d products are going to change architecture:"
 msgstr[0] "Dette produktet vil endra arkitektur:"
 msgstr[1] "Desse %d produkta vil endra arkitektur:"
 
-#: src/Summary.cc:1293
+#: src/Summary.cc:1295
 #, c-format, boost-format
 msgid "The following application is going to change architecture:"
 msgid_plural "The following %d applications are going to change architecture:"
 msgstr[0] "Dette programmet vil endra arkitektur:"
 msgstr[1] "Desse %d programma vil endra arkitektur:"
 
-#: src/Summary.cc:1318
+#: src/Summary.cc:1320
 #, c-format, boost-format
 msgid "The following package is going to change vendor:"
 msgid_plural "The following %d packages are going to change vendor:"
 msgstr[0] "Denne pakken vil endra leverandør:"
 msgstr[1] "Desse %d pakkane vil endra leverandør:"
 
-#: src/Summary.cc:1323
+#: src/Summary.cc:1325
 #, c-format, boost-format
 msgid "The following patch is going to change vendor:"
 msgid_plural "The following %d patches are going to change vendor:"
 msgstr[0] "Denne programfiksen vil endra leverandør:"
 msgstr[1] "Desse %d programfiksane vil endra leverandør:"
 
-#: src/Summary.cc:1328
+#: src/Summary.cc:1330
 #, c-format, boost-format
 msgid "The following pattern is going to change vendor:"
 msgid_plural "The following %d patterns are going to change vendor:"
 msgstr[0] "Dette mønsteret vil endra leverandør:"
 msgstr[1] "Desse %d mønstera vil endra leverandør:"
 
-#: src/Summary.cc:1333
+#: src/Summary.cc:1335
 #, c-format, boost-format
 msgid "The following product is going to change vendor:"
 msgid_plural "The following %d products are going to change vendor:"
 msgstr[0] "Dette produktet vil endra leverandør:"
 msgstr[1] "Desse %d produkta vil endra leverandør:"
 
-#: src/Summary.cc:1339
+#: src/Summary.cc:1341
 #, c-format, boost-format
 msgid "The following application is going to change vendor:"
 msgid_plural "The following %d applications are going to change vendor:"
 msgstr[0] "Dette programmet vil endra leverandør:"
 msgstr[1] "Desse %d programma vil endra leverandør:"
 
-#: src/Summary.cc:1362
+#: src/Summary.cc:1364
 #, fuzzy, c-format, boost-format
 msgid "The following package has no support information from its vendor:"
 msgid_plural ""
@@ -1088,14 +1088,14 @@ msgid_plural ""
 msgstr[0] "Denne pakken er ikkje støtta av leverandøren:"
 msgstr[1] "Desse %d pakkane er ikkje støtta av leverandøren:"
 
-#: src/Summary.cc:1380
+#: src/Summary.cc:1382
 #, c-format, boost-format
 msgid "The following package is not supported by its vendor:"
 msgid_plural "The following %d packages are not supported by their vendor:"
 msgstr[0] "Denne pakken er ikkje støtta av leverandøren:"
 msgstr[1] "Desse %d pakkane er ikkje støtta av leverandøren:"
 
-#: src/Summary.cc:1398
+#: src/Summary.cc:1400
 #, c-format, boost-format
 msgid ""
 "The following package needs additional customer contract to get support:"
@@ -1104,11 +1104,11 @@ msgid_plural ""
 msgstr[0] "Denne pakken treng ei ekstra kundekontrakt for å vera støtta:"
 msgstr[1] "Desse %d pakkane treng ei ekstra kundekontrakt for å vera støtta:"
 
-#: src/Summary.cc:1415
+#: src/Summary.cc:1417
 msgid "was superseded by"
 msgstr ""
 
-#: src/Summary.cc:1428
+#: src/Summary.cc:1430
 #, c-format, boost-format
 msgid ""
 "The following package was discontinued and has been superseded by a new "
@@ -1119,7 +1119,7 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Summary.cc:1433
+#: src/Summary.cc:1435
 msgid ""
 "The successor package should be installed as soon as possible to receive "
 "continued support:"
@@ -1129,28 +1129,28 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Summary.cc:1458
+#: src/Summary.cc:1460
 #, c-format, boost-format
 msgid "The following package update will NOT be installed:"
 msgid_plural "The following %d package updates will NOT be installed:"
 msgstr[0] "Denne pakkeoppdateringa vert IKKJE installert:"
 msgstr[1] "Desse %d pakkeoppdateringane vert IKKJE installerte:"
 
-#: src/Summary.cc:1463
+#: src/Summary.cc:1465
 #, c-format, boost-format
 msgid "The following product update will NOT be installed:"
 msgid_plural "The following %d product updates will NOT be installed:"
 msgstr[0] "Denne produktoppdateringa vert IKKJE installert:"
 msgstr[1] "Desse %d produktoppdateringane vert IKKJE installerte:"
 
-#: src/Summary.cc:1469
+#: src/Summary.cc:1471
 #, c-format, boost-format
 msgid "The following application update will NOT be installed:"
 msgid_plural "The following %d application updates will NOT be installed:"
 msgstr[0] "Denne programoppdateringa vert IKKJE installert:"
 msgstr[1] "Desse %d programoppdateringane vert IKKJE installerte:"
 
-#: src/Summary.cc:1502
+#: src/Summary.cc:1504
 #, c-format, boost-format
 msgid "The following item is locked and will not be changed by any action:"
 msgid_plural ""
@@ -1161,172 +1161,186 @@ msgstr[1] ""
 
 #. always as plain name list
 #. translators: used as 'tag:' (i.e. followed by ':')
-#: src/Summary.cc:1515
+#: src/Summary.cc:1517
 msgid "Available"
 msgstr "Tilgjengeleg"
 
 #. translators: used as 'tag:' (i.e. followed by ':')
 #. translators: property name; short; used like "Name: value"
-#: src/Summary.cc:1521 src/info.cc:396 src/info.cc:489 src/info.cc:609
+#: src/Summary.cc:1523 src/info.cc:396 src/info.cc:489 src/info.cc:609
 msgid "Installed"
 msgstr "Installert"
 
-#: src/Summary.cc:1526
+#: src/Summary.cc:1528
 #, boost-format
 msgid "Run '%1%' to see the complete list of locked items."
 msgstr "Køyr «%1%» for ei fullstendig oversikt over låste element."
 
-#: src/Summary.cc:1535
+#: src/Summary.cc:1537
 #, c-format, boost-format
 msgid "The following patch requires a system reboot:"
 msgid_plural "The following %d patches require a system reboot:"
 msgstr[0] "Denne programfiksen krev omstart av maskina:"
 msgstr[1] "Desse %d programfiksane krev omstart av maskina:"
 
-#: src/Summary.cc:1539
+#: src/Summary.cc:1541
 #, c-format, boost-format
 msgid "The following package requires a system reboot:"
 msgid_plural "The following %d packages require a system reboot:"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/Summary.cc:1561
+#: src/Summary.cc:1563
 msgid "Skipped needed patches which do not apply without conflict:"
 msgstr ""
 
-# Bevisst bruk av punktum i staden for mellomrom på slutten.
-#: src/Summary.cc:1577
-#, boost-format
-msgid "Overall download size: %1%. Already cached: %2%."
-msgstr "Samla storleik på nedlasting: %1%. Allereie lasta ned: %2%."
+#. Package download size:   99.2 MiB
+#. or
+#. Package download size:
+#. |     105.7 MiB  overall download size
+#. 99.2 MiB  |  -    6.4 MiB  already in cache
+#: src/Summary.cc:1588
+msgid "Package download size:"
+msgstr ""
 
-#: src/Summary.cc:1580
+#. translator: rendered as "105.7 MiB  overall download size"
+#: src/Summary.cc:1596
+msgid "overall package size"
+msgstr ""
+
+#. translator: rendered as "  6.4 MiB  already in cache"
+#: src/Summary.cc:1598
+msgid "already in cache"
+msgstr ""
+
+#: src/Summary.cc:1605
 msgid "Download only."
 msgstr "Berre nedlasting."
 
-#. TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
-#: src/Summary.cc:1586
-#, c-format, boost-format
-msgid "After the operation, additional %s will be used."
-msgstr "Etter handlinga vert det brukt %s meir diskplass."
+#. Package install size change:
+#. |     349.1 MiB  required by packages that will be installed
+#. 1.9 MiB  |  -  347.3 MiB  released by packages that will be removed
+#: src/Summary.cc:1610
+msgid "Package install size change:"
+msgstr ""
 
-#: src/Summary.cc:1588
-msgid "No additional space will be used or freed after the operation."
-msgstr "Ingen ledig plass vert teken i bruk eller frigjord etter handlinga."
+#. translator: rendered as "349.1 MiB  required by packages that will be installed"
+#: src/Summary.cc:1615
+msgid "required by packages that will be installed"
+msgstr ""
 
-#. TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
-#: src/Summary.cc:1595
-#, c-format, boost-format
-msgid "After the operation, %s will be freed."
-msgstr "Handlinga vil frigjera %s diskplass."
+#. translator: rendered as "347.3 MiB  released by packages that will be removed"
+#: src/Summary.cc:1617
+msgid "released by packages that will be removed"
+msgstr ""
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
-#: src/Summary.cc:1619
+#: src/Summary.cc:1638
 msgid "package to upgrade"
 msgid_plural "packages to upgrade"
 msgstr[0] "pakke som skal oppgraderast"
 msgstr[1] "pakkar som skal oppgraderast"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: src/Summary.cc:1630
+#: src/Summary.cc:1649
 msgid "to downgrade"
 msgid_plural "to downgrade"
 msgstr[0] "skal nedgraderast"
 msgstr[1] "skal nedgraderast"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
-#: src/Summary.cc:1633
+#: src/Summary.cc:1652
 msgid "package to downgrade"
 msgid_plural "packages to downgrade"
 msgstr[0] "pakke som skal nedgraderast"
 msgstr[1] "pakkar som skal nedgraderast"
 
 #. translators: this text will be preceded by a number e.g. "5 new"
-#: src/Summary.cc:1644
+#: src/Summary.cc:1663
 msgid "new"
 msgid_plural "new"
 msgstr[0] "ny"
 msgstr[1] "nye"
 
 #. translators: this text will be preceded by a number e.g. "5 new to install"
-#: src/Summary.cc:1647
+#: src/Summary.cc:1666
 msgid "new package to install"
 msgid_plural "new packages to install"
 msgstr[0] "ny pakke som skal installerast"
 msgstr[1] "nye pakkar som skal installerast"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: src/Summary.cc:1658
+#: src/Summary.cc:1677
 msgid "to reinstall"
 msgid_plural "to reinstall"
 msgstr[0] "skal installerast på nytt"
 msgstr[1] "skal installerast på nytt"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
-#: src/Summary.cc:1661
+#: src/Summary.cc:1680
 msgid "package to reinstall"
 msgid_plural "packages to reinstall"
 msgstr[0] "pakke som skal installerast på nytt"
 msgstr[1] "pakkar som skal installerast på nytt"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: src/Summary.cc:1672
+#: src/Summary.cc:1691
 msgid "to remove"
 msgid_plural "to remove"
 msgstr[0] "som skal fjernast"
 msgstr[1] "som skal fjernast"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
-#: src/Summary.cc:1675
+#: src/Summary.cc:1694
 msgid "package to remove"
 msgid_plural "packages to remove"
 msgstr[0] "pakke som skal fjernast"
 msgstr[1] "pakkar som skal fjernast"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: src/Summary.cc:1686
+#: src/Summary.cc:1705
 msgid "to change vendor"
 msgid_plural " to change vendor"
 msgstr[0] "med endra leverandør"
 msgstr[1] "med endra leverandør"
 
 #. translators: this text will be preceded by a number e.g. "5 packages ..."
-#: src/Summary.cc:1689
+#: src/Summary.cc:1708
 msgid "package will change vendor"
 msgid_plural "packages will change vendor"
 msgstr[0] "pakke vil få endra leverandør"
 msgstr[1] "pakkar vil få endra leverandør"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: src/Summary.cc:1700
+#: src/Summary.cc:1719
 msgid "to change arch"
 msgid_plural "to change arch"
 msgstr[0] "med endra arkitektur"
 msgstr[1] "med endra arkitektur"
 
 #. translators: this text will be preceded by a number e.g. "5 packages ..."
-#: src/Summary.cc:1703
+#: src/Summary.cc:1722
 msgid "package will change arch"
 msgid_plural "packages will change arch"
 msgstr[0] "pakke vil få endra arkitektur"
 msgstr[1] "pakkar vil få endra arkitektur"
 
 #. translators: this text will be preceded by a number e.g. "5 new"
-#: src/Summary.cc:1714
+#: src/Summary.cc:1733
 msgid "source package"
 msgid_plural "source packages"
 msgstr[0] "kjeldekodepakke"
 msgstr[1] "kjeldekodepakkar"
 
 #. translators: this text will be preceded by a number e.g. "5 new to install"
-#: src/Summary.cc:1717
+#: src/Summary.cc:1736
 msgid "source package to install"
 msgid_plural "source packages to install"
 msgstr[0] "kjeldekodepakke som skal installerast"
 msgstr[1] "kjeldekodepakkar som skal installerast"
 
 #. patch command (auto)restricted to update stack patches
-#: src/Summary.cc:1798
+#: src/Summary.cc:1817
 msgid ""
 "Package manager restart required. (Run this command once again after the "
 "update stack got updated)"
@@ -1335,12 +1349,12 @@ msgstr ""
 "oppdateringa.)"
 
 #. translator: %1% is an option string like  "--dry-run"
-#: src/Summary.cc:1805
+#: src/Summary.cc:1824
 #, boost-format
 msgid "%1% is set, otherwise a system reboot would be required."
 msgstr ""
 
-#: src/Summary.cc:1807
+#: src/Summary.cc:1826
 msgid "System reboot required."
 msgstr "Krev omstart av maskina."
 
@@ -1352,7 +1366,7 @@ msgstr "Krev omstart av maskina."
 #. Consider to cancel:
 #. Product 'opennSUSE Tumbleweed' requires to be upgraded by calling 'zypper dup'!
 #. Continue? [y/n/...? shows all options] (y):
-#: src/Summary.cc:1826
+#: src/Summary.cc:1845
 msgid "Consider to cancel:"
 msgstr ""
 
@@ -1383,7 +1397,7 @@ msgstr "PackageKit køyrer framleis (er truleg oppteken)."
 msgid "Try again?"
 msgstr "Vil du prøva på nytt?"
 
-#: src/Zypper.cc:244 src/Zypper.cc:716 src/commands/basecommand.cc:280
+#: src/Zypper.cc:244 src/Zypper.cc:721 src/commands/basecommand.cc:280
 msgid "Unexpected exception."
 msgstr "Uventa unntak."
 
@@ -1420,7 +1434,7 @@ msgstr ""
 msgid "The %s option has no effect here, ignoring."
 msgstr "Valet %s har ikkje nokon effekt her og vert ignorert."
 
-#: src/Zypper.cc:659
+#: src/Zypper.cc:630
 msgid "Non-option program arguments: "
 msgstr "Programargument som ikkje er val: "
 
@@ -2573,8 +2587,8 @@ msgstr[1] "Fjerna %lu låsar."
 #: src/commands/locks/list.cc:133 src/commands/repos/list.cc:42
 #: src/commands/repos/list.cc:227 src/commands/services/list.cc:107
 #: src/info.cc:90 src/info.cc:512 src/info.cc:747 src/locales.cc:201
-#: src/search.cc:48 src/search.cc:199 src/search.cc:304 src/search.cc:452
-#: src/search.cc:499 src/update.cc:789 src/utils/misc.cc:325
+#: src/search.cc:48 src/search.cc:199 src/search.cc:304 src/search.cc:458
+#: src/search.cc:508 src/update.cc:789 src/utils/misc.cc:324
 msgid "Name"
 msgstr "Namn"
 
@@ -2592,9 +2606,9 @@ msgstr "Type"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: package's repository (header)
-#: src/commands/locks/list.cc:136 src/info.cc:88 src/repos.cc:794
-#: src/search.cc:56 src/search.cc:306 src/search.cc:451 src/search.cc:495
-#: src/update.cc:786 src/utils/misc.cc:324
+#: src/commands/locks/list.cc:136 src/info.cc:88 src/search.cc:56
+#: src/search.cc:306 src/search.cc:457 src/search.cc:504 src/update.cc:786
+#: src/utils/misc.cc:323
 msgid "Repository"
 msgstr "Pakkebrønn"
 
@@ -3201,33 +3215,40 @@ msgstr ""
 msgid "Show installed packages which were explicitly selected by the user."
 msgstr ""
 
-#. translators: --orphaned
+#. translators: --system
 #: src/commands/query/packages.cc:43
-msgid "Show packages which are orphaned (without repository)."
+msgid "Show installed packages which are not provided by any repository."
+msgstr ""
+
+#. translators: --orphaned
+#: src/commands/query/packages.cc:47
+msgid ""
+"Show system packages which are orphaned (without repository and without "
+"update candidate)."
 msgstr ""
 
 #. translators: --suggested
-#: src/commands/query/packages.cc:47
+#: src/commands/query/packages.cc:51
 msgid "Show packages which are suggested."
 msgstr ""
 
 #. translators: --recommended
-#: src/commands/query/packages.cc:51
+#: src/commands/query/packages.cc:55
 msgid "Show packages which are recommended."
 msgstr ""
 
 #. translators: --unneeded
-#: src/commands/query/packages.cc:55
+#: src/commands/query/packages.cc:59
 msgid "Show packages which are unneeded."
 msgstr ""
 
 #. translators: -N, --sort-by-name
-#: src/commands/query/packages.cc:59
+#: src/commands/query/packages.cc:63
 msgid "Sort the list by package name."
 msgstr ""
 
 #. translators: -R, --sort-by-repo
-#: src/commands/query/packages.cc:63
+#: src/commands/query/packages.cc:67
 msgid "Sort the list by repository."
 msgstr ""
 
@@ -3380,7 +3401,7 @@ msgstr "Alias"
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/commands/repos/list.cc:44 src/commands/repos/list.cc:47
 #: src/commands/repos/list.cc:273 src/commands/services/add.cc:83
-#: src/commands/services/list.cc:118 src/repos.cc:1344
+#: src/commands/services/list.cc:118 src/repos.cc:1247
 #: src/utils/flags/zyppflags.h:49
 msgid "URI"
 msgstr "Adresse"
@@ -3389,27 +3410,27 @@ msgstr "Adresse"
 #. translators: property name; short; used like "Name: value"
 #: src/commands/repos/list.cc:51 src/commands/repos/list.cc:235
 #: src/commands/services/add.cc:85 src/commands/services/list.cc:108
-#: src/repos.cc:1346
+#: src/repos.cc:1249
 msgid "Enabled"
 msgstr "Verksam"
 
 #. GPG Check
 #. translators: property name; short; used like "Name: value"
 #: src/commands/repos/list.cc:52 src/commands/repos/list.cc:239
-#: src/commands/services/list.cc:109 src/repos.cc:1348
+#: src/commands/services/list.cc:109 src/repos.cc:1251
 msgid "GPG Check"
 msgstr "GPG-kontroll"
 
 #. translators: repository priority (in zypper repos -p or -d)
 #. translators: property name; short; used like "Name: value"
 #: src/commands/repos/list.cc:53 src/commands/repos/list.cc:257
-#: src/commands/services/list.cc:115 src/repos.cc:1352
+#: src/commands/services/list.cc:115 src/repos.cc:1255
 msgid "Priority"
 msgstr "Prioritet"
 
 #. translators: property name; short; used like "Name: value"
 #: src/commands/repos/list.cc:54 src/commands/services/add.cc:87
-#: src/repos.cc:1350
+#: src/repos.cc:1253
 msgid "Autorefresh"
 msgstr "Autooppdater"
 
@@ -3462,7 +3483,7 @@ msgstr "Vis oversikt over pakkebrønnar."
 msgid "Export all defined repositories as a single local .repo file."
 msgstr ""
 
-#: src/commands/repos/list.cc:122 src/repos.cc:1101
+#: src/commands/repos/list.cc:122 src/repos.cc:1004
 msgid "Error reading repositories:"
 msgstr "Feil ved lesing av pakkebrønnar:"
 
@@ -3587,7 +3608,7 @@ msgstr "Det globale valet «%s» har ingen effekt her."
 msgid "Arguments are not allowed if '%s' is used."
 msgstr "Argument er ikkje tillatne dersom «%s» vert brukt."
 
-#: src/commands/repos/refresh.cc:195 src/repos.cc:1113
+#: src/commands/repos/refresh.cc:195 src/repos.cc:1016
 msgid "Specified repositories: "
 msgstr "Valde pakkebrønnar: "
 
@@ -3596,7 +3617,7 @@ msgstr "Valde pakkebrønnar: "
 msgid "Refreshing repository '%s'."
 msgstr "Oppdaterer pakkebrønnen «%s»."
 
-#: src/commands/repos/refresh.cc:236 src/repos.cc:900
+#: src/commands/repos/refresh.cc:236 src/repos.cc:842
 #, c-format, boost-format
 msgid "Scanning content of disabled repository '%s'."
 msgstr "Les innhaldet i den uverksame pakkebrønnen «%s»."
@@ -3606,7 +3627,7 @@ msgstr "Les innhaldet i den uverksame pakkebrønnen «%s»."
 msgid "Skipping disabled repository '%s'"
 msgstr "Hoppar over den uverksame pakkebrønnen «%s»"
 
-#: src/commands/repos/refresh.cc:262 src/repos.cc:917 src/repos.cc:991
+#: src/commands/repos/refresh.cc:262 src/repos.cc:860 src/repos.cc:908
 #, c-format, boost-format
 msgid "Skipping repository '%s' because of the above error."
 msgstr "Hoppar over pakkebrønnen «%s», på grunn av feilen ovanfor."
@@ -3636,7 +3657,7 @@ msgstr ""
 msgid "Could not refresh the repositories because of errors."
 msgstr "Klarte ikkje oppdatera pakkebrønnane, på grunn av feil."
 
-#: src/commands/repos/refresh.cc:298 src/repos.cc:1028
+#: src/commands/repos/refresh.cc:298 src/repos.cc:937
 msgid "Some of the repositories have not been refreshed because of an error."
 msgstr "Nokre av pakkebrønnane vart ikkje oppdaterte, på grunn av feil."
 
@@ -3691,12 +3712,12 @@ msgstr ""
 msgid "Repository '%s' renamed to '%s'."
 msgstr "Pakkebrønnen «%s» heiter no «%s»."
 
-#: src/commands/repos/rename.cc:47 src/repos.cc:1292
+#: src/commands/repos/rename.cc:47 src/repos.cc:1195
 #, c-format, boost-format
 msgid "Repository named '%s' already exists. Please use another alias."
 msgstr "Det finst alt ein pakkebrønn med namnet «%s». Bruk eit anna alias."
 
-#: src/commands/repos/rename.cc:52 src/repos.cc:1770
+#: src/commands/repos/rename.cc:52 src/repos.cc:1673
 msgid "Error while modifying the repository:"
 msgstr "Feil ved endring av pakkebrønnen:"
 
@@ -3728,7 +3749,7 @@ msgstr "For få argument. Du må oppgje minst ei nettadresse og eit alias."
 msgid "Repository '%s' not found."
 msgstr "Fann ikkje pakkebrønnen «%s»."
 
-#: src/commands/reposerviceoptionsets.cc:35 src/repos.cc:150
+#: src/commands/reposerviceoptionsets.cc:35 src/repos.cc:109
 #, c-format, boost-format
 msgid ""
 "Invalid priority '%s'. Use a positive integer number. The greater the "
@@ -4115,7 +4136,7 @@ msgid ""
 "(useful for search in dependencies)."
 msgstr ""
 
-#: src/commands/search/search.cc:290 src/repos.cc:837
+#: src/commands/search/search.cc:290 src/repos.cc:779
 #, c-format, boost-format
 msgid "Specified repository '%s' is disabled."
 msgstr "Den valde pakkebrønnen «%s» er uverksam."
@@ -4133,7 +4154,7 @@ msgstr "Det oppstod ein feil ved klargjering eller køyring av søket"
 msgid "See the above message for a hint."
 msgstr "Sjå feilmeldinga ovanfor for eit hint."
 
-#: src/commands/search/search.cc:497 src/repos.cc:1080
+#: src/commands/search/search.cc:497 src/repos.cc:983
 msgid "Running 'zypper refresh' as root might resolve the problem."
 msgstr "Det kan hjelpa å køyra «zypper refresh» som rotbrukar."
 
@@ -4223,7 +4244,7 @@ msgid "Problem retrieving the repository index file for service '%s':"
 msgstr "Feil ved henting indeksfil for pakkebrønn for tenesta «%s»:"
 
 #: src/commands/services/common.cc:138 src/commands/services/refresh.cc:226
-#: src/repos.cc:1822
+#: src/repos.cc:1725
 #, c-format, boost-format
 msgid "Skipping service '%s' because of the above error."
 msgstr "Hoppar over tenesta «%s» på grunn av feilen ovanfor."
@@ -5157,13 +5178,13 @@ msgstr "%s er eldre enn %s"
 #. translators: Table column header
 #. translators: package version (header)
 #: src/info.cc:92 src/info.cc:748 src/search.cc:52 src/search.cc:305
-#: src/search.cc:453 src/search.cc:500
+#: src/search.cc:459 src/search.cc:509
 msgid "Version"
 msgstr "Versjon"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: package architecture (header)
-#: src/info.cc:94 src/search.cc:54 src/search.cc:454 src/search.cc:501
+#: src/info.cc:94 src/search.cc:54 src/search.cc:460 src/search.cc:510
 #: src/update.cc:795
 msgid "Arch"
 msgstr "Arkitektur"
@@ -5175,8 +5196,8 @@ msgstr "Leverandør"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: package summary (header)
-#: src/info.cc:102 src/search.cc:201 src/utils/misc.cc:331
-#: src/utils/misc.cc:373
+#: src/info.cc:102 src/search.cc:201 src/utils/misc.cc:330
+#: src/utils/misc.cc:372
 msgid "Summary"
 msgstr "Samandrag"
 
@@ -5233,8 +5254,8 @@ msgid "Installed Size"
 msgstr "Installert storleik"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:398 src/info.cc:448 src/info.cc:612 src/utils/misc.cc:329
-#: src/utils/misc.cc:371
+#: src/info.cc:398 src/info.cc:448 src/info.cc:612 src/utils/misc.cc:328
+#: src/utils/misc.cc:370
 msgid "Status"
 msgstr "Status"
 
@@ -5258,13 +5279,13 @@ msgstr ""
 #. translators: property name; short; used like "Name: value"
 #. translator: Table column header.
 #. Name
-#: src/info.cc:450 src/update.cc:406 src/utils/misc.cc:326
-#: src/utils/misc.cc:368
+#: src/info.cc:450 src/update.cc:406 src/utils/misc.cc:325
+#: src/utils/misc.cc:367
 msgid "Category"
 msgstr "Kategori"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:452 src/utils/misc.cc:327 src/utils/misc.cc:369
+#: src/info.cc:452 src/utils/misc.cc:326 src/utils/misc.cc:368
 msgid "Severity"
 msgstr "Alvorsgrad"
 
@@ -5274,7 +5295,7 @@ msgid "Created On"
 msgstr "Oppretta"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:456 src/utils/misc.cc:328 src/utils/misc.cc:370
+#: src/info.cc:456 src/utils/misc.cc:327 src/utils/misc.cc:369
 msgid "Interactive"
 msgstr "Interaktiv"
 
@@ -5298,7 +5319,7 @@ msgstr "(tom)"
 #. translators: S for installed Status
 #. TranslatorExplanation S stands for Status
 #: src/info.cc:511 src/info.cc:746 src/locales.cc:199 src/search.cc:46
-#: src/search.cc:198 src/search.cc:303 src/search.cc:450 src/search.cc:494
+#: src/search.cc:198 src/search.cc:303 src/search.cc:456 src/search.cc:503
 #: src/update.cc:784
 msgid "S"
 msgstr "S"
@@ -5341,7 +5362,7 @@ msgid "Flavor"
 msgstr "Variant"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:607 src/search.cc:502
+#: src/info.cc:607 src/search.cc:511
 msgid "Is Base"
 msgstr "Er grunnval"
 
@@ -5394,7 +5415,7 @@ msgstr ""
 msgid "Fallback"
 msgstr ""
 
-#: src/locales.cc:72 src/repos.cc:174 src/repos.cc:202
+#: src/locales.cc:72 src/repos.cc:133 src/repos.cc:161
 msgid "No"
 msgstr "Nei"
 
@@ -5436,12 +5457,12 @@ msgstr ""
 #. set up our strings we want to output in case SIGINT was triggered
 #. we can not allocate memory there, so we do it in advance and remember the translated strings
 #. translators: this will show up if you press ctrl+c once
-#: src/main.cc:122
+#: src/main.cc:150
 msgid "Trying to exit gracefully..."
 msgstr "Prøver å avslutta normalt …"
 
 #. translators: this will show up if you press ctrl+c twice
-#: src/main.cc:126
+#: src/main.cc:154
 msgid "Zypper is currently cleaning up, exiting as soon as possible."
 msgstr ""
 
@@ -5546,18 +5567,13 @@ msgstr "Installerte kjeldepakken %s-%s."
 msgid "Problem installing source package %s-%s:"
 msgstr "Feil ved installering av kjeldepakken %s-%s:"
 
-#. translator: used like "1h 12min in the future!"
-#: src/repos.cc:83
-msgid "in the future!"
-msgstr ""
-
 #. translators: used as 'XYZ changed to SOMETHING [volatile]' to tag specific property changes.
-#: src/repos.cc:94
+#: src/repos.cc:53
 msgid "volatile"
 msgstr "flyktig"
 
 #. translators: 'Volatile' refers to changes we previously tagged as 'XYZ changed to SOMETHING [volatile]'
-#: src/repos.cc:100
+#: src/repos.cc:59
 #, boost-format
 msgid ""
 "Repo '%1%' is managed by service '%2%'. Volatile changes are reset by the "
@@ -5566,23 +5582,23 @@ msgstr ""
 "Pakkebrønnen «%1%» er handtert av tenesta «%2%». Flyktige endringar vert "
 "tilbakestilte ved neste oppdatering av tenesta."
 
-#: src/repos.cc:116
+#: src/repos.cc:75
 msgid "default priority"
 msgstr "standardprioritet"
 
-#: src/repos.cc:117
+#: src/repos.cc:76
 msgid "raised priority"
 msgstr "opphøgd prioritet"
 
-#: src/repos.cc:117
+#: src/repos.cc:76
 msgid "lowered priority"
 msgstr "senka prioritet"
 
-#: src/repos.cc:168 src/repos.cc:196
+#: src/repos.cc:127 src/repos.cc:155
 msgid "Yes"
 msgstr "Ja"
 
-#: src/repos.cc:221
+#: src/repos.cc:180
 msgid ""
 "Repository priorities are without effect. All enabled repositories share the "
 "same priority."
@@ -5590,16 +5606,16 @@ msgstr ""
 "Pakkebrønnprioritetane har ikkje nokon effekt. Alle verksame pakkebrønnar "
 "har same prioritet."
 
-#: src/repos.cc:225
+#: src/repos.cc:184
 msgid "Repository priorities in effect:"
 msgstr "Pakkebrønnprioritet:"
 
-#: src/repos.cc:226
+#: src/repos.cc:185
 #, boost-format
 msgid "See '%1%' for details"
 msgstr "Sjå «%s» for meir informasjon"
 
-#: src/repos.cc:235
+#: src/repos.cc:194
 #, boost-format
 msgid "%1% repository"
 msgid_plural "%1% repositories"
@@ -5608,57 +5624,57 @@ msgstr[1] "%1% pakkebrønnar"
 
 #. check whether libzypp indicates a refresh is needed, and if so,
 #. print a message
-#: src/repos.cc:268
+#: src/repos.cc:227
 #, c-format, boost-format
 msgid "Checking whether to refresh metadata for %s"
 msgstr "Kontrollerer om metadata må oppdaterast for %s"
 
-#: src/repos.cc:297
+#: src/repos.cc:256
 #, c-format, boost-format
 msgid "Repository '%s' is up to date."
 msgstr "Pakkebrønnen «%s» er oppdatert."
 
-#: src/repos.cc:303
+#: src/repos.cc:262
 #, c-format, boost-format
 msgid "The up-to-date check of '%s' has been delayed."
 msgstr "Kontroll om pakkebrønnen «%s» er oppdatert er utsett."
 
-#: src/repos.cc:325
+#: src/repos.cc:284
 msgid "Forcing raw metadata refresh"
 msgstr "Tvingar gjennom oppdatering av metadata"
 
-#: src/repos.cc:331
+#: src/repos.cc:290
 #, c-format, boost-format
 msgid "Retrieving repository '%s' metadata"
 msgstr "Hentar metadata for pakkebrønnen «%s»"
 
-#: src/repos.cc:355
+#: src/repos.cc:314
 #, c-format, boost-format
 msgid "Do you want to disable the repository %s permanently?"
 msgstr "Vil du gjera pakkebrønnen %s uverksam for alltid?"
 
-#: src/repos.cc:371
+#: src/repos.cc:330
 #, c-format, boost-format
 msgid "Error while disabling repository '%s'."
 msgstr "Feil ved forsøk på å gjera pakkebrønnen «%s» uverksam."
 
-#: src/repos.cc:387
+#: src/repos.cc:346
 #, c-format, boost-format
 msgid "Problem retrieving files from '%s'."
 msgstr "Feil ved henting av filer frå «%s»."
 
-#: src/repos.cc:388 src/repos.cc:1957 src/solve-commit.cc:989
+#: src/repos.cc:347 src/repos.cc:1860 src/solve-commit.cc:989
 #: src/solve-commit.cc:1020 src/solve-commit.cc:1044
 msgid "Please see the above error message for a hint."
 msgstr "Sjå feilmeldinga ovanfor for eit hint."
 
-#: src/repos.cc:400
+#: src/repos.cc:359
 #, c-format, boost-format
 msgid "No URIs defined for '%s'."
 msgstr "Ingen nettadresser er definerte for «%s»."
 
 #. TranslatorExplanation the first %s is a .repo file path
-#: src/repos.cc:405
+#: src/repos.cc:364
 #, c-format, boost-format
 msgid ""
 "Please add one or more base URI (baseurl=URI) entries to %s for repository "
@@ -5667,16 +5683,16 @@ msgstr ""
 "Legg éi eller fleire grunnadresser («baseurl»-verdiar) til %s for "
 "pakkebrønnen «%s»."
 
-#: src/repos.cc:419
+#: src/repos.cc:378
 msgid "No alias defined for this repository."
 msgstr "Inkje alias er definert for denne pakkebrønnen."
 
-#: src/repos.cc:431
+#: src/repos.cc:390
 #, c-format, boost-format
 msgid "Repository '%s' is invalid."
 msgstr "Pakkebrønnen «%s» er ugyldig."
 
-#: src/repos.cc:432
+#: src/repos.cc:391
 msgid ""
 "Please check if the URIs defined for this repository are pointing to a valid "
 "repository."
@@ -5684,22 +5700,22 @@ msgstr ""
 "Kontroller at nettadressene definerte for denne pakkebrønnen peikar til ein "
 "gyldig pakkebrønn."
 
-#: src/repos.cc:444
+#: src/repos.cc:403
 #, c-format, boost-format
 msgid "Error retrieving metadata for '%s':"
 msgstr "Feil ved henting av metadata for «%s»:"
 
-#: src/repos.cc:457
+#: src/repos.cc:416
 msgid "Forcing building of repository cache"
 msgstr "Tvingar bygging av mellomlager for pakkebrønnen"
 
-#: src/repos.cc:482
+#: src/repos.cc:441
 #, c-format, boost-format
 msgid "Error parsing metadata for '%s':"
 msgstr "Feil ved tolking av metadata for «%s»:"
 
 #. TranslatorExplanation Don't translate the URL unless it is translated, too
-#: src/repos.cc:484
+#: src/repos.cc:443
 msgid ""
 "This may be caused by invalid metadata in the repository, or by a bug in the "
 "metadata parser. In the latter case, or if in doubt, please, file a bug "
@@ -5711,53 +5727,48 @@ msgstr ""
 "tvil om grunnen, meld det inn som ein feil, slik forklart på http://en."
 "opensuse.org/Zypper/Troubleshooting."
 
-#: src/repos.cc:493
+#: src/repos.cc:452
 #, c-format, boost-format
 msgid "Repository metadata for '%s' not found in local cache."
 msgstr "Fann ikkje pakkebrønnmetadata for «%s» i det lokale mellomlageret."
 
-#: src/repos.cc:501
+#: src/repos.cc:460
 msgid "Error building the cache:"
 msgstr "Feil ved bygging av mellomlager:"
 
-#: src/repos.cc:720
+#: src/repos.cc:679
 #, c-format, boost-format
 msgid "Repository '%s' not found by its alias, number, or URI."
 msgstr "Fann ikkje pakkebrønnen «%s» etter alias, tal eller nettadresse."
 
-#: src/repos.cc:722
+#: src/repos.cc:681
 #, c-format, boost-format
 msgid "Use '%s' to get the list of defined repositories."
 msgstr "Bruk «%s» for å henta oversikt over definerte pakkebrønnar."
 
-#: src/repos.cc:742
+#: src/repos.cc:701
 #, c-format, boost-format
 msgid "Ignoring disabled repository '%s'"
 msgstr "Hoppar over den uverksame pakkebrønnen «%s»"
 
-#. translator: used as a table header
-#: src/repos.cc:796
-msgid "Time since last refresh"
-msgstr ""
-
-#: src/repos.cc:843
+#: src/repos.cc:785
 #, c-format, boost-format
 msgid "Global option '%s' can be used to temporarily enable repositories."
 msgstr ""
 "Globale val «%s» kan brukast til å mellombels gjera uverksame pakkebrønnar "
 "verksame."
 
-#: src/repos.cc:859 src/repos.cc:865
+#: src/repos.cc:801 src/repos.cc:807
 #, c-format, boost-format
 msgid "Ignoring repository '%s' because of '%s' option."
 msgstr "Hoppar over pakkebrønnen «%s» på grunn av valet «%s»."
 
-#: src/repos.cc:886 src/repos.cc:1006
+#: src/repos.cc:828 src/repos.cc:922
 #, c-format, boost-format
 msgid "Temporarily enabling repository '%s'."
 msgstr "Gjer pakkebrønnen «%s» mellombels verksam."
 
-#: src/repos.cc:943
+#: src/repos.cc:886
 #, c-format, boost-format
 msgid ""
 "Repository '%s' is out-of-date. You can run 'zypper refresh' as root to "
@@ -5766,22 +5777,7 @@ msgstr ""
 "Pakkebrønnen «%s» er utdatert. Køyr «zypper refresh» som rotbrukar for å "
 "oppdatera han."
 
-#. translator: Used as status in a table "RepoName: MetadataStatus"
-#: src/repos.cc:963
-msgid "No metadata available! Skipping it!"
-msgstr ""
-
-#. translator: Used as status in a table "RepoName: MetadataStatus"
-#: src/repos.cc:966
-msgid "No permission to read metadata! Skipping it!"
-msgstr ""
-
-#. translator: Used as status in a table "RepoName: MetadataStatus"
-#: src/repos.cc:969
-msgid "Cannot access metadata! Skipping it!"
-msgstr ""
-
-#: src/repos.cc:986
+#: src/repos.cc:903
 #, c-format, boost-format
 msgid ""
 "The metadata cache needs to be built for the '%s' repository. You can run "
@@ -5790,92 +5786,82 @@ msgstr ""
 "Må byggja metadatamellomlageret for pakkebrønnen «%s». Du kan køyra «zypper "
 "refresh» som rotbrukar for å gjera dette."
 
-#: src/repos.cc:1013
+#: src/repos.cc:929
 #, c-format, boost-format
 msgid "Repository '%s' stays disabled."
 msgstr "Pakkebrønnen «%s» forblir uverksam."
 
-#: src/repos.cc:1026
-msgid "Some of the repositories had to be skipped due to missing metadata."
-msgstr ""
-
-#: src/repos.cc:1039
-msgid ""
-"Running with user privileges. From time to time run 'zypper refresh' as root "
-"to make sure the repository metadata are complete and up-to-date."
-msgstr ""
-
-#: src/repos.cc:1071
+#: src/repos.cc:974
 msgid "Initializing Target"
 msgstr "Gjer klar mål"
 
-#: src/repos.cc:1079
+#: src/repos.cc:982
 msgid "Target initialization failed:"
 msgstr "Klarte ikkje klargjera mål:"
 
-#: src/repos.cc:1161
+#: src/repos.cc:1064
 #, c-format, boost-format
 msgid "Cleaning metadata cache for '%s'."
 msgstr "Tømmer metadatamellomlager for «%s»."
 
-#: src/repos.cc:1169
+#: src/repos.cc:1072
 #, c-format, boost-format
 msgid "Cleaning raw metadata cache for '%s'."
 msgstr "Fjernar råmetadata-mellomlager for «%s»."
 
-#: src/repos.cc:1175
+#: src/repos.cc:1078
 #, c-format, boost-format
 msgid "Keeping raw metadata cache for %s '%s'."
 msgstr "Beheld råmetadata-mellomlager for %s «%s»."
 
 #. translators: meaning the cached rpm files
-#: src/repos.cc:1182
+#: src/repos.cc:1085
 #, c-format, boost-format
 msgid "Cleaning packages for '%s'."
 msgstr "Ryddar opp i pakkar for «%s»."
 
-#: src/repos.cc:1190
+#: src/repos.cc:1093
 #, c-format, boost-format
 msgid "Cannot clean repository '%s' because of an error."
 msgstr "Klarte ikkje rydda opp i pakkebrønnen «%s», på grunn av ein feil."
 
-#: src/repos.cc:1201
+#: src/repos.cc:1104
 msgid "Cleaning installed packages cache."
 msgstr "Ryddar opp i mellomlager for installerte pakkar."
 
-#: src/repos.cc:1210
+#: src/repos.cc:1113
 msgid "Cannot clean installed packages cache because of an error."
 msgstr ""
 "Klarte ikkje rydda opp i mellomlager for installerte pakkar, på grunn av ein "
 "feil."
 
-#: src/repos.cc:1228
+#: src/repos.cc:1131
 msgid "Could not clean the repositories because of errors."
 msgstr "Klarte ikkje rydda opp i pakkebrønnar, på grunn av ein feil."
 
-#: src/repos.cc:1234
+#: src/repos.cc:1137
 msgid "Some of the repositories have not been cleaned up because of an error."
 msgstr "Nokre av pakkebrønnane vart ikkje rydda opp i, på grunn av ein feil."
 
-#: src/repos.cc:1239
+#: src/repos.cc:1142
 msgid "Specified repositories have been cleaned up."
 msgstr "Dei valde pakkebrønnane er no rydda opp i."
 
-#: src/repos.cc:1241
+#: src/repos.cc:1144
 msgid "All repositories have been cleaned up."
 msgstr "Alle pakkebrønnane er no rydda opp i."
 
-#: src/repos.cc:1263
+#: src/repos.cc:1166
 msgid "This is a changeable read-only media (CD/DVD), disabling autorefresh."
 msgstr ""
 "Dette er eit utbytbart skriveverna medium (CD/DVD). Slår av autooppdatering."
 
-#: src/repos.cc:1284
+#: src/repos.cc:1187
 #, c-format, boost-format
 msgid "Invalid repository alias: '%s'"
 msgstr "Ugyldig pakkebrønnalias: «%s»"
 
-#: src/repos.cc:1301
+#: src/repos.cc:1204
 msgid ""
 "Could not determine the type of the repository. Please check if the defined "
 "URIs (see below) point to a valid repository:"
@@ -5883,26 +5869,26 @@ msgstr ""
 "Klarte ikkje fastslå type pakkebrønn. Sjå til at nettadressene nedanfor "
 "peikar til ein gyldig pakkebrønn:"
 
-#: src/repos.cc:1307
+#: src/repos.cc:1210
 msgid "Can't find a valid repository at given location:"
 msgstr "Fann ikkje ein gyldig pakkebrønn på den oppgjevne adressa:"
 
-#: src/repos.cc:1315
+#: src/repos.cc:1218
 msgid "Problem transferring repository data from specified URI:"
 msgstr ""
 "Feil ved overføring av metadata for pakkebrønn frå den oppgjevne adressa:"
 
-#: src/repos.cc:1316
+#: src/repos.cc:1219
 msgid "Please check whether the specified URI is accessible."
 msgstr "Kontroller at den oppgjevne adressa fungerer."
 
-#: src/repos.cc:1323
+#: src/repos.cc:1226
 msgid "Unknown problem when adding repository:"
 msgstr "Ukjend problem ved forsøk på å leggja til pakkebrønn:"
 
 #. translators: BOOST STYLE POSITIONAL DIRECTIVES ( %N% )
 #. translators: %1% - a repository name
-#: src/repos.cc:1333
+#: src/repos.cc:1236
 #, boost-format
 msgid ""
 "GPG checking is disabled in configuration of repository '%1%'. Integrity and "
@@ -5911,135 +5897,135 @@ msgstr ""
 "GPG-kontroll er slått av i oppsettet til pakkebrønnen «%1%». Kan derfor "
 "ikkje stadfesta integritet og opphav til pakkar."
 
-#: src/repos.cc:1338
+#: src/repos.cc:1241
 #, c-format, boost-format
 msgid "Repository '%s' successfully added"
 msgstr "Pakkebrønnen «%s» er no lagd til"
 
-#: src/repos.cc:1364
+#: src/repos.cc:1267
 #, c-format, boost-format
 msgid "Reading data from '%s' media"
 msgstr "Les data frå mediet «%s»"
 
-#: src/repos.cc:1370
+#: src/repos.cc:1273
 #, c-format, boost-format
 msgid "Problem reading data from '%s' media"
 msgstr "Feil ved lesing av data frå mediet «%s»"
 
-#: src/repos.cc:1371
+#: src/repos.cc:1274
 msgid "Please check if your installation media is valid and readable."
 msgstr "Kontroller at installasjonsmediet er gyldig og lesbart."
 
-#: src/repos.cc:1378
+#: src/repos.cc:1281
 #, c-format, boost-format
 msgid "Reading data from '%s' media is delayed until next refresh."
 msgstr "Lesing av data frå mediet «%s» er utsett til neste oppdatering."
 
-#: src/repos.cc:1447
+#: src/repos.cc:1350
 msgid "Problem accessing the file at the specified URI"
 msgstr "Feil ved tilgang til fila på denne oppgjevne adressa"
 
-#: src/repos.cc:1448
+#: src/repos.cc:1351
 msgid "Please check if the URI is valid and accessible."
 msgstr "Kontroller at adressa er gyldig og fungerer."
 
-#: src/repos.cc:1455
+#: src/repos.cc:1358
 msgid "Problem parsing the file at the specified URI"
 msgstr "Feil ved tolking av fila på den oppgjevne adressa"
 
 #. TranslatorExplanation Don't translate the '.repo' string.
-#: src/repos.cc:1457
+#: src/repos.cc:1360
 msgid "Is it a .repo file?"
 msgstr "Er det ei .repo-fil?"
 
-#: src/repos.cc:1464
+#: src/repos.cc:1367
 msgid "Problem encountered while trying to read the file at the specified URI"
 msgstr "Det oppstod ein feil ved forsøk på å lesa fil på den oppgjevne adressa"
 
-#: src/repos.cc:1477
+#: src/repos.cc:1380
 msgid "Repository with no alias defined found in the file, skipping."
 msgstr "Fann pakkebrønn utan definert alias i fila; hoppar over."
 
-#: src/repos.cc:1483
+#: src/repos.cc:1386
 #, c-format, boost-format
 msgid "Repository '%s' has no URI defined, skipping."
 msgstr "Pakkebrønnen «%s» har ikkje noko nettadresse definert; hoppar over."
 
-#: src/repos.cc:1531
+#: src/repos.cc:1434
 #, c-format, boost-format
 msgid "Repository '%s' has been removed."
 msgstr "Pakkebrønnen «%s» er no fjerna."
 
-#: src/repos.cc:1679
+#: src/repos.cc:1582
 #, c-format, boost-format
 msgid "Repository '%s' priority has been left unchanged (%d)"
 msgstr "Prioriteten til pakkebrønnen «%s» vart ikkje endra (er %d)."
 
-#: src/repos.cc:1712
+#: src/repos.cc:1615
 #, c-format, boost-format
 msgid "Repository '%s' has been successfully enabled."
 msgstr "Pakkebrønnen «%s» er no verksam."
 
-#: src/repos.cc:1714
+#: src/repos.cc:1617
 #, c-format, boost-format
 msgid "Repository '%s' has been successfully disabled."
 msgstr "Pakkebrønnen «%s» er no uverksam."
 
-#: src/repos.cc:1721
+#: src/repos.cc:1624
 #, c-format, boost-format
 msgid "Autorefresh has been enabled for repository '%s'."
 msgstr "Automatisk oppdatering er slått på for pakkebrønnen «%s»."
 
-#: src/repos.cc:1723
+#: src/repos.cc:1626
 #, c-format, boost-format
 msgid "Autorefresh has been disabled for repository '%s'."
 msgstr "Automatisk oppdatering er slått av for pakkebrønnen «%s»."
 
-#: src/repos.cc:1730
+#: src/repos.cc:1633
 #, c-format, boost-format
 msgid "RPM files caching has been enabled for repository '%s'."
 msgstr "Mellomlagring av RPM-filer er slått på for pakkebrønnen «%s»."
 
-#: src/repos.cc:1732
+#: src/repos.cc:1635
 #, c-format, boost-format
 msgid "RPM files caching has been disabled for repository '%s'."
 msgstr "Mellomlagring av RPM-filer er slått av for pakkebrønnen «%s»."
 
-#: src/repos.cc:1739
+#: src/repos.cc:1642
 #, c-format, boost-format
 msgid "GPG check has been enabled for repository '%s'."
 msgstr "GPG-kontroll er slått på for pakkebrønnen «%s»."
 
-#: src/repos.cc:1741
+#: src/repos.cc:1644
 #, c-format, boost-format
 msgid "GPG check has been disabled for repository '%s'."
 msgstr "GPG-kontroll er slått av for pakkebrønnen «%s»."
 
-#: src/repos.cc:1747
+#: src/repos.cc:1650
 #, c-format, boost-format
 msgid "Repository '%s' priority has been set to %d."
 msgstr "Prioriteten til pakkebrønnen «%s» er sett til %d."
 
-#: src/repos.cc:1753
+#: src/repos.cc:1656
 #, c-format, boost-format
 msgid "Name of repository '%s' has been set to '%s'."
 msgstr "Namnet på pakkebrønnen «%s» er sett til «%s»."
 
-#: src/repos.cc:1764
+#: src/repos.cc:1667
 #, c-format, boost-format
 msgid "Nothing to change for repository '%s'."
 msgstr "Ingen endringar var nødvendige for pakkebrønnen «%s»."
 
-#: src/repos.cc:1771
+#: src/repos.cc:1674
 #, c-format, boost-format
 msgid "Leaving repository %s unchanged."
 msgstr "Gjer ingen endringar på pakkebrønnen «%s»."
 
-#: src/repos.cc:1858
+#: src/repos.cc:1761
 msgid "Loading repository data..."
 msgstr "Lastar pakkebrønndata …"
 
-#: src/repos.cc:1860
+#: src/repos.cc:1763
 msgid ""
 "No repositories defined. Operating only with the installed resolvables. "
 "Nothing can be installed."
@@ -6047,43 +6033,43 @@ msgstr ""
 "Ingen pakkebrønnar er definerte. Held berre fram med dei installerte "
 "elementa. Ingenting kan installerast."
 
-#: src/repos.cc:1881
+#: src/repos.cc:1784
 #, c-format, boost-format
 msgid "Retrieving repository '%s' data..."
 msgstr "Hentar data for pakkebrønnen «%s» …"
 
-#: src/repos.cc:1887
+#: src/repos.cc:1790
 #, c-format, boost-format
 msgid "Repository '%s' not cached. Caching..."
 msgstr "Pakkebrønnen «%s» finst ikkje i mellomlageret. Gjer klar mellomlager …"
 
-#: src/repos.cc:1893 src/repos.cc:1927
+#: src/repos.cc:1796 src/repos.cc:1830
 #, c-format, boost-format
 msgid "Problem loading data from '%s'"
 msgstr "Feil ved lasting av data frå «%s»"
 
-#: src/repos.cc:1897
+#: src/repos.cc:1800
 #, c-format, boost-format
 msgid "Repository '%s' could not be refreshed. Using old cache."
 msgstr "Klarte ikkje oppdatera pakkebrønnen «%s». Brukar gammalt mellomlager."
 
-#: src/repos.cc:1901 src/repos.cc:1930
+#: src/repos.cc:1804 src/repos.cc:1833
 #, c-format, boost-format
 msgid "Resolvables from '%s' not loaded because of error."
 msgstr "På grunn av feil vart ikkje element frå «%s» lasta."
 
-#: src/repos.cc:1917
+#: src/repos.cc:1820
 #, boost-format
 msgid "Repository '%1%' metadata expired since %2%."
 msgstr ""
 
 #. translators: the first %s is 'zypper refresh' and the second 'zypper clean -m'
-#: src/repos.cc:1929
+#: src/repos.cc:1832
 #, c-format, boost-format
 msgid "Try '%s', or even '%s' before doing so."
 msgstr "Prøv «%s», eventuelt òg «%s», før du gjer dette."
 
-#: src/repos.cc:1934
+#: src/repos.cc:1837
 msgid ""
 "Repository metadata expired: Check if 'autorefresh' is turned on (zypper "
 "lr), otherwise manually refresh the repository (zypper ref). If this does "
@@ -6091,30 +6077,30 @@ msgid ""
 "server has actually discontinued to support the repository."
 msgstr ""
 
-#: src/repos.cc:1947
+#: src/repos.cc:1850
 msgid "Reading installed packages..."
 msgstr "Les installerte pakkar …"
 
-#: src/repos.cc:1956
+#: src/repos.cc:1859
 msgid "Problem occurred while reading the installed packages:"
 msgstr "Feil ved lesing av installerte pakkar:"
 
-#: src/repos.cc:1973
+#: src/repos.cc:1876
 #, c-format, boost-format
 msgid "'%s' looks like an RPM file. Will try to download it."
 msgstr "«%s» ser ut til å vera ei RPM-fil. Prøver å lasta ho ned."
 
-#: src/repos.cc:1982
+#: src/repos.cc:1885
 #, c-format, boost-format
 msgid "Problem with the RPM file specified as '%s', skipping."
 msgstr "Problem med RPM-fila spesifisert som «%s». Hoppar over."
 
-#: src/repos.cc:2004
+#: src/repos.cc:1907
 #, c-format, boost-format
 msgid "Problem reading the RPM header of %s. Is it an RPM file?"
 msgstr "Problem med lesing av RPM-filhovud til %s. Er det ei RPM-fil?"
 
-#: src/repos.cc:2024
+#: src/repos.cc:1927
 msgid "Plain RPM files cache"
 msgstr "Mellomlager for RPM-filer"
 
@@ -6130,17 +6116,17 @@ msgstr "Fann ingen nødvendige programfiksar."
 msgid "No patterns found."
 msgstr "Fann ikkje nokon mønster."
 
-#: src/search.cc:444
+#: src/search.cc:450
 msgid "No packages found."
 msgstr "Fann ikkje nokon pakkar."
 
 #. translators: used in products. Internal Name is the unix name of the
 #. product whereas simply Name is the official full name of the product.
-#: src/search.cc:498
+#: src/search.cc:507
 msgid "Internal Name"
 msgstr "Internt namn"
 
-#: src/search.cc:535
+#: src/search.cc:544
 msgid "No products found."
 msgstr "Fann ikkje nokon produkt."
 
@@ -6881,44 +6867,44 @@ msgstr ""
 "I så fall må du installera ein eigen pakke som gjev støtte for "
 "underkommandoen. Desse pakkane har ofte namn som «%1%» eller «%2%»."
 
-#: src/utils/misc.cc:94
+#: src/utils/misc.cc:93
 msgid "package"
 msgid_plural "packages"
 msgstr[0] "pakke"
 msgstr[1] "pakkar"
 
-#: src/utils/misc.cc:96
+#: src/utils/misc.cc:95
 msgid "pattern"
 msgid_plural "patterns"
 msgstr[0] "mønster"
 msgstr[1] "mønster"
 
-#: src/utils/misc.cc:98
+#: src/utils/misc.cc:97
 msgid "product"
 msgid_plural "product"
 msgstr[0] "produkt"
 msgstr[1] "produkt"
 
-#: src/utils/misc.cc:100
+#: src/utils/misc.cc:99
 msgid "patch"
 msgid_plural "patches"
 msgstr[0] "programfiks"
 msgstr[1] "programfiksar"
 
-#: src/utils/misc.cc:102
+#: src/utils/misc.cc:101
 msgid "srcpackage"
 msgid_plural "srcpackages"
 msgstr[0] "kjeldepakke"
 msgstr[1] "kjeldepakkar"
 
-#: src/utils/misc.cc:104
+#: src/utils/misc.cc:103
 msgid "application"
 msgid_plural "applications"
 msgstr[0] "program"
 msgstr[1] "program"
 
 #. default
-#: src/utils/misc.cc:106
+#: src/utils/misc.cc:105
 msgid "resolvable"
 msgid_plural "resolvables"
 msgstr[0] "element"
@@ -6926,103 +6912,103 @@ msgstr[1] "element"
 
 #. Patch status: i18n + color
 #. translator: patch status
-#: src/utils/misc.cc:115
+#: src/utils/misc.cc:114
 msgid "unwanted"
 msgstr "uønskt"
 
 #. translator: patch status
-#: src/utils/misc.cc:116
+#: src/utils/misc.cc:115
 msgid "optional"
 msgstr "valfri"
 
 #. translator: patch status
-#: src/utils/misc.cc:117
+#: src/utils/misc.cc:116
 msgid "needed"
 msgstr "nødvendig"
 
 #. translator: patch status
-#: src/utils/misc.cc:118
+#: src/utils/misc.cc:117
 msgid "applied"
 msgstr "brukt"
 
 #. translator: patch status
-#: src/utils/misc.cc:119
+#: src/utils/misc.cc:118
 msgid "not needed"
 msgstr "ikkje nødvendig"
 
 #. translator: patch status
-#: src/utils/misc.cc:120
+#: src/utils/misc.cc:119
 msgid "undetermined"
 msgstr "uavklart"
 
 #. pi_r is no patch!
 #. translator: patch status
-#: src/utils/misc.cc:121
+#: src/utils/misc.cc:120
 msgid "retracted"
 msgstr ""
 
-#: src/utils/misc.cc:330 src/utils/misc.cc:372
+#: src/utils/misc.cc:329 src/utils/misc.cc:371
 msgid "Since"
 msgstr ""
 
 #. << _("Repository")
-#: src/utils/misc.cc:365
+#: src/utils/misc.cc:364
 msgid "Issue"
 msgstr "Feilrapport"
 
-#: src/utils/misc.cc:366
+#: src/utils/misc.cc:365
 msgid "No."
 msgstr "Nr."
 
-#: src/utils/misc.cc:367
+#: src/utils/misc.cc:366
 msgid "Patch"
 msgstr "Programfiks"
 
-#: src/utils/misc.cc:445
+#: src/utils/misc.cc:444
 msgid "Specified local path does not exist or is not accessible."
 msgstr ""
 "Den valde lokale adressa finst ikkje, eller så har du ikkje tilgang til ho."
 
-#: src/utils/misc.cc:457
+#: src/utils/misc.cc:456
 msgid "Given URI is invalid"
 msgstr "Den valde nettadressa er ugyldig"
 
 #. Guess failed:
 #. translators: don't translate '<platform>'
-#: src/utils/misc.cc:549
+#: src/utils/misc.cc:548
 msgid "Unable to guess a value for <platform>."
 msgstr "Klarte ikkje gjetta verdi for <platform>."
 
-#: src/utils/misc.cc:550
+#: src/utils/misc.cc:549
 msgid "Please use obs://<project>/<platform>"
 msgstr "Bruk obs://<prosjekt>/<plattform>"
 
-#: src/utils/misc.cc:551 src/utils/misc.cc:597
+#: src/utils/misc.cc:550 src/utils/misc.cc:596
 #, c-format, boost-format
 msgid "Example: %s"
 msgstr "Eksempel: %s"
 
-#: src/utils/misc.cc:596
+#: src/utils/misc.cc:595
 msgid "Invalid OBS URI."
 msgstr "Ugyldig OBS-adresse."
 
-#: src/utils/misc.cc:596
+#: src/utils/misc.cc:595
 msgid "Correct form is obs://<project>/[platform]"
 msgstr "Rett format er obs://<prosjekt>/[plattform]"
 
-#: src/utils/misc.cc:644
+#: src/utils/misc.cc:643
 msgid "Problem copying the specified RPM file to the cache directory."
 msgstr "Feil ved kopiering av den valde RPM-fila til mellomlagermappa."
 
-#: src/utils/misc.cc:645
+#: src/utils/misc.cc:644
 msgid "Perhaps you are running out of disk space."
 msgstr "Det kan vera at du ikkje nok ledig diskplass."
 
-#: src/utils/misc.cc:653
+#: src/utils/misc.cc:652
 msgid "Problem retrieving the specified RPM file"
 msgstr "Feil ved henting av den valde RPM-fila"
 
-#: src/utils/misc.cc:654
+#: src/utils/misc.cc:653
 msgid "Please check whether the file is accessible."
 msgstr "Sjå til at fila er tilgjengeleg."
 
@@ -7136,6 +7122,22 @@ msgstr "Ugyldig objekt"
 #: src/utils/prompt.h:102
 msgid "Error"
 msgstr "Feil"
+
+# Bevisst bruk av punktum i staden for mellomrom på slutten.
+#, boost-format
+#~ msgid "Overall download size: %1%. Already cached: %2%."
+#~ msgstr "Samla storleik på nedlasting: %1%. Allereie lasta ned: %2%."
+
+#, c-format, boost-format
+#~ msgid "After the operation, additional %s will be used."
+#~ msgstr "Etter handlinga vert det brukt %s meir diskplass."
+
+#~ msgid "No additional space will be used or freed after the operation."
+#~ msgstr "Ingen ledig plass vert teken i bruk eller frigjord etter handlinga."
+
+#, c-format, boost-format
+#~ msgid "After the operation, %s will be freed."
+#~ msgstr "Handlinga vil frigjera %s diskplass."
 
 #, c-format, boost-format
 #~ msgid "File '%s' is unsigned, continue?"

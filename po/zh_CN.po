@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-15 13:01+0200\n"
+"POT-Creation-Date: 2024-07-29 15:47+0200\n"
 "PO-Revision-Date: 2024-05-02 05:43+0000\n"
 "Last-Translator: Grace Yu <grace.yu@excel-gits.com>\n"
 "Language-Team: Chinese (China) <https://l10n.opensuse.org/projects/zypper/"
@@ -103,8 +103,8 @@ msgstr[0] "已跳过以下 %d 个软件包移除："
 
 #. translators: Appended when clipping a long enumeration:
 #. "ConsoleKit-devel ConsoleKit-doc ... and 20828 more items."
-#: src/CommitSummary.cc:232 src/CommitSummary.cc:278 src/Summary.cc:629
-#: src/Summary.cc:705
+#: src/CommitSummary.cc:232 src/CommitSummary.cc:278 src/Summary.cc:631
+#: src/Summary.cc:707
 #, boost-format
 msgid "... and %1% more item."
 msgid_plural "... and %1% more items."
@@ -638,210 +638,210 @@ msgstr "可疑的严重性过滤器值 '%1%'。"
 #. translator: '%1%' is a products name
 #. '%2%' is a command to call (like 'zypper dup')
 #. Both may contain whitespace and should be enclosed by quotes!
-#: src/Summary.cc:554
+#: src/Summary.cc:556
 #, boost-format
 msgid "Product '%1%' requires to be upgraded by calling '%2%'!"
 msgstr "产品“%1%”需要调用“%2%”来升级！"
 
-#: src/Summary.cc:723
+#: src/Summary.cc:725
 #, c-format, boost-format
 msgid "The following NEW package is going to be installed:"
 msgid_plural "The following %d NEW packages are going to be installed:"
 msgstr[0] "将安装以下 %d 个新软件包："
 
-#: src/Summary.cc:728
+#: src/Summary.cc:730
 #, c-format, boost-format
 msgid "The following NEW patch is going to be installed:"
 msgid_plural "The following %d NEW patches are going to be installed:"
 msgstr[0] "将安装以下 %d 个新补丁："
 
-#: src/Summary.cc:733
+#: src/Summary.cc:735
 #, c-format, boost-format
 msgid "The following NEW pattern is going to be installed:"
 msgid_plural "The following %d NEW patterns are going to be installed:"
 msgstr[0] "将安装以下 %d 个新软件集："
 
-#: src/Summary.cc:738
+#: src/Summary.cc:740
 #, c-format, boost-format
 msgid "The following NEW product is going to be installed:"
 msgid_plural "The following %d NEW products are going to be installed:"
 msgstr[0] "将安装以下 %d 个新产品："
 
-#: src/Summary.cc:743
+#: src/Summary.cc:745
 #, c-format, boost-format
 msgid "The following source package is going to be installed:"
 msgid_plural "The following %d source packages are going to be installed:"
 msgstr[0] "将安装以下 %d 个源代码包："
 
-#: src/Summary.cc:749
+#: src/Summary.cc:751
 #, c-format, boost-format
 msgid "The following application is going to be installed:"
 msgid_plural "The following %d applications are going to be installed:"
 msgstr[0] "将安装以下 %d 个应用程序："
 
-#: src/Summary.cc:774
+#: src/Summary.cc:776
 #, c-format, boost-format
 msgid "The following package is going to be REMOVED:"
 msgid_plural "The following %d packages are going to be REMOVED:"
 msgstr[0] "将移除以下 %d 个软件包："
 
-#: src/Summary.cc:779
+#: src/Summary.cc:781
 #, c-format, boost-format
 msgid "The following patch is going to be REMOVED:"
 msgid_plural "The following %d patches are going to be REMOVED:"
 msgstr[0] "将移除以下 %d 个补丁："
 
-#: src/Summary.cc:784
+#: src/Summary.cc:786
 #, c-format, boost-format
 msgid "The following pattern is going to be REMOVED:"
 msgid_plural "The following %d patterns are going to be REMOVED:"
 msgstr[0] "将移除以下 %d 个软件集："
 
-#: src/Summary.cc:789
+#: src/Summary.cc:791
 #, c-format, boost-format
 msgid "The following product is going to be REMOVED:"
 msgid_plural "The following %d products are going to be REMOVED:"
 msgstr[0] "将移除以下 %d 个产品："
 
-#: src/Summary.cc:795
+#: src/Summary.cc:797
 #, c-format, boost-format
 msgid "The following application is going to be REMOVED:"
 msgid_plural "The following %d applications are going to be REMOVED:"
 msgstr[0] "将移除以下 %d 个应用程序："
 
-#: src/Summary.cc:818
+#: src/Summary.cc:820
 #, c-format, boost-format
 msgid "The following package is going to be upgraded:"
 msgid_plural "The following %d packages are going to be upgraded:"
 msgstr[0] "将升级以下 %d 个软件包："
 
-#: src/Summary.cc:823
+#: src/Summary.cc:825
 #, c-format, boost-format
 msgid "The following patch is going to be upgraded:"
 msgid_plural "The following %d patches are going to be upgraded:"
 msgstr[0] "将升级以下 %d 个补丁："
 
-#: src/Summary.cc:828
+#: src/Summary.cc:830
 #, c-format, boost-format
 msgid "The following pattern is going to be upgraded:"
 msgid_plural "The following %d patterns are going to be upgraded:"
 msgstr[0] "将升级以下 %d 个软件集："
 
-#: src/Summary.cc:834
+#: src/Summary.cc:836
 #, c-format, boost-format
 msgid "The following product is going to be upgraded:"
 msgid_plural "The following %d products are going to be upgraded:"
 msgstr[0] "将升级以下 %d 个产品："
 
-#: src/Summary.cc:842
+#: src/Summary.cc:844
 #, c-format, boost-format
 msgid "The following application is going to be upgraded:"
 msgid_plural "The following %d applications are going to be upgraded:"
 msgstr[0] "将升级以下 %d 个应用程序："
 
-#: src/Summary.cc:864
+#: src/Summary.cc:866
 #, c-format, boost-format
 msgid "The following package is going to be downgraded:"
 msgid_plural "The following %d packages are going to be downgraded:"
 msgstr[0] "将降级以下 %d 个软件包："
 
-#: src/Summary.cc:869
+#: src/Summary.cc:871
 #, c-format, boost-format
 msgid "The following patch is going to be downgraded:"
 msgid_plural "The following %d patches are going to be downgraded:"
 msgstr[0] "将降级以下 %d 个补丁："
 
-#: src/Summary.cc:874
+#: src/Summary.cc:876
 #, c-format, boost-format
 msgid "The following pattern is going to be downgraded:"
 msgid_plural "The following %d patterns are going to be downgraded:"
 msgstr[0] "将降级以下 %d 个软件集："
 
-#: src/Summary.cc:879
+#: src/Summary.cc:881
 #, c-format, boost-format
 msgid "The following product is going to be downgraded:"
 msgid_plural "The following %d products are going to be downgraded:"
 msgstr[0] "将降级以下 %d 个产品："
 
-#: src/Summary.cc:885
+#: src/Summary.cc:887
 #, c-format, boost-format
 msgid "The following application is going to be downgraded:"
 msgid_plural "The following %d applications are going to be downgraded:"
 msgstr[0] "将降级以下 %d 个应用程序："
 
-#: src/Summary.cc:907
+#: src/Summary.cc:909
 #, c-format, boost-format
 msgid "The following package is going to be reinstalled:"
 msgid_plural "The following %d packages are going to be reinstalled:"
 msgstr[0] "将重装以下 %d 个软件包："
 
-#: src/Summary.cc:912
+#: src/Summary.cc:914
 #, c-format, boost-format
 msgid "The following patch is going to be reinstalled:"
 msgid_plural "The following %d patches are going to be reinstalled:"
 msgstr[0] "将重装以下 %d 个补丁："
 
-#: src/Summary.cc:917
+#: src/Summary.cc:919
 #, c-format, boost-format
 msgid "The following pattern is going to be reinstalled:"
 msgid_plural "The following %d patterns are going to be reinstalled:"
 msgstr[0] "将重装以下 %d 个软件集："
 
-#: src/Summary.cc:922
+#: src/Summary.cc:924
 #, c-format, boost-format
 msgid "The following product is going to be reinstalled:"
 msgid_plural "The following %d products are going to be reinstalled:"
 msgstr[0] "将重装以下 %d 个产品："
 
-#: src/Summary.cc:935
+#: src/Summary.cc:937
 #, c-format, boost-format
 msgid "The following application is going to be reinstalled:"
 msgid_plural "The following %d applications are going to be reinstalled:"
 msgstr[0] "将重装以下 %d 个应用程序："
 
-#: src/Summary.cc:1072
+#: src/Summary.cc:1074
 #, c-format, boost-format
 msgid "The following recommended package was automatically selected:"
 msgid_plural ""
 "The following %d recommended packages were automatically selected:"
 msgstr[0] "自动选中了以下 %d 个推荐软件包："
 
-#: src/Summary.cc:1077
+#: src/Summary.cc:1079
 #, c-format, boost-format
 msgid "The following recommended patch was automatically selected:"
 msgid_plural ""
 "The following %d recommended patches were automatically selected:"
 msgstr[0] "自动选中了以下 %d 个推荐补丁："
 
-#: src/Summary.cc:1082
+#: src/Summary.cc:1084
 #, c-format, boost-format
 msgid "The following recommended pattern was automatically selected:"
 msgid_plural ""
 "The following %d recommended patterns were automatically selected:"
 msgstr[0] "自动选中了以下 %d 个推荐软件集："
 
-#: src/Summary.cc:1087
+#: src/Summary.cc:1089
 #, c-format, boost-format
 msgid "The following recommended product was automatically selected:"
 msgid_plural ""
 "The following %d recommended products were automatically selected:"
 msgstr[0] "自动选中了以下 %d 个推荐产品："
 
-#: src/Summary.cc:1092
+#: src/Summary.cc:1094
 #, c-format, boost-format
 msgid "The following recommended source package was automatically selected:"
 msgid_plural ""
 "The following %d recommended source packages were automatically selected:"
 msgstr[0] "自动选中了以下 %d 个推荐源代码包："
 
-#: src/Summary.cc:1098
+#: src/Summary.cc:1100
 #, c-format, boost-format
 msgid "The following recommended application was automatically selected:"
 msgid_plural ""
 "The following %d recommended applications were automatically selected:"
 msgstr[0] "自动选中了以下 %d 个推荐的应用程序："
 
-#: src/Summary.cc:1145
+#: src/Summary.cc:1147
 #, c-format, boost-format
 msgid ""
 "The following package is recommended, but will not be installed (only "
@@ -851,7 +851,7 @@ msgid_plural ""
 "required packages will be installed):"
 msgstr[0] "推荐以下 %d 个软件包，但不会安装（仅会安装依赖的软件包）："
 
-#: src/Summary.cc:1157
+#: src/Summary.cc:1159
 #, c-format, boost-format
 msgid ""
 "The following package is recommended, but will not be installed because it's "
@@ -862,7 +862,7 @@ msgid_plural ""
 msgstr[0] ""
 "推荐以下 %d 个软件包，但不会安装，因为它们是不需要的（曾经手动移除过）："
 
-#: src/Summary.cc:1167
+#: src/Summary.cc:1169
 #, c-format, boost-format
 msgid ""
 "The following package is recommended, but will not be installed due to "
@@ -872,143 +872,143 @@ msgid_plural ""
 "conflicts or dependency issues:"
 msgstr[0] "推荐以下 %d 个软件包，但由于冲突或依赖问题不会安装："
 
-#: src/Summary.cc:1180
+#: src/Summary.cc:1182
 #, c-format, boost-format
 msgid "The following patch is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d patches are recommended, but will not be installed:"
 msgstr[0] "推荐以下 %d 个补丁，但不会安装："
 
-#: src/Summary.cc:1184
+#: src/Summary.cc:1186
 #, c-format, boost-format
 msgid "The following pattern is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d patterns are recommended, but will not be installed:"
 msgstr[0] "推荐以下 %d 个软件集，但不会安装："
 
-#: src/Summary.cc:1188
+#: src/Summary.cc:1190
 #, c-format, boost-format
 msgid "The following product is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d products are recommended, but will not be installed:"
 msgstr[0] "推荐以下 %d 个产品，但不会安装："
 
-#: src/Summary.cc:1193
+#: src/Summary.cc:1195
 #, c-format, boost-format
 msgid "The following application is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d applications are recommended, but will not be installed:"
 msgstr[0] "推荐以下 %d 个应用程序，但不会安装："
 
-#: src/Summary.cc:1226
+#: src/Summary.cc:1228
 #, c-format, boost-format
 msgid "The following package is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d packages are suggested, but will not be installed:"
 msgstr[0] "建议以下 %d 个软件包，但不会安装："
 
-#: src/Summary.cc:1231
+#: src/Summary.cc:1233
 #, c-format, boost-format
 msgid "The following patch is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d patches are suggested, but will not be installed:"
 msgstr[0] "建议以下 %d 个补丁，但不会安装："
 
-#: src/Summary.cc:1236
+#: src/Summary.cc:1238
 #, c-format, boost-format
 msgid "The following pattern is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d patterns are suggested, but will not be installed:"
 msgstr[0] "建议以下 %d 个软件集，但不会安装："
 
-#: src/Summary.cc:1241
+#: src/Summary.cc:1243
 #, c-format, boost-format
 msgid "The following product is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d products are suggested, but will not be installed:"
 msgstr[0] "建议以下 %d 个产品，但不会安装："
 
-#: src/Summary.cc:1247
+#: src/Summary.cc:1249
 #, c-format, boost-format
 msgid "The following application is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d applications are suggested, but will not be installed:"
 msgstr[0] "建议以下 %d 个应用程序，但不会安装："
 
-#: src/Summary.cc:1272
+#: src/Summary.cc:1274
 #, c-format, boost-format
 msgid "The following package is going to change architecture:"
 msgid_plural "The following %d packages are going to change architecture:"
 msgstr[0] "将改变以下 %d 个软件包的架构："
 
-#: src/Summary.cc:1277
+#: src/Summary.cc:1279
 #, c-format, boost-format
 msgid "The following patch is going to change architecture:"
 msgid_plural "The following %d patches are going to change architecture:"
 msgstr[0] "将改变以下 %d 个补丁的架构："
 
-#: src/Summary.cc:1282
+#: src/Summary.cc:1284
 #, c-format, boost-format
 msgid "The following pattern is going to change architecture:"
 msgid_plural "The following %d patterns are going to change architecture:"
 msgstr[0] "将改变以下 %d 个软件集的架构："
 
-#: src/Summary.cc:1287
+#: src/Summary.cc:1289
 #, c-format, boost-format
 msgid "The following product is going to change architecture:"
 msgid_plural "The following %d products are going to change architecture:"
 msgstr[0] "将改变以下 %d 个产品的架构："
 
-#: src/Summary.cc:1293
+#: src/Summary.cc:1295
 #, c-format, boost-format
 msgid "The following application is going to change architecture:"
 msgid_plural "The following %d applications are going to change architecture:"
 msgstr[0] "将改变以下 %d 个应用程序的架构："
 
-#: src/Summary.cc:1318
+#: src/Summary.cc:1320
 #, c-format, boost-format
 msgid "The following package is going to change vendor:"
 msgid_plural "The following %d packages are going to change vendor:"
 msgstr[0] "将改变以下 %d 个软件包的来源："
 
-#: src/Summary.cc:1323
+#: src/Summary.cc:1325
 #, c-format, boost-format
 msgid "The following patch is going to change vendor:"
 msgid_plural "The following %d patches are going to change vendor:"
 msgstr[0] "将改变以下 %d 个补丁的来源："
 
-#: src/Summary.cc:1328
+#: src/Summary.cc:1330
 #, c-format, boost-format
 msgid "The following pattern is going to change vendor:"
 msgid_plural "The following %d patterns are going to change vendor:"
 msgstr[0] "将改变以下 %d 个软件集的来源："
 
-#: src/Summary.cc:1333
+#: src/Summary.cc:1335
 #, c-format, boost-format
 msgid "The following product is going to change vendor:"
 msgid_plural "The following %d products are going to change vendor:"
 msgstr[0] "将改变以下 %d 个产品的来源："
 
-#: src/Summary.cc:1339
+#: src/Summary.cc:1341
 #, c-format, boost-format
 msgid "The following application is going to change vendor:"
 msgid_plural "The following %d applications are going to change vendor:"
 msgstr[0] "将改变以下 %d 个应用程序的来源："
 
-#: src/Summary.cc:1362
+#: src/Summary.cc:1364
 #, c-format, boost-format
 msgid "The following package has no support information from its vendor:"
 msgid_plural ""
 "The following %d packages have no support information from their vendor:"
 msgstr[0] "以下 %d 个软件包没有来自其出品方的支持信息："
 
-#: src/Summary.cc:1380
+#: src/Summary.cc:1382
 #, c-format, boost-format
 msgid "The following package is not supported by its vendor:"
 msgid_plural "The following %d packages are not supported by their vendor:"
 msgstr[0] "以下 %d 个软件包不被其出品方支持："
 
-#: src/Summary.cc:1398
+#: src/Summary.cc:1400
 #, c-format, boost-format
 msgid ""
 "The following package needs additional customer contract to get support:"
@@ -1016,11 +1016,11 @@ msgid_plural ""
 "The following %d packages need additional customer contract to get support:"
 msgstr[0] "以下 %d 个软件包需要额外的客户合同以获取支持："
 
-#: src/Summary.cc:1415
+#: src/Summary.cc:1417
 msgid "was superseded by"
 msgstr "已被以下对象替代"
 
-#: src/Summary.cc:1428
+#: src/Summary.cc:1430
 #, c-format, boost-format
 msgid ""
 "The following package was discontinued and has been superseded by a new "
@@ -1030,7 +1030,7 @@ msgid_plural ""
 "new packages with different names."
 msgstr[0] "以下 %d 个软件包已停产且已被一个使用其他名称的新软件包替代。"
 
-#: src/Summary.cc:1433
+#: src/Summary.cc:1435
 msgid ""
 "The successor package should be installed as soon as possible to receive "
 "continued support:"
@@ -1039,25 +1039,25 @@ msgid_plural ""
 "continued support:"
 msgstr[0] "应尽快安装替换软件包以便获享持续的支持服务："
 
-#: src/Summary.cc:1458
+#: src/Summary.cc:1460
 #, c-format, boost-format
 msgid "The following package update will NOT be installed:"
 msgid_plural "The following %d package updates will NOT be installed:"
 msgstr[0] "将不会安装以下 %d 个软件包的更新："
 
-#: src/Summary.cc:1463
+#: src/Summary.cc:1465
 #, c-format, boost-format
 msgid "The following product update will NOT be installed:"
 msgid_plural "The following %d product updates will NOT be installed:"
 msgstr[0] "将不会安装以下 %d 个产品的更新："
 
-#: src/Summary.cc:1469
+#: src/Summary.cc:1471
 #, c-format, boost-format
 msgid "The following application update will NOT be installed:"
 msgid_plural "The following %d application updates will NOT be installed:"
 msgstr[0] "将不会安装以下 %d 个应用程序的更新："
 
-#: src/Summary.cc:1502
+#: src/Summary.cc:1504
 #, c-format, boost-format
 msgid "The following item is locked and will not be changed by any action:"
 msgid_plural ""
@@ -1066,166 +1066,181 @@ msgstr[0] "以下 %d 个项已锁定且不会被任何操作改动："
 
 #. always as plain name list
 #. translators: used as 'tag:' (i.e. followed by ':')
-#: src/Summary.cc:1515
+#: src/Summary.cc:1517
 msgid "Available"
 msgstr "可用版本"
 
 #. translators: used as 'tag:' (i.e. followed by ':')
 #. translators: property name; short; used like "Name: value"
-#: src/Summary.cc:1521 src/info.cc:396 src/info.cc:489 src/info.cc:609
+#: src/Summary.cc:1523 src/info.cc:396 src/info.cc:489 src/info.cc:609
 msgid "Installed"
 msgstr "已安装"
 
-#: src/Summary.cc:1526
+#: src/Summary.cc:1528
 #, boost-format
 msgid "Run '%1%' to see the complete list of locked items."
 msgstr "请运行 '%1%' 查看锁定项的完整列表。"
 
-#: src/Summary.cc:1535
+#: src/Summary.cc:1537
 #, c-format, boost-format
 msgid "The following patch requires a system reboot:"
 msgid_plural "The following %d patches require a system reboot:"
 msgstr[0] "以下 %d 个补丁需要重启系统："
 
-#: src/Summary.cc:1539
+#: src/Summary.cc:1541
 #, c-format, boost-format
 msgid "The following package requires a system reboot:"
 msgid_plural "The following %d packages require a system reboot:"
 msgstr[0] "以下 %d 个软件包需要重启系统："
 
-#: src/Summary.cc:1561
+#: src/Summary.cc:1563
 msgid "Skipped needed patches which do not apply without conflict:"
 msgstr "已跳过无法在应用后不产生冲突的所需补丁："
 
-#: src/Summary.cc:1577
-#, boost-format
-msgid "Overall download size: %1%. Already cached: %2%."
-msgstr "总下载大小：%1%。已缓存：%2%。"
+#. Package download size:   99.2 MiB
+#. or
+#. Package download size:
+#. |     105.7 MiB  overall download size
+#. 99.2 MiB  |  -    6.4 MiB  already in cache
+#: src/Summary.cc:1588
+msgid "Package download size:"
+msgstr ""
 
-#: src/Summary.cc:1580
+#. translator: rendered as "105.7 MiB  overall download size"
+#: src/Summary.cc:1596
+msgid "overall package size"
+msgstr ""
+
+#. translator: rendered as "  6.4 MiB  already in cache"
+#: src/Summary.cc:1598
+msgid "already in cache"
+msgstr ""
+
+#: src/Summary.cc:1605
 msgid "Download only."
 msgstr "仅下载。"
 
-#. TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
-#: src/Summary.cc:1586
-#, c-format, boost-format
-msgid "After the operation, additional %s will be used."
-msgstr "操作完成后，将使用额外的 %s。"
+#. Package install size change:
+#. |     349.1 MiB  required by packages that will be installed
+#. 1.9 MiB  |  -  347.3 MiB  released by packages that will be removed
+#: src/Summary.cc:1610
+msgid "Package install size change:"
+msgstr ""
 
-#: src/Summary.cc:1588
-msgid "No additional space will be used or freed after the operation."
-msgstr "操作完成后，不会占用或释放额外的空间。"
+#. translator: rendered as "349.1 MiB  required by packages that will be installed"
+#: src/Summary.cc:1615
+msgid "required by packages that will be installed"
+msgstr ""
 
-#. TrasnlatorExplanation %s will be substituted by a byte count e.g. 212 K
-#: src/Summary.cc:1595
-#, c-format, boost-format
-msgid "After the operation, %s will be freed."
-msgstr "操作完成后，将释放 %s。"
+#. translator: rendered as "347.3 MiB  released by packages that will be removed"
+#: src/Summary.cc:1617
+msgid "released by packages that will be removed"
+msgstr ""
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
-#: src/Summary.cc:1619
+#: src/Summary.cc:1638
 msgid "package to upgrade"
 msgid_plural "packages to upgrade"
 msgstr[0] "个软件包待升级"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: src/Summary.cc:1630
+#: src/Summary.cc:1649
 msgid "to downgrade"
 msgid_plural "to downgrade"
 msgstr[0] "个软件包待降级"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
-#: src/Summary.cc:1633
+#: src/Summary.cc:1652
 msgid "package to downgrade"
 msgid_plural "packages to downgrade"
 msgstr[0] "个软件包待降级"
 
 #. translators: this text will be preceded by a number e.g. "5 new"
-#: src/Summary.cc:1644
+#: src/Summary.cc:1663
 msgid "new"
 msgid_plural "new"
 msgstr[0] "个软件包将新装"
 
 #. translators: this text will be preceded by a number e.g. "5 new to install"
-#: src/Summary.cc:1647
+#: src/Summary.cc:1666
 msgid "new package to install"
 msgid_plural "new packages to install"
 msgstr[0] "个软件包将新装"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: src/Summary.cc:1658
+#: src/Summary.cc:1677
 msgid "to reinstall"
 msgid_plural "to reinstall"
 msgstr[0] "个软件包将重装"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
-#: src/Summary.cc:1661
+#: src/Summary.cc:1680
 msgid "package to reinstall"
 msgid_plural "packages to reinstall"
 msgstr[0] "个软件包将重装"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: src/Summary.cc:1672
+#: src/Summary.cc:1691
 msgid "to remove"
 msgid_plural "to remove"
 msgstr[0] "个软件包将移除"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
-#: src/Summary.cc:1675
+#: src/Summary.cc:1694
 msgid "package to remove"
 msgid_plural "packages to remove"
 msgstr[0] "个软件包将移除"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: src/Summary.cc:1686
+#: src/Summary.cc:1705
 msgid "to change vendor"
 msgid_plural " to change vendor"
 msgstr[0] "个软件包将跨源"
 
 #. translators: this text will be preceded by a number e.g. "5 packages ..."
-#: src/Summary.cc:1689
+#: src/Summary.cc:1708
 msgid "package will change vendor"
 msgid_plural "packages will change vendor"
 msgstr[0] "个软件包将跨源"
 
 #. translators: this text will be preceded by a number e.g. "5 to ..."
-#: src/Summary.cc:1700
+#: src/Summary.cc:1719
 msgid "to change arch"
 msgid_plural "to change arch"
 msgstr[0] "个软件包将改变架构"
 
 #. translators: this text will be preceded by a number e.g. "5 packages ..."
-#: src/Summary.cc:1703
+#: src/Summary.cc:1722
 msgid "package will change arch"
 msgid_plural "packages will change arch"
 msgstr[0] "个软件包将改变架构"
 
 #. translators: this text will be preceded by a number e.g. "5 new"
-#: src/Summary.cc:1714
+#: src/Summary.cc:1733
 msgid "source package"
 msgid_plural "source packages"
 msgstr[0] "个源代码包"
 
 #. translators: this text will be preceded by a number e.g. "5 new to install"
-#: src/Summary.cc:1717
+#: src/Summary.cc:1736
 msgid "source package to install"
 msgid_plural "source packages to install"
 msgstr[0] "个源代码包将安装"
 
 #. patch command (auto)restricted to update stack patches
-#: src/Summary.cc:1798
+#: src/Summary.cc:1817
 msgid ""
 "Package manager restart required. (Run this command once again after the "
 "update stack got updated)"
 msgstr "需要重启包管理器。(请在更新堆栈获得更新后再次运行此命令)"
 
 #. translator: %1% is an option string like  "--dry-run"
-#: src/Summary.cc:1805
+#: src/Summary.cc:1824
 #, boost-format
 msgid "%1% is set, otherwise a system reboot would be required."
 msgstr "已设置 %1%，否则将需要重引导系统。"
 
-#: src/Summary.cc:1807
+#: src/Summary.cc:1826
 msgid "System reboot required."
 msgstr "需要重启。"
 
@@ -1237,7 +1252,7 @@ msgstr "需要重启。"
 #. Consider to cancel:
 #. Product 'opennSUSE Tumbleweed' requires to be upgraded by calling 'zypper dup'!
 #. Continue? [y/n/...? shows all options] (y):
-#: src/Summary.cc:1826
+#: src/Summary.cc:1845
 msgid "Consider to cancel:"
 msgstr "考虑取消："
 
@@ -1269,7 +1284,7 @@ msgstr "PackageKit 仍在运行（或许正忙）。"
 msgid "Try again?"
 msgstr "重试吗？"
 
-#: src/Zypper.cc:244 src/Zypper.cc:716 src/commands/basecommand.cc:280
+#: src/Zypper.cc:244 src/Zypper.cc:721 src/commands/basecommand.cc:280
 msgid "Unexpected exception."
 msgstr "意外异常。"
 
@@ -1304,7 +1319,7 @@ msgstr ""
 msgid "The %s option has no effect here, ignoring."
 msgstr "%s 选项在此无效，正在忽略。"
 
-#: src/Zypper.cc:659
+#: src/Zypper.cc:630
 msgid "Non-option program arguments: "
 msgstr "无选项程序参数： "
 
@@ -2471,8 +2486,8 @@ msgstr[0] "已移除 %lu 锁定。"
 #: src/commands/locks/list.cc:133 src/commands/repos/list.cc:42
 #: src/commands/repos/list.cc:227 src/commands/services/list.cc:107
 #: src/info.cc:90 src/info.cc:512 src/info.cc:747 src/locales.cc:201
-#: src/search.cc:48 src/search.cc:199 src/search.cc:304 src/search.cc:452
-#: src/search.cc:499 src/update.cc:789 src/utils/misc.cc:325
+#: src/search.cc:48 src/search.cc:199 src/search.cc:304 src/search.cc:458
+#: src/search.cc:508 src/update.cc:789 src/utils/misc.cc:324
 msgid "Name"
 msgstr "名称"
 
@@ -2490,9 +2505,9 @@ msgstr "类型"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: package's repository (header)
-#: src/commands/locks/list.cc:136 src/info.cc:88 src/repos.cc:794
-#: src/search.cc:56 src/search.cc:306 src/search.cc:451 src/search.cc:495
-#: src/update.cc:786 src/utils/misc.cc:324
+#: src/commands/locks/list.cc:136 src/info.cc:88 src/search.cc:56
+#: src/search.cc:306 src/search.cc:457 src/search.cc:504 src/update.cc:786
+#: src/utils/misc.cc:323
 msgid "Repository"
 msgstr "软件源"
 
@@ -3103,33 +3118,40 @@ msgstr "显示解析器自动选择且已安装的软件包。"
 msgid "Show installed packages which were explicitly selected by the user."
 msgstr "显示用户明确选择且已安装的软件包。"
 
-#. translators: --orphaned
+#. translators: --system
 #: src/commands/query/packages.cc:43
-msgid "Show packages which are orphaned (without repository)."
-msgstr "显示孤立的（没有源） 软件包。"
+msgid "Show installed packages which are not provided by any repository."
+msgstr ""
+
+#. translators: --orphaned
+#: src/commands/query/packages.cc:47
+msgid ""
+"Show system packages which are orphaned (without repository and without "
+"update candidate)."
+msgstr ""
 
 #. translators: --suggested
-#: src/commands/query/packages.cc:47
+#: src/commands/query/packages.cc:51
 msgid "Show packages which are suggested."
 msgstr "显示建议的软件包。"
 
 #. translators: --recommended
-#: src/commands/query/packages.cc:51
+#: src/commands/query/packages.cc:55
 msgid "Show packages which are recommended."
 msgstr "显示推荐的软件包。"
 
 #. translators: --unneeded
-#: src/commands/query/packages.cc:55
+#: src/commands/query/packages.cc:59
 msgid "Show packages which are unneeded."
 msgstr "显示不再需要的软件包。"
 
 #. translators: -N, --sort-by-name
-#: src/commands/query/packages.cc:59
+#: src/commands/query/packages.cc:63
 msgid "Sort the list by package name."
 msgstr "按软件包名称排序列表。"
 
 #. translators: -R, --sort-by-repo
-#: src/commands/query/packages.cc:63
+#: src/commands/query/packages.cc:67
 msgid "Sort the list by repository."
 msgstr "按软件源排序列表。"
 
@@ -3281,7 +3303,7 @@ msgstr "别名"
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/commands/repos/list.cc:44 src/commands/repos/list.cc:47
 #: src/commands/repos/list.cc:273 src/commands/services/add.cc:83
-#: src/commands/services/list.cc:118 src/repos.cc:1344
+#: src/commands/services/list.cc:118 src/repos.cc:1247
 #: src/utils/flags/zyppflags.h:49
 msgid "URI"
 msgstr "URI"
@@ -3290,27 +3312,27 @@ msgstr "URI"
 #. translators: property name; short; used like "Name: value"
 #: src/commands/repos/list.cc:51 src/commands/repos/list.cc:235
 #: src/commands/services/add.cc:85 src/commands/services/list.cc:108
-#: src/repos.cc:1346
+#: src/repos.cc:1249
 msgid "Enabled"
 msgstr "已启用"
 
 #. GPG Check
 #. translators: property name; short; used like "Name: value"
 #: src/commands/repos/list.cc:52 src/commands/repos/list.cc:239
-#: src/commands/services/list.cc:109 src/repos.cc:1348
+#: src/commands/services/list.cc:109 src/repos.cc:1251
 msgid "GPG Check"
 msgstr "GPG 检查"
 
 #. translators: repository priority (in zypper repos -p or -d)
 #. translators: property name; short; used like "Name: value"
 #: src/commands/repos/list.cc:53 src/commands/repos/list.cc:257
-#: src/commands/services/list.cc:115 src/repos.cc:1352
+#: src/commands/services/list.cc:115 src/repos.cc:1255
 msgid "Priority"
 msgstr "优先级"
 
 #. translators: property name; short; used like "Name: value"
 #: src/commands/repos/list.cc:54 src/commands/services/add.cc:87
-#: src/repos.cc:1350
+#: src/repos.cc:1253
 msgid "Autorefresh"
 msgstr "自动刷新"
 
@@ -3363,7 +3385,7 @@ msgstr "列出全部已定义的软件源。"
 msgid "Export all defined repositories as a single local .repo file."
 msgstr "将全部已定义的软件源导出为一个本地 .repo 文件。"
 
-#: src/commands/repos/list.cc:122 src/repos.cc:1101
+#: src/commands/repos/list.cc:122 src/repos.cc:1004
 msgid "Error reading repositories:"
 msgstr "读取软件源出错："
 
@@ -3487,7 +3509,7 @@ msgstr "全局选项 '%s' 在此无效。"
 msgid "Arguments are not allowed if '%s' is used."
 msgstr "若使用 '%s' 则不允许使用参数。"
 
-#: src/commands/repos/refresh.cc:195 src/repos.cc:1113
+#: src/commands/repos/refresh.cc:195 src/repos.cc:1016
 msgid "Specified repositories: "
 msgstr "指定的软件源： "
 
@@ -3496,7 +3518,7 @@ msgstr "指定的软件源： "
 msgid "Refreshing repository '%s'."
 msgstr "正在刷新软件源 '%s'。"
 
-#: src/commands/repos/refresh.cc:236 src/repos.cc:900
+#: src/commands/repos/refresh.cc:236 src/repos.cc:842
 #, c-format, boost-format
 msgid "Scanning content of disabled repository '%s'."
 msgstr "正在扫描已禁用软件源 '%s' 的内容。"
@@ -3506,7 +3528,7 @@ msgstr "正在扫描已禁用软件源 '%s' 的内容。"
 msgid "Skipping disabled repository '%s'"
 msgstr "正在跳过已禁用的软件源 '%s'"
 
-#: src/commands/repos/refresh.cc:262 src/repos.cc:917 src/repos.cc:991
+#: src/commands/repos/refresh.cc:262 src/repos.cc:860 src/repos.cc:908
 #, c-format, boost-format
 msgid "Skipping repository '%s' because of the above error."
 msgstr "由于以上错误，正在跳过软件源 '%s' 。"
@@ -3533,7 +3555,7 @@ msgstr "请使用 '%s' 或者 '%s' 命令添加或启用软件源。"
 msgid "Could not refresh the repositories because of errors."
 msgstr "由于若干错误无法刷新软件源。"
 
-#: src/commands/repos/refresh.cc:298 src/repos.cc:1028
+#: src/commands/repos/refresh.cc:298 src/repos.cc:937
 msgid "Some of the repositories have not been refreshed because of an error."
 msgstr "由于某处出错未刷新部分软件源。"
 
@@ -3587,12 +3609,12 @@ msgstr ""
 msgid "Repository '%s' renamed to '%s'."
 msgstr "软件源 '%s' 已重命名为 '%s' 。"
 
-#: src/commands/repos/rename.cc:47 src/repos.cc:1292
+#: src/commands/repos/rename.cc:47 src/repos.cc:1195
 #, c-format, boost-format
 msgid "Repository named '%s' already exists. Please use another alias."
 msgstr "已存在名为 '%s' 的软件源。请使用其它别名。"
 
-#: src/commands/repos/rename.cc:52 src/repos.cc:1770
+#: src/commands/repos/rename.cc:52 src/repos.cc:1673
 msgid "Error while modifying the repository:"
 msgstr "修改软件源时出错："
 
@@ -3624,7 +3646,7 @@ msgstr "参数太少。至少需要 URI 和别名。"
 msgid "Repository '%s' not found."
 msgstr "未找到软件源 '%s'。"
 
-#: src/commands/reposerviceoptionsets.cc:35 src/repos.cc:150
+#: src/commands/reposerviceoptionsets.cc:35 src/repos.cc:109
 #, c-format, boost-format
 msgid ""
 "Invalid priority '%s'. Use a positive integer number. The greater the "
@@ -4005,7 +4027,7 @@ msgstr ""
 "像 --details 一样，带有搜索匹配到的位置的额外信息 （在依赖关系中搜索时很有"
 "用）。"
 
-#: src/commands/search/search.cc:290 src/repos.cc:837
+#: src/commands/search/search.cc:290 src/repos.cc:779
 #, c-format, boost-format
 msgid "Specified repository '%s' is disabled."
 msgstr "已禁用指定软件源 '%s'。"
@@ -4023,7 +4045,7 @@ msgstr "初始化或执行搜索查询出现问题"
 msgid "See the above message for a hint."
 msgstr "请参考以上消息汲取灵感。"
 
-#: src/commands/search/search.cc:497 src/repos.cc:1080
+#: src/commands/search/search.cc:497 src/repos.cc:983
 msgid "Running 'zypper refresh' as root might resolve the problem."
 msgstr "以 root 身份运行 'zypper refresh' 或许会解决该问题。"
 
@@ -4113,7 +4135,7 @@ msgid "Problem retrieving the repository index file for service '%s':"
 msgstr "检索服务 '%s' 的软件源索引文件出现问题："
 
 #: src/commands/services/common.cc:138 src/commands/services/refresh.cc:226
-#: src/repos.cc:1822
+#: src/repos.cc:1725
 #, c-format, boost-format
 msgid "Skipping service '%s' because of the above error."
 msgstr "由于以上错误，正在跳过服务 '%s' 。"
@@ -5033,13 +5055,13 @@ msgstr "%s 较 %s 旧"
 #. translators: Table column header
 #. translators: package version (header)
 #: src/info.cc:92 src/info.cc:748 src/search.cc:52 src/search.cc:305
-#: src/search.cc:453 src/search.cc:500
+#: src/search.cc:459 src/search.cc:509
 msgid "Version"
 msgstr "版本"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: package architecture (header)
-#: src/info.cc:94 src/search.cc:54 src/search.cc:454 src/search.cc:501
+#: src/info.cc:94 src/search.cc:54 src/search.cc:460 src/search.cc:510
 #: src/update.cc:795
 msgid "Arch"
 msgstr "架构"
@@ -5051,8 +5073,8 @@ msgstr "出品方"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: package summary (header)
-#: src/info.cc:102 src/search.cc:201 src/utils/misc.cc:331
-#: src/utils/misc.cc:373
+#: src/info.cc:102 src/search.cc:201 src/utils/misc.cc:330
+#: src/utils/misc.cc:372
 msgid "Summary"
 msgstr "摘要"
 
@@ -5108,8 +5130,8 @@ msgid "Installed Size"
 msgstr "已安装大小"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:398 src/info.cc:448 src/info.cc:612 src/utils/misc.cc:329
-#: src/utils/misc.cc:371
+#: src/info.cc:398 src/info.cc:448 src/info.cc:612 src/utils/misc.cc:328
+#: src/utils/misc.cc:370
 msgid "Status"
 msgstr "状态"
 
@@ -5133,13 +5155,13 @@ msgstr "上游网址"
 #. translators: property name; short; used like "Name: value"
 #. translator: Table column header.
 #. Name
-#: src/info.cc:450 src/update.cc:406 src/utils/misc.cc:326
-#: src/utils/misc.cc:368
+#: src/info.cc:450 src/update.cc:406 src/utils/misc.cc:325
+#: src/utils/misc.cc:367
 msgid "Category"
 msgstr "分类"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:452 src/utils/misc.cc:327 src/utils/misc.cc:369
+#: src/info.cc:452 src/utils/misc.cc:326 src/utils/misc.cc:368
 msgid "Severity"
 msgstr "严重性"
 
@@ -5149,7 +5171,7 @@ msgid "Created On"
 msgstr "创建于"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:456 src/utils/misc.cc:328 src/utils/misc.cc:370
+#: src/info.cc:456 src/utils/misc.cc:327 src/utils/misc.cc:369
 msgid "Interactive"
 msgstr "交互的"
 
@@ -5173,7 +5195,7 @@ msgstr "（空）"
 #. translators: S for installed Status
 #. TranslatorExplanation S stands for Status
 #: src/info.cc:511 src/info.cc:746 src/locales.cc:199 src/search.cc:46
-#: src/search.cc:198 src/search.cc:303 src/search.cc:450 src/search.cc:494
+#: src/search.cc:198 src/search.cc:303 src/search.cc:456 src/search.cc:503
 #: src/update.cc:784
 msgid "S"
 msgstr "S"
@@ -5216,7 +5238,7 @@ msgid "Flavor"
 msgstr "风格"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:607 src/search.cc:502
+#: src/info.cc:607 src/search.cc:511
 msgid "Is Base"
 msgstr "是基础"
 
@@ -5269,7 +5291,7 @@ msgstr "所请求语言"
 msgid "Fallback"
 msgstr "后备"
 
-#: src/locales.cc:72 src/repos.cc:174 src/repos.cc:202
+#: src/locales.cc:72 src/repos.cc:133 src/repos.cc:161
 msgid "No"
 msgstr "否"
 
@@ -5311,12 +5333,12 @@ msgstr "未请求 %s。"
 #. set up our strings we want to output in case SIGINT was triggered
 #. we can not allocate memory there, so we do it in advance and remember the translated strings
 #. translators: this will show up if you press ctrl+c once
-#: src/main.cc:122
+#: src/main.cc:150
 msgid "Trying to exit gracefully..."
 msgstr "正在尝试正常退出..."
 
 #. translators: this will show up if you press ctrl+c twice
-#: src/main.cc:126
+#: src/main.cc:154
 msgid "Zypper is currently cleaning up, exiting as soon as possible."
 msgstr "Zypper 目前正在执行清理，会尽快退出。"
 
@@ -5417,56 +5439,51 @@ msgstr "已成功安装源代码包 %s-%s。"
 msgid "Problem installing source package %s-%s:"
 msgstr "安装源代码包 %s-%s 出现问题："
 
-#. translator: used like "1h 12min in the future!"
-#: src/repos.cc:83
-msgid "in the future!"
-msgstr "将来！"
-
 #. translators: used as 'XYZ changed to SOMETHING [volatile]' to tag specific property changes.
-#: src/repos.cc:94
+#: src/repos.cc:53
 msgid "volatile"
 msgstr "非永久"
 
 #. translators: 'Volatile' refers to changes we previously tagged as 'XYZ changed to SOMETHING [volatile]'
-#: src/repos.cc:100
+#: src/repos.cc:59
 #, boost-format
 msgid ""
 "Repo '%1%' is managed by service '%2%'. Volatile changes are reset by the "
 "next service refresh!"
 msgstr "软件源 '%1%' 由服务 '%2%' 管理。下次服务刷新将重置非永久性变动！"
 
-#: src/repos.cc:116
+#: src/repos.cc:75
 msgid "default priority"
 msgstr "默认优先级"
 
-#: src/repos.cc:117
+#: src/repos.cc:76
 msgid "raised priority"
 msgstr "更高的优先级"
 
-#: src/repos.cc:117
+#: src/repos.cc:76
 msgid "lowered priority"
 msgstr "更低的优先级"
 
-#: src/repos.cc:168 src/repos.cc:196
+#: src/repos.cc:127 src/repos.cc:155
 msgid "Yes"
 msgstr "是"
 
-#: src/repos.cc:221
+#: src/repos.cc:180
 msgid ""
 "Repository priorities are without effect. All enabled repositories share the "
 "same priority."
 msgstr "软件源优先级无效。所有已启用的软件源将使用相同的优先级。"
 
-#: src/repos.cc:225
+#: src/repos.cc:184
 msgid "Repository priorities in effect:"
 msgstr "软件源优先级已生效："
 
-#: src/repos.cc:226
+#: src/repos.cc:185
 #, boost-format
 msgid "See '%1%' for details"
 msgstr "细节请参考 '%1%'"
 
-#: src/repos.cc:235
+#: src/repos.cc:194
 #, boost-format
 msgid "%1% repository"
 msgid_plural "%1% repositories"
@@ -5474,57 +5491,57 @@ msgstr[0] "%1% 个软件源"
 
 #. check whether libzypp indicates a refresh is needed, and if so,
 #. print a message
-#: src/repos.cc:268
+#: src/repos.cc:227
 #, c-format, boost-format
 msgid "Checking whether to refresh metadata for %s"
 msgstr "正在检查是否需要刷新 %s 的元数据"
 
-#: src/repos.cc:297
+#: src/repos.cc:256
 #, c-format, boost-format
 msgid "Repository '%s' is up to date."
 msgstr "软件源 '%s' 是最新的。"
 
-#: src/repos.cc:303
+#: src/repos.cc:262
 #, c-format, boost-format
 msgid "The up-to-date check of '%s' has been delayed."
 msgstr "已推延了对 '%s' 的更新检查。"
 
-#: src/repos.cc:325
+#: src/repos.cc:284
 msgid "Forcing raw metadata refresh"
 msgstr "正在强制执行原始元数据刷新"
 
-#: src/repos.cc:331
+#: src/repos.cc:290
 #, c-format, boost-format
 msgid "Retrieving repository '%s' metadata"
 msgstr "正在检索软件源 '%s' 的元数据"
 
-#: src/repos.cc:355
+#: src/repos.cc:314
 #, c-format, boost-format
 msgid "Do you want to disable the repository %s permanently?"
 msgstr "您想要永久禁用软件源 %s 吗？"
 
-#: src/repos.cc:371
+#: src/repos.cc:330
 #, c-format, boost-format
 msgid "Error while disabling repository '%s'."
 msgstr "禁用软件源 '%s' 时出错。"
 
-#: src/repos.cc:387
+#: src/repos.cc:346
 #, c-format, boost-format
 msgid "Problem retrieving files from '%s'."
 msgstr "从 '%s'检索文件时出现问题。"
 
-#: src/repos.cc:388 src/repos.cc:1957 src/solve-commit.cc:989
+#: src/repos.cc:347 src/repos.cc:1860 src/solve-commit.cc:989
 #: src/solve-commit.cc:1020 src/solve-commit.cc:1044
 msgid "Please see the above error message for a hint."
 msgstr "请参考以上错误消息汲取灵感。"
 
-#: src/repos.cc:400
+#: src/repos.cc:359
 #, c-format, boost-format
 msgid "No URIs defined for '%s'."
 msgstr "没有为 '%s' 定义 URI。"
 
 #. TranslatorExplanation the first %s is a .repo file path
-#: src/repos.cc:405
+#: src/repos.cc:364
 #, c-format, boost-format
 msgid ""
 "Please add one or more base URI (baseurl=URI) entries to %s for repository "
@@ -5532,37 +5549,37 @@ msgid ""
 msgstr ""
 "请添加一个或者更多的基础 URI 项 (baseurl=URI) 至 %s（针对软件源 '%s'）。"
 
-#: src/repos.cc:419
+#: src/repos.cc:378
 msgid "No alias defined for this repository."
 msgstr "该软件源没有定义别名。"
 
-#: src/repos.cc:431
+#: src/repos.cc:390
 #, c-format, boost-format
 msgid "Repository '%s' is invalid."
 msgstr "软件源 '%s' 无效。"
 
-#: src/repos.cc:432
+#: src/repos.cc:391
 msgid ""
 "Please check if the URIs defined for this repository are pointing to a valid "
 "repository."
 msgstr "请检查此软件源定义的 URI 是否指向了一个有效的软件源。"
 
-#: src/repos.cc:444
+#: src/repos.cc:403
 #, c-format, boost-format
 msgid "Error retrieving metadata for '%s':"
 msgstr "检索 '%s' 元数据时出错："
 
-#: src/repos.cc:457
+#: src/repos.cc:416
 msgid "Forcing building of repository cache"
 msgstr "正在强制构建软件源缓存"
 
-#: src/repos.cc:482
+#: src/repos.cc:441
 #, c-format, boost-format
 msgid "Error parsing metadata for '%s':"
 msgstr "解析 '%s' 元数据出错："
 
 #. TranslatorExplanation Don't translate the URL unless it is translated, too
-#: src/repos.cc:484
+#: src/repos.cc:443
 msgid ""
 "This may be caused by invalid metadata in the repository, or by a bug in the "
 "metadata parser. In the latter case, or if in doubt, please, file a bug "
@@ -5573,73 +5590,53 @@ msgstr ""
 "存疑，请参考 http://zh.opensuse.org/SDB:Zypper_疑难解答 的指南填写一份故障报"
 "告"
 
-#: src/repos.cc:493
+#: src/repos.cc:452
 #, c-format, boost-format
 msgid "Repository metadata for '%s' not found in local cache."
 msgstr "在本地缓存中未找到 '%s' 的软件源元数据。"
 
-#: src/repos.cc:501
+#: src/repos.cc:460
 msgid "Error building the cache:"
 msgstr "构建缓存出错："
 
-#: src/repos.cc:720
+#: src/repos.cc:679
 #, c-format, boost-format
 msgid "Repository '%s' not found by its alias, number, or URI."
 msgstr "未能通过别名、编号或 URI 找到软件源 '%s'。"
 
-#: src/repos.cc:722
+#: src/repos.cc:681
 #, c-format, boost-format
 msgid "Use '%s' to get the list of defined repositories."
 msgstr "使用 '%s' 获取已定义软件源的列表。"
 
-#: src/repos.cc:742
+#: src/repos.cc:701
 #, c-format, boost-format
 msgid "Ignoring disabled repository '%s'"
 msgstr "正在忽略已禁用的软件源 '%s'"
 
-#. translator: used as a table header
-#: src/repos.cc:796
-msgid "Time since last refresh"
-msgstr "自上次刷新经过的时间"
-
-#: src/repos.cc:843
+#: src/repos.cc:785
 #, c-format, boost-format
 msgid "Global option '%s' can be used to temporarily enable repositories."
 msgstr "全局选项 '%s' 可用来临时启用软件源。"
 
-#: src/repos.cc:859 src/repos.cc:865
+#: src/repos.cc:801 src/repos.cc:807
 #, c-format, boost-format
 msgid "Ignoring repository '%s' because of '%s' option."
 msgstr "正在忽略软件源 '%s'，因为启用了 '%s' 选项。"
 
-#: src/repos.cc:886 src/repos.cc:1006
+#: src/repos.cc:828 src/repos.cc:922
 #, c-format, boost-format
 msgid "Temporarily enabling repository '%s'."
 msgstr "正在暂时性启用软件源 '%s'。"
 
-#: src/repos.cc:943
+#: src/repos.cc:886
 #, c-format, boost-format
 msgid ""
 "Repository '%s' is out-of-date. You can run 'zypper refresh' as root to "
 "update it."
 msgstr "软件源 '%s' 已经过时。您可以 root 身份运行 'zypper refresh' 更新它。"
 
-#. translator: Used as status in a table "RepoName: MetadataStatus"
-#: src/repos.cc:963
-msgid "No metadata available! Skipping it!"
-msgstr "没有可用的元数据。将会跳过！"
-
-#. translator: Used as status in a table "RepoName: MetadataStatus"
-#: src/repos.cc:966
-msgid "No permission to read metadata! Skipping it!"
-msgstr "无权读取元数据。将会跳过！"
-
-#. translator: Used as status in a table "RepoName: MetadataStatus"
-#: src/repos.cc:969
-msgid "Cannot access metadata! Skipping it!"
-msgstr "无法访问元数据。将会跳过！"
-
-#: src/repos.cc:986
+#: src/repos.cc:903
 #, c-format, boost-format
 msgid ""
 "The metadata cache needs to be built for the '%s' repository. You can run "
@@ -5648,290 +5645,280 @@ msgstr ""
 "需要构建软件源 '%s' 的元数据缓存。您可以 root 身份运行 'zypper refresh' 执行"
 "此操作。"
 
-#: src/repos.cc:1013
+#: src/repos.cc:929
 #, c-format, boost-format
 msgid "Repository '%s' stays disabled."
 msgstr "软件源 '%s' 保持禁用。"
 
-#: src/repos.cc:1026
-msgid "Some of the repositories had to be skipped due to missing metadata."
-msgstr "由于缺少元数据，必须跳过部分储存库。"
-
-#: src/repos.cc:1039
-msgid ""
-"Running with user privileges. From time to time run 'zypper refresh' as root "
-"to make sure the repository metadata are complete and up-to-date."
-msgstr "正在使用用户权限运行。请不时以 root 身份运行 \"zypper refresh\" 来确保储存库元数据是完整且最新的。"
-
-#: src/repos.cc:1071
+#: src/repos.cc:974
 msgid "Initializing Target"
 msgstr "正在初始化目标"
 
-#: src/repos.cc:1079
+#: src/repos.cc:982
 msgid "Target initialization failed:"
 msgstr "目标初始化失败："
 
-#: src/repos.cc:1161
+#: src/repos.cc:1064
 #, c-format, boost-format
 msgid "Cleaning metadata cache for '%s'."
 msgstr "正在清理 '%s' 的元数据缓存。"
 
-#: src/repos.cc:1169
+#: src/repos.cc:1072
 #, c-format, boost-format
 msgid "Cleaning raw metadata cache for '%s'."
 msgstr "正在清理 '%s' 的原始元数据缓存。"
 
-#: src/repos.cc:1175
+#: src/repos.cc:1078
 #, c-format, boost-format
 msgid "Keeping raw metadata cache for %s '%s'."
 msgstr "正在保留 %s 的原始元数据缓存 '%s'。"
 
 #. translators: meaning the cached rpm files
-#: src/repos.cc:1182
+#: src/repos.cc:1085
 #, c-format, boost-format
 msgid "Cleaning packages for '%s'."
 msgstr "正在为 '%s' 清理软件包。"
 
-#: src/repos.cc:1190
+#: src/repos.cc:1093
 #, c-format, boost-format
 msgid "Cannot clean repository '%s' because of an error."
 msgstr "由于某处出错无法清理软件源 '%s' 。"
 
-#: src/repos.cc:1201
+#: src/repos.cc:1104
 msgid "Cleaning installed packages cache."
 msgstr "正在清理已安装软件包缓存。"
 
-#: src/repos.cc:1210
+#: src/repos.cc:1113
 msgid "Cannot clean installed packages cache because of an error."
 msgstr "由于某处出错无法清理已安装软件包缓存。"
 
-#: src/repos.cc:1228
+#: src/repos.cc:1131
 msgid "Could not clean the repositories because of errors."
 msgstr "由于若干错误无法清理软件源。"
 
-#: src/repos.cc:1234
+#: src/repos.cc:1137
 msgid "Some of the repositories have not been cleaned up because of an error."
 msgstr "由于某处出错未清理部分软件源。"
 
-#: src/repos.cc:1239
+#: src/repos.cc:1142
 msgid "Specified repositories have been cleaned up."
 msgstr "指定软件源清理完毕。"
 
-#: src/repos.cc:1241
+#: src/repos.cc:1144
 msgid "All repositories have been cleaned up."
 msgstr "全部软件源清理完毕。"
 
-#: src/repos.cc:1263
+#: src/repos.cc:1166
 msgid "This is a changeable read-only media (CD/DVD), disabling autorefresh."
 msgstr "这是一个可变只读介质 (CD/DVD)，正在禁用自动刷新。"
 
-#: src/repos.cc:1284
+#: src/repos.cc:1187
 #, c-format, boost-format
 msgid "Invalid repository alias: '%s'"
 msgstr "无效的软件源别名：'%s'"
 
-#: src/repos.cc:1301
+#: src/repos.cc:1204
 msgid ""
 "Could not determine the type of the repository. Please check if the defined "
 "URIs (see below) point to a valid repository:"
 msgstr "无法确定软件源类型。请检查定义的 URI (见下) 是否指向了有效的软件源："
 
-#: src/repos.cc:1307
+#: src/repos.cc:1210
 msgid "Can't find a valid repository at given location:"
 msgstr "未能在给定位置找到有效的软件源："
 
-#: src/repos.cc:1315
+#: src/repos.cc:1218
 msgid "Problem transferring repository data from specified URI:"
 msgstr "从指定 URI 传输软件源数据出现问题："
 
-#: src/repos.cc:1316
+#: src/repos.cc:1219
 msgid "Please check whether the specified URI is accessible."
 msgstr "请检查是否可访问指定的 URI。"
 
-#: src/repos.cc:1323
+#: src/repos.cc:1226
 msgid "Unknown problem when adding repository:"
 msgstr "添加软件源时出现未知问题："
 
 #. translators: BOOST STYLE POSITIONAL DIRECTIVES ( %N% )
 #. translators: %1% - a repository name
-#: src/repos.cc:1333
+#: src/repos.cc:1236
 #, boost-format
 msgid ""
 "GPG checking is disabled in configuration of repository '%1%'. Integrity and "
 "origin of packages cannot be verified."
 msgstr "软件源 '%1%' 的配置中禁用了 GPG 检查。无法校验完整性和软件包的出处。"
 
-#: src/repos.cc:1338
+#: src/repos.cc:1241
 #, c-format, boost-format
 msgid "Repository '%s' successfully added"
 msgstr "成功添加了软件源 '%s'"
 
-#: src/repos.cc:1364
+#: src/repos.cc:1267
 #, c-format, boost-format
 msgid "Reading data from '%s' media"
 msgstr "正在从介质 '%s' 读取数据"
 
-#: src/repos.cc:1370
+#: src/repos.cc:1273
 #, c-format, boost-format
 msgid "Problem reading data from '%s' media"
 msgstr "从介质 '%s' 读取数据时出现问题"
 
-#: src/repos.cc:1371
+#: src/repos.cc:1274
 msgid "Please check if your installation media is valid and readable."
 msgstr "请检查您的安装介质是否有效和可读。"
 
-#: src/repos.cc:1378
+#: src/repos.cc:1281
 #, c-format, boost-format
 msgid "Reading data from '%s' media is delayed until next refresh."
 msgstr "推迟从 '%s' 介质读取数据直至下次刷新。"
 
-#: src/repos.cc:1447
+#: src/repos.cc:1350
 msgid "Problem accessing the file at the specified URI"
 msgstr "访问指定 URI 处文件时出现问题"
 
-#: src/repos.cc:1448
+#: src/repos.cc:1351
 msgid "Please check if the URI is valid and accessible."
 msgstr "请检查该 URI 是否有效且可访问。"
 
-#: src/repos.cc:1455
+#: src/repos.cc:1358
 msgid "Problem parsing the file at the specified URI"
 msgstr "解析指定 URI 处文件时出现问题"
 
 #. TranslatorExplanation Don't translate the '.repo' string.
-#: src/repos.cc:1457
+#: src/repos.cc:1360
 msgid "Is it a .repo file?"
 msgstr "它是一个 .repo 文件吗？"
 
-#: src/repos.cc:1464
+#: src/repos.cc:1367
 msgid "Problem encountered while trying to read the file at the specified URI"
 msgstr "尝试读取指定 URI 处文件时遇到问题"
 
-#: src/repos.cc:1477
+#: src/repos.cc:1380
 msgid "Repository with no alias defined found in the file, skipping."
 msgstr "在文件中发现了未定义别名的软件源，正在跳过。"
 
-#: src/repos.cc:1483
+#: src/repos.cc:1386
 #, c-format, boost-format
 msgid "Repository '%s' has no URI defined, skipping."
 msgstr "软件源 '%s' 未定义 URI，正在跳过。"
 
-#: src/repos.cc:1531
+#: src/repos.cc:1434
 #, c-format, boost-format
 msgid "Repository '%s' has been removed."
 msgstr "已移除软件源 '%s'。"
 
-#: src/repos.cc:1679
+#: src/repos.cc:1582
 #, c-format, boost-format
 msgid "Repository '%s' priority has been left unchanged (%d)"
 msgstr "未变动软件源 '%s' 的优先级 (%d)"
 
-#: src/repos.cc:1712
+#: src/repos.cc:1615
 #, c-format, boost-format
 msgid "Repository '%s' has been successfully enabled."
 msgstr "已成功启用软件源 '%s'。"
 
-#: src/repos.cc:1714
+#: src/repos.cc:1617
 #, c-format, boost-format
 msgid "Repository '%s' has been successfully disabled."
 msgstr "已成功禁用软件源 '%s'。"
 
-#: src/repos.cc:1721
+#: src/repos.cc:1624
 #, c-format, boost-format
 msgid "Autorefresh has been enabled for repository '%s'."
 msgstr "已启用自动刷新软件源 '%s'。"
 
-#: src/repos.cc:1723
+#: src/repos.cc:1626
 #, c-format, boost-format
 msgid "Autorefresh has been disabled for repository '%s'."
 msgstr "已禁用自动刷新软件源 '%s'。"
 
-#: src/repos.cc:1730
+#: src/repos.cc:1633
 #, c-format, boost-format
 msgid "RPM files caching has been enabled for repository '%s'."
 msgstr "已为软件源 '%s' 启用 RPM 文件缓存。"
 
-#: src/repos.cc:1732
+#: src/repos.cc:1635
 #, c-format, boost-format
 msgid "RPM files caching has been disabled for repository '%s'."
 msgstr "已为软件源 '%s' 禁用 RPM 文件缓存。"
 
-#: src/repos.cc:1739
+#: src/repos.cc:1642
 #, c-format, boost-format
 msgid "GPG check has been enabled for repository '%s'."
 msgstr "已对软件源 '%s' 启用 GPG 检查。"
 
-#: src/repos.cc:1741
+#: src/repos.cc:1644
 #, c-format, boost-format
 msgid "GPG check has been disabled for repository '%s'."
 msgstr "已对软件源 '%s' 禁用 GPG 检查。"
 
-#: src/repos.cc:1747
+#: src/repos.cc:1650
 #, c-format, boost-format
 msgid "Repository '%s' priority has been set to %d."
 msgstr "软件源 '%s' 的优先级已设为 %d。"
 
-#: src/repos.cc:1753
+#: src/repos.cc:1656
 #, c-format, boost-format
 msgid "Name of repository '%s' has been set to '%s'."
 msgstr "软件源 '%s' 名称已设为 '%s'。"
 
-#: src/repos.cc:1764
+#: src/repos.cc:1667
 #, c-format, boost-format
 msgid "Nothing to change for repository '%s'."
 msgstr "软件源 '%s' 无需修改。"
 
-#: src/repos.cc:1771
+#: src/repos.cc:1674
 #, c-format, boost-format
 msgid "Leaving repository %s unchanged."
 msgstr "软件源 %s 未变动。"
 
-#: src/repos.cc:1858
+#: src/repos.cc:1761
 msgid "Loading repository data..."
 msgstr "正在加载软件源数据..."
 
-#: src/repos.cc:1860
+#: src/repos.cc:1763
 msgid ""
 "No repositories defined. Operating only with the installed resolvables. "
 "Nothing can be installed."
 msgstr "未定义软件源。只能操作已安装的可解析项。不能安装新东西。"
 
-#: src/repos.cc:1881
+#: src/repos.cc:1784
 #, c-format, boost-format
 msgid "Retrieving repository '%s' data..."
 msgstr "正在检索软件源 '%s' 的数据..."
 
-#: src/repos.cc:1887
+#: src/repos.cc:1790
 #, c-format, boost-format
 msgid "Repository '%s' not cached. Caching..."
 msgstr "未缓存软件源 '%s'。正在缓存中..."
 
-#: src/repos.cc:1893 src/repos.cc:1927
+#: src/repos.cc:1796 src/repos.cc:1830
 #, c-format, boost-format
 msgid "Problem loading data from '%s'"
 msgstr "从 '%s' 加载数据出现问题"
 
-#: src/repos.cc:1897
+#: src/repos.cc:1800
 #, c-format, boost-format
 msgid "Repository '%s' could not be refreshed. Using old cache."
 msgstr "无法刷新软件源 '%s'。正在使用旧缓存。"
 
-#: src/repos.cc:1901 src/repos.cc:1930
+#: src/repos.cc:1804 src/repos.cc:1833
 #, c-format, boost-format
 msgid "Resolvables from '%s' not loaded because of error."
 msgstr "由于某处错误未加载来自 '%s' 的可解析项。"
 
-#: src/repos.cc:1917
+#: src/repos.cc:1820
 #, boost-format
 msgid "Repository '%1%' metadata expired since %2%."
 msgstr "自 %2% 起，软件源 \"%1%\" 元数据已失效。"
 
 #. translators: the first %s is 'zypper refresh' and the second 'zypper clean -m'
-#: src/repos.cc:1929
+#: src/repos.cc:1832
 #, c-format, boost-format
 msgid "Try '%s', or even '%s' before doing so."
 msgstr "这么做前请先尝试 '%s'，甚至在那之前先尝试一下 '%s'。"
 
-#: src/repos.cc:1934
+#: src/repos.cc:1837
 msgid ""
 "Repository metadata expired: Check if 'autorefresh' is turned on (zypper "
 "lr), otherwise manually refresh the repository (zypper ref). If this does "
@@ -5942,30 +5929,30 @@ msgstr ""
 "软件源 (zypper ref)。如果这样无法解决问题，则可能是因为您使用的镜像已损坏或服"
 "务器实际上已停止支持该软件源。"
 
-#: src/repos.cc:1947
+#: src/repos.cc:1850
 msgid "Reading installed packages..."
 msgstr "正在读取已安装的软件包..."
 
-#: src/repos.cc:1956
+#: src/repos.cc:1859
 msgid "Problem occurred while reading the installed packages:"
 msgstr "读取已安装软件包时发生问题："
 
-#: src/repos.cc:1973
+#: src/repos.cc:1876
 #, c-format, boost-format
 msgid "'%s' looks like an RPM file. Will try to download it."
 msgstr "'%s' 貌似是一个 RPM 文件，将尝试下载之。"
 
-#: src/repos.cc:1982
+#: src/repos.cc:1885
 #, c-format, boost-format
 msgid "Problem with the RPM file specified as '%s', skipping."
 msgstr "指定为 '%s' 的 RPM 文件有问题，正在跳过。"
 
-#: src/repos.cc:2004
+#: src/repos.cc:1907
 #, c-format, boost-format
 msgid "Problem reading the RPM header of %s. Is it an RPM file?"
 msgstr "读取 %s 的 RPM 头部出现问题。它是一个 RPM 文件吗？"
 
-#: src/repos.cc:2024
+#: src/repos.cc:1927
 msgid "Plain RPM files cache"
 msgstr "纯 RPM 文件缓存"
 
@@ -5981,17 +5968,17 @@ msgstr "未找到所需补丁。"
 msgid "No patterns found."
 msgstr "未找到软件集。"
 
-#: src/search.cc:444
+#: src/search.cc:450
 msgid "No packages found."
 msgstr "未找到软件包。"
 
 #. translators: used in products. Internal Name is the unix name of the
 #. product whereas simply Name is the official full name of the product.
-#: src/search.cc:498
+#: src/search.cc:507
 msgid "Internal Name"
 msgstr "内部名称"
 
-#: src/search.cc:535
+#: src/search.cc:544
 msgid "No products found."
 msgstr "未找到产品。"
 
@@ -6714,140 +6701,140 @@ msgstr ""
 "在此情况下需要先安装提供这一 subcommand 的特定软件包。这样的软件包通常名为 "
 "'%1%' 或 '%2%'。"
 
-#: src/utils/misc.cc:94
+#: src/utils/misc.cc:93
 msgid "package"
 msgid_plural "packages"
 msgstr[0] "软件包"
 
-#: src/utils/misc.cc:96
+#: src/utils/misc.cc:95
 msgid "pattern"
 msgid_plural "patterns"
 msgstr[0] "软件集"
 
-#: src/utils/misc.cc:98
+#: src/utils/misc.cc:97
 msgid "product"
 msgid_plural "product"
 msgstr[0] "产品"
 
-#: src/utils/misc.cc:100
+#: src/utils/misc.cc:99
 msgid "patch"
 msgid_plural "patches"
 msgstr[0] "补丁"
 
-#: src/utils/misc.cc:102
+#: src/utils/misc.cc:101
 msgid "srcpackage"
 msgid_plural "srcpackages"
 msgstr[0] "源代码包"
 
-#: src/utils/misc.cc:104
+#: src/utils/misc.cc:103
 msgid "application"
 msgid_plural "applications"
 msgstr[0] "应用程序"
 
 #. default
-#: src/utils/misc.cc:106
+#: src/utils/misc.cc:105
 msgid "resolvable"
 msgid_plural "resolvables"
 msgstr[0] "可解析项"
 
 #. Patch status: i18n + color
 #. translator: patch status
-#: src/utils/misc.cc:115
+#: src/utils/misc.cc:114
 msgid "unwanted"
 msgstr "不需要"
 
 #. translator: patch status
-#: src/utils/misc.cc:116
+#: src/utils/misc.cc:115
 msgid "optional"
 msgstr "可选"
 
 #. translator: patch status
-#: src/utils/misc.cc:117
+#: src/utils/misc.cc:116
 msgid "needed"
 msgstr "需要"
 
 #. translator: patch status
-#: src/utils/misc.cc:118
+#: src/utils/misc.cc:117
 msgid "applied"
 msgstr "已应用"
 
 #. translator: patch status
-#: src/utils/misc.cc:119
+#: src/utils/misc.cc:118
 msgid "not needed"
 msgstr "不需要"
 
 #. translator: patch status
-#: src/utils/misc.cc:120
+#: src/utils/misc.cc:119
 msgid "undetermined"
 msgstr "未确定"
 
 #. pi_r is no patch!
 #. translator: patch status
-#: src/utils/misc.cc:121
+#: src/utils/misc.cc:120
 msgid "retracted"
 msgstr "已撤回"
 
-#: src/utils/misc.cc:330 src/utils/misc.cc:372
+#: src/utils/misc.cc:329 src/utils/misc.cc:371
 msgid "Since"
 msgstr "自从"
 
 #. << _("Repository")
-#: src/utils/misc.cc:365
+#: src/utils/misc.cc:364
 msgid "Issue"
 msgstr "问题"
 
-#: src/utils/misc.cc:366
+#: src/utils/misc.cc:365
 msgid "No."
 msgstr "编号"
 
-#: src/utils/misc.cc:367
+#: src/utils/misc.cc:366
 msgid "Patch"
 msgstr "补丁"
 
-#: src/utils/misc.cc:445
+#: src/utils/misc.cc:444
 msgid "Specified local path does not exist or is not accessible."
 msgstr "指定的本地路径不存在或者不可访问。"
 
-#: src/utils/misc.cc:457
+#: src/utils/misc.cc:456
 msgid "Given URI is invalid"
 msgstr "所给的 URL 无效"
 
 #. Guess failed:
 #. translators: don't translate '<platform>'
-#: src/utils/misc.cc:549
+#: src/utils/misc.cc:548
 msgid "Unable to guess a value for <platform>."
 msgstr "无法为 <platform> 猜测值。"
 
-#: src/utils/misc.cc:550
+#: src/utils/misc.cc:549
 msgid "Please use obs://<project>/<platform>"
 msgstr "请使用 obs://<project>/<platform>"
 
-#: src/utils/misc.cc:551 src/utils/misc.cc:597
+#: src/utils/misc.cc:550 src/utils/misc.cc:596
 #, c-format, boost-format
 msgid "Example: %s"
 msgstr "示例：%s"
 
-#: src/utils/misc.cc:596
+#: src/utils/misc.cc:595
 msgid "Invalid OBS URI."
 msgstr "无效的编译服务 URI。"
 
-#: src/utils/misc.cc:596
+#: src/utils/misc.cc:595
 msgid "Correct form is obs://<project>/[platform]"
 msgstr "正确格式为 obs://<项目>/[平台]"
 
-#: src/utils/misc.cc:644
+#: src/utils/misc.cc:643
 msgid "Problem copying the specified RPM file to the cache directory."
 msgstr "复制指定的 RPM 文件到缓存文件夹时出现问题。"
 
-#: src/utils/misc.cc:645
+#: src/utils/misc.cc:644
 msgid "Perhaps you are running out of disk space."
 msgstr "可能您的磁盘空间不足了。"
 
-#: src/utils/misc.cc:653
+#: src/utils/misc.cc:652
 msgid "Problem retrieving the specified RPM file"
 msgstr "检索指定的 RPM 文件时出现问题"
 
-#: src/utils/misc.cc:654
+#: src/utils/misc.cc:653
 msgid "Please check whether the file is accessible."
 msgstr "请检查是否可访问文件。"
 
@@ -6958,6 +6945,49 @@ msgstr "无效对象"
 #: src/utils/prompt.h:102
 msgid "Error"
 msgstr "错误"
+
+#, boost-format
+#~ msgid "Overall download size: %1%. Already cached: %2%."
+#~ msgstr "总下载大小：%1%。已缓存：%2%。"
+
+#, c-format, boost-format
+#~ msgid "After the operation, additional %s will be used."
+#~ msgstr "操作完成后，将使用额外的 %s。"
+
+#~ msgid "No additional space will be used or freed after the operation."
+#~ msgstr "操作完成后，不会占用或释放额外的空间。"
+
+#, c-format, boost-format
+#~ msgid "After the operation, %s will be freed."
+#~ msgstr "操作完成后，将释放 %s。"
+
+#~ msgid "Show packages which are orphaned (without repository)."
+#~ msgstr "显示孤立的（没有源） 软件包。"
+
+#~ msgid "in the future!"
+#~ msgstr "将来！"
+
+#~ msgid "Time since last refresh"
+#~ msgstr "自上次刷新经过的时间"
+
+#~ msgid "No metadata available! Skipping it!"
+#~ msgstr "没有可用的元数据。将会跳过！"
+
+#~ msgid "No permission to read metadata! Skipping it!"
+#~ msgstr "无权读取元数据。将会跳过！"
+
+#~ msgid "Cannot access metadata! Skipping it!"
+#~ msgstr "无法访问元数据。将会跳过！"
+
+#~ msgid "Some of the repositories had to be skipped due to missing metadata."
+#~ msgstr "由于缺少元数据，必须跳过部分储存库。"
+
+#~ msgid ""
+#~ "Running with user privileges. From time to time run 'zypper refresh' as "
+#~ "root to make sure the repository metadata are complete and up-to-date."
+#~ msgstr ""
+#~ "正在使用用户权限运行。请不时以 root 身份运行 \"zypper refresh\" 来确保储存"
+#~ "库元数据是完整且最新的。"
 
 #, c-format, boost-format
 #~ msgid "File '%s' is unsigned, continue?"
