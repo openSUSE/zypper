@@ -6,16 +6,16 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-07-29 15:47+0200\n"
-"PO-Revision-Date: 2024-05-28 17:46+0000\n"
+"PO-Revision-Date: 2024-07-29 20:47+0000\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
-"Language-Team: Slovak <https://l10n.opensuse.org/projects/zypper/master/sk/"
-">\n"
+"Language-Team: Slovak <https://l10n.opensuse.org/projects/zypper/master/sk/>"
+"\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Weblate 5.5.5\n"
+"X-Generator: Weblate 5.6.2\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -1313,17 +1313,17 @@ msgstr "Vynechané potrebné záplaty, ktoré sa nedajú použiť bez konfliktu:
 #. 99.2 MiB  |  -    6.4 MiB  already in cache
 #: src/Summary.cc:1588
 msgid "Package download size:"
-msgstr ""
+msgstr "Veľkosť balíka na stiahnutie:"
 
 #. translator: rendered as "105.7 MiB  overall download size"
 #: src/Summary.cc:1596
 msgid "overall package size"
-msgstr ""
+msgstr "celková veľkosť balíka"
 
 #. translator: rendered as "  6.4 MiB  already in cache"
 #: src/Summary.cc:1598
 msgid "already in cache"
-msgstr ""
+msgstr "už vo vyrovnávacej pamäti"
 
 #: src/Summary.cc:1605
 msgid "Download only."
@@ -1334,17 +1334,17 @@ msgstr "Len stiahnuť."
 #. 1.9 MiB  |  -  347.3 MiB  released by packages that will be removed
 #: src/Summary.cc:1610
 msgid "Package install size change:"
-msgstr ""
+msgstr "Zmena veľkosti inštalácie balíka:"
 
 #. translator: rendered as "349.1 MiB  required by packages that will be installed"
 #: src/Summary.cc:1615
 msgid "required by packages that will be installed"
-msgstr ""
+msgstr "požadované balíkmi, ktoré sa budú inštalovať"
 
 #. translator: rendered as "347.3 MiB  released by packages that will be removed"
 #: src/Summary.cc:1617
 msgid "released by packages that will be removed"
-msgstr ""
+msgstr "uvoľnené balíkmi, ktoré sa odstránia"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
 #: src/Summary.cc:1638
@@ -3467,6 +3467,7 @@ msgstr "Zobraziť nainštalované balíky, ktoré používateľ výslovne vybral
 #: src/commands/query/packages.cc:43
 msgid "Show installed packages which are not provided by any repository."
 msgstr ""
+"Zobraziť nainštalované balíky, ktoré nie sú poskytované žiadnym repozitárom."
 
 #. translators: --orphaned
 #: src/commands/query/packages.cc:47
@@ -3474,6 +3475,8 @@ msgid ""
 "Show system packages which are orphaned (without repository and without "
 "update candidate)."
 msgstr ""
+"Zobraziť systémové balíky, ktoré sú osirelé (bez repozitára a bez kandidáta "
+"na aktualizáciu)."
 
 #. translators: --suggested
 #: src/commands/query/packages.cc:51
