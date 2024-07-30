@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-07-29 15:47+0200\n"
-"PO-Revision-Date: 2024-04-15 16:43+0000\n"
+"PO-Revision-Date: 2024-07-30 08:47+0000\n"
 "Last-Translator: Aleš Kastner <alkas@volny.cz>\n"
 "Language-Team: Czech <https://l10n.opensuse.org/projects/zypper/master/cs/>\n"
 "Language: cs\n"
@@ -29,7 +29,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Weblate 4.9.1\n"
+"X-Generator: Weblate 5.6.2\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -1314,17 +1314,17 @@ msgstr "Přeskočeny potřebné záplaty, jejichž použití však vyvolá konfl
 #. 99.2 MiB  |  -    6.4 MiB  already in cache
 #: src/Summary.cc:1588
 msgid "Package download size:"
-msgstr ""
+msgstr "Velikost balíčku ke stažení:"
 
 #. translator: rendered as "105.7 MiB  overall download size"
 #: src/Summary.cc:1596
 msgid "overall package size"
-msgstr ""
+msgstr "celková velikost balíčku"
 
 #. translator: rendered as "  6.4 MiB  already in cache"
 #: src/Summary.cc:1598
 msgid "already in cache"
-msgstr ""
+msgstr "již v mezipaměti"
 
 #: src/Summary.cc:1605
 msgid "Download only."
@@ -1335,17 +1335,17 @@ msgstr "Pouze stažení."
 #. 1.9 MiB  |  -  347.3 MiB  released by packages that will be removed
 #: src/Summary.cc:1610
 msgid "Package install size change:"
-msgstr ""
+msgstr "Změna instalační velikosti balíčku:"
 
 #. translator: rendered as "349.1 MiB  required by packages that will be installed"
 #: src/Summary.cc:1615
 msgid "required by packages that will be installed"
-msgstr ""
+msgstr "vyžadované balíčky, které budou instalovány"
 
 #. translator: rendered as "347.3 MiB  released by packages that will be removed"
 #: src/Summary.cc:1617
 msgid "released by packages that will be removed"
-msgstr ""
+msgstr "uvolněné balíčky, které budou odstraněny"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
 #: src/Summary.cc:1638
@@ -3464,6 +3464,7 @@ msgstr "Zobrazit instalované balíčky, které uživatel výslovně vybral."
 #: src/commands/query/packages.cc:43
 msgid "Show installed packages which are not provided by any repository."
 msgstr ""
+"Zobrazit instalované balíčky, které nejsou poskytovány žádným úložištěm."
 
 #. translators: --orphaned
 #: src/commands/query/packages.cc:47
@@ -3471,6 +3472,8 @@ msgid ""
 "Show system packages which are orphaned (without repository and without "
 "update candidate)."
 msgstr ""
+"Zobrazí systémové balíčky \"sirotky\" (bez úložiště a bez kandidáta na "
+"aktualizaci)."
 
 #. translators: --suggested
 #: src/commands/query/packages.cc:51
