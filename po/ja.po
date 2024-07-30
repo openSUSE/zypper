@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-07-29 15:47+0200\n"
-"PO-Revision-Date: 2024-06-10 03:46+0000\n"
+"PO-Revision-Date: 2024-07-30 05:47+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
 "Language-Team: Japanese <https://l10n.opensuse.org/projects/zypper/master/ja/"
 ">\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.5.5\n"
+"X-Generator: Weblate 5.6.2\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -1152,17 +1152,17 @@ msgstr "矛盾無しでは適用できないため、必要なパッチを飛ば
 #. 99.2 MiB  |  -    6.4 MiB  already in cache
 #: src/Summary.cc:1588
 msgid "Package download size:"
-msgstr ""
+msgstr "パッケージのダウンロードサイズ:"
 
 #. translator: rendered as "105.7 MiB  overall download size"
 #: src/Summary.cc:1596
 msgid "overall package size"
-msgstr ""
+msgstr "が全体のパッケージサイズです"
 
 #. translator: rendered as "  6.4 MiB  already in cache"
 #: src/Summary.cc:1598
 msgid "already in cache"
-msgstr ""
+msgstr "が既にキャッシュ内に保管済みです"
 
 #: src/Summary.cc:1605
 msgid "Download only."
@@ -1173,17 +1173,17 @@ msgstr "ダウンロードのみ。"
 #. 1.9 MiB  |  -  347.3 MiB  released by packages that will be removed
 #: src/Summary.cc:1610
 msgid "Package install size change:"
-msgstr ""
+msgstr "パッケージのインストールサイズ変更:"
 
 #. translator: rendered as "349.1 MiB  required by packages that will be installed"
 #: src/Summary.cc:1615
 msgid "required by packages that will be installed"
-msgstr ""
+msgstr "がインストールするパッケージによって必要となります"
 
 #. translator: rendered as "347.3 MiB  released by packages that will be removed"
 #: src/Summary.cc:1617
 msgid "released by packages that will be removed"
-msgstr ""
+msgstr "が削除するパッケージによって解放されます"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
 #: src/Summary.cc:1638
@@ -3277,14 +3277,16 @@ msgstr "明示的にインストールするよう指定したパッケージを
 #. translators: --system
 #: src/commands/query/packages.cc:43
 msgid "Show installed packages which are not provided by any repository."
-msgstr ""
+msgstr "どのリポジトリにも存在していないインストール済みパッケージを表示します。"
 
 #. translators: --orphaned
 #: src/commands/query/packages.cc:47
 msgid ""
 "Show system packages which are orphaned (without repository and without "
 "update candidate)."
-msgstr ""
+msgstr "孤立したシステムパッケージ "
+"(どのリポジトリにも存在せず、かつ更新される予定もないパッケージ) "
+"を表示します。"
 
 #. translators: --suggested
 #: src/commands/query/packages.cc:51
