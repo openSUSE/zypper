@@ -3,6 +3,14 @@ PROJECT( ZYPPER C CXX )
 SET( PACKAGE "zypper" )
 
 # where to look first for cmake modules, before ${CMAKE_ROOT}/Modules/ is checked
+if ( ZYPP_STACK_BUILD )
+  SET( ZYPPER_TARGET_PREFIX "zypper_")
+  SET( CMAKE_MODULE_PATH
+    ${zypp-stack_SOURCE_DIR}/libzypp/cmake/modules/
+    ${CMAKE_MODULE_PATH}
+  )
+  include_directories(${ZYPP_STACK_INCLUDE_DIRS})
+else()
 IF (DEFINED ZYPP_PREFIX)
   SET( CMAKE_MODULE_PATH
     ${ZYPP_PREFIX}/${LIB}/cmake/Zypp/
@@ -14,6 +22,7 @@ ELSE (DEFINED ZYPP_PREFIX)
     ${CMAKE_MODULE_PATH}
   )
 ENDIF (DEFINED ZYPP_PREFIX)
+endif()
 
 SET( CMAKE_MODULE_PATH
   ${ZYPPER_SOURCE_DIR}/cmake/modules
@@ -52,7 +61,15 @@ ENDIF ( LEGACY_ENABLE_LONGOPT_ABBREV )
 
 GENERATE_PACKAGING(${PACKAGE} ${VERSION})
 
-FIND_PACKAGE( Zypp REQUIRED )
+if ( ZYPP_STACK_BUILD )
+  set( ZYPP_FOUND 1 )
+  set( ZYPP_INCLUDE_DIR ${zypp-stack_SOURCE_DIR}/libzypp )
+  set( ZYPP_LIBRARY zypp )
+  set( ZYPP_TUI_LIBRARY zypp-tui )
+else()
+  FIND_PACKAGE( Zypp REQUIRED )
+endif()
+
 IF( ZYPP_FOUND )
   INCLUDE_DIRECTORIES(${ZYPP_INCLUDE_DIR})
 ELSE( ZYPP_FOUND )
