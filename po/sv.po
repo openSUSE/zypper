@@ -12,16 +12,16 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-07-29 15:47+0200\n"
-"PO-Revision-Date: 2024-04-20 12:43+0000\n"
+"PO-Revision-Date: 2024-07-30 08:47+0000\n"
 "Last-Translator: Luna  Jernberg <bittin@opensuse.org>\n"
-"Language-Team: Swedish <https://l10n.opensuse.org/projects/zypper/master/sv/"
-">\n"
+"Language-Team: Swedish <https://l10n.opensuse.org/projects/zypper/master/sv/>"
+"\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.9.1\n"
+"X-Generator: Weblate 5.6.2\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -1226,17 +1226,17 @@ msgstr "Hoppade över nödvändiga patchar som inte gäller utan konflikt:"
 #. 99.2 MiB  |  -    6.4 MiB  already in cache
 #: src/Summary.cc:1588
 msgid "Package download size:"
-msgstr ""
+msgstr "Paket nedladdning storlek:"
 
 #. translator: rendered as "105.7 MiB  overall download size"
 #: src/Summary.cc:1596
 msgid "overall package size"
-msgstr ""
+msgstr "total paketstorlek"
 
 #. translator: rendered as "  6.4 MiB  already in cache"
 #: src/Summary.cc:1598
 msgid "already in cache"
-msgstr ""
+msgstr "redan i cache"
 
 #: src/Summary.cc:1605
 msgid "Download only."
@@ -1247,17 +1247,17 @@ msgstr "Endast hämtning."
 #. 1.9 MiB  |  -  347.3 MiB  released by packages that will be removed
 #: src/Summary.cc:1610
 msgid "Package install size change:"
-msgstr ""
+msgstr "Paketinstallationsstorlek ändring:"
 
 #. translator: rendered as "349.1 MiB  required by packages that will be installed"
 #: src/Summary.cc:1615
 msgid "required by packages that will be installed"
-msgstr ""
+msgstr "krävs av paket som kommer att installeras"
 
 #. translator: rendered as "347.3 MiB  released by packages that will be removed"
 #: src/Summary.cc:1617
 msgid "released by packages that will be removed"
-msgstr ""
+msgstr "släpps av paket som kommer att tas bort"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
 #: src/Summary.cc:1638
@@ -3359,7 +3359,7 @@ msgstr "Visa installerade paket som uttryckligen valts ut av användaren."
 #. translators: --system
 #: src/commands/query/packages.cc:43
 msgid "Show installed packages which are not provided by any repository."
-msgstr ""
+msgstr "Visa installerade paket som inte tillhandahålls av någon lagringsplats."
 
 #. translators: --orphaned
 #: src/commands/query/packages.cc:47
@@ -3367,6 +3367,8 @@ msgid ""
 "Show system packages which are orphaned (without repository and without "
 "update candidate)."
 msgstr ""
+"Visa systempaket som är föräldralösa (utan lagringsplats och utan "
+"uppdateringskandidat)."
 
 #. translators: --suggested
 #: src/commands/query/packages.cc:51
