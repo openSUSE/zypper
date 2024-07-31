@@ -121,61 +121,65 @@ void CommitSummary::writeXmlResolvableList( std::ostream & out, const std::vecto
 void CommitSummary::writeFailedInstalls( std::ostream & out )
 {
   std::string label( "%d" );
+  const auto & solvables { _failedInstalls };
 
   label = PL_(
     "The following package failed to install:",
     "The following %d packages failed to install:",
-    _failedInstalls.size() );
+    solvables.size() );
 
-  label = str::form( label.c_str(), _failedInstalls.size() );
+  label = str::form( label.c_str(), solvables.size() );
 
   out << endl << ( ColorContext::MSG_ERROR << label ) << endl;
-  writeResolvableList( out, _failedInstalls, ColorContext::NEGATIVE );
+  writeResolvableList( out, solvables, ColorContext::NEGATIVE );
 }
 
 void CommitSummary::writeSkippedInstalls( std::ostream & out )
 {
   std::string label( "%d" );
+  const auto & solvables { _skippedInstalls };
 
   label = PL_(
     "The following package installation was skipped:",
     "The following %d package installations were skipped:",
-    _failedInstalls.size() );
+    solvables.size() );
 
-  label = str::form( label.c_str(), _failedInstalls.size() );
+  label = str::form( label.c_str(), solvables.size() );
 
   out << endl << ( ColorContext::MSG_WARNING << label ) << endl;
-  writeResolvableList( out, _skippedInstalls, ColorContext::NEGATIVE );
+  writeResolvableList( out, solvables, ColorContext::NEGATIVE );
 }
 
 void CommitSummary::writeFailedRemovals( std::ostream & out )
 {
   std::string label( "%d" );
+  const auto & solvables { _failedRemovals };
 
   label = PL_(
     "The following package failed to uninstall:",
     "The following %d packages failed to uninstall:",
-    _failedInstalls.size() );
+    solvables.size() );
 
-  label = str::form( label.c_str(), _failedInstalls.size() );
+  label = str::form( label.c_str(), solvables.size() );
 
   out << endl << ( ColorContext::MSG_ERROR << label ) << endl;
-  writeResolvableList( out, _failedRemovals, ColorContext::NEGATIVE );
+  writeResolvableList( out, solvables, ColorContext::NEGATIVE );
 }
 
 void CommitSummary::writeSkippedRemovals( std::ostream & out )
 {
   std::string label( "%d" );
+  const auto & solvables { _skippedRemovals };
 
   label = PL_(
     "The following package removal was skipped:",
     "The following %d package removal were skipped:",
-    _failedInstalls.size() );
+    solvables.size() );
 
-  label = str::form( label.c_str(), _failedInstalls.size() );
+  label = str::form( label.c_str(), solvables.size() );
 
   out << endl << ( ColorContext::MSG_WARNING << label ) << endl;
-  writeResolvableList( out, _skippedRemovals, ColorContext::NEGATIVE );
+  writeResolvableList( out, solvables, ColorContext::NEGATIVE );
 }
 
 bool CommitSummary::writeResolvableList( std::ostream & out,
