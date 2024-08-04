@@ -16,8 +16,8 @@ msgstr ""
 "Project-Id-Version: zypper.hu\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-07-29 15:47+0200\n"
-"PO-Revision-Date: 2019-03-21 12:49+0000\n"
-"Last-Translator: Robert Taisz <robert.taisz@emerald.hu>\n"
+"PO-Revision-Date: 2024-08-04 09:47+0000\n"
+"Last-Translator: Csanád Mózner <csanadmozner@gmail.com>\n"
 "Language-Team: Hungarian <https://l10n.opensuse.org/projects/zypper/master/"
 "hu/>\n"
 "Language: hu\n"
@@ -25,7 +25,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.3\n"
+"X-Generator: Weblate 5.6.2\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -86,29 +86,29 @@ msgstr ""
 #, c-format, boost-format
 msgid "The following package failed to install:"
 msgid_plural "The following %d packages failed to install:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "A következő csomag telepítése nem sikerült:"
+msgstr[1] "A következő %d csomag telepítése nem sikerült:"
 
 #: src/CommitSummary.cc:141
 #, c-format, boost-format
 msgid "The following package installation was skipped:"
 msgid_plural "The following %d package installations were skipped:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "A következő csomag telepítése kimaradt:"
+msgstr[1] "A következő %d csomag telepítése kimaradt:"
 
 #: src/CommitSummary.cc:156
 #, c-format, boost-format
 msgid "The following package failed to uninstall:"
 msgid_plural "The following %d packages failed to uninstall:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "A következő csomag eltávolítása nem sikerült:"
+msgstr[1] "A következő %d csomag eltávolítása nem sikerült:"
 
 #: src/CommitSummary.cc:171
 #, c-format, boost-format
 msgid "The following package removal was skipped:"
 msgid_plural "The following %d package removal were skipped:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "A következő csomag eltávolítása kimaradt:"
+msgstr[1] "A következő %d csomag eltávolítása kimaradt:"
 
 #. translators: Appended when clipping a long enumeration:
 #. "ConsoleKit-devel ConsoleKit-doc ... and 20828 more items."
@@ -191,7 +191,7 @@ msgstr "Ne szerepeljenek rövidítések a táblázatokban."
 #: src/Config.cc:330
 #, fuzzy, boost-format
 msgid "Table style (%1%)."
-msgstr "Táblázatstílus (egész szám)."
+msgstr "Táblázatstílus (%1%)."
 
 #: src/Config.cc:334 src/commands/optionsets.cc:284
 msgid "Entering non-interactive mode."
@@ -393,16 +393,20 @@ msgid "Failed to save option."
 msgstr "Nem sikerült a beállítás mentése."
 
 #: src/PackageArgs.cc:159
-#, c-format, boost-format
+#, boost-format, c-format, fuzzy
 msgid ""
 "'%s' install modifier must not be used without a package name or capability."
 msgstr ""
+"A '%s' telepítési módosítót nem szabad csomagnév vagy képesség nélkül "
+"használni."
 
 #: src/PackageArgs.cc:169
-#, c-format, boost-format
+#, boost-format, c-format, fuzzy
 msgid ""
 "'%s' remove modifier must not be used without a package name or capability."
 msgstr ""
+"A '%s' eltávolító módosítót nem szabad csomagnév vagy képesség nélkül "
+"használni."
 
 #: src/PackageArgs.cc:221
 #, c-format, boost-format
@@ -1140,8 +1144,9 @@ msgstr[1] ""
 "kötnie:"
 
 #: src/Summary.cc:1417
+#, fuzzy
 msgid "was superseded by"
-msgstr ""
+msgstr "váltotta fel"
 
 #: src/Summary.cc:1430
 #, c-format, boost-format
@@ -1151,8 +1156,10 @@ msgid ""
 msgid_plural ""
 "The following %d packages were discontinued and have been superseded by a "
 "new packages with different names."
-msgstr[0] ""
+msgstr[0] "A következő csomag megszűnt, és egy új, más nevű csomag váltotta fel."
 msgstr[1] ""
+"A következő %d csomag megszűnt, és egy új, különböző nevű csomagok váltották "
+"fel őket."
 
 #: src/Summary.cc:1435
 msgid ""
@@ -1162,7 +1169,11 @@ msgid_plural ""
 "The successor packages should be installed as soon as possible to receive "
 "continued support:"
 msgstr[0] ""
+"Az utódcsomagot a lehető leghamarabb telepíteni kell a folyamatos támogatás "
+"érdekében:"
 msgstr[1] ""
+"Az utódcsomagokat a lehető leghamarabb telepíteni kell a folyamatos "
+"támogatás érdekében:"
 
 #: src/Summary.cc:1460
 #, c-format, boost-format
@@ -1228,7 +1239,7 @@ msgstr[1] "A következő %d csomag a rendszer újraindítását igényli:"
 
 #: src/Summary.cc:1563
 msgid "Skipped needed patches which do not apply without conflict:"
-msgstr ""
+msgstr "Kihagyott szükséges javítások, amelyek nem érvényesek ütközés nélkül:"
 
 #. Package download size:   99.2 MiB
 #. or
@@ -1237,17 +1248,17 @@ msgstr ""
 #. 99.2 MiB  |  -    6.4 MiB  already in cache
 #: src/Summary.cc:1588
 msgid "Package download size:"
-msgstr ""
+msgstr "Csomag letöltési méret:"
 
 #. translator: rendered as "105.7 MiB  overall download size"
 #: src/Summary.cc:1596
 msgid "overall package size"
-msgstr ""
+msgstr "a csomag teljes mérete"
 
 #. translator: rendered as "  6.4 MiB  already in cache"
 #: src/Summary.cc:1598
 msgid "already in cache"
-msgstr ""
+msgstr "már a gyorsítótárban van"
 
 #: src/Summary.cc:1605
 msgid "Download only."
@@ -1258,7 +1269,7 @@ msgstr "Csak letöltés."
 #. 1.9 MiB  |  -  347.3 MiB  released by packages that will be removed
 #: src/Summary.cc:1610
 msgid "Package install size change:"
-msgstr ""
+msgstr "A csomag telepítési méretének változása:"
 
 #. translator: rendered as "349.1 MiB  required by packages that will be installed"
 #: src/Summary.cc:1615
