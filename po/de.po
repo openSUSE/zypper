@@ -17,10 +17,10 @@ msgstr ""
 "Project-Id-Version: zypper.de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-07-29 15:47+0200\n"
-"PO-Revision-Date: 2024-07-13 19:47+0000\n"
+"PO-Revision-Date: 2024-08-05 19:47+0000\n"
 "Last-Translator: Ettore Atalan <atalanttore@googlemail.com>\n"
-"Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/"
-">\n"
+"Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/>"
+"\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1278,17 +1278,17 @@ msgstr ""
 #. 99.2 MiB  |  -    6.4 MiB  already in cache
 #: src/Summary.cc:1588
 msgid "Package download size:"
-msgstr ""
+msgstr "Größe des Pakets zum Herunterladen:"
 
 #. translator: rendered as "105.7 MiB  overall download size"
 #: src/Summary.cc:1596
 msgid "overall package size"
-msgstr ""
+msgstr "Gesamtpaketgröße"
 
 #. translator: rendered as "  6.4 MiB  already in cache"
 #: src/Summary.cc:1598
 msgid "already in cache"
-msgstr ""
+msgstr "bereits im Cache"
 
 #: src/Summary.cc:1605
 msgid "Download only."
@@ -1299,17 +1299,17 @@ msgstr "Nur herunterladen."
 #. 1.9 MiB  |  -  347.3 MiB  released by packages that will be removed
 #: src/Summary.cc:1610
 msgid "Package install size change:"
-msgstr ""
+msgstr "Änderung der Installationsgröße des Pakets:"
 
 #. translator: rendered as "349.1 MiB  required by packages that will be installed"
 #: src/Summary.cc:1615
 msgid "required by packages that will be installed"
-msgstr ""
+msgstr "erforderlich für Pakete, die installiert werden sollen"
 
 #. translator: rendered as "347.3 MiB  released by packages that will be removed"
 #: src/Summary.cc:1617
 msgid "released by packages that will be removed"
-msgstr ""
+msgstr "freigegeben von Paketen, die entfernt werden sollen"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
 #: src/Summary.cc:1638
@@ -3458,20 +3458,20 @@ msgstr "Alle verfügbaren Pakete in den angegebenen Repositorys auflisten."
 msgid ""
 "Show installed packages which were automatically selected by the resolver."
 msgstr ""
-"Zeigen Sie installierte Pakete an, die vom Resolver automatisch ausgewählt "
-"wurden."
+"Installierte Pakete anzeigen, die automatisch vom Resolver ausgewählt wurden."
 
 #. translators: --userinstalled
 #: src/commands/query/packages.cc:39
 msgid "Show installed packages which were explicitly selected by the user."
 msgstr ""
-"Zeigen Sie installierte Pakete an, die vom Benutzer explizit ausgewählt "
-"wurden."
+"Installierte Pakete anzeigen, die vom Benutzer explizit ausgewählt wurden."
 
 #. translators: --system
 #: src/commands/query/packages.cc:43
 msgid "Show installed packages which are not provided by any repository."
 msgstr ""
+"Installierte Pakete, die von keinem Repository bereitgestellt werden, "
+"anzeigen."
 
 #. translators: --orphaned
 #: src/commands/query/packages.cc:47
@@ -3479,6 +3479,8 @@ msgid ""
 "Show system packages which are orphaned (without repository and without "
 "update candidate)."
 msgstr ""
+"Systempakete anzeigen, die verwaist sind (ohne Repository und ohne "
+"Aktualisierungskandidaten)."
 
 #. translators: --suggested
 #: src/commands/query/packages.cc:51
