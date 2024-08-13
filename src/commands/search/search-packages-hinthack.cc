@@ -58,18 +58,6 @@ namespace searchPackagesHintHack
     bool searchPackagesSupportsZypperCliForwarding()
     {
       using target::rpm::librpmDb;
-      // RpmDb access is blocked while the Target is not initialized.
-      // Launching the Target just for this query would be an overkill.
-      struct TmpUnblock {
-        TmpUnblock()
-        : _wasBlocked( librpmDb::isBlocked() )
-        { if ( _wasBlocked ) librpmDb::unblockAccess(); }
-        ~TmpUnblock()
-        { if ( _wasBlocked ) librpmDb::blockAccess(); }
-      private:
-        bool _wasBlocked;
-      } tmpUnblock;
-
       librpmDb::db_const_iterator it;
       return( it.findPackage( ZSPP_PackageName ) && it->tag_provides().count( ZSPP_CliFwdCap ) );
     }
