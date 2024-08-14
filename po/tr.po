@@ -9,16 +9,16 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-07-29 15:47+0200\n"
-"PO-Revision-Date: 2022-04-06 16:12+0000\n"
-"Last-Translator: Murat Servan Kahraman <muratservan@outlook.com>\n"
-"Language-Team: Turkish <https://l10n.opensuse.org/projects/zypper/master/tr/"
-">\n"
+"PO-Revision-Date: 2024-08-14 02:47+0000\n"
+"Last-Translator: Çağan <cagankota@gmail.com>\n"
+"Language-Team: Turkish <https://l10n.opensuse.org/projects/zypper/master/tr/>"
+"\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.9.1\n"
+"X-Generator: Weblate 5.6.2\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -1441,7 +1441,7 @@ msgstr "PackageKit hala çalışıyor (muhtemelen meşgul)."
 
 #: src/Zypper.cc:106
 msgid "Try again?"
-msgstr "Yeniden denemek istiyormusunuz?"
+msgstr "Yeniden denemek istiyor musunuz?"
 
 #: src/Zypper.cc:244 src/Zypper.cc:721 src/commands/basecommand.cc:280
 msgid "Unexpected exception."
