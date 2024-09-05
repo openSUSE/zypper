@@ -12,16 +12,16 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-07-29 15:47+0200\n"
-"PO-Revision-Date: 2024-05-04 17:43+0000\n"
-"Last-Translator: Davide Aiello <davide.aiello@novilingulists.com>\n"
-"Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/"
-">\n"
+"PO-Revision-Date: 2024-09-05 15:47+0000\n"
+"Last-Translator: Paolo Za <feus73@gmail.com>\n"
+"Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/>"
+"\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.9.1\n"
+"X-Generator: Weblate 5.7.1\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -1277,17 +1277,17 @@ msgstr "Patch necessarie ignorate che non si applicano senza conflitti:"
 #. 99.2 MiB  |  -    6.4 MiB  already in cache
 #: src/Summary.cc:1588
 msgid "Package download size:"
-msgstr ""
+msgstr "Dimensione scaricata del pacchetto:"
 
 #. translator: rendered as "105.7 MiB  overall download size"
 #: src/Summary.cc:1596
 msgid "overall package size"
-msgstr ""
+msgstr "Dimensione totale del pacchetto"
 
 #. translator: rendered as "  6.4 MiB  already in cache"
 #: src/Summary.cc:1598
 msgid "already in cache"
-msgstr ""
+msgstr "già nella cache"
 
 #: src/Summary.cc:1605
 msgid "Download only."
@@ -1303,7 +1303,7 @@ msgstr ""
 #. translator: rendered as "349.1 MiB  required by packages that will be installed"
 #: src/Summary.cc:1615
 msgid "required by packages that will be installed"
-msgstr ""
+msgstr "richiesto dal pacchetto che verrà installato"
 
 #. translator: rendered as "347.3 MiB  released by packages that will be removed"
 #: src/Summary.cc:1617
@@ -3476,6 +3476,7 @@ msgstr ""
 #: src/commands/query/packages.cc:43
 msgid "Show installed packages which are not provided by any repository."
 msgstr ""
+"Mostra i pacchetti installati che non sono forniti da nessun repository."
 
 #. translators: --orphaned
 #: src/commands/query/packages.cc:47
@@ -3483,6 +3484,8 @@ msgid ""
 "Show system packages which are orphaned (without repository and without "
 "update candidate)."
 msgstr ""
+"Mostra tutti i pacchetti di sistema che sono orfani (senza repository e "
+"senza candidato all'aggiornamento)."
 
 #. translators: --suggested
 #: src/commands/query/packages.cc:51
