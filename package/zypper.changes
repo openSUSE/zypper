@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Fri Sep  6 11:56:39 CEST 2024 - ma@suse.de
+
+- API refactoring. Prevent zypper from using now private libzypp
+  symbols (bsc#1230267)
+- BuildRequires:  libzypp-devel >= 17.35.10.
+- Fix wrong numbers used in CommitSummary skipped/failed messages.
+- version 1.14.77
+
+-------------------------------------------------------------------
 Tue Jul  2 16:05:02 CEST 2024 - ma@suse.de
 
 - Show rpm install size before installing (bsc#1224771)
