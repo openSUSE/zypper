@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: zypper.ko\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-07-29 15:47+0200\n"
-"PO-Revision-Date: 2024-09-06 09:47+0000\n"
+"PO-Revision-Date: 2024-09-07 03:47+0000\n"
 "Last-Translator: Joungmin Lee <leejm516@gmail.com>\n"
 "Language-Team: Korean <https://l10n.opensuse.org/projects/zypper/master/ko/>"
 "\n"
@@ -6292,7 +6292,6 @@ msgstr "손상된 패키지 종속성을 복구하려면 루트 권한이 필요
 #: src/solve-commit.cc:816
 msgid "y/n/p/v/a/r/m/d/g"
 msgstr ""
-"예/아니오/문제 표시/버전/아키텍처/리포지토리/벤더/세부 사항/페이저 요약"
 
 #. translators: help text for 'y' option in the 'Continue?' prompt
 #: src/solve-commit.cc:821
