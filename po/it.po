@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-07-29 15:47+0200\n"
-"PO-Revision-Date: 2024-09-07 18:47+0000\n"
+"PO-Revision-Date: 2024-09-08 10:47+0000\n"
 "Last-Translator: Paolo Za <feus73@gmail.com>\n"
 "Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/>"
 "\n"
@@ -1298,7 +1298,7 @@ msgstr "Solo download."
 #. 1.9 MiB  |  -  347.3 MiB  released by packages that will be removed
 #: src/Summary.cc:1610
 msgid "Package install size change:"
-msgstr ""
+msgstr "Modifiche alla dimensione del pacchetto installato:"
 
 #. translator: rendered as "349.1 MiB  required by packages that will be installed"
 #: src/Summary.cc:1615
