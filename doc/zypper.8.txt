@@ -799,7 +799,9 @@ include::{incdir}/option_Solver_Flags_Installs.txt[]
 Query Commands
 ~~~~~~~~~~~~~~
 *search* (*se*) [_options_] [_querystring_|_capability_]...::
-	Search for packages matching any of the given search strings. *** and *?* _wildcard_ characters can be used within search strings. If the search string is enclosed in */*  (e.g. */^k.*e$/*) it's interpreted as a _regular expression_. See the *install* command for details about how to specify a _capability_.
+	Search for packages matching any of the given search strings. *** and *?* _wildcard_ characters can be used within search strings. If the search string is enclosed in */* (e.g. */^k.*e$/*) it's interpreted as a _regular expression_. See the *install* command for details about how to specify a _capability_.
++
+If the search string starts with a */*, a filename is assumed and the search will automatically look into the file list of packages. Otherwise use *-f* to search in the packages file lists as well.
 +
 Results of the search are printed in a table with columns **S**tatus, *Name*, *Summary* and *Type* of package. In case the query result is empty zypper returns *ZYPPER_EXIT_INF_CAP_NOT_FOUND*, unless the *--ignore-unknown* global option is set.
 +
@@ -817,8 +819,9 @@ _empty_::::	neither of the above cases
 .*P*::::	is shown in the 2nd column if the item is part of a PTF (A program temporary fix which must be explicitly selected and will otherwise not be considered in dependency resolution).
 .*R*::::	is shown in the 2nd column if the item has been retracted (see *patch* in section *Package Types*)
 
-{nop}::
-	The *v* status is only shown if the version or the repository matters (see *--details* or *--repo*), and the installed instance differs from the one listed in version or repository.
+{nop}::	The *v* status is only shown if the version or the repository matters (see *--details* or *--repo*), and the installed instance differs from the one listed in version or repository.
++
+The verbose view (*se -v*; implies *-s*) will also show the matches themselves within the packages metadata.
 +
 This command accepts the following options:
 +
