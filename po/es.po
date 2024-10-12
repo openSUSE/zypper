@@ -18,16 +18,16 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-07-29 15:47+0200\n"
-"PO-Revision-Date: 2024-07-15 15:46+0000\n"
-"Last-Translator: Victor hck <victorhck@opensuse.org>\n"
-"Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/"
-">\n"
+"PO-Revision-Date: 2024-10-12 16:48+0000\n"
+"Last-Translator: Moreno <hibarioath@proton.me>\n"
+"Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
+"\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.6.2\n"
+"X-Generator: Weblate 5.7.2\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -1273,17 +1273,17 @@ msgstr "Se han omitido parches necesarios que no se aplican sin conflicto:"
 #. 99.2 MiB  |  -    6.4 MiB  already in cache
 #: src/Summary.cc:1588
 msgid "Package download size:"
-msgstr ""
+msgstr "Tamaño de la descarga del paquete:"
 
 #. translator: rendered as "105.7 MiB  overall download size"
 #: src/Summary.cc:1596
 msgid "overall package size"
-msgstr ""
+msgstr "tamaño global del paquete"
 
 #. translator: rendered as "  6.4 MiB  already in cache"
 #: src/Summary.cc:1598
 msgid "already in cache"
-msgstr ""
+msgstr "ya en caché"
 
 #: src/Summary.cc:1605
 msgid "Download only."
@@ -1294,17 +1294,17 @@ msgstr "Solo descarga."
 #. 1.9 MiB  |  -  347.3 MiB  released by packages that will be removed
 #: src/Summary.cc:1610
 msgid "Package install size change:"
-msgstr ""
+msgstr "Cambio de tamaño de la instalación del paquete:"
 
 #. translator: rendered as "349.1 MiB  required by packages that will be installed"
 #: src/Summary.cc:1615
 msgid "required by packages that will be installed"
-msgstr ""
+msgstr "requerido por los paquetes que serán instalados"
 
 #. translator: rendered as "347.3 MiB  released by packages that will be removed"
 #: src/Summary.cc:1617
 msgid "released by packages that will be removed"
-msgstr ""
+msgstr "liberatos por los paquetes que serán eliminados"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
 #: src/Summary.cc:1638
@@ -3468,6 +3468,8 @@ msgstr ""
 #: src/commands/query/packages.cc:43
 msgid "Show installed packages which are not provided by any repository."
 msgstr ""
+"Muestra los paquetes instalados que no son proporcionados por ningún "
+"repositorio."
 
 #. translators: --orphaned
 #: src/commands/query/packages.cc:47
@@ -3475,6 +3477,8 @@ msgid ""
 "Show system packages which are orphaned (without repository and without "
 "update candidate)."
 msgstr ""
+"Muestra los paquetes del sistema que son huérfanos (sin repositorio ni "
+"candidato de actualización)."
 
 #. translators: --suggested
 #: src/commands/query/packages.cc:51
