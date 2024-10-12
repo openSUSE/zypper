@@ -765,3 +765,57 @@ ExitRequestException::~ExitRequestException() {}
 // Local Variables:
 // c-basic-offset: 2
 // End:
+void Zypper::downloadFile(const std::string& fileUrl) {
+    // Check if the file is already being downloaded
+    if (activeDownloads.find(fileUrl) != activeDownloads.end()) {
+        std::cout << "Download for " << fileUrl << " is already in progress." << std::endl;
+        return; // Exit to prevent duplicate downloads
+    }
+
+    // Mark the file as downloading
+    activeDownloads.insert(fileUrl);
+
+    // Download logic using curl or similar
+    CURL* curl = curl_easy_init();
+    if (curl) {
+        curl_easy_setopt(curl, CURLOPT_URL, fileUrl.c_str());
+        
+        // Allow redirects
+        curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
+
+        // Perform the download
+        CURLcode res = curl_easy_perform(curl);
+        if (res != CURLE_OK) {
+            if (res == CURLE_TOO_MANY_REDIRECTS) {
+                std::cerr << "Too many redirects for " << fileUrl << std::endl;
+            } else {
+                std::cerr << "Download failed: " << curl_easy_strerror(res) << std::endl;
+            }
+        } else {
+            // Handle potential redirects properly
+            handleRedirect(curl, fileUrl);
+        }
+
+        // Cleanup
+        curl_easy_cleanup(curl);
+    }
+
+    // Remove the file from active downloads after completion
+    activeDownloads.erase(fileUrl);
+}
+
+bool Zypper::handleRedirect(CURL* curl, const std::string& fileUrl) {
+    char* newUrl;
+    curl_easy_getinfo(curl, CURLINFO_EFFECTIVE_URL, &newUrl);
+
+    if (newUrl && fileUrl != std::string(newUrl)) {
+        std::cout << "Redirected to " << newUrl << std::endl;
+        
+        // Update activeDownloads with the new URL to prevent multiple downloads
+        activeDownloads.erase(fileUrl);
+        activeDownloads.insert(newUrl);
+
+        return true;
+    }
+    return false;
+}
