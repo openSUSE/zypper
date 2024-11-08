@@ -878,12 +878,8 @@ void do_init_repos( Zypper & zypper )
         catch ( const Exception & ex )
         {
           MIL << "We're running as non-root, skipping refresh of " << repo.alias() << endl;
-
-          //./src/Config.cc:    std::cerr << e.asUserHistory() << endl;
-          zypper.out().error( ex, "Problem", "hint" );
-
-
-          zypper.out().info( str::Format(_( "Repository '%s' is out-of-date. You can run 'zypper refresh' as root to update it.")) % repo.asUserString() );
+          zypper.out().error( ex, "Problem" );
+          zypper.out().notePar( 4, str::Format(_( "Repository '%s' is out-of-date. You can run 'zypper refresh' as root to update it.")) % repo.asUserString() );
         }
       }
     }
@@ -1778,11 +1774,15 @@ void load_repo_resolvables( Zypper & zypper )
     try
     {
       bool error = false;
+
       // if there is no metadata locally
       if ( manager.metadataStatus(repo).empty() )
       {
-        zypper.out().info( str::Format(_("Retrieving repository '%s' data...")) % repo.name() );
-        error = refresh_raw_metadata( zypper, repo, false );
+        if ( geteuid() == 0 ) {
+          zypper.out().info( str::Format(_("Retrieving repository '%s' data...")) % repo.name() );
+          error = refresh_raw_metadata( zypper, repo, false );
+        }
+        // else: as non-root user we'll see whether a usable solv cache exists ....
       }
 
       if ( !error && !manager.isCached(repo) )
