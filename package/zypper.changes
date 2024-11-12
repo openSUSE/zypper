@@ -1,4 +1,16 @@
 -------------------------------------------------------------------
+Tue Nov 12 14:43:45 CET 2024 - ma@suse.de
+
+- Don't try to download missing raw metadata if cache is not
+  writable (bsc#1225451)
+- man: Update 'search' command description.
+  Hint to "se -v" showing the matches within the packages metadata.
+  Explain that search strings starting with a "/" will implicitly
+  look into the filelist as well. Otherfise an explicit "-f" is
+  needed.
+- version 1.14.78
+
+-------------------------------------------------------------------
 Fri Sep  6 11:56:39 CEST 2024 - ma@suse.de
 
 - API refactoring. Prevent zypper from using now private libzypp
