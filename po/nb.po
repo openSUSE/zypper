@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-07-29 15:47+0200\n"
-"PO-Revision-Date: 2018-09-06 23:04+0000\n"
-"Last-Translator: Daniel Dybing <daniel.dybing@gmail.com>\n"
+"PO-Revision-Date: 2024-11-14 10:48+0000\n"
+"Last-Translator: Martin Hansen <mh306602@gmail.com>\n"
 "Language-Team: Norwegian Bokmål <https://l10n.opensuse.org/projects/zypper/"
 "master/nb/>\n"
 "Language: nb\n"
@@ -20,11 +20,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2.18\n"
+"X-Generator: Weblate 5.8.3\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
-msgstr ""
+msgstr "Ugyldig kommando"
 
 #: src/Command.cc:111
 msgid "Repository Management:"
@@ -44,7 +44,7 @@ msgstr "Oppdateringsadministrasjon:"
 
 #: src/Command.cc:139
 msgid "Querying:"
-msgstr "Kommandoer:"
+msgstr "Forespørsel:"
 
 #: src/Command.cc:150
 msgid "Package Locks:"
@@ -52,15 +52,15 @@ msgstr "Pakkelås:"
 
 #: src/Command.cc:155
 msgid "Locale Management:"
-msgstr ""
+msgstr "Lokalitet Håndtering:"
 
 #: src/Command.cc:159
 msgid "Other Commands:"
-msgstr ""
+msgstr "Andre Kommandoer:"
 
 #: src/Command.cc:168
 msgid "Subcommands:"
-msgstr ""
+msgstr "Underkommandoer:"
 
 #: src/Command.cc:289
 #, c-format, boost-format
@@ -69,40 +69,40 @@ msgstr "Ukjent kommando '%s'"
 
 #: src/CommitSummary.cc:91
 msgid "Installation has completed with error."
-msgstr ""
+msgstr "Installasjonen har fullført med feil."
 
 #: src/CommitSummary.cc:93
 #, boost-format
 msgid "You may run '%1%' to repair any dependency problems."
-msgstr ""
+msgstr "Du kan kjøre '%1%' for å reparere eventuelle avhengighetsproblemer."
 
 #: src/CommitSummary.cc:126
 #, c-format, boost-format
 msgid "The following package failed to install:"
 msgid_plural "The following %d packages failed to install:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Følgende pakke kunne ikke installeres:"
+msgstr[1] "Følgende pakker %d kunne ikke installeres:"
 
 #: src/CommitSummary.cc:141
 #, c-format, boost-format
 msgid "The following package installation was skipped:"
 msgid_plural "The following %d package installations were skipped:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Den følgende pakkeinstallasjonen ble hoppet over:"
+msgstr[1] "De følgende %d pakkeinstallasjonene ble hoppet over:"
 
 #: src/CommitSummary.cc:156
 #, c-format, boost-format
 msgid "The following package failed to uninstall:"
 msgid_plural "The following %d packages failed to uninstall:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Den følgende pakke kunne ikke avinstalleres:"
+msgstr[1] "De følgende %d pakkene kunne ikke avinstalleres:"
 
 #: src/CommitSummary.cc:171
 #, c-format, boost-format
 msgid "The following package removal was skipped:"
 msgid_plural "The following %d package removal were skipped:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Den følgende pakke fjerningen ble hoppet over:"
+msgstr[1] "De følgende %d pakke fjerningene ble hoppet over:"
 
 #. translators: Appended when clipping a long enumeration:
 #. "ConsoleKit-devel ConsoleKit-doc ... and 20828 more items."
@@ -111,8 +111,8 @@ msgstr[1] ""
 #, boost-format
 msgid "... and %1% more item."
 msgid_plural "... and %1% more items."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "... og %1% element til."
+msgstr[1] "... og %1% elementer til."
 
 #: src/Config.cc:53
 #, c-format, boost-format
@@ -122,31 +122,31 @@ msgstr "Ugyldig tabellstil %d."
 #: src/Config.cc:54
 #, c-format, boost-format
 msgid " Use an integer number from %d to %d"
-msgstr ""
+msgstr " Bruk et heltall nummer fra %d til %d"
 
 #: src/Config.cc:172
 msgid "The path specified in the --root option must be absolute."
-msgstr "Stien som er spesifisert for valget --root må være absolutt."
+msgstr "Stien som er spesifisert for --root alternativet må være absolutt."
 
 #. translators: --help, -h
 #: src/Config.cc:236
 msgid "Help."
-msgstr ""
+msgstr "Hjelp."
 
 #. translators: --version, -V
 #: src/Config.cc:245
 msgid "Output the version number."
-msgstr ""
+msgstr "Vis versjonsnummeret."
 
 #. translators: --promptids
 #: src/Config.cc:257
 msgid "Output a list of zypper's user prompts."
-msgstr ""
+msgstr "Vis en liste av zypper's brukerspørsmål."
 
 #. translators: --config, -c <FILE>
 #: src/Config.cc:270
 msgid "Use specified config file instead of the default."
-msgstr ""
+msgstr "Bruk en angitt konfigurasjonsfil i stedet for standardfilen."
 
 #: src/Config.cc:277
 msgid "User data string must not contain nonprintable or newline characters!"
@@ -187,7 +187,7 @@ msgstr ""
 
 #: src/Config.cc:334 src/commands/optionsets.cc:284
 msgid "Entering non-interactive mode."
-msgstr "Starter automatisk modus."
+msgstr "Starter ikke-interaktiv modus."
 
 #. translators: --non-interactive, -n
 #: src/Config.cc:338
@@ -199,8 +199,8 @@ msgid ""
 "Patches having the flag rebootSuggested set will not be treated as "
 "interactive."
 msgstr ""
-"Pakkeoppdateringene krever omstart. Anbefalte pakker vil ikke ble behandlet "
-"som interaktive."
+"Programrettelsene som har flagget rebootSuggested satt vil ikke bli "
+"behandlet som interaktive."
 
 #. translators: --non-interactive-include-reboot-patches
 #: src/Config.cc:347
@@ -242,7 +242,7 @@ msgstr "Bruk alternativ katalog for rådatamellomlager."
 #. translators: --solv-cache-dir <DIR>
 #: src/Config.cc:439
 msgid "Use alternative solv file cache directory."
-msgstr "Bruk alternativ katalog for mellomlagring av konfliktløsningsfiler."
+msgstr "Bruk alternativ katalog for mellomlagring av solv-filer."
 
 #. translators: --pkg-cache-dir <DIR>
 #: src/Config.cc:453
@@ -255,7 +255,7 @@ msgstr ""
 
 #: src/Config.cc:462
 msgid "Entering 'no-gpg-checks' mode."
-msgstr "Går til 'no-gpg-checks'-modus."
+msgstr "Går inn i 'no-gpg-checks' modus."
 
 #. translators: --no-gpg-checks
 #: src/Config.cc:466
@@ -267,7 +267,7 @@ msgstr ""
 msgid ""
 "Turning on '%s'. New repository signing keys will be automatically imported!"
 msgstr ""
-"Slå på '%s'. Signeringsnøkler for nye pakkebrønner vil bli automatisk "
+"Slår på '%s'. Signeringsnøkler for nye pakkebrønner vil bli automatisk "
 "importert!"
 
 #. translators: --gpg-auto-import-keys
@@ -333,7 +333,7 @@ msgstr ""
 
 #: src/Config.cc:530
 msgid "Target Options"
-msgstr "Målvalg"
+msgstr "Målalternativer"
 
 #. translators: --root, -R <DIR>
 #: src/Config.cc:535
@@ -403,7 +403,7 @@ msgstr "Pakken '%s' ikke funnet."
 #: src/RequestFeedback.cc:48
 #, c-format, boost-format
 msgid "Patch '%s' not found."
-msgstr "Pakkeoppdateringen '%s' ikke funnet."
+msgstr "Programrettelse '%s' ikke funnet."
 
 #: src/RequestFeedback.cc:50
 #, c-format, boost-format
@@ -418,7 +418,7 @@ msgstr "Mønsteret '%s' ikke funnet."
 #: src/RequestFeedback.cc:54
 #, c-format, boost-format
 msgid "Source package '%s' not found."
-msgstr "Kildekodepakken '%s' ble ikke funnet."
+msgstr "Kildepakken '%s' ble ikke funnet."
 
 #. just in case
 #: src/RequestFeedback.cc:56
@@ -434,7 +434,7 @@ msgstr "Pakken '%s' ikke funnet i angitte pakkebrønner."
 #: src/RequestFeedback.cc:63
 #, c-format, boost-format
 msgid "Patch '%s' not found in specified repositories."
-msgstr "Pakkeoppdateringen '%s' ikke funnet i angitte pakkebrønner."
+msgstr "Programrettelse '%s' ikke funnet i angitte pakkebrønner."
 
 #: src/RequestFeedback.cc:65
 #, c-format, boost-format
@@ -449,7 +449,7 @@ msgstr "Mønsteret '%s' ikke funnet i angitte pakkebrønner."
 #: src/RequestFeedback.cc:69
 #, c-format, boost-format
 msgid "Source package '%s' not found in specified repositories."
-msgstr "Kildekodepakken '%s' ikke funnet i angitte pakkebrønner."
+msgstr "Kildepakken '%s' ikke funnet i angitte pakkebrønner."
 
 #. just in case
 #: src/RequestFeedback.cc:71
@@ -566,12 +566,12 @@ msgstr "Bruk '%s' for å tvinge installasjon av pakken."
 #: src/RequestFeedback.cc:170
 #, c-format, boost-format
 msgid "Patch '%s' is interactive, skipping."
-msgstr "Pakkeoppdateringen '%s' er interaktiv, hopper over."
+msgstr "Programrettelse '%s' er interaktiv, hopper over."
 
 #: src/RequestFeedback.cc:176
 #, c-format, boost-format
 msgid "Patch '%s' is not needed."
-msgstr "Pakkeoppdateringen '%s' er ikke nødvendig."
+msgstr "Programrettelse '%s' er ikke nødvendig."
 
 #: src/RequestFeedback.cc:182
 #, fuzzy, boost-format
@@ -586,13 +586,13 @@ msgstr ""
 #, c-format, boost-format
 msgid "Patch '%s' is locked. Use '%s' to install it, or unlock it using '%s'."
 msgstr ""
-"Pakkeoppdateringen '%s' er låst. Bruk '%s' for å installere den, eller "
-"frigjør den ved å bruke '%s'."
+"Programrettelse '%s' er låst. Bruk '%s' for å installere den, eller frigjør "
+"den ved å bruke '%s'."
 
 #: src/RequestFeedback.cc:200
 #, c-format, boost-format
 msgid "Patch '%s' is not in the specified category."
-msgstr "Pakkeoppdateringen '%s' finnes ikke i angitte kategori."
+msgstr "Programrettelse '%s' finnes ikke i angitte kategori."
 
 #: src/RequestFeedback.cc:207
 #, fuzzy, c-format, boost-format
@@ -602,7 +602,7 @@ msgstr "Pakkeoppdateringen '%s' finnes ikke i angitte kategori."
 #: src/RequestFeedback.cc:214
 #, c-format, boost-format
 msgid "Patch '%s' was issued after the specified date."
-msgstr "Pakkeoppdateringen '%s' publisert etter angitt dato."
+msgstr "Programrettelse '%s' publisert etter angitt dato."
 
 #: src/RequestFeedback.cc:219
 #, c-format, boost-format
@@ -627,12 +627,12 @@ msgstr "'%s' er låst. Bruk '%s' for å låse opp."
 #: src/RequestFeedback.cc:239
 #, c-format, boost-format
 msgid "Adding requirement: '%s'."
-msgstr "Legger til nødvendig pakke '%s'"
+msgstr "Legger til krav: '%s'."
 
 #: src/RequestFeedback.cc:242
 #, c-format, boost-format
 msgid "Adding conflict: '%s'."
-msgstr "Legger til konflikt '%s'"
+msgstr "Legger til konflikt: '%s'."
 
 #. translators: %1% expands to a single package name or a ','-separated enumeration of names.
 #: src/RequestFeedback.cc:264
@@ -1218,7 +1218,7 @@ msgstr ""
 
 #: src/Summary.cc:1605
 msgid "Download only."
-msgstr "Bare last ned."
+msgstr "Bare nedlasting."
 
 #. Package install size change:
 #. |     349.1 MiB  required by packages that will be installed
@@ -1318,29 +1318,29 @@ msgstr[1] "pakkene vil få endrede leverandør"
 #: src/Summary.cc:1719
 msgid "to change arch"
 msgid_plural "to change arch"
-msgstr[0] "med endret ark."
-msgstr[1] "med endret ark"
+msgstr[0] "med endret arkitektur"
+msgstr[1] "med endret arkitektur"
 
 #. translators: this text will be preceded by a number e.g. "5 packages ..."
 #: src/Summary.cc:1722
 msgid "package will change arch"
 msgid_plural "packages will change arch"
-msgstr[0] "pakken vil få endret ark."
-msgstr[1] "pakkene vil få endret ark."
+msgstr[0] "pakken vil få endret arkitektur"
+msgstr[1] "pakkene vil få endret arkitektur"
 
 #. translators: this text will be preceded by a number e.g. "5 new"
 #: src/Summary.cc:1733
 msgid "source package"
 msgid_plural "source packages"
-msgstr[0] "kildekodepakke"
-msgstr[1] "kildekodepakker"
+msgstr[0] "kildepakke"
+msgstr[1] "kildepakker"
 
 #. translators: this text will be preceded by a number e.g. "5 new to install"
 #: src/Summary.cc:1736
 msgid "source package to install"
 msgid_plural "source packages to install"
-msgstr[0] "kildekodepakke som skal installeres"
-msgstr[1] "kildekodepakker som skal installeres"
+msgstr[0] "kildepakke som skal installeres"
+msgstr[1] "kildepakker som skal installeres"
 
 #. patch command (auto)restricted to update stack patches
 #: src/Summary.cc:1817
@@ -1377,8 +1377,8 @@ msgid ""
 "PackageKit is blocking zypper. This happens if you have an updater applet or "
 "other software management application using PackageKit running."
 msgstr ""
-"PackageKit blokkerer zypper. Dette kjer hvis et oppdateringsprogram eller at "
-"annet program som bruker PackageKit, allerede kjører."
+"PackageKit blokkerer zypper. Dette skjer hvis et oppdateringsprogram eller "
+"at annet program som bruker PackageKit, allerede kjører."
 
 #: src/Zypper.cc:93
 msgid ""
@@ -1407,7 +1407,7 @@ msgstr "Uventet unntak."
 #: src/Zypper.cc:291
 #, c-format, boost-format
 msgid "Type '%s' to get command-specific help."
-msgstr "Tast '%s' for å vise kommando-spesifikk help."
+msgstr "Tast '%s' for å vise kommando-spesifikk hjelp."
 
 #: src/Zypper.cc:311
 #, c-format, boost-format
@@ -1601,7 +1601,7 @@ msgstr "Ny nøkkel for signering av pakkebrønn eller pakke mottatt:"
 #: src/callbacks/keyring.h:284
 msgid "Do you want to reject the key, trust temporarily, or trust always?"
 msgstr ""
-"Vil du avvise nøkkelen, midlertidig stole på den eller alltid stole på den?"
+"Vil du forkaste nøkkelen, midlertidig stole på den eller alltid stole på den?"
 
 #. translators: this message is shown after showing description of the key
 #: src/callbacks/keyring.h:287
@@ -1617,12 +1617,12 @@ msgstr ""
 #. The answers should be lower case letters.
 #: src/callbacks/keyring.h:305
 msgid "r/t/a/"
-msgstr "r/t/a/"
+msgstr "f/m/a/"
 
 #. translators: the same as r/t/a, but without 'a'
 #: src/callbacks/keyring.h:308
 msgid "r/t"
-msgstr "r/t"
+msgstr "f/a"
 
 #. translators: r/a stands for Reject/trustAlways(import)
 #. translate to whatever is appropriate for your language
@@ -1789,7 +1789,7 @@ msgstr "Følgende kommando låser noen av objektene du vil låse opp:"
 # power-off message
 #: src/callbacks/locks.h:35 src/callbacks/locks.h:50
 msgid "Do you want to remove this lock?"
-msgstr "Vil du fjerne denne låsingen?"
+msgstr "Vil du fjerne denne låsen?"
 
 #: src/callbacks/locks.h:45
 msgid "The following query does not lock anything:"
@@ -1936,7 +1936,7 @@ msgstr "Henter delta"
 #. translators: this text is a progress display label e.g. "Applying delta foo [42%]"
 #: src/callbacks/repo.h:85
 msgid "Applying delta"
-msgstr "Bruker delta"
+msgstr "Tar i bruk delta"
 
 #: src/callbacks/repo.h:123
 #, fuzzy, boost-format
@@ -2078,7 +2078,7 @@ msgstr ""
 
 #: src/commands/commandhelpformatter.h:133
 msgid "This command has no additional options."
-msgstr "Denne kommandoen har ikke flere valg."
+msgstr "Denne kommandoen har ikke flere alternativer."
 
 #: src/commands/commandhelpformatter.h:136
 #, fuzzy
@@ -2269,7 +2269,7 @@ msgstr "Minst ett pakkenavn kreves."
 
 #: src/commands/installremove.cc:116
 msgid "Cannot uninstall patches."
-msgstr "Kan ikke fjerne pakkeoppdateringer."
+msgstr "Kan ikke fjerne programrettelser."
 
 #: src/commands/installremove.cc:117
 msgid ""
@@ -2286,7 +2286,7 @@ msgstr ""
 #: src/commands/installremove.cc:126
 msgid "Uninstallation of a source package not defined and implemented."
 msgstr ""
-"Å fjerne en kildekodepakke er ikke definert som en funksjon og implementert."
+"Å fjerne en kildepakke er ikke definert som en funksjon og implementert."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/installremove.cc:166
@@ -2564,7 +2564,7 @@ msgstr "Fjern unødvendige lås."
 #. translators: -d, --only-duplicates
 #: src/commands/locks/clean.cc:36
 msgid "Clean only duplicate locks."
-msgstr "Fjern kun dupliserte lås."
+msgstr "Fjern kun kopierte låser."
 
 #. translators: -e, --only-empty
 #: src/commands/locks/clean.cc:39
@@ -2687,7 +2687,7 @@ msgstr "Fjern kun låser i den angitte pakkebrønnen."
 
 #: src/commands/locks/remove.cc:81
 msgid "Specified lock has been successfully removed."
-msgstr "Definerte lås er fjernet."
+msgstr "Definert lås er fjernet."
 
 #: src/commands/locks/remove.cc:94
 msgid "No lock has been removed."
@@ -2918,7 +2918,7 @@ msgstr ""
 #. translators: command summary: patch
 #: src/commands/patch.cc:26
 msgid "Install needed patches."
-msgstr "Installer nødvendige pakkeoppdateringer."
+msgstr "Installer nødvendige programrettelser."
 
 #. translators: command description
 #: src/commands/patch.cc:28
@@ -2950,7 +2950,7 @@ msgstr ""
 #. translators: command summary: patch-check, pchk
 #: src/commands/patchcheck.cc:19
 msgid "Check for patches."
-msgstr "Se etter pakkeoppdateringer."
+msgstr "Se etter programrettelser."
 
 #. translators: command description
 #: src/commands/patchcheck.cc:21
@@ -3145,7 +3145,7 @@ msgstr "Bruk"
 #. translators: command summary: patch-info
 #: src/commands/query/info.cc:138
 msgid "Show full information for specified patches."
-msgstr "Vis fullstendig informasjon omspesifiserte oppdateringer."
+msgstr "Vis fullstendig informasjon om spesifiserte programrettelser."
 
 #. translators: command summary: pattern-info
 #: src/commands/query/info.cc:141
@@ -3258,13 +3258,13 @@ msgstr "patches (pch) [pakkebrønn] ..."
 #. translators: command summary: patches, pch
 #: src/commands/query/patches.cc:20
 msgid "List all available patches."
-msgstr "Vis alle tilgjengelige pakkeoppdateringer."
+msgstr "Vis alle tilgjengelige programrettelser."
 
 #. translators: command description
 #: src/commands/query/patches.cc:22
 msgid "List all patches available in specified repositories."
 msgstr ""
-"Vis alle tilgjengeligige pakkeoppdateringer i de spesifiserte pakkebrønnene."
+"Vis alle tilgjengeligige programrettelser i de spesifiserte pakkebrønnene."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/query/patterns.cc:18
@@ -3450,7 +3450,7 @@ msgstr "URI for GPG-nøkkel"
 
 #: src/commands/repos/list.cc:58
 msgid "Path Prefix"
-msgstr "Prefiks for pakkeoppdatering"
+msgstr "Adresseprefiks"
 
 #: src/commands/repos/list.cc:59
 msgid "Parent Service"
@@ -3632,7 +3632,7 @@ msgstr "Hopper over deaktivert pakkebrønn '%s'"
 #: src/commands/repos/refresh.cc:262 src/repos.cc:860 src/repos.cc:908
 #, c-format, boost-format
 msgid "Skipping repository '%s' because of the above error."
-msgstr "Hopper over pakkebrønn '%s' på grunn av tidligere feil."
+msgstr "Hopper over pakkebrønn '%s' på grunn av feilen overfor."
 
 #: src/commands/repos/refresh.cc:274
 #, fuzzy
@@ -3899,7 +3899,7 @@ msgstr "Vis også pakkebrønnens navn."
 #. translators: -r, --refresh
 #: src/commands/reposerviceoptionsets.cc:188
 msgid "Show also the autorefresh flag."
-msgstr "Vis også autooppdateringsflagget."
+msgstr "Vis også autooppdaterings-flagget."
 
 #. translators: -u, --uri
 #: src/commands/reposerviceoptionsets.cc:198
@@ -4261,16 +4261,16 @@ msgstr "Kontroller om URI-en er gyldig og tilgjengelig."
 #: src/commands/services/common.cc:159
 #, c-format, boost-format
 msgid "Removing service '%s':"
-msgstr "Fjerner tjenesten '%s'"
+msgstr "Fjerner tjenesten '%s':"
 
 #: src/commands/services/common.cc:162
 #, c-format, boost-format
 msgid "Service '%s' has been removed."
-msgstr "Tjenesten '%s' er fjernet"
+msgstr "Tjenesten '%s' er fjernet."
 
 #: src/commands/services/list.cc:83
 msgid "services (ls) [OPTIONS]"
-msgstr "services (ls) [valg]"
+msgstr "services (ls) [alternativer]"
 
 #: src/commands/services/list.cc:84
 msgid "List all defined services."
@@ -4502,7 +4502,7 @@ msgstr "Alle tjenester er oppdatert."
 
 #: src/commands/services/remove.cc:20
 msgid "removeservice (rs) [OPTIONS] <ALIAS|#|URI>"
-msgstr "removeservice (rs) [valg] <alias|#|URI>"
+msgstr "removeservice (rs) [alternativer] <alias|#|URI>"
 
 #: src/commands/services/remove.cc:21
 msgid "Remove specified service."
@@ -4621,18 +4621,17 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/sourceinstall.cc:21
 msgid "source-install (si) [OPTIONS] <NAME> ..."
-msgstr "source-install (si) [valg] <navn> ..."
+msgstr "source-install (si) [alternativer] <navn> ..."
 
 #. translators: command summary: source-install, si
 #: src/commands/sourceinstall.cc:23
 msgid "Install source packages and their build dependencies."
-msgstr "Installer kildekodepakker og deres nødvendige pakker."
+msgstr "Installer kildepakker og deres nødvendige pakker."
 
 #. translators: command description
 #: src/commands/sourceinstall.cc:25
 msgid "Install specified source packages and their build dependencies."
-msgstr ""
-"Installer spesifiserte kildekodepakker og tilhørende nødvendige pakker."
+msgstr "Installer spesifiserte kildepakker og tilhørende nødvendige pakker."
 
 #: src/commands/sourceinstall.cc:26
 #, boost-format
@@ -4654,7 +4653,7 @@ msgstr "Ikke installer byggeavhengigheter."
 
 #: src/commands/sourceinstall.cc:70
 msgid "Source package name is a required argument."
-msgstr "Kildekodepakkens navn er et obligatorisk argument."
+msgstr "Kildepakkens navn er et obligatorisk argument."
 
 #: src/commands/sourceinstall.cc:86
 msgid "Uninstalling source packages is not supported."
@@ -4827,8 +4826,8 @@ msgid ""
 "Zypper does not keep track of installed source packages. To install the "
 "latest source package and its build dependencies, use '%s'."
 msgstr ""
-"Zypper registrerer ikke installerte kildekodepakker. For å installere den "
-"nyeste kildekodepakken og tilhørende nødvendige pakker, bruk '%s'."
+"Zypper registrerer ikke installerte kildepakker. For å installere den nyeste "
+"kildepakken og tilhørende nødvendige pakker, bruk '%s'."
 
 #: src/commands/update.cc:83
 msgid ""
@@ -4990,25 +4989,25 @@ msgstr "Installerte pakker:"
 
 #: src/commands/utils/source-download.cc:287
 msgid "Required source packages:"
-msgstr "Nødvendig kildekodepakker:"
+msgstr "Nødvendig kildepakker:"
 
 #: src/commands/utils/source-download.cc:296
 msgid "Required source packages available in download directory:"
-msgstr "Nødvendige kildekodepakker tilgjengelige i nedlastingskatalog:"
+msgstr "Nødvendige kildepakker tilgjengelige i nedlastingskatalog:"
 
 #: src/commands/utils/source-download.cc:300
 msgid "Required source packages to be downloaded:"
-msgstr "Nødvendige kildekodepakker som vil bli lastet ned:"
+msgstr "Nødvendige kildepakker som vil bli lastet ned:"
 
 #: src/commands/utils/source-download.cc:304
 msgid "Superfluous source packages in download directory:"
-msgstr "Overflødige kildekodepakker i nedlastingskatalog:"
+msgstr "Overflødige kildepakker i nedlastingskatalog:"
 
 #. translators: table headers
 #. translators: property name; short; used like "Name: value"
 #: src/commands/utils/source-download.cc:318 src/info.cc:409
 msgid "Source package"
-msgstr "Kildekodepakke"
+msgstr "Kildepakke"
 
 #: src/commands/utils/source-download.cc:318
 msgid "Installed package"
@@ -5017,40 +5016,39 @@ msgstr "Installert pakke"
 #: src/commands/utils/source-download.cc:368
 msgid "Use '--verbose' option for a full list of required source packages."
 msgstr ""
-"Bruk valget '--verbose' for en komplett liste over nødvendige "
-"kildekodepakker."
+"Bruk valget '--verbose' for en komplett liste over nødvendige kildepakker."
 
 #: src/commands/utils/source-download.cc:377
 msgid "Deleting superfluous source packages"
-msgstr "Sletter overflødige kildekodepakker"
+msgstr "Sletter overflødige kildepakker"
 
 #: src/commands/utils/source-download.cc:388
 #, c-format, boost-format
 msgid "Failed to remove source package '%s'"
-msgstr "Kunne ikke slette kildekodepakken '%s'"
+msgstr "Kunne ikke slette kildepakken '%s'"
 
 #: src/commands/utils/source-download.cc:399
 msgid "No superfluous source packages to delete."
-msgstr "Ingen overflødige kildekodepakker å slette."
+msgstr "Ingen overflødige kildepakker å slette."
 
 #: src/commands/utils/source-download.cc:409
 msgid "Downloading required source packages..."
-msgstr "Laster ned nødvendige kildekodepakker..."
+msgstr "Laster ned nødvendige kildepakker..."
 
 #: src/commands/utils/source-download.cc:428
 #, c-format, boost-format
 msgid "Source package '%s' is not provided by any repository."
-msgstr "Kildekodepakken '%s' ikke funnet i noen pakkebrønner."
+msgstr "Kildepakken '%s' ikke funnet i noen pakkebrønner."
 
 #: src/commands/utils/source-download.cc:446
 #: src/commands/utils/source-download.cc:460
 #, c-format, boost-format
 msgid "Error downloading source package '%s'."
-msgstr "Installerer kildekodepakken '%s'."
+msgstr "Installerer kildepakken '%s'."
 
 #: src/commands/utils/source-download.cc:471
 msgid "No source packages to download."
-msgstr "Ingen kildekodepakker å laste ned."
+msgstr "Ingen kildepakker å laste ned."
 
 #. translators: command summary: source-download
 #. translators: command description
@@ -5082,7 +5080,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/utils/targetos.cc:20
 msgid "targetos (tos) [OPTIONS]"
-msgstr "targetos (tos) [valg]"
+msgstr "targetos (tos) [alternativer]"
 
 #. translators: command summary: targetos, tos
 #: src/commands/utils/targetos.cc:22
@@ -5179,12 +5177,12 @@ msgstr "Versjon"
 #: src/info.cc:94 src/search.cc:54 src/search.cc:460 src/search.cc:510
 #: src/update.cc:795
 msgid "Arch"
-msgstr "Ark."
+msgstr "Arkitektur"
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:96
 msgid "Vendor"
-msgstr "Produsent"
+msgstr "Leverandør"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: package summary (header)
@@ -5540,12 +5538,12 @@ msgstr "Installer pakker med lisensavtaler: %d"
 #: src/misc.cc:350
 #, c-format, boost-format
 msgid "Package '%s' has source package '%s'."
-msgstr "Pakken '%s' har kildekodepakken '%s'."
+msgstr "Pakken '%s' har kildepakken '%s'."
 
 #: src/misc.cc:359
 #, c-format, boost-format
 msgid "Source package '%s' for package '%s' not found."
-msgstr "Kildekodepakken '%s' for pakken '%s' ble ikke funnet."
+msgstr "Kildepakken '%s' for pakken '%s' ble ikke funnet."
 
 #: src/misc.cc:433
 #, c-format, boost-format
@@ -5555,17 +5553,17 @@ msgstr "Installerer pakke %s-%s"
 #: src/misc.cc:442
 #, c-format, boost-format
 msgid "Source package %s-%s successfully retrieved."
-msgstr "Kildekodepakken %s-%s ble hentet."
+msgstr "Kildepakken %s-%s ble hentet."
 
 #: src/misc.cc:448
 #, c-format, boost-format
 msgid "Source package %s-%s successfully installed."
-msgstr "Kildekodepakken %s-%s ble installert."
+msgstr "Kildepakken %s-%s ble installert."
 
 #: src/misc.cc:454
 #, c-format, boost-format
 msgid "Problem installing source package %s-%s:"
-msgstr "Problemer med å Installerer kildekodepakken %s-%s:"
+msgstr "Problemer med å Installerer kildepakken %s-%s:"
 
 #. translators: used as 'XYZ changed to SOMETHING [volatile]' to tag specific property changes.
 #: src/repos.cc:53
@@ -5855,7 +5853,7 @@ msgstr ""
 #: src/repos.cc:1187
 #, c-format, boost-format
 msgid "Invalid repository alias: '%s'"
-msgstr "Ugyldig pakkebrønnalias '%s'."
+msgstr "Ugyldig pakkebrønnalias '%s'"
 
 #: src/repos.cc:1204
 msgid ""
@@ -5924,7 +5922,7 @@ msgstr "Kontroller om URI-en er gyldig og tilgjengelig."
 
 #: src/repos.cc:1358
 msgid "Problem parsing the file at the specified URI"
-msgstr "Problemer med tolking av filen på  angitt URI"
+msgstr "Problemer med tolking av filen på angitt URI"
 
 #. TranslatorExplanation Don't translate the '.repo' string.
 #: src/repos.cc:1360
@@ -6040,7 +6038,7 @@ msgstr "Pakkebrønnen '%s' finnes ikke i mellomlager. Mellomlagrer..."
 #: src/repos.cc:1796 src/repos.cc:1830
 #, c-format, boost-format
 msgid "Problem loading data from '%s'"
-msgstr "Kunne ikke leser data fra '%s'"
+msgstr "Kunne ikke lese data fra '%s'"
 
 #: src/repos.cc:1800
 #, c-format, boost-format
@@ -6105,7 +6103,7 @@ msgstr "Systempakker"
 
 #: src/search.cc:261
 msgid "No needed patches found."
-msgstr "Ingen pakkeoppdateringer ble funnet."
+msgstr "Ingen programrettelser ble funnet."
 
 #: src/search.cc:342
 msgid "No patterns found."
@@ -6439,7 +6437,7 @@ msgid ""
 "One of the installed patches requires a reboot of your machine. Reboot as "
 "soon as possible."
 msgstr ""
-"Én av de installerte pakkeoppdateringene krever at datamaskinen startes på "
+"Én av de installerte programrettelsene krever at datamaskinen startes på "
 "nytt. Gjør dette så snart som mulig."
 
 #: src/solve-commit.cc:1095
@@ -6447,8 +6445,8 @@ msgid ""
 "One of the installed patches affects the package manager itself. Run this "
 "command once more to install any other needed patches."
 msgstr ""
-"Én av de installerte pakkeoppdateringene påvirker pakkebehandleren. Kjør "
-"denne kommandoen én gang til for installere andre nødvendige oppdateringer."
+"Én av de installerte programrettelsene påvirker pakkebehandleren. Kjør denne "
+"kommandoen én gang til for installere andre nødvendige oppdateringer."
 
 #: src/solve-commit.cc:1117
 msgid "Dependencies of all installed packages are satisfied."
@@ -6517,7 +6515,7 @@ msgstr ""
 #. translator: Table column header.
 #: src/update.cc:410 src/update.cc:702
 msgid "Patches"
-msgstr "Pakkeoppdateringer"
+msgstr "Programrettelser"
 
 #. translator: Table column header.
 #: src/update.cc:412
@@ -6543,7 +6541,7 @@ msgstr ""
 
 #: src/update.cc:600 src/update.cc:842
 msgid "No updates found."
-msgstr "Ingen pakkeoppdateringer ble funnet."
+msgstr "Ingen oppdateringer ble funnet."
 
 #. translator: Table headline
 #: src/update.cc:607
@@ -6581,7 +6579,8 @@ msgstr "Følgende samsvarende oppføringsnummer er funnet:"
 #: src/update.cc:988
 msgid "Matches in patch descriptions of the following patches have been found:"
 msgstr ""
-"Samsvar i oppdateringsbeskrivelser for følgende pakkeoppdateringer er funnet:"
+"Samsvar i programrettelse-beskrivelser for følgende programrettelser er "
+"funnet:"
 
 #: src/update.cc:1050
 #, c-format, boost-format
@@ -6735,7 +6734,7 @@ msgstr ""
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:37
 msgid "INTEGER"
-msgstr "1-99"
+msgstr "heltall"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:39
@@ -6780,11 +6779,11 @@ msgstr ""
 #. wrong option in the last argument
 #: src/utils/getopt.cc:78
 msgid "Unknown option "
-msgstr "Ukjent alternativ"
+msgstr "Ukjent alternativ "
 
 #: src/utils/getopt.cc:98
 msgid "Missing argument for "
-msgstr "Manglende argument for"
+msgstr "Manglende argument for "
 
 #: src/utils/messages.cc:19
 msgid "Please file a bug report about this."
@@ -6886,14 +6885,14 @@ msgstr[1] "produkter"
 #: src/utils/misc.cc:99
 msgid "patch"
 msgid_plural "patches"
-msgstr[0] "pakkeoppdatering"
-msgstr[1] "pakkeoppdatering"
+msgstr[0] "Programrettelse"
+msgstr[1] "Programrettelser"
 
 #: src/utils/misc.cc:101
 msgid "srcpackage"
 msgid_plural "srcpackages"
-msgstr[0] "kildekodepakke"
-msgstr[1] "kildekodepakker"
+msgstr[0] "src-pakke"
+msgstr[1] "src-pakker"
 
 #: src/utils/misc.cc:103
 msgid "application"
@@ -6952,7 +6951,7 @@ msgstr ""
 #. << _("Repository")
 #: src/utils/misc.cc:364
 msgid "Issue"
-msgstr "Oppføring"
+msgstr "Feilrapport"
 
 #: src/utils/misc.cc:365
 msgid "No."
@@ -6960,7 +6959,7 @@ msgstr "Nr."
 
 #: src/utils/misc.cc:366
 msgid "Patch"
-msgstr "Pakkeoppdatering"
+msgstr "Programrettelse"
 
 #: src/utils/misc.cc:444
 msgid "Specified local path does not exist or is not accessible."
@@ -6968,7 +6967,7 @@ msgstr "Den angitte lokale stien finnes ikke, eller er ikke tilgjengelig."
 
 #: src/utils/misc.cc:456
 msgid "Given URI is invalid"
-msgstr "Angitt URI er ugyldig."
+msgstr "Angitt URI er ugyldig"
 
 #. Guess failed:
 #. translators: don't translate '<platform>'
