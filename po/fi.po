@@ -23,16 +23,16 @@ msgstr ""
 "Project-Id-Version: zypper.fi\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-07-29 15:47+0200\n"
-"PO-Revision-Date: 2024-05-11 18:43+0000\n"
-"Last-Translator: Tommi Nieminen <software@legisign.org>\n"
-"Language-Team: Finnish <https://l10n.opensuse.org/projects/zypper/master/fi/"
-">\n"
+"PO-Revision-Date: 2024-11-23 21:48+0000\n"
+"Last-Translator: Rantala <toni.rantala@protonmail.com>\n"
+"Language-Team: Finnish <https://l10n.opensuse.org/projects/zypper/master/fi/>"
+"\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.9.1\n"
+"X-Generator: Weblate 5.8.4\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -790,7 +790,7 @@ msgstr[1] "Päivitetään seuraavat %d ohjelmistoryhmää:"
 msgid "The following product is going to be upgraded:"
 msgid_plural "The following %d products are going to be upgraded:"
 msgstr[0] "Päivitetään seuraava tuote:"
-msgstr[1] "Päivitetään seuraavat  %d tuotetta:"
+msgstr[1] "Päivitetään seuraavat %d tuotetta:"
 
 #: src/Summary.cc:844
 #, c-format, boost-format
@@ -900,7 +900,7 @@ msgid "The following recommended product was automatically selected:"
 msgid_plural ""
 "The following %d recommended products were automatically selected:"
 msgstr[0] "Seuraava suositeltu tuote valittiin automaattisesti:"
-msgstr[1] "Seuraavat  %d suositeltua tuotetta valittiin automaattisesti:"
+msgstr[1] "Seuraavat %d suositeltua tuotetta valittiin automaattisesti:"
 
 #: src/Summary.cc:1094
 #, c-format, boost-format
@@ -1171,7 +1171,7 @@ msgstr[1] ""
 msgid "The following package update will NOT be installed:"
 msgid_plural "The following %d package updates will NOT be installed:"
 msgstr[0] "Seuraavaa päivityspakettia EI asenneta:"
-msgstr[1] "Seuraavia %d  päivityspakettia EI asenneta:"
+msgstr[1] "Seuraavia %d päivityspakettia EI asenneta:"
 
 #: src/Summary.cc:1465
 #, c-format, boost-format
@@ -2358,7 +2358,7 @@ msgid ""
 "Remove packages with specified capabilities. A capability is NAME[.ARCH]"
 "[OP<VERSION>], where OP is one of <, <=, =, >=, >."
 msgstr ""
-"Poistaa järjestelmästä paketteja annettujen määritysten perusteella.  "
+"Poistaa järjestelmästä paketteja annettujen määritysten perusteella. "
 "Määritys on muotoa NIMI[.ARCH][OP<VERSIO>], jossa OP on jokin seuraavista <, "
 "<=, =, >=, >."
 
@@ -2844,7 +2844,7 @@ msgid ""
 "Exit code ZYPPER_EXIT_INF_REBOOT_NEEDED indicates that a reboot is "
 "suggested, otherwise the exit code is set to ZYPPER_EXIT_OK."
 msgstr ""
-"Tarkistaa, asettiko aiempi ydinkirjaston tai -palvelun päivitys tai  asennus "
+"Tarkistaa, asettiko aiempi ydinkirjaston tai -palvelun päivitys tai asennus "
 "needs-reboot-lipun.\n"
 "Paluukoodi ZYPPER_EXIT_INF_REBOOT_NEEDED osoittaa uudelleenkäynnistyksen "
 "olevan tarpeen, muuten\n"
@@ -3258,7 +3258,7 @@ msgid ""
 msgstr ""
 "Näyttää yksityiskohtaisia tietoja paketista. Oletuksena paketit jotka "
 "täsmäävät täysin annettuun nimeen näytetään. Nähdäksesi myös paketit jotka "
-"täsmäävät osittain, käytä valintaa  '--match-substrings' tai käytä "
+"täsmäävät osittain, käytä valintaa '--match-substrings' tai käytä "
 "jokerimerkkejä (*?) nimessä."
 
 #. translators: -s, --match-substrings
@@ -3757,13 +3757,13 @@ msgstr "Pakottaa hakemaan metatiedot uudelleen."
 #: src/commands/repos/refresh.cc:64
 msgid "Only build the database, don't download metadata."
 msgstr ""
-"Rakentaa ainoastaan tietokannan uudelleen. Ei nouda  metatietoja uudelleen."
+"Rakentaa ainoastaan tietokannan uudelleen. Ei nouda metatietoja uudelleen."
 
 #. translators: -D, --download-only
 #: src/commands/repos/refresh.cc:69
 msgid "Only download raw metadata, don't build the database."
 msgstr ""
-"Noutaa ainoastaan metatiedot uudelleen, ei  rakenna tietokantaa uudelleen."
+"Noutaa ainoastaan metatiedot uudelleen, ei rakenna tietokantaa uudelleen."
 
 #. translators: -r, --repo <ALIAS|#|URI>
 #: src/commands/repos/refresh.cc:74
@@ -5050,7 +5050,7 @@ msgstr "Toiminto ei ole tuettu."
 #: src/commands/update.cc:70
 #, c-format, boost-format
 msgid "To update installed products use '%s'."
-msgstr "Päivittääksesi asennetut  tuotteet käytä  \"%s\"."
+msgstr "Päivittääksesi asennetut tuotteet käytä \"%s\"."
 
 #: src/commands/update.cc:77
 #, c-format, boost-format
@@ -5790,7 +5790,7 @@ msgstr "Paketilla '%s' on lähdekoodipaketti '%s'."
 #: src/misc.cc:359
 #, c-format, boost-format
 msgid "Source package '%s' for package '%s' not found."
-msgstr "Lähdekoodipakettia  '%s'  paketille  '%s'  ei löytynyt."
+msgstr "Lähdekoodipakettia '%s' paketille '%s' ei löytynyt."
 
 #: src/misc.cc:433
 #, c-format, boost-format
@@ -7358,7 +7358,7 @@ msgstr "Virheellinen vastaus \"%s\"."
 #: src/utils/prompt.cc:281
 #, c-format, boost-format
 msgid "Ambiguous answer '%s'."
-msgstr "Monitulkintainen vastaus ”%s%”."
+msgstr "Monitulkintainen vastaus '%s'."
 
 #. translators: the %s are: 'y', 'yes' (translated), 'n', and 'no' (translated).
 #: src/utils/prompt.cc:289
@@ -7371,7 +7371,7 @@ msgid ""
 "If nothing else works enter '#1' to select the 1st option, '#2' for the 2nd "
 "one, ..."
 msgstr ""
-"Ellei muu auta, valitse ensimmäinen valinta  antamalla \"#1\", toinen "
+"Ellei muu auta, valitse ensimmäinen valinta antamalla \"#1\", toinen "
 "antamalla ”#2” jne…"
 
 #. TranslatorExplanation These are reasons for various failures.
