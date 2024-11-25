@@ -81,6 +81,7 @@ SET (zypper_HEADERS
   commands/query/patterns.h
   commands/query/products.h
   commands/solveroptionset.h
+  commands/autoremove.h
   commands/installremove.h
   commands/sourceinstall.h
   commands/distupgrade.h
@@ -161,6 +162,7 @@ SET( zypper_SRCS
   commands/query/products.cc
   commands/solveroptionset.cc
   commands/installremove.cc
+  commands/autoremove.cc
   commands/sourceinstall.cc
   commands/distupgrade.cc
   commands/inrverify.cc

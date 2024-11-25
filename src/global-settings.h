@@ -92,6 +92,12 @@ struct DupSettingsData
 };
 using DupSettings = GlobalSettingSingleton<DupSettingsData>;
 
+struct ArmSettingsData
+{
+  std::vector<std::string> _fromSystem;
+};
+using ArmSettings = GlobalSettingSingleton<ArmSettingsData>;
+
 struct FileConflictPolicyData
 {
   bool _replaceFiles = false;
