@@ -23,8 +23,8 @@ msgstr ""
 "Project-Id-Version: zypper.fi\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-07-29 15:47+0200\n"
-"PO-Revision-Date: 2024-11-23 21:48+0000\n"
-"Last-Translator: Rantala <toni.rantala@protonmail.com>\n"
+"PO-Revision-Date: 2024-12-01 09:48+0000\n"
+"Last-Translator: Tommi Nieminen <software@legisign.org>\n"
 "Language-Team: Finnish <https://l10n.opensuse.org/projects/zypper/master/fi/>"
 "\n"
 "Language: fi\n"
@@ -304,8 +304,8 @@ msgid ""
 "Additionally use disabled repositories providing a specific keyword. Try '--"
 "plus-content debug' to enable repos indicating to provide debug packages."
 msgstr ""
-"Käytä myös käytöstä poistettuja avainsanan tarjoavia asennuslähteitä. ”--"
-"plus-content debug” ottaa käyttöön myös vianpaikannuspakettilähteet."
+"Käytä myös käytöstä poistettuja avainsanan tarjoavia asennuslähteitä. "
+"”--plus-content debug” ottaa käyttöön myös vianpaikannusasennuslähteet."
 
 #: src/Config.cc:491
 msgid "Repositories disabled, using the database of installed packages only."
@@ -1137,7 +1137,7 @@ msgstr[1] ""
 
 #: src/Summary.cc:1417
 msgid "was superseded by"
-msgstr ""
+msgstr "jonka syrjäytti"
 
 #: src/Summary.cc:1430
 #, c-format, boost-format
@@ -1242,17 +1242,17 @@ msgstr ""
 #. 99.2 MiB  |  -    6.4 MiB  already in cache
 #: src/Summary.cc:1588
 msgid "Package download size:"
-msgstr ""
+msgstr "Paketin latauskoko:"
 
 #. translator: rendered as "105.7 MiB  overall download size"
 #: src/Summary.cc:1596
 msgid "overall package size"
-msgstr ""
+msgstr "paketin yhteiskoko"
 
 #. translator: rendered as "  6.4 MiB  already in cache"
 #: src/Summary.cc:1598
 msgid "already in cache"
-msgstr ""
+msgstr "jo välimuistissa"
 
 #: src/Summary.cc:1605
 msgid "Download only."
@@ -1263,17 +1263,17 @@ msgstr "Vain lataus."
 #. 1.9 MiB  |  -  347.3 MiB  released by packages that will be removed
 #: src/Summary.cc:1610
 msgid "Package install size change:"
-msgstr ""
+msgstr "Paketin asennuskoon muutos:"
 
 #. translator: rendered as "349.1 MiB  required by packages that will be installed"
 #: src/Summary.cc:1615
 msgid "required by packages that will be installed"
-msgstr ""
+msgstr "jota vaativat asennettavat paketit"
 
 #. translator: rendered as "347.3 MiB  released by packages that will be removed"
 #: src/Summary.cc:1617
 msgid "released by packages that will be removed"
-msgstr ""
+msgstr "jonka ovat irrottaneet poistettavat paketit"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
 #: src/Summary.cc:1638
@@ -3384,7 +3384,7 @@ msgstr "Näytä käyttäjän eksplisiittisesti valitsemat asennetut paketit."
 #. translators: --system
 #: src/commands/query/packages.cc:43
 msgid "Show installed packages which are not provided by any repository."
-msgstr ""
+msgstr "Näytä asennetut paketit, joita mikään asennuslähde ei tarjoa."
 
 #. translators: --orphaned
 #: src/commands/query/packages.cc:47
@@ -3392,6 +3392,8 @@ msgid ""
 "Show system packages which are orphaned (without repository and without "
 "update candidate)."
 msgstr ""
+"Näytä orvoiksi jääneet (asennuslähteettömät ja päivitysehdokkaattomat) "
+"järjestelmäpaketit."
 
 #. translators: --suggested
 #: src/commands/query/packages.cc:51
@@ -3712,8 +3714,8 @@ msgid ""
 "Modify properties of repositories specified by alias, number, or URI, or by "
 "the '%1%' aggregate options."
 msgstr ""
-"Muokkaa aliaksen, järjestysluvun, URIn tai ”%1%”-valitsimen määrittämien "
-"ohjelmalähteiden tietoja."
+"Muuta aliaksen, järjestysluvun, URIn tai ”%1%”-valitsimen määrittämien "
+"asennuslähteiden tietoja."
 
 #: src/commands/repos/modify.cc:89
 #, c-format, boost-format
@@ -3944,7 +3946,7 @@ msgstr "Aseta palvelulle kuvaileva nimi."
 
 #: src/commands/reposerviceoptionsets.cc:72
 msgid "Set a descriptive name for the repository."
-msgstr "Aseta ohjelmalähteelle kuvaileva nimi."
+msgstr "Aseta asennuslähteelle kuvaileva nimi."
 
 #: src/commands/reposerviceoptionsets.cc:75
 msgid "Enable a disabled service."
@@ -3952,7 +3954,7 @@ msgstr "Ota käytöstä poistettu palvelu käyttöön."
 
 #: src/commands/reposerviceoptionsets.cc:75
 msgid "Enable a disabled repository."
-msgstr "Ota käytöstä poistettu ohjelmalähde käyttöön."
+msgstr "Ota käytöstä poistettu asennuslähde käyttöön."
 
 #: src/commands/reposerviceoptionsets.cc:78
 msgid "Disable the service (but don't remove it)."
@@ -3960,7 +3962,7 @@ msgstr "Poista palvelu käytöstä (mutta älä poista sitä)."
 
 #: src/commands/reposerviceoptionsets.cc:78
 msgid "Disable the repository (but don't remove it)."
-msgstr "Poista ohjelmalähde käytöstä (mutta älä poista sitä)."
+msgstr "Poista asennuslähde käytöstä (poistamatta sitä)."
 
 #: src/commands/reposerviceoptionsets.cc:81
 msgid "Enable auto-refresh of the service."
@@ -3968,7 +3970,7 @@ msgstr "Ota käyttöön palvelun automaattivirkistys."
 
 #: src/commands/reposerviceoptionsets.cc:81
 msgid "Enable auto-refresh of the repository."
-msgstr "Ota käyttöön ohjelmalähteen automaattivirkistys."
+msgstr "Ota käyttöön asennuslähteen automaattivirkistys."
 
 #: src/commands/reposerviceoptionsets.cc:84
 msgid "Disable auto-refresh of the service."
@@ -3976,7 +3978,7 @@ msgstr "Poista palvelun automaattivirkistys käytöstä."
 
 #: src/commands/reposerviceoptionsets.cc:84
 msgid "Disable auto-refresh of the repository."
-msgstr "Poista ohjelmalähteesn automaattivirkistys käytöstä."
+msgstr "Poista asennuslähteen automaattivirkistys käytöstä."
 
 #: src/commands/reposerviceoptionsets.cc:111
 msgid "Apply changes to all services."
@@ -4012,7 +4014,7 @@ msgstr "Ota muutokset käyttöön vain tietyn tyyppisissä asennuslähteissä."
 
 #: src/commands/reposerviceoptionsets.cc:137
 msgid "Set priority of the repository."
-msgstr "Aseta ohjelmalähteen etusijaisuus."
+msgstr "Aseta asennuslähteen etusija."
 
 #: src/commands/reposerviceoptionsets.cc:138
 msgid "Enable RPM files caching."
@@ -4432,7 +4434,7 @@ msgstr "Lisää uusi palvelu."
 
 #: src/commands/services/add.cc:126
 msgid "Add a repository index service to the system."
-msgstr "Lisää ohjelmalähteen indeksipalvelun järjestelmään."
+msgstr "Lisää järjestelmään asennuslähteen indeksipalvelu."
 
 #: src/commands/services/add.cc:140
 msgid "The type of service is always autodetected. This option is ignored."
@@ -5353,6 +5355,8 @@ msgid ""
 "In not-terse mode the distribution label is shown instead of an empty value, "
 "if a baseproduct is installed."
 msgstr ""
+"”Not-terse”-tilassa näytetään tyhjän arvon sijaan jakelun selite, jos "
+"pohjatuote on asennettu."
 
 #: src/commands/utils/targetos.cc:36
 msgid "Show the baseproducts distribution and short label instead."
@@ -5829,15 +5833,15 @@ msgstr ""
 
 #: src/repos.cc:75
 msgid "default priority"
-msgstr "oletusetusijaisuus"
+msgstr "oletusetusija"
 
 #: src/repos.cc:76
 msgid "raised priority"
-msgstr "korotettu etusijaisuus"
+msgstr "korotettu etusija"
 
 #: src/repos.cc:76
 msgid "lowered priority"
-msgstr "laskettu etusijaisuus"
+msgstr "laskettu etusija"
 
 #: src/repos.cc:127 src/repos.cc:155
 msgid "Yes"
@@ -5848,12 +5852,12 @@ msgid ""
 "Repository priorities are without effect. All enabled repositories share the "
 "same priority."
 msgstr ""
-"Asennuslähteiden etusijaisuuksilla ei ole vaikutusta, koska kaikilla "
-"käytössä olevilla arvo on sama."
+"Asennuslähteiden etusijoilla ei ole vaikutusta, koska kaikilla käytössä "
+"olevilla arvo on sama."
 
 #: src/repos.cc:184
 msgid "Repository priorities in effect:"
-msgstr "Asennuslähteiden voimassa olevat etusijaisuudet:"
+msgstr "Asennuslähteiden voimassa olevat etusijat:"
 
 #: src/repos.cc:185
 #, boost-format
