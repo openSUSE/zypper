@@ -92,11 +92,11 @@ struct DupSettingsData
 };
 using DupSettings = GlobalSettingSingleton<DupSettingsData>;
 
-struct ArmSettingsData
+struct AutoRemoveSettingsData
 {
   std::vector<std::string> _fromSystem;
 };
-using ArmSettings = GlobalSettingSingleton<ArmSettingsData>;
+using AutoRemoveSettings = GlobalSettingSingleton<AutoRemoveSettingsData>;
 
 struct FileConflictPolicyData
 {

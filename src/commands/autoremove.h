@@ -18,7 +18,7 @@ public:
 
 private:
     bool _details = false;
-    bool _orpahned = false;
+    bool _orphaned = false;
     DryRunOptionSet _dryRunOpts{*this};
     NoConfirmRugOption _noConfirmOpts{*this};
     DownloadOptionSet _downloadModeOpts{*this};

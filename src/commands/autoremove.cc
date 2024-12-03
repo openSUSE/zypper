@@ -19,8 +19,8 @@ extern ZYpp::Ptr God;
 AutoRemoveCmd::AutoRemoveCmd(std::vector<std::string> &&commandAliases_r) : ZypperBaseCommand(std::move(commandAliases_r),
                                                                                               // translators: command synopsis; do not translate lowercase words
                                                                                               _("autoremove (arm) [OPTIONS]"),
-                                                                                              // translators: command summary: dist-upgrade, dup
-                                                                                              _("Remove unneeded packages due to updates or installs."), // TODO: better explnations
+                                                                                              // translators: command summary: autoremove, arm
+                                                                                              _("Remove unneeded packages due to updates or installs."), // TODO: better explanations
                                                                                               // translators: command description
                                                                                               _("Remove a unneeded packages."),
                                                                                               ResetRepoManager | InitTarget | InitRepos | LoadResolvables)
@@ -33,14 +33,14 @@ zypp::ZyppFlags::CommandGroup AutoRemoveCmd::cmdOptions() const
     auto that = const_cast<AutoRemoveCmd *>(this);
     return zypp::ZyppFlags::CommandGroup({{"remove-orphaned", '\0',
                                            zypp::ZyppFlags::NoArgument,
-                                           zypp::ZyppFlags::BoolType(&that->_orpahned, ZyppFlags::StoreTrue, _orpahned),
+                                           zypp::ZyppFlags::BoolType(&that->_orphaned, ZyppFlags::StoreTrue, _orphaned),
                                            _("Remove unneeded orphaned packages.")},
                                           CommonFlags::detailsFlag(that->_details)});
 }
 
 void AutoRemoveCmd::doReset()
 {
-    ArmSettings::reset();
+    AutoRemoveSettings::reset();
     _details = false;
 }
 
@@ -65,8 +65,8 @@ int AutoRemoveCmd::execute(Zypper &zypper, const std::vector<std::string> &posit
         return code;
 
     zypper.out().warning(str::form(
-        _("You are run autoremove on the system. This is experimental and subject to change"
-          " This may remove unintended packages please confirm the packages that will be removed before you"
+        _("You are running autoremove on the system. This is experimental and subject to change."
+          " This may remove unintended packages, please confirm the packages that will be removed before you"
           " continue. See '%s' for more information about this command."),
         "man zypper"));
 
@@ -74,9 +74,8 @@ int AutoRemoveCmd::execute(Zypper &zypper, const std::vector<std::string> &posit
 
     auto checkStatus = [=](const PoolItem &pi_r) -> bool
     {
-        // isipi : prevent returning true if identical installed items are tested.
         const ResStatus &status{pi_r.status()};
-        if ((_orpahned && status.isOrphaned()) || status.isUnneeded())
+        if ((_orphaned && status.isOrphaned()) || status.isUnneeded())
         {
             return true;
         }

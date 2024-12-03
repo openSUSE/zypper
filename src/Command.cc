@@ -24,7 +24,7 @@
 #include "commands/query.h"
 #include "commands/installremove.h"
 #include "commands/sourceinstall.h"
-#include  "commands/autoremove.h"
+#include "commands/autoremove.h"
 #include "commands/distupgrade.h"
 #include "commands/inrverify.h"
 #include "commands/patch.h"
