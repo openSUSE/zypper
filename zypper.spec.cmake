@@ -125,6 +125,9 @@ export LDFLAGS="-Wl,--as-needed -fpie %{optflags}"
 
 cmake $CMAKE_FLAGS \
       -DCMAKE_INSTALL_PREFIX=%{_prefix} \
+ %if %{defined _distconfdir}
+       -DDISTCONFDIR=%{_distconfdir} \
+ %endif
       -DSYSCONFDIR=%{_sysconfdir} \
       -DMANDIR=%{_mandir} \
       -DCMAKE_VERBOSE_MAKEFILE=TRUE \
@@ -161,12 +164,15 @@ touch %{buildroot}%{_var}/log/zypper.log
 mkdir -p %{buildroot}/%{_distconfdir}/logrotate.d
 mv %{buildroot}/%{_sysconfdir}/logrotate.d/zypper.lr %{buildroot}%{_distconfdir}/logrotate.d
 mv %{buildroot}/%{_sysconfdir}/logrotate.d/zypp-refresh.lr %{buildroot}%{_distconfdir}/logrotate.d
+# Move /etc/zypp/zypper.conf to /usr/etc/zypp/zypper.conf
+mkdir -p %{buildroot}%{_distconfdir}/zypp
+mv %{buildroot}%{_sysconfdir}/zypp/zypper.conf %{buildroot}%{_distconfdir}/zypp/zypper.conf
 %endif
 
 %if %{defined _distconfdir}
 %pre
 # Prepare for migration to /usr/etc; save any old .rpmsave
-for i in logrotate.d/zypper.lr logrotate.d/zypp-refresh.lr; do
+for i in logrotate.d/zypper.lr logrotate.d/zypp-refresh.lr zypp/zypper.conf; do
    test -f %{_sysconfdir}/${i}.rpmsave && mv -v %{_sysconfdir}/${i}.rpmsave %{_sysconfdir}/${i}.rpmsave.old ||:
 done
 %endif
@@ -174,7 +180,7 @@ done
 %if %{defined _distconfdir}
 %posttrans
 # Migration to /usr/etc, restore just created .rpmsave
-for i in logrotate.d/zypper.lr logrotate.d/zypp-refresh.lr; do
+for i in logrotate.d/zypper.lr logrotate.d/zypp-refresh.lr zypp/zypper.conf; do
    test -f %{_sysconfdir}/${i}.rpmsave && mv -v %{_sysconfdir}/${i}.rpmsave %{_sysconfdir}/${i} ||:
 done
 %endif
@@ -184,11 +190,13 @@ done
 %if 0%{?suse_version} >= 1500
 %license COPYING
 %endif
-%config(noreplace) %{_sysconfdir}/zypp/zypper.conf
 %if %{defined _distconfdir}
 %{_distconfdir}/logrotate.d/zypper.lr
 %{_distconfdir}/logrotate.d/zypp-refresh.lr
+%dir %{_distconfdir}/zypp
+%{_distconfdir}/zypp/zypper.conf
 %else
+%config(noreplace) %{_sysconfdir}/zypp/zypper.conf
 %config(noreplace) %{_sysconfdir}/logrotate.d/zypper.lr
 %config(noreplace) %{_sysconfdir}/logrotate.d/zypp-refresh.lr
 %endif
