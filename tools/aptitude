@@ -68,7 +68,8 @@ elsif($action eq "reinstall") {$action="install"; unshift(@zopt2, "--force");}
 elsif($action eq "source") {$action="source-install"}
 elsif($action=~m/build-dep(?:ends)?/) {$action="source-install"; unshift(@zopt2, "--build-deps-only");}
 elsif($action eq "changelog") {exec qw"rpm -q --changelog", @ARGV}
-elsif($action=~m/markauto|unmarkauto|forbid-version|autoclean|autoremove|check|why|why-not/) { print "aptitude '$action' unavailabe in zypper\n"; exit 0 }
+elsif($action eq "autoclean" or $action eq "autoremove") {$action="autoremove"}
+elsif($action=~m/markauto|unmarkauto|forbid-version|check|why|why-not/) { print "aptitude '$action' unavailabe in zypper\n"; exit 0 }
 
 foreach my $map (</etc/zypp/apt-packagemap.d/*.pm>) {
 	do $map;
