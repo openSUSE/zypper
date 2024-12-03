@@ -55,13 +55,13 @@ ENDFOREACH()
 # creates the .gmo files out of the .po files
 SET( SOURCE_POT_FILE ${CMAKE_CURRENT_SOURCE_DIR}/${POT_NAME}.pot )
 
-ADD_CUSTOM_TARGET( translations ALL
+ADD_CUSTOM_TARGET( ${ZYPPER_TARGET_PREFIX}translations ALL
   COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/PotfileDiff.sh ${SOURCE_POT_FILE} ${POT_FILE} | grep '^[+-][^+-]' || true
   DEPENDS ${GMO_FILES}
   COMMENT ".pot file diff..."
 )
 
-ADD_CUSTOM_TARGET( potfile_update
+ADD_CUSTOM_TARGET( ${ZYPPER_TARGET_PREFIX}potfile_update
   COMMAND ./PotfileDiff.sh ${SOURCE_POT_FILE} ${POT_FILE} -q || ./PotfileUpadte.sh ${CMAKE_CURRENT_BINARY_DIR}
   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
   DEPENDS translations
