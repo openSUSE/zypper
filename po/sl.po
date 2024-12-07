@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-07-29 15:47+0200\n"
-"PO-Revision-Date: 2024-11-04 15:48+0000\n"
+"PO-Revision-Date: 2024-12-07 11:48+0000\n"
 "Last-Translator: Jure Repinc <jlp@holodeck1.com>\n"
 "Language-Team: Slovenian <https://l10n.opensuse.org/projects/zypper/master/"
 "sl/>\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
 "n%100==4 ? 2 : 3;\n"
-"X-Generator: Weblate 5.8.2\n"
+"X-Generator: Weblate 5.8.4\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -1410,7 +1410,7 @@ msgstr "Preskočeni potrebni popravki, ki jih ni moč uveljaviti brez spora:"
 #. 99.2 MiB  |  -    6.4 MiB  already in cache
 #: src/Summary.cc:1588
 msgid "Package download size:"
-msgstr "Velikost prejemanja paketa:"
+msgstr "Velikost paketov za prejemanje:"
 
 #. translator: rendered as "105.7 MiB  overall download size"
 #: src/Summary.cc:1596
