@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-07-29 15:47+0200\n"
-"PO-Revision-Date: 2023-12-15 10:02+0000\n"
+"PO-Revision-Date: 2024-12-09 08:48+0000\n"
 "Last-Translator: Arif Budiman <arifpedia@gmail.com>\n"
 "Language-Team: Indonesian <https://l10n.opensuse.org/projects/zypper/master/"
 "id/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.9.1\n"
+"X-Generator: Weblate 5.8.4\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -1068,7 +1068,7 @@ msgstr[0] ""
 
 #: src/Summary.cc:1417
 msgid "was superseded by"
-msgstr ""
+msgstr "digantikan oleh"
 
 #: src/Summary.cc:1430
 #, c-format, boost-format
@@ -1079,6 +1079,8 @@ msgid_plural ""
 "The following %d packages were discontinued and have been superseded by a "
 "new packages with different names."
 msgstr[0] ""
+"%d paket berikut ini sudah tidak dikembangkan lagi dan telah digantikan oleh "
+"paket baru dengan nama yang berbeda."
 
 #: src/Summary.cc:1435
 msgid ""
@@ -1088,6 +1090,8 @@ msgid_plural ""
 "The successor packages should be installed as soon as possible to receive "
 "continued support:"
 msgstr[0] ""
+"Paket-paket penerus harus diinstal sesegera mungkin untuk mendapatkan "
+"dukungan yang berkelanjutan:"
 
 #: src/Summary.cc:1460
 #, c-format, boost-format
@@ -1147,6 +1151,8 @@ msgstr[0] "Paket %d berikut ini membutuhkan mulai ulang sistem:"
 #: src/Summary.cc:1563
 msgid "Skipped needed patches which do not apply without conflict:"
 msgstr ""
+"Melewatkan Patch yang diperlukan karena tidak dapat diterapkan tanpa "
+"menyebabkan konflik:"
 
 #. Package download size:   99.2 MiB
 #. or
@@ -1155,17 +1161,17 @@ msgstr ""
 #. 99.2 MiB  |  -    6.4 MiB  already in cache
 #: src/Summary.cc:1588
 msgid "Package download size:"
-msgstr ""
+msgstr "Ukuran unduhan paket:"
 
 #. translator: rendered as "105.7 MiB  overall download size"
 #: src/Summary.cc:1596
 msgid "overall package size"
-msgstr ""
+msgstr "ukuran paket keseluruhan"
 
 #. translator: rendered as "  6.4 MiB  already in cache"
 #: src/Summary.cc:1598
 msgid "already in cache"
-msgstr ""
+msgstr "sudah ada dalam cache"
 
 #: src/Summary.cc:1605
 msgid "Download only."
@@ -1176,17 +1182,17 @@ msgstr "Hanya unduh."
 #. 1.9 MiB  |  -  347.3 MiB  released by packages that will be removed
 #: src/Summary.cc:1610
 msgid "Package install size change:"
-msgstr ""
+msgstr "Perubahan ukuran instalasi paket:"
 
 #. translator: rendered as "349.1 MiB  required by packages that will be installed"
 #: src/Summary.cc:1615
 msgid "required by packages that will be installed"
-msgstr ""
+msgstr "diperlukan oleh paket yang akan diinstal"
 
 #. translator: rendered as "347.3 MiB  released by packages that will be removed"
 #: src/Summary.cc:1617
 msgid "released by packages that will be removed"
-msgstr ""
+msgstr "dikosongkan oleh paket-paket yang akan dihapus"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
 #: src/Summary.cc:1638
@@ -1291,7 +1297,7 @@ msgstr ""
 #: src/Summary.cc:1824
 #, boost-format
 msgid "%1% is set, otherwise a system reboot would be required."
-msgstr ""
+msgstr "%1% telah diatur, jika tidak, maka sistem harus di-boot ulang."
 
 #: src/Summary.cc:1826
 msgid "System reboot required."
@@ -2150,7 +2156,7 @@ msgstr "Batasi peningkatan ke repositori yang ditentukan."
 
 #: src/commands/distupgrade.cc:41
 msgid "Remove unneeded orphaned packages."
-msgstr ""
+msgstr "Hapus paket sampah yang tidak dibutuhkan."
 
 #: src/commands/distupgrade.cc:72
 #, c-format, boost-format
@@ -2994,6 +3000,8 @@ msgstr ""
 #: src/commands/patch.cc:50
 msgid "Skip needed patches which do not apply without conflict."
 msgstr ""
+"Lewati patch yang diperlukan karena tidak dapat diterapkan tanpa menyebabkan "
+"konflik."
 
 #: src/commands/patch.cc:53
 msgid ""
@@ -3277,17 +3285,19 @@ msgstr "Daftar semua paket yang tersedia dalam repositori tertentu."
 #: src/commands/query/packages.cc:35
 msgid ""
 "Show installed packages which were automatically selected by the resolver."
-msgstr ""
+msgstr "Menampilkan paket terinstal yang secara otomatis dipilih oleh resolver."
 
 #. translators: --userinstalled
 #: src/commands/query/packages.cc:39
 msgid "Show installed packages which were explicitly selected by the user."
 msgstr ""
+"Menampilkan paket terinstal yang secara eksplisit dipilih oleh pengguna."
 
 #. translators: --system
 #: src/commands/query/packages.cc:43
 msgid "Show installed packages which are not provided by any repository."
 msgstr ""
+"Tampilkan paket terinstal yang tidak disediakan oleh repositori mana pun."
 
 #. translators: --orphaned
 #: src/commands/query/packages.cc:47
@@ -3295,6 +3305,8 @@ msgid ""
 "Show system packages which are orphaned (without repository and without "
 "update candidate)."
 msgstr ""
+"Tampilkan paket sistem yang menjadi orphan (tanpa repositori dan tanpa "
+"kandidat pembaruan)."
 
 #. translators: --suggested
 #: src/commands/query/packages.cc:51
@@ -5373,17 +5385,19 @@ msgstr "Tingkat Dukungan"
 
 #: src/info.cc:375
 msgid "The successor package is already installed."
-msgstr ""
+msgstr "Paket penerus sudah diinstal."
 
 #: src/info.cc:377
 msgid ""
 "The successor package should be installed as soon as possible to receive "
 "continued support."
 msgstr ""
+"Paket penerus harus diinstal sesegera mungkin untuk mendapatkan dukungan "
+"yang berkelanjutan."
 
 #: src/info.cc:384
 msgid "Unfortunately the successor package is not provided by any repository."
-msgstr ""
+msgstr "Sayangnya paket penerus tidak disediakan oleh repositori mana pun."
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:394
@@ -6426,10 +6440,11 @@ msgid ""
 "updated by recent upgrades. They should be restarted to benefit from the "
 "latest updates. Run '%1%' to list these programs."
 msgstr ""
-"Ada program yang sedang berjalan yang masih menggunakan berkas dan pustaka "
-"yang dihapus atau diperbarui oleh pemutakhiran terbaru. Mereka harus dimulai "
-"untuk mendapatkan manfaat dari pemutakhiran terbaru. Jalankan '%1%' untuk "
-"mendaftar program ini."
+"Beberapa program yang sedang berjalan masih menggunakan berkas dan pustaka "
+"yang telah dihapus atau diperbarui oleh pemutakhiran terbaru. Program-"
+"program tersebut harus dimulai ulang untuk mendapatkan manfaat dari "
+"pemutakhiran terbaru. Jalankan '%1%' untuk melihat daftar program-program "
+"tersebut."
 
 #: src/solve-commit.cc:656
 msgid "Update notifications were received from the following packages:"
@@ -6537,8 +6552,9 @@ msgid "View the summary in pager."
 msgstr "Lihat ringkasan di pager."
 
 #: src/solve-commit.cc:844
+#, fuzzy
 msgid "Backend"
-msgstr ""
+msgstr "Backend"
 
 #: src/solve-commit.cc:958
 msgid "committing"
