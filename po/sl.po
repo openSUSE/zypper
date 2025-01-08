@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-01-08 15:42+0100\n"
-"PO-Revision-Date: 2024-12-07 11:48+0000\n"
+"PO-Revision-Date: 2025-01-08 19:50+0000\n"
 "Last-Translator: Jure Repinc <jlp@holodeck1.com>\n"
 "Language-Team: Slovenian <https://l10n.opensuse.org/projects/zypper/master/"
 "sl/>\n"
@@ -17,9 +17,9 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n"
-"%100==4 ? 2 : 3;\n"
-"X-Generator: Weblate 5.8.4\n"
+"Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
+"n%100==4 ? 2 : 3;\n"
+"X-Generator: Weblate 5.9.2\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -3454,7 +3454,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/query/info.cc:19
 msgid "info (if) [OPTIONS] <NAME>[-<VERSION>[-<RELEASE>]] ..."
-msgstr ""
+msgstr "info (if) [MOŽNOSTI] <IME>[-<RAZLIČICA>[-<IZDAJA>]] …"
 
 #. translators: command summary: info, if
 #: src/commands/query/info.cc:21
@@ -3480,6 +3480,9 @@ msgid ""
 "package is shown. Note that both the version and release numbers must always "
 "match exactly."
 msgstr ""
+"Če ni navedene omejitve glede različice, se prikažejo podatki o najboljšem "
+"razpoložljivem paketu. Vedite, da se morata točno ujemati tako številka "
+"različice kot tudi izdaje."
 
 #. translators: -s, --match-substrings
 #: src/commands/query/info.cc:65
