@@ -6,6 +6,7 @@
 \*---------------------------------------------------------------------------*/
 
 #include <iostream>
+#include <optional>
 
 #include <zypp/base/Algorithm.h>
 #include <zypp/ZYpp.h>
@@ -30,12 +31,12 @@
 
 extern ZYpp::Ptr God;
 
-void printPkgInfo(Zypper & zypper, const ui::Selectable & s, const PrintInfoOptions &options_r );
-void printPatchInfo(Zypper & zypper, const ui::Selectable & s, const PrintInfoOptions &options_r );
-void printPatternInfo(Zypper & zypper, const ui::Selectable & s, const PrintInfoOptions &options_r );
-void printProductInfo(Zypper & zypper, const ui::Selectable & s , const PrintInfoOptions &options_r );
-void printSrcPackageInfo(Zypper & zypper, const ui::Selectable & s , const PrintInfoOptions &options_r );
-void printDefaultInfo(Zypper & zypper, const ui::Selectable & s , const PrintInfoOptions &options_r );
+void printPkgInfo(Zypper & zypper, const ui::Selectable & s, const std::optional<PoolItem> & theWanted_r, const PrintInfoOptions &options_r );
+void printPatchInfo(Zypper & zypper, const ui::Selectable & s, const std::optional<PoolItem> & theWanted_r, const PrintInfoOptions &options_r );
+void printPatternInfo(Zypper & zypper, const ui::Selectable & s, const std::optional<PoolItem> & theWanted_r, const PrintInfoOptions &options_r );
+void printProductInfo(Zypper & zypper, const ui::Selectable & s, const std::optional<PoolItem> & theWanted_r, const PrintInfoOptions &options_r );
+void printSrcPackageInfo(Zypper & zypper, const ui::Selectable & s, const std::optional<PoolItem> & theWanted_r, const PrintInfoOptions &options_r );
+void printDefaultInfo(Zypper & zypper, const ui::Selectable & s, const std::optional<PoolItem> & theWanted_r, const PrintInfoOptions &options_r );
 
 ///////////////////////////////////////////////////////////////////
 namespace
@@ -46,7 +47,8 @@ namespace
    * Returns the installed item, the updateCandidate and \c theone which
    * is, unlike the first two, guaranteed to be not NULL.
    *
-   * \c theone: An updateCandidate is always better than any installed
+   * \c theone: Unless a specific version was selected by the user:
+   * An updateCandidate is always better than any installed
    * object. If the best version is already installed try to look it up
    * in the repo it came from, otherwise use the installed one.
    * If there is no installed one either, use the candidate.
@@ -55,11 +57,11 @@ namespace
    * auto [installed, updateCand, theone] = theInterestingPoolItems( sel );
    * \endcode
    */
-  inline auto theInterestingPoolItems( const ui::Selectable & sel )
+  inline auto theInterestingPoolItems( const ui::Selectable & sel, const std::optional<PoolItem> & theWanted_r )
   {
     PoolItem installed  { sel.installedObj() };
     PoolItem updateCand { sel.updateCandidateObj() };
-    PoolItem theone     { updateCand };
+    PoolItem theone     { theWanted_r ? *theWanted_r : updateCand };
     if ( not theone ) {
       theone = sel.identicalAvailableObj( installed );
       if ( not theone ) {
@@ -225,6 +227,36 @@ namespace {
            << endl;
     }
   }
+
+  void checkVersioned( PoolQuery & q_r, const std::string & arg_r )
+  {
+    q_r.addAttribute( sat::SolvAttr::name, arg_r );
+    if ( not q_r.empty() )
+      return; // name
+
+    static const zypp::str::regex rxVers { "^(.+)-([^-]+)$" };
+    static str::smatch what;
+    // check for version
+    if ( zypp::str::regex_match( arg_r, what, rxVers ) ) {
+      std::string name = what[1];
+      std::string ver  = what[2];
+      q_r.addAttribute( sat::SolvAttr::name, name );
+      q_r.setEdition( Edition( ver ) );
+      if ( not q_r.empty() )
+        return; // name-version
+
+      // check for version-release
+      if ( zypp::str::regex_match( name, what, rxVers ) ) {
+        name = what[1];
+        q_r.addAttribute( sat::SolvAttr::name, name );
+        q_r.setEdition( Edition( what[2], ver ) );
+        if ( not q_r.empty() )
+          return; // name-version-release
+      }
+    }
+    // no match at all
+  }
+
 } // namespace
 ///////////////////////////////////////////////////////////////////
 
@@ -239,8 +271,6 @@ void printInfo( Zypper & zypper, const std::vector<std::string> &names_r, const 
     KNSplit kn( rawarg );
 
     PoolQuery q( printInfo_BasicQuery( zypper, options_r ) );
-    q.addAttribute( sat::SolvAttr::name, kn._name );
-
     bool fallBackToAny = false;
     if ( kn._kind )
     {
@@ -256,6 +286,10 @@ void printInfo( Zypper & zypper, const std::vector<std::string> &names_r, const 
       q.addKind( ResKind::package );
       fallBackToAny = true;			// Prefer packages, but fall back to any
     }
+
+    // PED-11268: Check for an optional "-version" or "-version-release"if there
+    // are no matches on name. If q is not empty afterwards, check q.edition().
+    checkVersioned( q, kn._name );
 
     if ( q.empty() )
     {
@@ -290,24 +324,40 @@ void printInfo( Zypper & zypper, const std::vector<std::string> &names_r, const 
     {
       if ( noMatches ) noMatches = false;
       const ui::Selectable & sel( *(*it) );
+      std::optional<PoolItem> theWanted;
+      if ( q.edition() ) {
+        // An additional version constraint, find the wanted PoolItem
+        const Edition & ed { q.edition() };
+        for ( const auto & pi : sel.picklist() ) {
+          if ( Edition::match( ed, pi.edition() ) == 0 ) {
+            theWanted = pi;
+            break;
+          }
+        }
+      }
 
       if ( zypper.out().type() != Out::TYPE_XML )
       {
+        std::string pkgtag = { sel.name() };
+        if ( theWanted ) {
+          pkgtag += "-";
+          pkgtag += theWanted->edition().asString();
+        }
         // TranslatorExplanation E.g. "Information for package zypper:"
         std::string info = str::Format(_("Information for %s %s:"))
                                  % kind_to_string_localized( sel.kind(), 1 )
-                                 % sel.name();
+                                 % pkgtag;
 
         cout << endl << info << endl;
         cout << std::string( mbs_width(info), '-' ) << endl;
       }
 
-      if      ( sel.kind() == ResKind::package )	{ printPkgInfo( zypper, sel, options_r ); }
-      else if ( sel.kind() == ResKind::patch )		{ printPatchInfo( zypper, sel, options_r ); }
-      else if ( sel.kind() == ResKind::pattern )	{ printPatternInfo( zypper, sel, options_r ); }
-      else if ( sel.kind() == ResKind::product )	{ printProductInfo( zypper, sel, options_r ); }
-      else if ( sel.kind() == ResKind::srcpackage)	{ printSrcPackageInfo( zypper, sel, options_r ); }
-      else 						{ printDefaultInfo( zypper, sel, options_r ); }
+      if      ( sel.kind() == ResKind::package )	{ printPkgInfo( zypper, sel, theWanted, options_r ); }
+      else if ( sel.kind() == ResKind::patch )		{ printPatchInfo( zypper, sel, theWanted, options_r ); }
+      else if ( sel.kind() == ResKind::pattern )	{ printPatternInfo( zypper, sel, theWanted, options_r ); }
+      else if ( sel.kind() == ResKind::product )	{ printProductInfo( zypper, sel, theWanted, options_r ); }
+      else if ( sel.kind() == ResKind::srcpackage)	{ printSrcPackageInfo( zypper, sel, theWanted, options_r ); }
+      else 						{ printDefaultInfo( zypper, sel, theWanted, options_r ); }
     }
   }
 
@@ -320,9 +370,9 @@ void printInfo( Zypper & zypper, const std::vector<std::string> &names_r, const 
 }
 
 /** Information for kinds which don't have a extra needs... */
-void printDefaultInfo(Zypper & zypper, const ui::Selectable & s, const PrintInfoOptions &options_r  )
+void printDefaultInfo(Zypper & zypper, const ui::Selectable & s, const std::optional<PoolItem> & theWanted_r, const PrintInfoOptions &options_r  )
 {
-  auto [installed, updateCand, theone] = theInterestingPoolItems( s );
+  auto [installed, updateCand, theone] = theInterestingPoolItems( s, theWanted_r );
 
   PropertyTable p;
   printCommonData( theone, p );
@@ -350,9 +400,9 @@ Description    :
 </pre>
  *
  */
-void printPkgInfo(Zypper & zypper, const ui::Selectable & s , const PrintInfoOptions &options_r )
+void printPkgInfo(Zypper & zypper, const ui::Selectable & s , const std::optional<PoolItem> & theWanted_r, const PrintInfoOptions &options_r )
 {
-  auto [installed, updateCand, theone] = theInterestingPoolItems( s );
+  auto [installed, updateCand, theone] = theInterestingPoolItems( s, theWanted_r );
   Package::constPtr package = theone->asKind<Package>();
 
   PropertyTable p;
@@ -436,7 +486,7 @@ Requires:
 </pre>
  *
  */
-void printPatchInfo(Zypper & zypper, const ui::Selectable & s , const PrintInfoOptions &options_r )
+void printPatchInfo(Zypper & zypper, const ui::Selectable & s , const std::optional<PoolItem> & theWanted_r, const PrintInfoOptions &options_r )
 {
   PoolItem theone( s.theObj() );
   Patch::constPtr patch = theone->asKind<Patch>();
@@ -477,9 +527,9 @@ This pattern provides a graphical application and a command line tool for keepin
 </pre>
  *
  */
-void printPatternInfo(Zypper & zypper, const ui::Selectable & s , const PrintInfoOptions &options_r )
+void printPatternInfo(Zypper & zypper, const ui::Selectable & s , const std::optional<PoolItem> & theWanted_r, const PrintInfoOptions &options_r )
 {
-  auto [installed, updateCand, theone] = theInterestingPoolItems( s );
+  auto [installed, updateCand, theone] = theInterestingPoolItems( s, theWanted_r );
   Pattern::constPtr pattern = theone->asKind<Pattern>();
 
   PropertyTable p;
@@ -562,17 +612,17 @@ Description:
 </pre>
  *
  */
-void printProductInfo(Zypper & zypper, const ui::Selectable & s, const PrintInfoOptions &options_r  )
+void printProductInfo(Zypper & zypper, const ui::Selectable & s, const std::optional<PoolItem> & theWanted_r, const PrintInfoOptions &options_r  )
 {
   if ( zypper.out().type() == Out::TYPE_XML )
   {
-    PoolItem theone( s.theObj() );
+    PoolItem theone( theWanted_r ? *theWanted_r : s.theObj() );
     Product::constPtr product = theone->asKind<Product>();
     cout << asXML( *product, theone.status().isInstalled() ) << endl;
     return;
   }
 
-  auto [installed, updateCand, theone] = theInterestingPoolItems( s );
+  auto [installed, updateCand, theone] = theInterestingPoolItems( s, theWanted_r );
 
   PropertyTable p;
   printCommonData( theone, p );
@@ -728,9 +778,9 @@ namespace
 } // namespace
 ///////////////////////////////////////////////////////////////////
 
-void printSrcPackageInfo(Zypper & zypper, const ui::Selectable & s, const PrintInfoOptions &options_r  )
+void printSrcPackageInfo(Zypper & zypper, const ui::Selectable & s, const std::optional<PoolItem> & theWanted_r, const PrintInfoOptions &options_r  )
 {
-  auto [installed, updateCand, theone] = theInterestingPoolItems( s );
+  auto [installed, updateCand, theone] = theInterestingPoolItems( s, theWanted_r );
   SrcPackage::constPtr srcPackage = theone->asKind<SrcPackage>();
 
   PropertyTable p;

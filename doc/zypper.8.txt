@@ -188,13 +188,17 @@ The shell support is not complete so expect bugs there. However, there's no urge
 
 Package Management Commands
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-*info* (*if*) [_options_] _name_...::
-	Displays detailed information about the specified packages.
+*info* (*if*) [_options_] _name_[-_version_[-_release_]]...::
+	Show detailed information for specified packages. By default, only packages that exactly match the provided names are shown. To include packages that partially match, use the *--match-substrings* option or wildcards (* or ?) within the name.
 +
-For each specified package, zypper finds the best available version in defined repositories and shows information for this package. In case the query result is empty zypper returns *ZYPPER_EXIT_INF_CAP_NOT_FOUND*, unless the *--ignore-unknown* global option is set.
+If no version constraint is specified, information about the best available package is shown. Note that both the version and release numbers must always match exactly.
++
+If a query returns no results, zypper returns *ZYPPER_EXIT_INF_CAP_NOT_FOUND* unless the global option *--ignore-unknown* is set.
 +
 --
+	*-s*, *--match-substrings*::
+		Include packages that partially match the provided names.
+
 	*-r*, *--repo* _alias_|_name_|_#_|_URI_::
 		Work only with the repository specified by the alias, name, number or URI. This option can be used multiple times.
 

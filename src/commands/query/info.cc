@@ -16,11 +16,14 @@ InfoCmd::InfoCmd( std::vector<std::string> &&commandAliases_r, InfoCmd::Mode cmd
   ZypperBaseCommand (
     std::move( commandAliases_r ),
     // translators: command synopsis; do not translate lowercase words
-    _("info (if) [OPTIONS] <NAME> ..."),
+    _("info (if) [OPTIONS] <NAME>[-<VERSION>[-<RELEASE>]] ..."),
     // translators: command summary: info, if
     _("Show full information for specified packages."),
     // translators: command description
-    _("Show detailed information for specified packages. By default the packages which match exactly the given names are shown. To get also packages partially matching use option '--match-substrings' or use wildcards (*?) in name."),
+    _("Show detailed information for specified packages. By default the packages which match exactly the given names are shown. To get also packages partially matching use option '--match-substrings' or use wildcards (*?) in name.")
+    + std::string("\n\n")
+    + _("If no version constraint is specified, information about the best available package is shown. Note that both the version and release numbers must always match exactly.")
+    ,
     DefaultSetup
   ),
   _cmdMode ( cmdMode_r )
