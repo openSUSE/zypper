@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Wed Jan  8 15:43:37 CET 2025 - ma@suse.de
+
+- info: Allow to query a specific version (jsc#PED-11268)
+  To query for a specific version simply append "-<version>" or
+  "-<version>-<release>" to the "<name>" pattern. Note that the
+  edition part must always match exactly.
+- version 1.14.79
+
+-------------------------------------------------------------------
 Tue Nov 12 14:43:45 CET 2024 - ma@suse.de
 
 - Don't try to download missing raw metadata if cache is not
