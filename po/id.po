@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-29 15:47+0200\n"
+"POT-Creation-Date: 2025-01-08 15:42+0100\n"
 "PO-Revision-Date: 2024-12-09 08:48+0000\n"
 "Last-Translator: Arif Budiman <arifpedia@gmail.com>\n"
 "Language-Team: Indonesian <https://l10n.opensuse.org/projects/zypper/master/"
@@ -74,25 +74,25 @@ msgid "You may run '%1%' to repair any dependency problems."
 msgstr ""
 "Anda dapat menjalankan '%1%' untuk memperbaiki setiap masalah dependensi."
 
-#: src/CommitSummary.cc:126
+#: src/CommitSummary.cc:127
 #, c-format, boost-format
 msgid "The following package failed to install:"
 msgid_plural "The following %d packages failed to install:"
 msgstr[0] "Paket berikut %d gagal dipasang:"
 
-#: src/CommitSummary.cc:141
+#: src/CommitSummary.cc:143
 #, c-format, boost-format
 msgid "The following package installation was skipped:"
 msgid_plural "The following %d package installations were skipped:"
 msgstr[0] "Pemasangan paket berikut %d dilewati:"
 
-#: src/CommitSummary.cc:156
+#: src/CommitSummary.cc:159
 #, c-format, boost-format
 msgid "The following package failed to uninstall:"
 msgid_plural "The following %d packages failed to uninstall:"
 msgstr[0] "Paket berikut %d gagal dihapus:"
 
-#: src/CommitSummary.cc:171
+#: src/CommitSummary.cc:175
 #, c-format, boost-format
 msgid "The following package removal was skipped:"
 msgid_plural "The following %d package removal were skipped:"
@@ -100,7 +100,7 @@ msgstr[0] "Penghapusan paket berikut %d dilewati:"
 
 #. translators: Appended when clipping a long enumeration:
 #. "ConsoleKit-devel ConsoleKit-doc ... and 20828 more items."
-#: src/CommitSummary.cc:232 src/CommitSummary.cc:278 src/Summary.cc:631
+#: src/CommitSummary.cc:236 src/CommitSummary.cc:282 src/Summary.cc:631
 #: src/Summary.cc:707
 #, boost-format
 msgid "... and %1% more item."
@@ -1127,7 +1127,7 @@ msgstr "Tersedia"
 
 #. translators: used as 'tag:' (i.e. followed by ':')
 #. translators: property name; short; used like "Name: value"
-#: src/Summary.cc:1523 src/info.cc:396 src/info.cc:489 src/info.cc:609
+#: src/Summary.cc:1523 src/info.cc:446 src/info.cc:539 src/info.cc:659
 msgid "Installed"
 msgstr "Terpasang"
 
@@ -2628,7 +2628,7 @@ msgstr[0] "Kunci %lu dihapus."
 #. translators: name (general header)
 #: src/commands/locks/list.cc:133 src/commands/repos/list.cc:42
 #: src/commands/repos/list.cc:227 src/commands/services/list.cc:107
-#: src/info.cc:90 src/info.cc:512 src/info.cc:747 src/locales.cc:201
+#: src/info.cc:92 src/info.cc:562 src/info.cc:797 src/locales.cc:201
 #: src/search.cc:48 src/search.cc:199 src/search.cc:304 src/search.cc:458
 #: src/search.cc:508 src/update.cc:789 src/utils/misc.cc:324
 msgid "Name"
@@ -2642,13 +2642,13 @@ msgstr "Cocok"
 #. translators: type (general header)
 #: src/commands/locks/list.cc:136 src/commands/repos/list.cc:56
 #: src/commands/repos/list.cc:266 src/commands/services/list.cc:116
-#: src/info.cc:513 src/search.cc:50 src/search.cc:202
+#: src/info.cc:563 src/search.cc:50 src/search.cc:202
 msgid "Type"
 msgstr "Tipe"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: package's repository (header)
-#: src/commands/locks/list.cc:136 src/info.cc:88 src/search.cc:56
+#: src/commands/locks/list.cc:136 src/info.cc:90 src/search.cc:56
 #: src/search.cc:306 src/search.cc:457 src/search.cc:504 src/update.cc:786
 #: src/utils/misc.cc:323
 msgid "Repository"
@@ -3151,8 +3151,8 @@ msgstr ""
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/query/info.cc:19
-msgid "info (if) [OPTIONS] <NAME> ..."
-msgstr "info (if) [OPSI] <NAMA> ..."
+msgid "info (if) [OPTIONS] <NAME>[-<VERSION>[-<RELEASE>]] ..."
+msgstr ""
 
 #. translators: command summary: info, if
 #: src/commands/query/info.cc:21
@@ -3172,97 +3172,104 @@ msgstr ""
 "mendapatkan paket juga sebagian cocok menggunakan opsi '--match-substring' "
 "atau gunakan wildcard (*?) dalam namanya."
 
+#: src/commands/query/info.cc:25
+msgid ""
+"If no version constraint is specified, information about the best available "
+"package is shown. Note that both the version and release numbers must always "
+"match exactly."
+msgstr ""
+
 #. translators: -s, --match-substrings
-#: src/commands/query/info.cc:62
+#: src/commands/query/info.cc:65
 msgid "Print information for packages partially matching name."
 msgstr "Cetak informasi untuk paket yang cocok dengan sebagian nama."
 
 #. translators: --provides
-#: src/commands/query/info.cc:67
+#: src/commands/query/info.cc:70
 msgid "Show provides."
 msgstr "Tampilkan yang tersedia."
 
 #. translators: --requires
-#: src/commands/query/info.cc:71
+#: src/commands/query/info.cc:74
 msgid "Show requires and prerequires."
 msgstr "Tampilkan apa yang diperlukan dan prasyaratnya."
 
 #. translators: --conflicts
-#: src/commands/query/info.cc:75
+#: src/commands/query/info.cc:78
 msgid "Show conflicts."
 msgstr "Tampilkan konflik."
 
 #. translators: --obsoletes
-#: src/commands/query/info.cc:79
+#: src/commands/query/info.cc:82
 msgid "Show obsoletes."
 msgstr "Tampilkan yang usang."
 
 #. translators: --recommends
-#: src/commands/query/info.cc:83
+#: src/commands/query/info.cc:86
 msgid "Show recommends."
 msgstr "Tampilkan rekomendasi."
 
 #. translators: --supplements
-#: src/commands/query/info.cc:87
+#: src/commands/query/info.cc:90
 msgid "Show supplements."
 msgstr "Tampilkan suplemen."
 
 #. translators: --suggests
-#: src/commands/query/info.cc:91
+#: src/commands/query/info.cc:94
 msgid "Show suggests."
 msgstr "Tampilkan saran."
 
-#: src/commands/query/info.cc:105 src/utils/messages.cc:70
+#: src/commands/query/info.cc:108 src/utils/messages.cc:70
 msgid "Required argument missing."
 msgstr "Diperlukan argumen yang hilang."
 
-#: src/commands/query/info.cc:108 src/utils/messages.cc:37
+#: src/commands/query/info.cc:111 src/utils/messages.cc:37
 #: src/utils/messages.cc:52 src/utils/messages.cc:72 src/utils/messages.cc:89
 msgid "Usage"
 msgstr "Pemakaian"
 
 #. translators: command summary: patch-info
-#: src/commands/query/info.cc:138
+#: src/commands/query/info.cc:141
 msgid "Show full information for specified patches."
 msgstr "Tampilkan informasi lengkap untuk tambalan yang ditentukan."
 
 #. translators: command summary: pattern-info
-#: src/commands/query/info.cc:141
+#: src/commands/query/info.cc:144
 msgid "Show full information for specified patterns."
 msgstr "Tampilkan informasi lengkap untuk pola yang ditentukan."
 
 #. translators: command summary: product-info
-#: src/commands/query/info.cc:144
+#: src/commands/query/info.cc:147
 msgid "Show full information for specified products."
 msgstr "Tampilkan informasi lengkap untuk produk yang ditentukan."
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/commands/query/info.cc:157
+#: src/commands/query/info.cc:160
 msgid "patch-info <PATCHNAME> ..."
 msgstr "patch-info <NAMATAMBALAN> ..."
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/commands/query/info.cc:160
+#: src/commands/query/info.cc:163
 msgid "pattern-info <PATTERN_NAME> ..."
 msgstr "pattern-info <NAMA_POLA> ..."
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/commands/query/info.cc:163
+#: src/commands/query/info.cc:166
 msgid "product-info <PRODUCT_NAME> ..."
 msgstr "product-info <NAMA_PRODUK> ..."
 
 #. translators: command description
-#: src/commands/query/info.cc:175
+#: src/commands/query/info.cc:178
 msgid "Show detailed information for patches."
 msgstr "Tampilkan informasi detail untuk tambalan."
 
 #. translators: command description
-#: src/commands/query/info.cc:178
+#: src/commands/query/info.cc:181
 msgid "Show detailed information for patterns."
 msgstr "Tampilkan informasi terperinci untuk pola."
 
 #. translators: command description
-#: src/commands/query/info.cc:181
+#: src/commands/query/info.cc:184
 msgid "Show detailed information for products."
 msgstr "Tampilkan informasi terperinci untuk produk."
 
@@ -3285,7 +3292,8 @@ msgstr "Daftar semua paket yang tersedia dalam repositori tertentu."
 #: src/commands/query/packages.cc:35
 msgid ""
 "Show installed packages which were automatically selected by the resolver."
-msgstr "Menampilkan paket terinstal yang secara otomatis dipilih oleh resolver."
+msgstr ""
+"Menampilkan paket terinstal yang secara otomatis dipilih oleh resolver."
 
 #. translators: --userinstalled
 #: src/commands/query/packages.cc:39
@@ -3487,7 +3495,7 @@ msgstr "Alias"
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/commands/repos/list.cc:44 src/commands/repos/list.cc:47
 #: src/commands/repos/list.cc:273 src/commands/services/add.cc:83
-#: src/commands/services/list.cc:118 src/repos.cc:1247
+#: src/commands/services/list.cc:118 src/repos.cc:1243
 #: src/utils/flags/zyppflags.h:49
 msgid "URI"
 msgstr "URI"
@@ -3496,27 +3504,27 @@ msgstr "URI"
 #. translators: property name; short; used like "Name: value"
 #: src/commands/repos/list.cc:51 src/commands/repos/list.cc:235
 #: src/commands/services/add.cc:85 src/commands/services/list.cc:108
-#: src/repos.cc:1249
+#: src/repos.cc:1245
 msgid "Enabled"
 msgstr "Aktifkan"
 
 #. GPG Check
 #. translators: property name; short; used like "Name: value"
 #: src/commands/repos/list.cc:52 src/commands/repos/list.cc:239
-#: src/commands/services/list.cc:109 src/repos.cc:1251
+#: src/commands/services/list.cc:109 src/repos.cc:1247
 msgid "GPG Check"
 msgstr "Periksa GPG"
 
 #. translators: repository priority (in zypper repos -p or -d)
 #. translators: property name; short; used like "Name: value"
 #: src/commands/repos/list.cc:53 src/commands/repos/list.cc:257
-#: src/commands/services/list.cc:115 src/repos.cc:1255
+#: src/commands/services/list.cc:115 src/repos.cc:1251
 msgid "Priority"
 msgstr "Prioritas"
 
 #. translators: property name; short; used like "Name: value"
 #: src/commands/repos/list.cc:54 src/commands/services/add.cc:87
-#: src/repos.cc:1253
+#: src/repos.cc:1249
 msgid "Autorefresh"
 msgstr "Segarkan otomatis"
 
@@ -3571,7 +3579,7 @@ msgid "Export all defined repositories as a single local .repo file."
 msgstr ""
 "Ekspor semua repositori yang ditetapkan sebagai satu berkas .repo lokal."
 
-#: src/commands/repos/list.cc:122 src/repos.cc:1004
+#: src/commands/repos/list.cc:122 src/repos.cc:1000
 msgid "Error reading repositories:"
 msgstr "Galat saat membaca repositori:"
 
@@ -3701,7 +3709,7 @@ msgstr "Opsi global '%s' tidak berpengaruh di sini."
 msgid "Arguments are not allowed if '%s' is used."
 msgstr "Argumen tidak diizinkan jika '%s' digunakan."
 
-#: src/commands/repos/refresh.cc:195 src/repos.cc:1016
+#: src/commands/repos/refresh.cc:195 src/repos.cc:1012
 msgid "Specified repositories: "
 msgstr "Repositori yang ditentukan: "
 
@@ -3720,7 +3728,7 @@ msgstr "Memindai isi repositori yang tidak aktif '%s'."
 msgid "Skipping disabled repository '%s'"
 msgstr "Melewati repositori '%s' yang dinonaktifkan"
 
-#: src/commands/repos/refresh.cc:262 src/repos.cc:860 src/repos.cc:908
+#: src/commands/repos/refresh.cc:262 src/repos.cc:860 src/repos.cc:904
 #, c-format, boost-format
 msgid "Skipping repository '%s' because of the above error."
 msgstr "Melewati repositori '%s' karena galat di atas."
@@ -3748,7 +3756,7 @@ msgstr ""
 msgid "Could not refresh the repositories because of errors."
 msgstr "Tidak dapat menyegarkan repositori karena galat."
 
-#: src/commands/repos/refresh.cc:298 src/repos.cc:937
+#: src/commands/repos/refresh.cc:298 src/repos.cc:933
 msgid "Some of the repositories have not been refreshed because of an error."
 msgstr "Beberapa repositori belum disegarkan karena ada galat."
 
@@ -3803,12 +3811,12 @@ msgstr ""
 msgid "Repository '%s' renamed to '%s'."
 msgstr "Repositori '%s' diganti namanya menjadi '%s'."
 
-#: src/commands/repos/rename.cc:47 src/repos.cc:1195
+#: src/commands/repos/rename.cc:47 src/repos.cc:1191
 #, c-format, boost-format
 msgid "Repository named '%s' already exists. Please use another alias."
 msgstr "Repositori bernama '%s' sudah ada. Silakan gunakan alias lain."
 
-#: src/commands/repos/rename.cc:52 src/repos.cc:1673
+#: src/commands/repos/rename.cc:52 src/repos.cc:1669
 msgid "Error while modifying the repository:"
 msgstr "Galat saat memodifikasi repositori:"
 
@@ -4035,7 +4043,7 @@ msgid "Sort the list by repository priority."
 msgstr "Urutkan daftar berdasarkan prioritas repositori."
 
 #. translator: %1% denotes a zypper command to execute. Like 'zypper search-packages'.
-#: src/commands/search/search-packages-hinthack.cc:82
+#: src/commands/search/search-packages-hinthack.cc:70
 #, boost-format
 msgid ""
 "For an extended search including not yet activated remote resources please "
@@ -4045,7 +4053,7 @@ msgstr ""
 "diaktifkan, gunakan '%1%'."
 
 #. translator: %1% denotes a zypper command to execute. Like 'zypper search-packages'.
-#: src/commands/search/search-packages-hinthack.cc:86
+#: src/commands/search/search-packages-hinthack.cc:74
 #, boost-format
 msgid ""
 "The package providing this subcommand is currently not installed. You can "
@@ -4054,7 +4062,7 @@ msgstr ""
 "Paket yang menyediakan perintah ini saat ini tidak dipasang. Anda dapat "
 "memasangnnya dengan memanggil '%1%'."
 
-#: src/commands/search/search-packages-hinthack.cc:99
+#: src/commands/search/search-packages-hinthack.cc:87
 #, boost-format
 msgid ""
 "For an extended search including not yet activated remote resources you may "
@@ -4063,12 +4071,12 @@ msgstr ""
 "Untuk pencarian yang diperluas termasuk sumber jarak jauh yang belum "
 "diaktifkan, Anda dapat menjalankan '%1%' kapan saja."
 
-#: src/commands/search/search-packages-hinthack.cc:100
+#: src/commands/search/search-packages-hinthack.cc:88
 #, boost-format
 msgid "Do you want to run '%1%' now?"
 msgstr "Anda ingin menjalankan '%1%' sekarang?"
 
-#: src/commands/search/search-packages-hinthack.cc:116
+#: src/commands/search/search-packages-hinthack.cc:104
 #, boost-format
 msgid "Run '%1%' to search in not yet activated remote resources."
 msgstr "Jalankan '%1%' untuk mencari pada sumber yang belum diaktifkan."
@@ -4262,7 +4270,7 @@ msgid "Specified repository '%s' is disabled."
 msgstr "Repositori '%s' yang telah ditentukan dinonaktifkan."
 
 #. translators: empty search result message
-#: src/commands/search/search.cc:463 src/info.cc:315
+#: src/commands/search/search.cc:463 src/info.cc:365
 msgid "No matching items found."
 msgstr "Tidak ditemukan item yang cocok."
 
@@ -4275,7 +4283,7 @@ msgstr ""
 msgid "See the above message for a hint."
 msgstr "Lihat pesan di atas untuk petunjuk."
 
-#: src/commands/search/search.cc:497 src/repos.cc:983
+#: src/commands/search/search.cc:497 src/repos.cc:979
 msgid "Running 'zypper refresh' as root might resolve the problem."
 msgstr ""
 "Menjalankan 'zypper refresh' sebagai root mungkin bisa menyelesaikan masalah."
@@ -4371,7 +4379,7 @@ msgid "Problem retrieving the repository index file for service '%s':"
 msgstr "Masalah mengambil berkas indeks repositori untuk layanan '%s':"
 
 #: src/commands/services/common.cc:138 src/commands/services/refresh.cc:226
-#: src/repos.cc:1725
+#: src/repos.cc:1721
 #, c-format, boost-format
 msgid "Skipping service '%s' because of the above error."
 msgstr "Melewati layanan '%s' karena galat di atas."
@@ -5159,7 +5167,7 @@ msgstr "Paket sumber yang tidak berguna di direktori unduhan:"
 
 #. translators: table headers
 #. translators: property name; short; used like "Name: value"
-#: src/commands/utils/source-download.cc:318 src/info.cc:409
+#: src/commands/utils/source-download.cc:318 src/info.cc:459
 msgid "Source package"
 msgstr "Paket sumber"
 
@@ -5327,67 +5335,67 @@ msgstr "%s lebih tua dari %s"
 #. translators: property name; short; used like "Name: value"
 #. translators: Table column header
 #. translators: package version (header)
-#: src/info.cc:92 src/info.cc:748 src/search.cc:52 src/search.cc:305
+#: src/info.cc:94 src/info.cc:798 src/search.cc:52 src/search.cc:305
 #: src/search.cc:459 src/search.cc:509
 msgid "Version"
 msgstr "Versi"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: package architecture (header)
-#: src/info.cc:94 src/search.cc:54 src/search.cc:460 src/search.cc:510
+#: src/info.cc:96 src/search.cc:54 src/search.cc:460 src/search.cc:510
 #: src/update.cc:795
 msgid "Arch"
 msgstr "Arsitektur"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:96
+#: src/info.cc:98
 msgid "Vendor"
 msgstr "Vendor"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: package summary (header)
-#: src/info.cc:102 src/search.cc:201 src/utils/misc.cc:330
+#: src/info.cc:104 src/search.cc:201 src/utils/misc.cc:330
 #: src/utils/misc.cc:372
 msgid "Summary"
 msgstr "Ringkasan"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: header of table column - the package summary
-#: src/info.cc:104 src/locales.cc:203
+#: src/info.cc:106 src/locales.cc:203
 msgid "Description"
 msgstr "Deskripsi"
 
-#: src/info.cc:131
+#: src/info.cc:133
 msgid "automatically"
 msgstr "secara otomatis"
 
-#: src/info.cc:220
+#: src/info.cc:222
 #, boost-format
 msgid "There would be %1% match for '%2%'."
 msgid_plural "There would be %1% matches for '%2%'."
 msgstr[0] "Akan ada %1% cocok untuk '%2%'."
 
 #. TranslatorExplanation E.g. "package 'zypper' not found."
-#: src/info.cc:271
+#: src/info.cc:305
 #, c-format, boost-format
 msgid "%s '%s' not found."
 msgstr "%s '%s' tidak ditemukan."
 
 #. TranslatorExplanation E.g. "Information for package zypper:"
-#: src/info.cc:297
+#: src/info.cc:347
 #, c-format, boost-format
 msgid "Information for %s %s:"
 msgstr "Informasi untuk %s %s:"
 
-#: src/info.cc:373 src/info.cc:383 src/info.cc:389
+#: src/info.cc:423 src/info.cc:433 src/info.cc:439
 msgid "Support Level"
 msgstr "Tingkat Dukungan"
 
-#: src/info.cc:375
+#: src/info.cc:425
 msgid "The successor package is already installed."
 msgstr "Paket penerus sudah diinstal."
 
-#: src/info.cc:377
+#: src/info.cc:427
 msgid ""
 "The successor package should be installed as soon as possible to receive "
 "continued support."
@@ -5395,72 +5403,72 @@ msgstr ""
 "Paket penerus harus diinstal sesegera mungkin untuk mendapatkan dukungan "
 "yang berkelanjutan."
 
-#: src/info.cc:384
+#: src/info.cc:434
 msgid "Unfortunately the successor package is not provided by any repository."
 msgstr "Sayangnya paket penerus tidak disediakan oleh repositori mana pun."
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:394
+#: src/info.cc:444
 msgid "Installed Size"
 msgstr "Ukuran Terpasang"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:398 src/info.cc:448 src/info.cc:612 src/utils/misc.cc:328
+#: src/info.cc:448 src/info.cc:498 src/info.cc:662 src/utils/misc.cc:328
 #: src/utils/misc.cc:370
 msgid "Status"
 msgstr "Status"
 
-#: src/info.cc:402 src/info.cc:616
+#: src/info.cc:452 src/info.cc:666
 #, c-format, boost-format
 msgid "out-of-date (version %s installed)"
 msgstr "usang (versi %s terpasang)"
 
-#: src/info.cc:404 src/info.cc:618
+#: src/info.cc:454 src/info.cc:668
 msgid "up-to-date"
 msgstr "mutakhir"
 
-#: src/info.cc:407 src/info.cc:621
+#: src/info.cc:457 src/info.cc:671
 msgid "not installed"
 msgstr "tidak terpasang"
 
-#: src/info.cc:411
+#: src/info.cc:461
 msgid "Upstream URL"
 msgstr "URL hulu"
 
 #. translators: property name; short; used like "Name: value"
 #. translator: Table column header.
 #. Name
-#: src/info.cc:450 src/update.cc:406 src/utils/misc.cc:325
+#: src/info.cc:500 src/update.cc:406 src/utils/misc.cc:325
 #: src/utils/misc.cc:367
 msgid "Category"
 msgstr "Kategori"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:452 src/utils/misc.cc:326 src/utils/misc.cc:368
+#: src/info.cc:502 src/utils/misc.cc:326 src/utils/misc.cc:368
 msgid "Severity"
 msgstr "Tingkat Keparahan"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:454
+#: src/info.cc:504
 msgid "Created On"
 msgstr "Dibuat Pada"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:456 src/utils/misc.cc:327 src/utils/misc.cc:369
+#: src/info.cc:506 src/utils/misc.cc:327 src/utils/misc.cc:369
 msgid "Interactive"
 msgstr "Interaktif"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:491
+#: src/info.cc:541
 msgid "Visible to User"
 msgstr "Terlihat oleh Pengguna"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:505 src/info.cc:541
+#: src/info.cc:555 src/info.cc:591
 msgid "Contents"
 msgstr "Konten"
 
-#: src/info.cc:505
+#: src/info.cc:555
 msgid "(empty)"
 msgstr "(kosong)"
 
@@ -5469,91 +5477,91 @@ msgstr "(kosong)"
 #. translators: S for 'installed Status'
 #. translators: S for installed Status
 #. TranslatorExplanation S stands for Status
-#: src/info.cc:511 src/info.cc:746 src/locales.cc:199 src/search.cc:46
+#: src/info.cc:561 src/info.cc:796 src/locales.cc:199 src/search.cc:46
 #: src/search.cc:198 src/search.cc:303 src/search.cc:456 src/search.cc:503
 #: src/update.cc:784
 msgid "S"
 msgstr "S"
 
 #. translators: Table column header
-#: src/info.cc:514 src/search.cc:307
+#: src/info.cc:564 src/search.cc:307
 msgid "Dependency"
 msgstr "Dependensi"
 
-#: src/info.cc:519 src/info.cc:533
+#: src/info.cc:569 src/info.cc:583
 msgid "Required"
 msgstr "Diperlukan"
 
-#: src/info.cc:524 src/info.cc:533 src/search.cc:243
+#: src/info.cc:574 src/info.cc:583 src/search.cc:243
 msgid "Recommended"
 msgstr "Direkomendasikan"
 
-#: src/info.cc:530 src/info.cc:533 src/search.cc:245
+#: src/info.cc:580 src/info.cc:583 src/search.cc:245
 msgid "Suggested"
 msgstr "Disarankan"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:589
+#: src/info.cc:639
 msgid "End of Support"
 msgstr "Akhir Dukungan"
 
-#: src/info.cc:594
+#: src/info.cc:644
 msgid "unknown"
 msgstr "tidak diketahui"
 
 #. translators: %1% is an URL or Path pointing to some document
-#: src/info.cc:599
+#: src/info.cc:649
 #, boost-format
 msgid "See %1%"
 msgstr "Lihat %1%"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:605
+#: src/info.cc:655
 msgid "Flavor"
 msgstr "Rasa"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:607 src/search.cc:511
+#: src/info.cc:657 src/search.cc:511
 msgid "Is Base"
 msgstr "Adalah Basis"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:628 src/info.cc:655
+#: src/info.cc:678 src/info.cc:705
 msgid "Update Repositories"
 msgstr "Mutakhirkan Repositori"
 
-#: src/info.cc:633
+#: src/info.cc:683
 msgid "Content Id"
 msgstr "Id Konten"
 
-#: src/info.cc:645
+#: src/info.cc:695
 msgid "Provided by enabled repository"
 msgstr "Disediakan oleh repositori yang diaktifkan"
 
-#: src/info.cc:650
+#: src/info.cc:700
 msgid "Not provided by any enabled repository"
 msgstr "Tidak disediakan oleh repositori yang diaktifkan"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:660
+#: src/info.cc:710
 msgid "CPE Name"
 msgstr "Nama CPE"
 
-#: src/info.cc:665
+#: src/info.cc:715
 msgid "undefined"
 msgstr "tidak terdefinisi"
 
-#: src/info.cc:667
+#: src/info.cc:717
 msgid "invalid CPE Name"
 msgstr "nama CPE tidak valid"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:670
+#: src/info.cc:720
 msgid "Short Name"
 msgstr "Nama Singkat"
 
 #. translators: property name; short; used like "Name: value"; is followed by a list of binary packages built from this source package
-#: src/info.cc:756
+#: src/info.cc:806
 msgid "Builds binary package"
 msgstr "Bangun paket biner"
 
@@ -5913,12 +5921,12 @@ msgstr ""
 msgid "Ignoring repository '%s' because of '%s' option."
 msgstr "Mengabaikan repositori '%s' karena opsi '%s'."
 
-#: src/repos.cc:828 src/repos.cc:922
+#: src/repos.cc:828 src/repos.cc:918
 #, c-format, boost-format
 msgid "Temporarily enabling repository '%s'."
 msgstr "Mengaktifkan repository '%s' sementara."
 
-#: src/repos.cc:886
+#: src/repos.cc:882
 #, c-format, boost-format
 msgid ""
 "Repository '%s' is out-of-date. You can run 'zypper refresh' as root to "
@@ -5927,7 +5935,7 @@ msgstr ""
 "Repositori '%s' sudah usang. Anda bisa melakukan 'zypper refresh' dari root "
 "untuk memperbaruinya."
 
-#: src/repos.cc:903
+#: src/repos.cc:899
 #, c-format, boost-format
 msgid ""
 "The metadata cache needs to be built for the '%s' repository. You can run "
@@ -5936,82 +5944,82 @@ msgstr ""
 "Singgahan metadata perlu dibangun untuk repositori '%s'. Anda bisa jalankan "
 "'zypper refresh' sebagai root untuk melakukan ini."
 
-#: src/repos.cc:929
+#: src/repos.cc:925
 #, c-format, boost-format
 msgid "Repository '%s' stays disabled."
 msgstr "Repositori '%s' tetap dinonaktifkan."
 
-#: src/repos.cc:974
+#: src/repos.cc:970
 msgid "Initializing Target"
 msgstr "Inisialisasi Target"
 
-#: src/repos.cc:982
+#: src/repos.cc:978
 msgid "Target initialization failed:"
 msgstr "Inisialisasi target gagal:"
 
-#: src/repos.cc:1064
+#: src/repos.cc:1060
 #, c-format, boost-format
 msgid "Cleaning metadata cache for '%s'."
 msgstr "Membersihkan singgahan metadata untuk '%s'."
 
-#: src/repos.cc:1072
+#: src/repos.cc:1068
 #, c-format, boost-format
 msgid "Cleaning raw metadata cache for '%s'."
 msgstr "Membersihkan singgahan metadata raw untuk '%s'."
 
-#: src/repos.cc:1078
+#: src/repos.cc:1074
 #, c-format, boost-format
 msgid "Keeping raw metadata cache for %s '%s'."
 msgstr "Menyimpan singgahan metadata raw untuk %s '%s'."
 
 #. translators: meaning the cached rpm files
-#: src/repos.cc:1085
+#: src/repos.cc:1081
 #, c-format, boost-format
 msgid "Cleaning packages for '%s'."
 msgstr "Membersihkan paket untuk '%s'."
 
-#: src/repos.cc:1093
+#: src/repos.cc:1089
 #, c-format, boost-format
 msgid "Cannot clean repository '%s' because of an error."
 msgstr "Tidak dapat membersihkan repositori '%s' karena galat."
 
-#: src/repos.cc:1104
+#: src/repos.cc:1100
 msgid "Cleaning installed packages cache."
 msgstr "Membersihkan singgahan paket yang dipasang."
 
-#: src/repos.cc:1113
+#: src/repos.cc:1109
 msgid "Cannot clean installed packages cache because of an error."
 msgstr ""
 "Tidak dapat membersihkan singgahan paket yang dipasang karena kesalahan."
 
-#: src/repos.cc:1131
+#: src/repos.cc:1127
 msgid "Could not clean the repositories because of errors."
 msgstr "Tidak dapat membersihkan repositori karena kesalahan."
 
-#: src/repos.cc:1137
+#: src/repos.cc:1133
 msgid "Some of the repositories have not been cleaned up because of an error."
 msgstr "Beberapa repositori belum dibersihkan karena ada kesalahan."
 
-#: src/repos.cc:1142
+#: src/repos.cc:1138
 msgid "Specified repositories have been cleaned up."
 msgstr "Repositori yang ditentukan telah dibersihkan."
 
-#: src/repos.cc:1144
+#: src/repos.cc:1140
 msgid "All repositories have been cleaned up."
 msgstr "Semua repositori telah dibersihkan."
 
-#: src/repos.cc:1166
+#: src/repos.cc:1162
 msgid "This is a changeable read-only media (CD/DVD), disabling autorefresh."
 msgstr ""
 "Ini adalah media hanya-baca yang dapat diubah (CD/DVD), menonaktifkan "
 "penyegaran otomatis."
 
-#: src/repos.cc:1187
+#: src/repos.cc:1183
 #, c-format, boost-format
 msgid "Invalid repository alias: '%s'"
 msgstr "Alias repositori tidak valid: '%s'"
 
-#: src/repos.cc:1204
+#: src/repos.cc:1200
 msgid ""
 "Could not determine the type of the repository. Please check if the defined "
 "URIs (see below) point to a valid repository:"
@@ -6019,25 +6027,25 @@ msgstr ""
 "Tidak dapat menentukan tipe repositori. Periksa apakah URI yang ditetapkan "
 "(lihat di bawah) menunjuk ke repositori yang valid:"
 
-#: src/repos.cc:1210
+#: src/repos.cc:1206
 msgid "Can't find a valid repository at given location:"
 msgstr "Tidak dapat menemukan repositori yang valid di lokasi yang ditentukan:"
 
-#: src/repos.cc:1218
+#: src/repos.cc:1214
 msgid "Problem transferring repository data from specified URI:"
 msgstr "Masalah mentransfer data repositori dari URI yang ditentukan:"
 
-#: src/repos.cc:1219
+#: src/repos.cc:1215
 msgid "Please check whether the specified URI is accessible."
 msgstr "Harap periksa apakah URI yang ditentukan dapat diakses."
 
-#: src/repos.cc:1226
+#: src/repos.cc:1222
 msgid "Unknown problem when adding repository:"
 msgstr "Masalah tidak dikenal saat menambahkan repositori:"
 
 #. translators: BOOST STYLE POSITIONAL DIRECTIVES ( %N% )
 #. translators: %1% - a repository name
-#: src/repos.cc:1236
+#: src/repos.cc:1232
 #, boost-format
 msgid ""
 "GPG checking is disabled in configuration of repository '%1%'. Integrity and "
@@ -6046,135 +6054,135 @@ msgstr ""
 "Pemeriksaan GPG dinonaktifkan dalam konfigurasi repositori '%1%'. Integritas "
 "dan asal paket tidak dapat diverifikasi."
 
-#: src/repos.cc:1241
+#: src/repos.cc:1237
 #, c-format, boost-format
 msgid "Repository '%s' successfully added"
 msgstr "Repositori '%s' berhasil ditambahkan"
 
-#: src/repos.cc:1267
+#: src/repos.cc:1263
 #, c-format, boost-format
 msgid "Reading data from '%s' media"
 msgstr "Membaca data dari media '%s'"
 
-#: src/repos.cc:1273
+#: src/repos.cc:1269
 #, c-format, boost-format
 msgid "Problem reading data from '%s' media"
 msgstr "Masalah saat membaca data dari media '%s'"
 
-#: src/repos.cc:1274
+#: src/repos.cc:1270
 msgid "Please check if your installation media is valid and readable."
 msgstr "Silakan periksa apakah media pemasangan Anda valid dan mudah dibaca."
 
-#: src/repos.cc:1281
+#: src/repos.cc:1277
 #, c-format, boost-format
 msgid "Reading data from '%s' media is delayed until next refresh."
 msgstr "Membaca data dari media '%s' ditunda hingga penyegaran berikutnya."
 
-#: src/repos.cc:1350
+#: src/repos.cc:1346
 msgid "Problem accessing the file at the specified URI"
 msgstr "Masalah saat mengakses berkas pada URI yang ditentukan"
 
-#: src/repos.cc:1351
+#: src/repos.cc:1347
 msgid "Please check if the URI is valid and accessible."
 msgstr "Harap periksa apakah URI valid dan dapat diakses."
 
-#: src/repos.cc:1358
+#: src/repos.cc:1354
 msgid "Problem parsing the file at the specified URI"
 msgstr "Masalah penguraian berkas pada URI yang ditentukan"
 
 #. TranslatorExplanation Don't translate the '.repo' string.
-#: src/repos.cc:1360
+#: src/repos.cc:1356
 msgid "Is it a .repo file?"
 msgstr "Apakah ini berkas .repo?"
 
-#: src/repos.cc:1367
+#: src/repos.cc:1363
 msgid "Problem encountered while trying to read the file at the specified URI"
 msgstr "Terjadi masalah saat mencoba membaca berkas di URI yang ditentukan"
 
-#: src/repos.cc:1380
+#: src/repos.cc:1376
 msgid "Repository with no alias defined found in the file, skipping."
 msgstr "Repositori tanpa alias yang ditemukan dalam berkas, lewati."
 
-#: src/repos.cc:1386
+#: src/repos.cc:1382
 #, c-format, boost-format
 msgid "Repository '%s' has no URI defined, skipping."
 msgstr "Repositori '%s' tidak memiliki URI yang ditentukan, lewati."
 
-#: src/repos.cc:1434
+#: src/repos.cc:1430
 #, c-format, boost-format
 msgid "Repository '%s' has been removed."
 msgstr "Repositori '%s' telah dihapus."
 
-#: src/repos.cc:1582
+#: src/repos.cc:1578
 #, c-format, boost-format
 msgid "Repository '%s' priority has been left unchanged (%d)"
 msgstr "Prioritas '%s' dari repositori tidak berubah (%d)"
 
-#: src/repos.cc:1615
+#: src/repos.cc:1611
 #, c-format, boost-format
 msgid "Repository '%s' has been successfully enabled."
 msgstr "Repositori '%s' telah berhasil diaktifkan."
 
-#: src/repos.cc:1617
+#: src/repos.cc:1613
 #, c-format, boost-format
 msgid "Repository '%s' has been successfully disabled."
 msgstr "Repositori '%s' telah berhasil dinonaktifkan."
 
-#: src/repos.cc:1624
+#: src/repos.cc:1620
 #, c-format, boost-format
 msgid "Autorefresh has been enabled for repository '%s'."
 msgstr "Segarkan otomatis telah diaktifkan untuk repositori '%s'."
 
-#: src/repos.cc:1626
+#: src/repos.cc:1622
 #, c-format, boost-format
 msgid "Autorefresh has been disabled for repository '%s'."
 msgstr "Segarkan otomatis telah dinonaktifkan untuk repositori '%s'."
 
-#: src/repos.cc:1633
+#: src/repos.cc:1629
 #, c-format, boost-format
 msgid "RPM files caching has been enabled for repository '%s'."
 msgstr "Singgahan berkas RPM telah diaktifkan untuk repositori '%s'."
 
-#: src/repos.cc:1635
+#: src/repos.cc:1631
 #, c-format, boost-format
 msgid "RPM files caching has been disabled for repository '%s'."
 msgstr "Singgahan berkas RPM telah dinonaktifkan untuk repositori '%s'."
 
-#: src/repos.cc:1642
+#: src/repos.cc:1638
 #, c-format, boost-format
 msgid "GPG check has been enabled for repository '%s'."
 msgstr "Pemeriksaan GPG telah diaktifkan untuk repositori '%s'."
 
-#: src/repos.cc:1644
+#: src/repos.cc:1640
 #, c-format, boost-format
 msgid "GPG check has been disabled for repository '%s'."
 msgstr "Pemeriksaan GPG telah dinonaktifkan untuk repositori '%s'."
 
-#: src/repos.cc:1650
+#: src/repos.cc:1646
 #, c-format, boost-format
 msgid "Repository '%s' priority has been set to %d."
 msgstr "Prioritas repositori '%s' telah diatur ke %d."
 
-#: src/repos.cc:1656
+#: src/repos.cc:1652
 #, c-format, boost-format
 msgid "Name of repository '%s' has been set to '%s'."
 msgstr "Nama repositori '%s' telah ditetapkan ke '%s'."
 
-#: src/repos.cc:1667
+#: src/repos.cc:1663
 #, c-format, boost-format
 msgid "Nothing to change for repository '%s'."
 msgstr "Tidak ada yang berubah untuk repositori '%s'."
 
-#: src/repos.cc:1674
+#: src/repos.cc:1670
 #, c-format, boost-format
 msgid "Leaving repository %s unchanged."
 msgstr "Membiarkan repositori %s tidak berubah."
 
-#: src/repos.cc:1761
+#: src/repos.cc:1757
 msgid "Loading repository data..."
 msgstr "Memuat data repositori..."
 
-#: src/repos.cc:1763
+#: src/repos.cc:1759
 msgid ""
 "No repositories defined. Operating only with the installed resolvables. "
 "Nothing can be installed."
@@ -6182,7 +6190,7 @@ msgstr ""
 "Tidak ada repositori yang ditentukan. Beroperasi hanya dengan perbaikan yang "
 "terpasang. Tidak ada yang bisa dipasang."
 
-#: src/repos.cc:1784
+#: src/repos.cc:1782
 #, c-format, boost-format
 msgid "Retrieving repository '%s' data..."
 msgstr "Mengambil data repositori '%s'..."
@@ -7279,6 +7287,9 @@ msgstr "Obyek tidak valid"
 #: src/utils/prompt.h:102
 msgid "Error"
 msgstr "Galat"
+
+#~ msgid "info (if) [OPTIONS] <NAME> ..."
+#~ msgstr "info (if) [OPSI] <NAMA> ..."
 
 #, boost-format
 #~ msgid "Overall download size: %1%. Already cached: %2%."
