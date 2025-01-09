@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-01-08 15:42+0100\n"
-"PO-Revision-Date: 2024-07-30 05:47+0000\n"
+"PO-Revision-Date: 2025-01-09 04:50+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
 "Language-Team: Japanese <https://l10n.opensuse.org/projects/zypper/master/ja/"
 ">\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.6.2\n"
+"X-Generator: Weblate 5.9.2\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -3133,7 +3133,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/query/info.cc:19
 msgid "info (if) [OPTIONS] <NAME>[-<VERSION>[-<RELEASE>]] ..."
-msgstr ""
+msgstr "info (if) [オプション] <名前>[-<バージョン>[-<リリース>]] ..."
 
 #. translators: command summary: info, if
 #: src/commands/query/info.cc:21
@@ -3159,6 +3159,9 @@ msgid ""
 "package is shown. Note that both the version and release numbers must always "
 "match exactly."
 msgstr ""
+"バージョン制約を指定しない場合は、最新・最良のバージョンのパッケージ情報を表"
+"示します。なお、バージョン番号とリリース番号は、いずれも正確に合致させる必要"
+"があります。"
 
 #. translators: -s, --match-substrings
 #: src/commands/query/info.cc:65
