@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-01-08 15:42+0100\n"
-"PO-Revision-Date: 2024-07-30 12:47+0000\n"
+"PO-Revision-Date: 2025-01-09 13:50+0000\n"
 "Last-Translator: Freek de Kruijf <freek@opensuse.org>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/zypper/master/nl/>\n"
 "Language: nl\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.6.2\n"
+"X-Generator: Weblate 5.9.2\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -3315,7 +3315,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/query/info.cc:19
 msgid "info (if) [OPTIONS] <NAME>[-<VERSION>[-<RELEASE>]] ..."
-msgstr ""
+msgstr "info (if) [OPTIES] <NAAM>[-<VERSIE>[-<RELEASE>]] ..."
 
 #. translators: command summary: info, if
 #: src/commands/query/info.cc:21
@@ -3341,6 +3341,9 @@ msgid ""
 "package is shown. Note that both the version and release numbers must always "
 "match exactly."
 msgstr ""
+"Indien geen versiebeperking is gespecificeerd, wordt informatie over het "
+"best beschikbare pakket getoond. Merk op dat beiden de getallen van de "
+"versie en de release altijd exact overeen moeten komen."
 
 #. translators: -s, --match-substrings
 #: src/commands/query/info.cc:65
