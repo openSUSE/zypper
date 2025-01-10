@@ -8,12 +8,12 @@ IF (DEFINED ZYPP_PREFIX)
     ${ZYPP_PREFIX}/${LIB}/cmake/Zypp/
     ${CMAKE_MODULE_PATH}
   )
-ELSE (DEFINED ZYPP_PREFIX)
+else()
   SET( CMAKE_MODULE_PATH
     ${CMAKE_INSTALL_PREFIX}/${LIB}/cmake/Zypp/
     ${CMAKE_MODULE_PATH}
   )
-ENDIF (DEFINED ZYPP_PREFIX)
+endif()
 
 SET( CMAKE_MODULE_PATH
   ${ZYPPER_SOURCE_DIR}/cmake/modules
@@ -48,7 +48,7 @@ IF ( LEGACY_ENABLE_LONGOPT_ABBREV )
   # abbreviations in order not to break tools. In 15.2 they must be fixed.
   MESSAGE( STATUS "LEGACY_ENABLE_LONGOPT_ABBREV" )
   ADD_DEFINITIONS( -DLEGACY_ENABLE_LONGOPT_ABBREV=1 )
-ENDIF ( LEGACY_ENABLE_LONGOPT_ABBREV )
+endif()
 
 GENERATE_PACKAGING(${PACKAGE} ${VERSION})
 
@@ -74,22 +74,22 @@ MACRO(ADD_TESTS)
     ADD_EXECUTABLE( ${loop_var}_test ${loop_var}_test.cc )
     TARGET_LINK_LIBRARIES( ${loop_var}_test ${ZYPP_LIBRARY} boost_unit_test_framework zypper_lib zypper_test_utils)
     ADD_TEST( ${loop_var}_test ${CMAKE_CURRENT_BINARY_DIR}/${loop_var}_test --catch_system_errors=no)
-  ENDFOREACH( loop_var )
+  endforeach()
 ENDMACRO(ADD_TESTS)
 
 ADD_SUBDIRECTORY( src )
 ADD_SUBDIRECTORY( doc )
 IF ( ENABLE_BUILD_TESTS )
   ADD_SUBDIRECTORY( tests )
-ELSE ( ENABLE_BUILD_TESTS )
+else()
   ADD_SUBDIRECTORY( tests EXCLUDE_FROM_ALL )
-ENDIF ( ENABLE_BUILD_TESTS )
+endif()
 
 IF ( ENABLE_BUILD_TRANS )
   ADD_SUBDIRECTORY( po )
-ELSE ( ENABLE_BUILD_TRANS )
+else()
   ADD_SUBDIRECTORY( po EXCLUDE_FROM_ALL )
-ENDIF ( ENABLE_BUILD_TRANS )
+endif()
 
 INCLUDE(CTest)
 ENABLE_TESTING()
