@@ -17,16 +17,16 @@ msgstr ""
 "Project-Id-Version: zypper.de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-01-08 15:42+0100\n"
-"PO-Revision-Date: 2024-08-05 19:47+0000\n"
+"PO-Revision-Date: 2025-01-10 03:50+0000\n"
 "Last-Translator: Ettore Atalan <atalanttore@googlemail.com>\n"
-"Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/"
-">\n"
+"Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/>"
+"\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.6.2\n"
+"X-Generator: Weblate 5.9.2\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -3321,12 +3321,12 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/query/info.cc:19
 msgid "info (if) [OPTIONS] <NAME>[-<VERSION>[-<RELEASE>]] ..."
-msgstr ""
+msgstr "info (if) [OPTIONEN] <NAME>[-<VERSION>[-<VERÖFFENTLICHUNG>]] ..."
 
 #. translators: command summary: info, if
 #: src/commands/query/info.cc:21
 msgid "Show full information for specified packages."
-msgstr "Alle Infos für angegebene Pakete anzeigen."
+msgstr "Vollständige Informationen für angegebene Pakete anzeigen."
 
 #. translators: command description
 #: src/commands/query/info.cc:23
@@ -3338,7 +3338,7 @@ msgid ""
 msgstr ""
 "Detaillierte Informationen zu angegebenen Paketen anzeigen. Standardmäßig "
 "werden die Pakete angezeigt, deren Name exakt dem angegebenen Namen "
-"entspricht. Sollen auch Pakete mit teilweiser Namensübereinstimmugn "
+"entspricht. Sollen auch Pakete mit teilweiser Namensübereinstimmung "
 "angezeigt werden, die Option '--match-substrings' verwenden oder Platzhalter "
 "(*?) im Namen angeben."
 
@@ -3348,12 +3348,15 @@ msgid ""
 "package is shown. Note that both the version and release numbers must always "
 "match exactly."
 msgstr ""
+"Wenn keine Versionseinschränkung angegeben ist, werden Informationen über "
+"das beste verfügbare Paket angezeigt. Beachten Sie, dass sowohl die Versions-"
+" als auch die Veröffentlichungsnummer immer genau übereinstimmen müssen."
 
 #. translators: -s, --match-substrings
 #: src/commands/query/info.cc:65
 msgid "Print information for packages partially matching name."
 msgstr ""
-"Informationen für Pakete anzeigen, deren Name teilweise mit dem angegebenen "
+"Informationen für Pakete ausgeben, deren Name teilweise mit dem angegebenen "
 "Namen übereinstimmt."
 
 #. translators: --provides
