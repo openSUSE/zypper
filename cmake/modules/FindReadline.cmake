@@ -3,11 +3,6 @@
 # following values:
 #
 
-if(READLINE_INCLUDE_DIR AND READLINE_LIBRARY)
-        # Already in cache, be silent
-        set(READLINE_FIND_QUIETLY TRUE)
-endif()
-
 set(READLINE_LIBRARY)
 set(READLINE_INCLUDE_DIR)
 

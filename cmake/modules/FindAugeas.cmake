@@ -1,11 +1,6 @@
 # Find augeas library and tool
 #
 
-if(AUGEAS_INCLUDE_DIR AND AUGEAS_LIBRARY)
-        # Already in cache, be silent
-        set(AUGEAS_FIND_QUIETLY TRUE)
-endif()
-
 set(AUGEAS_LIBRARY)
 set(AUGEAS_INCLUDE_DIR)
 
