@@ -68,6 +68,8 @@ IF (LIBXML2_FOUND)
   INCLUDE_DIRECTORIES(${LIBXML2_INCLUDE_DIR})
 ENDIF()
 
+enable_testing()
+
 MACRO(ADD_TESTS)
   FOREACH( loop_var ${ARGV} )
     SET_SOURCE_FILES_PROPERTIES( ${loop_var}_test.cc COMPILE_FLAGS "-DBOOST_TEST_DYN_LINK -DBOOST_TEST_MAIN -DBOOST_AUTO_TEST_MAIN=\"\" " )
@@ -90,10 +92,6 @@ IF ( ENABLE_BUILD_TRANS )
 else()
   ADD_SUBDIRECTORY( po EXCLUDE_FROM_ALL )
 endif()
-
-INCLUDE(CTest)
-ENABLE_TESTING()
-
 
 # documentation too important to be hidden in doc:
 INSTALL(
