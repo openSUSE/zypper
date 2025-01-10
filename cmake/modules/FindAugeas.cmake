@@ -22,11 +22,9 @@ FIND_LIBRARY(AUGEAS_LIBRARY NAMES augeas
   /usr/local/lib64
 )
 
-if(AUGEAS_INCLUDE_DIR AND AUGEAS_LIBRARY)
-   MESSAGE( STATUS "augeas found: includes in ${AUGEAS_INCLUDE_DIR}, library in ${AUGEAS_LIBRARY}")
-   set(AUGEAS_FOUND TRUE)
-else()
-   MESSAGE( STATUS "augeas not found")
-endif()
+include(FindPackageHandleStandardArgs)
+find_package_handle_standard_args(
+  Augeas
+  REQUIRED_VARS AUGEAS_INCLUDE_DIR AUGEAS_LIBRARY)
 
 MARK_AS_ADVANCED(AUGEAS_INCLUDE_DIR AUGEAS_LIBRARY)
