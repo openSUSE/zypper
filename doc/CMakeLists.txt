@@ -2,7 +2,7 @@ FIND_PROGRAM(ASCIIDOC asciidoctor)
 IF (ASCIIDOC)
 MESSAGE("asciidoctor found: ${ASCIIDOC}")
 SET(ASCDOC_CMD ${ASCIIDOC} -D ${CMAKE_CURRENT_BINARY_DIR} -b manpage -d manpage)
-ENDIF (ASCIIDOC)
+endif()
 
 IF (NOT ASCDOC_CMD)
 MESSAGE(FATAL_ERROR "Could not find asciidoctor, please install the package")
