@@ -1,7 +1,6 @@
 # ma@: disabled subdirs and tests as thay fail on hudson
 ADD_SUBDIRECTORY(lib)
 
-ENABLE_TESTING()
 INCLUDE_DIRECTORIES( ${ZYPPER_SOURCE_DIR}/tests/lib )
 INCLUDE_DIRECTORIES( ${ZYPPER_SOURCE_DIR}/src )
 
