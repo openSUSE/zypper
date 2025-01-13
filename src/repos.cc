@@ -877,8 +877,11 @@ void do_init_repos( Zypper & zypper )
         // user
         catch ( const Exception & ex )
         {
+          ZYPP_CAUGHT( ex );
           MIL << "We're running as non-root, skipping refresh of " << repo.alias() << endl;
-          zypper.out().error( ex, "Problem" );
+          // bsc#1235636: Asks to suppress reporting the Exception (usually: No permission to
+          // write repository cache), because it scares. This was was indeed the legacy behavior:
+          // SUPPRESS: zypper.out().error( ex, "Problem" );
           zypper.out().notePar( 4, str::Format(_( "Repository '%s' is out-of-date. You can run 'zypper refresh' as root to update it.")) % repo.asUserString() );
         }
       }
