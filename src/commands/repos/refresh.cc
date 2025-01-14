@@ -18,6 +18,37 @@ using namespace zypp;
 
 extern ZYpp::Ptr God;
 
+namespace {
+  // bsc#1234752: Try to refresh update repos first (to have updated GPG keys on the fly).
+  // GA repos usually ship the old, maybe meanwhile expired, GPG key. If such a key was
+  // prolonged, the update repo may contain it and zypp updates the trusted key on the fly
+  // when refreshing it. This avoids a 'key has expired' warning being issued when refreshing
+  // the GA repos
+  inline std::list<RepoInfo> inRefreshOrder( std::list<RepoInfo> && list_r )
+  {
+    list_r.sort( []( const RepoInfo & lhs, const RepoInfo & rhs ) {
+      static const std::string update { "update" };
+      // 'update' directory within the URS's path
+      bool lu = str::containsCI( lhs.url().getPathName(), update );
+      bool ru = str::containsCI( rhs.url().getPathName(), update );
+      if ( lu != ru )
+        return lu;      // update in path wins
+      const std::string & la { lhs.alias() };
+      const std::string & ra { rhs.alias() };
+      if ( lu )
+        return la < ra; // both update => by alias
+      // 'update' in alias or name
+      lu = str::containsCI( la, update ) || str::containsCI( lhs.name(), update );
+      ru = str::containsCI( ra, update ) || str::containsCI( rhs.name(), update );
+      if ( lu != ru )
+        return lu;    // update in alias or name wins
+      return la < ra; // finally by alias
+    } );
+    return std::move(list_r);
+  }
+
+} // namespace
+
 RefreshRepoCmd::RefreshRepoCmd(std::vector<std::string> &&commandAliases_r )
   : ZypperBaseCommand (
       std::move( commandAliases_r ),
@@ -169,7 +200,8 @@ bool RefreshRepoCmd::refreshRepository(Zypper &zypper, const RepoInfo &repo, Ref
 int RefreshRepoCmd::refreshRepositories( Zypper &zypper, RefreshFlags flags_r, const std::vector<std::string> repos_r )
 {
   RepoManager & manager( zypper.repoManager() );
-  const std::list<RepoInfo> & repos( manager.knownRepositories() );
+  // bsc#1234752: Try to refresh update repos first (to have updated GPG keys on the fly)
+  const std::list<RepoInfo> & repos { inRefreshOrder( manager.knownRepositories() ) };
 
   // get the list of repos specified on the command line ...
   std::list<RepoInfo> specified;
