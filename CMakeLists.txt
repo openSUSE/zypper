@@ -1,4 +1,4 @@
-CMAKE_MINIMUM_REQUIRED(VERSION 3.5)
+CMAKE_MINIMUM_REQUIRED(VERSION 3.10)
 PROJECT( ZYPPER C CXX )
 SET( PACKAGE "zypper" )
 
@@ -6,11 +6,15 @@ SET( PACKAGE "zypper" )
 IF (DEFINED ZYPP_PREFIX)
   SET( CMAKE_MODULE_PATH
     ${ZYPP_PREFIX}/${LIB}/cmake/Zypp/
+    ${ZYPP_PREFIX}/lib64/cmake/Zypp/
+    ${ZYPP_PREFIX}/lib/cmake/Zypp/
     ${CMAKE_MODULE_PATH}
   )
 else()
   SET( CMAKE_MODULE_PATH
     ${CMAKE_INSTALL_PREFIX}/${LIB}/cmake/Zypp/
+    ${CMAKE_INSTALL_PREFIX}/lib64/cmake/Zypp/
+    ${CMAKE_INSTALL_PREFIX}/lib/cmake/Zypp/
     ${CMAKE_MODULE_PATH}
   )
 endif()

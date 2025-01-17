@@ -28,7 +28,7 @@ BuildRequires:  libboost_headers-devel
 %else
 BuildRequires:  boost-devel >= 1.33.1
 %endif
-BuildRequires:  cmake >= 3.5
+BuildRequires:  cmake >= 3.10
 BuildRequires:  gcc-c++ >= 7
 BuildRequires:  gettext-devel >= 0.15
 BuildRequires:  libzypp-devel >= 17.35.10
