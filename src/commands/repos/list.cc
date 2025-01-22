@@ -13,6 +13,13 @@ using namespace zypp;
 
 namespace {
 
+  inline const char * repoKeepPackagesStr( const RepoInfo & repo_r )
+  {
+    if ( repo_r.keepPackages() )
+      return asYesNo( repo_r.keepPackages() );
+    return repo_r.effectiveKeepPackages() ? "+" : "-";
+  }
+
 void print_repos_to( const std::list<RepoInfo> & repos, std::ostream & out )
 {
   for_( it, repos.begin(), repos.end() )
@@ -187,6 +194,8 @@ void ListReposCmd::printRepoList( Zypper & zypper, const std::list<RepoInfo> & r
       || list_cols.find_first_of("nN") != std::string::npos;
   bool showrefresh = _listOptions._flags.testFlag( RSCommonListOptions::ShowRefresh )
       || list_cols.find_first_of("rR") != std::string::npos;
+  bool showKeepPackages = _listOptions._flags.testFlag( RSCommonListOptions::ShowKeepPackages )
+      || list_cols.find_first_of("kK") != std::string::npos;
   bool showuri = _listOptions._flags.testFlag( RSCommonListOptions::ShowURI )
       || list_cols.find_first_of("uU") != std::string::npos;
   bool showprio = _listOptions._flags.testFlag( RSCommonListOptions::ShowPriority )
@@ -247,6 +256,16 @@ void ListReposCmd::printRepoList( Zypper & zypper, const std::list<RepoInfo> & r
     th << N_("Refresh");
     ++index;
     if ( list_cols.find("R") != std::string::npos && !sort_override )
+      sort_index = index;
+  }
+
+  // 'keep-packages' flag
+  if ( all || showKeepPackages )
+  {
+    // translators: 'zypper repos' column - whether keep-packages is enabled for the repository
+    th << N_("Keep");
+    ++index;
+    if ( list_cols.find("K") != std::string::npos && !sort_override )
       sort_index = index;
   }
 
@@ -312,6 +331,9 @@ void ListReposCmd::printRepoList( Zypper & zypper, const std::list<RepoInfo> & r
     // autorefresh?
     if ( all || showrefresh )
       tr << repoAutorefreshStr( repo );
+    // keep-packages?
+    if ( all || showKeepPackages )
+      tr << repoKeepPackagesStr( repo );
     // priority
     if ( all || showprio )
       // output flush right; use custom sort index as coloring will break lex. sort

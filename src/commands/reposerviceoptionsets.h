@@ -88,17 +88,18 @@ public:
     ShowAlias          = 1,       //< only supported in list repos
     ShowName           = 1 << 1,  //< only supported in list repos
     ShowRefresh        = 1 << 2,  //< only supported in list repos
-    ShowURI            = 1 << 3,  //< supported in service and repos
-    ShowPriority       = 1 << 4,  //< supported in service and repos
-    ShowWithRepos      = 1 << 5,  //< only supported in list services
-    ShowWithService    = 1 << 6,  //< only supported in list repos
+    ShowKeepPackages   = 1 << 3,  //< only supported in list repos
+    ShowURI            = 1 << 4,  //< supported in service and repos
+    ShowPriority       = 1 << 5,  //< supported in service and repos
+    ShowWithRepos      = 1 << 6,  //< only supported in list services
+    ShowWithService    = 1 << 7,  //< only supported in list repos
     ListServiceShowAll = ShowURI | ShowPriority | ShowWithRepos,
     ListRepoShowAll    = ShowAlias | ShowName | ShowRefresh | ShowURI | ShowPriority | ShowWithService,
-    ShowEnabledOnly    = 1 << 7,  //< supported in service and repos
-    SortByURI          = 1 << 8,  //< supported in service and repos
-    SortByAlias        = 1 << 9,  //< only supported in list repos
-    SortByName         = 1 << 10, //< supported in service and repos
-    SortByPrio         = 1 << 11, //< supported in service and repos
+    ShowEnabledOnly    = 1 << 8,  //< supported in service and repos
+    SortByURI          = 1 << 9,  //< supported in service and repos
+    SortByAlias        = 1 << 10,  //< only supported in list repos
+    SortByName         = 1 << 11, //< supported in service and repos
+    SortByPrio         = 1 << 12, //< supported in service and repos
     ServiceRepo        = 1 << 15  //< special value used in list services
   };
   ZYPP_DECLARE_FLAGS( RSCommonListFlags, RSCommonListFlagsBits );
