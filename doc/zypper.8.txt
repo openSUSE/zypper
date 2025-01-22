@@ -1262,6 +1262,9 @@ To show detailed information about specific repositories, specify them as argume
 	*-r*, *--refresh*::
 		Add the autorefresh column to the output.
 
+	*-k*, *--keep-packages*::
+		Add the keep-packages column to the output. The column will show a *Yes* if keep-packages is explicitly enabled for this repository. Otherwise a *-* or a *+* if a *.keep_packages* file in the pkg-cache directory exists. (see section *FILES*)
+
 	*-d*, *--details*::
 		Show more information like URI, priority, type, etc.
 
@@ -1971,8 +1974,13 @@ This directory is used by all ZYpp-based applications.
 This directory is used by all ZYpp-based applications.
 
 */var/cache/zypp/packages*::
-	If *keeppackages* property is set for a repository (see the *modifyrepo* command), all the RPM file downloaded during installation will be kept here. Packages are stored in subdirectories named after their repositories alias. Subdirectories of removed or otherwise unknown repositories are cleaned automatically. This auto-cleanup can be prevented by creating a file named *.no_auto_prune* in the pkg-cache directory.
-	See also the *clean* command for cleaning these cache directories.
+	If the *keep-packages* property is set for a repository (see the *modifyrepo* command), all the RPM file downloaded during installation will be kept here. Packages are stored in subdirectories named after their repositories alias.
++
+Subdirectories of removed or otherwise unknown repositories are cleaned automatically. This auto-cleanup can be prevented by creating a file named *.no_auto_prune* in the pkg-cache directory.
++
+Creating a *.keep_packages* file in the pkg-cache directory will keep downloaded packages for all repos cached here, overwriting the repositories *keep-packages* property.
++
+See also the *clean* command for cleaning these cache directories.
 +
 This directory is used by all ZYpp-based applications.
 

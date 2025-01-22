@@ -185,7 +185,10 @@ std::vector<ZyppFlags::CommandGroup> RSCommonListOptions::options()
               _("Show also repository name.")},
             { "refresh",   'r',       ZyppFlags::NoArgument,  ZyppFlags::BitFieldType( _flags, ShowRefresh ),
                 // translators: -r, --refresh
-              _("Show also the autorefresh flag.")}
+              _("Show also the autorefresh flag.")},
+            { "keep-packages",   'k',       ZyppFlags::NoArgument,  ZyppFlags::BitFieldType( _flags, ShowKeepPackages ),
+                // translators: -k, --keep-packages
+              _("Show also the keep-packages flag.")},
           }} );
 
     showAllFlag = ListRepoShowAll;
