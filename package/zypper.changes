@@ -1,4 +1,14 @@
 -------------------------------------------------------------------
+Wed Jan 22 18:05:15 CET 2025 - ma@suse.de
+
+- lr: show the repositories keep-packages flag (bsc#1232458)
+  It is shown in the  details view or by using -k,--keep-packages.
+  In addition libyzpp supports to enforce keeping downloaded
+  packages of all repos within a package cache by creating a
+  '.keep_packages' file there.
+- version 1.14.81
+
+-------------------------------------------------------------------
 Fri Jan 17 18:03:18 CET 2025 - ma@suse.de
 
 - Try to refresh update repos first to have updated GPG keys on
