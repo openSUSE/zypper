@@ -8,11 +8,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-08 15:42+0100\n"
+"POT-Creation-Date: 2025-01-22 18:04+0100\n"
 "PO-Revision-Date: 2025-01-09 10:50+0000\n"
 "Last-Translator: David Medina <medipas@gmail.com>\n"
-"Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/>"
-"\n"
+"Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/"
+">\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2732,8 +2732,8 @@ msgstr[1] "Suprimits %lu bloquejos."
 #. translators: Table column header
 #. translators: header of table column - the name of the package
 #. translators: name (general header)
-#: src/commands/locks/list.cc:133 src/commands/repos/list.cc:42
-#: src/commands/repos/list.cc:227 src/commands/services/list.cc:107
+#: src/commands/locks/list.cc:133 src/commands/repos/list.cc:49
+#: src/commands/repos/list.cc:236 src/commands/services/list.cc:107
 #: src/info.cc:92 src/info.cc:562 src/info.cc:797 src/locales.cc:201
 #: src/search.cc:48 src/search.cc:199 src/search.cc:304 src/search.cc:458
 #: src/search.cc:508 src/update.cc:789 src/utils/misc.cc:324
@@ -2746,8 +2746,8 @@ msgstr "Coincideix amb"
 
 #. translators: Table column header
 #. translators: type (general header)
-#: src/commands/locks/list.cc:136 src/commands/repos/list.cc:56
-#: src/commands/repos/list.cc:266 src/commands/services/list.cc:116
+#: src/commands/locks/list.cc:136 src/commands/repos/list.cc:63
+#: src/commands/repos/list.cc:285 src/commands/services/list.cc:116
 #: src/info.cc:563 src/search.cc:50 src/search.cc:202
 msgid "Type"
 msgstr "Tipus"
@@ -3218,7 +3218,7 @@ msgid "Command"
 msgstr "Ordre"
 
 #. "/etc/init.d/ script that might be used to restart the command (guessed)
-#: src/commands/ps.cc:152 src/commands/repos/list.cc:282
+#: src/commands/ps.cc:152 src/commands/repos/list.cc:301
 msgid "Service"
 msgstr "Servei"
 
@@ -3601,111 +3601,111 @@ msgid "Clean both metadata and package caches."
 msgstr "Neteja les dues coses: metadades i memòria cau dels paquets."
 
 # DZ
-#: src/commands/repos/list.cc:41 src/commands/repos/list.cc:216
+#: src/commands/repos/list.cc:48 src/commands/repos/list.cc:225
 #: src/commands/services/list.cc:106
 msgid "Alias"
 msgstr "Àlies"
 
 #. translators: property name; short; used like "Name: value"
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/commands/repos/list.cc:44 src/commands/repos/list.cc:47
-#: src/commands/repos/list.cc:273 src/commands/services/add.cc:83
-#: src/commands/services/list.cc:118 src/repos.cc:1243
+#: src/commands/repos/list.cc:51 src/commands/repos/list.cc:54
+#: src/commands/repos/list.cc:292 src/commands/services/add.cc:83
+#: src/commands/services/list.cc:118 src/repos.cc:1246
 #: src/utils/flags/zyppflags.h:49
 msgid "URI"
 msgstr "URI (adreça del recurs)"
 
 #. 'enabled' flag
 #. translators: property name; short; used like "Name: value"
-#: src/commands/repos/list.cc:51 src/commands/repos/list.cc:235
+#: src/commands/repos/list.cc:58 src/commands/repos/list.cc:244
 #: src/commands/services/add.cc:85 src/commands/services/list.cc:108
-#: src/repos.cc:1245
+#: src/repos.cc:1248
 msgid "Enabled"
 msgstr "Habilitat"
 
 #. GPG Check
 #. translators: property name; short; used like "Name: value"
-#: src/commands/repos/list.cc:52 src/commands/repos/list.cc:239
-#: src/commands/services/list.cc:109 src/repos.cc:1247
+#: src/commands/repos/list.cc:59 src/commands/repos/list.cc:248
+#: src/commands/services/list.cc:109 src/repos.cc:1250
 msgid "GPG Check"
 msgstr "Comprovació GPG"
 
 #. translators: repository priority (in zypper repos -p or -d)
 #. translators: property name; short; used like "Name: value"
-#: src/commands/repos/list.cc:53 src/commands/repos/list.cc:257
-#: src/commands/services/list.cc:115 src/repos.cc:1251
+#: src/commands/repos/list.cc:60 src/commands/repos/list.cc:276
+#: src/commands/services/list.cc:115 src/repos.cc:1254
 msgid "Priority"
 msgstr "Prioritat"
 
 #. translators: property name; short; used like "Name: value"
-#: src/commands/repos/list.cc:54 src/commands/services/add.cc:87
-#: src/repos.cc:1249
+#: src/commands/repos/list.cc:61 src/commands/services/add.cc:87
+#: src/repos.cc:1252
 msgid "Autorefresh"
 msgstr "Refresca automàticament"
 
-#: src/commands/repos/list.cc:54 src/commands/repos/list.cc:55
+#: src/commands/repos/list.cc:61 src/commands/repos/list.cc:62
 msgid "On"
 msgstr "Engegat"
 
-#: src/commands/repos/list.cc:54 src/commands/repos/list.cc:55
+#: src/commands/repos/list.cc:61 src/commands/repos/list.cc:62
 msgid "Off"
 msgstr "Apagat"
 
-#: src/commands/repos/list.cc:55
+#: src/commands/repos/list.cc:62
 msgid "Keep Packages"
 msgstr "Manté els paquets"
 
-#: src/commands/repos/list.cc:57
+#: src/commands/repos/list.cc:64
 msgid "GPG Key URI"
 msgstr "URI de la clau GPG"
 
-#: src/commands/repos/list.cc:58
+#: src/commands/repos/list.cc:65
 msgid "Path Prefix"
 msgstr "Prefix del camí"
 
-#: src/commands/repos/list.cc:59
+#: src/commands/repos/list.cc:66
 msgid "Parent Service"
 msgstr "Servei pare"
 
-#: src/commands/repos/list.cc:60
+#: src/commands/repos/list.cc:67
 msgid "Keywords"
 msgstr "Paraules clau"
 
-#: src/commands/repos/list.cc:61
+#: src/commands/repos/list.cc:68
 msgid "Repo Info Path"
 msgstr "Repo Info Ruta"
 
-#: src/commands/repos/list.cc:62
+#: src/commands/repos/list.cc:69
 msgid "MD Cache Path"
 msgstr "Ruta MD de la memòria cau"
 
-#: src/commands/repos/list.cc:78
+#: src/commands/repos/list.cc:85
 msgid "repos (lr) [OPTIONS] [REPO] ..."
 msgstr "repos (lr) [OPCIONS] [REPO] ..."
 
-#: src/commands/repos/list.cc:79 src/commands/repos/list.cc:80
+#: src/commands/repos/list.cc:86 src/commands/repos/list.cc:87
 msgid "List all defined repositories."
 msgstr "Llista tots els repositoris definits."
 
 #. translators: -e, --export <FILE.repo>
-#: src/commands/repos/list.cc:91
+#: src/commands/repos/list.cc:98
 msgid "Export all defined repositories as a single local .repo file."
 msgstr "Exporta tots els repositoris definis a un sol fitxer .repo."
 
-#: src/commands/repos/list.cc:122 src/repos.cc:1000
+#: src/commands/repos/list.cc:129 src/repos.cc:1003
 msgid "Error reading repositories:"
 msgstr "Error llegint els repositoris:"
 
-#: src/commands/repos/list.cc:148
+#: src/commands/repos/list.cc:155
 #, c-format, boost-format
 msgid "Can't open %s for writing."
 msgstr "No es pot obrir %s per a l'escriptura."
 
-#: src/commands/repos/list.cc:149
+#: src/commands/repos/list.cc:156
 msgid "Maybe you do not have write permissions?"
 msgstr "Potser no teniu els permisos necessaris per fer-hi canvis?"
 
-#: src/commands/repos/list.cc:155
+#: src/commands/repos/list.cc:162
 #, c-format, boost-format
 msgid "Repositories have been successfully exported to %s."
 msgstr "S'han exportat correctament els repositoris a %s."
@@ -3713,15 +3713,20 @@ msgstr "S'han exportat correctament els repositoris a %s."
 #. translators: 'zypper repos' column - whether autorefresh is enabled
 #. for the repository
 #. translators: 'zypper repos' column - whether autorefresh is enabled for the repository
-#: src/commands/repos/list.cc:247 src/commands/services/list.cc:111
+#: src/commands/repos/list.cc:256 src/commands/services/list.cc:111
 msgid "Refresh"
 msgstr "Refresca"
 
-#: src/commands/repos/list.cc:335
+#. translators: 'zypper repos' column - whether keep-packages is enabled for the repository
+#: src/commands/repos/list.cc:266
+msgid "Keep"
+msgstr ""
+
+#: src/commands/repos/list.cc:357
 msgid "No repositories defined."
 msgstr "No hi ha repositoris definits."
 
-#: src/commands/repos/list.cc:336
+#: src/commands/repos/list.cc:358
 msgid "Use the 'zypper addrepo' command to add one or more repositories."
 msgstr "Useu l'ordre \"zypper addrepo\" per afegir-hi un o més repositoris."
 
@@ -3756,17 +3761,17 @@ msgstr ""
 msgid "Repository %s not found."
 msgstr "No s'ha trobat el repositori %s."
 
-#: src/commands/repos/refresh.cc:24
+#: src/commands/repos/refresh.cc:55
 msgid "refresh (ref) [ALIAS|#|URI] ..."
 msgstr "refresh (ref) [ÀLIES|#|URI] ..."
 
 #. translators: command summary: refresh, ref
-#: src/commands/repos/refresh.cc:26
+#: src/commands/repos/refresh.cc:57
 msgid "Refresh all repositories."
 msgstr "Refresca tots els repositoris."
 
 #. translators: command description
-#: src/commands/repos/refresh.cc:28
+#: src/commands/repos/refresh.cc:59
 msgid ""
 "Refresh repositories specified by their alias, number or URI. If none are "
 "specified, all enabled repositories will be refreshed."
@@ -3775,106 +3780,106 @@ msgstr ""
 "ha cap d'especificat, es refrescaran tots els repositoris activats."
 
 #. translators: -f, --force
-#: src/commands/repos/refresh.cc:49 src/commands/services/refresh.cc:113
+#: src/commands/repos/refresh.cc:80 src/commands/services/refresh.cc:113
 msgid "Force a complete refresh."
 msgstr "Força un refresc complet."
 
 #. translators: -b, --force-build
-#: src/commands/repos/refresh.cc:54
+#: src/commands/repos/refresh.cc:85
 msgid "Force rebuild of the database."
 msgstr "Força una reconstrucció de la base de dades."
 
 #. translators: -d, --force-download
-#: src/commands/repos/refresh.cc:59
+#: src/commands/repos/refresh.cc:90
 msgid "Force download of raw metadata."
 msgstr "Força la baixada de metadades en cru."
 
 #. translators: -B, --build-only
-#: src/commands/repos/refresh.cc:64
+#: src/commands/repos/refresh.cc:95
 msgid "Only build the database, don't download metadata."
 msgstr "Només construeix la base de dades, no en baixis les metadades."
 
 #. translators: -D, --download-only
-#: src/commands/repos/refresh.cc:69
+#: src/commands/repos/refresh.cc:100
 msgid "Only download raw metadata, don't build the database."
 msgstr "Només baixa les metadades, no construeixis la base de dades."
 
 #. translators: -r, --repo <ALIAS|#|URI>
-#: src/commands/repos/refresh.cc:74
+#: src/commands/repos/refresh.cc:105
 msgid "Refresh only specified repositories."
 msgstr "Refresca només els repositoris especificats."
 
 #. translators: -s, --services
-#: src/commands/repos/refresh.cc:80
+#: src/commands/repos/refresh.cc:111
 msgid "Refresh also services before refreshing repos."
 msgstr "Refresca també els serveis abans de refrescar els repositoris."
 
-#: src/commands/repos/refresh.cc:95
+#: src/commands/repos/refresh.cc:126
 #, c-format, boost-format
 msgid "The '%s' global option has no effect here."
 msgstr "L'opció global \"%s\" no té cap efecte aquí."
 
-#: src/commands/repos/refresh.cc:103
+#: src/commands/repos/refresh.cc:134
 #, c-format, boost-format
 msgid "Arguments are not allowed if '%s' is used."
 msgstr "No es permeten arguments si no es fa servir \"%s\" ."
 
-#: src/commands/repos/refresh.cc:195 src/repos.cc:1012
+#: src/commands/repos/refresh.cc:227 src/repos.cc:1015
 msgid "Specified repositories: "
 msgstr "Repositoris especificats: "
 
-#: src/commands/repos/refresh.cc:218
+#: src/commands/repos/refresh.cc:250
 #, c-format, boost-format
 msgid "Refreshing repository '%s'."
 msgstr "Refrescant el repositori %s."
 
-#: src/commands/repos/refresh.cc:236 src/repos.cc:842
+#: src/commands/repos/refresh.cc:268 src/repos.cc:842
 #, c-format, boost-format
 msgid "Scanning content of disabled repository '%s'."
 msgstr "Escanejant el contingut del repositori inhabilitat %s."
 
-#: src/commands/repos/refresh.cc:247
+#: src/commands/repos/refresh.cc:279
 #, c-format, boost-format
 msgid "Skipping disabled repository '%s'"
 msgstr "Se salta el repositori inhabilitat %s."
 
-#: src/commands/repos/refresh.cc:262 src/repos.cc:860 src/repos.cc:904
+#: src/commands/repos/refresh.cc:294 src/repos.cc:860 src/repos.cc:907
 #, c-format, boost-format
 msgid "Skipping repository '%s' because of the above error."
 msgstr "Se salta el repositori %s a causa de l'error anterior."
 
-#: src/commands/repos/refresh.cc:274
+#: src/commands/repos/refresh.cc:306
 msgid ""
 "Some of the repositories have not been refreshed because they were not known."
 msgstr "Alguns dels repositoris no s'han refrescat perquè no eren coneguts."
 
-#: src/commands/repos/refresh.cc:281
+#: src/commands/repos/refresh.cc:313
 msgid "Specified repositories are not enabled or defined."
 msgstr "Els repositoris especificats no estan habilitats o definits."
 
-#: src/commands/repos/refresh.cc:283
+#: src/commands/repos/refresh.cc:315
 msgid "There are no enabled repositories defined."
 msgstr "No hi ha repositoris actius definits."
 
-#: src/commands/repos/refresh.cc:287
+#: src/commands/repos/refresh.cc:319
 #, c-format, boost-format
 msgid "Use '%s' or '%s' commands to add or enable repositories."
 msgstr ""
 "Feu servir les ordres \"%s\" o \"%s\" per afegir o habilitar repositoris."
 
-#: src/commands/repos/refresh.cc:293
+#: src/commands/repos/refresh.cc:325
 msgid "Could not refresh the repositories because of errors."
 msgstr "No s'han pogut refrescar els repositoris a causa d'errors."
 
-#: src/commands/repos/refresh.cc:298 src/repos.cc:933
+#: src/commands/repos/refresh.cc:330 src/repos.cc:936
 msgid "Some of the repositories have not been refreshed because of an error."
 msgstr "Alguns dels repositoris no s'han refrescat a causa d'un error."
 
-#: src/commands/repos/refresh.cc:302
+#: src/commands/repos/refresh.cc:334
 msgid "Specified repositories have been refreshed."
 msgstr "S'han refrescat els repositoris especificats."
 
-#: src/commands/repos/refresh.cc:304
+#: src/commands/repos/refresh.cc:336
 msgid "All repositories have been refreshed."
 msgstr "S'han refrescat tots els repositoris."
 
@@ -3921,13 +3926,13 @@ msgstr ""
 msgid "Repository '%s' renamed to '%s'."
 msgstr "El repositori %s ha canviat al nom de \"%s\"."
 
-#: src/commands/repos/rename.cc:47 src/repos.cc:1191
+#: src/commands/repos/rename.cc:47 src/repos.cc:1194
 #, c-format, boost-format
 msgid "Repository named '%s' already exists. Please use another alias."
 msgstr ""
 "El repositori amb el nom %s ja existeix. Si us plau, useu un altre àlies."
 
-#: src/commands/repos/rename.cc:52 src/repos.cc:1669
+#: src/commands/repos/rename.cc:52 src/repos.cc:1672
 msgid "Error while modifying the repository:"
 msgstr "Error en modificar el repositori:"
 
@@ -4107,49 +4112,54 @@ msgstr "Mostra també el nom del repositori."
 msgid "Show also the autorefresh flag."
 msgstr "Mostra també l'etiqueta d'autorefresc."
 
+#. translators: -k, --keep-packages
+#: src/commands/reposerviceoptionsets.cc:191
+msgid "Show also the keep-packages flag."
+msgstr ""
+
 #. translators: -u, --uri
-#: src/commands/reposerviceoptionsets.cc:198
+#: src/commands/reposerviceoptionsets.cc:201
 msgid "Show also base URI of repositories."
 msgstr "Mostra també la base URI dels repositoris."
 
 #. translators: -p, --priority
-#: src/commands/reposerviceoptionsets.cc:202
+#: src/commands/reposerviceoptionsets.cc:205
 msgid "Show also repository priority."
 msgstr "Mostra també la prioritat del repositori."
 
 #. translators: -d, --details
-#: src/commands/reposerviceoptionsets.cc:205
+#: src/commands/reposerviceoptionsets.cc:208
 msgid "Show more information like URI, priority, type."
 msgstr "Mostra més informació, com ara l'URI, prioritat, tipus."
 
-#: src/commands/reposerviceoptionsets.cc:212
+#: src/commands/reposerviceoptionsets.cc:215
 msgid "Show also repositories belonging to the services."
 msgstr "Mostra també els repositoris que pertanyin als serveis."
 
 #. translators: -s, --service
 #. translators: -A, --sort-by-alias
-#: src/commands/reposerviceoptionsets.cc:218
-#: src/commands/reposerviceoptionsets.cc:241
+#: src/commands/reposerviceoptionsets.cc:221
+#: src/commands/reposerviceoptionsets.cc:244
 msgid "Show also alias of parent service."
 msgstr "Mostra també l'àlies del servei."
 
 #. translators: -E, --show-enabled-only
-#: src/commands/reposerviceoptionsets.cc:225
+#: src/commands/reposerviceoptionsets.cc:228
 msgid "Show enabled repos only."
 msgstr "Mostra només els repositoris activats."
 
 #. translators: -U, --sort-by-uri
-#: src/commands/reposerviceoptionsets.cc:228
+#: src/commands/reposerviceoptionsets.cc:231
 msgid "Sort the list by URI."
 msgstr "Classifica per URI."
 
 #. translators: -N, --sort-by-name
-#: src/commands/reposerviceoptionsets.cc:231
+#: src/commands/reposerviceoptionsets.cc:234
 msgid "Sort the list by name."
 msgstr "Classifica per nom."
 
 #. translators: -P, --sort-by-priority
-#: src/commands/reposerviceoptionsets.cc:234
+#: src/commands/reposerviceoptionsets.cc:237
 msgid "Sort the list by repository priority."
 msgstr "Classifica per prioritat de repository."
 
@@ -4393,7 +4403,7 @@ msgstr "Problema a l'hora d'iniciar o executar l'ordre de cerca"
 msgid "See the above message for a hint."
 msgstr "Llegiu l'error anterior per tenir-ne una pista."
 
-#: src/commands/search/search.cc:497 src/repos.cc:979
+#: src/commands/search/search.cc:497 src/repos.cc:982
 msgid "Running 'zypper refresh' as root might resolve the problem."
 msgstr ""
 "Amb l'ordre \"zypper refresh\" com a administrador es podria resoldre el "
@@ -4491,7 +4501,7 @@ msgid "Problem retrieving the repository index file for service '%s':"
 msgstr "Error en obtenir el fitxer d'índex del repositori per al servei %s:"
 
 #: src/commands/services/common.cc:138 src/commands/services/refresh.cc:226
-#: src/repos.cc:1721
+#: src/repos.cc:1724
 #, c-format, boost-format
 msgid "Skipping service '%s' because of the above error."
 msgstr "Se salta el servei %s a causa de l'error anterior."
@@ -5956,7 +5966,7 @@ msgstr "Error a l'hora d'inhabilitar el repositori %s."
 msgid "Problem retrieving files from '%s'."
 msgstr "Problema obtenint els fitxers de %s."
 
-#: src/repos.cc:347 src/repos.cc:1860 src/solve-commit.cc:989
+#: src/repos.cc:347 src/repos.cc:1863 src/solve-commit.cc:989
 #: src/solve-commit.cc:1020 src/solve-commit.cc:1044
 msgid "Please see the above error message for a hint."
 msgstr "Si us plau, llegiu l'error anterior."
@@ -6056,12 +6066,15 @@ msgstr ""
 msgid "Ignoring repository '%s' because of '%s' option."
 msgstr "Ignorant el repositori %s a causa de l'opció \"%s\"."
 
-#: src/repos.cc:828 src/repos.cc:918
+#: src/repos.cc:828 src/repos.cc:921
 #, c-format, boost-format
 msgid "Temporarily enabling repository '%s'."
 msgstr "Habilitant temporalment el repositori %s."
 
-#: src/repos.cc:882
+#. bsc#1235636: Asks to suppress reporting the Exception (usually: No permission to
+#. write repository cache), because it scares. This was was indeed the legacy behavior:
+#. SUPPRESS: zypper.out().error( ex, "Problem" );
+#: src/repos.cc:885
 #, c-format, boost-format
 msgid ""
 "Repository '%s' is out-of-date. You can run 'zypper refresh' as root to "
@@ -6070,7 +6083,7 @@ msgstr ""
 "El repositori %s no està actualitzat. Feu servir \"zypper refresh\" com a "
 "administrador per actualitzar-lo."
 
-#: src/repos.cc:899
+#: src/repos.cc:902
 #, c-format, boost-format
 msgid ""
 "The metadata cache needs to be built for the '%s' repository. You can run "
@@ -6079,81 +6092,81 @@ msgstr ""
 "La memòria cau de metadades s'ha de construir per al repositori %s. Podeu "
 "fer servir \"zypper refresh\" com a administrador per fer-ho."
 
-#: src/repos.cc:925
+#: src/repos.cc:928
 #, c-format, boost-format
 msgid "Repository '%s' stays disabled."
 msgstr "El repositori %s roman inhabilitat."
 
-#: src/repos.cc:970
+#: src/repos.cc:973
 msgid "Initializing Target"
 msgstr "Iniciant la destinació"
 
-#: src/repos.cc:978
+#: src/repos.cc:981
 msgid "Target initialization failed:"
 msgstr "Ha fallat l'inici de la destinació:"
 
-#: src/repos.cc:1060
+#: src/repos.cc:1063
 #, c-format, boost-format
 msgid "Cleaning metadata cache for '%s'."
 msgstr "Netejant les metadades de %s."
 
-#: src/repos.cc:1068
+#: src/repos.cc:1071
 #, c-format, boost-format
 msgid "Cleaning raw metadata cache for '%s'."
 msgstr "Netejant la memòria cau de metadades per a %s."
 
-#: src/repos.cc:1074
+#: src/repos.cc:1077
 #, c-format, boost-format
 msgid "Keeping raw metadata cache for %s '%s'."
 msgstr "Guardant les metadades en cru de la memòria cau per a %s '%s'."
 
 #. translators: meaning the cached rpm files
-#: src/repos.cc:1081
+#: src/repos.cc:1084
 #, c-format, boost-format
 msgid "Cleaning packages for '%s'."
 msgstr "Netejant els paquets per a %s."
 
-#: src/repos.cc:1089
+#: src/repos.cc:1092
 #, c-format, boost-format
 msgid "Cannot clean repository '%s' because of an error."
 msgstr "No s'ha pogut netejar el repositori %s a causa d'un error."
 
-#: src/repos.cc:1100
+#: src/repos.cc:1103
 msgid "Cleaning installed packages cache."
 msgstr "Netejant la memòria cau de paquets instal·lats."
 
-#: src/repos.cc:1109
+#: src/repos.cc:1112
 msgid "Cannot clean installed packages cache because of an error."
 msgstr "No s'han pogut netejar els paquets instal·lats a causa d'un error."
 
-#: src/repos.cc:1127
+#: src/repos.cc:1130
 msgid "Could not clean the repositories because of errors."
 msgstr "No s'han pogut netejar els repositoris a causa d'errors."
 
-#: src/repos.cc:1133
+#: src/repos.cc:1136
 msgid "Some of the repositories have not been cleaned up because of an error."
 msgstr "Alguns dels repositoris no s'han netejat a causa d'un error."
 
-#: src/repos.cc:1138
+#: src/repos.cc:1141
 msgid "Specified repositories have been cleaned up."
 msgstr "S'han netejat els repositoris especificats."
 
-#: src/repos.cc:1140
+#: src/repos.cc:1143
 msgid "All repositories have been cleaned up."
 msgstr "S'han netejat tots els repositoris."
 
-#: src/repos.cc:1162
+#: src/repos.cc:1165
 msgid "This is a changeable read-only media (CD/DVD), disabling autorefresh."
 msgstr ""
 "Aquest és un mitjà canviable només de lectura (CD/DVD), desactivant "
 "l'autorefresc."
 
-#: src/repos.cc:1183
+#: src/repos.cc:1186
 #, c-format, boost-format
 msgid "Invalid repository alias: '%s'"
 msgstr "Àlies de repositori no vàlid: \"%s\""
 
-#: src/repos.cc:1200
+#: src/repos.cc:1203
 msgid ""
 "Could not determine the type of the repository. Please check if the defined "
 "URIs (see below) point to a valid repository:"
@@ -6161,26 +6174,26 @@ msgstr ""
 "No s'ha pogut determinar el tipus de repositori. Si us plau, comproveu si "
 "els URI definits (vegeu-ne la llista) apunten a un repositori vàlid:"
 
-#: src/repos.cc:1206
+#: src/repos.cc:1209
 msgid "Can't find a valid repository at given location:"
 msgstr "No es pot trobar un repositori vàlid en aquest lloc:"
 
-#: src/repos.cc:1214
+#: src/repos.cc:1217
 msgid "Problem transferring repository data from specified URI:"
 msgstr ""
 "Problema transferint les dades del repositori des de l'URI especificat:"
 
-#: src/repos.cc:1215
+#: src/repos.cc:1218
 msgid "Please check whether the specified URI is accessible."
 msgstr "Si us plau, comproveu si l'URI especificat és accessible."
 
-#: src/repos.cc:1222
+#: src/repos.cc:1225
 msgid "Unknown problem when adding repository:"
 msgstr "Problema desconegut en afegir el repositori:"
 
 #. translators: BOOST STYLE POSITIONAL DIRECTIVES ( %N% )
 #. translators: %1% - a repository name
-#: src/repos.cc:1232
+#: src/repos.cc:1235
 #, boost-format
 msgid ""
 "GPG checking is disabled in configuration of repository '%1%'. Integrity and "
@@ -6189,137 +6202,137 @@ msgstr ""
 "La comprovació GPG està inhabilitada a la configuració del repositori '%1%'. "
 "No es poden verificar la integritat ni l'origen dels paquets."
 
-#: src/repos.cc:1237
+#: src/repos.cc:1240
 #, c-format, boost-format
 msgid "Repository '%s' successfully added"
 msgstr "El repositori %s s'ha afegit correctament."
 
-#: src/repos.cc:1263
+#: src/repos.cc:1266
 #, c-format, boost-format
 msgid "Reading data from '%s' media"
 msgstr "Llegint la informació del mitjà %s"
 
-#: src/repos.cc:1269
+#: src/repos.cc:1272
 #, c-format, boost-format
 msgid "Problem reading data from '%s' media"
 msgstr "Problema llegint les dades del mitjà %s"
 
-#: src/repos.cc:1270
+#: src/repos.cc:1273
 msgid "Please check if your installation media is valid and readable."
 msgstr ""
 "Si us plau, comproveu que el mitjà d'instal·lació sigui vàlid i llegible."
 
-#: src/repos.cc:1277
+#: src/repos.cc:1280
 #, c-format, boost-format
 msgid "Reading data from '%s' media is delayed until next refresh."
 msgstr "S'ha ajornat la lectura de dades del mitjà %s fins al nou refresc."
 
-#: src/repos.cc:1346
+#: src/repos.cc:1349
 msgid "Problem accessing the file at the specified URI"
 msgstr "Problema accedint al fitxer a l'adreça (URI) especificada"
 
-#: src/repos.cc:1347
+#: src/repos.cc:1350
 msgid "Please check if the URI is valid and accessible."
 msgstr "Si us plau, comproveu si l'URI especificat és vàlid i accessible."
 
-#: src/repos.cc:1354
+#: src/repos.cc:1357
 msgid "Problem parsing the file at the specified URI"
 msgstr "Problema en analitzar el fitxer a l'URI especificat."
 
 #. TranslatorExplanation Don't translate the '.repo' string.
-#: src/repos.cc:1356
+#: src/repos.cc:1359
 msgid "Is it a .repo file?"
 msgstr "És un fitxer .repo?"
 
-#: src/repos.cc:1363
+#: src/repos.cc:1366
 msgid "Problem encountered while trying to read the file at the specified URI"
 msgstr ""
 "S'ha trobat un problema intentant llegir el fitxer a l'URI especificat."
 
-#: src/repos.cc:1376
+#: src/repos.cc:1379
 msgid "Repository with no alias defined found in the file, skipping."
 msgstr "Repositori sense àlies definit trobat al fitxer, s'omet."
 
-#: src/repos.cc:1382
+#: src/repos.cc:1385
 #, c-format, boost-format
 msgid "Repository '%s' has no URI defined, skipping."
 msgstr "El repositori %s no té URI definit, s'omet."
 
-#: src/repos.cc:1430
+#: src/repos.cc:1433
 #, c-format, boost-format
 msgid "Repository '%s' has been removed."
 msgstr "El repositori %s s'ha suprimit correctament."
 
-#: src/repos.cc:1578
+#: src/repos.cc:1581
 #, c-format, boost-format
 msgid "Repository '%s' priority has been left unchanged (%d)"
 msgstr "La prioritat del repositori %s s'ha deixat sense canviar (%d)"
 
-#: src/repos.cc:1611
+#: src/repos.cc:1614
 #, c-format, boost-format
 msgid "Repository '%s' has been successfully enabled."
 msgstr "El repositori %s s'ha habilitat correctament."
 
-#: src/repos.cc:1613
+#: src/repos.cc:1616
 #, c-format, boost-format
 msgid "Repository '%s' has been successfully disabled."
 msgstr "El repositori %s s'ha inhabilitat correctament."
 
-#: src/repos.cc:1620
+#: src/repos.cc:1623
 #, c-format, boost-format
 msgid "Autorefresh has been enabled for repository '%s'."
 msgstr "L'autorefresc s'ha activat per al repositori %s."
 
-#: src/repos.cc:1622
+#: src/repos.cc:1625
 #, c-format, boost-format
 msgid "Autorefresh has been disabled for repository '%s'."
 msgstr "L'autorefresc s'ha desactivat per al repositori %s."
 
-#: src/repos.cc:1629
+#: src/repos.cc:1632
 #, c-format, boost-format
 msgid "RPM files caching has been enabled for repository '%s'."
 msgstr "La còpia cau dels fitxers RPM s'ha activat per al repositori %s."
 
-#: src/repos.cc:1631
+#: src/repos.cc:1634
 #, c-format, boost-format
 msgid "RPM files caching has been disabled for repository '%s'."
 msgstr "La còpia cau dels fitxers RPM s'ha desactivat per al repositori %s."
 
-#: src/repos.cc:1638
+#: src/repos.cc:1641
 #, c-format, boost-format
 msgid "GPG check has been enabled for repository '%s'."
 msgstr "La comprovació GPG s'ha activat per al repositori %s."
 
-#: src/repos.cc:1640
+#: src/repos.cc:1643
 #, c-format, boost-format
 msgid "GPG check has been disabled for repository '%s'."
 msgstr "La comprovació GPG s'ha desactivat per al repositori %s."
 
-#: src/repos.cc:1646
+#: src/repos.cc:1649
 #, c-format, boost-format
 msgid "Repository '%s' priority has been set to %d."
 msgstr "La prioritat del repositori %s s'ha establert a %d."
 
-#: src/repos.cc:1652
+#: src/repos.cc:1655
 #, c-format, boost-format
 msgid "Name of repository '%s' has been set to '%s'."
 msgstr "El nom del repositori %s s'ha establert a \"%s\"."
 
-#: src/repos.cc:1663
+#: src/repos.cc:1666
 #, c-format, boost-format
 msgid "Nothing to change for repository '%s'."
 msgstr "No hi ha res per canviar del repositori %s."
 
-#: src/repos.cc:1670
+#: src/repos.cc:1673
 #, c-format, boost-format
 msgid "Leaving repository %s unchanged."
 msgstr "Deixant el repositori %s sense canvis."
 
-#: src/repos.cc:1757
+#: src/repos.cc:1760
 msgid "Loading repository data..."
 msgstr "Carregant les dades del repositori..."
 
-#: src/repos.cc:1759
+#: src/repos.cc:1762
 msgid ""
 "No repositories defined. Operating only with the installed resolvables. "
 "Nothing can be installed."
@@ -6327,44 +6340,44 @@ msgstr ""
 "No hi ha repositoris definits. Operant només amb els recursos instal·lats. "
 "No hi ha res per instal·lar."
 
-#: src/repos.cc:1782
+#: src/repos.cc:1785
 #, c-format, boost-format
 msgid "Retrieving repository '%s' data..."
 msgstr "Obtenint les dades del repositori %s..."
 
-#: src/repos.cc:1790
+#: src/repos.cc:1793
 #, c-format, boost-format
 msgid "Repository '%s' not cached. Caching..."
 msgstr "El repositori %s no és a la memòria cau. Fent-ho..."
 
-#: src/repos.cc:1796 src/repos.cc:1830
+#: src/repos.cc:1799 src/repos.cc:1833
 #, c-format, boost-format
 msgid "Problem loading data from '%s'"
 msgstr "Problema carregant la informació des de %s"
 
-#: src/repos.cc:1800
+#: src/repos.cc:1803
 #, c-format, boost-format
 msgid "Repository '%s' could not be refreshed. Using old cache."
 msgstr ""
 "El repositori %s no s'ha pogut refrescar. Es fa servir la memòria cau antiga."
 
-#: src/repos.cc:1804 src/repos.cc:1833
+#: src/repos.cc:1807 src/repos.cc:1836
 #, c-format, boost-format
 msgid "Resolvables from '%s' not loaded because of error."
 msgstr "No s'han carregat els elements de %s a causa d'un error."
 
-#: src/repos.cc:1820
+#: src/repos.cc:1823
 #, boost-format
 msgid "Repository '%1%' metadata expired since %2%."
 msgstr "Les metadades del repositori %1% estan caducades des del %2%."
 
 #. translators: the first %s is 'zypper refresh' and the second 'zypper clean -m'
-#: src/repos.cc:1832
+#: src/repos.cc:1835
 #, c-format, boost-format
 msgid "Try '%s', or even '%s' before doing so."
 msgstr "Proveu de fer un \"%s\", o fins i tot un \"%s\" abans."
 
-#: src/repos.cc:1837
+#: src/repos.cc:1840
 msgid ""
 "Repository metadata expired: Check if 'autorefresh' is turned on (zypper "
 "lr), otherwise manually refresh the repository (zypper ref). If this does "
@@ -6377,30 +6390,30 @@ msgstr ""
 "que useu una rèplica malmesa o que el servidor hagi deixat d'oferir el "
 "repositori."
 
-#: src/repos.cc:1850
+#: src/repos.cc:1853
 msgid "Reading installed packages..."
 msgstr "Llegint els paquets instal·lats..."
 
-#: src/repos.cc:1859
+#: src/repos.cc:1862
 msgid "Problem occurred while reading the installed packages:"
 msgstr "Hi ha hagut un problema mentre es llegien els paquets instal·lats:"
 
-#: src/repos.cc:1876
+#: src/repos.cc:1879
 #, c-format, boost-format
 msgid "'%s' looks like an RPM file. Will try to download it."
 msgstr "'%s' sembla un fitxer RPM. Es provarà de baixar-lo."
 
-#: src/repos.cc:1885
+#: src/repos.cc:1888
 #, c-format, boost-format
 msgid "Problem with the RPM file specified as '%s', skipping."
 msgstr "Problema amb el fitxer RPM especificat com a \"%s\", s'omet."
 
-#: src/repos.cc:1907
+#: src/repos.cc:1910
 #, c-format, boost-format
 msgid "Problem reading the RPM header of %s. Is it an RPM file?"
 msgstr "Problema llegint la capçalera RPM de %s. És un fitxer RPM?"
 
-#: src/repos.cc:1927
+#: src/repos.cc:1930
 msgid "Plain RPM files cache"
 msgstr "Memòria cau de fitxers RPM simple"
 
