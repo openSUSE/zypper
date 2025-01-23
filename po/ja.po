@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-01-22 18:04+0100\n"
-"PO-Revision-Date: 2025-01-09 04:50+0000\n"
+"PO-Revision-Date: 2025-01-23 08:50+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
 "Language-Team: Japanese <https://l10n.opensuse.org/projects/zypper/master/ja/"
 ">\n"
@@ -3587,7 +3587,7 @@ msgstr "更新"
 #. translators: 'zypper repos' column - whether keep-packages is enabled for the repository
 #: src/commands/repos/list.cc:266
 msgid "Keep"
-msgstr ""
+msgstr "維持"
 
 #: src/commands/repos/list.cc:357
 msgid "No repositories defined."
@@ -3989,7 +3989,7 @@ msgstr "自動更新フラグも表示します。"
 #. translators: -k, --keep-packages
 #: src/commands/reposerviceoptionsets.cc:191
 msgid "Show also the keep-packages flag."
-msgstr ""
+msgstr "keep-packages フラグも表示します。"
 
 #. translators: -u, --uri
 #: src/commands/reposerviceoptionsets.cc:201
