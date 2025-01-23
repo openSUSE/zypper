@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-01-22 18:04+0100\n"
-"PO-Revision-Date: 2025-01-08 19:50+0000\n"
+"PO-Revision-Date: 2025-01-23 03:50+0000\n"
 "Last-Translator: Jure Repinc <jlp@holodeck1.com>\n"
 "Language-Team: Slovenian <https://l10n.opensuse.org/projects/zypper/master/"
 "sl/>\n"
@@ -17,8 +17,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n"
-"%100==4 ? 2 : 3;\n"
+"Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
+"n%100==4 ? 2 : 3;\n"
 "X-Generator: Weblate 5.9.2\n"
 
 #: src/Command.cc:93
@@ -3906,7 +3906,7 @@ msgstr "Osvežitev"
 #. translators: 'zypper repos' column - whether keep-packages is enabled for the repository
 #: src/commands/repos/list.cc:266
 msgid "Keep"
-msgstr ""
+msgstr "Ohrani"
 
 #: src/commands/repos/list.cc:357
 msgid "No repositories defined."
@@ -4298,7 +4298,7 @@ msgstr "Prikaže tudi zastavico samoosvežitve."
 #. translators: -k, --keep-packages
 #: src/commands/reposerviceoptionsets.cc:191
 msgid "Show also the keep-packages flag."
-msgstr ""
+msgstr "Prikaže tudi zastavico keep-packages."
 
 #. translators: -u, --uri
 #: src/commands/reposerviceoptionsets.cc:201
