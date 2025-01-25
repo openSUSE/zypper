@@ -112,7 +112,7 @@ namespace searchPackagesHintHack
     /** Forward the search request to search-packages subcommand. */
     void callSearchPackages( Zypper & zypper_r )
     {
-      shared_ptr<SubcommandOptions> plgOptions { new SubcommandOptions };
+      std::shared_ptr<SubcommandOptions> plgOptions { new SubcommandOptions };
 
       plgOptions->_detected._cmd = "search-packages";
       plgOptions->_detected._name = ZSPP_BinaryPath.basename();

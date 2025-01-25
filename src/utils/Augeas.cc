@@ -8,6 +8,7 @@
 #include <augeas.h>
 
 #include <iostream>
+#include <memory>
 #include <stdlib.h>
 
 #include <zypp/base/Logger.h>
@@ -117,7 +118,7 @@ namespace
     { if ( aug_r ) ::aug_close( aug_r ); }
 
   private:
-    boost::shared_ptr<::augeas> _ref;
+    std::shared_ptr<::augeas> _ref;
   };
 
   ///////////////////////////////////////////////////////////////////
@@ -394,7 +395,7 @@ namespace
       unsigned		_cnt	{ 0U };
       char **		_matches{ nullptr };
     };
-    boost::shared_ptr<D> _d;
+    std::shared_ptr<D> _d;
   };
 
   /** \relates AugMatches Stream output */
