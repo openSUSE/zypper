@@ -12,10 +12,10 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-01-22 18:04+0100\n"
-"PO-Revision-Date: 2025-01-16 02:43+0000\n"
+"PO-Revision-Date: 2025-01-28 11:22+0000\n"
 "Last-Translator: Luna  Jernberg <bittin@opensuse.org>\n"
-"Language-Team: Swedish <https://l10n.opensuse.org/projects/zypper/master/sv/"
-">\n"
+"Language-Team: Swedish <https://l10n.opensuse.org/projects/zypper/master/sv/>"
+"\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -3671,7 +3671,7 @@ msgstr "Uppdatera"
 #. translators: 'zypper repos' column - whether keep-packages is enabled for the repository
 #: src/commands/repos/list.cc:266
 msgid "Keep"
-msgstr ""
+msgstr "Behåll"
 
 #: src/commands/repos/list.cc:357
 msgid "No repositories defined."
@@ -4064,7 +4064,7 @@ msgstr "Visa även autorefresh-flaggan."
 #. translators: -k, --keep-packages
 #: src/commands/reposerviceoptionsets.cc:191
 msgid "Show also the keep-packages flag."
-msgstr ""
+msgstr "Visa även behåll-paket flaggan."
 
 #. translators: -u, --uri
 #: src/commands/reposerviceoptionsets.cc:201
