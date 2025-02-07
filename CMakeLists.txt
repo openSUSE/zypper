@@ -3,20 +3,29 @@ PROJECT( ZYPPER C CXX )
 SET( PACKAGE "zypper" )
 
 # where to look first for cmake modules, before ${CMAKE_ROOT}/Modules/ is checked
-IF (DEFINED ZYPP_PREFIX)
+if ( ZYPP_STACK_BUILD )
+  SET( ZYPPER_TARGET_PREFIX "zypper_")
   SET( CMAKE_MODULE_PATH
-    ${ZYPP_PREFIX}/${LIB}/cmake/Zypp/
-    ${ZYPP_PREFIX}/lib64/cmake/Zypp/
-    ${ZYPP_PREFIX}/lib/cmake/Zypp/
-    ${CMAKE_MODULE_PATH}
+      ${zypp-stack_SOURCE_DIR}/libzypp/cmake/modules/
+      ${CMAKE_MODULE_PATH}
   )
+include_directories(${ZYPP_STACK_INCLUDE_DIRS})
 else()
-  SET( CMAKE_MODULE_PATH
-    ${CMAKE_INSTALL_PREFIX}/${LIB}/cmake/Zypp/
-    ${CMAKE_INSTALL_PREFIX}/lib64/cmake/Zypp/
-    ${CMAKE_INSTALL_PREFIX}/lib/cmake/Zypp/
-    ${CMAKE_MODULE_PATH}
-  )
+  IF (DEFINED ZYPP_PREFIX)
+    SET( CMAKE_MODULE_PATH
+      ${ZYPP_PREFIX}/${LIB}/cmake/Zypp/
+      ${ZYPP_PREFIX}/lib64/cmake/Zypp/
+      ${ZYPP_PREFIX}/lib/cmake/Zypp/
+      ${CMAKE_MODULE_PATH}
+    )
+  else()
+    SET( CMAKE_MODULE_PATH
+      ${CMAKE_INSTALL_PREFIX}/${LIB}/cmake/Zypp/
+      ${CMAKE_INSTALL_PREFIX}/lib64/cmake/Zypp/
+      ${CMAKE_INSTALL_PREFIX}/lib/cmake/Zypp/
+      ${CMAKE_MODULE_PATH}
+    )
+  endif()
 endif()
 
 SET( CMAKE_MODULE_PATH
@@ -46,6 +55,14 @@ SET( CMAKE_C_FLAGS   "${CMAKE_C_FLAGS}   -fpie -Wall" )
 
 SET( CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fpie -fvisibility=hidden" )
 
+if( ENABLE_UBSAN_CHECKS )
+  SET( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=undefined -fsanitize=address" )
+  SET( CMAKE_C_FLAGS   "${CMAKE_C_FLAGS}   -fsanitize=undefined -fsanitize=address" )
+  SET( CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -lubsan")
+  SET( CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -lubsan ")
+endif()
+
+
 IF ( LEGACY_ENABLE_LONGOPT_ABBREV )
   # Fixed in 1.14.34: Do not allow the abbreviation of cli arguments (bsc#1164543)
   # On SLE15/Leap 15.0 and 15.1 we will stay bug-compatible and accept the
@@ -56,7 +73,15 @@ endif()
 
 GENERATE_PACKAGING(${PACKAGE} ${VERSION})
 
-FIND_PACKAGE( Zypp REQUIRED )
+if ( ZYPP_STACK_BUILD )
+  set( ZYPP_FOUND 1 )
+  set( ZYPP_INCLUDE_DIR ${zypp-stack_SOURCE_DIR}/libzypp )
+  set( ZYPP_LIBRARY zypp )
+  set( ZYPP_TUI_LIBRARY zypp-tui )
+else()
+  FIND_PACKAGE( Zypp REQUIRED )
+endif()
+
 INCLUDE_DIRECTORIES(${ZYPP_INCLUDE_DIR})
 
 FIND_PACKAGE( Gettext REQUIRED )
