@@ -239,8 +239,8 @@ BOOST_AUTO_TEST_CASE(install6)
   BOOST_CHECK(sr.hasFeedback(SolverRequester::Feedback::NOT_FOUND_NAME_TRYING_CAPS));
   BOOST_CHECK(sr.hasFeedback(SolverRequester::Feedback::ADDED_REQUIREMENT));
   BOOST_CHECK_EQUAL(sr.toInstall().size(), 0);
-  BOOST_CHECK_EQUAL(sr.requires().size(), 1);
-  BOOST_CHECK(sr.requires().find(Capability("perl(Net::SSL)")) != sr.requires().end());
+  BOOST_CHECK_EQUAL(sr.dep_requires().size(), 1);
+  BOOST_CHECK(sr.dep_requires().find(Capability("perl(Net::SSL)")) != sr.dep_requires().end());
 }
 
 // request : install --name 'perl(Net::SSL)'
@@ -280,7 +280,7 @@ BOOST_AUTO_TEST_CASE(install8)
   BOOST_CHECK(!sr.hasFeedback(SolverRequester::Feedback::NOT_FOUND_NAME_TRYING_CAPS));
   BOOST_CHECK(sr.hasFeedback(SolverRequester::Feedback::ALREADY_INSTALLED));
   BOOST_CHECK(sr.toInstall().empty());
-  BOOST_CHECK(sr.requires().empty());
+  BOOST_CHECK(sr.dep_requires().empty());
 }
 
 // request : install 'info'
@@ -782,7 +782,7 @@ BOOST_AUTO_TEST_CASE(remove6)
   BOOST_CHECK(sr.hasFeedback(SolverRequester::Feedback::SET_TO_REMOVE));
   BOOST_CHECK_EQUAL(sr.toRemove().size(), 1);
   BOOST_CHECK(hasPoolItem(sr.toRemove(), "libzypp", Edition("5.24.5-1.1"), Arch_x86_64));
-  BOOST_CHECK(sr.conflicts().empty());
+  BOOST_CHECK(sr.dep_conflicts().empty());
 }
 
 // request : remove --capability y2pmsh
@@ -802,8 +802,8 @@ BOOST_AUTO_TEST_CASE(remove7)
 
   BOOST_CHECK(sr.hasFeedback(SolverRequester::Feedback::ADDED_CONFLICT));
   BOOST_CHECK(sr.toRemove().empty());
-  BOOST_CHECK_EQUAL(sr.conflicts().size(), 1);
-  BOOST_CHECK(sr.conflicts().find(Capability("y2pmsh")) != sr.conflicts().end());
+  BOOST_CHECK_EQUAL(sr.dep_conflicts().size(), 1);
+  BOOST_CHECK(sr.dep_conflicts().find(Capability("y2pmsh")) != sr.dep_conflicts().end());
 }
 
 // request : remove onekit
@@ -824,7 +824,7 @@ BOOST_AUTO_TEST_CASE(remove8)
   BOOST_CHECK(sr.hasFeedback(SolverRequester::Feedback::SET_TO_REMOVE));
   BOOST_CHECK_EQUAL(sr.toRemove().size(), 1);
   BOOST_CHECK(hasPoolItem(sr.toRemove(), "onekit", Edition("0.0.2-1"), Arch_x86_64));
-  BOOST_CHECK(sr.conflicts().empty());
+  BOOST_CHECK(sr.dep_conflicts().empty());
 }
 
 

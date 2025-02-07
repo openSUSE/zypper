@@ -547,7 +547,7 @@ namespace
       if ( Zypper::instance().command() != ZypperCommand::DIST_UPGRADE_e )
       {
         static const Capability indicator( "product-update()", Rel::EQ, "dup" );
-        if ( obj_r->asKind<Product>()->referencePackage().provides().matches( indicator ) )
+        if ( obj_r->asKind<Product>()->referencePackage().dep_provides().matches( indicator ) )
         {
           WAR << obj_r << " provides " << indicator << endl;
           // translator: '%1%' is a products name
@@ -952,7 +952,7 @@ void Summary::writeReinstalled( std::ostream & out )
 
 void Summary::collectInstalledRecommends( const ResObject::constPtr & obj )
 {
-  Capabilities rec = obj->recommends();
+  Capabilities rec = obj->dep_recommends();
   for_( capit, rec.begin(), rec.end() )
   {
     sat::WhatProvides q( *capit );
@@ -977,7 +977,7 @@ void Summary::collectInstalledRecommends( const ResObject::constPtr & obj )
     }
   }
 
-  Capabilities req = obj->requires();
+  Capabilities req = obj->dep_requires();
   for_( capit, req.begin(), req.end() )
   {
     sat::WhatProvides q( *capit );
