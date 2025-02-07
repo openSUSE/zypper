@@ -20,7 +20,10 @@ VersionCompareCmd::VersionCompareCmd(std::vector<std::string> &&commandAliases_r
     // translators: command summary
     _("Compare two version strings."),
     // translators: command description
-    _("Compare the versions supplied as arguments."),
+    {
+        _("Compare the versions supplied as arguments."),
+        _("The exit code is 0 if the versions are equal, 11 if VERSION1 is newer, and 12 if VERSION2 is newer."),
+    },
     DisableAll
   )
 { }
@@ -67,7 +70,14 @@ int VersionCompareCmd::execute( Zypper &zypper, const std::vector<std::string> &
   if ( zypper.config().terse )
   {
     zypper.out().info( str::numstring(result) );
-    return ZYPPER_EXIT_OK;
+    // we're returning a comparison result, not a standard exit code
+    // the values are compatible with rpmdev-vercmp
+    if ( result == 0 )
+      return 0;
+    else if ( result > 0 )
+      return 11;
+    else
+      return 12;
   }
 
   // tell a human
@@ -143,5 +153,12 @@ int VersionCompareCmd::execute( Zypper &zypper, const std::vector<std::string> &
     }
   }
 
-  return ZYPPER_EXIT_OK;
+  // we're returning a comparison result, not a standard exit code
+  // the values are compatible with rpmdev-vercmp
+  if ( result == 0 )
+    return 0;
+  else if ( result > 0 )
+    return 11;
+  else
+    return 12;
 }
