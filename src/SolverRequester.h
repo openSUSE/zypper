@@ -386,8 +386,8 @@ public:
 
   const std::set<PoolItem> & toInstall() const { return _toinst; }
   const std::set<PoolItem> & toRemove() const { return _toremove; }
-  const std::set<Capability> & requires() const { return _requires; }
-  const std::set<Capability> & conflicts() const { return _conflicts; }
+  const std::set<Capability> & dep_requires() const { return _requires; }
+  const std::set<Capability> & dep_conflicts() const { return _conflicts; }
 
 private:
   void installRemove( const PackageArgs & args );
