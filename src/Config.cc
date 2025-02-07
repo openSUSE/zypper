@@ -597,8 +597,8 @@ void Config::read( const std::string & file )
     {
       std::list<std::string> cmdstr;
       str::split(s, std::back_inserter(cmdstr), ",");
-      for_(c, cmdstr.begin(), cmdstr.end())
-        solver_forceResolutionCommands.insert(ZypperCommand(str::trim(*c)));
+      for (const std::string & c : cmdstr)
+        solver_forceResolutionCommands.insert(ZypperCommand(str::trim(c)));
     }
 
     // ---------------[ commit ]------------------------------------------------

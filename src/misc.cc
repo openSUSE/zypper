@@ -282,8 +282,8 @@ void report_licenses( Zypper & zypper )
   cout << str::form(_("Installed packages with EULAs: %d"), count_installed_eula) << endl;
 
   cout << str::form("Package licenses (%u):", (unsigned) unique_licenses.size()) << endl;
-  for_( it, unique_licenses.begin(), unique_licenses.end() )
-    cout << "* " << *it << endl;
+  for ( const std::string & license : unique_licenses )
+    cout << "* " << license << endl;
 }
 
 // ----------------------------------------------------------------------------
@@ -387,10 +387,10 @@ void build_deps_install( Zypper & zypper, const PackageSpec &spec, bool buildDep
 
     // install build depenendcies only
     if ( buildDepsOnly_r )
-      for_( itc, srcpkg->requires().begin(), srcpkg->requires().end() )
+      for ( const Capability & capability : srcpkg->requires() )
       {
-        God->resolver()->addRequire( *itc );
-        DBG << "requiring: " << *itc << endl;
+        God->resolver()->addRequire( capability );
+        DBG << "requiring: " << capability << endl;
       }
     // install the source package with build deps
     else

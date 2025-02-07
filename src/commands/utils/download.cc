@@ -242,10 +242,10 @@ int DownloadCmd::execute( Zypper &zypper , const std::vector<std::string> &posit
 
       AvailableItemSet & avset( collect[(*q.begin()).ident()] );
       zypper.out().info( str::Str() << pkgspec.orig_str << ": ", Out::HIGH );
-      for_( it, q.begin(), q.end() )
+      for ( const sat::Solvable & solvable : q )
       {
-        avset.insert( PoolItem( *it ) );
-        zypper.out().info( str::Str() << "  " << (*it).asUserString(), Out::HIGH );
+        avset.insert( PoolItem( solvable ) );
+        zypper.out().info( str::Str() << "  " << solvable.asUserString(), Out::HIGH );
       }
     }
 
