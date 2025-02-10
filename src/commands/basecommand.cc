@@ -108,7 +108,7 @@ std::vector<std::string> ZypperBaseCommand::synopsis() const
 
 std::string ZypperBaseCommand::description() const
 {
-  return _description;
+  return _description.empty() ? _summary : _description;
 }
 
 int ZypperBaseCommand::parseArguments( Zypper &, const int argc, char * const *argv )
