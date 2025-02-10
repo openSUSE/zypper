@@ -164,6 +164,7 @@ namespace
       makeCmd<NeedsRebootingCmd> ( ZypperCommand::NEEDS_REBOOTING_e , std::string(), { "needs-rebooting" } ),
       makeCmd<PSCommand> ( ZypperCommand::PS_e , std::string(), { "ps" } ),
       makeCmd<PurgeKernelsCmd> ( ZypperCommand::PURGE_KERNELS_e , std::string(), { "purge-kernels" } ),
+      makeCmd<SystemArchitectureCmd> ( ZypperCommand::SYSTEM_ARCHITECTURE_e, std::string(),  { "system-architecture" } ),
 
       makeCmd<SubCmd> ( ZypperCommand::SUBCOMMAND_e, _("Subcommands:"), { "subcommand" }),
 
