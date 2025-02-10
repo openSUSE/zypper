@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Mon Feb 10 16:19:54 CET 2025 - ma@suse.de
+
+- requires: libzypp >= 17.36.0.
+- Change versioncmp command to return exit code according to the
+  comparison result (#593)
+- version 1.14.82
+
+-------------------------------------------------------------------
 Wed Jan 22 18:05:15 CET 2025 - ma@suse.de
 
 - lr: show the repositories keep-packages flag (bsc#1232458)
