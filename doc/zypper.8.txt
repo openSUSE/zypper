@@ -1633,6 +1633,9 @@ Examples: :: {nop}
 
 Other Commands
 ~~~~~~~~~~~~~~
+*system-architecture*::
+    Print the detected system architecture.
+
 *versioncmp* (*vcmp*) _VERSION1_ _VERSION2_::
 	Compare the versions supplied as arguments and tell whether VERSION1 is older or newer than VERSION2 or the two version strings match. The exit code is 0 if the versions are equal, 11 if VERSION1 is newer, and 12 if VERSION2 is newer.
 +
