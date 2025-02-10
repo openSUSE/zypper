@@ -1633,10 +1633,10 @@ Examples: :: {nop}
 
 Other Commands
 ~~~~~~~~~~~~~~
-*versioncmp* (*vcmp*) _version1_ _version2_::
-	Compare the versions supplied as arguments and tell whether version1 is older or newer than version2 or the two version strings match.
+*versioncmp* (*vcmp*) _VERSION1_ _VERSION2_::
+	Compare the versions supplied as arguments and tell whether VERSION1 is older or newer than VERSION2 or the two version strings match. The exit code is 0 if the versions are equal, 11 if VERSION1 is newer, and 12 if VERSION2 is newer.
 +
-The default output is in human-friendly form. If *--terse* global option is used, the result is an integer number, negative/positive if version1 is older/newer than version2, zero if they match.
+The default output is in human-friendly form. If *--terse* global option is used, the result is an integer number, negative/positive if VERSION1 is older/newer than VERSION2, zero if they match.
 +
 --
 	*-m*, *--match*::
