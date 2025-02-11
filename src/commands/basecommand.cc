@@ -175,6 +175,15 @@ int ZypperBaseCommand::defaultSystemSetup( Zypper &zypper, SetupSystemFlags flag
     init_repos( zypper );
     if ( zypper.exitCode() != ZYPPER_EXIT_OK )
       return zypper.exitCode();
+    else if ( flags_r.testFlag( FailIfReposFail ) && zypper.exitInfoCode() != ZYPPER_EXIT_OK ) {
+      // Fail as demanded by FailIfReposFail. Commands may tune or explain
+      // this by overriding systemSetup (e.g. distupgrade).
+      // NOTE: Since several exitInfoCodes are documented to be returned as a kind
+      // of annotation, if the command would otherwise have returned 0, we indicate
+      // a real error here. Just in case the command does not amend it later.
+      zypper.setExitCode( ZYPPER_EXIT_ERR_ZYPP ); // intentionally an error and NOT the exitInfoCode
+      return zypper.exitInfoCode();               // but return the exitInfoCode
+    }
   }
 
   DtorReset _tmp( zypper.configNoConst().disable_system_resolvables );
