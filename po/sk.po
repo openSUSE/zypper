@@ -5,11 +5,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-22 18:04+0100\n"
+"POT-Creation-Date: 2025-02-10 18:23+0100\n"
 "PO-Revision-Date: 2025-01-23 17:50+0000\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
-"Language-Team: Slovak <https://l10n.opensuse.org/projects/zypper/master/sk/>"
-"\n"
+"Language-Team: Slovak <https://l10n.opensuse.org/projects/zypper/master/sk/"
+">\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -53,11 +53,11 @@ msgstr "Správa lokalizácií:"
 msgid "Other Commands:"
 msgstr "Ostatné príkazy:"
 
-#: src/Command.cc:168
+#: src/Command.cc:169
 msgid "Subcommands:"
 msgstr "Podpríkazy:"
 
-#: src/Command.cc:289
+#: src/Command.cc:290
 #, c-format, boost-format
 msgid "Unknown command '%s'"
 msgstr "Neznámy príkaz '%s'"
@@ -5412,6 +5412,11 @@ msgstr ""
 "Nesťahovať žiadne zdrojové rpm balíky, ale ukázať, ktoré zdrojové rpm balíky "
 "chýbajú, alebo sú vedľajšie."
 
+#. translators: command summary: targetos, tos
+#: src/commands/utils/system-architecture.cc:20
+msgid "Print the detected system architecture."
+msgstr ""
+
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/utils/targetos.cc:20
 msgid "targetos (tos) [OPTIONS]"
@@ -5481,27 +5486,32 @@ msgstr "versioncmp (vcmp) <verzia1> <verzia2>"
 msgid "Compare two version strings."
 msgstr "Porovnať dva reťazce verzie."
 
-#. translators: command description
-#: src/commands/utils/versioncmp.cc:23
+#: src/commands/utils/versioncmp.cc:24
 msgid "Compare the versions supplied as arguments."
 msgstr "Porovnaj zadané verzie."
 
+#: src/commands/utils/versioncmp.cc:25
+msgid ""
+"The exit code is 0 if the versions are equal, 11 if VERSION1 is newer, and "
+"12 if VERSION2 is newer."
+msgstr ""
+
 #. translators: -m, --match
-#: src/commands/utils/versioncmp.cc:35
+#: src/commands/utils/versioncmp.cc:38
 msgid "Takes missing release number as any release."
 msgstr "Berie chýbajúce číslo vydania ako akékoľvek vydanie."
 
-#: src/commands/utils/versioncmp.cc:75
+#: src/commands/utils/versioncmp.cc:85
 #, c-format, boost-format
 msgid "%s matches %s"
 msgstr "%s sa zhoduje s %s"
 
-#: src/commands/utils/versioncmp.cc:77
+#: src/commands/utils/versioncmp.cc:87
 #, c-format, boost-format
 msgid "%s is newer than %s"
 msgstr "%s je novšia ako %s"
 
-#: src/commands/utils/versioncmp.cc:79
+#: src/commands/utils/versioncmp.cc:89
 #, c-format, boost-format
 msgid "%s is older than %s"
 msgstr "%s je staršia ako %s"

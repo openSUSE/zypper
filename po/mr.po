@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-22 18:04+0100\n"
+"POT-Creation-Date: 2025-02-10 18:23+0100\n"
 "PO-Revision-Date: 2019-05-02 20:15+0000\n"
 "Last-Translator: Aditi Sarwate <aditi.sarwate@gmail.com>\n"
 "Language-Team: Marathi <https://l10n.opensuse.org/projects/zypper/master/mr/"
@@ -50,11 +50,11 @@ msgstr ""
 msgid "Other Commands:"
 msgstr ""
 
-#: src/Command.cc:168
+#: src/Command.cc:169
 msgid "Subcommands:"
 msgstr ""
 
-#: src/Command.cc:289
+#: src/Command.cc:290
 #, fuzzy, c-format, boost-format
 msgid "Unknown command '%s'"
 msgstr "अनोळखी आज्ञा: %1"
@@ -5056,6 +5056,11 @@ msgid ""
 "extraneous."
 msgstr ""
 
+#. translators: command summary: targetos, tos
+#: src/commands/utils/system-architecture.cc:20
+msgid "Print the detected system architecture."
+msgstr ""
+
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/utils/targetos.cc:20
 msgid "targetos (tos) [OPTIONS]"
@@ -5118,27 +5123,32 @@ msgstr ""
 msgid "Compare two version strings."
 msgstr ""
 
-#. translators: command description
-#: src/commands/utils/versioncmp.cc:23
+#: src/commands/utils/versioncmp.cc:24
 msgid "Compare the versions supplied as arguments."
 msgstr ""
 
+#: src/commands/utils/versioncmp.cc:25
+msgid ""
+"The exit code is 0 if the versions are equal, 11 if VERSION1 is newer, and "
+"12 if VERSION2 is newer."
+msgstr ""
+
 #. translators: -m, --match
-#: src/commands/utils/versioncmp.cc:35
+#: src/commands/utils/versioncmp.cc:38
 msgid "Takes missing release number as any release."
 msgstr ""
 
-#: src/commands/utils/versioncmp.cc:75
+#: src/commands/utils/versioncmp.cc:85
 #, fuzzy, c-format, boost-format
 msgid "%s matches %s"
 msgstr "%s %s ला बाजूला टाकते"
 
-#: src/commands/utils/versioncmp.cc:77
+#: src/commands/utils/versioncmp.cc:87
 #, fuzzy, c-format, boost-format
 msgid "%s is newer than %s"
 msgstr "%s ला %s ची गरज आहे"
 
-#: src/commands/utils/versioncmp.cc:79
+#: src/commands/utils/versioncmp.cc:89
 #, fuzzy, c-format, boost-format
 msgid "%s is older than %s"
 msgstr "%s च्या जागी %s"
