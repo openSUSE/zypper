@@ -934,10 +934,12 @@ void do_init_repos( Zypper & zypper )
   if ( skip_count )
   {
     zypper.out().error(_("Some of the repositories have not been refreshed because of an error.") );
-    // TODO: A user abort during repo refresh as well as unavailable metadata
-    // should probably lead to ZYPPER_EXIT_ERR_ZYPP right here. Ignored refresh
-    // errors may continue. For now at least remember the refresh error to prevent
-    // a 0 exit code after the action completed. (bsc#961719, bsc#961724, et.al.)
+    // A user abort during repo refresh as well as unavailable metadata
+    // could lead to ZYPPER_EXIT_ERR_ZYPP right here. Ignored refresh
+    // errors may continue. For now at least remember the refresh error
+    // to prevent a 0 exit code after the action completed.
+    // Commands should override ZypperBaseCommand::systemSetup to decide whether
+    // they fail if repos fail to refresh (dup!) or continue.
     // zypper.setExitCode( ZYPPER_EXIT_ERR_ZYPP );
     zypper.setExitInfoCode( ZYPPER_EXIT_INF_REPOS_SKIPPED );
   }

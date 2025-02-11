@@ -752,6 +752,7 @@ It might be less tedious to persistently set *$releasever* to the target distrib
 +
 'Note:' distribution upgrades in openSUSE are currently only supported between consecutive releases. To upgrade multiple releases, upgrade each consecutive release one at a time. For more details see *http://en.opensuse.org/SDB:System_upgrade* and the _openSUSE release notes_ at *http://doc.opensuse.org/release-notes/*.
 +
+'Note:' Due to the treatment of orphaned packages dist-upgrade depends on a proper repository setup more than any other command. It must not continue if enabled repositories fail to refresh. This may severely damage the system. If a failing repository is actually not needed, it must be disabled.
 --
 	*--from* _alias_|_name_|_#_|_URI_::
 		The option can be used multiple times and restricts the upgrade to the specified repositories only. Nevertheless all enabled repositories are visible to the resolver and will be considered to satisfy dependency problems.
