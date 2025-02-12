@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-02-10 18:23+0100\n"
-"PO-Revision-Date: 2025-01-09 13:50+0000\n"
+"PO-Revision-Date: 2025-02-12 14:38+0000\n"
 "Last-Translator: Freek de Kruijf <freek@opensuse.org>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/zypper/master/nl/>\n"
 "Language: nl\n"
@@ -3780,7 +3780,7 @@ msgstr "Vernieuwen"
 #. translators: 'zypper repos' column - whether keep-packages is enabled for the repository
 #: src/commands/repos/list.cc:266
 msgid "Keep"
-msgstr ""
+msgstr "Behouden"
 
 #: src/commands/repos/list.cc:357
 msgid "No repositories defined."
@@ -4181,7 +4181,7 @@ msgstr "toon ook de vlag voor automatisch vernieuwen."
 #. translators: -k, --keep-packages
 #: src/commands/reposerviceoptionsets.cc:191
 msgid "Show also the keep-packages flag."
-msgstr ""
+msgstr "Ook de vlag pakketten-behouden tonen."
 
 #. translators: -u, --uri
 #: src/commands/reposerviceoptionsets.cc:201
@@ -5471,7 +5471,7 @@ msgstr ""
 #. translators: command summary: targetos, tos
 #: src/commands/utils/system-architecture.cc:20
 msgid "Print the detected system architecture."
-msgstr ""
+msgstr "Toon de gedetecteerde systeemarchitectuur af."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/utils/targetos.cc:20
@@ -5554,6 +5554,8 @@ msgid ""
 "The exit code is 0 if the versions are equal, 11 if VERSION1 is newer, and "
 "12 if VERSION2 is newer."
 msgstr ""
+"De exitcode is 0 als de versies gelijk zijn, 11 als VERSIE1 nieuwer is en 12 "
+"als VERSIE2 nieuwer is."
 
 #. translators: -m, --match
 #: src/commands/utils/versioncmp.cc:38
