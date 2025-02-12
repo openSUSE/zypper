@@ -109,12 +109,10 @@ static bool remove_duplicate( PackageArgs::PackageSpecSet & set, const PackageSp
 
 void PackageArgs::argsToCaps( const ResKind & kind )
 {
-  bool dont;
-  std::string arg, repo;
-  for_( it, _args.begin(), _args.end() )
+  for ( std::string arg : _args )
   {
-    arg = *it;
-    repo.clear();
+    bool dont;
+    std::string repo;
 
     PackageSpec spec;
     spec.orig_str = arg;

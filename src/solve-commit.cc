@@ -511,9 +511,9 @@ static bool dist_upgrade( Zypper & zypper )
       // Here: do upgrade for the specified repos:
       Resolver_Ptr resolver( God->resolver() );
       ResPool      pool    ( God->pool() );
-      for_( it, specified.begin(), specified.end() )
+      for ( const RepoInfo specifiedRepo : specified )
       {
-        Repository repo( pool.reposFind( it->alias() ) );
+        Repository repo( pool.reposFind( specifiedRepo.alias() ) );
         MIL << "Adding upgrade repository: " << repo.alias() << endl;
         resolver->addUpgradeRepo( repo );
       }
@@ -657,13 +657,13 @@ static void show_update_messages( Zypper & zypper, const UpdateNotifications & m
   MIL << "Received " << messages.size() << " update notification(s):" << endl;
 
   std::ostringstream msg;
-  for_( it, messages.begin(), messages.end() )
+  for ( const UpdateNotificationFile & file : messages )
   {
-    MIL << "- From " << it->solvable().asString() << " in file " << Pathname::showRootIf( zypper.config().root_dir, it->file() ) << endl;
-    zypper.out().info( it->solvable().asString() + " (" + Pathname::showRootIf(zypper.config().root_dir, it->file()) + ")" );
+    MIL << "- From " << file.solvable().asString() << " in file " << Pathname::showRootIf( zypper.config().root_dir, file.file() ) << endl;
+    zypper.out().info( file.solvable().asString() + " (" + Pathname::showRootIf(zypper.config().root_dir, file.file()) + ")" );
     {
-      msg << str::form(_("Message from package %s:"), it->solvable().name().c_str() ) << endl << endl;
-      InputStream istr( Pathname::assertprefix( zypper.config().root_dir, it->file() ) );
+      msg << str::form(_("Message from package %s:"), file.solvable().name().c_str() ) << endl << endl;
+      InputStream istr( Pathname::assertprefix( zypper.config().root_dir, file.file() ) );
       iostr::copy( istr, msg );
       msg << endl << "-----------------------------------------------------------------------------" << endl;
     }

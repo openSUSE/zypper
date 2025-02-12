@@ -75,9 +75,9 @@ ResKindSet kindset_from( const std::list<std::string> & kindstrings )
 {
   ResKind kind;
   ResKindSet kinds;
-  for_( it, kindstrings.begin(), kindstrings.end() )
+  for ( const std::string & kindstring : kindstrings )
   {
-    kind = string_to_kind(*it);
+    kind = string_to_kind(kindstring);
     if ( kind == ResKind::nokind )
       continue;
     kinds.insert( kind );

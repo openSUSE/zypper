@@ -119,11 +119,11 @@ static void eject_drive_dialog( Zypper & zypper, Url & url, const std::vector<st
     zypper.out().info( _("Detected devices:") );
     int devn = 1;
     std::ostringstream numbers;
-    for_( it, devices.begin(), devices.end() )
+    for ( const std::string & device : devices )
     {
       // enhancement: we could try to get nicer device names like
       // "DVDRAM GSA-U10N on /dev/sr0"
-      cout << devn << "  " << *it << " " << endl;
+      cout << devn << "  " << device << " " << endl;
       numbers << devn << "/";
       ++devn;
     }
