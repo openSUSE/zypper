@@ -112,59 +112,59 @@ zypp::ZyppFlags::CommandGroup SearchCmd::cmdOptions() const
             // translators: -x, --match-exact
             _("Searches for an exact match of the search strings.")
       },
-      { "provides", '\0', ZyppFlags::NoArgument, ZyppFlags::appendSolvAttrToSet( that._requestedDeps, sat::SolvAttr::provides ),
+      { "provides", '\0', ZyppFlags::NoArgument, ZyppFlags::appendSolvAttrToSet( that._requestedDeps, sat::SolvAttr::dep_provides ),
         // translators: --provides
         _("Search for packages which provide the search strings.")
       },
-      { "requires", '\0', ZyppFlags::NoArgument, ZyppFlags::appendSolvAttrToSet( that._requestedDeps, sat::SolvAttr::requires ),
+      { "requires", '\0', ZyppFlags::NoArgument, ZyppFlags::appendSolvAttrToSet( that._requestedDeps, sat::SolvAttr::dep_requires ),
         // translators: --requires
         _("Search for packages which require the search strings.")
       },
-      { "recommends", '\0', ZyppFlags::NoArgument, ZyppFlags::appendSolvAttrToSet( that._requestedDeps, sat::SolvAttr::recommends ),
+      { "recommends", '\0', ZyppFlags::NoArgument, ZyppFlags::appendSolvAttrToSet( that._requestedDeps, sat::SolvAttr::dep_recommends ),
         // translators: --recommends
         _("Search for packages which recommend the search strings.")
       },
-      { "supplements", '\0', ZyppFlags::NoArgument, ZyppFlags::appendSolvAttrToSet( that._requestedDeps, sat::SolvAttr::supplements ),
+      { "supplements", '\0', ZyppFlags::NoArgument, ZyppFlags::appendSolvAttrToSet( that._requestedDeps, sat::SolvAttr::dep_supplements ),
         // translators: --supplements
         _("Search for packages which supplement the search strings.")
       },
-      { "conflicts", '\0', ZyppFlags::NoArgument, ZyppFlags::appendSolvAttrToSet( that._requestedDeps, sat::SolvAttr::conflicts ),
+      { "conflicts", '\0', ZyppFlags::NoArgument, ZyppFlags::appendSolvAttrToSet( that._requestedDeps, sat::SolvAttr::dep_conflicts ),
         // translators: --conflicts
         _("Search packages conflicting with search strings.")
       },
-      { "obsoletes", '\0', ZyppFlags::NoArgument, ZyppFlags::appendSolvAttrToSet( that._requestedDeps, sat::SolvAttr::obsoletes ),
+      { "obsoletes", '\0', ZyppFlags::NoArgument, ZyppFlags::appendSolvAttrToSet( that._requestedDeps, sat::SolvAttr::dep_obsoletes ),
         // translators: --obsoletes
         _("Search for packages which obsolete the search strings.")
       },
-      { "suggests", '\0', ZyppFlags::NoArgument, ZyppFlags::appendSolvAttrToSet( that._requestedDeps, sat::SolvAttr::suggests ),
+      { "suggests", '\0', ZyppFlags::NoArgument, ZyppFlags::appendSolvAttrToSet( that._requestedDeps, sat::SolvAttr::dep_suggests ),
         // translators: --suggests
         _("Search for packages which suggest the search strings.")
       },
-      { "provides-pkg", '\0', ZyppFlags::NoArgument, ZyppFlags::setSolvAttrOptional( that._requestedReverseSearch, sat::SolvAttr::provides ),
+      { "provides-pkg", '\0', ZyppFlags::NoArgument, ZyppFlags::setSolvAttrOptional( that._requestedReverseSearch, sat::SolvAttr::dep_provides ),
         // translators: --provides-pkg
         _("Search for all packages that provide any of the provides of the package(s) matched by the input parameters.")
       },
-      { "requires-pkg", '\0', ZyppFlags::NoArgument, ZyppFlags::setSolvAttrOptional( that._requestedReverseSearch, sat::SolvAttr::requires ),
+      { "requires-pkg", '\0', ZyppFlags::NoArgument, ZyppFlags::setSolvAttrOptional( that._requestedReverseSearch, sat::SolvAttr::dep_requires ),
         // translators: --requires-pkg
         _("Search for all packages that require any of the provides of the package(s) matched by the input parameters.")
       },
-      { "recommends-pkg", '\0', ZyppFlags::NoArgument, ZyppFlags::setSolvAttrOptional( that._requestedReverseSearch, sat::SolvAttr::recommends ),
+      { "recommends-pkg", '\0', ZyppFlags::NoArgument, ZyppFlags::setSolvAttrOptional( that._requestedReverseSearch, sat::SolvAttr::dep_recommends ),
         // translators: --recommends-pkg
         _("Search for all packages that recommend any of the provides of the package(s) matched by the input parameters.")
       },
-      { "supplements-pkg", '\0', ZyppFlags::NoArgument, ZyppFlags::setSolvAttrOptional( that._requestedReverseSearch, sat::SolvAttr::supplements ),
+      { "supplements-pkg", '\0', ZyppFlags::NoArgument, ZyppFlags::setSolvAttrOptional( that._requestedReverseSearch, sat::SolvAttr::dep_supplements ),
         // translators: --supplements-pkg
         _("Search for all packages that supplement any of the provides of the package(s) matched by the input parameters.")
       },
-      { "conflicts-pkg", '\0', ZyppFlags::NoArgument, ZyppFlags::setSolvAttrOptional( that._requestedReverseSearch, sat::SolvAttr::conflicts ),
+      { "conflicts-pkg", '\0', ZyppFlags::NoArgument, ZyppFlags::setSolvAttrOptional( that._requestedReverseSearch, sat::SolvAttr::dep_conflicts ),
         // translators: --conflicts-pkg
         _("Search for all packages that conflict with any of the package(s) matched by the input parameters.")
       },
-      { "obsoletes-pkg", '\0', ZyppFlags::NoArgument, ZyppFlags::setSolvAttrOptional( that._requestedReverseSearch, sat::SolvAttr::obsoletes ),
+      { "obsoletes-pkg", '\0', ZyppFlags::NoArgument, ZyppFlags::setSolvAttrOptional( that._requestedReverseSearch, sat::SolvAttr::dep_obsoletes ),
         // translators: --obsoletes-pkg
         _("Search for all packages that obsolete any of the package(s) matched by the input parameters.")
       },
-      { "suggests-pkg", '\0', ZyppFlags::NoArgument, ZyppFlags::setSolvAttrOptional( that._requestedReverseSearch, sat::SolvAttr::suggests ),
+      { "suggests-pkg", '\0', ZyppFlags::NoArgument, ZyppFlags::setSolvAttrOptional( that._requestedReverseSearch, sat::SolvAttr::dep_suggests ),
         // translators: --suggests-pkg
         _("Search for all packages that suggest any of the provides of the package(s) matched by the input parameters.")
       },
@@ -338,7 +338,7 @@ int SearchCmd::execute( Zypper &zypper, const std::vector<std::string> &position
       query.addDependency( attr , name, cap.detail().op(), cap.detail().ed(), Arch(cap.detail().arch()), matchmode );
 
       //handle special cases
-      if ( attr == sat::SolvAttr::provides && str::regex_match( name.c_str(), std::string("^/") ) ) {
+      if ( attr == sat::SolvAttr::dep_provides && str::regex_match( name.c_str(), std::string("^/") ) ) {
         // in case of path names also search in file list
         query.setFilesMatchFullPath( true );
         query.addDependency( sat::SolvAttr::filelist , name, cap.detail().op(), cap.detail().ed(), Arch(cap.detail().arch()), matchmode );

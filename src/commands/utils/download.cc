@@ -224,7 +224,7 @@ int DownloadCmd::execute( Zypper &zypper , const std::vector<std::string> &posit
 
       // no natch on names, do try provides
       if ( q.empty() )
-        q.addDependency( sat::SolvAttr::provides,
+        q.addDependency( sat::SolvAttr::dep_provides,
                          capDetail.name().asString(),
                          capDetail.op(),		// defaults to Rel::ANY (NOOP) if no versioned cap
                          capDetail.ed(),

@@ -387,7 +387,7 @@ void build_deps_install( Zypper & zypper, const PackageSpec &spec, bool buildDep
 
     // install build depenendcies only
     if ( buildDepsOnly_r )
-      for ( const Capability & capability : srcpkg->requires() )
+      for ( const Capability & capability : srcpkg->dep_requires() )
       {
         God->resolver()->addRequire( capability );
         DBG << "requiring: " << capability << endl;

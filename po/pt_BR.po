@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-22 18:04+0100\n"
+"POT-Creation-Date: 2025-02-12 16:01+0100\n"
 "PO-Revision-Date: 2024-09-09 18:47+0000\n"
 "Last-Translator: Rodrigo Macedo <sottomaiormacedotec@sottomaiormacedo.tech>\n"
 "Language-Team: Portuguese (Brazil) <https://l10n.opensuse.org/projects/"
@@ -61,11 +61,11 @@ msgstr "Gerenciamento de Localidade:"
 msgid "Other Commands:"
 msgstr "Outros comandos:"
 
-#: src/Command.cc:168
+#: src/Command.cc:169
 msgid "Subcommands:"
 msgstr "Subcomandos:"
 
-#: src/Command.cc:289
+#: src/Command.cc:290
 #, c-format, boost-format
 msgid "Unknown command '%s'"
 msgstr "Comando desconhecido '%s'"
@@ -1457,7 +1457,7 @@ msgstr "O PackageKit ainda está em execução (provavelmente ocupado)."
 msgid "Try again?"
 msgstr "Tentar novamente?"
 
-#: src/Zypper.cc:244 src/Zypper.cc:721 src/commands/basecommand.cc:280
+#: src/Zypper.cc:244 src/Zypper.cc:721 src/commands/basecommand.cc:289
 msgid "Unexpected exception."
 msgstr "Exceção inesperada."
 
@@ -2272,7 +2272,20 @@ msgstr "Restringir a atualização ao repositório especificado."
 msgid "Remove unneeded orphaned packages."
 msgstr "Remover os pacotes órfãos desnecessários."
 
-#: src/commands/distupgrade.cc:72
+#. FailIfReposFail
+#: src/commands/distupgrade.cc:55
+msgid ""
+"Due to the treatment of orphaned packages dist-upgrade depends on a proper "
+"repository setup more than any other command. It must not continue if "
+"enabled repositories fail to refresh. This may severely damage the system. "
+"If a failing repository is actually not needed, it must be disabled."
+msgstr ""
+
+#: src/commands/distupgrade.cc:57
+msgid "See 'man zypper' for more information about this command."
+msgstr ""
+
+#: src/commands/distupgrade.cc:88
 #, c-format, boost-format
 msgid ""
 "You are about to do a distribution upgrade with all enabled repositories. "
@@ -3625,7 +3638,7 @@ msgstr "Apelido"
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/commands/repos/list.cc:51 src/commands/repos/list.cc:54
 #: src/commands/repos/list.cc:292 src/commands/services/add.cc:83
-#: src/commands/services/list.cc:118 src/repos.cc:1246
+#: src/commands/services/list.cc:118 src/repos.cc:1248
 #: src/utils/flags/zyppflags.h:49
 msgid "URI"
 msgstr "URI"
@@ -3634,27 +3647,27 @@ msgstr "URI"
 #. translators: property name; short; used like "Name: value"
 #: src/commands/repos/list.cc:58 src/commands/repos/list.cc:244
 #: src/commands/services/add.cc:85 src/commands/services/list.cc:108
-#: src/repos.cc:1248
+#: src/repos.cc:1250
 msgid "Enabled"
 msgstr "Habilitado"
 
 #. GPG Check
 #. translators: property name; short; used like "Name: value"
 #: src/commands/repos/list.cc:59 src/commands/repos/list.cc:248
-#: src/commands/services/list.cc:109 src/repos.cc:1250
+#: src/commands/services/list.cc:109 src/repos.cc:1252
 msgid "GPG Check"
 msgstr "Verificação GPG"
 
 #. translators: repository priority (in zypper repos -p or -d)
 #. translators: property name; short; used like "Name: value"
 #: src/commands/repos/list.cc:60 src/commands/repos/list.cc:276
-#: src/commands/services/list.cc:115 src/repos.cc:1254
+#: src/commands/services/list.cc:115 src/repos.cc:1256
 msgid "Priority"
 msgstr "Prioridade"
 
 #. translators: property name; short; used like "Name: value"
 #: src/commands/repos/list.cc:61 src/commands/services/add.cc:87
-#: src/repos.cc:1252
+#: src/repos.cc:1254
 msgid "Autorefresh"
 msgstr "Atualização automática"
 
@@ -3707,7 +3720,7 @@ msgstr "Lista todos os repositórios definidos."
 msgid "Export all defined repositories as a single local .repo file."
 msgstr "Exportar todos os repositórios definidos como um único arquivo .repo."
 
-#: src/commands/repos/list.cc:129 src/repos.cc:1003
+#: src/commands/repos/list.cc:129 src/repos.cc:1005
 msgid "Error reading repositories:"
 msgstr "Erro ao ler os repositórios:"
 
@@ -3840,7 +3853,7 @@ msgstr "A opção global '%s' não tem efeito aqui."
 msgid "Arguments are not allowed if '%s' is used."
 msgstr "Argumentos não serão permitidos se '%s' for utilizado."
 
-#: src/commands/repos/refresh.cc:227 src/repos.cc:1015
+#: src/commands/repos/refresh.cc:227 src/repos.cc:1017
 msgid "Specified repositories: "
 msgstr "Repositórios especificados: "
 
@@ -3943,12 +3956,12 @@ msgstr ""
 msgid "Repository '%s' renamed to '%s'."
 msgstr "Repositório '%s' renomeado para '%s'."
 
-#: src/commands/repos/rename.cc:47 src/repos.cc:1194
+#: src/commands/repos/rename.cc:47 src/repos.cc:1196
 #, c-format, boost-format
 msgid "Repository named '%s' already exists. Please use another alias."
 msgstr "Um repositório chamado '%s' já existe. Escolha outro apelido."
 
-#: src/commands/repos/rename.cc:52 src/repos.cc:1672
+#: src/commands/repos/rename.cc:52 src/repos.cc:1674
 msgid "Error while modifying the repository:"
 msgstr "Erro ao alterar o repositório:"
 
@@ -4419,7 +4432,7 @@ msgstr "Problema ao inicializar ou executar a pesquisa"
 msgid "See the above message for a hint."
 msgstr "Veja a mensagem acima para uma dica."
 
-#: src/commands/search/search.cc:497 src/repos.cc:982
+#: src/commands/search/search.cc:497 src/repos.cc:984
 msgid "Running 'zypper refresh' as root might resolve the problem."
 msgstr "Executar 'zypper refresh' como root deve resolver o problema."
 
@@ -4514,7 +4527,7 @@ msgstr ""
 "Problema ao baixar o arquivo de índice do repositório para o serviço '%s':"
 
 #: src/commands/services/common.cc:138 src/commands/services/refresh.cc:226
-#: src/repos.cc:1724
+#: src/repos.cc:1726
 #, c-format, boost-format
 msgid "Skipping service '%s' because of the above error."
 msgstr "Ignorando o serviço '%s' devido ao erro acima."
@@ -5382,6 +5395,11 @@ msgstr ""
 "Não baixar nenhum RPM fonte, mas exibir quais são os RPMs fontes faltantes e "
 "quais são extras."
 
+#. translators: command summary: targetos, tos
+#: src/commands/utils/system-architecture.cc:20
+msgid "Print the detected system architecture."
+msgstr ""
+
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/utils/targetos.cc:20
 msgid "targetos (tos) [OPTIONS]"
@@ -5451,27 +5469,32 @@ msgstr "versioncmp (vcmp) <versão1> <versão2>"
 msgid "Compare two version strings."
 msgstr "Comparar textos de duas versões."
 
-#. translators: command description
-#: src/commands/utils/versioncmp.cc:23
+#: src/commands/utils/versioncmp.cc:24
 msgid "Compare the versions supplied as arguments."
 msgstr "Compara as versões fornecidas como argumentos."
 
+#: src/commands/utils/versioncmp.cc:25
+msgid ""
+"The exit code is 0 if the versions are equal, 11 if VERSION1 is newer, and "
+"12 if VERSION2 is newer."
+msgstr ""
+
 #. translators: -m, --match
-#: src/commands/utils/versioncmp.cc:35
+#: src/commands/utils/versioncmp.cc:38
 msgid "Takes missing release number as any release."
 msgstr "Considerar número de versão ausente como qualquer versão."
 
-#: src/commands/utils/versioncmp.cc:75
+#: src/commands/utils/versioncmp.cc:85
 #, c-format, boost-format
 msgid "%s matches %s"
 msgstr "%s corresponde a %s"
 
-#: src/commands/utils/versioncmp.cc:77
+#: src/commands/utils/versioncmp.cc:87
 #, c-format, boost-format
 msgid "%s is newer than %s"
 msgstr "%s é mais novo que %s"
 
-#: src/commands/utils/versioncmp.cc:79
+#: src/commands/utils/versioncmp.cc:89
 #, c-format, boost-format
 msgid "%s is older than %s"
 msgstr "%s é mais antigo que %s"
@@ -5970,7 +5993,7 @@ msgstr "Erro ao desabilitar o repositório '%s'."
 msgid "Problem retrieving files from '%s'."
 msgstr "Problema ao baixar os arquivos de '%s'."
 
-#: src/repos.cc:347 src/repos.cc:1863 src/solve-commit.cc:989
+#: src/repos.cc:347 src/repos.cc:1865 src/solve-commit.cc:989
 #: src/solve-commit.cc:1020 src/solve-commit.cc:1044
 msgid "Please see the above error message for a hint."
 msgstr "Veja a mensagem de erro acima para uma dica."
@@ -6102,77 +6125,77 @@ msgstr ""
 msgid "Repository '%s' stays disabled."
 msgstr "O repositório '%s' permanece desabilitado."
 
-#: src/repos.cc:973
+#: src/repos.cc:975
 msgid "Initializing Target"
 msgstr "Inicializando destino"
 
-#: src/repos.cc:981
+#: src/repos.cc:983
 msgid "Target initialization failed:"
 msgstr "Falha na inicialização do destino:"
 
-#: src/repos.cc:1063
+#: src/repos.cc:1065
 #, c-format, boost-format
 msgid "Cleaning metadata cache for '%s'."
 msgstr "Limpando o cache de metadados de '%s'."
 
-#: src/repos.cc:1071
+#: src/repos.cc:1073
 #, c-format, boost-format
 msgid "Cleaning raw metadata cache for '%s'."
 msgstr "Limpando o cache de metadados brutos de '%s'."
 
-#: src/repos.cc:1077
+#: src/repos.cc:1079
 #, c-format, boost-format
 msgid "Keeping raw metadata cache for %s '%s'."
 msgstr "Mantendo o cache de metadados brutos para %s '%s'."
 
 #. translators: meaning the cached rpm files
-#: src/repos.cc:1084
+#: src/repos.cc:1086
 #, c-format, boost-format
 msgid "Cleaning packages for '%s'."
 msgstr "Limpando os pacotes para '%s'."
 
-#: src/repos.cc:1092
+#: src/repos.cc:1094
 #, c-format, boost-format
 msgid "Cannot clean repository '%s' because of an error."
 msgstr "Não foi possível limpar o repositório '%s' devido a um erro."
 
-#: src/repos.cc:1103
+#: src/repos.cc:1105
 msgid "Cleaning installed packages cache."
 msgstr "Limpando o cache de pacotes instalados."
 
-#: src/repos.cc:1112
+#: src/repos.cc:1114
 msgid "Cannot clean installed packages cache because of an error."
 msgstr ""
 "Não foi possível limpar o cache de pacotes instalados devido a um erro."
 
-#: src/repos.cc:1130
+#: src/repos.cc:1132
 msgid "Could not clean the repositories because of errors."
 msgstr "Não foi possível limpar os repositórios devido a erros."
 
-#: src/repos.cc:1136
+#: src/repos.cc:1138
 msgid "Some of the repositories have not been cleaned up because of an error."
 msgstr "Alguns dos repositórios não foram limpos devido a um erro."
 
-#: src/repos.cc:1141
+#: src/repos.cc:1143
 msgid "Specified repositories have been cleaned up."
 msgstr "Os repositórios especificados foram limpos."
 
-#: src/repos.cc:1143
+#: src/repos.cc:1145
 msgid "All repositories have been cleaned up."
 msgstr "Todos os repositórios foram limpos."
 
-#: src/repos.cc:1165
+#: src/repos.cc:1167
 msgid "This is a changeable read-only media (CD/DVD), disabling autorefresh."
 msgstr ""
 "Esta é uma mídia removível apenas leitura (CD/DVD), desabilitando a "
 "atualização automática."
 
-#: src/repos.cc:1186
+#: src/repos.cc:1188
 #, c-format, boost-format
 msgid "Invalid repository alias: '%s'"
 msgstr "Apelido de repositório inválido: '%s'"
 
-#: src/repos.cc:1203
+#: src/repos.cc:1205
 msgid ""
 "Could not determine the type of the repository. Please check if the defined "
 "URIs (see below) point to a valid repository:"
@@ -6180,25 +6203,25 @@ msgstr ""
 "Não foi possível determinar o tipo do repositório. Verifique se os URIs "
 "definidos (veja abaixo) apontam para um repositório válido:"
 
-#: src/repos.cc:1209
+#: src/repos.cc:1211
 msgid "Can't find a valid repository at given location:"
 msgstr "Não foi possível encontrar um repositório válido no local indicado:"
 
-#: src/repos.cc:1217
+#: src/repos.cc:1219
 msgid "Problem transferring repository data from specified URI:"
 msgstr "Problema ao transferir os dados do repositório do URI especificado:"
 
-#: src/repos.cc:1218
+#: src/repos.cc:1220
 msgid "Please check whether the specified URI is accessible."
 msgstr "Verifique se o URI especificado é acessível."
 
-#: src/repos.cc:1225
+#: src/repos.cc:1227
 msgid "Unknown problem when adding repository:"
 msgstr "Problema desconhecido ao adicionar o repositório:"
 
 #. translators: BOOST STYLE POSITIONAL DIRECTIVES ( %N% )
 #. translators: %1% - a repository name
-#: src/repos.cc:1235
+#: src/repos.cc:1237
 #, boost-format
 msgid ""
 "GPG checking is disabled in configuration of repository '%1%'. Integrity and "
@@ -6207,135 +6230,135 @@ msgstr ""
 "A verificação GPG está desabilitada na configuração do repositório '%1%'. A "
 "integridade e origem dos pacotes não pode ser verificada."
 
-#: src/repos.cc:1240
+#: src/repos.cc:1242
 #, c-format, boost-format
 msgid "Repository '%s' successfully added"
 msgstr "Repositório '%s' adicionado com sucesso"
 
-#: src/repos.cc:1266
+#: src/repos.cc:1268
 #, c-format, boost-format
 msgid "Reading data from '%s' media"
 msgstr "Lendo dados da mídia '%s'"
 
-#: src/repos.cc:1272
+#: src/repos.cc:1274
 #, c-format, boost-format
 msgid "Problem reading data from '%s' media"
 msgstr "Problema ao ler dados da mídia '%s'"
 
-#: src/repos.cc:1273
+#: src/repos.cc:1275
 msgid "Please check if your installation media is valid and readable."
 msgstr "Verifique se sua mídia de instalação é válida e legível."
 
-#: src/repos.cc:1280
+#: src/repos.cc:1282
 #, c-format, boost-format
 msgid "Reading data from '%s' media is delayed until next refresh."
 msgstr "Leitura dos dados da mídia '%s' adiada até a próxima atualização."
 
-#: src/repos.cc:1349
+#: src/repos.cc:1351
 msgid "Problem accessing the file at the specified URI"
 msgstr "Problema ao acessar o arquivo no URI especificado"
 
-#: src/repos.cc:1350
+#: src/repos.cc:1352
 msgid "Please check if the URI is valid and accessible."
 msgstr "Verifique se o URI é válido e acessível."
 
-#: src/repos.cc:1357
+#: src/repos.cc:1359
 msgid "Problem parsing the file at the specified URI"
 msgstr "Problema ao analisar o arquivo no URI especificado"
 
 #. TranslatorExplanation Don't translate the '.repo' string.
-#: src/repos.cc:1359
+#: src/repos.cc:1361
 msgid "Is it a .repo file?"
 msgstr "Isto é um arquivo .repo?"
 
-#: src/repos.cc:1366
+#: src/repos.cc:1368
 msgid "Problem encountered while trying to read the file at the specified URI"
 msgstr "Problema encontrado ao tentar ler o arquivo no URI especificado"
 
-#: src/repos.cc:1379
+#: src/repos.cc:1381
 msgid "Repository with no alias defined found in the file, skipping."
 msgstr "Repositório sem apelido definido encontrado no arquivo, ignorando."
 
-#: src/repos.cc:1385
+#: src/repos.cc:1387
 #, c-format, boost-format
 msgid "Repository '%s' has no URI defined, skipping."
 msgstr "O repositório '%s' não tem um URI definido, ignorando."
 
-#: src/repos.cc:1433
+#: src/repos.cc:1435
 #, c-format, boost-format
 msgid "Repository '%s' has been removed."
 msgstr "Repositório '%s' removido."
 
-#: src/repos.cc:1581
+#: src/repos.cc:1583
 #, c-format, boost-format
 msgid "Repository '%s' priority has been left unchanged (%d)"
 msgstr "Prioridade do repositório '%s' não alterada (%d)"
 
-#: src/repos.cc:1614
+#: src/repos.cc:1616
 #, c-format, boost-format
 msgid "Repository '%s' has been successfully enabled."
 msgstr "Repositório '%s' habilitado com sucesso."
 
-#: src/repos.cc:1616
+#: src/repos.cc:1618
 #, c-format, boost-format
 msgid "Repository '%s' has been successfully disabled."
 msgstr "Repositório '%s' desabilitado com sucesso."
 
-#: src/repos.cc:1623
+#: src/repos.cc:1625
 #, c-format, boost-format
 msgid "Autorefresh has been enabled for repository '%s'."
 msgstr "Atualização automática para o repositório '%s' habilitada."
 
-#: src/repos.cc:1625
+#: src/repos.cc:1627
 #, c-format, boost-format
 msgid "Autorefresh has been disabled for repository '%s'."
 msgstr "Atualização automática para o repositório '%s' desabilitada."
 
-#: src/repos.cc:1632
+#: src/repos.cc:1634
 #, c-format, boost-format
 msgid "RPM files caching has been enabled for repository '%s'."
 msgstr "Cache dos arquivos RPM habilitado para o repositório '%s'."
 
-#: src/repos.cc:1634
+#: src/repos.cc:1636
 #, c-format, boost-format
 msgid "RPM files caching has been disabled for repository '%s'."
 msgstr "Cache dos arquivos RPM desabilitado para o repositório '%s'."
 
-#: src/repos.cc:1641
+#: src/repos.cc:1643
 #, c-format, boost-format
 msgid "GPG check has been enabled for repository '%s'."
 msgstr "Verificação GPG habilitada para o repositório '%s'."
 
-#: src/repos.cc:1643
+#: src/repos.cc:1645
 #, c-format, boost-format
 msgid "GPG check has been disabled for repository '%s'."
 msgstr "Verificação GPG desabilitada para o repositório '%s'."
 
-#: src/repos.cc:1649
+#: src/repos.cc:1651
 #, c-format, boost-format
 msgid "Repository '%s' priority has been set to %d."
 msgstr "Prioridade do repositório '%s' alterada para %d."
 
-#: src/repos.cc:1655
+#: src/repos.cc:1657
 #, c-format, boost-format
 msgid "Name of repository '%s' has been set to '%s'."
 msgstr "Nome do repositório '%s' definido para '%s'."
 
-#: src/repos.cc:1666
+#: src/repos.cc:1668
 #, c-format, boost-format
 msgid "Nothing to change for repository '%s'."
 msgstr "Nada a alterar para o repositório '%s'."
 
-#: src/repos.cc:1673
+#: src/repos.cc:1675
 #, c-format, boost-format
 msgid "Leaving repository %s unchanged."
 msgstr "Mantendo o repositório %s inalterado."
 
-#: src/repos.cc:1760
+#: src/repos.cc:1762
 msgid "Loading repository data..."
 msgstr "Carregando dados do repositório..."
 
-#: src/repos.cc:1762
+#: src/repos.cc:1764
 msgid ""
 "No repositories defined. Operating only with the installed resolvables. "
 "Nothing can be installed."
@@ -6343,43 +6366,43 @@ msgstr ""
 "Nenhum repositório definido. Operando somente com os resolvíveis instalados. "
 "Nada pode ser instalado."
 
-#: src/repos.cc:1785
+#: src/repos.cc:1787
 #, c-format, boost-format
 msgid "Retrieving repository '%s' data..."
 msgstr "Baixando dados do repositório '%s'..."
 
-#: src/repos.cc:1793
+#: src/repos.cc:1795
 #, c-format, boost-format
 msgid "Repository '%s' not cached. Caching..."
 msgstr "O repositório '%s' não está no cache. Criando o cache..."
 
-#: src/repos.cc:1799 src/repos.cc:1833
+#: src/repos.cc:1801 src/repos.cc:1835
 #, c-format, boost-format
 msgid "Problem loading data from '%s'"
 msgstr "Problema ao carregar os dados de '%s'"
 
-#: src/repos.cc:1803
+#: src/repos.cc:1805
 #, c-format, boost-format
 msgid "Repository '%s' could not be refreshed. Using old cache."
 msgstr "O repositório '%s' não pôde ser atualizado. Utilizando o cache antigo."
 
-#: src/repos.cc:1807 src/repos.cc:1836
+#: src/repos.cc:1809 src/repos.cc:1838
 #, c-format, boost-format
 msgid "Resolvables from '%s' not loaded because of error."
 msgstr "Os resolvíveis de '%s' não foram carregados devido a um erro."
 
-#: src/repos.cc:1823
+#: src/repos.cc:1825
 #, boost-format
 msgid "Repository '%1%' metadata expired since %2%."
 msgstr "Os metadados do repositório '%1%' estão expirados desde %2%."
 
 #. translators: the first %s is 'zypper refresh' and the second 'zypper clean -m'
-#: src/repos.cc:1835
+#: src/repos.cc:1837
 #, c-format, boost-format
 msgid "Try '%s', or even '%s' before doing so."
 msgstr "Tente '%s' ou mesmo '%s' antes disso."
 
-#: src/repos.cc:1840
+#: src/repos.cc:1842
 msgid ""
 "Repository metadata expired: Check if 'autorefresh' is turned on (zypper "
 "lr), otherwise manually refresh the repository (zypper ref). If this does "
@@ -6391,30 +6414,30 @@ msgstr ""
 "(zypper ref). Se isto não resolver o problema, pode ser que você esteja "
 "usando um mirror com problemas e que descontinuou o suporte ao repositório."
 
-#: src/repos.cc:1853
+#: src/repos.cc:1855
 msgid "Reading installed packages..."
 msgstr "Lendo os pacotes instalados..."
 
-#: src/repos.cc:1862
+#: src/repos.cc:1864
 msgid "Problem occurred while reading the installed packages:"
 msgstr "Problema ao ler os pacotes instalados:"
 
-#: src/repos.cc:1879
+#: src/repos.cc:1881
 #, c-format, boost-format
 msgid "'%s' looks like an RPM file. Will try to download it."
 msgstr "'%s' se parece com um arquivo RPM. Tentará ser baixado."
 
-#: src/repos.cc:1888
+#: src/repos.cc:1890
 #, c-format, boost-format
 msgid "Problem with the RPM file specified as '%s', skipping."
 msgstr "Problema com o arquivo RPM especificado como %s, ignorando."
 
-#: src/repos.cc:1910
+#: src/repos.cc:1912
 #, c-format, boost-format
 msgid "Problem reading the RPM header of %s. Is it an RPM file?"
 msgstr "Problema ao ler o cabeçalho RPM do %s. É um arquivo RPM?"
 
-#: src/repos.cc:1930
+#: src/repos.cc:1932
 msgid "Plain RPM files cache"
 msgstr "Cache de arquivos RPM simples"
 

@@ -58,7 +58,7 @@ int WhatProvidesCmd::execute( Zypper &zypper, const std::vector<std::string> &po
   zypper.out().info( str::Format(_("See '%s' for all available options.")) % "help search" );
 
   SearchCmd cmd ( this->command() );
-  cmd.addRequestedDependency( zypp::sat::SolvAttr::provides );
+  cmd.addRequestedDependency( zypp::sat::SolvAttr::dep_provides );
   cmd.setMode( SearchCmd::MatchMode::Exact );
   cmd.setPositionalArguments( positionalArgs_r );
 

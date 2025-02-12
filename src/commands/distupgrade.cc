@@ -44,6 +44,22 @@ zypp::ZyppFlags::CommandGroup DistUpgradeCmd::cmdOptions() const
   });
 }
 
+int DistUpgradeCmd::systemSetup( Zypper &zypper )
+{
+  // bsc#1228434, bsc#1236939, bsc#961719, bsc#961724, et.al.
+  // dup must not continue if repositories failed to refresh.
+  SetupSystemFlags flags = DefaultSetup | FailIfReposFail;
+  int res = defaultSystemSetup( zypper, flags );
+  if ( res == ZYPPER_EXIT_INF_REPOS_SKIPPED ) {
+    // FailIfReposFail
+    zypper.out().taggedPar( 4, MSG_ERRORString( command()[0]+":" ), _("Due to the treatment of orphaned packages dist-upgrade depends on a proper repository setup more than any other command. It must not continue if enabled repositories fail to refresh. This may severely damage the system. If a failing repository is actually not needed, it must be disabled.")
+      +std::string(" ")
+      +_("See 'man zypper' for more information about this command.") );
+    zypper.setExitCode( ZYPPER_EXIT_ERR_ZYPP );
+  }
+  return zypper.exitCode();
+}
+
 void DistUpgradeCmd::doReset()
 {
   DupSettings::reset();

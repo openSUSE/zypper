@@ -752,6 +752,7 @@ It might be less tedious to persistently set *$releasever* to the target distrib
 +
 'Note:' distribution upgrades in openSUSE are currently only supported between consecutive releases. To upgrade multiple releases, upgrade each consecutive release one at a time. For more details see *http://en.opensuse.org/SDB:System_upgrade* and the _openSUSE release notes_ at *http://doc.opensuse.org/release-notes/*.
 +
+'Note:' Due to the treatment of orphaned packages dist-upgrade depends on a proper repository setup more than any other command. It must not continue if enabled repositories fail to refresh. This may severely damage the system. If a failing repository is actually not needed, it must be disabled.
 --
 	*--from* _alias_|_name_|_#_|_URI_::
 		The option can be used multiple times and restricts the upgrade to the specified repositories only. Nevertheless all enabled repositories are visible to the resolver and will be considered to satisfy dependency problems.
@@ -1633,10 +1634,13 @@ Examples: :: {nop}
 
 Other Commands
 ~~~~~~~~~~~~~~
-*versioncmp* (*vcmp*) _version1_ _version2_::
-	Compare the versions supplied as arguments and tell whether version1 is older or newer than version2 or the two version strings match.
+*system-architecture*::
+    Print the detected system architecture.
+
+*versioncmp* (*vcmp*) _VERSION1_ _VERSION2_::
+	Compare the versions supplied as arguments and tell whether VERSION1 is older or newer than VERSION2 or the two version strings match. The exit code is 0 if the versions are equal, 11 if VERSION1 is newer, and 12 if VERSION2 is newer.
 +
-The default output is in human-friendly form. If *--terse* global option is used, the result is an integer number, negative/positive if version1 is older/newer than version2, zero if they match.
+The default output is in human-friendly form. If *--terse* global option is used, the result is an integer number, negative/positive if VERSION1 is older/newer than VERSION2, zero if they match.
 +
 --
 	*-m*, *--match*::

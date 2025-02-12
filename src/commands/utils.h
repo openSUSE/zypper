@@ -6,6 +6,7 @@
 #include "utils/licenses.h"
 #include "utils/download.h"
 #include "utils/source-download.h"
+#include "utils/system-architecture.h"
 #include "utils/purge-kernels.h"
 
 #endif

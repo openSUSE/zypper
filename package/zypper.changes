@@ -1,4 +1,26 @@
 -------------------------------------------------------------------
+Wed Feb 12 16:02:10 CET 2025 - ma@suse.de
+
+- Let zypper dup fail in case of (temporarily) unaccessible repos
+  (bsc#1228434, bsc#1236939, fixes #446)
+- version 1.14.84
+
+-------------------------------------------------------------------
+Mon Feb 10 19:02:26 CET 2025 - ma@suse.de
+
+- New system-architecture command (bsc#1236384)
+  Prints the detected system architecture.
+- version 1.14.83
+
+-------------------------------------------------------------------
+Mon Feb 10 16:19:54 CET 2025 - ma@suse.de
+
+- requires: libzypp >= 17.36.0.
+- Change versioncmp command to return exit code according to the
+  comparison result (#593)
+- version 1.14.82
+
+-------------------------------------------------------------------
 Wed Jan 22 18:05:15 CET 2025 - ma@suse.de
 
 - lr: show the repositories keep-packages flag (bsc#1232458)
