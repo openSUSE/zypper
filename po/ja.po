@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-02-10 18:23+0100\n"
-"PO-Revision-Date: 2025-01-23 08:50+0000\n"
+"PO-Revision-Date: 2025-02-12 04:58+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
 "Language-Team: Japanese <https://l10n.opensuse.org/projects/zypper/master/ja/"
 ">\n"
@@ -5253,7 +5253,7 @@ msgstr ""
 #. translators: command summary: targetos, tos
 #: src/commands/utils/system-architecture.cc:20
 msgid "Print the detected system architecture."
-msgstr ""
+msgstr "検出したシステムアーキテクチャを出力します。"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/utils/targetos.cc:20
@@ -5334,6 +5334,8 @@ msgid ""
 "The exit code is 0 if the versions are equal, 11 if VERSION1 is newer, and "
 "12 if VERSION2 is newer."
 msgstr ""
+"バージョンが等しければ 0 を、バージョン1のほうが新しければ 11 を、"
+"バージョン2のほうが新しければ 12 を、それぞれ終了コードとして設定します。"
 
 #. translators: -m, --match
 #: src/commands/utils/versioncmp.cc:38
