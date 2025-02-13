@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-02-12 16:01+0100\n"
-"PO-Revision-Date: 2025-02-12 14:38+0000\n"
+"PO-Revision-Date: 2025-02-13 11:50+0000\n"
 "Last-Translator: Freek de Kruijf <freek@opensuse.org>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/zypper/master/nl/>\n"
 "Language: nl\n"
@@ -2315,10 +2315,15 @@ msgid ""
 "enabled repositories fail to refresh. This may severely damage the system. "
 "If a failing repository is actually not needed, it must be disabled."
 msgstr ""
+"Vanwege de behandeling van verweesde pakketten hangt dist-upgrade af van de "
+"juiste opzet van opslagruimten meer dan elk ander commando. Het moet niet "
+"doorgaan als ingeschakelde opslagruimten niet willen vernieuwen. Dit kan het "
+"systeem ernstig beschadigen. Als een niet vernieuwde opslagruimte niet echt "
+"nodig is, dan moet het uitgeschakeld worden."
 
 #: src/commands/distupgrade.cc:57
 msgid "See 'man zypper' for more information about this command."
-msgstr ""
+msgstr "Zie 'man zypper' voor meer informatie over dit commando."
 
 #: src/commands/distupgrade.cc:88
 #, c-format, boost-format
