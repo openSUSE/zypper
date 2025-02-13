@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-02-12 16:01+0100\n"
-"PO-Revision-Date: 2025-02-12 04:58+0000\n"
+"PO-Revision-Date: 2025-02-13 03:50+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
 "Language-Team: Japanese <https://l10n.opensuse.org/projects/zypper/master/ja/"
 ">\n"
@@ -2149,10 +2149,17 @@ msgid ""
 "enabled repositories fail to refresh. This may severely damage the system. "
 "If a failing repository is actually not needed, it must be disabled."
 msgstr ""
+"孤立したパッケージを処理する目的から、 dist-upgrade "
+"を使用する場合は、リポジトリ設定に関して特に注意を払わなければなりません。特"
+"に、更新できなくなっているリポジトリがある場合、そのまま続行してはなりません"
+"。これによってシステムに深刻な被害が生じる可能性があるためです。また、更新で"
+"きなくなっているリポジトリが不要なリポジトリであれば、無効化しなければなりま"
+"せん。"
 
 #: src/commands/distupgrade.cc:57
 msgid "See 'man zypper' for more information about this command."
-msgstr ""
+msgstr "このコマンドに関する詳細については、 'man zypper' "
+"で表示されるマニュアルページをお読みください。"
 
 #: src/commands/distupgrade.cc:88
 #, c-format, boost-format
