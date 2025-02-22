@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: zypper.de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-02-12 16:01+0100\n"
-"PO-Revision-Date: 2025-02-16 12:57+0000\n"
+"PO-Revision-Date: 2025-02-22 04:46+0000\n"
 "Last-Translator: Ettore Atalan <atalanttore@googlemail.com>\n"
 "Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/>"
 "\n"
@@ -26,7 +26,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.9.2\n"
+"X-Generator: Weblate 5.10.1\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -1800,8 +1800,8 @@ msgid ""
 "Unless you believe the key in question is still in use, you can remove it "
 "from the rpm database calling '%1%'."
 msgstr ""
-"Ohne dass Sie glauben, dass der Schlüssel in der Frage auch in Verwendung "
-"ist, können Sie ihn aus der rpm-Datenbank mit dem Aufruf '%1%' löschen."
+"Wenn Sie nicht glauben, dass der Schlüssel in Frage noch in Verwendung ist, "
+"können Sie ihn aus der rpm-Datenbank mit dem Aufruf '%1%' löschen."
 
 #. translator: %1% is the number of keys, %2% the name of a repository
 #: src/callbacks/keyring.h:468
