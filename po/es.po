@@ -18,7 +18,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-02-12 16:01+0100\n"
-"PO-Revision-Date: 2025-02-25 13:03+0000\n"
+"PO-Revision-Date: 2025-02-25 14:50+0000\n"
 "Last-Translator: Javier Llorente <javier@opensuse.org>\n"
 "Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
 "\n"
@@ -779,8 +779,8 @@ msgstr[1] "Los siguientes %d productos van a ser ELIMINADOS:"
 #, c-format, boost-format
 msgid "The following application is going to be REMOVED:"
 msgid_plural "The following %d applications are going to be REMOVED:"
-msgstr[0] "La siguiente aplicación será ELIMINADA:"
-msgstr[1] "Las siguientes %d aplicaciones serán ELIMINADAS:"
+msgstr[0] "La siguiente aplicación va a ser ELIMINADA:"
+msgstr[1] "Las siguientes %d aplicaciones van a ser ELIMINADAS:"
 
 #: src/Summary.cc:820
 #, c-format, boost-format
@@ -814,8 +814,8 @@ msgstr[1] "Los siguientes %d productos van a ser actualizados:"
 #, c-format, boost-format
 msgid "The following application is going to be upgraded:"
 msgid_plural "The following %d applications are going to be upgraded:"
-msgstr[0] "La siguiente aplicación será actualizada:"
-msgstr[1] "Las siguientes %d aplicaciones serán actualizadas:"
+msgstr[0] "La siguiente aplicación va a ser actualizada:"
+msgstr[1] "Las siguientes %d aplicaciones van a ser actualizadas:"
 
 #: src/Summary.cc:866
 #, c-format, boost-format
@@ -849,8 +849,8 @@ msgstr[1] "Los siguientes %d productos van a ser desactualizados:"
 #, c-format, boost-format
 msgid "The following application is going to be downgraded:"
 msgid_plural "The following %d applications are going to be downgraded:"
-msgstr[0] "La siguiente aplicación será desactualizada:"
-msgstr[1] "Las siguientes %d aplicaciones serán desactualizadas:"
+msgstr[0] "La siguiente aplicación va a ser desactualizada:"
+msgstr[1] "Las siguientes %d aplicaciones van a ser desactualizadas:"
 
 #: src/Summary.cc:909
 #, c-format, boost-format
@@ -884,8 +884,8 @@ msgstr[1] "Los siguientes %d productos van a ser reinstalados:"
 #, c-format, boost-format
 msgid "The following application is going to be reinstalled:"
 msgid_plural "The following %d applications are going to be reinstalled:"
-msgstr[0] "La siguiente aplicación será reinstalada:"
-msgstr[1] "Las siguientes %d aplicaciones serán reinstaladas:"
+msgstr[0] "Se va a reinstalar la siguiente aplicación:"
+msgstr[1] "Se van a reinstalar las siguientes %d aplicaciones:"
 
 #: src/Summary.cc:1074
 #, c-format, boost-format
@@ -953,11 +953,11 @@ msgid_plural ""
 "The following %d packages are recommended, but will not be installed (only "
 "required packages will be installed):"
 msgstr[0] ""
-"El siguiente paquete es recomendado, pero no será instalado (sólo paquetes "
-"requeridos serán instalados):"
+"Se recomienda el siguiente paquete pero se instalará (sólo se instalarán los "
+"paquetes requeridos):"
 msgstr[1] ""
-"Los siguientes %d paquetes son recomendados, pero no serán instalados (sólo "
-"paquetes requeridos serán instalados):"
+"Se recomiendan los siguientes %d paquetes pero no se instalarán (sólo se "
+"instalarán los paquetes requeridos):"
 
 #: src/Summary.cc:1159
 #, c-format, boost-format
@@ -983,88 +983,85 @@ msgid_plural ""
 "The following %d packages are recommended, but will not be installed due to "
 "conflicts or dependency issues:"
 msgstr[0] ""
-"Se recomienda el siguiente paquete, pero no será instalado debido a "
-"conflictos o problemas de dependencias:"
+"Se recomienda el siguiente paquete pero no se instalará debido a conflictos "
+"o problemas de dependencias:"
 msgstr[1] ""
-"Los siguientes %d paquetes son recomendados, pero no serán instalados debido "
-"a conflictos o problemas de dependencias:"
+"Se recomiendan los siguientes %d paquetes pero no se instalarán debido a "
+"conflictos o problemas de dependencias:"
 
 #: src/Summary.cc:1182
 #, c-format, boost-format
 msgid "The following patch is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d patches are recommended, but will not be installed:"
-msgstr[0] "Se recomienda el siguiente parche, pero no será instalado:"
-msgstr[1] "Se recomiendan los siguientes %d parches, pero no serán instalados:"
+msgstr[0] "Se recomienda el siguiente parche pero no se instalará:"
+msgstr[1] "Se recomiendan los siguientes %d parches pero no se instalarán:"
 
 #: src/Summary.cc:1186
 #, c-format, boost-format
 msgid "The following pattern is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d patterns are recommended, but will not be installed:"
-msgstr[0] "Se recomienda el siguiente patrón, pero no será instalado:"
-msgstr[1] ""
-"Se recomiendan los siguientes %d patrones, pero no serán instalados:"
+msgstr[0] "Se recomienda el siguiente patrón pero no se instalará:"
+msgstr[1] "Se recomiendan los siguientes %d patrones pero no se instalarán:"
 
 #: src/Summary.cc:1190
 #, c-format, boost-format
 msgid "The following product is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d products are recommended, but will not be installed:"
-msgstr[0] "Se recomienda el siguiente producto, pero no será instalado:"
-msgstr[1] ""
-"Se recomiendan los siguientes %d productos, pero no serán instalados:"
+msgstr[0] "Se recomienda el siguiente producto pero no se instalará:"
+msgstr[1] "Se recomiendan los siguientes %d productos pero no se instalarán:"
 
 #: src/Summary.cc:1195
 #, c-format, boost-format
 msgid "The following application is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d applications are recommended, but will not be installed:"
-msgstr[0] "Se recomienda la siguiente aplicación, pero no será instalada:"
+msgstr[0] "Se recomienda la siguiente aplicación, sin embargo no se instalará:"
 msgstr[1] ""
-"Se recomiendan las siguientes %d aplicaciones, pero no serán instaladas:"
+"Se recomiendan las siguientes %d aplicaciones, las cuales no se instalarán:"
 
 #: src/Summary.cc:1228
 #, c-format, boost-format
 msgid "The following package is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d packages are suggested, but will not be installed:"
-msgstr[0] "Se sugiere el siguiente paquete, pero no será instalado:"
-msgstr[1] "Los siguientes %d paquetes son sugeridos, pero no serán instalados:"
+msgstr[0] "Se sugiere el siguiente paquete pero no se instalará:"
+msgstr[1] "Se sugieren los siguientes %d paquetes pero no se instalarán:"
 
 #: src/Summary.cc:1233
 #, c-format, boost-format
 msgid "The following patch is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d patches are suggested, but will not be installed:"
-msgstr[0] "Se sugiere el siguiente parche, sin embargo no será instalado:"
-msgstr[1] ""
-"Se sugieren los siguientes %d parches, los cuales no serán instalados:"
+msgstr[0] "Se sugiere el siguiente parche, sin embargo no se instalará:"
+msgstr[1] "Se sugieren los siguientes %d parches, los cuales no se instalarán:"
 
 #: src/Summary.cc:1238
 #, c-format, boost-format
 msgid "The following pattern is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d patterns are suggested, but will not be installed:"
-msgstr[0] "Se sugiere el siguiente paquete, pero no será instalado:"
-msgstr[1] "Los siguientes %d paquetes son sugeridos, pero no serán instalados:"
+msgstr[0] "Se sugiere el siguiente paquete, sin embargo no se instalará:"
+msgstr[1] "Se sugieren los siguientes %d paquetes, los cuales no se instalarán:"
 
 #: src/Summary.cc:1243
 #, c-format, boost-format
 msgid "The following product is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d products are suggested, but will not be installed:"
-msgstr[0] "Se sugiere el siguiente producto, pero no será instalado:"
-msgstr[1] "Se sugieren los siguientes %d productos, pero no serán instalados:"
+msgstr[0] "Se sugiere el siguiente producto, sin embargo no se instalará:"
+msgstr[1] "Se sugieren los siguientes %d productos, los cuales no se instalarán:"
 
 #: src/Summary.cc:1249
 #, c-format, boost-format
 msgid "The following application is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d applications are suggested, but will not be installed:"
-msgstr[0] "Se sugiere la siguiente aplicación, pero no será instalada:"
+msgstr[0] "Se sugiere la siguiente aplicación, sin embargo no se instalará:"
 msgstr[1] ""
-"Se sugieren las siguientes %d aplicaciones, pero no serán instaladas:"
+"Se sugieren las siguientes %d aplicaciones, las cuales no se instalarán:"
 
 #: src/Summary.cc:1274
 #, c-format, boost-format
@@ -1203,23 +1200,22 @@ msgstr[1] ""
 #, c-format, boost-format
 msgid "The following package update will NOT be installed:"
 msgid_plural "The following %d package updates will NOT be installed:"
-msgstr[0] "La siguiente actualización NO será instalada:"
-msgstr[1] "Las siguientes %d actualizaciones NO serán instaladas:"
+msgstr[0] "NO se instalará la siguiente actualización:"
+msgstr[1] "NO se instalarán las siguientes %d actualizaciones:"
 
 #: src/Summary.cc:1465
 #, c-format, boost-format
 msgid "The following product update will NOT be installed:"
 msgid_plural "The following %d product updates will NOT be installed:"
-msgstr[0] "La siguiente actualización de producto NO será instalada:"
-msgstr[1] "Las siguientes %d actualizaciones de producto NO serán instaladas:"
+msgstr[0] "NO se instalará la siguiente actualización de producto:"
+msgstr[1] "NO se instalarán las siguientes %d actualizaciones de producto:"
 
 #: src/Summary.cc:1471
 #, c-format, boost-format
 msgid "The following application update will NOT be installed:"
 msgid_plural "The following %d application updates will NOT be installed:"
-msgstr[0] "La siguiente actualización de aplicación NO será instalada:"
-msgstr[1] ""
-"Las siguientes %d actualizaciones de aplicación NO serán instaladas:"
+msgstr[0] "NO se instalará la siguiente actualización de aplicación:"
+msgstr[1] "NO se instalarán las siguientes %d actualizaciones de aplicaciones:"
 
 #: src/Summary.cc:1504
 #, c-format, boost-format
@@ -1300,12 +1296,12 @@ msgstr "Cambio de tamaño de la instalación del paquete:"
 #. translator: rendered as "349.1 MiB  required by packages that will be installed"
 #: src/Summary.cc:1615
 msgid "required by packages that will be installed"
-msgstr "requerido por los paquetes que serán instalados"
+msgstr "requerido por los paquetes que se instalarán"
 
 #. translator: rendered as "347.3 MiB  released by packages that will be removed"
 #: src/Summary.cc:1617
 msgid "released by packages that will be removed"
-msgstr "liberatos por los paquetes que serán eliminados"
+msgstr "liberados por los paquetes que van a ser eliminados"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
 #: src/Summary.cc:1638
@@ -1920,7 +1916,7 @@ msgstr "Omitir recuperación del archivo y cancelar la operación actual."
 #. help text for the "Abort, retry, ignore?" prompt for media errors
 #: src/callbacks/media.cc:30
 msgid "Try to retrieve the file again."
-msgstr "Intentar recuperar el archivo de nuevo."
+msgstr "Intente obtener el archivo de nuevo."
 
 #. help text for the "Abort, retry, ignore?" prompt for media errors
 #: src/callbacks/media.cc:32
@@ -1933,7 +1929,7 @@ msgstr ""
 #. help text for the "Abort, retry, ignore?" prompt for media errors
 #: src/callbacks/media.cc:34
 msgid "Change current base URI and try retrieving the file again."
-msgstr "Cambiar el URI base actual e intentar recuperar el archivo de nuevo."
+msgstr "Cambie el URI base actual e intente obtener el archivo de nuevo."
 
 #. translators: this is a prompt label, will appear as "New URI: "
 #: src/callbacks/media.cc:49
@@ -2049,7 +2045,7 @@ msgstr "Contraseña"
 
 #: src/callbacks/repo.h:60
 msgid "Retrieving delta"
-msgstr "Recuperando delta"
+msgstr "Obteniendo delta"
 
 #. translators: this text is a progress display label e.g. "Applying delta foo [42%]"
 #: src/callbacks/repo.h:85
@@ -2063,7 +2059,7 @@ msgstr "En caché %1%"
 
 #: src/callbacks/repo.h:139
 msgid "Retrieving:"
-msgstr "Recuperando:"
+msgstr "Obteniendo:"
 
 #: src/callbacks/repo.h:225
 msgid "Signature verification failed"
@@ -4574,7 +4570,7 @@ msgstr "Actualizando el servicio '%s'."
 #: src/commands/services/common.cc:136 src/commands/services/common.cc:146
 #, c-format, boost-format
 msgid "Problem retrieving the repository index file for service '%s':"
-msgstr "Problema al recuperar el índice del repositorio para el servicio '%s':"
+msgstr "Problema al obtener el índice del repositorio para el servicio '%s':"
 
 #: src/commands/services/common.cc:138 src/commands/services/refresh.cc:226
 #: src/repos.cc:1726
@@ -5971,7 +5967,7 @@ msgstr "Instalando el paquete de origen %s-%s"
 #: src/misc.cc:442
 #, c-format, boost-format
 msgid "Source package %s-%s successfully retrieved."
-msgstr "Paquete de origen %s-%s recuperado correctamente."
+msgstr "Paquete fuente %s-%s obtenido correctamente."
 
 #: src/misc.cc:448
 #, c-format, boost-format
@@ -6062,7 +6058,7 @@ msgstr "Forzando actualización de metadatos en bruto"
 #: src/repos.cc:290
 #, c-format, boost-format
 msgid "Retrieving repository '%s' metadata"
-msgstr "Recuperando los metadatos del repositorio '%s'"
+msgstr "Obteniendo los metadatos del repositorio '%s'"
 
 #: src/repos.cc:314
 #, c-format, boost-format
@@ -6077,7 +6073,7 @@ msgstr "Error al inhabilitar el repositorio '%s'."
 #: src/repos.cc:346
 #, c-format, boost-format
 msgid "Problem retrieving files from '%s'."
-msgstr "Error al recuperar los archivos desde '%s'."
+msgstr "Error al obtener los archivos de '%s'."
 
 #: src/repos.cc:347 src/repos.cc:1865 src/solve-commit.cc:989
 #: src/solve-commit.cc:1020 src/solve-commit.cc:1044
@@ -6464,7 +6460,7 @@ msgstr ""
 #: src/repos.cc:1787
 #, c-format, boost-format
 msgid "Retrieving repository '%s' data..."
-msgstr "Recuperando los datos del repositorio '%s'..."
+msgstr "Obteniendo los datos del repositorio '%s'..."
 
 #: src/repos.cc:1795
 #, c-format, boost-format
@@ -6507,9 +6503,9 @@ msgid ""
 "server has actually discontinued to support the repository."
 msgstr ""
 "Los metadatos del repositorio han caducado. Compruebe si autorefresh está "
-"activado (zypper lr). Si no lo está, actualice manualmente el repositorio "
-"(zypper ref). Si esto no resuelve el problema, podría deberse a que usa un "
-"duplicado dañado o a que el servidor ya no admita el repositorio."
+"activado (zypper lr). Si no lo está, actualice manualmente el repositorio ("
+"zypper ref). Si esto no resuelve el problema, podría deberse a que usa una "
+"réplica rota o a que el servidor haya dejado de mantener el repositorio."
 
 #: src/repos.cc:1855
 msgid "Reading installed packages..."
@@ -6858,7 +6854,7 @@ msgstr "(ejecución de prueba)"
 
 #: src/solve-commit.cc:988 src/solve-commit.cc:1021
 msgid "Problem retrieving the package file from the repository:"
-msgstr "Problema al recuperar el paquete desde el repositorio:"
+msgstr "Problema al obtener el paquete del repositorio:"
 
 #. translators: the first %s is 'zypper refresh' and the second is repo alias
 #: src/solve-commit.cc:1018
@@ -7302,7 +7298,7 @@ msgid ""
 "Abbreviated commandline options will not be supported in future versions. "
 "Please use %2% instead of %1% ."
 msgstr ""
-"Las opciones de línea de órdenes abreviadas no serán compatibles en "
+"Las opciones abreviadas de línea de órdenes no serán compatibles en "
 "versiones futuras. Utilice %2% en lugar de %1%."
 
 #. translators: %s is "help" or "zypper help" depending on whether
@@ -7475,7 +7471,7 @@ msgstr "Puede que se esté quedando sin espacio en el disco."
 
 #: src/utils/misc.cc:652
 msgid "Problem retrieving the specified RPM file"
-msgstr "Problema al recuperar el archivo RPM especificado"
+msgstr "Problema al obtener el archivo RPM especificado"
 
 #: src/utils/misc.cc:653
 msgid "Please check whether the file is accessible."
