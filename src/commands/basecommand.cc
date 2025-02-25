@@ -169,6 +169,10 @@ int ZypperBaseCommand::defaultSystemSetup( Zypper &zypper, SetupSystemFlags flag
     init_target( zypper );
     if ( zypper.exitCode() != ZYPPER_EXIT_OK )
       return zypper.exitCode();
+  } else {
+    // bsc#1237044: Even if we don't launch a Target, announce
+    // a --root so components refer to the right context.
+    ZConfig::instance().announceSystemRoot( zypper.config().root_dir );
   }
 
   if ( flags_r.testFlag( InitRepos ) ) {
