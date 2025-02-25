@@ -18,16 +18,16 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-02-12 16:01+0100\n"
-"PO-Revision-Date: 2024-10-12 16:48+0000\n"
-"Last-Translator: Moreno <hibarioath@proton.me>\n"
-"Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/"
-">\n"
+"PO-Revision-Date: 2025-02-25 13:03+0000\n"
+"Last-Translator: Javier Llorente <javier@opensuse.org>\n"
+"Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
+"\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.7.2\n"
+"X-Generator: Weblate 5.10.1\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -892,56 +892,57 @@ msgstr[1] "Las siguientes %d aplicaciones serán reinstaladas:"
 msgid "The following recommended package was automatically selected:"
 msgid_plural ""
 "The following %d recommended packages were automatically selected:"
-msgstr[0] "Se seleccionó automáticamente el siguiente paquete recomendado:"
+msgstr[0] "Se ha seleccionado automáticamente el siguiente paquete recomendado:"
 msgstr[1] ""
-"Los siguientes %d paquetes recomendados fueron seleccionados automáticamente:"
+"Se han seleccionado automáticamente los siguientes %d paquetes recomendados:"
 
 #: src/Summary.cc:1079
 #, c-format, boost-format
 msgid "The following recommended patch was automatically selected:"
 msgid_plural ""
 "The following %d recommended patches were automatically selected:"
-msgstr[0] "Se seleccionó automáticamente el siguiente parche recomendado:"
+msgstr[0] "Se ha seleccionado automáticamente el siguiente parche recomendado:"
 msgstr[1] ""
-"Los siguientes %d parches recomendados fueron seleccionados automáticamente:"
+"Se han seleccionado automáticamente los siguientes %d parches recomendados:"
 
 #: src/Summary.cc:1084
 #, c-format, boost-format
 msgid "The following recommended pattern was automatically selected:"
 msgid_plural ""
 "The following %d recommended patterns were automatically selected:"
-msgstr[0] "Se seleccionó automáticamente el siguiente patrón recomendado:"
+msgstr[0] "Se ha seleccionado automáticamente el siguiente patrón recomendado:"
 msgstr[1] ""
-"Los siguientes %d patrones recomendados fueron seleccionados automáticamente:"
+"Se han seleccionado automáticamente los siguientes %d patrones recomendados:"
 
 #: src/Summary.cc:1089
 #, c-format, boost-format
 msgid "The following recommended product was automatically selected:"
 msgid_plural ""
 "The following %d recommended products were automatically selected:"
-msgstr[0] "Se seleccionó automáticamente el siguiente producto recomendado:"
+msgstr[0] "Se ha seleccionado automáticamente el siguiente producto recomendado:"
 msgstr[1] ""
-"Los siguientes %d productos recomendados fueron seleccionados "
-"automáticamente:"
+"Se han seleccionado automáticamente los siguientes %d productos recomendados:"
 
 #: src/Summary.cc:1094
 #, c-format, boost-format
 msgid "The following recommended source package was automatically selected:"
 msgid_plural ""
 "The following %d recommended source packages were automatically selected:"
-msgstr[0] "Se seleccionó automáticamente el siguiente paquete recomendado:"
+msgstr[0] ""
+"Se ha seleccionado automáticamente el siguiente paquete fuente recomendado:"
 msgstr[1] ""
-"Los siguientes %d paquetes recomendados fueron seleccionados automáticamente:"
+"Se han seleccionado automáticamente los siguientes %d paquetes fuente "
+"recomendados:"
 
 #: src/Summary.cc:1100
 #, c-format, boost-format
 msgid "The following recommended application was automatically selected:"
 msgid_plural ""
 "The following %d recommended applications were automatically selected:"
-msgstr[0] "Se seleccionó automáticamente la aplicación recomendada:"
+msgstr[0] "Se ha seleccionado automáticamente la aplicación recomendada:"
 msgstr[1] ""
-"Las siguientes %d aplicaciones recomendadas fueron seleccionadas "
-"automáticamente:"
+"Se han seleccionado automáticamente las siguientes %d aplicaciones "
+"recomendadas:"
 
 #: src/Summary.cc:1147
 #, c-format, boost-format
@@ -967,11 +968,11 @@ msgid_plural ""
 "The following %d packages are recommended, but will not be installed because "
 "they are unwanted (were manually removed before):"
 msgstr[0] ""
-"Se recomienda el siguiente paquete, pero no será instalado por no ser "
-"requerido (fue eliminado manualmente):"
+"Se recomienda el siguiente paquete, pero no se instalará por no ser "
+"requerido (se ha eliminado manualmente antes):"
 msgstr[1] ""
-"Los siguientes %d paquetes son recomendados, pero no serán instalados por no "
-"ser requeridos (fueron eliminados manualmente):"
+"Se recomiendan los siguientes %d paquetes, pero no se instalarán por no ser "
+"requeridos (se han eliminado manualmente antes):"
 
 #: src/Summary.cc:1169
 #, c-format, boost-format
@@ -1178,11 +1179,11 @@ msgid_plural ""
 "The following %d packages were discontinued and have been superseded by a "
 "new packages with different names."
 msgstr[0] ""
-"El siguiente paquete se ha descontinuado y ha sido reemplazado por un nuevo "
+"El siguiente paquete se ha descatalogado y ha sido reemplazado por un nuevo "
 "paquete con un nombre diferente."
 msgstr[1] ""
-"Los siguientes paquetes %d fueron descontinuados y reemplazados por nuevos "
-"paquetes con nombres diferentes."
+"Los siguientes paquetes %d se han descatalogado y se han reemplazado por "
+"nuevos paquetes con nombres diferentes."
 
 #: src/Summary.cc:1435
 msgid ""
@@ -1818,8 +1819,8 @@ msgid ""
 "The repository metadata introducing the new keys have been signed and "
 "validated by the trusted key:"
 msgstr ""
-"Los metadatos del repositorio estrenando las nuevas claves fueron firmados y "
-"validados por una clave confiable:"
+"Los metadatos del repositorio que vienen con las nuevas claves se han "
+"firmado y validado por la clave de confianza:"
 
 #: src/callbacks/keyring.h:503
 #, c-format, boost-format
@@ -6272,7 +6273,7 @@ msgstr "Todos los repositorios se han borrado."
 #: src/repos.cc:1167
 msgid "This is a changeable read-only media (CD/DVD), disabling autorefresh."
 msgstr ""
-"Este es un medio de solo lectura intercambiable (CD/DVD). Inhabilitando la "
+"Soporte modificable de sólo lectura (CD/DVD), que desactiva la función de "
 "actualización automática."
 
 #: src/repos.cc:1188
