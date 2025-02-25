@@ -18,7 +18,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-02-12 16:01+0100\n"
-"PO-Revision-Date: 2025-02-25 14:50+0000\n"
+"PO-Revision-Date: 2025-02-25 17:50+0000\n"
 "Last-Translator: Javier Llorente <javier@opensuse.org>\n"
 "Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
 "\n"
@@ -723,7 +723,7 @@ msgstr[1] "Los siguientes %d parches NUEVOS van a ser instalados:"
 #, c-format, boost-format
 msgid "The following NEW pattern is going to be installed:"
 msgid_plural "The following %d NEW patterns are going to be installed:"
-msgstr[0] "El siguiente patrón NUEVO va a ser instalado:"
+msgstr[0] "Se va a instalar el siguiente patrón NUEVO:"
 msgstr[1] "Los siguientes %d patrones NUEVOS van a ser instalados:"
 
 #: src/Summary.cc:740
@@ -765,8 +765,8 @@ msgstr[1] "Los siguientes %d parches van a ser ELIMINADOS:"
 #, c-format, boost-format
 msgid "The following pattern is going to be REMOVED:"
 msgid_plural "The following %d patterns are going to be REMOVED:"
-msgstr[0] "El siguiente patrón va a ser ELIMINADO:"
-msgstr[1] "Los siguientes %d patrones van a ser ELIMINADOS:"
+msgstr[0] "Se va a ELIMINAR el siguiente patrón:"
+msgstr[1] "Se van a ELIMINAR los siguientes %d patrones:"
 
 #: src/Summary.cc:791
 #, c-format, boost-format
@@ -800,8 +800,8 @@ msgstr[1] "Los siguientes %d parches van a ser actualizados:"
 #, c-format, boost-format
 msgid "The following pattern is going to be upgraded:"
 msgid_plural "The following %d patterns are going to be upgraded:"
-msgstr[0] "El siguiente patrón va a ser actualizado:"
-msgstr[1] "Los siguientes %d patrones van a ser actualizados:"
+msgstr[0] "Se va a actualizar el siguiente patrón:"
+msgstr[1] "Se van a actualizar los siguientes %d patrones:"
 
 #: src/Summary.cc:836
 #, c-format, boost-format
@@ -835,8 +835,8 @@ msgstr[1] "Los siguientes %d parches van a ser desactualizados:"
 #, c-format, boost-format
 msgid "The following pattern is going to be downgraded:"
 msgid_plural "The following %d patterns are going to be downgraded:"
-msgstr[0] "El siguiente patrón va a ser desactualizado:"
-msgstr[1] "Los siguientes %d patrones van a ser desactualizados:"
+msgstr[0] "Se va a desactualizar el siguiente patrón:"
+msgstr[1] "Se van a desactualizar los siguientes %d patrones:"
 
 #: src/Summary.cc:881
 #, c-format, boost-format
@@ -870,8 +870,8 @@ msgstr[1] "Los siguientes %d parches van a ser reinstalados:"
 #, c-format, boost-format
 msgid "The following pattern is going to be reinstalled:"
 msgid_plural "The following %d patterns are going to be reinstalled:"
-msgstr[0] "El siguiente patrón va a ser reinstalado:"
-msgstr[1] "Los siguientes %d patrones van a ser reinstalados:"
+msgstr[0] "Se va a reinstalar el siguiente patrón:"
+msgstr[1] "Se van a reinstalar los siguientes %d patrones:"
 
 #: src/Summary.cc:924
 #, c-format, boost-format
@@ -953,11 +953,11 @@ msgid_plural ""
 "The following %d packages are recommended, but will not be installed (only "
 "required packages will be installed):"
 msgstr[0] ""
-"Se recomienda el siguiente paquete pero se instalará (sólo se instalarán los "
-"paquetes requeridos):"
-msgstr[1] ""
-"Se recomiendan los siguientes %d paquetes pero no se instalarán (sólo se "
+"Se recomienda el siguiente paquete, sin embargo no se instalará (sólo se "
 "instalarán los paquetes requeridos):"
+msgstr[1] ""
+"Se recomiendan los siguientes %d paquetes, los cuales no se instalarán (sólo "
+"se instalarán los paquetes requeridos):"
 
 #: src/Summary.cc:1159
 #, c-format, boost-format
@@ -983,35 +983,36 @@ msgid_plural ""
 "The following %d packages are recommended, but will not be installed due to "
 "conflicts or dependency issues:"
 msgstr[0] ""
-"Se recomienda el siguiente paquete pero no se instalará debido a conflictos "
-"o problemas de dependencias:"
-msgstr[1] ""
-"Se recomiendan los siguientes %d paquetes pero no se instalarán debido a "
+"Se recomienda el siguiente paquete, sin embargo no se instalará debido a "
 "conflictos o problemas de dependencias:"
+msgstr[1] ""
+"Se recomiendan los siguientes %d paquetes, sin embargo no se instalarán "
+"debido a conflictos o problemas de dependencias:"
 
 #: src/Summary.cc:1182
 #, c-format, boost-format
 msgid "The following patch is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d patches are recommended, but will not be installed:"
-msgstr[0] "Se recomienda el siguiente parche pero no se instalará:"
-msgstr[1] "Se recomiendan los siguientes %d parches pero no se instalarán:"
+msgstr[0] "Se recomienda el siguiente parche, sin embargo no se instalará:"
+msgstr[1] "Se recomiendan los siguientes %d parches, los cuales no se instalarán:"
 
 #: src/Summary.cc:1186
 #, c-format, boost-format
 msgid "The following pattern is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d patterns are recommended, but will not be installed:"
-msgstr[0] "Se recomienda el siguiente patrón pero no se instalará:"
-msgstr[1] "Se recomiendan los siguientes %d patrones pero no se instalarán:"
+msgstr[0] "Se recomienda el siguiente patrón, sin embargo no se instalará:"
+msgstr[1] "Se recomiendan los siguientes %d patrones, los cuales no se instalarán:"
 
 #: src/Summary.cc:1190
 #, c-format, boost-format
 msgid "The following product is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d products are recommended, but will not be installed:"
-msgstr[0] "Se recomienda el siguiente producto pero no se instalará:"
-msgstr[1] "Se recomiendan los siguientes %d productos pero no se instalarán:"
+msgstr[0] "Se recomienda el siguiente producto, sin embargo no se instalará:"
+msgstr[1] ""
+"Se recomiendan los siguientes %d productos, los cuales no se instalarán:"
 
 #: src/Summary.cc:1195
 #, c-format, boost-format
@@ -1027,8 +1028,8 @@ msgstr[1] ""
 msgid "The following package is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d packages are suggested, but will not be installed:"
-msgstr[0] "Se sugiere el siguiente paquete pero no se instalará:"
-msgstr[1] "Se sugieren los siguientes %d paquetes pero no se instalarán:"
+msgstr[0] "Se sugiere el siguiente paquete, sin embargo no se instalará:"
+msgstr[1] "Se sugieren los siguientes %d paquetes, los cuales no se instalarán:"
 
 #: src/Summary.cc:1233
 #, c-format, boost-format
@@ -1081,8 +1082,8 @@ msgstr[1] "Los siguientes %d parches van a cambiar la arquitectura:"
 #, c-format, boost-format
 msgid "The following pattern is going to change architecture:"
 msgid_plural "The following %d patterns are going to change architecture:"
-msgstr[0] "El siguiente patrón va a cambiar la arquitectura:"
-msgstr[1] "Los siguientes %d patrones van a cambiar la arquitectura:"
+msgstr[0] "El siguiente patrón va a cambiar de arquitectura:"
+msgstr[1] "Los siguientes %d patrones van a cambiar de arquitectura:"
 
 #: src/Summary.cc:1289
 #, c-format, boost-format
