@@ -1,7 +1,7 @@
 #
 # spec file for package zypper.spec
 #
-# Copyright (c) 2024 SUSE LLC
+# Copyright (c) 2025 SUSE LLC
 #
 # All modifications and additions to the file contributed by third parties
 # remain the property of their copyright owners, unless otherwise agreed
@@ -41,7 +41,6 @@ BuildRequires:  rubygem(asciidoctor)
 # TUI library which is built and shipped with libzypp-devel
 BuildRequires:  libzypp-tui-devel >= 1
 
-BuildRoot:      %{_tmppath}/%{name}-%{version}-build
 Summary:        Command line software manager using libzypp
 License:        GPL-2.0-or-later
 Group:          System/Packages
@@ -78,7 +77,7 @@ Requires:       %{_bindir}/grep
 Requires:       /bin/bash
 BuildArch:      noarch
 
-%description -n zypper-log
+%description log
 CLI for accessing the zypper logfile
 
 %package aptitude
@@ -179,7 +178,6 @@ done
 %endif
 
 %files -f zypper.lang
-%defattr(-,root,root)
 %if 0%{?suse_version} >= 1500
 %license COPYING
 %endif
@@ -210,7 +208,6 @@ done
 %ghost %config(noreplace) %attr (640,root,root) %{_var}/log/zypper.log
 
 %files log
-%defattr(-,root,root)
 %{_sbindir}/zypper-log
 %{_mandir}/man8/zypper-log.8%{?ext_man}
 
@@ -222,7 +219,6 @@ done
 %config(noreplace) %{_sysconfdir}/zypp/apt-packagemap.d/*
 
 %files needs-restarting
-%defattr(-,root,root)
 %{_bindir}/needs-restarting
 %{_mandir}/man1/needs-restarting.1%{?ext_man}
 
