@@ -24,7 +24,7 @@
 
 using media::MediaChangeReport;
 using media::DownloadProgressReport;
-
+using media::CommitPreloadReport;
 ///////////////////////////////////////////////////////////////////
 namespace ZmartRecipients
 {
@@ -178,6 +178,145 @@ namespace ZmartRecipients
     double _last_drate_avg;
   };
 
+  struct CommitPreloadReportReceiver : public ExitGuardedReceiveReport<media::CommitPreloadReport>
+  {
+    CommitPreloadReportReceiver()
+      : _be_quiet(false)
+    {}
+
+    void start( const UserData & ) override
+    {
+      Out & out = Zypper::instance().out();
+      out.progressStart("preload-progress", _("Preloading Packages") );
+      _last_drate_avg = -1;
+    }
+
+    bool progress( int value, const UserData &userData ) override
+    {
+      Zypper & zypper( Zypper::instance() );
+
+      if ( zypper.exitRequested() )
+      {
+        DBG << "received exit request" << std::endl;
+        return false;
+      }
+
+      if (_be_quiet)
+        return true;
+
+      zypp::str::Str outstr;
+
+      outstr << _("Preloading Packages:") << " ";
+      outstr << '[';
+      if ( userData.haskey ("bytesReceived") && userData.haskey ("bytesRequired") )
+        outstr << " (" << zypp::ByteCount( userData.get<double>("bytesReceived") ) << " / "<<zypp::ByteCount( userData.get<double>("bytesRequired") )<<")";
+      if ( userData.haskey("dbps_current") )
+        outstr << " (" << zypp::ByteCount( userData.get<double>("dbps_current") ) << "/s)";
+      outstr << ']';
+
+      zypper.out().progress("preload-progress", outstr, value );
+      if ( userData.haskey("dbps_avg") )
+        _last_drate_avg = userData.get<double>("dbps_avg");
+      return true;
+    }
+
+    /**
+     * File just started to download
+     */
+    void fileStart (
+      const Pathname &localfile,
+      const UserData &userData
+    ) override {
+      if ( _be_quiet )
+        return;
+
+      zypp::str::Str outstr;
+      outstr << _("Preloading:") << " ";
+      if ( Zypper::instance().out().verbosity() == Out::DEBUG  && userData.haskey("Url") )
+        outstr << userData.get<zypp::Url>("Url");
+      else
+        outstr << localfile.basename();
+
+      Zypper::instance().out().info() << ( ColorContext::MSG_STATUS << outstr );
+    }
+
+    /**
+     * File finished to download, Error indicated if it
+     * was successful for not.
+     */
+    void fileDone (
+        const Pathname &localfile
+      , Error error
+      , const UserData &userData
+    ) override {
+      if ( _be_quiet )
+        return;
+
+      zypp::str::Str outstr;
+      outstr << _("Preloading:") << " ";
+      if ( Zypper::instance().out().verbosity() == Out::DEBUG && userData.haskey("Url") )
+        outstr << userData.get<zypp::Url>("Url");
+      else
+        outstr << localfile.basename();
+      outstr << ' ';
+      outstr << '[';
+      switch ( error ) {
+        case zypp::media::CommitPreloadReport::NO_ERROR: {
+          // Translator: prefetch progress bar result: ".............[done]"
+          outstr << _("done");
+          break;
+        }
+        case zypp::media::CommitPreloadReport::NOT_FOUND: {
+          // Translator: prefetch progress bar result: "........[not found]"
+          outstr << CHANGEString( _("not found") );
+          break;
+        }
+        case zypp::media::CommitPreloadReport::IO:
+        case zypp::media::CommitPreloadReport::ACCESS_DENIED:
+        case zypp::media::CommitPreloadReport::ERROR: {
+          // Translator: prefetch progress bar result: "............[error]"
+          outstr << NEGATIVEString( _("error") );
+          break;
+        }
+      }
+      outstr << ']';
+
+      Zypper::instance().out().info() << ( ColorContext::MSG_STATUS << outstr );
+    }
+
+    void finish( Result res, const UserData & ) override
+    {
+      if (_be_quiet)
+        return;
+
+
+      zypp::str::Str outstr;
+      outstr << _("Preload finished.");
+      outstr << ' ';
+      outstr << '[';
+      switch ( res ) {
+        case Result::SUCCESS:
+          outstr << _("success");
+          break;
+        case Result::MISS:
+          outstr << NEGATIVEString( _("files missing") );
+          break;
+      }
+
+      if ( _last_drate_avg > 0 ) {
+        outstr << " (" << zypp::ByteCount(_last_drate_avg) << "/s) ";
+      }
+      outstr << ']';
+
+      Zypper::instance().out().progressEnd("preload-progress", outstr, false);
+    }
+
+  private:
+    bool _be_quiet;
+    double _last_drate_avg;
+  };
+
+
 
   struct AuthenticationReportReceiver : public ExitGuardedReceiveReport<media::AuthenticationReport>
   {
@@ -195,6 +334,7 @@ class MediaCallbacks {
     ZmartRecipients::MediaChangeReportReceiver _mediaChangeReport;
     ZmartRecipients::DownloadProgressReportReceiver _mediaDownloadReport;
     ZmartRecipients::AuthenticationReportReceiver _mediaAuthenticationReport;
+    ZmartRecipients::CommitPreloadReportReceiver _mediaPreloadReport;
   public:
     MediaCallbacks()
     {
@@ -202,6 +342,7 @@ class MediaCallbacks {
       _mediaChangeReport.connect();
       _mediaDownloadReport.connect();
       _mediaAuthenticationReport.connect();
+      _mediaPreloadReport.connect();
     }
 
     ~MediaCallbacks()
@@ -209,6 +350,7 @@ class MediaCallbacks {
       _mediaChangeReport.disconnect();
       _mediaDownloadReport.disconnect();
       _mediaAuthenticationReport.disconnect();
+      _mediaPreloadReport.disconnect();
     }
 };
 
