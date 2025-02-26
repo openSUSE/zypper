@@ -136,9 +136,8 @@ cmake $CMAKE_FLAGS \
 %make_build
 
 %check
-pushd build/tests
+cd build/tests
 ctest --output-on-failure .
-popd
 
 %install
 cd build
