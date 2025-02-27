@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-12 16:01+0100\n"
+"POT-Creation-Date: 2025-02-27 23:35+0100\n"
 "PO-Revision-Date: 2025-02-13 03:50+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
 "Language-Team: Japanese <https://l10n.opensuse.org/projects/zypper/master/ja/"
@@ -372,7 +372,7 @@ msgstr "オプション '%1%' を '%2%' に保存しました。"
 msgid "Failed to save option."
 msgstr "オプションの保存に失敗しました。"
 
-#: src/PackageArgs.cc:159
+#: src/PackageArgs.cc:157
 #, c-format, boost-format
 msgid ""
 "'%s' install modifier must not be used without a package name or capability."
@@ -380,7 +380,7 @@ msgstr ""
 "'%s' のインストール修飾子は、パッケージ名もしくは能力とともに使用しなければな"
 "りません。"
 
-#: src/PackageArgs.cc:169
+#: src/PackageArgs.cc:167
 #, c-format, boost-format
 msgid ""
 "'%s' remove modifier must not be used without a package name or capability."
@@ -388,12 +388,12 @@ msgstr ""
 "'%s' のアンインストール修飾子は、パッケージ名もしくは能力とともに使用しなけれ"
 "ばなりません。"
 
-#: src/PackageArgs.cc:221
+#: src/PackageArgs.cc:219
 #, c-format, boost-format
 msgid "'%s' not found in package names. Trying '%s'."
 msgstr "'%s' というパッケージ名は見つかりません。 '%s' として試してみます。"
 
-#: src/PackageArgs.cc:231
+#: src/PackageArgs.cc:229
 #, c-format, boost-format
 msgid "'%s' is not a package name or capability."
 msgstr "'%s' は正しいパッケージ名でも能力でもありません。"
@@ -1119,7 +1119,7 @@ msgstr "利用可能"
 
 #. translators: used as 'tag:' (i.e. followed by ':')
 #. translators: property name; short; used like "Name: value"
-#: src/Summary.cc:1523 src/info.cc:446 src/info.cc:539 src/info.cc:659
+#: src/Summary.cc:1523 src/info.cc:447 src/info.cc:540 src/info.cc:660
 msgid "Installed"
 msgstr "インストール済み"
 
@@ -1336,7 +1336,7 @@ msgstr "PackageKitが稼働中です(おそらくビジーです)。"
 msgid "Try again?"
 msgstr "再試行しますか？"
 
-#: src/Zypper.cc:244 src/Zypper.cc:721 src/commands/basecommand.cc:289
+#: src/Zypper.cc:244 src/Zypper.cc:721 src/commands/basecommand.cc:293
 msgid "Unexpected exception."
 msgstr "予期しない例外が発生しました。"
 
@@ -2149,17 +2149,17 @@ msgid ""
 "enabled repositories fail to refresh. This may severely damage the system. "
 "If a failing repository is actually not needed, it must be disabled."
 msgstr ""
-"孤立したパッケージを処理する目的から、 dist-upgrade "
-"を使用する場合は、リポジトリ設定に関して特に注意を払わなければなりません。特"
-"に、更新できなくなっているリポジトリがある場合、そのまま続行してはなりません"
-"。これによってシステムに深刻な被害が生じる可能性があるためです。また、更新で"
-"きなくなっているリポジトリが不要なリポジトリであれば、無効化しなければなりま"
-"せん。"
+"孤立したパッケージを処理する目的から、 dist-upgrade を使用する場合は、リポジ"
+"トリ設定に関して特に注意を払わなければなりません。特に、更新できなくなってい"
+"るリポジトリがある場合、そのまま続行してはなりません。これによってシステムに"
+"深刻な被害が生じる可能性があるためです。また、更新できなくなっているリポジト"
+"リが不要なリポジトリであれば、無効化しなければなりません。"
 
 #: src/commands/distupgrade.cc:57
 msgid "See 'man zypper' for more information about this command."
-msgstr "このコマンドに関する詳細については、 'man zypper' "
-"で表示されるマニュアルページをお読みください。"
+msgstr ""
+"このコマンドに関する詳細については、 'man zypper' で表示されるマニュアルペー"
+"ジをお読みください。"
 
 #: src/commands/distupgrade.cc:88
 #, c-format, boost-format
@@ -2635,7 +2635,7 @@ msgstr[0] "%lu 個のパッケージロックを削除しました。"
 #. translators: name (general header)
 #: src/commands/locks/list.cc:133 src/commands/repos/list.cc:49
 #: src/commands/repos/list.cc:236 src/commands/services/list.cc:107
-#: src/info.cc:92 src/info.cc:562 src/info.cc:797 src/locales.cc:201
+#: src/info.cc:92 src/info.cc:563 src/info.cc:798 src/locales.cc:201
 #: src/search.cc:48 src/search.cc:199 src/search.cc:304 src/search.cc:458
 #: src/search.cc:508 src/update.cc:789 src/utils/misc.cc:324
 msgid "Name"
@@ -2649,7 +2649,7 @@ msgstr "適合条件"
 #. translators: type (general header)
 #: src/commands/locks/list.cc:136 src/commands/repos/list.cc:63
 #: src/commands/repos/list.cc:285 src/commands/services/list.cc:116
-#: src/info.cc:563 src/search.cc:50 src/search.cc:202
+#: src/info.cc:564 src/search.cc:50 src/search.cc:202
 msgid "Type"
 msgstr "種類"
 
@@ -3223,57 +3223,62 @@ msgstr "補足するものを検索します。"
 msgid "Show suggests."
 msgstr "提案するものを表示します。"
 
-#: src/commands/query/info.cc:108 src/utils/messages.cc:70
+#. translators: --enhances
+#: src/commands/query/info.cc:98
+msgid "Show enhances."
+msgstr ""
+
+#: src/commands/query/info.cc:112 src/utils/messages.cc:70
 msgid "Required argument missing."
 msgstr "必要なパラメータが指定されていません。"
 
-#: src/commands/query/info.cc:111 src/utils/messages.cc:37
+#: src/commands/query/info.cc:115 src/utils/messages.cc:37
 #: src/utils/messages.cc:52 src/utils/messages.cc:72 src/utils/messages.cc:89
 msgid "Usage"
 msgstr "利用方法"
 
 #. translators: command summary: patch-info
-#: src/commands/query/info.cc:141
+#: src/commands/query/info.cc:145
 msgid "Show full information for specified patches."
 msgstr "指定したパッチの完全な情報を表示します。"
 
 #. translators: command summary: pattern-info
-#: src/commands/query/info.cc:144
+#: src/commands/query/info.cc:148
 msgid "Show full information for specified patterns."
 msgstr "指定したパターンの完全な情報を表示します。"
 
 #. translators: command summary: product-info
-#: src/commands/query/info.cc:147
+#: src/commands/query/info.cc:151
 msgid "Show full information for specified products."
 msgstr "指定した製品の完全な情報を表示します。"
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/commands/query/info.cc:160
+#: src/commands/query/info.cc:164
 msgid "patch-info <PATCHNAME> ..."
 msgstr "patch-info <パッチ名> ..."
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/commands/query/info.cc:163
+#: src/commands/query/info.cc:167
 msgid "pattern-info <PATTERN_NAME> ..."
 msgstr "pattern-info <パターン名> ..."
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/commands/query/info.cc:166
+#: src/commands/query/info.cc:170
 msgid "product-info <PRODUCT_NAME> ..."
 msgstr "product-info <製品名> ..."
 
 #. translators: command description
-#: src/commands/query/info.cc:178
+#: src/commands/query/info.cc:182
 msgid "Show detailed information for patches."
 msgstr "パッチに関する詳細情報を表示します。"
 
 #. translators: command description
-#: src/commands/query/info.cc:181
+#: src/commands/query/info.cc:185
 msgid "Show detailed information for patterns."
 msgstr "パターンについての詳細情報を表示します。"
 
 #. translators: command description
-#: src/commands/query/info.cc:184
+#: src/commands/query/info.cc:188
 msgid "Show detailed information for products."
 msgstr "製品についての詳細情報を表示します。"
 
@@ -3694,85 +3699,92 @@ msgid "Only download raw metadata, don't build the database."
 msgstr ""
 "未加工のメタデータをダウンロードするだけでデータベースの再構築を行いません。"
 
-#. translators: -r, --repo <ALIAS|#|URI>
+#. translators: --include-all-archs
 #: src/commands/repos/refresh.cc:105
+msgid ""
+"Multi-Arch repos: Download raw metadata for all offered architectures even "
+"if the repo supports filtering."
+msgstr ""
+
+#. translators: -r, --repo <ALIAS|#|URI>
+#: src/commands/repos/refresh.cc:110
 msgid "Refresh only specified repositories."
 msgstr "指定したリポジトリだけを更新します。"
 
 #. translators: -s, --services
-#: src/commands/repos/refresh.cc:111
+#: src/commands/repos/refresh.cc:116
 msgid "Refresh also services before refreshing repos."
 msgstr "リポジトリを更新する前にサービスも更新します。"
 
-#: src/commands/repos/refresh.cc:126
+#: src/commands/repos/refresh.cc:131
 #, c-format, boost-format
 msgid "The '%s' global option has no effect here."
 msgstr "'%s' グローバルオプションはここでは意味がありません。"
 
-#: src/commands/repos/refresh.cc:134
+#: src/commands/repos/refresh.cc:139
 #, c-format, boost-format
 msgid "Arguments are not allowed if '%s' is used."
 msgstr "'%s' を使用したときは引数は使用できません。"
 
-#: src/commands/repos/refresh.cc:227 src/repos.cc:1017
+#: src/commands/repos/refresh.cc:239 src/repos.cc:1017
 msgid "Specified repositories: "
 msgstr "指定したリポジトリ: "
 
-#: src/commands/repos/refresh.cc:250
+#: src/commands/repos/refresh.cc:262
 #, c-format, boost-format
 msgid "Refreshing repository '%s'."
 msgstr "リポジトリ '%s' を更新しています。"
 
-#: src/commands/repos/refresh.cc:268 src/repos.cc:842
+#: src/commands/repos/refresh.cc:280 src/repos.cc:842
 #, c-format, boost-format
 msgid "Scanning content of disabled repository '%s'."
 msgstr "無効化されたリポジトリ '%s' の内容をスキャンしています。"
 
-#: src/commands/repos/refresh.cc:279
+#: src/commands/repos/refresh.cc:291
 #, c-format, boost-format
 msgid "Skipping disabled repository '%s'"
 msgstr "無効化されたリポジトリ '%s' をスキップします"
 
-#: src/commands/repos/refresh.cc:294 src/repos.cc:860 src/repos.cc:907
+#: src/commands/repos/refresh.cc:306 src/repos.cc:860 src/repos.cc:907
 #, c-format, boost-format
 msgid "Skipping repository '%s' because of the above error."
 msgstr "上記のエラーにより、リポジトリ '%s' をスキップします。"
 
-#: src/commands/repos/refresh.cc:306
+#: src/commands/repos/refresh.cc:318
 msgid ""
 "Some of the repositories have not been refreshed because they were not known."
 msgstr ""
 "既知のものではないことから、いくつかのリポジトリを更新することができませんで"
 "した。"
 
-#: src/commands/repos/refresh.cc:313
+#: src/commands/repos/refresh.cc:325
 msgid "Specified repositories are not enabled or defined."
 msgstr "指定したリポジトリは有効化されていないか設定されていません。"
 
-#: src/commands/repos/refresh.cc:315
+#: src/commands/repos/refresh.cc:327
 msgid "There are no enabled repositories defined."
 msgstr "有効化されているリポジトリが設定されていません。"
 
-#: src/commands/repos/refresh.cc:319
+#: src/commands/repos/refresh.cc:331
 #, c-format, boost-format
 msgid "Use '%s' or '%s' commands to add or enable repositories."
 msgstr ""
 "リポジトリを追加したり有効化したりするには、それぞれ '%s' コマンドや '%s' コ"
 "マンドをご利用ください。"
 
-#: src/commands/repos/refresh.cc:325
+#: src/commands/repos/refresh.cc:337
 msgid "Could not refresh the repositories because of errors."
 msgstr "エラーによりリポジトリの更新ができませんでした。"
 
-#: src/commands/repos/refresh.cc:330 src/repos.cc:936
+#: src/commands/repos/refresh.cc:342 src/repos.cc:936
 msgid "Some of the repositories have not been refreshed because of an error."
 msgstr "エラーにより、いくつかのリポジトリを更新することができませんでした。"
 
-#: src/commands/repos/refresh.cc:334
+#: src/commands/repos/refresh.cc:346
 msgid "Specified repositories have been refreshed."
 msgstr "指定したリポジトリを更新しました。"
 
-#: src/commands/repos/refresh.cc:336
+#: src/commands/repos/refresh.cc:348
 msgid "All repositories have been refreshed."
 msgstr "すべてのリポジトリを更新しました。"
 
@@ -4172,8 +4184,13 @@ msgstr "検索文字列を廃棄するパッケージを検索します。"
 msgid "Search for packages which suggest the search strings."
 msgstr "検索文字列を提案するパッケージを検索します。"
 
-#. translators: --provides-pkg
+#. translators: --enhances
 #: src/commands/search/search.cc:145
+msgid "Search for packages which enhance the search strings."
+msgstr ""
+
+#. translators: --provides-pkg
+#: src/commands/search/search.cc:149
 msgid ""
 "Search for all packages that provide any of the provides of the package(s) "
 "matched by the input parameters."
@@ -4182,7 +4199,7 @@ msgstr ""
 "ジを検索します。"
 
 #. translators: --requires-pkg
-#: src/commands/search/search.cc:149
+#: src/commands/search/search.cc:153
 msgid ""
 "Search for all packages that require any of the provides of the package(s) "
 "matched by the input parameters."
@@ -4191,7 +4208,7 @@ msgstr ""
 "ケージを検索します。"
 
 #. translators: --recommends-pkg
-#: src/commands/search/search.cc:153
+#: src/commands/search/search.cc:157
 msgid ""
 "Search for all packages that recommend any of the provides of the package(s) "
 "matched by the input parameters."
@@ -4200,7 +4217,7 @@ msgstr ""
 "ジを検索します。"
 
 #. translators: --supplements-pkg
-#: src/commands/search/search.cc:157
+#: src/commands/search/search.cc:161
 msgid ""
 "Search for all packages that supplement any of the provides of the "
 "package(s) matched by the input parameters."
@@ -4209,7 +4226,7 @@ msgstr ""
 "ジを検索します。"
 
 #. translators: --conflicts-pkg
-#: src/commands/search/search.cc:161
+#: src/commands/search/search.cc:165
 msgid ""
 "Search for all packages that conflict with any of the package(s) matched by "
 "the input parameters."
@@ -4218,7 +4235,7 @@ msgstr ""
 "します。"
 
 #. translators: --obsoletes-pkg
-#: src/commands/search/search.cc:165
+#: src/commands/search/search.cc:169
 msgid ""
 "Search for all packages that obsolete any of the package(s) matched by the "
 "input parameters."
@@ -4227,7 +4244,7 @@ msgstr ""
 "を検索します。"
 
 #. translators: --suggests-pkg
-#: src/commands/search/search.cc:169
+#: src/commands/search/search.cc:173
 msgid ""
 "Search for all packages that suggest any of the provides of the package(s) "
 "matched by the input parameters."
@@ -4235,13 +4252,20 @@ msgstr ""
 "入力パラメータに合致するパッケージの提供物のうち、いずれかを提案するパッケー"
 "ジを検索します。"
 
+#. translators: --enhances-pkg
+#: src/commands/search/search.cc:177
+msgid ""
+"Search for all packages that enhance any of the provides of the package(s) "
+"matched by the input parameters."
+msgstr ""
+
 #. translators: -t, --type <TYPE>
-#: src/commands/search/search.cc:173
+#: src/commands/search/search.cc:181
 msgid "Search only for packages of the specified type."
 msgstr "指定されたタイプのパッケージのみを検索します。"
 
 #. translators: -n, --name
-#: src/commands/search/search.cc:177
+#: src/commands/search/search.cc:185
 msgid ""
 "Useful together with dependency options, otherwise searching in package name "
 "is default."
@@ -4250,27 +4274,27 @@ msgstr ""
 "名の検索がデフォルトです。"
 
 #. translators: -f, --file-list
-#: src/commands/search/search.cc:181
+#: src/commands/search/search.cc:189
 msgid "Search for a match in the file list of packages."
 msgstr "パッケージのファイルリストの一致を検索します。"
 
 #. translators: -d, --search-descriptions
-#: src/commands/search/search.cc:185
+#: src/commands/search/search.cc:193
 msgid "Search also in package summaries and descriptions."
 msgstr "パッケージのサマリおよび説明でも検索します。"
 
 #. translators: -C, --case-sensitive
-#: src/commands/search/search.cc:189
+#: src/commands/search/search.cc:197
 msgid "Perform case-sensitive search."
 msgstr "大文字小文字を区別した検索を実行します。"
 
 #. translators: -s, --details
-#: src/commands/search/search.cc:193
+#: src/commands/search/search.cc:201
 msgid "Show each available version in each repository on a separate line."
 msgstr "各リポジトリ内で使用可能な各バージョンを別の行に 表示します。"
 
 #. translators: -v, --verbose
-#: src/commands/search/search.cc:197
+#: src/commands/search/search.cc:205
 msgid ""
 "Like --details, with additional information where the search has matched "
 "(useful for search in dependencies)."
@@ -4278,25 +4302,25 @@ msgstr ""
 "--details と同様に、追加情報を検索対象に含めます (依存関係内の検索に便利で"
 "す) 。"
 
-#: src/commands/search/search.cc:290 src/repos.cc:779
+#: src/commands/search/search.cc:298 src/repos.cc:779
 #, c-format, boost-format
 msgid "Specified repository '%s' is disabled."
 msgstr "指定したリポジトリ '%s' は無効化されています。"
 
 #. translators: empty search result message
-#: src/commands/search/search.cc:463 src/info.cc:365
+#: src/commands/search/search.cc:471 src/info.cc:366
 msgid "No matching items found."
 msgstr "該当する項目がありません。"
 
-#: src/commands/search/search.cc:495
+#: src/commands/search/search.cc:503
 msgid "Problem occurred initializing or executing the search query"
 msgstr "検索の問い合わせを準備する際、または実行する際に問題が発生しました"
 
-#: src/commands/search/search.cc:496
+#: src/commands/search/search.cc:504
 msgid "See the above message for a hint."
 msgstr "解決へのヒントとして上記のメッセージをお読みください。"
 
-#: src/commands/search/search.cc:497 src/repos.cc:984
+#: src/commands/search/search.cc:505 src/repos.cc:984
 msgid "Running 'zypper refresh' as root might resolve the problem."
 msgstr ""
 "root ユーザで 'zypper refresh' を実行すると問題を解決できるかもしれません。"
@@ -5194,7 +5218,7 @@ msgstr "ダウンロードディレクトリ内にある不要なソースパッ
 
 #. translators: table headers
 #. translators: property name; short; used like "Name: value"
-#: src/commands/utils/source-download.cc:318 src/info.cc:459
+#: src/commands/utils/source-download.cc:318 src/info.cc:460
 msgid "Source package"
 msgstr "ソースパッケージ"
 
@@ -5381,7 +5405,7 @@ msgstr "%s は %s よりも古くなっています"
 #. translators: property name; short; used like "Name: value"
 #. translators: Table column header
 #. translators: package version (header)
-#: src/info.cc:94 src/info.cc:798 src/search.cc:52 src/search.cc:305
+#: src/info.cc:94 src/info.cc:799 src/search.cc:52 src/search.cc:305
 #: src/search.cc:459 src/search.cc:509
 msgid "Version"
 msgstr "バージョン"
@@ -5411,37 +5435,37 @@ msgstr "概要"
 msgid "Description"
 msgstr "説明"
 
-#: src/info.cc:133
+#: src/info.cc:134
 msgid "automatically"
 msgstr "自動的"
 
-#: src/info.cc:222
+#: src/info.cc:223
 #, boost-format
 msgid "There would be %1% match for '%2%'."
 msgid_plural "There would be %1% matches for '%2%'."
 msgstr[0] "'%2%' に対しては %1% 個の該当があるものと思われます。"
 
 #. TranslatorExplanation E.g. "package 'zypper' not found."
-#: src/info.cc:305
+#: src/info.cc:306
 #, c-format, boost-format
 msgid "%s '%s' not found."
 msgstr "%s '%s' が見つかりません。"
 
 #. TranslatorExplanation E.g. "Information for package zypper:"
-#: src/info.cc:347
+#: src/info.cc:348
 #, c-format, boost-format
 msgid "Information for %s %s:"
 msgstr "%s %s に関する情報:"
 
-#: src/info.cc:423 src/info.cc:433 src/info.cc:439
+#: src/info.cc:424 src/info.cc:434 src/info.cc:440
 msgid "Support Level"
 msgstr "サポートレベル"
 
-#: src/info.cc:425
+#: src/info.cc:426
 msgid "The successor package is already installed."
 msgstr "後継パッケージは既にインストール済みです。"
 
-#: src/info.cc:427
+#: src/info.cc:428
 msgid ""
 "The successor package should be installed as soon as possible to receive "
 "continued support."
@@ -5449,73 +5473,73 @@ msgstr ""
 "サポートを受け続けるには、できる限り速やかに後継パッケージをインストールする"
 "必要があります。"
 
-#: src/info.cc:434
+#: src/info.cc:435
 msgid "Unfortunately the successor package is not provided by any repository."
 msgstr ""
 "残念ながら、後継パッケージはどのリポジトリ内においても提供されていません。"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:444
+#: src/info.cc:445
 msgid "Installed Size"
 msgstr "インストール後のサイズ"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:448 src/info.cc:498 src/info.cc:662 src/utils/misc.cc:328
+#: src/info.cc:449 src/info.cc:499 src/info.cc:663 src/utils/misc.cc:328
 #: src/utils/misc.cc:370
 msgid "Status"
 msgstr "状態"
 
-#: src/info.cc:452 src/info.cc:666
+#: src/info.cc:453 src/info.cc:667
 #, c-format, boost-format
 msgid "out-of-date (version %s installed)"
 msgstr "期限切れ (バージョン %s がインストールされています)"
 
-#: src/info.cc:454 src/info.cc:668
+#: src/info.cc:455 src/info.cc:669
 msgid "up-to-date"
 msgstr "最新"
 
-#: src/info.cc:457 src/info.cc:671
+#: src/info.cc:458 src/info.cc:672
 msgid "not installed"
 msgstr "インストールされていません"
 
-#: src/info.cc:461
+#: src/info.cc:462
 msgid "Upstream URL"
 msgstr "アップストリーム URL"
 
 #. translators: property name; short; used like "Name: value"
 #. translator: Table column header.
 #. Name
-#: src/info.cc:500 src/update.cc:406 src/utils/misc.cc:325
+#: src/info.cc:501 src/update.cc:406 src/utils/misc.cc:325
 #: src/utils/misc.cc:367
 msgid "Category"
 msgstr "カテゴリ"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:502 src/utils/misc.cc:326 src/utils/misc.cc:368
+#: src/info.cc:503 src/utils/misc.cc:326 src/utils/misc.cc:368
 msgid "Severity"
 msgstr "重要度"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:504
+#: src/info.cc:505
 msgid "Created On"
 msgstr "作成日"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:506 src/utils/misc.cc:327 src/utils/misc.cc:369
+#: src/info.cc:507 src/utils/misc.cc:327 src/utils/misc.cc:369
 msgid "Interactive"
 msgstr "対話性"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:541
+#: src/info.cc:542
 msgid "Visible to User"
 msgstr "ユーザへの表示"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:555 src/info.cc:591
+#: src/info.cc:556 src/info.cc:592
 msgid "Contents"
 msgstr "内容"
 
-#: src/info.cc:555
+#: src/info.cc:556
 msgid "(empty)"
 msgstr "(何もありません)"
 
@@ -5524,91 +5548,91 @@ msgstr "(何もありません)"
 #. translators: S for 'installed Status'
 #. translators: S for installed Status
 #. TranslatorExplanation S stands for Status
-#: src/info.cc:561 src/info.cc:796 src/locales.cc:199 src/search.cc:46
+#: src/info.cc:562 src/info.cc:797 src/locales.cc:199 src/search.cc:46
 #: src/search.cc:198 src/search.cc:303 src/search.cc:456 src/search.cc:503
 #: src/update.cc:784
 msgid "S"
 msgstr "S"
 
 #. translators: Table column header
-#: src/info.cc:564 src/search.cc:307
+#: src/info.cc:565 src/search.cc:307
 msgid "Dependency"
 msgstr "依存関係"
 
-#: src/info.cc:569 src/info.cc:583
+#: src/info.cc:570 src/info.cc:584
 msgid "Required"
 msgstr "必要"
 
-#: src/info.cc:574 src/info.cc:583 src/search.cc:243
+#: src/info.cc:575 src/info.cc:584 src/search.cc:243
 msgid "Recommended"
 msgstr "推奨"
 
-#: src/info.cc:580 src/info.cc:583 src/search.cc:245
+#: src/info.cc:581 src/info.cc:584 src/search.cc:245
 msgid "Suggested"
 msgstr "提案"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:639
+#: src/info.cc:640
 msgid "End of Support"
 msgstr "サポート終了"
 
-#: src/info.cc:644
+#: src/info.cc:645
 msgid "unknown"
 msgstr "不明"
 
 #. translators: %1% is an URL or Path pointing to some document
-#: src/info.cc:649
+#: src/info.cc:650
 #, boost-format
 msgid "See %1%"
 msgstr "詳しくは %1% をお読みください"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:655
+#: src/info.cc:656
 msgid "Flavor"
 msgstr "フレーバー"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:657 src/search.cc:511
+#: src/info.cc:658 src/search.cc:511
 msgid "Is Base"
 msgstr "ベース"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:678 src/info.cc:705
+#: src/info.cc:679 src/info.cc:706
 msgid "Update Repositories"
 msgstr "更新リポジトリ"
 
-#: src/info.cc:683
+#: src/info.cc:684
 msgid "Content Id"
 msgstr "コンテンツID"
 
-#: src/info.cc:695
+#: src/info.cc:696
 msgid "Provided by enabled repository"
 msgstr "有効なリポジトリによって提供されています"
 
-#: src/info.cc:700
+#: src/info.cc:701
 msgid "Not provided by any enabled repository"
 msgstr "有効なリポジトリによって提供されていません"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:710
+#: src/info.cc:711
 msgid "CPE Name"
 msgstr "CPE名"
 
-#: src/info.cc:715
+#: src/info.cc:716
 msgid "undefined"
 msgstr "未定義"
 
-#: src/info.cc:717
+#: src/info.cc:718
 msgid "invalid CPE Name"
 msgstr "CPE名が正しくありません"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:720
+#: src/info.cc:721
 msgid "Short Name"
 msgstr "短縮名"
 
 #. translators: property name; short; used like "Name: value"; is followed by a list of binary packages built from this source package
-#: src/info.cc:806
+#: src/info.cc:807
 msgid "Builds binary package"
 msgstr "構築されたバイナリパッケージ"
 

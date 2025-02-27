@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-12 16:01+0100\n"
+"POT-Creation-Date: 2025-02-27 23:35+0100\n"
 "PO-Revision-Date: 2024-05-02 05:43+0000\n"
 "Last-Translator: Grace Yu <grace.yu@excel-gits.com>\n"
 "Language-Team: Chinese (Taiwan) <https://l10n.opensuse.org/projects/zypper/"
@@ -360,24 +360,24 @@ msgstr "選項「%1%」已儲存到「%2%」中。"
 msgid "Failed to save option."
 msgstr "無法儲存選項。"
 
-#: src/PackageArgs.cc:159
+#: src/PackageArgs.cc:157
 #, c-format, boost-format
 msgid ""
 "'%s' install modifier must not be used without a package name or capability."
 msgstr "\"%s\" 安裝修飾詞必須與套件名稱或功能配合使用。"
 
-#: src/PackageArgs.cc:169
+#: src/PackageArgs.cc:167
 #, c-format, boost-format
 msgid ""
 "'%s' remove modifier must not be used without a package name or capability."
 msgstr "\"%s\" 移除修飾詞必須與套件名稱或功能配合使用。"
 
-#: src/PackageArgs.cc:221
+#: src/PackageArgs.cc:219
 #, c-format, boost-format
 msgid "'%s' not found in package names. Trying '%s'."
 msgstr "套件名稱中找不到 '%s'。正在嘗試 '%s'。"
 
-#: src/PackageArgs.cc:231
+#: src/PackageArgs.cc:229
 #, c-format, boost-format
 msgid "'%s' is not a package name or capability."
 msgstr "'%s' 不是一個套件或功能名稱。"
@@ -1075,7 +1075,7 @@ msgstr "可用"
 
 #. translators: used as 'tag:' (i.e. followed by ':')
 #. translators: property name; short; used like "Name: value"
-#: src/Summary.cc:1523 src/info.cc:446 src/info.cc:539 src/info.cc:659
+#: src/Summary.cc:1523 src/info.cc:447 src/info.cc:540 src/info.cc:660
 msgid "Installed"
 msgstr "已安裝"
 
@@ -1287,7 +1287,7 @@ msgstr "PackageKit 仍在執行中 (可能正忙)。"
 msgid "Try again?"
 msgstr "再次嘗試嗎？"
 
-#: src/Zypper.cc:244 src/Zypper.cc:721 src/commands/basecommand.cc:289
+#: src/Zypper.cc:244 src/Zypper.cc:721 src/commands/basecommand.cc:293
 msgid "Unexpected exception."
 msgstr "非預期的例外。"
 
@@ -2500,7 +2500,7 @@ msgstr[0] "移除 %lu 鎖定。"
 #. translators: name (general header)
 #: src/commands/locks/list.cc:133 src/commands/repos/list.cc:49
 #: src/commands/repos/list.cc:236 src/commands/services/list.cc:107
-#: src/info.cc:92 src/info.cc:562 src/info.cc:797 src/locales.cc:201
+#: src/info.cc:92 src/info.cc:563 src/info.cc:798 src/locales.cc:201
 #: src/search.cc:48 src/search.cc:199 src/search.cc:304 src/search.cc:458
 #: src/search.cc:508 src/update.cc:789 src/utils/misc.cc:324
 msgid "Name"
@@ -2514,7 +2514,7 @@ msgstr "符合"
 #. translators: type (general header)
 #: src/commands/locks/list.cc:136 src/commands/repos/list.cc:63
 #: src/commands/repos/list.cc:285 src/commands/services/list.cc:116
-#: src/info.cc:563 src/search.cc:50 src/search.cc:202
+#: src/info.cc:564 src/search.cc:50 src/search.cc:202
 msgid "Type"
 msgstr "類型"
 
@@ -3060,57 +3060,62 @@ msgstr "顯示補充。"
 msgid "Show suggests."
 msgstr "顯示建議套件。"
 
-#: src/commands/query/info.cc:108 src/utils/messages.cc:70
+#. translators: --enhances
+#: src/commands/query/info.cc:98
+msgid "Show enhances."
+msgstr ""
+
+#: src/commands/query/info.cc:112 src/utils/messages.cc:70
 msgid "Required argument missing."
 msgstr "缺少需要的參數。"
 
-#: src/commands/query/info.cc:111 src/utils/messages.cc:37
+#: src/commands/query/info.cc:115 src/utils/messages.cc:37
 #: src/utils/messages.cc:52 src/utils/messages.cc:72 src/utils/messages.cc:89
 msgid "Usage"
 msgstr "使用"
 
 #. translators: command summary: patch-info
-#: src/commands/query/info.cc:141
+#: src/commands/query/info.cc:145
 msgid "Show full information for specified patches."
 msgstr "顯示指定修補程式的完整資訊。"
 
 #. translators: command summary: pattern-info
-#: src/commands/query/info.cc:144
+#: src/commands/query/info.cc:148
 msgid "Show full information for specified patterns."
 msgstr "顯示指定樣式的完整資訊。"
 
 #. translators: command summary: product-info
-#: src/commands/query/info.cc:147
+#: src/commands/query/info.cc:151
 msgid "Show full information for specified products."
 msgstr "顯示指定產品的完整資訊。"
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/commands/query/info.cc:160
+#: src/commands/query/info.cc:164
 msgid "patch-info <PATCHNAME> ..."
 msgstr "patch-info <修補程式名稱> ..."
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/commands/query/info.cc:163
+#: src/commands/query/info.cc:167
 msgid "pattern-info <PATTERN_NAME> ..."
 msgstr "pattern-info <樣式名稱> ..."
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/commands/query/info.cc:166
+#: src/commands/query/info.cc:170
 msgid "product-info <PRODUCT_NAME> ..."
 msgstr "product-info <產品名稱> ..."
 
 #. translators: command description
-#: src/commands/query/info.cc:178
+#: src/commands/query/info.cc:182
 msgid "Show detailed information for patches."
 msgstr "顯示修補程式的詳細資料。"
 
 #. translators: command description
-#: src/commands/query/info.cc:181
+#: src/commands/query/info.cc:185
 msgid "Show detailed information for patterns."
 msgstr "顯示樣式的詳細資料。"
 
 #. translators: command description
-#: src/commands/query/info.cc:184
+#: src/commands/query/info.cc:188
 msgid "Show detailed information for products."
 msgstr "顯示產品的詳細資料。"
 
@@ -3517,81 +3522,88 @@ msgstr "僅建立資料庫，不下載中繼資料。"
 msgid "Only download raw metadata, don't build the database."
 msgstr "僅下載 RAW 中繼資料，不建立資料庫。"
 
-#. translators: -r, --repo <ALIAS|#|URI>
+#. translators: --include-all-archs
 #: src/commands/repos/refresh.cc:105
+msgid ""
+"Multi-Arch repos: Download raw metadata for all offered architectures even "
+"if the repo supports filtering."
+msgstr ""
+
+#. translators: -r, --repo <ALIAS|#|URI>
+#: src/commands/repos/refresh.cc:110
 msgid "Refresh only specified repositories."
 msgstr "僅重新整理指定的套件庫。"
 
 #. translators: -s, --services
-#: src/commands/repos/refresh.cc:111
+#: src/commands/repos/refresh.cc:116
 msgid "Refresh also services before refreshing repos."
 msgstr "重新整理套件庫之前也重新整理服務。"
 
-#: src/commands/repos/refresh.cc:126
+#: src/commands/repos/refresh.cc:131
 #, c-format, boost-format
 msgid "The '%s' global option has no effect here."
 msgstr "全域選項 '%s' 在此無效。"
 
-#: src/commands/repos/refresh.cc:134
+#: src/commands/repos/refresh.cc:139
 #, c-format, boost-format
 msgid "Arguments are not allowed if '%s' is used."
 msgstr "如果使用了 '%s'，則不允許使用參數。"
 
-#: src/commands/repos/refresh.cc:227 src/repos.cc:1017
+#: src/commands/repos/refresh.cc:239 src/repos.cc:1017
 msgid "Specified repositories: "
 msgstr "指定的套件庫： "
 
-#: src/commands/repos/refresh.cc:250
+#: src/commands/repos/refresh.cc:262
 #, c-format, boost-format
 msgid "Refreshing repository '%s'."
 msgstr "正在重新整理套件庫 '%s'。"
 
-#: src/commands/repos/refresh.cc:268 src/repos.cc:842
+#: src/commands/repos/refresh.cc:280 src/repos.cc:842
 #, c-format, boost-format
 msgid "Scanning content of disabled repository '%s'."
 msgstr "正在掃描已停用的套件庫 '%s' 的內容。"
 
-#: src/commands/repos/refresh.cc:279
+#: src/commands/repos/refresh.cc:291
 #, c-format, boost-format
 msgid "Skipping disabled repository '%s'"
 msgstr "正在跳過已停用的套件庫 '%s'"
 
-#: src/commands/repos/refresh.cc:294 src/repos.cc:860 src/repos.cc:907
+#: src/commands/repos/refresh.cc:306 src/repos.cc:860 src/repos.cc:907
 #, c-format, boost-format
 msgid "Skipping repository '%s' because of the above error."
 msgstr "由於上述錯誤，正在跳過套件庫 '%s'。"
 
-#: src/commands/repos/refresh.cc:306
+#: src/commands/repos/refresh.cc:318
 msgid ""
 "Some of the repositories have not been refreshed because they were not known."
 msgstr "因為套件庫未知，某些套件庫尚未被重新整理。"
 
-#: src/commands/repos/refresh.cc:313
+#: src/commands/repos/refresh.cc:325
 msgid "Specified repositories are not enabled or defined."
 msgstr "指定的套件庫尚未啟用或定義。"
 
-#: src/commands/repos/refresh.cc:315
+#: src/commands/repos/refresh.cc:327
 msgid "There are no enabled repositories defined."
 msgstr "尚未定義已啟用的套件庫。"
 
-#: src/commands/repos/refresh.cc:319
+#: src/commands/repos/refresh.cc:331
 #, c-format, boost-format
 msgid "Use '%s' or '%s' commands to add or enable repositories."
 msgstr "請用 '%s' 或 '%s' 指令來加入或啟用套件庫。"
 
-#: src/commands/repos/refresh.cc:325
+#: src/commands/repos/refresh.cc:337
 msgid "Could not refresh the repositories because of errors."
 msgstr "因發生錯誤無法重新整理套件庫。"
 
-#: src/commands/repos/refresh.cc:330 src/repos.cc:936
+#: src/commands/repos/refresh.cc:342 src/repos.cc:936
 msgid "Some of the repositories have not been refreshed because of an error."
 msgstr "因發生錯誤，某些套件庫尚未被重新整理。"
 
-#: src/commands/repos/refresh.cc:334
+#: src/commands/repos/refresh.cc:346
 msgid "Specified repositories have been refreshed."
 msgstr "指定的套件庫已重新整理。"
 
-#: src/commands/repos/refresh.cc:336
+#: src/commands/repos/refresh.cc:348
 msgid "All repositories have been refreshed."
 msgstr "所有套件庫已重新整理。"
 
@@ -3970,114 +3982,126 @@ msgstr "搜尋哪個套件取代了搜尋字串。"
 msgid "Search for packages which suggest the search strings."
 msgstr "搜尋建議搜尋字串的套件。"
 
-#. translators: --provides-pkg
+#. translators: --enhances
 #: src/commands/search/search.cc:145
+msgid "Search for packages which enhance the search strings."
+msgstr ""
+
+#. translators: --provides-pkg
+#: src/commands/search/search.cc:149
 msgid ""
 "Search for all packages that provide any of the provides of the package(s) "
 "matched by the input parameters."
 msgstr "搜尋提供任何與輸入參數相符的套件的所有套件。"
 
 #. translators: --requires-pkg
-#: src/commands/search/search.cc:149
+#: src/commands/search/search.cc:153
 msgid ""
 "Search for all packages that require any of the provides of the package(s) "
 "matched by the input parameters."
 msgstr "搜尋需要任何與輸入參數相符的套件的所有套件。"
 
 #. translators: --recommends-pkg
-#: src/commands/search/search.cc:153
+#: src/commands/search/search.cc:157
 msgid ""
 "Search for all packages that recommend any of the provides of the package(s) "
 "matched by the input parameters."
 msgstr "搜尋推薦任何與輸入參數相符的套件的所有套件。"
 
 #. translators: --supplements-pkg
-#: src/commands/search/search.cc:157
+#: src/commands/search/search.cc:161
 msgid ""
 "Search for all packages that supplement any of the provides of the "
 "package(s) matched by the input parameters."
 msgstr "搜尋補充任何與輸入參數相符的套件的所有套件。"
 
 #. translators: --conflicts-pkg
-#: src/commands/search/search.cc:161
+#: src/commands/search/search.cc:165
 msgid ""
 "Search for all packages that conflict with any of the package(s) matched by "
 "the input parameters."
 msgstr "搜尋與輸入參數相符的任何套件衝突的所有套件。"
 
 #. translators: --obsoletes-pkg
-#: src/commands/search/search.cc:165
+#: src/commands/search/search.cc:169
 msgid ""
 "Search for all packages that obsolete any of the package(s) matched by the "
 "input parameters."
 msgstr "搜尋廢棄任何與輸入參數相符的套件的所有套件。"
 
 #. translators: --suggests-pkg
-#: src/commands/search/search.cc:169
+#: src/commands/search/search.cc:173
 msgid ""
 "Search for all packages that suggest any of the provides of the package(s) "
 "matched by the input parameters."
 msgstr "搜尋建議任何與輸入參數相符的套件的所有套件。"
 
+#. translators: --enhances-pkg
+#: src/commands/search/search.cc:177
+msgid ""
+"Search for all packages that enhance any of the provides of the package(s) "
+"matched by the input parameters."
+msgstr ""
+
 #. translators: -t, --type <TYPE>
-#: src/commands/search/search.cc:173
+#: src/commands/search/search.cc:181
 msgid "Search only for packages of the specified type."
 msgstr "僅搜尋指定類型的套件。"
 
 #. translators: -n, --name
-#: src/commands/search/search.cc:177
+#: src/commands/search/search.cc:185
 msgid ""
 "Useful together with dependency options, otherwise searching in package name "
 "is default."
 msgstr "可和相依性選項合併使用，否則 預設搜尋套件名稱。"
 
 #. translators: -f, --file-list
-#: src/commands/search/search.cc:181
+#: src/commands/search/search.cc:189
 msgid "Search for a match in the file list of packages."
 msgstr "在檔案清單中搜尋符合的套件。"
 
 #. translators: -d, --search-descriptions
-#: src/commands/search/search.cc:185
+#: src/commands/search/search.cc:193
 msgid "Search also in package summaries and descriptions."
 msgstr "也搜尋套件摘要和描述。"
 
 #. translators: -C, --case-sensitive
-#: src/commands/search/search.cc:189
+#: src/commands/search/search.cc:197
 msgid "Perform case-sensitive search."
 msgstr "執行區分大小寫的搜尋。"
 
 #. translators: -s, --details
-#: src/commands/search/search.cc:193
+#: src/commands/search/search.cc:201
 msgid "Show each available version in each repository on a separate line."
 msgstr "每個套件庫中每個可用的版本 單獨顯示在一行。"
 
 #. translators: -v, --verbose
-#: src/commands/search/search.cc:197
+#: src/commands/search/search.cc:205
 msgid ""
 "Like --details, with additional information where the search has matched "
 "(useful for search in dependencies)."
 msgstr ""
 "與 --details 相似，不過會額外顯示相符項的 位置資訊 (對搜尋相依套件很有用)。"
 
-#: src/commands/search/search.cc:290 src/repos.cc:779
+#: src/commands/search/search.cc:298 src/repos.cc:779
 #, c-format, boost-format
 msgid "Specified repository '%s' is disabled."
 msgstr "指定套件庫 '%s' 已停用。"
 
 #. translators: empty search result message
-#: src/commands/search/search.cc:463 src/info.cc:365
+#: src/commands/search/search.cc:471 src/info.cc:366
 msgid "No matching items found."
 msgstr "找不到符合項目。"
 
-#: src/commands/search/search.cc:495
+#: src/commands/search/search.cc:503
 msgid "Problem occurred initializing or executing the search query"
 msgstr "初始化或執行搜尋查詢時出現問題"
 
-#: src/commands/search/search.cc:496
+#: src/commands/search/search.cc:504
 msgid "See the above message for a hint."
 msgstr "請檢視上面的訊息以獲得提示。"
 
-#: src/commands/search/search.cc:497 src/repos.cc:984
+#: src/commands/search/search.cc:505 src/repos.cc:984
 msgid "Running 'zypper refresh' as root might resolve the problem."
 msgstr "以 root 執行 'zypper refresh' 也許可以解決這個問題。"
 
@@ -4922,7 +4946,7 @@ msgstr "下載目錄中多餘的原始碼套件︰"
 
 #. translators: table headers
 #. translators: property name; short; used like "Name: value"
-#: src/commands/utils/source-download.cc:318 src/info.cc:459
+#: src/commands/utils/source-download.cc:318 src/info.cc:460
 msgid "Source package"
 msgstr "原始碼套件"
 
@@ -5095,7 +5119,7 @@ msgstr "%s 比 %s 還舊"
 #. translators: property name; short; used like "Name: value"
 #. translators: Table column header
 #. translators: package version (header)
-#: src/info.cc:94 src/info.cc:798 src/search.cc:52 src/search.cc:305
+#: src/info.cc:94 src/info.cc:799 src/search.cc:52 src/search.cc:305
 #: src/search.cc:459 src/search.cc:509
 msgid "Version"
 msgstr "版本"
@@ -5125,108 +5149,108 @@ msgstr "摘要"
 msgid "Description"
 msgstr "描述"
 
-#: src/info.cc:133
+#: src/info.cc:134
 msgid "automatically"
 msgstr "自動地"
 
-#: src/info.cc:222
+#: src/info.cc:223
 #, boost-format
 msgid "There would be %1% match for '%2%'."
 msgid_plural "There would be %1% matches for '%2%'."
 msgstr[0] "有 %1% 筆符合 '%2%'。"
 
 #. TranslatorExplanation E.g. "package 'zypper' not found."
-#: src/info.cc:305
+#: src/info.cc:306
 #, c-format, boost-format
 msgid "%s '%s' not found."
 msgstr "%s '%s' 找不到。"
 
 #. TranslatorExplanation E.g. "Information for package zypper:"
-#: src/info.cc:347
+#: src/info.cc:348
 #, c-format, boost-format
 msgid "Information for %s %s:"
 msgstr "%s %s 的資訊："
 
-#: src/info.cc:423 src/info.cc:433 src/info.cc:439
+#: src/info.cc:424 src/info.cc:434 src/info.cc:440
 msgid "Support Level"
 msgstr "支援層級"
 
-#: src/info.cc:425
+#: src/info.cc:426
 msgid "The successor package is already installed."
 msgstr "已安裝後續套件。"
 
-#: src/info.cc:427
+#: src/info.cc:428
 msgid ""
 "The successor package should be installed as soon as possible to receive "
 "continued support."
 msgstr "應儘快安裝後續套件，以獲享持續的支援。"
 
-#: src/info.cc:434
+#: src/info.cc:435
 msgid "Unfortunately the successor package is not provided by any repository."
 msgstr "抱歉，所有儲存庫都未提供該後續套件。"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:444
+#: src/info.cc:445
 msgid "Installed Size"
 msgstr "安裝的大小"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:448 src/info.cc:498 src/info.cc:662 src/utils/misc.cc:328
+#: src/info.cc:449 src/info.cc:499 src/info.cc:663 src/utils/misc.cc:328
 #: src/utils/misc.cc:370
 msgid "Status"
 msgstr "狀態"
 
-#: src/info.cc:452 src/info.cc:666
+#: src/info.cc:453 src/info.cc:667
 #, c-format, boost-format
 msgid "out-of-date (version %s installed)"
 msgstr "過期 (版本 %s 已安裝)"
 
-#: src/info.cc:454 src/info.cc:668
+#: src/info.cc:455 src/info.cc:669
 msgid "up-to-date"
 msgstr "最新"
 
-#: src/info.cc:457 src/info.cc:671
+#: src/info.cc:458 src/info.cc:672
 msgid "not installed"
 msgstr "未安裝"
 
-#: src/info.cc:461
+#: src/info.cc:462
 msgid "Upstream URL"
 msgstr "上游 URL"
 
 #. translators: property name; short; used like "Name: value"
 #. translator: Table column header.
 #. Name
-#: src/info.cc:500 src/update.cc:406 src/utils/misc.cc:325
+#: src/info.cc:501 src/update.cc:406 src/utils/misc.cc:325
 #: src/utils/misc.cc:367
 msgid "Category"
 msgstr "分類"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:502 src/utils/misc.cc:326 src/utils/misc.cc:368
+#: src/info.cc:503 src/utils/misc.cc:326 src/utils/misc.cc:368
 msgid "Severity"
 msgstr "嚴重度"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:504
+#: src/info.cc:505
 msgid "Created On"
 msgstr "建立時間"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:506 src/utils/misc.cc:327 src/utils/misc.cc:369
+#: src/info.cc:507 src/utils/misc.cc:327 src/utils/misc.cc:369
 msgid "Interactive"
 msgstr "互動式"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:541
+#: src/info.cc:542
 msgid "Visible to User"
 msgstr "對使用者可見"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:555 src/info.cc:591
+#: src/info.cc:556 src/info.cc:592
 msgid "Contents"
 msgstr "內容"
 
-#: src/info.cc:555
+#: src/info.cc:556
 msgid "(empty)"
 msgstr "(空)"
 
@@ -5235,91 +5259,91 @@ msgstr "(空)"
 #. translators: S for 'installed Status'
 #. translators: S for installed Status
 #. TranslatorExplanation S stands for Status
-#: src/info.cc:561 src/info.cc:796 src/locales.cc:199 src/search.cc:46
+#: src/info.cc:562 src/info.cc:797 src/locales.cc:199 src/search.cc:46
 #: src/search.cc:198 src/search.cc:303 src/search.cc:456 src/search.cc:503
 #: src/update.cc:784
 msgid "S"
 msgstr "S"
 
 #. translators: Table column header
-#: src/info.cc:564 src/search.cc:307
+#: src/info.cc:565 src/search.cc:307
 msgid "Dependency"
 msgstr "相依性"
 
-#: src/info.cc:569 src/info.cc:583
+#: src/info.cc:570 src/info.cc:584
 msgid "Required"
 msgstr "需要"
 
-#: src/info.cc:574 src/info.cc:583 src/search.cc:243
+#: src/info.cc:575 src/info.cc:584 src/search.cc:243
 msgid "Recommended"
 msgstr "推薦"
 
-#: src/info.cc:580 src/info.cc:583 src/search.cc:245
+#: src/info.cc:581 src/info.cc:584 src/search.cc:245
 msgid "Suggested"
 msgstr "建議"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:639
+#: src/info.cc:640
 msgid "End of Support"
 msgstr "終止支援"
 
-#: src/info.cc:644
+#: src/info.cc:645
 msgid "unknown"
 msgstr "不明的"
 
 #. translators: %1% is an URL or Path pointing to some document
-#: src/info.cc:649
+#: src/info.cc:650
 #, boost-format
 msgid "See %1%"
 msgstr "詳見 %1%"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:655
+#: src/info.cc:656
 msgid "Flavor"
 msgstr "類別"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:657 src/search.cc:511
+#: src/info.cc:658 src/search.cc:511
 msgid "Is Base"
 msgstr "是基礎"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:678 src/info.cc:705
+#: src/info.cc:679 src/info.cc:706
 msgid "Update Repositories"
 msgstr "更新套件庫"
 
-#: src/info.cc:683
+#: src/info.cc:684
 msgid "Content Id"
 msgstr "內容 ID"
 
-#: src/info.cc:695
+#: src/info.cc:696
 msgid "Provided by enabled repository"
 msgstr "由啟用的套件庫提供"
 
-#: src/info.cc:700
+#: src/info.cc:701
 msgid "Not provided by any enabled repository"
 msgstr "非由任何啟用的套件庫提供"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:710
+#: src/info.cc:711
 msgid "CPE Name"
 msgstr "CPE 名稱"
 
-#: src/info.cc:715
+#: src/info.cc:716
 msgid "undefined"
 msgstr "未定義"
 
-#: src/info.cc:717
+#: src/info.cc:718
 msgid "invalid CPE Name"
 msgstr "無效的 CPE 名稱"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:720
+#: src/info.cc:721
 msgid "Short Name"
 msgstr "簡稱"
 
 #. translators: property name; short; used like "Name: value"; is followed by a list of binary packages built from this source package
-#: src/info.cc:806
+#: src/info.cc:807
 msgid "Builds binary package"
 msgstr "建構二進位套件"
 

@@ -8,11 +8,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-12 16:01+0100\n"
+"POT-Creation-Date: 2025-02-27 23:35+0100\n"
 "PO-Revision-Date: 2025-02-13 11:50+0000\n"
 "Last-Translator: David Medina <medipas@gmail.com>\n"
-"Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/>"
-"\n"
+"Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/"
+">\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -381,7 +381,7 @@ msgstr "Opció \"%1%\" desada a \"%2%\"."
 msgid "Failed to save option."
 msgstr "Ha fallat desar l'opció."
 
-#: src/PackageArgs.cc:159
+#: src/PackageArgs.cc:157
 #, c-format, boost-format
 msgid ""
 "'%s' install modifier must not be used without a package name or capability."
@@ -389,7 +389,7 @@ msgstr ""
 "El modificador d'instal·lació %s no s'ha d'usar sense un nom de paquet o "
 "capacitat."
 
-#: src/PackageArgs.cc:169
+#: src/PackageArgs.cc:167
 #, c-format, boost-format
 msgid ""
 "'%s' remove modifier must not be used without a package name or capability."
@@ -397,12 +397,12 @@ msgstr ""
 "El modificador de supressió %s no s'ha d'usar sense un nom de paquet o "
 "capacitat."
 
-#: src/PackageArgs.cc:221
+#: src/PackageArgs.cc:219
 #, c-format, boost-format
 msgid "'%s' not found in package names. Trying '%s'."
 msgstr "\"%s\" no s'ha trobat entre els noms dels paquets. Provant \"%s\"."
 
-#: src/PackageArgs.cc:231
+#: src/PackageArgs.cc:229
 #, c-format, boost-format
 msgid "'%s' is not a package name or capability."
 msgstr "\"%s\" no és un nom de paquet o de capacitat."
@@ -1209,7 +1209,7 @@ msgstr "Disponible"
 
 #. translators: used as 'tag:' (i.e. followed by ':')
 #. translators: property name; short; used like "Name: value"
-#: src/Summary.cc:1523 src/info.cc:446 src/info.cc:539 src/info.cc:659
+#: src/Summary.cc:1523 src/info.cc:447 src/info.cc:540 src/info.cc:660
 msgid "Installed"
 msgstr "Instal·lat"
 
@@ -1441,7 +1441,7 @@ msgstr "El PackageKit encara està actiu (probablement ocupat)."
 msgid "Try again?"
 msgstr "Ho torno a intentar?"
 
-#: src/Zypper.cc:244 src/Zypper.cc:721 src/commands/basecommand.cc:289
+#: src/Zypper.cc:244 src/Zypper.cc:721 src/commands/basecommand.cc:293
 msgid "Unexpected exception."
 msgstr "Excepció inesperada."
 
@@ -2752,7 +2752,7 @@ msgstr[1] "Suprimits %lu bloquejos."
 #. translators: name (general header)
 #: src/commands/locks/list.cc:133 src/commands/repos/list.cc:49
 #: src/commands/repos/list.cc:236 src/commands/services/list.cc:107
-#: src/info.cc:92 src/info.cc:562 src/info.cc:797 src/locales.cc:201
+#: src/info.cc:92 src/info.cc:563 src/info.cc:798 src/locales.cc:201
 #: src/search.cc:48 src/search.cc:199 src/search.cc:304 src/search.cc:458
 #: src/search.cc:508 src/update.cc:789 src/utils/misc.cc:324
 msgid "Name"
@@ -2766,7 +2766,7 @@ msgstr "Coincideix amb"
 #. translators: type (general header)
 #: src/commands/locks/list.cc:136 src/commands/repos/list.cc:63
 #: src/commands/repos/list.cc:285 src/commands/services/list.cc:116
-#: src/info.cc:563 src/search.cc:50 src/search.cc:202
+#: src/info.cc:564 src/search.cc:50 src/search.cc:202
 msgid "Type"
 msgstr "Tipus"
 
@@ -3350,57 +3350,62 @@ msgstr "Mostra els complements."
 msgid "Show suggests."
 msgstr "Mostra els suggerits."
 
-#: src/commands/query/info.cc:108 src/utils/messages.cc:70
+#. translators: --enhances
+#: src/commands/query/info.cc:98
+msgid "Show enhances."
+msgstr ""
+
+#: src/commands/query/info.cc:112 src/utils/messages.cc:70
 msgid "Required argument missing."
 msgstr "Falta l'argument obligatori."
 
-#: src/commands/query/info.cc:111 src/utils/messages.cc:37
+#: src/commands/query/info.cc:115 src/utils/messages.cc:37
 #: src/utils/messages.cc:52 src/utils/messages.cc:72 src/utils/messages.cc:89
 msgid "Usage"
 msgstr "Ús"
 
 #. translators: command summary: patch-info
-#: src/commands/query/info.cc:141
+#: src/commands/query/info.cc:145
 msgid "Show full information for specified patches."
 msgstr "Mostra la informació sencera per a pedaços especificats."
 
 #. translators: command summary: pattern-info
-#: src/commands/query/info.cc:144
+#: src/commands/query/info.cc:148
 msgid "Show full information for specified patterns."
 msgstr "Mostra la informació sencera per a patrons especificats."
 
 #. translators: command summary: product-info
-#: src/commands/query/info.cc:147
+#: src/commands/query/info.cc:151
 msgid "Show full information for specified products."
 msgstr "SMostra la informació sencera per a productes especificats."
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/commands/query/info.cc:160
+#: src/commands/query/info.cc:164
 msgid "patch-info <PATCHNAME> ..."
 msgstr "patch-info <NOMDELPEDAÇ> ..."
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/commands/query/info.cc:163
+#: src/commands/query/info.cc:167
 msgid "pattern-info <PATTERN_NAME> ..."
 msgstr "pattern-info <NOMDELPATRÓ> ..."
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/commands/query/info.cc:166
+#: src/commands/query/info.cc:170
 msgid "product-info <PRODUCT_NAME> ..."
 msgstr "product-info <NOMDELPRODUCTE> ..."
 
 #. translators: command description
-#: src/commands/query/info.cc:178
+#: src/commands/query/info.cc:182
 msgid "Show detailed information for patches."
 msgstr "Mostra informació detallada dels pedaços."
 
 #. translators: command description
-#: src/commands/query/info.cc:181
+#: src/commands/query/info.cc:185
 msgid "Show detailed information for patterns."
 msgstr "Mostra informació detallada dels patrons."
 
 #. translators: command description
-#: src/commands/query/info.cc:184
+#: src/commands/query/info.cc:188
 msgid "Show detailed information for products."
 msgstr "Mostra informació detallada dels productes."
 
@@ -3822,82 +3827,89 @@ msgstr "Només construeix la base de dades, no en baixis les metadades."
 msgid "Only download raw metadata, don't build the database."
 msgstr "Només baixa les metadades, no construeixis la base de dades."
 
-#. translators: -r, --repo <ALIAS|#|URI>
+#. translators: --include-all-archs
 #: src/commands/repos/refresh.cc:105
+msgid ""
+"Multi-Arch repos: Download raw metadata for all offered architectures even "
+"if the repo supports filtering."
+msgstr ""
+
+#. translators: -r, --repo <ALIAS|#|URI>
+#: src/commands/repos/refresh.cc:110
 msgid "Refresh only specified repositories."
 msgstr "Refresca només els repositoris especificats."
 
 #. translators: -s, --services
-#: src/commands/repos/refresh.cc:111
+#: src/commands/repos/refresh.cc:116
 msgid "Refresh also services before refreshing repos."
 msgstr "Refresca també els serveis abans de refrescar els repositoris."
 
-#: src/commands/repos/refresh.cc:126
+#: src/commands/repos/refresh.cc:131
 #, c-format, boost-format
 msgid "The '%s' global option has no effect here."
 msgstr "L'opció global \"%s\" no té cap efecte aquí."
 
-#: src/commands/repos/refresh.cc:134
+#: src/commands/repos/refresh.cc:139
 #, c-format, boost-format
 msgid "Arguments are not allowed if '%s' is used."
 msgstr "No es permeten arguments si no es fa servir \"%s\" ."
 
-#: src/commands/repos/refresh.cc:227 src/repos.cc:1017
+#: src/commands/repos/refresh.cc:239 src/repos.cc:1017
 msgid "Specified repositories: "
 msgstr "Repositoris especificats: "
 
-#: src/commands/repos/refresh.cc:250
+#: src/commands/repos/refresh.cc:262
 #, c-format, boost-format
 msgid "Refreshing repository '%s'."
 msgstr "Refrescant el repositori %s."
 
-#: src/commands/repos/refresh.cc:268 src/repos.cc:842
+#: src/commands/repos/refresh.cc:280 src/repos.cc:842
 #, c-format, boost-format
 msgid "Scanning content of disabled repository '%s'."
 msgstr "Escanejant el contingut del repositori inhabilitat %s."
 
-#: src/commands/repos/refresh.cc:279
+#: src/commands/repos/refresh.cc:291
 #, c-format, boost-format
 msgid "Skipping disabled repository '%s'"
 msgstr "Se salta el repositori inhabilitat %s."
 
-#: src/commands/repos/refresh.cc:294 src/repos.cc:860 src/repos.cc:907
+#: src/commands/repos/refresh.cc:306 src/repos.cc:860 src/repos.cc:907
 #, c-format, boost-format
 msgid "Skipping repository '%s' because of the above error."
 msgstr "Se salta el repositori %s a causa de l'error anterior."
 
-#: src/commands/repos/refresh.cc:306
+#: src/commands/repos/refresh.cc:318
 msgid ""
 "Some of the repositories have not been refreshed because they were not known."
 msgstr "Alguns dels repositoris no s'han refrescat perquè no eren coneguts."
 
-#: src/commands/repos/refresh.cc:313
+#: src/commands/repos/refresh.cc:325
 msgid "Specified repositories are not enabled or defined."
 msgstr "Els repositoris especificats no estan habilitats o definits."
 
-#: src/commands/repos/refresh.cc:315
+#: src/commands/repos/refresh.cc:327
 msgid "There are no enabled repositories defined."
 msgstr "No hi ha repositoris actius definits."
 
-#: src/commands/repos/refresh.cc:319
+#: src/commands/repos/refresh.cc:331
 #, c-format, boost-format
 msgid "Use '%s' or '%s' commands to add or enable repositories."
 msgstr ""
 "Feu servir les ordres \"%s\" o \"%s\" per afegir o habilitar repositoris."
 
-#: src/commands/repos/refresh.cc:325
+#: src/commands/repos/refresh.cc:337
 msgid "Could not refresh the repositories because of errors."
 msgstr "No s'han pogut refrescar els repositoris a causa d'errors."
 
-#: src/commands/repos/refresh.cc:330 src/repos.cc:936
+#: src/commands/repos/refresh.cc:342 src/repos.cc:936
 msgid "Some of the repositories have not been refreshed because of an error."
 msgstr "Alguns dels repositoris no s'han refrescat a causa d'un error."
 
-#: src/commands/repos/refresh.cc:334
+#: src/commands/repos/refresh.cc:346
 msgid "Specified repositories have been refreshed."
 msgstr "S'han refrescat els repositoris especificats."
 
-#: src/commands/repos/refresh.cc:336
+#: src/commands/repos/refresh.cc:348
 msgid "All repositories have been refreshed."
 msgstr "S'han refrescat tots els repositoris."
 
@@ -4297,8 +4309,13 @@ msgstr "Cerca els paquets que tenen el contingut cercat com a obsolet."
 msgid "Search for packages which suggest the search strings."
 msgstr "Cerca els paquets que suggereixen el que es cerca."
 
-#. translators: --provides-pkg
+#. translators: --enhances
 #: src/commands/search/search.cc:145
+msgid "Search for packages which enhance the search strings."
+msgstr ""
+
+#. translators: --provides-pkg
+#: src/commands/search/search.cc:149
 msgid ""
 "Search for all packages that provide any of the provides of the package(s) "
 "matched by the input parameters."
@@ -4307,7 +4324,7 @@ msgstr ""
 "proporcionats dels paquets que coincideixen amb els paràmetres introduïts."
 
 #. translators: --requires-pkg
-#: src/commands/search/search.cc:149
+#: src/commands/search/search.cc:153
 msgid ""
 "Search for all packages that require any of the provides of the package(s) "
 "matched by the input parameters."
@@ -4316,7 +4333,7 @@ msgstr ""
 "proporcionats dels paquets que coincideixen amb els paràmetres introduïts."
 
 #. translators: --recommends-pkg
-#: src/commands/search/search.cc:153
+#: src/commands/search/search.cc:157
 msgid ""
 "Search for all packages that recommend any of the provides of the package(s) "
 "matched by the input parameters."
@@ -4325,7 +4342,7 @@ msgstr ""
 "dels paquets que coincideixen amb els paràmetres introduïts."
 
 #. translators: --supplements-pkg
-#: src/commands/search/search.cc:157
+#: src/commands/search/search.cc:161
 msgid ""
 "Search for all packages that supplement any of the provides of the "
 "package(s) matched by the input parameters."
@@ -4334,7 +4351,7 @@ msgstr ""
 "proporcionats dels paquets que coincideixen amb els paràmetres introduïts."
 
 #. translators: --conflicts-pkg
-#: src/commands/search/search.cc:161
+#: src/commands/search/search.cc:165
 msgid ""
 "Search for all packages that conflict with any of the package(s) matched by "
 "the input parameters."
@@ -4343,7 +4360,7 @@ msgstr ""
 "coincideixen amb els paràmetres introduïts."
 
 #. translators: --obsoletes-pkg
-#: src/commands/search/search.cc:165
+#: src/commands/search/search.cc:169
 msgid ""
 "Search for all packages that obsolete any of the package(s) matched by the "
 "input parameters."
@@ -4352,7 +4369,7 @@ msgstr ""
 "coincideixen amb els paràmetres introduïts."
 
 #. translators: --suggests-pkg
-#: src/commands/search/search.cc:169
+#: src/commands/search/search.cc:173
 msgid ""
 "Search for all packages that suggest any of the provides of the package(s) "
 "matched by the input parameters."
@@ -4360,13 +4377,20 @@ msgstr ""
 "Cerca tots els paquets que suggereixen qualsevol dels continguts "
 "proporcionats dels paquets que coincideixen amb els paràmetres introduïts."
 
+#. translators: --enhances-pkg
+#: src/commands/search/search.cc:177
+msgid ""
+"Search for all packages that enhance any of the provides of the package(s) "
+"matched by the input parameters."
+msgstr ""
+
 #. translators: -t, --type <TYPE>
-#: src/commands/search/search.cc:173
+#: src/commands/search/search.cc:181
 msgid "Search only for packages of the specified type."
 msgstr "Cerca només els paquets del tipus especificat."
 
 #. translators: -n, --name
-#: src/commands/search/search.cc:177
+#: src/commands/search/search.cc:185
 msgid ""
 "Useful together with dependency options, otherwise searching in package name "
 "is default."
@@ -4375,27 +4399,27 @@ msgstr ""
 "defecte pel nom del paquet."
 
 #. translators: -f, --file-list
-#: src/commands/search/search.cc:181
+#: src/commands/search/search.cc:189
 msgid "Search for a match in the file list of packages."
 msgstr "Cerca per coincidència dins la llista de fitxers dels paquets."
 
 #. translators: -d, --search-descriptions
-#: src/commands/search/search.cc:185
+#: src/commands/search/search.cc:193
 msgid "Search also in package summaries and descriptions."
 msgstr "Cerca també dins dels resums i descripcions dels paquets."
 
 #. translators: -C, --case-sensitive
-#: src/commands/search/search.cc:189
+#: src/commands/search/search.cc:197
 msgid "Perform case-sensitive search."
 msgstr "Fes una cerca sensitiva pel que fa a les majúscules."
 
 #. translators: -s, --details
-#: src/commands/search/search.cc:193
+#: src/commands/search/search.cc:201
 msgid "Show each available version in each repository on a separate line."
 msgstr "Mostra cada versió disponible de cada repositori en línies separades."
 
 #. translators: -v, --verbose
-#: src/commands/search/search.cc:197
+#: src/commands/search/search.cc:205
 msgid ""
 "Like --details, with additional information where the search has matched "
 "(useful for search in dependencies)."
@@ -4403,25 +4427,25 @@ msgstr ""
 "Com --details, amb la informació addicional d'on la cerca ha coincidit (útil "
 "per a cerques a les dependències)."
 
-#: src/commands/search/search.cc:290 src/repos.cc:779
+#: src/commands/search/search.cc:298 src/repos.cc:779
 #, c-format, boost-format
 msgid "Specified repository '%s' is disabled."
 msgstr "El repositori especificat '%s' està inhabilitat."
 
 #. translators: empty search result message
-#: src/commands/search/search.cc:463 src/info.cc:365
+#: src/commands/search/search.cc:471 src/info.cc:366
 msgid "No matching items found."
 msgstr "No s'ha trobat cap element que coincideixi."
 
-#: src/commands/search/search.cc:495
+#: src/commands/search/search.cc:503
 msgid "Problem occurred initializing or executing the search query"
 msgstr "Problema a l'hora d'iniciar o executar l'ordre de cerca"
 
-#: src/commands/search/search.cc:496
+#: src/commands/search/search.cc:504
 msgid "See the above message for a hint."
 msgstr "Llegiu l'error anterior per tenir-ne una pista."
 
-#: src/commands/search/search.cc:497 src/repos.cc:984
+#: src/commands/search/search.cc:505 src/repos.cc:984
 msgid "Running 'zypper refresh' as root might resolve the problem."
 msgstr ""
 "Amb l'ordre \"zypper refresh\" com a administrador es podria resoldre el "
@@ -5316,7 +5340,7 @@ msgstr "Paquets de codi font superflus al directori de baixada:"
 
 #. translators: table headers
 #. translators: property name; short; used like "Name: value"
-#: src/commands/utils/source-download.cc:318 src/info.cc:459
+#: src/commands/utils/source-download.cc:318 src/info.cc:460
 msgid "Source package"
 msgstr "Paquet de codi font"
 
@@ -5501,7 +5525,7 @@ msgstr "%s és més antic que %s"
 #. translators: property name; short; used like "Name: value"
 #. translators: Table column header
 #. translators: package version (header)
-#: src/info.cc:94 src/info.cc:798 src/search.cc:52 src/search.cc:305
+#: src/info.cc:94 src/info.cc:799 src/search.cc:52 src/search.cc:305
 #: src/search.cc:459 src/search.cc:509
 msgid "Version"
 msgstr "Versió"
@@ -5531,11 +5555,11 @@ msgstr "Resum"
 msgid "Description"
 msgstr "Descripció"
 
-#: src/info.cc:133
+#: src/info.cc:134
 msgid "automatically"
 msgstr "automàticament"
 
-#: src/info.cc:222
+#: src/info.cc:223
 #, boost-format
 msgid "There would be %1% match for '%2%'."
 msgid_plural "There would be %1% matches for '%2%'."
@@ -5543,27 +5567,27 @@ msgstr[0] "Hi hauria %1% coincidència per a %2%."
 msgstr[1] "Hi hauria %1% coincidències per a %2%."
 
 #. TranslatorExplanation E.g. "package 'zypper' not found."
-#: src/info.cc:305
+#: src/info.cc:306
 #, c-format, boost-format
 msgid "%s '%s' not found."
 msgstr "No s'ha trobat %s \"%s\"."
 
 #. TranslatorExplanation E.g. "Information for package zypper:"
-#: src/info.cc:347
+#: src/info.cc:348
 #, c-format, boost-format
 msgid "Information for %s %s:"
 msgstr "Informació per a %s %s:"
 
 # SR
-#: src/info.cc:423 src/info.cc:433 src/info.cc:439
+#: src/info.cc:424 src/info.cc:434 src/info.cc:440
 msgid "Support Level"
 msgstr "Nivell de suport"
 
-#: src/info.cc:425
+#: src/info.cc:426
 msgid "The successor package is already installed."
 msgstr "El paquet successor ja està instal·lat."
 
-#: src/info.cc:427
+#: src/info.cc:428
 msgid ""
 "The successor package should be installed as soon as possible to receive "
 "continued support."
@@ -5571,72 +5595,72 @@ msgstr ""
 "El paquet successor s'ha d'instal·lar tan aviat com sigui possible per rebre "
 "suport continu."
 
-#: src/info.cc:434
+#: src/info.cc:435
 msgid "Unfortunately the successor package is not provided by any repository."
 msgstr "Malauradament, cap repositori no en proporciona el paquet successor."
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:444
+#: src/info.cc:445
 msgid "Installed Size"
 msgstr "Mida un cop feta la instal·lació"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:448 src/info.cc:498 src/info.cc:662 src/utils/misc.cc:328
+#: src/info.cc:449 src/info.cc:499 src/info.cc:663 src/utils/misc.cc:328
 #: src/utils/misc.cc:370
 msgid "Status"
 msgstr "Estat"
 
-#: src/info.cc:452 src/info.cc:666
+#: src/info.cc:453 src/info.cc:667
 #, c-format, boost-format
 msgid "out-of-date (version %s installed)"
 msgstr "caducat (hi ha la versió %s instal·lada)"
 
-#: src/info.cc:454 src/info.cc:668
+#: src/info.cc:455 src/info.cc:669
 msgid "up-to-date"
 msgstr "actualitzat"
 
-#: src/info.cc:457 src/info.cc:671
+#: src/info.cc:458 src/info.cc:672
 msgid "not installed"
 msgstr "no instal·lat"
 
-#: src/info.cc:461
+#: src/info.cc:462
 msgid "Upstream URL"
 msgstr "URL de l'origen"
 
 #. translators: property name; short; used like "Name: value"
 #. translator: Table column header.
 #. Name
-#: src/info.cc:500 src/update.cc:406 src/utils/misc.cc:325
+#: src/info.cc:501 src/update.cc:406 src/utils/misc.cc:325
 #: src/utils/misc.cc:367
 msgid "Category"
 msgstr "Categoria"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:502 src/utils/misc.cc:326 src/utils/misc.cc:368
+#: src/info.cc:503 src/utils/misc.cc:326 src/utils/misc.cc:368
 msgid "Severity"
 msgstr "Gravetat"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:504
+#: src/info.cc:505
 msgid "Created On"
 msgstr "Creació"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:506 src/utils/misc.cc:327 src/utils/misc.cc:369
+#: src/info.cc:507 src/utils/misc.cc:327 src/utils/misc.cc:369
 msgid "Interactive"
 msgstr "Interactiu"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:541
+#: src/info.cc:542
 msgid "Visible to User"
 msgstr "Visible per a l'usuari"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:555 src/info.cc:591
+#: src/info.cc:556 src/info.cc:592
 msgid "Contents"
 msgstr "Contingut"
 
-#: src/info.cc:555
+#: src/info.cc:556
 msgid "(empty)"
 msgstr "(buit)"
 
@@ -5645,92 +5669,92 @@ msgstr "(buit)"
 #. translators: S for 'installed Status'
 #. translators: S for installed Status
 #. TranslatorExplanation S stands for Status
-#: src/info.cc:561 src/info.cc:796 src/locales.cc:199 src/search.cc:46
+#: src/info.cc:562 src/info.cc:797 src/locales.cc:199 src/search.cc:46
 #: src/search.cc:198 src/search.cc:303 src/search.cc:456 src/search.cc:503
 #: src/update.cc:784
 msgid "S"
 msgstr "S"
 
 #. translators: Table column header
-#: src/info.cc:564 src/search.cc:307
+#: src/info.cc:565 src/search.cc:307
 msgid "Dependency"
 msgstr "Dependència"
 
-#: src/info.cc:569 src/info.cc:583
+#: src/info.cc:570 src/info.cc:584
 msgid "Required"
 msgstr "Requerit"
 
-#: src/info.cc:574 src/info.cc:583 src/search.cc:243
+#: src/info.cc:575 src/info.cc:584 src/search.cc:243
 msgid "Recommended"
 msgstr "Recomanat"
 
-#: src/info.cc:580 src/info.cc:583 src/search.cc:245
+#: src/info.cc:581 src/info.cc:584 src/search.cc:245
 msgid "Suggested"
 msgstr "Suggerit"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:639
+#: src/info.cc:640
 msgid "End of Support"
 msgstr "Final del suport"
 
-#: src/info.cc:644
+#: src/info.cc:645
 msgid "unknown"
 msgstr "desconegut"
 
 #. translators: %1% is an URL or Path pointing to some document
-#: src/info.cc:649
+#: src/info.cc:650
 #, boost-format
 msgid "See %1%"
 msgstr "Vegeu %1%"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:655
+#: src/info.cc:656
 msgid "Flavor"
 msgstr "Gust"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:657 src/search.cc:511
+#: src/info.cc:658 src/search.cc:511
 msgid "Is Base"
 msgstr "És Base"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:678 src/info.cc:705
+#: src/info.cc:679 src/info.cc:706
 msgid "Update Repositories"
 msgstr "Actualitza els repositoris"
 
-#: src/info.cc:683
+#: src/info.cc:684
 msgid "Content Id"
 msgstr "Contingut d'Id"
 
-#: src/info.cc:695
+#: src/info.cc:696
 msgid "Provided by enabled repository"
 msgstr "Proveït pel repositori habilitat"
 
-#: src/info.cc:700
+#: src/info.cc:701
 msgid "Not provided by any enabled repository"
 msgstr "No proveït per cap repositori habilitat"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:710
+#: src/info.cc:711
 msgid "CPE Name"
 msgstr "Nom de CPE"
 
-#: src/info.cc:715
+#: src/info.cc:716
 msgid "undefined"
 msgstr "no definit"
 
-#: src/info.cc:717
+#: src/info.cc:718
 msgid "invalid CPE Name"
 msgstr "Nom de CPE no vàlid"
 
 # SR
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:720
+#: src/info.cc:721
 msgid "Short Name"
 msgstr "Nom curt"
 
 #. translators: property name; short; used like "Name: value"; is followed by a list of binary packages built from this source package
-#: src/info.cc:806
+#: src/info.cc:807
 msgid "Builds binary package"
 msgstr "Construeix un paquet binari"
 

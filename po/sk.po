@@ -5,11 +5,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-12 16:01+0100\n"
+"POT-Creation-Date: 2025-02-27 23:35+0100\n"
 "PO-Revision-Date: 2025-02-13 16:27+0000\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
-"Language-Team: Slovak <https://l10n.opensuse.org/projects/zypper/master/sk/>"
-"\n"
+"Language-Team: Slovak <https://l10n.opensuse.org/projects/zypper/master/sk/"
+">\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -377,7 +377,7 @@ msgstr "Voľba '%1%' uložená v '%2%'."
 msgid "Failed to save option."
 msgstr "Zlyhalo uloženie voľby."
 
-#: src/PackageArgs.cc:159
+#: src/PackageArgs.cc:157
 #, c-format, boost-format
 msgid ""
 "'%s' install modifier must not be used without a package name or capability."
@@ -385,7 +385,7 @@ msgstr ""
 "'%s' modifikátor inštalácie sa nesmie používať bez názvu balíka alebo "
 "schopnosti."
 
-#: src/PackageArgs.cc:169
+#: src/PackageArgs.cc:167
 #, c-format, boost-format
 msgid ""
 "'%s' remove modifier must not be used without a package name or capability."
@@ -393,12 +393,12 @@ msgstr ""
 "'%s' modifikátor odstránenia sa nesmie používať bez názvu balíka alebo "
 "schopnosti."
 
-#: src/PackageArgs.cc:221
+#: src/PackageArgs.cc:219
 #, c-format, boost-format
 msgid "'%s' not found in package names. Trying '%s'."
 msgstr "'%s' nebol nájdený v názvoch balíkov. Skúšanie '%s'."
 
-#: src/PackageArgs.cc:231
+#: src/PackageArgs.cc:229
 #, c-format, boost-format
 msgid "'%s' is not a package name or capability."
 msgstr "'%s' nie je názov balíka alebo schopnosti."
@@ -1277,7 +1277,7 @@ msgstr "Dostupné"
 
 #. translators: used as 'tag:' (i.e. followed by ':')
 #. translators: property name; short; used like "Name: value"
-#: src/Summary.cc:1523 src/info.cc:446 src/info.cc:539 src/info.cc:659
+#: src/Summary.cc:1523 src/info.cc:447 src/info.cc:540 src/info.cc:660
 msgid "Installed"
 msgstr "Nainštalovaný"
 
@@ -1525,7 +1525,7 @@ msgstr "PackageKit stále beží (pravdepodobne je zaneprázdnený)."
 msgid "Try again?"
 msgstr "Skúsiť znova?"
 
-#: src/Zypper.cc:244 src/Zypper.cc:721 src/commands/basecommand.cc:289
+#: src/Zypper.cc:244 src/Zypper.cc:721 src/commands/basecommand.cc:293
 msgid "Unexpected exception."
 msgstr "Neočakávaná výnimka."
 
@@ -2818,7 +2818,7 @@ msgstr[2] "Odstránených %lu zámkov."
 #. translators: name (general header)
 #: src/commands/locks/list.cc:133 src/commands/repos/list.cc:49
 #: src/commands/repos/list.cc:236 src/commands/services/list.cc:107
-#: src/info.cc:92 src/info.cc:562 src/info.cc:797 src/locales.cc:201
+#: src/info.cc:92 src/info.cc:563 src/info.cc:798 src/locales.cc:201
 #: src/search.cc:48 src/search.cc:199 src/search.cc:304 src/search.cc:458
 #: src/search.cc:508 src/update.cc:789 src/utils/misc.cc:324
 msgid "Name"
@@ -2832,7 +2832,7 @@ msgstr "Zhoduje sa"
 #. translators: type (general header)
 #: src/commands/locks/list.cc:136 src/commands/repos/list.cc:63
 #: src/commands/repos/list.cc:285 src/commands/services/list.cc:116
-#: src/info.cc:563 src/search.cc:50 src/search.cc:202
+#: src/info.cc:564 src/search.cc:50 src/search.cc:202
 msgid "Type"
 msgstr "Typ"
 
@@ -3410,57 +3410,62 @@ msgstr "Ukázať doplnky."
 msgid "Show suggests."
 msgstr "Ukázať navrhované."
 
-#: src/commands/query/info.cc:108 src/utils/messages.cc:70
+#. translators: --enhances
+#: src/commands/query/info.cc:98
+msgid "Show enhances."
+msgstr ""
+
+#: src/commands/query/info.cc:112 src/utils/messages.cc:70
 msgid "Required argument missing."
 msgstr "Chýba požadovaný argument."
 
-#: src/commands/query/info.cc:111 src/utils/messages.cc:37
+#: src/commands/query/info.cc:115 src/utils/messages.cc:37
 #: src/utils/messages.cc:52 src/utils/messages.cc:72 src/utils/messages.cc:89
 msgid "Usage"
 msgstr "Použitie"
 
 #. translators: command summary: patch-info
-#: src/commands/query/info.cc:141
+#: src/commands/query/info.cc:145
 msgid "Show full information for specified patches."
 msgstr "Zobraziť podrobné informácie o opravách."
 
 #. translators: command summary: pattern-info
-#: src/commands/query/info.cc:144
+#: src/commands/query/info.cc:148
 msgid "Show full information for specified patterns."
 msgstr "Zobraziť podrobné informácie o vzoroch."
 
 #. translators: command summary: product-info
-#: src/commands/query/info.cc:147
+#: src/commands/query/info.cc:151
 msgid "Show full information for specified products."
 msgstr "Zobraziť podrobné informácie o produktoch."
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/commands/query/info.cc:160
+#: src/commands/query/info.cc:164
 msgid "patch-info <PATCHNAME> ..."
 msgstr "patch-info <názov_opravy> ..."
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/commands/query/info.cc:163
+#: src/commands/query/info.cc:167
 msgid "pattern-info <PATTERN_NAME> ..."
 msgstr "pattern-info <názov_šablóny> ..."
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/commands/query/info.cc:166
+#: src/commands/query/info.cc:170
 msgid "product-info <PRODUCT_NAME> ..."
 msgstr "produkt-info <názov-produktu> ..."
 
 #. translators: command description
-#: src/commands/query/info.cc:178
+#: src/commands/query/info.cc:182
 msgid "Show detailed information for patches."
 msgstr "Zobrazí podrobné informácie o opravách."
 
 #. translators: command description
-#: src/commands/query/info.cc:181
+#: src/commands/query/info.cc:185
 msgid "Show detailed information for patterns."
 msgstr "Zobrazí podrobné informácie o šablóne."
 
 #. translators: command description
-#: src/commands/query/info.cc:184
+#: src/commands/query/info.cc:188
 msgid "Show detailed information for products."
 msgstr "Zobrazí podrobné informácie o produktoch."
 
@@ -3876,82 +3881,89 @@ msgstr "Len vytvoriť databázu, nesťahovať metadáta."
 msgid "Only download raw metadata, don't build the database."
 msgstr "Len stiahnuť metadáta, nevytvárať databázu."
 
-#. translators: -r, --repo <ALIAS|#|URI>
+#. translators: --include-all-archs
 #: src/commands/repos/refresh.cc:105
+msgid ""
+"Multi-Arch repos: Download raw metadata for all offered architectures even "
+"if the repo supports filtering."
+msgstr ""
+
+#. translators: -r, --repo <ALIAS|#|URI>
+#: src/commands/repos/refresh.cc:110
 msgid "Refresh only specified repositories."
 msgstr "Obnoviť iba zadaný repozitár."
 
 #. translators: -s, --services
-#: src/commands/repos/refresh.cc:111
+#: src/commands/repos/refresh.cc:116
 msgid "Refresh also services before refreshing repos."
 msgstr "Obnoviť tiež služby pred obnovou repozitárov."
 
-#: src/commands/repos/refresh.cc:126
+#: src/commands/repos/refresh.cc:131
 #, c-format, boost-format
 msgid "The '%s' global option has no effect here."
 msgstr "Globálna voľba '%s' tu nemá žiadny vplyv."
 
-#: src/commands/repos/refresh.cc:134
+#: src/commands/repos/refresh.cc:139
 #, c-format, boost-format
 msgid "Arguments are not allowed if '%s' is used."
 msgstr "Argumenty príkazu nie sú povolené ak je použitá voľba '%s'."
 
-#: src/commands/repos/refresh.cc:227 src/repos.cc:1017
+#: src/commands/repos/refresh.cc:239 src/repos.cc:1017
 msgid "Specified repositories: "
 msgstr "Zadané repozitáre: "
 
-#: src/commands/repos/refresh.cc:250
+#: src/commands/repos/refresh.cc:262
 #, c-format, boost-format
 msgid "Refreshing repository '%s'."
 msgstr "Obnovenie repozitára '%s'."
 
-#: src/commands/repos/refresh.cc:268 src/repos.cc:842
+#: src/commands/repos/refresh.cc:280 src/repos.cc:842
 #, c-format, boost-format
 msgid "Scanning content of disabled repository '%s'."
 msgstr "Prehľadávanie obsahu vypnutého repozitára '%s'."
 
-#: src/commands/repos/refresh.cc:279
+#: src/commands/repos/refresh.cc:291
 #, c-format, boost-format
 msgid "Skipping disabled repository '%s'"
 msgstr "Vynechanie vypnutého repozitára '%s'"
 
-#: src/commands/repos/refresh.cc:294 src/repos.cc:860 src/repos.cc:907
+#: src/commands/repos/refresh.cc:306 src/repos.cc:860 src/repos.cc:907
 #, c-format, boost-format
 msgid "Skipping repository '%s' because of the above error."
 msgstr "Vynechávam repozitár '%s' kvôli vyššie uvedenej chybe."
 
-#: src/commands/repos/refresh.cc:306
+#: src/commands/repos/refresh.cc:318
 msgid ""
 "Some of the repositories have not been refreshed because they were not known."
 msgstr "Niektoré repozitáre neboli obnovené, pretože neboli známe."
 
-#: src/commands/repos/refresh.cc:313
+#: src/commands/repos/refresh.cc:325
 msgid "Specified repositories are not enabled or defined."
 msgstr "Zadané repozitáre sú buď vypnuté alebo nie sú definované."
 
-#: src/commands/repos/refresh.cc:315
+#: src/commands/repos/refresh.cc:327
 msgid "There are no enabled repositories defined."
 msgstr "Nie sú definované žiadne zapnuté repozitáre."
 
-#: src/commands/repos/refresh.cc:319
+#: src/commands/repos/refresh.cc:331
 #, c-format, boost-format
 msgid "Use '%s' or '%s' commands to add or enable repositories."
 msgstr ""
 "Použite príkaz '%s' alebo '%s' pre pridanie alebo zapnutie repozitárov."
 
-#: src/commands/repos/refresh.cc:325
+#: src/commands/repos/refresh.cc:337
 msgid "Could not refresh the repositories because of errors."
 msgstr "Nepodarilo sa obnoviť repozitáre kvôli chybám."
 
-#: src/commands/repos/refresh.cc:330 src/repos.cc:936
+#: src/commands/repos/refresh.cc:342 src/repos.cc:936
 msgid "Some of the repositories have not been refreshed because of an error."
 msgstr "Niektoré repozitáre neboli obnovené kvôli chybe."
 
-#: src/commands/repos/refresh.cc:334
+#: src/commands/repos/refresh.cc:346
 msgid "Specified repositories have been refreshed."
 msgstr "Zadané repozitáre boli obnovené."
 
-#: src/commands/repos/refresh.cc:336
+#: src/commands/repos/refresh.cc:348
 msgid "All repositories have been refreshed."
 msgstr "Všetky repozitáre boli obnovené."
 
@@ -4348,8 +4360,13 @@ msgstr "Hľadať balíky, ktoré zastarávajú hľadané reťazce."
 msgid "Search for packages which suggest the search strings."
 msgstr "Hľadať balíky, ktoré navrhujú hľadané reťazce."
 
-#. translators: --provides-pkg
+#. translators: --enhances
 #: src/commands/search/search.cc:145
+msgid "Search for packages which enhance the search strings."
+msgstr ""
+
+#. translators: --provides-pkg
+#: src/commands/search/search.cc:149
 msgid ""
 "Search for all packages that provide any of the provides of the package(s) "
 "matched by the input parameters."
@@ -4358,7 +4375,7 @@ msgstr ""
 "zodpovedajú vstupným parametrom."
 
 #. translators: --requires-pkg
-#: src/commands/search/search.cc:149
+#: src/commands/search/search.cc:153
 msgid ""
 "Search for all packages that require any of the provides of the package(s) "
 "matched by the input parameters."
@@ -4367,7 +4384,7 @@ msgstr ""
 "zodpovedajú vstupným parametrom."
 
 #. translators: --recommends-pkg
-#: src/commands/search/search.cc:153
+#: src/commands/search/search.cc:157
 msgid ""
 "Search for all packages that recommend any of the provides of the package(s) "
 "matched by the input parameters."
@@ -4376,7 +4393,7 @@ msgstr ""
 "zodpovedajú vstupným parametrom."
 
 #. translators: --supplements-pkg
-#: src/commands/search/search.cc:157
+#: src/commands/search/search.cc:161
 msgid ""
 "Search for all packages that supplement any of the provides of the "
 "package(s) matched by the input parameters."
@@ -4385,7 +4402,7 @@ msgstr ""
 "zodpovedajú vstupným parametrom."
 
 #. translators: --conflicts-pkg
-#: src/commands/search/search.cc:161
+#: src/commands/search/search.cc:165
 msgid ""
 "Search for all packages that conflict with any of the package(s) matched by "
 "the input parameters."
@@ -4394,7 +4411,7 @@ msgstr ""
 "ktoré zodpovedajú vstupným parametrom."
 
 #. translators: --obsoletes-pkg
-#: src/commands/search/search.cc:165
+#: src/commands/search/search.cc:169
 msgid ""
 "Search for all packages that obsolete any of the package(s) matched by the "
 "input parameters."
@@ -4403,7 +4420,7 @@ msgstr ""
 "zodpovedajú vstupným parametrom."
 
 #. translators: --suggests-pkg
-#: src/commands/search/search.cc:169
+#: src/commands/search/search.cc:173
 msgid ""
 "Search for all packages that suggest any of the provides of the package(s) "
 "matched by the input parameters."
@@ -4411,13 +4428,20 @@ msgstr ""
 "Hľadať všetky balíky, ktoré navrhujú akúkoľvek funkciu z balíka(ov), ktoré "
 "zodpovedajú vstupným parametrom."
 
+#. translators: --enhances-pkg
+#: src/commands/search/search.cc:177
+msgid ""
+"Search for all packages that enhance any of the provides of the package(s) "
+"matched by the input parameters."
+msgstr ""
+
 #. translators: -t, --type <TYPE>
-#: src/commands/search/search.cc:173
+#: src/commands/search/search.cc:181
 msgid "Search only for packages of the specified type."
 msgstr "Hľadať iba balíky zadaného typu."
 
 #. translators: -n, --name
-#: src/commands/search/search.cc:177
+#: src/commands/search/search.cc:185
 msgid ""
 "Useful together with dependency options, otherwise searching in package name "
 "is default."
@@ -4426,28 +4450,28 @@ msgstr ""
 "balíčka."
 
 #. translators: -f, --file-list
-#: src/commands/search/search.cc:181
+#: src/commands/search/search.cc:189
 msgid "Search for a match in the file list of packages."
 msgstr "Hľadať zhodu v súborovom zozname balíkov."
 
 #. translators: -d, --search-descriptions
-#: src/commands/search/search.cc:185
+#: src/commands/search/search.cc:193
 msgid "Search also in package summaries and descriptions."
 msgstr "Hľadať zhodu v popisoch balíkov."
 
 #. translators: -C, --case-sensitive
-#: src/commands/search/search.cc:189
+#: src/commands/search/search.cc:197
 msgid "Perform case-sensitive search."
 msgstr "Vykonať hľadanie s rozlišovaním veľkosti písmen."
 
 #. translators: -s, --details
-#: src/commands/search/search.cc:193
+#: src/commands/search/search.cc:201
 msgid "Show each available version in each repository on a separate line."
 msgstr ""
 "Zobraziť každú dostupnú verziu v každom repozitári na samostatnom riadku."
 
 #. translators: -v, --verbose
-#: src/commands/search/search.cc:197
+#: src/commands/search/search.cc:205
 msgid ""
 "Like --details, with additional information where the search has matched "
 "(useful for search in dependencies)."
@@ -4455,25 +4479,25 @@ msgstr ""
 "Ako --details, s ďalšími informáciami, kde bolo hľadanie vyhovujúce "
 "(užitočné pre hľadanie v závislostiach)."
 
-#: src/commands/search/search.cc:290 src/repos.cc:779
+#: src/commands/search/search.cc:298 src/repos.cc:779
 #, c-format, boost-format
 msgid "Specified repository '%s' is disabled."
 msgstr "Zadaný repozitár '%s' je vypnutý."
 
 #. translators: empty search result message
-#: src/commands/search/search.cc:463 src/info.cc:365
+#: src/commands/search/search.cc:471 src/info.cc:366
 msgid "No matching items found."
 msgstr "Neboli nájdené žiadne odpovedajúce položky."
 
-#: src/commands/search/search.cc:495
+#: src/commands/search/search.cc:503
 msgid "Problem occurred initializing or executing the search query"
 msgstr "Nastal problém pri inicializácii alebo spustení vyhľadávania"
 
-#: src/commands/search/search.cc:496
+#: src/commands/search/search.cc:504
 msgid "See the above message for a hint."
 msgstr "Pozrite predchádzajúcu správu. Poskytne vám tip o príčine chyby."
 
-#: src/commands/search/search.cc:497 src/repos.cc:984
+#: src/commands/search/search.cc:505 src/repos.cc:984
 msgid "Running 'zypper refresh' as root might resolve the problem."
 msgstr ""
 "Spustenie 'zypper refresh' pod správcom systému (root) by mohlo vyriešiť "
@@ -5357,7 +5381,7 @@ msgstr "Nadbytočné zdrojové balíky v sťahovacom adresári:"
 
 #. translators: table headers
 #. translators: property name; short; used like "Name: value"
-#: src/commands/utils/source-download.cc:318 src/info.cc:459
+#: src/commands/utils/source-download.cc:318 src/info.cc:460
 msgid "Source package"
 msgstr "Zdrojový balík"
 
@@ -5539,7 +5563,7 @@ msgstr "%s je staršia ako %s"
 #. translators: property name; short; used like "Name: value"
 #. translators: Table column header
 #. translators: package version (header)
-#: src/info.cc:94 src/info.cc:798 src/search.cc:52 src/search.cc:305
+#: src/info.cc:94 src/info.cc:799 src/search.cc:52 src/search.cc:305
 #: src/search.cc:459 src/search.cc:509
 msgid "Version"
 msgstr "Verzia"
@@ -5569,11 +5593,11 @@ msgstr "Súhrn"
 msgid "Description"
 msgstr "Popis"
 
-#: src/info.cc:133
+#: src/info.cc:134
 msgid "automatically"
 msgstr "automaticky"
 
-#: src/info.cc:222
+#: src/info.cc:223
 #, boost-format
 msgid "There would be %1% match for '%2%'."
 msgid_plural "There would be %1% matches for '%2%'."
@@ -5582,26 +5606,26 @@ msgstr[1] "Mali by existovať %1% zhody pre '%2%'."
 msgstr[2] "Malo by existovať %1% zhôd pre '%2%'."
 
 #. TranslatorExplanation E.g. "package 'zypper' not found."
-#: src/info.cc:305
+#: src/info.cc:306
 #, c-format, boost-format
 msgid "%s '%s' not found."
 msgstr "%s '%s' nenájdené."
 
 #. TranslatorExplanation E.g. "Information for package zypper:"
-#: src/info.cc:347
+#: src/info.cc:348
 #, c-format, boost-format
 msgid "Information for %s %s:"
 msgstr "Informácie pre %s %s:"
 
-#: src/info.cc:423 src/info.cc:433 src/info.cc:439
+#: src/info.cc:424 src/info.cc:434 src/info.cc:440
 msgid "Support Level"
 msgstr "Úroveň podpory"
 
-#: src/info.cc:425
+#: src/info.cc:426
 msgid "The successor package is already installed."
 msgstr "Nástupnícky balík je už nainštalovaný."
 
-#: src/info.cc:427
+#: src/info.cc:428
 msgid ""
 "The successor package should be installed as soon as possible to receive "
 "continued support."
@@ -5609,72 +5633,72 @@ msgstr ""
 "Nástupnícky balík by sa mal nainštalovať čo najskôr, aby sa získala "
 "pokračujúca podpora."
 
-#: src/info.cc:434
+#: src/info.cc:435
 msgid "Unfortunately the successor package is not provided by any repository."
 msgstr "Nástupnícky balík nanešťastie neposkytuje žiadny repozitár."
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:444
+#: src/info.cc:445
 msgid "Installed Size"
 msgstr "Inštalovaná veľkosť"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:448 src/info.cc:498 src/info.cc:662 src/utils/misc.cc:328
+#: src/info.cc:449 src/info.cc:499 src/info.cc:663 src/utils/misc.cc:328
 #: src/utils/misc.cc:370
 msgid "Status"
 msgstr "Stav"
 
-#: src/info.cc:452 src/info.cc:666
+#: src/info.cc:453 src/info.cc:667
 #, c-format, boost-format
 msgid "out-of-date (version %s installed)"
 msgstr "zastaraný (nainštalovaná verzia: %s)"
 
-#: src/info.cc:454 src/info.cc:668
+#: src/info.cc:455 src/info.cc:669
 msgid "up-to-date"
 msgstr "aktuálny"
 
-#: src/info.cc:457 src/info.cc:671
+#: src/info.cc:458 src/info.cc:672
 msgid "not installed"
 msgstr "nenainštalovaný"
 
-#: src/info.cc:461
+#: src/info.cc:462
 msgid "Upstream URL"
 msgstr "URL pôvodných autorov"
 
 #. translators: property name; short; used like "Name: value"
 #. translator: Table column header.
 #. Name
-#: src/info.cc:500 src/update.cc:406 src/utils/misc.cc:325
+#: src/info.cc:501 src/update.cc:406 src/utils/misc.cc:325
 #: src/utils/misc.cc:367
 msgid "Category"
 msgstr "Kategória"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:502 src/utils/misc.cc:326 src/utils/misc.cc:368
+#: src/info.cc:503 src/utils/misc.cc:326 src/utils/misc.cc:368
 msgid "Severity"
 msgstr "Závažnosť"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:504
+#: src/info.cc:505
 msgid "Created On"
 msgstr "Dátum vytvorenia"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:506 src/utils/misc.cc:327 src/utils/misc.cc:369
+#: src/info.cc:507 src/utils/misc.cc:327 src/utils/misc.cc:369
 msgid "Interactive"
 msgstr "Interaktívny"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:541
+#: src/info.cc:542
 msgid "Visible to User"
 msgstr "Viditeľný pre používateľa"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:555 src/info.cc:591
+#: src/info.cc:556 src/info.cc:592
 msgid "Contents"
 msgstr "Obsah"
 
-#: src/info.cc:555
+#: src/info.cc:556
 msgid "(empty)"
 msgstr "(prázdny)"
 
@@ -5683,91 +5707,91 @@ msgstr "(prázdny)"
 #. translators: S for 'installed Status'
 #. translators: S for installed Status
 #. TranslatorExplanation S stands for Status
-#: src/info.cc:561 src/info.cc:796 src/locales.cc:199 src/search.cc:46
+#: src/info.cc:562 src/info.cc:797 src/locales.cc:199 src/search.cc:46
 #: src/search.cc:198 src/search.cc:303 src/search.cc:456 src/search.cc:503
 #: src/update.cc:784
 msgid "S"
 msgstr "S"
 
 #. translators: Table column header
-#: src/info.cc:564 src/search.cc:307
+#: src/info.cc:565 src/search.cc:307
 msgid "Dependency"
 msgstr "Závislosť"
 
-#: src/info.cc:569 src/info.cc:583
+#: src/info.cc:570 src/info.cc:584
 msgid "Required"
 msgstr "Požadované"
 
-#: src/info.cc:574 src/info.cc:583 src/search.cc:243
+#: src/info.cc:575 src/info.cc:584 src/search.cc:243
 msgid "Recommended"
 msgstr "Odporúčaný"
 
-#: src/info.cc:580 src/info.cc:583 src/search.cc:245
+#: src/info.cc:581 src/info.cc:584 src/search.cc:245
 msgid "Suggested"
 msgstr "Navrhovaný"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:639
+#: src/info.cc:640
 msgid "End of Support"
 msgstr "Koniec podpory"
 
-#: src/info.cc:644
+#: src/info.cc:645
 msgid "unknown"
 msgstr "neznámy"
 
 #. translators: %1% is an URL or Path pointing to some document
-#: src/info.cc:649
+#: src/info.cc:650
 #, boost-format
 msgid "See %1%"
 msgstr "Pozrieť %1%"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:655
+#: src/info.cc:656
 msgid "Flavor"
 msgstr "Druh"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:657 src/search.cc:511
+#: src/info.cc:658 src/search.cc:511
 msgid "Is Base"
 msgstr "Základný"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:678 src/info.cc:705
+#: src/info.cc:679 src/info.cc:706
 msgid "Update Repositories"
 msgstr "Aktualizačné repozitáre"
 
-#: src/info.cc:683
+#: src/info.cc:684
 msgid "Content Id"
 msgstr "Id obsahu"
 
-#: src/info.cc:695
+#: src/info.cc:696
 msgid "Provided by enabled repository"
 msgstr "Poskytované zapnutým repozitárom"
 
-#: src/info.cc:700
+#: src/info.cc:701
 msgid "Not provided by any enabled repository"
 msgstr "Neposkytované žiadnym zapnutým repozitárom"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:710
+#: src/info.cc:711
 msgid "CPE Name"
 msgstr "Názov CPE"
 
-#: src/info.cc:715
+#: src/info.cc:716
 msgid "undefined"
 msgstr "nedefinované"
 
-#: src/info.cc:717
+#: src/info.cc:718
 msgid "invalid CPE Name"
 msgstr "Neplatný názov CPE"
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:720
+#: src/info.cc:721
 msgid "Short Name"
 msgstr "Krátky názov"
 
 #. translators: property name; short; used like "Name: value"; is followed by a list of binary packages built from this source package
-#: src/info.cc:806
+#: src/info.cc:807
 msgid "Builds binary package"
 msgstr "Zostavuje binárny balík"
 
