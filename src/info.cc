@@ -115,7 +115,8 @@ namespace
       { InfoBits::ShowObsoletes,   Dep::OBSOLETES },
       { InfoBits::ShowRecommends,  Dep::RECOMMENDS },
       { InfoBits::ShowSuggests,    Dep::SUGGESTS },
-      { InfoBits::ShowSupplements, Dep::SUPPLEMENTS }
+      { InfoBits::ShowSupplements, Dep::SUPPLEMENTS },
+      { InfoBits::ShowEnhances,    Dep::ENHANCES },
     } )
     {
       if ( ( isPatch && ( dep.second == Dep::PROVIDES || dep.second == Dep::CONFLICTS ) )
