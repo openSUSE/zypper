@@ -1,4 +1,17 @@
 -------------------------------------------------------------------
+Thu Feb 27 23:53:31 CET 2025 - ma@suse.de
+
+- refresh: add --include-all-archs (fixes #598)
+  Future multi-arch repos may allow to download only those metadata
+  which refer to packages actually compatible with the systems
+  architecture. Some tools however want zypp to provide the full
+  metadata of a repository without filtering incompatible
+  architectures.
+- info,search: add option to search and list Enhances
+  (bsc#1237949)
+- version 1.14.86
+
+-------------------------------------------------------------------
 Thu Feb 27 10:23:48 CET 2025 - ma@suse.de
 
 - Annonunce --root in commands not launching a Target
