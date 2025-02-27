@@ -51,6 +51,7 @@ Provides:       zypper(auto-agree-with-product-licenses)
 Provides:       zypper(oldpackage)
 Provides:       zypper(updatestack-only)
 Provides:       zypper(purge-kernels)
+Provides:       zypper(include-all-archs)
 %if 0%{?suse_version}
 Requires:       libaugeas0 >= 1.10.0
 %requires_ge    libzypp

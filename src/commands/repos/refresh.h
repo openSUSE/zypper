@@ -21,7 +21,8 @@ public:
     ForceBuild    = 1 << 1,
     ForceDownload = 1 << 2,
     BuildOnly     = 1 << 3,
-    DownloadOnly  = 1 << 4
+    DownloadOnly  = 1 << 4,
+    AllArchs      = 1 << 5,
   };
   ZYPP_DECLARE_FLAGS(RefreshFlags,RefreshFlagsBits);
 

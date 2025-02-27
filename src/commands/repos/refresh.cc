@@ -99,6 +99,11 @@ zypp::ZyppFlags::CommandGroup RefreshRepoCmd::cmdOptions() const
             // translators: -D, --download-only
             _("Only download raw metadata, don't build the database.")
       },
+      {"include-all-archs", 0, ZyppFlags::NoArgument,
+            ZyppFlags::BitFieldType( that->_flags, AllArchs ),
+            // translators: --include-all-archs
+            _("Multi-Arch repos: Download raw metadata for all offered architectures even if the repo supports filtering.")
+      },
       {"repo", 'r', ZyppFlags::RequiredArgument | ZyppFlags::Repeatable,
             ZyppFlags::StringVectorType( &that->_repos, ARG_REPOSITORY),
             // translators: -r, --repo <ALIAS|#|URI>
@@ -176,6 +181,13 @@ int RefreshRepoCmd::execute( Zypper &zypper , const std::vector<std::string> &po
 bool RefreshRepoCmd::refreshRepository(Zypper &zypper, const RepoInfo &repo, RefreshFlags flags_r)
 {
   MIL << "going to refresh repo '" << repo.alias() << "'" << endl;
+
+  // https://code.opensuse.org/leap/features/issue/193
+  // https://github.com/openSUSE/zypper/issues/598
+  // --include-all-archs is a stub for SUMA(MLM) in case #193 is implemented
+  // and honoured by libzypp. Actually we'd prefer using the single-arch
+  // repos rather than filtering, but we will see how Leap evolves.
+#warning RefreshFlagsBits::AllArchs is a NO-OP - propagate it to libzypp
 
   // raw metadata refresh
   bool error = false;

@@ -1367,6 +1367,9 @@ include::{incdir}/option_Repo_Aggregates.txt[]
 	*-D*, *--download-only*::
 		Only download the raw metadata, don't parse it or build the database.
 
+	*--include-all-archs*::
+		Multi-Arch repos: Download raw metadata for all offered architectures even if the repo supports filtering. Otherwise we'd download only the metadata for architectures compatible with the local system. You do not need this unless you want zypper to provide the full metadata for the purpose of mirroring the repository.
+
 	*-s*, *--services*::
 		Refresh also services before refreshing repositories.
 --
