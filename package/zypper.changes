@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Thu Feb 27 10:23:48 CET 2025 - ma@suse.de
+
+- Annonunce --root in commands not launching a Target
+  (bsc#1237044)
+- BuildRequires:  libzypp-devel >= 17.36.3.
+- version 1.14.85
+
+-------------------------------------------------------------------
 Wed Feb 12 16:02:10 CET 2025 - ma@suse.de
 
 - Let zypper dup fail in case of (temporarily) unaccessible repos
