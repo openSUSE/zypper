@@ -225,6 +225,9 @@ If a query returns no results, zypper returns *ZYPPER_EXIT_INF_CAP_NOT_FOUND* un
 	*--supplements*::
 		Show symbols the package supplements.
 
+	*--enhances*::
+		Show symbols the package enhances.
+
 	Examples: :: {nop}
 
 		$ *zypper info workrave*:::
@@ -861,6 +864,9 @@ This command accepts the following options:
 	*--supplements*::
 		Search for packages which supplement the search strings.
 
+	*--enhances*::
+		Search for packages which enhances the search strings.
+
 	*--provides-pkg*::
 		Search for all packages that provide any of the provides of the package(s) matched by the input parameters.
 
@@ -881,6 +887,9 @@ This command accepts the following options:
 
 	*--suggests-pkg*::
 		Search for all packages that suggest any of the provides of the package(s) matched by the input parameters.
+
+	*--enhances-pkg*::
+		Search for all packages that enhance any of the provides of the package(s) matched by the input parameters.
 
 	*-n*, *--name*::
 		Useful together with dependency options, otherwise searching in package name is default.

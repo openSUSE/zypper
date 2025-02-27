@@ -93,6 +93,10 @@ zypp::ZyppFlags::CommandGroup InfoCmd::cmdOptions() const
             // translators: --suggests
             _("Show suggests.")
       },
+      { "enhances", '\0', ZyppFlags::NoArgument, ZyppFlags::BitFieldType( that._options._flags, InfoBits::ShowEnhances, ZyppFlags::StoreTrue),
+            // translators: --enhances
+            _("Show enhances.")
+      },
   }};
 }
 

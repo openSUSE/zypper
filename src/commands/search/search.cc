@@ -140,6 +140,10 @@ zypp::ZyppFlags::CommandGroup SearchCmd::cmdOptions() const
         // translators: --suggests
         _("Search for packages which suggest the search strings.")
       },
+      { "enhances", '\0', ZyppFlags::NoArgument, ZyppFlags::appendSolvAttrToSet( that._requestedDeps, sat::SolvAttr::dep_enhances ),
+        // translators: --enhances
+        _("Search for packages which enhance the search strings.")
+      },
       { "provides-pkg", '\0', ZyppFlags::NoArgument, ZyppFlags::setSolvAttrOptional( that._requestedReverseSearch, sat::SolvAttr::dep_provides ),
         // translators: --provides-pkg
         _("Search for all packages that provide any of the provides of the package(s) matched by the input parameters.")
@@ -167,6 +171,10 @@ zypp::ZyppFlags::CommandGroup SearchCmd::cmdOptions() const
       { "suggests-pkg", '\0', ZyppFlags::NoArgument, ZyppFlags::setSolvAttrOptional( that._requestedReverseSearch, sat::SolvAttr::dep_suggests ),
         // translators: --suggests-pkg
         _("Search for all packages that suggest any of the provides of the package(s) matched by the input parameters.")
+      },
+      { "enhances-pkg", '\0', ZyppFlags::NoArgument, ZyppFlags::setSolvAttrOptional( that._requestedReverseSearch, sat::SolvAttr::dep_enhances ),
+        // translators: --enhances-pkg
+        _("Search for all packages that enhance any of the provides of the package(s) matched by the input parameters.")
       },
       CommonFlags::resKindSetFlag( that._requestedTypes,
                                    // translators: -t, --type <TYPE>
