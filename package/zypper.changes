@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Fri Feb 28 16:38:40 CET 2025 - ma@suse.de
+
+- Package preloader that concurrently downloads files. It's not yet
+  enabled per default. To enable the preview set ZYPP_CURL2=1 and
+  ZYPP_PCK_PRELOAD=1 in the environment. (#104)
+- BuildRequires:  libzypp-devel >= 17.36.4.
+- version 1.14.87
+
+-------------------------------------------------------------------
 Thu Feb 27 23:53:31 CET 2025 - ma@suse.de
 
 - refresh: add --include-all-archs (fixes #598)
