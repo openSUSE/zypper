@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-02-27 23:35+0100\n"
-"PO-Revision-Date: 2025-02-13 03:50+0000\n"
+"PO-Revision-Date: 2025-02-28 11:50+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
 "Language-Team: Japanese <https://l10n.opensuse.org/projects/zypper/master/ja/"
 ">\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.9.2\n"
+"X-Generator: Weblate 5.10.1\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -3226,7 +3226,7 @@ msgstr "提案するものを表示します。"
 #. translators: --enhances
 #: src/commands/query/info.cc:98
 msgid "Show enhances."
-msgstr ""
+msgstr "拡張するものを表示します。"
 
 #: src/commands/query/info.cc:112 src/utils/messages.cc:70
 msgid "Required argument missing."
@@ -3705,6 +3705,9 @@ msgid ""
 "Multi-Arch repos: Download raw metadata for all offered architectures even "
 "if the repo supports filtering."
 msgstr ""
+"マルチアーキテクチャ型リポジトリにおいて、リポジトリ側でフィルタリングに対応"
+"していた場合でも、提供されている全てのアーキテクチャに対する未加工のメタデー"
+"タをダウンロードします。"
 
 #. translators: -r, --repo <ALIAS|#|URI>
 #: src/commands/repos/refresh.cc:110
@@ -4187,7 +4190,7 @@ msgstr "検索文字列を提案するパッケージを検索します。"
 #. translators: --enhances
 #: src/commands/search/search.cc:145
 msgid "Search for packages which enhance the search strings."
-msgstr ""
+msgstr "検索文字列を拡張するパッケージを検索します。"
 
 #. translators: --provides-pkg
 #: src/commands/search/search.cc:149
@@ -4257,7 +4260,8 @@ msgstr ""
 msgid ""
 "Search for all packages that enhance any of the provides of the package(s) "
 "matched by the input parameters."
-msgstr ""
+msgstr "入力したパラメータに合致する任意のパッケージに対して、それを拡張する全てのパ"
+"ッケージを検索します。"
 
 #. translators: -t, --type <TYPE>
 #: src/commands/search/search.cc:181
