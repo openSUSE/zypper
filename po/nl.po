@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-02-27 23:35+0100\n"
-"PO-Revision-Date: 2025-02-13 11:50+0000\n"
+"PO-Revision-Date: 2025-02-28 11:50+0000\n"
 "Last-Translator: Freek de Kruijf <freek@opensuse.org>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/zypper/master/nl/>\n"
 "Language: nl\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.9.2\n"
+"X-Generator: Weblate 5.10.1\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -3407,7 +3407,7 @@ msgstr "toon gesuggereerde."
 #. translators: --enhances
 #: src/commands/query/info.cc:98
 msgid "Show enhances."
-msgstr ""
+msgstr "Verbeteringen tonen."
 
 #: src/commands/query/info.cc:112 src/utils/messages.cc:70
 msgid "Required argument missing."
@@ -3895,6 +3895,8 @@ msgid ""
 "Multi-Arch repos: Download raw metadata for all offered architectures even "
 "if the repo supports filtering."
 msgstr ""
+"Multi-Arch opslagruimten: download ruwe metagegevens voor alle aangeboden "
+"architecturen zelfs als de opslagruimte filteren ondersteunt."
 
 #. translators: -r, --repo <ALIAS|#|URI>
 #: src/commands/repos/refresh.cc:110
@@ -4379,7 +4381,7 @@ msgstr "zoek welke pakketten gesuggereerd worden door de zoektermen."
 #. translators: --enhances
 #: src/commands/search/search.cc:145
 msgid "Search for packages which enhance the search strings."
-msgstr ""
+msgstr "Naar pakketten zoeken die de tekenreeksen voor zoeken verbeteren."
 
 #. translators: --provides-pkg
 #: src/commands/search/search.cc:149
@@ -4450,6 +4452,8 @@ msgid ""
 "Search for all packages that enhance any of the provides of the package(s) "
 "matched by the input parameters."
 msgstr ""
+"Naar alle pakketten zoeken die elk van de geleverden van de pakket(ten) "
+"verbeteren overeenkomend met de invoerparameters."
 
 #. translators: -t, --type <TYPE>
 #: src/commands/search/search.cc:181
