@@ -413,7 +413,7 @@ bool looks_like_url( const std::string& s )
 Url make_url( const std::string & url_s )
 {
   Url u;
-  std::string urlstr( url::encode( url_s, URL_SAFE_CHARS ) );
+  std::string urlstr;
 
   if ( !url_s.empty() && !looks_like_url(url_s) )
   {
@@ -445,6 +445,10 @@ Url make_url( const std::string & url_s )
       ERR << "specified local path does not exist or is not accessible" << endl;
       return u;
     }
+  }
+  else
+  {
+    urlstr = url::encode( url_s, URL_SAFE_CHARS, url::E_ENCODED );
   }
 
   try {
