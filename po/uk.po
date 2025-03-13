@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.uk\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-27 23:35+0100\n"
+"POT-Creation-Date: 2025-03-13 16:49+0100\n"
 "PO-Revision-Date: 2024-02-25 22:42+0000\n"
 "Last-Translator: Oleksii <oleksiimnz@proton.me>\n"
 "Language-Team: Ukrainian <https://l10n.opensuse.org/projects/zypper/master/"
@@ -22,8 +22,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Weblate 4.9.1\n"
 
 #: src/Command.cc:93
@@ -616,8 +616,8 @@ msgstr ""
 #, c-format, boost-format
 msgid "Patch '%s' is locked. Use '%s' to install it, or unlock it using '%s'."
 msgstr ""
-"Виправлення \"%s\" заблоковано. Використовуйте \"%s\" для установки або \"%s"
-"\" для розблокування."
+"Виправлення \"%s\" заблоковано. Використовуйте \"%s\" для установки або "
+"\"%s\" для розблокування."
 
 #: src/RequestFeedback.cc:200
 #, c-format, boost-format
@@ -2089,6 +2089,45 @@ msgstr "Ім'я користувача"
 msgid "Password"
 msgstr "Пароль"
 
+#: src/callbacks/media.h:190
+msgid "Preloading Packages"
+msgstr ""
+
+#: src/callbacks/media.h:209
+msgid "Preloading Packages:"
+msgstr ""
+
+#: src/callbacks/media.h:234 src/callbacks/media.h:256
+msgid "Preloading:"
+msgstr ""
+
+#. Translator: prefetch progress bar result: ".............[done]"
+#: src/callbacks/media.h:266
+msgid "done"
+msgstr "завершено"
+
+#. Translator: prefetch progress bar result: "........[not found]"
+#: src/callbacks/media.h:271
+msgid "not found"
+msgstr "не знайдено"
+
+#. Translator: prefetch progress bar result: "............[error]"
+#: src/callbacks/media.h:278
+msgid "error"
+msgstr "помилка"
+
+#: src/callbacks/media.h:294
+msgid "Preload finished."
+msgstr ""
+
+#: src/callbacks/media.h:299
+msgid "success"
+msgstr ""
+
+#: src/callbacks/media.h:302
+msgid "files missing"
+msgstr ""
+
 #: src/callbacks/repo.h:60
 msgid "Retrieving delta"
 msgstr "Отримання розбіжності"
@@ -2357,8 +2396,8 @@ msgid ""
 "for more information about this command."
 msgstr ""
 "Ви збираєтесь оновити дистрибутив за допомогою всіх увімкнених сховищ. Перед "
-"тим як продовжити переконайтесь, що ці сховища між собою сумісні. Див. \"%s"
-"\" для більш детальнішої інформації про цю команду."
+"тим як продовжити переконайтесь, що ці сховища між собою сумісні. Див. "
+"\"%s\" для більш детальнішої інформації про цю команду."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/help.cc:22
@@ -7404,46 +7443,46 @@ msgstr "Латка"
 msgid "Specified local path does not exist or is not accessible."
 msgstr "Вказаний локальний шлях або не існує, або доступ до нього неможливий."
 
-#: src/utils/misc.cc:456
+#: src/utils/misc.cc:460
 msgid "Given URI is invalid"
 msgstr "Вказана адреса URI - недійсна"
 
 #. Guess failed:
 #. translators: don't translate '<platform>'
-#: src/utils/misc.cc:548
+#: src/utils/misc.cc:552
 msgid "Unable to guess a value for <platform>."
 msgstr "Неможливо вгадати значення для <platform>."
 
-#: src/utils/misc.cc:549
+#: src/utils/misc.cc:553
 msgid "Please use obs://<project>/<platform>"
 msgstr "Вживайте obs://<проект>/<платформа>"
 
-#: src/utils/misc.cc:550 src/utils/misc.cc:596
+#: src/utils/misc.cc:554 src/utils/misc.cc:600
 #, c-format, boost-format
 msgid "Example: %s"
 msgstr "Приклад: %s"
 
-#: src/utils/misc.cc:595
+#: src/utils/misc.cc:599
 msgid "Invalid OBS URI."
 msgstr "Недійсний OBS URI."
 
-#: src/utils/misc.cc:595
+#: src/utils/misc.cc:599
 msgid "Correct form is obs://<project>/[platform]"
 msgstr "Коректна форма — obs://<проект>/[платформа]"
 
-#: src/utils/misc.cc:643
+#: src/utils/misc.cc:647
 msgid "Problem copying the specified RPM file to the cache directory."
 msgstr "Проблема з копіюванням зазначеного файлу RPM до директорії кешу."
 
-#: src/utils/misc.cc:644
+#: src/utils/misc.cc:648
 msgid "Perhaps you are running out of disk space."
 msgstr "Можливо, ви вичерпали вільне місце на диску."
 
-#: src/utils/misc.cc:652
+#: src/utils/misc.cc:656
 msgid "Problem retrieving the specified RPM file"
 msgstr "Проблема із звантаженням зазначеного файла RPM"
 
-#: src/utils/misc.cc:653
+#: src/utils/misc.cc:657
 msgid "Please check whether the file is accessible."
 msgstr "Будь ласка, перевірте чи доступний файл."
 
@@ -7618,14 +7657,8 @@ msgstr "Помилка"
 #~ msgid "OK OK! Exiting immediately..."
 #~ msgstr "Добре, добре! Негайно виходжу…"
 
-#~ msgid "done"
-#~ msgstr "завершено"
-
 #~ msgid "attention"
 #~ msgstr "увага"
-
-#~ msgid "error"
-#~ msgstr "помилка"
 
 #~ msgid "Note:"
 #~ msgstr "Примітка:"
@@ -7643,9 +7676,6 @@ msgstr "Помилка"
 # window title for kernel loading (see txt_load_kernel)
 #~ msgid "starting"
 #~ msgstr "запуск"
-
-#~ msgid "not found"
-#~ msgstr "не знайдено"
 
 #~ msgid "No help available for this prompt."
 #~ msgstr "Для цього запрошення немає довідки."
@@ -9390,8 +9420,8 @@ msgstr "Помилка"
 #~ msgstr ""
 #~ "patch-search [параметри] [рядок запиту...]\n"
 #~ "\n"
-#~ "Шукає латки, що відповідають заданим рядкам пошуку. Це псевдо для \"%s"
-#~ "\".\n"
+#~ "Шукає латки, що відповідають заданим рядкам пошуку. Це псевдо для "
+#~ "\"%s\".\n"
 
 #~ msgid "Unknown package type '%s'."
 #~ msgstr "Невідомий тип пакунка «%s»."

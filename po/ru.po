@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-27 23:35+0100\n"
+"POT-Creation-Date: 2025-03-13 16:49+0100\n"
 "PO-Revision-Date: 2025-01-07 17:50+0000\n"
 "Last-Translator: Aleksey Fedorov <Aleksejfedorov963@gmail.com>\n"
 "Language-Team: Russian <https://l10n.opensuse.org/projects/zypper/master/ru/"
@@ -18,8 +18,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Weblate 5.9.2\n"
 
 #: src/Command.cc:93
@@ -611,8 +611,8 @@ msgstr ""
 #, c-format, boost-format
 msgid "Patch '%s' is locked. Use '%s' to install it, or unlock it using '%s'."
 msgstr ""
-"Исправление \"%s\" заблокировано. Используйте \"%s\" для установки или \"%s"
-"\" для разблокирования."
+"Исправление \"%s\" заблокировано. Используйте \"%s\" для установки или "
+"\"%s\" для разблокирования."
 
 #: src/RequestFeedback.cc:200
 #, c-format, boost-format
@@ -2102,6 +2102,45 @@ msgstr "Имя пользователя"
 msgid "Password"
 msgstr "Пароль"
 
+#: src/callbacks/media.h:190
+msgid "Preloading Packages"
+msgstr ""
+
+#: src/callbacks/media.h:209
+msgid "Preloading Packages:"
+msgstr ""
+
+#: src/callbacks/media.h:234 src/callbacks/media.h:256
+msgid "Preloading:"
+msgstr ""
+
+#. Translator: prefetch progress bar result: ".............[done]"
+#: src/callbacks/media.h:266
+msgid "done"
+msgstr "готово"
+
+#. Translator: prefetch progress bar result: "........[not found]"
+#: src/callbacks/media.h:271
+msgid "not found"
+msgstr "не найдено"
+
+#. Translator: prefetch progress bar result: "............[error]"
+#: src/callbacks/media.h:278
+msgid "error"
+msgstr "ошибка"
+
+#: src/callbacks/media.h:294
+msgid "Preload finished."
+msgstr ""
+
+#: src/callbacks/media.h:299
+msgid "success"
+msgstr ""
+
+#: src/callbacks/media.h:302
+msgid "files missing"
+msgstr ""
+
 #: src/callbacks/repo.h:60
 msgid "Retrieving delta"
 msgstr "Получение разности"
@@ -3129,8 +3168,8 @@ msgid ""
 "Automatically accept product licenses only. See 'man zypper' for more "
 "details."
 msgstr ""
-"Автоматически принимать только лицензии продуктов. Подробнее см. \"man zypper"
-"\"."
+"Автоматически принимать только лицензии продуктов. Подробнее см. \"man "
+"zypper\"."
 
 #. translators: --replacefiles
 #: src/commands/optionsets.cc:264
@@ -7459,46 +7498,46 @@ msgstr "Исправление"
 msgid "Specified local path does not exist or is not accessible."
 msgstr "Указанный локальный путь не существует или недоступен."
 
-#: src/utils/misc.cc:456
+#: src/utils/misc.cc:460
 msgid "Given URI is invalid"
 msgstr "Данный URI-адрес неверен"
 
 #. Guess failed:
 #. translators: don't translate '<platform>'
-#: src/utils/misc.cc:548
+#: src/utils/misc.cc:552
 msgid "Unable to guess a value for <platform>."
 msgstr "Не удается подобрать значение для параметра <платформа>."
 
-#: src/utils/misc.cc:549
+#: src/utils/misc.cc:553
 msgid "Please use obs://<project>/<platform>"
 msgstr "Используйте obs://<проект>/<платформа>"
 
-#: src/utils/misc.cc:550 src/utils/misc.cc:596
+#: src/utils/misc.cc:554 src/utils/misc.cc:600
 #, c-format, boost-format
 msgid "Example: %s"
 msgstr "Пример: %s"
 
-#: src/utils/misc.cc:595
+#: src/utils/misc.cc:599
 msgid "Invalid OBS URI."
 msgstr "Недопустимый OBS URI."
 
-#: src/utils/misc.cc:595
+#: src/utils/misc.cc:599
 msgid "Correct form is obs://<project>/[platform]"
 msgstr "Правильный формат - obs://<проект>/[платформа]"
 
-#: src/utils/misc.cc:643
+#: src/utils/misc.cc:647
 msgid "Problem copying the specified RPM file to the cache directory."
 msgstr "Проблема при копировании указанного файла RPM в каталог кэша."
 
-#: src/utils/misc.cc:644
+#: src/utils/misc.cc:648
 msgid "Perhaps you are running out of disk space."
 msgstr "Возможно, у вас на диске закончилось место."
 
-#: src/utils/misc.cc:652
+#: src/utils/misc.cc:656
 msgid "Problem retrieving the specified RPM file"
 msgstr "Проблема при получении указанного файла RPM"
 
-#: src/utils/misc.cc:653
+#: src/utils/misc.cc:657
 msgid "Please check whether the file is accessible."
 msgstr "Проверьте, доступен ли этот файл."
 
@@ -7698,14 +7737,8 @@ msgstr "Ошибка"
 #~ msgid "OK OK! Exiting immediately..."
 #~ msgstr "Ладно, ладно! Уже выхожу..."
 
-#~ msgid "done"
-#~ msgstr "готово"
-
 #~ msgid "attention"
 #~ msgstr "внимание"
-
-#~ msgid "error"
-#~ msgstr "ошибка"
 
 #~ msgid "Note:"
 #~ msgstr "Замечание:"
@@ -7721,9 +7754,6 @@ msgstr "Ошибка"
 
 #~ msgid "starting"
 #~ msgstr "запуск"
-
-#~ msgid "not found"
-#~ msgstr "не найдено"
 
 #~ msgid "No help available for this prompt."
 #~ msgstr "Для этого режима справка недоступна."
@@ -8803,8 +8833,8 @@ msgstr "Ошибка"
 #~ "                                подтверждения лицензии независимого "
 #~ "производителя.\n"
 #~ "                                Подробности см. в руководстве по Zypper.\n"
-#~ "    --best-effort               Использовать подход \"наилучшие действия"
-#~ "\" для обновления.\n"
+#~ "    --best-effort               Использовать подход \"наилучшие "
+#~ "действия\" для обновления.\n"
 #~ "                                Обновления до версии ниже последней\n"
 #~ "                                также приемлемы.\n"
 #~ "    --replacefiles          Устанавливать пакеты, даже если они заменяют "
@@ -8983,8 +9013,8 @@ msgstr "Ошибка"
 #~ "                                По умолчанию: %s.\n"
 #~ "-r, --repo <псевдоним|#|URI>        Вывести список обновления только из "
 #~ "указанного репозитория.\n"
-#~ "    --best-effort               Использовать подход \"наилучших действий"
-#~ "\" для обновления. Обновления\n"
+#~ "    --best-effort               Использовать подход \"наилучших "
+#~ "действий\" для обновления. Обновления\n"
 #~ "                                до не самых последних версий также "
 #~ "приемлемы.\n"
 #~ "-a, --all                     Вывести список всех пакетов, для которых "
@@ -9453,14 +9483,14 @@ msgstr "Ошибка"
 #~ "поиска.\n"
 #~ "    --provides               Искать совпадение строки в поле "
 #~ "«Предоставляет\".\n"
-#~ "    --recommends             Искать совпадение строки в поле \"Рекомендует"
-#~ "\".\n"
-#~ "    --requires               Искать совпадение строки в поле \"Требует"
-#~ "\".\n"
+#~ "    --recommends             Искать совпадение строки в поле "
+#~ "\"Рекомендует\".\n"
+#~ "    --requires               Искать совпадение строки в поле "
+#~ "\"Требует\".\n"
 #~ "    --suggests               Искать совпадение строки в поле "
 #~ "\"Предлагается\".\n"
-#~ "    --conflicts              Искать совпадение строки в поле \"Конфликтует"
-#~ "\".\n"
+#~ "    --conflicts              Искать совпадение строки в поле "
+#~ "\"Конфликтует\".\n"
 #~ "    --obsoletes              Искать совпадение строки в поле \"Делает "
 #~ "устаревшим\".\n"
 #~ "-n, --name                   Полезно для использования вместе с "
@@ -9771,8 +9801,8 @@ msgstr "Ошибка"
 
 #~ msgid "See '%s' or '%s' to get a list of known service types."
 #~ msgstr ""
-#~ "Для получения списка известных типов сервисов воспользуйтесь командой \"%s"
-#~ "\" или \"%s\"."
+#~ "Для получения списка известных типов сервисов воспользуйтесь командой "
+#~ "\"%s\" или \"%s\"."
 
 #~ msgid "Root privileges are required for modifying system repositories."
 #~ msgstr ""

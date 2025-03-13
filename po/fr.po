@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.fr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-27 23:35+0100\n"
+"POT-Creation-Date: 2025-03-13 16:49+0100\n"
 "PO-Revision-Date: 2025-02-13 07:50+0000\n"
 "Last-Translator: Guillaume GARDET <guillaume.gardet@opensuse.org>\n"
 "Language-Team: French <https://l10n.opensuse.org/projects/zypper/master/fr/"
@@ -2074,6 +2074,45 @@ msgstr "Nom d'utilisateur"
 #: src/callbacks/media.cc:329
 msgid "Password"
 msgstr "Mot de passe"
+
+#: src/callbacks/media.h:190
+msgid "Preloading Packages"
+msgstr ""
+
+#: src/callbacks/media.h:209
+msgid "Preloading Packages:"
+msgstr ""
+
+#: src/callbacks/media.h:234 src/callbacks/media.h:256
+msgid "Preloading:"
+msgstr ""
+
+#. Translator: prefetch progress bar result: ".............[done]"
+#: src/callbacks/media.h:266
+msgid "done"
+msgstr "fait"
+
+#. Translator: prefetch progress bar result: "........[not found]"
+#: src/callbacks/media.h:271
+msgid "not found"
+msgstr "non trouvé"
+
+#. Translator: prefetch progress bar result: "............[error]"
+#: src/callbacks/media.h:278
+msgid "error"
+msgstr "erreur"
+
+#: src/callbacks/media.h:294
+msgid "Preload finished."
+msgstr ""
+
+#: src/callbacks/media.h:299
+msgid "success"
+msgstr ""
+
+#: src/callbacks/media.h:302
+msgid "files missing"
+msgstr ""
 
 #: src/callbacks/repo.h:60
 msgid "Retrieving delta"
@@ -7501,50 +7540,50 @@ msgstr "Correctif"
 msgid "Specified local path does not exist or is not accessible."
 msgstr "Le chemin local spécifié n'existe pas ou n'est pas accessible."
 
-#: src/utils/misc.cc:456
+#: src/utils/misc.cc:460
 msgid "Given URI is invalid"
 msgstr "L'URI fourni est invalide"
 
 #. Guess failed:
 #. translators: don't translate '<platform>'
-#: src/utils/misc.cc:548
+#: src/utils/misc.cc:552
 msgid "Unable to guess a value for <platform>."
 msgstr "Impossible de deviner une valeur pour <platform>."
 
-#: src/utils/misc.cc:549
+#: src/utils/misc.cc:553
 msgid "Please use obs://<project>/<platform>"
 msgstr "Veuillez utiliser obs://<project>/<platform>"
 
 # TLABEL linuxrc_2002_03_29_0036__85
-#: src/utils/misc.cc:550 src/utils/misc.cc:596
+#: src/utils/misc.cc:554 src/utils/misc.cc:600
 #, c-format, boost-format
 msgid "Example: %s"
 msgstr "Exemple : %s"
 
-#: src/utils/misc.cc:595
+#: src/utils/misc.cc:599
 msgid "Invalid OBS URI."
 msgstr "URI OBS invalide."
 
-#: src/utils/misc.cc:595
+#: src/utils/misc.cc:599
 msgid "Correct form is obs://<project>/[platform]"
 msgstr "La forme correcte est obs://<project>/[platform]"
 
 # TLABEL restore_2002_08_07_0216__60
-#: src/utils/misc.cc:643
+#: src/utils/misc.cc:647
 msgid "Problem copying the specified RPM file to the cache directory."
 msgstr ""
 "Problème lors de la copie du fichier RPM spécifié vers le dossier de cache."
 
-#: src/utils/misc.cc:644
+#: src/utils/misc.cc:648
 msgid "Perhaps you are running out of disk space."
 msgstr "Il se peut que vous n'ayez plus d'espace disque disponible."
 
 # TLABEL restore_2002_08_07_0216__60
-#: src/utils/misc.cc:652
+#: src/utils/misc.cc:656
 msgid "Problem retrieving the specified RPM file"
 msgstr "Problème de récupération du fichier RPM spécifié"
 
-#: src/utils/misc.cc:653
+#: src/utils/misc.cc:657
 msgid "Please check whether the file is accessible."
 msgstr "Veuillez vérifier si le fichier est accessible."
 
@@ -7747,14 +7786,8 @@ msgstr "Erreur"
 #~ msgid "OK OK! Exiting immediately..."
 #~ msgstr "OK OK ! Sortie immédiate..."
 
-#~ msgid "done"
-#~ msgstr "fait"
-
 #~ msgid "attention"
 #~ msgstr "attention"
-
-#~ msgid "error"
-#~ msgstr "erreur"
 
 #~ msgid "Note:"
 #~ msgstr "Note :"
@@ -7772,9 +7805,6 @@ msgstr "Erreur"
 # window title for kernel loading (see txt_load_kernel)
 #~ msgid "starting"
 #~ msgstr "Démarrage"
-
-#~ msgid "not found"
-#~ msgstr "non trouvé"
 
 #~ msgid "No help available for this prompt."
 #~ msgstr "Aucune aide disponible pour cette invite."

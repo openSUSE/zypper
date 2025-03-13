@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-27 23:35+0100\n"
+"POT-Creation-Date: 2025-03-13 16:49+0100\n"
 "PO-Revision-Date: 2025-02-13 07:50+0000\n"
 "Last-Translator: Luna  Jernberg <bittin@opensuse.org>\n"
 "Language-Team: Swedish <https://l10n.opensuse.org/projects/zypper/master/sv/"
@@ -1984,6 +1984,45 @@ msgstr "Användarnamn"
 #: src/callbacks/media.cc:329
 msgid "Password"
 msgstr "Lösenord"
+
+#: src/callbacks/media.h:190
+msgid "Preloading Packages"
+msgstr ""
+
+#: src/callbacks/media.h:209
+msgid "Preloading Packages:"
+msgstr ""
+
+#: src/callbacks/media.h:234 src/callbacks/media.h:256
+msgid "Preloading:"
+msgstr ""
+
+#. Translator: prefetch progress bar result: ".............[done]"
+#: src/callbacks/media.h:266
+msgid "done"
+msgstr "klar"
+
+#. Translator: prefetch progress bar result: "........[not found]"
+#: src/callbacks/media.h:271
+msgid "not found"
+msgstr "hittades inte"
+
+#. Translator: prefetch progress bar result: "............[error]"
+#: src/callbacks/media.h:278
+msgid "error"
+msgstr "fel"
+
+#: src/callbacks/media.h:294
+msgid "Preload finished."
+msgstr ""
+
+#: src/callbacks/media.h:299
+msgid "success"
+msgstr ""
+
+#: src/callbacks/media.h:302
+msgid "files missing"
+msgstr ""
 
 #: src/callbacks/repo.h:60
 msgid "Retrieving delta"
@@ -5966,8 +6005,8 @@ msgid ""
 "Please add one or more base URI (baseurl=URI) entries to %s for repository "
 "'%s'."
 msgstr ""
-"Lägg till en eller flera bas-URI-poster (basurl=URI) i %s för förrådet \"%s"
-"\"."
+"Lägg till en eller flera bas-URI-poster (basurl=URI) i %s för förrådet "
+"\"%s\"."
 
 #: src/repos.cc:378
 msgid "No alias defined for this repository."
@@ -7285,46 +7324,46 @@ msgid "Specified local path does not exist or is not accessible."
 msgstr ""
 "Den angivna lokala sökvägen finns inte eller också går den inte att komma åt."
 
-#: src/utils/misc.cc:456
+#: src/utils/misc.cc:460
 msgid "Given URI is invalid"
 msgstr "Den angivna URI:n är ogiltig"
 
 #. Guess failed:
 #. translators: don't translate '<platform>'
-#: src/utils/misc.cc:548
+#: src/utils/misc.cc:552
 msgid "Unable to guess a value for <platform>."
 msgstr "Kan inte gissa ett värde för <plattform>."
 
-#: src/utils/misc.cc:549
+#: src/utils/misc.cc:553
 msgid "Please use obs://<project>/<platform>"
 msgstr "Använd obs://<projekt>/<plattform>"
 
-#: src/utils/misc.cc:550 src/utils/misc.cc:596
+#: src/utils/misc.cc:554 src/utils/misc.cc:600
 #, c-format, boost-format
 msgid "Example: %s"
 msgstr "Exempel: %s"
 
-#: src/utils/misc.cc:595
+#: src/utils/misc.cc:599
 msgid "Invalid OBS URI."
 msgstr "Ogiltig OBS-URI."
 
-#: src/utils/misc.cc:595
+#: src/utils/misc.cc:599
 msgid "Correct form is obs://<project>/[platform]"
 msgstr "Den korrekta formen är obs://<projekt>/[plattform]"
 
-#: src/utils/misc.cc:643
+#: src/utils/misc.cc:647
 msgid "Problem copying the specified RPM file to the cache directory."
 msgstr "Det gick inte att kopiera den angivna RPM-filen till cachekatalogen."
 
-#: src/utils/misc.cc:644
+#: src/utils/misc.cc:648
 msgid "Perhaps you are running out of disk space."
 msgstr "Diskutrymmet håller eventuellt på att ta slut."
 
-#: src/utils/misc.cc:652
+#: src/utils/misc.cc:656
 msgid "Problem retrieving the specified RPM file"
 msgstr "Det gick inte att hämta den angivna RPM-filen"
 
-#: src/utils/misc.cc:653
+#: src/utils/misc.cc:657
 msgid "Please check whether the file is accessible."
 msgstr "Kontrollera att filen är hämtningsbar."
 
@@ -7520,14 +7559,8 @@ msgstr "Fel"
 #~ msgid "OK OK! Exiting immediately..."
 #~ msgstr "OK! Avslutar genast..."
 
-#~ msgid "done"
-#~ msgstr "klar"
-
 #~ msgid "attention"
 #~ msgstr "uppmärksamhet"
-
-#~ msgid "error"
-#~ msgstr "fel"
 
 #~ msgid "Note:"
 #~ msgstr "Notera:"
@@ -7544,9 +7577,6 @@ msgstr "Fel"
 
 #~ msgid "starting"
 #~ msgstr "startar"
-
-#~ msgid "not found"
-#~ msgstr "hittades inte"
 
 #~ msgid "No help available for this prompt."
 #~ msgstr "Det finns ingen hjälp till meddelandet."

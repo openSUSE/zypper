@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-27 23:35+0100\n"
+"POT-Creation-Date: 2025-03-13 16:49+0100\n"
 "PO-Revision-Date: 2005-08-03 21:03+0200\n"
 "Last-Translator: Данило Шеган <danilo@gnome.org>\n"
 "Language-Team: Serbian <novell@prevod.org>\n"
@@ -16,8 +16,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : (n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : (n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -1968,6 +1968,48 @@ msgstr "Назив догађаја"
 #: src/callbacks/media.cc:329
 msgid "Password"
 msgstr "Лозинка"
+
+#: src/callbacks/media.h:190
+msgid "Preloading Packages"
+msgstr ""
+
+#: src/callbacks/media.h:209
+msgid "Preloading Packages:"
+msgstr ""
+
+#: src/callbacks/media.h:234 src/callbacks/media.h:256
+msgid "Preloading:"
+msgstr ""
+
+#. Translator: prefetch progress bar result: ".............[done]"
+#: src/callbacks/media.h:266
+#, fuzzy
+msgid "done"
+msgstr "Indonezija"
+
+#. Translator: prefetch progress bar result: "........[not found]"
+#: src/callbacks/media.h:271
+#, fuzzy
+msgid "not found"
+msgstr "веза није успостављена"
+
+#. Translator: prefetch progress bar result: "............[error]"
+#: src/callbacks/media.h:278
+#, fuzzy
+msgid "error"
+msgstr "Greška"
+
+#: src/callbacks/media.h:294
+msgid "Preload finished."
+msgstr ""
+
+#: src/callbacks/media.h:299
+msgid "success"
+msgstr ""
+
+#: src/callbacks/media.h:302
+msgid "files missing"
+msgstr ""
 
 #: src/callbacks/repo.h:60
 msgid "Retrieving delta"
@@ -7036,48 +7078,48 @@ msgstr "Закрпа"
 msgid "Specified local path does not exist or is not accessible."
 msgstr ""
 
-#: src/utils/misc.cc:456
+#: src/utils/misc.cc:460
 msgid "Given URI is invalid"
 msgstr ""
 
 #. Guess failed:
 #. translators: don't translate '<platform>'
-#: src/utils/misc.cc:548
+#: src/utils/misc.cc:552
 msgid "Unable to guess a value for <platform>."
 msgstr ""
 
-#: src/utils/misc.cc:549
+#: src/utils/misc.cc:553
 msgid "Please use obs://<project>/<platform>"
 msgstr ""
 
-#: src/utils/misc.cc:550 src/utils/misc.cc:596
+#: src/utils/misc.cc:554 src/utils/misc.cc:600
 #, fuzzy, c-format, boost-format
 msgid "Example: %s"
 msgstr "Назив:"
 
-#: src/utils/misc.cc:595
+#: src/utils/misc.cc:599
 msgid "Invalid OBS URI."
 msgstr ""
 
-#: src/utils/misc.cc:595
+#: src/utils/misc.cc:599
 msgid "Correct form is obs://<project>/[platform]"
 msgstr ""
 
-#: src/utils/misc.cc:643
+#: src/utils/misc.cc:647
 msgid "Problem copying the specified RPM file to the cache directory."
 msgstr ""
 
-#: src/utils/misc.cc:644
+#: src/utils/misc.cc:648
 msgid "Perhaps you are running out of disk space."
 msgstr ""
 
 #  progress stages
-#: src/utils/misc.cc:652
+#: src/utils/misc.cc:656
 #, fuzzy
 msgid "Problem retrieving the specified RPM file"
 msgstr "&Instaliraj pakete"
 
-#: src/utils/misc.cc:653
+#: src/utils/misc.cc:657
 msgid "Please check whether the file is accessible."
 msgstr ""
 
@@ -7190,14 +7232,6 @@ msgstr ""
 msgid "Error"
 msgstr "Greška"
 
-#, fuzzy
-#~ msgid "done"
-#~ msgstr "Indonezija"
-
-#, fuzzy
-#~ msgid "error"
-#~ msgstr "Greška"
-
 # window title for kernel loading (see txt_load_kernel)
 #, fuzzy
 #~ msgid "Warning:"
@@ -7216,10 +7250,6 @@ msgstr "Greška"
 #, fuzzy
 #~ msgid "starting"
 #~ msgstr "Покрећем..."
-
-#, fuzzy
-#~ msgid "not found"
-#~ msgstr "веза није успостављена"
 
 #, fuzzy
 #~ msgid "Retrieving %s %s-%s.%s"

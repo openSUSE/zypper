@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-27 23:35+0100\n"
+"POT-Creation-Date: 2025-03-13 16:49+0100\n"
 "PO-Revision-Date: 2024-08-30 04:47+0000\n"
 "Last-Translator: yok <mtopac2024@gmail.com>\n"
 "Language-Team: Turkish <https://l10n.opensuse.org/projects/zypper/master/tr/"
@@ -2026,6 +2026,47 @@ msgstr "Kullanıcı Adı"
 #: src/callbacks/media.cc:329
 msgid "Password"
 msgstr "Şifre"
+
+#: src/callbacks/media.h:190
+msgid "Preloading Packages"
+msgstr ""
+
+#: src/callbacks/media.h:209
+msgid "Preloading Packages:"
+msgstr ""
+
+#: src/callbacks/media.h:234 src/callbacks/media.h:256
+msgid "Preloading:"
+msgstr ""
+
+#. Translator: prefetch progress bar result: ".............[done]"
+#: src/callbacks/media.h:266
+msgid "done"
+msgstr "tamamlandı"
+
+# clients/nis_write.ycp:73
+#. Translator: prefetch progress bar result: "........[not found]"
+#: src/callbacks/media.h:271
+msgid "not found"
+msgstr "bulunamadı"
+
+# include/ui/common_messages.ycp:95
+#. Translator: prefetch progress bar result: "............[error]"
+#: src/callbacks/media.h:278
+msgid "error"
+msgstr "hata"
+
+#: src/callbacks/media.h:294
+msgid "Preload finished."
+msgstr ""
+
+#: src/callbacks/media.h:299
+msgid "success"
+msgstr ""
+
+#: src/callbacks/media.h:302
+msgid "files missing"
+msgstr ""
 
 #: src/callbacks/repo.h:60
 msgid "Retrieving delta"
@@ -7376,46 +7417,46 @@ msgstr "Yama"
 msgid "Specified local path does not exist or is not accessible."
 msgstr "Belirtilen yerel yol mevcut ya da erişilebilir değil."
 
-#: src/utils/misc.cc:456
+#: src/utils/misc.cc:460
 msgid "Given URI is invalid"
 msgstr "Verilen URI geçersiz"
 
 #. Guess failed:
 #. translators: don't translate '<platform>'
-#: src/utils/misc.cc:548
+#: src/utils/misc.cc:552
 msgid "Unable to guess a value for <platform>."
 msgstr "<platform> için bir değer tahmin edilemiyor."
 
-#: src/utils/misc.cc:549
+#: src/utils/misc.cc:553
 msgid "Please use obs://<project>/<platform>"
 msgstr "Lütfen obs://<proje>/<platform> kullanın"
 
-#: src/utils/misc.cc:550 src/utils/misc.cc:596
+#: src/utils/misc.cc:554 src/utils/misc.cc:600
 #, c-format, boost-format
 msgid "Example: %s"
 msgstr "Örnek: %s"
 
-#: src/utils/misc.cc:595
+#: src/utils/misc.cc:599
 msgid "Invalid OBS URI."
 msgstr "Geçersiz OBS URI'si."
 
-#: src/utils/misc.cc:595
+#: src/utils/misc.cc:599
 msgid "Correct form is obs://<project>/[platform]"
 msgstr "Doğru biçim obs://<proje>/[platform]"
 
-#: src/utils/misc.cc:643
+#: src/utils/misc.cc:647
 msgid "Problem copying the specified RPM file to the cache directory."
 msgstr "Belirtilen RPM dosyasını önbellek dizinine kopyalamada sorun."
 
-#: src/utils/misc.cc:644
+#: src/utils/misc.cc:648
 msgid "Perhaps you are running out of disk space."
 msgstr "Muhtemelen diskinizde boş alan yok."
 
-#: src/utils/misc.cc:652
+#: src/utils/misc.cc:656
 msgid "Problem retrieving the specified RPM file"
 msgstr "Belirtilen RPM dosyasını alma sorunu"
 
-#: src/utils/misc.cc:653
+#: src/utils/misc.cc:657
 msgid "Please check whether the file is accessible."
 msgstr "Dosyanın erişilebilir olup olmadığını kontrol edin."
 
@@ -7595,16 +7636,9 @@ msgstr "Hata"
 #~ msgid "OK OK! Exiting immediately..."
 #~ msgstr "OK OK! Hemen çıkılıyor."
 
-#~ msgid "done"
-#~ msgstr "tamamlandı"
-
 #, fuzzy
 #~ msgid "attention"
 #~ msgstr "dikkat"
-
-# include/ui/common_messages.ycp:95
-#~ msgid "error"
-#~ msgstr "hata"
 
 #~ msgid "Note:"
 #~ msgstr "Not:"
@@ -7622,10 +7656,6 @@ msgstr "Hata"
 # window title for kernel loading (see txt_load_kernel)
 #~ msgid "starting"
 #~ msgstr "başlatılıyor"
-
-# clients/nis_write.ycp:73
-#~ msgid "not found"
-#~ msgstr "bulunamadı"
 
 #~ msgid "no help available for this option"
 #~ msgstr "Bu seçenek için yardım mevcut değil"

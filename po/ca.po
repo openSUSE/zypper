@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-27 23:35+0100\n"
+"POT-Creation-Date: 2025-03-13 16:49+0100\n"
 "PO-Revision-Date: 2025-02-13 11:50+0000\n"
 "Last-Translator: David Medina <medipas@gmail.com>\n"
 "Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/"
@@ -2012,6 +2012,46 @@ msgstr "Nom d'usuari"
 msgid "Password"
 msgstr "Contrasenya"
 
+#: src/callbacks/media.h:190
+msgid "Preloading Packages"
+msgstr ""
+
+#: src/callbacks/media.h:209
+msgid "Preloading Packages:"
+msgstr ""
+
+#: src/callbacks/media.h:234 src/callbacks/media.h:256
+msgid "Preloading:"
+msgstr ""
+
+# ID
+#. Translator: prefetch progress bar result: ".............[done]"
+#: src/callbacks/media.h:266
+msgid "done"
+msgstr "fet"
+
+#. Translator: prefetch progress bar result: "........[not found]"
+#: src/callbacks/media.h:271
+msgid "not found"
+msgstr "no trobat"
+
+#. Translator: prefetch progress bar result: "............[error]"
+#: src/callbacks/media.h:278
+msgid "error"
+msgstr "error"
+
+#: src/callbacks/media.h:294
+msgid "Preload finished."
+msgstr ""
+
+#: src/callbacks/media.h:299
+msgid "success"
+msgstr ""
+
+#: src/callbacks/media.h:302
+msgid "files missing"
+msgstr ""
+
 #: src/callbacks/repo.h:60
 msgid "Retrieving delta"
 msgstr "Obtenint delta"
@@ -2638,8 +2678,8 @@ msgstr "Obtén la llengua que coincideixi exactament amb l'argument: "
 #: src/commands/locale/localescmd.cc:100
 msgid "Get the list of packages which are available for 'de' and 'en':"
 msgstr ""
-"Obtén la llista de paquets que estan disponibles per als codis \"de\" i \"en"
-"\":"
+"Obtén la llista de paquets que estan disponibles per als codis \"de\" i "
+"\"en\":"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/removelocalecmd.cc:18
@@ -7369,47 +7409,47 @@ msgstr "Pedaç"
 msgid "Specified local path does not exist or is not accessible."
 msgstr "L'adreça local especificada no existeix o no és accessible."
 
-#: src/utils/misc.cc:456
+#: src/utils/misc.cc:460
 msgid "Given URI is invalid"
 msgstr "L'URI introduït no és vàlid."
 
 #. Guess failed:
 #. translators: don't translate '<platform>'
-#: src/utils/misc.cc:548
+#: src/utils/misc.cc:552
 msgid "Unable to guess a value for <platform>."
 msgstr "No es pot estimar un valor per a <platform>."
 
-#: src/utils/misc.cc:549
+#: src/utils/misc.cc:553
 msgid "Please use obs://<project>/<platform>"
 msgstr "Si us plau, useu obs://<project>/<platform>"
 
-#: src/utils/misc.cc:550 src/utils/misc.cc:596
+#: src/utils/misc.cc:554 src/utils/misc.cc:600
 #, c-format, boost-format
 msgid "Example: %s"
 msgstr "Exemple: %s"
 
-#: src/utils/misc.cc:595
+#: src/utils/misc.cc:599
 msgid "Invalid OBS URI."
 msgstr "OBS URI no vàlid."
 
-#: src/utils/misc.cc:595
+#: src/utils/misc.cc:599
 msgid "Correct form is obs://<project>/[platform]"
 msgstr "La forma correcta és obs://<project>/[platform]"
 
-#: src/utils/misc.cc:643
+#: src/utils/misc.cc:647
 msgid "Problem copying the specified RPM file to the cache directory."
 msgstr ""
 "Problema copiant el fitxer RPM especificat a la memòria cau del directori."
 
-#: src/utils/misc.cc:644
+#: src/utils/misc.cc:648
 msgid "Perhaps you are running out of disk space."
 msgstr "Potser s'està esgotant l'espai del disc."
 
-#: src/utils/misc.cc:652
+#: src/utils/misc.cc:656
 msgid "Problem retrieving the specified RPM file"
 msgstr "Problema obtenint el fitxer RPM especificat"
 
-#: src/utils/misc.cc:653
+#: src/utils/misc.cc:657
 msgid "Please check whether the file is accessible."
 msgstr "Si us plau, comproveu si el fitxer és accessible."
 
@@ -7595,8 +7635,8 @@ msgstr "Error"
 #~ "File '%s' from repository '%s' is signed with an unknown key '%s'. "
 #~ "Continue?"
 #~ msgstr ""
-#~ "El fitxer %s del repositori %s està signat amb una clau desconeguda: \"%s"
-#~ "\". Continuo?"
+#~ "El fitxer %s del repositori %s està signat amb una clau desconeguda: "
+#~ "\"%s\". Continuo?"
 
 #~ msgid "Write a manifest file."
 #~ msgstr "Escriu un fitxer de manifest."
@@ -7610,15 +7650,8 @@ msgstr "Error"
 #~ msgid "OK OK! Exiting immediately..."
 #~ msgstr "D'acord, d'acord! Se surt immediatament..."
 
-# ID
-#~ msgid "done"
-#~ msgstr "fet"
-
 #~ msgid "attention"
 #~ msgstr "atenció"
-
-#~ msgid "error"
-#~ msgstr "error"
 
 #~ msgid "Note:"
 #~ msgstr "Atenció!"
@@ -7635,9 +7668,6 @@ msgstr "Error"
 # window title for kernel loading (see txt_load_kernel)
 #~ msgid "starting"
 #~ msgstr "començant"
-
-#~ msgid "not found"
-#~ msgstr "no trobat"
 
 #~ msgid "No help available for this prompt."
 #~ msgstr "No hi ha ajuda per a aquesta entrada."
@@ -9515,8 +9545,8 @@ msgstr "Error"
 #~ "Different package type specified in '%s' option and '%s' argument. Will "
 #~ "use the latter."
 #~ msgstr ""
-#~ "Tipus de paquet diferent especificat a l'opció \"%s\" amb l'argument \"%s"
-#~ "\". Es farà servir el darrer."
+#~ "Tipus de paquet diferent especificat a l'opció \"%s\" amb l'argument "
+#~ "\"%s\". Es farà servir el darrer."
 
 #~ msgid "Load only the specified repository."
 #~ msgstr "Carrega només el repositori especificat."

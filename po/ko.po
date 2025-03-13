@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.ko\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-27 23:35+0100\n"
+"POT-Creation-Date: 2025-03-13 16:49+0100\n"
 "PO-Revision-Date: 2024-09-07 03:47+0000\n"
 "Last-Translator: Joungmin Lee <leejm516@gmail.com>\n"
 "Language-Team: Korean <https://l10n.opensuse.org/projects/zypper/master/ko/"
@@ -1849,6 +1849,45 @@ msgstr "사용자 이름"
 #: src/callbacks/media.cc:329
 msgid "Password"
 msgstr "비밀번호"
+
+#: src/callbacks/media.h:190
+msgid "Preloading Packages"
+msgstr ""
+
+#: src/callbacks/media.h:209
+msgid "Preloading Packages:"
+msgstr ""
+
+#: src/callbacks/media.h:234 src/callbacks/media.h:256
+msgid "Preloading:"
+msgstr ""
+
+#. Translator: prefetch progress bar result: ".............[done]"
+#: src/callbacks/media.h:266
+msgid "done"
+msgstr "완료"
+
+#. Translator: prefetch progress bar result: "........[not found]"
+#: src/callbacks/media.h:271
+msgid "not found"
+msgstr "찾을 수 없음"
+
+#. Translator: prefetch progress bar result: "............[error]"
+#: src/callbacks/media.h:278
+msgid "error"
+msgstr "오류"
+
+#: src/callbacks/media.h:294
+msgid "Preload finished."
+msgstr ""
+
+#: src/callbacks/media.h:299
+msgid "success"
+msgstr ""
+
+#: src/callbacks/media.h:302
+msgid "files missing"
+msgstr ""
 
 #: src/callbacks/repo.h:60
 msgid "Retrieving delta"
@@ -6976,46 +7015,46 @@ msgstr "패치"
 msgid "Specified local path does not exist or is not accessible."
 msgstr "지정된 로컬 경로가 없거나, 액세스할 수 없습니다."
 
-#: src/utils/misc.cc:456
+#: src/utils/misc.cc:460
 msgid "Given URI is invalid"
 msgstr "지정된 URI가 잘못되었습니다."
 
 #. Guess failed:
 #. translators: don't translate '<platform>'
-#: src/utils/misc.cc:548
+#: src/utils/misc.cc:552
 msgid "Unable to guess a value for <platform>."
 msgstr "<플랫폼>에 대한 값을 추측할 수 없습니다."
 
-#: src/utils/misc.cc:549
+#: src/utils/misc.cc:553
 msgid "Please use obs://<project>/<platform>"
 msgstr "obs://<project>/<platform>을 사용하십시오."
 
-#: src/utils/misc.cc:550 src/utils/misc.cc:596
+#: src/utils/misc.cc:554 src/utils/misc.cc:600
 #, c-format, boost-format
 msgid "Example: %s"
 msgstr "예: %s"
 
-#: src/utils/misc.cc:595
+#: src/utils/misc.cc:599
 msgid "Invalid OBS URI."
 msgstr "OBS URI가 잘못되었습니다."
 
-#: src/utils/misc.cc:595
+#: src/utils/misc.cc:599
 msgid "Correct form is obs://<project>/[platform]"
 msgstr "올바른 형식은 obs://<project>/[platform]입니다."
 
-#: src/utils/misc.cc:643
+#: src/utils/misc.cc:647
 msgid "Problem copying the specified RPM file to the cache directory."
 msgstr "지정된 RPM 파일을 캐시 디렉토리에 복사하는 중 문제가 발생했습니다."
 
-#: src/utils/misc.cc:644
+#: src/utils/misc.cc:648
 msgid "Perhaps you are running out of disk space."
 msgstr "디스크 용량이 부족한 것 같습니다."
 
-#: src/utils/misc.cc:652
+#: src/utils/misc.cc:656
 msgid "Problem retrieving the specified RPM file"
 msgstr "지정한 RPM 파일 검색 중 문제가 발생했습니다."
 
-#: src/utils/misc.cc:653
+#: src/utils/misc.cc:657
 msgid "Please check whether the file is accessible."
 msgstr "파일이 액세스 가능한지 확인하십시오."
 
@@ -7189,12 +7228,6 @@ msgstr "오류"
 #~ msgid "OK OK! Exiting immediately..."
 #~ msgstr "예, 즉시 종료하는 중입니다..."
 
-#~ msgid "done"
-#~ msgstr "완료"
-
-#~ msgid "error"
-#~ msgstr "오류"
-
 #~ msgid "Note:"
 #~ msgstr "참조:"
 
@@ -7210,9 +7243,6 @@ msgstr "오류"
 # window title for kernel loading (see txt_load_kernel)
 #~ msgid "starting"
 #~ msgstr "시작 중"
-
-#~ msgid "not found"
-#~ msgstr "찾을 수 없음"
 
 #~ msgid "No help available for this prompt."
 #~ msgstr "이 프롬프트에 사용 가능한 도움말이 없습니다."

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.hi\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-27 23:35+0100\n"
+"POT-Creation-Date: 2025-03-13 16:49+0100\n"
 "PO-Revision-Date: 2021-04-22 19:57+0000\n"
 "Last-Translator: Panwar <caspian7pena@gmail.com>\n"
 "Language-Team: Hindi <https://l10n.opensuse.org/projects/zypper/master/hi/>\n"
@@ -1904,6 +1904,46 @@ msgstr "यूजर नाम"
 #: src/callbacks/media.cc:329
 msgid "Password"
 msgstr "कूट शब्द"
+
+#: src/callbacks/media.h:190
+msgid "Preloading Packages"
+msgstr ""
+
+#: src/callbacks/media.h:209
+msgid "Preloading Packages:"
+msgstr ""
+
+#: src/callbacks/media.h:234 src/callbacks/media.h:256
+msgid "Preloading:"
+msgstr ""
+
+#. Translator: prefetch progress bar result: ".............[done]"
+#: src/callbacks/media.h:266
+msgid "done"
+msgstr "हो गया"
+
+#. Translator: prefetch progress bar result: "........[not found]"
+#: src/callbacks/media.h:271
+#, fuzzy
+msgid "not found"
+msgstr "नहीं मिला"
+
+#. Translator: prefetch progress bar result: "............[error]"
+#: src/callbacks/media.h:278
+msgid "error"
+msgstr "त्रुटि"
+
+#: src/callbacks/media.h:294
+msgid "Preload finished."
+msgstr ""
+
+#: src/callbacks/media.h:299
+msgid "success"
+msgstr ""
+
+#: src/callbacks/media.h:302
+msgid "files missing"
+msgstr ""
 
 #: src/callbacks/repo.h:60
 msgid "Retrieving delta"
@@ -6999,22 +7039,22 @@ msgstr "पैच"
 msgid "Specified local path does not exist or is not accessible."
 msgstr ""
 
-#: src/utils/misc.cc:456
+#: src/utils/misc.cc:460
 #, fuzzy
 msgid "Given URI is invalid"
 msgstr "दिया यूआरएल अवैध है"
 
 #. Guess failed:
 #. translators: don't translate '<platform>'
-#: src/utils/misc.cc:548
+#: src/utils/misc.cc:552
 msgid "Unable to guess a value for <platform>."
 msgstr ""
 
-#: src/utils/misc.cc:549
+#: src/utils/misc.cc:553
 msgid "Please use obs://<project>/<platform>"
 msgstr ""
 
-#: src/utils/misc.cc:550 src/utils/misc.cc:596
+#: src/utils/misc.cc:554 src/utils/misc.cc:600
 #, fuzzy, c-format, boost-format
 msgid "Example: %s"
 msgstr ""
@@ -7022,30 +7062,30 @@ msgstr ""
 "\n"
 "उदाहरणः "
 
-#: src/utils/misc.cc:595
+#: src/utils/misc.cc:599
 #, fuzzy
 msgid "Invalid OBS URI."
 msgstr "अमान्य KeyID।"
 
-#: src/utils/misc.cc:595
+#: src/utils/misc.cc:599
 msgid "Correct form is obs://<project>/[platform]"
 msgstr ""
 
-#: src/utils/misc.cc:643
+#: src/utils/misc.cc:647
 #, fuzzy
 msgid "Problem copying the specified RPM file to the cache directory."
 msgstr "%s से उत्पाद को पढ़ रहा है"
 
-#: src/utils/misc.cc:644
+#: src/utils/misc.cc:648
 msgid "Perhaps you are running out of disk space."
 msgstr ""
 
-#: src/utils/misc.cc:652
+#: src/utils/misc.cc:656
 #, fuzzy
 msgid "Problem retrieving the specified RPM file"
 msgstr "%s से उत्पाद को पढ़ रहा है"
 
-#: src/utils/misc.cc:653
+#: src/utils/misc.cc:657
 #, fuzzy
 msgid "Please check whether the file is accessible."
 msgstr "स्क्रिप्ट फाइल एक्सेस योग्य नहीं है"
@@ -7188,12 +7228,6 @@ msgstr "खराबी"
 #~ msgid "Specified capability not found"
 #~ msgstr "निर्दिष्ट बैटरी स्कीम नहीं मिली."
 
-#~ msgid "done"
-#~ msgstr "हो गया"
-
-#~ msgid "error"
-#~ msgstr "त्रुटि"
-
 #, fuzzy
 #~ msgid "Warning:"
 #~ msgstr "चेतावनी"
@@ -7208,10 +7242,6 @@ msgstr "खराबी"
 #, fuzzy
 #~ msgid "starting"
 #~ msgstr "आरंभ हो रहा है..."
-
-#, fuzzy
-#~ msgid "not found"
-#~ msgstr "नहीं मिला"
 
 #, fuzzy
 #~ msgid "Retrieving %s %s-%s.%s"

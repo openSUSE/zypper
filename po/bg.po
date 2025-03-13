@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-27 23:35+0100\n"
+"POT-Creation-Date: 2025-03-13 16:49+0100\n"
 "PO-Revision-Date: 2021-07-16 22:10+0000\n"
 "Last-Translator: Yavor Uzunov <yav@aaa.a.bg>\n"
 "Language-Team: Bulgarian <https://l10n.opensuse.org/projects/zypper/master/"
@@ -1889,6 +1889,48 @@ msgstr "Имена на машините"
 #: src/callbacks/media.cc:329
 msgid "Password"
 msgstr "Парола"
+
+#: src/callbacks/media.h:190
+msgid "Preloading Packages"
+msgstr ""
+
+#: src/callbacks/media.h:209
+msgid "Preloading Packages:"
+msgstr ""
+
+#: src/callbacks/media.h:234 src/callbacks/media.h:256
+msgid "Preloading:"
+msgstr ""
+
+#. Translator: prefetch progress bar result: ".............[done]"
+#: src/callbacks/media.h:266
+#, fuzzy
+msgid "done"
+msgstr "Индонезия"
+
+#. Translator: prefetch progress bar result: "........[not found]"
+#: src/callbacks/media.h:271
+#, fuzzy
+msgid "not found"
+msgstr "не работи"
+
+#. Translator: prefetch progress bar result: "............[error]"
+#: src/callbacks/media.h:278
+#, fuzzy
+msgid "error"
+msgstr "Грешка"
+
+#: src/callbacks/media.h:294
+msgid "Preload finished."
+msgstr ""
+
+#: src/callbacks/media.h:299
+msgid "success"
+msgstr ""
+
+#: src/callbacks/media.h:302
+msgid "files missing"
+msgstr ""
 
 #: src/callbacks/repo.h:60
 msgid "Retrieving delta"
@@ -7014,21 +7056,21 @@ msgstr "кръпка"
 msgid "Specified local path does not exist or is not accessible."
 msgstr ""
 
-#: src/utils/misc.cc:456
+#: src/utils/misc.cc:460
 msgid "Given URI is invalid"
 msgstr ""
 
 #. Guess failed:
 #. translators: don't translate '<platform>'
-#: src/utils/misc.cc:548
+#: src/utils/misc.cc:552
 msgid "Unable to guess a value for <platform>."
 msgstr ""
 
-#: src/utils/misc.cc:549
+#: src/utils/misc.cc:553
 msgid "Please use obs://<project>/<platform>"
 msgstr ""
 
-#: src/utils/misc.cc:550 src/utils/misc.cc:596
+#: src/utils/misc.cc:554 src/utils/misc.cc:600
 #, fuzzy, c-format, boost-format
 msgid "Example: %s"
 msgstr ""
@@ -7036,29 +7078,29 @@ msgstr ""
 "\n"
 "Пример: "
 
-#: src/utils/misc.cc:595
+#: src/utils/misc.cc:599
 #, fuzzy
 msgid "Invalid OBS URI."
 msgstr "Невалиден вход."
 
-#: src/utils/misc.cc:595
+#: src/utils/misc.cc:599
 msgid "Correct form is obs://<project>/[platform]"
 msgstr ""
 
-#: src/utils/misc.cc:643
+#: src/utils/misc.cc:647
 msgid "Problem copying the specified RPM file to the cache directory."
 msgstr ""
 
-#: src/utils/misc.cc:644
+#: src/utils/misc.cc:648
 msgid "Perhaps you are running out of disk space."
 msgstr ""
 
-#: src/utils/misc.cc:652
+#: src/utils/misc.cc:656
 #, fuzzy
 msgid "Problem retrieving the specified RPM file"
 msgstr "Грешка при четенето на сектор %u."
 
-#: src/utils/misc.cc:653
+#: src/utils/misc.cc:657
 msgid "Please check whether the file is accessible."
 msgstr ""
 
@@ -7180,14 +7222,6 @@ msgstr "Грешка"
 #~ msgstr "%s Файлът от %s хранилище е неподписан. Да продължа ли?"
 
 #, fuzzy
-#~ msgid "done"
-#~ msgstr "Индонезия"
-
-#, fuzzy
-#~ msgid "error"
-#~ msgstr "Грешка"
-
-#, fuzzy
 #~ msgid "Warning:"
 #~ msgstr "Предупреждение"
 
@@ -7203,10 +7237,6 @@ msgstr "Грешка"
 #, fuzzy
 #~ msgid "starting"
 #~ msgstr "Стартиране..."
-
-#, fuzzy
-#~ msgid "not found"
-#~ msgstr "не работи"
 
 #, fuzzy
 #~ msgid "Retrieving %s %s-%s.%s"

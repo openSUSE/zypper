@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-27 23:35+0100\n"
+"POT-Creation-Date: 2025-03-13 16:49+0100\n"
 "PO-Revision-Date: 2025-02-28 11:50+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
 "Language-Team: Japanese <https://l10n.opensuse.org/projects/zypper/master/ja/"
@@ -1901,6 +1901,45 @@ msgstr "ユーザ名"
 #: src/callbacks/media.cc:329
 msgid "Password"
 msgstr "パスワード"
+
+#: src/callbacks/media.h:190
+msgid "Preloading Packages"
+msgstr ""
+
+#: src/callbacks/media.h:209
+msgid "Preloading Packages:"
+msgstr ""
+
+#: src/callbacks/media.h:234 src/callbacks/media.h:256
+msgid "Preloading:"
+msgstr ""
+
+#. Translator: prefetch progress bar result: ".............[done]"
+#: src/callbacks/media.h:266
+msgid "done"
+msgstr "完了"
+
+#. Translator: prefetch progress bar result: "........[not found]"
+#: src/callbacks/media.h:271
+msgid "not found"
+msgstr "見つかりません"
+
+#. Translator: prefetch progress bar result: "............[error]"
+#: src/callbacks/media.h:278
+msgid "error"
+msgstr "エラー"
+
+#: src/callbacks/media.h:294
+msgid "Preload finished."
+msgstr ""
+
+#: src/callbacks/media.h:299
+msgid "success"
+msgstr ""
+
+#: src/callbacks/media.h:302
+msgid "files missing"
+msgstr ""
 
 #: src/callbacks/repo.h:60
 msgid "Retrieving delta"
@@ -4260,8 +4299,9 @@ msgstr ""
 msgid ""
 "Search for all packages that enhance any of the provides of the package(s) "
 "matched by the input parameters."
-msgstr "入力したパラメータに合致する任意のパッケージに対して、それを拡張する全てのパ"
-"ッケージを検索します。"
+msgstr ""
+"入力したパラメータに合致する任意のパッケージに対して、それを拡張する全ての"
+"パッケージを検索します。"
 
 #. translators: -t, --type <TYPE>
 #: src/commands/search/search.cc:181
@@ -7231,48 +7271,48 @@ msgstr "パッチ"
 msgid "Specified local path does not exist or is not accessible."
 msgstr "指定したローカルパスは存在しないか、アクセスできません。"
 
-#: src/utils/misc.cc:456
+#: src/utils/misc.cc:460
 msgid "Given URI is invalid"
 msgstr "指定した URI が無効です"
 
 #. Guess failed:
 #. translators: don't translate '<platform>'
-#: src/utils/misc.cc:548
+#: src/utils/misc.cc:552
 msgid "Unable to guess a value for <platform>."
 msgstr "<プラットフォーム>の値を推測することができません。"
 
-#: src/utils/misc.cc:549
+#: src/utils/misc.cc:553
 msgid "Please use obs://<project>/<platform>"
 msgstr "obs://<プロジェクト名>/<プラットフォーム>の形式で指定してください"
 
-#: src/utils/misc.cc:550 src/utils/misc.cc:596
+#: src/utils/misc.cc:554 src/utils/misc.cc:600
 #, c-format, boost-format
 msgid "Example: %s"
 msgstr "例:%s"
 
-#: src/utils/misc.cc:595
+#: src/utils/misc.cc:599
 msgid "Invalid OBS URI."
 msgstr "無効なOBS URIです。"
 
-#: src/utils/misc.cc:595
+#: src/utils/misc.cc:599
 msgid "Correct form is obs://<project>/[platform]"
 msgstr "正しい形式はobs://<project>/[platform]です"
 
-#: src/utils/misc.cc:643
+#: src/utils/misc.cc:647
 msgid "Problem copying the specified RPM file to the cache directory."
 msgstr ""
 "指定した RPM ファイルをキャッシュディレクトリにコピーする際に問題が発生しまし"
 "た。"
 
-#: src/utils/misc.cc:644
+#: src/utils/misc.cc:648
 msgid "Perhaps you are running out of disk space."
 msgstr "おそらくディスク容量が不足しているものと思われます。"
 
-#: src/utils/misc.cc:652
+#: src/utils/misc.cc:656
 msgid "Problem retrieving the specified RPM file"
 msgstr "指定したRPMファイルの取得の際に問題が発生しました"
 
-#: src/utils/misc.cc:653
+#: src/utils/misc.cc:657
 msgid "Please check whether the file is accessible."
 msgstr "ファイルがアクセス可能かどうか確認してください。"
 
@@ -7469,14 +7509,8 @@ msgstr "エラー"
 #~ msgid "OK OK! Exiting immediately..."
 #~ msgstr "OK OK! すぐに終了します..."
 
-#~ msgid "done"
-#~ msgstr "完了"
-
 #~ msgid "attention"
 #~ msgstr "注意"
-
-#~ msgid "error"
-#~ msgstr "エラー"
 
 #~ msgid "Note:"
 #~ msgstr "注意:"
@@ -7495,9 +7529,6 @@ msgstr "エラー"
 # window title for kernel loading (see txt_load_kernel)
 #~ msgid "starting"
 #~ msgstr "開始しています"
-
-#~ msgid "not found"
-#~ msgstr "見つかりません"
 
 #~ msgid "No help available for this prompt."
 #~ msgstr "このプロンプトに対するヘルプは用意されていません。"

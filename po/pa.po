@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.pa\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-27 23:35+0100\n"
+"POT-Creation-Date: 2025-03-13 16:49+0100\n"
 "PO-Revision-Date: 2008-11-23 08:36+0530\n"
 "Last-Translator: KDB <brar.kd@gmail.com>\n"
 "Language-Team: Panjabi <punjabi-l10n@list.sf.net>\n"
@@ -1893,6 +1893,46 @@ msgstr "ਯੂਜ਼ਰ ਨਾਂ"
 #: src/callbacks/media.cc:329
 msgid "Password"
 msgstr "ਗੁਪਤ-ਕੋਡ"
+
+#: src/callbacks/media.h:190
+msgid "Preloading Packages"
+msgstr ""
+
+#: src/callbacks/media.h:209
+msgid "Preloading Packages:"
+msgstr ""
+
+#: src/callbacks/media.h:234 src/callbacks/media.h:256
+msgid "Preloading:"
+msgstr ""
+
+#. Translator: prefetch progress bar result: ".............[done]"
+#: src/callbacks/media.h:266
+msgid "done"
+msgstr "ਪੂਰਾ"
+
+#. Translator: prefetch progress bar result: "........[not found]"
+#: src/callbacks/media.h:271
+#, fuzzy
+msgid "not found"
+msgstr "ਨਹੀਂ ਲੱਭਿਆ"
+
+#. Translator: prefetch progress bar result: "............[error]"
+#: src/callbacks/media.h:278
+msgid "error"
+msgstr "ਗਲਤੀ"
+
+#: src/callbacks/media.h:294
+msgid "Preload finished."
+msgstr ""
+
+#: src/callbacks/media.h:299
+msgid "success"
+msgstr ""
+
+#: src/callbacks/media.h:302
+msgid "files missing"
+msgstr ""
 
 #: src/callbacks/repo.h:60
 #, fuzzy
@@ -6980,22 +7020,22 @@ msgstr "ਪੈਂਚ"
 msgid "Specified local path does not exist or is not accessible."
 msgstr ""
 
-#: src/utils/misc.cc:456
+#: src/utils/misc.cc:460
 #, fuzzy
 msgid "Given URI is invalid"
 msgstr "ਦਿੱਤਾ URL ਗਲਤ ਹੈ।"
 
 #. Guess failed:
 #. translators: don't translate '<platform>'
-#: src/utils/misc.cc:548
+#: src/utils/misc.cc:552
 msgid "Unable to guess a value for <platform>."
 msgstr ""
 
-#: src/utils/misc.cc:549
+#: src/utils/misc.cc:553
 msgid "Please use obs://<project>/<platform>"
 msgstr ""
 
-#: src/utils/misc.cc:550 src/utils/misc.cc:596
+#: src/utils/misc.cc:554 src/utils/misc.cc:600
 #, fuzzy, c-format, boost-format
 msgid "Example: %s"
 msgstr ""
@@ -7003,30 +7043,30 @@ msgstr ""
 "\n"
 "ਉਦਾਹਰਨ: "
 
-#: src/utils/misc.cc:595
+#: src/utils/misc.cc:599
 #, fuzzy
 msgid "Invalid OBS URI."
 msgstr "ਗਲਤ KeyID ਹੈ।"
 
-#: src/utils/misc.cc:595
+#: src/utils/misc.cc:599
 msgid "Correct form is obs://<project>/[platform]"
 msgstr ""
 
-#: src/utils/misc.cc:643
+#: src/utils/misc.cc:647
 #, fuzzy
 msgid "Problem copying the specified RPM file to the cache directory."
 msgstr "'%s' ਤੋਂ ਫਾਇਲਾਂ ਡਾਊਨਲੋਡ ਕਰਨ ਦੌਰਾਨ ਸਮੱਸਿਆ।"
 
-#: src/utils/misc.cc:644
+#: src/utils/misc.cc:648
 msgid "Perhaps you are running out of disk space."
 msgstr ""
 
-#: src/utils/misc.cc:652
+#: src/utils/misc.cc:656
 #, fuzzy
 msgid "Problem retrieving the specified RPM file"
 msgstr "'%s' ਤੋਂ ਫਾਇਲਾਂ ਡਾਊਨਲੋਡ ਕਰਨ ਦੌਰਾਨ ਸਮੱਸਿਆ।"
 
-#: src/utils/misc.cc:653
+#: src/utils/misc.cc:657
 #, fuzzy
 msgid "Please check whether the file is accessible."
 msgstr "ਚੈੱਕ ਕਰੋ ਕਿ ਕੀ URL ਅਸੈੱਸਬਲ ਹੈ।"
@@ -7167,12 +7207,6 @@ msgstr "ਗਲਤੀ"
 #~ msgid "Specified capability not found"
 #~ msgstr "ਦਿੱਤੀ ਸਮਰੱਥਾ ਨਹੀਂ ਲੱਭੀ"
 
-#~ msgid "done"
-#~ msgstr "ਪੂਰਾ"
-
-#~ msgid "error"
-#~ msgstr "ਗਲਤੀ"
-
 #, fuzzy
 #~ msgid "Warning:"
 #~ msgstr "ਸਾਵਧਾਨ: "
@@ -7187,10 +7221,6 @@ msgstr "ਗਲਤੀ"
 # window title for kernel loading (see txt_load_kernel)
 #~ msgid "starting"
 #~ msgstr "ਸ਼ੁਰੂ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ"
-
-#, fuzzy
-#~ msgid "not found"
-#~ msgstr "ਨਹੀਂ ਲੱਭਿਆ"
 
 #~ msgid "(%s unpacked)"
 #~ msgstr "(%s ਅਣ-ਪੈਕ)"
