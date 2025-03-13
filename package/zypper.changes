@@ -1,4 +1,15 @@
 -------------------------------------------------------------------
+Thu Mar 13 16:50:20 CET 2025 - ma@suse.de
+
+- Do not double encode URL strings passed on the commandline
+  (bsc#1237587)
+  URLs passed on the commandline must have their special chars
+  encoded already. We just want to check and encode forgotten
+  unsafe chars like a blank. A '%' however must not be encoded
+  again.
+- version 1.14.88
+
+-------------------------------------------------------------------
 Fri Feb 28 16:38:40 CET 2025 - ma@suse.de
 
 - Package preloader that concurrently downloads files. It's not yet
