@@ -9,16 +9,16 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-03-13 16:49+0100\n"
-"PO-Revision-Date: 2025-02-13 11:50+0000\n"
+"PO-Revision-Date: 2025-03-14 09:56+0000\n"
 "Last-Translator: David Medina <medipas@gmail.com>\n"
-"Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/"
-">\n"
+"Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/>"
+"\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.9.2\n"
+"X-Generator: Weblate 5.10.3\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -2014,15 +2014,15 @@ msgstr "Contrasenya"
 
 #: src/callbacks/media.h:190
 msgid "Preloading Packages"
-msgstr ""
+msgstr "Precarregant paquets"
 
 #: src/callbacks/media.h:209
 msgid "Preloading Packages:"
-msgstr ""
+msgstr "Precarregant paquets:"
 
 #: src/callbacks/media.h:234 src/callbacks/media.h:256
 msgid "Preloading:"
-msgstr ""
+msgstr "Precarregant:"
 
 # ID
 #. Translator: prefetch progress bar result: ".............[done]"
@@ -2042,15 +2042,15 @@ msgstr "error"
 
 #: src/callbacks/media.h:294
 msgid "Preload finished."
-msgstr ""
+msgstr "Precàrrega acabada."
 
 #: src/callbacks/media.h:299
 msgid "success"
-msgstr ""
+msgstr "correcte"
 
 #: src/callbacks/media.h:302
 msgid "files missing"
-msgstr ""
+msgstr "fitxers que manquen"
 
 #: src/callbacks/repo.h:60
 msgid "Retrieving delta"
@@ -3358,7 +3358,7 @@ msgstr ""
 #. translators: --provides
 #: src/commands/query/info.cc:70
 msgid "Show provides."
-msgstr "Mostra provides."
+msgstr "Mostra les prestacions."
 
 #. translators: --requires
 #: src/commands/query/info.cc:74
@@ -3393,7 +3393,7 @@ msgstr "Mostra els suggerits."
 #. translators: --enhances
 #: src/commands/query/info.cc:98
 msgid "Show enhances."
-msgstr ""
+msgstr "Mostra les millores."
 
 #: src/commands/query/info.cc:112 src/utils/messages.cc:70
 msgid "Required argument missing."
@@ -3873,6 +3873,8 @@ msgid ""
 "Multi-Arch repos: Download raw metadata for all offered architectures even "
 "if the repo supports filtering."
 msgstr ""
+"Repositoris Multi-Arquitectura: baixeu metadades en brut per a totes les "
+"arquitectures ofertes fins i tot si el repositori admet el filtratge."
 
 #. translators: -r, --repo <ALIAS|#|URI>
 #: src/commands/repos/refresh.cc:110
@@ -4352,7 +4354,7 @@ msgstr "Cerca els paquets que suggereixen el que es cerca."
 #. translators: --enhances
 #: src/commands/search/search.cc:145
 msgid "Search for packages which enhance the search strings."
-msgstr ""
+msgstr "Cerca paquets que millorin les cadenes de cerca."
 
 #. translators: --provides-pkg
 #: src/commands/search/search.cc:149
@@ -4360,8 +4362,8 @@ msgid ""
 "Search for all packages that provide any of the provides of the package(s) "
 "matched by the input parameters."
 msgstr ""
-"Cerca tots els paquets que proporcionen qualsevol dels continguts "
-"proporcionats dels paquets que coincideixen amb els paràmetres introduïts."
+"Cerca tots els paquets que proporcionin qualsevol de les prestacions dels "
+"paquets que coincideixin amb els paràmetres d'entrada."
 
 #. translators: --requires-pkg
 #: src/commands/search/search.cc:153
@@ -4369,8 +4371,8 @@ msgid ""
 "Search for all packages that require any of the provides of the package(s) "
 "matched by the input parameters."
 msgstr ""
-"Cerca tots els paquets que requereixen qualsevol dels continguts "
-"proporcionats dels paquets que coincideixen amb els paràmetres introduïts."
+"Cerca tots els paquets que requereixin qualsevol de les prestacions dels "
+"paquets que coincideixin amb els paràmetres d'entrada."
 
 #. translators: --recommends-pkg
 #: src/commands/search/search.cc:157
@@ -4378,8 +4380,8 @@ msgid ""
 "Search for all packages that recommend any of the provides of the package(s) "
 "matched by the input parameters."
 msgstr ""
-"Cerca tots els paquets que recomanen qualsevol dels continguts proporcionats "
-"dels paquets que coincideixen amb els paràmetres introduïts."
+"Cerca tots els paquets que recomanin qualsevol de les prestacions dels "
+"paquets que coincideixin amb els paràmetres d'entrada."
 
 #. translators: --supplements-pkg
 #: src/commands/search/search.cc:161
@@ -4387,8 +4389,8 @@ msgid ""
 "Search for all packages that supplement any of the provides of the "
 "package(s) matched by the input parameters."
 msgstr ""
-"Cerca tots els paquets que complementen qualsevol dels continguts "
-"proporcionats dels paquets que coincideixen amb els paràmetres introduïts."
+"Cerca tots els paquets que complementin qualsevol de les prestacions dels "
+"paquets coincidents amb els paràmetres d'entrada."
 
 #. translators: --conflicts-pkg
 #: src/commands/search/search.cc:165
@@ -4414,8 +4416,8 @@ msgid ""
 "Search for all packages that suggest any of the provides of the package(s) "
 "matched by the input parameters."
 msgstr ""
-"Cerca tots els paquets que suggereixen qualsevol dels continguts "
-"proporcionats dels paquets que coincideixen amb els paràmetres introduïts."
+"Cerca tots els paquets que suggereixin qualsevol de les prestacions dels "
+"paquets que coincideixin amb els paràmetres d'entrada."
 
 #. translators: --enhances-pkg
 #: src/commands/search/search.cc:177
@@ -4423,6 +4425,8 @@ msgid ""
 "Search for all packages that enhance any of the provides of the package(s) "
 "matched by the input parameters."
 msgstr ""
+"Cerca tots els paquets que millorin qualsevol de les prestacions dels "
+"paquets que coincideixin amb els paràmetres d'entrada."
 
 #. translators: -t, --type <TYPE>
 #: src/commands/search/search.cc:181
