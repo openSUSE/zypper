@@ -14,6 +14,7 @@ extern "C"
 #include <zypp/base/Logger.h>
 #include <zypp/base/Measure.h>
 #include <zypp/base/String.h>
+#include <zypp/base/StringV.h>
 #include <zypp/base/Exception.h>
 #include <zypp/ZConfig.h>
 
@@ -202,7 +203,6 @@ Config::Config()
   , non_interactive( false )
   , reboot_req_non_interactive( false )
   , no_gpg_checks( false )
-  , gpg_auto_import_keys( false )
   , machine_readable( false )
   , no_refresh( false )
   , no_cd( false )
@@ -465,16 +465,42 @@ std::vector<ZyppFlags::CommandGroup> Config::cliOptions()
               // translators: --no-gpg-checks
               _("Ignore GPG check failures and continue.")
         },
-        { "gpg-auto-import-keys", 0, ZyppFlags::NoArgument, std::move( ZyppFlags::BoolType( &gpg_auto_import_keys, ZyppFlags::StoreTrue ).
-              after( []() {
-                std::string warn = str::form(
-                  _("Turning on '%s'. New repository signing keys will be automatically imported!"),
-                  "--gpg-auto-import-keys");
-                Zypper::instance().out().warning( warn, Out::HIGH );
-                MIL << "gpg-auto-import-keys is on" << endl;
+        { "gpg-auto-import-keys", 0, ZyppFlags::OptionalArgument | ZyppFlags::Repeatable, std::move( ZyppFlags::GenericContainerType( gpg_auto_import_keys, ARG_KEY_ID, ",", "*" ).
+              after( [](const ZyppFlags::CommandOption &, const boost::optional<std::string> & arg) {
+                if (arg.has_value()) {
+                  std::vector<std::string> key_ids;
+                  strv::splitRx(*arg, ",", [&key_ids]( std::string_view key_id ) {
+                    if ( ! key_id.empty() )
+                      key_ids.push_back( std::string(key_id) );
+                  });
+
+                  for (const std::string& key_id : key_ids) {
+                    std::string warn = str::form(
+                        _("Turning on '%s' for key id '%s'. This signing key will be automatically imported if present!"),
+                        "--gpg-auto-import-keys",
+                        key_id.c_str());
+                    Zypper::instance().out().warning( warn, Out::HIGH );
+
+                    if (!PublicKeyData::isSafeKeyId(key_id)) {
+                      warn = str::form(
+                          _("Key id '%s' is not a secure key ID."),
+                          key_id.c_str());
+                      Zypper::instance().out().warning( warn, Out::NORMAL );
+                    }
+
+                    MIL << "gpg-auto-import-keys is on for " << key_id << endl;
+                  }
+                }
+                else {
+                  std::string warn = str::form(
+                      _("Turning on '%s'. New repository signing keys will be automatically imported!"),
+                      "--gpg-auto-import-keys");
+                  Zypper::instance().out().warning( warn, Out::HIGH );
+                  MIL << "gpg-auto-import-keys is on" << endl;
+                }
               })),
               // translators: --gpg-auto-import-keys
-              _("Automatically trust and import new repository signing keys.")
+              _("Automatically trust and import new repository signing keys. If one or more key IDs are provided, only those keys will be allowed to be trusted and imported. Note that 8-byte short IDs are considered insecure, but will be accepted for convenience.")
         },
         { "plus-repo", 'p', ZyppFlags::Repeatable | ZyppFlags::RequiredArgument, ZyppFlags::GenericContainerType( plusRepoFromCLI, ARG_URI ),
               // translators: --plus-repo, -p <URI>
