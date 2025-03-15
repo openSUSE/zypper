@@ -17,16 +17,16 @@ msgstr ""
 "Project-Id-Version: zypper.de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-03-13 16:49+0100\n"
-"PO-Revision-Date: 2025-02-22 04:46+0000\n"
+"PO-Revision-Date: 2025-03-15 21:20+0000\n"
 "Last-Translator: Ettore Atalan <atalanttore@googlemail.com>\n"
-"Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/"
-">\n"
+"Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/>"
+"\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.10.1\n"
+"X-Generator: Weblate 5.10.3\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -2060,15 +2060,15 @@ msgstr "Passwort"
 
 #: src/callbacks/media.h:190
 msgid "Preloading Packages"
-msgstr ""
+msgstr "Pakete vorladen"
 
 #: src/callbacks/media.h:209
 msgid "Preloading Packages:"
-msgstr ""
+msgstr "Pakete vorladen:"
 
 #: src/callbacks/media.h:234 src/callbacks/media.h:256
 msgid "Preloading:"
-msgstr ""
+msgstr "Vorladen:"
 
 #. Translator: prefetch progress bar result: ".............[done]"
 #: src/callbacks/media.h:266
@@ -2078,7 +2078,7 @@ msgstr "fertig"
 #. Translator: prefetch progress bar result: "........[not found]"
 #: src/callbacks/media.h:271
 msgid "not found"
-msgstr "Nicht gefunden"
+msgstr "nicht gefunden"
 
 #. Translator: prefetch progress bar result: "............[error]"
 #: src/callbacks/media.h:278
@@ -2087,15 +2087,15 @@ msgstr "Fehler"
 
 #: src/callbacks/media.h:294
 msgid "Preload finished."
-msgstr ""
+msgstr "Vorladen abgeschlossen."
 
 #: src/callbacks/media.h:299
 msgid "success"
-msgstr ""
+msgstr "Erfolg"
 
 #: src/callbacks/media.h:302
 msgid "files missing"
-msgstr ""
+msgstr "Dateien fehlen"
 
 #: src/callbacks/repo.h:60
 msgid "Retrieving delta"
@@ -3431,17 +3431,17 @@ msgstr "'Erfordert' und 'Setzt voraus' wird angezeigt."
 #. translators: --conflicts
 #: src/commands/query/info.cc:78
 msgid "Show conflicts."
-msgstr "'Konflikte' wird angezeigt."
+msgstr "Konflikte anzeigen."
 
 #. translators: --obsoletes
 #: src/commands/query/info.cc:82
 msgid "Show obsoletes."
-msgstr "'Veraltet' wird angezeigt."
+msgstr "Veraltetes anzeigen."
 
 #. translators: --recommends
 #: src/commands/query/info.cc:86
 msgid "Show recommends."
-msgstr "'Empfohlen' wird angezeigt."
+msgstr "Empfehlungen anzeigen."
 
 #. translators: --supplements
 #: src/commands/query/info.cc:90
@@ -3451,12 +3451,12 @@ msgstr "Ergänzungen anzeigen."
 #. translators: --suggests
 #: src/commands/query/info.cc:94
 msgid "Show suggests."
-msgstr "'Vorschläge' wird angezeigt."
+msgstr "Vorschläge anzeigen."
 
 #. translators: --enhances
 #: src/commands/query/info.cc:98
 msgid "Show enhances."
-msgstr ""
+msgstr "Verbesserungen anzeigen."
 
 #: src/commands/query/info.cc:112 src/utils/messages.cc:70
 msgid "Required argument missing."
@@ -3971,7 +3971,7 @@ msgstr "Angegebene Repositorys: "
 #: src/commands/repos/refresh.cc:262
 #, c-format, boost-format
 msgid "Refreshing repository '%s'."
-msgstr "Repository '%s 1' wird aktualisiert."
+msgstr "Repository '%s' wird aktualisiert."
 
 #: src/commands/repos/refresh.cc:280 src/repos.cc:842
 #, c-format, boost-format
@@ -4433,7 +4433,7 @@ msgstr "Suche nach Paketen, die die Suchzeichenfolge vorschlagen."
 #. translators: --enhances
 #: src/commands/search/search.cc:145
 msgid "Search for packages which enhance the search strings."
-msgstr ""
+msgstr "Suche nach Paketen, die die Suchbegriffe erweitern."
 
 #. translators: --provides-pkg
 #: src/commands/search/search.cc:149
@@ -4504,6 +4504,8 @@ msgid ""
 "Search for all packages that enhance any of the provides of the package(s) "
 "matched by the input parameters."
 msgstr ""
+"Suche nach allen Paketen, die eine der Leistungen des/der Pakete(s), die mit "
+"den Eingabeparametern übereinstimmen, verbessern."
 
 #. translators: -t, --type <TYPE>
 #: src/commands/search/search.cc:181
