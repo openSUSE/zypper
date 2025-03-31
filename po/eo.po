@@ -8,89 +8,91 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-03-13 16:49+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2025-03-31 07:56+0000\n"
+"Last-Translator: Edouard Tavinor <edtavinor@posteo.de>\n"
+"Language-Team: Esperanto <https://l10n.opensuse.org/projects/zypper/master/"
+"eo/>\n"
 "Language: eo\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.10.3\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
-msgstr ""
+msgstr "Nevalida komando"
 
 #: src/Command.cc:111
 msgid "Repository Management:"
-msgstr ""
+msgstr "Deponejo-administrado:"
 
 #: src/Command.cc:119
 msgid "Service Management:"
-msgstr ""
+msgstr "Servo-administrado:"
 
 #: src/Command.cc:125
 msgid "Software Management:"
-msgstr ""
+msgstr "Softvaro-administrado:"
 
 #: src/Command.cc:132
 msgid "Update Management:"
-msgstr ""
+msgstr "Ĝisdatigo-administrado:"
 
 #: src/Command.cc:139
 msgid "Querying:"
-msgstr ""
+msgstr "Informpeto:"
 
 #: src/Command.cc:150
 msgid "Package Locks:"
-msgstr ""
+msgstr "Pakaĵŝlosoj:"
 
 #: src/Command.cc:155
 msgid "Locale Management:"
-msgstr ""
+msgstr "Lokaĵaro-administrado:"
 
 #: src/Command.cc:159
 msgid "Other Commands:"
-msgstr ""
+msgstr "Pluaj komandoj:"
 
 #: src/Command.cc:169
 msgid "Subcommands:"
-msgstr ""
+msgstr "Subkomandoj:"
 
 #: src/Command.cc:290
 #, c-format, boost-format
 msgid "Unknown command '%s'"
-msgstr ""
+msgstr "Nekonata komando '%s'"
 
 #: src/CommitSummary.cc:91
 msgid "Installation has completed with error."
-msgstr ""
+msgstr "Instalado kompletiĝis kun eraro."
 
 #: src/CommitSummary.cc:93
 #, boost-format
 msgid "You may run '%1%' to repair any dependency problems."
-msgstr ""
+msgstr "Vi povas lanĉi '%1%' por ripari ajnajn problemojn kun dependecoj."
 
 #: src/CommitSummary.cc:127
 #, c-format, boost-format
 msgid "The following package failed to install:"
 msgid_plural "The following %d packages failed to install:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Instalado de jena pakaĵo ne sukcesis:"
+msgstr[1] "Instalado de jenaj %d pakaĵoj ne sukcesis:"
 
 #: src/CommitSummary.cc:143
 #, c-format, boost-format
 msgid "The following package installation was skipped:"
 msgid_plural "The following %d package installations were skipped:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Instalado de jena pakaĵo estis preterlasita:"
+msgstr[1] "Instalado je jenaj %d pakaĵoj estis preterlasita:"
 
 #: src/CommitSummary.cc:159
 #, c-format, boost-format
 msgid "The following package failed to uninstall:"
 msgid_plural "The following %d packages failed to uninstall:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Jena pakaĵo ne povis malinstaliĝi:"
+msgstr[1] "Jenaj %d pakaĵoj ne povis malinstaliĝi:"
 
 #: src/CommitSummary.cc:175
 #, c-format, boost-format
