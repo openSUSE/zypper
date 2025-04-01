@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-03-13 16:49+0100\n"
-"PO-Revision-Date: 2025-03-31 07:56+0000\n"
+"PO-Revision-Date: 2025-04-01 08:56+0000\n"
 "Last-Translator: Edouard Tavinor <edtavinor@posteo.de>\n"
 "Language-Team: Esperanto <https://l10n.opensuse.org/projects/zypper/master/"
 "eo/>\n"
@@ -98,8 +98,8 @@ msgstr[1] "Jenaj %d pakaĵoj ne povis malinstaliĝi:"
 #, c-format, boost-format
 msgid "The following package removal was skipped:"
 msgid_plural "The following %d package removal were skipped:"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Forigo de jena pakaĵo estis preterlasita:"
+msgstr[1] "Forigo de jenaj %d pakaĵoj estis preterlasita:"
 
 #. translators: Appended when clipping a long enumeration:
 #. "ConsoleKit-devel ConsoleKit-doc ... and 20828 more items."
@@ -108,42 +108,42 @@ msgstr[1] ""
 #, boost-format
 msgid "... and %1% more item."
 msgid_plural "... and %1% more items."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "... kaj %1% plia eroj."
+msgstr[1] "kaj %1% pliaj eroj."
 
 #: src/Config.cc:53
 #, c-format, boost-format
 msgid "Invalid table style %d."
-msgstr ""
+msgstr "Nevalida tabelo-stilo %d."
 
 #: src/Config.cc:54
 #, c-format, boost-format
 msgid " Use an integer number from %d to %d"
-msgstr ""
+msgstr " Uzi entjeran nombron inter %d kaj %d"
 
 #: src/Config.cc:172
 msgid "The path specified in the --root option must be absolute."
-msgstr ""
+msgstr "La dosierindiko en la --root opcio devas esti absoluta."
 
 #. translators: --help, -h
 #: src/Config.cc:236
 msgid "Help."
-msgstr ""
+msgstr "Helpo."
 
 #. translators: --version, -V
 #: src/Config.cc:245
 msgid "Output the version number."
-msgstr ""
+msgstr "Eligi la versio-numeron."
 
 #. translators: --promptids
 #: src/Config.cc:257
 msgid "Output a list of zypper's user prompts."
-msgstr ""
+msgstr "Eligi liston de uzantinvitoj de zypper."
 
 #. translators: --config, -c <FILE>
 #: src/Config.cc:270
 msgid "Use specified config file instead of the default."
-msgstr ""
+msgstr "Uzi indikitan agorddosieron anstataŭe de la defaŭlta."
 
 #: src/Config.cc:277
 msgid "User data string must not contain nonprintable or newline characters!"
