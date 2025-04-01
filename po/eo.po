@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-03-13 16:49+0100\n"
-"PO-Revision-Date: 2025-04-01 08:56+0000\n"
+"PO-Revision-Date: 2025-04-01 19:56+0000\n"
 "Last-Translator: Edouard Tavinor <edtavinor@posteo.de>\n"
 "Language-Team: Esperanto <https://l10n.opensuse.org/projects/zypper/master/"
 "eo/>\n"
@@ -148,46 +148,47 @@ msgstr "Uzi indikitan agorddosieron anstataŭe de la defaŭlta."
 #: src/Config.cc:277
 msgid "User data string must not contain nonprintable or newline characters!"
 msgstr ""
+"Ĉeno por uzantdatumo ne povas enhavi neprinteblajn nek linifina signojn!"
 
 #. translators: --userdata <STRING>
 #: src/Config.cc:283
 msgid "User defined transaction id used in history and plugins."
-msgstr ""
+msgstr "Uzanto-definita transakcia numero uzata en historio kaj kromprogramoj."
 
 #. translators: --quiet, -q
 #: src/Config.cc:291
 msgid "Suppress normal output, print only error messages."
-msgstr ""
+msgstr "Malebligi normalan eligon, premi nur erarmesaĝojn."
 
 #. translators: --verbose, -v
 #: src/Config.cc:299
 msgid "Increase verbosity."
-msgstr ""
+msgstr "Pliigi malkoncizecon."
 
 #. translators: --color / --no-color
 #: src/Config.cc:320
 msgid "Whether to use colors in output if tty supports it."
-msgstr ""
+msgstr "Ĉu uzi kolorojn en eligo se la konzolo subtenas tiun."
 
 #. translators: --no-abbrev, -A
 #: src/Config.cc:325
 msgid "Do not abbreviate text in tables."
-msgstr ""
+msgstr "Ne mallongigi tekston en tabeloj."
 
 #. translators: --table-style, -s, %1% denotes the supported range of the integer argument (e.g. "1-11")
 #: src/Config.cc:330
 #, boost-format
 msgid "Table style (%1%)."
-msgstr ""
+msgstr "Tabelo-stilo (%1%)."
 
 #: src/Config.cc:334 src/commands/optionsets.cc:284
 msgid "Entering non-interactive mode."
-msgstr ""
+msgstr "Komencante ne-interagan reĝimon."
 
 #. translators: --non-interactive, -n
 #: src/Config.cc:338
 msgid "Do not ask anything, use default answers automatically."
-msgstr ""
+msgstr "Demandi nenion, uzi defaŭltajn respondojn aŭtomate."
 
 #: src/Config.cc:343
 msgid "Patches having the flag rebootSuggested set will not be treated as interactive."
