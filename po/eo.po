@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-03-13 16:49+0100\n"
-"PO-Revision-Date: 2025-04-01 19:56+0000\n"
+"PO-Revision-Date: 2025-04-02 19:56+0000\n"
 "Last-Translator: Edouard Tavinor <edtavinor@posteo.de>\n"
 "Language-Team: Esperanto <https://l10n.opensuse.org/projects/zypper/master/"
 "eo/>\n"
@@ -193,26 +193,29 @@ msgstr "Demandi nenion, uzi defaŭltajn respondojn aŭtomate."
 #: src/Config.cc:343
 msgid "Patches having the flag rebootSuggested set will not be treated as interactive."
 msgstr ""
+"Flikaĵoj kiuj havas la \"rekomenci sugestata\" flagon, ne estos traktataj "
+"interage."
 
 #. translators: --non-interactive-include-reboot-patches
 #: src/Config.cc:347
 msgid "Do not treat patches as interactive, which have the rebootSuggested-flag set."
 msgstr ""
+"Ne trakti flikaĵojn interage, kiuj havas la \"rekomenci sugestata\" flagon."
 
 #. translators: --xmlout, -x
 #: src/Config.cc:357
 msgid "Switch to XML output."
-msgstr ""
+msgstr "Ŝanĝi al XML-eligo."
 
 #. translators: --ignore-unknown, -i
 #: src/Config.cc:362
 msgid "Ignore unknown packages."
-msgstr ""
+msgstr "Malatenti nekonatajn pakaĵojn."
 
 #. translators: --terse, -t
 #: src/Config.cc:373
 msgid "Terse output for machine consumption. Implies --no-abbrev and --no-color."
-msgstr ""
+msgstr "Koncize eligo por maŝina uzo. Tio implikas --no-abbrev kaj --no-color."
 
 #. translators: --reposd-dir, -D <DIR>
 #: src/Config.cc:397
