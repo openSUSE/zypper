@@ -189,6 +189,8 @@ namespace ZmartRecipients
       Out & out = Zypper::instance().out();
       out.progressStart("preload-progress", _("Preloading Packages") );
       _last_drate_avg = -1;
+      _lastProgressVal = -1;
+      _lastProgressString.clear();
     }
 
     bool progress( int value, const UserData &userData ) override
@@ -214,6 +216,8 @@ namespace ZmartRecipients
         outstr << " (" << zypp::ByteCount( userData.get<double>("dbps_current") ) << "/s)";
       outstr << ']';
 
+      _lastProgressString = outstr;
+      _lastProgressVal    = value;
       zypper.out().progress("preload-progress", outstr, value );
       if ( userData.haskey("dbps_avg") )
         _last_drate_avg = userData.get<double>("dbps_avg");
@@ -238,6 +242,7 @@ namespace ZmartRecipients
         outstr << localfile.basename();
 
       Zypper::instance().out().info() << ( ColorContext::MSG_STATUS << outstr );
+      redrawProgress ();
     }
 
     /**
@@ -282,6 +287,7 @@ namespace ZmartRecipients
       outstr << ']';
 
       Zypper::instance().out().info() << ( ColorContext::MSG_STATUS << outstr );
+      redrawProgress ();
     }
 
     void finish( Result res, const UserData & ) override
@@ -312,8 +318,16 @@ namespace ZmartRecipients
     }
 
   private:
+
+    void redrawProgress() {
+      if ( _lastProgressVal >= 0 )
+        Zypper::instance().out().progress("preload-progress", _lastProgressString, _lastProgressVal );
+    }
+
     bool _be_quiet;
     double _last_drate_avg;
+    int _lastProgressVal = -1;
+    std::string _lastProgressString;
   };
 
 
