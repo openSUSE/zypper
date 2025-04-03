@@ -234,7 +234,8 @@ bool refresh_raw_metadata( Zypper & zypper, const RepoInfo & repo, bool force_do
         media::ScopedDisableMediaChangeReport guard( repo.baseUrlsSize() > 1 );
 #endif
 
-        for ( RepoInfo::urls_const_iterator it = repo.baseUrlsBegin(); it != repo.baseUrlsEnd(); )
+        const auto &groupedBaseUrls = repo.groupedBaseUrls ();
+        for ( auto it = groupedBaseUrls.begin(); it != groupedBaseUrls.end(); )
         {
           try
           {
@@ -271,10 +272,10 @@ bool refresh_raw_metadata( Zypper & zypper, const RepoInfo & repo, bool force_do
           catch ( const Exception & e )
           {
             ZYPP_CAUGHT( e );
-            Url badurl( *it );
-            if ( ++it == repo.baseUrlsEnd() )
+            std::vector<Url> badurls( *it );
+            if ( ++it == groupedBaseUrls.end() )
               ZYPP_RETHROW( e );
-            ERR << badurl << " doesn't look good. Trying another url (" << *it << ")." << endl;
+            ERR << badurls << " doesn't look good. Trying another url (" << *it << ")." << endl;
           }
         }
       }
