@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-03-13 16:49+0100\n"
-"PO-Revision-Date: 2025-04-02 19:56+0000\n"
+"PO-Revision-Date: 2025-04-04 19:56+0000\n"
 "Last-Translator: Edouard Tavinor <edtavinor@posteo.de>\n"
 "Language-Team: Esperanto <https://l10n.opensuse.org/projects/zypper/master/"
 "eo/>\n"
@@ -220,115 +220,122 @@ msgstr "Koncize eligo por maŝina uzo. Tio implikas --no-abbrev kaj --no-color."
 #. translators: --reposd-dir, -D <DIR>
 #: src/Config.cc:397
 msgid "Use alternative repository definition file directory."
-msgstr ""
+msgstr "Uzi alternativan dosierujon por la deponeja defino-dosiero."
 
 #. translators: --cache-dir, -C <DIR>
 #: src/Config.cc:412
 msgid "Use alternative directory for all caches."
-msgstr ""
+msgstr "Uzi alternativan dosierujon por ĉiuj kaŝdosieroj."
 
 #. translators: --raw-cache-dir <DIR>
 #: src/Config.cc:425
 msgid "Use alternative raw meta-data cache directory."
-msgstr ""
+msgstr "Uzi alternativan dosierujon por la kruda metadatuma kaŝdosiero."
 
 #. translators: --solv-cache-dir <DIR>
 #: src/Config.cc:439
 msgid "Use alternative solv file cache directory."
-msgstr ""
+msgstr "Uzi alternativan dosierujon por la solva kaŝdosiero."
 
 #. translators: --pkg-cache-dir <DIR>
 #: src/Config.cc:453
 msgid "Use alternative package cache directory."
-msgstr ""
+msgstr "Uzi alternativan dosierujon por la pakaĵa kaŝdosiero."
 
 #: src/Config.cc:458
 msgid "Repository Options"
-msgstr ""
+msgstr "Deponejo-opcioj"
 
 #: src/Config.cc:462
 msgid "Entering 'no-gpg-checks' mode."
-msgstr ""
+msgstr "Enirante reĝimon sen gpg-kontrolado."
 
 #. translators: --no-gpg-checks
 #: src/Config.cc:466
 msgid "Ignore GPG check failures and continue."
-msgstr ""
+msgstr "Malatenti gpg-kontrolpaneojn kaj daŭrigi."
 
 #: src/Config.cc:471
 #, c-format, boost-format
 msgid "Turning on '%s'. New repository signing keys will be automatically imported!"
 msgstr ""
+"Ŝaltante '%s'. Novaj deponejo-subskribŝlosiloj estos aŭtomate importitaj!"
 
 #. translators: --gpg-auto-import-keys
 #: src/Config.cc:477
 msgid "Automatically trust and import new repository signing keys."
-msgstr ""
+msgstr "Fidi kaj importi novajn deponejo-subskribŝlosilojn aŭtomate."
 
 #. translators: --plus-repo, -p <URI>
 #: src/Config.cc:481
 msgid "Use an additional repository."
-msgstr ""
+msgstr "Uzi plian deponejon."
 
 #. translators: --plus-content <TAG>
 #: src/Config.cc:485
 msgid "Additionally use disabled repositories providing a specific keyword. Try '--plus-content debug' to enable repos indicating to provide debug packages."
 msgstr ""
+"Uzi aldone malebligitajn deponejojn pro specifa ŝlosilvorto. Provi '--plus-"
+"content debug' por ebligi deponejojn kiuj provizas pakaĵojn por la "
+"sencimigado."
 
 #: src/Config.cc:491
 msgid "Repositories disabled, using the database of installed packages only."
-msgstr ""
+msgstr "Deponejoj malebligitaj. Uzante nur la datumbazon de instalitaj pakaĵoj."
 
 #. translators: --disable-repositories
 #: src/Config.cc:495
 msgid "Do not read meta-data from repositories."
-msgstr ""
+msgstr "Ne legi la metadatumojn el la deponejoj."
 
 #: src/Config.cc:499
 msgid "Autorefresh disabled."
-msgstr ""
+msgstr "Aŭtomata aktualigo malŝaltita."
 
 #. translators: --no-refresh
 #: src/Config.cc:503
 msgid "Do not refresh the repositories."
-msgstr ""
+msgstr "Ne aktualigi la deponejojn."
 
 #: src/Config.cc:507
 msgid "CD/DVD repositories disabled."
-msgstr ""
+msgstr "CD/DVD deponejoj malebligitaj."
 
 #. translators: --no-cd
 #: src/Config.cc:511
 msgid "Ignore CD/DVD repositories."
-msgstr ""
+msgstr "Malatenti CD/DVD deponejojn."
 
 #: src/Config.cc:515
 msgid "Remote repositories disabled."
-msgstr ""
+msgstr "Foraj deponejoj malebligitaj."
 
 #. translators: --no-remote
 #: src/Config.cc:519
 msgid "Ignore remote repositories."
-msgstr ""
+msgstr "Malatenti forajn deponejojn."
 
 #. translators: --releasever
 #: src/Config.cc:526
 msgid "Set the value of $releasever in all .repo files (default: distribution version)"
 msgstr ""
+"Starigi la valoron de $releasever en ĉiuj .repo dosieroj (defaŭlta valoro: "
+"distribua versio)"
 
 #: src/Config.cc:530
 msgid "Target Options"
-msgstr ""
+msgstr "Celopcioj"
 
 #. translators: --root, -R <DIR>
 #: src/Config.cc:535
 msgid "Operate on a different root directory."
-msgstr ""
+msgstr "Operacii sur alia radika dosierujo."
 
 #. translators: --installroot <DIR>
 #: src/Config.cc:541
 msgid "Operate on a different root directory, but share repositories with the host."
 msgstr ""
+"Operacii sur alia radika dosierujo, sed kunhavigi deponejojn kun la gastigo."
 
 #: src/Config.cc:547
 msgid "Ignoring installed resolvables."
