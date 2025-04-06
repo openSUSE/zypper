@@ -18,16 +18,16 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-03-13 16:49+0100\n"
-"PO-Revision-Date: 2025-02-25 17:50+0000\n"
-"Last-Translator: Javier Llorente <javier@opensuse.org>\n"
-"Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/"
-">\n"
+"PO-Revision-Date: 2025-04-06 19:56+0000\n"
+"Last-Translator: Fran Serrador <serrador@proton.me>\n"
+"Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
+"\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.10.1\n"
+"X-Generator: Weblate 5.10.3\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -2053,15 +2053,15 @@ msgstr "Contraseña"
 
 #: src/callbacks/media.h:190
 msgid "Preloading Packages"
-msgstr ""
+msgstr "Precargar Paquetes"
 
 #: src/callbacks/media.h:209
 msgid "Preloading Packages:"
-msgstr ""
+msgstr "Precargar paquetes:"
 
 #: src/callbacks/media.h:234 src/callbacks/media.h:256
 msgid "Preloading:"
-msgstr ""
+msgstr "Precargando:"
 
 #. Translator: prefetch progress bar result: ".............[done]"
 #: src/callbacks/media.h:266
@@ -2080,15 +2080,15 @@ msgstr "error"
 
 #: src/callbacks/media.h:294
 msgid "Preload finished."
-msgstr ""
+msgstr "Precarga finalizada."
 
 #: src/callbacks/media.h:299
 msgid "success"
-msgstr ""
+msgstr "correcto"
 
 #: src/callbacks/media.h:302
 msgid "files missing"
-msgstr ""
+msgstr "archivos ausentes"
 
 #: src/callbacks/repo.h:60
 msgid "Retrieving delta"
@@ -2258,11 +2258,11 @@ msgstr "Opciones legadas:"
 #: src/commands/commandhelpformatter.h:140
 #, boost-format
 msgid "The same as %1%."
-msgstr "Igual que %1%."
+msgstr "Lo mismo que %1%."
 
 #: src/commands/commandhelpformatter.h:188
 msgid "Usage:"
-msgstr "Uso:"
+msgstr "Modo de empleo:"
 
 #: src/commands/commandhelpformatter.h:190
 msgid "Global Options:"
@@ -2349,7 +2349,7 @@ msgstr ""
 
 #: src/commands/distupgrade.cc:57
 msgid "See 'man zypper' for more information about this command."
-msgstr ""
+msgstr "Consulte 'man zypper' para más información sobre esta instrucción."
 
 #: src/commands/distupgrade.cc:88
 #, c-format, boost-format
@@ -2366,12 +2366,12 @@ msgstr ""
 #: src/commands/help.cc:22
 msgid "zypper [--GLOBAL-OPTIONS] <COMMAND> [--COMMAND-OPTIONS] [ARGUMENTS]"
 msgstr ""
-"zypper [--opciones globales] <comando> [--opciones de comando] [argumentos]"
+"zypper [--opciones-globales] <comando> [--opciones-de-comando] [argumentos]"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/help.cc:25
 msgid "zypper <SUBCOMMAND> [--COMMAND-OPTIONS] [ARGUMENTS]"
-msgstr "zypper <subcomando> [--opciones de comando] [argumentos]"
+msgstr "zypper <subcomando> [--opciones-de-comando] [argumentos]"
 
 #: src/commands/help.cc:80 src/commands/help.cc:81
 msgid "Print zypper help"
@@ -2445,7 +2445,7 @@ msgstr "Seleccione paquetes solamente por capacidad."
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/installremove.cc:82
 msgid "remove (rm) [OPTIONS] <CAPABILITY> ..."
-msgstr "remove (rm) [opciones] <capacidad> ..."
+msgstr "remove (rm) [opciones] <capacidad> …"
 
 #. translators: command summary: remove, rm
 #: src/commands/installremove.cc:84
@@ -2488,8 +2488,8 @@ msgstr ""
 "El estado de instalación de un parche se determina únicamente según sus "
 "dependencias.\n"
 "Los parches no se consideran instalados en función de los archivos copiados, "
-"los registros de bases\n"
-"de datos u otros elementos similares."
+"los registros\n"
+"de bases de datos u otros elementos similares."
 
 #: src/commands/installremove.cc:126
 msgid "Uninstallation of a source package not defined and implemented."
@@ -2559,7 +2559,7 @@ msgstr "No se ha especificado ningún argumento válido."
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/installremove.cc:312
 msgid "removeptf (rmptf) [OPTIONS] <PTF|CAPABILITY> ..."
-msgstr "removeptf (rmptf) [OPCIONES] <PTF|CAPACIDAD> ..."
+msgstr "removeptf (rmptf) [OPCIONES] <PTF|CAPACIDAD> …"
 
 #. translators: command summary: removeptf, rmptf
 #: src/commands/installremove.cc:314
@@ -2622,7 +2622,7 @@ msgstr "Muestra todos los parches, no solo los aplicables."
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/listupdates.cc:16
 msgid "list-updates (lu) [OPTIONS]"
-msgstr "list-updates (lu) [opciones]"
+msgstr "list-updates (lu) [OPCIONES]"
 
 #. translators: command summary: list-updates, lu
 #: src/commands/listupdates.cc:18
@@ -2646,7 +2646,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/addlocalecmd.cc:20
 msgid "addlocale (aloc) [OPTIONS] <LOCALE> ..."
-msgstr "addlocale (aloc) [OPCIONES] <CONFIGURACIÓN REGIONAL> ..."
+msgstr "addlocale (aloc) [OPCIONES] <REGIONAL> …"
 
 #: src/commands/locale/addlocalecmd.cc:21
 msgid "Add locale(s) to requested locales."
@@ -2676,7 +2676,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/localescmd.cc:17
 msgid "locales (lloc) [OPTIONS] [LOCALE] ..."
-msgstr "locales (lloc) [OPCIONES] [CONFIGURACIÓN REGIONAL] ..."
+msgstr "locales (lloc) [OPCIONES] [REGIONAL] …"
 
 #: src/commands/locale/localescmd.cc:18
 msgid "List requested locales (languages codes)."
@@ -2733,7 +2733,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/removelocalecmd.cc:18
 msgid "removelocale (rloc) [OPTIONS] <LOCALE> ..."
-msgstr "removelocale (rloc) [OPCIONES] <CONFIGURACIÓN REGIONAL> ..."
+msgstr "removelocale (rloc) [OPCIONES] <REGIONAL> …"
 
 #: src/commands/locale/removelocalecmd.cc:19
 msgid "Remove locale(s) from requested locales."
@@ -2766,7 +2766,7 @@ msgstr ""
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
 #: src/commands/locks/add.cc:29
 msgid "addlock (al) [OPTIONS] <LOCKSPEC>..."
-msgstr "addlock (al) [OPCIONES] <ESPECBLOQUEO>..."
+msgstr "addlock (al) [OPCIONES] <ESPEC-BLOQUEO>…"
 
 #. translators: command summary
 #: src/commands/locks/add.cc:31 src/commands/locks/add.cc:34
@@ -2900,11 +2900,11 @@ msgstr "No instalar"
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
 #: src/commands/locks/list.cc:257
 msgid "locks (ll) [OPTIONS]"
-msgstr "locks (ll) [opciones]"
+msgstr "locks (ll) [OPCIONES]"
 
 #: src/commands/locks/list.cc:258
 msgid "List current package locks."
-msgstr "Muestra los bloqueos de paquetes actuales."
+msgstr "Enumera los bloqueos de paquetes actuales."
 
 #: src/commands/locks/list.cc:286
 msgid "Show the number of resolvables matched by each lock."
@@ -2912,7 +2912,7 @@ msgstr "Muestra el número de resoluciones con la que coincide cada bloqueo."
 
 #: src/commands/locks/list.cc:287
 msgid "List the resolvables matched by each lock."
-msgstr "Muestra las resoluciones con la que coincide cada bloqueo."
+msgstr "Enumera las resoluciones con la que coincide cada bloqueo."
 
 #: src/commands/locks/list.cc:301
 msgid "Error reading the locks file:"
@@ -2925,11 +2925,11 @@ msgstr "No hay bloqueos de paquete definidos."
 # =============================================================================
 #: src/commands/locks/remove.cc:25
 msgid "removelock (rl) [OPTIONS] <LOCK-NUMBER|PACKAGENAME> ..."
-msgstr "removelock (rl) [opciones] <número de bloqueo|paquete>..."
+msgstr "removelock (rl) [opciones] <número de bloqueo|paquete>…"
 
 #: src/commands/locks/remove.cc:26
 msgid "Remove a package lock."
-msgstr "Elimina un bloqueo de paquete."
+msgstr "Quita un bloqueo de paquete."
 
 #. translators: command description; %1% is acoomand like 'zypper locks'
 #: src/commands/locks/remove.cc:28
@@ -2993,7 +2993,9 @@ msgstr ""
 #: src/commands/needs-rebooting.cc:38
 msgid ""
 "Since the last system boot core libraries or services have been updated."
-msgstr "Se han actualizado bibliotecas o servicios básicos."
+msgstr ""
+"Se han actualizado bibliotecas o servicios básicos desde el último arranque "
+"del sistema."
 
 #: src/commands/needs-rebooting.cc:39
 msgid ""
@@ -3005,7 +3007,9 @@ msgstr ""
 #: src/commands/needs-rebooting.cc:44
 msgid ""
 "No core libraries or services have been updated since the last system boot."
-msgstr "No se han actualizado bibliotecas o servicios básicos."
+msgstr ""
+"No se han actualizado bibliotecas o servicios básicos desde el último "
+"arranque del sistema."
 
 #: src/commands/needs-rebooting.cc:45
 msgid "Reboot is probably not necessary."
@@ -3129,15 +3133,15 @@ msgid ""
 "zypper' for more details."
 msgstr ""
 "Responder «sí» automáticamente a las solicitudes de confirmación para "
-"aceptar licencias de terceros. Vea «man zypper» para más detalles."
+"aceptar licencias de terceros. Consulte «man zypper» para más detalles."
 
 #: src/commands/optionsets.cc:244
 msgid ""
 "Automatically accept product licenses only. See 'man zypper' for more "
 "details."
 msgstr ""
-"Aceptar automáticamente solo licencias de productos. Vea «man zypper» para "
-"más detalles."
+"Aceptar automáticamente solo licencias de productos. Consulte «man zypper» "
+"para más detalles."
 
 #. translators: --replacefiles
 #: src/commands/optionsets.cc:264
@@ -3165,7 +3169,7 @@ msgid ""
 "excluded."
 msgstr ""
 "Indica si los parches opcionales aplicables se deben tratar como necesarios "
-"o si de deben excluir."
+"o si se deben excluir."
 
 #: src/commands/optionsets.cc:312
 msgid "The default is to exclude optional patches."
@@ -3288,8 +3292,8 @@ msgid ""
 "system service name."
 msgstr ""
 "Para cada servicio del sistema asociado, imprime <format> en la salida "
-"estándar, seguido de un salto de línea. Cualquier directiva '%s 1' en "
-"<format> es sustituida por el nombre del servicio del sistema."
+"estándar, seguido de un salto de línea. Cualquier directiva '%s' en <format> "
+"es sustituida por el nombre del servicio del sistema."
 
 #. translators: -d, --debugFile <path>
 #: src/commands/ps.cc:52
@@ -3375,7 +3379,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/query/info.cc:19
 msgid "info (if) [OPTIONS] <NAME>[-<VERSION>[-<RELEASE>]] ..."
-msgstr ""
+msgstr "info (if) [OPCIONES] <NOMBRE>[-<VERSIÓN>[-<PUBLICACIÓN>]] …"
 
 #. translators: command summary: info, if
 #: src/commands/query/info.cc:21
@@ -3401,6 +3405,9 @@ msgid ""
 "package is shown. Note that both the version and release numbers must always "
 "match exactly."
 msgstr ""
+"Si ninguna versión restringida está especificada, se muestra la información "
+"acerca del mejor paquete disponible. Note que tanto la versión como los "
+"números de la publicación siempre deben coincidir exactamente."
 
 #. translators: -s, --match-substrings
 #: src/commands/query/info.cc:65
@@ -3437,7 +3444,7 @@ msgstr "Muestra los elementos recomendados."
 #. translators: --supplements
 #: src/commands/query/info.cc:90
 msgid "Show supplements."
-msgstr "Mostrar suplementos."
+msgstr "Muestra suplementos."
 
 #. translators: --suggests
 #: src/commands/query/info.cc:94
@@ -3447,7 +3454,7 @@ msgstr "Muestra los elementos sugeridos."
 #. translators: --enhances
 #: src/commands/query/info.cc:98
 msgid "Show enhances."
-msgstr ""
+msgstr "Muestra mejoras."
 
 #: src/commands/query/info.cc:112 src/utils/messages.cc:70
 msgid "Required argument missing."
@@ -3456,7 +3463,7 @@ msgstr "Falta un argumento requerido."
 #: src/commands/query/info.cc:115 src/utils/messages.cc:37
 #: src/utils/messages.cc:52 src/utils/messages.cc:72 src/utils/messages.cc:89
 msgid "Usage"
-msgstr "Uso"
+msgstr "Modo de empleo"
 
 #. translators: command summary: patch-info
 #: src/commands/query/info.cc:145
@@ -3476,17 +3483,17 @@ msgstr "Muestra información completa de los productos especificados."
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/query/info.cc:164
 msgid "patch-info <PATCHNAME> ..."
-msgstr "patch-info <nombre_de_parche>..."
+msgstr "patch-info <nombre_de_parche>…"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/query/info.cc:167
 msgid "pattern-info <PATTERN_NAME> ..."
-msgstr "pattern-info <nombre_de_patrón>..."
+msgstr "pattern-info <nombre_de_patrón>…"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/query/info.cc:170
 msgid "product-info <PRODUCT_NAME> ..."
-msgstr "product-info <nombre_de_producto>..."
+msgstr "product-info <nombre_de_producto>…"
 
 #. translators: command description
 #: src/commands/query/info.cc:182
@@ -3577,7 +3584,7 @@ msgstr "Ordena la lista por repositorio."
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/query/patches.cc:18
 msgid "patches (pch) [REPOSITORY] ..."
-msgstr "patches (pch) [repositorio]..."
+msgstr "patches (pch) [REPOSITORIO] …"
 
 #. translators: command summary: patches, pch
 #: src/commands/query/patches.cc:20
@@ -3587,12 +3594,12 @@ msgstr "Enumera todos los parches disponibles."
 #. translators: command description
 #: src/commands/query/patches.cc:22
 msgid "List all patches available in specified repositories."
-msgstr "Muestra los parches disponibles en los repositorios especificados."
+msgstr "Enumera los parches disponibles en los repositorios especificados."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/query/patterns.cc:18
 msgid "patterns (pt) [OPTIONS] [REPOSITORY] ..."
-msgstr "patterns (pt) [opciones] [repositorio]..."
+msgstr "patterns (pt) [OPCIONES] [REPOSITORIO] …"
 
 #. translators: command summary: patterns, pt
 #: src/commands/query/patterns.cc:20
@@ -3603,12 +3610,12 @@ msgstr "Enumera todos los patrones disponibles."
 #: src/commands/query/patterns.cc:22
 msgid "List all patterns available in specified repositories."
 msgstr ""
-"Muestra todos los patrones disponibles en los repositorios especificados."
+"Enumera todos los patrones disponibles en los repositorios especificados."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/query/products.cc:18
 msgid "products (pd) [OPTIONS] [REPOSITORY] ..."
-msgstr "products (pd) [opciones] [repositorio]..."
+msgstr "products (pd) [OPCIONES] [REPOSITORIO] …"
 
 #. translators: command summary: products, pd
 #: src/commands/query/products.cc:20
@@ -3636,11 +3643,11 @@ msgstr "La opción %1% no tiene ningún efecto sin la opción global %2%."
 
 #: src/commands/repos/add.cc:23
 msgid "addrepo (ar) [OPTIONS] <URI> <ALIAS>"
-msgstr "addrepo (ar) [opciones] <URI> <alias>"
+msgstr "addrepo (ar) [OPCIONES] <URI> <ALIAS>"
 
 #: src/commands/repos/add.cc:23
 msgid "addrepo (ar) [OPTIONS] <FILE.repo>"
-msgstr "addrepo (ar) [opciones] <archivo.repo>"
+msgstr "addrepo (ar) [OPCIONES] <ARCHIVO.repo>"
 
 #: src/commands/repos/add.cc:24
 msgid "Add a new repository."
@@ -3702,27 +3709,27 @@ msgstr "clean (cc) [alias|n.º|URI]..."
 
 #: src/commands/repos/clean.cc:17 src/commands/repos/clean.cc:18
 msgid "Clean local caches."
-msgstr "Borra los cachés locales."
+msgstr "Vacía los cachés locales."
 
 #. translators: -r, --repo <ALIAS|#|URI>
 #: src/commands/repos/clean.cc:37
 msgid "Clean only specified repositories."
-msgstr "Borra solo los repositorios especificados."
+msgstr "Vacía solo los repositorios especificados."
 
 #. translators: -m, --metadata
 #: src/commands/repos/clean.cc:42
 msgid "Clean metadata cache."
-msgstr "Borra el caché de metadatos."
+msgstr "Vacía el caché de metadatos."
 
 #. translators: -M, --raw-metadata
 #: src/commands/repos/clean.cc:48
 msgid "Clean raw metadata cache."
-msgstr "Borra el caché de metadatos en bruto."
+msgstr "Vacía el caché de metadatos en bruto."
 
 #. translators: -a, --all
 #: src/commands/repos/clean.cc:53
 msgid "Clean both metadata and package caches."
-msgstr "Borra tanto el caché de paquetes como el de metadatos."
+msgstr "Vacía tanto el caché de paquetes como el de metadatos."
 
 #: src/commands/repos/list.cc:48 src/commands/repos/list.cc:225
 #: src/commands/services/list.cc:106
@@ -3808,7 +3815,7 @@ msgstr "repos (lr) [opciones] [repo]..."
 
 #: src/commands/repos/list.cc:86 src/commands/repos/list.cc:87
 msgid "List all defined repositories."
-msgstr "Muestra todos los repositorios definidos."
+msgstr "Enumera todos los repositorios definidos."
 
 #. translators: -e, --export <FILE.repo>
 #: src/commands/repos/list.cc:98
@@ -3838,12 +3845,12 @@ msgstr "Se han exportado correctamente los repositorios a %s."
 #. translators: 'zypper repos' column - whether autorefresh is enabled for the repository
 #: src/commands/repos/list.cc:256 src/commands/services/list.cc:111
 msgid "Refresh"
-msgstr "Actualizar"
+msgstr "Recargar"
 
 #. translators: 'zypper repos' column - whether keep-packages is enabled for the repository
 #: src/commands/repos/list.cc:266
 msgid "Keep"
-msgstr ""
+msgstr "Mantener"
 
 #: src/commands/repos/list.cc:357
 msgid "No repositories defined."
@@ -3856,13 +3863,13 @@ msgstr "Use el comando zypper addrepo para añadir uno o varios repositorios."
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/repos/modify.cc:24
 msgid "modifyrepo (mr) <OPTIONS> <ALIAS|#|URI>"
-msgstr "modifyrepo (mr) <opciones> <alias|n.º|URI>"
+msgstr "modifyrepo (mr) <OPCIONES> <ALIAS|nº|URI>"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/repos/modify.cc:26
 #, boost-format
 msgid "modifyrepo (mr) <OPTIONS> <%1%>"
-msgstr "modifyrepo (mr) <opciones> <%1%>"
+msgstr "modifyrepo (mr) <OPCIONES> <%1%>"
 
 #. translators: command summary
 #: src/commands/repos/modify.cc:29
@@ -3886,7 +3893,7 @@ msgstr "No se ha encontrado el repositorio %s."
 
 #: src/commands/repos/refresh.cc:55
 msgid "refresh (ref) [ALIAS|#|URI] ..."
-msgstr "refresh (ref) [alias|n.º|URI]..."
+msgstr "refresh (ref) [alias|nº|URI] …"
 
 #. translators: command summary: refresh, ref
 #: src/commands/repos/refresh.cc:57
@@ -3934,6 +3941,8 @@ msgid ""
 "Multi-Arch repos: Download raw metadata for all offered architectures even "
 "if the repo supports filtering."
 msgstr ""
+"Repos multi-arq: descarga metadatos en crudo para todas las arquitecturas "
+"ofrecidas incluso si el repo proporciona filtrado."
 
 #. translators: -r, --repo <ALIAS|#|URI>
 #: src/commands/repos/refresh.cc:110
@@ -4016,7 +4025,7 @@ msgstr "Todos los repositorios han sido actualizados."
 
 #: src/commands/repos/remove.cc:21
 msgid "removerepo (rr) [OPTIONS] <ALIAS|#|URI>"
-msgstr "removerepo (rr) [opciones] <alias|n.º|URI>"
+msgstr "removerepo (rr) [OPCIONES] <ALIAS|n.º|URI>"
 
 #: src/commands/repos/remove.cc:22
 msgid "Remove specified repository."
@@ -4074,7 +4083,7 @@ msgstr "El repositorio '%s' se va a dejar sin cambios."
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/repos/rename.cc:64
 msgid "renamerepo (nr) [OPTIONS] <ALIAS|#|URI> <NEW-ALIAS>"
-msgstr "renamerepo (nr) [opciones] <alias|#|URI> <nuevo-alias>"
+msgstr "renamerepo (nr) [OPCIONES] <ALIAS|nº|URI> <ALIAS-NUEVO>"
 
 #: src/commands/repos/rename.cc:65
 msgid "Rename specified repository."
@@ -4084,12 +4093,12 @@ msgstr "Renombra el repositorio especificado."
 #: src/commands/repos/rename.cc:67
 msgid "Assign new alias to the repository specified by alias, number or URI."
 msgstr ""
-"Asigna un nuevo alias al repositorio especificado mediante el alias o la "
-"dirección URI."
+"Asigna un alias nuevo al repositorio especificado mediante el alias, número "
+"o dirección URI."
 
 #: src/commands/repos/rename.cc:92
 msgid "Too few arguments. At least URI and alias are required."
-msgstr "No hay argumentos suficientes. Se necesita al menos el URI y el alias."
+msgstr "No hay argumentos suficientes. Se requiere al menos el URI y el alias."
 
 #: src/commands/repos/rename.cc:114
 #, c-format, boost-format
@@ -4245,7 +4254,7 @@ msgstr "Muestra el indicador de actualización automática."
 #. translators: -k, --keep-packages
 #: src/commands/reposerviceoptionsets.cc:191
 msgid "Show also the keep-packages flag."
-msgstr ""
+msgstr "Muestra además el indicador keep-packages."
 
 #. translators: -u, --uri
 #: src/commands/reposerviceoptionsets.cc:201
@@ -4340,7 +4349,7 @@ msgstr "Busca paquetes que coincidan con un patrón."
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/search/search.cc:83
 msgid "search (se) [OPTIONS] [QUERYSTRING] ..."
-msgstr "search (se) [opciones] [cadenaconsulta] ..."
+msgstr "search (se) [OPCIONES] [CADENA-CONSULTA] …"
 
 #. translators: command description
 #: src/commands/search/search.cc:91
@@ -4412,7 +4421,7 @@ msgstr "Buscar paquetes que sugieran las cadenas de búsqueda."
 #. translators: --enhances
 #: src/commands/search/search.cc:145
 msgid "Search for packages which enhance the search strings."
-msgstr ""
+msgstr "Buscar paquete los cuales mejoren las cadenas de búsqueda."
 
 #. translators: --provides-pkg
 #: src/commands/search/search.cc:149
@@ -4483,6 +4492,8 @@ msgid ""
 "Search for all packages that enhance any of the provides of the package(s) "
 "matched by the input parameters."
 msgstr ""
+"Búsqueda para todos los paquetes que mejoren cualquiera de lo(s) paquete(s) "
+"proporcionado(s) coincidido(s) por los parámetros de entrada."
 
 #. translators: -t, --type <TYPE>
 #: src/commands/search/search.cc:181
@@ -4541,11 +4552,11 @@ msgstr "No se encuentran elementos que coincidan."
 
 #: src/commands/search/search.cc:503
 msgid "Problem occurred initializing or executing the search query"
-msgstr "Problema al inicializar o ejecutar la búsqueda"
+msgstr "Problema sucedido al inicializar o ejecutar la solicitud de búsqueda"
 
 #: src/commands/search/search.cc:504
 msgid "See the above message for a hint."
-msgstr "Consulte el mensaje de error anterior para obtener sugerencias."
+msgstr "Consulte el mensaje anterior para una sugerencia."
 
 #: src/commands/search/search.cc:505 src/repos.cc:984
 msgid "Running 'zypper refresh' as root might resolve the problem."
@@ -4590,7 +4601,8 @@ msgstr "Seleccione los problemas correspondientes a la cadena especificada."
 msgid ""
 "Service '%1%' with URL '%2%' already exists. Just updating the settings."
 msgstr ""
-"El servicio %1% con la URL %2% ya existe. Se actualizarán solo los ajustes."
+"El servicio '%1%' con la URL '%2%' ya existe. Tan solo se actualizan los "
+"ajustes."
 
 #: src/commands/services/add.cc:58
 #, boost-format
@@ -4598,7 +4610,7 @@ msgid ""
 "Service '%1%' already exists but uses a different URL '%2%'. Please use "
 "another alias."
 msgstr ""
-"El servicio %1% ya existe, pero usa una URL distinta, %2%. Use otro alias."
+"El servicio %1% ya existe, pero usa una URL distinta, '%2%'. Use otro alias."
 
 #: src/commands/services/add.cc:70
 #, c-format, boost-format
@@ -4854,15 +4866,15 @@ msgstr "refresh-services (refs) [opciones]"
 
 #: src/commands/services/refresh.cc:96
 msgid "Refresh all services."
-msgstr "Actualizar todos los servicios."
+msgstr "Recarga todos los servicios."
 
 #: src/commands/services/refresh.cc:97
 msgid "Refresh defined repository index services."
-msgstr "Actualiza los servicios del índice de repositorios definido."
+msgstr "Recarga los servicios del índice de repositorios definido."
 
 #: src/commands/services/refresh.cc:114
 msgid "Refresh also the service repositories."
-msgstr "Actualiza también los repositorios del servicio."
+msgstr "Recarga también los repositorios del servicio."
 
 #: src/commands/services/refresh.cc:115
 msgid "Also restore service repositories enabled/disabled state."
@@ -4936,11 +4948,11 @@ msgstr "Acepta varios comandos a la vez."
 #. translators: command description
 #: src/commands/shell.cc:24
 msgid "Enter the zypper command shell."
-msgstr "Abre la shell de comandos de zypper."
+msgstr "Abre el intérprete de comandos de zypper."
 
 #: src/commands/shell.cc:40
 msgid "You already are running zypper's shell."
-msgstr "Ya se está ejecutando la shell de zypper."
+msgstr "Ya se está ejecutando el intérprete de zypper."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/shell.cc:52
@@ -4981,11 +4993,12 @@ msgstr "Crea casos de prueba para depuración."
 msgid ""
 "Force the solver to find a solution (even an aggressive one) rather than "
 "asking."
-msgstr "Fuerza una solución (incluso agresiva)."
+msgstr ""
+"Fuerza resolver una solución (incluso una agresiva) mejor que preguntar."
 
 #: src/commands/solveroptionset.cc:63
 msgid "Do not force the solver to find a solution, let it ask."
-msgstr "No fuerza una solución, solo pregunta."
+msgstr "No fuerza encontrar una solución, solo pregunta."
 
 #: src/commands/solveroptionset.cc:64
 msgid "Set the solvers general attitude when resolving a job."
@@ -5032,12 +5045,12 @@ msgstr "No elimina automáticamente las dependencias innecesarias."
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/sourceinstall.cc:21
 msgid "source-install (si) [OPTIONS] <NAME> ..."
-msgstr "source-install (si) [opciones] <nombre> ..."
+msgstr "source-install (si) [OPCIONES] <NOMBRE> …"
 
 #. translators: command summary: source-install, si
 #: src/commands/sourceinstall.cc:23
 msgid "Install source packages and their build dependencies."
-msgstr "Instalar los paquetes fuente y sus dependencias de construcción."
+msgstr "Instalar los paquetes fuente y sus dependencias de compilación."
 
 #. translators: command description
 #: src/commands/sourceinstall.cc:25
@@ -5096,14 +5109,14 @@ msgstr "no es posible ejecutar %1% (%2%)"
 #: src/commands/subcommand.cc:341
 #, boost-format
 msgid "fork for %1% failed (%2%)"
-msgstr "fork de %1% fallido (%2%)"
+msgstr "fork de %1% incorrecto (%2%)"
 
 #. translators: %1% - command name or path
 #. translators: %2% - system error message
 #: src/commands/subcommand.cc:360
 #, boost-format
 msgid "waitpid for %1% failed (%2%)"
-msgstr "waitpid de %1% fallido (%2%)"
+msgstr "waitpid de %1% incorrecto (%2%)"
 
 #. translators: %1% - command name or path
 #. translators: %2% - returned PID (number)
@@ -5211,20 +5224,20 @@ msgstr "No es posible mostrar la entrada manual de %1%"
 
 #: src/commands/subcommand.cc:522
 msgid "Lists available subcommands."
-msgstr "Muestra los subcomandos disponibles."
+msgstr "Enumera los subcomandos disponibles."
 
 #: src/commands/subcommand.cc:523
 msgid ""
 "Lists available subcommands. Using zypper subcommands found on your $PATH is "
 "disabled in zypper.conf."
 msgstr ""
-"Lista los subcomandos disponibles. Usar subcomandos de zypper encontrados en "
-"su $PATH está deshabilitado en zypper.conf."
+"Enumera los subcomandos disponibles. Usar subcomandos de zypper encontrados "
+"en su $PATH está deshabilitado en zypper.conf."
 
 #. Currently no concept how to handle global options and ZYPPlock
 #: src/commands/subcommand.cc:626
 msgid "Zypper shell does not support execution of subcommands."
-msgstr "La shell de Zypper no admite la ejecución de subcomandos."
+msgstr "El intérprete Zypper no admite la ejecución de subcomandos."
 
 #. translators: %1%  - is the name of a subcommand
 #: src/commands/subcommand.cc:640
@@ -5285,7 +5298,7 @@ msgstr "Permisos insuficientes para utilizar el directorio de descargas '%s'."
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/utils/download.cc:142
 msgid "download [OPTIONS] <PACKAGES>..."
-msgstr "download [opciones] <paquetes>..."
+msgstr "download [OPCIONES] <PAQUETES>…"
 
 #. translators: command summary: download
 #: src/commands/utils/download.cc:144
@@ -5543,7 +5556,7 @@ msgstr ""
 #. translators: command summary: targetos, tos
 #: src/commands/utils/system-architecture.cc:20
 msgid "Print the detected system architecture."
-msgstr ""
+msgstr "Declara la arquitectura del sistema detectado."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/utils/targetos.cc:20
@@ -5624,6 +5637,8 @@ msgid ""
 "The exit code is 0 if the versions are equal, 11 if VERSION1 is newer, and "
 "12 if VERSION2 is newer."
 msgstr ""
+"El código de salida es 0 si las versiones son iguales, 11 si VERSION1 es más "
+"nueva, y 12 si VERSION2 es más nueva."
 
 #. translators: -m, --match
 #: src/commands/utils/versioncmp.cc:38
