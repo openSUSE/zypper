@@ -13,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-03-13 16:49+0100\n"
 "PO-Revision-Date: 2025-04-08 10:56+0000\n"
-"Last-Translator: Davide Aiello <davide.aiello@novilingulists.com>\n"
+"Last-Translator: Tommaso Fonda <neronio@outlook.com>\n"
 "Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/>"
 "\n"
 "Language: it\n"
@@ -1429,7 +1429,7 @@ msgstr ""
 #, boost-format
 msgid "%1% is set, otherwise a system reboot would be required."
 msgstr ""
-"%1% sia impostato. In caso contrario, sarebbe necessario un riavvio del "
+"%1% è impostato. In caso contrario, sarebbe necessario un riavvio del "
 "sistema."
 
 #: src/Summary.cc:1826
