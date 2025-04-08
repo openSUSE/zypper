@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-03-13 16:49+0100\n"
-"PO-Revision-Date: 2024-05-02 05:43+0000\n"
+"PO-Revision-Date: 2025-04-08 10:56+0000\n"
 "Last-Translator: Grace Yu <grace.yu@excel-gits.com>\n"
 "Language-Team: Chinese (China) <https://l10n.opensuse.org/projects/zypper/"
 "master/zh_CN/>\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.9.1\n"
+"X-Generator: Weblate 5.10.3\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -1104,17 +1104,17 @@ msgstr "已跳过无法在应用后不产生冲突的所需补丁："
 #. 99.2 MiB  |  -    6.4 MiB  already in cache
 #: src/Summary.cc:1588
 msgid "Package download size:"
-msgstr ""
+msgstr "软件包下载大小："
 
 #. translator: rendered as "105.7 MiB  overall download size"
 #: src/Summary.cc:1596
 msgid "overall package size"
-msgstr ""
+msgstr "总软件包大小"
 
 #. translator: rendered as "  6.4 MiB  already in cache"
 #: src/Summary.cc:1598
 msgid "already in cache"
-msgstr ""
+msgstr "已在缓存中"
 
 #: src/Summary.cc:1605
 msgid "Download only."
@@ -1125,17 +1125,17 @@ msgstr "仅下载。"
 #. 1.9 MiB  |  -  347.3 MiB  released by packages that will be removed
 #: src/Summary.cc:1610
 msgid "Package install size change:"
-msgstr ""
+msgstr "软件包安装大小更改："
 
 #. translator: rendered as "349.1 MiB  required by packages that will be installed"
 #: src/Summary.cc:1615
 msgid "required by packages that will be installed"
-msgstr ""
+msgstr "将安装的软件包需要"
 
 #. translator: rendered as "347.3 MiB  released by packages that will be removed"
 #: src/Summary.cc:1617
 msgid "released by packages that will be removed"
-msgstr ""
+msgstr "由将去除的软件包释放"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
 #: src/Summary.cc:1638
@@ -1195,7 +1195,7 @@ msgstr[0] "个软件包将移除"
 #: src/Summary.cc:1705
 msgid "to change vendor"
 msgid_plural " to change vendor"
-msgstr[0] "个软件包将跨源"
+msgstr[0] " 个软件包将改变供应商"
 
 #. translators: this text will be preceded by a number e.g. "5 packages ..."
 #: src/Summary.cc:1708
@@ -1819,15 +1819,15 @@ msgstr "密码"
 
 #: src/callbacks/media.h:190
 msgid "Preloading Packages"
-msgstr ""
+msgstr "正在预加载软件包"
 
 #: src/callbacks/media.h:209
 msgid "Preloading Packages:"
-msgstr ""
+msgstr "正在预加载软件包："
 
 #: src/callbacks/media.h:234 src/callbacks/media.h:256
 msgid "Preloading:"
-msgstr ""
+msgstr "正在预加载："
 
 #. Translator: prefetch progress bar result: ".............[done]"
 #: src/callbacks/media.h:266
@@ -1846,15 +1846,15 @@ msgstr "错误"
 
 #: src/callbacks/media.h:294
 msgid "Preload finished."
-msgstr ""
+msgstr "已完成预加载。"
 
 #: src/callbacks/media.h:299
 msgid "success"
-msgstr ""
+msgstr "成功"
 
 #: src/callbacks/media.h:302
 msgid "files missing"
-msgstr ""
+msgstr "缺少文件"
 
 #: src/callbacks/repo.h:60
 msgid "Retrieving delta"
@@ -2093,10 +2093,14 @@ msgid ""
 "enabled repositories fail to refresh. This may severely damage the system. "
 "If a failing repository is actually not needed, it must be disabled."
 msgstr ""
+"由于孤立软件包处理方式的缘故，dist-upgrade "
+"比其他任何命令更依赖于正确的储存库设置。如果启用的储存库无法刷新，该命令必定"
+"无法继续。这可能会严重损害系统。如果实际并不需要某个刷新失败的储存库，则必须"
+"将其禁用。"
 
 #: src/commands/distupgrade.cc:57
 msgid "See 'man zypper' for more information about this command."
-msgstr ""
+msgstr "如需此命令的详细信息，请参见 'man zypper'。"
 
 #: src/commands/distupgrade.cc:88
 #, c-format, boost-format
@@ -3032,7 +3036,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/query/info.cc:19
 msgid "info (if) [OPTIONS] <NAME>[-<VERSION>[-<RELEASE>]] ..."
-msgstr ""
+msgstr "info (if) [选项] <名称>[-<版本>[-<发行版>]] ..."
 
 #. translators: command summary: info, if
 #: src/commands/query/info.cc:21
@@ -3055,7 +3059,8 @@ msgid ""
 "If no version constraint is specified, information about the best available "
 "package is shown. Note that both the version and release numbers must always "
 "match exactly."
-msgstr ""
+msgstr "如果未指定版本限制条件，将会显示最合适的软件包的相关信息。请注意，版本和发行"
+"版编号必须始终完全匹配。"
 
 #. translators: -s, --match-substrings
 #: src/commands/query/info.cc:65
@@ -3100,7 +3105,7 @@ msgstr "显示该软件包建议的软件包。"
 #. translators: --enhances
 #: src/commands/query/info.cc:98
 msgid "Show enhances."
-msgstr ""
+msgstr "显示增强的软件包。"
 
 #: src/commands/query/info.cc:112 src/utils/messages.cc:70
 msgid "Required argument missing."
@@ -3185,14 +3190,14 @@ msgstr "显示用户明确选择且已安装的软件包。"
 #. translators: --system
 #: src/commands/query/packages.cc:43
 msgid "Show installed packages which are not provided by any repository."
-msgstr ""
+msgstr "显示并非由任何储存库提供的已安装软件包。"
 
 #. translators: --orphaned
 #: src/commands/query/packages.cc:47
 msgid ""
 "Show system packages which are orphaned (without repository and without "
 "update candidate)."
-msgstr ""
+msgstr "显示孤立的系统软件包（没有储存库和候选更新软件包）。"
 
 #. translators: --suggested
 #: src/commands/query/packages.cc:51
@@ -3477,7 +3482,7 @@ msgstr "刷新"
 #. translators: 'zypper repos' column - whether keep-packages is enabled for the repository
 #: src/commands/repos/list.cc:266
 msgid "Keep"
-msgstr ""
+msgstr "保留"
 
 #: src/commands/repos/list.cc:357
 msgid "No repositories defined."
@@ -3563,7 +3568,8 @@ msgstr "仅下载原始元数据，不构建数据库。"
 msgid ""
 "Multi-Arch repos: Download raw metadata for all offered architectures even "
 "if the repo supports filtering."
-msgstr ""
+msgstr "多体系结构储存库：即使储存库支持过滤，仍会下载提供的所有体系结构对应的原始元"
+"数据。"
 
 #. translators: -r, --repo <ALIAS|#|URI>
 #: src/commands/repos/refresh.cc:110
@@ -3863,7 +3869,7 @@ msgstr "也显示自动刷新旗标。"
 #. translators: -k, --keep-packages
 #: src/commands/reposerviceoptionsets.cc:191
 msgid "Show also the keep-packages flag."
-msgstr ""
+msgstr "同时显示保留软件包标志。"
 
 #. translators: -u, --uri
 #: src/commands/reposerviceoptionsets.cc:201
@@ -4021,7 +4027,7 @@ msgstr "搜索建议了搜索字符串内容的软件包。"
 #. translators: --enhances
 #: src/commands/search/search.cc:145
 msgid "Search for packages which enhance the search strings."
-msgstr ""
+msgstr "搜索能够增强搜索字符串的软件包。"
 
 #. translators: --provides-pkg
 #: src/commands/search/search.cc:149
@@ -4077,7 +4083,7 @@ msgstr "搜索建议了与所输入参数匹配的软件包所提供的功能的
 msgid ""
 "Search for all packages that enhance any of the provides of the package(s) "
 "matched by the input parameters."
-msgstr ""
+msgstr "搜索能够增强与输入参数相匹配的软件包所提供的任何功能的所有软件包。"
 
 #. translators: -t, --type <TYPE>
 #: src/commands/search/search.cc:181
@@ -5055,7 +5061,7 @@ msgstr "不下载任何源代码 RPM， 而是显示缺失或多余的源代码 
 #. translators: command summary: targetos, tos
 #: src/commands/utils/system-architecture.cc:20
 msgid "Print the detected system architecture."
-msgstr ""
+msgstr "列显检测到的系统体系结构。"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/utils/targetos.cc:20
@@ -5132,7 +5138,8 @@ msgstr "比较作为参数提供的版本号。"
 msgid ""
 "The exit code is 0 if the versions are equal, 11 if VERSION1 is newer, and "
 "12 if VERSION2 is newer."
-msgstr ""
+msgstr "如果两个版本相同，则退出代码为 0；如果版本1 较新，则退出代码为 11；如果版本2 "
+"较新，则退出代码为 12。"
 
 #. translators: -m, --match
 #: src/commands/utils/versioncmp.cc:38
