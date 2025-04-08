@@ -17,8 +17,8 @@ msgstr ""
 "Project-Id-Version: zypper.de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-03-13 16:49+0100\n"
-"PO-Revision-Date: 2025-03-15 21:20+0000\n"
-"Last-Translator: Ettore Atalan <atalanttore@googlemail.com>\n"
+"PO-Revision-Date: 2025-04-08 10:56+0000\n"
+"Last-Translator: Gemineo <vistatec@gemineo.de>\n"
 "Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/>"
 "\n"
 "Language: de\n"
@@ -3943,6 +3943,8 @@ msgid ""
 "Multi-Arch repos: Download raw metadata for all offered architectures even "
 "if the repo supports filtering."
 msgstr ""
+"Multi-Arch-Repos: Lade die Rohmetadaten für alle angebotenen Architekturen "
+"herunter, auch wenn das Repo Filtern unterstützt."
 
 #. translators: -r, --repo <ALIAS|#|URI>
 #: src/commands/repos/refresh.cc:110
@@ -4264,7 +4266,7 @@ msgstr "Das Kennzeichen für automatische Aktualisierung anzeigen."
 #. translators: -k, --keep-packages
 #: src/commands/reposerviceoptionsets.cc:191
 msgid "Show also the keep-packages flag."
-msgstr ""
+msgstr "Zeige auch das Flag 'keep-packages' an."
 
 #. translators: -u, --uri
 #: src/commands/reposerviceoptionsets.cc:201
