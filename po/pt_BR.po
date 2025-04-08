@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-03-13 16:49+0100\n"
-"PO-Revision-Date: 2024-09-09 18:47+0000\n"
-"Last-Translator: Rodrigo Macedo <sottomaiormacedotec@sottomaiormacedo.tech>\n"
+"PO-Revision-Date: 2025-04-08 20:56+0000\n"
+"Last-Translator: Samanta Magalhaes <samanta_texttrans@outlook.com>\n"
 "Language-Team: Portuguese (Brazil) <https://l10n.opensuse.org/projects/"
 "zypper/master/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.7.2\n"
+"X-Generator: Weblate 5.10.3\n"
 "X-Poedit-Language: Portuguese\n"
 "X-Poedit-Country: BRAZIL\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -2031,15 +2031,15 @@ msgstr "Senha"
 
 #: src/callbacks/media.h:190
 msgid "Preloading Packages"
-msgstr ""
+msgstr "Pré-carregando Pacotes"
 
 #: src/callbacks/media.h:209
 msgid "Preloading Packages:"
-msgstr ""
+msgstr "Pré-carregando Pacotes:"
 
 #: src/callbacks/media.h:234 src/callbacks/media.h:256
 msgid "Preloading:"
-msgstr ""
+msgstr "Pré-carregando:"
 
 #. Translator: prefetch progress bar result: ".............[done]"
 #: src/callbacks/media.h:266
@@ -2058,15 +2058,15 @@ msgstr "erro"
 
 #: src/callbacks/media.h:294
 msgid "Preload finished."
-msgstr ""
+msgstr "Pré-carregamento concluído."
 
 #: src/callbacks/media.h:299
 msgid "success"
-msgstr ""
+msgstr "êxito"
 
 #: src/callbacks/media.h:302
 msgid "files missing"
-msgstr ""
+msgstr "arquivos ausentes"
 
 #: src/callbacks/repo.h:60
 msgid "Retrieving delta"
@@ -2319,10 +2319,15 @@ msgid ""
 "enabled repositories fail to refresh. This may severely damage the system. "
 "If a failing repository is actually not needed, it must be disabled."
 msgstr ""
+"Devido ao tratamento de pacotes órfãos, o dist-upgrade depende de uma "
+"configuração de repositório apropriada mais do que qualquer outro comando. "
+"Ele não deverá prosseguir se houver falha na atualização dos repositórios "
+"habilitados. Isso pode prejudicar o sistema gravemente. Se, de fato, não for "
+"necessário um repositório com falha, ele deverá ser desabilitado."
 
 #: src/commands/distupgrade.cc:57
 msgid "See 'man zypper' for more information about this command."
-msgstr ""
+msgstr "Consulte 'man zypper' para obter mais informações sobre este comando."
 
 #: src/commands/distupgrade.cc:88
 #, c-format, boost-format
@@ -3332,7 +3337,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/query/info.cc:19
 msgid "info (if) [OPTIONS] <NAME>[-<VERSION>[-<RELEASE>]] ..."
-msgstr ""
+msgstr "info (if) [OPÇÕES] <NOME>[-<VERSÃO>[-<LANÇAMENTO>]]..."
 
 #. translators: command summary: info, if
 #: src/commands/query/info.cc:21
@@ -3358,6 +3363,9 @@ msgid ""
 "package is shown. Note that both the version and release numbers must always "
 "match exactly."
 msgstr ""
+"Se nenhuma restrição de versão foi especificada, as informações sobre o "
+"melhor pacote disponível é mostrada. Observe que ambos os números de versão "
+"e de lançamento sempre devem ser exatamente iguais."
 
 #. translators: -s, --match-substrings
 #: src/commands/query/info.cc:65
@@ -3402,7 +3410,7 @@ msgstr "Exibir sugestões."
 #. translators: --enhances
 #: src/commands/query/info.cc:98
 msgid "Show enhances."
-msgstr ""
+msgstr "Mostrar melhorias."
 
 #: src/commands/query/info.cc:112 src/utils/messages.cc:70
 msgid "Required argument missing."
@@ -3792,7 +3800,7 @@ msgstr "Atualizar"
 #. translators: 'zypper repos' column - whether keep-packages is enabled for the repository
 #: src/commands/repos/list.cc:266
 msgid "Keep"
-msgstr ""
+msgstr "Manter"
 
 #: src/commands/repos/list.cc:357
 msgid "No repositories defined."
@@ -3883,6 +3891,8 @@ msgid ""
 "Multi-Arch repos: Download raw metadata for all offered architectures even "
 "if the repo supports filtering."
 msgstr ""
+"Repositório multiarquitetura: Faça download dos metadados brutos para todas "
+"as arquiteturas, mesmo que o repositório suporte filtragem."
 
 #. translators: -r, --repo <ALIAS|#|URI>
 #: src/commands/repos/refresh.cc:110
@@ -4195,7 +4205,7 @@ msgstr "Exibir também o indicador de atualização automática."
 #. translators: -k, --keep-packages
 #: src/commands/reposerviceoptionsets.cc:191
 msgid "Show also the keep-packages flag."
-msgstr ""
+msgstr "Mostrar também o flag keep-packages."
 
 #. translators: -u, --uri
 #: src/commands/reposerviceoptionsets.cc:201
@@ -4362,7 +4372,7 @@ msgstr "Pesquisar pacotes que sugerem os textos da pesquisa."
 #. translators: --enhances
 #: src/commands/search/search.cc:145
 msgid "Search for packages which enhance the search strings."
-msgstr ""
+msgstr "Pesquisar pacotes que aprimoram as strings de pesquisa."
 
 #. translators: --provides-pkg
 #: src/commands/search/search.cc:149
@@ -4433,6 +4443,8 @@ msgid ""
 "Search for all packages that enhance any of the provides of the package(s) "
 "matched by the input parameters."
 msgstr ""
+"Pesquisar todos os pacotes que aprimoram qualquer um de seus recursos "
+"correspondentes a parâmetros de entrada."
 
 #. translators: -t, --type <TYPE>
 #: src/commands/search/search.cc:181
@@ -5461,7 +5473,7 @@ msgstr ""
 #. translators: command summary: targetos, tos
 #: src/commands/utils/system-architecture.cc:20
 msgid "Print the detected system architecture."
-msgstr ""
+msgstr "Apresenta a arquitetura de sistema detectada."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/utils/targetos.cc:20
@@ -5541,6 +5553,8 @@ msgid ""
 "The exit code is 0 if the versions are equal, 11 if VERSION1 is newer, and "
 "12 if VERSION2 is newer."
 msgstr ""
+"O código de saída será 0 se as versões forem iguais, 11 se VERSION1 for mais "
+"recente e 12 se VERSION2 for mais recente."
 
 #. translators: -m, --match
 #: src/commands/utils/versioncmp.cc:38
