@@ -226,7 +226,7 @@ bool refresh_raw_metadata( Zypper & zypper, const RepoInfo & repo, bool force_do
       // print a message
       zypper.out().info( str::Format(_("Checking whether to refresh metadata for %s")) % repo.asUserString(),
                          Out::HIGH );
-      if ( !repo.baseUrlsEmpty() )
+      if ( !repo.effectiveBaseUrlsEmpty() )
       {
 #ifndef DISABLE_ScopedDisableMediaChangeReport_GUARD
         Disabled because of fix for bsc#1123967
@@ -234,7 +234,8 @@ bool refresh_raw_metadata( Zypper & zypper, const RepoInfo & repo, bool force_do
         media::ScopedDisableMediaChangeReport guard( repo.baseUrlsSize() > 1 );
 #endif
 
-        for ( RepoInfo::urls_const_iterator it = repo.baseUrlsBegin(); it != repo.baseUrlsEnd(); )
+        const auto &groupedBaseUrls = repo.groupedBaseUrls ();
+        for ( auto it = groupedBaseUrls.begin(); it != groupedBaseUrls.end(); )
         {
           try
           {
@@ -271,10 +272,10 @@ bool refresh_raw_metadata( Zypper & zypper, const RepoInfo & repo, bool force_do
           catch ( const Exception & e )
           {
             ZYPP_CAUGHT( e );
-            Url badurl( *it );
-            if ( ++it == repo.baseUrlsEnd() )
+            std::vector<Url> badurls( *it );
+            if ( ++it == groupedBaseUrls.end() )
               ZYPP_RETHROW( e );
-            ERR << badurl << " doesn't look good. Trying another url (" << *it << ")." << endl;
+            ERR << badurls << " doesn't look good. Trying another url (" << *it << ")." << endl;
           }
         }
       }
@@ -534,11 +535,10 @@ bool match_repo( Zypper & zypper, std::string str, RepoInfo *repo, bool looseQue
         // string is expected to have no credentials or query
         if ( !( urlview.has( url::ViewOptions::WITH_PASSWORD ) && urlview.has( url::ViewOptions::WITH_QUERY_STR ) ) )
         {
-          if ( !known_it->baseUrlsEmpty() )
+          if ( !known_it->effectiveBaseUrlsEmpty() )
           {
-            for_( urlit, known_it->baseUrlsBegin(), known_it->baseUrlsEnd() )
+            for( auto newrl : known_it->effectiveBaseUrls() )
             {
-              Url newrl( *urlit );
               newrl.setPathName( Pathname(newrl.getPathName()).asString() );
               if ( newrl.asString(urlview) == uurl.asString(urlview) )
               {
@@ -551,11 +551,10 @@ bool match_repo( Zypper & zypper, std::string str, RepoInfo *repo, bool looseQue
         // ordinary == comparison suffices here (quicker)
         else
         {
-          if ( !known_it->baseUrlsEmpty() )
+          if ( !known_it->effectiveBaseUrlsEmpty() )
           {
-            for_( urlit, known_it->baseUrlsBegin(), known_it->baseUrlsEnd() )
+            for( auto newrl : known_it->effectiveBaseUrls() )
             {
-              Url newrl( *urlit );
               newrl.setPathName( Pathname(newrl.getPathName()).asString() );
               if ( newrl == uurl )
               {
@@ -596,12 +595,13 @@ bool repo_cmp_alias_urls(const RepoInfo &lhs, const RepoInfo &rhs)
   else
   {
     // URIs (all of them must be in the other RepoInfo)
-    if ( !lhs.baseUrlsEmpty() )
+    if ( !lhs.effectiveBaseUrlsEmpty() )
     {
       bool urlfound = false;
-      for ( RepoInfo::urls_const_iterator urlit = lhs.baseUrlsBegin(); urlit != lhs.baseUrlsEnd(); ++urlit )
+      for ( const auto &lhsUrl : lhs.effectiveBaseUrls() )
       {
-        if ( std::find( rhs.baseUrlsBegin(), rhs.baseUrlsEnd(), Url(*urlit) ) != rhs.baseUrlsEnd() )
+        const auto &rhsUrls = rhs.effectiveBaseUrls();
+        if ( std::find( rhsUrls.begin(), rhsUrls.end(), lhsUrl ) != rhsUrls.end() )
           urlfound = true;
         if ( !urlfound )
         {
@@ -610,7 +610,7 @@ bool repo_cmp_alias_urls(const RepoInfo &lhs, const RepoInfo &rhs)
         }
       }
     }
-    else if ( !rhs.baseUrlsEmpty() )
+    else if ( !rhs.effectiveBaseUrlsEmpty() )
       equals = false;
   }
 
@@ -1153,9 +1153,9 @@ bool add_repo( Zypper & zypper, RepoInfo & repo, bool noCheck )
   RuntimeData & gData = zypper.runtimeData();
 
   bool is_cd = true;
-  for_( it, repo.baseUrlsBegin(), repo.baseUrlsEnd() )
+  for( const auto &url : repo.effectiveBaseUrls() )
   {
-    if ( ! it->schemeIsVolatile() )	// cd/dvd
+    if ( ! url.schemeIsVolatile() )	// cd/dvd
     {
       is_cd = false;
       break;
@@ -1203,10 +1203,10 @@ bool add_repo( Zypper & zypper, RepoInfo & repo, bool noCheck )
 
     std::ostringstream s;
     s << _("Could not determine the type of the repository. Please check if the defined URIs (see below) point to a valid repository:");
-    if ( !repo.baseUrlsEmpty() )
+    if ( !repo.effectiveBaseUrlsEmpty() )
     {
-      for_( uit, repo.baseUrlsBegin(), repo.baseUrlsEnd() )
-        s << (*uit) << endl;
+      for( const auto &url : repo.effectiveBaseUrls() )
+        s << url << endl;
     }
     zypper.out().error( e, _("Can't find a valid repository at given location:"), s.str() );
     zypper.setExitCode( ZYPPER_EXIT_ERR_ZYPP );
@@ -1245,7 +1245,8 @@ bool add_repo( Zypper & zypper, RepoInfo & repo, bool noCheck )
   {
     PropertyTable p;
     // translators: property name; short; used like "Name: value"
-    p.add( _("URI"),		repo.baseUrlsBegin(), repo.baseUrlsEnd() );
+    const auto &effUrls = repo.effectiveBaseUrls ();
+    p.add( _("URI"),		effUrls.begin(), effUrls.end() );
     // translators: property name; short; used like "Name: value"
     p.add( _("Enabled"),	repo.enabled() );
     // translators: property name; short; used like "Name: value"
@@ -1382,7 +1383,7 @@ void add_repo_from_file( Zypper & zypper,
       continue;
     }
 
-    if( repo.baseUrlsEmpty() )
+    if( repo.effectiveBaseUrlsEmpty() )
     {
       zypper.out().warning( str::Format(_("Repository '%s' has no URI defined, skipping.")) % repo.asUserString() );
       continue;
@@ -1490,7 +1491,7 @@ RepoInfoSet collect_repos_by_option( Zypper & zypper, const RepoServiceCommonSel
     {
       filterList.push_back([ &selectOpts ]( const RepoInfo &info ) {
         const std::vector<std::string> & pars = selectOpts._mediumTypes;
-        return ( !info.baseUrlsEmpty() && std::find( pars.begin(), pars.end(), info.url().getScheme() ) != pars.end() );
+        return ( !info.effectiveBaseUrlsEmpty() && std::find( pars.begin(), pars.end(), info.url().getScheme() ) != pars.end() );
       });
     }
 
