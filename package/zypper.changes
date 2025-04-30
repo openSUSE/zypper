@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Apr 30 12:56:34 CEST 2025 - ma@suse.de
+
+- Updated translations (bsc#1230267)
+- version 1.14.89
+
+-------------------------------------------------------------------
 Thu Mar 13 16:50:20 CET 2025 - ma@suse.de
 
 - Do not double encode URL strings passed on the commandline
