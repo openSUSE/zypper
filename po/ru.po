@@ -10,17 +10,17 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-03-13 16:49+0100\n"
-"PO-Revision-Date: 2025-01-07 17:50+0000\n"
+"PO-Revision-Date: 2025-05-01 14:59+0000\n"
 "Last-Translator: Aleksey Fedorov <Aleksejfedorov963@gmail.com>\n"
-"Language-Team: Russian <https://l10n.opensuse.org/projects/zypper/master/ru/"
-">\n"
+"Language-Team: Russian <https://l10n.opensuse.org/projects/zypper/master/ru/>"
+"\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 5.9.2\n"
+"X-Generator: Weblate 5.11.1\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -2104,15 +2104,15 @@ msgstr "Пароль"
 
 #: src/callbacks/media.h:190
 msgid "Preloading Packages"
-msgstr ""
+msgstr "Предварительная загрузка пакетов"
 
 #: src/callbacks/media.h:209
 msgid "Preloading Packages:"
-msgstr ""
+msgstr "Предварительная загрузка пакетов:"
 
 #: src/callbacks/media.h:234 src/callbacks/media.h:256
 msgid "Preloading:"
-msgstr ""
+msgstr "Предварительная загрузка:"
 
 #. Translator: prefetch progress bar result: ".............[done]"
 #: src/callbacks/media.h:266
@@ -2131,15 +2131,15 @@ msgstr "ошибка"
 
 #: src/callbacks/media.h:294
 msgid "Preload finished."
-msgstr ""
+msgstr "Предварительная загрузка завершена."
 
 #: src/callbacks/media.h:299
 msgid "success"
-msgstr ""
+msgstr "успешно"
 
 #: src/callbacks/media.h:302
 msgid "files missing"
-msgstr ""
+msgstr "отсутствующие файлы"
 
 #: src/callbacks/repo.h:60
 msgid "Retrieving delta"
@@ -2397,10 +2397,15 @@ msgid ""
 "enabled repositories fail to refresh. This may severely damage the system. "
 "If a failing repository is actually not needed, it must be disabled."
 msgstr ""
+"Из-за обращения с осиротевшими пакетами dist-upgrade зависит от правильной "
+"настройки репозитория больше, чем любая другая команда. Она не должна "
+"продолжаться, если включенные репозитории не обновляются. Это может нанести "
+"серьезный ущерб системе. Если неработающий репозиторий на самом деле не "
+"нужен, его следует отключить."
 
 #: src/commands/distupgrade.cc:57
 msgid "See 'man zypper' for more information about this command."
-msgstr ""
+msgstr "Дополнительные сведения об этой команде см. „man zypper“."
 
 #: src/commands/distupgrade.cc:88
 #, c-format, boost-format
@@ -3430,6 +3435,9 @@ msgid ""
 "package is shown. Note that both the version and release numbers must always "
 "match exactly."
 msgstr ""
+"Если ограничение на версию не указано, будет показана информация о лучшем из "
+"доступных пакетов. Обратите внимание, что номера версии и выпуска всегда "
+"должны точно совпадать."
 
 #. translators: -s, --match-substrings
 #: src/commands/query/info.cc:65
@@ -3474,7 +3482,7 @@ msgstr "Показывать также предлагаемые."
 #. translators: --enhances
 #: src/commands/query/info.cc:98
 msgid "Show enhances."
-msgstr ""
+msgstr "Показать улучшения."
 
 #: src/commands/query/info.cc:112 src/utils/messages.cc:70
 msgid "Required argument missing."
@@ -3866,7 +3874,7 @@ msgstr "Обновление"
 #. translators: 'zypper repos' column - whether keep-packages is enabled for the repository
 #: src/commands/repos/list.cc:266
 msgid "Keep"
-msgstr ""
+msgstr "Оставить"
 
 #: src/commands/repos/list.cc:357
 msgid "No repositories defined."
@@ -3958,6 +3966,8 @@ msgid ""
 "Multi-Arch repos: Download raw metadata for all offered architectures even "
 "if the repo supports filtering."
 msgstr ""
+"Многоархитектурные репозитории: Загружайте необработанные метаданные для "
+"всех предлагаемых архитектур, даже если репозиторий поддерживает фильтрацию."
 
 #. translators: -r, --repo <ALIAS|#|URI>
 #: src/commands/repos/refresh.cc:110
@@ -4270,7 +4280,7 @@ msgstr "Показать также флаг автообновления."
 #. translators: -k, --keep-packages
 #: src/commands/reposerviceoptionsets.cc:191
 msgid "Show also the keep-packages flag."
-msgstr ""
+msgstr "Показать также флаг keep-packages."
 
 #. translators: -u, --uri
 #: src/commands/reposerviceoptionsets.cc:201
@@ -4437,7 +4447,7 @@ msgstr "Искать совпадение строки в поле \"Предл�
 #. translators: --enhances
 #: src/commands/search/search.cc:145
 msgid "Search for packages which enhance the search strings."
-msgstr ""
+msgstr "Найти пакеты, которые улучшают поисковые строки."
 
 #. translators: --provides-pkg
 #: src/commands/search/search.cc:149
@@ -4508,6 +4518,8 @@ msgid ""
 "Search for all packages that enhance any of the provides of the package(s) "
 "matched by the input parameters."
 msgstr ""
+"Поиск всех пакетов, которые улучшают любое из свойств пакета(ов), "
+"соответствующих входным параметрам."
 
 #. translators: -t, --type <TYPE>
 #: src/commands/search/search.cc:181
@@ -5555,7 +5567,7 @@ msgstr ""
 #. translators: command summary: targetos, tos
 #: src/commands/utils/system-architecture.cc:20
 msgid "Print the detected system architecture."
-msgstr ""
+msgstr "Вывести информацию об обнаруженной архитектуре системы."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/utils/targetos.cc:20
@@ -5637,6 +5649,8 @@ msgid ""
 "The exit code is 0 if the versions are equal, 11 if VERSION1 is newer, and "
 "12 if VERSION2 is newer."
 msgstr ""
+"Код выхода равен 0, если версии равны, 11, если версия VERSION1 новее, и 12, "
+"если версия VERSION2 новее."
 
 #. translators: -m, --match
 #: src/commands/utils/versioncmp.cc:38
