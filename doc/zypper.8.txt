@@ -322,7 +322,7 @@ If _product_ or _pattern_ are specified, zypper ensures that all required (and o
 include::{incdir}/option_legacy_no-confirm.txt[]
 
 	*--allow-unsigned-rpm*::
-		Silently install unsigned rpm packages given as commandline parameters.
+		Silently install unsigned .rpm packages given as commandline parameters. The option does not affect unsigned packages provided by repositories. To allow a repository to provide unsigned packages without explicit confirmation, set the repositories *--gpgcheck-allow-unsigned-package* option. See the *addrepo* and *modifyrepo* commands for details.
 
 	Solver related options: :: {nop}
 include::{incdir}/option_Solver_Flags_Common.txt[]
