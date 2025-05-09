@@ -201,7 +201,8 @@ repo-element =
     attribute gpgcheck { xsd:boolean }?,
     attribute gpgkey { xsd:anyURI }?,
     attribute mirrorlist { xsd:anyURI }?,
-    element url { xsd:anyURI }+
+    attribute metalink { xsd:anyURI }?,
+    element url { xsd:anyURI }*
   }
 
 repo-list-element =
