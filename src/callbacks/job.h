@@ -64,7 +64,11 @@ namespace ZmartRecipients
           break;
 
         case MsgType::warning:
-          out.warning( msg_r );
+          if ( userData_r.type() == JobReport::repoRefreshMirrorlist && userData_r.haskey("error") ) {
+            out.warning ( userData_r.get<zypp::Exception>("error").asUserHistory() );
+          } else {
+            out.warning( msg_r );
+          }
           break;
 
         case MsgType::error:
