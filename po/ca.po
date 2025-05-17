@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-03-13 16:49+0100\n"
-"PO-Revision-Date: 2025-03-14 09:56+0000\n"
+"PO-Revision-Date: 2025-05-17 09:59+0000\n"
 "Last-Translator: David Medina <medipas@gmail.com>\n"
 "Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/>"
 "\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.10.3\n"
+"X-Generator: Weblate 5.11.4\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -1700,7 +1700,7 @@ msgstr "Confia en la clau temporalment."
 #. translators: help text for the 'a' option in the 'r/t/a' prompt
 #: src/callbacks/keyring.h:330
 msgid "Trust the key and import it into trusted keyring."
-msgstr "Confia en la clau i importa-la a l'anell de claus de confiança."
+msgstr "Confia en la clau i importa-la al clauer de confiança."
 
 #: src/callbacks/keyring.h:367
 #, c-format, boost-format
