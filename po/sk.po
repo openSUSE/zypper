@@ -6,16 +6,16 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-03-13 16:49+0100\n"
-"PO-Revision-Date: 2025-02-13 16:27+0000\n"
+"PO-Revision-Date: 2025-05-18 16:59+0000\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
-"Language-Team: Slovak <https://l10n.opensuse.org/projects/zypper/master/sk/"
-">\n"
+"Language-Team: Slovak <https://l10n.opensuse.org/projects/zypper/master/sk/>"
+"\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Weblate 5.9.2\n"
+"X-Generator: Weblate 5.11.4\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -2087,15 +2087,15 @@ msgstr "Heslo"
 
 #: src/callbacks/media.h:190
 msgid "Preloading Packages"
-msgstr ""
+msgstr "Balíky na predbežné načítanie"
 
 #: src/callbacks/media.h:209
 msgid "Preloading Packages:"
-msgstr ""
+msgstr "Balíky na predbežné načítanie:"
 
 #: src/callbacks/media.h:234 src/callbacks/media.h:256
 msgid "Preloading:"
-msgstr ""
+msgstr "Predbežné načítanie:"
 
 #. Translator: prefetch progress bar result: ".............[done]"
 #: src/callbacks/media.h:266
@@ -2114,15 +2114,15 @@ msgstr "chyba"
 
 #: src/callbacks/media.h:294
 msgid "Preload finished."
-msgstr ""
+msgstr "Predbežné načítanie dokončené."
 
 #: src/callbacks/media.h:299
 msgid "success"
-msgstr ""
+msgstr "úspech"
 
 #: src/callbacks/media.h:302
 msgid "files missing"
-msgstr ""
+msgstr "chýbajúce súbory"
 
 #: src/callbacks/repo.h:60
 msgid "Retrieving delta"
@@ -3452,7 +3452,7 @@ msgstr "Ukázať navrhované."
 #. translators: --enhances
 #: src/commands/query/info.cc:98
 msgid "Show enhances."
-msgstr ""
+msgstr "Ukázať zlepšenia."
 
 #: src/commands/query/info.cc:112 src/utils/messages.cc:70
 msgid "Required argument missing."
@@ -3926,6 +3926,8 @@ msgid ""
 "Multi-Arch repos: Download raw metadata for all offered architectures even "
 "if the repo supports filtering."
 msgstr ""
+"Repozitáre s viacerými architektúrami: Stiahnuť nespracované metadáta pre "
+"všetky ponúkané architektúry, aj keď repozitár podporuje filtrovanie."
 
 #. translators: -r, --repo <ALIAS|#|URI>
 #: src/commands/repos/refresh.cc:110
@@ -4402,7 +4404,7 @@ msgstr "Hľadať balíky, ktoré navrhujú hľadané reťazce."
 #. translators: --enhances
 #: src/commands/search/search.cc:145
 msgid "Search for packages which enhance the search strings."
-msgstr ""
+msgstr "Hľadať balíky, ktoré vylepšujú hľadané reťazce."
 
 #. translators: --provides-pkg
 #: src/commands/search/search.cc:149
@@ -4473,6 +4475,8 @@ msgid ""
 "Search for all packages that enhance any of the provides of the package(s) "
 "matched by the input parameters."
 msgstr ""
+"Hľadať všetky balíky, ktoré vylepšujú niektorý z poskytovaných balíkov "
+"zodpovedajúcich vstupným parametrom."
 
 #. translators: -t, --type <TYPE>
 #: src/commands/search/search.cc:181
