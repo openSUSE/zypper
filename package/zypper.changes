@@ -1,4 +1,18 @@
 -------------------------------------------------------------------
+Thu May 22 16:26:42 CEST 2025 - ma@suse.de
+
+- BuildRequires:  libzypp-devel >= 17.37.0.
+- Use libzypp improvements for preload and mirror handling.
+- xmlout.rnc: Update repo-element (bsc#1241463)
+  Add the "metalink" attribute and reflect that the "url" elements
+  list may in fact be empty, if no baseurls are defined in the
+  .repo files.
+- man: update --allow-unsigned-rpm description.
+  Explain how to achieve the same for packages provided by
+  repositories.
+- version 1.14.90
+
+-------------------------------------------------------------------
 Wed Apr 30 12:56:34 CEST 2025 - ma@suse.de
 
 - Updated translations (bsc#1230267)
