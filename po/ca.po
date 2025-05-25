@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-03-13 16:49+0100\n"
-"PO-Revision-Date: 2025-05-17 09:59+0000\n"
+"PO-Revision-Date: 2025-05-25 10:59+0000\n"
 "Last-Translator: David Medina <medipas@gmail.com>\n"
 "Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/>"
 "\n"
@@ -6797,7 +6797,9 @@ msgstr "Commuta la visualització de l'arquitectura dels paquets."
 #: src/solve-commit.cc:831
 msgid ""
 "Toggle display of repositories from which the packages will be installed."
-msgstr "Commuta la visualització de les versions dels paquets."
+msgstr ""
+"Commuta la visualització dels repositoris des dels quals s'instal·laran els "
+"paquets."
 
 #. translators: help text for 'm' option in the 'Continue?' prompt
 #: src/solve-commit.cc:833
