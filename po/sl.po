@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-03-13 16:49+0100\n"
-"PO-Revision-Date: 2025-01-23 03:50+0000\n"
+"PO-Revision-Date: 2025-05-27 22:59+0000\n"
 "Last-Translator: Jure Repinc <jlp@holodeck1.com>\n"
 "Language-Team: Slovenian <https://l10n.opensuse.org/projects/zypper/master/"
 "sl/>\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
 "n%100==4 ? 2 : 3;\n"
-"X-Generator: Weblate 5.9.2\n"
+"X-Generator: Weblate 5.11.4\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -2209,45 +2209,42 @@ msgstr "Geslo"
 
 #: src/callbacks/media.h:190
 msgid "Preloading Packages"
-msgstr ""
+msgstr "Vnaprejšnje nalaganje paketov"
 
 #: src/callbacks/media.h:209
 msgid "Preloading Packages:"
-msgstr ""
+msgstr "Vnaprejšnje nalaganje paketov:"
 
 #: src/callbacks/media.h:234 src/callbacks/media.h:256
 msgid "Preloading:"
-msgstr ""
+msgstr "Vnaprejšnje nalaganje:"
 
 #. Translator: prefetch progress bar result: ".............[done]"
 #: src/callbacks/media.h:266
-#, fuzzy
 msgid "done"
-msgstr "Indonezija"
+msgstr "zaključeno"
 
 #. Translator: prefetch progress bar result: "........[not found]"
 #: src/callbacks/media.h:271
-#, fuzzy
 msgid "not found"
-msgstr "Ni napak."
+msgstr "ni najdeno"
 
 #. Translator: prefetch progress bar result: "............[error]"
 #: src/callbacks/media.h:278
-#, fuzzy
 msgid "error"
-msgstr "Napaka"
+msgstr "napaka"
 
 #: src/callbacks/media.h:294
 msgid "Preload finished."
-msgstr ""
+msgstr "Vnaprejšnje nalaganje zaključeno."
 
 #: src/callbacks/media.h:299
 msgid "success"
-msgstr ""
+msgstr "uspeh"
 
 #: src/callbacks/media.h:302
 msgid "files missing"
-msgstr ""
+msgstr "manjkajo datoteke"
 
 #: src/callbacks/repo.h:60
 msgid "Retrieving delta"
@@ -2508,10 +2505,15 @@ msgid ""
 "enabled repositories fail to refresh. This may severely damage the system. "
 "If a failing repository is actually not needed, it must be disabled."
 msgstr ""
+"Zaradi načina ravnanja z osirotelimi paketi se ukaz dist-upgrade zanaša na "
+"pravilno nastavitev virov bolj kot katerikoli drug ukaz. Ne sme nadaljevati, "
+"če omogočenih virov ni moč osvežiti. To bi lahko resno okvarilo sistem. Če "
+"vira ni moč osvežiti in ga ne potrebujete, ga morate onemogočiti."
 
 #: src/commands/distupgrade.cc:57
 msgid "See 'man zypper' for more information about this command."
 msgstr ""
+"Za več informacij o tem ukazu si oglejte priročnik z ukazom »man zypper«."
 
 #: src/commands/distupgrade.cc:88
 #, c-format, boost-format
@@ -3582,7 +3584,7 @@ msgstr "Prikaže predlagano."
 #. translators: --enhances
 #: src/commands/query/info.cc:98
 msgid "Show enhances."
-msgstr ""
+msgstr "Prikaže izboljšave."
 
 #: src/commands/query/info.cc:112 src/utils/messages.cc:70
 msgid "Required argument missing."
@@ -4056,6 +4058,8 @@ msgid ""
 "Multi-Arch repos: Download raw metadata for all offered architectures even "
 "if the repo supports filtering."
 msgstr ""
+"Viri za več arhitektur: Prenese surove metapodatke za vse ponujane "
+"arhitekture, tudi če vir podpira filtriranje."
 
 #. translators: -r, --repo <ALIAS|#|URI>
 #: src/commands/repos/refresh.cc:110
@@ -4530,7 +4534,7 @@ msgstr "Iskanje paketov, kjer se predlogi ujemajo z iskalnimi nizi."
 #. translators: --enhances
 #: src/commands/search/search.cc:145
 msgid "Search for packages which enhance the search strings."
-msgstr ""
+msgstr "Iskanje paketov, kjer se izboljšave ujemajo z iskalnimi nizi."
 
 #. translators: --provides-pkg
 #: src/commands/search/search.cc:149
@@ -4601,6 +4605,8 @@ msgid ""
 "Search for all packages that enhance any of the provides of the package(s) "
 "matched by the input parameters."
 msgstr ""
+"Iskanje vseh paketov, ki izboljšajo katerikoli paket, ki se ujema z vhodnimi "
+"parametri."
 
 #. translators: -t, --type <TYPE>
 #: src/commands/search/search.cc:181
@@ -5624,7 +5630,7 @@ msgstr ""
 #. translators: command summary: targetos, tos
 #: src/commands/utils/system-architecture.cc:20
 msgid "Print the detected system architecture."
-msgstr ""
+msgstr "Izpiše zaznano arhitekturo sistema."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/utils/targetos.cc:20
@@ -5703,6 +5709,8 @@ msgid ""
 "The exit code is 0 if the versions are equal, 11 if VERSION1 is newer, and "
 "12 if VERSION2 is newer."
 msgstr ""
+"Izhodna koda je 0, če sta različici enaki; 11, če je RAZLIČICA1 novejša; in "
+"12, če je RAZLIČICA2 novejša."
 
 #. translators: -m, --match
 #: src/commands/utils/versioncmp.cc:38
