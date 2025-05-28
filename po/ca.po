@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-03-13 16:49+0100\n"
-"PO-Revision-Date: 2025-05-25 10:59+0000\n"
+"PO-Revision-Date: 2025-05-28 12:59+0000\n"
 "Last-Translator: David Medina <medipas@gmail.com>\n"
 "Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/>"
 "\n"
@@ -1243,7 +1243,7 @@ msgstr "S'han omès pedaços necessaris que no s'apliquen sense conflicte:"
 #. 99.2 MiB  |  -    6.4 MiB  already in cache
 #: src/Summary.cc:1588
 msgid "Package download size:"
-msgstr "Mida de la descàrrega del paquet:"
+msgstr "Mida de la descàrrega dels paquets:"
 
 #. translator: rendered as "105.7 MiB  overall download size"
 #: src/Summary.cc:1596
@@ -1264,7 +1264,7 @@ msgstr "Només descarregar."
 #. 1.9 MiB  |  -  347.3 MiB  released by packages that will be removed
 #: src/Summary.cc:1610
 msgid "Package install size change:"
-msgstr "Canvi de mida d'instal·lació del paquet:"
+msgstr "Canvi de mida de la instal·lació dels paquets:"
 
 #. translator: rendered as "349.1 MiB  required by packages that will be installed"
 #: src/Summary.cc:1615
