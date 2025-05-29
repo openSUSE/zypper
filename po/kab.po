@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-03-13 16:49+0100\n"
-"PO-Revision-Date: 2021-05-02 12:57+0000\n"
-"Last-Translator: Slimane Selyan Amiri <selyan.kab@protonmail.com>\n"
-"Language-Team: Kabyle <https://l10n.opensuse.org/projects/zypper/master/kab/"
-">\n"
+"PO-Revision-Date: 2025-05-29 23:59+0000\n"
+"Last-Translator: Athmane MOKRAOUI <butterflyoffire+opensuse@protonmail.com>\n"
+"Language-Team: Kabyle <https://l10n.opensuse.org/projects/zypper/master/kab/>"
+"\n"
 "Language: kab\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.6\n"
+"X-Generator: Weblate 5.11.4\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -37,7 +37,7 @@ msgstr ""
 
 #: src/Command.cc:132
 msgid "Update Management:"
-msgstr "Asefrek n uleqqem:"
+msgstr "Asefrek n umucceḍ:"
 
 #: src/Command.cc:139
 msgid "Querying:"
@@ -128,7 +128,7 @@ msgstr ""
 #. translators: --help, -h
 #: src/Config.cc:236
 msgid "Help."
-msgstr ""
+msgstr "Tallalt."
 
 #. translators: --version, -V
 #: src/Config.cc:245
@@ -1124,13 +1124,13 @@ msgstr[1] ""
 #. translators: used as 'tag:' (i.e. followed by ':')
 #: src/Summary.cc:1517
 msgid "Available"
-msgstr ""
+msgstr "Yella"
 
 #. translators: used as 'tag:' (i.e. followed by ':')
 #. translators: property name; short; used like "Name: value"
 #: src/Summary.cc:1523 src/info.cc:447 src/info.cc:540 src/info.cc:660
 msgid "Installed"
-msgstr ""
+msgstr "Yettwasebded"
 
 #: src/Summary.cc:1528
 #, boost-format
@@ -1438,7 +1438,7 @@ msgstr ""
 
 #: src/callbacks/keyring.h:88
 msgid "Repository:"
-msgstr ""
+msgstr "Akufi:"
 
 #: src/callbacks/keyring.h:90
 msgid "Key Fingerprint:"
@@ -1554,12 +1554,12 @@ msgstr ""
 #. The answers should be lower case letters.
 #: src/callbacks/keyring.h:305
 msgid "r/t/a/"
-msgstr ""
+msgstr "r/t/a/"
 
 #. translators: the same as r/t/a, but without 'a'
 #: src/callbacks/keyring.h:308
 msgid "r/t"
-msgstr ""
+msgstr "r/t"
 
 #. translators: r/a stands for Reject/trustAlways(import)
 #. translate to whatever is appropriate for your language
@@ -1568,7 +1568,7 @@ msgstr ""
 #. The answers should be lower case letters.
 #: src/callbacks/keyring.h:315
 msgid "r/a/"
-msgstr ""
+msgstr "r/a/"
 
 #. translators: help text for the 'r' option in the 'r/t/a' prompt
 #: src/callbacks/keyring.h:321
@@ -1794,7 +1794,7 @@ msgstr ""
 
 #: src/callbacks/media.cc:134
 msgid "Cancel"
-msgstr ""
+msgstr "Semmet"
 
 #: src/callbacks/media.cc:136
 msgid "Select device to eject."
@@ -1854,7 +1854,7 @@ msgstr ""
 #. password
 #: src/callbacks/media.cc:329
 msgid "Password"
-msgstr ""
+msgstr "Awal n uɛeddi"
 
 #: src/callbacks/media.h:190
 msgid "Preloading Packages"
@@ -2021,7 +2021,7 @@ msgstr ""
 
 #: src/commands/commandhelpformatter.h:108
 msgid "Examples:"
-msgstr ""
+msgstr "Imedyaten:"
 
 #: src/commands/commandhelpformatter.h:111
 msgid "Arguments:"
@@ -2549,7 +2549,7 @@ msgstr[1] ""
 #: src/search.cc:48 src/search.cc:199 src/search.cc:304 src/search.cc:458
 #: src/search.cc:508 src/update.cc:789 src/utils/misc.cc:324
 msgid "Name"
-msgstr ""
+msgstr "Isem"
 
 #: src/commands/locks/list.cc:135
 msgid "Matches"
@@ -2561,7 +2561,7 @@ msgstr ""
 #: src/commands/repos/list.cc:285 src/commands/services/list.cc:116
 #: src/info.cc:564 src/search.cc:50 src/search.cc:202
 msgid "Type"
-msgstr ""
+msgstr "Anaw"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: package's repository (header)
@@ -2569,7 +2569,7 @@ msgstr ""
 #: src/search.cc:306 src/search.cc:457 src/search.cc:504 src/update.cc:786
 #: src/utils/misc.cc:323
 msgid "Repository"
-msgstr ""
+msgstr "Akufi"
 
 #: src/commands/locks/list.cc:136
 msgid "Comment"
@@ -2700,7 +2700,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/nullcommands.cc:17
 msgid "moo"
-msgstr ""
+msgstr "moo"
 
 #. translators: command summary
 #. translators: command description
@@ -2957,22 +2957,22 @@ msgstr ""
 #. process ID
 #: src/commands/ps.cc:142
 msgid "PID"
-msgstr ""
+msgstr "PID"
 
 #. parent process ID
 #: src/commands/ps.cc:144
 msgid "PPID"
-msgstr ""
+msgstr "PPID"
 
 #. process user ID
 #: src/commands/ps.cc:146
 msgid "UID"
-msgstr ""
+msgstr "UID"
 
 #. process login name
 #: src/commands/ps.cc:148
 msgid "User"
-msgstr ""
+msgstr "Aseqdac"
 
 #. process command name
 #: src/commands/ps.cc:150
@@ -2982,12 +2982,12 @@ msgstr ""
 #. "/etc/init.d/ script that might be used to restart the command (guessed)
 #: src/commands/ps.cc:152 src/commands/repos/list.cc:301
 msgid "Service"
-msgstr ""
+msgstr "Amezlu"
 
 #. "list of deleted files or libraries accessed"
 #: src/commands/ps.cc:156
 msgid "Files"
-msgstr ""
+msgstr "Ifuyla"
 
 #: src/commands/ps.cc:187
 msgid "No processes using deleted files found."
@@ -3092,7 +3092,7 @@ msgstr ""
 #: src/commands/query/info.cc:115 src/utils/messages.cc:37
 #: src/utils/messages.cc:52 src/utils/messages.cc:72 src/utils/messages.cc:89
 msgid "Usage"
-msgstr ""
+msgstr "Aseqdec"
 
 #. translators: command summary: patch-info
 #: src/commands/query/info.cc:145
@@ -3359,7 +3359,7 @@ msgstr ""
 #: src/commands/services/add.cc:85 src/commands/services/list.cc:108
 #: src/repos.cc:1250
 msgid "Enabled"
-msgstr ""
+msgstr "Yermed"
 
 #. GPG Check
 #. translators: property name; short; used like "Name: value"
