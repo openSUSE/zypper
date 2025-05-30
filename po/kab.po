@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-03-13 16:49+0100\n"
-"PO-Revision-Date: 2025-05-29 23:59+0000\n"
+"PO-Revision-Date: 2025-05-30 16:59+0000\n"
 "Last-Translator: Athmane MOKRAOUI <butterflyoffire+opensuse@protonmail.com>\n"
 "Language-Team: Kabyle <https://l10n.opensuse.org/projects/zypper/master/kab/>"
 "\n"
@@ -1647,7 +1647,7 @@ msgstr ""
 
 #: src/callbacks/keyring.h:474
 msgid "New:"
-msgstr ""
+msgstr "Amaynut:"
 
 #: src/callbacks/keyring.h:480
 msgid ""
@@ -1849,7 +1849,7 @@ msgstr ""
 
 #: src/callbacks/media.cc:314 src/callbacks/media.cc:321
 msgid "User Name"
-msgstr ""
+msgstr "Isem n useqdac"
 
 #. password
 #: src/callbacks/media.cc:329
@@ -1871,7 +1871,7 @@ msgstr ""
 #. Translator: prefetch progress bar result: ".............[done]"
 #: src/callbacks/media.h:266
 msgid "done"
-msgstr ""
+msgstr "immed"
 
 #. Translator: prefetch progress bar result: "........[not found]"
 #: src/callbacks/media.h:271
@@ -1947,7 +1947,7 @@ msgstr ""
 #: src/callbacks/rpm.h:437 src/callbacks/rpm.h:693
 #, c-format, boost-format
 msgid "Installing: %s"
-msgstr ""
+msgstr "Asebded n: %s"
 
 #. translators: A progressbar label
 #: src/callbacks/rpm.h:456
@@ -2573,7 +2573,7 @@ msgstr "Akufi"
 
 #: src/commands/locks/list.cc:136
 msgid "Comment"
-msgstr ""
+msgstr "Awennit"
 
 #. translators: locks table value
 #: src/commands/locks/list.cc:154 src/commands/locks/list.cc:233
@@ -3351,7 +3351,7 @@ msgstr ""
 #: src/commands/services/list.cc:118 src/repos.cc:1248
 #: src/utils/flags/zyppflags.h:49
 msgid "URI"
-msgstr ""
+msgstr "URI"
 
 #. 'enabled' flag
 #. translators: property name; short; used like "Name: value"
@@ -3453,7 +3453,7 @@ msgstr ""
 #. translators: 'zypper repos' column - whether autorefresh is enabled for the repository
 #: src/commands/repos/list.cc:256 src/commands/services/list.cc:111
 msgid "Refresh"
-msgstr ""
+msgstr "Smiren"
 
 #. translators: 'zypper repos' column - whether keep-packages is enabled for the repository
 #: src/commands/repos/list.cc:266
@@ -4606,7 +4606,7 @@ msgstr ""
 
 #: src/commands/subcommand.cc:103
 msgid "none"
-msgstr ""
+msgstr "ula yiwen"
 
 #: src/commands/subcommand.cc:332
 #, boost-format
@@ -5109,7 +5109,7 @@ msgstr ""
 #: src/info.cc:94 src/info.cc:799 src/search.cc:52 src/search.cc:305
 #: src/search.cc:459 src/search.cc:509
 msgid "Version"
-msgstr ""
+msgstr "Lqem"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: package architecture (header)
@@ -5134,11 +5134,11 @@ msgstr ""
 #. translators: header of table column - the package summary
 #: src/info.cc:106 src/locales.cc:203
 msgid "Description"
-msgstr ""
+msgstr "Aglam"
 
 #: src/info.cc:134
 msgid "automatically"
-msgstr ""
+msgstr "s wudem awurman"
 
 #: src/info.cc:223
 #, boost-format
@@ -5186,7 +5186,7 @@ msgstr ""
 #: src/info.cc:449 src/info.cc:499 src/info.cc:663 src/utils/misc.cc:328
 #: src/utils/misc.cc:370
 msgid "Status"
-msgstr ""
+msgstr "Addad"
 
 #: src/info.cc:453 src/info.cc:667
 #, c-format, boost-format
@@ -5211,7 +5211,7 @@ msgstr ""
 #: src/info.cc:501 src/update.cc:406 src/utils/misc.cc:325
 #: src/utils/misc.cc:367
 msgid "Category"
-msgstr ""
+msgstr "Taggayt"
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:503 src/utils/misc.cc:326 src/utils/misc.cc:368
@@ -5236,11 +5236,11 @@ msgstr ""
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:556 src/info.cc:592
 msgid "Contents"
-msgstr ""
+msgstr "Igburen"
 
 #: src/info.cc:556
 msgid "(empty)"
-msgstr ""
+msgstr "(d ilem)"
 
 #. translators: Table column header
 #. translators: header of table column - S is for 'Status' (package installed or not)
@@ -5264,7 +5264,7 @@ msgstr ""
 
 #: src/info.cc:575 src/info.cc:584 src/search.cc:243
 msgid "Recommended"
-msgstr ""
+msgstr "Yettuwelleh"
 
 #: src/info.cc:581 src/info.cc:584 src/search.cc:245
 msgid "Suggested"
@@ -5277,7 +5277,7 @@ msgstr ""
 
 #: src/info.cc:645
 msgid "unknown"
-msgstr ""
+msgstr "arussin"
 
 #. translators: %1% is an URL or Path pointing to some document
 #: src/info.cc:650
@@ -5346,17 +5346,17 @@ msgstr ""
 
 #: src/locales.cc:72 src/repos.cc:133 src/repos.cc:161
 msgid "No"
-msgstr ""
+msgstr "Uhu"
 
 #. translators: header of table column - the language code, e.g. en_US
 #: src/locales.cc:174
 msgid "Code"
-msgstr ""
+msgstr "Tangalt"
 
 #. translators: header of table column - the language, e.g. English (United States)
 #: src/locales.cc:176
 msgid "Language"
-msgstr ""
+msgstr "Tutlayt"
 
 #: src/locales.cc:235
 #, c-format, boost-format
@@ -5437,7 +5437,7 @@ msgstr ""
 
 #: src/misc.cc:248
 msgid "License"
-msgstr ""
+msgstr "Turagt"
 
 #: src/misc.cc:267
 msgid "EULA"
@@ -5519,7 +5519,7 @@ msgstr ""
 
 #: src/repos.cc:127 src/repos.cc:155
 msgid "Yes"
-msgstr ""
+msgstr "Ih"
 
 #: src/repos.cc:180
 msgid ""
@@ -6196,7 +6196,7 @@ msgstr ""
 
 #: src/solve-commit.cc:673
 msgid "y/n"
-msgstr ""
+msgstr "i/u"
 
 #: src/solve-commit.cc:674
 msgid "View the notifications now?"
@@ -6583,22 +6583,22 @@ msgstr ""
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:27
 msgid "CATEGORY"
-msgstr ""
+msgstr "TAGGAYT"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:29
 msgid "DIR"
-msgstr ""
+msgstr "aka"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:31
 msgid "FILE"
-msgstr ""
+msgstr "AFAYLU"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:33
 msgid "FILE.repo"
-msgstr ""
+msgstr "AFAYLU.repo"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:35
@@ -6613,7 +6613,7 @@ msgstr ""
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:39
 msgid "PATH"
-msgstr ""
+msgstr "Abrid"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:41
@@ -6623,7 +6623,7 @@ msgstr ""
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:43
 msgid "STRING"
-msgstr ""
+msgstr "AZRIR"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:45
@@ -6633,17 +6633,17 @@ msgstr ""
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:47
 msgid "TYPE"
-msgstr ""
+msgstr "ANAW"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:51
 msgid "YYYY-MM-DD"
-msgstr ""
+msgstr "AAAA-MM-JJ"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:53
 msgid "MODE"
-msgstr ""
+msgstr "ASKAR"
 
 #. For '-garbage' argument, with 'a', 'b', and 'e' as known options,
 #. getopt_long reports 'a', 'b', and 'e' as known options.
@@ -6738,8 +6738,8 @@ msgstr ""
 #: src/utils/misc.cc:93
 msgid "package"
 msgid_plural "packages"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "akemmus"
+msgstr[1] "ikemmusen"
 
 #: src/utils/misc.cc:95
 msgid "pattern"
@@ -6768,8 +6768,8 @@ msgstr[1] ""
 #: src/utils/misc.cc:103
 msgid "application"
 msgid_plural "applications"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "asnas"
+msgstr[1] "isnasen"
 
 #. default
 #: src/utils/misc.cc:105
@@ -6920,11 +6920,11 @@ msgstr ""
 
 #: src/utils/prompt.cc:152 src/utils/prompt.cc:161 src/utils/prompt.cc:290
 msgid "yes"
-msgstr ""
+msgstr "ih"
 
 #: src/utils/prompt.cc:152 src/utils/prompt.cc:161 src/utils/prompt.cc:290
 msgid "no"
-msgstr ""
+msgstr "uhu"
 
 #: src/utils/prompt.cc:161
 msgid "always"
