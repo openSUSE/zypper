@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-03-13 16:49+0100\n"
-"PO-Revision-Date: 2025-05-28 12:59+0000\n"
+"PO-Revision-Date: 2025-06-11 10:59+0000\n"
 "Last-Translator: David Medina <medipas@gmail.com>\n"
 "Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/>"
 "\n"
@@ -2022,7 +2022,7 @@ msgstr "Precarregant paquets:"
 
 #: src/callbacks/media.h:234 src/callbacks/media.h:256
 msgid "Preloading:"
-msgstr "Precarregant:"
+msgstr "Precarregant"
 
 # ID
 #. Translator: prefetch progress bar result: ".............[done]"
