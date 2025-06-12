@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-03-13 16:49+0100\n"
-"PO-Revision-Date: 2025-06-09 23:59+0000\n"
+"PO-Revision-Date: 2025-06-12 08:59+0000\n"
 "Last-Translator: Jure Repinc <jlp@holodeck1.com>\n"
 "Language-Team: Slovenian <https://l10n.opensuse.org/projects/zypper/master/"
 "sl/>\n"
@@ -2209,15 +2209,15 @@ msgstr "Geslo"
 
 #: src/callbacks/media.h:190
 msgid "Preloading Packages"
-msgstr "Vnaprejšnje nalaganje paketov"
+msgstr "Pred-nalaganje paketov"
 
 #: src/callbacks/media.h:209
 msgid "Preloading Packages:"
-msgstr "Vnaprejšnje nalaganje paketov:"
+msgstr "Pred-nalaganje paketov:"
 
 #: src/callbacks/media.h:234 src/callbacks/media.h:256
 msgid "Preloading:"
-msgstr "Vnaprejšnje nalaganje:"
+msgstr "Pred-nalaganje:"
 
 #. Translator: prefetch progress bar result: ".............[done]"
 #: src/callbacks/media.h:266
