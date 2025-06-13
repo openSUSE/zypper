@@ -234,8 +234,8 @@ bool refresh_raw_metadata( Zypper & zypper, const RepoInfo & repo, bool force_do
         media::ScopedDisableMediaChangeReport guard( repo.baseUrlsSize() > 1 );
 #endif
 
-        const auto &groupedBaseUrls = repo.groupedBaseUrls ();
-        for ( auto it = groupedBaseUrls.begin(); it != groupedBaseUrls.end(); )
+        const auto &repoOrigins = repo.repoOrigins();
+        for ( auto it = repoOrigins.begin(); it != repoOrigins.end(); )
         {
           try
           {
@@ -272,8 +272,8 @@ bool refresh_raw_metadata( Zypper & zypper, const RepoInfo & repo, bool force_do
           catch ( const Exception & e )
           {
             ZYPP_CAUGHT( e );
-            std::vector<Url> badurls( *it );
-            if ( ++it == groupedBaseUrls.end() )
+            std::vector<OriginEndpoint> badurls( it->begin(), it->end() );
+            if ( ++it == repoOrigins.end() )
               ZYPP_RETHROW( e );
             ERR << badurls << " doesn't look good. Trying another url (" << *it << ")." << endl;
           }
