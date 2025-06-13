@@ -994,15 +994,15 @@ void solve_and_commit ( Zypper &zypper, SolveAndCommitPolicy policy )
         {
           ZYPP_CAUGHT( e );
           bool refresh_needed = false;
-          if ( !e.info().effectiveBaseUrlsEmpty() )
+          if ( !e.info().repoOriginsEmpty() )
           {
             try
             {
               RepoManager manager( zypper.config().rm_options );
-              const auto &groupedBaseUrls = e.info().groupedBaseUrls();
-              for( const auto &urls : groupedBaseUrls )
+              const auto &origins = e.info().repoOrigins ();
+              for( const auto &origin : origins )
               {
-                if ( manager.checkIfToRefreshMetadata( e.info(), urls, RepoManager::RefreshForced ) == RepoManager::REFRESH_NEEDED )
+                if ( manager.checkIfToRefreshMetadata( e.info(), origin, RepoManager::RefreshForced ) == RepoManager::REFRESH_NEEDED )
                 {
                   refresh_needed = true;
                   break;
