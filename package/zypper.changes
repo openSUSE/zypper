@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Wed Jun 18 12:26:40 CEST 2025 - ma@suse.de
+
+- BuildRequires:  libzypp-devel >= 17.37.6.
+  Enhancements regarding mirror handling during repo refresh. Adapt
+  to libzypp API changes. (bsc#1230267)
+- version 1.14.91
+
+-------------------------------------------------------------------
 Thu May 22 16:26:42 CEST 2025 - ma@suse.de
 
 - BuildRequires:  libzypp-devel >= 17.37.0.
