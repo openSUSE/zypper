@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-07-02 13:50+0200\n"
-"PO-Revision-Date: 2025-06-12 08:59+0000\n"
+"PO-Revision-Date: 2025-07-02 18:59+0000\n"
 "Last-Translator: Jure Repinc <jlp@holodeck1.com>\n"
 "Language-Team: Slovenian <https://l10n.opensuse.org/projects/zypper/master/"
 "sl/>\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
 "n%100==4 ? 2 : 3;\n"
-"X-Generator: Weblate 5.11.4\n"
+"X-Generator: Weblate 5.12.2\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -6849,6 +6849,8 @@ msgid ""
 "Explicitly selecting DownloadAsNeeded also selects the classic_rpmtrans "
 "backend."
 msgstr ""
+"Če izrecno izberete DownloadAsNeeded (prejmi po potrebi), bo izbrano tudi "
+"zaledje classic_rpmtrans."
 
 #: src/solve-commit.cc:620
 #, c-format, boost-format
