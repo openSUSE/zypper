@@ -598,8 +598,9 @@ SolveAndCommitPolicy & SolveAndCommitPolicy::downloadMode( DownloadMode dlMode )
   if ( dlMode != _zyppCommitPolicy.downloadMode() ) {
 
     if ( dlMode == DownloadAsNeeded && _zyppCommitPolicy.singleTransModeEnabled() ) {
-      Zypper::instance().out().warning( _("DownloadAsNeeded can not be used with ZYPP_SINGLE_RPMTRANS=1, falling back to DownloadInAdvance") );
-      dlMode = DownloadInAdvance;
+      Zypper::instance().out().infoLRHint( text::join( text::tagWarning(),
+                                                       _("Explicitly selecting DownloadAsNeeded also selects the classic_rpmtrans backend.") ),
+                                           "ZYPP_SINGLE_RPMTRANS=0" );
     }
     _zyppCommitPolicy.downloadMode( dlMode );
   }
