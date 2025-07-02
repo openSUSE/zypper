@@ -1371,8 +1371,8 @@ msgid ""
 "The link must point to your core products .prod file in /etc/products.d.\n"
 msgstr ""
 "Symlink /etc/products.d/baseproduct tidak benar atau hilang!\n"
-"Tautan harus mengarah ke produk inti Anda pada berkas .prod di /etc/products."
-"d.\n"
+"Tautan harus mengarah ke produk inti Anda pada berkas .prod di /etc/"
+"products.d.\n"
 
 #. TranslatorExplanation The %s is "--plus-repo"
 #. TranslatorExplanation The %s is "--option-name"
@@ -4048,8 +4048,8 @@ msgid ""
 "Use the global GPG check setting defined in /etc/zypp/zypp.conf. This is the "
 "default."
 msgstr ""
-"Gunakan pengaturan pemeriksaan GPG global yang ditentukan di /etc/zypp/zypp."
-"conf. Ini sudah bawaan."
+"Gunakan pengaturan pemeriksaan GPG global yang ditentukan di /etc/zypp/"
+"zypp.conf. Ini sudah bawaan."
 
 #. translators: -a, --alias
 #: src/commands/reposerviceoptionsets.cc:182
@@ -6529,8 +6529,8 @@ msgstr ""
 #: src/solve-commit.cc:620
 #, c-format, boost-format
 msgid ""
-"Check for running processes using deleted libraries is disabled in zypper."
-"conf. Run '%s' to check manually."
+"Check for running processes using deleted libraries is disabled in "
+"zypper.conf. Run '%s' to check manually."
 msgstr ""
 "Periksa proses yang berjalan menggunakan pustaka yang dihapus yang "
 "dinonaktifkan di zypper.conf. Jalankan '%s' untuk memeriksa secara manual."

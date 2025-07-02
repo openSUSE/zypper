@@ -3809,8 +3809,8 @@ msgstr ""
 msgid ""
 "If only one argument is used, it must be a URI pointing to a .repo file."
 msgstr ""
-"Če je uporabljen samo en argument, mora to biti URI, ki kaže na datoteko ."
-"repo."
+"Če je uporabljen samo en argument, mora to biti URI, ki kaže na "
+"datoteko .repo."
 
 #: src/commands/repos/add.cc:130
 msgid "Specified type is not a valid repository type:"
@@ -4348,8 +4348,8 @@ msgid ""
 "Use the global GPG check setting defined in /etc/zypp/zypp.conf. This is the "
 "default."
 msgstr ""
-"Uporabi splošno nastavitev preverjanja GPG, ki je določena v /etc/zypp/zypp."
-"conf. To je privzeto."
+"Uporabi splošno nastavitev preverjanja GPG, ki je določena v /etc/zypp/"
+"zypp.conf. To je privzeto."
 
 #. translators: -a, --alias
 #: src/commands/reposerviceoptionsets.cc:182
@@ -6853,8 +6853,8 @@ msgstr ""
 #: src/solve-commit.cc:620
 #, c-format, boost-format
 msgid ""
-"Check for running processes using deleted libraries is disabled in zypper."
-"conf. Run '%s' to check manually."
+"Check for running processes using deleted libraries is disabled in "
+"zypper.conf. Run '%s' to check manually."
 msgstr ""
 "Preverjanje tekočih procesov, ki uporabljajo izbrisane knjižnice je "
 "onemogočeno v zypper.conf. Da jih preverite ročno, uporabite ukaz »%s«."

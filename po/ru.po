@@ -2517,8 +2517,8 @@ msgid ""
 "Remove packages with specified capabilities. A capability is NAME[.ARCH]"
 "[OP<VERSION>], where OP is one of <, <=, =, >=, >."
 msgstr ""
-"Удалить пакеты с указанными возможностями. Возможность — это ИМЯ[."
-"АРХИТЕКТУРА][ОП<ВЕРСИЯ>], где ОП — один из операторов <, <=, =, >=, >."
+"Удалить пакеты с указанными возможностями. Возможность — это "
+"ИМЯ[.АРХИТЕКТУРА][ОП<ВЕРСИЯ>], где ОП — один из операторов <, <=, =, >=, >."
 
 #: src/commands/installremove.cc:104 src/commands/installremove.cc:234
 #: src/utils/messages.cc:53
@@ -6226,8 +6226,8 @@ msgid ""
 msgstr ""
 "Это может быть вызвано недопустимыми метаданными в репозитории или ошибкой в "
 "анализаторе метаданных. В последнем случае (или если возникают сомнения) "
-"отправьте отчёт об ошибке, выполнив указания на странице http://en.opensuse."
-"org/Zypper/Troubleshooting"
+"отправьте отчёт об ошибке, выполнив указания на странице http://"
+"en.opensuse.org/Zypper/Troubleshooting"
 
 #: src/repos.cc:453
 #, c-format, boost-format
@@ -6579,10 +6579,10 @@ msgid ""
 "not solve the issue, it could be that you are using a broken mirror or the "
 "server has actually discontinued to support the repository."
 msgstr ""
-"Метаданные репозитория устарели: Проверьте, что включено "
-"«автообновление» (zypper lr), либо обновите репозиторий вручную (zypper "
-"ref). Если это не решит проблему, то вы, возможно, используете сломанное "
-"зеркало или сервер прекратил поддержку репозитория."
+"Метаданные репозитория устарели: Проверьте, что включено «автообновление» "
+"(zypper lr), либо обновите репозиторий вручную (zypper ref). Если это не "
+"решит проблему, то вы, возможно, используете сломанное зеркало или сервер "
+"прекратил поддержку репозитория."
 
 #: src/repos.cc:1856
 msgid "Reading installed packages..."
@@ -6785,8 +6785,8 @@ msgstr ""
 #: src/solve-commit.cc:620
 #, c-format, boost-format
 msgid ""
-"Check for running processes using deleted libraries is disabled in zypper."
-"conf. Run '%s' to check manually."
+"Check for running processes using deleted libraries is disabled in "
+"zypper.conf. Run '%s' to check manually."
 msgstr ""
 "Проверка запущенных процессов, использующих удаленные библиотеки, отключена "
 "в zypper.conf. Для ручной проверки запустите \"%s\"."
@@ -7897,8 +7897,8 @@ msgstr "Ошибка"
 #~ "Следующие %1% пакета были исключены из проверки на конфликты файлов, т.к. "
 #~ "загрузка ещё не завершена:"
 #~ msgstr[2] ""
-#~ "Следующие %1% пакетов были исключены из проверки на конфликты файлов, т."
-#~ "к. загрузка ещё не завершена:"
+#~ "Следующие %1% пакетов были исключены из проверки на конфликты файлов, "
+#~ "т.к. загрузка ещё не завершена:"
 
 #~ msgid "s/r/c"
 #~ msgstr "s/r/c"

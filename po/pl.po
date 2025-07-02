@@ -2521,9 +2521,9 @@ msgid ""
 "Remove packages with specified capabilities. A capability is NAME[.ARCH]"
 "[OP<VERSION>], where OP is one of <, <=, =, >=, >."
 msgstr ""
-"Usuwa pakiety o określonych właściwościach. Właściwość to NAZWA[."
-"ARCHITEKTURA][OP<WERSJA>],  gdzie OP jest jednym z operatorów <, <=, =, >=, "
-">."
+"Usuwa pakiety o określonych właściwościach. Właściwość to "
+"NAZWA[.ARCHITEKTURA][OP<WERSJA>],  gdzie OP jest jednym z operatorów <, <=, "
+"=, >=, >."
 
 #: src/commands/installremove.cc:104 src/commands/installremove.cc:234
 #: src/utils/messages.cc:53
@@ -3821,8 +3821,8 @@ msgstr "Wyświetla wszystkie zdefiniowane repozytoria."
 #: src/commands/repos/list.cc:98
 msgid "Export all defined repositories as a single local .repo file."
 msgstr ""
-"Eksportuje wszystkie zdefiniowane repozytoria jako pojedynczy lokalny plik ."
-"repo."
+"Eksportuje wszystkie zdefiniowane repozytoria jako pojedynczy lokalny "
+"plik .repo."
 
 #: src/commands/repos/list.cc:129 src/repos.cc:1006
 msgid "Error reading repositories:"
@@ -4232,8 +4232,8 @@ msgid ""
 "Use the global GPG check setting defined in /etc/zypp/zypp.conf. This is the "
 "default."
 msgstr ""
-"Używa globalnego ustawienia sprawdzania GPG, zdefiniowanego w /etc/zypp/zypp."
-"conf. Jest to wartość domyślna."
+"Używa globalnego ustawienia sprawdzania GPG, zdefiniowanego w /etc/zypp/"
+"zypp.conf. Jest to wartość domyślna."
 
 #. translators: -a, --alias
 #: src/commands/reposerviceoptionsets.cc:182
@@ -6736,8 +6736,8 @@ msgstr ""
 #: src/solve-commit.cc:620
 #, c-format, boost-format
 msgid ""
-"Check for running processes using deleted libraries is disabled in zypper."
-"conf. Run '%s' to check manually."
+"Check for running processes using deleted libraries is disabled in "
+"zypper.conf. Run '%s' to check manually."
 msgstr ""
 "Sprawdzanie, czy działające procesy korzystają z usuniętych bibliotek, jest "
 "wyłączone w pliku zypper.conf. Aby sprawdzić to ręcznie, uruchom program "
@@ -7958,8 +7958,8 @@ msgstr "Błąd"
 #~ "\t--no-refresh\t\tBez odświeżania repozytoriów.\n"
 #~ "\t--no-cd\t\t\tIgnorowanie repozytoriów na CD/DVD.\n"
 #~ "\t--no-remote\t\tIgnorowanie repozytoriów zdalnych.\n"
-#~ "\t--releasever\t\tUstawienie wartości $releasever we wszystkich plikach ."
-#~ "repo (domyślnie: wersja dystrybucji)\n"
+#~ "\t--releasever\t\tUstawienie wartości $releasever we wszystkich "
+#~ "plikach .repo (domyślnie: wersja dystrybucji)\n"
 
 #~ msgid ""
 #~ "     Target Options:\n"
