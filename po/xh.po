@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-13 16:49+0100\n"
+"POT-Creation-Date: 2025-07-02 13:50+0200\n"
 "PO-Revision-Date: 2006-11-03 12:03\n"
 "Last-Translator: Novell Language <language@novell.com>\n"
 "Language-Team: Novell Language <language@novell.com>\n"
@@ -1893,39 +1893,39 @@ msgstr "Igama lokugqithisa"
 msgid "Preloading Packages"
 msgstr ""
 
-#: src/callbacks/media.h:209
+#: src/callbacks/media.h:211
 msgid "Preloading Packages:"
 msgstr ""
 
-#: src/callbacks/media.h:234 src/callbacks/media.h:256
+#: src/callbacks/media.h:263
 msgid "Preloading:"
 msgstr ""
 
 #. Translator: prefetch progress bar result: ".............[done]"
-#: src/callbacks/media.h:266
+#: src/callbacks/media.h:278
 msgid "done"
 msgstr "igqibile"
 
 #. Translator: prefetch progress bar result: "........[not found]"
-#: src/callbacks/media.h:271
+#: src/callbacks/media.h:283
 #, fuzzy
 msgid "not found"
 msgstr "Ayifunyanwanga"
 
 #. Translator: prefetch progress bar result: "............[error]"
-#: src/callbacks/media.h:278
+#: src/callbacks/media.h:290
 msgid "error"
 msgstr "impazamo"
 
-#: src/callbacks/media.h:294
+#: src/callbacks/media.h:307
 msgid "Preload finished."
 msgstr ""
 
-#: src/callbacks/media.h:299
+#: src/callbacks/media.h:312
 msgid "success"
 msgstr ""
 
-#: src/callbacks/media.h:302
+#: src/callbacks/media.h:315
 msgid "files missing"
 msgstr ""
 
@@ -3014,13 +3014,13 @@ msgstr ""
 msgid "Write debug output to file <path>."
 msgstr ""
 
-#: src/commands/ps.cc:72 src/solve-commit.cc:633
+#: src/commands/ps.cc:72 src/solve-commit.cc:634
 #, fuzzy
 msgid "Check failed:"
 msgstr "isilele"
 
 #. Here: Table output
-#: src/commands/ps.cc:127 src/solve-commit.cc:622
+#: src/commands/ps.cc:127 src/solve-commit.cc:623
 msgid "Checking for running processes using deleted libraries..."
 msgstr ""
 
@@ -3425,7 +3425,7 @@ msgstr ""
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/commands/repos/list.cc:51 src/commands/repos/list.cc:54
 #: src/commands/repos/list.cc:292 src/commands/services/add.cc:83
-#: src/commands/services/list.cc:118 src/repos.cc:1248
+#: src/commands/services/list.cc:118 src/repos.cc:1249
 #: src/utils/flags/zyppflags.h:49
 msgid "URI"
 msgstr ""
@@ -3434,14 +3434,14 @@ msgstr ""
 #. translators: property name; short; used like "Name: value"
 #: src/commands/repos/list.cc:58 src/commands/repos/list.cc:244
 #: src/commands/services/add.cc:85 src/commands/services/list.cc:108
-#: src/repos.cc:1250
+#: src/repos.cc:1251
 msgid "Enabled"
 msgstr "Yenziwe yasebenza"
 
 #. GPG Check
 #. translators: property name; short; used like "Name: value"
 #: src/commands/repos/list.cc:59 src/commands/repos/list.cc:248
-#: src/commands/services/list.cc:109 src/repos.cc:1252
+#: src/commands/services/list.cc:109 src/repos.cc:1253
 #, fuzzy
 msgid "GPG Check"
 msgstr "Qwalasela i-DNS"
@@ -3449,13 +3449,13 @@ msgstr "Qwalasela i-DNS"
 #. translators: repository priority (in zypper repos -p or -d)
 #. translators: property name; short; used like "Name: value"
 #: src/commands/repos/list.cc:60 src/commands/repos/list.cc:276
-#: src/commands/services/list.cc:115 src/repos.cc:1256
+#: src/commands/services/list.cc:115 src/repos.cc:1257
 msgid "Priority"
 msgstr ""
 
 #. translators: property name; short; used like "Name: value"
 #: src/commands/repos/list.cc:61 src/commands/services/add.cc:87
-#: src/repos.cc:1254
+#: src/repos.cc:1255
 #, fuzzy
 msgid "Autorefresh"
 msgstr "Iyazihlaziya"
@@ -3513,7 +3513,7 @@ msgstr ""
 msgid "Export all defined repositories as a single local .repo file."
 msgstr ""
 
-#: src/commands/repos/list.cc:129 src/repos.cc:1005
+#: src/commands/repos/list.cc:129 src/repos.cc:1006
 #, fuzzy
 msgid "Error reading repositories:"
 msgstr "Ifayili yokubhala imposiso '%1'"
@@ -3650,7 +3650,7 @@ msgstr ""
 msgid "Arguments are not allowed if '%s' is used."
 msgstr ""
 
-#: src/commands/repos/refresh.cc:239 src/repos.cc:1017
+#: src/commands/repos/refresh.cc:239 src/repos.cc:1018
 #, fuzzy
 msgid "Specified repositories: "
 msgstr "Ifayili yokubhala imposiso '%1'"
@@ -3660,7 +3660,7 @@ msgstr "Ifayili yokubhala imposiso '%1'"
 msgid "Refreshing repository '%s'."
 msgstr "Ifayili yokubhala imposiso '%1'"
 
-#: src/commands/repos/refresh.cc:280 src/repos.cc:842
+#: src/commands/repos/refresh.cc:280 src/repos.cc:843
 #, fuzzy, c-format, boost-format
 msgid "Scanning content of disabled repository '%s'."
 msgstr "Ifayili yokubhala imposiso '%1'"
@@ -3670,7 +3670,7 @@ msgstr "Ifayili yokubhala imposiso '%1'"
 msgid "Skipping disabled repository '%s'"
 msgstr ""
 
-#: src/commands/repos/refresh.cc:306 src/repos.cc:860 src/repos.cc:907
+#: src/commands/repos/refresh.cc:306 src/repos.cc:861 src/repos.cc:908
 #, c-format, boost-format
 msgid "Skipping repository '%s' because of the above error."
 msgstr ""
@@ -3699,7 +3699,7 @@ msgstr ""
 msgid "Could not refresh the repositories because of errors."
 msgstr ""
 
-#: src/commands/repos/refresh.cc:342 src/repos.cc:936
+#: src/commands/repos/refresh.cc:342 src/repos.cc:937
 msgid "Some of the repositories have not been refreshed because of an error."
 msgstr ""
 
@@ -3752,12 +3752,12 @@ msgstr ""
 msgid "Repository '%s' renamed to '%s'."
 msgstr "Inkonzo iyaqhuba"
 
-#: src/commands/repos/rename.cc:47 src/repos.cc:1196
+#: src/commands/repos/rename.cc:47 src/repos.cc:1197
 #, c-format, boost-format
 msgid "Repository named '%s' already exists. Please use another alias."
 msgstr ""
 
-#: src/commands/repos/rename.cc:52 src/repos.cc:1674
+#: src/commands/repos/rename.cc:52 src/repos.cc:1675
 #, fuzzy
 msgid "Error while modifying the repository:"
 msgstr "Kwenzeke imposiso xa bekufundwa isixhobo sokufumanisa imposiso"
@@ -4190,7 +4190,7 @@ msgid ""
 "(useful for search in dependencies)."
 msgstr ""
 
-#: src/commands/search/search.cc:298 src/repos.cc:779
+#: src/commands/search/search.cc:298 src/repos.cc:780
 #, fuzzy, c-format, boost-format
 msgid "Specified repository '%s' is disabled."
 msgstr "Iyazihlaziya"
@@ -4210,7 +4210,7 @@ msgstr ""
 msgid "See the above message for a hint."
 msgstr "Nceda lungisa imposiso kwaye uzame kwakhona."
 
-#: src/commands/search/search.cc:505 src/repos.cc:984
+#: src/commands/search/search.cc:505 src/repos.cc:985
 msgid "Running 'zypper refresh' as root might resolve the problem."
 msgstr ""
 
@@ -4301,7 +4301,7 @@ msgid "Problem retrieving the repository index file for service '%s':"
 msgstr "Ifayili yokubhala imposiso '%1'"
 
 #: src/commands/services/common.cc:138 src/commands/services/refresh.cc:226
-#: src/repos.cc:1726
+#: src/repos.cc:1727
 #, c-format, boost-format
 msgid "Skipping service '%s' because of the above error."
 msgstr ""
@@ -4928,7 +4928,7 @@ msgstr ""
 msgid "Argument resolves to no package"
 msgstr ""
 
-#: src/commands/utils/download.cc:254 src/solve-commit.cc:1119
+#: src/commands/utils/download.cc:254 src/solve-commit.cc:1121
 msgid "Nothing to do."
 msgstr "Akukho nto yakwenza."
 
@@ -5689,93 +5689,93 @@ msgstr[1] "Ubulembelele"
 msgid "Checking whether to refresh metadata for %s"
 msgstr ""
 
-#: src/repos.cc:256
+#: src/repos.cc:257
 #, fuzzy, c-format, boost-format
 msgid "Repository '%s' is up to date."
 msgstr "Inkonzo iyaqhuba"
 
-#: src/repos.cc:262
+#: src/repos.cc:263
 #, fuzzy, c-format, boost-format
 msgid "The up-to-date check of '%s' has been delayed."
 msgstr "Inkonzo iyaqhuba"
 
-#: src/repos.cc:284
+#: src/repos.cc:285
 msgid "Forcing raw metadata refresh"
 msgstr ""
 
-#: src/repos.cc:290
+#: src/repos.cc:291
 #, fuzzy, c-format, boost-format
 msgid "Retrieving repository '%s' metadata"
 msgstr "Ifayili yokubhala imposiso '%1'"
 
 # power-off message
-#: src/repos.cc:314
+#: src/repos.cc:315
 #, fuzzy, c-format, boost-format
 msgid "Do you want to disable the repository %s permanently?"
 msgstr "Ingaba ufuna ukuzizilizisa isixokelelwano ngoku?"
 
-#: src/repos.cc:330
+#: src/repos.cc:331
 #, fuzzy, c-format, boost-format
 msgid "Error while disabling repository '%s'."
 msgstr "Ifayili yokubhala imposiso '%1'"
 
-#: src/repos.cc:346
+#: src/repos.cc:347
 #, fuzzy, c-format, boost-format
 msgid "Problem retrieving files from '%s'."
 msgstr "Ifunda uluhlu lwefayili ukusuka ku%s"
 
-#: src/repos.cc:347 src/repos.cc:1865 src/solve-commit.cc:989
-#: src/solve-commit.cc:1020 src/solve-commit.cc:1044
+#: src/repos.cc:348 src/repos.cc:1866 src/solve-commit.cc:990
+#: src/solve-commit.cc:1022 src/solve-commit.cc:1046
 #, fuzzy
 msgid "Please see the above error message for a hint."
 msgstr "Nceda lungisa imposiso kwaye uzame kwakhona."
 
-#: src/repos.cc:359
+#: src/repos.cc:360
 #, fuzzy, c-format, boost-format
 msgid "No URIs defined for '%s'."
 msgstr "Kwenzeke imposiso xa bekufundwa isixhobo sokufumanisa imposiso"
 
 #. TranslatorExplanation the first %s is a .repo file path
-#: src/repos.cc:364
+#: src/repos.cc:365
 #, c-format, boost-format
 msgid ""
 "Please add one or more base URI (baseurl=URI) entries to %s for repository "
 "'%s'."
 msgstr ""
 
-#: src/repos.cc:378
+#: src/repos.cc:379
 #, fuzzy
 msgid "No alias defined for this repository."
 msgstr "Kwenzeke imposiso xa bekufundwa isixhobo sokufumanisa imposiso"
 
-#: src/repos.cc:390
+#: src/repos.cc:391
 #, fuzzy, c-format, boost-format
 msgid "Repository '%s' is invalid."
 msgstr "Inkonzo iyaqhuba"
 
-#: src/repos.cc:391
+#: src/repos.cc:392
 msgid ""
 "Please check if the URIs defined for this repository are pointing to a valid "
 "repository."
 msgstr ""
 
-#: src/repos.cc:403
+#: src/repos.cc:404
 #, fuzzy, c-format, boost-format
 msgid "Error retrieving metadata for '%s':"
 msgstr "Ifayili yokubhala imposiso '%1'"
 
-#: src/repos.cc:416
+#: src/repos.cc:417
 #, fuzzy
 msgid "Forcing building of repository cache"
 msgstr "Isilumkiso: Uhlobo lwe-metadata olungaziwa"
 
-#: src/repos.cc:441
+#: src/repos.cc:442
 #, fuzzy, c-format, boost-format
 msgid "Error parsing metadata for '%s':"
 msgstr "Ifayili yokubhala imposiso '%1'"
 
 #. TranslatorExplanation Don't translate the URL unless it is translated, too
-#: src/repos.cc:443
+#: src/repos.cc:444
 msgid ""
 "This may be caused by invalid metadata in the repository, or by a bug in the "
 "metadata parser. In the latter case, or if in doubt, please, file a bug "
@@ -5783,42 +5783,42 @@ msgid ""
 "Troubleshooting"
 msgstr ""
 
-#: src/repos.cc:452
+#: src/repos.cc:453
 #, fuzzy, c-format, boost-format
 msgid "Repository metadata for '%s' not found in local cache."
 msgstr "Inkonzo iyaqhuba"
 
-#: src/repos.cc:460
+#: src/repos.cc:461
 #, fuzzy
 msgid "Error building the cache:"
 msgstr "Imposiso xa kwahlulwa isatifikethi."
 
-#: src/repos.cc:679
+#: src/repos.cc:680
 #, fuzzy, c-format, boost-format
 msgid "Repository '%s' not found by its alias, number, or URI."
 msgstr "Inkonzo iyaqhuba"
 
-#: src/repos.cc:681
+#: src/repos.cc:682
 #, c-format, boost-format
 msgid "Use '%s' to get the list of defined repositories."
 msgstr ""
 
-#: src/repos.cc:701
+#: src/repos.cc:702
 #, fuzzy, c-format, boost-format
 msgid "Ignoring disabled repository '%s'"
 msgstr "Ifayili yokubhala imposiso '%1'"
 
-#: src/repos.cc:785
+#: src/repos.cc:786
 #, c-format, boost-format
 msgid "Global option '%s' can be used to temporarily enable repositories."
 msgstr ""
 
-#: src/repos.cc:801 src/repos.cc:807
+#: src/repos.cc:802 src/repos.cc:808
 #, fuzzy, c-format, boost-format
 msgid "Ignoring repository '%s' because of '%s' option."
 msgstr "Inkonzo iyaqhuba"
 
-#: src/repos.cc:828 src/repos.cc:921
+#: src/repos.cc:829 src/repos.cc:922
 #, fuzzy, c-format, boost-format
 msgid "Temporarily enabling repository '%s'."
 msgstr "Ifayili yokubhala imposiso '%1'"
@@ -5826,267 +5826,267 @@ msgstr "Ifayili yokubhala imposiso '%1'"
 #. bsc#1235636: Asks to suppress reporting the Exception (usually: No permission to
 #. write repository cache), because it scares. This was was indeed the legacy behavior:
 #. SUPPRESS: zypper.out().error( ex, "Problem" );
-#: src/repos.cc:885
+#: src/repos.cc:886
 #, c-format, boost-format
 msgid ""
 "Repository '%s' is out-of-date. You can run 'zypper refresh' as root to "
 "update it."
 msgstr ""
 
-#: src/repos.cc:902
+#: src/repos.cc:903
 #, c-format, boost-format
 msgid ""
 "The metadata cache needs to be built for the '%s' repository. You can run "
 "'zypper refresh' as root to do this."
 msgstr ""
 
-#: src/repos.cc:928
+#: src/repos.cc:929
 #, fuzzy, c-format, boost-format
 msgid "Repository '%s' stays disabled."
 msgstr "Inkonzo iyaqhuba"
 
-#: src/repos.cc:975
+#: src/repos.cc:976
 msgid "Initializing Target"
 msgstr "Indulula Okujoliswe kuko"
 
-#: src/repos.cc:983
+#: src/repos.cc:984
 #, fuzzy
 msgid "Target initialization failed:"
 msgstr "Ukundulula kusilele"
 
-#: src/repos.cc:1065
+#: src/repos.cc:1066
 #, fuzzy, c-format, boost-format
 msgid "Cleaning metadata cache for '%s'."
 msgstr "Ifayili yokubhala imposiso '%1'"
 
-#: src/repos.cc:1073
+#: src/repos.cc:1074
 #, fuzzy, c-format, boost-format
 msgid "Cleaning raw metadata cache for '%s'."
 msgstr "Ifayili yokubhala imposiso '%1'"
 
-#: src/repos.cc:1079
+#: src/repos.cc:1080
 #, fuzzy, c-format, boost-format
 msgid "Keeping raw metadata cache for %s '%s'."
 msgstr "Ifayili yokubhala imposiso '%1'"
 
 #. translators: meaning the cached rpm files
-#: src/repos.cc:1086
+#: src/repos.cc:1087
 #, fuzzy, c-format, boost-format
 msgid "Cleaning packages for '%s'."
 msgstr "Ifunda imibekelo ukusuka ku%s"
 
-#: src/repos.cc:1094
+#: src/repos.cc:1095
 #, c-format, boost-format
 msgid "Cannot clean repository '%s' because of an error."
 msgstr ""
 
-#: src/repos.cc:1105
+#: src/repos.cc:1106
 #, fuzzy
 msgid "Cleaning installed packages cache."
 msgstr "Kuqwalaselwa imibekelelo ye-RPM ehlohliweyo..."
 
-#: src/repos.cc:1114
+#: src/repos.cc:1115
 #, fuzzy
 msgid "Cannot clean installed packages cache because of an error."
 msgstr "ayikwazi kukhuphela oovimba (imposiso yesiseko senkcukacha)"
 
-#: src/repos.cc:1132
+#: src/repos.cc:1133
 #, fuzzy
 msgid "Could not clean the repositories because of errors."
 msgstr "ayikwazi kukhuphela oovimba (imposiso yesiseko senkcukacha)"
 
-#: src/repos.cc:1138
+#: src/repos.cc:1139
 msgid "Some of the repositories have not been cleaned up because of an error."
 msgstr ""
 
-#: src/repos.cc:1143
+#: src/repos.cc:1144
 #, fuzzy
 msgid "Specified repositories have been cleaned up."
 msgstr "Ifayili yokubhala imposiso '%1'"
 
-#: src/repos.cc:1145
+#: src/repos.cc:1146
 #, fuzzy
 msgid "All repositories have been cleaned up."
 msgstr "Inkonzo iyaqhuba"
 
-#: src/repos.cc:1167
+#: src/repos.cc:1168
 msgid "This is a changeable read-only media (CD/DVD), disabling autorefresh."
 msgstr ""
 
-#: src/repos.cc:1188
+#: src/repos.cc:1189
 #, fuzzy, c-format, boost-format
 msgid "Invalid repository alias: '%s'"
 msgstr "Ifayili yokubhala imposiso '%1'"
 
-#: src/repos.cc:1205
+#: src/repos.cc:1206
 msgid ""
 "Could not determine the type of the repository. Please check if the defined "
 "URIs (see below) point to a valid repository:"
 msgstr ""
 
-#: src/repos.cc:1211
+#: src/repos.cc:1212
 msgid "Can't find a valid repository at given location:"
 msgstr ""
 
-#: src/repos.cc:1219
+#: src/repos.cc:1220
 #, fuzzy
 msgid "Problem transferring repository data from specified URI:"
 msgstr "Isilumkiso: Uhlobo lwe-metadata olungaziwa"
 
-#: src/repos.cc:1220
+#: src/repos.cc:1221
 #, fuzzy
 msgid "Please check whether the specified URI is accessible."
 msgstr "ifayili yeskripti ayinakufikelelwa"
 
-#: src/repos.cc:1227
+#: src/repos.cc:1228
 #, fuzzy
 msgid "Unknown problem when adding repository:"
 msgstr "Isilumkiso: Uhlobo lwe-metadata olungaziwa"
 
 #. translators: BOOST STYLE POSITIONAL DIRECTIVES ( %N% )
 #. translators: %1% - a repository name
-#: src/repos.cc:1237
+#: src/repos.cc:1238
 #, boost-format
 msgid ""
 "GPG checking is disabled in configuration of repository '%1%'. Integrity and "
 "origin of packages cannot be verified."
 msgstr ""
 
-#: src/repos.cc:1242
+#: src/repos.cc:1243
 #, c-format, boost-format
 msgid "Repository '%s' successfully added"
 msgstr ""
 
-#: src/repos.cc:1268
+#: src/repos.cc:1269
 #, fuzzy, c-format, boost-format
 msgid "Reading data from '%s' media"
 msgstr "Ifunda imveliso ukusuka ku%s"
 
-#: src/repos.cc:1274
+#: src/repos.cc:1275
 #, c-format, boost-format
 msgid "Problem reading data from '%s' media"
 msgstr ""
 
-#: src/repos.cc:1275
+#: src/repos.cc:1276
 msgid "Please check if your installation media is valid and readable."
 msgstr ""
 
-#: src/repos.cc:1282
+#: src/repos.cc:1283
 #, fuzzy, c-format, boost-format
 msgid "Reading data from '%s' media is delayed until next refresh."
 msgstr "Ifunda imveliso ukusuka ku%s"
 
-#: src/repos.cc:1351
+#: src/repos.cc:1352
 #, fuzzy
 msgid "Problem accessing the file at the specified URI"
 msgstr "Isilumkiso: Uhlobo lwe-metadata olungaziwa"
 
-#: src/repos.cc:1352
+#: src/repos.cc:1353
 #, fuzzy
 msgid "Please check if the URI is valid and accessible."
 msgstr "ifayili yeskripti ayinakufikelelwa"
 
-#: src/repos.cc:1359
+#: src/repos.cc:1360
 #, fuzzy
 msgid "Problem parsing the file at the specified URI"
 msgstr "Isilumkiso: Uhlobo lwe-metadata olungaziwa"
 
 #. TranslatorExplanation Don't translate the '.repo' string.
-#: src/repos.cc:1361
+#: src/repos.cc:1362
 msgid "Is it a .repo file?"
 msgstr ""
 
-#: src/repos.cc:1368
+#: src/repos.cc:1369
 #, fuzzy
 msgid "Problem encountered while trying to read the file at the specified URI"
 msgstr "Isilumkiso: Uhlobo lwe-metadata olungaziwa"
 
-#: src/repos.cc:1381
+#: src/repos.cc:1382
 #, fuzzy
 msgid "Repository with no alias defined found in the file, skipping."
 msgstr "Inkonzo iyaqhuba"
 
-#: src/repos.cc:1387
+#: src/repos.cc:1388
 #, fuzzy, c-format, boost-format
 msgid "Repository '%s' has no URI defined, skipping."
 msgstr "Inkonzo iyaqhuba"
 
-#: src/repos.cc:1435
+#: src/repos.cc:1436
 #, fuzzy, c-format, boost-format
 msgid "Repository '%s' has been removed."
 msgstr "Inkonzo iyaqhuba"
 
-#: src/repos.cc:1583
+#: src/repos.cc:1584
 #, fuzzy, c-format, boost-format
 msgid "Repository '%s' priority has been left unchanged (%d)"
 msgstr "Inkonzo iyaqhuba"
 
-#: src/repos.cc:1616
+#: src/repos.cc:1617
 #, fuzzy, c-format, boost-format
 msgid "Repository '%s' has been successfully enabled."
 msgstr "Inkonzo iyaqhuba"
 
-#: src/repos.cc:1618
+#: src/repos.cc:1619
 #, fuzzy, c-format, boost-format
 msgid "Repository '%s' has been successfully disabled."
 msgstr "Inkonzo iyaqhuba"
 
-#: src/repos.cc:1625
+#: src/repos.cc:1626
 #, c-format, boost-format
 msgid "Autorefresh has been enabled for repository '%s'."
 msgstr ""
 
-#: src/repos.cc:1627
+#: src/repos.cc:1628
 #, c-format, boost-format
 msgid "Autorefresh has been disabled for repository '%s'."
 msgstr ""
 
-#: src/repos.cc:1634
+#: src/repos.cc:1635
 #, fuzzy, c-format, boost-format
 msgid "RPM files caching has been enabled for repository '%s'."
 msgstr "Ifayili yokubhala imposiso '%1'"
 
-#: src/repos.cc:1636
+#: src/repos.cc:1637
 #, fuzzy, c-format, boost-format
 msgid "RPM files caching has been disabled for repository '%s'."
 msgstr "Ifayili yokubhala imposiso '%1'"
 
-#: src/repos.cc:1643
+#: src/repos.cc:1644
 #, fuzzy, c-format, boost-format
 msgid "GPG check has been enabled for repository '%s'."
 msgstr "Ifayili yokubhala imposiso '%1'"
 
-#: src/repos.cc:1645
+#: src/repos.cc:1646
 #, fuzzy, c-format, boost-format
 msgid "GPG check has been disabled for repository '%s'."
 msgstr "Ifayili yokubhala imposiso '%1'"
 
-#: src/repos.cc:1651
+#: src/repos.cc:1652
 #, fuzzy, c-format, boost-format
 msgid "Repository '%s' priority has been set to %d."
 msgstr "Inkonzo iyaqhuba"
 
-#: src/repos.cc:1657
+#: src/repos.cc:1658
 #, fuzzy, c-format, boost-format
 msgid "Name of repository '%s' has been set to '%s'."
 msgstr "Inkonzo iyaqhuba"
 
-#: src/repos.cc:1668
+#: src/repos.cc:1669
 #, fuzzy, c-format, boost-format
 msgid "Nothing to change for repository '%s'."
 msgstr "Ifayili yokubhala imposiso '%1'"
 
-#: src/repos.cc:1675
+#: src/repos.cc:1676
 #, fuzzy, c-format, boost-format
 msgid "Leaving repository %s unchanged."
 msgstr "Isilumkiso: Uhlobo lwe-metadata olungaziwa"
 
-#: src/repos.cc:1762
+#: src/repos.cc:1763
 #, fuzzy
 msgid "Loading repository data..."
 msgstr "Ifayili yokubhala imposiso '%1'"
 
-#: src/repos.cc:1764
+#: src/repos.cc:1765
 #, fuzzy
 msgid ""
 "No repositories defined. Operating only with the installed resolvables. "
@@ -6095,43 +6095,43 @@ msgstr ""
 "Isilumkiso: Akho mithombo. Isebenza kuphela ngezinto ezinokwahlulwa "
 "ezihlohliweyo. Akukho nto inokuhlohlwa."
 
-#: src/repos.cc:1787
+#: src/repos.cc:1788
 #, fuzzy, c-format, boost-format
 msgid "Retrieving repository '%s' data..."
 msgstr "Ifayili yokubhala imposiso '%1'"
 
-#: src/repos.cc:1795
+#: src/repos.cc:1796
 #, c-format, boost-format
 msgid "Repository '%s' not cached. Caching..."
 msgstr ""
 
-#: src/repos.cc:1801 src/repos.cc:1835
+#: src/repos.cc:1802 src/repos.cc:1836
 #, c-format, boost-format
 msgid "Problem loading data from '%s'"
 msgstr ""
 
-#: src/repos.cc:1805
+#: src/repos.cc:1806
 #, fuzzy, c-format, boost-format
 msgid "Repository '%s' could not be refreshed. Using old cache."
 msgstr "Inkonzo iyaqhuba"
 
-#: src/repos.cc:1809 src/repos.cc:1838
+#: src/repos.cc:1810 src/repos.cc:1839
 #, c-format, boost-format
 msgid "Resolvables from '%s' not loaded because of error."
 msgstr ""
 
-#: src/repos.cc:1825
+#: src/repos.cc:1826
 #, boost-format
 msgid "Repository '%1%' metadata expired since %2%."
 msgstr ""
 
 #. translators: the first %s is 'zypper refresh' and the second 'zypper clean -m'
-#: src/repos.cc:1837
+#: src/repos.cc:1838
 #, c-format, boost-format
 msgid "Try '%s', or even '%s' before doing so."
 msgstr ""
 
-#: src/repos.cc:1842
+#: src/repos.cc:1843
 msgid ""
 "Repository metadata expired: Check if 'autorefresh' is turned on (zypper "
 "lr), otherwise manually refresh the repository (zypper ref). If this does "
@@ -6139,32 +6139,32 @@ msgid ""
 "server has actually discontinued to support the repository."
 msgstr ""
 
-#: src/repos.cc:1855
+#: src/repos.cc:1856
 #, fuzzy
 msgid "Reading installed packages..."
 msgstr "Kuqwalaselwa imibekelelo ye-RPM ehlohliweyo..."
 
-#: src/repos.cc:1864
+#: src/repos.cc:1865
 #, fuzzy
 msgid "Problem occurred while reading the installed packages:"
 msgstr "Kwenzeke imposiso xa bekufundwa kukavimba wokuhlohla."
 
-#: src/repos.cc:1881
+#: src/repos.cc:1882
 #, c-format, boost-format
 msgid "'%s' looks like an RPM file. Will try to download it."
 msgstr ""
 
-#: src/repos.cc:1890
+#: src/repos.cc:1891
 #, c-format, boost-format
 msgid "Problem with the RPM file specified as '%s', skipping."
 msgstr ""
 
-#: src/repos.cc:1912
+#: src/repos.cc:1913
 #, c-format, boost-format
 msgid "Problem reading the RPM header of %s. Is it an RPM file?"
 msgstr ""
 
-#: src/repos.cc:1932
+#: src/repos.cc:1933
 msgid "Plain RPM files cache"
 msgstr ""
 
@@ -6333,25 +6333,25 @@ msgstr "Imodyuli \"%s\" ilayishwe ngempumelelo."
 msgid "Error creating the solver test case."
 msgstr "Imposiso xa kwahlulwa isatifikethi."
 
-#: src/solve-commit.cc:601
+#: src/solve-commit.cc:602
 msgid ""
-"DownloadAsNeeded can not be used with ZYPP_SINGLE_RPMTRANS=1, falling back "
-"to DownloadInAdvance"
+"Explicitly selecting DownloadAsNeeded also selects the classic_rpmtrans "
+"backend."
 msgstr ""
 
-#: src/solve-commit.cc:619
+#: src/solve-commit.cc:620
 #, c-format, boost-format
 msgid ""
 "Check for running processes using deleted libraries is disabled in zypper."
 "conf. Run '%s' to check manually."
 msgstr ""
 
-#: src/solve-commit.cc:635
+#: src/solve-commit.cc:636
 #, fuzzy
 msgid "Skip check:"
 msgstr "Qwalasela i-DNS"
 
-#: src/solve-commit.cc:642
+#: src/solve-commit.cc:643
 #, boost-format
 msgid ""
 "There are running programs which still use files and libraries deleted or "
@@ -6359,40 +6359,40 @@ msgid ""
 "latest updates. Run '%1%' to list these programs."
 msgstr ""
 
-#: src/solve-commit.cc:656
+#: src/solve-commit.cc:657
 msgid "Update notifications were received from the following packages:"
 msgstr ""
 
-#: src/solve-commit.cc:665
+#: src/solve-commit.cc:666
 #, c-format, boost-format
 msgid "Message from package %s:"
 msgstr ""
 
-#: src/solve-commit.cc:673
+#: src/solve-commit.cc:674
 msgid "y/n"
 msgstr ""
 
-#: src/solve-commit.cc:674
+#: src/solve-commit.cc:675
 #, fuzzy
 msgid "View the notifications now?"
 msgstr "Susa Isakhono Seziganeko Zokwazisa"
 
-#: src/solve-commit.cc:720
+#: src/solve-commit.cc:721
 msgid "Computing distribution upgrade..."
 msgstr ""
 
-#: src/solve-commit.cc:725
+#: src/solve-commit.cc:726
 #, fuzzy
 msgid "Resolving package dependencies..."
 msgstr "Isombulula Izixhomekeki..."
 
-#: src/solve-commit.cc:787
+#: src/solve-commit.cc:788
 msgid ""
 "Some of the dependencies of installed packages are broken. In order to fix "
 "these dependencies, the following actions need to be taken:"
 msgstr ""
 
-#: src/solve-commit.cc:794
+#: src/solve-commit.cc:795
 #, fuzzy
 msgid "Root privileges are required to fix broken package dependencies."
 msgstr ""
@@ -6408,84 +6408,84 @@ msgstr ""
 #. The answers should be lower case letters, but in general, any UTF-8
 #. string will do.
 #. ! \todo add c for changelog and x for explain (show the dep tree)
-#: src/solve-commit.cc:816
+#: src/solve-commit.cc:817
 msgid "y/n/p/v/a/r/m/d/g"
 msgstr ""
 
 #. translators: help text for 'y' option in the 'Continue?' prompt
-#: src/solve-commit.cc:821
+#: src/solve-commit.cc:822
 #, fuzzy
 msgid ""
 "Yes, accept the summary and proceed with installation/removal of packages."
 msgstr "Kwenzeke impazamo ngethuba lokuhlohla."
 
 #. translators: help text for 'n' option in the 'Continue?' prompt
-#: src/solve-commit.cc:823
+#: src/solve-commit.cc:824
 msgid "No, cancel the operation."
 msgstr ""
 
 #. translators: help text for 'p' option in the 'Continue?' prompt
-#: src/solve-commit.cc:825
+#: src/solve-commit.cc:826
 msgid ""
 "Restart solver in no-force-resolution mode in order to show dependency "
 "problems."
 msgstr ""
 
 #. translators: help text for 'v' option in the 'Continue?' prompt
-#: src/solve-commit.cc:827
+#: src/solve-commit.cc:828
 msgid "Toggle display of package versions."
 msgstr ""
 
 #. translators: help text for 'a' option in the 'Continue?' prompt
-#: src/solve-commit.cc:829
+#: src/solve-commit.cc:830
 msgid "Toggle display of package architectures."
 msgstr ""
 
 #. translators: help text for 'r' option in the 'Continue?' prompt
-#: src/solve-commit.cc:831
+#: src/solve-commit.cc:832
 msgid ""
 "Toggle display of repositories from which the packages will be installed."
 msgstr ""
 
 #. translators: help text for 'm' option in the 'Continue?' prompt
-#: src/solve-commit.cc:833
+#: src/solve-commit.cc:834
 msgid "Toggle display of package vendor names."
 msgstr ""
 
 #. translators: help text for 'd' option in the 'Continue?' prompt
-#: src/solve-commit.cc:835
+#: src/solve-commit.cc:836
 msgid "Toggle between showing all details and as few details as possible."
 msgstr ""
 
 #. translators: help text for 'g' option in the 'Continue?' prompt
-#: src/solve-commit.cc:837
+#: src/solve-commit.cc:838
 msgid "View the summary in pager."
 msgstr ""
 
-#: src/solve-commit.cc:844
+#: src/solve-commit.cc:845
 msgid "Backend"
 msgstr ""
 
-#: src/solve-commit.cc:958
+#: src/solve-commit.cc:959
 msgid "committing"
 msgstr "yenza"
 
-#: src/solve-commit.cc:960
+#: src/solve-commit.cc:961
 msgid "(dry run)"
 msgstr ""
 
-#: src/solve-commit.cc:988 src/solve-commit.cc:1021
+#: src/solve-commit.cc:989 src/solve-commit.cc:1023
 #, fuzzy
 msgid "Problem retrieving the package file from the repository:"
 msgstr "Ifunda uluhlu lwefayili ukusuka ku%s"
 
 #. translators: the first %s is 'zypper refresh' and the second is repo alias
-#: src/solve-commit.cc:1018
+#: src/solve-commit.cc:1020
 #, fuzzy, c-format, boost-format
 msgid "Repository '%s' is out of date. Running '%s' might help."
 msgstr "Inkonzo iyaqhuba"
 
-#: src/solve-commit.cc:1029
+#: src/solve-commit.cc:1031
 msgid ""
 "The package integrity check failed. This may be a problem with the "
 "repository or media. Try one of the following:\n"
@@ -6496,12 +6496,12 @@ msgid ""
 "- use another repository"
 msgstr ""
 
-#: src/solve-commit.cc:1043
+#: src/solve-commit.cc:1045
 #, fuzzy
 msgid "Problem occurred during or after installation or removal of packages:"
 msgstr "Kwenzeke impazamo ngethuba lokuhlohla."
 
-#: src/solve-commit.cc:1082
+#: src/solve-commit.cc:1084
 #, fuzzy
 msgid ""
 "One of the installed patches requires a reboot of your machine. Reboot as "
@@ -6510,7 +6510,7 @@ msgstr ""
 "ISILUMKISO: Enye yendawo ezihlohliweyo ifuna ukumiselwa kwakhona inkqubo "
 "kamatshini wakho. Nceda, kwenze oku kwakamsinya kangangoko."
 
-#: src/solve-commit.cc:1095
+#: src/solve-commit.cc:1097
 #, fuzzy
 msgid ""
 "One of the installed patches affects the package manager itself. Run this "
@@ -6520,7 +6520,7 @@ msgstr ""
 "ngokunokwawo, ngolo hlobo ifuna ukuqalela kwakhona ngaphambi kokwenza "
 "umsebenzi olandelayo."
 
-#: src/solve-commit.cc:1117
+#: src/solve-commit.cc:1119
 msgid "Dependencies of all installed packages are satisfied."
 msgstr ""
 

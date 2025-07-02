@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-13 16:49+0100\n"
+"POT-Creation-Date: 2025-07-02 13:50+0200\n"
 "PO-Revision-Date: 2025-04-08 10:56+0000\n"
 "Last-Translator: Grace Yu <grace.yu@excel-gits.com>\n"
 "Language-Team: Chinese (China) <https://l10n.opensuse.org/projects/zypper/"
@@ -1821,38 +1821,38 @@ msgstr "密码"
 msgid "Preloading Packages"
 msgstr "正在预加载软件包"
 
-#: src/callbacks/media.h:209
+#: src/callbacks/media.h:211
 msgid "Preloading Packages:"
 msgstr "正在预加载软件包："
 
-#: src/callbacks/media.h:234 src/callbacks/media.h:256
+#: src/callbacks/media.h:263
 msgid "Preloading:"
 msgstr "正在预加载："
 
 #. Translator: prefetch progress bar result: ".............[done]"
-#: src/callbacks/media.h:266
+#: src/callbacks/media.h:278
 msgid "done"
 msgstr "完毕"
 
 #. Translator: prefetch progress bar result: "........[not found]"
-#: src/callbacks/media.h:271
+#: src/callbacks/media.h:283
 msgid "not found"
 msgstr "未找到"
 
 #. Translator: prefetch progress bar result: "............[error]"
-#: src/callbacks/media.h:278
+#: src/callbacks/media.h:290
 msgid "error"
 msgstr "错误"
 
-#: src/callbacks/media.h:294
+#: src/callbacks/media.h:307
 msgid "Preload finished."
 msgstr "已完成预加载。"
 
-#: src/callbacks/media.h:299
+#: src/callbacks/media.h:312
 msgid "success"
 msgstr "成功"
 
-#: src/callbacks/media.h:302
+#: src/callbacks/media.h:315
 msgid "files missing"
 msgstr "缺少文件"
 
@@ -2093,10 +2093,9 @@ msgid ""
 "enabled repositories fail to refresh. This may severely damage the system. "
 "If a failing repository is actually not needed, it must be disabled."
 msgstr ""
-"由于孤立软件包处理方式的缘故，dist-upgrade "
-"比其他任何命令更依赖于正确的储存库设置。如果启用的储存库无法刷新，该命令必定"
-"无法继续。这可能会严重损害系统。如果实际并不需要某个刷新失败的储存库，则必须"
-"将其禁用。"
+"由于孤立软件包处理方式的缘故，dist-upgrade 比其他任何命令更依赖于正确的储存库"
+"设置。如果启用的储存库无法刷新，该命令必定无法继续。这可能会严重损害系统。如"
+"果实际并不需要某个刷新失败的储存库，则必须将其禁用。"
 
 #: src/commands/distupgrade.cc:57
 msgid "See 'man zypper' for more information about this command."
@@ -2961,12 +2960,12 @@ msgstr ""
 msgid "Write debug output to file <path>."
 msgstr "将侦错输出写入到文件 <path>。"
 
-#: src/commands/ps.cc:72 src/solve-commit.cc:633
+#: src/commands/ps.cc:72 src/solve-commit.cc:634
 msgid "Check failed:"
 msgstr "检查失败："
 
 #. Here: Table output
-#: src/commands/ps.cc:127 src/solve-commit.cc:622
+#: src/commands/ps.cc:127 src/solve-commit.cc:623
 msgid "Checking for running processes using deleted libraries..."
 msgstr "正在检查使用了已删除库文件的运行中进程..."
 
@@ -3059,7 +3058,8 @@ msgid ""
 "If no version constraint is specified, information about the best available "
 "package is shown. Note that both the version and release numbers must always "
 "match exactly."
-msgstr "如果未指定版本限制条件，将会显示最合适的软件包的相关信息。请注意，版本和发行"
+msgstr ""
+"如果未指定版本限制条件，将会显示最合适的软件包的相关信息。请注意，版本和发行"
 "版编号必须始终完全匹配。"
 
 #. translators: -s, --match-substrings
@@ -3372,7 +3372,7 @@ msgstr "别名"
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/commands/repos/list.cc:51 src/commands/repos/list.cc:54
 #: src/commands/repos/list.cc:292 src/commands/services/add.cc:83
-#: src/commands/services/list.cc:118 src/repos.cc:1248
+#: src/commands/services/list.cc:118 src/repos.cc:1249
 #: src/utils/flags/zyppflags.h:49
 msgid "URI"
 msgstr "URI"
@@ -3381,27 +3381,27 @@ msgstr "URI"
 #. translators: property name; short; used like "Name: value"
 #: src/commands/repos/list.cc:58 src/commands/repos/list.cc:244
 #: src/commands/services/add.cc:85 src/commands/services/list.cc:108
-#: src/repos.cc:1250
+#: src/repos.cc:1251
 msgid "Enabled"
 msgstr "已启用"
 
 #. GPG Check
 #. translators: property name; short; used like "Name: value"
 #: src/commands/repos/list.cc:59 src/commands/repos/list.cc:248
-#: src/commands/services/list.cc:109 src/repos.cc:1252
+#: src/commands/services/list.cc:109 src/repos.cc:1253
 msgid "GPG Check"
 msgstr "GPG 检查"
 
 #. translators: repository priority (in zypper repos -p or -d)
 #. translators: property name; short; used like "Name: value"
 #: src/commands/repos/list.cc:60 src/commands/repos/list.cc:276
-#: src/commands/services/list.cc:115 src/repos.cc:1256
+#: src/commands/services/list.cc:115 src/repos.cc:1257
 msgid "Priority"
 msgstr "优先级"
 
 #. translators: property name; short; used like "Name: value"
 #: src/commands/repos/list.cc:61 src/commands/services/add.cc:87
-#: src/repos.cc:1254
+#: src/repos.cc:1255
 msgid "Autorefresh"
 msgstr "自动刷新"
 
@@ -3454,7 +3454,7 @@ msgstr "列出全部已定义的软件源。"
 msgid "Export all defined repositories as a single local .repo file."
 msgstr "将全部已定义的软件源导出为一个本地 .repo 文件。"
 
-#: src/commands/repos/list.cc:129 src/repos.cc:1005
+#: src/commands/repos/list.cc:129 src/repos.cc:1006
 msgid "Error reading repositories:"
 msgstr "读取软件源出错："
 
@@ -3568,7 +3568,8 @@ msgstr "仅下载原始元数据，不构建数据库。"
 msgid ""
 "Multi-Arch repos: Download raw metadata for all offered architectures even "
 "if the repo supports filtering."
-msgstr "多体系结构储存库：即使储存库支持过滤，仍会下载提供的所有体系结构对应的原始元"
+msgstr ""
+"多体系结构储存库：即使储存库支持过滤，仍会下载提供的所有体系结构对应的原始元"
 "数据。"
 
 #. translators: -r, --repo <ALIAS|#|URI>
@@ -3591,7 +3592,7 @@ msgstr "全局选项 '%s' 在此无效。"
 msgid "Arguments are not allowed if '%s' is used."
 msgstr "若使用 '%s' 则不允许使用参数。"
 
-#: src/commands/repos/refresh.cc:239 src/repos.cc:1017
+#: src/commands/repos/refresh.cc:239 src/repos.cc:1018
 msgid "Specified repositories: "
 msgstr "指定的软件源： "
 
@@ -3600,7 +3601,7 @@ msgstr "指定的软件源： "
 msgid "Refreshing repository '%s'."
 msgstr "正在刷新软件源 '%s'。"
 
-#: src/commands/repos/refresh.cc:280 src/repos.cc:842
+#: src/commands/repos/refresh.cc:280 src/repos.cc:843
 #, c-format, boost-format
 msgid "Scanning content of disabled repository '%s'."
 msgstr "正在扫描已禁用软件源 '%s' 的内容。"
@@ -3610,7 +3611,7 @@ msgstr "正在扫描已禁用软件源 '%s' 的内容。"
 msgid "Skipping disabled repository '%s'"
 msgstr "正在跳过已禁用的软件源 '%s'"
 
-#: src/commands/repos/refresh.cc:306 src/repos.cc:860 src/repos.cc:907
+#: src/commands/repos/refresh.cc:306 src/repos.cc:861 src/repos.cc:908
 #, c-format, boost-format
 msgid "Skipping repository '%s' because of the above error."
 msgstr "由于以上错误，正在跳过软件源 '%s' 。"
@@ -3637,7 +3638,7 @@ msgstr "请使用 '%s' 或者 '%s' 命令添加或启用软件源。"
 msgid "Could not refresh the repositories because of errors."
 msgstr "由于若干错误无法刷新软件源。"
 
-#: src/commands/repos/refresh.cc:342 src/repos.cc:936
+#: src/commands/repos/refresh.cc:342 src/repos.cc:937
 msgid "Some of the repositories have not been refreshed because of an error."
 msgstr "由于某处出错未刷新部分软件源。"
 
@@ -3691,12 +3692,12 @@ msgstr ""
 msgid "Repository '%s' renamed to '%s'."
 msgstr "软件源 '%s' 已重命名为 '%s' 。"
 
-#: src/commands/repos/rename.cc:47 src/repos.cc:1196
+#: src/commands/repos/rename.cc:47 src/repos.cc:1197
 #, c-format, boost-format
 msgid "Repository named '%s' already exists. Please use another alias."
 msgstr "已存在名为 '%s' 的软件源。请使用其它别名。"
 
-#: src/commands/repos/rename.cc:52 src/repos.cc:1674
+#: src/commands/repos/rename.cc:52 src/repos.cc:1675
 msgid "Error while modifying the repository:"
 msgstr "修改软件源时出错："
 
@@ -4126,7 +4127,7 @@ msgstr ""
 "像 --details 一样，带有搜索匹配到的位置的额外信息 （在依赖关系中搜索时很有"
 "用）。"
 
-#: src/commands/search/search.cc:298 src/repos.cc:779
+#: src/commands/search/search.cc:298 src/repos.cc:780
 #, c-format, boost-format
 msgid "Specified repository '%s' is disabled."
 msgstr "已禁用指定软件源 '%s'。"
@@ -4144,7 +4145,7 @@ msgstr "初始化或执行搜索查询出现问题"
 msgid "See the above message for a hint."
 msgstr "请参考以上消息汲取灵感。"
 
-#: src/commands/search/search.cc:505 src/repos.cc:984
+#: src/commands/search/search.cc:505 src/repos.cc:985
 msgid "Running 'zypper refresh' as root might resolve the problem."
 msgstr "以 root 身份运行 'zypper refresh' 或许会解决该问题。"
 
@@ -4234,7 +4235,7 @@ msgid "Problem retrieving the repository index file for service '%s':"
 msgstr "检索服务 '%s' 的软件源索引文件出现问题："
 
 #: src/commands/services/common.cc:138 src/commands/services/refresh.cc:226
-#: src/repos.cc:1726
+#: src/repos.cc:1727
 #, c-format, boost-format
 msgid "Skipping service '%s' because of the above error."
 msgstr "由于以上错误，正在跳过服务 '%s' 。"
@@ -4865,7 +4866,7 @@ msgstr ""
 msgid "Argument resolves to no package"
 msgstr "参数解析为无软件包"
 
-#: src/commands/utils/download.cc:254 src/solve-commit.cc:1119
+#: src/commands/utils/download.cc:254 src/solve-commit.cc:1121
 msgid "Nothing to do."
 msgstr "无事可做。"
 
@@ -5138,7 +5139,8 @@ msgstr "比较作为参数提供的版本号。"
 msgid ""
 "The exit code is 0 if the versions are equal, 11 if VERSION1 is newer, and "
 "12 if VERSION2 is newer."
-msgstr "如果两个版本相同，则退出代码为 0；如果版本1 较新，则退出代码为 11；如果版本2 "
+msgstr ""
+"如果两个版本相同，则退出代码为 0；如果版本1 较新，则退出代码为 11；如果版本2 "
 "较新，则退出代码为 12。"
 
 #. translators: -m, --match
@@ -5606,52 +5608,52 @@ msgstr[0] "%1% 个软件源"
 msgid "Checking whether to refresh metadata for %s"
 msgstr "正在检查是否需要刷新 %s 的元数据"
 
-#: src/repos.cc:256
+#: src/repos.cc:257
 #, c-format, boost-format
 msgid "Repository '%s' is up to date."
 msgstr "软件源 '%s' 是最新的。"
 
-#: src/repos.cc:262
+#: src/repos.cc:263
 #, c-format, boost-format
 msgid "The up-to-date check of '%s' has been delayed."
 msgstr "已推延了对 '%s' 的更新检查。"
 
-#: src/repos.cc:284
+#: src/repos.cc:285
 msgid "Forcing raw metadata refresh"
 msgstr "正在强制执行原始元数据刷新"
 
-#: src/repos.cc:290
+#: src/repos.cc:291
 #, c-format, boost-format
 msgid "Retrieving repository '%s' metadata"
 msgstr "正在检索软件源 '%s' 的元数据"
 
-#: src/repos.cc:314
+#: src/repos.cc:315
 #, c-format, boost-format
 msgid "Do you want to disable the repository %s permanently?"
 msgstr "您想要永久禁用软件源 %s 吗？"
 
-#: src/repos.cc:330
+#: src/repos.cc:331
 #, c-format, boost-format
 msgid "Error while disabling repository '%s'."
 msgstr "禁用软件源 '%s' 时出错。"
 
-#: src/repos.cc:346
+#: src/repos.cc:347
 #, c-format, boost-format
 msgid "Problem retrieving files from '%s'."
 msgstr "从 '%s'检索文件时出现问题。"
 
-#: src/repos.cc:347 src/repos.cc:1865 src/solve-commit.cc:989
-#: src/solve-commit.cc:1020 src/solve-commit.cc:1044
+#: src/repos.cc:348 src/repos.cc:1866 src/solve-commit.cc:990
+#: src/solve-commit.cc:1022 src/solve-commit.cc:1046
 msgid "Please see the above error message for a hint."
 msgstr "请参考以上错误消息汲取灵感。"
 
-#: src/repos.cc:359
+#: src/repos.cc:360
 #, c-format, boost-format
 msgid "No URIs defined for '%s'."
 msgstr "没有为 '%s' 定义 URI。"
 
 #. TranslatorExplanation the first %s is a .repo file path
-#: src/repos.cc:364
+#: src/repos.cc:365
 #, c-format, boost-format
 msgid ""
 "Please add one or more base URI (baseurl=URI) entries to %s for repository "
@@ -5659,37 +5661,37 @@ msgid ""
 msgstr ""
 "请添加一个或者更多的基础 URI 项 (baseurl=URI) 至 %s（针对软件源 '%s'）。"
 
-#: src/repos.cc:378
+#: src/repos.cc:379
 msgid "No alias defined for this repository."
 msgstr "该软件源没有定义别名。"
 
-#: src/repos.cc:390
+#: src/repos.cc:391
 #, c-format, boost-format
 msgid "Repository '%s' is invalid."
 msgstr "软件源 '%s' 无效。"
 
-#: src/repos.cc:391
+#: src/repos.cc:392
 msgid ""
 "Please check if the URIs defined for this repository are pointing to a valid "
 "repository."
 msgstr "请检查此软件源定义的 URI 是否指向了一个有效的软件源。"
 
-#: src/repos.cc:403
+#: src/repos.cc:404
 #, c-format, boost-format
 msgid "Error retrieving metadata for '%s':"
 msgstr "检索 '%s' 元数据时出错："
 
-#: src/repos.cc:416
+#: src/repos.cc:417
 msgid "Forcing building of repository cache"
 msgstr "正在强制构建软件源缓存"
 
-#: src/repos.cc:441
+#: src/repos.cc:442
 #, c-format, boost-format
 msgid "Error parsing metadata for '%s':"
 msgstr "解析 '%s' 元数据出错："
 
 #. TranslatorExplanation Don't translate the URL unless it is translated, too
-#: src/repos.cc:443
+#: src/repos.cc:444
 msgid ""
 "This may be caused by invalid metadata in the repository, or by a bug in the "
 "metadata parser. In the latter case, or if in doubt, please, file a bug "
@@ -5700,41 +5702,41 @@ msgstr ""
 "存疑，请参考 http://zh.opensuse.org/SDB:Zypper_疑难解答 的指南填写一份故障报"
 "告"
 
-#: src/repos.cc:452
+#: src/repos.cc:453
 #, c-format, boost-format
 msgid "Repository metadata for '%s' not found in local cache."
 msgstr "在本地缓存中未找到 '%s' 的软件源元数据。"
 
-#: src/repos.cc:460
+#: src/repos.cc:461
 msgid "Error building the cache:"
 msgstr "构建缓存出错："
 
-#: src/repos.cc:679
+#: src/repos.cc:680
 #, c-format, boost-format
 msgid "Repository '%s' not found by its alias, number, or URI."
 msgstr "未能通过别名、编号或 URI 找到软件源 '%s'。"
 
-#: src/repos.cc:681
+#: src/repos.cc:682
 #, c-format, boost-format
 msgid "Use '%s' to get the list of defined repositories."
 msgstr "使用 '%s' 获取已定义软件源的列表。"
 
-#: src/repos.cc:701
+#: src/repos.cc:702
 #, c-format, boost-format
 msgid "Ignoring disabled repository '%s'"
 msgstr "正在忽略已禁用的软件源 '%s'"
 
-#: src/repos.cc:785
+#: src/repos.cc:786
 #, c-format, boost-format
 msgid "Global option '%s' can be used to temporarily enable repositories."
 msgstr "全局选项 '%s' 可用来临时启用软件源。"
 
-#: src/repos.cc:801 src/repos.cc:807
+#: src/repos.cc:802 src/repos.cc:808
 #, c-format, boost-format
 msgid "Ignoring repository '%s' because of '%s' option."
 msgstr "正在忽略软件源 '%s'，因为启用了 '%s' 选项。"
 
-#: src/repos.cc:828 src/repos.cc:921
+#: src/repos.cc:829 src/repos.cc:922
 #, c-format, boost-format
 msgid "Temporarily enabling repository '%s'."
 msgstr "正在暂时性启用软件源 '%s'。"
@@ -5742,14 +5744,14 @@ msgstr "正在暂时性启用软件源 '%s'。"
 #. bsc#1235636: Asks to suppress reporting the Exception (usually: No permission to
 #. write repository cache), because it scares. This was was indeed the legacy behavior:
 #. SUPPRESS: zypper.out().error( ex, "Problem" );
-#: src/repos.cc:885
+#: src/repos.cc:886
 #, c-format, boost-format
 msgid ""
 "Repository '%s' is out-of-date. You can run 'zypper refresh' as root to "
 "update it."
 msgstr "软件源 '%s' 已经过时。您可以 root 身份运行 'zypper refresh' 更新它。"
 
-#: src/repos.cc:902
+#: src/repos.cc:903
 #, c-format, boost-format
 msgid ""
 "The metadata cache needs to be built for the '%s' repository. You can run "
@@ -5758,280 +5760,280 @@ msgstr ""
 "需要构建软件源 '%s' 的元数据缓存。您可以 root 身份运行 'zypper refresh' 执行"
 "此操作。"
 
-#: src/repos.cc:928
+#: src/repos.cc:929
 #, c-format, boost-format
 msgid "Repository '%s' stays disabled."
 msgstr "软件源 '%s' 保持禁用。"
 
-#: src/repos.cc:975
+#: src/repos.cc:976
 msgid "Initializing Target"
 msgstr "正在初始化目标"
 
-#: src/repos.cc:983
+#: src/repos.cc:984
 msgid "Target initialization failed:"
 msgstr "目标初始化失败："
 
-#: src/repos.cc:1065
+#: src/repos.cc:1066
 #, c-format, boost-format
 msgid "Cleaning metadata cache for '%s'."
 msgstr "正在清理 '%s' 的元数据缓存。"
 
-#: src/repos.cc:1073
+#: src/repos.cc:1074
 #, c-format, boost-format
 msgid "Cleaning raw metadata cache for '%s'."
 msgstr "正在清理 '%s' 的原始元数据缓存。"
 
-#: src/repos.cc:1079
+#: src/repos.cc:1080
 #, c-format, boost-format
 msgid "Keeping raw metadata cache for %s '%s'."
 msgstr "正在保留 %s 的原始元数据缓存 '%s'。"
 
 #. translators: meaning the cached rpm files
-#: src/repos.cc:1086
+#: src/repos.cc:1087
 #, c-format, boost-format
 msgid "Cleaning packages for '%s'."
 msgstr "正在为 '%s' 清理软件包。"
 
-#: src/repos.cc:1094
+#: src/repos.cc:1095
 #, c-format, boost-format
 msgid "Cannot clean repository '%s' because of an error."
 msgstr "由于某处出错无法清理软件源 '%s' 。"
 
-#: src/repos.cc:1105
+#: src/repos.cc:1106
 msgid "Cleaning installed packages cache."
 msgstr "正在清理已安装软件包缓存。"
 
-#: src/repos.cc:1114
+#: src/repos.cc:1115
 msgid "Cannot clean installed packages cache because of an error."
 msgstr "由于某处出错无法清理已安装软件包缓存。"
 
-#: src/repos.cc:1132
+#: src/repos.cc:1133
 msgid "Could not clean the repositories because of errors."
 msgstr "由于若干错误无法清理软件源。"
 
-#: src/repos.cc:1138
+#: src/repos.cc:1139
 msgid "Some of the repositories have not been cleaned up because of an error."
 msgstr "由于某处出错未清理部分软件源。"
 
-#: src/repos.cc:1143
+#: src/repos.cc:1144
 msgid "Specified repositories have been cleaned up."
 msgstr "指定软件源清理完毕。"
 
-#: src/repos.cc:1145
+#: src/repos.cc:1146
 msgid "All repositories have been cleaned up."
 msgstr "全部软件源清理完毕。"
 
-#: src/repos.cc:1167
+#: src/repos.cc:1168
 msgid "This is a changeable read-only media (CD/DVD), disabling autorefresh."
 msgstr "这是一个可变只读介质 (CD/DVD)，正在禁用自动刷新。"
 
-#: src/repos.cc:1188
+#: src/repos.cc:1189
 #, c-format, boost-format
 msgid "Invalid repository alias: '%s'"
 msgstr "无效的软件源别名：'%s'"
 
-#: src/repos.cc:1205
+#: src/repos.cc:1206
 msgid ""
 "Could not determine the type of the repository. Please check if the defined "
 "URIs (see below) point to a valid repository:"
 msgstr "无法确定软件源类型。请检查定义的 URI (见下) 是否指向了有效的软件源："
 
-#: src/repos.cc:1211
+#: src/repos.cc:1212
 msgid "Can't find a valid repository at given location:"
 msgstr "未能在给定位置找到有效的软件源："
 
-#: src/repos.cc:1219
+#: src/repos.cc:1220
 msgid "Problem transferring repository data from specified URI:"
 msgstr "从指定 URI 传输软件源数据出现问题："
 
-#: src/repos.cc:1220
+#: src/repos.cc:1221
 msgid "Please check whether the specified URI is accessible."
 msgstr "请检查是否可访问指定的 URI。"
 
-#: src/repos.cc:1227
+#: src/repos.cc:1228
 msgid "Unknown problem when adding repository:"
 msgstr "添加软件源时出现未知问题："
 
 #. translators: BOOST STYLE POSITIONAL DIRECTIVES ( %N% )
 #. translators: %1% - a repository name
-#: src/repos.cc:1237
+#: src/repos.cc:1238
 #, boost-format
 msgid ""
 "GPG checking is disabled in configuration of repository '%1%'. Integrity and "
 "origin of packages cannot be verified."
 msgstr "软件源 '%1%' 的配置中禁用了 GPG 检查。无法校验完整性和软件包的出处。"
 
-#: src/repos.cc:1242
+#: src/repos.cc:1243
 #, c-format, boost-format
 msgid "Repository '%s' successfully added"
 msgstr "成功添加了软件源 '%s'"
 
-#: src/repos.cc:1268
+#: src/repos.cc:1269
 #, c-format, boost-format
 msgid "Reading data from '%s' media"
 msgstr "正在从介质 '%s' 读取数据"
 
-#: src/repos.cc:1274
+#: src/repos.cc:1275
 #, c-format, boost-format
 msgid "Problem reading data from '%s' media"
 msgstr "从介质 '%s' 读取数据时出现问题"
 
-#: src/repos.cc:1275
+#: src/repos.cc:1276
 msgid "Please check if your installation media is valid and readable."
 msgstr "请检查您的安装介质是否有效和可读。"
 
-#: src/repos.cc:1282
+#: src/repos.cc:1283
 #, c-format, boost-format
 msgid "Reading data from '%s' media is delayed until next refresh."
 msgstr "推迟从 '%s' 介质读取数据直至下次刷新。"
 
-#: src/repos.cc:1351
+#: src/repos.cc:1352
 msgid "Problem accessing the file at the specified URI"
 msgstr "访问指定 URI 处文件时出现问题"
 
-#: src/repos.cc:1352
+#: src/repos.cc:1353
 msgid "Please check if the URI is valid and accessible."
 msgstr "请检查该 URI 是否有效且可访问。"
 
-#: src/repos.cc:1359
+#: src/repos.cc:1360
 msgid "Problem parsing the file at the specified URI"
 msgstr "解析指定 URI 处文件时出现问题"
 
 #. TranslatorExplanation Don't translate the '.repo' string.
-#: src/repos.cc:1361
+#: src/repos.cc:1362
 msgid "Is it a .repo file?"
 msgstr "它是一个 .repo 文件吗？"
 
-#: src/repos.cc:1368
+#: src/repos.cc:1369
 msgid "Problem encountered while trying to read the file at the specified URI"
 msgstr "尝试读取指定 URI 处文件时遇到问题"
 
-#: src/repos.cc:1381
+#: src/repos.cc:1382
 msgid "Repository with no alias defined found in the file, skipping."
 msgstr "在文件中发现了未定义别名的软件源，正在跳过。"
 
-#: src/repos.cc:1387
+#: src/repos.cc:1388
 #, c-format, boost-format
 msgid "Repository '%s' has no URI defined, skipping."
 msgstr "软件源 '%s' 未定义 URI，正在跳过。"
 
-#: src/repos.cc:1435
+#: src/repos.cc:1436
 #, c-format, boost-format
 msgid "Repository '%s' has been removed."
 msgstr "已移除软件源 '%s'。"
 
-#: src/repos.cc:1583
+#: src/repos.cc:1584
 #, c-format, boost-format
 msgid "Repository '%s' priority has been left unchanged (%d)"
 msgstr "未变动软件源 '%s' 的优先级 (%d)"
 
-#: src/repos.cc:1616
+#: src/repos.cc:1617
 #, c-format, boost-format
 msgid "Repository '%s' has been successfully enabled."
 msgstr "已成功启用软件源 '%s'。"
 
-#: src/repos.cc:1618
+#: src/repos.cc:1619
 #, c-format, boost-format
 msgid "Repository '%s' has been successfully disabled."
 msgstr "已成功禁用软件源 '%s'。"
 
-#: src/repos.cc:1625
+#: src/repos.cc:1626
 #, c-format, boost-format
 msgid "Autorefresh has been enabled for repository '%s'."
 msgstr "已启用自动刷新软件源 '%s'。"
 
-#: src/repos.cc:1627
+#: src/repos.cc:1628
 #, c-format, boost-format
 msgid "Autorefresh has been disabled for repository '%s'."
 msgstr "已禁用自动刷新软件源 '%s'。"
 
-#: src/repos.cc:1634
+#: src/repos.cc:1635
 #, c-format, boost-format
 msgid "RPM files caching has been enabled for repository '%s'."
 msgstr "已为软件源 '%s' 启用 RPM 文件缓存。"
 
-#: src/repos.cc:1636
+#: src/repos.cc:1637
 #, c-format, boost-format
 msgid "RPM files caching has been disabled for repository '%s'."
 msgstr "已为软件源 '%s' 禁用 RPM 文件缓存。"
 
-#: src/repos.cc:1643
+#: src/repos.cc:1644
 #, c-format, boost-format
 msgid "GPG check has been enabled for repository '%s'."
 msgstr "已对软件源 '%s' 启用 GPG 检查。"
 
-#: src/repos.cc:1645
+#: src/repos.cc:1646
 #, c-format, boost-format
 msgid "GPG check has been disabled for repository '%s'."
 msgstr "已对软件源 '%s' 禁用 GPG 检查。"
 
-#: src/repos.cc:1651
+#: src/repos.cc:1652
 #, c-format, boost-format
 msgid "Repository '%s' priority has been set to %d."
 msgstr "软件源 '%s' 的优先级已设为 %d。"
 
-#: src/repos.cc:1657
+#: src/repos.cc:1658
 #, c-format, boost-format
 msgid "Name of repository '%s' has been set to '%s'."
 msgstr "软件源 '%s' 名称已设为 '%s'。"
 
-#: src/repos.cc:1668
+#: src/repos.cc:1669
 #, c-format, boost-format
 msgid "Nothing to change for repository '%s'."
 msgstr "软件源 '%s' 无需修改。"
 
-#: src/repos.cc:1675
+#: src/repos.cc:1676
 #, c-format, boost-format
 msgid "Leaving repository %s unchanged."
 msgstr "软件源 %s 未变动。"
 
-#: src/repos.cc:1762
+#: src/repos.cc:1763
 msgid "Loading repository data..."
 msgstr "正在加载软件源数据..."
 
-#: src/repos.cc:1764
+#: src/repos.cc:1765
 msgid ""
 "No repositories defined. Operating only with the installed resolvables. "
 "Nothing can be installed."
 msgstr "未定义软件源。只能操作已安装的可解析项。不能安装新东西。"
 
-#: src/repos.cc:1787
+#: src/repos.cc:1788
 #, c-format, boost-format
 msgid "Retrieving repository '%s' data..."
 msgstr "正在检索软件源 '%s' 的数据..."
 
-#: src/repos.cc:1795
+#: src/repos.cc:1796
 #, c-format, boost-format
 msgid "Repository '%s' not cached. Caching..."
 msgstr "未缓存软件源 '%s'。正在缓存中..."
 
-#: src/repos.cc:1801 src/repos.cc:1835
+#: src/repos.cc:1802 src/repos.cc:1836
 #, c-format, boost-format
 msgid "Problem loading data from '%s'"
 msgstr "从 '%s' 加载数据出现问题"
 
-#: src/repos.cc:1805
+#: src/repos.cc:1806
 #, c-format, boost-format
 msgid "Repository '%s' could not be refreshed. Using old cache."
 msgstr "无法刷新软件源 '%s'。正在使用旧缓存。"
 
-#: src/repos.cc:1809 src/repos.cc:1838
+#: src/repos.cc:1810 src/repos.cc:1839
 #, c-format, boost-format
 msgid "Resolvables from '%s' not loaded because of error."
 msgstr "由于某处错误未加载来自 '%s' 的可解析项。"
 
-#: src/repos.cc:1825
+#: src/repos.cc:1826
 #, boost-format
 msgid "Repository '%1%' metadata expired since %2%."
 msgstr "自 %2% 起，软件源 \"%1%\" 元数据已失效。"
 
 #. translators: the first %s is 'zypper refresh' and the second 'zypper clean -m'
-#: src/repos.cc:1837
+#: src/repos.cc:1838
 #, c-format, boost-format
 msgid "Try '%s', or even '%s' before doing so."
 msgstr "这么做前请先尝试 '%s'，甚至在那之前先尝试一下 '%s'。"
 
-#: src/repos.cc:1842
+#: src/repos.cc:1843
 msgid ""
 "Repository metadata expired: Check if 'autorefresh' is turned on (zypper "
 "lr), otherwise manually refresh the repository (zypper ref). If this does "
@@ -6042,30 +6044,30 @@ msgstr ""
 "软件源 (zypper ref)。如果这样无法解决问题，则可能是因为您使用的镜像已损坏或服"
 "务器实际上已停止支持该软件源。"
 
-#: src/repos.cc:1855
+#: src/repos.cc:1856
 msgid "Reading installed packages..."
 msgstr "正在读取已安装的软件包..."
 
-#: src/repos.cc:1864
+#: src/repos.cc:1865
 msgid "Problem occurred while reading the installed packages:"
 msgstr "读取已安装软件包时发生问题："
 
-#: src/repos.cc:1881
+#: src/repos.cc:1882
 #, c-format, boost-format
 msgid "'%s' looks like an RPM file. Will try to download it."
 msgstr "'%s' 貌似是一个 RPM 文件，将尝试下载之。"
 
-#: src/repos.cc:1890
+#: src/repos.cc:1891
 #, c-format, boost-format
 msgid "Problem with the RPM file specified as '%s', skipping."
 msgstr "指定为 '%s' 的 RPM 文件有问题，正在跳过。"
 
-#: src/repos.cc:1912
+#: src/repos.cc:1913
 #, c-format, boost-format
 msgid "Problem reading the RPM header of %s. Is it an RPM file?"
 msgstr "读取 %s 的 RPM 头部出现问题。它是一个 RPM 文件吗？"
 
-#: src/repos.cc:1932
+#: src/repos.cc:1933
 msgid "Plain RPM files cache"
 msgstr "纯 RPM 文件缓存"
 
@@ -6222,15 +6224,13 @@ msgstr "在 %s 成功生成了解算器试例。"
 msgid "Error creating the solver test case."
 msgstr "创建解算器试例出错。"
 
-#: src/solve-commit.cc:601
+#: src/solve-commit.cc:602
 msgid ""
-"DownloadAsNeeded can not be used with ZYPP_SINGLE_RPMTRANS=1, falling back "
-"to DownloadInAdvance"
+"Explicitly selecting DownloadAsNeeded also selects the classic_rpmtrans "
+"backend."
 msgstr ""
-"DownloadAsNeeded 不能与 ZYPP_SINGLE_RPMTRANS=1 一起使用，将回退为 "
-"DownloadInAdvance"
 
-#: src/solve-commit.cc:619
+#: src/solve-commit.cc:620
 #, c-format, boost-format
 msgid ""
 "Check for running processes using deleted libraries is disabled in zypper."
@@ -6239,11 +6239,11 @@ msgstr ""
 "检查使用了已删除函数库的运行中进程的功能在 zypper.conf 中禁用了。运行 '%s' 手"
 "动检查。"
 
-#: src/solve-commit.cc:635
+#: src/solve-commit.cc:636
 msgid "Skip check:"
 msgstr "跳过检查："
 
-#: src/solve-commit.cc:642
+#: src/solve-commit.cc:643
 #, boost-format
 msgid ""
 "There are running programs which still use files and libraries deleted or "
@@ -6253,39 +6253,39 @@ msgstr ""
 "某些运行中的程序仍在使用被最近升级所删除或更新的文件和函数库。应重启它们使其"
 "也能从最新更新中获益。运行 ‘%1%’ 列出这些程序。"
 
-#: src/solve-commit.cc:656
+#: src/solve-commit.cc:657
 msgid "Update notifications were received from the following packages:"
 msgstr "接收到了来自以下软件包的更新通知："
 
-#: src/solve-commit.cc:665
+#: src/solve-commit.cc:666
 #, c-format, boost-format
 msgid "Message from package %s:"
 msgstr "来自软件包 %s 的消息："
 
-#: src/solve-commit.cc:673
+#: src/solve-commit.cc:674
 msgid "y/n"
 msgstr "y/n"
 
-#: src/solve-commit.cc:674
+#: src/solve-commit.cc:675
 msgid "View the notifications now?"
 msgstr "现在查看通知吗？"
 
-#: src/solve-commit.cc:720
+#: src/solve-commit.cc:721
 msgid "Computing distribution upgrade..."
 msgstr "正在计算发行版升级..."
 
-#: src/solve-commit.cc:725
+#: src/solve-commit.cc:726
 msgid "Resolving package dependencies..."
 msgstr "正在解决软件包依赖关系..."
 
-#: src/solve-commit.cc:787
+#: src/solve-commit.cc:788
 msgid ""
 "Some of the dependencies of installed packages are broken. In order to fix "
 "these dependencies, the following actions need to be taken:"
 msgstr ""
 "已安装软件包的某些依赖关系已损坏。要修复这些依赖关系，需要执行以下动作："
 
-#: src/solve-commit.cc:794
+#: src/solve-commit.cc:795
 msgid "Root privileges are required to fix broken package dependencies."
 msgstr "修复受损的软件包依赖关系需要有 root 特权。"
 
@@ -6299,82 +6299,82 @@ msgstr "修复受损的软件包依赖关系需要有 root 特权。"
 #. The answers should be lower case letters, but in general, any UTF-8
 #. string will do.
 #. ! \todo add c for changelog and x for explain (show the dep tree)
-#: src/solve-commit.cc:816
+#: src/solve-commit.cc:817
 msgid "y/n/p/v/a/r/m/d/g"
 msgstr "y/n/p/v/a/r/m/d/g"
 
 #. translators: help text for 'y' option in the 'Continue?' prompt
-#: src/solve-commit.cc:821
+#: src/solve-commit.cc:822
 msgid ""
 "Yes, accept the summary and proceed with installation/removal of packages."
 msgstr "是，接受摘要并继续安装/移除软件包。"
 
 #. translators: help text for 'n' option in the 'Continue?' prompt
-#: src/solve-commit.cc:823
+#: src/solve-commit.cc:824
 msgid "No, cancel the operation."
 msgstr "否，取消操作。"
 
 #. translators: help text for 'p' option in the 'Continue?' prompt
-#: src/solve-commit.cc:825
+#: src/solve-commit.cc:826
 msgid ""
 "Restart solver in no-force-resolution mode in order to show dependency "
 "problems."
 msgstr "以不强行解决模式重启解算器以便显示依赖关系问题。"
 
 #. translators: help text for 'v' option in the 'Continue?' prompt
-#: src/solve-commit.cc:827
+#: src/solve-commit.cc:828
 msgid "Toggle display of package versions."
 msgstr "切换显示软件包版本。"
 
 #. translators: help text for 'a' option in the 'Continue?' prompt
-#: src/solve-commit.cc:829
+#: src/solve-commit.cc:830
 msgid "Toggle display of package architectures."
 msgstr "切换显示软件包架构。"
 
 #. translators: help text for 'r' option in the 'Continue?' prompt
-#: src/solve-commit.cc:831
+#: src/solve-commit.cc:832
 msgid ""
 "Toggle display of repositories from which the packages will be installed."
 msgstr "切换显示待安装软件包所属软件源。"
 
 #. translators: help text for 'm' option in the 'Continue?' prompt
-#: src/solve-commit.cc:833
+#: src/solve-commit.cc:834
 msgid "Toggle display of package vendor names."
 msgstr "切换显示软件包出品方名称。"
 
 #. translators: help text for 'd' option in the 'Continue?' prompt
-#: src/solve-commit.cc:835
+#: src/solve-commit.cc:836
 msgid "Toggle between showing all details and as few details as possible."
 msgstr "切换显示全部细节和最少细节。"
 
 #. translators: help text for 'g' option in the 'Continue?' prompt
-#: src/solve-commit.cc:837
+#: src/solve-commit.cc:838
 msgid "View the summary in pager."
 msgstr "在分页器中查看摘要。"
 
-#: src/solve-commit.cc:844
+#: src/solve-commit.cc:845
 msgid "Backend"
 msgstr "后端"
 
-#: src/solve-commit.cc:958
+#: src/solve-commit.cc:959
 msgid "committing"
 msgstr "正在提交"
 
-#: src/solve-commit.cc:960
+#: src/solve-commit.cc:961
 msgid "(dry run)"
 msgstr "(演习)"
 
-#: src/solve-commit.cc:988 src/solve-commit.cc:1021
+#: src/solve-commit.cc:989 src/solve-commit.cc:1023
 msgid "Problem retrieving the package file from the repository:"
 msgstr "从软件源检索软件包文件出现问题："
 
 #. translators: the first %s is 'zypper refresh' and the second is repo alias
-#: src/solve-commit.cc:1018
+#: src/solve-commit.cc:1020
 #, c-format, boost-format
 msgid "Repository '%s' is out of date. Running '%s' might help."
 msgstr "软件源 '%s' 已过时。运行 '%s' 可能有帮助。"
 
-#: src/solve-commit.cc:1029
+#: src/solve-commit.cc:1031
 msgid ""
 "The package integrity check failed. This may be a problem with the "
 "repository or media. Try one of the following:\n"
@@ -6391,17 +6391,17 @@ msgstr ""
 "－ 使用其它安装介质 (若当前介质已损坏)\n"
 "－ 使用其它软件源"
 
-#: src/solve-commit.cc:1043
+#: src/solve-commit.cc:1045
 msgid "Problem occurred during or after installation or removal of packages:"
 msgstr "安装/移除以下软件包期间或之后发生问题："
 
-#: src/solve-commit.cc:1082
+#: src/solve-commit.cc:1084
 msgid ""
 "One of the installed patches requires a reboot of your machine. Reboot as "
 "soon as possible."
 msgstr "已安装的某个补丁需要重启计算机。请尽快重启。"
 
-#: src/solve-commit.cc:1095
+#: src/solve-commit.cc:1097
 msgid ""
 "One of the installed patches affects the package manager itself. Run this "
 "command once more to install any other needed patches."
@@ -6409,7 +6409,7 @@ msgstr ""
 "已安装的某个补丁影响到了软件包管理器自身。请再次运行此命令来安装全部其它所需"
 "补丁。"
 
-#: src/solve-commit.cc:1117
+#: src/solve-commit.cc:1119
 msgid "Dependencies of all installed packages are satisfied."
 msgstr "已满足全部已安装软件包的依赖关系。"
 
@@ -7058,6 +7058,13 @@ msgstr "无效对象"
 #: src/utils/prompt.h:102
 msgid "Error"
 msgstr "错误"
+
+#~ msgid ""
+#~ "DownloadAsNeeded can not be used with ZYPP_SINGLE_RPMTRANS=1, falling "
+#~ "back to DownloadInAdvance"
+#~ msgstr ""
+#~ "DownloadAsNeeded 不能与 ZYPP_SINGLE_RPMTRANS=1 一起使用，将回退为 "
+#~ "DownloadInAdvance"
 
 #~ msgid "info (if) [OPTIONS] <NAME> ..."
 #~ msgstr "info (if) [选项] <名称> ..."

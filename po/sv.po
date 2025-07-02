@@ -11,11 +11,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-13 16:49+0100\n"
+"POT-Creation-Date: 2025-07-02 13:50+0200\n"
 "PO-Revision-Date: 2025-03-24 05:56+0000\n"
 "Last-Translator: Luna  Jernberg <bittin@opensuse.org>\n"
-"Language-Team: Swedish <https://l10n.opensuse.org/projects/zypper/master/sv/>"
-"\n"
+"Language-Team: Swedish <https://l10n.opensuse.org/projects/zypper/master/sv/"
+">\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1989,38 +1989,38 @@ msgstr "Lösenord"
 msgid "Preloading Packages"
 msgstr "Förladdar paket"
 
-#: src/callbacks/media.h:209
+#: src/callbacks/media.h:211
 msgid "Preloading Packages:"
 msgstr "Förladdar paket:"
 
-#: src/callbacks/media.h:234 src/callbacks/media.h:256
+#: src/callbacks/media.h:263
 msgid "Preloading:"
 msgstr "Förladdar:"
 
 #. Translator: prefetch progress bar result: ".............[done]"
-#: src/callbacks/media.h:266
+#: src/callbacks/media.h:278
 msgid "done"
 msgstr "klar"
 
 #. Translator: prefetch progress bar result: "........[not found]"
-#: src/callbacks/media.h:271
+#: src/callbacks/media.h:283
 msgid "not found"
 msgstr "hittades inte"
 
 #. Translator: prefetch progress bar result: "............[error]"
-#: src/callbacks/media.h:278
+#: src/callbacks/media.h:290
 msgid "error"
 msgstr "fel"
 
-#: src/callbacks/media.h:294
+#: src/callbacks/media.h:307
 msgid "Preload finished."
 msgstr "Förladdning slutförd."
 
-#: src/callbacks/media.h:299
+#: src/callbacks/media.h:312
 msgid "success"
 msgstr "lyckades"
 
-#: src/callbacks/media.h:302
+#: src/callbacks/media.h:315
 msgid "files missing"
 msgstr "filer saknas"
 
@@ -3198,12 +3198,12 @@ msgstr ""
 msgid "Write debug output to file <path>."
 msgstr "Skriv felsökningsutdata till en fil <path>."
 
-#: src/commands/ps.cc:72 src/solve-commit.cc:633
+#: src/commands/ps.cc:72 src/solve-commit.cc:634
 msgid "Check failed:"
 msgstr "Kontrollen misslyckades:"
 
 #. Here: Table output
-#: src/commands/ps.cc:127 src/solve-commit.cc:622
+#: src/commands/ps.cc:127 src/solve-commit.cc:623
 msgid "Checking for running processes using deleted libraries..."
 msgstr "Kontrollerar om processer som körs använder borttagna bibliotek..."
 
@@ -3622,7 +3622,7 @@ msgstr "Alias"
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/commands/repos/list.cc:51 src/commands/repos/list.cc:54
 #: src/commands/repos/list.cc:292 src/commands/services/add.cc:83
-#: src/commands/services/list.cc:118 src/repos.cc:1248
+#: src/commands/services/list.cc:118 src/repos.cc:1249
 #: src/utils/flags/zyppflags.h:49
 msgid "URI"
 msgstr "uri"
@@ -3631,27 +3631,27 @@ msgstr "uri"
 #. translators: property name; short; used like "Name: value"
 #: src/commands/repos/list.cc:58 src/commands/repos/list.cc:244
 #: src/commands/services/add.cc:85 src/commands/services/list.cc:108
-#: src/repos.cc:1250
+#: src/repos.cc:1251
 msgid "Enabled"
 msgstr "Aktiverad"
 
 #. GPG Check
 #. translators: property name; short; used like "Name: value"
 #: src/commands/repos/list.cc:59 src/commands/repos/list.cc:248
-#: src/commands/services/list.cc:109 src/repos.cc:1252
+#: src/commands/services/list.cc:109 src/repos.cc:1253
 msgid "GPG Check"
 msgstr "GPG-kontroll"
 
 #. translators: repository priority (in zypper repos -p or -d)
 #. translators: property name; short; used like "Name: value"
 #: src/commands/repos/list.cc:60 src/commands/repos/list.cc:276
-#: src/commands/services/list.cc:115 src/repos.cc:1256
+#: src/commands/services/list.cc:115 src/repos.cc:1257
 msgid "Priority"
 msgstr "Prioritet"
 
 #. translators: property name; short; used like "Name: value"
 #: src/commands/repos/list.cc:61 src/commands/services/add.cc:87
-#: src/repos.cc:1254
+#: src/repos.cc:1255
 msgid "Autorefresh"
 msgstr "Automatisk uppdatering"
 
@@ -3705,7 +3705,7 @@ msgid "Export all defined repositories as a single local .repo file."
 msgstr ""
 "Exportera alla definierade lagringsplatser som en enskild lokal .repo-fil."
 
-#: src/commands/repos/list.cc:129 src/repos.cc:1005
+#: src/commands/repos/list.cc:129 src/repos.cc:1006
 msgid "Error reading repositories:"
 msgstr "Fel vid läsning av förråd:"
 
@@ -3847,7 +3847,7 @@ msgstr "Det globala alternativet %s har ingen effekt här."
 msgid "Arguments are not allowed if '%s' is used."
 msgstr "Det går inte att använda argument om %s används."
 
-#: src/commands/repos/refresh.cc:239 src/repos.cc:1017
+#: src/commands/repos/refresh.cc:239 src/repos.cc:1018
 msgid "Specified repositories: "
 msgstr "Angivna förråd: "
 
@@ -3856,7 +3856,7 @@ msgstr "Angivna förråd: "
 msgid "Refreshing repository '%s'."
 msgstr "Uppdaterar förrådet '%s'."
 
-#: src/commands/repos/refresh.cc:280 src/repos.cc:842
+#: src/commands/repos/refresh.cc:280 src/repos.cc:843
 #, c-format, boost-format
 msgid "Scanning content of disabled repository '%s'."
 msgstr "Hoppar över inaktiverat arkiv '%s'."
@@ -3866,7 +3866,7 @@ msgstr "Hoppar över inaktiverat arkiv '%s'."
 msgid "Skipping disabled repository '%s'"
 msgstr "Hoppar över inaktiverat förråd '%s'"
 
-#: src/commands/repos/refresh.cc:306 src/repos.cc:860 src/repos.cc:907
+#: src/commands/repos/refresh.cc:306 src/repos.cc:861 src/repos.cc:908
 #, c-format, boost-format
 msgid "Skipping repository '%s' because of the above error."
 msgstr "Förrådet %s ignoreras på grund av felet ovan."
@@ -3893,7 +3893,7 @@ msgstr "Lägg till eller aktivera arkiv med hjälp av kommandona %s eller %s."
 msgid "Could not refresh the repositories because of errors."
 msgstr "Det gick inte att uppdatera förrådet på grund av fel."
 
-#: src/commands/repos/refresh.cc:342 src/repos.cc:936
+#: src/commands/repos/refresh.cc:342 src/repos.cc:937
 msgid "Some of the repositories have not been refreshed because of an error."
 msgstr "Några av arkiven har inte uppdaterats på grund av ett fel."
 
@@ -3948,12 +3948,12 @@ msgstr ""
 msgid "Repository '%s' renamed to '%s'."
 msgstr "Förrådet '%s' har bytt namn till '%s'."
 
-#: src/commands/repos/rename.cc:47 src/repos.cc:1196
+#: src/commands/repos/rename.cc:47 src/repos.cc:1197
 #, c-format, boost-format
 msgid "Repository named '%s' already exists. Please use another alias."
 msgstr "Förrådet '%s' finns redan. Använd ett annat alias."
 
-#: src/commands/repos/rename.cc:52 src/repos.cc:1674
+#: src/commands/repos/rename.cc:52 src/repos.cc:1675
 msgid "Error while modifying the repository:"
 msgstr "Ett fel uppstod när förrådet skulle ändras:"
 
@@ -4417,7 +4417,7 @@ msgstr ""
 "Som --details, med ytterligare information där sökningen har gett "
 "matchningar (användbart för sökning i beroenden)."
 
-#: src/commands/search/search.cc:298 src/repos.cc:779
+#: src/commands/search/search.cc:298 src/repos.cc:780
 #, c-format, boost-format
 msgid "Specified repository '%s' is disabled."
 msgstr "Den angivna lagringsplatsen \"%s\" är inaktiverad."
@@ -4435,7 +4435,7 @@ msgstr "Ett problem uppstod när sökfrågan initierades eller kördes"
 msgid "See the above message for a hint."
 msgstr "Mer information finns i meddelandet ovan."
 
-#: src/commands/search/search.cc:505 src/repos.cc:984
+#: src/commands/search/search.cc:505 src/repos.cc:985
 msgid "Running 'zypper refresh' as root might resolve the problem."
 msgstr ""
 "Problemet kan eventuellt lösas genom att köra \"zypper refresh\" som root."
@@ -4532,7 +4532,7 @@ msgid "Problem retrieving the repository index file for service '%s':"
 msgstr "Det gick inte att hämta förrådsindexfilen för tjänsten '%s':"
 
 #: src/commands/services/common.cc:138 src/commands/services/refresh.cc:226
-#: src/repos.cc:1726
+#: src/repos.cc:1727
 #, c-format, boost-format
 msgid "Skipping service '%s' because of the above error."
 msgstr "Hoppar över tjänsten %s på grund av felet ovan."
@@ -5192,7 +5192,7 @@ msgstr ""
 msgid "Argument resolves to no package"
 msgstr "Argumentet matchar inget paket"
 
-#: src/commands/utils/download.cc:254 src/solve-commit.cc:1119
+#: src/commands/utils/download.cc:254 src/solve-commit.cc:1121
 msgid "Nothing to do."
 msgstr "Ingenting att göra."
 
@@ -5958,52 +5958,52 @@ msgstr[1] "%1% lagringsplatser"
 msgid "Checking whether to refresh metadata for %s"
 msgstr "Kontrollerar om metadata för %s måste uppdateras"
 
-#: src/repos.cc:256
+#: src/repos.cc:257
 #, c-format, boost-format
 msgid "Repository '%s' is up to date."
 msgstr "Förrådet \"%s\" är uppdaterat."
 
-#: src/repos.cc:262
+#: src/repos.cc:263
 #, c-format, boost-format
 msgid "The up-to-date check of '%s' has been delayed."
 msgstr "Aktualitetskontrollen av %s har försenats."
 
-#: src/repos.cc:284
+#: src/repos.cc:285
 msgid "Forcing raw metadata refresh"
 msgstr "Tvingar uppdatering av rå metadata"
 
-#: src/repos.cc:290
+#: src/repos.cc:291
 #, c-format, boost-format
 msgid "Retrieving repository '%s' metadata"
 msgstr "Hämtar metadata för förrådet \"%s\""
 
-#: src/repos.cc:314
+#: src/repos.cc:315
 #, c-format, boost-format
 msgid "Do you want to disable the repository %s permanently?"
 msgstr "Vill du inaktivera lagringsplatsen %s permanent?"
 
-#: src/repos.cc:330
+#: src/repos.cc:331
 #, c-format, boost-format
 msgid "Error while disabling repository '%s'."
 msgstr "Fel när lagringsplatsen %s inaktiverades."
 
-#: src/repos.cc:346
+#: src/repos.cc:347
 #, c-format, boost-format
 msgid "Problem retrieving files from '%s'."
 msgstr "Det gick inte att hämta filer från %s."
 
-#: src/repos.cc:347 src/repos.cc:1865 src/solve-commit.cc:989
-#: src/solve-commit.cc:1020 src/solve-commit.cc:1044
+#: src/repos.cc:348 src/repos.cc:1866 src/solve-commit.cc:990
+#: src/solve-commit.cc:1022 src/solve-commit.cc:1046
 msgid "Please see the above error message for a hint."
 msgstr "Mer information visas i felmeddelandet ovan."
 
-#: src/repos.cc:359
+#: src/repos.cc:360
 #, c-format, boost-format
 msgid "No URIs defined for '%s'."
 msgstr "Ingen URI har definierats för %s."
 
 #. TranslatorExplanation the first %s is a .repo file path
-#: src/repos.cc:364
+#: src/repos.cc:365
 #, c-format, boost-format
 msgid ""
 "Please add one or more base URI (baseurl=URI) entries to %s for repository "
@@ -6012,16 +6012,16 @@ msgstr ""
 "Lägg till en eller flera bas-URI-poster (basurl=URI) i %s för förrådet "
 "\"%s\"."
 
-#: src/repos.cc:378
+#: src/repos.cc:379
 msgid "No alias defined for this repository."
 msgstr "Inget alias har definierats för förrådet."
 
-#: src/repos.cc:390
+#: src/repos.cc:391
 #, c-format, boost-format
 msgid "Repository '%s' is invalid."
 msgstr "Förrådet \"%s\" är ogiltigt."
 
-#: src/repos.cc:391
+#: src/repos.cc:392
 msgid ""
 "Please check if the URIs defined for this repository are pointing to a valid "
 "repository."
@@ -6029,22 +6029,22 @@ msgstr ""
 "Kontrollera att URI:er som har definierats för förrådet pekar på ett giltigt "
 "förråd."
 
-#: src/repos.cc:403
+#: src/repos.cc:404
 #, c-format, boost-format
 msgid "Error retrieving metadata for '%s':"
 msgstr "Ett fel uppstod när metadata för %s hämtades:"
 
-#: src/repos.cc:416
+#: src/repos.cc:417
 msgid "Forcing building of repository cache"
 msgstr "Tvingar uppbyggnad av cache för förråd"
 
-#: src/repos.cc:441
+#: src/repos.cc:442
 #, c-format, boost-format
 msgid "Error parsing metadata for '%s':"
 msgstr "Ett fel uppstod när metadata för %s tolkades:"
 
 #. TranslatorExplanation Don't translate the URL unless it is translated, too
-#: src/repos.cc:443
+#: src/repos.cc:444
 msgid ""
 "This may be caused by invalid metadata in the repository, or by a bug in the "
 "metadata parser. In the latter case, or if in doubt, please, file a bug "
@@ -6056,44 +6056,44 @@ msgstr ""
 "du en felrapport genom att följa instruktionerna på http://en.opensuse.org/"
 "Zypper/Troubleshooting"
 
-#: src/repos.cc:452
+#: src/repos.cc:453
 #, c-format, boost-format
 msgid "Repository metadata for '%s' not found in local cache."
 msgstr ""
 "Det gick inte att hitta förrådsmetadata för %s i det lokala cacheminnet."
 
-#: src/repos.cc:460
+#: src/repos.cc:461
 msgid "Error building the cache:"
 msgstr "Det uppstod ett fel när cachen skapades:"
 
-#: src/repos.cc:679
+#: src/repos.cc:680
 #, c-format, boost-format
 msgid "Repository '%s' not found by its alias, number, or URI."
 msgstr "Kunde inte hitta förrådet \"%s\" med hjälp av alias, nummer eller URI."
 
-#: src/repos.cc:681
+#: src/repos.cc:682
 #, c-format, boost-format
 msgid "Use '%s' to get the list of defined repositories."
 msgstr "Hämta listan över de definierade arkiven med hjälp av %s."
 
-#: src/repos.cc:701
+#: src/repos.cc:702
 #, c-format, boost-format
 msgid "Ignoring disabled repository '%s'"
 msgstr "Hoppar över inaktiverad lagringsplats \"%s\""
 
-#: src/repos.cc:785
+#: src/repos.cc:786
 #, c-format, boost-format
 msgid "Global option '%s' can be used to temporarily enable repositories."
 msgstr ""
 "Det globala alternativet %s 1 kan användas för att tillfälligt aktivera "
 "lagringsplatser."
 
-#: src/repos.cc:801 src/repos.cc:807
+#: src/repos.cc:802 src/repos.cc:808
 #, c-format, boost-format
 msgid "Ignoring repository '%s' because of '%s' option."
 msgstr "Ignorerar förrådet \"%s\" på grund av alternativet \"%s\"."
 
-#: src/repos.cc:828 src/repos.cc:921
+#: src/repos.cc:829 src/repos.cc:922
 #, c-format, boost-format
 msgid "Temporarily enabling repository '%s'."
 msgstr "Inaktiverar arkivet %s."
@@ -6101,7 +6101,7 @@ msgstr "Inaktiverar arkivet %s."
 #. bsc#1235636: Asks to suppress reporting the Exception (usually: No permission to
 #. write repository cache), because it scares. This was was indeed the legacy behavior:
 #. SUPPRESS: zypper.out().error( ex, "Problem" );
-#: src/repos.cc:885
+#: src/repos.cc:886
 #, c-format, boost-format
 msgid ""
 "Repository '%s' is out-of-date. You can run 'zypper refresh' as root to "
@@ -6110,7 +6110,7 @@ msgstr ""
 "Förrådet \"%s\" är inaktuellt. Du kan uppdatera det genom att köra \"zypper "
 "refresh\" som root."
 
-#: src/repos.cc:902
+#: src/repos.cc:903
 #, c-format, boost-format
 msgid ""
 "The metadata cache needs to be built for the '%s' repository. You can run "
@@ -6119,83 +6119,83 @@ msgstr ""
 "Cacheminnet för metadata måste skapas för förrådet \"%s\". Gör det genom att "
 "köra \"zypper refresh\" som root."
 
-#: src/repos.cc:928
+#: src/repos.cc:929
 #, c-format, boost-format
 msgid "Repository '%s' stays disabled."
 msgstr "Arkivet %s är ogiltigt."
 
-#: src/repos.cc:975
+#: src/repos.cc:976
 msgid "Initializing Target"
 msgstr "Målet initieras"
 
-#: src/repos.cc:983
+#: src/repos.cc:984
 msgid "Target initialization failed:"
 msgstr "Det gick inte att initiera mål:"
 
-#: src/repos.cc:1065
+#: src/repos.cc:1066
 #, c-format, boost-format
 msgid "Cleaning metadata cache for '%s'."
 msgstr "Rensa cacheminnet för metadata för %s."
 
-#: src/repos.cc:1073
+#: src/repos.cc:1074
 #, c-format, boost-format
 msgid "Cleaning raw metadata cache for '%s'."
 msgstr "Rensar cacheminnet för raw-metadata för %s."
 
-#: src/repos.cc:1079
+#: src/repos.cc:1080
 #, c-format, boost-format
 msgid "Keeping raw metadata cache for %s '%s'."
 msgstr "Behåll cacheminnet för raw-metadata för %s '%s'."
 
 #. translators: meaning the cached rpm files
-#: src/repos.cc:1086
+#: src/repos.cc:1087
 #, c-format, boost-format
 msgid "Cleaning packages for '%s'."
 msgstr "Rensar paket för %s."
 
-#: src/repos.cc:1094
+#: src/repos.cc:1095
 #, c-format, boost-format
 msgid "Cannot clean repository '%s' because of an error."
 msgstr "Kan inte rensa förrådet '%s' på grund av ett fel."
 
-#: src/repos.cc:1105
+#: src/repos.cc:1106
 msgid "Cleaning installed packages cache."
 msgstr "Rensar installerade paketcache."
 
-#: src/repos.cc:1114
+#: src/repos.cc:1115
 msgid "Cannot clean installed packages cache because of an error."
 msgstr ""
 "Det gick inte att rensa cacheminnet för de installerade paketen på grund av "
 "ett fel."
 
-#: src/repos.cc:1132
+#: src/repos.cc:1133
 msgid "Could not clean the repositories because of errors."
 msgstr "Det gick inte att rensa arkiven på grund av fel."
 
-#: src/repos.cc:1138
+#: src/repos.cc:1139
 msgid "Some of the repositories have not been cleaned up because of an error."
 msgstr "Några av arkiven har inte rensats på grund av ett fel."
 
-#: src/repos.cc:1143
+#: src/repos.cc:1144
 msgid "Specified repositories have been cleaned up."
 msgstr "De angivna arkiven har rensats."
 
-#: src/repos.cc:1145
+#: src/repos.cc:1146
 msgid "All repositories have been cleaned up."
 msgstr "Alla arkiv har rensats."
 
-#: src/repos.cc:1167
+#: src/repos.cc:1168
 msgid "This is a changeable read-only media (CD/DVD), disabling autorefresh."
 msgstr ""
 "Det här är en ändringsbar, skrivskyddad skiva (CD/DVD). Inaktivera "
 "automatisk uppdatering."
 
-#: src/repos.cc:1188
+#: src/repos.cc:1189
 #, c-format, boost-format
 msgid "Invalid repository alias: '%s'"
 msgstr "Ogiltigt arkivalias: %s"
 
-#: src/repos.cc:1205
+#: src/repos.cc:1206
 msgid ""
 "Could not determine the type of the repository. Please check if the defined "
 "URIs (see below) point to a valid repository:"
@@ -6203,25 +6203,25 @@ msgstr ""
 "Kunde inte avgöra förrådets typ. Vänligen kontrollera att den angivna URI:en "
 "(se nedan) pekar på ett giltigt förråd:"
 
-#: src/repos.cc:1211
+#: src/repos.cc:1212
 msgid "Can't find a valid repository at given location:"
 msgstr "Kan inte hitta ett giltigt förråd på angiven plats:"
 
-#: src/repos.cc:1219
+#: src/repos.cc:1220
 msgid "Problem transferring repository data from specified URI:"
 msgstr "Det gick inte att överföra förråddata från den angivna URI:n:"
 
-#: src/repos.cc:1220
+#: src/repos.cc:1221
 msgid "Please check whether the specified URI is accessible."
 msgstr "Kontrollera att den angivna URI:n går att nå."
 
-#: src/repos.cc:1227
+#: src/repos.cc:1228
 msgid "Unknown problem when adding repository:"
 msgstr "Ett okänt problem uppstod när förrådet lades till:"
 
 #. translators: BOOST STYLE POSITIONAL DIRECTIVES ( %N% )
 #. translators: %1% - a repository name
-#: src/repos.cc:1237
+#: src/repos.cc:1238
 #, boost-format
 msgid ""
 "GPG checking is disabled in configuration of repository '%1%'. Integrity and "
@@ -6230,135 +6230,135 @@ msgstr ""
 "GPG-kontroll har inaktiverats i konfigurationen för lagringsplatsen %1%. "
 "Paketets integritet och ursprung kan inte verifieras."
 
-#: src/repos.cc:1242
+#: src/repos.cc:1243
 #, c-format, boost-format
 msgid "Repository '%s' successfully added"
 msgstr "Förrådet '%s' har lagts till"
 
-#: src/repos.cc:1268
+#: src/repos.cc:1269
 #, c-format, boost-format
 msgid "Reading data from '%s' media"
 msgstr "Läser data från '%s'-media"
 
-#: src/repos.cc:1274
+#: src/repos.cc:1275
 #, c-format, boost-format
 msgid "Problem reading data from '%s' media"
 msgstr "Ett fel uppstod när data skulle läsas in från \"%s\"-media"
 
-#: src/repos.cc:1275
+#: src/repos.cc:1276
 msgid "Please check if your installation media is valid and readable."
 msgstr "Kontrollera att installationsskivan är giltig och läsbar."
 
-#: src/repos.cc:1282
+#: src/repos.cc:1283
 #, c-format, boost-format
 msgid "Reading data from '%s' media is delayed until next refresh."
 msgstr "Läsning av data från %s medier senareläggs till nästa uppdatering."
 
-#: src/repos.cc:1351
+#: src/repos.cc:1352
 msgid "Problem accessing the file at the specified URI"
 msgstr "Det gick inte att nå filen på den angivna URI:n"
 
-#: src/repos.cc:1352
+#: src/repos.cc:1353
 msgid "Please check if the URI is valid and accessible."
 msgstr "Kontrollera att URI:n är giltig och går att öppna."
 
-#: src/repos.cc:1359
+#: src/repos.cc:1360
 msgid "Problem parsing the file at the specified URI"
 msgstr "Det gick inte att tolka filen på den angivna URI:n"
 
 #. TranslatorExplanation Don't translate the '.repo' string.
-#: src/repos.cc:1361
+#: src/repos.cc:1362
 msgid "Is it a .repo file?"
 msgstr "Är det en REPO-fil?"
 
-#: src/repos.cc:1368
+#: src/repos.cc:1369
 msgid "Problem encountered while trying to read the file at the specified URI"
 msgstr "Det gick inte att läsa filen på den angivna URI:n"
 
-#: src/repos.cc:1381
+#: src/repos.cc:1382
 msgid "Repository with no alias defined found in the file, skipping."
 msgstr "Ett förråd utan alias hittades i filen. Det hoppas över."
 
-#: src/repos.cc:1387
+#: src/repos.cc:1388
 #, c-format, boost-format
 msgid "Repository '%s' has no URI defined, skipping."
 msgstr "Förrådet '%s' har ingen URI. Det hoppas över."
 
-#: src/repos.cc:1435
+#: src/repos.cc:1436
 #, c-format, boost-format
 msgid "Repository '%s' has been removed."
 msgstr "Förrådet '%s' har tagits bort."
 
-#: src/repos.cc:1583
+#: src/repos.cc:1584
 #, c-format, boost-format
 msgid "Repository '%s' priority has been left unchanged (%d)"
 msgstr "Prioriteten för förrådet '%s' är oförändrad (%d)"
 
-#: src/repos.cc:1616
+#: src/repos.cc:1617
 #, c-format, boost-format
 msgid "Repository '%s' has been successfully enabled."
 msgstr "Arkivet %s har aktiverats."
 
-#: src/repos.cc:1618
+#: src/repos.cc:1619
 #, c-format, boost-format
 msgid "Repository '%s' has been successfully disabled."
 msgstr "Arkivet %s har inaktiverats."
 
-#: src/repos.cc:1625
+#: src/repos.cc:1626
 #, c-format, boost-format
 msgid "Autorefresh has been enabled for repository '%s'."
 msgstr "Automatisk uppdatering har aktiverats för förrådet '%s'."
 
-#: src/repos.cc:1627
+#: src/repos.cc:1628
 #, c-format, boost-format
 msgid "Autorefresh has been disabled for repository '%s'."
 msgstr "Den automatiska uppdateringen har inaktiverats för förrådet '%s'."
 
-#: src/repos.cc:1634
+#: src/repos.cc:1635
 #, c-format, boost-format
 msgid "RPM files caching has been enabled for repository '%s'."
 msgstr "Cachelagring av RPM-filer har aktiverats för förrådet '%s'."
 
-#: src/repos.cc:1636
+#: src/repos.cc:1637
 #, c-format, boost-format
 msgid "RPM files caching has been disabled for repository '%s'."
 msgstr "Cachelagring av RPM-filer har inaktiverats för förrådet '%s'."
 
-#: src/repos.cc:1643
+#: src/repos.cc:1644
 #, c-format, boost-format
 msgid "GPG check has been enabled for repository '%s'."
 msgstr "GPG-kontroll har aktiverats för lagringsplatsen \"%s\"."
 
-#: src/repos.cc:1645
+#: src/repos.cc:1646
 #, c-format, boost-format
 msgid "GPG check has been disabled for repository '%s'."
 msgstr "GPG-kontroll har inaktiverats för lagringsplatsen \"%s\"."
 
-#: src/repos.cc:1651
+#: src/repos.cc:1652
 #, c-format, boost-format
 msgid "Repository '%s' priority has been set to %d."
 msgstr "Prioriteten för förrådet '%s' har satts till %d."
 
-#: src/repos.cc:1657
+#: src/repos.cc:1658
 #, c-format, boost-format
 msgid "Name of repository '%s' has been set to '%s'."
 msgstr "Förrådet '%s' har fått namnet '%s'."
 
-#: src/repos.cc:1668
+#: src/repos.cc:1669
 #, c-format, boost-format
 msgid "Nothing to change for repository '%s'."
 msgstr "Det finns inget att ändra för förrådet '%s'."
 
-#: src/repos.cc:1675
+#: src/repos.cc:1676
 #, c-format, boost-format
 msgid "Leaving repository %s unchanged."
 msgstr "Förrådet '%s' lämnas oförändrat."
 
-#: src/repos.cc:1762
+#: src/repos.cc:1763
 msgid "Loading repository data..."
 msgstr "Läser in förrådsdata..."
 
-#: src/repos.cc:1764
+#: src/repos.cc:1765
 msgid ""
 "No repositories defined. Operating only with the installed resolvables. "
 "Nothing can be installed."
@@ -6366,44 +6366,44 @@ msgstr ""
 "Inga arkiv definierade. Endast de installerade resurserna används. Inget kan "
 "installeras."
 
-#: src/repos.cc:1787
+#: src/repos.cc:1788
 #, c-format, boost-format
 msgid "Retrieving repository '%s' data..."
 msgstr "Hämtar data för förrådet '%s'..."
 
-#: src/repos.cc:1795
+#: src/repos.cc:1796
 #, c-format, boost-format
 msgid "Repository '%s' not cached. Caching..."
 msgstr "Förrådet '%s' är inte cachat. Cachar..."
 
-#: src/repos.cc:1801 src/repos.cc:1835
+#: src/repos.cc:1802 src/repos.cc:1836
 #, c-format, boost-format
 msgid "Problem loading data from '%s'"
 msgstr "Ett problem uppstod när data skulle läsas in från '%s'"
 
-#: src/repos.cc:1805
+#: src/repos.cc:1806
 #, c-format, boost-format
 msgid "Repository '%s' could not be refreshed. Using old cache."
 msgstr ""
 "Det gick inte att uppdatera lagringsplatsen '%s'. Använder gammal cache."
 
-#: src/repos.cc:1809 src/repos.cc:1838
+#: src/repos.cc:1810 src/repos.cc:1839
 #, c-format, boost-format
 msgid "Resolvables from '%s' not loaded because of error."
 msgstr "Resurser från \"%s\" har inte lästs in eftersom ett fel uppstod."
 
-#: src/repos.cc:1825
+#: src/repos.cc:1826
 #, boost-format
 msgid "Repository '%1%' metadata expired since %2%."
 msgstr "Förråd '%1%' metadata löpt ut sedan %2%."
 
 #. translators: the first %s is 'zypper refresh' and the second 'zypper clean -m'
-#: src/repos.cc:1837
+#: src/repos.cc:1838
 #, c-format, boost-format
 msgid "Try '%s', or even '%s' before doing so."
 msgstr "Prova '%s', eller till och med '%s', innan du gör så här."
 
-#: src/repos.cc:1842
+#: src/repos.cc:1843
 msgid ""
 "Repository metadata expired: Check if 'autorefresh' is turned on (zypper "
 "lr), otherwise manually refresh the repository (zypper ref). If this does "
@@ -6415,30 +6415,30 @@ msgstr ""
 "Om detta inte löser problemet kan det bero på att du använder en trasig "
 "spegel eller så har servern faktiskt slutat att stödja förrådet."
 
-#: src/repos.cc:1855
+#: src/repos.cc:1856
 msgid "Reading installed packages..."
 msgstr "Läser installerade paket..."
 
-#: src/repos.cc:1864
+#: src/repos.cc:1865
 msgid "Problem occurred while reading the installed packages:"
 msgstr "Ett problem uppstod vid läsning av de installerade paketen:"
 
-#: src/repos.cc:1881
+#: src/repos.cc:1882
 #, c-format, boost-format
 msgid "'%s' looks like an RPM file. Will try to download it."
 msgstr "%s ser ut som en RPM-fil. Ett försök att hämta den görs."
 
-#: src/repos.cc:1890
+#: src/repos.cc:1891
 #, c-format, boost-format
 msgid "Problem with the RPM file specified as '%s', skipping."
 msgstr "Det uppstod ett problem med RPM-filen %s. Den hoppas över."
 
-#: src/repos.cc:1912
+#: src/repos.cc:1913
 #, c-format, boost-format
 msgid "Problem reading the RPM header of %s. Is it an RPM file?"
 msgstr "Det går inte att läsa RPM-huvudet i %s. Är det en RPM-fil?"
 
-#: src/repos.cc:1932
+#: src/repos.cc:1933
 msgid "Plain RPM files cache"
 msgstr "Enkel RPM-filcache"
 
@@ -6602,15 +6602,13 @@ msgstr "Testfallet för problemlösaren skapades på %s."
 msgid "Error creating the solver test case."
 msgstr "Det gick inte att skapa ett testfall för problemlösaren."
 
-#: src/solve-commit.cc:601
+#: src/solve-commit.cc:602
 msgid ""
-"DownloadAsNeeded can not be used with ZYPP_SINGLE_RPMTRANS=1, falling back "
-"to DownloadInAdvance"
+"Explicitly selecting DownloadAsNeeded also selects the classic_rpmtrans "
+"backend."
 msgstr ""
-"DownloadAsNeeded kan inte användas med ZYPP_SINGLE_RPMTRANS=1, faller "
-"tillbaka till DownloadInAdvance"
 
-#: src/solve-commit.cc:619
+#: src/solve-commit.cc:620
 #, c-format, boost-format
 msgid ""
 "Check for running processes using deleted libraries is disabled in zypper."
@@ -6619,11 +6617,11 @@ msgstr ""
 "Sökning efter processer som körs och använder borttagna bibliotek är "
 "inaktiverad i zypper.conf. Kör '%s' om du vill söka manuellt."
 
-#: src/solve-commit.cc:635
+#: src/solve-commit.cc:636
 msgid "Skip check:"
 msgstr "Hoppa över kontrollen:"
 
-#: src/solve-commit.cc:642
+#: src/solve-commit.cc:643
 #, boost-format
 msgid ""
 "There are running programs which still use files and libraries deleted or "
@@ -6635,32 +6633,32 @@ msgstr ""
 "att dra fördel av de senaste uppdateringarna. Kör '%1%' för att lista dessa "
 "program."
 
-#: src/solve-commit.cc:656
+#: src/solve-commit.cc:657
 msgid "Update notifications were received from the following packages:"
 msgstr "Uppdateringsmeddelanden mottogs från följande paket:"
 
-#: src/solve-commit.cc:665
+#: src/solve-commit.cc:666
 #, c-format, boost-format
 msgid "Message from package %s:"
 msgstr "Meddelande från paketet %s:"
 
-#: src/solve-commit.cc:673
+#: src/solve-commit.cc:674
 msgid "y/n"
 msgstr "j/n"
 
-#: src/solve-commit.cc:674
+#: src/solve-commit.cc:675
 msgid "View the notifications now?"
 msgstr "Vill du visa meddelandena nu?"
 
-#: src/solve-commit.cc:720
+#: src/solve-commit.cc:721
 msgid "Computing distribution upgrade..."
 msgstr "Beräknar distributionsuppgradering..."
 
-#: src/solve-commit.cc:725
+#: src/solve-commit.cc:726
 msgid "Resolving package dependencies..."
 msgstr "Översätter paketberoenden..."
 
-#: src/solve-commit.cc:787
+#: src/solve-commit.cc:788
 msgid ""
 "Some of the dependencies of installed packages are broken. In order to fix "
 "these dependencies, the following actions need to be taken:"
@@ -6668,7 +6666,7 @@ msgstr ""
 "Några av de installerade paketens beroenden är brutna. Rätta till beroendena "
 "så här:"
 
-#: src/solve-commit.cc:794
+#: src/solve-commit.cc:795
 msgid "Root privileges are required to fix broken package dependencies."
 msgstr ""
 "Det behövs root-behörighet för att kunna åtgärda brutna paketberoenden."
@@ -6683,12 +6681,12 @@ msgstr ""
 #. The answers should be lower case letters, but in general, any UTF-8
 #. string will do.
 #. ! \todo add c for changelog and x for explain (show the dep tree)
-#: src/solve-commit.cc:816
+#: src/solve-commit.cc:817
 msgid "y/n/p/v/a/r/m/d/g"
 msgstr "j/n/p/v/b/a/l/d/s"
 
 #. translators: help text for 'y' option in the 'Continue?' prompt
-#: src/solve-commit.cc:821
+#: src/solve-commit.cc:822
 msgid ""
 "Yes, accept the summary and proceed with installation/removal of packages."
 msgstr ""
@@ -6696,12 +6694,12 @@ msgstr ""
 "av paketen."
 
 #. translators: help text for 'n' option in the 'Continue?' prompt
-#: src/solve-commit.cc:823
+#: src/solve-commit.cc:824
 msgid "No, cancel the operation."
 msgstr "Nej, avbryt åtgärden."
 
 #. translators: help text for 'p' option in the 'Continue?' prompt
-#: src/solve-commit.cc:825
+#: src/solve-commit.cc:826
 msgid ""
 "Restart solver in no-force-resolution mode in order to show dependency "
 "problems."
@@ -6710,60 +6708,60 @@ msgstr ""
 "lösningar."
 
 #. translators: help text for 'v' option in the 'Continue?' prompt
-#: src/solve-commit.cc:827
+#: src/solve-commit.cc:828
 msgid "Toggle display of package versions."
 msgstr "Växla visning av paketversioner."
 
 #. translators: help text for 'a' option in the 'Continue?' prompt
-#: src/solve-commit.cc:829
+#: src/solve-commit.cc:830
 msgid "Toggle display of package architectures."
 msgstr "Växla visning av paketarkitekturer."
 
 #. translators: help text for 'r' option in the 'Continue?' prompt
-#: src/solve-commit.cc:831
+#: src/solve-commit.cc:832
 msgid ""
 "Toggle display of repositories from which the packages will be installed."
 msgstr "Växla visning av arkiv som paketen installeras från."
 
 #. translators: help text for 'm' option in the 'Continue?' prompt
-#: src/solve-commit.cc:833
+#: src/solve-commit.cc:834
 msgid "Toggle display of package vendor names."
 msgstr "Växla visning av namn på paketleverantörer."
 
 #. translators: help text for 'd' option in the 'Continue?' prompt
-#: src/solve-commit.cc:835
+#: src/solve-commit.cc:836
 msgid "Toggle between showing all details and as few details as possible."
 msgstr ""
 "Växla mellan att visa all information och så lite information som möjligt."
 
 #. translators: help text for 'g' option in the 'Continue?' prompt
-#: src/solve-commit.cc:837
+#: src/solve-commit.cc:838
 msgid "View the summary in pager."
 msgstr "Visa sammanfattning i sökaren."
 
-#: src/solve-commit.cc:844
+#: src/solve-commit.cc:845
 msgid "Backend"
 msgstr "Backend"
 
-#: src/solve-commit.cc:958
+#: src/solve-commit.cc:959
 msgid "committing"
 msgstr "skriver"
 
-#: src/solve-commit.cc:960
+#: src/solve-commit.cc:961
 msgid "(dry run)"
 msgstr "(torrkörning)"
 
-#: src/solve-commit.cc:988 src/solve-commit.cc:1021
+#: src/solve-commit.cc:989 src/solve-commit.cc:1023
 msgid "Problem retrieving the package file from the repository:"
 msgstr "Det gick inte att hämta paketfilen från förrådet:"
 
 #. translators: the first %s is 'zypper refresh' and the second is repo alias
-#: src/solve-commit.cc:1018
+#: src/solve-commit.cc:1020
 #, c-format, boost-format
 msgid "Repository '%s' is out of date. Running '%s' might help."
 msgstr "Förrådet '%s' är för gammalt. Det kan hjälpa att köra '%s'."
 
-#: src/solve-commit.cc:1029
+#: src/solve-commit.cc:1031
 msgid ""
 "The package integrity check failed. This may be a problem with the "
 "repository or media. Try one of the following:\n"
@@ -6781,13 +6779,13 @@ msgstr ""
 " - använd ett annat installationsmedium (t.ex. vid skada)\n"
 " - använd ett annat förråd"
 
-#: src/solve-commit.cc:1043
+#: src/solve-commit.cc:1045
 msgid "Problem occurred during or after installation or removal of packages:"
 msgstr ""
 "Ett problem uppstod under eller efter installationen eller borttagningen av "
 "paket:"
 
-#: src/solve-commit.cc:1082
+#: src/solve-commit.cc:1084
 msgid ""
 "One of the installed patches requires a reboot of your machine. Reboot as "
 "soon as possible."
@@ -6795,7 +6793,7 @@ msgstr ""
 "En av de installerade programfixarna innebär att datorn måste startas om. "
 "Starta om datorn så snart som möjligt."
 
-#: src/solve-commit.cc:1095
+#: src/solve-commit.cc:1097
 msgid ""
 "One of the installed patches affects the package manager itself. Run this "
 "command once more to install any other needed patches."
@@ -6803,7 +6801,7 @@ msgstr ""
 "En av de installerade programfixarna påverkar Pakethanteraren. Kör kommandot "
 "igen för att installera övriga programfixar som behövs."
 
-#: src/solve-commit.cc:1117
+#: src/solve-commit.cc:1119
 msgid "Dependencies of all installed packages are satisfied."
 msgstr "Beroendena för alla installerade paket är tillräckliga."
 
@@ -7483,6 +7481,13 @@ msgstr "Ogiltigt objekt"
 #: src/utils/prompt.h:102
 msgid "Error"
 msgstr "Fel"
+
+#~ msgid ""
+#~ "DownloadAsNeeded can not be used with ZYPP_SINGLE_RPMTRANS=1, falling "
+#~ "back to DownloadInAdvance"
+#~ msgstr ""
+#~ "DownloadAsNeeded kan inte användas med ZYPP_SINGLE_RPMTRANS=1, faller "
+#~ "tillbaka till DownloadInAdvance"
 
 #~ msgid "info (if) [OPTIONS] <NAME> ..."
 #~ msgstr "info (if) [ALTERNATIV] <NAMN> ..."
