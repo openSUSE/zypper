@@ -11,15 +11,15 @@ msgstr ""
 "Project-Id-Version: zypper.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-07-02 13:50+0200\n"
-"PO-Revision-Date: 2025-05-17 23:59+0000\n"
-"Last-Translator: Feike Donia <feikedonia@proton.me>\n"
+"PO-Revision-Date: 2025-07-03 12:59+0000\n"
+"Last-Translator: Freek de Kruijf <freek@opensuse.org>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/zypper/master/nl/>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.11.4\n"
+"X-Generator: Weblate 5.12.2\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -27,7 +27,7 @@ msgstr "Ongeldig commando"
 
 #: src/Command.cc:111
 msgid "Repository Management:"
-msgstr "Repositorybeheer:"
+msgstr "Opslagruimtebeheer:"
 
 #: src/Command.cc:119
 msgid "Service Management:"
@@ -39,7 +39,7 @@ msgstr "Softwarebeheer:"
 
 #: src/Command.cc:132
 msgid "Update Management:"
-msgstr "Updatebeheer:"
+msgstr "Beheer van bijwerken:"
 
 #: src/Command.cc:139
 msgid "Querying:"
@@ -451,33 +451,33 @@ msgstr "‘%s’ is niet gevonden."
 #: src/RequestFeedback.cc:61
 #, c-format, boost-format
 msgid "Package '%s' not found in specified repositories."
-msgstr "‘%s’ is niet aangetroffen in de opgegeven installatiebronnen."
+msgstr "Pakket ‘%s’ is niet aangetroffen in de opgegeven opslagruimten."
 
 #: src/RequestFeedback.cc:63
 #, c-format, boost-format
 msgid "Patch '%s' not found in specified repositories."
-msgstr "‘%s’ is niet aangetroffen in de opgegeven installatiebronnen."
+msgstr "Patch ‘%s’ is niet aangetroffen in de opgegeven opslagruimten."
 
 #: src/RequestFeedback.cc:65
 #, c-format, boost-format
 msgid "Product '%s' not found in specified repositories."
-msgstr "‘%s’ is niet aangetroffen in de opgegeven installatiebronnen."
+msgstr "Product ‘%s’ is niet aangetroffen in de opgegeven opslagruimten."
 
 #: src/RequestFeedback.cc:67
 #, c-format, boost-format
 msgid "Pattern '%s' not found in specified repositories."
-msgstr "‘%s’ is niet aangetroffen in de opgegeven installatiebronnen."
+msgstr "Patroon ‘%s’ is niet aangetroffen in de opgegeven opslagruimten."
 
 #: src/RequestFeedback.cc:69
 #, c-format, boost-format
 msgid "Source package '%s' not found in specified repositories."
-msgstr "‘%s’ is niet aangetroffen in de opgegeven installatiebronnen."
+msgstr "Bronpakket ‘%s’ is niet aangetroffen in de opgegeven opslagruimten."
 
 #. just in case
 #: src/RequestFeedback.cc:71
 #, c-format, boost-format
 msgid "Object '%s' not found in specified repositories."
-msgstr "‘%s’ is niet aangetroffen in de opgegeven installatiebronnen."
+msgstr "Object ‘%s’ is niet aangetroffen in de opgegeven opslagruimten."
 
 #. translators: meaning a package %s or provider of capability %s
 #: src/RequestFeedback.cc:76
@@ -2064,15 +2064,15 @@ msgstr "Wachtwoord"
 
 #: src/callbacks/media.h:190
 msgid "Preloading Packages"
-msgstr ""
+msgstr "Pakketten worden vooraf geladen"
 
 #: src/callbacks/media.h:211
 msgid "Preloading Packages:"
-msgstr ""
+msgstr "Pakketten worden vooraf geladen:"
 
 #: src/callbacks/media.h:263
 msgid "Preloading:"
-msgstr ""
+msgstr "Vooraf laden:"
 
 #. Translator: prefetch progress bar result: ".............[done]"
 #: src/callbacks/media.h:278
@@ -2091,15 +2091,15 @@ msgstr "foutmelding"
 
 #: src/callbacks/media.h:307
 msgid "Preload finished."
-msgstr ""
+msgstr "Vooraf laden beëindigd."
 
 #: src/callbacks/media.h:312
 msgid "success"
-msgstr ""
+msgstr "succes"
 
 #: src/callbacks/media.h:315
 msgid "files missing"
-msgstr ""
+msgstr "Ontbrekende bestanden"
 
 #: src/callbacks/repo.h:60
 msgid "Retrieving delta"
@@ -6783,6 +6783,8 @@ msgid ""
 "Explicitly selecting DownloadAsNeeded also selects the classic_rpmtrans "
 "backend."
 msgstr ""
+"Expliciet selecteren van Downloaden-zoals-nodg selecteert ook de backend "
+"classic_rpmtrans."
 
 #: src/solve-commit.cc:620
 #, c-format, boost-format
