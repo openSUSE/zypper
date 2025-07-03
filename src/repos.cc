@@ -215,7 +215,6 @@ bool refresh_raw_metadata( Zypper & zypper, const RepoInfo & repo, bool force_do
 
   // bsc#1123967
   // Temporarily disconnect, if errors happen we just skip the repository
-#define DISABLE_ScopedDisableMediaChangeReport_GUARD
   callback::TempConnect<zypp::media::MediaChangeReport> tempDisconnect;
 
   try
@@ -228,12 +227,6 @@ bool refresh_raw_metadata( Zypper & zypper, const RepoInfo & repo, bool force_do
                          Out::HIGH );
       if ( !repo.baseUrlsEmpty() )
       {
-#ifndef DISABLE_ScopedDisableMediaChangeReport_GUARD
-        Disabled because of fix for bsc#1123967
-        // Suppress (interactive) media::MediaChangeReport if we in have multiple basurls (>1)
-        media::ScopedDisableMediaChangeReport guard( repo.baseUrlsSize() > 1 );
-#endif
-
         const auto &repoOrigins = repo.repoOrigins();
         for ( auto it = repoOrigins.begin(); it != repoOrigins.end(); )
         {
