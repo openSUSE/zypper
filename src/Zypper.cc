@@ -457,6 +457,10 @@ void Zypper::shellCleanup()
     }
     default:;
   }
+  // reset persistent solver jobs
+  auto resolverPtr { God->resolver() };
+  resolverPtr->setUpgradeMode( false );
+  resolverPtr->setUpdateMode( false );
 
   // clear the command
   _command = ZypperCommand::NONE;
@@ -466,7 +470,12 @@ void Zypper::shellCleanup()
   setExitCode( ZYPPER_EXIT_OK );
 
   // runtime data
+  // TODO: Those runtime data are a mess for sh. Clean them up
+  // so we can just provide a fresh instance for the next command.
   _rdata.current_repo = RepoInfo();
+  _rdata.solve_update_only = false;
+  _rdata.solve_with_update = false;
+  _rdata.plain_patch_command = false;
 
   // cause the RepoManager to be reinitialized
   _rm.reset();
