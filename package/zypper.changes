@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Fri Jul  4 18:53:57 CEST 2025 - ma@suse.de
+
+- sh: Reset solver options after command (bsc#1245496)
+- Explicitly selecting DownloadAsNeeded also selects the
+  classic_rpmtrans backend.
+- version 1.14.92
+
+-------------------------------------------------------------------
 Wed Jun 18 12:26:40 CEST 2025 - ma@suse.de
 
 - BuildRequires:  libzypp-devel >= 17.37.6.
