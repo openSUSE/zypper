@@ -56,8 +56,17 @@ std::string renderGlobalHelp ()
       const std::vector<std::string> aliases = cmd->command();
 
       std::string cmdTxt = aliases.at(0);
-      if ( aliases.size() > 1 )
-        cmdTxt += ", " + aliases.at(1);
+
+      // TODO: Generalize this in Command.cc:makeCmd.
+      // Some aliases (like "catalogs" for "repos") are just legacy names we do
+      // accept for comatibility. But we don't advertise them.
+      // Others (like "show" for "info") may be published in help and supported by
+      // bash completion.
+      size_t maxAliases = ( cmdTxt == "info" ? 3 : 2 );
+      size_t numAliases = std::min( aliases.size(), maxAliases );
+      for ( unsigned i = 1; i < numAliases; i++ ) {
+        cmdTxt += ", " + aliases.at(i);
+      }
 
       help.gDef( cmdTxt, cmd->summary() );
 

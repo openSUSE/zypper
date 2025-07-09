@@ -137,7 +137,7 @@ namespace
       makeCmd<PatchCheckCmd> ( ZypperCommand::PATCH_CHECK_e , std::string(), { "patch-check", "pchk"} ),
 
       makeCmd<SearchCmd> ( ZypperCommand::SEARCH_e , _("Querying:"), { "search", "se" } ),
-      makeCmd<InfoCmd> ( ZypperCommand::INFO_e , std::string(), { "info", "if" } ),
+      makeCmd<InfoCmd> ( ZypperCommand::INFO_e , std::string(), { "info", "if", "show" } ),
       makeCmd<InfoCmd> ( ZypperCommand::RUG_PATCH_INFO_e , std::string(), { "patch-info" }, InfoCmd::Mode::RugPatchInfo ),
       makeCmd<InfoCmd> ( ZypperCommand::RUG_PATTERN_INFO_e , std::string(), { "pattern-info" }, InfoCmd::Mode::RugPatternInfo ),
       makeCmd<InfoCmd> ( ZypperCommand::RUG_PRODUCT_INFO_e , std::string(), { "product-info" }, InfoCmd::Mode::RugProductInfo ),
