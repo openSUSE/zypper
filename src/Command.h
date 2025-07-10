@@ -129,6 +129,7 @@ struct ZypperCommand
     LIST_PATCHES_e,
     PATCH_CHECK_e,
     DIST_UPGRADE_e,
+    AUTOREMOVE_e,
 
     SEARCH_e,
     INFO_e,
