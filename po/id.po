@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-07-02 13:50+0200\n"
-"PO-Revision-Date: 2024-12-09 08:48+0000\n"
+"PO-Revision-Date: 2025-07-14 16:59+0000\n"
 "Last-Translator: Arif Budiman <arifpedia@gmail.com>\n"
 "Language-Team: Indonesian <https://l10n.opensuse.org/projects/zypper/master/"
 "id/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.8.4\n"
+"X-Generator: Weblate 5.12.2\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -1920,15 +1920,15 @@ msgstr "Kata Sandi"
 
 #: src/callbacks/media.h:190
 msgid "Preloading Packages"
-msgstr ""
+msgstr "Pramuat Paket"
 
 #: src/callbacks/media.h:211
 msgid "Preloading Packages:"
-msgstr ""
+msgstr "Pramuat Paket:"
 
 #: src/callbacks/media.h:263
 msgid "Preloading:"
-msgstr ""
+msgstr "Pramuat:"
 
 # ID
 #. Translator: prefetch progress bar result: ".............[done]"
@@ -1948,15 +1948,15 @@ msgstr "galat"
 
 #: src/callbacks/media.h:307
 msgid "Preload finished."
-msgstr ""
+msgstr "Pramuat selesai."
 
 #: src/callbacks/media.h:312
 msgid "success"
-msgstr ""
+msgstr "berhasil"
 
 #: src/callbacks/media.h:315
 msgid "files missing"
-msgstr ""
+msgstr "berkas hilang"
 
 #: src/callbacks/repo.h:60
 msgid "Retrieving delta"
@@ -2206,10 +2206,16 @@ msgid ""
 "enabled repositories fail to refresh. This may severely damage the system. "
 "If a failing repository is actually not needed, it must be disabled."
 msgstr ""
+"Karena penanganan paket yang tidak terawat, dist-upgrade sangat bergantung "
+"pada pengaturan repositori yang benar dibandingkan perintah lainnya. Proses "
+"ini tidak boleh dilanjutkan jika repositori yang diaktifkan gagal "
+"diperbarui.Kondisi ini dapat menyebabkan kerusakan serius pada sistem. Jika "
+"repositori yang gagal sebenarnya tidak diperlukan, repositori tersebut harus "
+"dinonaktifkan."
 
 #: src/commands/distupgrade.cc:57
 msgid "See 'man zypper' for more information about this command."
-msgstr ""
+msgstr "Lihat ‘man zypper’ untuk informasi lebih lanjut tentang perintah ini."
 
 #: src/commands/distupgrade.cc:88
 #, c-format, boost-format
@@ -3205,7 +3211,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/query/info.cc:19
 msgid "info (if) [OPTIONS] <NAME>[-<VERSION>[-<RELEASE>]] ..."
-msgstr ""
+msgstr "info (if) [OPTIONS] <NAME>[-<VERSION>[-<RELEASE>]] ..."
 
 #. translators: command summary: info, if
 #: src/commands/query/info.cc:21
@@ -3231,6 +3237,9 @@ msgid ""
 "package is shown. Note that both the version and release numbers must always "
 "match exactly."
 msgstr ""
+"Jika tidak ada batasan versi yang ditentukan, informasi tentang paket "
+"terbaik yang tersedia akan ditampilkan. Perhatikan bahwa baik nomor versi "
+"maupun nomor rilis harus sama persis."
 
 #. translators: -s, --match-substrings
 #: src/commands/query/info.cc:65
@@ -3275,7 +3284,7 @@ msgstr "Tampilkan saran."
 #. translators: --enhances
 #: src/commands/query/info.cc:98
 msgid "Show enhances."
-msgstr ""
+msgstr "Lihat diperluas."
 
 #: src/commands/query/info.cc:112 src/utils/messages.cc:70
 msgid "Required argument missing."
@@ -3665,7 +3674,7 @@ msgstr "Segarkan"
 #. translators: 'zypper repos' column - whether keep-packages is enabled for the repository
 #: src/commands/repos/list.cc:266
 msgid "Keep"
-msgstr ""
+msgstr "Simpan"
 
 #: src/commands/repos/list.cc:357
 msgid "No repositories defined."
@@ -3758,6 +3767,8 @@ msgid ""
 "Multi-Arch repos: Download raw metadata for all offered architectures even "
 "if the repo supports filtering."
 msgstr ""
+"Repositori Multi-Arch: Unduh metadata mentah untuk semua arsitektur yang "
+"ditawarkan, bahkan jika repositori tersebut mendukung penyaringan."
 
 #. translators: -r, --repo <ALIAS|#|URI>
 #: src/commands/repos/refresh.cc:110
@@ -4069,7 +4080,7 @@ msgstr "Tampilkan juga tanda penyegaran otomatis."
 #. translators: -k, --keep-packages
 #: src/commands/reposerviceoptionsets.cc:191
 msgid "Show also the keep-packages flag."
-msgstr ""
+msgstr "Tampilkan juga tanda keep-packages."
 
 #. translators: -u, --uri
 #: src/commands/reposerviceoptionsets.cc:201
@@ -4234,7 +4245,7 @@ msgstr "Cari paket yang menyarankan string pencarian."
 #. translators: --enhances
 #: src/commands/search/search.cc:145
 msgid "Search for packages which enhance the search strings."
-msgstr ""
+msgstr "Cari paket yang memperluas string pencarian."
 
 #. translators: --provides-pkg
 #: src/commands/search/search.cc:149
@@ -4305,6 +4316,8 @@ msgid ""
 "Search for all packages that enhance any of the provides of the package(s) "
 "matched by the input parameters."
 msgstr ""
+"Cari semua paket yang memperluas salah satu fitur dari paket (atau paket-"
+"paket) yang sesuai dengan parameter input."
 
 #. translators: -t, --type <TYPE>
 #: src/commands/search/search.cc:181
@@ -5328,7 +5341,7 @@ msgstr ""
 #. translators: command summary: targetos, tos
 #: src/commands/utils/system-architecture.cc:20
 msgid "Print the detected system architecture."
-msgstr ""
+msgstr "Cetak arsitektur sistem yang terdeteksi."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/utils/targetos.cc:20
@@ -5408,6 +5421,8 @@ msgid ""
 "The exit code is 0 if the versions are equal, 11 if VERSION1 is newer, and "
 "12 if VERSION2 is newer."
 msgstr ""
+"Kode keluar adalah 0 jika versi sama, 11 jika VERSION1 lebih baru, dan 12 "
+"jika VERSION2 lebih baru."
 
 #. translators: -m, --match
 #: src/commands/utils/versioncmp.cc:38
@@ -6488,7 +6503,7 @@ msgstr[0] "%d Masalah:"
 #. translator: The tag says that the preceding dependency problem is auto-resolved by applying the following solution
 #: src/solve-commit.cc:292
 msgid "Autoresolve:"
-msgstr ""
+msgstr "Autoresolve:"
 
 #: src/solve-commit.cc:321
 msgid "Resolving dependencies..."
@@ -6525,6 +6540,8 @@ msgid ""
 "Explicitly selecting DownloadAsNeeded also selects the classic_rpmtrans "
 "backend."
 msgstr ""
+"Memilih secara eksplisit DownloadAsNeeded juga memilih backend "
+"classic_rpmtrans."
 
 #: src/solve-commit.cc:620
 #, c-format, boost-format
@@ -6658,7 +6675,6 @@ msgid "View the summary in pager."
 msgstr "Lihat ringkasan di pager."
 
 #: src/solve-commit.cc:845
-#, fuzzy
 msgid "Backend"
 msgstr "Backend"
 
