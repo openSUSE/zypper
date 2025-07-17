@@ -172,7 +172,7 @@ int AddServiceCmd::execute( Zypper &zypper, const std::vector<std::string> &posi
     add_service_by_url( zypper, url, positionalArgs_r[1], _commonProps );
   else {
     //legacy behaviour
-    add_repo_by_url( zypper, url, positionalArgs_r[1], _commonProps, RepoProperties(), false);
+    add_repo_by_url( zypper, url, positionalArgs_r[1], _commonProps, RepoProperties() );
   }
 
   return zypper.exitCode();

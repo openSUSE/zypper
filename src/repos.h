@@ -122,14 +122,12 @@ bool match_repo( Zypper & zypper, const std::string str, RepoInfo *repo = 0 , bo
  *
  * \param url Valid URL of the repository.
  * \param alias
- * \param enabled     Whether the repo should be enabled
- * \param autorefresh Whether the repo should have autorefresh turned on
  */
-void add_repo_by_url(Zypper & zypper,
-                      const Url & url,
-                      const std::string & alias,
-                      const RepoServiceCommonOptions &opts,
-                      const RepoProperties &repoProps, bool noCheck);
+void add_repo_by_url( Zypper & zypper, const Url & url, const std::string & alias,
+                      const RepoServiceCommonOptions & opts,
+                      const RepoProperties & repoProps,
+                      const TriBool & forcedProbe = indeterminate
+                     );
 
 /**
  * Add repository specified in given repo file on \a repo_file_url. All repos
@@ -137,16 +135,20 @@ void add_repo_by_url(Zypper & zypper,
  * autorefresh values provided in the files will be ignored.
  *
  * \param repo_file_url Valid URL of the repo file.
- * \param enabled     Whether the repo should be enabled
- * \param autorefresh Whether the repo should have autorefresh turned on
  */
-void add_repo_from_file(Zypper & zypper,
-                         const std::string & repo_file_url , const RepoServiceCommonOptions &opts, const RepoProperties &repoProps, bool noCheck);
+void add_repo_from_file( Zypper & zypper, const std::string & repo_file_url,
+                         const RepoServiceCommonOptions & opts,
+                         const RepoProperties & repoProps,
+                         const TriBool & forcedProbe = indeterminate
+                        );
 
 /**
  * Add repository specified by \repo to system repositories.
+ * \param forcedProbe corresponds to explicit \c --check \c --no-check requests.
+ * If nothing was specified, \c indeterminate will let the RepoManager check
+ * according to his configuration.
  */
-bool add_repo(Zypper & zypper, RepoInfo & repo , bool noCheck);
+bool add_repo( Zypper & zypper, RepoInfo & repo, const TriBool & forcedProbe = indeterminate );
 
 
 /**

@@ -1141,7 +1141,7 @@ void clean_repos(Zypper & zypper , std::vector<std::string> specificRepos, Clean
 
 // ----------------------------------------------------------------------------
 
-bool add_repo( Zypper & zypper, RepoInfo & repo, bool noCheck )
+bool add_repo( Zypper & zypper, RepoInfo & repo, const TriBool & forcedProbe )
 {
   RepoManager & manager = zypper.repoManager();
   RuntimeData & gData = zypper.runtimeData();
@@ -1173,7 +1173,7 @@ bool add_repo( Zypper & zypper, RepoInfo & repo, bool noCheck )
     // reset the gData.current_repo when going out of scope
     struct Bye { ~Bye() { Zypper::instance().runtimeData().current_repo = RepoInfo(); } } reset __attribute__ ((__unused__));
 
-    manager.addRepository( repo );
+    manager.addRepository( repo, forcedProbe );
     repo = manager.getRepo( repo );
   }
   catch ( const repo::RepoInvalidAliasException & e )
@@ -1257,7 +1257,12 @@ bool add_repo( Zypper & zypper, RepoInfo & repo, bool noCheck )
 
   if ( is_cd )
   {
-    if ( ! noCheck )
+    if ( forcedProbe == false ) // TriBool! - explicitly false
+    {
+      zypper.out().info( str::Format(_("Reading data from '%s' media is delayed until next refresh.")) % repo.asUserString(),
+                         " [--no-check]" );
+    }
+    else
     {
       zypper.out().info( str::Format(_("Reading data from '%s' media")) % repo.asUserString() );
       bool error = refresh_raw_metadata( zypper, repo, false );
@@ -1271,11 +1276,6 @@ bool add_repo( Zypper & zypper, RepoInfo & repo, bool noCheck )
         return false;
       }
     }
-    else
-    {
-      zypper.out().info( str::Format(_("Reading data from '%s' media is delayed until next refresh.")) % repo.asUserString(),
-                         " [--no-check]" );
-    }
   }
   return true;
 }
@@ -1287,7 +1287,7 @@ void add_repo_by_url( Zypper & zypper,
                       const std::string & alias,
                       const RepoServiceCommonOptions &opts,
                       const RepoProperties &repoProps,
-                      bool noCheck )
+                      const TriBool & forcedProbe )
 {
   MIL << "going to add repository by url (alias=" << alias << ", url=" << url << ")" << endl;
 
@@ -1313,7 +1313,7 @@ void add_repo_by_url( Zypper & zypper,
   if ( gpgCheck != RepoInfo::GpgCheck::indeterminate )
     repo.setGpgCheck( gpgCheck );
 
-  if ( add_repo( zypper, repo, noCheck ) )
+  if ( add_repo( zypper, repo, forcedProbe ) )
     repoPrioSummary( zypper );
 }
 
@@ -1323,7 +1323,7 @@ void add_repo_from_file( Zypper & zypper,
                          const std::string & repo_file_url,
                          const RepoServiceCommonOptions &opts,
                          const RepoProperties &repoProps,
-                         bool noCheck )
+                         const TriBool & forcedProbe )
 {
   Url url = make_url( repo_file_url );
   if ( !url.isValid() )
@@ -1400,7 +1400,7 @@ void add_repo_from_file( Zypper & zypper,
     if ( repoProps._priority >= 1 )
       repo.setPriority( repoProps._priority );
 
-    if ( add_repo( zypper, repo, noCheck ) )
+    if ( add_repo( zypper, repo, forcedProbe ) )
       addedAtLeastOneRepository = true;
   }
 
