@@ -64,6 +64,7 @@ int AddRepoCmd::execute(Zypper &zypper, const std::vector<std::string> &position
     return ( ZYPPER_EXIT_ERR_INVALID_ARGS );
   }
 
+  TriBool forcedProbe { indeterminate };    // let RepoManager decide
   if ( _enableCheck && _disableCheck )
   {
     zypper.out().warning(str::form(
@@ -71,13 +72,17 @@ int AddRepoCmd::execute(Zypper &zypper, const std::vector<std::string> &position
       "--check", "--no-check", "zypp.conf")
         ,Out::QUIET );
   }
+  else if ( _enableCheck )
+    forcedProbe = true;
+  else if ( _disableCheck )
+    forcedProbe = false;
 
   try
   {
     // add repository specified in .repo file
     if ( ! _repoFile.empty() )
     {
-      add_repo_from_file( zypper, _repoFile, _commonProperties, _repoProperties, _disableCheck );
+      add_repo_from_file( zypper, _repoFile, _commonProperties, _repoProperties, forcedProbe );
       return zypper.exitCode();
     }
 
@@ -97,7 +102,7 @@ int AddRepoCmd::execute(Zypper &zypper, const std::vector<std::string> &position
       }
       else
       {
-        add_repo_from_file( zypper, positionalArgs_r[0], _commonProperties, _repoProperties, _disableCheck );
+        add_repo_from_file( zypper, positionalArgs_r[0], _commonProperties, _repoProperties, forcedProbe );
         break;
       }
     case 2:
@@ -111,17 +116,12 @@ int AddRepoCmd::execute(Zypper &zypper, const std::vector<std::string> &position
         return (ZYPPER_EXIT_ERR_INVALID_ARGS);
       }
 
-      if ( _enableCheck )
-        zypper.configNoConst().rm_options.probe = true;
-      else if ( _disableCheck )
-        zypper.configNoConst().rm_options.probe = false;
-
       // load gpg keys
       int code = defaultSystemSetup( zypper, InitTarget  );
       if ( code != ZYPPER_EXIT_OK )
         return code;
 
-      add_repo_by_url( zypper, url, positionalArgs_r[1]/*alias*/, _commonProperties, _repoProperties, _disableCheck );
+      add_repo_by_url( zypper, url, positionalArgs_r[1]/*alias*/, _commonProperties, _repoProperties, forcedProbe );
     }
   }
   catch ( const repo::RepoUnknownTypeException & e )
