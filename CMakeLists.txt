@@ -9,9 +9,9 @@ if ( ZYPP_STACK_BUILD )
       ${zypp-stack_SOURCE_DIR}/libzypp/cmake/modules/
       ${CMAKE_MODULE_PATH}
   )
-include_directories(${ZYPP_STACK_INCLUDE_DIRS})
+  include_directories(${ZYPP_STACK_INCLUDE_DIRS})
 else()
-  IF (DEFINED ZYPP_PREFIX)
+  if (DEFINED ZYPP_PREFIX)
     SET( CMAKE_MODULE_PATH
       ${ZYPP_PREFIX}/${LIB}/cmake/Zypp/
       ${ZYPP_PREFIX}/lib64/cmake/Zypp/
@@ -82,7 +82,11 @@ else()
   FIND_PACKAGE( Zypp REQUIRED )
 endif()
 
-INCLUDE_DIRECTORIES(${ZYPP_INCLUDE_DIR})
+IF( ZYPP_FOUND )
+  INCLUDE_DIRECTORIES(${ZYPP_INCLUDE_DIR})
+ELSE( ZYPP_FOUND )
+  MESSAGE( FATAL_ERROR "libzypp not found" )
+ENDIF( ZYPP_FOUND )
 
 FIND_PACKAGE( Gettext REQUIRED )
 INCLUDE_DIRECTORIES(${GETTEXT_INCLUDE_DIR})
