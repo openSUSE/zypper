@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-07-02 13:50+0200\n"
-"PO-Revision-Date: 2024-06-01 03:46+0000\n"
+"PO-Revision-Date: 2025-07-18 03:59+0000\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <https://l10n.opensuse.org/projects/zypper/master/ka/"
 ">\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.5.5\n"
+"X-Generator: Weblate 5.12.2\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -1073,7 +1073,7 @@ msgstr "ხელმისაწვდომი"
 #. translators: property name; short; used like "Name: value"
 #: src/Summary.cc:1523 src/info.cc:447 src/info.cc:540 src/info.cc:660
 msgid "Installed"
-msgstr ""
+msgstr "დაყენებულია"
 
 #: src/Summary.cc:1528
 #, boost-format
@@ -1117,7 +1117,7 @@ msgstr ""
 
 #: src/Summary.cc:1605
 msgid "Download only."
-msgstr ""
+msgstr "მხოლოდ გადმოწერა."
 
 #. Package install size change:
 #. |     349.1 MiB  required by packages that will be installed
@@ -1297,7 +1297,7 @@ msgstr ""
 
 #: src/Zypper.cc:320
 msgid "Enforced setting"
-msgstr ""
+msgstr "ძალით მითითებული პარამეტრი"
 
 #: src/Zypper.cc:343
 msgid ""
@@ -1388,7 +1388,7 @@ msgstr ""
 
 #: src/callbacks/keyring.h:96
 msgid "Subkey:"
-msgstr ""
+msgstr "ქვეგასაღები:"
 
 #: src/callbacks/keyring.h:97
 msgid "Rpm Name:"
@@ -1480,12 +1480,12 @@ msgstr "გნებავთ უარყოთ გასაღები, თ�
 #. The answers should be lower case letters.
 #: src/callbacks/keyring.h:305
 msgid "r/t/a/"
-msgstr ""
+msgstr "r/t/a/"
 
 #. translators: the same as r/t/a, but without 'a'
 #: src/callbacks/keyring.h:308
 msgid "r/t"
-msgstr ""
+msgstr "r/t"
 
 #. translators: r/a stands for Reject/trustAlways(import)
 #. translate to whatever is appropriate for your language
@@ -1494,7 +1494,7 @@ msgstr ""
 #. The answers should be lower case letters.
 #: src/callbacks/keyring.h:315
 msgid "r/a/"
-msgstr ""
+msgstr "r/a/"
 
 #. translators: help text for the 'r' option in the 'r/t/a' prompt
 #: src/callbacks/keyring.h:321
@@ -1572,7 +1572,7 @@ msgstr ""
 
 #: src/callbacks/keyring.h:474
 msgid "New:"
-msgstr ""
+msgstr "ახალი:"
 
 #: src/callbacks/keyring.h:480
 msgid ""
@@ -1689,7 +1689,7 @@ msgstr "ახალი URI"
 #. 's' stands for Disable SSL certificate authority check
 #: src/callbacks/media.cc:77
 msgid "a/r/i/u/s"
-msgstr ""
+msgstr "a/r/i/u/s"
 
 #: src/callbacks/media.cc:79
 msgid "Disable SSL certificate authority check and continue."
@@ -1743,11 +1743,11 @@ msgstr "თავიდან ცდა..."
 #. 'e' stands for Eject medium
 #: src/callbacks/media.cc:169
 msgid "a/r/i/u/e"
-msgstr ""
+msgstr "a/r/i/u/e"
 
 #: src/callbacks/media.cc:171
 msgid "Eject medium."
-msgstr ""
+msgstr "მედიის ამოღება."
 
 #. TranslatorExplanation translate letters 'y' and 'n' to whathever is appropriate for your language.
 #. Try to check what answers does zypper accept (it always accepts y/n at least)
@@ -1765,7 +1765,7 @@ msgstr ""
 #. the 'u' reply means 'Change URI'.
 #: src/callbacks/media.cc:250
 msgid "a/r/i/u"
-msgstr ""
+msgstr "a/r/i/u"
 
 #: src/callbacks/media.cc:292
 #, c-format, boost-format
@@ -1794,12 +1794,12 @@ msgstr ""
 
 #: src/callbacks/media.h:263
 msgid "Preloading:"
-msgstr ""
+msgstr "წინასწარი ჩატვირთვა:"
 
 #. Translator: prefetch progress bar result: ".............[done]"
 #: src/callbacks/media.h:278
 msgid "done"
-msgstr ""
+msgstr "მზადაა"
 
 #. Translator: prefetch progress bar result: "........[not found]"
 #: src/callbacks/media.h:283
@@ -1809,7 +1809,7 @@ msgstr "ვერ ვიპოვე"
 #. Translator: prefetch progress bar result: "............[error]"
 #: src/callbacks/media.h:290
 msgid "error"
-msgstr ""
+msgstr "შეცდომა"
 
 #: src/callbacks/media.h:307
 msgid "Preload finished."
@@ -1817,7 +1817,7 @@ msgstr ""
 
 #: src/callbacks/media.h:312
 msgid "success"
-msgstr ""
+msgstr "წარმატებულია"
 
 #: src/callbacks/media.h:315
 msgid "files missing"
@@ -2474,7 +2474,7 @@ msgstr[0] ""
 #: src/search.cc:48 src/search.cc:199 src/search.cc:304 src/search.cc:458
 #: src/search.cc:508 src/update.cc:789 src/utils/misc.cc:324
 msgid "Name"
-msgstr ""
+msgstr "სახელი"
 
 #: src/commands/locks/list.cc:135
 msgid "Matches"
@@ -2486,7 +2486,7 @@ msgstr "დამთხვევები"
 #: src/commands/repos/list.cc:285 src/commands/services/list.cc:116
 #: src/info.cc:564 src/search.cc:50 src/search.cc:202
 msgid "Type"
-msgstr ""
+msgstr "ტიპი"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: package's repository (header)
@@ -2498,17 +2498,17 @@ msgstr "საცავი"
 
 #: src/commands/locks/list.cc:136
 msgid "Comment"
-msgstr ""
+msgstr "კომენტარი"
 
 #. translators: locks table value
 #: src/commands/locks/list.cc:154 src/commands/locks/list.cc:233
 msgid "(multiple)"
-msgstr ""
+msgstr "(ერთზე მეტი)"
 
 #. translators: locks table value
 #: src/commands/locks/list.cc:157 src/commands/locks/list.cc:231
 msgid "(any)"
-msgstr ""
+msgstr "(ნებისმიერი)"
 
 #. translators: property name; short; used like "Name: value"
 #: src/commands/locks/list.cc:196
@@ -2625,7 +2625,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/nullcommands.cc:17
 msgid "moo"
-msgstr ""
+msgstr "moo"
 
 #. translators: command summary
 #. translators: command description
@@ -2872,7 +2872,7 @@ msgstr ""
 
 #: src/commands/ps.cc:72 src/solve-commit.cc:634
 msgid "Check failed:"
-msgstr ""
+msgstr "შემოწმება ჩავარდა:"
 
 #. Here: Table output
 #: src/commands/ps.cc:127 src/solve-commit.cc:623
@@ -2897,12 +2897,12 @@ msgstr "UID"
 #. process login name
 #: src/commands/ps.cc:148
 msgid "User"
-msgstr ""
+msgstr "მომხმარებელი"
 
 #. process command name
 #: src/commands/ps.cc:150
 msgid "Command"
-msgstr ""
+msgstr "ბრძანება"
 
 #. "/etc/init.d/ script that might be used to restart the command (guessed)
 #: src/commands/ps.cc:152 src/commands/repos/list.cc:301
@@ -3292,7 +3292,7 @@ msgstr "ჩართული"
 #: src/commands/repos/list.cc:59 src/commands/repos/list.cc:248
 #: src/commands/services/list.cc:109 src/repos.cc:1253
 msgid "GPG Check"
-msgstr ""
+msgstr "GPG შემოწმება"
 
 #. translators: repository priority (in zypper repos -p or -d)
 #. translators: property name; short; used like "Name: value"
@@ -3309,7 +3309,7 @@ msgstr "ავტოგანახლება"
 
 #: src/commands/repos/list.cc:61 src/commands/repos/list.cc:62
 msgid "On"
-msgstr ""
+msgstr "ჩართ"
 
 #: src/commands/repos/list.cc:61 src/commands/repos/list.cc:62
 msgid "Off"
@@ -3384,7 +3384,7 @@ msgstr "განახლება"
 #. translators: 'zypper repos' column - whether keep-packages is enabled for the repository
 #: src/commands/repos/list.cc:266
 msgid "Keep"
-msgstr ""
+msgstr "შენარჩუნება"
 
 #: src/commands/repos/list.cc:357
 msgid "No repositories defined."
@@ -4528,7 +4528,7 @@ msgstr ""
 
 #: src/commands/subcommand.cc:103
 msgid "none"
-msgstr ""
+msgstr "არცერთი"
 
 #: src/commands/subcommand.cc:332
 #, boost-format
@@ -4766,7 +4766,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/utils/licenses.cc:19
 msgid "licenses"
-msgstr ""
+msgstr "licenses"
 
 #. translators: command summary: licenses
 #: src/commands/utils/licenses.cc:21
@@ -5056,11 +5056,11 @@ msgstr "შეჯამება"
 #. translators: header of table column - the package summary
 #: src/info.cc:106 src/locales.cc:203
 msgid "Description"
-msgstr ""
+msgstr "აღწერა"
 
 #: src/info.cc:134
 msgid "automatically"
-msgstr ""
+msgstr "ავტომატურად"
 
 #: src/info.cc:223
 #, boost-format
@@ -5116,7 +5116,7 @@ msgstr ""
 
 #: src/info.cc:455 src/info.cc:669
 msgid "up-to-date"
-msgstr ""
+msgstr "განახლებულია"
 
 #: src/info.cc:458 src/info.cc:672
 msgid "not installed"
@@ -5132,7 +5132,7 @@ msgstr "აღმავლის URL"
 #: src/info.cc:501 src/update.cc:406 src/utils/misc.cc:325
 #: src/utils/misc.cc:367
 msgid "Category"
-msgstr ""
+msgstr "კატეგორია"
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:503 src/utils/misc.cc:326 src/utils/misc.cc:368
@@ -5172,7 +5172,7 @@ msgstr "(ცარიელი)"
 #: src/search.cc:198 src/search.cc:303 src/search.cc:456 src/search.cc:503
 #: src/update.cc:784
 msgid "S"
-msgstr ""
+msgstr "ს"
 
 #. translators: Table column header
 #: src/info.cc:565 src/search.cc:307
@@ -5189,7 +5189,7 @@ msgstr "რეკომენდებულია"
 
 #: src/info.cc:581 src/info.cc:584 src/search.cc:245
 msgid "Suggested"
-msgstr ""
+msgstr "შეთავაზებულია"
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:640
@@ -5198,7 +5198,7 @@ msgstr ""
 
 #: src/info.cc:645
 msgid "unknown"
-msgstr ""
+msgstr "უცნობი"
 
 #. translators: %1% is an URL or Path pointing to some document
 #: src/info.cc:650
@@ -5223,7 +5223,7 @@ msgstr "განახლების რეპოზიტორიები"
 
 #: src/info.cc:684
 msgid "Content Id"
-msgstr ""
+msgstr "შემცელობის Id"
 
 #: src/info.cc:696
 msgid "Provided by enabled repository"
@@ -5236,7 +5236,7 @@ msgstr ""
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:711
 msgid "CPE Name"
-msgstr ""
+msgstr "CPE-ის სახელი"
 
 #: src/info.cc:716
 msgid "undefined"
@@ -5277,7 +5277,7 @@ msgstr "კოდი"
 #. translators: header of table column - the language, e.g. English (United States)
 #: src/locales.cc:176
 msgid "Language"
-msgstr ""
+msgstr "ენა"
 
 #: src/locales.cc:235
 #, c-format, boost-format
@@ -5362,11 +5362,11 @@ msgstr "ლიცენზია"
 
 #: src/misc.cc:267
 msgid "EULA"
-msgstr ""
+msgstr "EULA"
 
 #: src/misc.cc:279
 msgid "SUMMARY"
-msgstr ""
+msgstr "შეჯამება"
 
 #: src/misc.cc:280
 #, c-format, boost-format
@@ -5992,7 +5992,7 @@ msgstr[0] ""
 #. The answers should be lower case letters.
 #: src/solve-commit.cc:169
 msgid "s/r/c/d"
-msgstr ""
+msgstr "s/r/c/d"
 
 #. translators: answers for dependency problem solution input prompt:
 #. "Choose from above solutions by number or cancel"
@@ -6003,7 +6003,7 @@ msgstr ""
 #. please report a bug against zypper at bugzilla.suse.com, we'll try to solve it.
 #: src/solve-commit.cc:185
 msgid "c/d"
-msgstr ""
+msgstr "c/d"
 
 #: src/solve-commit.cc:191
 #, boost-format
@@ -6045,7 +6045,7 @@ msgstr[0] "%d პრობლემა:"
 #. translator: The tag says that the preceding dependency problem is auto-resolved by applying the following solution
 #: src/solve-commit.cc:292
 msgid "Autoresolve:"
-msgstr ""
+msgstr "ავტოგადაწყეტა:"
 
 #: src/solve-commit.cc:321
 msgid "Resolving dependencies..."
@@ -6062,7 +6062,7 @@ msgstr ""
 #. Here: compute the full upgrade
 #: src/solve-commit.cc:531
 msgid "Computing upgrade..."
-msgstr ""
+msgstr "ვერსიის აწევის გამოთვლა..."
 
 #: src/solve-commit.cc:545
 msgid "Generating solver test case..."
@@ -6113,7 +6113,7 @@ msgstr ""
 
 #: src/solve-commit.cc:674
 msgid "y/n"
-msgstr ""
+msgstr "y/n"
 
 #: src/solve-commit.cc:675
 msgid "View the notifications now?"
@@ -6149,7 +6149,7 @@ msgstr ""
 #. ! \todo add c for changelog and x for explain (show the dep tree)
 #: src/solve-commit.cc:817
 msgid "y/n/p/v/a/r/m/d/g"
-msgstr ""
+msgstr "y/n/p/v/a/r/m/d/g"
 
 #. translators: help text for 'y' option in the 'Continue?' prompt
 #: src/solve-commit.cc:822
@@ -6202,15 +6202,15 @@ msgstr ""
 
 #: src/solve-commit.cc:845
 msgid "Backend"
-msgstr ""
+msgstr "უკანაბოლო"
 
 #: src/solve-commit.cc:959
 msgid "committing"
-msgstr ""
+msgstr "გადაცემა"
 
 #: src/solve-commit.cc:961
 msgid "(dry run)"
-msgstr ""
+msgstr "(გამოსაცდელი გავლა)"
 
 #: src/solve-commit.cc:989 src/solve-commit.cc:1023
 msgid "Problem retrieving the package file from the repository:"
@@ -6305,7 +6305,7 @@ msgstr[0] ""
 #. translator: Table column header.
 #: src/update.cc:408
 msgid "Updatestack"
-msgstr ""
+msgstr "განახლებების სტეკი"
 
 #. translator: Table column header.
 #: src/update.cc:410 src/update.cc:702
@@ -6358,7 +6358,7 @@ msgstr "მიმდინარე ვერსია"
 
 #: src/update.cc:795
 msgid "Available Version"
-msgstr ""
+msgstr "ხელმისაწვდომი ვერსია"
 
 #: src/update.cc:972
 msgid "No matching issues found."
@@ -6479,17 +6479,17 @@ msgstr ""
 #. to not break scripts that use xml output (bsc#1172925)
 #: src/utils/flags/zyppflags.cc:392
 msgid "Warning: "
-msgstr ""
+msgstr "გაფრთხილება: "
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:23
 msgid "ALIAS"
-msgstr ""
+msgstr "ფსევდონიმი"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:25
 msgid "ALIAS|#|URI"
-msgstr ""
+msgstr "ფსევდონიმი|#|URI"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:27
@@ -6504,12 +6504,12 @@ msgstr "საქაღალდე"
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:31
 msgid "FILE"
-msgstr ""
+msgstr "ფაილი"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:33
 msgid "FILE.repo"
-msgstr ""
+msgstr "ფაილი.repo"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:35
@@ -6519,7 +6519,7 @@ msgstr "ფორმატი"
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:37
 msgid "INTEGER"
-msgstr ""
+msgstr "მთელირიცხვი"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:39
@@ -6529,7 +6529,7 @@ msgstr "ბილიკი"
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:41
 msgid "SEVERITY"
-msgstr ""
+msgstr "სიმძიმე"
 
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
 #: src/utils/flags/zyppflags.h:43
@@ -6686,7 +6686,7 @@ msgstr[0] "ამოხსნადები"
 #. translator: patch status
 #: src/utils/misc.cc:114
 msgid "unwanted"
-msgstr ""
+msgstr "არასასურველია"
 
 #. translator: patch status
 #: src/utils/misc.cc:115
@@ -6696,12 +6696,12 @@ msgstr "არასავალდებულო"
 #. translator: patch status
 #: src/utils/misc.cc:116
 msgid "needed"
-msgstr ""
+msgstr "საჭიროა"
 
 #. translator: patch status
 #: src/utils/misc.cc:117
 msgid "applied"
-msgstr ""
+msgstr "გადატარებულია"
 
 #. translator: patch status
 #: src/utils/misc.cc:118
@@ -6717,7 +6717,7 @@ msgstr "განუსაზღვრელია"
 #. translator: patch status
 #: src/utils/misc.cc:120
 msgid "retracted"
-msgstr ""
+msgstr "გამოთხოვილია"
 
 #: src/utils/misc.cc:329 src/utils/misc.cc:371
 msgid "Since"
@@ -6757,7 +6757,7 @@ msgstr ""
 #: src/utils/misc.cc:554 src/utils/misc.cc:600
 #, c-format, boost-format
 msgid "Example: %s"
-msgstr ""
+msgstr "მაგალითი: %s"
 
 #: src/utils/misc.cc:599
 msgid "Invalid OBS URI."
@@ -6809,7 +6809,7 @@ msgstr ""
 #. The answers should be lower case letters.
 #: src/utils/prompt.cc:49 src/utils/prompt.cc:142
 msgid "a/r/i"
-msgstr ""
+msgstr "a/r/i"
 
 #: src/utils/prompt.cc:107
 #, c-format, boost-format
