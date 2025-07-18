@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Fri Jul 18 20:33:46 CEST 2025 - ma@suse.de
+
+- Fix addrepo to handle explicit --check and --no-check requests
+  (bsc#1246466)
+- Accept "show" as alias for "info" (bsc#1245985)
+- version 1.14.93
+
+-------------------------------------------------------------------
 Fri Jul  4 18:53:57 CEST 2025 - ma@suse.de
 
 - sh: Reset solver options after command (bsc#1245496)
