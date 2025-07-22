@@ -11,15 +11,16 @@ msgstr ""
 "Project-Id-Version: zypper.pa\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-07-02 13:50+0200\n"
-"PO-Revision-Date: 2008-11-23 08:36+0530\n"
-"Last-Translator: KDB <brar.kd@gmail.com>\n"
-"Language-Team: Panjabi <punjabi-l10n@list.sf.net>\n"
-"Language: \n"
+"PO-Revision-Date: 2025-07-22 12:48+0000\n"
+"Last-Translator: Julia Faltenbacher <julia.faltenbacher@suse.com>\n"
+"Language-Team: Punjabi <https://l10n.opensuse.org/projects/zypper/master/pa/>"
+"\n"
+"Language: pa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11.4\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.12.2\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -5888,7 +5889,8 @@ msgstr "ਸਭ ਰਿਪੋਜ਼ਟਰੀਆਂ ਤਾਜ਼ਾ ਕੀਤੀਆ
 
 #: src/repos.cc:1168
 msgid "This is a changeable read-only media (CD/DVD), disabling autorefresh."
-msgstr "ਇਹ ਬਦਲਣਯੋਗ ਕੇਵਲ ਪੜ੍ਹਨ ਵਾਸਤੇ ਮੀਡਿਆ (CD/DVD) ਹੈ, ਆਟੋ-ਤਾਜ਼ਾ ਆਯੋਗ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ।"
+msgstr ""
+"ਇਹ ਬਦਲਣਯੋਗ ਕੇਵਲ ਪੜ੍ਹਨ ਵਾਸਤੇ ਮੀਡਿਆ (CD/DVD) ਹੈ, ਆਟੋ-ਤਾਜ਼ਾ ਆਯੋਗ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ।"
 
 #: src/repos.cc:1189
 #, fuzzy, c-format, boost-format
