@@ -7,16 +7,16 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-07-02 13:50+0200\n"
-"PO-Revision-Date: 2020-05-11 08:31+0000\n"
-"Last-Translator: scootergrisen <scootergrisen@gmail.com>\n"
-"Language-Team: Danish <https://l10n.opensuse.org/projects/zypper/master/da/"
-">\n"
+"PO-Revision-Date: 2025-07-22 12:47+0000\n"
+"Last-Translator: Julia Faltenbacher <julia.faltenbacher@suse.com>\n"
+"Language-Team: Danish <https://l10n.opensuse.org/projects/zypper/master/da/>"
+"\n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.6.1\n"
+"X-Generator: Weblate 5.12.2\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -922,8 +922,8 @@ msgid_plural ""
 "The following %d packages are recommended, but will not be installed because "
 "they are unwanted (were manually removed before):"
 msgstr[0] ""
-"Følgende pakke anbefales, men vil ikke blive installeret da den er uønsket "
-"(blev fjernet manuelt tidligere):"
+"Følgende pakke anbefales, men vil ikke blive installeret da den er uønsket ("
+"blev fjernet manuelt tidligere):"
 msgstr[1] ""
 "Følgende %d pakker anbefales, men vil ikke blive installeret da de er "
 "uønsket (blev fjernet manuelt tidligere):"
@@ -1013,8 +1013,7 @@ msgid "The following application is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d applications are suggested, but will not be installed:"
 msgstr[0] "Følgende program er foreslået, men vil ikke blive installeret:"
-msgstr[1] ""
-"Følgende %d programmer er foreslået, men vil ikke blive installeret:"
+msgstr[1] "Følgende %d programmer er foreslået, men vil ikke blive installeret:"
 
 #: src/Summary.cc:1274
 #, c-format, boost-format
@@ -1110,8 +1109,7 @@ msgid ""
 msgid_plural ""
 "The following %d packages need additional customer contract to get support:"
 msgstr[0] "Følgende pakke behøver yderligere kundekontrakt for at få support:"
-msgstr[1] ""
-"Følgende %d pakker behøver yderligere kundekontrakt for at få support:"
+msgstr[1] "Følgende %d pakker behøver yderligere kundekontrakt for at få support:"
 
 #: src/Summary.cc:1417
 msgid "was superseded by"
@@ -1164,8 +1162,7 @@ msgstr[1] "Følgende %d programopdateringer vil IKKE blive installeret:"
 msgid "The following item is locked and will not be changed by any action:"
 msgid_plural ""
 "The following %d items are locked and will not be changed by any action:"
-msgstr[0] ""
-"Følgende element er låst og vil ikke blive ændret af nogen handling:"
+msgstr[0] "Følgende element er låst og vil ikke blive ændret af nogen handling:"
 msgstr[1] ""
 "Følgende %d elementer er låst og vil ikke blive ændret af nogen handling:"
 
@@ -2264,8 +2261,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/help.cc:22
 msgid "zypper [--GLOBAL-OPTIONS] <COMMAND> [--COMMAND-OPTIONS] [ARGUMENTS]"
-msgstr ""
-"zypper [--globale-tilvalg] <kommando> [--kommando-tilvalg] [argumenter]"
+msgstr "zypper [--globale-tilvalg] <kommando> [--kommando-tilvalg] [argumenter]"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/help.cc:25
@@ -2382,8 +2378,8 @@ msgid ""
 msgstr ""
 "Installationsstatus for en rettelse bestemmes alene baseret på dens "
 "afhængigheder.\n"
-" Rettelser installeres ikke i betydningen af kopierede filer, "
-"databaseindgange,\n"
+" Rettelser installeres ikke i betydningen af kopierede filer, databaseindgange,"
+"\n"
 " eller lignende."
 
 #: src/commands/installremove.cc:126
@@ -3017,8 +3013,8 @@ msgid ""
 "download-as-needed disables the fileconflict check."
 msgstr ""
 "Installér pakkerne selvom de overskriver filer fra andre, allerede "
-"installerede pakker. Standard er at behandle filkonflikter som en fejl. --"
-"download-as-needed deaktiverer tjek af filkonflikter."
+"installerede pakker. Standard er at behandle filkonflikter som en fejl. "
+"--download-as-needed deaktiverer tjek af filkonflikter."
 
 #. translators: -y, --no-confirm
 #: src/commands/optionsets.cc:291
@@ -3532,8 +3528,8 @@ msgstr "Kan ikke bruge %s sammen med %s. Bruger indstillingen %s."
 msgid ""
 "If only one argument is used, it must be a URI pointing to a .repo file."
 msgstr ""
-"Hvis der kun anvendes ét argument, skal det være en URI, der peger på "
-"en .repo-fil."
+"Hvis der kun anvendes ét argument, skal det være en URI, der peger på en "
+".repo-fil."
 
 #: src/commands/repos/add.cc:130
 msgid "Specified type is not a valid repository type:"
@@ -4363,8 +4359,7 @@ msgstr "Udfør versalfølsom søgning."
 #. translators: -s, --details
 #: src/commands/search/search.cc:201
 msgid "Show each available version in each repository on a separate line."
-msgstr ""
-"Vis hver tilgængelig version i hver softwarekilde  på en separat linje."
+msgstr "Vis hver tilgængelig version i hver softwarekilde  på en separat linje."
 
 #. translators: -v, --verbose
 #: src/commands/search/search.cc:205
@@ -4387,8 +4382,7 @@ msgstr "Ingen matchende elementer fundet."
 
 #: src/commands/search/search.cc:503
 msgid "Problem occurred initializing or executing the search query"
-msgstr ""
-"Problem opstod under initialisering eller udførsel af søgeforespørgslen"
+msgstr "Problem opstod under initialisering eller udførsel af søgeforespørgslen"
 
 #: src/commands/search/search.cc:504
 msgid "See the above message for a hint."
@@ -5782,8 +5776,7 @@ msgstr ""
 #: src/misc.cc:209
 #, c-format, boost-format
 msgid "Aborting installation due to user disagreement with %s %s license."
-msgstr ""
-"Afbryder installationen, da bruger ikke accepterer licensaftalen %s %s."
+msgstr "Afbryder installationen, da bruger ikke accepterer licensaftalen %s %s."
 
 #: src/misc.cc:248
 msgid "License"
@@ -6193,8 +6186,7 @@ msgstr "Tjek om dit installationsmedie er gyldigt og læsbart."
 #: src/repos.cc:1283
 #, c-format, boost-format
 msgid "Reading data from '%s' media is delayed until next refresh."
-msgstr ""
-"Læsning af data fra mediet \"%s\" udsættes indtil næste genopfriskning."
+msgstr "Læsning af data fra mediet \"%s\" udsættes indtil næste genopfriskning."
 
 #: src/repos.cc:1352
 msgid "Problem accessing the file at the specified URI"
@@ -7077,8 +7069,7 @@ msgstr "Opret venligst en fejlrapport om dette."
 #. unless you translate the actual page :)
 #: src/utils/messages.cc:22
 msgid "See http://en.opensuse.org/Zypper/Troubleshooting for instructions."
-msgstr ""
-"Du kan få vejledning på http://en.opensuse.org/Zypper/Troubleshooting ."
+msgstr "Du kan få vejledning på http://en.opensuse.org/Zypper/Troubleshooting ."
 
 #: src/utils/messages.cc:38
 msgid "Too many arguments."
@@ -7397,8 +7388,8 @@ msgid ""
 "If nothing else works enter '#1' to select the 1st option, '#2' for the 2nd "
 "one, ..."
 msgstr ""
-"Hvis intet andet virker så indtast '#1' for at vælge det første tilvalg, "
-"'#2' for det andet, ..."
+"Hvis intet andet virker så indtast '#1' for at vælge det første tilvalg, '#"
+"2' for det andet, ..."
 
 #. TranslatorExplanation These are reasons for various failures.
 #: src/utils/prompt.h:95
