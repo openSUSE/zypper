@@ -18,16 +18,16 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-07-02 13:50+0200\n"
-"PO-Revision-Date: 2025-04-06 19:56+0000\n"
-"Last-Translator: Antonio Simón <antonio@trans-mission.com>\n"
-"Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/"
-">\n"
+"PO-Revision-Date: 2025-07-22 12:47+0000\n"
+"Last-Translator: Julia Faltenbacher <julia.faltenbacher@suse.com>\n"
+"Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/>"
+"\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.10.3\n"
+"X-Generator: Weblate 5.12.2\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -235,8 +235,8 @@ msgstr "Omitir paquetes desconocidos."
 msgid ""
 "Terse output for machine consumption. Implies --no-abbrev and --no-color."
 msgstr ""
-"Salida simplificada para procesamiento automático. Implica --no-abbrev y --"
-"no-color."
+"Salida simplificada para procesamiento automático. Implica --no-abbrev y "
+"--no-color."
 
 #. translators: --reposd-dir, -D <DIR>
 #: src/Config.cc:397
@@ -892,8 +892,7 @@ msgstr[1] "Se van a reinstalar las siguientes %d aplicaciones:"
 msgid "The following recommended package was automatically selected:"
 msgid_plural ""
 "The following %d recommended packages were automatically selected:"
-msgstr[0] ""
-"Se ha seleccionado automáticamente el siguiente paquete recomendado:"
+msgstr[0] "Se ha seleccionado automáticamente el siguiente paquete recomendado:"
 msgstr[1] ""
 "Se han seleccionado automáticamente los siguientes %d paquetes recomendados:"
 
@@ -920,8 +919,7 @@ msgstr[1] ""
 msgid "The following recommended product was automatically selected:"
 msgid_plural ""
 "The following %d recommended products were automatically selected:"
-msgstr[0] ""
-"Se ha seleccionado automáticamente el siguiente producto recomendado:"
+msgstr[0] "Se ha seleccionado automáticamente el siguiente producto recomendado:"
 msgstr[1] ""
 "Se han seleccionado automáticamente los siguientes %d productos recomendados:"
 
@@ -997,8 +995,7 @@ msgid "The following patch is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d patches are recommended, but will not be installed:"
 msgstr[0] "Se recomienda el siguiente parche, sin embargo no se instalará:"
-msgstr[1] ""
-"Se recomiendan los siguientes %d parches, los cuales no se instalarán:"
+msgstr[1] "Se recomiendan los siguientes %d parches, los cuales no se instalarán:"
 
 #: src/Summary.cc:1186
 #, c-format, boost-format
@@ -1006,8 +1003,7 @@ msgid "The following pattern is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d patterns are recommended, but will not be installed:"
 msgstr[0] "Se recomienda el siguiente patrón, sin embargo no se instalará:"
-msgstr[1] ""
-"Se recomiendan los siguientes %d patrones, los cuales no se instalarán:"
+msgstr[1] "Se recomiendan los siguientes %d patrones, los cuales no se instalarán:"
 
 #: src/Summary.cc:1190
 #, c-format, boost-format
@@ -1033,8 +1029,7 @@ msgid "The following package is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d packages are suggested, but will not be installed:"
 msgstr[0] "Se sugiere el siguiente paquete, sin embargo no se instalará:"
-msgstr[1] ""
-"Se sugieren los siguientes %d paquetes, los cuales no se instalarán:"
+msgstr[1] "Se sugieren los siguientes %d paquetes, los cuales no se instalarán:"
 
 #: src/Summary.cc:1233
 #, c-format, boost-format
@@ -1050,8 +1045,7 @@ msgid "The following pattern is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d patterns are suggested, but will not be installed:"
 msgstr[0] "Se sugiere el siguiente paquete, sin embargo no se instalará:"
-msgstr[1] ""
-"Se sugieren los siguientes %d paquetes, los cuales no se instalarán:"
+msgstr[1] "Se sugieren los siguientes %d paquetes, los cuales no se instalarán:"
 
 #: src/Summary.cc:1243
 #, c-format, boost-format
@@ -1059,8 +1053,7 @@ msgid "The following product is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d products are suggested, but will not be installed:"
 msgstr[0] "Se sugiere el siguiente producto, sin embargo no se instalará:"
-msgstr[1] ""
-"Se sugieren los siguientes %d productos, los cuales no se instalarán:"
+msgstr[1] "Se sugieren los siguientes %d productos, los cuales no se instalarán:"
 
 #: src/Summary.cc:1249
 #, c-format, boost-format
@@ -1230,8 +1223,7 @@ msgstr[1] "NO se instalarán las siguientes %d actualizaciones de aplicaciones:"
 msgid "The following item is locked and will not be changed by any action:"
 msgid_plural ""
 "The following %d items are locked and will not be changed by any action:"
-msgstr[0] ""
-"El elemento siguiente está bloqueado y no cambiará con ninguna acción:"
+msgstr[0] "El elemento siguiente está bloqueado y no cambiará con ninguna acción:"
 msgstr[1] ""
 "Los %d elementos siguientes están bloqueados y no cambiarán con ninguna "
 "acción:"
@@ -1801,8 +1793,8 @@ msgid_plural "Received %1% new package signing keys from repository \"%2%\":"
 msgstr[0] ""
 "Se recibió la nueva clave de firma de paquete %1% del repositorio \"%2%\":"
 msgstr[1] ""
-"Se recibieron las nuevas claves de firma de paquete %1% del repositorio \"%2%"
-"\":"
+"Se recibieron las nuevas claves de firma de paquete %1% del repositorio "
+"\"%2%\":"
 
 #: src/callbacks/keyring.h:472
 msgid ""
@@ -1956,8 +1948,7 @@ msgstr "a/r/i/u/s"
 
 #: src/callbacks/media.cc:79
 msgid "Disable SSL certificate authority check and continue."
-msgstr ""
-"Inhabilitar comprobación de la autoridad certificadora SSL y continuar."
+msgstr "Inhabilitar comprobación de la autoridad certificadora SSL y continuar."
 
 #. translators: this is a prompt text
 #: src/callbacks/media.cc:82 src/callbacks/media.cc:174
@@ -2586,8 +2577,8 @@ msgstr ""
 "con todas sus funciones que incluye el modificador para eliminar (-) "
 "aplicado a sus argumentos básicos. Es decir, \"removeptf foo\" es igual que "
 "\"install -- -foo\". Por eso el comando acepta las mismas opciones que el "
-"comando de instalación. Es la forma recomendada de eliminar una PTF "
-"(solución temporal de programa)."
+"comando de instalación. Es la forma recomendada de eliminar una PTF ("
+"solución temporal de programa)."
 
 #: src/commands/installremove.cc:317
 msgid ""
@@ -2704,8 +2695,8 @@ msgstr "Muestra todas las configuraciones regionales disponibles."
 #: src/commands/locale/localescmd.cc:48
 msgid "Ignoring positional arguments because --all argument was provided."
 msgstr ""
-"Ignora los argumentos de posición porque se ha proporcionado el argumento --"
-"all."
+"Ignora los argumentos de posición porque se ha proporcionado el argumento "
+"--all."
 
 #: src/commands/locale/localescmd.cc:75
 msgid "The locale(s) for which the information shall be printed."
@@ -5248,8 +5239,7 @@ msgstr "El intérprete Zypper no admite la ejecución de subcomandos."
 #: src/commands/subcommand.cc:640
 #, boost-format
 msgid "Subcommand %1% does not support zypper global options."
-msgstr ""
-"El subcomando %1% no es compatible con las opciones globales de zypper."
+msgstr "El subcomando %1% no es compatible con las opciones globales de zypper."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/update.cc:22
@@ -6338,8 +6328,7 @@ msgstr "Borrando el caché de paquetes instalados."
 
 #: src/repos.cc:1115
 msgid "Cannot clean installed packages cache because of an error."
-msgstr ""
-"No es posible borrar el caché de paquetes instalados debido a un error."
+msgstr "No es posible borrar el caché de paquetes instalados debido a un error."
 
 #: src/repos.cc:1133
 msgid "Could not clean the repositories because of errors."
@@ -6382,8 +6371,7 @@ msgstr "No se encuentra un repositorio válido en la ubicación proporcionada:"
 
 #: src/repos.cc:1220
 msgid "Problem transferring repository data from specified URI:"
-msgstr ""
-"Problema al transferir datos del repositorio desde el URI especificado:"
+msgstr "Problema al transferir datos del repositorio desde el URI especificado:"
 
 #: src/repos.cc:1221
 msgid "Please check whether the specified URI is accessible."
@@ -6594,8 +6582,8 @@ msgid ""
 "server has actually discontinued to support the repository."
 msgstr ""
 "Los metadatos del repositorio han caducado. Compruebe si autorefresh está "
-"activado (zypper lr). Si no lo está, actualice manualmente el repositorio "
-"(zypper ref). Si esto no resuelve el problema, podría deberse a que usa una "
+"activado (zypper lr). Si no lo está, actualice manualmente el repositorio ("
+"zypper ref). Si esto no resuelve el problema, podría deberse a que usa una "
 "réplica rota o a que el servidor haya dejado de mantener el repositorio."
 
 #: src/repos.cc:1856
@@ -7176,8 +7164,7 @@ msgstr "El archivo de configuración %1% no existe."
 #: src/utils/Augeas.cc:635
 #, boost-format
 msgid "%1%: Option '%2%' is defined multiple times. Using the last one."
-msgstr ""
-"%1%: la opción %2% se ha definido varias veces. Se va a usar la última."
+msgstr "%1%: la opción %2% se ha definido varias veces. Se va a usar la última."
 
 #: src/utils/Augeas.cc:656
 msgid "No config file is in use."
@@ -7662,8 +7649,8 @@ msgid ""
 "If nothing else works enter '#1' to select the 1st option, '#2' for the 2nd "
 "one, ..."
 msgstr ""
-"Si no funciona nada más, introduzca #1 para seleccionar la primera opción, "
-"#2 para la segunda, etc."
+"Si no funciona nada más, introduzca #1 para seleccionar la primera opción, #"
+"2 para la segunda, etc."
 
 #. TranslatorExplanation These are reasons for various failures.
 #: src/utils/prompt.h:95
