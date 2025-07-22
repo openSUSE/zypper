@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-07-02 13:50+0200\n"
-"PO-Revision-Date: 2025-07-03 09:59+0000\n"
-"Last-Translator: David Medina <medipas@gmail.com>\n"
+"PO-Revision-Date: 2025-07-22 12:47+0000\n"
+"Last-Translator: Julia Faltenbacher <julia.faltenbacher@suse.com>\n"
 "Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/>"
 "\n"
 "Language: ca\n"
@@ -871,8 +871,7 @@ msgid "The following recommended package was automatically selected:"
 msgid_plural ""
 "The following %d recommended packages were automatically selected:"
 msgstr[0] "El paquet recomanat següent s'ha seleccionat automàticament:"
-msgstr[1] ""
-"Els %d paquets recomanats següents s'han seleccionat automàticament:"
+msgstr[1] "Els %d paquets recomanats següents s'han seleccionat automàticament:"
 
 #: src/Summary.cc:1079
 #, c-format, boost-format
@@ -880,8 +879,7 @@ msgid "The following recommended patch was automatically selected:"
 msgid_plural ""
 "The following %d recommended patches were automatically selected:"
 msgstr[0] "El pedaç recomanat següent s'ha seleccionat automàticament:"
-msgstr[1] ""
-"Els %d pedaços recomanats següents s'han seleccionat automàticament:"
+msgstr[1] "Els %d pedaços recomanats següents s'han seleccionat automàticament:"
 
 #: src/Summary.cc:1084
 #, c-format, boost-format
@@ -889,8 +887,7 @@ msgid "The following recommended pattern was automatically selected:"
 msgid_plural ""
 "The following %d recommended patterns were automatically selected:"
 msgstr[0] "El patró recomanat següent s'ha seleccionat automàticament:"
-msgstr[1] ""
-"Els %d patrons recomanats següents s'han seleccionat automàticament:"
+msgstr[1] "Els %d patrons recomanats següents s'han seleccionat automàticament:"
 
 #: src/Summary.cc:1089
 #, c-format, boost-format
@@ -898,8 +895,7 @@ msgid "The following recommended product was automatically selected:"
 msgid_plural ""
 "The following %d recommended products were automatically selected:"
 msgstr[0] "El producte recomanat següent s'ha seleccionat automàticament:"
-msgstr[1] ""
-"Els %d productes recomanats següents s'han seleccionat automàticament:"
+msgstr[1] "Els %d productes recomanats següents s'han seleccionat automàticament:"
 
 #: src/Summary.cc:1094
 #, c-format, boost-format
@@ -930,8 +926,8 @@ msgid_plural ""
 "The following %d packages are recommended, but will not be installed (only "
 "required packages will be installed):"
 msgstr[0] ""
-"El paquet següent està recomanat, però no s'instal·larà (només "
-"s'instal·laran els paquets necessaris):"
+"El paquet següent està recomanat, però no s'instal·larà (només s'instal·"
+"laran els paquets necessaris):"
 msgstr[1] ""
 "Els s%d paquets següents estan recomanats, però no s'instal·laran (només "
 "s'instal·laran els paquets necessaris):"
@@ -945,8 +941,8 @@ msgid_plural ""
 "The following %d packages are recommended, but will not be installed because "
 "they are unwanted (were manually removed before):"
 msgstr[0] ""
-"El paquet següent està recomanat, però no s'instal·larà perquè no és volgut "
-"(abans es va suprimir manualment):"
+"El paquet següent està recomanat, però no s'instal·larà perquè no és volgut ("
+"abans es va suprimir manualment):"
 msgstr[1] ""
 "Els %d paquets següents estan recomanats, però no s'instal·laran perquè no "
 "són volguts (abans es van suprimir manualment):"
@@ -996,8 +992,7 @@ msgid "The following application is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d applications are recommended, but will not be installed:"
 msgstr[0] "La següent aplicació està recomanada, però no s'instal·larà:"
-msgstr[1] ""
-"Les següents %d aplicacions estan recomanades, però no s'instal·laran:"
+msgstr[1] "Les següents %d aplicacions estan recomanades, però no s'instal·laran:"
 
 #: src/Summary.cc:1228
 #, c-format, boost-format
@@ -1037,8 +1032,7 @@ msgid "The following application is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d applications are suggested, but will not be installed:"
 msgstr[0] "La següent aplicació està suggerida, però no s'instal·larà:"
-msgstr[1] ""
-"Les següents %d aplicacions estan suggerides, però no s'instal·laran:"
+msgstr[1] "Les següents %d aplicacions estan suggerides, però no s'instal·laran:"
 
 #: src/Summary.cc:1274
 #, c-format, boost-format
@@ -1772,8 +1766,8 @@ msgid ""
 "installation the new keys will be imported into the rpm database."
 msgstr ""
 "Aquestes claus addicionals solen usar-se per signar paquets enviats pel "
-"repositori. Per tal de validar aquests paquets a la descàrrega i la "
-"instal·lació, les claus noves s'importaran a la base de dades d'rpm."
+"repositori. Per tal de validar aquests paquets a la descàrrega i la instal·"
+"lació, les claus noves s'importaran a la base de dades d'rpm."
 
 #: src/callbacks/keyring.h:474
 msgid "New:"
@@ -1917,8 +1911,7 @@ msgstr "a/r/i/u/s"
 
 #: src/callbacks/media.cc:79
 msgid "Disable SSL certificate authority check and continue."
-msgstr ""
-"Desactiva la comprovació de l'autoritat de certificació SSL i continua."
+msgstr "Desactiva la comprovació de l'autoritat de certificació SSL i continua."
 
 #. translators: this is a prompt text
 #: src/callbacks/media.cc:82 src/callbacks/media.cc:174
@@ -2135,9 +2128,9 @@ msgid ""
 "in advance in order to access their file lists. See option '%1%' in the "
 "zypper manual page for details."
 msgstr ""
-"Comprovar els conflictes entre fitxers requereix que els paquets no "
-"instal·lats es baixin abans per tal d'accedir a la seva llista de fitxers. "
-"Vegeu l'opció \"%1%\" al manual del zypper per a més detalls."
+"Comprovar els conflictes entre fitxers requereix que els paquets no instal·"
+"lats es baixin abans per tal d'accedir a la seva llista de fitxers. Vegeu "
+"l'opció \"%1%\" al manual del zypper per a més detalls."
 
 #. TranslatorExplanation %1%(number of conflicts); detailed list follows
 #: src/callbacks/rpm.h:523
@@ -2652,8 +2645,8 @@ msgstr "Llista totes les llengües disponibles."
 #: src/commands/locale/localescmd.cc:48
 msgid "Ignoring positional arguments because --all argument was provided."
 msgstr ""
-"S'ignoren els arguments posicionals perquè s'ha proporcionat l'argument --"
-"all."
+"S'ignoren els arguments posicionals perquè s'ha proporcionat l'argument "
+"--all."
 
 #: src/commands/locale/localescmd.cc:75
 msgid "The locale(s) for which the information shall be printed."
@@ -2705,8 +2698,7 @@ msgstr ""
 
 #: src/commands/locale/removelocalecmd.cc:46
 msgid "Do not remove corresponding packages for given locale(s)."
-msgstr ""
-"No suprimeixis els paquets corresponents de les llengües especificades."
+msgstr "No suprimeixis els paquets corresponents de les llengües especificades."
 
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
 #: src/commands/locks/add.cc:29
@@ -2738,8 +2730,8 @@ msgid ""
 msgstr ""
 "El formulari bàsic bloquejarà totes les edicions dels elements coincidents. "
 "Opcionalment, podeu restringir el bloqueig perquè coincideixi amb una edició "
-"o un interval d’edició específics fent servir =, <, <=, >, >= o != seguit "
-"d’una EDICIÓ."
+"o un interval d’edició específics fent servir =, <, <=, >, >= o != seguit d’"
+"una EDICIÓ."
 
 #: src/commands/locks/add.cc:46
 msgid "Restrict the lock to the specified repository."
@@ -3474,8 +3466,7 @@ msgstr ""
 #. translators: --userinstalled
 #: src/commands/query/packages.cc:39
 msgid "Show installed packages which were explicitly selected by the user."
-msgstr ""
-"Mostra els paquets instal·lats seleccionats explícitament per l'usuari."
+msgstr "Mostra els paquets instal·lats seleccionats explícitament per l'usuari."
 
 #. translators: --system
 #: src/commands/query/packages.cc:43
@@ -3621,8 +3612,8 @@ msgstr ""
 msgid ""
 "If only one argument is used, it must be a URI pointing to a .repo file."
 msgstr ""
-"Si només es fa servir un argument, ha de ser un URI que apunti a un "
-"fitxer .repo."
+"Si només es fa servir un argument, ha de ser un URI que apunti a un fitxer "
+".repo."
 
 #: src/commands/repos/add.cc:130
 msgid "Specified type is not a valid repository type:"
@@ -4719,8 +4710,7 @@ msgstr "El nom del servei %s s'ha establert a \"%s\"."
 msgid "Repository '%s' has been added to enabled repositories of service '%s'"
 msgid_plural ""
 "Repositories '%s' have been added to enabled repositories of service '%s'"
-msgstr[0] ""
-"El repositori %s s'ha afegit als repositoris habilitats del servei %s."
+msgstr[0] "El repositori %s s'ha afegit als repositoris habilitats del servei %s."
 msgstr[1] ""
 "Els repositoris %s s'han afegit als repositoris habilitats del servei %s."
 
@@ -4940,8 +4930,7 @@ msgstr "Si s'ha de permetre canviar els noms dels resolubles instal·lats."
 
 #: src/commands/solveroptionset.cc:91
 msgid "Whether to allow changing the architecture of installed resolvables."
-msgstr ""
-"Si s'ha de permetre canviar l'arquitectura dels resolubles instal·lats."
+msgstr "Si s'ha de permetre canviar l'arquitectura dels resolubles instal·lats."
 
 #: src/commands/solveroptionset.cc:93
 msgid "Whether to allow changing the vendor of installed resolvables."
@@ -5090,8 +5079,8 @@ msgstr ""
 "\n"
 "Si no es troba una subordre a zypper_execdir, l'embolcall\n"
 "la buscarà a la resta del vostre $PATH. Així, és possible\n"
-"escriure les extensions locals del zypper que no viuen a l'espai del "
-"sistema.\n"
+"escriure les extensions locals del zypper que no viuen a l'espai del sistema."
+"\n"
 
 #: src/commands/subcommand.cc:458
 #, boost-format
@@ -5193,9 +5182,9 @@ msgid ""
 "Zypper does not keep track of installed source packages. To install the "
 "latest source package and its build dependencies, use '%s'."
 msgstr ""
-"El Zypper no controla els paquets de codi font ja instal·lats. Per "
-"instal·lar l'últim paquet de codi font i les seves dependències construïdes, "
-"feu servir '%s'."
+"El Zypper no controla els paquets de codi font ja instal·lats. Per instal·"
+"lar l'últim paquet de codi font i les seves dependències construïdes, feu "
+"servir '%s'."
 
 #: src/commands/update.cc:83
 msgid ""
@@ -5488,8 +5477,8 @@ msgid ""
 "installed at all, the value is empty if the --terse global option is used."
 msgstr ""
 "Si el producte de base no proporciona aquesta entrada, o si no hi ha cap "
-"producte de base instal·lat, el valor és buit si s'usa l'opció global --"
-"terse."
+"producte de base instal·lat, el valor és buit si s'usa l'opció global "
+"--terse."
 
 #: src/commands/utils/targetos.cc:26
 msgid ""
@@ -6278,8 +6267,7 @@ msgstr "No es pot trobar un repositori vàlid en aquest lloc:"
 
 #: src/repos.cc:1220
 msgid "Problem transferring repository data from specified URI:"
-msgstr ""
-"Problema transferint les dades del repositori des de l'URI especificat:"
+msgstr "Problema transferint les dades del repositori des de l'URI especificat:"
 
 #: src/repos.cc:1221
 msgid "Please check whether the specified URI is accessible."
@@ -6344,8 +6332,7 @@ msgstr "És un fitxer .repo?"
 
 #: src/repos.cc:1369
 msgid "Problem encountered while trying to read the file at the specified URI"
-msgstr ""
-"S'ha trobat un problema intentant llegir el fitxer a l'URI especificat."
+msgstr "S'ha trobat un problema intentant llegir el fitxer a l'URI especificat."
 
 #: src/repos.cc:1382
 msgid "Repository with no alias defined found in the file, skipping."
@@ -6567,8 +6554,8 @@ msgstr "Informació detallada: "
 msgid "Choose the above solution using '1' or skip, retry or cancel"
 msgid_plural "Choose from above solutions by number or skip, retry or cancel"
 msgstr[0] ""
-"Trieu la solució anterior marcant \"1\" o salteu-ho, reintenteu-ho o "
-"cancel·leu-ho."
+"Trieu la solució anterior marcant \"1\" o salteu-ho, reintenteu-ho o cancel"
+"·leu-ho."
 msgstr[1] ""
 "Trieu la solució marcant-ne el número corresponent o salteu-ho, reintenteu-"
 "ho o cancel·leu-ho."
@@ -7300,8 +7287,8 @@ msgid ""
 "provided as a subcommand or plug-in (see '%2%')."
 msgstr ""
 "En cas que \"%1%\" no sigui un error tipogràfic, és probable que no sigui "
-"una ordre incorporada sinó que es proporcioni com a subordre o connector "
-"(vegeu \"%2%\")."
+"una ordre incorporada sinó que es proporcioni com a subordre o connector ("
+"vegeu \"%2%\")."
 
 #. translators: %1% and %2% are plug-in packages which might provide it.
 #. translators: The word 'subcommand' also refers to a zypper command and should not be translated.
