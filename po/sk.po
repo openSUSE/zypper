@@ -6,8 +6,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-07-02 13:50+0200\n"
-"PO-Revision-Date: 2025-07-03 19:59+0000\n"
-"Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
+"PO-Revision-Date: 2025-07-22 12:48+0000\n"
+"Last-Translator: Julia Faltenbacher <julia.faltenbacher@suse.com>\n"
 "Language-Team: Slovak <https://l10n.opensuse.org/projects/zypper/master/sk/>"
 "\n"
 "Language: sk\n"
@@ -226,8 +226,7 @@ msgstr "Ignorovať neznáme balíky."
 #: src/Config.cc:373
 msgid ""
 "Terse output for machine consumption. Implies --no-abbrev and --no-color."
-msgstr ""
-"Stručný výstup pre spotrebu stroja. Naznačuje --no-abbrev a --no-color."
+msgstr "Stručný výstup pre spotrebu stroja. Naznačuje --no-abbrev a --no-color."
 
 #. translators: --reposd-dir, -D <DIR>
 #: src/Config.cc:397
@@ -1020,8 +1019,7 @@ msgid_plural ""
 "The following %d products are recommended, but will not be installed:"
 msgstr[0] "Nasledujúci produkt je odporúčaný, ale nebude sa inštalovať:"
 msgstr[1] "Nasledujúce %d produkty sú odporúčané, ale nebudú sa inštalovať:"
-msgstr[2] ""
-"Nasledujúcich %d produktov je odporúčaných, ale nebudú sa inštalovať:"
+msgstr[2] "Nasledujúcich %d produktov je odporúčaných, ale nebudú sa inštalovať:"
 
 #: src/Summary.cc:1195
 #, c-format, boost-format
@@ -1030,8 +1028,7 @@ msgid_plural ""
 "The following %d applications are recommended, but will not be installed:"
 msgstr[0] "Nasledujúca aplikácia je odporúčaná, ale nebude sa inštalovať:"
 msgstr[1] "Nasledujúce %d aplikácie sú odporúčané, ale nebudú sa inštalovať:"
-msgstr[2] ""
-"Nasledujúcich %d aplikácií je odporúčaných, ale nebudú sa inštalovať:"
+msgstr[2] "Nasledujúcich %d aplikácií je odporúčaných, ale nebudú sa inštalovať:"
 
 #: src/Summary.cc:1228
 #, c-format, boost-format
@@ -1067,8 +1064,7 @@ msgid_plural ""
 "The following %d products are suggested, but will not be installed:"
 msgstr[0] "Nasledujúci produkt je navrhovaný, ale nebude sa inštalovať:"
 msgstr[1] "Nasledujúce %d produkty sú navrhované, ale nebudú sa inštalovať:"
-msgstr[2] ""
-"Nasledujúcich %d produktov je navrhovaných, ale nebudú sa inštalovať:"
+msgstr[2] "Nasledujúcich %d produktov je navrhovaných, ale nebudú sa inštalovať:"
 
 #: src/Summary.cc:1249
 #, c-format, boost-format
@@ -1077,8 +1073,7 @@ msgid_plural ""
 "The following %d applications are suggested, but will not be installed:"
 msgstr[0] "Nasledujúca aplikácia je navrhovaná, ale nebude sa inštalovať:"
 msgstr[1] "Nasledujúce %d aplikácie sú navrhované, ale nebudú sa inštalovať:"
-msgstr[2] ""
-"Nasledujúcich %d aplikácií je navrhovaných, ale nebudú sa inštalovať:"
+msgstr[2] "Nasledujúcich %d aplikácií je navrhovaných, ale nebudú sa inštalovať:"
 
 #: src/Summary.cc:1274
 #, c-format, boost-format
@@ -1209,8 +1204,7 @@ msgid ""
 msgid_plural ""
 "The following %d packages were discontinued and have been superseded by a "
 "new packages with different names."
-msgstr[0] ""
-"Nasledujúci balík bol ukončený a nahradil ho nový balík s iným názvom."
+msgstr[0] "Nasledujúci balík bol ukončený a nahradil ho nový balík s iným názvom."
 msgstr[1] ""
 "Nasledujúce %d balíky boli ukončené a nahradené novými balíkmi s inými "
 "názvami."
@@ -1791,8 +1785,7 @@ msgstr "Ignorujem zlyhanie overenia podpisu pre súbor '%s'!"
 #, c-format, boost-format
 msgid ""
 "Ignoring failed signature verification for file '%s' from repository '%s'!"
-msgstr ""
-"Ignorovanie zlyhania overenia podpisu pre súbor '%s' z repozitára '%s'!"
+msgstr "Ignorovanie zlyhania overenia podpisu pre súbor '%s' z repozitára '%s'!"
 
 #: src/callbacks/keyring.h:376
 msgid "Double-check this is not caused by some malicious changes in the file!"
@@ -2073,8 +2066,8 @@ msgid ""
 "Authentication required to access %s. You need to be root to be able to read "
 "the credentials from %s."
 msgstr ""
-"Autentifikácia požadovaná pre prístup k %s. Musíte byť správca systému "
-"(root), aby ste boli schopní čítať prihlasovacie údaje z %s."
+"Autentifikácia požadovaná pre prístup k %s. Musíte byť správca systému (root)"
+", aby ste boli schopní čítať prihlasovacie údaje z %s."
 
 #: src/callbacks/media.cc:314 src/callbacks/media.cc:321
 msgid "User Name"
@@ -2736,8 +2729,7 @@ msgstr ""
 
 #: src/commands/locale/localescmd.cc:86
 msgid "Get all locales with lang code 'en' with or without country code:"
-msgstr ""
-"Získať všetky lokalizácie s kódom jazyka 'en' s alebo bez kódu krajiny:"
+msgstr "Získať všetky lokalizácie s kódom jazyka 'en' s alebo bez kódu krajiny:"
 
 #: src/commands/locale/localescmd.cc:93
 msgid "Get the locale matching the argument exactly: "
@@ -3624,8 +3616,7 @@ msgstr "Vypíše zoznam všetkých dostupných produktov v zdaných repozitároc
 #: src/commands/query/products.cc:36
 msgid ""
 "XML output only: Literally forward the XML tags found in a product file."
-msgstr ""
-"Iba výstup XML: Doslova preposlať značky XML nájdené v súbore produktu."
+msgstr "Iba výstup XML: Doslova preposlať značky XML nájdené v súbore produktu."
 
 #: src/commands/query/products.cc:50
 #, boost-format
@@ -3989,8 +3980,7 @@ msgstr "Nie sú definované žiadne zapnuté repozitáre."
 #: src/commands/repos/refresh.cc:331
 #, c-format, boost-format
 msgid "Use '%s' or '%s' commands to add or enable repositories."
-msgstr ""
-"Použite príkaz '%s' alebo '%s' pre pridanie alebo zapnutie repozitárov."
+msgstr "Použite príkaz '%s' alebo '%s' pre pridanie alebo zapnutie repozitárov."
 
 #: src/commands/repos/refresh.cc:337
 msgid "Could not refresh the repositories because of errors."
@@ -4519,8 +4509,8 @@ msgid ""
 "Like --details, with additional information where the search has matched "
 "(useful for search in dependencies)."
 msgstr ""
-"Ako --details, s ďalšími informáciami, kde bolo hľadanie vyhovujúce "
-"(užitočné pre hľadanie v závislostiach)."
+"Ako --details, s ďalšími informáciami, kde bolo hľadanie vyhovujúce ("
+"užitočné pre hľadanie v závislostiach)."
 
 #: src/commands/search/search.cc:298 src/repos.cc:780
 #, c-format, boost-format
@@ -4902,8 +4892,7 @@ msgstr "Odstráni indexovú službu zadaného repozitára zo systému.."
 #: src/commands/services/remove.cc:76
 #, c-format, boost-format
 msgid "Service '%s' not found by alias, number or URI."
-msgstr ""
-"Služba '%s' nebola nájdená podľa zadaného aliasu, čísla ani URI adresy."
+msgstr "Služba '%s' nebola nájdená podľa zadaného aliasu, čísla ani URI adresy."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/shell.cc:20
@@ -6510,8 +6499,8 @@ msgid ""
 "server has actually discontinued to support the repository."
 msgstr ""
 "Platnosť metadát repozitára vypršala: Skontrolujte, či je zapnutá "
-"'automatická obnova' (zypper lr), v opačnom prípade obnovte repozitár ručne "
-"(zypper ref). Ak to problém nevyrieši, môže to byť spôsobené tým, že "
+"'automatická obnova' (zypper lr), v opačnom prípade obnovte repozitár ručne ("
+"zypper ref). Ak to problém nevyrieši, môže to byť spôsobené tým, že "
 "používate nefunkčné zrkadlo alebo server skutočne prestal podporovať "
 "repozitár."
 
@@ -7043,8 +7032,7 @@ msgstr "Našli sa zhody v popisoch týchto opráv:"
 #: src/update.cc:1050
 #, c-format, boost-format
 msgid "Fix for bugzilla issue number %s was not found or is not needed."
-msgstr ""
-"Oprava bugzilla problému číslo %s nebola nájdená alebo nie je potrebná."
+msgstr "Oprava bugzilla problému číslo %s nebola nájdená alebo nie je potrebná."
 
 #: src/update.cc:1052
 #, c-format, boost-format
