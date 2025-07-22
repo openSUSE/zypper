@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-07-02 13:50+0200\n"
-"PO-Revision-Date: 2024-05-17 19:46+0000\n"
-"Last-Translator: Alex Glazko <lenify@tutanota.com>\n"
+"PO-Revision-Date: 2025-07-22 12:47+0000\n"
+"Last-Translator: Julia Faltenbacher <julia.faltenbacher@suse.com>\n"
 "Language-Team: Belarusian <https://l10n.opensuse.org/projects/zypper/master/"
 "be/>\n"
 "Language: be\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 5.5.5\n"
+"X-Generator: Weblate 5.12.2\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -237,8 +237,7 @@ msgstr ""
 #. translators: --reposd-dir, -D <DIR>
 #: src/Config.cc:397
 msgid "Use alternative repository definition file directory."
-msgstr ""
-"Выкарыстоўваць альтэрнатыўны каталог файлаў з азначэннямі рэпазіторыяў."
+msgstr "Выкарыстоўваць альтэрнатыўны каталог файлаў з азначэннямі рэпазіторыяў."
 
 #. translators: --cache-dir, -C <DIR>
 #: src/Config.cc:412
