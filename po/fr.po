@@ -14,16 +14,16 @@ msgstr ""
 "Project-Id-Version: zypper.fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-07-02 13:50+0200\n"
-"PO-Revision-Date: 2025-04-09 15:56+0000\n"
-"Last-Translator: Sophie Leroy <sophie@stoquart.com>\n"
-"Language-Team: French <https://l10n.opensuse.org/projects/zypper/master/fr/"
-">\n"
+"PO-Revision-Date: 2025-07-22 12:47+0000\n"
+"Last-Translator: Julia Faltenbacher <julia.faltenbacher@suse.com>\n"
+"Language-Team: French <https://l10n.opensuse.org/projects/zypper/master/fr/>"
+"\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.10.4\n"
+"X-Generator: Weblate 5.12.2\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -828,8 +828,7 @@ msgstr[1] "Les %d paquets suivants vont être remis à une version inférieure 
 msgid "The following patch is going to be downgraded:"
 msgid_plural "The following %d patches are going to be downgraded:"
 msgstr[0] "Le correctif suivant va être remis à une version inférieure :"
-msgstr[1] ""
-"Les %d correctifs suivants vont être remis à une version inférieure :"
+msgstr[1] "Les %d correctifs suivants vont être remis à une version inférieure :"
 
 #: src/Summary.cc:876
 #, c-format, boost-format
@@ -929,8 +928,7 @@ msgstr[1] ""
 msgid "The following recommended source package was automatically selected:"
 msgid_plural ""
 "The following %d recommended source packages were automatically selected:"
-msgstr[0] ""
-"Le paquet source recommandé suivant a été sélectionné automatiquement :"
+msgstr[0] "Le paquet source recommandé suivant a été sélectionné automatiquement :"
 msgstr[1] ""
 "Les %d paquets source recommandés suivants ont été sélectionnés "
 "automatiquement :"
@@ -940,8 +938,7 @@ msgstr[1] ""
 msgid "The following recommended application was automatically selected:"
 msgid_plural ""
 "The following %d recommended applications were automatically selected:"
-msgstr[0] ""
-"L'application recommandée suivante a été automatiquement sélectionnée :"
+msgstr[0] "L'application recommandée suivante a été automatiquement sélectionnée :"
 msgstr[1] ""
 "Les %d applications recommandées suivantes ont été automatiquement "
 "sélectionnées :"
@@ -1023,8 +1020,7 @@ msgstr[1] ""
 msgid "The following application is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d applications are recommended, but will not be installed:"
-msgstr[0] ""
-"L'application suivante est recommandée, mais ne sera pas installée :"
+msgstr[0] "L'application suivante est recommandée, mais ne sera pas installée :"
 msgstr[1] ""
 "Les %d applications suivantes sont recommandées, mais ne seront pas "
 "installées :"
@@ -1035,8 +1031,7 @@ msgid "The following package is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d packages are suggested, but will not be installed:"
 msgstr[0] "Le paquet suivant est suggéré, mais ne sera pas installé :"
-msgstr[1] ""
-"Les %d paquets suivants sont suggérés, mais ne seront pas installés :"
+msgstr[1] "Les %d paquets suivants sont suggérés, mais ne seront pas installés :"
 
 #: src/Summary.cc:1233
 #, c-format, boost-format
@@ -1053,8 +1048,7 @@ msgid "The following pattern is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d patterns are suggested, but will not be installed:"
 msgstr[0] "Le schéma suivant est suggéré, mais ne sera pas installé :"
-msgstr[1] ""
-"Les %d schémas suivants sont suggérés, mais ne seront pas installés :"
+msgstr[1] "Les %d schémas suivants sont suggérés, mais ne seront pas installés :"
 
 #: src/Summary.cc:1243
 #, c-format, boost-format
@@ -1062,8 +1056,7 @@ msgid "The following product is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d products are suggested, but will not be installed:"
 msgstr[0] "Le produit suivant est suggéré, mais ne sera pas installé :"
-msgstr[1] ""
-"Les %d produits suivants sont suggérés, mais ne seront pas installés :"
+msgstr[1] "Les %d produits suivants sont suggérés, mais ne seront pas installés :"
 
 #: src/Summary.cc:1249
 #, c-format, boost-format
@@ -1150,16 +1143,14 @@ msgid "The following package has no support information from its vendor:"
 msgid_plural ""
 "The following %d packages have no support information from their vendor:"
 msgstr[0] "Le paquet suivant n'est pas supporté par son fournisseur :"
-msgstr[1] ""
-"Les %d paquets suivants ne sont pas supportés par leur fournisseur :"
+msgstr[1] "Les %d paquets suivants ne sont pas supportés par leur fournisseur :"
 
 #: src/Summary.cc:1382
 #, c-format, boost-format
 msgid "The following package is not supported by its vendor:"
 msgid_plural "The following %d packages are not supported by their vendor:"
 msgstr[0] "Le paquet suivant n'est pas supporté par son fournisseur :"
-msgstr[1] ""
-"Les %d paquets suivants ne sont pas supportés par leur fournisseur :"
+msgstr[1] "Les %d paquets suivants ne sont pas supportés par leur fournisseur :"
 
 #: src/Summary.cc:1400
 #, c-format, boost-format
@@ -1219,24 +1210,21 @@ msgstr[1] "Les %d mises à jour de paquets suivantes ne seront PAS installées 
 msgid "The following product update will NOT be installed:"
 msgid_plural "The following %d product updates will NOT be installed:"
 msgstr[0] "La mise à jour de produit suivante ne sera PAS installée :"
-msgstr[1] ""
-"Les %d mises à jour de produits suivantes ne seront PAS installées :"
+msgstr[1] "Les %d mises à jour de produits suivantes ne seront PAS installées :"
 
 #: src/Summary.cc:1471
 #, c-format, boost-format
 msgid "The following application update will NOT be installed:"
 msgid_plural "The following %d application updates will NOT be installed:"
 msgstr[0] "La mise à jour d'application suivante ne sera PAS installée :"
-msgstr[1] ""
-"Les %d mises à jour d'applications suivantes ne seront PAS installées :"
+msgstr[1] "Les %d mises à jour d'applications suivantes ne seront PAS installées :"
 
 #: src/Summary.cc:1504
 #, c-format, boost-format
 msgid "The following item is locked and will not be changed by any action:"
 msgid_plural ""
 "The following %d items are locked and will not be changed by any action:"
-msgstr[0] ""
-"L'élément suivant est verrouillé et ne sera modifié par aucune action :"
+msgstr[0] "L'élément suivant est verrouillé et ne sera modifié par aucune action :"
 msgstr[1] ""
 "Les %d éléments suivants sont verrouillés et ne seront modifiés par aucune "
 "action :"
@@ -1811,11 +1799,11 @@ msgstr ""
 msgid "Received %1% new package signing key from repository \"%2%\":"
 msgid_plural "Received %1% new package signing keys from repository \"%2%\":"
 msgstr[0] ""
-"Réception de %1% nouvelle clé de signature de paquets provenant du dépôt "
-"« %2% » :"
+"Réception de %1% nouvelle clé de signature de paquets provenant du dépôt « "
+"%2% » :"
 msgstr[1] ""
-"Réception de %1% nouvelles clés de signature de paquets provenant du dépôt "
-"« %2% » :"
+"Réception de %1% nouvelles clés de signature de paquets provenant du dépôt « "
+"%2% » :"
 
 #: src/callbacks/keyring.h:472
 msgid ""
@@ -2541,8 +2529,8 @@ msgid ""
 "<=, =, >=, >."
 msgstr ""
 "Installer les paquets d'après les fonctions spécifiées ou les fichiers RPM "
-"d'après l'emplacement spécifié. Une fonction s'écrit NOM[.ARCH]"
-"[OP<VERSION>], où OP est l'un des opérateurs suivants : <, <=, =, >=, >."
+"d'après l'emplacement spécifié. Une fonction s'écrit NOM[.ARCH][OP<VERSION>]"
+", où OP est l'un des opérateurs suivants : <, <=, =, >=, >."
 
 #. translators: --from <ALIAS|#|URI>
 #: src/commands/installremove.cc:195 src/commands/utils/download.cc:170
@@ -3114,8 +3102,7 @@ msgstr "Ne travailler qu'avec le dépôt spécifié."
 #: src/commands/optionsets.cc:87
 #, c-format, boost-format
 msgid "Option '--%s' overrides a previously set download mode."
-msgstr ""
-"L'option « --%s » annule un mode de téléchargement précédemment défini."
+msgstr "L'option « --%s » annule un mode de téléchargement précédemment défini."
 
 #: src/commands/optionsets.cc:116
 #, c-format, boost-format
@@ -3177,15 +3164,14 @@ msgid ""
 "Don't require user interaction. Alias for the --non-interactive global "
 "option."
 msgstr ""
-"Se passer de l'interaction avec l'utilisateur. Alias de l'option globale --"
-"non-interactive."
+"Se passer de l'interaction avec l'utilisateur. Alias de l'option globale "
+"--non-interactive."
 
 #: src/commands/optionsets.cc:309
 msgid ""
 "Whether applicable optional patches should be treated as needed or be "
 "excluded."
-msgstr ""
-"Si les correctifs optionnels applicables doivent être inclus ou exclus."
+msgstr "Si les correctifs optionnels applicables doivent être inclus ou exclus."
 
 #: src/commands/optionsets.cc:312
 msgid "The default is to exclude optional patches."
@@ -3325,8 +3311,7 @@ msgstr "Échec de la vérification :"
 #. Here: Table output
 #: src/commands/ps.cc:127 src/solve-commit.cc:623
 msgid "Checking for running processes using deleted libraries..."
-msgstr ""
-"Contrôle des processus actifs utilisant des bibliothèques supprimées..."
+msgstr "Contrôle des processus actifs utilisant des bibliothèques supprimées..."
 
 # TLABEL linuxrc_2002_03_29_0036__42
 #. process ID
@@ -4021,8 +4006,7 @@ msgstr "Il n'y a pas de dépôts activés définis."
 #: src/commands/repos/refresh.cc:331
 #, c-format, boost-format
 msgid "Use '%s' or '%s' commands to add or enable repositories."
-msgstr ""
-"Utilisez les commandes '%s' ou '%s' pour ajouter ou activer des dépôts."
+msgstr "Utilisez les commandes '%s' ou '%s' pour ajouter ou activer des dépôts."
 
 #: src/commands/repos/refresh.cc:337
 msgid "Could not refresh the repositories because of errors."
@@ -4657,8 +4641,7 @@ msgstr "Ajoute un service d'index de dépôts au système."
 
 #: src/commands/services/add.cc:140
 msgid "The type of service is always autodetected. This option is ignored."
-msgstr ""
-"Le type de service est toujours auto-détecté. Cette option est ignorée."
+msgstr "Le type de service est toujours auto-détecté. Cette option est ignorée."
 
 #: src/commands/services/common.cc:37
 msgid "Error reading services:"
@@ -4818,8 +4801,7 @@ msgid "Repository '%s' has been added to disabled repositories of service '%s'"
 msgid_plural ""
 "Repositories '%s' have been added to disabled repositories of service '%s'"
 msgstr[0] "Le dépôt '%s' a été ajouté aux dépôts désactivés du service '%s'"
-msgstr[1] ""
-"Les dépôts '%s' ont été ajoutés aux dépôts désactivés du service '%s'"
+msgstr[1] "Les dépôts '%s' ont été ajoutés aux dépôts désactivés du service '%s'"
 
 #: src/commands/services/modify.cc:269
 #, c-format, boost-format
@@ -4828,8 +4810,7 @@ msgid ""
 msgid_plural ""
 "Repositories '%s' have been removed from enabled repositories of service '%s'"
 msgstr[0] "Le dépôt '%s' a été supprimé des dépôts activés du service '%s'"
-msgstr[1] ""
-"Les dépôts '%s' ont été supprimés des dépôts activés du service '%s'"
+msgstr[1] "Les dépôts '%s' ont été supprimés des dépôts activés du service '%s'"
 
 #: src/commands/services/modify.cc:276
 #, c-format, boost-format
@@ -4839,8 +4820,7 @@ msgid_plural ""
 "Repositories '%s' have been removed from disabled repositories of service "
 "'%s'"
 msgstr[0] "Le dépôt '%s' a été supprimé des dépôts désactivés du service '%s'"
-msgstr[1] ""
-"Les dépôts '%s' ont été supprimés des dépôts désactivés du service '%s'"
+msgstr[1] "Les dépôts '%s' ont été supprimés des dépôts désactivés du service '%s'"
 
 #: src/commands/services/modify.cc:285
 #, c-format, boost-format
@@ -6385,8 +6365,7 @@ msgstr "Impossible de trouver un dépôt valide à l'endroit indiqué :"
 
 #: src/repos.cc:1220
 msgid "Problem transferring repository data from specified URI:"
-msgstr ""
-"Problème lors du transfert des données du dépôt depuis l'URI spécifié :"
+msgstr "Problème lors du transfert des données du dépôt depuis l'URI spécifié :"
 
 #: src/repos.cc:1221
 msgid "Please check whether the specified URI is accessible."
@@ -6569,8 +6548,7 @@ msgstr "Problème lors du chargement des données depuis '%s'"
 #: src/repos.cc:1806
 #, c-format, boost-format
 msgid "Repository '%s' could not be refreshed. Using old cache."
-msgstr ""
-"Le dépôt '%s' n'a pas pu être rafraichi. Utilisation de l'ancien cache."
+msgstr "Le dépôt '%s' n'a pas pu être rafraichi. Utilisation de l'ancien cache."
 
 #: src/repos.cc:1810 src/repos.cc:1839
 #, c-format, boost-format
@@ -6596,9 +6574,9 @@ msgid ""
 "server has actually discontinued to support the repository."
 msgstr ""
 "Métadonnées du dépôt expirées : vérifiez si l'option 'autorefresh' est "
-"activée (zypper lr), sinon, rafraîchissez manuellement le dépôt (zypper "
-"ref). Si cela ne résout pas le problème, il se peut que vous utilisez un "
-"miroir interrompu ou que le serveur a cessé de prendre en charge le dépôt."
+"activée (zypper lr), sinon, rafraîchissez manuellement le dépôt (zypper ref)"
+". Si cela ne résout pas le problème, il se peut que vous utilisez un miroir "
+"interrompu ou que le serveur a cessé de prendre en charge le dépôt."
 
 #: src/repos.cc:1856
 msgid "Reading installed packages..."
@@ -7128,8 +7106,8 @@ msgstr "Aucun problème correspondant n'a été trouvé."
 #: src/update.cc:978
 msgid "The following matches in issue numbers have been found:"
 msgstr ""
-"Les correspondances suivantes dans les numéros de problèmes ont été "
-"trouvées :"
+"Les correspondances suivantes dans les numéros de problèmes ont été trouvées "
+":"
 
 #: src/update.cc:988
 msgid "Matches in patch descriptions of the following patches have been found:"
