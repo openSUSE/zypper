@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-07-02 13:50+0200\n"
-"PO-Revision-Date: 2025-07-18 03:59+0000\n"
-"Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
+"PO-Revision-Date: 2025-07-22 12:48+0000\n"
+"Last-Translator: Julia Faltenbacher <julia.faltenbacher@suse.com>\n"
 "Language-Team: Georgian <https://l10n.opensuse.org/projects/zypper/master/ka/"
 ">\n"
 "Language: ka\n"
@@ -822,8 +822,7 @@ msgstr[0] "შემდეგი %d რეკომენდებული პ�
 msgid "The following recommended source package was automatically selected:"
 msgid_plural ""
 "The following %d recommended source packages were automatically selected:"
-msgstr[0] ""
-"შემდეგი %d რეკომენდებული საწყისი კოდის პაკეტი ავტომატურად იქნა არჩეული:"
+msgstr[0] "შემდეგი %d რეკომენდებული საწყისი კოდის პაკეტი ავტომატურად იქნა არჩეული:"
 
 #: src/Summary.cc:1100
 #, c-format, boost-format
@@ -887,16 +886,14 @@ msgstr[0] "შემდეგი %d ნიმუში რეკომენდ�
 msgid "The following product is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d products are recommended, but will not be installed:"
-msgstr[0] ""
-"შემდეგი %d პროდუქტი რეკომენდებულია, მაგრამ მათი დაყენება არ მოხდება:"
+msgstr[0] "შემდეგი %d პროდუქტი რეკომენდებულია, მაგრამ მათი დაყენება არ მოხდება:"
 
 #: src/Summary.cc:1195
 #, c-format, boost-format
 msgid "The following application is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d applications are recommended, but will not be installed:"
-msgstr[0] ""
-"შემდეგი %d აპლიკაცია რეკომენდებულია, მაგრამ მათი დაყენება არ მოხდება:"
+msgstr[0] "შემდეგი %d აპლიკაცია რეკომენდებულია, მაგრამ მათი დაყენება არ მოხდება:"
 
 #: src/Summary.cc:1228
 #, c-format, boost-format
@@ -998,8 +995,7 @@ msgstr[0] "%d აპლიკაცია მომწოდებელს შ�
 msgid "The following package has no support information from its vendor:"
 msgid_plural ""
 "The following %d packages have no support information from their vendor:"
-msgstr[0] ""
-"%d პაკეტს მათი მომწოდებლის მხარდაჭერის შესახებ ინფორმაცია არ გააჩნია:"
+msgstr[0] "%d პაკეტს მათი მომწოდებლის მხარდაჭერის შესახებ ინფორმაცია არ გააჩნია:"
 
 #: src/Summary.cc:1382
 #, c-format, boost-format
