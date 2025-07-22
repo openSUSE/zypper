@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-07-02 13:50+0200\n"
-"PO-Revision-Date: 2021-12-30 23:11+0000\n"
-"Last-Translator: Mindaugas Baranauskas <opensuse.lietuviu.kalba@gmail.com>\n"
+"PO-Revision-Date: 2025-07-22 12:48+0000\n"
+"Last-Translator: Julia Faltenbacher <julia.faltenbacher@suse.com>\n"
 "Language-Team: Lithuanian <https://l10n.opensuse.org/projects/zypper/master/"
 "lt/>\n"
 "Language: lt\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=n==1 ? 0 : n%10>=2 && (n%100<10 || "
 "n%100>=20) ? 1 : n%10==0 || (n%100>10 && n%100<20) ? 2 : 3;\n"
-"X-Generator: Weblate 4.9.1\n"
+"X-Generator: Weblate 5.12.2\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -2901,8 +2901,7 @@ msgstr "Nėra užrakintų paketų."
 # =============================================================================
 #: src/commands/locks/remove.cc:25
 msgid "removelock (rl) [OPTIONS] <LOCK-NUMBER|PACKAGENAME> ..."
-msgstr ""
-"removelock (rl) [parinktys] <užrakinimo_numeris|paketo_pavadinimas> ..."
+msgstr "removelock (rl) [parinktys] <užrakinimo_numeris|paketo_pavadinimas> ..."
 
 #: src/commands/locks/remove.cc:26
 msgid "Remove a package lock."
@@ -4845,8 +4844,7 @@ msgstr "Sukurti priklausomybių sprendimo aprašą derinimui."
 msgid ""
 "Force the solver to find a solution (even an aggressive one) rather than "
 "asking."
-msgstr ""
-"Priverstinai rasti priklausomybių sprendimą (leistina net ir agresyvų)."
+msgstr "Priverstinai rasti priklausomybių sprendimą (leistina net ir agresyvų)."
 
 #: src/commands/solveroptionset.cc:63
 msgid "Do not force the solver to find a solution, let it ask."
@@ -6140,8 +6138,8 @@ msgid ""
 "Could not determine the type of the repository. Please check if the defined "
 "URIs (see below) point to a valid repository:"
 msgstr ""
-"Nepavyksta apibrėžti saugyklos tipo. Patikrinkite, ar nurodytas URI "
-"(žiūrėkite žemiau) skirtas tinkamai saugyklai:"
+"Nepavyksta apibrėžti saugyklos tipo. Patikrinkite, ar nurodytas URI ("
+"žiūrėkite žemiau) skirtas tinkamai saugyklai:"
 
 #: src/repos.cc:1212
 msgid "Can't find a valid repository at given location:"
