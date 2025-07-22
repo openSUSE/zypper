@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-07-02 13:50+0200\n"
-"PO-Revision-Date: 2017-05-07 15:28+0000\n"
-"Last-Translator: Enol P <enolp@softastur.org>\n"
+"PO-Revision-Date: 2025-07-22 12:48+0000\n"
+"Last-Translator: Julia Faltenbacher <julia.faltenbacher@suse.com>\n"
 "Language-Team: Asturian <https://l10n.opensuse.org/projects/zypper/master/"
 "ast/>\n"
 "Language: ast\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2.6\n"
+"X-Generator: Weblate 5.12.2\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -856,8 +856,7 @@ msgid "The following recommended product was automatically selected:"
 msgid_plural ""
 "The following %d recommended products were automatically selected:"
 msgstr[0] "Esbillóse automáticamente'l productu recomendáu de darréu:"
-msgstr[1] ""
-"Esbilláronse automáticamente los %d productos recomendaos de darréu:"
+msgstr[1] "Esbilláronse automáticamente los %d productos recomendaos de darréu:"
 
 #: src/Summary.cc:1094
 #, c-format, boost-format
@@ -1628,8 +1627,7 @@ msgstr "Falló la verificación de robla pal ficheru «%1%»."
 #: src/callbacks/keyring.h:389
 #, boost-format
 msgid "Signature verification failed for file '%1%' from repository '%2%'."
-msgstr ""
-"Falló la verificación de robla pal ficheru «%1%» del repositoriu «%2%»."
+msgstr "Falló la verificación de robla pal ficheru «%1%» del repositoriu «%2%»."
 
 #: src/callbacks/keyring.h:438
 msgid ""
@@ -6125,8 +6123,7 @@ msgstr ""
 #: src/solve-commit.cc:138
 msgid "Choose the above solution using '1' or skip, retry or cancel"
 msgid_plural "Choose from above solutions by number or skip, retry or cancel"
-msgstr[0] ""
-"Escueyi la solución d'enriba usando «1» o saltar, retentar o encaboxar"
+msgstr[0] "Escueyi la solución d'enriba usando «1» o saltar, retentar o encaboxar"
 msgstr[1] ""
 "Escueyi les soluciones d'enriba colos númberos o saltar, retentar o encaboxar"
 
@@ -6390,8 +6387,7 @@ msgstr ""
 
 #: src/solve-commit.cc:1045
 msgid "Problem occurred during or after installation or removal of packages:"
-msgstr ""
-"Asocedieron problemes dempués o na instalación o desaniciu de paquetes:"
+msgstr "Asocedieron problemes dempués o na instalación o desaniciu de paquetes:"
 
 #: src/solve-commit.cc:1084
 msgid ""
