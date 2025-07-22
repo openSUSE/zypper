@@ -32,8 +32,8 @@ msgstr ""
 "Project-Id-Version: OpenSUSE\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-07-02 13:50+0200\n"
-"PO-Revision-Date: 2016-10-26 12:30+0000\n"
-"Last-Translator: Pasca Alexandru <yo6ial@yahoo.com>\n"
+"PO-Revision-Date: 2025-07-22 12:48+0000\n"
+"Last-Translator: Julia Faltenbacher <julia.faltenbacher@suse.com>\n"
 "Language-Team: Romanian <https://l10n.opensuse.org/projects/zypper/master/ro/"
 ">\n"
 "Language: ro\n"
@@ -42,7 +42,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
 "20)) ? 1 : 2;\n"
-"X-Generator: Weblate 2.6\n"
+"X-Generator: Weblate 5.12.2\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -1709,8 +1709,7 @@ msgstr "Am încredere implicit în următoarea cheie:"
 
 #: src/callbacks/keyring.h:250
 msgid "New repository or package signing key received:"
-msgstr ""
-"Am primit o nouă cheie de semnare a unei surse de instalare sau pachet:"
+msgstr "Am primit o nouă cheie de semnare a unei surse de instalare sau pachet:"
 
 #. translators: this message is shown after showing description of the key
 #: src/callbacks/keyring.h:284
@@ -1763,8 +1762,7 @@ msgstr "Am încredere temporar în cheie."
 #. translators: help text for the 'a' option in the 'r/t/a' prompt
 #: src/callbacks/keyring.h:330
 msgid "Trust the key and import it into trusted keyring."
-msgstr ""
-"Am încredere în cheie; import-o în baza de date cu cheile de încredere."
+msgstr "Am încredere în cheie; import-o în baza de date cu cheile de încredere."
 
 #: src/callbacks/keyring.h:367
 #, c-format, boost-format
@@ -3873,8 +3871,7 @@ msgstr ""
 
 #: src/commands/repos/refresh.cc:325
 msgid "Specified repositories are not enabled or defined."
-msgstr ""
-"Sursele de instalare specificate nu sunt activate sau nu sunt definite."
+msgstr "Sursele de instalare specificate nu sunt activate sau nu sunt definite."
 
 #: src/commands/repos/refresh.cc:327
 msgid "There are no enabled repositories defined."
@@ -6252,8 +6249,7 @@ msgstr "Cache-ul fișierelor RPM este activat pentru sursa de instalare '%s'."
 #: src/repos.cc:1637
 #, c-format, boost-format
 msgid "RPM files caching has been disabled for repository '%s'."
-msgstr ""
-"Cache-ul fișierelor RPM este dezactivat pentru sursa de instalare '%s'."
+msgstr "Cache-ul fișierelor RPM este dezactivat pentru sursa de instalare '%s'."
 
 #: src/repos.cc:1644
 #, c-format, boost-format
@@ -7125,8 +7121,7 @@ msgstr ""
 #: src/utils/messages.cc:141
 #, c-format, boost-format
 msgid "Type '%s' to get a list of global options and commands."
-msgstr ""
-"Introduceți '%s' pentru a obține o listă de opțiuni globale și comenzi."
+msgstr "Introduceți '%s' pentru a obține o listă de opțiuni globale și comenzi."
 
 #. translators: %1% is the name of an (unknown) command
 #. translators: %2% something providing more info (like 'zypper help subcommand')
