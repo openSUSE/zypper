@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-07-02 13:50+0200\n"
-"PO-Revision-Date: 2025-07-03 12:59+0000\n"
-"Last-Translator: Freek de Kruijf <freek@opensuse.org>\n"
+"PO-Revision-Date: 2025-07-22 12:48+0000\n"
+"Last-Translator: Julia Faltenbacher <julia.faltenbacher@suse.com>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/zypper/master/nl/>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
@@ -125,8 +125,7 @@ msgstr " Gebruik een geheel getal van %d tot %d"
 
 #: src/Config.cc:172
 msgid "The path specified in the --root option must be absolute."
-msgstr ""
-"De bij --rootoptie opgegeven locatie dient een directe locatie te zijn."
+msgstr "De bij --rootoptie opgegeven locatie dient een directe locatie te zijn."
 
 #. translators: --help, -h
 #: src/Config.cc:236
@@ -918,8 +917,7 @@ msgid "The following recommended application was automatically selected:"
 msgid_plural ""
 "The following %d recommended applications were automatically selected:"
 msgstr[0] "Het volgende aanbevolen programma is automatisch geselecteerd:"
-msgstr[1] ""
-"De volgende %d aanbevolen programma's zijn automatisch geselecteerd:"
+msgstr[1] "De volgende %d aanbevolen programma's zijn automatisch geselecteerd:"
 
 #: src/Summary.cc:1147
 #, c-format, boost-format
@@ -930,8 +928,8 @@ msgid_plural ""
 "The following %d packages are recommended, but will not be installed (only "
 "required packages will be installed):"
 msgstr[0] ""
-"Het volgende pakket is aanbevolen, maar zal niet worden geïnstalleerd "
-"(alleen vereiste pakketten zullen geïnstalleerd worden):"
+"Het volgende pakket is aanbevolen, maar zal niet worden geïnstalleerd ("
+"alleen vereiste pakketten zullen geïnstalleerd worden):"
 msgstr[1] ""
 "De volgende %d pakketten zijn aanbevolen, maar zullen niet worden "
 "geïnstalleerd (alleen vereiste pakketten zullen geïnstalleerd worden):"
@@ -971,8 +969,7 @@ msgstr[1] ""
 msgid "The following patch is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d patches are recommended, but will not be installed:"
-msgstr[0] ""
-"De volgende patch is aanbevolen, maar zal niet worden geïnstalleerd:"
+msgstr[0] "De volgende patch is aanbevolen, maar zal niet worden geïnstalleerd:"
 msgstr[1] ""
 "De volgende %d patches zijn aanbevolen, maar zullen niet worden "
 "geïnstalleerd:"
@@ -982,8 +979,7 @@ msgstr[1] ""
 msgid "The following pattern is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d patterns are recommended, but will not be installed:"
-msgstr[0] ""
-"Het volgende patroon is aanbevolen, maar zal niet worden geïnstalleerd:"
+msgstr[0] "Het volgende patroon is aanbevolen, maar zal niet worden geïnstalleerd:"
 msgstr[1] ""
 "De volgende %d patronen zijn aanbevolen, maar zullen niet worden "
 "geïnstalleerd:"
@@ -993,8 +989,7 @@ msgstr[1] ""
 msgid "The following product is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d products are recommended, but will not be installed:"
-msgstr[0] ""
-"Het volgende product is aanbevolen, maar zal niet worden geïnstalleerd:"
+msgstr[0] "Het volgende product is aanbevolen, maar zal niet worden geïnstalleerd:"
 msgstr[1] ""
 "De volgende %d producten zijn aanbevolen, maar zullen niet worden "
 "geïnstalleerd:"
@@ -1142,16 +1137,14 @@ msgid "The following package has no support information from its vendor:"
 msgid_plural ""
 "The following %d packages have no support information from their vendor:"
 msgstr[0] "Het volgende pakket wordt niet ondersteund door de leverancier:"
-msgstr[1] ""
-"De volgende %d pakketten worden niet ondersteund door de leverancier:"
+msgstr[1] "De volgende %d pakketten worden niet ondersteund door de leverancier:"
 
 #: src/Summary.cc:1382
 #, c-format, boost-format
 msgid "The following package is not supported by its vendor:"
 msgid_plural "The following %d packages are not supported by their vendor:"
 msgstr[0] "Het volgende pakket wordt niet ondersteund door de leverancier:"
-msgstr[1] ""
-"De volgende %d pakketten worden niet ondersteund door de leverancier:"
+msgstr[1] "De volgende %d pakketten worden niet ondersteund door de leverancier:"
 
 #: src/Summary.cc:1400
 #, c-format, boost-format
@@ -1428,8 +1421,7 @@ msgstr ""
 #: src/Summary.cc:1824
 #, boost-format
 msgid "%1% is set, otherwise a system reboot would be required."
-msgstr ""
-"%1% is ingesteld, anders zou een herstart van het systeen vereist zijn."
+msgstr "%1% is ingesteld, anders zou een herstart van het systeen vereist zijn."
 
 #: src/Summary.cc:1826
 msgid "System reboot required."
@@ -1946,8 +1938,7 @@ msgstr ""
 #. help text for the "Abort, retry, ignore?" prompt for media errors
 #: src/callbacks/media.cc:34
 msgid "Change current base URI and try retrieving the file again."
-msgstr ""
-"Wijzig de huidige basis-uri en probeer het bestand opnieuw op te halen."
+msgstr "Wijzig de huidige basis-uri en probeer het bestand opnieuw op te halen."
 
 #. translators: this is a prompt label, will appear as "New URI: "
 #: src/callbacks/media.cc:49
@@ -2474,8 +2465,8 @@ msgid ""
 "Remove packages with specified capabilities. A capability is NAME[.ARCH]"
 "[OP<VERSION>], where OP is one of <, <=, =, >=, >."
 msgstr ""
-"Verwijder pakketten met gespecificeerde capaciteiten. Een capaciteit is "
-"NAAM[.ARCH][OP<VERSIE>], waarbij OP één is van <, <=, =, >=, >."
+"Verwijder pakketten met gespecificeerde capaciteiten. Een capaciteit is NAAM"
+"[.ARCH][OP<VERSIE>], waarbij OP één is van <, <=, =, >=, >."
 
 # /usr/lib/YaST2/clients/lan_inetd_custom.ycp:764
 #: src/commands/installremove.cc:104 src/commands/installremove.cc:234
@@ -3225,8 +3216,8 @@ msgid ""
 msgstr ""
 "Probeer daarnaast alle pakketten bij te werken die niet gedekt zijn door "
 "patches. De optie wordt genegeerd als de patchopdracht eerst de software "
-"voor bijwerken moet bijwerken. Kan niet gecombineerd worden met --"
-"updatestack-only."
+"voor bijwerken moet bijwerken. Kan niet gecombineerd worden met "
+"--updatestack-only."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/patchcheck.cc:17
@@ -3389,8 +3380,8 @@ msgid ""
 msgstr ""
 "Gedetailleerde informatie over gespecificeerde pakketten tonen. Standaard "
 "worden de pakketten getoond die exact overeenkomen met de gegeven naam. Om "
-"alle pakketten te zien die gedeeltelijk overeenkomen gebruikt u de optie '--"
-"match-substrings' of gebruikt u jokertekens (*?) in de naam."
+"alle pakketten te zien die gedeeltelijk overeenkomen gebruikt u de optie "
+"'--match-substrings' of gebruikt u jokertekens (*?) in de naam."
 
 #: src/commands/query/info.cc:25
 msgid ""
@@ -4526,8 +4517,7 @@ msgstr "Hoofdlettergevoelige zoekopdracht uitvoeren."
 #. translators: -s, --details
 #: src/commands/search/search.cc:201
 msgid "Show each available version in each repository on a separate line."
-msgstr ""
-"Elke beschikbare versie in elke opslagruimte tonen op een aparte regel."
+msgstr "Elke beschikbare versie in elke opslagruimte tonen op een aparte regel."
 
 #. translators: -v, --verbose
 #: src/commands/search/search.cc:205
@@ -4535,8 +4525,8 @@ msgid ""
 "Like --details, with additional information where the search has matched "
 "(useful for search in dependencies)."
 msgstr ""
-"Zoals --details, met extra informatie waar de zoekopdracht overeenkwam "
-"(nuttig bij zoeken in afhankelijkheden)."
+"Zoals --details, met extra informatie waar de zoekopdracht overeenkwam ("
+"nuttig bij zoeken in afhankelijkheden)."
 
 #: src/commands/search/search.cc:298 src/repos.cc:780
 #, c-format, boost-format
@@ -5012,8 +5002,7 @@ msgstr ""
 
 #: src/commands/solveroptionset.cc:64
 msgid "Set the solvers general attitude when resolving a job."
-msgstr ""
-"Stel de algemene houding van de oplossers in bij oplossen van een taak."
+msgstr "Stel de algemene houding van de oplossers in bij oplossen van een taak."
 
 #: src/commands/solveroptionset.cc:84
 msgid "Expert options"
@@ -5131,8 +5120,7 @@ msgstr "waitpid voor %1% is mislukt (%2%)"
 #: src/commands/subcommand.cc:370
 #, boost-format
 msgid "waitpid for %1% returns unexpected pid %2% while waiting for %3%"
-msgstr ""
-"waitpid voor %1% geeft een onverwachte pid %2% terug bij wachten op %3%"
+msgstr "waitpid voor %1% geeft een onverwachte pid %2% terug bij wachten op %3%"
 
 #. translators: %1% - command name or path
 #. translators: %2% - signal number
@@ -5541,8 +5529,7 @@ msgstr "alle broncode-rpm's naar deze map downloaden."
 #. translators: --delete/--no-delete
 #: src/commands/utils/source-download.cc:501
 msgid "Whether to delete extraneous source rpms in the local directory."
-msgstr ""
-"Of overtollige broncode-rpms in de lokale map verwijderd moeten worden."
+msgstr "Of overtollige broncode-rpms in de lokale map verwijderd moeten worden."
 
 #. translators: --status
 #: src/commands/utils/source-download.cc:505
@@ -6376,8 +6363,7 @@ msgstr "Kan geen geldige opslagruimte vinden op de opgegeven locatie:"
 
 #: src/repos.cc:1220
 msgid "Problem transferring repository data from specified URI:"
-msgstr ""
-"Probleem bij het overdragen van opslagruimtegegevens van opgegeven URI:"
+msgstr "Probleem bij het overdragen van opslagruimtegegevens van opgegeven URI:"
 
 #: src/repos.cc:1221
 msgid "Please check whether the specified URI is accessible."
@@ -6582,8 +6568,8 @@ msgid ""
 "server has actually discontinued to support the repository."
 msgstr ""
 "Metagegevens in opslagruimte zijn verlopen: Controleer of 'autorefresh' is "
-"aangezet (zypper lr), vernieuw anders handmatig de opslagruimte (zypper "
-"ref). Als dat does het probleem niet oplost, dan zou het kunnen dat u een "
+"aangezet (zypper lr), vernieuw anders handmatig de opslagruimte (zypper ref)"
+". Als dat does het probleem niet oplost, dan zou het kunnen dat u een "
 "gebroken mirror gebruikt of heeft de server de ondersteuning van de "
 "opslagruimte niet voortgezet."
 
@@ -7386,8 +7372,7 @@ msgstr ""
 #: src/utils/messages.cc:141
 #, c-format, boost-format
 msgid "Type '%s' to get a list of global options and commands."
-msgstr ""
-"Type '%s' om een lijst van algemene opties en opdrachten te verkrijgen."
+msgstr "Type '%s' om een lijst van algemene opties en opdrachten te verkrijgen."
 
 #. translators: %1% is the name of an (unknown) command
 #. translators: %2% something providing more info (like 'zypper help subcommand')
