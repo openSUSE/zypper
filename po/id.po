@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-07-02 13:50+0200\n"
-"PO-Revision-Date: 2025-07-14 16:59+0000\n"
-"Last-Translator: Arif Budiman <arifpedia@gmail.com>\n"
+"PO-Revision-Date: 2025-07-22 12:47+0000\n"
+"Last-Translator: Julia Faltenbacher <julia.faltenbacher@suse.com>\n"
 "Language-Team: Indonesian <https://l10n.opensuse.org/projects/zypper/master/"
 "id/>\n"
 "Language: id\n"
@@ -854,8 +854,7 @@ msgstr[0] ""
 msgid "The following recommended pattern was automatically selected:"
 msgid_plural ""
 "The following %d recommended patterns were automatically selected:"
-msgstr[0] ""
-"%d Pola yang direkomendasikan berikut ini akan dipilih secara otomatis:"
+msgstr[0] "%d Pola yang direkomendasikan berikut ini akan dipilih secara otomatis:"
 
 #: src/Summary.cc:1089
 #, c-format, boost-format
@@ -923,8 +922,7 @@ msgstr[0] ""
 msgid "The following patch is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d patches are recommended, but will not be installed:"
-msgstr[0] ""
-"%d Tambalan berikut ini direkomendasikan, tetapi tidak akan dipasang:"
+msgstr[0] "%d Tambalan berikut ini direkomendasikan, tetapi tidak akan dipasang:"
 
 #: src/Summary.cc:1186
 #, c-format, boost-format
@@ -945,8 +943,7 @@ msgstr[0] "%d Produk berikut ini direkomendasikan, tetapi tidak akan dipasang:"
 msgid "The following application is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d applications are recommended, but will not be installed:"
-msgstr[0] ""
-"%d Aplikasi berikut ini direkomendasikan, tetapi tidak akan dipasang:"
+msgstr[0] "%d Aplikasi berikut ini direkomendasikan, tetapi tidak akan dipasang:"
 
 #: src/Summary.cc:1228
 #, c-format, boost-format
@@ -1494,8 +1491,7 @@ msgstr "Berkas penandatanganan kunci gpg '%1%' telah kedaluwarsa."
 #, boost-format
 msgid "The gpg key signing file '%1%' will expire in %2% day."
 msgid_plural "The gpg key signing file '%1%' will expire in %2% days."
-msgstr[0] ""
-"Berkas penandatanganan kunci gpg '%1%' akan kedaluwarsa dalam %2% hari."
+msgstr[0] "Berkas penandatanganan kunci gpg '%1%' akan kedaluwarsa dalam %2% hari."
 
 #: src/callbacks/keyring.h:152
 #, c-format, boost-format
@@ -1639,8 +1635,7 @@ msgstr "Verifikasi tanda tangan gagal untuk berkas '%1%'."
 #: src/callbacks/keyring.h:389
 #, boost-format
 msgid "Signature verification failed for file '%1%' from repository '%2%'."
-msgstr ""
-"Verifikasi tanda tangan gagal untuk berkas '%1%' dari repositori '%2%'."
+msgstr "Verifikasi tanda tangan gagal untuk berkas '%1%' dari repositori '%2%'."
 
 #: src/callbacks/keyring.h:438
 msgid ""
@@ -1669,8 +1664,7 @@ msgstr ""
 #, boost-format
 msgid "Received %1% new package signing key from repository \"%2%\":"
 msgid_plural "Received %1% new package signing keys from repository \"%2%\":"
-msgstr[0] ""
-"Menerima %1% kunci penandatanganan paket baru dari repositori \"%2%\":"
+msgstr[0] "Menerima %1% kunci penandatanganan paket baru dari repositori \"%2%\":"
 
 #: src/callbacks/keyring.h:472
 msgid ""
@@ -2346,10 +2340,10 @@ msgid ""
 "Patches are not installed in sense of copied files, database records,\n"
 "or similar."
 msgstr ""
-"Status tambalan yang dipasang ditentukan semata-mata berdasarkan "
-"dependensi.\n"
-"Tambalan tidak terpasang dalam arti berkas yang disalin, rekaman basis "
-"data,\n"
+"Status tambalan yang dipasang ditentukan semata-mata berdasarkan dependensi."
+"\n"
+"Tambalan tidak terpasang dalam arti berkas yang disalin, rekaman basis data,"
+"\n"
 "atau serupa."
 
 #: src/commands/installremove.cc:126
@@ -3070,8 +3064,8 @@ msgid ""
 msgstr ""
 "Selain itu coba perbarui semua paket yang tidak tercakup oleh tambalan. "
 "Pilihannya diabaikan, jika perintah tambalan harus memutakhirkan "
-"pemutakhiran stack terlebih dahulu. Tidak bisa digabungkan dengan --"
-"updatestack-only."
+"pemutakhiran stack terlebih dahulu. Tidak bisa digabungkan dengan "
+"--updatestack-only."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/patchcheck.cc:17
@@ -3359,8 +3353,7 @@ msgstr "Daftar semua paket yang tersedia dalam repositori tertentu."
 #: src/commands/query/packages.cc:35
 msgid ""
 "Show installed packages which were automatically selected by the resolver."
-msgstr ""
-"Menampilkan paket terinstal yang secara otomatis dipilih oleh resolver."
+msgstr "Menampilkan paket terinstal yang secara otomatis dipilih oleh resolver."
 
 #. translators: --userinstalled
 #: src/commands/query/packages.cc:39
@@ -4361,8 +4354,8 @@ msgid ""
 "Like --details, with additional information where the search has matched "
 "(useful for search in dependencies)."
 msgstr ""
-"Seperti --details, dengan informasi tambahan di mana pencarian yang cocok "
-"(berguna untuk pencarian dalam dependensi)."
+"Seperti --details, dengan informasi tambahan di mana pencarian yang cocok ("
+"berguna untuk pencarian dalam dependensi)."
 
 #: src/commands/search/search.cc:298 src/repos.cc:780
 #, c-format, boost-format
@@ -4376,8 +4369,7 @@ msgstr "Tidak ditemukan item yang cocok."
 
 #: src/commands/search/search.cc:503
 msgid "Problem occurred initializing or executing the search query"
-msgstr ""
-"Masalah terjadi menginisialisasi atau mengeksekusi permintaan pencarian"
+msgstr "Masalah terjadi menginisialisasi atau mengeksekusi permintaan pencarian"
 
 #: src/commands/search/search.cc:504
 msgid "See the above message for a hint."
@@ -5132,8 +5124,8 @@ msgid ""
 "Download all versions matching the commandline arguments. Otherwise only the "
 "best version of each matching package is downloaded."
 msgstr ""
-"Unduh semua versi-versi yang cocok dengan argumen baris perintah. Jika "
-"tidak , hanya versi yang terbaik dari setiap paket yang cocok diunduh."
+"Unduh semua versi-versi yang cocok dengan argumen baris perintah. Jika tidak "
+", hanya versi yang terbaik dari setiap paket yang cocok diunduh."
 
 #. translators: Label text; is followed by ': cmdline argument'
 #: src/commands/utils/download.cc:236
@@ -6139,8 +6131,8 @@ msgid ""
 "Could not determine the type of the repository. Please check if the defined "
 "URIs (see below) point to a valid repository:"
 msgstr ""
-"Tidak dapat menentukan tipe repositori. Periksa apakah URI yang ditetapkan "
-"(lihat di bawah) menunjuk ke repositori yang valid:"
+"Tidak dapat menentukan tipe repositori. Periksa apakah URI yang ditetapkan ("
+"lihat di bawah) menunjuk ke repositori yang valid:"
 
 #: src/repos.cc:1212
 msgid "Can't find a valid repository at given location:"
@@ -6348,8 +6340,8 @@ msgid ""
 "not solve the issue, it could be that you are using a broken mirror or the "
 "server has actually discontinued to support the repository."
 msgstr ""
-"Metadata repositori kedaluwarsa: Periksa apakah 'autorefresh' diaktifkan "
-"(zypper lr), jika tidak segarkan repositori secara manual (zypper ref). Jika "
+"Metadata repositori kedaluwarsa: Periksa apakah 'autorefresh' diaktifkan ("
+"zypper lr), jika tidak segarkan repositori secara manual (zypper ref). Jika "
 "ini tidak menyelesaikan masalah, bisa jadi Anda menggunakan cermin yang "
 "rusak atau peladen yang sebenarnya telah dihentikan untuk mendukung "
 "repositori."
@@ -6432,8 +6424,7 @@ msgstr "Informasi detail: "
 #: src/solve-commit.cc:138
 msgid "Choose the above solution using '1' or skip, retry or cancel"
 msgid_plural "Choose from above solutions by number or skip, retry or cancel"
-msgstr[0] ""
-"Pilih solusi di atas menggunakan '1' atau lewati, coba lagi atau batal"
+msgstr[0] "Pilih solusi di atas menggunakan '1' atau lewati, coba lagi atau batal"
 
 #. translators: translate 'c' to whatever you translated the 'c' in
 #. "c" and "s/r/c" strings
@@ -6871,8 +6862,7 @@ msgstr ""
 #: src/update.cc:1052
 #, c-format, boost-format
 msgid "Fix for CVE issue number %s was not found or is not needed."
-msgstr ""
-"Perbaikan untuk isu CVE nomor %s tidak ditemukan atau tidak diperlukan."
+msgstr "Perbaikan untuk isu CVE nomor %s tidak ditemukan atau tidak diperlukan."
 
 #. translators: keep '%s issue' together, it's something like 'CVE issue' or 'Bugzilla issue'
 #: src/update.cc:1055
@@ -6911,8 +6901,7 @@ msgstr "Berkas konfigurasi '%1%' tidak ada."
 #: src/utils/Augeas.cc:635
 #, boost-format
 msgid "%1%: Option '%2%' is defined multiple times. Using the last one."
-msgstr ""
-"%1%: Opsi '%2%' didefinisikan beberapa kali. Menggunakan yang terakhir."
+msgstr "%1%: Opsi '%2%' didefinisikan beberapa kali. Menggunakan yang terakhir."
 
 #: src/utils/Augeas.cc:656
 msgid "No config file is in use."
