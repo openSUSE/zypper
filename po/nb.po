@@ -11,16 +11,16 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-07-02 13:50+0200\n"
-"PO-Revision-Date: 2024-11-14 10:48+0000\n"
-"Last-Translator: Martin Hansen <mh306602@gmail.com>\n"
+"PO-Revision-Date: 2025-07-22 12:48+0000\n"
+"Last-Translator: Julia Faltenbacher <julia.faltenbacher@suse.com>\n"
 "Language-Team: Norwegian Bokmål <https://l10n.opensuse.org/projects/zypper/"
-"master/nb/>\n"
+"master/nb_NO/>\n"
 "Language: nb\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.8.3\n"
+"X-Generator: Weblate 5.12.2\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -3793,8 +3793,7 @@ msgstr "Pakkebrønnen '%s' har endret navn til '%s'."
 #: src/commands/repos/rename.cc:47 src/repos.cc:1197
 #, c-format, boost-format
 msgid "Repository named '%s' already exists. Please use another alias."
-msgstr ""
-"En pakkebrønn med navnet '%s' eksisterer allerede. Velg et annet alias."
+msgstr "En pakkebrønn med navnet '%s' eksisterer allerede. Velg et annet alias."
 
 #: src/commands/repos/rename.cc:52 src/repos.cc:1675
 msgid "Error while modifying the repository:"
@@ -4477,8 +4476,7 @@ msgstr "Navnet på tjenesten '%s' er satt til '%s'."
 msgid "Repository '%s' has been added to enabled repositories of service '%s'"
 msgid_plural ""
 "Repositories '%s' have been added to enabled repositories of service '%s'"
-msgstr[0] ""
-"Pakkebrønnen '%s' er lagt til aktiverte pakkebrønner for tjenesten '%s'"
+msgstr[0] "Pakkebrønnen '%s' er lagt til aktiverte pakkebrønner for tjenesten '%s'"
 msgstr[1] ""
 "Pakkebrønnene '%s' er lagt til aktiverte pakkebrønner for tjenesten '%s'"
 
@@ -5056,8 +5054,7 @@ msgstr ""
 #: src/commands/utils/source-download.cc:203
 #, c-format, boost-format
 msgid "Can't create or access download directory '%s'."
-msgstr ""
-"Kan ikke opprette eller har ikke tilgang til nedlastingskatalogen '%s'."
+msgstr "Kan ikke opprette eller har ikke tilgang til nedlastingskatalogen '%s'."
 
 #: src/commands/utils/source-download.cc:216
 #, c-format, boost-format
@@ -5149,8 +5146,7 @@ msgstr "Ingen kildepakker å laste ned."
 #: src/commands/utils/source-download.cc:481
 #: src/commands/utils/source-download.cc:483
 msgid "Download source rpms for all installed packages to a local directory."
-msgstr ""
-"Last ned kilde-rpm-er for alle installerte pakker til en lokal katalog."
+msgstr "Last ned kilde-rpm-er for alle installerte pakker til en lokal katalog."
 
 #. translators: -d, --directory <DIR>
 #: src/commands/utils/source-download.cc:495
@@ -6255,8 +6251,7 @@ msgstr ""
 #: src/solve-commit.cc:138
 msgid "Choose the above solution using '1' or skip, retry or cancel"
 msgid_plural "Choose from above solutions by number or skip, retry or cancel"
-msgstr[0] ""
-"Velg løsningen ovenfor med '1' eller med hopp over, gjenta eller avbryt"
+msgstr[0] "Velg løsningen ovenfor med '1' eller med hopp over, gjenta eller avbryt"
 msgstr[1] ""
 "Velg løsningen ovenfor med nummeret eller med hopp over, gjenta eller avbryt"
 
