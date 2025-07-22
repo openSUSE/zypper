@@ -15,8 +15,8 @@ msgstr ""
 "Project-Id-Version: zypper.gl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-07-02 13:50+0200\n"
-"PO-Revision-Date: 2024-02-13 17:42+0000\n"
-"Last-Translator: Manuel Vazquez <xixirei@yahoo.es>\n"
+"PO-Revision-Date: 2025-07-22 12:47+0000\n"
+"Last-Translator: Julia Faltenbacher <julia.faltenbacher@suse.com>\n"
 "Language-Team: Galician <https://l10n.opensuse.org/projects/zypper/master/gl/"
 ">\n"
 "Language: gl\n"
@@ -24,7 +24,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.9.1\n"
+"X-Generator: Weblate 5.12.2\n"
 "X-Poedit-Language: Galician\n"
 
 #: src/Command.cc:93
@@ -239,8 +239,7 @@ msgstr ""
 #. translators: --cache-dir, -C <DIR>
 #: src/Config.cc:412
 msgid "Use alternative directory for all caches."
-msgstr ""
-"Utilizar directorio alternativo de base de datos de caché de metadatos."
+msgstr "Utilizar directorio alternativo de base de datos de caché de metadatos."
 
 #. translators: --raw-cache-dir <DIR>
 #: src/Config.cc:425
@@ -4300,8 +4299,7 @@ msgstr "Actualizando servizo '%s'."
 #: src/commands/services/common.cc:136 src/commands/services/common.cc:146
 #, c-format, boost-format
 msgid "Problem retrieving the repository index file for service '%s':"
-msgstr ""
-"Houbo un problema ao obter o índice do repositorio para o servizo '%s':"
+msgstr "Houbo un problema ao obter o índice do repositorio para o servizo '%s':"
 
 #: src/commands/services/common.cc:138 src/commands/services/refresh.cc:226
 #: src/repos.cc:1727
@@ -4435,8 +4433,7 @@ msgstr "O nome do servizo '%s' foi definido coma '%s'."
 msgid "Repository '%s' has been added to enabled repositories of service '%s'"
 msgid_plural ""
 "Repositories '%s' have been added to enabled repositories of service '%s'"
-msgstr[0] ""
-"Engadíuse o repositorio '%s' aos repositorios activados do servizo '%s'"
+msgstr[0] "Engadíuse o repositorio '%s' aos repositorios activados do servizo '%s'"
 msgstr[1] ""
 "Engadíronse os repositorios '%s' aos repositorios activados do servizo '%s'"
 
@@ -6100,8 +6097,7 @@ msgstr "Problema ao cargar datos de '%s'"
 #: src/repos.cc:1806
 #, c-format, boost-format
 msgid "Repository '%s' could not be refreshed. Using old cache."
-msgstr ""
-"O repositorio '%s' non se pode actualizar. Empregando unha caché vella."
+msgstr "O repositorio '%s' non se pode actualizar. Empregando unha caché vella."
 
 #: src/repos.cc:1810 src/repos.cc:1839
 #, c-format, boost-format
