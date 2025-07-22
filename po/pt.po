@@ -15,8 +15,8 @@ msgstr ""
 "Project-Id-Version: zypper.pt\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-07-02 13:50+0200\n"
-"PO-Revision-Date: 2023-01-05 13:14+0000\n"
-"Last-Translator: Juliano Camargo <julianosc@pm.me>\n"
+"PO-Revision-Date: 2025-07-22 12:48+0000\n"
+"Last-Translator: Julia Faltenbacher <julia.faltenbacher@suse.com>\n"
 "Language-Team: Portuguese <https://l10n.opensuse.org/projects/zypper/master/"
 "pt/>\n"
 "Language: pt\n"
@@ -24,7 +24,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Weblate 4.9.1\n"
+"X-Generator: Weblate 5.12.2\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -911,8 +911,7 @@ msgstr[1] ""
 msgid "The following recommended source package was automatically selected:"
 msgid_plural ""
 "The following %d recommended source packages were automatically selected:"
-msgstr[0] ""
-"O seguinte pacote fonte recomendado foi automaticamente seleccionado:"
+msgstr[0] "O seguinte pacote fonte recomendado foi automaticamente seleccionado:"
 msgstr[1] ""
 "Os seguintes %d pacotes fonte recomendados foram automaticamente "
 "selecionados:"
@@ -950,8 +949,8 @@ msgid_plural ""
 "The following %d packages are recommended, but will not be installed because "
 "they are unwanted (were manually removed before):"
 msgstr[0] ""
-"O pacote seguinte é recomendado, mas não será instalado porque é indesejado "
-"(foi removido manualmente antes):"
+"O pacote seguinte é recomendado, mas não será instalado porque é indesejado ("
+"foi removido manualmente antes):"
 msgstr[1] ""
 "Os seguintes %d pacotes são recomendados, mas não serão instalados porque "
 "são indesejados (foram removidos manualmente antes):"
@@ -993,8 +992,7 @@ msgid "The following product is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d products are recommended, but will not be installed:"
 msgstr[0] "O seguinte produto é recomendado, mas não será instalado:"
-msgstr[1] ""
-"Os seguintes %d produtos são recomendados, mas não serão instalados:"
+msgstr[1] "Os seguintes %d produtos são recomendados, mas não serão instalados:"
 
 #: src/Summary.cc:1195
 #, c-format, boost-format
@@ -1002,8 +1000,7 @@ msgid "The following application is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d applications are recommended, but will not be installed:"
 msgstr[0] "A seguinte aplicação é recomendada, mas não será instalada:"
-msgstr[1] ""
-"A seguintes %d aplicações são recomendadas, mas não serão instaladas:"
+msgstr[1] "A seguintes %d aplicações são recomendadas, mas não serão instaladas:"
 
 #: src/Summary.cc:1228
 #, c-format, boost-format
@@ -1581,10 +1578,8 @@ msgstr "O ficheiro de assinatura da chave gpg '%1%' expirou."
 #, boost-format
 msgid "The gpg key signing file '%1%' will expire in %2% day."
 msgid_plural "The gpg key signing file '%1%' will expire in %2% days."
-msgstr[0] ""
-"O ficheiro de assinatura da chave gpg '%1%' vai expirar num %2% dia."
-msgstr[1] ""
-"O ficheiro de assinatura da chave gpg '%1%' vai expirar em %2% dias."
+msgstr[0] "O ficheiro de assinatura da chave gpg '%1%' vai expirar num %2% dia."
+msgstr[1] "O ficheiro de assinatura da chave gpg '%1%' vai expirar em %2% dias."
 
 #: src/callbacks/keyring.h:152
 #, c-format, boost-format
@@ -1852,8 +1847,7 @@ msgstr ""
 
 #: src/callbacks/locks.h:30
 msgid "The following query locks some of the objects you want to unlock:"
-msgstr ""
-"A seguinte interrogação tranca alguns dos objectos que quer destrancar:"
+msgstr "A seguinte interrogação tranca alguns dos objectos que quer destrancar:"
 
 # power-off message
 #: src/callbacks/locks.h:35 src/callbacks/locks.h:50
@@ -2404,8 +2398,8 @@ msgid ""
 "Remove packages with specified capabilities. A capability is NAME[.ARCH]"
 "[OP<VERSION>], where OP is one of <, <=, =, >=, >."
 msgstr ""
-"Remover pacotes com capacidades especificadas. Uma capacidade é um "
-"NOME[.ARCH] ou [OP<VERSÃO>], onde OP é um dos sinais <, <=, =, >=, >."
+"Remover pacotes com capacidades especificadas. Uma capacidade é um NOME"
+"[.ARCH] ou [OP<VERSÃO>], onde OP é um dos sinais <, <=, =, >=, >."
 
 #: src/commands/installremove.cc:104 src/commands/installremove.cc:234
 #: src/utils/messages.cc:53
@@ -3046,8 +3040,8 @@ msgid ""
 "download-as-needed disables the fileconflict check."
 msgstr ""
 "Instalar os pacotes mesmo que estes substituam ficheiros de outros pacotes "
-"já instalados. O padrão é tratar os conflitos de ficheiros como um erro. --"
-"download-as-needed  desativa a verificação de conflito de ficheiros."
+"já instalados. O padrão é tratar os conflitos de ficheiros como um erro. "
+"--download-as-needed  desativa a verificação de conflito de ficheiros."
 
 #. translators: -y, --no-confirm
 #: src/commands/optionsets.cc:291
@@ -3055,8 +3049,8 @@ msgid ""
 "Don't require user interaction. Alias for the --non-interactive global "
 "option."
 msgstr ""
-"Não é necessária a interação do utilizador. Pseudónimo para a opção global --"
-"non-interactive."
+"Não é necessária a interação do utilizador. Pseudónimo para a opção global "
+"--non-interactive."
 
 #: src/commands/optionsets.cc:309
 msgid ""
@@ -3300,8 +3294,7 @@ msgstr ""
 #. translators: -s, --match-substrings
 #: src/commands/query/info.cc:65
 msgid "Print information for packages partially matching name."
-msgstr ""
-"Imprimir informação para pacotes que correspondam parcialmente ao nome."
+msgstr "Imprimir informação para pacotes que correspondam parcialmente ao nome."
 
 #. translators: --provides
 #: src/commands/query/info.cc:70
@@ -3536,8 +3529,8 @@ msgid ""
 "or can be read from specified .repo file (even remote)."
 msgstr ""
 "Adicionar um repositório ao sistema. O repositório pode ser especificado "
-"pelo seu URI ou pode ser lido a partir de um ficheiro .repo especificado "
-"(mesmo remoto)."
+"pelo seu URI ou pode ser lido a partir de um ficheiro .repo especificado ("
+"mesmo remoto)."
 
 #: src/commands/repos/add.cc:40
 msgid "Just another means to specify a .repo file to read."
@@ -4399,8 +4392,7 @@ msgstr "Efetuar pesquisa sensível a maiúsculas e minúsculas."
 #. translators: -s, --details
 #: src/commands/search/search.cc:201
 msgid "Show each available version in each repository on a separate line."
-msgstr ""
-"Mostrar cada versão disponível em cada repositório numa linha separada."
+msgstr "Mostrar cada versão disponível em cada repositório numa linha separada."
 
 #. translators: -v, --verbose
 #: src/commands/search/search.cc:205
@@ -4408,8 +4400,8 @@ msgid ""
 "Like --details, with additional information where the search has matched "
 "(useful for search in dependencies)."
 msgstr ""
-"Como --details, com informação adicional onde a pesquisa se tenha igualado "
-"(útil para pesquisa em dependências)."
+"Como --details, com informação adicional onde a pesquisa se tenha igualado ("
+"útil para pesquisa em dependências)."
 
 #: src/commands/search/search.cc:298 src/repos.cc:780
 #, c-format, boost-format
@@ -4518,8 +4510,7 @@ msgstr "A refrescar o serviço '%s'."
 #: src/commands/services/common.cc:136 src/commands/services/common.cc:146
 #, c-format, boost-format
 msgid "Problem retrieving the repository index file for service '%s':"
-msgstr ""
-"Problema ao obter o ficheiro índice do repositório para o serviço '%s':"
+msgstr "Problema ao obter o ficheiro índice do repositório para o serviço '%s':"
 
 #: src/commands/services/common.cc:138 src/commands/services/refresh.cc:226
 #: src/repos.cc:1727
@@ -4738,8 +4729,7 @@ msgstr "Refrescar também os repositórios de serviço."
 
 #: src/commands/services/refresh.cc:115
 msgid "Also restore service repositories enabled/disabled state."
-msgstr ""
-"Restaurar também os repositórios de serviços habilitados/desabilitados."
+msgstr "Restaurar também os repositórios de serviços habilitados/desabilitados."
 
 #: src/commands/services/refresh.cc:179
 #, c-format, boost-format
@@ -4974,8 +4964,7 @@ msgstr "waitpid para  %1% , falhou (%2%)"
 #: src/commands/subcommand.cc:370
 #, boost-format
 msgid "waitpid for %1% returns unexpected pid %2% while waiting for %3%"
-msgstr ""
-"waitpid para %1% devolve um pid inesperado %2%, enquanto espera por %3%"
+msgstr "waitpid para %1% devolve um pid inesperado %2%, enquanto espera por %3%"
 
 #. translators: %1% - command name or path
 #. translators: %2% - signal number
@@ -5231,8 +5220,7 @@ msgstr "Imprimir relatório sobre licenças e EULAs de pacotes instalados."
 #. translators: command description
 #: src/commands/utils/licenses.cc:23
 msgid "Report licenses and EULAs of currently installed software packages."
-msgstr ""
-"Relata licenças e EULAs dos pacotes de software actualmente instalados."
+msgstr "Relata licenças e EULAs dos pacotes de software actualmente instalados."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/utils/purge-kernels.cc:26
@@ -6061,8 +6049,7 @@ msgstr "Erro ao construir a cache:"
 #: src/repos.cc:680
 #, c-format, boost-format
 msgid "Repository '%s' not found by its alias, number, or URI."
-msgstr ""
-"O repositório '%s' não foi encontrado pela sua alcunha, número, ou URI."
+msgstr "O repositório '%s' não foi encontrado pela sua alcunha, número, ou URI."
 
 #: src/repos.cc:682
 #, c-format, boost-format
@@ -7131,8 +7118,7 @@ msgstr "Por favor submeta um relatório de erro sobre disto."
 #. unless you translate the actual page :)
 #: src/utils/messages.cc:22
 msgid "See http://en.opensuse.org/Zypper/Troubleshooting for instructions."
-msgstr ""
-"Consulte http://en.opensuse.org/Zypper/Troubleshooting para instruções."
+msgstr "Consulte http://en.opensuse.org/Zypper/Troubleshooting para instruções."
 
 #: src/utils/messages.cc:38
 msgid "Too many arguments."
@@ -7445,8 +7431,7 @@ msgstr "Resposta ambígua '%s'."
 #: src/utils/prompt.cc:289
 #, c-format, boost-format
 msgid "Enter '%s' for '%s' or '%s' for '%s' if nothing else works for you."
-msgstr ""
-"Insira '%s' para '%s' ou '%s' para '%s' se nada mais funcionar consigo."
+msgstr "Insira '%s' para '%s' ou '%s' para '%s' se nada mais funcionar consigo."
 
 #: src/utils/prompt.cc:294
 msgid ""
