@@ -12,16 +12,16 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-07-02 13:50+0200\n"
-"PO-Revision-Date: 2025-06-10 10:59+0000\n"
-"Last-Translator: Davide Aiello <davide.aiello@novilingulists.com>\n"
-"Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/"
-">\n"
+"PO-Revision-Date: 2025-07-22 12:48+0000\n"
+"Last-Translator: Julia Faltenbacher <julia.faltenbacher@suse.com>\n"
+"Language-Team: Italian <https://l10n.opensuse.org/projects/zypper/master/it/>"
+"\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.11.4\n"
+"X-Generator: Weblate 5.12.2\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -233,8 +233,7 @@ msgstr ""
 #. translators: --reposd-dir, -D <DIR>
 #: src/Config.cc:397
 msgid "Use alternative repository definition file directory."
-msgstr ""
-"Usa una directory alternativa per i file di definizione dei repository."
+msgstr "Usa una directory alternativa per i file di definizione dei repository."
 
 #. translators: --cache-dir, -C <DIR>
 #: src/Config.cc:412
@@ -808,8 +807,7 @@ msgstr[1] "Le seguenti %d applicazioni stanno per essere aggiornate:"
 #, c-format, boost-format
 msgid "The following package is going to be downgraded:"
 msgid_plural "The following %d packages are going to be downgraded:"
-msgstr[0] ""
-"Il seguente pacchetto sta per essere portato alla versione precedente:"
+msgstr[0] "Il seguente pacchetto sta per essere portato alla versione precedente:"
 msgstr[1] ""
 "I seguenti %d pacchetti stanno per essere portati alla versione precedente:"
 
@@ -825,8 +823,7 @@ msgstr[1] ""
 #, c-format, boost-format
 msgid "The following pattern is going to be downgraded:"
 msgid_plural "The following %d patterns are going to be downgraded:"
-msgstr[0] ""
-"Il seguente modello sta per essere portato alla versione precedente:"
+msgstr[0] "Il seguente modello sta per essere portato alla versione precedente:"
 msgstr[1] ""
 "I seguenti %d modelli stanno per essere portati alla versione precedente:"
 
@@ -834,8 +831,7 @@ msgstr[1] ""
 #, c-format, boost-format
 msgid "The following product is going to be downgraded:"
 msgid_plural "The following %d products are going to be downgraded:"
-msgstr[0] ""
-"Il seguente prodotto sta per essere portato alla versione precedente:"
+msgstr[0] "Il seguente prodotto sta per essere portato alla versione precedente:"
 msgstr[1] ""
 "I seguenti %d prodotti stanno per essere portati alla versione precedente:"
 
@@ -889,8 +885,7 @@ msgstr[1] "Le seguenti %d applicazioni verranno re-installate:"
 msgid "The following recommended package was automatically selected:"
 msgid_plural ""
 "The following %d recommended packages were automatically selected:"
-msgstr[0] ""
-"Il seguente pacchetto raccomandato è stato selezionato automaticamente:"
+msgstr[0] "Il seguente pacchetto raccomandato è stato selezionato automaticamente:"
 msgstr[1] ""
 "I seguenti %d pacchetti raccomandati sono stati selezionati automaticamente:"
 
@@ -908,8 +903,7 @@ msgstr[1] ""
 msgid "The following recommended pattern was automatically selected:"
 msgid_plural ""
 "The following %d recommended patterns were automatically selected:"
-msgstr[0] ""
-"Il seguente modello raccomandato è stato selezionato automaticamente:"
+msgstr[0] "Il seguente modello raccomandato è stato selezionato automaticamente:"
 msgstr[1] ""
 "I seguenti %d modelli raccomandati sono stati selezionati automaticamente:"
 
@@ -918,8 +912,7 @@ msgstr[1] ""
 msgid "The following recommended product was automatically selected:"
 msgid_plural ""
 "The following %d recommended products were automatically selected:"
-msgstr[0] ""
-"Il seguente prodotto raccomandato è stato selezionato automaticamente:"
+msgstr[0] "Il seguente prodotto raccomandato è stato selezionato automaticamente:"
 msgstr[1] ""
 "I seguenti %d prodotti raccomandati sono stati selezionati automaticamente:"
 
@@ -958,8 +951,8 @@ msgstr[0] ""
 "Il seguente pacchetto è raccomandato, ma non verrà installato (verranno "
 "installati solo i pacchetti richiesti):"
 msgstr[1] ""
-"I seguenti %d pacchetti sono raccomandati, ma non verranno installati "
-"(verranno installati solo i pacchetti richiesti):"
+"I seguenti %d pacchetti sono raccomandati, ma non verranno installati ("
+"verranno installati solo i pacchetti richiesti):"
 
 #: src/Summary.cc:1159
 #, c-format, boost-format
@@ -1005,8 +998,7 @@ msgid "The following pattern is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d patterns are recommended, but will not be installed:"
 msgstr[0] "Il seguente modello è raccomandato, ma non verrà installato:"
-msgstr[1] ""
-"I seguenti %d modelli sono raccomandati, ma non verranno installati:"
+msgstr[1] "I seguenti %d modelli sono raccomandati, ma non verranno installati:"
 
 #: src/Summary.cc:1190
 #, c-format, boost-format
@@ -1014,8 +1006,7 @@ msgid "The following product is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d products are recommended, but will not be installed:"
 msgstr[0] "Il seguente prodotto è raccomandato, ma non verrà installato:"
-msgstr[1] ""
-"I seguenti %d prodotti sono raccomandati, ma non verranno installati:"
+msgstr[1] "I seguenti %d prodotti sono raccomandati, ma non verranno installati:"
 
 #: src/Summary.cc:1195
 #, c-format, boost-format
@@ -1064,8 +1055,7 @@ msgid "The following application is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d applications are suggested, but will not be installed:"
 msgstr[0] "La seguente applicazione è suggerita, ma non verrà installata:"
-msgstr[1] ""
-"Le seguenti %d applicazioni sono suggerite, ma non verranno installate:"
+msgstr[1] "Le seguenti %d applicazioni sono suggerite, ma non verranno installate:"
 
 #: src/Summary.cc:1274
 #, c-format, boost-format
@@ -1221,8 +1211,7 @@ msgstr[1] "I seguenti %d aggiornamenti di prodotto NON verranno installati:"
 msgid "The following application update will NOT be installed:"
 msgid_plural "The following %d application updates will NOT be installed:"
 msgstr[0] "Il seguente aggiornamento di applicazione NON verrà installato:"
-msgstr[1] ""
-"I seguenti %d aggiornamenti di applicazione NON verranno installati:"
+msgstr[1] "I seguenti %d aggiornamenti di applicazione NON verranno installati:"
 
 #: src/Summary.cc:1504
 #, c-format, boost-format
@@ -1502,8 +1491,8 @@ msgid ""
 "The /etc/products.d/baseproduct symlink is dangling or missing!\n"
 "The link must point to your core products .prod file in /etc/products.d.\n"
 msgstr ""
-"Il collegamento simbolico /etc/products.d/baseproduct è pendente o "
-"mancante.\n"
+"Il collegamento simbolico /etc/products.d/baseproduct è pendente o mancante."
+"\n"
 "Il collegamento deve puntare al file dei prodotti principali .prod in /etc/"
 "products.d.\n"
 
@@ -1629,10 +1618,8 @@ msgstr "La chiave gpg di firma del file '%1%' è scaduta."
 #, boost-format
 msgid "The gpg key signing file '%1%' will expire in %2% day."
 msgid_plural "The gpg key signing file '%1%' will expire in %2% days."
-msgstr[0] ""
-"La chiave gpg usata per firmare il file '%1%' scadrà tra %2% giorno."
-msgstr[1] ""
-"La chiave gpg usata per firmare il file '%1%' scadrà tra %2% giorni."
+msgstr[0] "La chiave gpg usata per firmare il file '%1%' scadrà tra %2% giorno."
+msgstr[1] "La chiave gpg usata per firmare il file '%1%' scadrà tra %2% giorni."
 
 #: src/callbacks/keyring.h:152
 #, c-format, boost-format
@@ -1902,8 +1889,7 @@ msgstr "Sbloccare o ignorare?"
 #: src/callbacks/locks.h:27
 msgid ""
 "The following query locks the same objects as the one you want to remove:"
-msgstr ""
-"La seguente interrogazione blocca oggetti uguali a quello da rimuovere:"
+msgstr "La seguente interrogazione blocca oggetti uguali a quello da rimuovere:"
 
 #: src/callbacks/locks.h:30
 msgid "The following query locks some of the objects you want to unlock:"
@@ -1941,8 +1927,7 @@ msgstr ""
 #. help text for the "Abort, retry, ignore?" prompt for media errors
 #: src/callbacks/media.cc:34
 msgid "Change current base URI and try retrieving the file again."
-msgstr ""
-"Modifica l'URI di base attuale e prova a recuperare nuovamente il file."
+msgstr "Modifica l'URI di base attuale e prova a recuperare nuovamente il file."
 
 #. translators: this is a prompt label, will appear as "New URI: "
 #: src/callbacks/media.cc:49
@@ -1961,8 +1946,7 @@ msgstr "a/r/i/c/d"
 
 #: src/callbacks/media.cc:79
 msgid "Disable SSL certificate authority check and continue."
-msgstr ""
-"Disabilita il controllo sull'autorità di certificazione SSL e continua."
+msgstr "Disabilita il controllo sull'autorità di certificazione SSL e continua."
 
 #. translators: this is a prompt text
 #: src/callbacks/media.cc:82 src/callbacks/media.cc:174
@@ -2469,8 +2453,8 @@ msgid ""
 "Remove packages with specified capabilities. A capability is NAME[.ARCH]"
 "[OP<VERSION>], where OP is one of <, <=, =, >=, >."
 msgstr ""
-"Rimuove i pacchetti con le funzionalità specificate. Una funzionalità è "
-"NOME[.ARCH][OP<VERSIONE>], dove OP può essere uno tra <, <=, =, >=, >."
+"Rimuove i pacchetti con le funzionalità specificate. Una funzionalità è NOME"
+"[.ARCH][OP<VERSIONE>], dove OP può essere uno tra <, <=, =, >=, >."
 
 #: src/commands/installremove.cc:104 src/commands/installremove.cc:234
 #: src/utils/messages.cc:53
@@ -2815,8 +2799,7 @@ msgstr[1] "I blocchi specificati sono stati aggiunti con successo."
 
 #: src/commands/locks/add.cc:88
 msgid "Problem adding the package lock:"
-msgstr ""
-"Si è verificato un problema durante l'aggiunta del blocco al pacchetto:"
+msgstr "Si è verificato un problema durante l'aggiunta del blocco al pacchetto:"
 
 # =============================================================================
 #: src/commands/locks/clean.cc:16
@@ -3155,8 +3138,8 @@ msgid ""
 "download-as-needed disables the fileconflict check."
 msgstr ""
 "Installa i pacchetti anche se sostituiscono i file di altri pacchetti già "
-"installati. Per default, i conflitti tra file vengono considerati errori. --"
-"download-as-needed disabilita la verifica dei conflitti tra file."
+"installati. Per default, i conflitti tra file vengono considerati errori. "
+"--download-as-needed disabilita la verifica dei conflitti tra file."
 
 #. translators: -y, --no-confirm
 #: src/commands/optionsets.cc:291
@@ -3674,8 +3657,7 @@ msgstr "Aggiunge l'archivio come disabilitato."
 
 #: src/commands/repos/add.cc:46
 msgid "The repository type is always autodetected. This option is ignored."
-msgstr ""
-"Il tipo di repository è sempre autorilevato. Questa opzione è ignorata."
+msgstr "Il tipo di repository è sempre autorilevato. Questa opzione è ignorata."
 
 #: src/commands/repos/add.cc:70
 #, c-format, boost-format
@@ -5161,8 +5143,8 @@ msgstr ""
 "\n"
 "Se è impossibile trovare un sottocomando in zypper_execdir, il wrapper\n"
 "lo cercherà nella parte rimanente di $PATH. È pertanto possibile\n"
-"scrivere estensioni zypper locali che non si trovano nello spazio di "
-"sistema.\n"
+"scrivere estensioni zypper locali che non si trovano nello spazio di sistema."
+"\n"
 
 #: src/commands/subcommand.cc:458
 #, boost-format
@@ -5446,8 +5428,7 @@ msgstr "Pacchetti sorgente richiesti:"
 
 #: src/commands/utils/source-download.cc:296
 msgid "Required source packages available in download directory:"
-msgstr ""
-"Pacchetti di origine richiesti disponibili nella directory di download:"
+msgstr "Pacchetti di origine richiesti disponibili nella directory di download:"
 
 #: src/commands/utils/source-download.cc:300
 msgid "Required source packages to be downloaded:"
@@ -6478,8 +6459,7 @@ msgstr "L'aggiornamento automatico è stato abilitato per il repository '%s'."
 #: src/repos.cc:1628
 #, c-format, boost-format
 msgid "Autorefresh has been disabled for repository '%s'."
-msgstr ""
-"L'aggiornamento automatico è stato disabilitato per il repository '%s'."
+msgstr "L'aggiornamento automatico è stato disabilitato per il repository '%s'."
 
 #: src/repos.cc:1635
 #, c-format, boost-format
@@ -6585,9 +6565,9 @@ msgid ""
 "server has actually discontinued to support the repository."
 msgstr ""
 "I metadati del repository sono scaduti: verificare che 'autorefresh' sia "
-"attivato su (zypper lr), altrimenti aggiornare manualmente il repository "
-"(zypper ref). Se il problema persiste, il mirror in uso potrebbe essere "
-"rotto o il server ha effettivamente smesso di supportare il repository."
+"attivato su (zypper lr), altrimenti aggiornare manualmente il repository ("
+"zypper ref). Se il problema persiste, il mirror in uso potrebbe essere rotto "
+"o il server ha effettivamente smesso di supportare il repository."
 
 #: src/repos.cc:1856
 msgid "Reading installed packages..."
@@ -6682,8 +6662,7 @@ msgstr[1] ""
 #: src/solve-commit.cc:145
 msgid "Choose the above solution using '1' or cancel using 'c'"
 msgid_plural "Choose from above solutions by number or cancel"
-msgstr[0] ""
-"Scegliere la soluzione precedente premendo '1' o annulla premendo 'a'"
+msgstr[0] "Scegliere la soluzione precedente premendo '1' o annulla premendo 'a'"
 msgstr[1] "Scegliere tra le soluzioni precedenti per numero o annulla"
 
 #. translators: answers for dependency problem solution input prompt:
@@ -6774,8 +6753,7 @@ msgstr "Generazione del caso di prova del solver in corso..."
 #: src/solve-commit.cc:547
 #, c-format, boost-format
 msgid "Solver test case generated successfully at %s."
-msgstr ""
-"Generazione del caso di prova del solver completata con successo su %s."
+msgstr "Generazione del caso di prova del solver completata con successo su %s."
 
 #: src/solve-commit.cc:550
 msgid "Error creating the solver test case."
@@ -7410,8 +7388,8 @@ msgid ""
 "provided as a subcommand or plug-in (see '%2%')."
 msgstr ""
 "Nel caso in cui '%1%' non sia un errore di digitazione, probabilmente non si "
-"tratta di un comando integrato, ma viene fornito come subcommand o plug-in "
-"(si veda '%2%')."
+"tratta di un comando integrato, ma viene fornito come subcommand o plug-in ("
+"si veda '%2%')."
 
 #. translators: %1% and %2% are plug-in packages which might provide it.
 #. translators: The word 'subcommand' also refers to a zypper command and should not be translated.
