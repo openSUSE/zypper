@@ -17,16 +17,16 @@ msgstr ""
 "Project-Id-Version: zypper.de\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-07-02 13:50+0200\n"
-"PO-Revision-Date: 2025-04-10 12:56+0000\n"
-"Last-Translator: Gemineo <vistatec@gemineo.de>\n"
-"Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/"
-">\n"
+"PO-Revision-Date: 2025-07-22 12:47+0000\n"
+"Last-Translator: Julia Faltenbacher <julia.faltenbacher@suse.com>\n"
+"Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/>"
+"\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.10.4\n"
+"X-Generator: Weblate 5.12.2\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -816,16 +816,14 @@ msgstr[1] "Die folgenden %d Anwendungen werden aktualisiert:"
 msgid "The following package is going to be downgraded:"
 msgid_plural "The following %d packages are going to be downgraded:"
 msgstr[0] "Das folgende Paket wird durch eine ältere Version ausgetauscht:"
-msgstr[1] ""
-"Die folgenden %d Pakete werden durch eine ältere Version ausgetauscht:"
+msgstr[1] "Die folgenden %d Pakete werden durch eine ältere Version ausgetauscht:"
 
 #: src/Summary.cc:871
 #, c-format, boost-format
 msgid "The following patch is going to be downgraded:"
 msgid_plural "The following %d patches are going to be downgraded:"
 msgstr[0] "Der folgende Patch wird durch eine ältere Version ausgetauscht:"
-msgstr[1] ""
-"Die folgenden %d Patches werden durch eine ältere Version ausgetauscht:"
+msgstr[1] "Die folgenden %d Patches werden durch eine ältere Version ausgetauscht:"
 
 #: src/Summary.cc:876
 #, c-format, boost-format
@@ -924,8 +922,7 @@ msgid "The following recommended source package was automatically selected:"
 msgid_plural ""
 "The following %d recommended source packages were automatically selected:"
 msgstr[0] "Das folgende empfohlene Quellpaket wurde automatisch gewählt:"
-msgstr[1] ""
-"Die folgenden %d empfohlenen Quellpakete wurden automatisch gewählt:"
+msgstr[1] "Die folgenden %d empfohlenen Quellpakete wurden automatisch gewählt:"
 
 #: src/Summary.cc:1100
 #, c-format, boost-format
@@ -933,8 +930,7 @@ msgid "The following recommended application was automatically selected:"
 msgid_plural ""
 "The following %d recommended applications were automatically selected:"
 msgstr[0] "Die folgende empfohlene Anwendung wurde automatisch gewählt:"
-msgstr[1] ""
-"Die folgenden %d empfohlenen Anwendungen wurden automatisch gewählt:"
+msgstr[1] "Die folgenden %d empfohlenen Anwendungen wurden automatisch gewählt:"
 
 #: src/Summary.cc:1147
 #, c-format, boost-format
@@ -1040,8 +1036,7 @@ msgstr[1] ""
 msgid "The following pattern is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d patterns are suggested, but will not be installed:"
-msgstr[0] ""
-"Das folgende Schema wird vorgeschlagen, wird aber nicht installiert:"
+msgstr[0] "Das folgende Schema wird vorgeschlagen, wird aber nicht installiert:"
 msgstr[1] ""
 "Die folgenden %d Schemata werden vorgeschlagen, werden aber nicht "
 "installiert:"
@@ -1051,8 +1046,7 @@ msgstr[1] ""
 msgid "The following product is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d products are suggested, but will not be installed:"
-msgstr[0] ""
-"Das folgende Produkt wird vorgeschlagen, wird aber nicht installiert:"
+msgstr[0] "Das folgende Produkt wird vorgeschlagen, wird aber nicht installiert:"
 msgstr[1] ""
 "Die folgenden %d Produkte werden vorgeschlagen, werden aber nicht "
 "installiert:"
@@ -1062,8 +1056,7 @@ msgstr[1] ""
 msgid "The following application is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d applications are suggested, but will not be installed:"
-msgstr[0] ""
-"Die folgende Anwendung wird vorgeschlagen, wird aber nicht installiert:"
+msgstr[0] "Die folgende Anwendung wird vorgeschlagen, wird aber nicht installiert:"
 msgstr[1] ""
 "Die folgenden %d Anwendungen werden vorgeschlagen, werden aber nicht "
 "installiert:"
@@ -1220,8 +1213,7 @@ msgstr[1] "Die folgenden %d Produktaktualisierungen werden NICHT installiert:"
 msgid "The following application update will NOT be installed:"
 msgid_plural "The following %d application updates will NOT be installed:"
 msgstr[0] "Die folgende Anwendungsaktualisierung wird NICHT installiert:"
-msgstr[1] ""
-"Die folgenden %d Anwendungsaktualisierungen werden NICHT installiert:"
+msgstr[1] "Die folgenden %d Anwendungsaktualisierungen werden NICHT installiert:"
 
 #: src/Summary.cc:1504
 #, c-format, boost-format
@@ -1429,8 +1421,7 @@ msgstr ""
 #: src/Summary.cc:1824
 #, boost-format
 msgid "%1% is set, otherwise a system reboot would be required."
-msgstr ""
-"%1% wurde festgelegt, andernfalls wäre ein Systemneustart erforderlich."
+msgstr "%1% wurde festgelegt, andernfalls wäre ein Systemneustart erforderlich."
 
 #: src/Summary.cc:1826
 msgid "System reboot required."
@@ -2377,8 +2368,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/help.cc:22
 msgid "zypper [--GLOBAL-OPTIONS] <COMMAND> [--COMMAND-OPTIONS] [ARGUMENTS]"
-msgstr ""
-"zypper [--Globale-Optionen] <Kommando> [--Kommandooptionen] [Argumente]"
+msgstr "zypper [--Globale-Optionen] <Kommando> [--Kommandooptionen] [Argumente]"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/help.cc:25
@@ -3159,8 +3149,8 @@ msgid ""
 "Don't require user interaction. Alias for the --non-interactive global "
 "option."
 msgstr ""
-"Keine Benutzerinteraktion erforderlich. Alias für die globale Option \"--non-"
-"interactive\"."
+"Keine Benutzerinteraktion erforderlich. Alias für die globale Option "
+"\"--non-interactive\"."
 
 #: src/commands/optionsets.cc:309
 msgid ""
@@ -3407,9 +3397,8 @@ msgid ""
 "match exactly."
 msgstr ""
 "Wenn keine Versionseinschränkung angegeben ist, werden Informationen über "
-"das beste verfügbare Paket angezeigt. Beachten Sie, dass sowohl die "
-"Versions- als auch die Veröffentlichungsnummer immer genau übereinstimmen "
-"müssen."
+"das beste verfügbare Paket angezeigt. Beachten Sie, dass sowohl die Versions-"
+" als auch die Veröffentlichungsnummer immer genau übereinstimmen müssen."
 
 #. translators: -s, --match-substrings
 #: src/commands/query/info.cc:65
@@ -3689,8 +3678,8 @@ msgstr ""
 msgid ""
 "If only one argument is used, it must be a URI pointing to a .repo file."
 msgstr ""
-"Wenn nur ein Argument verwendet wird, dann muss es sich um einen auf "
-"eine .repo-Datei verweisenden URI handeln."
+"Wenn nur ein Argument verwendet wird, dann muss es sich um einen auf eine "
+".repo-Datei verweisenden URI handeln."
 
 #: src/commands/repos/add.cc:130
 msgid "Specified type is not a valid repository type:"
@@ -4014,8 +4003,7 @@ msgstr ""
 
 #: src/commands/repos/refresh.cc:337
 msgid "Could not refresh the repositories because of errors."
-msgstr ""
-"Die Repositorys konnten aufgrund von Fehlern nicht aktualisiert werden."
+msgstr "Die Repositorys konnten aufgrund von Fehlern nicht aktualisiert werden."
 
 #: src/commands/repos/refresh.cc:342 src/repos.cc:937
 msgid "Some of the repositories have not been refreshed because of an error."
@@ -4384,8 +4372,7 @@ msgstr ""
 #. translators: --match-substrings
 #: src/commands/search/search.cc:105
 msgid "Search for a match to partial words (default)."
-msgstr ""
-"Suche nach Treffern, in denen die Suchzeichenfolge vorkommt (Standard)."
+msgstr "Suche nach Treffern, in denen die Suchzeichenfolge vorkommt (Standard)."
 
 #. translators: --match-words
 #: src/commands/search/search.cc:109
@@ -5023,8 +5010,7 @@ msgstr "Abhängigkeitsauflösung erzwingen (selbst eine aggressive)."
 
 #: src/commands/solveroptionset.cc:63
 msgid "Do not force the solver to find a solution, let it ask."
-msgstr ""
-"Keine Abhängigkeitsauflösung erzwingen, Frage an den Benutzer zulassen."
+msgstr "Keine Abhängigkeitsauflösung erzwingen, Frage an den Benutzer zulassen."
 
 #: src/commands/solveroptionset.cc:64
 msgid "Set the solvers general attitude when resolving a job."
@@ -5101,8 +5087,7 @@ msgstr ""
 #. translators: -d, --build-deps-only
 #: src/commands/sourceinstall.cc:48
 msgid "Install only build dependencies of specified packages."
-msgstr ""
-"Installiert nur die Compilierungsabhängigkeiten der angegebenen Pakete."
+msgstr "Installiert nur die Compilierungsabhängigkeiten der angegebenen Pakete."
 
 #. translators: -D, --no-build-deps
 #: src/commands/sourceinstall.cc:52
@@ -6267,8 +6252,7 @@ msgstr ""
 #: src/repos.cc:682
 #, c-format, boost-format
 msgid "Use '%s' to get the list of defined repositories."
-msgstr ""
-"Verwenden Sie '%s', um die Liste der definierten Repositorys abzurufen."
+msgstr "Verwenden Sie '%s', um die Liste der definierten Repositorys abzurufen."
 
 #: src/repos.cc:702
 #, c-format, boost-format
@@ -6707,8 +6691,8 @@ msgstr "Detaillierte Informationen: "
 msgid "Choose the above solution using '1' or skip, retry or cancel"
 msgid_plural "Choose from above solutions by number or skip, retry or cancel"
 msgstr[0] ""
-"Wählen Sie die obige Lösung mittels '1' oder Sie (u)eberspringen, "
-"(w)iederholen oder brechen (a)b"
+"Wählen Sie die obige Lösung mittels '1' oder Sie (u)eberspringen, (w)"
+"iederholen oder brechen (a)b"
 msgstr[1] ""
 "Wählen Sie aus den obigen Lösungen mittels Nummer oder Sie (u)eberspringen, "
 "(w)iederholen oder brechen (a)b"
@@ -6719,8 +6703,7 @@ msgstr[1] ""
 msgid "Choose the above solution using '1' or cancel using 'c'"
 msgid_plural "Choose from above solutions by number or cancel"
 msgstr[0] "Wählen Sie die obige Lösung mittels '1' oder brechen Sie (a)b"
-msgstr[1] ""
-"Wählen Sie aus den obigen Lösungen mittels Nummer oder brechen Sie (a)b"
+msgstr[1] "Wählen Sie aus den obigen Lösungen mittels Nummer oder brechen Sie (a)b"
 
 #. translators: answers for dependency problem solution input prompt:
 #. "Choose from above solutions by number or skip, retry or cancel"
@@ -7368,8 +7351,7 @@ msgstr "Senden Sie einen Fehlerbericht zu diesem Problem."
 #. unless you translate the actual page :)
 #: src/utils/messages.cc:22
 msgid "See http://en.opensuse.org/Zypper/Troubleshooting for instructions."
-msgstr ""
-"Anweisungen finden Sie unter http://de.opensuse.org/Zypper/Fehlersuche."
+msgstr "Anweisungen finden Sie unter http://de.opensuse.org/Zypper/Fehlersuche."
 
 #: src/utils/messages.cc:38
 msgid "Too many arguments."
