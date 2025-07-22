@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-07-02 13:50+0200\n"
-"PO-Revision-Date: 2025-07-10 18:59+0000\n"
-"Last-Translator: yok440 <yakupyok440@gmail.com>\n"
+"PO-Revision-Date: 2025-07-22 12:48+0000\n"
+"Last-Translator: Julia Faltenbacher <julia.faltenbacher@suse.com>\n"
 "Language-Team: Turkish <https://l10n.opensuse.org/projects/zypper/master/tr/>"
 "\n"
 "Language: tr\n"
@@ -1136,10 +1136,8 @@ msgid ""
 "The following package needs additional customer contract to get support:"
 msgid_plural ""
 "The following %d packages need additional customer contract to get support:"
-msgstr[0] ""
-"Aşağıdaki paket, destek almak için ek müşteri sözleşmesi gerektirir:"
-msgstr[1] ""
-"Aşağıdaki %d paket, destek almak için ek müşteri sözleşmesi gerektirir:"
+msgstr[0] "Aşağıdaki paket, destek almak için ek müşteri sözleşmesi gerektirir:"
+msgstr[1] "Aşağıdaki %d paket, destek almak için ek müşteri sözleşmesi gerektirir:"
 
 #: src/Summary.cc:1417
 msgid "was superseded by"
@@ -2547,8 +2545,8 @@ msgid ""
 msgstr ""
 "Bağımlı paketleri kaldırmaktansa değiştirmeyi tercih eden bir kaldırma "
 "komutu. Aslında bu, düz argümanlarına (-) uygulanan kaldırma değiştiricisi "
-"ile tam özellikli bir yükleme komutudur. Yani 'removeptf foo', 'install -- "
-"-foo' ile aynıdır. Bu yüzden komut, yükleme komutuyla aynı seçenekleri kabul "
+"ile tam özellikli bir yükleme komutudur. Yani 'removeptf foo', 'install -- -"
+"foo' ile aynıdır. Bu yüzden komut, yükleme komutuyla aynı seçenekleri kabul "
 "eder. Bir PTF'yi (Program Geçici Düzeltmesi) kaldırmanın önerilen yoludur."
 
 #: src/commands/installremove.cc:317
@@ -2729,10 +2727,10 @@ msgid ""
 "have their KIND: string prepended (e.g. 'patch:foo') or use the commands --"
 "type option."
 msgstr ""
-"Kilit özelliği (LOCKSPEC), \"[TÜR:]İSİM[OP EDITION]\" tarafından "
-"oluşturulur; burada AD, * ve ? kullanan bir glob modeli de olabilir, joker "
-"karakterler de olabilir. Paket dışı türlerin başına KIND: dizesi eklenebilir "
-"(örneğin, 'patch: foo') veya komutlar --type seçeneğini kullanabilir."
+"Kilit özelliği (LOCKSPEC), \"[TÜR:]İSİM[OP EDITION]\" tarafından oluşturulur;"
+" burada AD, * ve ? kullanan bir glob modeli de olabilir, joker karakterler "
+"de olabilir. Paket dışı türlerin başına KIND: dizesi eklenebilir (örneğin, "
+"'patch: foo') veya komutlar --type seçeneğini kullanabilir."
 
 #: src/commands/locks/add.cc:36
 msgid ""
@@ -3094,8 +3092,8 @@ msgid ""
 "download-as-needed disables the fileconflict check."
 msgstr ""
 "Paketleri, önceden kurulmuş olan diğer paketlerdeki dosyaları değiştirseler "
-"bile kurun. Varsayılan, dosya çakışmalarını bir hata olarak ele almaktır. `--"
-"download-as-needed` dosya çakışması denetimini devre dışı bırakır."
+"bile kurun. Varsayılan, dosya çakışmalarını bir hata olarak ele almaktır. "
+"`--download-as-needed` dosya çakışması denetimini devre dışı bırakır."
 
 #. translators: -y, --no-confirm
 #: src/commands/optionsets.cc:291
@@ -4488,8 +4486,7 @@ msgstr "İp uçları için üstteki mesaja balın."
 
 #: src/commands/search/search.cc:505 src/repos.cc:985
 msgid "Running 'zypper refresh' as root might resolve the problem."
-msgstr ""
-"'zypper refresh' komutunu yönetici olarak çalıştırmak sorunu çözebilir."
+msgstr "'zypper refresh' komutunu yönetici olarak çalıştırmak sorunu çözebilir."
 
 #. translators: -g, --category <CATEGORY>
 #: src/commands/selectpatchoptionset.cc:24
@@ -4724,10 +4721,8 @@ msgstr[1] "'%s' depoları '%s' hizmetinin etkin depolarına eklendi"
 msgid "Repository '%s' has been added to disabled repositories of service '%s'"
 msgid_plural ""
 "Repositories '%s' have been added to disabled repositories of service '%s'"
-msgstr[0] ""
-"'%s' deposu '%s' hizmetinin devre dışı bırakılmış depolarına eklendi"
-msgstr[1] ""
-"'%s' depoları '%s' hizmetinin devre dışı bırakılmış depolarına eklendi"
+msgstr[0] "'%s' deposu '%s' hizmetinin devre dışı bırakılmış depolarına eklendi"
+msgstr[1] "'%s' depoları '%s' hizmetinin devre dışı bırakılmış depolarına eklendi"
 
 #: src/commands/services/modify.cc:269
 #, c-format, boost-format
@@ -4735,10 +4730,8 @@ msgid ""
 "Repository '%s' has been removed from enabled repositories of service '%s'"
 msgid_plural ""
 "Repositories '%s' have been removed from enabled repositories of service '%s'"
-msgstr[0] ""
-"'%s' deposu '%s' hizmetinin etkinleştirilmiş depolarından kaldırıldı"
-msgstr[1] ""
-"'%s' depoları '%s' hizmetinin etkinleştirilmiş depolarından kaldırıldı"
+msgstr[0] "'%s' deposu '%s' hizmetinin etkinleştirilmiş depolarından kaldırıldı"
+msgstr[1] "'%s' depoları '%s' hizmetinin etkinleştirilmiş depolarından kaldırıldı"
 
 #: src/commands/services/modify.cc:276
 #, c-format, boost-format
@@ -4928,8 +4921,7 @@ msgstr "Uzman seçenekler"
 
 #: src/commands/solveroptionset.cc:87
 msgid "Whether to allow downgrading installed resolvables."
-msgstr ""
-"Yüklü çözümlenebilirlerin sürüm düşürmesine izin verilip verilmeyeceği."
+msgstr "Yüklü çözümlenebilirlerin sürüm düşürmesine izin verilip verilmeyeceği."
 
 #: src/commands/solveroptionset.cc:89
 msgid "Whether to allow changing the names of installed resolvables."
@@ -5224,8 +5216,8 @@ msgid ""
 msgstr ""
 "Komut satırında belirtilen RPM'leri yerel bir dizine indirin. Varsayılan "
 "paketler libzypp paket önbelleğine indirilir (/var/cache/zypp/packages; root "
-"olmayan kullanıcılar için $XDG_CACHE_HOME/zypp/packages), ancak bu genel `--"
-"pkg-cache-dir` seçeneği kullanılarak değiştirilebilir. ."
+"olmayan kullanıcılar için $XDG_CACHE_HOME/zypp/packages), ancak bu genel "
+"`--pkg-cache-dir` seçeneği kullanılarak değiştirilebilir. ."
 
 #. translators: command description
 #: src/commands/utils/download.cc:151
@@ -6078,8 +6070,8 @@ msgid ""
 "Please add one or more base URI (baseurl=URI) entries to %s for repository "
 "'%s'."
 msgstr ""
-"Lütfen '%s' kod deposu için %s'ye bir veya daha fazla temel URI "
-"(baseurl=URI) girişi ekleyin."
+"Lütfen '%s' kod deposu için %s'ye bir veya daha fazla temel URI (baseurl=URI)"
+" girişi ekleyin."
 
 #: src/repos.cc:379
 msgid "No alias defined for this repository."
