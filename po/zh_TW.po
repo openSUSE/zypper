@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-07-02 13:50+0200\n"
-"PO-Revision-Date: 2025-04-08 10:56+0000\n"
-"Last-Translator: Emily Dong <Emily.Dong@excel-gits.com>\n"
+"PO-Revision-Date: 2025-07-22 12:48+0000\n"
+"Last-Translator: Julia Faltenbacher <julia.faltenbacher@suse.com>\n"
 "Language-Team: Chinese (Taiwan) <https://l10n.opensuse.org/projects/zypper/"
 "master/zh_TW/>\n"
 "Language: zh_TW\n"
@@ -22,7 +22,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.10.3\n"
+"X-Generator: Weblate 5.12.2\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -276,9 +276,8 @@ msgstr "使用額外的套件庫。"
 msgid ""
 "Additionally use disabled repositories providing a specific keyword. Try '--"
 "plus-content debug' to enable repos indicating to provide debug packages."
-msgstr ""
-"另外使用提供特定關鍵字的被停用套件庫。 嘗試 '--plus-content debug' 來啟用有提"
-"供除錯套件的套件庫。"
+msgstr "另外使用提供特定關鍵字的被停用套件庫。 嘗試 '--plus-content debug' "
+"來啟用有提供除錯套件的套件庫。"
 
 #: src/Config.cc:491
 msgid "Repositories disabled, using the database of installed packages only."
@@ -507,18 +506,16 @@ msgstr "有更新候選 '%s' (適用於 '%s')，但它不符合特定版本、�
 msgid ""
 "There is an update candidate for '%s' from vendor '%s', while the current "
 "vendor is '%s'. Use '%s' to install this candidate."
-msgstr ""
-"有一個「%s」的更新候選 (來自廠商「%s」)，但當前廠商是「%s」。請使用「%s」安裝"
-"此候選。"
+msgstr "有一個「%s」的更新候選 "
+"(來自廠商「%s」)，但當前廠商是「%s」。請使用「%s」安裝此候選。"
 
 #: src/RequestFeedback.cc:133
 #, c-format, boost-format
 msgid ""
 "There is an update candidate for '%s', but it comes from a repository with a "
 "lower priority. Use '%s' to install this candidate."
-msgstr ""
-"有針對 '%s' 的更新候選，但是從優先等級較低的套件庫而來。 使用 '%s' 來安裝此更"
-"新。"
+msgstr "有針對 '%s' 的更新候選，但是從優先等級較低的套件庫而來。 使用 '%s' "
+"來安裝此更新。"
 
 #: src/RequestFeedback.cc:143
 #, c-format, boost-format
@@ -562,9 +559,8 @@ msgstr "不需要修補程式 '%s'。"
 msgid ""
 "Patch '%1%' is optional. Use '%2%' to install it, or '%3%' to include all "
 "optional patches."
-msgstr ""
-"'%s' 為選擇性修補程式。請用 '%s' 來安裝它，或使用 '%s' 包括所有選擇性修補程"
-"式。"
+msgstr "'%s' 為選擇性修補程式。請用 '%s' 來安裝它，或使用 '%s' "
+"包括所有選擇性修補程式。"
 
 #: src/RequestFeedback.cc:193
 #, c-format, boost-format
@@ -861,9 +857,8 @@ msgid ""
 msgid_plural ""
 "The following %d packages are recommended, but will not be installed because "
 "they are unwanted (were manually removed before):"
-msgstr[0] ""
-"下列 %d 個套件是推薦的，但將不會被安裝，因為它們是您不想要的 (之前已被手動移"
-"除)："
+msgstr[0] "下列 %d 個套件是推薦的，但將不會被安裝，因為它們是您不想要的 "
+"(之前已被手動移除)："
 
 #: src/Summary.cc:1169
 #, c-format, boost-format
@@ -1271,9 +1266,8 @@ msgstr ""
 msgid ""
 "We can ask PackageKit to interrupt the current action as soon as possible, "
 "but it depends on PackageKit how fast it will respond to this request."
-msgstr ""
-"我們可以要求 PackageKit 儘快中止目前的動作，但取決於 PackageKit 對此要求的回"
-"應速度。"
+msgstr "我們可以要求 PackageKit 儘快中止目前的動作，但取決於 PackageKit "
+"對此要求的回應速度。"
 
 #: src/Zypper.cc:96
 msgid "Ask PackageKit to quit?"
@@ -1333,9 +1327,9 @@ msgid ""
 "the repository provider or check their web site. Many providers maintain a "
 "web page showing the fingerprints of the GPG keys they are using."
 msgstr ""
-"透過指紋已清楚地識別一個 GPG 公開金鑰。請不要信任金鑰名稱。若您不確定該金鑰是"
-"否可信，請詢問套件庫提供者或是查看其網站。許多提供者會維護一個網頁以顯示他們"
-"所使用的 GPG 金鑰指紋。"
+"透過指紋已清楚地識別一個 GPG "
+"公開金鑰。請不要信任金鑰名稱。若您不確定該金鑰是否可信，請詢問套件庫提供者或"
+"是查看其網站。許多提供者會維護一個網頁以顯示他們所使用的 GPG 金鑰指紋。"
 
 #: src/callbacks/keyring.h:38
 msgid ""
@@ -1343,8 +1337,7 @@ msgid ""
 "after the data were signed. Accepting data with no, wrong or unknown "
 "signature can lead to a corrupted system and in extreme cases even to a "
 "system compromise."
-msgstr ""
-"資料簽名可讓接收者能夠驗證資料被簽名後並無變動。接受無簽名或者簽名錯誤或未知"
+msgstr "資料簽名可讓接收者能夠驗證資料被簽名後並無變動。接受無簽名或者簽名錯誤或未知"
 "的資料可能導致系統毀損，在極端情況下甚至會導致系統被入侵。"
 
 #. translator: %1% is a file name
@@ -1359,8 +1352,7 @@ msgstr "檔案「%1%」是套件庫主索引檔案。它可確保整個套件庫
 msgid ""
 "We can't verify that no one meddled with this file, so it might not be "
 "trustworthy anymore! You should not continue unless you know it's safe."
-msgstr ""
-"我們無法確認此檔案是否曾受到他人的干預，因此它可能不再可信！除非您確定該檔案"
+msgstr "我們無法確認此檔案是否曾受到他人的干預，因此它可能不再可信！除非您確定該檔案"
 "安全，否則不應繼續。"
 
 #: src/callbacks/keyring.h:57
@@ -1368,8 +1360,7 @@ msgid ""
 "This file was modified after it has been signed. This may have been a "
 "malicious change, so it might not be trustworthy anymore! You should not "
 "continue unless you know it's safe."
-msgstr ""
-"此檔案簽章後已被修改。這可能是惡意變更，因此該檔案可能不再可信！除非您確定該"
+msgstr "此檔案簽章後已被修改。這可能是惡意變更，因此該檔案可能不再可信！除非您確定該"
 "檔案安全，否則不應繼續。"
 
 #: src/callbacks/keyring.h:59
@@ -1563,9 +1554,8 @@ msgstr "檔案 '%1%' (來自套件庫 '%2%') 的簽章驗證失敗。"
 msgid ""
 "The rpm database seems to contain old V3 version gpg keys which are "
 "meanwhile obsolete and considered insecure:"
-msgstr ""
-"該 RPM 資料庫看似包含了舊的 V3 版本 GPG 金鑰，這些金鑰已經廢棄，因此被認為是"
-"不安全的："
+msgstr "該 RPM 資料庫看似包含了舊的 V3 版本 GPG "
+"金鑰，這些金鑰已經廢棄，因此被認為是不安全的："
 
 #: src/callbacks/keyring.h:445
 #, boost-format
@@ -1577,9 +1567,8 @@ msgstr "檢視呼叫「%1%」的金鑰詳細資訊。"
 msgid ""
 "Unless you believe the key in question is still in use, you can remove it "
 "from the rpm database calling '%1%'."
-msgstr ""
-"除非您相信這些有問題的金鑰仍在使用當中，否則您可以從 RPM 資料庫中呼叫「%1%」"
-"移除它們。"
+msgstr "除非您相信這些有問題的金鑰仍在使用當中，否則您可以從 RPM "
+"資料庫中呼叫「%1%」移除它們。"
 
 #. translator: %1% is the number of keys, %2% the name of a repository
 #: src/callbacks/keyring.h:468
@@ -1593,8 +1582,7 @@ msgid ""
 "Those additional keys are usually used to sign packages shipped by the "
 "repository. In order to validate those packages upon download and "
 "installation the new keys will be imported into the rpm database."
-msgstr ""
-"這些額外的金鑰通常被使用於簽署由套件庫分發的套件。為了在下載及安裝時驗證這些"
+msgstr "這些額外的金鑰通常被使用於簽署由套件庫分發的套件。為了在下載及安裝時驗證這些"
 "套件，這些新的金鑰將會被匯入到 rpm 資料庫。"
 
 #: src/callbacks/keyring.h:474
@@ -1648,10 +1636,10 @@ msgid ""
 "to unblock using this file on your own risk. Empty input will discard the "
 "file.\n"
 msgstr ""
-"然而，若您確定該檔案 (檢核碼 '%1%..') 是安全且正確的，在此操作中應該要使用"
-"它，\n"
-"請輸入檢核碼的前 4 個字元來取消阻擋該檔案，並請您自負風險。空白輸入將直接放棄"
-"該檔案。\n"
+"然而，若您確定該檔案 (檢核碼 '%1%..') "
+"是安全且正確的，在此操作中應該要使用它，\n"
+"請輸入檢核碼的前 4 "
+"個字元來取消阻擋該檔案，並請您自負風險。空白輸入將直接放棄該檔案。\n"
 
 #. translators: A prompt option
 #: src/callbacks/keyring.h:555
@@ -1933,8 +1921,7 @@ msgid ""
 "Checking for file conflicts requires not installed packages to be downloaded "
 "in advance in order to access their file lists. See option '%1%' in the "
 "zypper manual page for details."
-msgstr ""
-"檢查檔案衝突需要事先下載尚未安裝的套件，才能存取其檔案清單。詳情請見 zypper "
+msgstr "檢查檔案衝突需要事先下載尚未安裝的套件，才能存取其檔案清單。詳情請見 zypper "
 "說明文件中關於選項 '%1%' 的說明。"
 
 #. TranslatorExplanation %1%(number of conflicts); detailed list follows
@@ -1954,8 +1941,7 @@ msgid ""
 "File conflicts happen when two packages attempt to install files with the "
 "same name but different contents. If you continue, conflicting files will be "
 "replaced losing the previous content."
-msgstr ""
-"當二個套件嘗試安裝檔名相同、內容卻不同的檔案時，檔案衝突就會發生。若您選擇繼"
+msgstr "當二個套件嘗試安裝檔名相同、內容卻不同的檔案時，檔案衝突就會發生。若您選擇繼"
 "續，衝突檔案將會被取代，先前的內容也會消失。"
 
 #. TranslatorExplanation This text is a progress display label e.g. "Installing: foo-1.1.2 [42%]"
@@ -2107,9 +2093,9 @@ msgid ""
 "You are about to do a distribution upgrade with all enabled repositories. "
 "Make sure these repositories are compatible before you continue. See '%s' "
 "for more information about this command."
-msgstr ""
-"您將要使用所有可用的套件庫進行發行版本升級。 在您繼續之前，請先確定這些套件庫"
-"的相容性。參閱 '%s' 得到更多關於此命令的資訊。"
+msgstr "您將要使用所有可用的套件庫進行發行版本升級。 "
+"在您繼續之前，請先確定這些套件庫的相容性。參閱 '%s' "
+"得到更多關於此命令的資訊。"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/help.cc:22
@@ -2165,8 +2151,7 @@ msgid ""
 "Called as '%1%', it restricts the command to just look for packages "
 "supporting available hardware, languages or filesystems. Useful after having "
 "added e.g. new hardware or driver repos."
-msgstr ""
-"呼叫「%1%」將限制該指令，僅允許其尋找支援可用硬體、語言或檔案系統的套件。新增"
+msgstr "呼叫「%1%」將限制該指令，僅允許其尋找支援可用硬體、語言或檔案系統的套件。新增"
 "硬體或驅動程式儲存庫後此指令會十分有用。"
 
 #. translators: command description
@@ -2199,9 +2184,8 @@ msgstr "移除套件。"
 msgid ""
 "Remove packages with specified capabilities. A capability is NAME[.ARCH]"
 "[OP<VERSION>], where OP is one of <, <=, =, >=, >."
-msgstr ""
-"移除具有指定功能的套件。 功能是名稱[.ARCH][OP<版本>]，其中 OP 為以下運算子之"
-"一： <、<=、=、>=、>。"
+msgstr "移除具有指定功能的套件。 功能是名稱[.ARCH][OP<版本>]，其中 OP "
+"為以下運算子之一： <、<=、=、>=、>。"
 
 #: src/commands/installremove.cc:104 src/commands/installremove.cc:234
 #: src/utils/messages.cc:53
@@ -2260,8 +2244,7 @@ msgstr "從指定的套件庫選取套件。"
 msgid ""
 "Allows one to replace a newer item with an older one. Handy if you are doing "
 "a rollback. Unlike --force it will not enforce a reinstall."
-msgstr ""
-"允許使用舊版本取代新版本。 如果您要回復到舊版本，該選項是個方便的功能。不像 "
+msgstr "允許使用舊版本取代新版本。 如果您要回復到舊版本，該選項是個方便的功能。不像 "
 "--force， 它不會強迫重新安裝。"
 
 #: src/commands/installremove.cc:203
@@ -2386,8 +2369,7 @@ msgstr "不安裝針對指定地區設定的對應套件。"
 msgid ""
 "Specify locale which shall be supported by the language code. Get a list of "
 "all available locales by calling '%s'."
-msgstr ""
-"依據語言代碼指定應支援的地區設定。透過呼叫「%s」獲取所有可用地區設定的清單。"
+msgstr "依據語言代碼指定應支援的地區設定。透過呼叫「%s」獲取所有可用地區設定的清單。"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/localescmd.cc:17
@@ -2422,9 +2404,8 @@ msgstr "要列印資訊的相應地區設定。"
 msgid ""
 "Get all locales with lang code 'en' that have their own country code, "
 "excluding the fallback 'en':"
-msgstr ""
-"獲取語言代碼為「en」且具有自己國家/地區代碼的所有地區設定，不包括錯誤回復"
-"「en」："
+msgstr "獲取語言代碼為「en」且具有自己國家/地區代碼的所有地區設定，不包括錯誤回復「en"
+"」："
 
 #: src/commands/locale/localescmd.cc:86
 msgid "Get all locales with lang code 'en' with or without country code:"
@@ -2456,8 +2437,7 @@ msgstr "從支援的語言清單移除指定地區設定。"
 msgid ""
 "Specify locales which shall be removed by the language code. Get the list of "
 "requested locales by calling '%s'."
-msgstr ""
-"指定要依據語言代碼移除的地區設定。透過呼叫「%s」獲取所請求地區設定的清單。"
+msgstr "指定要依據語言代碼移除的地區設定。透過呼叫「%s」獲取所請求地區設定的清單。"
 
 #: src/commands/locale/removelocalecmd.cc:46
 msgid "Do not remove corresponding packages for given locale(s)."
@@ -2481,8 +2461,8 @@ msgid ""
 "type option."
 msgstr ""
 "LOCKSPEC 的格式為「[KIND:]NAME[ OP EDITION]」，其中 NAME 也可以是使用 * 和 ? "
-"萬用字元的 glob 模式。非套件類型可以在前面預增 KIND: 字串 (例如"
-"「patch:foo」)，或使用指令 --type 選項。"
+"萬用字元的 glob 模式。非套件類型可以在前面預增 KIND: 字串 "
+"(例如「patch:foo」)，或使用指令 --type 選項。"
 
 #: src/commands/locks/add.cc:36
 msgid ""
@@ -2490,8 +2470,8 @@ msgid ""
 "optionally restrict the lock to match a specific edition or edition range "
 "using =, <, <=, >, >= or != followed an EDITION."
 msgstr ""
-"基本格式將鎖定匹配項目的所有版本。您可以選擇性地使用 =、<、<=、>、>= 或 != 後"
-"接 EDITION，將鎖定限制為比對特定的版本或版本範圍。"
+"基本格式將鎖定匹配項目的所有版本。您可以選擇性地使用 =、<、<=、>、>= 或 != "
+"後接 EDITION，將鎖定限制為比對特定的版本或版本範圍。"
 
 #: src/commands/locks/add.cc:46
 msgid "Restrict the lock to the specified repository."
@@ -2632,8 +2612,7 @@ msgstr "解除一個套件鎖定。"
 msgid ""
 "Remove a package lock. Specify the lock to remove by its number obtained "
 "with '%1%' or by package name."
-msgstr ""
-"移除一個套件鎖定。透過由 '%1% 1' 獲得的編號或透過套件名稱指定要移除的鎖定。"
+msgstr "移除一個套件鎖定。透過由 '%1% 1' 獲得的編號或透過套件名稱指定要移除的鎖定。"
 
 #: src/commands/locks/remove.cc:45
 msgid "Remove only locks with specified repository."
@@ -2740,9 +2719,9 @@ msgstr "列出所有提供指定功能的套件。"
 msgid ""
 "The command is an alias for '%1%' and performs a case-insensitive search. "
 "For a case-sensitive search call the search command and add the '%2%' option."
-msgstr ""
-"這個指令是 '%1%' 的縮寫，並且執行不區分大小寫的搜尋。若要執行區分大小寫的搜"
-"尋，請呼叫該搜尋指令並加上 '%2%' 選項。"
+msgstr "這個指令是 '%1%' "
+"的縮寫，並且執行不區分大小寫的搜尋。若要執行區分大小寫的搜尋，"
+"請呼叫該搜尋指令並加上 '%2%' 選項。"
 
 #. "what-provides" is obsolete
 #. The "what-provides" now is included in "search" command, e.g.
@@ -2810,8 +2789,7 @@ msgstr "僅顯示未安裝的套件。"
 msgid ""
 "Automatically say 'yes' to third party license confirmation prompt. See 'man "
 "zypper' for more details."
-msgstr ""
-"對協力廠商授權資訊提示自動選取「是」。請參閱「man zypper」瞭解詳細資料。"
+msgstr "對協力廠商授權資訊提示自動選取「是」。請參閱「man zypper」瞭解詳細資料。"
 
 #: src/commands/optionsets.cc:244
 msgid ""
@@ -2826,8 +2804,9 @@ msgid ""
 "installed, packages. Default is to treat file conflicts as an error. --"
 "download-as-needed disables the fileconflict check."
 msgstr ""
-"安裝套件，即使它會取代來自其他已安裝套件的檔案。 預設將檔案衝突視為錯誤來處"
-"理。 使用 --download-as-needed 選項來停用檔案衝突檢查。"
+"安裝套件，即使它會取代來自其他已安裝套件的檔案。 "
+"預設將檔案衝突視為錯誤來處理。 使用 --download-as-needed "
+"選項來停用檔案衝突檢查。"
 
 #. translators: -y, --no-confirm
 #: src/commands/optionsets.cc:291
@@ -2921,9 +2900,8 @@ msgstr "檢查有無修補程式。"
 msgid ""
 "Display stats about applicable patches. The command returns 100 if needed "
 "patches were found, 101 if there is at least one needed security patch."
-msgstr ""
-"顯示適用修補程式的統計資料。如果找到需要的修補程式，該指令會傳回 100；如果至"
-"少存在一個需要的安全性修補程式，則傳回 101。"
+msgstr "顯示適用修補程式的統計資料。如果找到需要的修補程式，該指令會傳回 "
+"100；如果至少存在一個需要的安全性修補程式，則傳回 101。"
 
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
 #: src/commands/ps.cc:27
@@ -2943,8 +2921,7 @@ msgid ""
 "Create a short table not showing the deleted files. Given twice, show only "
 "processes which are associated with a system service. Given three times, "
 "list the associated system service names only."
-msgstr ""
-"產生一個不顯示刪除檔案的簡短列表。給定二次相同參數，則只顯示和系統服務相關的"
+msgstr "產生一個不顯示刪除檔案的簡短列表。給定二次相同參數，則只顯示和系統服務相關的"
 "程序。給定三次，則只列出相關的系統服務名稱。"
 
 #. translators: --print <format>
@@ -2954,9 +2931,8 @@ msgid ""
 "For each associated system service print <format> on the standard output, "
 "followed by a newline. Any '%s' directive in <format> is replaced by the "
 "system service name."
-msgstr ""
-"每個關聯系統服務均會在標準輸出上列印 <format>，並後跟一個换行符。<format> 中"
-"的所有「%s」指令都將由系統服務名稱取代。"
+msgstr "每個關聯系統服務均會在標準輸出上列印 <format>，並後跟一個换行符。<format> "
+"中的所有「%s」指令都將由系統服務名稱取代。"
 
 #. translators: -d, --debugFile <path>
 #: src/commands/ps.cc:52
@@ -3030,9 +3006,8 @@ msgid ""
 "Note: Not running as root you are limited to searching for files you have "
 "permission to examine with the system stat(2) function. The result might be "
 "incomplete."
-msgstr ""
-"注意：您沒有使用 root 身分執行，您的搜尋範圍將限制為透過 system stat(2) 功能"
-"有權檢視的檔案。結果可能並不完整。"
+msgstr "注意：您沒有使用 root 身分執行，您的搜尋範圍將限制為透過 system stat(2) "
+"功能有權檢視的檔案。結果可能並不完整。"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/query/info.cc:19
@@ -3052,8 +3027,9 @@ msgid ""
 "partially matching use option '--match-substrings' or use wildcards (*?) in "
 "name."
 msgstr ""
-"顯示指定套件的詳細資訊。 預設僅有完全符合指定名稱的才會顯示。 若也要顯示部份"
-"符合的套件，使用 '--match-substrings' 選項 或在名稱中使用萬用字元 (*?)。"
+"顯示指定套件的詳細資訊。 預設僅有完全符合指定名稱的才會顯示。 "
+"若也要顯示部份符合的套件，使用 '--match-substrings' 選項 "
+"或在名稱中使用萬用字元 (*?)。"
 
 #: src/commands/query/info.cc:25
 msgid ""
@@ -3298,9 +3274,8 @@ msgstr "加入一個新的套件庫。"
 msgid ""
 "Add a repository to the system. The repository can be specified by its URI "
 "or can be read from specified .repo file (even remote)."
-msgstr ""
-"增加一個套件庫到此系統。套件庫可藉由指定位址或從指定的 .repo 檔讀取(甚至是遠"
-"端的)。"
+msgstr "增加一個套件庫到此系統。套件庫可藉由指定位址或從指定的 .repo "
+"檔讀取(甚至是遠端的)。"
 
 #: src/commands/repos/add.cc:40
 msgid "Just another means to specify a .repo file to read."
@@ -3537,8 +3512,7 @@ msgstr "重新整理所有套件庫。"
 msgid ""
 "Refresh repositories specified by their alias, number or URI. If none are "
 "specified, all enabled repositories will be refreshed."
-msgstr ""
-"重新整理由別名、編號或位址指定的套件庫。若未指定任何套件庫，將會重新整理所有"
+msgstr "重新整理由別名、編號或位址指定的套件庫。若未指定任何套件庫，將會重新整理所有"
 "啟用的套件庫。"
 
 #. translators: -f, --force
@@ -3686,8 +3660,7 @@ msgstr "無法由它的別名、編號或位址找到套件庫 '%s'。"
 msgid ""
 "Cannot change alias of '%s' repository. The repository belongs to service "
 "'%s' which is responsible for setting its alias."
-msgstr ""
-"無法變更 '%s' 套件庫的別名。此套件庫屬於 '%s' 服務，此服務才能設定它的別名。"
+msgstr "無法變更 '%s' 套件庫的別名。此套件庫屬於 '%s' 服務，此服務才能設定它的別名。"
 
 #: src/commands/repos/rename.cc:43
 #, c-format, boost-format
@@ -3973,9 +3946,8 @@ msgstr "搜尋符合指定搜尋字串的套件。"
 msgid ""
 "* and ? wildcards can also be used within search strings. If a search string "
 "is enclosed in '/', it's interpreted as a regular expression."
-msgstr ""
-"* 和 ? 萬用字元也可以用在搜尋字串中。 如果搜尋字串被 '/' 包圍，它會被解讀為正"
-"規表示式。"
+msgstr "* 和 ? 萬用字元也可以用在搜尋字串中。 如果搜尋字串被 '/' "
+"包圍，它會被解讀為正規表示式。"
 
 #. translators: --match-substrings
 #: src/commands/search/search.cc:105
@@ -4125,8 +4097,7 @@ msgstr "每個套件庫中每個可用的版本 單獨顯示在一行。"
 msgid ""
 "Like --details, with additional information where the search has matched "
 "(useful for search in dependencies)."
-msgstr ""
-"與 --details 相似，不過會額外顯示相符項的 位置資訊 (對搜尋相依套件很有用)。"
+msgstr "與 --details 相似，不過會額外顯示相符項的 位置資訊 (對搜尋相依套件很有用)。"
 
 #: src/commands/search/search.cc:298 src/repos.cc:780
 #, c-format, boost-format
@@ -4607,9 +4578,8 @@ msgid ""
 "The default location where rpm installs source packages to is '%1%', but the "
 "value can be changed in your local rpm configuration. In case of doubt try "
 "executing '%2%'."
-msgstr ""
-"預設 rpm 源碼套件的安裝位置是在 '%1%'，但您可在本地端的 rpm 設定修改此值。若"
-"有疑問，請嘗試執行 '%2%'。"
+msgstr "預設 rpm 源碼套件的安裝位置是在 '%1%'，但您可在本地端的 rpm "
+"設定修改此值。若有疑問，請嘗試執行 '%2%'。"
 
 #. translators: -d, --build-deps-only
 #: src/commands/sourceinstall.cc:48
@@ -4807,9 +4777,8 @@ msgstr "要更新已安裝的產品請用 '%s'。"
 msgid ""
 "Zypper does not keep track of installed source packages. To install the "
 "latest source package and its build dependencies, use '%s'."
-msgstr ""
-"Zypper 不會追蹤安裝的原始碼套件。若要安裝最新的原始碼套件及其建構相依項，請使"
-"用 '%s 1'。"
+msgstr "Zypper 不會追蹤安裝的原始碼套件。若要安裝最新的原始碼套件及其建構相依項，"
+"請使用 '%s 1'。"
 
 #: src/commands/update.cc:83
 msgid ""
@@ -4851,8 +4820,8 @@ msgid ""
 "result/localpath@path'."
 msgstr ""
 "在 XML 輸出模式下，對每個 zypper 嘗試下載的套件， 將會寫入一個 <download-"
-"result> 節點。下載成功後， 本地端路徑可在「download-result/localpath@path」中"
-"找到。"
+"result> 節點。下載成功後， 本地端路徑可在「download-result/"
+"localpath@path」中找到。"
 
 #. translators: --all-matches
 #: src/commands/utils/download.cc:166
@@ -5486,8 +5455,7 @@ msgstr "正在中止安裝，因為必須確認授權條款。"
 msgid ""
 "Please restart the operation in interactive mode and confirm your agreement "
 "with required licenses, or use the %s option."
-msgstr ""
-"請在互動模式中重新啟動作業，並確認您同意所需的授權合約，或使用 %s 的選項。"
+msgstr "請在互動模式中重新啟動作業，並確認您同意所需的授權合約，或使用 %s 的選項。"
 
 #. translators: e.g. "... with flash package license."
 #: src/misc.cc:209
@@ -5563,8 +5531,7 @@ msgstr "暫時"
 msgid ""
 "Repo '%1%' is managed by service '%2%'. Volatile changes are reset by the "
 "next service refresh!"
-msgstr ""
-"套件庫「%1%」由服務「%2%」管理。暫時性的變動將會在下次服務重新整理時重設！"
+msgstr "套件庫「%1%」由服務「%2%」管理。暫時性的變動將會在下次服務重新整理時重設！"
 
 #: src/repos.cc:75
 msgid "default priority"
@@ -5660,8 +5627,7 @@ msgstr "'%s' 沒有定義位址。"
 msgid ""
 "Please add one or more base URI (baseurl=URI) entries to %s for repository "
 "'%s'."
-msgstr ""
-"請加入一個或數個基礎位址 (baseurl=位址) 項目到 %s，以供套件庫 '%s' 使用。"
+msgstr "請加入一個或數個基礎位址 (baseurl=位址) 項目到 %s，以供套件庫 '%s' 使用。"
 
 #: src/repos.cc:379
 msgid "No alias defined for this repository."
@@ -5700,9 +5666,9 @@ msgid ""
 "report by following instructions at http://en.opensuse.org/Zypper/"
 "Troubleshooting"
 msgstr ""
-"這可能是因為套件庫的中繼資訊不適用，或中繼資訊分析器存在錯誤。若是後者的情形"
-"(或您懷疑是)請參考 http://en.opensuse.org/Zypper/Troubleshooting 的指引發出錯"
-"誤回報"
+"這可能是因為套件庫的中繼資訊不適用，或中繼資訊分析器存在錯誤。若是後者的情形("
+"或您懷疑是)請參考 http://en.opensuse.org/Zypper/Troubleshooting "
+"的指引發出錯誤回報"
 
 #: src/repos.cc:453
 #, c-format, boost-format
@@ -5758,9 +5724,8 @@ msgstr "套件庫 '%s' 已過期。您可以用 root 執行 'zypper refresh' 來
 msgid ""
 "The metadata cache needs to be built for the '%s' repository. You can run "
 "'zypper refresh' as root to do this."
-msgstr ""
-"需要建立套件庫 '%s' 的中繼資料快取。您可以用 root 執行 'zypper refresh' 來完"
-"成。"
+msgstr "需要建立套件庫 '%s' 的中繼資料快取。您可以用 root 執行 'zypper refresh' "
+"來完成。"
 
 #: src/repos.cc:929
 #, c-format, boost-format
@@ -5838,9 +5803,8 @@ msgstr "無效的套件庫別名：'%s'"
 msgid ""
 "Could not determine the type of the repository. Please check if the defined "
 "URIs (see below) point to a valid repository:"
-msgstr ""
-"無法決定套件庫的類型。請檢查是否定義的位址 (參看下方) 真的指向一個有效的軟體"
-"庫："
+msgstr "無法決定套件庫的類型。請檢查是否定義的位址 (參看下方) "
+"真的指向一個有效的軟體庫："
 
 #: src/repos.cc:1212
 msgid "Can't find a valid repository at given location:"
@@ -5999,8 +5963,7 @@ msgstr "正在載入套件庫資料..."
 msgid ""
 "No repositories defined. Operating only with the installed resolvables. "
 "Nothing can be installed."
-msgstr ""
-"警告：沒有已定義的套件庫。您只能使用已安裝的解決方案操作。無法安裝任何項目。"
+msgstr "警告：沒有已定義的套件庫。您只能使用已安裝的解決方案操作。無法安裝任何項目。"
 
 #: src/repos.cc:1788
 #, c-format, boost-format
@@ -6045,9 +6008,10 @@ msgid ""
 "not solve the issue, it could be that you are using a broken mirror or the "
 "server has actually discontinued to support the repository."
 msgstr ""
-"儲存庫中繼資料已過期：請確認已啟用 \"autorefresh\" (zypper lr)，否則需以手動"
-"方式更新儲存庫 (zypper ref)。如果這樣無法解決問題，則可能是因為您使用的鏡像已"
-"損毀或伺服器實際上已停止支援該儲存庫。"
+"儲存庫中繼資料已過期：請確認已啟用 \"autorefresh\" (zypper lr)，"
+"否則需以手動方式更新儲存庫 (zypper "
+"ref)。如果這樣無法解決問題，則可能是因為您使用的鏡像已損毀或伺服器實際上已停"
+"止支援該儲存庫。"
 
 #: src/repos.cc:1856
 msgid "Reading installed packages..."
@@ -6127,8 +6091,7 @@ msgstr "詳細資訊： "
 #: src/solve-commit.cc:138
 msgid "Choose the above solution using '1' or skip, retry or cancel"
 msgid_plural "Choose from above solutions by number or skip, retry or cancel"
-msgstr[0] ""
-"使用'數字'選擇上列的解決方法，或 skip(跳過)、retry(重試)或 cancel(取消)"
+msgstr[0] "使用'數字'選擇上列的解決方法，或 skip(跳過)、retry(重試)或 cancel(取消)"
 
 #. translators: translate 'c' to whatever you translated the 'c' in
 #. "c" and "s/r/c" strings
@@ -6241,8 +6204,7 @@ msgstr ""
 msgid ""
 "Check for running processes using deleted libraries is disabled in "
 "zypper.conf. Run '%s' to check manually."
-msgstr ""
-"檢查使用已刪除函式庫之執行中程序的功能在 zypper.conf 中已被關閉。請手動執行 "
+msgstr "檢查使用已刪除函式庫之執行中程序的功能在 zypper.conf 中已被關閉。請手動執行 "
 "'%s' 來做檢查。"
 
 #: src/solve-commit.cc:636
@@ -6255,8 +6217,7 @@ msgid ""
 "There are running programs which still use files and libraries deleted or "
 "updated by recent upgrades. They should be restarted to benefit from the "
 "latest updates. Run '%1%' to list these programs."
-msgstr ""
-"有些執行中的程式仍在使用已被近期升級刪除或更新的檔案和文件庫。應重新啟動它們"
+msgstr "有些執行中的程式仍在使用已被近期升級刪除或更新的檔案和文件庫。應重新啟動它們"
 "以使其獲得最新更新。執行「%1%」列出這些程式。"
 
 #: src/solve-commit.cc:657
@@ -6410,8 +6371,7 @@ msgstr "其中一個安裝的修補程式需要重新啟動您的機器。 請�
 msgid ""
 "One of the installed patches affects the package manager itself. Run this "
 "command once more to install any other needed patches."
-msgstr ""
-"其中一個安裝的修補程式會影響套件管理員本身，請再次執行此命令以安裝其他所需的"
+msgstr "其中一個安裝的修補程式會影響套件管理員本身，請再次執行此命令以安裝其他所需的"
 "修補程式。"
 
 #: src/solve-commit.cc:1119
@@ -6760,9 +6720,8 @@ msgid ""
 "You have chosen to ignore a problem with download or installation of a "
 "package which might lead to broken dependencies of other packages. It is "
 "recommended to run '%s' after the operation has finished."
-msgstr ""
-"您已經選擇去忽略套件下載或安裝的問題，這可能導致其他套件的相依性被破壞。建議"
-"您在此操作完成後執行 '%s' 命令。"
+msgstr "您已經選擇去忽略套件下載或安裝的問題，這可能導致其他套件的相依性被破壞。"
+"建議您在此操作完成後執行 '%s' 命令。"
 
 #: src/utils/messages.cc:111
 #, boost-format
@@ -6802,9 +6761,8 @@ msgstr "輸入 '%s' 以獲取全域選項與指令的清單。"
 msgid ""
 "In case '%1%' is not a typo it's probably not a built-in command, but "
 "provided as a subcommand or plug-in (see '%2%')."
-msgstr ""
-"如果「%1%」不是拼字錯誤，則可能不是內建指令，而是子指令或外掛程式 (請參閱"
-"「%2%」)。"
+msgstr "如果「%1%」不是拼字錯誤，則可能不是內建指令，而是子指令或外掛程式 "
+"(請參閱「%2%」)。"
 
 #. translators: %1% and %2% are plug-in packages which might provide it.
 #. translators: The word 'subcommand' also refers to a zypper command and should not be translated.
@@ -6813,9 +6771,8 @@ msgstr ""
 msgid ""
 "In this case a specific package providing the subcommand needs to be "
 "installed first. Those packages are often named '%1%' or '%2%'."
-msgstr ""
-"在此情況下，需要先安裝提供該子指令的特定套件。這些套件通常名為「%1%」或"
-"「%2%」。"
+msgstr "在此情況下，需要先安裝提供該子指令的特定套件。這些套件通常名為「%1%」或「%2%"
+"」。"
 
 #: src/utils/misc.cc:93
 msgid "package"
@@ -7041,8 +6998,7 @@ msgstr "如果沒有可用的答案，輸入 '%s' 表示 '%s' 或 '%s' 表示 '%
 msgid ""
 "If nothing else works enter '#1' to select the 1st option, '#2' for the 2nd "
 "one, ..."
-msgstr ""
-"如果沒有可用回答，輸入「#1」選取第一個選項，輸入「#2」選取第二個選項..."
+msgstr "如果沒有可用回答，輸入「#1」選取第一個選項，輸入「#2」選取第二個選項..."
 
 #. TranslatorExplanation These are reasons for various failures.
 #: src/utils/prompt.h:95
