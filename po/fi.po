@@ -23,16 +23,16 @@ msgstr ""
 "Project-Id-Version: zypper.fi\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-07-02 13:50+0200\n"
-"PO-Revision-Date: 2024-12-01 09:48+0000\n"
-"Last-Translator: Tommi Nieminen <software@legisign.org>\n"
-"Language-Team: Finnish <https://l10n.opensuse.org/projects/zypper/master/fi/"
-">\n"
+"PO-Revision-Date: 2025-07-22 12:47+0000\n"
+"Last-Translator: Julia Faltenbacher <julia.faltenbacher@suse.com>\n"
+"Language-Team: Finnish <https://l10n.opensuse.org/projects/zypper/master/fi/>"
+"\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.8.4\n"
+"X-Generator: Weblate 5.12.2\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -237,8 +237,8 @@ msgstr "Sivuuta tuntemattomat paketit."
 msgid ""
 "Terse output for machine consumption. Implies --no-abbrev and --no-color."
 msgstr ""
-"Niukka tuloste ohjelmalliseen käyttöön. Asettaa valitsimet --no-abbrev ja --"
-"no-color."
+"Niukka tuloste ohjelmalliseen käyttöön. Asettaa valitsimet --no-abbrev ja "
+"--no-color."
 
 #. translators: --reposd-dir, -D <DIR>
 #: src/Config.cc:397
@@ -304,8 +304,8 @@ msgid ""
 "Additionally use disabled repositories providing a specific keyword. Try '--"
 "plus-content debug' to enable repos indicating to provide debug packages."
 msgstr ""
-"Käytä myös käytöstä poistettuja avainsanan tarjoavia asennuslähteitä. ”--"
-"plus-content debug” ottaa käyttöön myös vianpaikannusasennuslähteet."
+"Käytä myös käytöstä poistettuja avainsanan tarjoavia asennuslähteitä. "
+"”--plus-content debug” ottaa käyttöön myös vianpaikannusasennuslähteet."
 
 #: src/Config.cc:491
 msgid "Repositories disabled, using the database of installed packages only."
@@ -891,8 +891,7 @@ msgid "The following recommended pattern was automatically selected:"
 msgid_plural ""
 "The following %d recommended patterns were automatically selected:"
 msgstr[0] "Seuraava suositeltu ohjelmistoryhmä valittiin automaattisesti:"
-msgstr[1] ""
-"Seuraavat %d suositeltua ohjelmistoryhmää valittiin automaattisesti:"
+msgstr[1] "Seuraavat %d suositeltua ohjelmistoryhmää valittiin automaattisesti:"
 
 #: src/Summary.cc:1089
 #, c-format, boost-format
@@ -908,8 +907,7 @@ msgid "The following recommended source package was automatically selected:"
 msgid_plural ""
 "The following %d recommended source packages were automatically selected:"
 msgstr[0] "Seuraava suositeltu lähdekoodipaketti valittiin automaattisesti:"
-msgstr[1] ""
-"Seuraavat %d suositeltua lähdekoodipakettia valittiin automaattisesti:"
+msgstr[1] "Seuraavat %d suositeltua lähdekoodipakettia valittiin automaattisesti:"
 
 #: src/Summary.cc:1100
 #, c-format, boost-format
@@ -995,8 +993,7 @@ msgid "The following application is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d applications are recommended, but will not be installed:"
 msgstr[0] "Seuraavaa ohjelmistoa suositellaan, mutta sitä ei asenneta:"
-msgstr[1] ""
-"Seuraavat %d ohjelmistoa ovat suositeltuja, mutta niitä ei asenneta:"
+msgstr[1] "Seuraavat %d ohjelmistoa ovat suositeltuja, mutta niitä ei asenneta:"
 
 #: src/Summary.cc:1228
 #, c-format, boost-format
@@ -1147,8 +1144,7 @@ msgid ""
 msgid_plural ""
 "The following %d packages were discontinued and have been superseded by a "
 "new packages with different names."
-msgstr[0] ""
-"Seuraava paketti on hylätty ja korvattu erinimisellä uudella paketilla."
+msgstr[0] "Seuraava paketti on hylätty ja korvattu erinimisellä uudella paketilla."
 msgstr[1] ""
 "Seuraavat %d pakettia on hylätty ja korvattu erinimisillä uusilla paketeilla."
 
@@ -1193,8 +1189,7 @@ msgid "The following item is locked and will not be changed by any action:"
 msgid_plural ""
 "The following %d items are locked and will not be changed by any action:"
 msgstr[0] "Seuraava kohde on lukittu, eikä sitä muuteta millään toimella:"
-msgstr[1] ""
-"Seuraavat %d kohteet on lukittu, eikä niitä muuteta millään toimella:"
+msgstr[1] "Seuraavat %d kohteet on lukittu, eikä niitä muuteta millään toimella:"
 
 #. always as plain name list
 #. translators: used as 'tag:' (i.e. followed by ':')
@@ -1217,8 +1212,7 @@ msgstr "Näet kaikki lukitut kohteet suorittamalla ”%1“."
 #, c-format, boost-format
 msgid "The following patch requires a system reboot:"
 msgid_plural "The following %d patches require a system reboot:"
-msgstr[0] ""
-"Seuraava korjauspäivitys vaatii käynnistämään järjestelmän uudelleen:"
+msgstr[0] "Seuraava korjauspäivitys vaatii käynnistämään järjestelmän uudelleen:"
 msgstr[1] ""
 "Seuraavat %d korjauspäivitystä vaativat käynnistämään järjestelmän uudelleen:"
 
@@ -1227,8 +1221,7 @@ msgstr[1] ""
 msgid "The following package requires a system reboot:"
 msgid_plural "The following %d packages require a system reboot:"
 msgstr[0] "Seuraava paketti vaatii käynnistämään järjestelmän uudelleen:"
-msgstr[1] ""
-"Seuraavat %d pakettia vaativat käynnistämään järjestelmän uudelleen:"
+msgstr[1] "Seuraavat %d pakettia vaativat käynnistämään järjestelmän uudelleen:"
 
 #: src/Summary.cc:1563
 msgid "Skipped needed patches which do not apply without conflict:"
@@ -1393,8 +1386,7 @@ msgstr ""
 #: src/Summary.cc:1824
 #, boost-format
 msgid "%1% is set, otherwise a system reboot would be required."
-msgstr ""
-"%1% on asetettu, muuten vaadittaisiin järjestelmän uudelleenkäynnistys."
+msgstr "%1% on asetettu, muuten vaadittaisiin järjestelmän uudelleenkäynnistys."
 
 #: src/Summary.cc:1826
 msgid "System reboot required."
@@ -2522,8 +2514,8 @@ msgstr ""
 "poistamisen sijaan. Itse asiassa tämä on täysi asennuskomento, jossa "
 "raakaparametreihin sovelletaan poistomuunninta (-). ”removeptf foo” on näin "
 "sama kuin ”install -- -foo”, mistä syystä komento myös hyväksyy samat "
-"parametrit kuin asennuskomento. Tämä on suositeltu tapa poistaa PTF "
-"(ohjelman väliaikainen korjaus)."
+"parametrit kuin asennuskomento. Tämä on suositeltu tapa poistaa PTF ("
+"ohjelman väliaikainen korjaus)."
 
 #: src/commands/installremove.cc:317
 msgid ""
@@ -4715,11 +4707,11 @@ msgid_plural ""
 "Repositories '%s' have been removed from disabled repositories of service "
 "'%s'"
 msgstr[0] ""
-"Poistettiin asennuslähde \"%s\" käytöstä poistetuista asennuslähteistä "
-"(palvelu \"%s\")"
+"Poistettiin asennuslähde \"%s\" käytöstä poistetuista asennuslähteistä ("
+"palvelu \"%s\")"
 msgstr[1] ""
-"Poistettiin asennuslähteet '%s' käytöstä poistetuista asennuslähteistä "
-"(palvelu '%s')"
+"Poistettiin asennuslähteet '%s' käytöstä poistetuista asennuslähteistä ("
+"palvelu '%s')"
 
 #: src/commands/services/modify.cc:285
 #, c-format, boost-format
@@ -6131,8 +6123,8 @@ msgid ""
 "Repository '%s' is out-of-date. You can run 'zypper refresh' as root to "
 "update it."
 msgstr ""
-"Asennuslähde \"%s\" ei ole ajan tasalla. Päivitä se suorittamalla \"zypper "
-"refresh\" -komento pääkäyttäjänä."
+"Asennuslähde \"%s\" ei ole ajan tasalla. Päivitä se suorittamalla "
+"\"zypper refresh\" -komento pääkäyttäjänä."
 
 #: src/repos.cc:903
 #, c-format, boost-format
@@ -6436,8 +6428,8 @@ msgid ""
 "server has actually discontinued to support the repository."
 msgstr ""
 "Asennuslähteet metatiedot ovat vanhentuneet: tarkista, onko "
-"automaattivirkistys käytössä (zypper lr) tai virkistä lähde itse (zypper "
-"ref). Ellei ongelma ratkea, peilipalvelin voi olla virheellinen tai palvelin "
+"automaattivirkistys käytössä (zypper lr) tai virkistä lähde itse (zypper ref)"
+". Ellei ongelma ratkea, peilipalvelin voi olla virheellinen tai palvelin "
 "lakannut tukemasta asennuslähdettä."
 
 #: src/repos.cc:1856
@@ -6658,8 +6650,8 @@ msgid ""
 msgstr ""
 "Käynnissä on yhä ohjelmia, jotka käyttävät päivitysten poistamia tai "
 "muuttamia tiedostoja ja kirjastoja. Ne tulisi käynnistää uudelleen, jotta "
-"päivitykset tulevat voimaan. Saat näiden ohjelmien luettelon komennolla "
-"\"%1%”."
+"päivitykset tulevat voimaan. Saat näiden ohjelmien luettelon komennolla \""
+"%1%”."
 
 #: src/solve-commit.cc:657
 msgid "Update notifications were received from the following packages:"
