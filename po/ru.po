@@ -10,17 +10,17 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-07-02 13:50+0200\n"
-"PO-Revision-Date: 2025-06-01 19:59+0000\n"
-"Last-Translator: Aleksey Fedorov <Aleksejfedorov963@gmail.com>\n"
-"Language-Team: Russian <https://l10n.opensuse.org/projects/zypper/master/ru/"
-">\n"
+"PO-Revision-Date: 2025-07-22 12:48+0000\n"
+"Last-Translator: Julia Faltenbacher <julia.faltenbacher@suse.com>\n"
+"Language-Team: Russian <https://l10n.opensuse.org/projects/zypper/master/ru/>"
+"\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 5.11.4\n"
+"X-Generator: Weblate 5.12.2\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -199,8 +199,7 @@ msgstr "Переход в неинтерактивный режим."
 #. translators: --non-interactive, -n
 #: src/Config.cc:338
 msgid "Do not ask anything, use default answers automatically."
-msgstr ""
-"Ни о чем не спрашивать, автоматически использовать ответы по умолчанию."
+msgstr "Ни о чем не спрашивать, автоматически использовать ответы по умолчанию."
 
 #: src/Config.cc:343
 msgid ""
@@ -611,8 +610,8 @@ msgstr ""
 #, c-format, boost-format
 msgid "Patch '%s' is locked. Use '%s' to install it, or unlock it using '%s'."
 msgstr ""
-"Исправление \"%s\" заблокировано. Используйте \"%s\" для установки или "
-"\"%s\" для разблокирования."
+"Исправление \"%s\" заблокировано. Используйте \"%s\" для установки или \"%s\""
+" для разблокирования."
 
 #: src/RequestFeedback.cc:200
 #, c-format, boost-format
@@ -940,10 +939,8 @@ msgid "The following recommended source package was automatically selected:"
 msgid_plural ""
 "The following %d recommended source packages were automatically selected:"
 msgstr[0] "%d рекомендованный пакет с исходным кодом был выбран автоматически:"
-msgstr[1] ""
-"%d рекомендованных пакета с исходным кодом были выбраны автоматически:"
-msgstr[2] ""
-"%d рекомендованных пакетов с исходным кодом были выбраны автоматически:"
+msgstr[1] "%d рекомендованных пакета с исходным кодом были выбраны автоматически:"
+msgstr[2] "%d рекомендованных пакетов с исходным кодом были выбраны автоматически:"
 
 #: src/Summary.cc:1100
 #, c-format, boost-format
@@ -2446,8 +2443,7 @@ msgstr "verify (ve) [параметры]"
 #. translators: command summary: install-new-recommends, inr
 #: src/commands/inrverify.cc:81
 msgid "Install newly added packages recommended by installed packages."
-msgstr ""
-"Установить добавленные пакеты, рекомендованные установленными пакетами."
+msgstr "Установить добавленные пакеты, рекомендованные установленными пакетами."
 
 #. translators: command summary: verify, ve
 #: src/commands/inrverify.cc:84
@@ -2517,8 +2513,8 @@ msgid ""
 "Remove packages with specified capabilities. A capability is NAME[.ARCH]"
 "[OP<VERSION>], where OP is one of <, <=, =, >=, >."
 msgstr ""
-"Удалить пакеты с указанными возможностями. Возможность — это "
-"ИМЯ[.АРХИТЕКТУРА][ОП<ВЕРСИЯ>], где ОП — один из операторов <, <=, =, >=, >."
+"Удалить пакеты с указанными возможностями. Возможность — это ИМЯ"
+"[.АРХИТЕКТУРА][ОП<ВЕРСИЯ>], где ОП — один из операторов <, <=, =, >=, >."
 
 #: src/commands/installremove.cc:104 src/commands/installremove.cc:234
 #: src/utils/messages.cc:53
@@ -3173,8 +3169,8 @@ msgid ""
 "Automatically accept product licenses only. See 'man zypper' for more "
 "details."
 msgstr ""
-"Автоматически принимать только лицензии продуктов. Подробнее см. \"man "
-"zypper\"."
+"Автоматически принимать только лицензии продуктов. Подробнее см. "
+"\"man zypper\"."
 
 #. translators: --replacefiles
 #: src/commands/optionsets.cc:264
@@ -3564,8 +3560,7 @@ msgstr ""
 #. translators: --userinstalled
 #: src/commands/query/packages.cc:39
 msgid "Show installed packages which were explicitly selected by the user."
-msgstr ""
-"Показать установленные пакеты, которые были явно выбраны пользователем."
+msgstr "Показать установленные пакеты, которые были явно выбраны пользователем."
 
 #. translators: --system
 #: src/commands/query/packages.cc:43
@@ -3883,8 +3878,8 @@ msgstr "Репозитории не определены."
 #: src/commands/repos/list.cc:358
 msgid "Use the 'zypper addrepo' command to add one or more repositories."
 msgstr ""
-"Чтобы добавить один или несколько репозиториев, используйте команду \"zypper "
-"addrepo\"."
+"Чтобы добавить один или несколько репозиториев, используйте команду "
+"\"zypper addrepo\"."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/repos/modify.cc:24
@@ -4240,8 +4235,7 @@ msgstr "Сокращение для \"%1%\"."
 
 #: src/commands/reposerviceoptionsets.cc:143
 msgid "Enable GPG check but allow the repository metadata to be unsigned."
-msgstr ""
-"Включить проверку GPG, но разрешить метаданные репозитория без подписи."
+msgstr "Включить проверку GPG, но разрешить метаданные репозитория без подписи."
 
 #: src/commands/reposerviceoptionsets.cc:144
 msgid ""
@@ -4562,8 +4556,8 @@ msgid ""
 "Like --details, with additional information where the search has matched "
 "(useful for search in dependencies)."
 msgstr ""
-"Аналогично --details, с дополнительными сведениями о месте совпадения "
-"(полезно для поиска в зависимостях)."
+"Аналогично --details, с дополнительными сведениями о месте совпадения ("
+"полезно для поиска в зависимостях)."
 
 #: src/commands/search/search.cc:298 src/repos.cc:780
 #, c-format, boost-format
@@ -4835,8 +4829,7 @@ msgid ""
 "Repository '%s' has been removed from enabled repositories of service '%s'"
 msgid_plural ""
 "Repositories '%s' have been removed from enabled repositories of service '%s'"
-msgstr[0] ""
-"\"%s\" репозиторий был удален из включенных репозиториев сервиса \"%s\""
+msgstr[0] "\"%s\" репозиторий был удален из включенных репозиториев сервиса \"%s\""
 msgstr[1] ""
 "Репозитории \"%s\" были удалены из включенных репозиториев сервиса \"%s\""
 msgstr[2] ""
@@ -5311,8 +5304,7 @@ msgstr ""
 #: src/commands/utils/download.cc:129 src/commands/utils/source-download.cc:212
 #, c-format, boost-format
 msgid "Insufficient privileges to use download directory '%s'."
-msgstr ""
-"Недостаточно привилегий для использования загрузочного каталога \"%s\"."
+msgstr "Недостаточно привилегий для использования загрузочного каталога \"%s\"."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/utils/download.cc:142
@@ -5607,8 +5599,7 @@ msgstr ""
 
 #: src/commands/utils/targetos.cc:36
 msgid "Show the baseproducts distribution and short label instead."
-msgstr ""
-"Вместо этого показать распределение базовых продуктов и короткую метку."
+msgstr "Вместо этого показать распределение базовых продуктов и короткую метку."
 
 #: src/commands/utils/targetos.cc:49
 msgid "XML output not implemented for this command."
@@ -6579,8 +6570,8 @@ msgid ""
 "not solve the issue, it could be that you are using a broken mirror or the "
 "server has actually discontinued to support the repository."
 msgstr ""
-"Метаданные репозитория устарели: Проверьте, что включено «автообновление» "
-"(zypper lr), либо обновите репозиторий вручную (zypper ref). Если это не "
+"Метаданные репозитория устарели: Проверьте, что включено «автообновление» ("
+"zypper lr), либо обновите репозиторий вручную (zypper ref). Если это не "
 "решит проблему, то вы, возможно, используете сломанное зеркало или сервер "
 "прекратил поддержку репозитория."
 
@@ -7648,8 +7639,8 @@ msgid ""
 "If nothing else works enter '#1' to select the 1st option, '#2' for the 2nd "
 "one, ..."
 msgstr ""
-"Если больше ничего не работает, введите #1, чтобы выбрать первый параметр, "
-"#2 — второй и т. д."
+"Если больше ничего не работает, введите #1, чтобы выбрать первый параметр, #"
+"2 — второй и т. д."
 
 #. TranslatorExplanation These are reasons for various failures.
 #: src/utils/prompt.h:95
