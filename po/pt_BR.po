@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-07-02 13:50+0200\n"
-"PO-Revision-Date: 2025-04-08 20:56+0000\n"
-"Last-Translator: Samanta Magalhaes <samanta_texttrans@outlook.com>\n"
+"PO-Revision-Date: 2025-07-22 12:48+0000\n"
+"Last-Translator: Julia Faltenbacher <julia.faltenbacher@suse.com>\n"
 "Language-Team: Portuguese (Brazil) <https://l10n.opensuse.org/projects/"
 "zypper/master/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.10.3\n"
+"X-Generator: Weblate 5.12.2\n"
 "X-Poedit-Language: Portuguese\n"
 "X-Poedit-Country: BRAZIL\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -912,8 +912,7 @@ msgstr[1] ""
 msgid "The following recommended source package was automatically selected:"
 msgid_plural ""
 "The following %d recommended source packages were automatically selected:"
-msgstr[0] ""
-"O seguinte pacote fonte recomendado foi selecionado automaticamente:"
+msgstr[0] "O seguinte pacote fonte recomendado foi selecionado automaticamente:"
 msgstr[1] ""
 "Os seguintes %d pacotes fontes recomendados foram selecionados "
 "automaticamente:"
@@ -978,8 +977,7 @@ msgid "The following patch is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d patches are recommended, but will not be installed:"
 msgstr[0] "A seguinte correção é recomendada, mas não será instalada:"
-msgstr[1] ""
-"As seguintes %d correções são recomendadas, mas não serão instaladas:"
+msgstr[1] "As seguintes %d correções são recomendadas, mas não serão instaladas:"
 
 #: src/Summary.cc:1186
 #, c-format, boost-format
@@ -995,8 +993,7 @@ msgid "The following product is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d products are recommended, but will not be installed:"
 msgstr[0] "O seguinte produto é recomendado, mas não será instalado:"
-msgstr[1] ""
-"Os seguintes %d produtos são recomendados, mas não serão instalados:"
+msgstr[1] "Os seguintes %d produtos são recomendados, mas não serão instalados:"
 
 #: src/Summary.cc:1195
 #, c-format, boost-format
@@ -1004,8 +1001,7 @@ msgid "The following application is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d applications are recommended, but will not be installed:"
 msgstr[0] "O seguinte aplicativo é recomendado, mas não será instalado:"
-msgstr[1] ""
-"Os seguintes %d aplicativos são recomendados, mas não serão instalados:"
+msgstr[1] "Os seguintes %d aplicativos são recomendados, mas não serão instalados:"
 
 #: src/Summary.cc:1228
 #, c-format, boost-format
@@ -1045,8 +1041,7 @@ msgid "The following application is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d applications are suggested, but will not be installed:"
 msgstr[0] "O seguinte aplicativo é sugerido, mas não será instalado:"
-msgstr[1] ""
-"Os seguintes %d aplicativos são sugeridos, mas não serão instalados:"
+msgstr[1] "Os seguintes %d aplicativos são sugeridos, mas não serão instalados:"
 
 #: src/Summary.cc:1274
 #, c-format, boost-format
@@ -1123,8 +1118,7 @@ msgstr[1] "Os seguintes %d aplicativos irão alterar de fornecedor:"
 msgid "The following package has no support information from its vendor:"
 msgid_plural ""
 "The following %d packages have no support information from their vendor:"
-msgstr[0] ""
-"O seguinte pacote não possui informação de suporte de seu fornecedor:"
+msgstr[0] "O seguinte pacote não possui informação de suporte de seu fornecedor:"
 msgstr[1] ""
 "Os seguintes %d pacotes não possuem informação de suporte de seus "
 "fornecedores:"
@@ -1208,8 +1202,7 @@ msgstr[1] "As seguintes %d atualizações de aplicativo NÃO serão instaladas:"
 msgid "The following item is locked and will not be changed by any action:"
 msgid_plural ""
 "The following %d items are locked and will not be changed by any action:"
-msgstr[0] ""
-"O seguinte item está bloqueado e não será alterado por nenhuma ação:"
+msgstr[0] "O seguinte item está bloqueado e não será alterado por nenhuma ação:"
 msgstr[1] ""
 "Os seguintes %d itens estão bloqueados e não serão alterados por nenhuma "
 "ação:"
@@ -1776,8 +1769,7 @@ msgstr ""
 #, boost-format
 msgid "Received %1% new package signing key from repository \"%2%\":"
 msgid_plural "Received %1% new package signing keys from repository \"%2%\":"
-msgstr[0] ""
-"Recebido %1% novo pacote de chave de assinatura do repositório \"%2%\":"
+msgstr[0] "Recebido %1% novo pacote de chave de assinatura do repositório \"%2%\":"
 msgstr[1] ""
 "Recebidos %1% novos pacotes de chaves de assinatura do repositório \"%2%\":"
 
@@ -1933,8 +1925,7 @@ msgstr "c/r/i/u/s"
 
 #: src/callbacks/media.cc:79
 msgid "Disable SSL certificate authority check and continue."
-msgstr ""
-"Desabilitar a verificação da autoridade do certificado SSL e continuar."
+msgstr "Desabilitar a verificação da autoridade do certificado SSL e continuar."
 
 #. translators: this is a prompt text
 #: src/callbacks/media.cc:82 src/callbacks/media.cc:174
@@ -2437,9 +2428,8 @@ msgid ""
 "Remove packages with specified capabilities. A capability is NAME[.ARCH]"
 "[OP<VERSION>], where OP is one of <, <=, =, >=, >."
 msgstr ""
-"Remove os pacotes com os recursos especificados. Um recurso é "
-"NOME[.ARQUITETURA][OP<VERSÃO>], em que OP é um dos operadores <, <=, =, >=, "
-">."
+"Remove os pacotes com os recursos especificados. Um recurso é NOME"
+"[.ARQUITETURA][OP<VERSÃO>], em que OP é um dos operadores <, <=, =, >=, >."
 
 #: src/commands/installremove.cc:104 src/commands/installremove.cc:234
 #: src/utils/messages.cc:53
@@ -3629,8 +3619,7 @@ msgstr "Não testar o URI, testá-lo mais tarde durante a atualização."
 
 #: src/commands/repos/add.cc:46
 msgid "The repository type is always autodetected. This option is ignored."
-msgstr ""
-"O tipo de repositório sempre é autodetectado. Essa opção será ignorada."
+msgstr "O tipo de repositório sempre é autodetectado. Essa opção será ignorada."
 
 #: src/commands/repos/add.cc:70
 #, c-format, boost-format
@@ -3956,8 +3945,7 @@ msgstr "Não há repositórios habilitados definidos."
 #: src/commands/repos/refresh.cc:331
 #, c-format, boost-format
 msgid "Use '%s' or '%s' commands to add or enable repositories."
-msgstr ""
-"Use o comando '%s' ou '%s' para adicionar ou habilitar os repositórios."
+msgstr "Use o comando '%s' ou '%s' para adicionar ou habilitar os repositórios."
 
 #: src/commands/repos/refresh.cc:337
 msgid "Could not refresh the repositories because of errors."
@@ -4757,8 +4745,7 @@ msgid ""
 "Repository '%s' has been removed from enabled repositories of service '%s'"
 msgid_plural ""
 "Repositories '%s' have been removed from enabled repositories of service '%s'"
-msgstr[0] ""
-"Repositório '%s' removido dos repositórios habilitados do serviço '%s'"
+msgstr[0] "Repositório '%s' removido dos repositórios habilitados do serviço '%s'"
 msgstr[1] ""
 "Repositórios '%s' removidos dos repositórios habilitados do serviço '%s'"
 
@@ -4958,8 +4945,7 @@ msgstr "Se é para permitir alteração de nomes dos resolvíveis instalados."
 
 #: src/commands/solveroptionset.cc:91
 msgid "Whether to allow changing the architecture of installed resolvables."
-msgstr ""
-"Se é para permitir alteração da arquitetura dos resolvíveis instalados."
+msgstr "Se é para permitir alteração da arquitetura dos resolvíveis instalados."
 
 #: src/commands/solveroptionset.cc:93
 msgid "Whether to allow changing the vendor of installed resolvables."
@@ -5135,8 +5121,8 @@ msgid ""
 "Using zypper subcommands available from elsewhere on your $PATH is disabled "
 "in zypper.conf."
 msgstr ""
-"O uso de sub-comandos zypper disponíveis em qualquer outro lugar em seu "
-"$PATH está desabilitado em zypper.conf."
+"O uso de sub-comandos zypper disponíveis em qualquer outro lugar em seu $"
+"PATH está desabilitado em zypper.conf."
 
 #. translators: helptext; %1% is a zypper command
 #: src/commands/subcommand.cc:485
@@ -5897,8 +5883,7 @@ msgstr "Você concorda com os termos da licença?"
 
 #: src/misc.cc:193
 msgid "Aborting installation due to the need for license confirmation."
-msgstr ""
-"Cancelando a instalação devido à necessidade da confirmação da licença."
+msgstr "Cancelando a instalação devido à necessidade da confirmação da licença."
 
 #. translators: %s is '--auto-agree-with-licenses'
 #: src/misc.cc:196
@@ -6243,8 +6228,7 @@ msgstr "Limpando o cache de pacotes instalados."
 
 #: src/repos.cc:1115
 msgid "Cannot clean installed packages cache because of an error."
-msgstr ""
-"Não foi possível limpar o cache de pacotes instalados devido a um erro."
+msgstr "Não foi possível limpar o cache de pacotes instalados devido a um erro."
 
 #: src/repos.cc:1133
 msgid "Could not clean the repositories because of errors."
@@ -6488,8 +6472,8 @@ msgid ""
 "server has actually discontinued to support the repository."
 msgstr ""
 "Metadados do repositório expirado: Verifique se a 'atualização automática' "
-"está ligada (zypper lr), caso contrário, atualize manualmente o repositório "
-"(zypper ref). Se isto não resolver o problema, pode ser que você esteja "
+"está ligada (zypper lr), caso contrário, atualize manualmente o repositório ("
+"zypper ref). Se isto não resolver o problema, pode ser que você esteja "
 "usando um mirror com problemas e que descontinuou o suporte ao repositório."
 
 #: src/repos.cc:1856
@@ -6571,8 +6555,7 @@ msgstr "Informação detalhada: "
 msgid "Choose the above solution using '1' or skip, retry or cancel"
 msgid_plural "Choose from above solutions by number or skip, retry or cancel"
 msgstr[0] "Escolha a solução acima usando '1' ou ignore, repita ou cancele"
-msgstr[1] ""
-"Escolha uma das opções acima pelo número ou ignore, repita ou cancele"
+msgstr[1] "Escolha uma das opções acima pelo número ou ignore, repita ou cancele"
 
 #. translators: translate 'c' to whatever you translated the 'c' in
 #. "c" and "s/r/c" strings
@@ -7220,8 +7203,7 @@ msgstr "Registre um relatório de bugs sobre isto."
 #. unless you translate the actual page :)
 #: src/utils/messages.cc:22
 msgid "See http://en.opensuse.org/Zypper/Troubleshooting for instructions."
-msgstr ""
-"Consulte http://en.opensuse.org/Zypper/Troubleshooting para instruções."
+msgstr "Consulte http://en.opensuse.org/Zypper/Troubleshooting para instruções."
 
 #: src/utils/messages.cc:38
 msgid "Too many arguments."
