@@ -10,17 +10,17 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-07-02 13:50+0200\n"
-"PO-Revision-Date: 2023-04-04 00:14+0000\n"
-"Last-Translator: Szymon Scholz <neome@posteo.me>\n"
-"Language-Team: Polish <https://l10n.opensuse.org/projects/zypper/master/pl/"
-">\n"
+"PO-Revision-Date: 2025-07-22 12:48+0000\n"
+"Last-Translator: Julia Faltenbacher <julia.faltenbacher@suse.com>\n"
+"Language-Team: Polish <https://l10n.opensuse.org/projects/zypper/master/pl/>"
+"\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 4.9.1\n"
+"X-Generator: Weblate 5.12.2\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -74,8 +74,7 @@ msgstr "Instalacja zakończyła się błędem."
 #: src/CommitSummary.cc:93
 #, boost-format
 msgid "You may run '%1%' to repair any dependency problems."
-msgstr ""
-"Możesz uruchomić '%1%', aby naprawić wszelkie problemy z zależnościami."
+msgstr "Możesz uruchomić '%1%', aby naprawić wszelkie problemy z zależnościami."
 
 #: src/CommitSummary.cc:127
 #, c-format, boost-format
@@ -823,8 +822,7 @@ msgstr[2] "Następujących %d aplikacji zostanie uaktualnionych:"
 msgid "The following package is going to be downgraded:"
 msgid_plural "The following %d packages are going to be downgraded:"
 msgstr[0] "Następujący pakiet zostanie przywrócony do wcześniejszej wersji:"
-msgstr[1] ""
-"Następujące %d pakiety zostaną przywrócone do wcześniejszych wersji:"
+msgstr[1] "Następujące %d pakiety zostaną przywrócone do wcześniejszych wersji:"
 msgstr[2] ""
 "Następujących %d pakietów zostanie przywróconych do wcześniejszych wersji:"
 
@@ -833,8 +831,7 @@ msgstr[2] ""
 msgid "The following patch is going to be downgraded:"
 msgid_plural "The following %d patches are going to be downgraded:"
 msgstr[0] "Następująca poprawka zostanie przywrócona do wcześniejszej wersji:"
-msgstr[1] ""
-"Następujące %d poprawki zostaną przywrócone do wcześniejszych wersji:"
+msgstr[1] "Następujące %d poprawki zostaną przywrócone do wcześniejszych wersji:"
 msgstr[2] ""
 "Następujących %d poprawek zostanie przywróconych do wcześniejszych wersji:"
 
@@ -852,8 +849,7 @@ msgstr[2] ""
 msgid "The following product is going to be downgraded:"
 msgid_plural "The following %d products are going to be downgraded:"
 msgstr[0] "Następujący produkt zostanie przywrócony do wcześniejszej wersji:"
-msgstr[1] ""
-"Następujące %d produkty zostaną przywrócone do wcześniejszych wersji:"
+msgstr[1] "Następujące %d produkty zostaną przywrócone do wcześniejszych wersji:"
 msgstr[2] ""
 "Następujących %d produktów zostanie przywróconych do wcześniejszych wersji:"
 
@@ -862,8 +858,7 @@ msgstr[2] ""
 msgid "The following application is going to be downgraded:"
 msgid_plural "The following %d applications are going to be downgraded:"
 msgstr[0] "Następująca aplikacja zostanie przywrócona do wcześniejszej wersji:"
-msgstr[1] ""
-"Następujące %d aplikacje zostaną przywrócone do wcześniejszych wersji:"
+msgstr[1] "Następujące %d aplikacje zostaną przywrócone do wcześniejszych wersji:"
 msgstr[2] ""
 "Następujących %d aplikacji zostanie przywróconych do wcześniejszych wersji:"
 
@@ -934,8 +929,7 @@ msgid_plural ""
 "The following %d recommended patterns were automatically selected:"
 msgstr[0] "Następujący zalecany wzorzec został automatycznie zaznaczony:"
 msgstr[1] "Następujące %d zalecane wzorce zostały automatycznie zaznaczone:"
-msgstr[2] ""
-"Następujących %d zalecanych wzorców zostało automatycznie zaznaczonych:"
+msgstr[2] "Następujących %d zalecanych wzorców zostało automatycznie zaznaczonych:"
 
 #: src/Summary.cc:1089
 #, c-format, boost-format
@@ -952,8 +946,7 @@ msgstr[2] ""
 msgid "The following recommended source package was automatically selected:"
 msgid_plural ""
 "The following %d recommended source packages were automatically selected:"
-msgstr[0] ""
-"Następujący zalecany pakiet źródłowy został automatycznie zaznaczony:"
+msgstr[0] "Następujący zalecany pakiet źródłowy został automatycznie zaznaczony:"
 msgstr[1] ""
 "Następujące %d zalecane pakiety źródłowe zostały automatycznie zaznaczone:"
 msgstr[2] ""
@@ -985,8 +978,8 @@ msgstr[1] ""
 "Następujące %d pakiety są zalecane, ale nie zostaną zainstalowane (zostaną "
 "zainstalowane wyłącznie wymagane pakiety):"
 msgstr[2] ""
-"Następujących %d pakietów jest zalecanych, ale nie zostanie zainstalowanych "
-"(zostaną zainstalowane wyłącznie wymagane pakiety):"
+"Następujących %d pakietów jest zalecanych, ale nie zostanie zainstalowanych ("
+"zostaną zainstalowane wyłącznie wymagane pakiety):"
 
 # Do rozważenia: "niechciany", "niepożądany".
 #: src/Summary.cc:1159
@@ -1060,10 +1053,8 @@ msgstr[2] ""
 msgid "The following application is recommended, but will not be installed:"
 msgid_plural ""
 "The following %d applications are recommended, but will not be installed:"
-msgstr[0] ""
-"Następująca aplikacja jest zalecana, ale nie zostanie zainstalowana:"
-msgstr[1] ""
-"Następujące %d aplikacje są zalecane, ale nie zostaną zainstalowane:"
+msgstr[0] "Następująca aplikacja jest zalecana, ale nie zostanie zainstalowana:"
+msgstr[1] "Następujące %d aplikacje są zalecane, ale nie zostaną zainstalowane:"
 msgstr[2] ""
 "Następujących %d aplikacji jest zalecanych, ale nie zostanie zainstalowanych:"
 
@@ -1073,8 +1064,7 @@ msgid "The following package is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d packages are suggested, but will not be installed:"
 msgstr[0] "Następujący pakiet jest sugerowany, ale nie zostanie zainstalowany:"
-msgstr[1] ""
-"Następujące %d pakiety są sugerowane, ale nie zostaną zainstalowane:"
+msgstr[1] "Następujące %d pakiety są sugerowane, ale nie zostaną zainstalowane:"
 msgstr[2] ""
 "Następujących %d pakietów jest sugerowanych, ale nie zostanie "
 "zainstalowanych:"
@@ -1084,10 +1074,8 @@ msgstr[2] ""
 msgid "The following patch is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d patches are suggested, but will not be installed:"
-msgstr[0] ""
-"Następująca poprawka jest sugerowana, ale nie zostanie zainstalowana:"
-msgstr[1] ""
-"Następujące %d poprawki są sugerowane, ale nie zostaną zainstalowane:"
+msgstr[0] "Następująca poprawka jest sugerowana, ale nie zostanie zainstalowana:"
+msgstr[1] "Następujące %d poprawki są sugerowane, ale nie zostaną zainstalowane:"
 msgstr[2] ""
 "Następujących %d poprawek jest sugerowanych, ale nie zostanie "
 "zainstalowanych:"
@@ -1097,8 +1085,7 @@ msgstr[2] ""
 msgid "The following pattern is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d patterns are suggested, but will not be installed:"
-msgstr[0] ""
-"Następujący wzorzec jest sugerowany, ale nie zostanie zainstalowany:"
+msgstr[0] "Następujący wzorzec jest sugerowany, ale nie zostanie zainstalowany:"
 msgstr[1] "Następujące %d wzorce są sugerowane, ale nie zostaną zainstalowane:"
 msgstr[2] ""
 "Następujących %d wzorców jest sugerowanych, ale nie zostanie zainstalowanych:"
@@ -1108,10 +1095,8 @@ msgstr[2] ""
 msgid "The following product is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d products are suggested, but will not be installed:"
-msgstr[0] ""
-"Następujący produkt jest sugerowany, ale nie zostanie zainstalowany:"
-msgstr[1] ""
-"Następujące %d produkty są sugerowane, ale nie zostaną zainstalowane:"
+msgstr[0] "Następujący produkt jest sugerowany, ale nie zostanie zainstalowany:"
+msgstr[1] "Następujące %d produkty są sugerowane, ale nie zostaną zainstalowane:"
 msgstr[2] ""
 "Następujących %d produktów jest sugerowanych, ale nie zostanie "
 "zainstalowanych:"
@@ -1121,10 +1106,8 @@ msgstr[2] ""
 msgid "The following application is suggested, but will not be installed:"
 msgid_plural ""
 "The following %d applications are suggested, but will not be installed:"
-msgstr[0] ""
-"Następująca aplikacja jest sugerowana, ale nie zostanie zainstalowana:"
-msgstr[1] ""
-"Następujące %d aplikacje są sugerowane, ale nie zostaną zainstalowane:"
+msgstr[0] "Następująca aplikacja jest sugerowana, ale nie zostanie zainstalowana:"
+msgstr[1] "Następujące %d aplikacje są sugerowane, ale nie zostaną zainstalowane:"
 msgstr[2] ""
 "Następujących %d aplikacji jest sugerowanych, ale nie zostanie "
 "zainstalowanych:"
@@ -1275,8 +1258,7 @@ msgid "The following package update will NOT be installed:"
 msgid_plural "The following %d package updates will NOT be installed:"
 msgstr[0] "Następująca aktualizacja pakietu NIE zostanie zainstalowana:"
 msgstr[1] "Następujące %d aktualizacje pakietów NIE zostaną zainstalowane:"
-msgstr[2] ""
-"Następujących %d aktualizacji pakietów NIE zostanie zainstalowanych:"
+msgstr[2] "Następujących %d aktualizacji pakietów NIE zostanie zainstalowanych:"
 
 #: src/Summary.cc:1465
 #, c-format, boost-format
@@ -1284,8 +1266,7 @@ msgid "The following product update will NOT be installed:"
 msgid_plural "The following %d product updates will NOT be installed:"
 msgstr[0] "Następująca aktualizacja produktu NIE zostanie zainstalowana:"
 msgstr[1] "Następujące %d aktualizacje produktów NIE zostaną zainstalowane:"
-msgstr[2] ""
-"Następujących %d aktualizacji produktów NIE zostanie zainstalowanych:"
+msgstr[2] "Następujących %d aktualizacji produktów NIE zostanie zainstalowanych:"
 
 #: src/Summary.cc:1471
 #, c-format, boost-format
@@ -1293,8 +1274,7 @@ msgid "The following application update will NOT be installed:"
 msgid_plural "The following %d application updates will NOT be installed:"
 msgstr[0] "Następująca aktualizacja aplikacji NIE zostanie zainstalowana:"
 msgstr[1] "Następujące %d aktualizacje aplikacji NIE zostaną zainstalowane:"
-msgstr[2] ""
-"Następujących %d aktualizacji aplikacji NIE zostanie zainstalowanych:"
+msgstr[2] "Następujących %d aktualizacji aplikacji NIE zostanie zainstalowanych:"
 
 #: src/Summary.cc:1504
 #, c-format, boost-format
@@ -1758,8 +1738,7 @@ msgstr "Plik '%1%' jest podpisany nieznanym kluczem '%2%'."
 #: src/callbacks/keyring.h:217
 #, boost-format
 msgid "File '%1%' from repository '%3%' is signed with an unknown key '%2%'."
-msgstr ""
-"Plik '%1%' z repozytorium '%3%' jest podpisany nieznanym kluczem '%2%'."
+msgstr "Plik '%1%' z repozytorium '%3%' jest podpisany nieznanym kluczem '%2%'."
 
 #: src/callbacks/keyring.h:246
 msgid "Automatically importing the following key:"
@@ -2521,9 +2500,9 @@ msgid ""
 "Remove packages with specified capabilities. A capability is NAME[.ARCH]"
 "[OP<VERSION>], where OP is one of <, <=, =, >=, >."
 msgstr ""
-"Usuwa pakiety o określonych właściwościach. Właściwość to "
-"NAZWA[.ARCHITEKTURA][OP<WERSJA>],  gdzie OP jest jednym z operatorów <, <=, "
-"=, >=, >."
+"Usuwa pakiety o określonych właściwościach. Właściwość to NAZWA"
+"[.ARCHITEKTURA][OP<WERSJA>],  gdzie OP jest jednym z operatorów <, <=, =, "
+">=, >."
 
 #: src/commands/installremove.cc:104 src/commands/installremove.cc:234
 #: src/utils/messages.cc:53
@@ -2793,8 +2772,7 @@ msgstr ""
 
 #: src/commands/locale/removelocalecmd.cc:46
 msgid "Do not remove corresponding packages for given locale(s)."
-msgstr ""
-"Nie usuwanie odpowiadających pakietów dla danych ustawień regionalnych."
+msgstr "Nie usuwanie odpowiadających pakietów dla danych ustawień regionalnych."
 
 #. translators: command synopsis; do not translate the command 'name (abbreviations)' or '-option' names
 #: src/commands/locks/add.cc:29
@@ -3159,8 +3137,7 @@ msgstr ""
 msgid ""
 "Automatically accept product licenses only. See 'man zypper' for more "
 "details."
-msgstr ""
-"Automatycznie akceptuj tylko licencje produktów. Szczegóły: man zypper."
+msgstr "Automatycznie akceptuj tylko licencje produktów. Szczegóły: man zypper."
 
 #. translators: --replacefiles
 #: src/commands/optionsets.cc:264
@@ -3821,8 +3798,8 @@ msgstr "Wyświetla wszystkie zdefiniowane repozytoria."
 #: src/commands/repos/list.cc:98
 msgid "Export all defined repositories as a single local .repo file."
 msgstr ""
-"Eksportuje wszystkie zdefiniowane repozytoria jako pojedynczy lokalny "
-"plik .repo."
+"Eksportuje wszystkie zdefiniowane repozytoria jako pojedynczy lokalny plik "
+".repo."
 
 #: src/commands/repos/list.cc:129 src/repos.cc:1006
 msgid "Error reading repositories:"
@@ -4519,8 +4496,8 @@ msgid ""
 "Like --details, with additional information where the search has matched "
 "(useful for search in dependencies)."
 msgstr ""
-"Podobnie jak --details, ale dodaje informację o miejscu znalezienia frazy "
-"(przydatne podczas wyszukiwania zależności)."
+"Podobnie jak --details, ale dodaje informację o miejscu znalezienia frazy ("
+"przydatne podczas wyszukiwania zależności)."
 
 #: src/commands/search/search.cc:298 src/repos.cc:780
 #, c-format, boost-format
@@ -4767,12 +4744,9 @@ msgstr "Nazwa usługi '%s' została ustawiona na '%s'."
 msgid "Repository '%s' has been added to enabled repositories of service '%s'"
 msgid_plural ""
 "Repositories '%s' have been added to enabled repositories of service '%s'"
-msgstr[0] ""
-"Repozytorium '%s' zostało dodane do włączonych repozytoriów usługi '%s'"
-msgstr[1] ""
-"Repozytoria '%s' zostały dodane do włączonych repozytoriów usługi '%s'"
-msgstr[2] ""
-"Repozytoria '%s' zostały dodane do włączonych repozytoriów usługi '%s'"
+msgstr[0] "Repozytorium '%s' zostało dodane do włączonych repozytoriów usługi '%s'"
+msgstr[1] "Repozytoria '%s' zostały dodane do włączonych repozytoriów usługi '%s'"
+msgstr[2] "Repozytoria '%s' zostały dodane do włączonych repozytoriów usługi '%s'"
 
 #: src/commands/services/modify.cc:262
 #, c-format, boost-format
@@ -4781,10 +4755,8 @@ msgid_plural ""
 "Repositories '%s' have been added to disabled repositories of service '%s'"
 msgstr[0] ""
 "Repozytorium '%s' zostało dodane do wyłączonych repozytoriów usługi '%s'"
-msgstr[1] ""
-"Repozytoria '%s' zostały dodane do wyłączonych repozytoriów usługi '%s'"
-msgstr[2] ""
-"Repozytoria '%s' zostały dodane do wyłączonych repozytoriów usługi '%s'"
+msgstr[1] "Repozytoria '%s' zostały dodane do wyłączonych repozytoriów usługi '%s'"
+msgstr[2] "Repozytoria '%s' zostały dodane do wyłączonych repozytoriów usługi '%s'"
 
 #: src/commands/services/modify.cc:269
 #, c-format, boost-format
@@ -4794,10 +4766,8 @@ msgid_plural ""
 "Repositories '%s' have been removed from enabled repositories of service '%s'"
 msgstr[0] ""
 "Repozytorium '%s' zostało usunięte z włączonych repozytoriów usługi '%s'"
-msgstr[1] ""
-"Repozytoria '%s' zostały usunięte z włączonych repozytoriów usługi '%s'"
-msgstr[2] ""
-"Repozytoria '%s' zostały usunięte z włączonych repozytoriów usługi '%s'"
+msgstr[1] "Repozytoria '%s' zostały usunięte z włączonych repozytoriów usługi '%s'"
+msgstr[2] "Repozytoria '%s' zostały usunięte z włączonych repozytoriów usługi '%s'"
 
 #: src/commands/services/modify.cc:276
 #, c-format, boost-format
@@ -4830,8 +4800,7 @@ msgstr "Nie zmieniono usługi %s."
 #: src/commands/services/refresh.cc:86
 #, c-format, boost-format
 msgid "Service '%s' not found by its alias, number, or URI."
-msgstr ""
-"Nie odnaleziono usługi '%s' na podstawie aliasu, numeru ani adresu URI."
+msgstr "Nie odnaleziono usługi '%s' na podstawie aliasu, numeru ani adresu URI."
 
 #: src/commands/services/refresh.cc:89
 #, c-format, boost-format
@@ -4909,8 +4878,7 @@ msgstr "Usuwa określoną usługę indeksu repozytorium (RIS) z systemu."
 #: src/commands/services/remove.cc:76
 #, c-format, boost-format
 msgid "Service '%s' not found by alias, number or URI."
-msgstr ""
-"Nie odnaleziono usługi '%s' na podstawie aliasu, numeru ani adresu URI."
+msgstr "Nie odnaleziono usługi '%s' na podstawie aliasu, numeru ani adresu URI."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/shell.cc:20
@@ -5285,8 +5253,8 @@ msgid ""
 msgstr ""
 "Pobiera pakiety rpm określone w wierszu poleceń do katalogu lokalnego. "
 "Domyślnie pakiety są pobierane do pamięci podręcznej pakietu libzypp (/var/"
-"cache/zypp/packages; w przypadku użytkowników innych niż root jest to "
-"$XDG_CACHE_HOME/zypp/packages), ale ustawienie to można zmienić za pomocą "
+"cache/zypp/packages; w przypadku użytkowników innych niż root jest to $"
+"XDG_CACHE_HOME/zypp/packages), ale ustawienie to można zmienić za pomocą "
 "opcji globalnej --pkg-cache-dir."
 
 #. translators: command description
@@ -7334,8 +7302,7 @@ msgstr ""
 #: src/utils/messages.cc:141
 #, c-format, boost-format
 msgid "Type '%s' to get a list of global options and commands."
-msgstr ""
-"Wprowadź '%s', aby uzyskać listę wszystkich globalnych opcji i poleceń."
+msgstr "Wprowadź '%s', aby uzyskać listę wszystkich globalnych opcji i poleceń."
 
 #. translators: %1% is the name of an (unknown) command
 #. translators: %2% something providing more info (like 'zypper help subcommand')
