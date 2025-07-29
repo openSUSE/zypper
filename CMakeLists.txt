@@ -6,7 +6,7 @@ SET( PACKAGE "zypper" )
 if ( ZYPP_STACK_BUILD )
   SET( ZYPPER_TARGET_PREFIX "zypper_")
   SET( CMAKE_MODULE_PATH
-      ${zypp-stack_SOURCE_DIR}/libzypp/cmake/modules/
+      ${zypp-libs_SOURCE_DIR}/cmake/modules/
       ${CMAKE_MODULE_PATH}
   )
   include_directories(${ZYPP_STACK_INCLUDE_DIRS})
@@ -75,7 +75,7 @@ GENERATE_PACKAGING(${PACKAGE} ${VERSION})
 
 if ( ZYPP_STACK_BUILD )
   set( ZYPP_FOUND 1 )
-  set( ZYPP_INCLUDE_DIR ${zypp-stack_SOURCE_DIR}/libzypp )
+  #set( ZYPP_INCLUDE_DIR ${LIBZYPP_SOURCE_DIR} ${zypp-libs_SOURCE_DIR}/zypp-logic  )
   set( ZYPP_LIBRARY zypp )
   set( ZYPP_TUI_LIBRARY zypp-tui )
 else()
