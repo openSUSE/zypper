@@ -13,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-07-02 13:50+0200\n"
 "PO-Revision-Date: 2025-08-05 03:23+0000\n"
-"Last-Translator: Grace Yu <grace.yu@excel-gits.com>\n"
+"Last-Translator: Yunhe Guo <i@guoyunhe.me>\n"
 "Language-Team: Chinese (China) <https://l10n.opensuse.org/projects/zypper/"
 "master/zh_CN/>\n"
 "Language: zh_CN\n"
@@ -1130,7 +1130,7 @@ msgstr "待安装软件包所需空间"
 #. translator: rendered as "347.3 MiB  released by packages that will be removed"
 #: src/Summary.cc:1617
 msgid "released by packages that will be removed"
-msgstr "待去除软件包将释放的空间"
+msgstr "旧软件包卸载释放"
 
 #. translators: this text will be preceded by a number e.g. "5 packages to ..."
 #: src/Summary.cc:1638
