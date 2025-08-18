@@ -10,7 +10,7 @@
 #include "Zypper.h"
 #include "global-settings.h"
 
-#include <zypp/AutoDispose.h>
+#include <zypp-core/AutoDispose.h>
 
 /**
  * Implements a shared initialization for a set of query commands

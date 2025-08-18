@@ -10,7 +10,7 @@
 
 #include <zypp/parser/xml/libxmlfwd.h>
 #include <zypp/parser/xml/Reader.h>
-#include <zypp/base/Xml.h>
+#include <zypp-core/base/Xml.h>
 
 ///////////////////////////////////////////////////////////////////
 namespace zypp

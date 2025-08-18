@@ -7,10 +7,10 @@
 
 #include <iostream>
 
-#include <zypp/base/LogTools.h>
+#include <zypp-core/base/LogTools.h>
 #include <zypp/Package.h>
 #include <zypp/ResPool.h>
-#include <zypp/Pathname.h>
+#include <zypp-core/Pathname.h>
 #include <zypp/PoolQuery.h>
 #include <zypp/ZYppCallbacks.h>
 #include <zypp/ui/SelectableTraits.h>

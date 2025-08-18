@@ -11,8 +11,8 @@
 #include <iosfwd>
 #include <string>
 
-#include <zypp/base/PtrTypes.h>
-#include <zypp/Pathname.h>
+#include <zypp-core/base/PtrTypes.h>
+#include <zypp-core/Pathname.h>
 
 struct augeas;
 

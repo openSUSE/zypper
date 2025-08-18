@@ -12,9 +12,9 @@
 #include <map>
 #include <iosfwd>
 
-#include <zypp/base/PtrTypes.h>
-#include <zypp/ByteCount.h>
-#include <zypp/base/DefaultIntegral.h>
+#include <zypp-core/base/PtrTypes.h>
+#include <zypp-core/ByteCount.h>
+#include <zypp-core/base/DefaultIntegral>
 #include <zypp/ResObject.h>
 #include <zypp/ResPool.h>
 #include "utils/ansi.h"

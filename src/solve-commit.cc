@@ -10,13 +10,13 @@
 #include <optional>
 
 #include <zypp/ZYppFactory.h>
-#include <zypp/base/Logger.h>
-#include <zypp/TriBool.h>
+#include <zypp-core/base/Logger.h>
+#include <zypp-core/TriBool.h>
 #include <zypp/FileChecker.h>
-#include <zypp/base/InputStream.h>
-#include <zypp/base/IOStream.h>
+#include <zypp-core/base/InputStream>
+#include <zypp-core/base/IOStream.h>
 
-#include <zypp/media/MediaException.h>
+#include <zypp-media/MediaException>
 #include <zypp/misc/CheckAccessDeleted.h>
 
 #include "misc.h"		// confirm_licenses

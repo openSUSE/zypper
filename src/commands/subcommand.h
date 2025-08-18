@@ -10,7 +10,7 @@
 
 #include "commands/basecommand.h"
 
-#include <zypp/Pathname.h>
+#include <zypp-core/Pathname.h>
 
 #include <vector>
 #include <string>

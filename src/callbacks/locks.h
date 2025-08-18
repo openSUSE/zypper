@@ -10,7 +10,7 @@
 
 #include <iosfwd>
 
-#include <zypp/base/Logger.h>
+#include <zypp-core/base/Logger.h>
 #include <zypp/ZYppCallbacks.h>
 #include <zypp/PoolQuery.h>
 

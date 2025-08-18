@@ -11,7 +11,7 @@
 #include <zypp/PoolItem.h>
 #include <zypp/ResKind.h>
 #include <zypp/ui/Selectable.h>
-#include <zypp/base/Flags.h>
+#include <zypp-core/base/Flags.h>
 
 #include "Zypper.h"
 #include "utils/misc.h" // for ResKindSet; might make sense to move this elsewhere

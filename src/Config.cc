@@ -11,10 +11,10 @@ extern "C"
 }
 #include <iostream>
 
-#include <zypp/base/Logger.h>
+#include <zypp-core/base/Logger.h>
 #include <zypp/base/Measure.h>
-#include <zypp/base/String.h>
-#include <zypp/base/Exception.h>
+#include <zypp-core/base/String.h>
+#include <zypp-core/base/Exception.h>
 #include <zypp/ZConfig.h>
 
 #include "utils/messages.h"

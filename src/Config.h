@@ -11,8 +11,8 @@
 #include <string>
 #include <set>
 
-#include <zypp/Url.h>
-#include <zypp/Pathname.h>
+#include <zypp-core/Url.h>
+#include <zypp-core/Pathname.h>
 #include <zypp/RepoManager.h>
 
 #include "Command.h"

@@ -10,7 +10,7 @@
 #include "commands/basecommand.h"
 #include "utils/flags/zyppflags.h"
 
-#include <zypp/base/Flags.h>
+#include <zypp-core/base/Flags.h>
 
 class RefreshServicesCmd : public ZypperBaseCommand
 {

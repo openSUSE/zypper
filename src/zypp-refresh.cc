@@ -12,12 +12,12 @@
 #include <iostream>
 
 #include <zypp/ZYppFactory.h>
-#include <zypp/base/LogControl.h>
-#include <zypp/base/Logger.h>
-#include <zypp/base/String.h>
+#include <zypp-core/base/LogControl.h>
+#include <zypp-core/base/Logger.h>
+#include <zypp-core/base/String.h>
 
 #include <zypp/ZYppCallbacks.h>
-#include <zypp/Pathname.h>
+#include <zypp-core/Pathname.h>
 #include <zypp/KeyRing.h>
 #include <zypp/Digest.h>
 

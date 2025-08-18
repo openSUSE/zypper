@@ -13,13 +13,13 @@
 #include <set>
 #include <list>
 
-#include <zypp/Url.h>
-#include <zypp/Date.h>
-#include <zypp/Pathname.h>
+#include <zypp-core/Url.h>
+#include <zypp-core/Date.h>
+#include <zypp-core/Pathname.h>
 
 #include <zypp/ui/Selectable.h>
 #include <zypp/ZYppCommitPolicy.h>
-#include <zypp/base/Logger.h>
+#include <zypp-core/base/Logger.h>
 
 #include "Table.h"
 

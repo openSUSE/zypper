@@ -13,7 +13,7 @@
 #include "src/info.h"
 
 #include <zypp/ResKind.h>
-#include <zypp/base/Flags.h>
+#include <zypp-core/base/Flags.h>
 
 #include <set>
 

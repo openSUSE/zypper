@@ -16,8 +16,8 @@
 #include <iostream>
 #include <algorithm>
 #include <set>
-#include <zypp/base/LogTools.h>
-#include <zypp/ExternalProgram.h>
+#include <zypp-core/base/LogTools.h>
+#include <zypp-core/ExternalProgram.h>
 
 #include "Zypper.h"
 #include "Table.h"

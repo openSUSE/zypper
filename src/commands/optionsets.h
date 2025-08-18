@@ -15,7 +15,7 @@
 #include "utils/misc.h"
 
 #include <zypp/DownloadMode.h>
-#include <zypp/base/Flags.h>
+#include <zypp-core/base/Flags.h>
 
 enum class CompatModeBits {
   EnableRugOpt = 1 << 0,

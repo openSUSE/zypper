@@ -15,8 +15,8 @@
 #include "commands/conditions.h"
 
 #include <zypp/repo/RepoInfoBase.h>
-#include <zypp/base/Iterator.h>
-#include <zypp/media/MediaException.h>
+#include <zypp-core/base/Iterator.h>
+#include <zypp-media/MediaException>
 
 using namespace zypp;
 

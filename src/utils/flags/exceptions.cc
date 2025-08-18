@@ -6,7 +6,7 @@
 \*---------------------------------------------------------------------------*/
 #include "exceptions.h"
 
-#include <zypp/base/String.h>
+#include <zypp-core/base/String.h>
 
 #include "main.h"
 #include <iostream>

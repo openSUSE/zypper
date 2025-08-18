@@ -9,8 +9,8 @@
 #include <iostream>
 #include <boost/lexical_cast.hpp>
 
-#include <zypp/base/String.h>
-#include <zypp/base/Logger.h>
+#include <zypp-core/base/String.h>
+#include <zypp-core/base/Logger.h>
 #include <zypp/Locks.h>
 
 #include "output/Out.h"

@@ -13,9 +13,9 @@
 #include "issue.h"
 
 #include <zypp/ResKind.h>
-#include <zypp/TriBool.h>
-#include <zypp/Pathname.h>
-#include <zypp/Date.h>
+#include <zypp-core/TriBool.h>
+#include <zypp-core/Pathname.h>
+#include <zypp-core/Date.h>
 #include <zypp/Patch.h>
 #include <set>
 #include <type_traits>

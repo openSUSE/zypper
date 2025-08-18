@@ -3,10 +3,10 @@
 #include <poll.h>
 #include <readline/readline.h>
 
-#include <zypp/base/LogTools.h>
-#include <zypp/base/LogControl.h>
+#include <zypp-core/base/LogTools.h>
+#include <zypp-core/base/LogControl.h>
 #include <zypp/base/Backtrace.h>
-#include <zypp/base/Regex.h>
+#include <zypp-core/base/Regex.h>
 
 #include "main.h"
 #include "Zypper.h"

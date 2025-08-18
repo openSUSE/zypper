@@ -9,8 +9,8 @@
 #include <functional>
 
 #include <zypp/base/NamedValue.h>
-#include <zypp/base/Exception.h>
-#include <zypp/base/String.h>
+#include <zypp-core/base/Exception.h>
+#include <zypp-core/base/String.h>
 
 #include "main.h"
 #include "Command.h"

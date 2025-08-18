@@ -12,8 +12,8 @@
 
 #include <boost/lexical_cast.hpp>
 
-#include <zypp/TriBool.h>
-#include <zypp/Url.h>
+#include <zypp-core/TriBool.h>
+#include <zypp-core/Url.h>
 #include <zypp/RepoInfo.h>
 #include <zypp/ServiceInfo.h>
 

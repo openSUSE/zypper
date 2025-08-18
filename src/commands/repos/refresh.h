@@ -9,7 +9,7 @@
 
 #include "commands/basecommand.h"
 
-#include <zypp/base/Flags.h>
+#include <zypp-core/base/Flags.h>
 
 class RefreshRepoCmd : public ZypperBaseCommand
 {

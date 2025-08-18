@@ -2,7 +2,7 @@
 
 #include <zypp/ZYpp.h> // for ResPool::instance()
 
-#include <zypp/base/Logger.h>
+#include <zypp-core/base/Logger.h>
 #include <zypp/base/Algorithm.h>
 #include <zypp/Patch.h>
 #include <zypp/Pattern.h>

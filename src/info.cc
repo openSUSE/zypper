@@ -15,7 +15,7 @@
 #include <zypp/Pattern.h>
 #include <zypp/Product.h>
 #include <zypp/PoolQuery.h>
-#include <zypp/base/LogTools.h>
+#include <zypp-core/base/LogTools.h>
 
 #include "Zypper.h"
 #include "main.h"

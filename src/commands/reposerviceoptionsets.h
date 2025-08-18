@@ -9,9 +9,9 @@
 
 #include "basecommand.h"
 
-#include <zypp/TriBool.h>
+#include <zypp-core/TriBool.h>
 #include <zypp/RepoInfo.h>
-#include <zypp/base/Flags.h>
+#include <zypp-core/base/Flags.h>
 
 enum class OptCommandCtx
 {

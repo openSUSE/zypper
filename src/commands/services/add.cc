@@ -14,7 +14,7 @@
 #include "utils/flags/flagtypes.h"
 
 #include <zypp/repo/RepoException.h>
-#include <zypp/Url.h>
+#include <zypp-core/Url.h>
 
 using namespace zypp;
 

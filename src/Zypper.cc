@@ -22,13 +22,13 @@
 #include <zypp/ZYppFactory.h>
 #include <zypp/zypp_detail/ZYppReadOnlyHack.h>
 
-#include <zypp/base/LogTools.h>
+#include <zypp-core/base/LogTools.h>
 #include <zypp/base/Algorithm.h>
-#include <zypp/base/UserRequestException.h>
-#include <zypp/base/DtorReset.h>
+#include <zypp-core/base/UserRequestException>
+#include <zypp-core/base/DtorReset>
 
 #include <zypp/sat/SolvAttr.h>
-#include <zypp/AutoDispose.h>
+#include <zypp-core/AutoDispose.h>
 #include <zypp/PoolQuery.h>
 #include <zypp/Locks.h>
 #include <zypp/Edition.h>
