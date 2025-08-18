@@ -10,7 +10,7 @@
 #include "commands/basecommand.h"
 #include "commands/reposerviceoptionsets.h"
 
-#include <zypp/TriBool.h>
+#include <zypp-core/TriBool.h>
 
 #include <string>
 

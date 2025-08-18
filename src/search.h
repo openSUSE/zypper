@@ -8,9 +8,9 @@
 #ifndef ZYPPERSEARCH_H_
 #define ZYPPERSEARCH_H_
 
-#include <zypp/TriBool.h>
+#include <zypp-core/TriBool.h>
 #include <zypp/PoolQuery.h>
-#include <zypp/base/Flags.h>
+#include <zypp-core/base/Flags.h>
 
 #include "Zypper.h"
 #include "Table.h"

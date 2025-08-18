@@ -7,7 +7,7 @@
 #ifndef ZYPPER_GUARDIANS_H
 #define ZYPPER_GUARDIANS_H
 
-#include <zypp/base/PtrTypes.h>
+#include <zypp-core/base/PtrTypes.h>
 
 ///////////////////////////////////////////////////////////////////
 /// \class Guardians<TreasureT>

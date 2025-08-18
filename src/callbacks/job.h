@@ -10,8 +10,8 @@
 
 #include <iostream>
 
-#include <zypp/base/Logger.h>
-#include <zypp/base/String.h>
+#include <zypp-core/base/Logger.h>
+#include <zypp-core/base/String.h>
 #include <zypp/ZYppCallbacks.h>
 
 #include "Zypper.h"

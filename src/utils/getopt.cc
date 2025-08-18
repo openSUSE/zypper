@@ -1,7 +1,7 @@
 #include "getopt.h"
 #include "main.h"
 #include <iostream>
-#include <zypp/base/String.h>
+#include <zypp-core/base/String.h>
 #include "Zypper.h"
 
 std::string longopts2optstring( const struct option* longopts )

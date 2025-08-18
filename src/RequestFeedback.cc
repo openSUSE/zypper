@@ -9,7 +9,7 @@
  *
  */
 
-#include <zypp/base/LogTools.h>
+#include <zypp-core/base/LogTools.h>
 #include <zypp/ui/Selectable.h>
 
 #include "Zypper.h"

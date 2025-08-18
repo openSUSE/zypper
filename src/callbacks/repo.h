@@ -10,10 +10,10 @@
 
 #include <sstream>
 
-#include <zypp/base/Logger.h>
+#include <zypp-core/base/Logger.h>
 #include <zypp/ZYppCallbacks.h>
-#include <zypp/Pathname.h>
-#include <zypp/Url.h>
+#include <zypp-core/Pathname.h>
+#include <zypp-core/Url.h>
 #include <zypp/target/rpm/RpmDb.h>
 
 #include "Zypper.h"

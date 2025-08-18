@@ -9,7 +9,7 @@
 #include "exceptions.h"
 #include "utils/messages.h"
 #include "Zypper.h"
-#include <zypp/base/Regex.h>
+#include <zypp-core/base/Regex.h>
 
 #include <getopt.h>
 #include <unordered_map>

@@ -11,7 +11,7 @@
 #include "commands/reposerviceoptionsets.h"
 #include "utils/flags/zyppflags.h"
 
-#include <zypp/base/Flags.h>
+#include <zypp-core/base/Flags.h>
 #include <zypp/repo/ServiceType.h>
 
 class AddServiceCmd : public ZypperBaseCommand

@@ -10,7 +10,7 @@
 
 #include <zypp/Arch.h>
 #include <zypp/ZYppFactory.h>
-#include <zypp/base/Logger.h>
+#include <zypp-core/base/Logger.h>
 
 #include <zypp/SrcPackage.h>
 #include <zypp/Package.h>

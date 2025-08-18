@@ -11,12 +11,12 @@
 #include <list>
 
 #include <zypp/ZYpp.h>
-#include <zypp/base/Logger.h>
-#include <zypp/base/IOStream.h>
-#include <zypp/base/String.h>
-#include <zypp/base/Flags.h>
+#include <zypp-core/base/Logger.h>
+#include <zypp-core/base/IOStream.h>
+#include <zypp-core/base/String.h>
+#include <zypp-core/base/Flags.h>
 #include <zypp/ui/Selectable.h>
-#include <zypp/base/Regex.h>
+#include <zypp-core/base/Regex.h>
 #include <zypp/sat/LocaleSupport.h>
 
 #include "output/Out.h"

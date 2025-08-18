@@ -5,7 +5,7 @@
 #include <string>
 #include <memory>
 
-#include <zypp/base/Flags.h>
+#include <zypp-core/base/Flags.h>
 #include "utils/flags/zyppflags.h"
 #include "utils/MultiParText.h"
 

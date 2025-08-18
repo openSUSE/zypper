@@ -16,7 +16,7 @@
 #include <string>
 
 #include <zypp/ZConfig.h>
-#include <zypp/Date.h>
+#include <zypp-core/Date.h>
 #include <zypp/PoolItem.h>
 #include <zypp/Patch.h>
 

@@ -14,11 +14,11 @@
 #include <boost/utility/string_ref.hpp>
 
 #include <zypp-core/Globals.h>  // LIBZYPP_VERSION macro (buildtime version)
-#include <zypp/base/Exception.h>
-#include <zypp/base/NonCopyable.h>
-#include <zypp/base/PtrTypes.h>
-#include <zypp/base/Flags.h>
-#include <zypp/TriBool.h>
+#include <zypp-core/base/Exception.h>
+#include <zypp-core/base/NonCopyable.h>
+#include <zypp-core/base/PtrTypes.h>
+#include <zypp-core/base/Flags.h>
+#include <zypp-core/TriBool.h>
 
 #include <zypp/RepoInfo.h>
 #include <zypp/RepoManager.h> // for RepoManagerOptions

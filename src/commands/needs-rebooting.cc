@@ -10,7 +10,7 @@
 #include "Zypper.h"
 
 #include <zypp/PathInfo.h>
-#include <zypp/TriBool.h>
+#include <zypp-core/TriBool.h>
 
 using namespace zypp;
 

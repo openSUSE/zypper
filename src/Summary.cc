@@ -11,9 +11,9 @@
 #include <string_view>
 
 #include <zypp/ZYppFactory.h>
-#include <zypp/base/LogTools.h>
+#include <zypp-core/base/LogTools.h>
 #include <zypp/base/Measure.h>
-#include <zypp/base/DtorReset.h>
+#include <zypp-core/base/DtorReset>
 #include <zypp/ResPool.h>
 #include <zypp/Patch.h>
 #include <zypp/Package.h>

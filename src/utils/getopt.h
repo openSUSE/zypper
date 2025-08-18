@@ -7,7 +7,7 @@
 #include <string>
 
 #include <getopt.h>
-#include <zypp/TriBool.h>
+#include <zypp-core/TriBool.h>
 
 using zypp::TriBool;
 

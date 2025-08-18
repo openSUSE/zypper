@@ -9,11 +9,11 @@
 #include <iostream>
 #include <unistd.h>          // for getcwd()
 
-#include <zypp/base/Logger.h>
-#include <zypp/base/String.h>
-#include <zypp/base/Regex.h>
+#include <zypp-core/base/Logger.h>
+#include <zypp-core/base/String.h>
+#include <zypp-core/base/Regex.h>
 #include <zypp/media/MediaManager.h>
-#include <zypp/ExternalProgram.h>
+#include <zypp-core/ExternalProgram.h>
 #include <zypp/parser/ProductFileReader.h>
 #include <zypp/parser/HistoryLogReader.h>
 
@@ -22,7 +22,7 @@
 #include <zypp/PoolItem.h>
 #include <zypp/Product.h>
 #include <zypp/Pattern.h>
-#include <zypp/AutoDispose.h>
+#include <zypp-core/AutoDispose.h>
 
 #include "main.h"
 #include "Zypper.h"

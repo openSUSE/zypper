@@ -10,7 +10,7 @@
 #include <vector>
 #include <string>
 
-#include <zypp/TriBool.h>
+#include <zypp-core/TriBool.h>
 #include <zypp/ResolverFocus.h>
 
 /**

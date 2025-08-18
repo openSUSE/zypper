@@ -11,15 +11,15 @@
 #include <list>
 
 #include <zypp/ZYpp.h>
-#include <zypp/base/Logger.h>
-#include <zypp/base/IOStream.h>
-#include <zypp/base/String.h>
-#include <zypp/base/Flags.h>
+#include <zypp-core/base/Logger.h>
+#include <zypp-core/base/IOStream.h>
+#include <zypp-core/base/String.h>
+#include <zypp-core/base/Flags.h>
 
 #include <zypp/RepoManager.h>
 #include <zypp/repo/RepoException.h>
-#include <zypp/parser/ParseException.h>
-#include <zypp/media/MediaException.h>
+#include <zypp-core/parser/ParseException>
+#include <zypp-media/MediaException>
 #include <zypp/target/rpm/RpmHeader.h>
 
 #include "output/Out.h"

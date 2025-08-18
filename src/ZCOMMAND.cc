@@ -6,7 +6,7 @@
 \*---------------------------------------------------------------------------*/
 
 #include <iostream>
-#include <zypp/base/LogTools.h>
+#include <zypp-core/base/LogTools.h>
 
 #include "Zypper.h"
 #include "@command@.h"

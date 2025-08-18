@@ -10,7 +10,7 @@
 #include <string>
 #include <initializer_list>
 
-#include <zypp/base/String.h>	// zypp::asString
+#include <zypp-core/base/String.h>	// zypp::asString
 
 ///////////////////////////////////////////////////////////////////
 /// \brief Helper to build multi paragraph description texts

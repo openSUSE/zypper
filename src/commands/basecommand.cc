@@ -1,7 +1,7 @@
 #include "basecommand.h"
 
 #include <boost/optional.hpp>
-#include <zypp/base/LogControl.h>
+#include <zypp-core/base/LogControl.h>
 #include "utils/flags/flagtypes.h"
 #include "utils/messages.h"
 #include "commandhelpformatter.h"

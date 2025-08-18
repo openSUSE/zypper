@@ -8,8 +8,8 @@
 
 #include <iostream>
 
-#include <zypp/base/LogTools.h>
-#include <zypp/ExternalProgram.h>
+#include <zypp-core/base/LogTools.h>
+#include <zypp-core/ExternalProgram.h>
 #include <zypp/misc/CheckAccessDeleted.h>
 
 #include "Zypper.h"

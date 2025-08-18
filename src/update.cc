@@ -1,10 +1,10 @@
 #include <iostream> // for xml and table output
 #include <sstream>
 
-#include <zypp/base/LogTools.h>
+#include <zypp-core/base/LogTools.h>
 #include <zypp/ZYppFactory.h>
 #include <zypp/base/Algorithm.h>
-#include <zypp/base/Iterable.h>
+#include <zypp-core/base/Iterable.h>
 #include <zypp/PoolQuery.h>
 
 #include <zypp/Patch.h>

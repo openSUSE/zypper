@@ -7,7 +7,7 @@
 #ifndef ZYPP_FLAGS_EXCEPTIONS_H_INCLUDED
 #define ZYPP_FLAGS_EXCEPTIONS_H_INCLUDED
 
-#include <zypp/base/Exception.h>
+#include <zypp-core/base/Exception.h>
 
 namespace zypp {
 namespace ZyppFlags {

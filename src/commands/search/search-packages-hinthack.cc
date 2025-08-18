@@ -5,7 +5,7 @@
                              |__/|_|  |_|
 \*---------------------------------------------------------------------------*/
 
-#include <zypp/base/LogTools.h>
+#include <zypp-core/base/LogTools.h>
 #include <zypp/target/rpm/librpmDb.h>
 #include <zypp/ui/Selectable.h>
 #include <zypp/ResPool.h>

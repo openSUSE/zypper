@@ -6,7 +6,7 @@
 \*---------------------------------------------------------------------------*/
 #include "remove.h"
 
-#include <zypp/base/String.h>
+#include <zypp-core/base/String.h>
 #include <zypp/Locks.h>
 
 #include "main.h"

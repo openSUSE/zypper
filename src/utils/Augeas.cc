@@ -10,8 +10,8 @@
 #include <iostream>
 #include <stdlib.h>
 
-#include <zypp/base/Logger.h>
-#include <zypp/Pathname.h>
+#include <zypp-core/base/Logger.h>
+#include <zypp-core/Pathname.h>
 
 #include "Zypper.h"
 #include "utils/Augeas.h"

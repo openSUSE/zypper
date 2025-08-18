@@ -7,11 +7,11 @@
 using boost::unit_test::test_case;
 #endif
 
-#include "zypp/base/LogControl.h"
-#include "zypp/base/LogTools.h"
-#include "zypp/base/InputStream.h"
-#include "zypp/base/IOStream.h"
-#include "zypp/base/Flags.h"
+#include <zypp-core/base/LogControl.h>
+#include <zypp-core/base/LogTools.h>
+#include <zypp-core/base/InputStream>
+#include <zypp-core/base/IOStream.h>
+#include <zypp-core/base/Flags.h>
 #include "zypp/ZYppFactory.h"
 #include "zypp/ZYpp.h"
 #include "zypp/TmpPath.h"

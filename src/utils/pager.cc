@@ -12,10 +12,10 @@
 #include <sys/wait.h> //for wait()
 #include <iterator>
 
-#include <zypp/base/Logger.h>
-#include <zypp/base/String.h>
+#include <zypp-core/base/Logger.h>
+#include <zypp-core/base/String.h>
 #include <zypp/TmpPath.h>
-#include <zypp/Pathname.h>
+#include <zypp-core/Pathname.h>
 #include <zypp/PathInfo.h>
 
 #include "../main.h"

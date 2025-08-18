@@ -12,10 +12,10 @@
 #include <sstream>
 #include <ctime>
 
-#include <zypp/base/Logger.h>
-#include <zypp/base/IOStream.h>
-#include <zypp/base/StringV.h>
-#include <zypp/base/Regex.h>
+#include <zypp-core/base/Logger.h>
+#include <zypp-core/base/IOStream.h>
+#include <zypp-core/base/StringV.h>
+#include <zypp-core/base/Regex.h>
 #include <zypp/sat/Queue.h>
 #include <zypp/sat/FileConflicts.h>
 #include <zypp/ZYppCallbacks.h>

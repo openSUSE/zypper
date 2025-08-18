@@ -8,7 +8,7 @@
 #include "common.h"
 #include "repos.h"
 
-#include <zypp/media/MediaException.h>
+#include <zypp-media/MediaException>
 
 ServiceList get_all_services( Zypper & zypper )
 {

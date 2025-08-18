@@ -11,7 +11,7 @@
 #include "repos.h"
 #include "commonflags.h"
 
-#include <zypp/Pathname.h>
+#include <zypp-core/Pathname.h>
 #include <zypp/target/rpm/RpmHeader.h>
 
 using namespace zypp;

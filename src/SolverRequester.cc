@@ -10,7 +10,7 @@
  *
  */
 #include <zypp/ZYppFactory.h>
-#include <zypp/base/LogTools.h>
+#include <zypp-core/base/LogTools.h>
 
 #include <zypp/PoolQuery.h>
 #include <zypp/PoolItemBest.h>
