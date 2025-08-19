@@ -18,6 +18,7 @@
 
 #include "utils/flags/flagtypes.h"
 #include "utils/messages.h"
+#include "utils/misc.h"
 #include "Zypper.h"
 #include "PackageArgs.h"
 #include "Table.h"
