@@ -231,10 +231,10 @@ void localePackages( Zypper &zypper, const std::vector<std::string> &localeArgs,
 {
   for ( const auto & el : argsToLocaleSet( localeArgs, showAll ) )
   {
-    zypper.out().gap();
+    zypper.out().info("", Out::NORMAL, Out::TYPE_NORMAL);
     zypper.out().info( str::form( _("Packages for %s (locale '%s', requested: %s):"),
                                   el.first.name().c_str(), el.first.code().c_str(), el.second.asString().c_str() ) );
-    zypper.out().gap();
+    zypper.out().info("", Out::NORMAL, Out::TYPE_NORMAL);
     printLocalePackages( zypper, el.first );
   }
 }

@@ -360,7 +360,7 @@ namespace
                             // translator: Hint displayed right adjusted; %1% is a CLI option
                             // "42 patches optional                  (use --with-optional to include optional patches)"
                             str::Format(_("use '%1%' to include optional patches")) % "--with-optional",
-                            Out::QUIET );
+                            Out::NORMAL );
           }
         }
     }
@@ -585,9 +585,9 @@ static bool list_patch_updates( Zypper & zypper, bool all_r, const PatchSelector
   bool affectpm = !pmTbl.empty();
   if ( affectpm )
   {
-    zypper.out().gap();
     if (!tbl.empty())
     {
+      zypper.out().info("", Out::NORMAL, Out::TYPE_NORMAL);
       // translator: Table headline; 'Needed' refers to patches with status 'needed'
       zypper.out().info(_("Needed software management updates will be installed first:"));
       zypper.out().info("", Out::NORMAL, Out::TYPE_NORMAL);
@@ -605,15 +605,19 @@ static bool list_patch_updates( Zypper & zypper, bool all_r, const PatchSelector
       zypper.out().info("", Out::NORMAL, Out::TYPE_NORMAL);
       // translator: Table headline
       zypper.out().info(_("The following updates are also available:"));
+      zypper.out().gap(); // Print even if the above message wasn't, to seperate the tables
     }
-    zypper.out().info("", Out::QUIET, Out::TYPE_NORMAL);
+    else
+    {
+      zypper.out().info("", Out::NORMAL, Out::TYPE_NORMAL);
+    }
     tbl.sort();	// use default sort
     cout << tbl;
   }
 
-  zypper.out().gap();
   if ( stats.visited() )
   {
+    zypper.out().gap();
     stats.render( zypper.out(), /*withDetails*/false );
     zypper.out().gap();
   }
@@ -833,10 +837,10 @@ void list_updates(Zypper & zypper, const ResKindSet & kinds, bool best_effort, b
 
     if (kind_size > 1)
     {
-      zypper.out().info("", Out::QUIET, Out::TYPE_NORMAL); // visual separator
+      zypper.out().info("", Out::NORMAL, Out::TYPE_NORMAL); // visual separator
       zypper.out().info(i18n_kind_updates(*it), Out::QUIET, Out::TYPE_NORMAL);
-      zypper.out().info("", Out::QUIET, Out::TYPE_NORMAL); // visual separator
     }
+    zypper.out().info("", Out::NORMAL, Out::TYPE_NORMAL); // visual separator
 
     if (tbl.empty())
       zypper.out().info(_("No updates found."));
@@ -974,21 +978,21 @@ void list_patches_by_issue( Zypper & zypper, bool all_r, const PatchSelector & s
     {
       if ( !issueMatchesTbl.empty() )
       {
-        zypper.out().gap();
+        zypper.out().info("", Out::NORMAL, Out::TYPE_NORMAL);
         zypper.out().info(_("The following matches in issue numbers have been found:"));
+        zypper.out().info("", Out::NORMAL, Out::TYPE_NORMAL);
 
         issueMatchesTbl.sort(); // use default sort
-        zypper.out().gap();
         cout << issueMatchesTbl;
       }
 
       if ( !descrMatchesTbl.empty() )
       {
-        zypper.out().gap();
+        zypper.out().info("", Out::NORMAL, Out::TYPE_NORMAL);
         zypper.out().info(_( "Matches in patch descriptions of the following patches have been found:"));
+        zypper.out().info("", Out::NORMAL, Out::TYPE_NORMAL);
 
         descrMatchesTbl.sort(); // use default sort
-        zypper.out().gap();
         cout << descrMatchesTbl;
       }
     }

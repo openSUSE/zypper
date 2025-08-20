@@ -257,6 +257,7 @@ void list_patches( Zypper & zypper )
                 God->pool().byKindEnd(ResKind::patch),
                 callback);
 
+  zypper.out().info("", Out::NORMAL, Out::TYPE_NORMAL);
   if ( tbl.empty() )
     zypper.out().info( _("No needed patches found.") );
   else
@@ -338,6 +339,7 @@ static void list_pattern_table( Zypper & zypper, SolvableFilterMode mode_r )
   }
   tbl.sort( 1 ); // Name
 
+  zypper.out().info("", Out::NORMAL, Out::TYPE_NORMAL);
   if ( tbl.empty() )
     zypper.out().info(_("No patterns found.") );
   else
@@ -464,6 +466,7 @@ void list_packages(Zypper & zypper , ListPackagesFlags flags_r )
     else
       tbl.sort( 2 ); // Name
 
+    zypper.out().info("", Out::NORMAL, Out::TYPE_NORMAL);
     cout << tbl;
 
     if ( tagOrphaned )
@@ -540,6 +543,7 @@ void list_product_table(Zypper & zypper , SolvableFilterMode mode_r)
 
   tbl.sort(1); // Name
 
+  zypper.out().info("", Out::NORMAL, Out::TYPE_NORMAL);
   if ( tbl.empty() )
     zypper.out().info(_("No products found.") );
   else

@@ -165,7 +165,7 @@ RepoGpgCheckStrings::RepoGpgCheckStrings(const RepoInfo &repo_r)
 
 void repoPrioSummary( Zypper & zypper )
 {
-  if ( zypper.out().type() != Out::TYPE_NORMAL )
+  if ( zypper.out().type() != Out::TYPE_NORMAL || zypper.out().verbosity() < Out::NORMAL )
     return;
 
   std::map<unsigned,ZeroInit<unsigned>> priomap;
@@ -1837,7 +1837,7 @@ void load_repo_resolvables( Zypper & zypper )
     "Check if 'autorefresh' is turned on (zypper lr), otherwise manually refresh the repository (zypper ref). "
     "If this does not solve the issue, it could be that you are using a broken mirror or "
     "the server has actually discontinued to support the repository." ) );
-    zypper.out().gap();
+    zypper.out().info("", Out::NORMAL, Out::TYPE_NORMAL);
   }
 }
 

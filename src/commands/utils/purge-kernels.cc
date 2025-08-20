@@ -47,12 +47,12 @@ int PurgeKernelsCmd::execute( Zypper &zypper , const std::vector<std::string> & 
 {
   PurgeKernels purger;
 
-  zypper.out().gap();
+  zypper.out().info("", Out::NORMAL, Out::TYPE_NORMAL);
   zypper.out().info( _("Preparing to purge obsolete kernels...") );
   zypper.out().info( str::Format( _("Configuration: %1%") ) % purger.keepSpec() );
   zypper.out().info( str::Format( _("Running kernel release: %1%") ) % purger.unameR() );
   zypper.out().info( str::Format( _("Running kernel arch: %1%") ) % purger.kernelArch().asString() );
-  zypper.out().gap();
+  zypper.out().info("", Out::NORMAL, Out::TYPE_NORMAL);
 
   purger.markObsoleteKernels();
 

@@ -475,7 +475,7 @@ int SearchCmd::execute( Zypper &zypper, const std::vector<std::string> &position
     }
     else
     {
-      cout << endl; //! \todo  out().separator()?
+      zypper.out().info("", Out::NORMAL, Out::TYPE_NORMAL);
 
       if ( _details )
       {

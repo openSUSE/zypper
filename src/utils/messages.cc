@@ -140,7 +140,7 @@ void print_unknown_command_hint( Zypper & zypper, const std::string & cmd_r )
     // zypper shell is running or not
     str::Format(_("Type '%s' to get a list of global options and commands."))
     % (zypper.runningShell() ? "help" : "zypper help") );
-  zypper.out().gap();
+  zypper.out().info("", Out::NORMAL, Out::TYPE_NORMAL);
   zypper.out().info(
     // translators: %1% is the name of an (unknown) command
     // translators: %2% something providing more info (like 'zypper help subcommand')

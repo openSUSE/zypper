@@ -317,7 +317,7 @@ static bool show_problems( Zypper & zypper, SolveAndCommitPolicy & policy )
   }
 
   if ( retry ) {
-    zypper.out().gap();
+    zypper.out().info("", Out::NORMAL, Out::TYPE_NORMAL);
     zypper.out().info(_("Resolving dependencies...") );
     resolver->applySolutions( pendingSolutions );
   }

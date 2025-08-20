@@ -519,7 +519,7 @@ namespace zypp
         Zypper & zypper = Zypper::instance();
         std::string unblock( found.substr( 0, 4 ) );
 
-        zypper.out().gap();
+        zypper.out().info("", Out::NORMAL, Out::TYPE_NORMAL);
         // translators: !!! BOOST STYLE PLACEHOLDERS ( %N% - reorder and multiple occurrence is OK )
         // translators: %1%      - a file name
         // translators: %2%      - full path name
@@ -540,7 +540,7 @@ namespace zypp
                 "Accepting packages with wrong checksums can lead to a corrupted system "
                 "and in extreme cases even to a system compromise." ) ).str()
         );
-        zypper.out().gap();
+        zypper.out().info("", Out::NORMAL, Out::TYPE_NORMAL);
 
         // translators: !!! BOOST STYLE PLACEHOLDERS ( %N% - reorder and multiple occurrence is OK )
         // translators: %1%      - abbreviated checksum (4 chars)

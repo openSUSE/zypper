@@ -362,7 +362,7 @@ void ListReposCmd::printRepoList( Zypper & zypper, const std::list<RepoInfo> & r
     if ( !showprio )
     {
       repoPrioSummary( zypper );
-      zypper.out().gap();
+      zypper.out().info("", Out::NORMAL, Out::TYPE_NORMAL);
     }
     // sort
     tbl.sort( sort_index );
