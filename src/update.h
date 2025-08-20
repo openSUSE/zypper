@@ -25,8 +25,8 @@ void patch_check(bool updatestackOnly);
  * Lists available updates of installed resolvables of specified \a kind.
  * if repo_alias != "", restrict updates to this repository.
  * if best_effort == true, any version greater than the installed one will do.
+ * if idsOnly == true, only the names of the updates will be printed
  * Prints the table of updates to stdout.
- *
  * \param kind  resolvable type
  * \param best_effort
  */
@@ -34,13 +34,15 @@ void list_updates(Zypper & zypper,
                   const ResKindSet & kinds,
                   bool best_effort,
                   bool all,
+                  bool idsOnly,
                   const PatchSelector &patchSel_r = PatchSelector() );
 
 /**
  * List available fixes to all issues or issues specified in --bugzilla
  * or --cve options, or look for --issue[=str[ in numbers and descriptions
+ * (only printing the names of patches if idsOnly == true)
  */
-void list_patches_by_issue(Zypper & zypper, bool all_r, const PatchSelector &sel );
+void list_patches_by_issue(Zypper & zypper, bool all_r, bool idsOnly, const PatchSelector &sel );
 
 /**
  * Mark patches for installation according to bugzilla or CVE number specified

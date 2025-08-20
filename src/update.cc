@@ -547,7 +547,7 @@ static void xml_list_updates(const ResKindSet & kinds, bool all_r )
 // ----------------------------------------------------------------------------
 
 // returns true if NEEDED! restartSuggested() patches are available
-static bool list_patch_updates( Zypper & zypper, bool all_r, const PatchSelector &sel, const PatchHistoryData & historyData_r )
+static bool list_patch_updates( Zypper & zypper, bool all_r, bool idsOnly, const PatchSelector &sel, const PatchHistoryData & historyData_r )
 {
   Table tbl;
   FillPatchesTable intoTbl( tbl, historyData_r );
@@ -593,7 +593,7 @@ static bool list_patch_updates( Zypper & zypper, bool all_r, const PatchSelector
       zypper.out().info("", Out::NORMAL, Out::TYPE_NORMAL);
     }
     pmTbl.sort();	// use default sort
-    cout << pmTbl;
+    printIdTable(pmTbl, idsOnly, 1);
   }
 
   if (tbl.empty() && !affectpm)
@@ -605,17 +605,20 @@ static bool list_patch_updates( Zypper & zypper, bool all_r, const PatchSelector
       zypper.out().info("", Out::NORMAL, Out::TYPE_NORMAL);
       // translator: Table headline
       zypper.out().info(_("The following updates are also available:"));
-      zypper.out().gap(); // Print even if the above message wasn't, to seperate the tables
+      if (!idsOnly)
+        // Print even if the above message wasn't, to seperate the tables
+        // (unless we weren't printing a table in the first place)
+        zypper.out().gap();
     }
     else
     {
       zypper.out().info("", Out::NORMAL, Out::TYPE_NORMAL);
     }
     tbl.sort();	// use default sort
-    cout << tbl;
+    printIdTable(tbl, idsOnly, 1);
   }
 
-  if ( stats.visited() )
+  if ( stats.visited() && !idsOnly )
   {
     zypper.out().gap();
     stats.render( zypper.out(), /*withDetails*/false );
@@ -716,7 +719,7 @@ std::string i18n_kind_updates(const ResKind & kind)
 
 // FIXME rewrite this function so that first the list of updates is collected and later correctly presented (bnc #523573)
 
-void list_updates(Zypper & zypper, const ResKindSet & kinds, bool best_effort, bool all_r, const PatchSelector &patchSel_r )
+void list_updates(Zypper & zypper, const ResKindSet & kinds, bool best_effort, bool all_r, bool idsOnly, const PatchSelector &patchSel_r )
 {
   PatchHistoryData patchHistoryData;	// commonly used by all tables
 
@@ -745,18 +748,17 @@ void list_updates(Zypper & zypper, const ResKindSet & kinds, bool best_effort, b
       affects_pkgmgr = xml_list_patches( zypper, all_r, patchHistoryData );
     else
     {
-      if (kinds.size() > 1)
+      if (kinds.size() > 1 && !idsOnly)
       {
         zypper.out().info("", Out::NORMAL, Out::TYPE_NORMAL);
         zypper.out().info(i18n_kind_updates(*it), Out::QUIET, Out::TYPE_NORMAL);
       }
-      affects_pkgmgr = list_patch_updates( zypper, all_r, patchSel_r, patchHistoryData );
+      affects_pkgmgr = list_patch_updates( zypper, all_r, idsOnly, patchSel_r, patchHistoryData );
     }
     localkinds.erase(it);
   }
 
   // list other kinds (only if there are no _patches_ affecting the package manager)
-
   // XML output here
   if (zypper.out().type() == Out::TYPE_XML)
   {
@@ -835,7 +837,7 @@ void list_updates(Zypper & zypper, const ResKindSet & kinds, bool best_effort, b
     }
     tbl.sort( name_col );
 
-    if (kind_size > 1)
+    if (kind_size > 1 && !idsOnly)
     {
       zypper.out().info("", Out::NORMAL, Out::TYPE_NORMAL); // visual separator
       zypper.out().info(i18n_kind_updates(*it), Out::QUIET, Out::TYPE_NORMAL);
@@ -845,12 +847,14 @@ void list_updates(Zypper & zypper, const ResKindSet & kinds, bool best_effort, b
     if (tbl.empty())
       zypper.out().info(_("No updates found."));
     else
-      cout << tbl;
+    {
+      printIdTable(tbl, idsOnly, hide_repo ? 1 : 2);
+    }
   }
 }
 
 // ----------------------------------------------------------------------------
-void list_patches_by_issue( Zypper & zypper, bool all_r, const PatchSelector & sel_r )
+void list_patches_by_issue( Zypper & zypper, bool all_r, bool idsOnly, const PatchSelector & sel_r )
 {
   PatchHistoryData patchHistoryData;	// commonly used by all tables
 
@@ -983,7 +987,7 @@ void list_patches_by_issue( Zypper & zypper, bool all_r, const PatchSelector & s
         zypper.out().info("", Out::NORMAL, Out::TYPE_NORMAL);
 
         issueMatchesTbl.sort(); // use default sort
-        cout << issueMatchesTbl;
+        printIdTable(issueMatchesTbl, idsOnly, 2);
       }
 
       if ( !descrMatchesTbl.empty() )
@@ -993,7 +997,7 @@ void list_patches_by_issue( Zypper & zypper, bool all_r, const PatchSelector & s
         zypper.out().info("", Out::NORMAL, Out::TYPE_NORMAL);
 
         descrMatchesTbl.sort(); // use default sort
-        cout << descrMatchesTbl;
+        printIdTable(descrMatchesTbl, idsOnly, 1);
       }
     }
   }

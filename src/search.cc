@@ -247,7 +247,7 @@ static std::string string_weak_status( const ResStatus & rs )
 }
 
 
-void list_patches( Zypper & zypper )
+void list_patches( Zypper & zypper, bool idsOnly )
 {
   MIL << "Pool contains " << God->pool().size() << " items. Checking whether available patches are needed." << std::endl;
 
@@ -264,7 +264,7 @@ void list_patches( Zypper & zypper )
   {
     // display the result, even if --quiet specified
     tbl.sort();	// use default sort
-    cout << tbl;
+    printIdTable(tbl, idsOnly, 1);
   }
 }
 
@@ -293,7 +293,7 @@ static void list_patterns_xml( Zypper & zypper, SolvableFilterMode mode_r )
   cout << "</pattern-list>" << endl;
 }
 
-static void list_pattern_table( Zypper & zypper, SolvableFilterMode mode_r )
+static void list_pattern_table( Zypper & zypper, SolvableFilterMode mode_r, bool idsOnly )
 {
   MIL << "Going to list patterns." << std::endl;
 
@@ -344,15 +344,15 @@ static void list_pattern_table( Zypper & zypper, SolvableFilterMode mode_r )
     zypper.out().info(_("No patterns found.") );
   else
     // display the result, even if --quiet specified
-    cout << tbl;
+    printIdTable(tbl, idsOnly, 1);
 }
 
-void list_patterns(Zypper & zypper , SolvableFilterMode mode_r)
+void list_patterns(Zypper & zypper , SolvableFilterMode mode_r, bool idsOnly)
 {
   if ( zypper.out().type() == Out::TYPE_XML )
     list_patterns_xml( zypper, mode_r );
   else
-    list_pattern_table( zypper, mode_r );
+    list_pattern_table( zypper, mode_r, idsOnly );
 }
 
 void list_packages(Zypper & zypper , ListPackagesFlags flags_r )
@@ -379,6 +379,7 @@ void list_packages(Zypper & zypper , ListPackagesFlags flags_r )
   bool unneeded = flags_r.testFlag( ListPackagesBits::ShowUnneeded );
   bool byAuto = flags_r.testFlag( ListPackagesBits::ShowByAuto );
   bool byUser = flags_r.testFlag( ListPackagesBits::ShowByUser );
+  bool idsOnly = flags_r.testFlag( ListPackagesBits::IdsOnly );
   bool check = ( flags_r & ( maskNeedSolv | ListPackagesBits::ShowSystem | ListPackagesBits::ShowByAuto | ListPackagesBits::ShowByUser ) );
   if ( flags_r & maskNeedSolv ) {
     God->resolver()->resolvePool();
@@ -467,9 +468,9 @@ void list_packages(Zypper & zypper , ListPackagesFlags flags_r )
       tbl.sort( 2 ); // Name
 
     zypper.out().info("", Out::NORMAL, Out::TYPE_NORMAL);
-    cout << tbl;
+    printIdTable(tbl, idsOnly, 2);
 
-    if ( tagOrphaned )
+    if ( tagOrphaned && !idsOnly )
       Zypper::instance().out().notePar( 4, "(o) = orphaned" );
   }
 }
@@ -495,7 +496,7 @@ void list_products_xml( Zypper & zypper, SolvableFilterMode mode_r, const std::v
   cout << "</product-list>" << endl;
 }
 
-void list_product_table(Zypper & zypper , SolvableFilterMode mode_r)
+void list_product_table(Zypper & zypper , SolvableFilterMode mode_r, bool idsOnly )
 {
   MIL << "Going to list products." << std::endl;
 
@@ -548,5 +549,5 @@ void list_product_table(Zypper & zypper , SolvableFilterMode mode_r)
     zypper.out().info(_("No products found.") );
   else
     // display the result, even if --quiet specified
-    cout << tbl;
+    printIdTable(tbl, idsOnly, 2);
 }

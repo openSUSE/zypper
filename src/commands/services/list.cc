@@ -4,7 +4,9 @@
 #include "common.h"
 #include "Table.h"
 
+#include "commands/commonflags.h"
 #include "utils/flags/flagtypes.h"
+#include "utils/misc.h"
 
 using namespace zypp;
 
@@ -194,7 +196,7 @@ void ListServicesCmd::printServiceList( Zypper &zypper )
       tbl.sort( 5 );
 
     // print
-    cout << tbl;
+    printIdTable(tbl, _idsOnly, 1);
   }
 }
 
@@ -230,11 +232,15 @@ void ListServicesCmd::printXMLServiceList( Zypper &zypper )
 
 ZyppFlags::CommandGroup ListServicesCmd::cmdOptions() const
 {
-  return ZyppFlags::CommandGroup();
+  auto that = const_cast<ListServicesCmd *>(this);
+  return {{
+    CommonFlags::idsOnlyFlag( that->_idsOnly, _("service") )
+  }};
 }
 
 void ListServicesCmd::doReset()
 {
+  _idsOnly = false;
 }
 
 int ListServicesCmd::execute( Zypper &zypper, const std::vector<std::string> &positionalArgs_r )

@@ -18,6 +18,7 @@ public:
 private:
   bool _packages;
   bool _all;
+  bool _idsOnly;
 
   // ZypperBaseCommand interface
 public:

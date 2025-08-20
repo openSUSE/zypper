@@ -19,6 +19,7 @@ public:
   ListServicesCmd ( std::vector<std::string> &&commandAliases_r );
 
 private:
+  bool _idsOnly = false;
   void printServiceList    ( Zypper &zypper );
   void printXMLServiceList ( Zypper &zypper );
 

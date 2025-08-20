@@ -203,7 +203,8 @@ zypp::ZyppFlags::CommandGroup SearchCmd::cmdOptions() const
       {"verbose", 'v', ZyppFlags::NoArgument, ZyppFlags::BoolType( &that._verbose, ZyppFlags::StoreTrue, _caseSensitive ),
         // translators: -v, --verbose
         _("Like --details, with additional information where the search has matched (useful for search in dependencies).")
-      }
+      },
+      CommonFlags::idsOnlyFlag( that._idsOnly, ResKind::nokind )
     },
     {
       { "match-substrings", "match-words", "match-exact" },
@@ -229,6 +230,7 @@ void SearchCmd::doReset()
   _verbose = false;
   _requestedDeps.clear();
   _requestedTypes.clear();
+  _idsOnly = false;
 }
 
 int SearchCmd::execute( Zypper &zypper, const std::vector<std::string> &positionalArgs_r )
@@ -492,8 +494,11 @@ int SearchCmd::execute( Zypper &zypper, const std::vector<std::string> &position
           t.allowAbbrev( 2 );
       }
 
-      //cout << t; //! \todo out().table()?
-      zypper.out().searchResult( t );
+      if ( _idsOnly )
+        printIdTable(t, true, 1);
+      else
+        //cout << t; //! \todo out().table()?
+        zypper.out().searchResult( t );
     }
 
     if ( !_requestedReverseSearch.is_initialized() )

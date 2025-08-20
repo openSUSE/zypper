@@ -7,6 +7,7 @@
 #include "packages.h"
 #include "Zypper.h"
 #include "utils/flags/flagtypes.h"
+#include "commands/commonflags.h"
 #include "global-settings.h"
 
 using namespace zypp;
@@ -66,6 +67,7 @@ zypp::ZyppFlags::CommandGroup PackagesCmdBase::cmdOptions() const
             // translators: -R, --sort-by-repo
             _("Sort the list by repository.")
       },
+      CommonFlags::idsOnlyFlag( that->_idsOnly, ResKind::package ),
       {"sort-by-catalog", '\0', ZyppFlags::NoArgument | ZyppFlags::Hidden, ZyppFlags::BitFieldType( that->_flags, ListPackagesBits::SortByRepo ), ""}
   }};
 }
@@ -73,6 +75,7 @@ zypp::ZyppFlags::CommandGroup PackagesCmdBase::cmdOptions() const
 void PackagesCmdBase::doReset()
 {
   _flags = ListPackagesBits::Default;
+  _idsOnly = false;
 }
 
 int PackagesCmdBase::execute( Zypper &zypper, const std::vector<std::string> & )
@@ -80,6 +83,7 @@ int PackagesCmdBase::execute( Zypper &zypper, const std::vector<std::string> & )
   ListPackagesFlags  flags = _flags;
   flags.setFlag( ListPackagesBits::HideInstalled, _notInstalledOnly._mode == SolvableFilterMode::ShowOnlyNotInstalled );
   flags.setFlag( ListPackagesBits::HideNotInstalled, _notInstalledOnly._mode == SolvableFilterMode::ShowOnlyInstalled );
+  flags.setFlag( ListPackagesBits::IdsOnly, _idsOnly );
 
   list_packages( zypper, flags );
 

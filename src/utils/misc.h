@@ -252,4 +252,7 @@ bool packagekit_running();
 /** Send suggestion to quit to PackageKit via DBus */
 void packagekit_suggest_quit();
 
+/** Prints a table, or if idsOnly, just print the contents of idCol */
+void printIdTable( const Table &table, bool idsOnly, int idCol );
+
 #endif /*ZYPPER_UTILS_H*/

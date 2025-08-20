@@ -23,6 +23,7 @@ private:
   InitReposOptionSet _initRepoFlags { *this };
   NotInstalledOnlyOptionSet _instFilterFlags { *this };
   std::vector<std::string> _xmlFwdTags;
+  bool _idsOnly = false;
 
   // ZypperBaseCommand interface
 protected:

@@ -7,6 +7,7 @@
 #include "patches.h"
 #include "Zypper.h"
 #include "utils/flags/flagtypes.h"
+#include "commands/commonflags.h"
 #include "global-settings.h"
 
 using namespace zypp;
@@ -29,14 +30,19 @@ PatchesCmdBase::PatchesCmdBase(std::vector<std::string> &&commandAliases_r) :
 
 zypp::ZyppFlags::CommandGroup PatchesCmdBase::cmdOptions() const
 {
-  return {};
+  auto that = const_cast<PatchesCmdBase *>(this);
+  return {{
+    CommonFlags::idsOnlyFlag( that->_idsOnly, ResKind::patch )
+  }};
 }
 
 void PatchesCmdBase::doReset()
-{ }
+{
+  _idsOnly = false;
+}
 
 int PatchesCmdBase::execute( Zypper &zypper, const std::vector<std::string> & )
 {
-  list_patches( zypper );
+  list_patches( zypper, _idsOnly );
   return ZYPPER_EXIT_OK;
 }

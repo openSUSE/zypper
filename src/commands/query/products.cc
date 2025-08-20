@@ -7,6 +7,7 @@
 #include "products.h"
 #include "Zypper.h"
 #include "utils/flags/flagtypes.h"
+#include "commands/commonflags.h"
 #include "global-settings.h"
 
 using namespace zypp;
@@ -34,13 +35,15 @@ zypp::ZyppFlags::CommandGroup ProductsCmdBase::cmdOptions() const
     { "xmlfwd", '\0', ZyppFlags::RequiredArgument | ZyppFlags::Repeatable, ZyppFlags::StringVectorType( &that->_xmlFwdTags, ARG_TAG ),
       // translators: --xmlfwd <TAG>
       _("XML output only: Literally forward the XML tags found in a product file.")
-    }
+    },
+    CommonFlags::idsOnlyFlag( that->_idsOnly, ResKind::product )
   }};
 }
 
 void ProductsCmdBase::doReset()
 {
   _xmlFwdTags.clear();
+  _idsOnly = false;
 }
 
 int ProductsCmdBase::execute( Zypper &zypper, const std::vector<std::string> & )
@@ -53,6 +56,6 @@ int ProductsCmdBase::execute( Zypper &zypper, const std::vector<std::string> & )
   if ( zypper.out().type() == Out::TYPE_XML )
     list_products_xml( zypper, _instFilterFlags._mode, _xmlFwdTags );
   else
-    list_product_table( zypper, _instFilterFlags._mode );
+    list_product_table( zypper, _instFilterFlags._mode, _idsOnly  );
   return ZYPPER_EXIT_OK;
 }

@@ -19,6 +19,7 @@ public:
 
 private:
   bool _all = false;
+  bool _idsOnly = false;
   InitReposOptionSet _initReposOpts { *this };
   SelectPatchOptionSet _selectPatchOpts { *this, SelectPatchOptionSet::EnableAnyType };
   OptionalPatchesOptionSet _optionalPatchesOpts { *this };

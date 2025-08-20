@@ -21,6 +21,7 @@ public:
 
 private:
   ListPackagesFlags _flags = ListPackagesBits::Default;
+  bool _idsOnly = false;
   InitReposOptionSet _initRepoFlags { *this };
   NotInstalledOnlyOptionSet _notInstalledOnly { *this };
 

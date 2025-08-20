@@ -23,6 +23,7 @@ private:
   std::set<ResKind> _kinds;
   bool _all = false;
   bool _bestEffort = false;
+  bool _idsOnly = false;
   InitReposOptionSet _initReposOpts { *this };
   SolverInstallsOptionSet _solverOpts { *this };
 

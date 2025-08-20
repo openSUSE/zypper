@@ -24,10 +24,11 @@ protected:
   zypp::ZyppFlags::CommandGroup cmdOptions() const override;
   void doReset() override;
   int execute(Zypper &zypper, const std::vector<std::string> &positionalArgs_r) override;
-  void printRepoList(Zypper &zypper, const std::list<zypp::RepoInfo> &repos);
+  void printRepoList(Zypper &zypper, const std::list<zypp::RepoInfo> &repos, bool idsOnly);
 
 private:
   std::string _exportFile;
+  bool _idsOnly;
   RSCommonListOptions _listOptions{ OptCommandCtx::RepoContext, *this };
 };
 

@@ -8,6 +8,7 @@
 #include "localescmd.h"
 #include "utils/flags/flagtypes.h"
 #include "commands/commandhelpformatter.h"
+#include "commands/commonflags.h"
 #include "locales.h"
 
 LocalesCmd::LocalesCmd( std::vector<std::string> &&commandAliases_r )
@@ -32,7 +33,8 @@ zypp::ZyppFlags::CommandGroup LocalesCmd::cmdOptions() const
   auto &that = *const_cast<LocalesCmd *>(this);
   return {{
     { "packages", 'p', ZyppFlags::NoArgument, ZyppFlags::BoolCompatibleType( that._packages, ZyppFlags::StoreTrue ), _("Show corresponding packages.") },
-    { "all", 'a', ZyppFlags::NoArgument, ZyppFlags::BoolCompatibleType( that._all, ZyppFlags::StoreTrue ), _("List all available locales.") }
+    { "all", 'a', ZyppFlags::NoArgument, ZyppFlags::BoolCompatibleType( that._all, ZyppFlags::StoreTrue ), _("List all available locales.") },
+    CommonFlags::idsOnlyFlag( that._idsOnly, _("locale (or package)") ),
   }};
 }
 
@@ -40,6 +42,7 @@ void LocalesCmd::doReset()
 {
   _packages = false;
   _all = false;
+  _idsOnly = false;
 }
 
 int LocalesCmd::execute(Zypper &zypper, const std::vector<std::string> &positionalArgs)
@@ -60,9 +63,9 @@ int LocalesCmd::execute(Zypper &zypper, const std::vector<std::string> &position
     return code;
 
   if ( _packages )
-    localePackages( zypper, positionalArgs, _all );
+    localePackages( zypper, positionalArgs, _all, _idsOnly );
   else
-    listLocales( zypper, positionalArgs, _all );
+    listLocales( zypper, positionalArgs, _all, _idsOnly );
   return zypper.exitCode();
 }
 

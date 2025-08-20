@@ -8,6 +8,7 @@
 #include "commonflags.h"
 #include "src/update.h"
 #include "utils/messages.h"
+#include "commands/commonflags.h"
 
 ListPatchesCmd::ListPatchesCmd(std::vector<std::string> &&commandAliases_r)
   : ZypperBaseCommand (
@@ -29,13 +30,15 @@ zypp::ZyppFlags::CommandGroup ListPatchesCmd::cmdOptions() const
       {"all", 'a', ZyppFlags::NoArgument, ZyppFlags::BoolType( &that._all, ZyppFlags::StoreTrue, _all ),
             // translators: -a, --all
             _("List all patches, not only applicable ones.")
-      }
+      },
+      CommonFlags::idsOnlyFlag( that._idsOnly, ResKind::patch )
   }};
 }
 
 void ListPatchesCmd::doReset()
 {
   _all = false;
+  _idsOnly = false;
 }
 
 int ListPatchesCmd::execute( Zypper &zypper, const std::vector<std::string> &positionalArgs_r )
@@ -55,9 +58,9 @@ int ListPatchesCmd::execute( Zypper &zypper, const std::vector<std::string> &pos
     };
 
     if ( _selectPatchOpts._select._requestedIssues.size() )
-      list_patches_by_issue( zypper, _all, _selectPatchOpts._select );
+      list_patches_by_issue( zypper, _all, _idsOnly, _selectPatchOpts._select );
     else
-      list_updates( zypper, kinds, false, _all, _selectPatchOpts._select );
+      list_updates( zypper, kinds, false, _all, _idsOnly, _selectPatchOpts._select );
 
     return zypper.exitCode();
 }

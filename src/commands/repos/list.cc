@@ -4,6 +4,7 @@
 #include "Table.h"
 #include "utils/messages.h"
 #include "utils/flags/flagtypes.h"
+#include "commands/commonflags.h"
 
 #include <zypp/RepoManager.h>
 
@@ -95,13 +96,15 @@ zypp::ZyppFlags::CommandGroup ListReposCmd::cmdOptions() const
   return {{
       { "export", 'e', ZyppFlags::RequiredArgument, ZyppFlags::StringType(&that->_exportFile, boost::optional<const char *>(), "FILE.repo"),
             // translators: -e, --export <FILE.repo>
-            _("Export all defined repositories as a single local .repo file.") }
+            _("Export all defined repositories as a single local .repo file.") },
+      CommonFlags::idsOnlyFlag(that->_idsOnly, _("repository"))
   }};
 }
 
 void ListReposCmd::doReset()
 {
   _exportFile.clear();
+  _idsOnly = false;
 }
 
 int ListReposCmd::execute( Zypper &zypper, const std::vector<std::string> &positionalArgs_r )
@@ -171,7 +174,7 @@ int ListReposCmd::execute( Zypper &zypper, const std::vector<std::string> &posit
     print_repo_details( zypper, repos );
   // print repo list as table
   else
-    printRepoList( zypper, repos );
+    printRepoList( zypper, repos, _idsOnly );
 
   if ( !not_found.empty() ) {
     return ( ZYPPER_EXIT_ERR_INVALID_ARGS );
@@ -182,7 +185,7 @@ int ListReposCmd::execute( Zypper &zypper, const std::vector<std::string> &posit
   return ZYPPER_EXIT_OK;
 }
 
-void ListReposCmd::printRepoList( Zypper & zypper, const std::list<RepoInfo> & repos )
+void ListReposCmd::printRepoList( Zypper & zypper, const std::list<RepoInfo> & repos, bool idsOnly )
 {
   Table tbl;
   bool all = _listOptions._flags.testFlag( RSCommonListOptions::ListRepoShowAll );
@@ -220,7 +223,7 @@ void ListReposCmd::printRepoList( Zypper & zypper, const std::list<RepoInfo> & r
   th << "#";
 
   // alias
-  if ( all || showalias )
+  if ( all || showalias || idsOnly )
   {
     th << N_("Alias");
     ++index;
@@ -359,7 +362,7 @@ void ListReposCmd::printRepoList( Zypper & zypper, const std::list<RepoInfo> & r
   }
   else
   {
-    if ( !showprio )
+    if ( !showprio && !idsOnly )
     {
       repoPrioSummary( zypper );
       zypper.out().info("", Out::NORMAL, Out::TYPE_NORMAL);
@@ -367,7 +370,7 @@ void ListReposCmd::printRepoList( Zypper & zypper, const std::list<RepoInfo> & r
     // sort
     tbl.sort( sort_index );
     // print
-    cout << tbl;
+    printIdTable(tbl, idsOnly, 1);
   }
 }
 

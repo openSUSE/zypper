@@ -14,9 +14,9 @@
 
 class Zypper;
 
-void listLocales( Zypper & zypper, const std::vector<std::string> &localeArgs, bool showAll );
+void listLocales( Zypper & zypper, const std::vector<std::string> &localeArgs, bool showAll, bool idsOnly );
 
-void localePackages( Zypper & zypper, const std::vector<std::string> &localeArgs, bool showAll );
+void localePackages( Zypper & zypper, const std::vector<std::string> &localeArgs, bool showAll, bool idsOnly );
 
 void addLocales( Zypper & zypper_r, const std::vector<std::string> &localeArgs_r, bool packages, std::map<std::string, bool> *result = nullptr );
 

@@ -60,12 +60,13 @@ struct FillSearchTableSelectable
 // struct FillPatchesTableForIssue	in src/utils/misc.h
 
 
-/** List all patches with specific info in specified repos */
-void list_patches(Zypper & zypper);
+/** List all patches with specific info in specified repos,
+ *  (possibly printing only their names) */
+void list_patches(Zypper & zypper, bool idsOnly);
 
-/** List all patterns with specific info in specified repos */
-
-void list_patterns(Zypper & zypper, SolvableFilterMode mode_r );
+/** List all patterns with specific info in specified repos
+  *  (possibly printing only their names) */
+void list_patterns(Zypper & zypper, SolvableFilterMode mode_r, bool idsOnly);
 
 /** List all packages with specific info in specified repos
  *  - currently looks like zypper search -t package -r foorepo */
@@ -80,15 +81,17 @@ enum class ListPackagesBits {
   ShowUnneeded      = 1 << 6,
   ShowByAuto        = 1 << 7,
   ShowByUser        = 1 << 8,
+  IdsOnly           = 1 << 9, // Only ids will be printed
   SortByRepo        = 1 << 20  //< Result will be sorted by repo, not by name
 };
 ZYPP_DECLARE_FLAGS( ListPackagesFlags, ListPackagesBits );
 ZYPP_DECLARE_OPERATORS_FOR_FLAGS(ListPackagesFlags)
 void list_packages(Zypper & zypper, ListPackagesFlags flags_r );
 
-/** List all products with specific info in specified repos */
+/** List all products with specific info in specified repos
+ *  (possibly printing only their internal names) */
 void list_products_xml( Zypper & zypper, SolvableFilterMode mode_r, const std::vector<std::string> &fwdTags );
-void list_product_table( Zypper & zypper, SolvableFilterMode mode_r );
+void list_product_table( Zypper & zypper, SolvableFilterMode mode_r, bool idsOnly );
 
 
 #endif /*ZYPPERSEARCH_H_*/

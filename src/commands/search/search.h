@@ -38,6 +38,7 @@ private:
   bool _caseSensitive = false;
   bool _details = false;
   bool _verbose = false;
+  bool _idsOnly = false;
   std::set<zypp::sat::SolvAttr> _requestedDeps;
   boost::optional<zypp::sat::SolvAttr> _requestedReverseSearch;
 

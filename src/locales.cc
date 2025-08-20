@@ -166,7 +166,7 @@ namespace
     return ret;
   }
 
-  void printLocaleList( Zypper & zypper, const LocaleStateMap & locales_r )
+  void printLocaleList( Zypper & zypper, const LocaleStateMap & locales_r, bool idsOnly )
   {
     Table tbl;
     tbl << ( TableHeader()
@@ -188,10 +188,10 @@ namespace
     }
 
     tbl.sort( 0 );
-    cout << tbl;
+    printIdTable(tbl, idsOnly, 0);
   }
 
-  void printLocalePackages( Zypper & zypper, const zypp::sat::LocaleSupport & myLocale )
+  void printLocalePackages( Zypper & zypper, const zypp::sat::LocaleSupport & myLocale, bool idsOnly )
   {
     Table tbl;
     tbl << ( TableHeader()
@@ -214,7 +214,7 @@ namespace
     }
 
     tbl.sort(1);
-    cout << tbl;
+    printIdTable(tbl, idsOnly, 1);
   }
 
 } // namespace
@@ -222,12 +222,12 @@ namespace
 
 
 
-void listLocales( Zypper & zypper, const std::vector<std::string> &localeArgs, bool showAll )
+void listLocales( Zypper & zypper, const std::vector<std::string> &localeArgs, bool showAll, bool idsOnly )
 {
-  printLocaleList( zypper, argsToLocaleSet( localeArgs, showAll ) );
+  printLocaleList( zypper, argsToLocaleSet( localeArgs, showAll ), idsOnly );
 }
 
-void localePackages( Zypper &zypper, const std::vector<std::string> &localeArgs, bool showAll )
+void localePackages( Zypper &zypper, const std::vector<std::string> &localeArgs, bool showAll, bool idsOnly )
 {
   for ( const auto & el : argsToLocaleSet( localeArgs, showAll ) )
   {
@@ -235,7 +235,7 @@ void localePackages( Zypper &zypper, const std::vector<std::string> &localeArgs,
     zypper.out().info( str::form( _("Packages for %s (locale '%s', requested: %s):"),
                                   el.first.name().c_str(), el.first.code().c_str(), el.second.asString().c_str() ) );
     zypper.out().info("", Out::NORMAL, Out::TYPE_NORMAL);
-    printLocalePackages( zypper, el.first );
+    printLocalePackages( zypper, el.first, idsOnly );
   }
 }
 

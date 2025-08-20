@@ -33,7 +33,8 @@ zypp::ZyppFlags::CommandGroup ListUpdatesCmd::cmdOptions() const
     { "all", 'a', ZyppFlags::NoArgument, ZyppFlags::BoolType( &that._all, ZyppFlags::StoreTrue, _all ),
           // translators: -a, --all
           _("List all packages for which newer versions are available, regardless whether they are installable or not.")
-    }
+    },
+    CommonFlags::idsOnlyFlag( that._idsOnly, ResKind::nokind )
   }};
 }
 
@@ -42,6 +43,7 @@ void ListUpdatesCmd::doReset()
   _kinds.clear();
   _all = false;
   _bestEffort = false;
+  _idsOnly = false;
 }
 
 int ListUpdatesCmd::execute( Zypper &zypper, const std::vector<std::string> &positionalArgs_r )
@@ -59,6 +61,6 @@ int ListUpdatesCmd::execute( Zypper &zypper, const std::vector<std::string> &pos
   if ( code != ZYPPER_EXIT_OK )
     return code;
 
-  list_updates( zypper, _kinds, _bestEffort, _all );
+  list_updates( zypper, _kinds, _bestEffort, _all, _idsOnly );
   return zypper.exitCode();
 }

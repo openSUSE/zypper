@@ -897,3 +897,18 @@ const char * computeStatusIndicator( const ui::Selectable & sel_r, bool tagForei
     return stem[1];
   return stem[0];
 }
+
+// ----------------------------------------------------------------------------
+
+void printIdTable( const Table &table, bool idsOnly, int idCol )
+{
+  if ( idsOnly )
+  {
+    for ( auto &row : table.rows() )
+      cout << row.columns()[idCol] << endl;
+  }
+  else
+  {
+    cout << table;
+  }
+}

@@ -22,6 +22,7 @@ public:
 private:
   InitReposOptionSet _initRepoFlags { *this };
   NotInstalledOnlyOptionSet _instOnlyFlags { *this };
+  bool _idsOnly = false;
 
   // ZypperBaseCommand interface
 protected:
