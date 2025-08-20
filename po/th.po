@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: YaST (@memory@)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-02 13:50+0200\n"
+"POT-Creation-Date: 2025-08-21 05:59+1000\n"
 "PO-Revision-Date: 2025-07-22 12:48+0000\n"
 "Last-Translator: Julia Faltenbacher <julia.faltenbacher@suse.com>\n"
 "Language-Team: Thai <https://l10n.opensuse.org/projects/zypper/master/th/>\n"
@@ -273,8 +273,7 @@ msgstr ""
 
 #: src/Config.cc:491
 msgid "Repositories disabled, using the database of installed packages only."
-msgstr ""
-"คลังแพกเกจถูกปิดการใช้งาน จะใช้ฐานข้อมูลของแพกเกจที่ถูกติดตั้งไว้แล้วเท่านั้น"
+msgstr "คลังแพกเกจถูกปิดการใช้งาน จะใช้ฐานข้อมูลของแพกเกจที่ถูกติดตั้งไว้แล้วเท่านั้น"
 
 #. translators: --disable-repositories
 #: src/Config.cc:495
@@ -1286,7 +1285,7 @@ msgstr ""
 msgid "Try again?"
 msgstr "ลองอีกครั้งหรือไม่ ?"
 
-#: src/Zypper.cc:244 src/Zypper.cc:721 src/commands/basecommand.cc:293
+#: src/Zypper.cc:244 src/Zypper.cc:730 src/commands/basecommand.cc:293
 msgid "Unexpected exception."
 msgstr "เกิดข้อผิดพลาดยกเว้นที่ไม่ได้คาดไว้ "
 
@@ -1314,12 +1313,12 @@ msgstr ""
 
 #. TranslatorExplanation The %s is "--plus-repo"
 #. TranslatorExplanation The %s is "--option-name"
-#: src/Zypper.cc:536 src/Zypper.cc:588
+#: src/Zypper.cc:545 src/Zypper.cc:597
 #, c-format, boost-format
 msgid "The %s option has no effect here, ignoring."
 msgstr "ตัวเลือก %s ไม่มีผลอะไรที่นี่ ไม่สนใจมัน"
 
-#: src/Zypper.cc:630
+#: src/Zypper.cc:639
 msgid "Non-option program arguments: "
 msgstr "อาร์กิวเมนต์ของโปรแกรมที่ไม่มีตัวเลือกใด: "
 
@@ -1449,8 +1448,7 @@ msgstr "ทำการยอมรับแฟ้ม '%s' ซึ่งถูก
 #, c-format, boost-format
 msgid ""
 "Accepting file '%s' from repository '%s' signed with an unknown key '%s'."
-msgstr ""
-"ทำการยอมรับแฟ้ม '%s' จากคลังแพกเกจ '%s' ซึ่งถูกเซ็นด้วยกุญแจที่ไม่รู้จัก '%s'"
+msgstr "ทำการยอมรับแฟ้ม '%s' จากคลังแพกเกจ '%s' ซึ่งถูกเซ็นด้วยกุญแจที่ไม่รู้จัก '%s'"
 
 #. translator: %1% is a file name, %2% is a gpg key ID
 #: src/callbacks/keyring.h:214
@@ -1535,13 +1533,11 @@ msgstr "ไม่สนใจต่อความล้มเหลวในก
 #, c-format, boost-format
 msgid ""
 "Ignoring failed signature verification for file '%s' from repository '%s'!"
-msgstr ""
-"ไม่สนใจต่อความล้มเหลวในการตรวจสอบลายเซ็นของแฟ้ม '%s' จากคลังแพกเกจ '%s' !"
+msgstr "ไม่สนใจต่อความล้มเหลวในการตรวจสอบลายเซ็นของแฟ้ม '%s' จากคลังแพกเกจ '%s' !"
 
 #: src/callbacks/keyring.h:376
 msgid "Double-check this is not caused by some malicious changes in the file!"
-msgstr ""
-"การดับเบิลคลิกที่นี่ไม่ได้เป็นผลให้มีความเปลี่ยนในส่วนประสงค์ร้ายของแฟ้ม !"
+msgstr "การดับเบิลคลิกที่นี่ไม่ได้เป็นผลให้มีความเปลี่ยนในส่วนประสงค์ร้ายของแฟ้ม !"
 
 #. translator: %1% is a file name
 #: src/callbacks/keyring.h:386
@@ -1553,8 +1549,7 @@ msgstr "ไม่สนใจต่อความล้มเหลวในก
 #: src/callbacks/keyring.h:389
 #, boost-format
 msgid "Signature verification failed for file '%1%' from repository '%2%'."
-msgstr ""
-"ไม่สนใจต่อความล้มเหลวในการตรวจสอบลายเซ็นของแฟ้ม '%1%' จากคลังแพกเกจ '%2%'"
+msgstr "ไม่สนใจต่อความล้มเหลวในการตรวจสอบลายเซ็นของแฟ้ม '%1%' จากคลังแพกเกจ '%2%'"
 
 #: src/callbacks/keyring.h:438
 msgid ""
@@ -1783,8 +1778,7 @@ msgstr ""
 msgid ""
 "Please insert medium [%s] #%d and type 'y' to continue or 'n' to cancel the "
 "operation."
-msgstr ""
-"โปรดใส่สื่อ [%s] #%d และพิมพ์ 'y' เพื่อทำต่อ หรือพิมพ์ 'n' เพื่อยกเลิกปฏิบัติการ"
+msgstr "โปรดใส่สื่อ [%s] #%d และพิมพ์ 'y' เพื่อทำต่อ หรือพิมพ์ 'n' เพื่อยกเลิกปฏิบัติการ"
 
 #. translators: a/r/i/u are replies to the "Abort, retry, ignore?" prompt
 #. Translate the a/r/i part exactly as you did the a/r/i string.
@@ -2023,24 +2017,30 @@ msgid "Commands:"
 msgstr "คำสั่ง:"
 
 #. translators: --details
-#: src/commands/commonflags.h:23 src/commands/inrverify.cc:35
+#: src/commands/commonflags.h:25 src/commands/inrverify.cc:35
 msgid "Show the detailed installation summary."
 msgstr ""
 
-#: src/commands/commonflags.h:30
+#: src/commands/commonflags.h:32
 #, boost-format
 msgid "Type of package (%1%)."
 msgstr ""
 
 #. translators: --best-effort
-#: src/commands/commonflags.h:38
+#: src/commands/commonflags.h:40
 msgid ""
 "Do a 'best effort' approach to update. Updates to a lower than the latest "
 "version are also acceptable."
 msgstr ""
 
-#: src/commands/commonflags.h:45
+#: src/commands/commonflags.h:47
 msgid "Consider only patches which affect the package management itself."
+msgstr ""
+
+#. translators: --name-only
+#: src/commands/commonflags.h:61
+#, c-format, boost-format
+msgid "Just print %s ids."
 msgstr ""
 
 #: src/commands/conditions.cc:19
@@ -2110,7 +2110,7 @@ msgstr ""
 msgid "zypper <SUBCOMMAND> [--COMMAND-OPTIONS] [ARGUMENTS]"
 msgstr ""
 
-#: src/commands/help.cc:80 src/commands/help.cc:81
+#: src/commands/help.cc:89 src/commands/help.cc:90
 msgid "Print zypper help"
 msgstr "พิมพ์ความช่วยเหลือ"
 
@@ -2295,22 +2295,22 @@ msgid ""
 msgstr ""
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/commands/listpatches.cc:16
+#: src/commands/listpatches.cc:17
 msgid "list-patches (lp) [OPTIONS]"
 msgstr ""
 
 #. translators: command summary: list-patches, lp
-#: src/commands/listpatches.cc:18
+#: src/commands/listpatches.cc:19
 msgid "List available patches."
 msgstr ""
 
 #. translators: command description
-#: src/commands/listpatches.cc:20
+#: src/commands/listpatches.cc:21
 msgid "List all applicable patches."
 msgstr ""
 
 #. translators: -a, --all
-#: src/commands/listpatches.cc:31
+#: src/commands/listpatches.cc:32
 msgid "List all patches, not only applicable ones."
 msgstr ""
 
@@ -2361,49 +2361,53 @@ msgid ""
 msgstr ""
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/commands/locale/localescmd.cc:17
+#: src/commands/locale/localescmd.cc:18
 msgid "locales (lloc) [OPTIONS] [LOCALE] ..."
 msgstr ""
 
-#: src/commands/locale/localescmd.cc:18
+#: src/commands/locale/localescmd.cc:19
 msgid "List requested locales (languages codes)."
 msgstr ""
 
-#: src/commands/locale/localescmd.cc:20
+#: src/commands/locale/localescmd.cc:21
 msgid "List requested locales and corresponding packages."
 msgstr ""
 
-#: src/commands/locale/localescmd.cc:34
+#: src/commands/locale/localescmd.cc:35
 msgid "Show corresponding packages."
 msgstr ""
 
-#: src/commands/locale/localescmd.cc:35
+#: src/commands/locale/localescmd.cc:36
 msgid "List all available locales."
 msgstr ""
 
-#: src/commands/locale/localescmd.cc:48
+#: src/commands/locale/localescmd.cc:37
+msgid "locale (or package)"
+msgstr ""
+
+#: src/commands/locale/localescmd.cc:51
 msgid "Ignoring positional arguments because --all argument was provided."
 msgstr ""
 
-#: src/commands/locale/localescmd.cc:75
+#: src/commands/locale/localescmd.cc:78
 msgid "The locale(s) for which the information shall be printed."
 msgstr ""
 
-#: src/commands/locale/localescmd.cc:79
+#: src/commands/locale/localescmd.cc:82
 msgid ""
 "Get all locales with lang code 'en' that have their own country code, "
 "excluding the fallback 'en':"
 msgstr ""
 
-#: src/commands/locale/localescmd.cc:86
+#: src/commands/locale/localescmd.cc:89
 msgid "Get all locales with lang code 'en' with or without country code:"
 msgstr ""
 
-#: src/commands/locale/localescmd.cc:93
+#: src/commands/locale/localescmd.cc:96
 msgid "Get the locale matching the argument exactly: "
 msgstr ""
 
-#: src/commands/locale/localescmd.cc:100
+#: src/commands/locale/localescmd.cc:103
 msgid "Get the list of packages which are available for 'de' and 'en':"
 msgstr ""
 
@@ -2503,11 +2507,11 @@ msgstr[0] "เอาออกทั้งหมด"
 #. translators: Table column header
 #. translators: header of table column - the name of the package
 #. translators: name (general header)
-#: src/commands/locks/list.cc:133 src/commands/repos/list.cc:49
-#: src/commands/repos/list.cc:236 src/commands/services/list.cc:107
+#: src/commands/locks/list.cc:133 src/commands/repos/list.cc:50
+#: src/commands/repos/list.cc:239 src/commands/services/list.cc:109
 #: src/info.cc:92 src/info.cc:563 src/info.cc:798 src/locales.cc:201
-#: src/search.cc:48 src/search.cc:199 src/search.cc:304 src/search.cc:458
-#: src/search.cc:508 src/update.cc:789 src/utils/misc.cc:324
+#: src/search.cc:48 src/search.cc:199 src/search.cc:305 src/search.cc:461
+#: src/search.cc:512 src/update.cc:795 src/utils/misc.cc:324
 msgid "Name"
 msgstr "ชื่อ"
 
@@ -2518,8 +2522,8 @@ msgstr "แพตช์"
 
 #. translators: Table column header
 #. translators: type (general header)
-#: src/commands/locks/list.cc:136 src/commands/repos/list.cc:63
-#: src/commands/repos/list.cc:285 src/commands/services/list.cc:116
+#: src/commands/locks/list.cc:136 src/commands/repos/list.cc:64
+#: src/commands/repos/list.cc:288 src/commands/services/list.cc:118
 #: src/info.cc:564 src/search.cc:50 src/search.cc:202
 msgid "Type"
 msgstr "ประเภท"
@@ -2527,7 +2531,7 @@ msgstr "ประเภท"
 #. translators: property name; short; used like "Name: value"
 #. translators: package's repository (header)
 #: src/commands/locks/list.cc:136 src/info.cc:90 src/search.cc:56
-#: src/search.cc:306 src/search.cc:457 src/search.cc:504 src/update.cc:786
+#: src/search.cc:307 src/search.cc:460 src/search.cc:508 src/update.cc:792
 #: src/utils/misc.cc:323
 msgid "Repository"
 msgstr "คลังแพกเกจ"
@@ -2951,7 +2955,7 @@ msgid "Command"
 msgstr "คำสั่ง:"
 
 #. "/etc/init.d/ script that might be used to restart the command (guessed)
-#: src/commands/ps.cc:152 src/commands/repos/list.cc:301
+#: src/commands/ps.cc:152 src/commands/repos/list.cc:304
 msgid "Service"
 msgstr "บริการ"
 
@@ -3112,120 +3116,120 @@ msgid "Show detailed information for products."
 msgstr ""
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/commands/query/packages.cc:18
+#: src/commands/query/packages.cc:19
 msgid "packages (pa) [OPTIONS] [REPOSITORY] ..."
 msgstr ""
 
 #. translators: command summary: packages, pa
-#: src/commands/query/packages.cc:20
+#: src/commands/query/packages.cc:21
 msgid "List all available packages."
 msgstr "เรียกดูแพกเกจที่มีให้เลือกทั้งหมด"
 
 #. translators: command description
-#: src/commands/query/packages.cc:22
+#: src/commands/query/packages.cc:23
 msgid "List all packages available in specified repositories."
 msgstr ""
 
 #. translators: --autoinstalled
-#: src/commands/query/packages.cc:35
+#: src/commands/query/packages.cc:36
 msgid ""
 "Show installed packages which were automatically selected by the resolver."
 msgstr ""
 
 #. translators: --userinstalled
-#: src/commands/query/packages.cc:39
+#: src/commands/query/packages.cc:40
 msgid "Show installed packages which were explicitly selected by the user."
 msgstr ""
 
 #. translators: --system
-#: src/commands/query/packages.cc:43
+#: src/commands/query/packages.cc:44
 msgid "Show installed packages which are not provided by any repository."
 msgstr ""
 
 #. translators: --orphaned
-#: src/commands/query/packages.cc:47
+#: src/commands/query/packages.cc:48
 msgid ""
 "Show system packages which are orphaned (without repository and without "
 "update candidate)."
 msgstr ""
 
 #. translators: --suggested
-#: src/commands/query/packages.cc:51
+#: src/commands/query/packages.cc:52
 msgid "Show packages which are suggested."
 msgstr ""
 
 #. translators: --recommended
-#: src/commands/query/packages.cc:55
+#: src/commands/query/packages.cc:56
 msgid "Show packages which are recommended."
 msgstr ""
 
 #. translators: --unneeded
-#: src/commands/query/packages.cc:59
+#: src/commands/query/packages.cc:60
 msgid "Show packages which are unneeded."
 msgstr ""
 
 #. translators: -N, --sort-by-name
-#: src/commands/query/packages.cc:63
+#: src/commands/query/packages.cc:64
 msgid "Sort the list by package name."
 msgstr ""
 
 #. translators: -R, --sort-by-repo
-#: src/commands/query/packages.cc:67
+#: src/commands/query/packages.cc:68
 msgid "Sort the list by repository."
 msgstr ""
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/commands/query/patches.cc:18
+#: src/commands/query/patches.cc:19
 msgid "patches (pch) [REPOSITORY] ..."
 msgstr ""
 
 #. translators: command summary: patches, pch
-#: src/commands/query/patches.cc:20
+#: src/commands/query/patches.cc:21
 msgid "List all available patches."
 msgstr "เรียกดูแพตช์ที่มีให้เลือกทั้งหมด"
 
 #. translators: command description
-#: src/commands/query/patches.cc:22
+#: src/commands/query/patches.cc:23
 msgid "List all patches available in specified repositories."
 msgstr ""
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/commands/query/patterns.cc:18
+#: src/commands/query/patterns.cc:19
 msgid "patterns (pt) [OPTIONS] [REPOSITORY] ..."
 msgstr ""
 
 #. translators: command summary: patterns, pt
-#: src/commands/query/patterns.cc:20
+#: src/commands/query/patterns.cc:21
 msgid "List all available patterns."
 msgstr "เรียกดูชุดรูปแบบที่มีให้เลือกทั้งหมด"
 
 #. translators: command description
-#: src/commands/query/patterns.cc:22
+#: src/commands/query/patterns.cc:23
 msgid "List all patterns available in specified repositories."
 msgstr ""
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/commands/query/products.cc:18
+#: src/commands/query/products.cc:19
 msgid "products (pd) [OPTIONS] [REPOSITORY] ..."
 msgstr ""
 
 #. translators: command summary: products, pd
-#: src/commands/query/products.cc:20
+#: src/commands/query/products.cc:21
 msgid "List all available products."
 msgstr "เรียกดูผลิตภัณฑ์ที่มีให้เลือกทั้งหมด"
 
 #. translators: command description
-#: src/commands/query/products.cc:22
+#: src/commands/query/products.cc:23
 msgid "List all products available in specified repositories."
 msgstr ""
 
 #. translators: --xmlfwd <TAG>
-#: src/commands/query/products.cc:36
+#: src/commands/query/products.cc:37
 msgid ""
 "XML output only: Literally forward the XML tags found in a product file."
 msgstr ""
 
-#: src/commands/query/products.cc:50
+#: src/commands/query/products.cc:53
 #, boost-format
 msgid "Option %1% has no effect without the %2% global option."
 msgstr ""
@@ -3265,16 +3269,15 @@ msgstr ""
 msgid "The repository type is always autodetected. This option is ignored."
 msgstr ""
 
-#: src/commands/repos/add.cc:70
+#: src/commands/repos/add.cc:71
 #, c-format, boost-format
 msgid "Cannot use %s together with %s. Using the %s setting."
 msgstr "ไม่สามารถใช้ %s ร่วมกับ %s ได้ ใช้การตั้งค่า %s"
 
-#: src/commands/repos/add.cc:93
+#: src/commands/repos/add.cc:98
 msgid ""
 "If only one argument is used, it must be a URI pointing to a .repo file."
-msgstr ""
-"หากใช้อาร์กิวเมนต์เพียงตัวเดียว มันจะต้องเป็นค่าที่อยู่ URI ที่ชี้ไปยังแฟ้ม .repo"
+msgstr "หากใช้อาร์กิวเมนต์เพียงตัวเดียว มันจะต้องเป็นค่าที่อยู่ URI ที่ชี้ไปยังแฟ้ม .repo"
 
 #: src/commands/repos/add.cc:130
 msgid "Specified type is not a valid repository type:"
@@ -3313,117 +3316,121 @@ msgstr ""
 msgid "Clean both metadata and package caches."
 msgstr ""
 
-#: src/commands/repos/list.cc:48 src/commands/repos/list.cc:225
-#: src/commands/services/list.cc:106
+#: src/commands/repos/list.cc:49 src/commands/repos/list.cc:228
+#: src/commands/services/list.cc:108
 msgid "Alias"
 msgstr "ชื่อเรียกอื่น"
 
 #. translators: property name; short; used like "Name: value"
 #. translator: Option argument like '--export <FILE.repo>'. Do do not translate lowercase wordparts
-#: src/commands/repos/list.cc:51 src/commands/repos/list.cc:54
-#: src/commands/repos/list.cc:292 src/commands/services/add.cc:83
-#: src/commands/services/list.cc:118 src/repos.cc:1249
+#: src/commands/repos/list.cc:52 src/commands/repos/list.cc:55
+#: src/commands/repos/list.cc:295 src/commands/services/add.cc:83
+#: src/commands/services/list.cc:120 src/repos.cc:1242
 #: src/utils/flags/zyppflags.h:49
 msgid "URI"
 msgstr "ที่อยู่ URI"
 
 #. 'enabled' flag
 #. translators: property name; short; used like "Name: value"
-#: src/commands/repos/list.cc:58 src/commands/repos/list.cc:244
-#: src/commands/services/add.cc:85 src/commands/services/list.cc:108
-#: src/repos.cc:1251
+#: src/commands/repos/list.cc:59 src/commands/repos/list.cc:247
+#: src/commands/services/add.cc:85 src/commands/services/list.cc:110
+#: src/repos.cc:1244
 msgid "Enabled"
 msgstr "เปิดใช้งาน"
 
 #. GPG Check
 #. translators: property name; short; used like "Name: value"
-#: src/commands/repos/list.cc:59 src/commands/repos/list.cc:248
-#: src/commands/services/list.cc:109 src/repos.cc:1253
+#: src/commands/repos/list.cc:60 src/commands/repos/list.cc:251
+#: src/commands/services/list.cc:111 src/repos.cc:1246
 #, fuzzy
 msgid "GPG Check"
 msgstr "ตรวจสอบ"
 
 #. translators: repository priority (in zypper repos -p or -d)
 #. translators: property name; short; used like "Name: value"
-#: src/commands/repos/list.cc:60 src/commands/repos/list.cc:276
-#: src/commands/services/list.cc:115 src/repos.cc:1257
+#: src/commands/repos/list.cc:61 src/commands/repos/list.cc:279
+#: src/commands/services/list.cc:117 src/repos.cc:1250
 msgid "Priority"
 msgstr "ความสำคัญ"
 
 #. translators: property name; short; used like "Name: value"
-#: src/commands/repos/list.cc:61 src/commands/services/add.cc:87
-#: src/repos.cc:1255
+#: src/commands/repos/list.cc:62 src/commands/services/add.cc:87
+#: src/repos.cc:1248
 msgid "Autorefresh"
 msgstr "เรียกปรับปรุงใหม่อัตโนมัติ"
 
-#: src/commands/repos/list.cc:61 src/commands/repos/list.cc:62
+#: src/commands/repos/list.cc:62 src/commands/repos/list.cc:63
 msgid "On"
 msgstr "เปิด"
 
-#: src/commands/repos/list.cc:61 src/commands/repos/list.cc:62
+#: src/commands/repos/list.cc:62 src/commands/repos/list.cc:63
 msgid "Off"
 msgstr "ปิด"
 
-#: src/commands/repos/list.cc:62
+#: src/commands/repos/list.cc:63
 #, fuzzy
 msgid "Keep Packages"
 msgstr "แพกเกจ"
 
-#: src/commands/repos/list.cc:64
+#: src/commands/repos/list.cc:65
 #, fuzzy
 msgid "GPG Key URI"
 msgstr "ค่าประจำตัวกุญแจ GPG"
 
-#: src/commands/repos/list.cc:65
+#: src/commands/repos/list.cc:66
 #, fuzzy
 msgid "Path Prefix"
 msgstr "เลขนำหน้าการหมุน"
 
-#: src/commands/repos/list.cc:66
+#: src/commands/repos/list.cc:67
 #, fuzzy
 msgid "Parent Service"
 msgstr "เครื่องให้บริการการพิมพ์"
 
-#: src/commands/repos/list.cc:67
+#: src/commands/repos/list.cc:68
 msgid "Keywords"
 msgstr ""
 
-#: src/commands/repos/list.cc:68
+#: src/commands/repos/list.cc:69
 msgid "Repo Info Path"
 msgstr ""
 
-#: src/commands/repos/list.cc:69
+#: src/commands/repos/list.cc:70
 #, fuzzy
 msgid "MD Cache Path"
 msgstr "พาธของอุปกรณ์"
 
-#: src/commands/repos/list.cc:85
+#: src/commands/repos/list.cc:86
 msgid "repos (lr) [OPTIONS] [REPO] ..."
 msgstr ""
 
-#: src/commands/repos/list.cc:86 src/commands/repos/list.cc:87
+#: src/commands/repos/list.cc:87 src/commands/repos/list.cc:88
 msgid "List all defined repositories."
 msgstr "เรียกดูคลังแพกเกจที่ถูกกำหนดไว้ทั้งหมด"
 
 #. translators: -e, --export <FILE.repo>
-#: src/commands/repos/list.cc:98
+#: src/commands/repos/list.cc:99
 msgid "Export all defined repositories as a single local .repo file."
 msgstr ""
 
-#: src/commands/repos/list.cc:129 src/repos.cc:1006
+#: src/commands/repos/list.cc:100
+msgid "repository"
+msgstr ""
+
+#: src/commands/repos/list.cc:132 src/repos.cc:999
 msgid "Error reading repositories:"
 msgstr "เกิดข้อผิดพลาดในการอ่านคลังแพกเกจ:"
 
-#: src/commands/repos/list.cc:155
+#: src/commands/repos/list.cc:158
 #, c-format, boost-format
 msgid "Can't open %s for writing."
 msgstr "ไม่สามารถเปิด %s เพื่อทำการเขียนได้"
 
-#: src/commands/repos/list.cc:156
+#: src/commands/repos/list.cc:159
 msgid "Maybe you do not have write permissions?"
 msgstr "เป็นไปได้หรือไม่ว่า คุณยังไม่ได้รับสิทธิ์อนุญาตในการเขียน ?"
 
-#: src/commands/repos/list.cc:162
+#: src/commands/repos/list.cc:165
 #, c-format, boost-format
 msgid "Repositories have been successfully exported to %s."
 msgstr "ส่งออกคลังแพกเกจไปยัง %s เรียบร้อยแล้ว"
@@ -3431,21 +3438,21 @@ msgstr "ส่งออกคลังแพกเกจไปยัง %s เ�
 #. translators: 'zypper repos' column - whether autorefresh is enabled
 #. for the repository
 #. translators: 'zypper repos' column - whether autorefresh is enabled for the repository
-#: src/commands/repos/list.cc:256 src/commands/services/list.cc:111
+#: src/commands/repos/list.cc:259 src/commands/services/list.cc:113
 msgid "Refresh"
 msgstr "เรียกปรับปรุงใหม่"
 
 #. translators: 'zypper repos' column - whether keep-packages is enabled for the repository
-#: src/commands/repos/list.cc:266
+#: src/commands/repos/list.cc:269
 msgid "Keep"
 msgstr ""
 
-#: src/commands/repos/list.cc:357
+#: src/commands/repos/list.cc:360
 #, fuzzy
 msgid "No repositories defined."
 msgstr "คลังแพกเกจระยะไกล ถูกปิดการใช้งาน"
 
-#: src/commands/repos/list.cc:358
+#: src/commands/repos/list.cc:361
 #, fuzzy
 msgid "Use the 'zypper addrepo' command to add one or more repositories."
 msgstr "ยังไม่มีการกำหนดคลังแพกเกจ สั่งคำสั่ง 'zypper addrepo' เพื่อเพิ่มคลังแพกเกจ"
@@ -3547,7 +3554,7 @@ msgstr "ตัวเลือกทั่วไป '%s' ไม่มีผลท
 msgid "Arguments are not allowed if '%s' is used."
 msgstr "หากมีการใช้ '%s' จะไม่อนุญาตให้มีอาร์กิวเมนต์"
 
-#: src/commands/repos/refresh.cc:239 src/repos.cc:1018
+#: src/commands/repos/refresh.cc:239 src/repos.cc:1011
 msgid "Specified repositories: "
 msgstr "คลังแพกเกจที่ระบุ: "
 
@@ -3556,7 +3563,7 @@ msgstr "คลังแพกเกจที่ระบุ: "
 msgid "Refreshing repository '%s'."
 msgstr "ทำการปิดการใช้งานคลังแพกเกจ '%s'"
 
-#: src/commands/repos/refresh.cc:280 src/repos.cc:843
+#: src/commands/repos/refresh.cc:280 src/repos.cc:836
 #, fuzzy, c-format, boost-format
 msgid "Scanning content of disabled repository '%s'."
 msgstr "ทำการข้ามคลังแพกเกจ '%s' ซึ่งถูกปิดการใช้งาน"
@@ -3566,7 +3573,7 @@ msgstr "ทำการข้ามคลังแพกเกจ '%s' ซึ่
 msgid "Skipping disabled repository '%s'"
 msgstr "ทำการข้ามคลังแพกเกจ '%s' ซึ่งถูกปิดการใช้งาน"
 
-#: src/commands/repos/refresh.cc:306 src/repos.cc:861 src/repos.cc:908
+#: src/commands/repos/refresh.cc:306 src/repos.cc:854 src/repos.cc:901
 #, c-format, boost-format
 msgid "Skipping repository '%s' because of the above error."
 msgstr "ทำการข้ามคลังแพกเกจ '%s' เนื่องจากข้อผิดพลาดทางด้านบน"
@@ -3594,7 +3601,7 @@ msgstr "ใช้คำสั่ง '%s' หรือ '%s' เพื่อเพ
 msgid "Could not refresh the repositories because of errors."
 msgstr "ไม่สามารถเรียกปรับปรุงคลังแพกเกจได้ เนื่องจากเกิดข้อผิดพลาดขึ้น"
 
-#: src/commands/repos/refresh.cc:342 src/repos.cc:937
+#: src/commands/repos/refresh.cc:342 src/repos.cc:930
 msgid "Some of the repositories have not been refreshed because of an error."
 msgstr "คลังแพกเกจบางตัวยังไม่ถูกเรียกปรับปรุงใหม่ เนื่องจากเกิดข้อผิดพลาดขึ้น"
 
@@ -3649,12 +3656,12 @@ msgstr ""
 msgid "Repository '%s' renamed to '%s'."
 msgstr "คลังแพกเกจ '%s' ถูกเปลี่ยนชื่อเป็น '%s'"
 
-#: src/commands/repos/rename.cc:47 src/repos.cc:1197
+#: src/commands/repos/rename.cc:47 src/repos.cc:1190
 #, c-format, boost-format
 msgid "Repository named '%s' already exists. Please use another alias."
 msgstr "มีคลังแพกเกจที่ชื่อ '%s' อยู่แล้ว โปรดเปลี่ยนไปใช้ชื่ออื่น"
 
-#: src/commands/repos/rename.cc:52 src/repos.cc:1675
+#: src/commands/repos/rename.cc:52 src/repos.cc:1668
 msgid "Error while modifying the repository:"
 msgstr "เกิดข้อผิดพลาดระหว่างทำการแก้ไขคลังแพกเกจ:"
 
@@ -3679,8 +3686,7 @@ msgstr ""
 
 #: src/commands/repos/rename.cc:92
 msgid "Too few arguments. At least URI and alias are required."
-msgstr ""
-"มีอาร์กิวเมนต์น้อยเกินไป อย่างน้อยจะต้องกำหนดค่าที่อยู่ URI หรือชื่ออื่นมาให้"
+msgstr "มีอาร์กิวเมนต์น้อยเกินไป อย่างน้อยจะต้องกำหนดค่าที่อยู่ URI หรือชื่ออื่นมาให้"
 
 #: src/commands/repos/rename.cc:114
 #, c-format, boost-format
@@ -4092,26 +4098,26 @@ msgid ""
 "(useful for search in dependencies)."
 msgstr ""
 
-#: src/commands/search/search.cc:298 src/repos.cc:780
+#: src/commands/search/search.cc:300 src/repos.cc:773
 #, fuzzy, c-format, boost-format
 msgid "Specified repository '%s' is disabled."
 msgstr "คลังแพกเกจระยะไกล ถูกปิดการใช้งาน"
 
 #. translators: empty search result message
-#: src/commands/search/search.cc:471 src/info.cc:366
+#: src/commands/search/search.cc:473 src/info.cc:366
 #, fuzzy
 msgid "No matching items found."
 msgstr "ไม่พบแพตช์ที่เข้าคู่กับ '%s'"
 
-#: src/commands/search/search.cc:503
+#: src/commands/search/search.cc:508
 msgid "Problem occurred initializing or executing the search query"
 msgstr "เกิดปัญหาขึ้นในการเตรียมการหรือการประมวลผลการค้นข้อมูล"
 
-#: src/commands/search/search.cc:504
+#: src/commands/search/search.cc:509
 msgid "See the above message for a hint."
 msgstr "ดูข้อความด้านบนเพื่อช่วยแก้ปัญหา"
 
-#: src/commands/search/search.cc:505 src/repos.cc:985
+#: src/commands/search/search.cc:510 src/repos.cc:978
 msgid "Running 'zypper refresh' as root might resolve the problem."
 msgstr "เรียกคำสั่ง 'zypper refresh' ด้วยสิทธิ์ผู้ใช้ root อาจจะแก้ปัญหานี้ได้"
 
@@ -4201,7 +4207,7 @@ msgid "Problem retrieving the repository index file for service '%s':"
 msgstr "เกิดปัญหาในการรับแฟ้มดัชนีบนคลังแพกเกจสำหรับบริการ '%s':"
 
 #: src/commands/services/common.cc:138 src/commands/services/refresh.cc:226
-#: src/repos.cc:1727
+#: src/repos.cc:1720
 #, c-format, boost-format
 msgid "Skipping service '%s' because of the above error."
 msgstr "ทำการข้ามบริการ '%s' มีจากข้อผิดพลาดทางด้านบน"
@@ -4220,22 +4226,26 @@ msgstr "เอาบริการ '%s' ออกไป:"
 msgid "Service '%s' has been removed."
 msgstr "เอาบริการ '%s' ออกไปแล้ว"
 
-#: src/commands/services/list.cc:83
+#: src/commands/services/list.cc:85
 msgid "services (ls) [OPTIONS]"
 msgstr ""
 
-#: src/commands/services/list.cc:84
+#: src/commands/services/list.cc:86
 msgid "List all defined services."
 msgstr "ดูบริการที่ถูกกำหนดไว้แล้วทั้งหมด"
 
-#: src/commands/services/list.cc:85
+#: src/commands/services/list.cc:87
 msgid "List defined services."
 msgstr ""
 
-#: src/commands/services/list.cc:172
+#: src/commands/services/list.cc:174
 #, c-format, boost-format
 msgid "No services defined. Use the '%s' command to add one or more services."
 msgstr "ยังไม่มีการกำหนดบริการ ใช้คำสั่ง '%s' เพื่อเพิ่มบริการ"
+
+#: src/commands/services/list.cc:237
+msgid "service"
+msgstr ""
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/services/modify.cc:18
@@ -4333,16 +4343,14 @@ msgstr "ชื่อของบริการ '%s' ถูกเปลี่ย
 msgid "Repository '%s' has been added to enabled repositories of service '%s'"
 msgid_plural ""
 "Repositories '%s' have been added to enabled repositories of service '%s'"
-msgstr[0] ""
-"คลังแพกเกจ '%s' ได้ถูกเพิ่มไปยังคลังแพกเกจที่เปิดใช้งานของบริการ '%s' แล้ว"
+msgstr[0] "คลังแพกเกจ '%s' ได้ถูกเพิ่มไปยังคลังแพกเกจที่เปิดใช้งานของบริการ '%s' แล้ว"
 
 #: src/commands/services/modify.cc:262
 #, c-format, boost-format
 msgid "Repository '%s' has been added to disabled repositories of service '%s'"
 msgid_plural ""
 "Repositories '%s' have been added to disabled repositories of service '%s'"
-msgstr[0] ""
-"คลังแพกเกจ '%s' ได้ถูกเพิ่มไปยังคลังแพกเกจที่ปิดการใช้งานของบริการ '%s' แล้ว"
+msgstr[0] "คลังแพกเกจ '%s' ได้ถูกเพิ่มไปยังคลังแพกเกจที่ปิดการใช้งานของบริการ '%s' แล้ว"
 
 #: src/commands/services/modify.cc:269
 #, c-format, boost-format
@@ -4360,8 +4368,7 @@ msgid ""
 msgid_plural ""
 "Repositories '%s' have been removed from disabled repositories of service "
 "'%s'"
-msgstr[0] ""
-"คลังแพกเกจ '%s' ได้ถูกเอาออกไปจากคลังแพกเกจที่ปิดการใช้งานของบริการ '%s' แล้ว"
+msgstr[0] "คลังแพกเกจ '%s' ได้ถูกเอาออกไปจากคลังแพกเกจที่ปิดการใช้งานของบริการ '%s' แล้ว"
 
 #: src/commands/services/modify.cc:285
 #, c-format, boost-format
@@ -4431,8 +4438,7 @@ msgstr "ไม่สามารถเรียกปรับปรุงบร
 
 #: src/commands/services/refresh.cc:251
 msgid "Some of the services have not been refreshed because of an error."
-msgstr ""
-"มีบางบริการที่ยังไม่ถูกเรียกปรับปรุงใหม่อีกครั้ง เนื่องจากเกิดข้อผิดพลาดขึ้น"
+msgstr "มีบางบริการที่ยังไม่ถูกเรียกปรับปรุงใหม่อีกครั้ง เนื่องจากเกิดข้อผิดพลาดขึ้น"
 
 #: src/commands/services/refresh.cc:255
 msgid "Specified services have been refreshed."
@@ -5121,15 +5127,15 @@ msgstr "%s เก่ากว่า %s"
 #. translators: property name; short; used like "Name: value"
 #. translators: Table column header
 #. translators: package version (header)
-#: src/info.cc:94 src/info.cc:799 src/search.cc:52 src/search.cc:305
-#: src/search.cc:459 src/search.cc:509
+#: src/info.cc:94 src/info.cc:799 src/search.cc:52 src/search.cc:306
+#: src/search.cc:462 src/search.cc:513
 msgid "Version"
 msgstr "รุ่น"
 
 #. translators: property name; short; used like "Name: value"
 #. translators: package architecture (header)
-#: src/info.cc:96 src/search.cc:54 src/search.cc:460 src/search.cc:510
-#: src/update.cc:795
+#: src/info.cc:96 src/search.cc:54 src/search.cc:463 src/search.cc:514
+#: src/update.cc:801
 msgid "Arch"
 msgstr "สถาปัตยกรรม"
 
@@ -5265,13 +5271,13 @@ msgstr "(ว่าง)"
 #. translators: S for installed Status
 #. TranslatorExplanation S stands for Status
 #: src/info.cc:562 src/info.cc:797 src/locales.cc:199 src/search.cc:46
-#: src/search.cc:198 src/search.cc:303 src/search.cc:456 src/search.cc:503
-#: src/update.cc:784
+#: src/search.cc:198 src/search.cc:304 src/search.cc:459 src/search.cc:507
+#: src/update.cc:790
 msgid "S"
 msgstr "สถานะ"
 
 #. translators: Table column header
-#: src/info.cc:565 src/search.cc:307
+#: src/info.cc:565 src/search.cc:308
 msgid "Dependency"
 msgstr "ความเกี่ยวพันกัน"
 
@@ -5309,7 +5315,7 @@ msgid "Flavor"
 msgstr ""
 
 #. translators: property name; short; used like "Name: value"
-#: src/info.cc:658 src/search.cc:511
+#: src/info.cc:658 src/search.cc:515
 msgid "Is Base"
 msgstr ""
 
@@ -5434,8 +5440,7 @@ msgstr "ทำการยอมรับข้อตกลงในสัญญ
 msgid ""
 "In order to install '%s'%s, you must agree to terms of the following license "
 "agreement:"
-msgstr ""
-"ในการติดตั้ง '%s'%s นั้น คุณจะต้องยอมรับข้อตกลงในสัญญาอนุญาตสิทธิ์ต่อไปนี้ก่อน:"
+msgstr "ในการติดตั้ง '%s'%s นั้น คุณจะต้องยอมรับข้อตกลงในสัญญาอนุญาตสิทธิ์ต่อไปนี้ก่อน:"
 
 #. lincense prompt
 #: src/misc.cc:187
@@ -5460,8 +5465,7 @@ msgstr ""
 #: src/misc.cc:209
 #, c-format, boost-format
 msgid "Aborting installation due to user disagreement with %s %s license."
-msgstr ""
-"ยุติการติดตั้ง เนื่องจากผู้ใช้ไม่ยอมรับข้อตกลงในสัญญาอนุญาตสิทธิ์ของ %s %s"
+msgstr "ยุติการติดตั้ง เนื่องจากผู้ใช้ไม่ยอมรับข้อตกลงในสัญญาอนุญาตสิทธิ์ของ %s %s"
 
 #: src/misc.cc:248
 msgid "License"
@@ -5574,57 +5578,57 @@ msgstr[0] "คลังแพกเกจ"
 
 #. check whether libzypp indicates a refresh is needed, and if so,
 #. print a message
-#: src/repos.cc:227
+#: src/repos.cc:226
 #, c-format, boost-format
 msgid "Checking whether to refresh metadata for %s"
 msgstr "ทำการตรวจสอบเพื่อปรับปรุงข้อมูลกำกับของ %s"
 
-#: src/repos.cc:257
+#: src/repos.cc:250
 #, c-format, boost-format
 msgid "Repository '%s' is up to date."
 msgstr "คลังแพกเกจ '%s' ถูกปรับปรุงล่าสุดแล้ว"
 
-#: src/repos.cc:263
+#: src/repos.cc:256
 #, c-format, boost-format
 msgid "The up-to-date check of '%s' has been delayed."
 msgstr "การตรวจสอบการปรับปรุงของ '%s' ถูกหน่วงเอาไว้"
 
-#: src/repos.cc:285
+#: src/repos.cc:278
 msgid "Forcing raw metadata refresh"
 msgstr "บังคับให้ปรับปรุงข้อมูลกำกับดิบ"
 
-#: src/repos.cc:291
+#: src/repos.cc:284
 #, c-format, boost-format
 msgid "Retrieving repository '%s' metadata"
 msgstr "กำลังรับข้อมูลกำกับของคลังแพกเกจ '%s'"
 
-#: src/repos.cc:315
+#: src/repos.cc:308
 #, fuzzy, c-format, boost-format
 msgid "Do you want to disable the repository %s permanently?"
 msgstr "เตรียมการใช้งานตัวจัดการคลังแพกเกจ"
 
-#: src/repos.cc:331
+#: src/repos.cc:324
 #, fuzzy, c-format, boost-format
 msgid "Error while disabling repository '%s'."
 msgstr "ทำการปิดการใช้งานคลังแพกเกจ '%s'"
 
-#: src/repos.cc:347
+#: src/repos.cc:340
 #, c-format, boost-format
 msgid "Problem retrieving files from '%s'."
 msgstr "เกิดปัญหาในการรับแฟ้มจาก '%s'"
 
-#: src/repos.cc:348 src/repos.cc:1866 src/solve-commit.cc:990
+#: src/repos.cc:341 src/repos.cc:1859 src/solve-commit.cc:990
 #: src/solve-commit.cc:1022 src/solve-commit.cc:1046
 msgid "Please see the above error message for a hint."
 msgstr "โปรดดูข้อความผิดพลาดด้านบนเพื่อช่วยในการแก้ปัญหา"
 
-#: src/repos.cc:360
+#: src/repos.cc:353
 #, c-format, boost-format
 msgid "No URIs defined for '%s'."
 msgstr "ยังไม่มีการกำหนดที่อยู่ URI ของ '%s'"
 
 #. TranslatorExplanation the first %s is a .repo file path
-#: src/repos.cc:365
+#: src/repos.cc:358
 #, c-format, boost-format
 msgid ""
 "Please add one or more base URI (baseurl=URI) entries to %s for repository "
@@ -5633,38 +5637,38 @@ msgstr ""
 "โปรดเพิ่มรายการฐานของที่อยู่ URI (baseurl=URI) หนึ่งตัวหรือมากกว่า ไปยัง %s ของคลังแพกเกจ "
 "'%s'"
 
-#: src/repos.cc:379
+#: src/repos.cc:372
 msgid "No alias defined for this repository."
 msgstr "ยังไม่มีการกำหนดชื่อเรียกอื่น ๆ ของคลังแพกเกจนี้"
 
-#: src/repos.cc:391
+#: src/repos.cc:384
 #, c-format, boost-format
 msgid "Repository '%s' is invalid."
 msgstr "คลังแพกเกจ '%s' ใช้งานไม่ได้"
 
-#: src/repos.cc:392
+#: src/repos.cc:385
 msgid ""
 "Please check if the URIs defined for this repository are pointing to a valid "
 "repository."
 msgstr ""
 "โปรดตรวจสอบว่าได้กำหนดที่อยู่ URI ของคลังแพกเกจนี้ว่าชี้ไปยังคลังแพกเกจที่ใช้งานได้แล้วหรือยัง"
 
-#: src/repos.cc:404
+#: src/repos.cc:397
 #, c-format, boost-format
 msgid "Error retrieving metadata for '%s':"
 msgstr "เกิดข้อผิดพลาดในการรับข้อมูลกำกับของ '%s':"
 
-#: src/repos.cc:417
+#: src/repos.cc:410
 msgid "Forcing building of repository cache"
 msgstr "บังคับให้ทำการสร้างแคชของคลังแพกเกจ"
 
-#: src/repos.cc:442
+#: src/repos.cc:435
 #, c-format, boost-format
 msgid "Error parsing metadata for '%s':"
 msgstr "เกิดข้อผิดพลาดในการกระจายข้อมูลกำกับของ '%s':"
 
 #. TranslatorExplanation Don't translate the URL unless it is translated, too
-#: src/repos.cc:444
+#: src/repos.cc:437
 msgid ""
 "This may be caused by invalid metadata in the repository, or by a bug in the "
 "metadata parser. In the latter case, or if in doubt, please, file a bug "
@@ -5675,42 +5679,41 @@ msgstr ""
 "หากเป็นกรณีหลังหรือไม่แน่ใจ โปรดทำการรายงานบั๊กตามวิธีการที่บอกไว้ที่ http://"
 "en.opensuse.org/Zypper/Troubleshooting"
 
-#: src/repos.cc:453
+#: src/repos.cc:446
 #, c-format, boost-format
 msgid "Repository metadata for '%s' not found in local cache."
 msgstr "ไม่พบข้อมูลกำกับของคลังแพกเกจ '%s' ในแคชภายในระบบ"
 
-#: src/repos.cc:461
+#: src/repos.cc:454
 msgid "Error building the cache:"
 msgstr "เกิดข้อผิดพลาดในการสร้างแคช:"
 
-#: src/repos.cc:680
+#: src/repos.cc:673
 #, c-format, boost-format
 msgid "Repository '%s' not found by its alias, number, or URI."
-msgstr ""
-"ไม่พบคลังแพกเกจ '%s' ทั้งในส่วนชื่อเรียกอื่น, หมายเลข หรือที่อยู่ URI ของมัน"
+msgstr "ไม่พบคลังแพกเกจ '%s' ทั้งในส่วนชื่อเรียกอื่น, หมายเลข หรือที่อยู่ URI ของมัน"
 
-#: src/repos.cc:682
+#: src/repos.cc:675
 #, c-format, boost-format
 msgid "Use '%s' to get the list of defined repositories."
 msgstr "ใช้ '%s' เพื่อเรียกดูคลังแพกเกจที่ได้กำหนดไว้แล้ว"
 
-#: src/repos.cc:702
+#: src/repos.cc:695
 #, fuzzy, c-format, boost-format
 msgid "Ignoring disabled repository '%s'"
 msgstr "ทำการข้ามคลังแพกเกจ '%s' ซึ่งถูกปิดการใช้งาน"
 
-#: src/repos.cc:786
+#: src/repos.cc:779
 #, fuzzy, c-format, boost-format
 msgid "Global option '%s' can be used to temporarily enable repositories."
 msgstr "ใช้คำสั่ง '%s' หรือ '%s' เพื่อเพิ่มหรือเปิดการใช้งานคลังแพกเกจ"
 
-#: src/repos.cc:802 src/repos.cc:808
+#: src/repos.cc:795 src/repos.cc:801
 #, c-format, boost-format
 msgid "Ignoring repository '%s' because of '%s' option."
 msgstr "ไม่ใช้คลังแพกเกจ '%s' เนื่องจากตัวเลือก '%s'"
 
-#: src/repos.cc:829 src/repos.cc:922
+#: src/repos.cc:822 src/repos.cc:915
 #, fuzzy, c-format, boost-format
 msgid "Temporarily enabling repository '%s'."
 msgstr "ทำการปิดการใช้งานคลังแพกเกจ '%s'"
@@ -5718,7 +5721,7 @@ msgstr "ทำการปิดการใช้งานคลังแพก
 #. bsc#1235636: Asks to suppress reporting the Exception (usually: No permission to
 #. write repository cache), because it scares. This was was indeed the legacy behavior:
 #. SUPPRESS: zypper.out().error( ex, "Problem" );
-#: src/repos.cc:886
+#: src/repos.cc:879
 #, c-format, boost-format
 msgid ""
 "Repository '%s' is out-of-date. You can run 'zypper refresh' as root to "
@@ -5727,7 +5730,7 @@ msgstr ""
 "คลังแพกเกจ '%s' ล้าสมัยแล้ว คุณสามารถเรียกคำสั่ง 'zypper refresh' ด้วยสิทธิ์ผู้ใช้ root "
 "เพื่อปรับปรุงมันได้"
 
-#: src/repos.cc:903
+#: src/repos.cc:896
 #, c-format, boost-format
 msgid ""
 "The metadata cache needs to be built for the '%s' repository. You can run "
@@ -5736,81 +5739,80 @@ msgstr ""
 "ต้องการใช้แคชข้อมูลกำกับเพื่อใช้ในการสร้างคลังแพกเกจ '%s' คุณสามารถสั่งคำสั่ง 'zypper "
 "refresh' ด้วยสิทธิ์ผู้ใช้ root เพื่อสร้างมันได้"
 
-#: src/repos.cc:929
+#: src/repos.cc:922
 #, fuzzy, c-format, boost-format
 msgid "Repository '%s' stays disabled."
 msgstr "คลังแพกเกจ '%s' ใช้งานไม่ได้"
 
-#: src/repos.cc:976
+#: src/repos.cc:969
 msgid "Initializing Target"
 msgstr "ทำการเตรียมเป้าหมาย"
 
-#: src/repos.cc:984
+#: src/repos.cc:977
 msgid "Target initialization failed:"
 msgstr "ล้มเหลวในการเตรียมเป้าหมาย:"
 
-#: src/repos.cc:1066
+#: src/repos.cc:1059
 #, c-format, boost-format
 msgid "Cleaning metadata cache for '%s'."
 msgstr "ทำการล้างแคชข้อมูลกำกับของ '%s'"
 
-#: src/repos.cc:1074
+#: src/repos.cc:1067
 #, c-format, boost-format
 msgid "Cleaning raw metadata cache for '%s'."
 msgstr "ทำการล้างแคชข้อมูลกำกับดิบของ '%s'"
 
-#: src/repos.cc:1080
+#: src/repos.cc:1073
 #, fuzzy, c-format, boost-format
 msgid "Keeping raw metadata cache for %s '%s'."
 msgstr "ทำการล้างแคชข้อมูลกำกับดิบของ '%s'"
 
 #. translators: meaning the cached rpm files
-#: src/repos.cc:1087
+#: src/repos.cc:1080
 #, c-format, boost-format
 msgid "Cleaning packages for '%s'."
 msgstr "ทำการล้างแพกเกจของ '%s'"
 
-#: src/repos.cc:1095
+#: src/repos.cc:1088
 #, c-format, boost-format
 msgid "Cannot clean repository '%s' because of an error."
 msgstr "ไม่สามารถล้างคลังแพกเกจ '%s' ได้ เนื่องจากเกิดข้อผิดพลาดขึ้น"
 
-#: src/repos.cc:1106
+#: src/repos.cc:1099
 msgid "Cleaning installed packages cache."
 msgstr "ทำการล้างแคชของแพกเกจที่ถูกติดตั้งแล้ว"
 
-#: src/repos.cc:1115
+#: src/repos.cc:1108
 msgid "Cannot clean installed packages cache because of an error."
-msgstr ""
-"ไม่สามารถล้างแคชของแพกเกจที่ถูกติดตั้งแล้วได้ เนื่องจากเกิดข้อผิดพลาดขึ้น"
+msgstr "ไม่สามารถล้างแคชของแพกเกจที่ถูกติดตั้งแล้วได้ เนื่องจากเกิดข้อผิดพลาดขึ้น"
 
-#: src/repos.cc:1133
+#: src/repos.cc:1126
 msgid "Could not clean the repositories because of errors."
 msgstr "ไม่สามารถล้างคลังแพกเกจได้ เนื่องจากเกิดข้อผิดพลาดขึ้น"
 
-#: src/repos.cc:1139
+#: src/repos.cc:1132
 msgid "Some of the repositories have not been cleaned up because of an error."
 msgstr "มีบางคลังแพกเกจที่ยังไม่ถูกล้าง เนื่องจากเกิดข้อผิดพลาดขึ้น"
 
-#: src/repos.cc:1144
+#: src/repos.cc:1137
 msgid "Specified repositories have been cleaned up."
 msgstr "ล้างคลังแพกเกจที่ระบุไว้แล้ว"
 
-#: src/repos.cc:1146
+#: src/repos.cc:1139
 msgid "All repositories have been cleaned up."
 msgstr "ล้างคลังแพกเกจทั้งหมดแล้ว"
 
-#: src/repos.cc:1168
+#: src/repos.cc:1161
 msgid "This is a changeable read-only media (CD/DVD), disabling autorefresh."
 msgstr ""
 "นี่เป็นสื่ออ่านได้อย่างเดียว (แผ่นซีดี/ดีวีดี) ที่ทำการเปลี่ยนได้เท่านั้น ทำการปิดการเรียกปรับปรุงใหม่"
 
-#: src/repos.cc:1189
+#: src/repos.cc:1182
 #, fuzzy, c-format, boost-format
 msgid "Invalid repository alias: '%s'"
 msgstr "ชื่อของคลังแพกเกจใช้งานไม่ได้"
 
-#: src/repos.cc:1206
+#: src/repos.cc:1199
 msgid ""
 "Could not determine the type of the repository. Please check if the defined "
 "URIs (see below) point to a valid repository:"
@@ -5818,161 +5820,160 @@ msgstr ""
 "ไม่สามารถตรวจหาชนิดของคลังแพกเกจได้ โปรดตรวจสอบว่าได้กำหนดที่อยู่ URIL (ดูด้านล่าง) "
 "ที่ชี้ไปยังคลังแพกเกจที่ใช้ได้แล้วหรือยัง:"
 
-#: src/repos.cc:1212
+#: src/repos.cc:1205
 msgid "Can't find a valid repository at given location:"
 msgstr "ไม่พบคลังแพกเกจที่ใช้งานได้ในตำแหน่งที่ให้มา:"
 
-#: src/repos.cc:1220
+#: src/repos.cc:1213
 msgid "Problem transferring repository data from specified URI:"
 msgstr "เกิดปัญหาในการถ่ายโอนข้อมูลของคลังแพกเกจจากที่อยู่ URI ที่ระบุ:"
 
-#: src/repos.cc:1221
+#: src/repos.cc:1214
 msgid "Please check whether the specified URI is accessible."
 msgstr "โปรดตรวจสอบว่า ที่อยู่ URI ที่ระบุไว้ สามารถเข้าใช้งานได้จริงหรือไม่"
 
-#: src/repos.cc:1228
+#: src/repos.cc:1221
 msgid "Unknown problem when adding repository:"
 msgstr "เกิดปัญหาที่ไม่ทราบขึ้นเมื่อทำการเพิ่มคลังแพกเกจ:"
 
 #. translators: BOOST STYLE POSITIONAL DIRECTIVES ( %N% )
 #. translators: %1% - a repository name
-#: src/repos.cc:1238
+#: src/repos.cc:1231
 #, boost-format
 msgid ""
 "GPG checking is disabled in configuration of repository '%1%'. Integrity and "
 "origin of packages cannot be verified."
 msgstr ""
 
-#: src/repos.cc:1243
+#: src/repos.cc:1236
 #, c-format, boost-format
 msgid "Repository '%s' successfully added"
 msgstr "เพิ่มคลังแพกเกจ '%s' เรียบร้อยแล้ว"
 
-#: src/repos.cc:1269
-#, c-format, boost-format
-msgid "Reading data from '%s' media"
-msgstr "ทำการอ่านข้อมูลจากสื่อการติดตั้ง '%s'"
-
-#: src/repos.cc:1275
-#, c-format, boost-format
-msgid "Problem reading data from '%s' media"
-msgstr "เกิดปัญหาในการอ่านข้อมูลจากสื่อการติดตั้ง '%s'"
-
-#: src/repos.cc:1276
-msgid "Please check if your installation media is valid and readable."
-msgstr "โปรดตรวจสอบว่าสื่อการติดตั้งของคุณยังใช้ได้และยังสามารถอ่านได้หรือไม่"
-
-#: src/repos.cc:1283
+#: src/repos.cc:1262
 #, fuzzy, c-format, boost-format
 msgid "Reading data from '%s' media is delayed until next refresh."
 msgstr "ทำการอ่านข้อมูลจากสื่อการติดตั้ง '%s'"
 
-#: src/repos.cc:1352
+#: src/repos.cc:1267
+#, c-format, boost-format
+msgid "Reading data from '%s' media"
+msgstr "ทำการอ่านข้อมูลจากสื่อการติดตั้ง '%s'"
+
+#: src/repos.cc:1273
+#, c-format, boost-format
+msgid "Problem reading data from '%s' media"
+msgstr "เกิดปัญหาในการอ่านข้อมูลจากสื่อการติดตั้ง '%s'"
+
+#: src/repos.cc:1274
+msgid "Please check if your installation media is valid and readable."
+msgstr "โปรดตรวจสอบว่าสื่อการติดตั้งของคุณยังใช้ได้และยังสามารถอ่านได้หรือไม่"
+
+#: src/repos.cc:1345
 msgid "Problem accessing the file at the specified URI"
 msgstr "เกิดปัญหาในการเข้าถึงแฟ้มตามที่อยู่ URI ที่ระบุไว้"
 
-#: src/repos.cc:1353
+#: src/repos.cc:1346
 msgid "Please check if the URI is valid and accessible."
 msgstr "โปรดตรวจสอบว่า ที่อยู่ URI ที่ระบุไว้ สามารถเข้าใช้งานได้จริงหรือไม่"
 
-#: src/repos.cc:1360
+#: src/repos.cc:1353
 msgid "Problem parsing the file at the specified URI"
 msgstr "เกิดปัญหาในการกระจายแฟ้มตามที่อยู่ URI ที่ระบุไว้"
 
 #. TranslatorExplanation Don't translate the '.repo' string.
-#: src/repos.cc:1362
+#: src/repos.cc:1355
 msgid "Is it a .repo file?"
 msgstr "แน่ใจหรือว่ามันเป็นแฟ้มแบบ .repo ?"
 
-#: src/repos.cc:1369
+#: src/repos.cc:1362
 msgid "Problem encountered while trying to read the file at the specified URI"
 msgstr "เกิดปัญหาขึ้นระหว่างพยายามอ่านแฟ้มในที่อยู่ URI ที่ระบุไว้"
 
-#: src/repos.cc:1382
+#: src/repos.cc:1375
 msgid "Repository with no alias defined found in the file, skipping."
 msgstr "มีคลังแพกเกจซึ่งยังไม่มีการกำหนดชื่อเรียกอื่นอยู่ในแฟ้ม, ทำการข้ามมัน"
 
-#: src/repos.cc:1388
+#: src/repos.cc:1381
 #, c-format, boost-format
 msgid "Repository '%s' has no URI defined, skipping."
 msgstr "ยังไม่มีการกำหนดที่อยู่ URI ให้กับคลังแพกเกจ '%s', ทำการข้ามมัน"
 
-#: src/repos.cc:1436
+#: src/repos.cc:1429
 #, c-format, boost-format
 msgid "Repository '%s' has been removed."
 msgstr "คลังแพกเกจ '%s' ถูกเอาออกไปแล้ว"
 
-#: src/repos.cc:1584
+#: src/repos.cc:1577
 #, c-format, boost-format
 msgid "Repository '%s' priority has been left unchanged (%d)"
-msgstr ""
-"ระดับความสำคัญของคลังแพกเกจ '%s' ยังเหมือนเดิม (%d) โดยไม่มีการเปลี่ยนแปลง"
+msgstr "ระดับความสำคัญของคลังแพกเกจ '%s' ยังเหมือนเดิม (%d) โดยไม่มีการเปลี่ยนแปลง"
 
-#: src/repos.cc:1617
+#: src/repos.cc:1610
 #, fuzzy, c-format, boost-format
 msgid "Repository '%s' has been successfully enabled."
 msgstr "คลังแพกเกจ '%s' ถูกเปิดใช้งานแล้ว"
 
-#: src/repos.cc:1619
+#: src/repos.cc:1612
 #, fuzzy, c-format, boost-format
 msgid "Repository '%s' has been successfully disabled."
 msgstr "คลังแพกเกจ '%s' ถูกปิดการใช้งานแล้ว"
 
-#: src/repos.cc:1626
+#: src/repos.cc:1619
 #, c-format, boost-format
 msgid "Autorefresh has been enabled for repository '%s'."
 msgstr "การเรียกปรับปรุงใหม่อัตโนมัติถูกเปิดใช้งานกับคลังแพกเกจ '%s' แล้ว"
 
-#: src/repos.cc:1628
+#: src/repos.cc:1621
 #, c-format, boost-format
 msgid "Autorefresh has been disabled for repository '%s'."
 msgstr "การเรียกปรับปรุงใหม่อัตโนมัติถูกปิดการใช้งานกับคลังแพกเกจ '%s' แล้ว"
 
-#: src/repos.cc:1635
+#: src/repos.cc:1628
 #, c-format, boost-format
 msgid "RPM files caching has been enabled for repository '%s'."
 msgstr "การทำแคชของแฟ้ม RPM ถูกเปิดใช้งานกับคลังแพกเกจ '%s' แล้ว"
 
-#: src/repos.cc:1637
+#: src/repos.cc:1630
 #, c-format, boost-format
 msgid "RPM files caching has been disabled for repository '%s'."
 msgstr "การทำแคชของแฟ้ม RPM ถูกปิดการใช้งานกับคลังแพกเกจ '%s' แล้ว"
 
-#: src/repos.cc:1644
+#: src/repos.cc:1637
 #, fuzzy, c-format, boost-format
 msgid "GPG check has been enabled for repository '%s'."
 msgstr "การทำแคชของแฟ้ม RPM ถูกเปิดใช้งานกับคลังแพกเกจ '%s' แล้ว"
 
-#: src/repos.cc:1646
+#: src/repos.cc:1639
 #, fuzzy, c-format, boost-format
 msgid "GPG check has been disabled for repository '%s'."
 msgstr "การทำแคชของแฟ้ม RPM ถูกปิดการใช้งานกับคลังแพกเกจ '%s' แล้ว"
 
-#: src/repos.cc:1652
+#: src/repos.cc:1645
 #, c-format, boost-format
 msgid "Repository '%s' priority has been set to %d."
 msgstr "ระดับความสำคัญของคลังแพกเกจ '%s' ถูกเปลี่ยนเป็นระดับ %d แล้ว"
 
-#: src/repos.cc:1658
+#: src/repos.cc:1651
 #, c-format, boost-format
 msgid "Name of repository '%s' has been set to '%s'."
 msgstr "ตั้งค่าชื่อของคลังแพกเกจ '%s' ไปเป็น '%s' แล้ว"
 
-#: src/repos.cc:1669
+#: src/repos.cc:1662
 #, c-format, boost-format
 msgid "Nothing to change for repository '%s'."
 msgstr "ไม่มีการเปลี่ยนแปลงใด ๆ กับคลังแพกเกจ '%s'"
 
-#: src/repos.cc:1676
+#: src/repos.cc:1669
 #, c-format, boost-format
 msgid "Leaving repository %s unchanged."
 msgstr "ออกจากคลังแพกเกจ %s โดยไม่เปลี่ยนแปลงใด ๆ"
 
-#: src/repos.cc:1763
+#: src/repos.cc:1756
 msgid "Loading repository data..."
 msgstr "ทำการโหลดข้อมูลของคลังแพกเกจ..."
 
-#: src/repos.cc:1765
+#: src/repos.cc:1758
 #, fuzzy
 msgid ""
 "No repositories defined. Operating only with the installed resolvables. "
@@ -5981,43 +5982,43 @@ msgstr ""
 "แจ้งเตือน: ยังไม่มีการกำหนดคลังแพกเกจ "
 "จะทำปฏิบัติการกับส่วนที่ตรวจค้นได้จากตัวที่ติดตั้งไว้แล้วเท่าน้น และจะไม่สามารถติดตั้งอะไรเพิ่มได้"
 
-#: src/repos.cc:1788
+#: src/repos.cc:1781
 #, c-format, boost-format
 msgid "Retrieving repository '%s' data..."
 msgstr "ทำการรับข้อมูลของคลังแพกเกจ '%s'..."
 
-#: src/repos.cc:1796
+#: src/repos.cc:1789
 #, c-format, boost-format
 msgid "Repository '%s' not cached. Caching..."
 msgstr "คลังแพกเกจ '%s' ยังไม่ถูกทำแคช ทำแคชให้มัน..."
 
-#: src/repos.cc:1802 src/repos.cc:1836
+#: src/repos.cc:1795 src/repos.cc:1829
 #, c-format, boost-format
 msgid "Problem loading data from '%s'"
 msgstr "เกิดปัญหาในการโหลดข้อมูลจาก '%s'"
 
-#: src/repos.cc:1806
+#: src/repos.cc:1799
 #, fuzzy, c-format, boost-format
 msgid "Repository '%s' could not be refreshed. Using old cache."
 msgstr "ไม่พบข้อมูลกำกับของคลังแพกเกจ '%s' ในแคชภายในระบบ"
 
-#: src/repos.cc:1810 src/repos.cc:1839
+#: src/repos.cc:1803 src/repos.cc:1832
 #, c-format, boost-format
 msgid "Resolvables from '%s' not loaded because of error."
 msgstr "ไม่สามารถโหลดส่วนแก้ปัญหาจาก '%s' ได้ เนื่องจากมีข้อผิดพลาดเกิดขึ้น"
 
-#: src/repos.cc:1826
+#: src/repos.cc:1819
 #, boost-format
 msgid "Repository '%1%' metadata expired since %2%."
 msgstr ""
 
 #. translators: the first %s is 'zypper refresh' and the second 'zypper clean -m'
-#: src/repos.cc:1838
+#: src/repos.cc:1831
 #, c-format, boost-format
 msgid "Try '%s', or even '%s' before doing so."
 msgstr "ลองใช้ '%s', หรือ '%s' ก่อนจะทำเช่นนั้น"
 
-#: src/repos.cc:1843
+#: src/repos.cc:1836
 msgid ""
 "Repository metadata expired: Check if 'autorefresh' is turned on (zypper "
 "lr), otherwise manually refresh the repository (zypper ref). If this does "
@@ -6025,31 +6026,31 @@ msgid ""
 "server has actually discontinued to support the repository."
 msgstr ""
 
-#: src/repos.cc:1856
+#: src/repos.cc:1849
 msgid "Reading installed packages..."
 msgstr "อ่านข้อมูลแพกเกจที่ติดตั้งไว้แล้ว..."
 
-#: src/repos.cc:1865
+#: src/repos.cc:1858
 #, fuzzy
 msgid "Problem occurred while reading the installed packages:"
 msgstr "เกิดข้อผิดพลาดขึ้นระหว่างทำการอ่านแพกเกจที่ติดตั้งไว้แล้ว:"
 
-#: src/repos.cc:1882
+#: src/repos.cc:1875
 #, c-format, boost-format
 msgid "'%s' looks like an RPM file. Will try to download it."
 msgstr "'%s' ดูคล้ายแฟ้มแบบ RPM จะลองทำการดาวน์โหลดมันดู"
 
-#: src/repos.cc:1891
+#: src/repos.cc:1884
 #, c-format, boost-format
 msgid "Problem with the RPM file specified as '%s', skipping."
 msgstr "เกิดปัญหากับแฟ้ม RPM ที่ระบุไว้เป็น '%s', ทำการข้าม"
 
-#: src/repos.cc:1913
+#: src/repos.cc:1906
 #, c-format, boost-format
 msgid "Problem reading the RPM header of %s. Is it an RPM file?"
 msgstr "เกิดปัญหาในการอ่านส่วนหัว RPM ของ %s, แน่ใจหรือว่ามันเป็นแฟ้มแบบ RPM ?"
 
-#: src/repos.cc:1933
+#: src/repos.cc:1926
 msgid "Plain RPM files cache"
 msgstr "ทำแคชแฟ้ม RPM แบบธรรมดา"
 
@@ -6057,26 +6058,26 @@ msgstr "ทำแคชแฟ้ม RPM แบบธรรมดา"
 msgid "System Packages"
 msgstr "แพกเกจระบบ"
 
-#: src/search.cc:261
+#: src/search.cc:262
 msgid "No needed patches found."
 msgstr "ไม่พบแพตช์ที่จำเป็นต้องใช้ใด ๆ"
 
-#: src/search.cc:342
+#: src/search.cc:344
 msgid "No patterns found."
 msgstr "ไม่พบชุดรูปแบบใด ๆ"
 
-#: src/search.cc:450
+#: src/search.cc:453
 msgid "No packages found."
 msgstr "ไม่พบแพกเกจใด ๆ"
 
 #. translators: used in products. Internal Name is the unix name of the
 #. product whereas simply Name is the official full name of the product.
-#: src/search.cc:507
+#: src/search.cc:511
 #, fuzzy
 msgid "Internal Name"
 msgstr "ชื่อส่วนเชื่อมต่อ"
 
-#: src/search.cc:544
+#: src/search.cc:549
 msgid "No products found."
 msgstr "ไม่พบผลิตภัณฑ์ใด ๆ"
 
@@ -6270,8 +6271,7 @@ msgstr ""
 
 #: src/solve-commit.cc:795
 msgid "Root privileges are required to fix broken package dependencies."
-msgstr ""
-"ต้องสิทธิ์ของผู้ใช้ Root เพื่อแก้ปัญหาความเกี่ยวพันกันที่ขัดแย้งกันของแพกเกจ"
+msgstr "ต้องสิทธิ์ของผู้ใช้ Root เพื่อแก้ปัญหาความเกี่ยวพันกันที่ขัดแย้งกันของแพกเกจ"
 
 #. translators: These are the "Continue?" prompt options corresponding to
 #. "Yes / No / show Problems / Versions / Arch / Repository /
@@ -6305,8 +6305,7 @@ msgstr "ยกเลิกปฏิบัติการ"
 msgid ""
 "Restart solver in no-force-resolution mode in order to show dependency "
 "problems."
-msgstr ""
-"เรียกตัวแก้ปัญหาในโหมด ไม่บังคับให้แก้ปัญหา เพื่อดูปัญหาความเกี่ยวพันกัน"
+msgstr "เรียกตัวแก้ปัญหาในโหมด ไม่บังคับให้แก้ปัญหา เพื่อดูปัญหาความเกี่ยวพันกัน"
 
 #. translators: help text for 'v' option in the 'Continue?' prompt
 #: src/solve-commit.cc:828
@@ -6372,8 +6371,8 @@ msgid ""
 "- use another installation medium (if e.g. damaged)\n"
 "- use another repository"
 msgstr ""
-"ล้มเหลวในการตรวจสอบความถูกต้องของแพกเกจ ซึ่งอาจเป็นปัญหามาจากคลังแพกเกจหรือจากสื่อที่ใช้ติดตั้"
-"ง โปรดลองแก้ปัญหาแบบใดแบบหนึ่งต่อไปนี้:\n"
+"ล้มเหลวในการตรวจสอบความถูกต้องของแพกเกจ "
+"ซึ่งอาจเป็นปัญหามาจากคลังแพกเกจหรือจากสื่อที่ใช้ติดตั้ง โปรดลองแก้ปัญหาแบบใดแบบหนึ่งต่อไปนี้:\n"
 "\n"
 "- เรียกคำสั่งที่ใช้ไปก่อนหน้านี้อีกครั้ง\n"
 "- เรียกปรับปรุงคลังแพกเกจอีกครั้ง ด้วยคำสั่ง 'zypper refresh'\n"
@@ -6459,7 +6458,7 @@ msgid "Updatestack"
 msgstr ""
 
 #. translator: Table column header.
-#: src/update.cc:410 src/update.cc:702
+#: src/update.cc:410 src/update.cc:709
 msgid "Patches"
 msgstr "แพตช์"
 
@@ -6483,7 +6482,7 @@ msgstr ""
 msgid "Needed software management updates will be installed first:"
 msgstr "ถ้าคุณเลือกที่จะทำต่อไป แพกเกจของซอฟต์แวร์ต่อไปนี้จะถูกติดตั้ง:"
 
-#: src/update.cc:600 src/update.cc:842
+#: src/update.cc:600 src/update.cc:848
 msgid "No updates found."
 msgstr "ไม่พบรายการปรับรุ่นใด ๆ"
 
@@ -6493,54 +6492,54 @@ msgstr "ไม่พบรายการปรับรุ่นใด ๆ"
 msgid "The following updates are also available:"
 msgstr "รูปแบบต่อไปนี้ไม่สามารถติดตั้งได้"
 
-#: src/update.cc:700
+#: src/update.cc:707
 msgid "Package updates"
 msgstr "ปรับรุ่นแพกเกจ"
 
-#: src/update.cc:704
+#: src/update.cc:711
 msgid "Pattern updates"
 msgstr "ปรับรุ่นชุดรูปแบบ"
 
-#: src/update.cc:706
+#: src/update.cc:713
 msgid "Product updates"
 msgstr "ปรับรุ่นผลิตภัณฑ์"
 
-#: src/update.cc:794
+#: src/update.cc:800
 #, fuzzy
 msgid "Current Version"
 msgstr "ค่าปัจจุบัน"
 
-#: src/update.cc:795
+#: src/update.cc:801
 #, fuzzy
 msgid "Available Version"
 msgstr "รุ่นที่มีอยู่: %1 (%2)"
 
-#: src/update.cc:972
+#: src/update.cc:980
 #, fuzzy
 msgid "No matching issues found."
 msgstr "ไม่พบแพตช์ที่เข้าคู่กับ '%s'"
 
-#: src/update.cc:978
+#: src/update.cc:986
 #, fuzzy
 msgid "The following matches in issue numbers have been found:"
 msgstr "แพตช์เหล่านี้จะถูกปรับลดรุ่น:"
 
-#: src/update.cc:988
+#: src/update.cc:996
 msgid "Matches in patch descriptions of the following patches have been found:"
 msgstr ""
 
-#: src/update.cc:1050
+#: src/update.cc:1058
 #, c-format, boost-format
 msgid "Fix for bugzilla issue number %s was not found or is not needed."
 msgstr ""
 
-#: src/update.cc:1052
+#: src/update.cc:1060
 #, c-format, boost-format
 msgid "Fix for CVE issue number %s was not found or is not needed."
 msgstr ""
 
 #. translators: keep '%s issue' together, it's something like 'CVE issue' or 'Bugzilla issue'
-#: src/update.cc:1055
+#: src/update.cc:1063
 #, c-format, boost-format
 msgid "Fix for %s issue number %s was not found or is not needed."
 msgstr ""
@@ -6955,13 +6954,11 @@ msgstr "กด '%c' เพื่อออกจากเพจเจอร์"
 
 #: src/utils/pager.cc:42
 msgid "Use arrows or pgUp/pgDown keys to scroll the text by lines or pages."
-msgstr ""
-"ใช้ปุ่มพิมพ์กลุ่มลูกศร หรือปุ่มพิมพ์ pgUp/pgDown เพื่อเลื่อนข้อความทีละบรรทัดหรือทีละหน้า"
+msgstr "ใช้ปุ่มพิมพ์กลุ่มลูกศร หรือปุ่มพิมพ์ pgUp/pgDown เพื่อเลื่อนข้อความทีละบรรทัดหรือทีละหน้า"
 
 #: src/utils/pager.cc:44
 msgid "Use the Enter or Space key to scroll the text by lines or pages."
-msgstr ""
-"ใช้ปุ่มพิมพ์ Enter หรือปุ่มพิมพ์วรรค เพื่อเลื่อนข้อความทีละบรรทัดหรือทีละหน้า"
+msgstr "ใช้ปุ่มพิมพ์ Enter หรือปุ่มพิมพ์วรรค เพื่อเลื่อนข้อความทีละบรรทัดหรือทีละหน้า"
 
 #: src/utils/prompt.cc:43 src/utils/prompt.cc:94
 #, fuzzy, c-format, boost-format
