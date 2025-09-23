@@ -1,4 +1,13 @@
 -------------------------------------------------------------------
+Tue Sep 23 16:44:12 CEST 2025 - ma@suse.de
+
+- Fixed `bash-completion`: `zypper refresh` now ignores
+  repository priority lines.
+- Changes to support building against restructured libzypp in
+  stack build (bsc#1230267)
+- version 1.14.94
+
+-------------------------------------------------------------------
 Fri Jul 18 20:33:46 CEST 2025 - ma@suse.de
 
 - Fix addrepo to handle explicit --check and --no-check requests
