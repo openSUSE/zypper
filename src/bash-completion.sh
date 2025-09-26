@@ -129,7 +129,7 @@ _zypper() {
 				opts=(${ZYPPER_CMDLIST[@]})
 			;;
 			removerepo | rr | modifyrepo | mr | renamerepo | nr | refresh | ref)
-				opts=(${opts[@]}$(echo; LC_ALL=POSIX $ZYPPER -q lr | \
+				opts=(${opts[@]}$(echo; LC_ALL=POSIX $ZYPPER -q lr -a | \
 					sed -rn '/^[[:blank:]]*[0-9]+[[:blank:]]*\|/{
 						s/^[[:blank:]]*[0-9]+[[:blank:]]*\|[[:blank:]]*([^|]+).*/\1/
 						s/[[:blank:]]*$//
