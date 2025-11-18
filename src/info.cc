@@ -528,6 +528,162 @@ This pattern provides a graphical application and a command line tool for keepin
 </pre>
  *
  */
+namespace {
+  struct PatternContentHelper
+  {
+    enum Rank { NONE=0, Req, Rec, Sug }; // Dep ranking
+
+    struct Element
+    {
+      Rank _dep = NONE;
+      Capability _cap;                              // the dependency we're looking for
+      unsigned _num = 0U;                           // the number of providers
+      std::optional<ui::Selectable::Ptr> _provider; // the provider to show (if any)
+
+      explicit operator bool() const
+      { return _dep; }
+
+      // the table entires:
+      std::string s() const
+      { return _provider ? computeStatusIndicator( **_provider ) : std::string(); }
+
+      std::string name() const
+      { return _provider ? (*_provider)->ident().asString() : _cap.asString(); }
+
+      std::string type() const
+      { return _provider ? (*_provider)->kind().asString() : Dep::PROVIDES.asUserString(); }
+
+      std::string depstr() const
+      { return _dep == Req ? _("Required") : _dep == Rec ? _("Recommended") : _("Suggested"); }
+
+      // Table ordering
+      int order() const
+      {
+        int ret = _dep*2;
+        if ( _provider && (*_provider)->kind() != ResKind::package )
+          --ret;  // non-packages before packages
+        return ret;
+      }
+    };
+
+    std::map<std::string,Element> _content;
+
+    // Elements will be added in order of relevance (Req, Rec, Sug).
+    // => Add new ones only if a more relevant does not exist yet.
+    //
+    void add( const Capabilities & capset_r, Rank dep_r )
+    {
+      for ( const auto & c : capset_r ) {
+        if ( str::startsWith( c.c_str(), "rpmlib(" ) )
+          continue;
+
+        sat::WhatProvides wp { c };       // wp: stay in scope
+        auto providers = wp.selectable(); // iterator reference into wp!
+        auto numproviders = providers.size();
+        switch( numproviders ) {
+          case 0:   // no provider (collect only if missing requires)
+            if ( dep_r == Req )
+              add( dep_r, c, numproviders );
+            break;
+          case 1:   // unique provider
+            add( dep_r, c, numproviders, *providers.begin() );
+            break;
+          default:  // multiple providers
+          {
+            // Keeping it simple: Show the best installed provider
+            // otherwise display the missing capability.
+            ui::Selectable::Ptr ishow;
+            for ( const auto & sel : providers ) {
+              if ( sel->hasInstalledObj() ) {
+                if ( c.id() == sel->ident().id() ) {
+                  ishow = sel;
+                  break;        // best: installed and same ident as the dependency
+                }
+                else if ( not ishow || sel->ident() < ishow->ident() ) {
+                  ishow = sel;  // lex. least ident otherwise
+                }
+              }
+            }
+            if ( ishow )
+              add( dep_r, c, numproviders, ishow );
+            else
+              add( dep_r, c, numproviders );
+          }
+          break;
+        }
+      }
+    }
+
+    // The depkeeper: we invent a self referring capability
+    void add( const sat::Solvable & el_r, Rank dep_r )
+    {
+      add( dep_r, Capability(el_r.ident().id()), 1, ui::Selectable::get( el_r ) );
+    }
+
+  private:
+    // An (usually installed) Selectable representing the Capability is added under it's ident
+    void add( Rank dep_r, Capability cap_r, unsigned num_r, ui::Selectable::Ptr provider_r )
+    {
+      // translate a patterns- package back into it's pattern
+      rewriteIfPatternsPackge( provider_r );
+
+      Element & el = _content[provider_r->ident().asString()];
+      if ( not el ) {
+        el._provider = provider_r;
+        el._dep = dep_r;
+        el._cap = cap_r;
+        el._num = num_r;
+      }
+    }
+    // No or multiple providers (usually not installed)
+    void add( Rank dep_r, Capability cap_r, unsigned num_r )
+    {
+      Element & el = _content[cap_r.asString()];
+      if ( not el ) {
+        el._dep = dep_r;
+        el._cap = cap_r;
+        el._num = num_r;
+      }
+    }
+    void rewriteIfPatternsPackge( ui::Selectable::Ptr & provider_r )
+    {
+      // translate a patterns- package back into it's pattern
+#if LIBZYPP_VERSION <= 173718
+      static const Capability indicator { "pattern()" };
+      if ( str::hasPrefix( provider_r->ident().c_str(), "pattern" ) && provider_r->theObj().dep_provides().matches(indicator) )
+#else
+      if ( str::hasPrefix( provider_r->ident().c_str(), "pattern" ) && provider_r->theObj().isPatternPackage() )
+#endif
+      {
+        static const std::string cap { "autopattern() = " };
+        sat::WhatProvides wp { Capability( cap+provider_r->ident().c_str() ) };
+        if ( not wp.empty() )
+          provider_r = *wp.selectableBegin();
+      }
+    }
+  };
+
+  inline std::ostream & operator<<( std::ostream & str, const PatternContentHelper::Element & obj )
+  { return str << obj._dep << " " << ( obj._provider ? (*obj._provider)->hasInstalledObj() ? "i" : "u" : obj._num ? "*" : "-" ) << " " << obj.name(); }
+
+  PatternContentHelper patternContentHelper( Pattern::constPtr pattern_r, bool addSuggests_r )
+  {
+    PatternContentHelper ret;
+    sat::Solvable depKeeper( pattern_r->autoPackage() );  // (my required) patterns-package
+
+    if ( depKeeper ) {
+      // collect the depKeeper
+      ret.add( depKeeper, PatternContentHelper::Req );
+      // and expand it
+      ret.add( depKeeper[Dep::REQUIRES],   PatternContentHelper::Req );
+      ret.add( depKeeper[Dep::RECOMMENDS], PatternContentHelper::Rec );
+      if ( addSuggests_r )
+        ret.add( depKeeper[Dep::SUGGESTS], PatternContentHelper::Sug );
+    }
+    return ret;
+  }
+} // namespace
+
 void printPatternInfo(Zypper & zypper, const ui::Selectable & s , const std::optional<PoolItem> & theWanted_r, const PrintInfoOptions &options_r )
 {
   auto [installed, updateCand, theone] = theInterestingPoolItems( s, theWanted_r );
@@ -537,6 +693,9 @@ void printPatternInfo(Zypper & zypper, const ui::Selectable & s , const std::opt
   printCommonData( theone, p );
 
   // translators: property name; short; used like "Name: value"
+  // translators: A pattern has a 1:1 relation to a .rpm package defining it's properties AKA the pattern's Buddy.
+  p.add( _("Buddy Package"),		pattern->autoPackage() );
+  // translators: property name; short; used like "Name: value"
   p.add( _("Installed"),		propertyInstalled( s.installedObj() ) );
   // translators: property name; short; used like "Name: value"
   p.add( _("Visible to User"),		pattern->userVisible() );
@@ -544,19 +703,15 @@ void printPatternInfo(Zypper & zypper, const ui::Selectable & s , const std::opt
   printSummaryDescDeps( theone, p, options_r );
 
   {	// show contents
-    Pattern::ContentsSet collect;
-    pattern->contentsSet( collect );
-
     bool showSuggests = options_r._flags.testFlag( InfoBits::ShowSuggests );
-    if ( collect.req.empty()
-      && collect.rec.empty()
-      && ( !showSuggests || collect.sug.empty() ) )
-    {
+
+    PatternContentHelper contentHelper { patternContentHelper( pattern, showSuggests ) };
+    const auto & content { contentHelper._content };
+
+    if ( content.empty() ) {
       // translators: property name; short; used like "Name: value"
       p.addDetail( _("Contents"),	_("(empty)") );
-    }
-    else
-    {
+    } else {
       Table t;
       t << ( TableHeader()
           /* translators: Table column header */	<< N_("S")
@@ -564,29 +719,13 @@ void printPatternInfo(Zypper & zypper, const ui::Selectable & s , const std::opt
           /* translators: Table column header */	<< N_("Type")
           /* translators: Table column header */	<< N_("Dependency") );
 
-      for ( ui::Selectable::Ptr sel : collect.req.selectable() )
-      {
-        const ui::Selectable & s = *sel;
-        t << ( TableRow() << computeStatusIndicator( s ) << s.name() << s.kind().asString() << _("Required") );
+      for( const auto & [k,v] : content ) {
+        TableRow tr;
+        tr << v.s() << v.name() << v.type() << v.depstr();
+        tr.userData( v.order() );
+        t << std::move(tr);
       }
-      for ( ui::Selectable::Ptr sel : collect.rec.selectable() )
-      {
-        const ui::Selectable & s = *sel;
-        t << ( TableRow() << computeStatusIndicator( s ) << s.name() << s.kind().asString() << _("Recommended") );
-      }
-      if ( showSuggests )
-        for ( ui::Selectable::Ptr sel : collect.sug.selectable() )
-        {
-          const ui::Selectable & s = *sel;
-          t << ( TableRow() << computeStatusIndicator( s ) << s.name() << s.kind().asString() << _("Suggested") );
-        }
-
-      std::map<std::string, unsigned> depPrio({{_("Required"),0}, {_("Recommended"),1}, {_("Suggested"),2}});
-      t.sort( [&depPrio]( const TableRow & lhs, const TableRow & rhs ) -> bool {
-        if ( lhs.columns()[3] != rhs.columns()[3] )
-          return depPrio[lhs.columns()[3]] < depPrio[rhs.columns()[3]];
-        return  lhs.columns()[1] < rhs.columns()[1];
-      } );
+      t.sort(4);  // by userdata
 
       // translators: property name; short; used like "Name: value"
       p.addDetail( _("Contents"),	str::Str() << t );
