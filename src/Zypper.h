@@ -13,6 +13,7 @@
 
 #include <boost/utility/string_ref.hpp>
 
+#include <zypp-core/Globals.h>  // LIBZYPP_VERSION macro (buildtime version)
 #include <zypp/base/Exception.h>
 #include <zypp/base/NonCopyable.h>
 #include <zypp/base/PtrTypes.h>
