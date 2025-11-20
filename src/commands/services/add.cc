@@ -51,7 +51,20 @@ void add_service( Zypper & zypper, const ServiceInfo & service )
         // bsc#1203715: Support (re)adding a service with the same URL.
         MIL << "Service '" << service.alias() << "' exists with same URL '" << service.url() << "'" << endl;
         zypper.out().info( str::Format(_("Service '%1%' with URL '%2%' already exists. Just updating the settings.")) % service.alias() % service.url() );
-        manager.modifyService( service.alias(), service );
+        // bsc#1252744: Update service enabled/refresh settings but keep all
+        // the remembered repo data. They will be updated on the next refresh.
+        bool mustModify = false;
+        if ( exists.enabled() != service.enabled() ) {
+          exists.setEnabled( service.enabled() );
+          mustModify = true;
+        }
+        if ( exists.autorefresh() != service.autorefresh() ) {
+          exists.setAutorefresh( service.autorefresh() );
+          mustModify = true;
+        }
+        if ( mustModify ) {
+          manager.modifyService( exists.alias(), exists );
+        }
       }
       else {
         ERR << "Service '" << service.alias() << "' exists with different URL '" << service.url() << "'" << endl;
