@@ -61,8 +61,6 @@ void safe_lexical_cast( Source s, Target & tr )
   {;}
 }
 
-void report_unknown_repos( Out & out, const std::list<std::string> & not_found );
-
 /**
  * Looks for known repos based on specified arguments and creates a list
  * of aliases of found repos. Reports repos not found via zypper's output.

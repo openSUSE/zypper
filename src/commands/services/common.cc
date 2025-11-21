@@ -41,7 +41,64 @@ ServiceList get_all_services( Zypper & zypper )
   return services;
 }
 
-bool match_service( Zypper & zypper, std::string str, repo::RepoInfoBase_Ptr & service_ptr, bool looseAuth, bool looseQuery  )
+void get_services_helper( Zypper & zypper, const std::string & spec, ServiceList & services, std::list<std::string> & not_found )
+{
+  repo::RepoInfoBase_Ptr service;
+
+  if ( !match_service( zypper, spec, service, false, false ) )
+  {
+    not_found.push_back( spec );
+    return;
+  }
+
+  // service found
+  // is it a duplicate? compare by alias and URIs
+  //! \todo operator== in RepoInfo?
+  bool duplicate = false;
+  for_( serv_it, services.begin(), services.end() )
+  {
+    ServiceInfo_Ptr s_ptr = dynamic_pointer_cast<ServiceInfo>(*serv_it);
+    ServiceInfo_Ptr current_service_ptr = dynamic_pointer_cast<ServiceInfo>(service);
+
+    // one is a service, the other is a repo
+    if ( s_ptr && !current_service_ptr )
+      continue;
+
+    // service
+    if ( s_ptr )
+    {
+      if ( s_ptr->alias() == current_service_ptr->alias()
+        && s_ptr->url() == current_service_ptr->url() )
+      {
+        duplicate = true;
+        break;
+      }
+    }
+    // repo
+    else if ( repo_cmp_alias_urls( *dynamic_pointer_cast<RepoInfo>(service),
+      *dynamic_pointer_cast<RepoInfo>(*serv_it) ) )
+    {
+      duplicate = true;
+      break;
+    }
+  } // END for all found so far
+
+  if ( !duplicate )
+    services.push_back( service );
+}
+
+void report_unknown_services( Out & out, const std::list<std::string> & not_found )
+{
+  if ( not_found.empty() )
+    return;
+
+  for_( it, not_found.begin(), not_found.end() )
+    out.error( str::Format(_("Service '%s' not found by its alias, number, or URI.")) % *it );
+
+  out.info( str::Format(_("Use '%s' to get the list of defined services.")) % "zypper services" );
+}
+
+bool match_service( Zypper & zypper, const std::string & spec, repo::RepoInfoBase_Ptr & service_ptr, bool looseAuth, bool looseQuery  )
 {
   ServiceList known = get_all_services( zypper );
   bool found = false;
@@ -51,12 +108,12 @@ bool match_service( Zypper & zypper, std::string str, repo::RepoInfoBase_Ptr & s
   {
     ++number;
     unsigned tmp = 0;
-    safe_lexical_cast( str, tmp ); // try to make an int out of the string
+    safe_lexical_cast( spec, tmp ); // try to make an int out of the string
 
     try
     {
       // match by alias or number
-      found = (*known_it)->alias() == str || tmp == number;
+      found = (*known_it)->alias() == spec || tmp == number;
 
       // match by URL
       if ( !found )
@@ -74,14 +131,14 @@ bool match_service( Zypper & zypper, std::string str, repo::RepoInfoBase_Ptr & s
         if ( !( urlview.has(url::ViewOptions::WITH_PASSWORD) && urlview.has(url::ViewOptions::WITH_QUERY_STR) ) )
         {
           if ( s_ptr )
-            found = Url(str).asString(urlview) == s_ptr->url().asString(urlview);
+            found = Url(spec).asString(urlview) == s_ptr->url().asString(urlview);
           else
           {
             RepoInfo_Ptr r_ptr = dynamic_pointer_cast<RepoInfo>(*known_it);
             if ( !r_ptr->baseUrlsEmpty() )
             {
               for_( urlit, r_ptr->baseUrlsBegin(), r_ptr->baseUrlsEnd() )
-                if ( urlit->asString(urlview) == Url(str).asString(urlview) )
+                if ( urlit->asString(urlview) == Url(spec).asString(urlview) )
                 {
                   found = true;
                   break;
@@ -92,13 +149,13 @@ bool match_service( Zypper & zypper, std::string str, repo::RepoInfoBase_Ptr & s
         else
         {
           if ( s_ptr )
-            found = ( Url(str) == s_ptr->url() );
+            found = ( Url(spec) == s_ptr->url() );
           else
           {
             RepoInfo_Ptr r_ptr = dynamic_pointer_cast<RepoInfo>(*known_it);
             if ( !r_ptr->baseUrlsEmpty() )
             {
-              found = find( r_ptr->baseUrlsBegin(), r_ptr->baseUrlsEnd(), Url(str) ) != r_ptr->baseUrlsEnd();
+              found = find( r_ptr->baseUrlsBegin(), r_ptr->baseUrlsEnd(), Url(spec) ) != r_ptr->baseUrlsEnd();
             }
           }
         }
