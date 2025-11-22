@@ -20,74 +20,7 @@
 
 using namespace zypp;
 
-/**
- * Try to find ServiceInfo or RepoInfo counterparts among known services by alias, number,
- * or URI, based on the list of strings given as the iterator range \a begin and
- * \a end. Matching objects will be added to \a services (as RepoInfoBase_Ptr) and those
- * with no match will be added to \a not_found.
- */
-template<typename T>
-void get_services( Zypper & zypper, const T & begin, const T & end,
-                   ServiceList & services, std::list<std::string> & not_found )
-{
-  for_( it, begin, end )
-  {
-    repo::RepoInfoBase_Ptr service;
 
-    if ( !match_service( zypper, *it, service, false, false ) )
-    {
-      not_found.push_back( *it );
-      continue;
-    }
-
-    // service found
-    // is it a duplicate? compare by alias and URIs
-    //! \todo operator== in RepoInfo?
-    bool duplicate = false;
-    for_( serv_it, services.begin(), services.end() )
-    {
-      ServiceInfo_Ptr s_ptr = dynamic_pointer_cast<ServiceInfo>(*serv_it);
-      ServiceInfo_Ptr current_service_ptr = dynamic_pointer_cast<ServiceInfo>(service);
-
-      // one is a service, the other is a repo
-      if ( s_ptr && !current_service_ptr )
-        continue;
-
-      // service
-      if ( s_ptr )
-      {
-        if ( s_ptr->alias() == current_service_ptr->alias()
-          && s_ptr->url() == current_service_ptr->url() )
-        {
-          duplicate = true;
-          break;
-        }
-      }
-      // repo
-      else if ( repo_cmp_alias_urls( *dynamic_pointer_cast<RepoInfo>(service),
-                                     *dynamic_pointer_cast<RepoInfo>(*serv_it) ) )
-      {
-        duplicate = true;
-        break;
-      }
-    } // END for all found so far
-
-    if ( !duplicate )
-      services.push_back( service );
-  }
-}
-
-/**
- * Say "Service %s not found" for all strings in \a not_found list.
- */
-static void report_unknown_services( Out & out, std::list<std::string> not_found )
-{
-  for_( it, not_found.begin(), not_found.end() )
-    out.error( str::Format(_("Service '%s' not found by its alias, number, or URI.")) % *it );
-
-  if ( !not_found.empty() )
-    out.info( str::Format(_("Use '%s' to get the list of defined services.")) % "zypper repos" );
-}
 
 RefreshServicesCmd::RefreshServicesCmd(std::vector<std::string> &&commandAliases_r ) :
   ZypperBaseCommand(

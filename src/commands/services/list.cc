@@ -75,12 +75,66 @@ void service_list_tr( Zypper & zypper,
   tbl << tr;
 }
 
+struct ServiceDetailsFormat
+{
+  using NormalLayout = out::DefaultListLayout;
+
+  std::string listElement( const repo::RepoInfoBase_Ptr & el_r ) const
+  {
+    ServiceInfo_Ptr service_ptr = dynamic_pointer_cast<ServiceInfo>(el_r);
+    RepoInfo_Ptr    repo_ptr    = dynamic_pointer_cast<RepoInfo>(el_r);
+    str::Str ret;
+
+    PropertyTable p;
+    p.add( "Service",		type( service_ptr, repo_ptr ) );
+    p.add( _("Alias"),		el_r->alias() );
+    p.add( _("Name"),		el_r->name() );
+    p.add( _("Enabled"),	asYesNo( el_r->enabled() ) );
+    p.add( _("Autorefresh"),	el_r->autorefresh() ? _("On") : _("Off") );
+    p.add( _("URL"),		url( service_ptr, repo_ptr ) );
+    p.add( _("Config"),		el_r->filepath() );
+    return ret << p;
+  }
+private:
+  std::string type( ServiceInfo_Ptr service_r, RepoInfo_Ptr repo_r ) const {
+    if ( service_r )
+      return service_r->type().asString();
+    else if ( repo_r )
+      return repo_r->type().asString();
+    return "N/A";
+  }
+  std::string url( ServiceInfo_Ptr service_r, RepoInfo_Ptr repo_r ) const {
+    if ( service_r )
+      return service_r->url().asString();
+    else if ( repo_r )
+      return repo_r->url().asString();
+    return "N/A";
+  }
+};
+
+int printServiceDetails( Zypper & zypper, const std::vector<std::string> & positionalArgs_r )
+{
+  ServiceList services;
+  std::list<std::string> not_found;
+  get_services( zypper, positionalArgs_r.begin(),positionalArgs_r.end(), services, not_found );
+
+  report_unknown_services( zypper.out(), not_found );
+  cout << endl;
+  out::writeContainer( cout, services, ServiceDetailsFormat() );
+
+  if ( not not_found.empty() ) {
+    return ( ZYPPER_EXIT_ERR_INVALID_ARGS );
+  } else if ( services.empty() ) {
+    return ( ZYPPER_EXIT_NO_REPOS );
+  }
+  return ZYPPER_EXIT_OK;
 }
+} // namespace
 
 ListServicesCmd::ListServicesCmd(std::vector<std::string> &&commandAliases_r)
   : ZypperBaseCommand (
       std::move( commandAliases_r ),
-      _("services (ls) [OPTIONS]"),
+      _("services (ls) [OPTIONS] [SERVICE] ..."),
       _("List all defined services."),
       _("List defined services."),
       ResetRepoManager
@@ -239,6 +293,10 @@ void ListServicesCmd::doReset()
 
 int ListServicesCmd::execute( Zypper &zypper, const std::vector<std::string> &positionalArgs_r )
 {
+  if ( not positionalArgs_r.empty() ) {
+    return printServiceDetails( zypper, positionalArgs_r );
+  }
+
   if ( _listOptions._flags.testFlag( RSCommonListOptions::ShowWithRepos) )
     checkIfToRefreshPluginServices( zypper );
 
