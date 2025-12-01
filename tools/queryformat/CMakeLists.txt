@@ -1,0 +1,7 @@
+CMAKE_MINIMUM_REQUIRED( VERSION 2.8.9 )
+PROJECT( QueryFormat )
+
+SET( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wp,-D_GLIBCXX_ASSERTIONS -Wall -O3 -g -Wl,-as-needed" )
+
+ADD_EXECUTABLE( test test.cc Parser.cc )
+TARGET_LINK_LIBRARIES( test libzypp.so )

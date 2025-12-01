@@ -126,6 +126,11 @@ else()
   ADD_SUBDIRECTORY( po EXCLUDE_FROM_ALL )
 endif()
 
+ADD_SUBDIRECTORY( tools/queryformat )
+
+INCLUDE(CTest)
+ENABLE_TESTING()
+
 # documentation too important to be hidden in doc:
 INSTALL(
   FILES HACKING
