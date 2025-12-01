@@ -8,21 +8,45 @@
 #ifndef ZYPPER_QUERYFORMAT_PARSER_H
 #define ZYPPER_QUERYFORMAT_PARSER_H
 
+#include <exception>
+#include <optional>
 #include <string_view>
 
 #include "Tokens.h"
 
 ///////////////////////////////////////////////////////////////////
-namespace zypp
+namespace zypp::qf
 {
-  ///////////////////////////////////////////////////////////////////
-  namespace qf
+  struct ParseException : public std::exception
   {
-    /** Translate string into \ref Format.
-     * Returns whether passing succeeded. If not, \a result_r is
-     * incomplete.
+    ParseException( std::string msg_r )
+    : _msg { std::move(msg_r) }
+    {}
+
+    const char * what() const throw() override
+    { return _msg.c_str(); }
+
+  private:
+    std::string _msg;
+  };
+
+  /** Translate string into \ref Format.
+   * \throws ParseException If parsing did not succeed.
+   */
+  Format parse( std::string_view qf_r );
+  /** \overload */
+  inline void parse( std::string_view qf_r, Format & format_r )
+  { format_r = parse( qf_r );}
+
+
+  namespace test {
+    /** Parse \a qf_r and compare result against \a expect_r.
+     * If \a expect_r is empty or not provided, qf_r itself is expected.
+     * If \a expect_r is \c std::nullopt, a \ref ParseException is expected.
      */
-    bool parse( std::string_view qf_r, Format & result_r );
-  } // namespace qf
-} // namespace zypp
+    unsigned parsetest( std::string_view qf_r, std::optional<std::string_view> expect_r=std::string_view() );
+    /** Run some predefiined tests. */
+    unsigned parsetest();
+  }
+} // namespace zypp::qf
 #endif // ZYPPER_QUERYFORMAT_PARSER_H
