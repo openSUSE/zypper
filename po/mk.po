@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-07-02 13:50+0200\n"
-"PO-Revision-Date: 2026-01-03 11:04+0000\n"
+"PO-Revision-Date: 2026-01-10 08:04+0000\n"
 "Last-Translator: \"Kristijan \\\"Fremen\\\" Velkovski\" <me@krisfremen.com>\n"
 "Language-Team: Macedonian <https://l10n.opensuse.org/projects/zypper/master/"
 "mk/>\n"
@@ -450,35 +450,35 @@ msgstr "Печот „%s“ не е пронајден во наведените
 #: src/RequestFeedback.cc:65
 #, c-format, boost-format
 msgid "Product '%s' not found in specified repositories."
-msgstr ""
+msgstr "Производот „%s“ не е пронајден во наведените складишта."
 
 #: src/RequestFeedback.cc:67
 #, c-format, boost-format
 msgid "Pattern '%s' not found in specified repositories."
-msgstr ""
+msgstr "Шаблонот „%s“ не е пронајден во наведените складишта."
 
 #: src/RequestFeedback.cc:69
 #, c-format, boost-format
 msgid "Source package '%s' not found in specified repositories."
-msgstr ""
+msgstr "Изворниот пакет „%s“ не е пронајден во наведените складишта."
 
 #. just in case
 #: src/RequestFeedback.cc:71
 #, c-format, boost-format
 msgid "Object '%s' not found in specified repositories."
-msgstr ""
+msgstr "Објектот „%s“ не е пронајден во наведените складишта."
 
 #. translators: meaning a package %s or provider of capability %s
 #: src/RequestFeedback.cc:76
 #, c-format, boost-format
 msgid "No provider of '%s' found."
-msgstr ""
+msgstr "Не е пронајден провајдер на „%s“."
 
 #. wildcards used
 #: src/RequestFeedback.cc:85
 #, c-format, boost-format
 msgid "No package matching '%s' is installed."
-msgstr ""
+msgstr "Не е инсталиран пакет што одговара на „%s“."
 
 #: src/RequestFeedback.cc:87
 #, c-format, boost-format
@@ -489,12 +489,12 @@ msgstr "Пакетот '%s' не е инсталиран."
 #: src/RequestFeedback.cc:91
 #, c-format, boost-format
 msgid "No provider of '%s' is installed."
-msgstr ""
+msgstr "Не е инсталиран провајдер на „%s“."
 
 #: src/RequestFeedback.cc:96
 #, c-format, boost-format
 msgid "'%s' is already installed."
-msgstr ""
+msgstr "„%s“ е веќе инсталиран."
 
 #. translators: %s are package names
 #: src/RequestFeedback.cc:99
