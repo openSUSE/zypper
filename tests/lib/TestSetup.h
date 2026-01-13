@@ -51,7 +51,7 @@ ZYPP_DECLARE_FLAGS_AND_OPERATORS( TestSetupOptions, TestSetupOptionBits );
  * \note The lifetime of this objects is the lifetime of the temp. root directory.
  *
  * \code
- * #include "TestSetup.h"
+ * #include <tests/lib/TestSetup.h>
  *
  * BOOST_AUTO_TEST_CASE(WhatProvides)
  * {

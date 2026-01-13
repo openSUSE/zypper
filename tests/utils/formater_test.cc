@@ -1,4 +1,4 @@
-#include "TestSetup.h"
+#include <tests/lib/TestSetup.h>
 #include "output/Out.h"
 
 typedef std::vector<std::string> Container;

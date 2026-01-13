@@ -1,4 +1,4 @@
-#include "TestSetup.h"
+#include <tests/lib/TestSetup.h>
 #include "commands/search/search.h"
 #include "commands/query.h"
 

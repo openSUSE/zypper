@@ -1,4 +1,4 @@
-#include "TestSetup.h"
+#include <tests/lib/TestSetup.h>
 #include "utils/text.h"
 
 BOOST_AUTO_TEST_CASE(out_of_bounds_read_issue_167)
