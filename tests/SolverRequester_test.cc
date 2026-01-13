@@ -67,7 +67,7 @@
  * \todo adapt --best-effort concept to the new package selection
  */
 
-#include "TestSetup.h"
+#include <tests/lib/TestSetup.h>
 #include "zypp/PoolQuery.h"
 #include "zypp/Locks.h"
 

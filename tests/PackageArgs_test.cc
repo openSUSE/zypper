@@ -5,7 +5,7 @@
                              |__/|_|  |_|
 \*---------------------------------------------------------------------------*/
 
-#include "TestSetup.h"
+#include <tests/lib/TestSetup.h>
 #include "PackageArgs.h"
 
 using namespace zypp;
