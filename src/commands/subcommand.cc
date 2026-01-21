@@ -513,7 +513,7 @@ std::ostream & SubcommandOptions::showHelpOn( std::ostream & out ) const
   return out;	// FAKE!
 }
 
-SubCmd::SubCmd(std::vector<std::string> &&commandAliases_r , boost::shared_ptr<SubcommandOptions> options_r) :
+SubCmd::SubCmd(std::vector<std::string> &&commandAliases_r , std::shared_ptr<SubcommandOptions> options_r) :
   ZypperBaseCommand (
     std::move( commandAliases_r ),
     "subcommand",
@@ -588,7 +588,7 @@ int SubCmd::runCmd( Zypper &zypper )
   return zypper.exitCode();
 }
 
-boost::shared_ptr<SubcommandOptions> SubCmd::subCmdOptions()
+std::shared_ptr<SubcommandOptions> SubCmd::subCmdOptions()
 {
   return _options;
 }
