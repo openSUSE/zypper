@@ -144,6 +144,12 @@ INSTALL(
   DESTINATION ${INSTALL_PREFIX}/sbin
 )
 
+# zypper-mark tool
+INSTALL(
+  PROGRAMS tools/zypper-mark
+  DESTINATION ${INSTALL_PREFIX}/sbin
+)
+
 # needs-restarting tool
 INSTALL(
   PROGRAMS tools/needs-restarting
