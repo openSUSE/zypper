@@ -559,7 +559,8 @@ Url make_obs_url( const std::string & obsuri )
         if ( platform == "openSUSE"  )
         {
           if ( pdata.productline() == "Leap" )
-            platform += "_Leap_$releasever";
+            // boo#1219148 - openSUSE Leap 15 now uses simply "15.X"
+            platform = "$releasever";
           else if ( str::containsCI( pdata.summary(), "Tumbleweed" ) )
             platform += "_Tumbleweed";
           else
@@ -572,8 +573,8 @@ Url make_obs_url( const std::string & obsuri )
         }
         else if ( platform == "Leap" && pdata.vendor() == "openSUSE" )
         {
-          // bsc#1187425 Hotfix
-          platform = "openSUSE_Leap_$releasever";
+          // boo#1219148 - openSUSE Leap 15 now uses simply "15.X"
+          platform = "$releasever";
         }
         else
           platform += "_$releasever";
