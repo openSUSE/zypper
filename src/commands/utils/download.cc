@@ -15,6 +15,7 @@
 #include <zypp/ZYppCallbacks.h>
 #include <zypp/ui/SelectableTraits.h>
 #include <zypp/target/CommitPackageCache.h>
+#include <zypp/repo/PackageProvider.h>
 
 #include "utils/flags/flagtypes.h"
 #include "utils/messages.h"
@@ -28,25 +29,6 @@ using namespace zypp;
 
 namespace
 {
-  namespace env {
-    /** XDG_CACHE_HOME: base directory relative to which user specific non-essential data files should be stored.
-     * http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html
-     */
-    inline filesystem::Pathname XDG_CACHE_HOME()
-    {
-      filesystem::Pathname ret;
-      const char * envp = getenv( "XDG_CACHE_HOME" );
-      if ( envp && *envp )
-        ret = envp;
-      else
-      {
-        ret = getenv( "HOME" );
-        ret /= ".cache";
-      }
-      return ret;
-    }
-  } //namespace env
-
   inline bool isPackageType( const sat::Solvable & slv_r )
   { return( slv_r.isKind<Package>() || slv_r.isKind<SrcPackage>() ); }
 
@@ -120,7 +102,7 @@ namespace
         if ( ! mayuse && /* is the default path: */
              gOpts.rm_options.repoPackagesCachePath == RepoManagerOptions( gOpts.root_dir ).repoPackagesCachePath )
         {
-          zypp.configNoConst().rm_options.repoPackagesCachePath = env::XDG_CACHE_HOME() / "zypp/packages";
+          zypp.configNoConst().rm_options.repoPackagesCachePath = zypp::repo::env::XDG_CACHE_HOME() / "zypp/packages";
           mayuse = userMayUseDir( gOpts.rm_options.repoPackagesCachePath );
         }
 
