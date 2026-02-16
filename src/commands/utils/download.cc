@@ -15,7 +15,6 @@
 #include <zypp/ZYppCallbacks.h>
 #include <zypp/ui/SelectableTraits.h>
 #include <zypp/target/CommitPackageCache.h>
-#include <zypp/repo/PackageProvider.h>
 
 #include "utils/flags/flagtypes.h"
 #include "utils/messages.h"
@@ -102,7 +101,6 @@ namespace
         if ( ! mayuse && /* is the default path: */
              gOpts.rm_options.repoPackagesCachePath == RepoManagerOptions( gOpts.root_dir ).repoPackagesCachePath )
         {
-          zypp.configNoConst().rm_options.repoPackagesCachePath = zypp::repo::env::XDG_CACHE_HOME() / "zypp/packages";
           mayuse = userMayUseDir( gOpts.rm_options.repoPackagesCachePath );
         }
 
