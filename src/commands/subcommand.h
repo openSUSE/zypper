@@ -80,7 +80,7 @@ public:
 class SubCmd : public ZypperBaseCommand
 {
 public:
-  SubCmd ( std::vector<std::string> &&commandAliases_r, boost::shared_ptr<SubcommandOptions> options_r = boost::shared_ptr<SubcommandOptions>() );
+  SubCmd ( std::vector<std::string> &&commandAliases_r, std::shared_ptr<SubcommandOptions> options_r = std::shared_ptr<SubcommandOptions>() );
 
   /** Test whether \c strval_r denotes a subcommand and remember the \ref Detected details.
    * \ref SubcommandOptions can load the last detected details if necessary.
@@ -98,14 +98,14 @@ public:
    */
   int runCmd( Zypper &zypper );
 
-  boost::shared_ptr<SubcommandOptions>  subCmdOptions ();
+  std::shared_ptr<SubcommandOptions>  subCmdOptions ();
 
 private:
   /** Store command in \c _args[0]. */
   void setArg0( std::string arg0_r );
 
 private:
-  boost::shared_ptr<SubcommandOptions> _options;
+  std::shared_ptr<SubcommandOptions> _options;
 
   // ZypperBaseCommand interface
 public:
