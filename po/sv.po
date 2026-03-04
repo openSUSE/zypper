@@ -12,16 +12,16 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-02-24 18:09+0100\n"
-"PO-Revision-Date: 2025-07-22 12:48+0000\n"
-"Last-Translator: Julia Faltenbacher <julia.faltenbacher@suse.com>\n"
-"Language-Team: Swedish <https://l10n.opensuse.org/projects/zypper/master/sv/"
-">\n"
+"PO-Revision-Date: 2026-03-04 10:04+0000\n"
+"Last-Translator: Luna  Jernberg <bittin@opensuse.org>\n"
+"Language-Team: Swedish <https://l10n.opensuse.org/projects/zypper/master/sv/>"
+"\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.12.2\n"
+"X-Generator: Weblate 5.16.1\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -176,6 +176,8 @@ msgid ""
 "For debugging output specify this option twice. 'zypper -vv ref' for example "
 "will show the mirrors used to download the metadata."
 msgstr ""
+"För felsökningsutdata specificera detta alternativ två gånger. 'zypper -vv "
+"ref' visar till exempel de speglar som används för att ladda ner metadata."
 
 #. translators: --color / --no-color
 #: src/Config.cc:320
@@ -3806,6 +3808,8 @@ msgstr ""
 msgid ""
 "HINT: 'zypper -vv ref' will show the mirrors used to download the metadata."
 msgstr ""
+"TIPS: 'zypper -vv ref' visar de speglar som används för att ladda ner "
+"metadata."
 
 #. translators: -f, --force
 #: src/commands/repos/refresh.cc:82 src/commands/services/refresh.cc:46
@@ -4578,15 +4582,15 @@ msgstr "Tjänsten %s har tagits bort."
 
 #: src/commands/services/list.cc:94
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 #: src/commands/services/list.cc:95
 msgid "Config"
-msgstr ""
+msgstr "Konfiguration"
 
 #: src/commands/services/list.cc:137
 msgid "services (ls) [OPTIONS] [SERVICE] ..."
-msgstr ""
+msgstr "tjänster (ls) [ALTERNATIV] [TJÄNST] ..."
 
 #: src/commands/services/list.cc:138
 msgid "List all defined services."
@@ -5663,7 +5667,7 @@ msgstr "Föreslagen"
 #. translators: A pattern has a 1:1 relation to a .rpm package defining it's properties AKA the pattern's Buddy.
 #: src/info.cc:697
 msgid "Buddy Package"
-msgstr ""
+msgstr "Kompispaket"
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:701
