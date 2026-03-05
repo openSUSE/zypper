@@ -6,10 +6,10 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-03-05 12:49+0100\n"
-"PO-Revision-Date: 2026-02-27 18:04+0000\n"
+"PO-Revision-Date: 2026-03-05 19:04+0000\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
-"Language-Team: Slovak <https://l10n.opensuse.org/projects/zypper/master/sk/"
-">\n"
+"Language-Team: Slovak <https://l10n.opensuse.org/projects/zypper/master/sk/>"
+"\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -6558,7 +6558,7 @@ msgstr "Chyba pri čítaní nainštalovaných balíkov:"
 #: src/repos.cc:1875
 #, c-format, boost-format
 msgid "'%s' looks like an RPM file. Will try to use it."
-msgstr ""
+msgstr "'%s' vyzerá ako súbor RPM. Skúsi sa použiť."
 
 #: src/repos.cc:1884
 #, c-format, boost-format
