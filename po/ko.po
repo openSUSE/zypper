@@ -3357,8 +3357,8 @@ msgid ""
 "Add a repository to the system. The repository can be specified by its URI "
 "or can be read from specified .repo file (even remote)."
 msgstr ""
-"시스템에 리포지토리를 추가합니다. 해당 URI로 리포지토리를 지정하거나 지정된 ."
-"repo 파일(원격 포함)에서 리포지토리를 읽을 수 있습니다."
+"시스템에 리포지토리를 추가합니다. 해당 URI로 리포지토리를 지정하거나 지정"
+"된 .repo 파일(원격 포함)에서 리포지토리를 읽을 수 있습니다."
 
 #: src/commands/repos/add.cc:40
 msgid "Just another means to specify a .repo file to read."
@@ -6359,8 +6359,8 @@ msgstr ""
 #: src/solve-commit.cc:620
 #, c-format, boost-format
 msgid ""
-"Check for running processes using deleted libraries is disabled in zypper."
-"conf. Run '%s' to check manually."
+"Check for running processes using deleted libraries is disabled in "
+"zypper.conf. Run '%s' to check manually."
 msgstr ""
 "zypper.conf에서는 삭제된 라이브러리를 사용하여 실행 중인 프로세스를 확인할 "
 "수 없습니다. '%s'을(를) 실행하여 수동으로 확인하십시오."

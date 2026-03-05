@@ -6366,8 +6366,8 @@ msgstr ""
 #: src/solve-commit.cc:620
 #, c-format, boost-format
 msgid ""
-"Check for running processes using deleted libraries is disabled in zypper."
-"conf. Run '%s' to check manually."
+"Check for running processes using deleted libraries is disabled in "
+"zypper.conf. Run '%s' to check manually."
 msgstr ""
 
 #: src/solve-commit.cc:636
@@ -6530,8 +6530,8 @@ msgid ""
 "One of the installed patches requires a reboot of your machine. Reboot as "
 "soon as possible."
 msgstr ""
-" எச்சரிக்கை: நிறுவப்பட்ட பிழைநீப்புகளில் ஒன்றிற்கு உங்கள் சாதனம் மறுதுவக்கம் செய்யப்பட."
-"வேண்டிய தேவையுள்ளது. தயவுசெய்து, இயன்றவரை விரைவாக அதைச் செய்யவும்."
+" எச்சரிக்கை: நிறுவப்பட்ட பிழைநீப்புகளில் ஒன்றிற்கு உங்கள் சாதனம் மறுதுவக்கம் "
+"செய்யப்பட.வேண்டிய தேவையுள்ளது. தயவுசெய்து, இயன்றவரை விரைவாக அதைச் செய்யவும்."
 
 #: src/solve-commit.cc:1097
 #, fuzzy
@@ -7740,8 +7740,8 @@ msgstr "பிழை"
 #~ "WARNING: One of the installed patches requires a a reboot of your "
 #~ "machine. Please do it as soon as possible."
 #~ msgstr ""
-#~ " எச்சரிக்கை: நிறுவப்பட்ட பிழைநீப்புகளில் ஒன்றிற்கு உங்கள் சாதனம் மறுதுவக்கம் செய்யப்பட."
-#~ "வேண்டிய தேவையுள்ளது. தயவுசெய்து, இயன்றவரை விரைவாக அதைச் செய்யவும்."
+#~ " எச்சரிக்கை: நிறுவப்பட்ட பிழைநீப்புகளில் ஒன்றிற்கு உங்கள் சாதனம் மறுதுவக்கம் "
+#~ "செய்யப்பட.வேண்டிய தேவையுள்ளது. தயவுசெய்து, இயன்றவரை விரைவாக அதைச் செய்யவும்."
 
 #, fuzzy
 #~ msgid "(%d resolvables found)"

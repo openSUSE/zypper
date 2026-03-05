@@ -6375,8 +6375,8 @@ msgstr ""
 #: src/solve-commit.cc:620
 #, c-format, boost-format
 msgid ""
-"Check for running processes using deleted libraries is disabled in zypper."
-"conf. Run '%s' to check manually."
+"Check for running processes using deleted libraries is disabled in "
+"zypper.conf. Run '%s' to check manually."
 msgstr ""
 
 #: src/solve-commit.cc:636
@@ -7723,8 +7723,8 @@ msgstr "त्रुटी"
 #~ "WARNING: One of the installed patches requires a a reboot of your "
 #~ "machine. Please do it as soon as possible."
 #~ msgstr ""
-#~ "सावधगिरीचा इषाराः प्रस्थापित केलेल्या पॅचपैकी एकासाठी मशीन पुनःआरंभ करावी लागेल."
-#~ "कृपया शक्य तेवढ्या लवकर तसे करा."
+#~ "सावधगिरीचा इषाराः प्रस्थापित केलेल्या पॅचपैकी एकासाठी मशीन पुनःआरंभ करावी "
+#~ "लागेल.कृपया शक्य तेवढ्या लवकर तसे करा."
 
 #, fuzzy
 #~ msgid "Reading RPM database..."

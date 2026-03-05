@@ -2485,8 +2485,8 @@ msgid ""
 "type option."
 msgstr ""
 "LOCKSPEC 的格式为“[KIND:]NAME[ OP EDITION]”，其中 NAME 也可以是使用 * 和 ? 通"
-"配符的 glob 模式。非软件包类型可以在前面追加 KIND: 字符串（例如“patch:"
-"foo”），或使用命令 --type 选项。"
+"配符的 glob 模式。非软件包类型可以在前面追加 KIND: 字符串（例"
+"如“patch:foo”），或使用命令 --type 选项。"
 
 #: src/commands/locks/add.cc:36
 msgid ""
@@ -6263,8 +6263,8 @@ msgstr "明确选择 DownloadAsNeeded 还会选择 classic_rpmtrans 后端。"
 #: src/solve-commit.cc:620
 #, c-format, boost-format
 msgid ""
-"Check for running processes using deleted libraries is disabled in zypper."
-"conf. Run '%s' to check manually."
+"Check for running processes using deleted libraries is disabled in "
+"zypper.conf. Run '%s' to check manually."
 msgstr ""
 "检查使用了已删除函数库的运行中进程的功能在 zypper.conf 中禁用了。运行 '%s' 手"
 "动检查。"
@@ -6769,8 +6769,8 @@ msgstr "请填写一份关于此情况的故障报告。"
 #: src/utils/messages.cc:22
 msgid "See http://en.opensuse.org/Zypper/Troubleshooting for instructions."
 msgstr ""
-"故障回报指南请参考 https://zh.opensuse.org/SDB:"
-"Zypper_%E7%96%91%E9%9A%BE%E8%A7%A3%E7%AD%94。"
+"故障回报指南请参考 https://zh.opensuse.org/"
+"SDB:Zypper_%E7%96%91%E9%9A%BE%E8%A7%A3%E7%AD%94。"
 
 #: src/utils/messages.cc:38
 msgid "Too many arguments."

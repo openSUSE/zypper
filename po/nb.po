@@ -6401,8 +6401,8 @@ msgstr ""
 #: src/solve-commit.cc:620
 #, fuzzy, c-format, boost-format
 msgid ""
-"Check for running processes using deleted libraries is disabled in zypper."
-"conf. Run '%s' to check manually."
+"Check for running processes using deleted libraries is disabled in "
+"zypper.conf. Run '%s' to check manually."
 msgstr "Ser etter kjørende prosesser med slettede biblioteker..."
 
 #: src/solve-commit.cc:636

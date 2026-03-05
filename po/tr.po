@@ -2553,8 +2553,8 @@ msgid ""
 msgstr ""
 "Bağımlı paketleri kaldırmaktansa değiştirmeyi tercih eden bir kaldırma "
 "komutu. Aslında bu, düz argümanlarına (-) uygulanan kaldırma değiştiricisi "
-"ile tam özellikli bir yükleme komutudur. Yani 'removeptf foo', 'install -- -"
-"foo' ile aynıdır. Bu yüzden komut, yükleme komutuyla aynı seçenekleri kabul "
+"ile tam özellikli bir yükleme komutudur. Yani 'removeptf foo', 'install -- "
+"-foo' ile aynıdır. Bu yüzden komut, yükleme komutuyla aynı seçenekleri kabul "
 "eder. Bir PTF'yi (Program Geçici Düzeltmesi) kaldırmanın önerilen yoludur."
 
 #: src/commands/installremove.cc:317
@@ -6723,8 +6723,8 @@ msgstr ""
 #: src/solve-commit.cc:620
 #, c-format, boost-format
 msgid ""
-"Check for running processes using deleted libraries is disabled in zypper."
-"conf. Run '%s' to check manually."
+"Check for running processes using deleted libraries is disabled in "
+"zypper.conf. Run '%s' to check manually."
 msgstr ""
 "Silinen kitaplıkları kullanan çalışan işlemleri denetleme, zypper.conf "
 "içinde devre dışı bırakılmıştır. Manuel olarak kontrol etmek için '%s' "

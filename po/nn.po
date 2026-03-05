@@ -1430,8 +1430,8 @@ msgid ""
 msgstr ""
 "Den symbolske lenkja «/etc/products.d/baseproduct» manglar eller peikar "
 "ikkje ikkje til ei reell fil.\n"
-"Lenkja må peika til .prod-fila til kjerneproduktet ditt i «/etc/products."
-"d».\n"
+"Lenkja må peika til .prod-fila til kjerneproduktet ditt i «/etc/"
+"products.d».\n"
 
 #. TranslatorExplanation The %s is "--plus-repo"
 #. TranslatorExplanation The %s is "--option-name"
@@ -5858,8 +5858,8 @@ msgid ""
 msgstr ""
 "Dette kan komma av ugyldige metadata i pakkebrønnen eller av ein feil i "
 "metadatatolkaren. Viss det kjem av ein feil i tolkaren, eller om du er i "
-"tvil om grunnen, meld det inn som ein feil, slik forklart på http://en."
-"opensuse.org/Zypper/Troubleshooting."
+"tvil om grunnen, meld det inn som ein feil, slik forklart på http://"
+"en.opensuse.org/Zypper/Troubleshooting."
 
 #: src/repos.cc:446
 #, c-format, boost-format
@@ -6407,8 +6407,8 @@ msgstr ""
 #: src/solve-commit.cc:620
 #, c-format, boost-format
 msgid ""
-"Check for running processes using deleted libraries is disabled in zypper."
-"conf. Run '%s' to check manually."
+"Check for running processes using deleted libraries is disabled in "
+"zypper.conf. Run '%s' to check manually."
 msgstr ""
 "Kontroll av prosessar som køyrer og brukar sletta bibliotekfiler er slått av "
 "i zypper.conf. Køyr «%s» for å kontrollera manuelt."

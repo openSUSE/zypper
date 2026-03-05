@@ -221,8 +221,8 @@ msgid ""
 "Patches having the flag rebootSuggested set will not be treated as "
 "interactive."
 msgstr ""
-"Opravy, které mají nastavený příznak "
-"\"navrhovanýRestart\" (rebootSuggested), nebudou považovány za interaktivní."
+"Opravy, které mají nastavený příznak \"navrhovanýRestart\" "
+"(rebootSuggested), nebudou považovány za interaktivní."
 
 #. translators: --non-interactive-include-reboot-patches
 #: src/Config.cc:347
@@ -1558,8 +1558,8 @@ msgid ""
 "The link must point to your core products .prod file in /etc/products.d.\n"
 msgstr ""
 "Symbolický odkaz /etc/products.d/baseproduct je neplatný nebo chybí! Tento\n"
-"odkaz musí směřovat na soubor vašich hlavních produktů .prod v /etc/products."
-"d.\n"
+"odkaz musí směřovat na soubor vašich hlavních produktů .prod v /etc/"
+"products.d.\n"
 
 #. TranslatorExplanation The %s is "--plus-repo"
 #. TranslatorExplanation The %s is "--option-name"
@@ -2495,8 +2495,8 @@ msgid ""
 "Remove packages with specified capabilities. A capability is NAME[.ARCH]"
 "[OP<VERSION>], where OP is one of <, <=, =, >=, >."
 msgstr ""
-"Odinstaluje závislosti se zadanými schopnostmi. Schopnost má tvar NÁZEV[."
-"ARCHITEKTURA][OP<VERZE>], kde OP je jeden z operátorů <, <=, =, >=, >."
+"Odinstaluje závislosti se zadanými schopnostmi. Schopnost má tvar "
+"NÁZEV[.ARCHITEKTURA][OP<VERZE>], kde OP je jeden z operátorů <, <=, =, >=, >."
 
 #: src/commands/installremove.cc:104 src/commands/installremove.cc:234
 #: src/utils/messages.cc:53
@@ -6722,11 +6722,11 @@ msgstr ""
 #: src/solve-commit.cc:620
 #, c-format, boost-format
 msgid ""
-"Check for running processes using deleted libraries is disabled in zypper."
-"conf. Run '%s' to check manually."
+"Check for running processes using deleted libraries is disabled in "
+"zypper.conf. Run '%s' to check manually."
 msgstr ""
-"Kontrola, které spuštěné procesy používají smazané knihovny, je v zypper."
-"conf zakázána. Spusťte '%s' pro ruční kontrolu."
+"Kontrola, které spuštěné procesy používají smazané knihovny, je v "
+"zypper.conf zakázána. Spusťte '%s' pro ruční kontrolu."
 
 #: src/solve-commit.cc:636
 msgid "Skip check:"

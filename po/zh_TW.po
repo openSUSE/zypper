@@ -2312,8 +2312,8 @@ msgid ""
 "Temporary Fix)."
 msgstr ""
 "將會取代相依套件而不是也將其移除的移除指令。事實上，這是完整的安裝指令 (對該"
-"指令的普通參數套用了移除修飾詞 (-))。因此 \"removeptf foo\" 與 \"install -- -"
-"foo\" 效果相同。這就是該指令接受的選項與安裝指令相同的原因。建議使用此方式來"
+"指令的普通參數套用了移除修飾詞 (-))。因此 \"removeptf foo\" 與 \"install -- "
+"-foo\" 效果相同。這就是該指令接受的選項與安裝指令相同的原因。建議使用此方式來"
 "移除臨時修復程式 (Program Temporary Fix，PTF)。"
 
 #: src/commands/installremove.cc:317
@@ -2487,8 +2487,8 @@ msgid ""
 "type option."
 msgstr ""
 "LOCKSPEC 的格式為「[KIND:]NAME[ OP EDITION]」，其中 NAME 也可以是使用 * 和 ? "
-"萬用字元的 glob 模式。非套件類型可以在前面預增 KIND: 字串 (例如「patch:"
-"foo」)，或使用指令 --type 選項。"
+"萬用字元的 glob 模式。非套件類型可以在前面預增 KIND: 字串 (例如"
+"「patch:foo」)，或使用指令 --type 選項。"
 
 #: src/commands/locks/add.cc:36
 msgid ""
@@ -6269,8 +6269,8 @@ msgstr "明確選取 DownloadAsNeeded 還會選取 classic_rpmtrans 後端。"
 #: src/solve-commit.cc:620
 #, c-format, boost-format
 msgid ""
-"Check for running processes using deleted libraries is disabled in zypper."
-"conf. Run '%s' to check manually."
+"Check for running processes using deleted libraries is disabled in "
+"zypper.conf. Run '%s' to check manually."
 msgstr ""
 "檢查使用已刪除函式庫之執行中程序的功能在 zypper.conf 中已被關閉。請手動執行 "
 "'%s' 來做檢查。"

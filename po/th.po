@@ -5688,8 +5688,8 @@ msgid ""
 "Troubleshooting"
 msgstr ""
 "อาจเกิดจากข้อมูลกำกับที่ใช้ไม่ได้ในคลังแพกเกจ หรือเกิดจากบั๊กในตัวกระจายข้อมูลกำกับ "
-"หากเป็นกรณีหลังหรือไม่แน่ใจ โปรดทำการรายงานบั๊กตามวิธีการที่บอกไว้ที่ http://en.opensuse."
-"org/Zypper/Troubleshooting"
+"หากเป็นกรณีหลังหรือไม่แน่ใจ โปรดทำการรายงานบั๊กตามวิธีการที่บอกไว้ที่ http://"
+"en.opensuse.org/Zypper/Troubleshooting"
 
 #: src/repos.cc:446
 #, c-format, boost-format
@@ -6229,8 +6229,8 @@ msgstr ""
 #: src/solve-commit.cc:620
 #, c-format, boost-format
 msgid ""
-"Check for running processes using deleted libraries is disabled in zypper."
-"conf. Run '%s' to check manually."
+"Check for running processes using deleted libraries is disabled in "
+"zypper.conf. Run '%s' to check manually."
 msgstr ""
 
 #: src/solve-commit.cc:636

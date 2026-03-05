@@ -2410,8 +2410,8 @@ msgid ""
 "Remove packages with specified capabilities. A capability is NAME[.ARCH]"
 "[OP<VERSION>], where OP is one of <, <=, =, >=, >."
 msgstr ""
-"Remover pacotes com capacidades especificadas. Uma capacidade é um NOME[."
-"ARCH] ou [OP<VERSÃO>], onde OP é um dos sinais <, <=, =, >=, >."
+"Remover pacotes com capacidades especificadas. Uma capacidade é um "
+"NOME[.ARCH] ou [OP<VERSÃO>], onde OP é um dos sinais <, <=, =, >=, >."
 
 #: src/commands/installremove.cc:104 src/commands/installremove.cc:234
 #: src/utils/messages.cc:53
@@ -4121,8 +4121,8 @@ msgid ""
 "Use the global GPG check setting defined in /etc/zypp/zypp.conf. This is the "
 "default."
 msgstr ""
-"Utilizar a definição global de verificação GPG definida em /etc/zypp/zypp."
-"conf. Esta é o padrão."
+"Utilizar a definição global de verificação GPG definida em /etc/zypp/"
+"zypp.conf. Esta é o padrão."
 
 #. translators: -a, --alias
 #: src/commands/reposerviceoptionsets.cc:182
@@ -6076,8 +6076,8 @@ msgid ""
 msgstr ""
 "Isto pode ser causado por metadados inválidos no repositório, ou por um erro "
 "na interpretação dos metadados. Neste último caso, ou na dúvida, por favor "
-"preencha um relatório de erro seguindo as instruções em http://en.opensuse."
-"org/Zypper/Troubleshooting"
+"preencha um relatório de erro seguindo as instruções em http://"
+"en.opensuse.org/Zypper/Troubleshooting"
 
 #: src/repos.cc:446
 #, c-format, boost-format
@@ -6626,8 +6626,8 @@ msgstr ""
 #: src/solve-commit.cc:620
 #, c-format, boost-format
 msgid ""
-"Check for running processes using deleted libraries is disabled in zypper."
-"conf. Run '%s' to check manually."
+"Check for running processes using deleted libraries is disabled in "
+"zypper.conf. Run '%s' to check manually."
 msgstr ""
 "A verificação de processos em execução utilizando bibliotecas eliminadas "
 "está desativada em zypper.conf. Execute '%s' para verificar manualmente."
