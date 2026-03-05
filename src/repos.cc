@@ -1872,8 +1872,8 @@ std::vector<std::string> createTempRepoFromArgs( Zypper &zypper, std::vector<std
     if ( looks_like_rpm_file( *it ) )
     {
       DBG << *it << " looks like rpm file" << endl;
-      zypper.out().info( str::Format(_("'%s' looks like an RPM file. Will try to download it.")) % *it,
-        Out::HIGH );
+      zypper.out().info( str::Format(_("'%s' looks like an RPM file. Will try to use it.")) % *it );
+      Offering::ScopedDemand _verboseDownloadProgress = Zypper::instance().runtimeData().scopedVerboseDownloadProgress.demand();
 
       // download the rpm into the temp cache
       if ( cliRPMCache.empty() )
