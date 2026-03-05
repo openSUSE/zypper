@@ -233,18 +233,6 @@ namespace ZmartRecipients
     ) override {
       if ( _be_quiet )
         return;
-
-      /*
-      zypp::str::Str outstr;
-      outstr << _("Preloading:") << " ";
-      if ( Zypper::instance().out().verbosity() == Out::DEBUG  && userData.haskey("Url") )
-        outstr << userData.get<zypp::Url>("Url");
-      else
-        outstr << localfile.basename();
-
-      Zypper::instance().out().info() << ( ColorContext::MSG_STATUS << outstr );
-      redrawProgress ();
-      */
     }
 
     /**
