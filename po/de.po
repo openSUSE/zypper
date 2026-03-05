@@ -16,11 +16,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.de\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-24 18:09+0100\n"
+"POT-Creation-Date: 2026-03-05 12:49+0100\n"
 "PO-Revision-Date: 2026-02-25 05:04+0000\n"
 "Last-Translator: Ettore Atalan <atalanttore@googlemail.com>\n"
-"Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/>"
-"\n"
+"Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/"
+">\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2075,34 +2075,34 @@ msgstr "Pakete vorladen"
 msgid "Preloading Packages:"
 msgstr "Pakete vorladen:"
 
-#: src/callbacks/media.h:263
+#: src/callbacks/media.h:251
 msgid "Preloading:"
 msgstr "Vorladen:"
 
 #. Translator: prefetch progress bar result: ".............[done]"
-#: src/callbacks/media.h:278
+#: src/callbacks/media.h:266
 msgid "done"
 msgstr "fertig"
 
 #. Translator: prefetch progress bar result: "........[not found]"
-#: src/callbacks/media.h:283
+#: src/callbacks/media.h:271
 msgid "not found"
 msgstr "nicht gefunden"
 
 #. Translator: prefetch progress bar result: "............[error]"
-#: src/callbacks/media.h:290
+#: src/callbacks/media.h:278
 msgid "error"
 msgstr "Fehler"
 
-#: src/callbacks/media.h:307
+#: src/callbacks/media.h:295
 msgid "Preload finished."
 msgstr "Vorladen abgeschlossen."
 
-#: src/callbacks/media.h:312
+#: src/callbacks/media.h:300
 msgid "success"
 msgstr "Erfolg"
 
-#: src/callbacks/media.h:315
+#: src/callbacks/media.h:303
 msgid "files missing"
 msgstr "Dateien fehlen"
 
@@ -3699,8 +3699,8 @@ msgstr ""
 msgid ""
 "If only one argument is used, it must be a URI pointing to a .repo file."
 msgstr ""
-"Wenn nur ein Argument verwendet wird, dann muss es sich um einen auf "
-"eine .repo-Datei verweisenden URI handeln."
+"Wenn nur ein Argument verwendet wird, dann muss es sich um einen auf eine ."
+"repo-Datei verweisenden URI handeln."
 
 #: src/commands/repos/add.cc:130
 msgid "Specified type is not a valid repository type:"
@@ -5462,9 +5462,9 @@ msgid ""
 "N), running, oldest(+N)."
 msgstr ""
 "Automatische Löschungen von installierten Kerneln gemäß der Liste an "
-"Kerneln, die von /etc/zypp/zypp.conf behalten werden sollen: "
-"multiversion.kernels, die als <Version>, aktuellster(-N), laufend, "
-"ältester(+N) gegeben sein können."
+"Kerneln, die von /etc/zypp/zypp.conf behalten werden sollen: multiversion."
+"kernels, die als <Version>, aktuellster(-N), laufend, ältester(+N) gegeben "
+"sein können."
 
 #: src/commands/utils/purge-kernels.cc:51
 msgid "Preparing to purge obsolete kernels..."
@@ -6670,9 +6670,8 @@ msgstr "Problem beim Lesen der installierten Pakete:"
 
 #: src/repos.cc:1875
 #, c-format, boost-format
-msgid "'%s' looks like an RPM file. Will try to download it."
+msgid "'%s' looks like an RPM file. Will try to use it."
 msgstr ""
-"'%s' sieht wie eine RPM-Datei aus. Es wird versucht, sie herunterzuladen."
 
 #: src/repos.cc:1884
 #, c-format, boost-format
@@ -6862,8 +6861,8 @@ msgstr ""
 #: src/solve-commit.cc:620
 #, c-format, boost-format
 msgid ""
-"Check for running processes using deleted libraries is disabled in "
-"zypper.conf. Run '%s' to check manually."
+"Check for running processes using deleted libraries is disabled in zypper."
+"conf. Run '%s' to check manually."
 msgstr ""
 "Die Suche nach laufenden Prozessen, die gelöschte Bibliotheken verwenden, "
 "ist in zypper.conf deaktiviert. Starten Sie die Suche manuell mit '%s'."
@@ -7754,6 +7753,11 @@ msgstr "Objekt ungültig"
 #: src/utils/prompt.h:102
 msgid "Error"
 msgstr "Fehler"
+
+#, c-format, boost-format
+#~ msgid "'%s' looks like an RPM file. Will try to download it."
+#~ msgstr ""
+#~ "'%s' sieht wie eine RPM-Datei aus. Es wird versucht, sie herunterzuladen."
 
 #~ msgid "services (ls) [OPTIONS]"
 #~ msgstr "services (ls) [Optionen]"
@@ -9674,8 +9678,8 @@ msgstr "Fehler"
 #~ "Standard.\n"
 #~ "-f, --file-list            Suche nach einem Treffer in der Dateiliste der "
 #~ "Pakete.\n"
-#~ "-d, --search-descriptions  Suche auch in Paketzusammenfassungen und "
-#~ "-beschreibungen.\n"
+#~ "-d, --search-descriptions  Suche auch in Paketzusammenfassungen und -"
+#~ "beschreibungen.\n"
 #~ "-C, --case-sensitive       Beachtung der Groß-/Kleinschreibung.\n"
 #~ "-i, --installed-only       Nur Pakete anzeigen, die schon installiert "
 #~ "sind.\n"
@@ -12073,8 +12077,8 @@ msgstr "Fehler"
 #~ "                           ist die Suche in Paketnamen der Standard.\n"
 #~ "-f, --file-list            Suche nach einer Übereinstimmung in der "
 #~ "Dateiliste der Pakete.\n"
-#~ "-d, --search-descriptions  Suche auch in Paketzusammenfassungen und "
-#~ "-beschreibungen.\n"
+#~ "-d, --search-descriptions  Suche auch in Paketzusammenfassungen und -"
+#~ "beschreibungen.\n"
 #~ "-C, --case-sensitive       Suche unter Beachtung der "
 #~ "Großkleinschreibung.\n"
 #~ "-i, --installed-only       Zeige nur schon installierte Pakete.\n"
@@ -12141,8 +12145,8 @@ msgstr "Fehler"
 #~ "    --match-words          Nach einer Übereinstimmung mit nur ganzen "
 #~ "Wörtern suchen.\n"
 #~ "    --match-exact          Nach einem genauen Paketnamen suchen.\n"
-#~ "-d, --search-descriptions  Auch in Paketzusammenfassungen und "
-#~ "-beschreibungen suchen.\n"
+#~ "-d, --search-descriptions  Auch in Paketzusammenfassungen und -"
+#~ "beschreibungen suchen.\n"
 #~ "-C, --case-sensitive       Eine Groß- und Kleinschreibung "
 #~ "berücksichtigende Suche durchführen.\n"
 #~ "-i, --installed-only       Nur installierte Pakete anzeigen.\n"

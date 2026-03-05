@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-24 18:09+0100\n"
+"POT-Creation-Date: 2026-03-05 12:49+0100\n"
 "PO-Revision-Date: 2025-08-03 17:59+0000\n"
 "Last-Translator: Antonio Simón <antonio@trans-mission.com>\n"
 "Language-Team: Spanish <https://l10n.opensuse.org/projects/zypper/master/es/"
@@ -2065,34 +2065,34 @@ msgstr "Precargar Paquetes"
 msgid "Preloading Packages:"
 msgstr "Precargar paquetes:"
 
-#: src/callbacks/media.h:263
+#: src/callbacks/media.h:251
 msgid "Preloading:"
 msgstr "Precargando:"
 
 #. Translator: prefetch progress bar result: ".............[done]"
-#: src/callbacks/media.h:278
+#: src/callbacks/media.h:266
 msgid "done"
 msgstr "terminado"
 
 #. Translator: prefetch progress bar result: "........[not found]"
-#: src/callbacks/media.h:283
+#: src/callbacks/media.h:271
 msgid "not found"
 msgstr "no encontrado"
 
 #. Translator: prefetch progress bar result: "............[error]"
-#: src/callbacks/media.h:290
+#: src/callbacks/media.h:278
 msgid "error"
 msgstr "error"
 
-#: src/callbacks/media.h:307
+#: src/callbacks/media.h:295
 msgid "Preload finished."
 msgstr "Precarga finalizada."
 
-#: src/callbacks/media.h:312
+#: src/callbacks/media.h:300
 msgid "success"
 msgstr "correcto"
 
-#: src/callbacks/media.h:315
+#: src/callbacks/media.h:303
 msgid "files missing"
 msgstr "archivos ausentes"
 
@@ -4252,8 +4252,8 @@ msgid ""
 "Use the global GPG check setting defined in /etc/zypp/zypp.conf. This is the "
 "default."
 msgstr ""
-"Usar la configuración de comprobación GPG global definida en /etc/zypp/"
-"zypp.conf. Este es el valor por omisión."
+"Usar la configuración de comprobación GPG global definida en /etc/zypp/zypp."
+"conf. Este es el valor por omisión."
 
 #. translators: -a, --alias
 #: src/commands/reposerviceoptionsets.cc:182
@@ -6257,8 +6257,8 @@ msgid ""
 msgstr ""
 "Puede deberse a que existen metadatos no válidos en el repositorio o a un "
 "error en el analizador de metadatos. En este último caso, o si tiene alguna "
-"duda, abra un informe de errores siguiendo las instrucciones de http://"
-"en.opensuse.org/Zypper/Troubleshooting"
+"duda, abra un informe de errores siguiendo las instrucciones de http://en."
+"opensuse.org/Zypper/Troubleshooting"
 
 #: src/repos.cc:446
 #, c-format, boost-format
@@ -6638,8 +6638,8 @@ msgstr "Se ha producido un problema al leer los paquetes instalados:"
 
 #: src/repos.cc:1875
 #, c-format, boost-format
-msgid "'%s' looks like an RPM file. Will try to download it."
-msgstr "'%s' parece un archivo RPM. Se intentará descargarlo."
+msgid "'%s' looks like an RPM file. Will try to use it."
+msgstr ""
 
 #: src/repos.cc:1884
 #, c-format, boost-format
@@ -6830,8 +6830,8 @@ msgstr ""
 #: src/solve-commit.cc:620
 #, c-format, boost-format
 msgid ""
-"Check for running processes using deleted libraries is disabled in "
-"zypper.conf. Run '%s' to check manually."
+"Check for running processes using deleted libraries is disabled in zypper."
+"conf. Run '%s' to check manually."
 msgstr ""
 "La comprobación de los procesos en ejecución que usan bibliotecas suprimidas "
 "está inhabilitada en zypper.conf. Ejecute '%s' para realizar la comprobación "
@@ -7714,6 +7714,10 @@ msgstr "Objeto no válido"
 msgid "Error"
 msgstr "Error"
 
+#, c-format, boost-format
+#~ msgid "'%s' looks like an RPM file. Will try to download it."
+#~ msgstr "'%s' parece un archivo RPM. Se intentará descargarlo."
+
 #~ msgid "services (ls) [OPTIONS]"
 #~ msgstr "services (ls) [opciones]"
 
@@ -8097,8 +8101,8 @@ msgstr "Error"
 #~ "\t--no-refresh\t\tNo actualizar los repositorios.\n"
 #~ "\t--no-cd\t\t\tOmitir los repositorios de CD/DVD.\n"
 #~ "\t--no-remote\t\tOmitir los repositorios remotos.\n"
-#~ "\t--releasever\t\tDefinir el valor de $releasever en todos los "
-#~ "archivos .repo (por defecto: versión de distribución)\n"
+#~ "\t--releasever\t\tDefinir el valor de $releasever en todos los archivos ."
+#~ "repo (por defecto: versión de distribución)\n"
 
 #~ msgid ""
 #~ "     Target Options:\n"
@@ -8671,8 +8675,8 @@ msgstr "Error"
 #~ "(incluso remoto).\n"
 #~ "\n"
 #~ "  Opciones de comando:\n"
-#~ "-r, --repo <archivo.repo>    Solo otro medio para especificar un "
-#~ "archivo .repo que leer.\n"
+#~ "-r, --repo <archivo.repo>    Solo otro medio para especificar un archivo ."
+#~ "repo que leer.\n"
 #~ "-t, --type <tipo>         Tipo de repositorio (%s).\n"
 #~ "-d, --disable             Añade el repositorio como inhabilitado.\n"
 #~ "-c, --check               Sondear el URI.\n"
@@ -10303,8 +10307,8 @@ msgstr "Error"
 #~ "(incluso remoto).\n"
 #~ "\n"
 #~ "  Opciones de comando:\n"
-#~ "-r, --repo <archivo.repo>    Solo otro medio para especificar un "
-#~ "archivo .repo que leer.\n"
+#~ "-r, --repo <archivo.repo>    Solo otro medio para especificar un archivo ."
+#~ "repo que leer.\n"
 #~ "-t, --type <tipo>         Tipo de repositorio (%s).\n"
 #~ "-d, --disable             Añade el repositorio como inhabilitado.\n"
 #~ "-c, --check               Sondear el URI.\n"

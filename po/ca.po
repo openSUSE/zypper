@@ -8,11 +8,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-24 18:09+0100\n"
+"POT-Creation-Date: 2026-03-05 12:49+0100\n"
 "PO-Revision-Date: 2026-02-25 11:04+0000\n"
 "Last-Translator: David Medina <medipas@gmail.com>\n"
-"Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/>"
-"\n"
+"Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/"
+">\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2029,35 +2029,35 @@ msgstr "Precarregant paquets"
 msgid "Preloading Packages:"
 msgstr "Precarregant paquets:"
 
-#: src/callbacks/media.h:263
+#: src/callbacks/media.h:251
 msgid "Preloading:"
 msgstr "Precarregant"
 
 # ID
 #. Translator: prefetch progress bar result: ".............[done]"
-#: src/callbacks/media.h:278
+#: src/callbacks/media.h:266
 msgid "done"
 msgstr "fet"
 
 #. Translator: prefetch progress bar result: "........[not found]"
-#: src/callbacks/media.h:283
+#: src/callbacks/media.h:271
 msgid "not found"
 msgstr "no trobat"
 
 #. Translator: prefetch progress bar result: "............[error]"
-#: src/callbacks/media.h:290
+#: src/callbacks/media.h:278
 msgid "error"
 msgstr "error"
 
-#: src/callbacks/media.h:307
+#: src/callbacks/media.h:295
 msgid "Preload finished."
 msgstr "Precàrrega acabada."
 
-#: src/callbacks/media.h:312
+#: src/callbacks/media.h:300
 msgid "success"
 msgstr "correcte"
 
-#: src/callbacks/media.h:315
+#: src/callbacks/media.h:303
 msgid "files missing"
 msgstr "fitxers que manquen"
 
@@ -3631,8 +3631,8 @@ msgstr ""
 msgid ""
 "If only one argument is used, it must be a URI pointing to a .repo file."
 msgstr ""
-"Si només es fa servir un argument, ha de ser un URI que apunti a un "
-"fitxer .repo."
+"Si només es fa servir un argument, ha de ser un URI que apunti a un fitxer ."
+"repo."
 
 #: src/commands/repos/add.cc:130
 msgid "Specified type is not a valid repository type:"
@@ -5506,8 +5506,8 @@ msgid ""
 "the XPath:/product/register/target entry in /etc/products.d/baseproduct."
 msgstr ""
 "Mostra la cadena d'identificació del sistema operatiu de destinació. La "
-"cadena la defineix l'entrada XPath:/product/register/target a /etc/"
-"products.d/baseproduct."
+"cadena la defineix l'entrada XPath:/product/register/target a /etc/products."
+"d/baseproduct."
 
 #: src/commands/utils/targetos.cc:25
 msgid ""
@@ -6160,8 +6160,8 @@ msgid ""
 msgstr ""
 "Això pot ser degut a una metadada invàlida al repositori, o per un error en "
 "la comprovació de les metadades. En aquest últim cas, o si en dubteu, si us "
-"plau, denuncieu l'error seguint les instruccions que trobareu a http://"
-"en.opensuse.org/Zypper/Troubleshooting"
+"plau, denuncieu l'error seguint les instruccions que trobareu a http://en."
+"opensuse.org/Zypper/Troubleshooting"
 
 #: src/repos.cc:446
 #, c-format, boost-format
@@ -6533,8 +6533,8 @@ msgstr "Hi ha hagut un problema mentre es llegien els paquets instal·lats:"
 
 #: src/repos.cc:1875
 #, c-format, boost-format
-msgid "'%s' looks like an RPM file. Will try to download it."
-msgstr "'%s' sembla un fitxer RPM. Es provarà de baixar-lo."
+msgid "'%s' looks like an RPM file. Will try to use it."
+msgstr ""
 
 #: src/repos.cc:1884
 #, c-format, boost-format
@@ -6721,8 +6721,8 @@ msgstr ""
 #: src/solve-commit.cc:620
 #, c-format, boost-format
 msgid ""
-"Check for running processes using deleted libraries is disabled in "
-"zypper.conf. Run '%s' to check manually."
+"Check for running processes using deleted libraries is disabled in zypper."
+"conf. Run '%s' to check manually."
 msgstr ""
 "La comprovació dels processos en execució que usen biblioteques suprimides "
 "està inhabilitada a zypper.conf. Executeu \"%s\" per comprovar-los "
@@ -7608,6 +7608,10 @@ msgstr "Objecte no vàlid"
 msgid "Error"
 msgstr "Error"
 
+#, c-format, boost-format
+#~ msgid "'%s' looks like an RPM file. Will try to download it."
+#~ msgstr "'%s' sembla un fitxer RPM. Es provarà de baixar-lo."
+
 #~ msgid "services (ls) [OPTIONS]"
 #~ msgstr "services (ls) [opcions]"
 
@@ -7986,8 +7990,8 @@ msgstr "Error"
 #~ "\t--no-refresh\t\tNo refresquis els repositoris.\n"
 #~ "\t--no-cd\t\t\tIgnora els repositoris de CD/DVD.\n"
 #~ "\t--no-remote\t\tIgnora els repositoris remots.\n"
-#~ "\t--releasever\t\tEstableix el valor de $releasever en tots els "
-#~ "fitxers .repo (per defecte: versió de la distribució)\n"
+#~ "\t--releasever\t\tEstableix el valor de $releasever en tots els fitxers ."
+#~ "repo (per defecte: versió de la distribució)\n"
 
 #~ msgid ""
 #~ "     Target Options:\n"

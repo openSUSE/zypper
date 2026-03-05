@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-24 18:09+0100\n"
+"POT-Creation-Date: 2026-03-05 12:49+0100\n"
 "PO-Revision-Date: 2025-07-22 12:48+0000\n"
 "Last-Translator: Julia Faltenbacher <julia.faltenbacher@suse.com>\n"
 "Language-Team: Norwegian Nynorsk <https://l10n.opensuse.org/projects/zypper/"
@@ -1430,8 +1430,8 @@ msgid ""
 msgstr ""
 "Den symbolske lenkja «/etc/products.d/baseproduct» manglar eller peikar "
 "ikkje ikkje til ei reell fil.\n"
-"Lenkja må peika til .prod-fila til kjerneproduktet ditt i «/etc/"
-"products.d».\n"
+"Lenkja må peika til .prod-fila til kjerneproduktet ditt i «/etc/products."
+"d».\n"
 
 #. TranslatorExplanation The %s is "--plus-repo"
 #. TranslatorExplanation The %s is "--option-name"
@@ -1948,35 +1948,35 @@ msgstr ""
 msgid "Preloading Packages:"
 msgstr ""
 
-#: src/callbacks/media.h:263
+#: src/callbacks/media.h:251
 msgid "Preloading:"
 msgstr ""
 
 #. Translator: prefetch progress bar result: ".............[done]"
-#: src/callbacks/media.h:278
+#: src/callbacks/media.h:266
 msgid "done"
 msgstr "fullført"
 
 #. Translator: prefetch progress bar result: "........[not found]"
-#: src/callbacks/media.h:283
+#: src/callbacks/media.h:271
 #, fuzzy
 msgid "not found"
 msgstr "Fann ikkje"
 
 #. Translator: prefetch progress bar result: "............[error]"
-#: src/callbacks/media.h:290
+#: src/callbacks/media.h:278
 msgid "error"
 msgstr "feil"
 
-#: src/callbacks/media.h:307
+#: src/callbacks/media.h:295
 msgid "Preload finished."
 msgstr ""
 
-#: src/callbacks/media.h:312
+#: src/callbacks/media.h:300
 msgid "success"
 msgstr ""
 
-#: src/callbacks/media.h:315
+#: src/callbacks/media.h:303
 msgid "files missing"
 msgstr ""
 
@@ -5858,8 +5858,8 @@ msgid ""
 msgstr ""
 "Dette kan komma av ugyldige metadata i pakkebrønnen eller av ein feil i "
 "metadatatolkaren. Viss det kjem av ein feil i tolkaren, eller om du er i "
-"tvil om grunnen, meld det inn som ein feil, slik forklart på http://"
-"en.opensuse.org/Zypper/Troubleshooting."
+"tvil om grunnen, meld det inn som ein feil, slik forklart på http://en."
+"opensuse.org/Zypper/Troubleshooting."
 
 #: src/repos.cc:446
 #, c-format, boost-format
@@ -6224,8 +6224,8 @@ msgstr "Feil ved lesing av installerte pakkar:"
 
 #: src/repos.cc:1875
 #, c-format, boost-format
-msgid "'%s' looks like an RPM file. Will try to download it."
-msgstr "«%s» ser ut til å vera ei RPM-fil. Prøver å lasta ho ned."
+msgid "'%s' looks like an RPM file. Will try to use it."
+msgstr ""
 
 #: src/repos.cc:1884
 #, c-format, boost-format
@@ -6407,8 +6407,8 @@ msgstr ""
 #: src/solve-commit.cc:620
 #, c-format, boost-format
 msgid ""
-"Check for running processes using deleted libraries is disabled in "
-"zypper.conf. Run '%s' to check manually."
+"Check for running processes using deleted libraries is disabled in zypper."
+"conf. Run '%s' to check manually."
 msgstr ""
 "Kontroll av prosessar som køyrer og brukar sletta bibliotekfiler er slått av "
 "i zypper.conf. Køyr «%s» for å kontrollera manuelt."
@@ -7259,6 +7259,10 @@ msgstr "Ugyldig objekt"
 #: src/utils/prompt.h:102
 msgid "Error"
 msgstr "Feil"
+
+#, c-format, boost-format
+#~ msgid "'%s' looks like an RPM file. Will try to download it."
+#~ msgstr "«%s» ser ut til å vera ei RPM-fil. Prøver å lasta ho ned."
 
 # Bevisst bruk av punktum i staden for mellomrom på slutten.
 #, boost-format

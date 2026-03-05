@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.km\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-24 18:09+0100\n"
+"POT-Creation-Date: 2026-03-05 12:49+0100\n"
 "PO-Revision-Date: 2025-07-22 12:48+0000\n"
 "Last-Translator: Julia Faltenbacher <julia.faltenbacher@suse.com>\n"
 "Language-Team: Khmer (Central) <https://l10n.opensuse.org/projects/zypper/"
@@ -1812,35 +1812,35 @@ msgstr ""
 msgid "Preloading Packages:"
 msgstr ""
 
-#: src/callbacks/media.h:263
+#: src/callbacks/media.h:251
 msgid "Preloading:"
 msgstr ""
 
 #. Translator: prefetch progress bar result: ".............[done]"
-#: src/callbacks/media.h:278
+#: src/callbacks/media.h:266
 msgid "done"
 msgstr "ធ្វើរួច"
 
 #. Translator: prefetch progress bar result: "........[not found]"
-#: src/callbacks/media.h:283
+#: src/callbacks/media.h:271
 #, fuzzy
 msgid "not found"
 msgstr "រក​មិនឃើញ"
 
 #. Translator: prefetch progress bar result: "............[error]"
-#: src/callbacks/media.h:290
+#: src/callbacks/media.h:278
 msgid "error"
 msgstr "កំហុស"
 
-#: src/callbacks/media.h:307
+#: src/callbacks/media.h:295
 msgid "Preload finished."
 msgstr ""
 
-#: src/callbacks/media.h:312
+#: src/callbacks/media.h:300
 msgid "success"
 msgstr ""
 
-#: src/callbacks/media.h:315
+#: src/callbacks/media.h:303
 msgid "files missing"
 msgstr ""
 
@@ -5670,8 +5670,8 @@ msgid ""
 "Troubleshooting"
 msgstr ""
 "វា​អាច​បណ្ដាល​មក​ពី​ទិន្នន័យ​មេតា​មិន​ត្រឹមត្រូវ​នៅ​ក្នុង​ឃ្លាំង ឬ​ដោយ​កំហុស​នៅ​ក្នុង​ឧបករណ៍​ញែក​ទិន្នន័យ​មេតា ។ "
-"ពេលក្រោយ បើ​មាន​ចម្ងល់ សូម​ផ្ញើ​របាយការណ៍​កំហុស​តាម​សេចក្ដី​ណែនាំ​ដូច​ខាង​ក្រោម​នៅ http://"
-"en.opensuse.org/Zypper/Troubleshooting"
+"ពេលក្រោយ បើ​មាន​ចម្ងល់ សូម​ផ្ញើ​របាយការណ៍​កំហុស​តាម​សេចក្ដី​ណែនាំ​ដូច​ខាង​ក្រោម​នៅ http://en.opensuse."
+"org/Zypper/Troubleshooting"
 
 #: src/repos.cc:446
 #, c-format, boost-format
@@ -6029,8 +6029,8 @@ msgstr "មាន​បញ្ហា​នៅពេល​អាន​កញ្ច
 
 #: src/repos.cc:1875
 #, c-format, boost-format
-msgid "'%s' looks like an RPM file. Will try to download it."
-msgstr "'%s' ដូចជា​ឯកសារ RPM ។ ព្យាយាម​ទាញយក​វា ។"
+msgid "'%s' looks like an RPM file. Will try to use it."
+msgstr ""
 
 #: src/repos.cc:1884
 #, c-format, boost-format
@@ -6208,8 +6208,8 @@ msgstr ""
 #: src/solve-commit.cc:620
 #, fuzzy, c-format, boost-format
 msgid ""
-"Check for running processes using deleted libraries is disabled in "
-"zypper.conf. Run '%s' to check manually."
+"Check for running processes using deleted libraries is disabled in zypper."
+"conf. Run '%s' to check manually."
 msgstr "ពិនិត្យ​មើល​ដំណើរការ​ដែល​កំពុង​រត់ ដោយ​ប្រើបណ្ណាល័យ​ដែល​បាន​លុប..."
 
 #: src/solve-commit.cc:636
@@ -7029,6 +7029,10 @@ msgstr "វត្ថុ​មិន​ត្រឹមត្រូវ"
 #: src/utils/prompt.h:102
 msgid "Error"
 msgstr "កំហុស"
+
+#, c-format, boost-format
+#~ msgid "'%s' looks like an RPM file. Will try to download it."
+#~ msgstr "'%s' ដូចជា​ឯកសារ RPM ។ ព្យាយាម​ទាញយក​វា ។"
 
 #, fuzzy, boost-format
 #~ msgid "Overall download size: %1%. Already cached: %2%."

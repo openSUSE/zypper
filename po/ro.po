@@ -31,7 +31,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenSUSE\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-24 18:09+0100\n"
+"POT-Creation-Date: 2026-03-05 12:49+0100\n"
 "PO-Revision-Date: 2025-07-22 12:48+0000\n"
 "Last-Translator: Julia Faltenbacher <julia.faltenbacher@suse.com>\n"
 "Language-Team: Romanian <https://l10n.opensuse.org/projects/zypper/master/ro/"
@@ -2083,35 +2083,35 @@ msgstr ""
 msgid "Preloading Packages:"
 msgstr ""
 
-#: src/callbacks/media.h:263
+#: src/callbacks/media.h:251
 msgid "Preloading:"
 msgstr ""
 
 #. Translator: prefetch progress bar result: ".............[done]"
-#: src/callbacks/media.h:278
+#: src/callbacks/media.h:266
 msgid "done"
 msgstr "gata"
 
 #. Translator: prefetch progress bar result: "........[not found]"
-#: src/callbacks/media.h:283
+#: src/callbacks/media.h:271
 #, fuzzy
 msgid "not found"
 msgstr "Nu s-a găsit"
 
 #. Translator: prefetch progress bar result: "............[error]"
-#: src/callbacks/media.h:290
+#: src/callbacks/media.h:278
 msgid "error"
 msgstr "eroare"
 
-#: src/callbacks/media.h:307
+#: src/callbacks/media.h:295
 msgid "Preload finished."
 msgstr ""
 
-#: src/callbacks/media.h:312
+#: src/callbacks/media.h:300
 msgid "success"
 msgstr ""
 
-#: src/callbacks/media.h:315
+#: src/callbacks/media.h:303
 msgid "files missing"
 msgstr ""
 
@@ -6013,8 +6013,8 @@ msgid ""
 msgstr ""
 "Poate fi cauzat de metadate invalide în sursa de instalare sau un bug al "
 "aplicației de parcurgere a metadatelor. În acest din urmă caz sau dacă aveți "
-"dubii, raportați vă rog eroarea conform instrucțiunilor la http://"
-"en.opensuse.org/Zypper/Troubleshooting"
+"dubii, raportați vă rog eroarea conform instrucțiunilor la http://en."
+"opensuse.org/Zypper/Troubleshooting"
 
 #: src/repos.cc:446
 #, c-format, boost-format
@@ -6385,8 +6385,8 @@ msgstr "A apărut o problemă în timpul citirii pachetelor instalate:"
 
 #: src/repos.cc:1875
 #, c-format, boost-format
-msgid "'%s' looks like an RPM file. Will try to download it."
-msgstr "'%s' pare a fi un fișier RPM. Voi încerca să-l descarc."
+msgid "'%s' looks like an RPM file. Will try to use it."
+msgstr ""
 
 #: src/repos.cc:1884
 #, c-format, boost-format
@@ -6570,8 +6570,8 @@ msgstr ""
 #: src/solve-commit.cc:620
 #, fuzzy, c-format, boost-format
 msgid ""
-"Check for running processes using deleted libraries is disabled in "
-"zypper.conf. Run '%s' to check manually."
+"Check for running processes using deleted libraries is disabled in zypper."
+"conf. Run '%s' to check manually."
 msgstr "Se verifică procesele care rulează utilizând bibliotecile șterse..."
 
 #: src/solve-commit.cc:636
@@ -7444,6 +7444,10 @@ msgstr "Obiect invalid"
 msgid "Error"
 msgstr "Eroare"
 
+#, c-format, boost-format
+#~ msgid "'%s' looks like an RPM file. Will try to download it."
+#~ msgstr "'%s' pare a fi un fișier RPM. Voi încerca să-l descarc."
+
 #, fuzzy, boost-format
 #~ msgid "Overall download size: %1%. Already cached: %2%."
 #~ msgstr "Volum total descărcat: %s."
@@ -8210,8 +8214,8 @@ msgstr "Eroare"
 #~ "(chiar și la distanță).\n"
 #~ "\n"
 #~ " Opțiuni de comandă:\n"
-#~ "-r, --repo <file.repo> Doar un altul înseamnă specificarea unui "
-#~ "fișier .repo pentru a fi citit.\n"
+#~ "-r, --repo <file.repo> Doar un altul înseamnă specificarea unui fișier ."
+#~ "repo pentru a fi citit.\n"
 #~ "-t, --type <type> Tipul sursei de instalare (%s).\n"
 #~ "-d, --disable Adaugă o sursă de instalare ca dezactivată.\n"
 #~ "-c, --check Verifică URI.\n"
@@ -9290,8 +9294,8 @@ msgstr "Eroare"
 #~ "(chiar și la distanță).\n"
 #~ "\n"
 #~ " Opțiuni de comandă:\n"
-#~ "-r, --repo <file.repo> Doar un altul înseamnă specificarea unui "
-#~ "fișier .repo pentru a fi citit.\n"
+#~ "-r, --repo <file.repo> Doar un altul înseamnă specificarea unui fișier ."
+#~ "repo pentru a fi citit.\n"
 #~ "-t, --type <type> Tipul sursei de instalare (%s).\n"
 #~ "-d, --disable Adaugă o sursă de instalare ca dezactivată.\n"
 #~ "-c, --check Verifică URI.\n"

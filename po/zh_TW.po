@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-24 18:09+0100\n"
+"POT-Creation-Date: 2026-03-05 12:49+0100\n"
 "PO-Revision-Date: 2025-08-05 05:59+0000\n"
 "Last-Translator: Grace Yu <grace.yu@excel-gits.com>\n"
 "Language-Team: Chinese (Taiwan) <https://l10n.opensuse.org/projects/zypper/"
@@ -1831,34 +1831,34 @@ msgstr "正在預先載入套件"
 msgid "Preloading Packages:"
 msgstr "正在預先載入套件："
 
-#: src/callbacks/media.h:263
+#: src/callbacks/media.h:251
 msgid "Preloading:"
 msgstr "正在預先載入："
 
 #. Translator: prefetch progress bar result: ".............[done]"
-#: src/callbacks/media.h:278
+#: src/callbacks/media.h:266
 msgid "done"
 msgstr "完成"
 
 #. Translator: prefetch progress bar result: "........[not found]"
-#: src/callbacks/media.h:283
+#: src/callbacks/media.h:271
 msgid "not found"
 msgstr "找不到"
 
 #. Translator: prefetch progress bar result: "............[error]"
-#: src/callbacks/media.h:290
+#: src/callbacks/media.h:278
 msgid "error"
 msgstr "錯誤"
 
-#: src/callbacks/media.h:307
+#: src/callbacks/media.h:295
 msgid "Preload finished."
 msgstr "已完成預先載入。"
 
-#: src/callbacks/media.h:312
+#: src/callbacks/media.h:300
 msgid "success"
 msgstr "成功"
 
-#: src/callbacks/media.h:315
+#: src/callbacks/media.h:303
 msgid "files missing"
 msgstr "遺失檔案"
 
@@ -2312,8 +2312,8 @@ msgid ""
 "Temporary Fix)."
 msgstr ""
 "將會取代相依套件而不是也將其移除的移除指令。事實上，這是完整的安裝指令 (對該"
-"指令的普通參數套用了移除修飾詞 (-))。因此 \"removeptf foo\" 與 \"install -- "
-"-foo\" 效果相同。這就是該指令接受的選項與安裝指令相同的原因。建議使用此方式來"
+"指令的普通參數套用了移除修飾詞 (-))。因此 \"removeptf foo\" 與 \"install -- -"
+"foo\" 效果相同。這就是該指令接受的選項與安裝指令相同的原因。建議使用此方式來"
 "移除臨時修復程式 (Program Temporary Fix，PTF)。"
 
 #: src/commands/installremove.cc:317
@@ -2487,8 +2487,8 @@ msgid ""
 "type option."
 msgstr ""
 "LOCKSPEC 的格式為「[KIND:]NAME[ OP EDITION]」，其中 NAME 也可以是使用 * 和 ? "
-"萬用字元的 glob 模式。非套件類型可以在前面預增 KIND: 字串 (例如"
-"「patch:foo」)，或使用指令 --type 選項。"
+"萬用字元的 glob 模式。非套件類型可以在前面預增 KIND: 字串 (例如「patch:"
+"foo」)，或使用指令 --type 選項。"
 
 #: src/commands/locks/add.cc:36
 msgid ""
@@ -6089,8 +6089,8 @@ msgstr "讀取已安裝套件時發生錯誤："
 
 #: src/repos.cc:1875
 #, c-format, boost-format
-msgid "'%s' looks like an RPM file. Will try to download it."
-msgstr "'%s' 看起來像是一個 RPM 檔。將嘗試去下載它。"
+msgid "'%s' looks like an RPM file. Will try to use it."
+msgstr ""
 
 #: src/repos.cc:1884
 #, c-format, boost-format
@@ -6269,8 +6269,8 @@ msgstr "明確選取 DownloadAsNeeded 還會選取 classic_rpmtrans 後端。"
 #: src/solve-commit.cc:620
 #, c-format, boost-format
 msgid ""
-"Check for running processes using deleted libraries is disabled in "
-"zypper.conf. Run '%s' to check manually."
+"Check for running processes using deleted libraries is disabled in zypper."
+"conf. Run '%s' to check manually."
 msgstr ""
 "檢查使用已刪除函式庫之執行中程序的功能在 zypper.conf 中已被關閉。請手動執行 "
 "'%s' 來做檢查。"
@@ -7091,6 +7091,10 @@ msgstr "無效的物件"
 #: src/utils/prompt.h:102
 msgid "Error"
 msgstr "錯誤"
+
+#, c-format, boost-format
+#~ msgid "'%s' looks like an RPM file. Will try to download it."
+#~ msgstr "'%s' 看起來像是一個 RPM 檔。將嘗試去下載它。"
 
 #~ msgid "services (ls) [OPTIONS]"
 #~ msgstr "services (ls) [選項]"

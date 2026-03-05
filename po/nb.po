@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-24 18:09+0100\n"
+"POT-Creation-Date: 2026-03-05 12:49+0100\n"
 "PO-Revision-Date: 2026-02-08 15:04+0000\n"
 "Last-Translator: Terje Berg-Hansen <terje@itfakultetet.no>\n"
 "Language-Team: Norwegian Bokmål <https://l10n.opensuse.org/projects/zypper/"
@@ -1943,35 +1943,35 @@ msgstr ""
 msgid "Preloading Packages:"
 msgstr ""
 
-#: src/callbacks/media.h:263
+#: src/callbacks/media.h:251
 msgid "Preloading:"
 msgstr ""
 
 #. Translator: prefetch progress bar result: ".............[done]"
-#: src/callbacks/media.h:278
+#: src/callbacks/media.h:266
 msgid "done"
 msgstr "fullført"
 
 #. Translator: prefetch progress bar result: "........[not found]"
-#: src/callbacks/media.h:283
+#: src/callbacks/media.h:271
 #, fuzzy
 msgid "not found"
 msgstr "Ikke funnet"
 
 #. Translator: prefetch progress bar result: "............[error]"
-#: src/callbacks/media.h:290
+#: src/callbacks/media.h:278
 msgid "error"
 msgstr "feil"
 
-#: src/callbacks/media.h:307
+#: src/callbacks/media.h:295
 msgid "Preload finished."
 msgstr ""
 
-#: src/callbacks/media.h:312
+#: src/callbacks/media.h:300
 msgid "success"
 msgstr ""
 
-#: src/callbacks/media.h:315
+#: src/callbacks/media.h:303
 msgid "files missing"
 msgstr ""
 
@@ -6217,8 +6217,8 @@ msgstr "Det oppstod en feil ved lesing av installerte pakker:"
 
 #: src/repos.cc:1875
 #, c-format, boost-format
-msgid "'%s' looks like an RPM file. Will try to download it."
-msgstr "'%s' ser ut som an RPM-fil. Forsøker å laste den ned."
+msgid "'%s' looks like an RPM file. Will try to use it."
+msgstr ""
 
 #: src/repos.cc:1884
 #, c-format, boost-format
@@ -6401,8 +6401,8 @@ msgstr ""
 #: src/solve-commit.cc:620
 #, fuzzy, c-format, boost-format
 msgid ""
-"Check for running processes using deleted libraries is disabled in "
-"zypper.conf. Run '%s' to check manually."
+"Check for running processes using deleted libraries is disabled in zypper."
+"conf. Run '%s' to check manually."
 msgstr "Ser etter kjørende prosesser med slettede biblioteker..."
 
 #: src/solve-commit.cc:636
@@ -7253,6 +7253,10 @@ msgstr "Ugyldig objekt"
 #: src/utils/prompt.h:102
 msgid "Error"
 msgstr "Feil"
+
+#, c-format, boost-format
+#~ msgid "'%s' looks like an RPM file. Will try to download it."
+#~ msgstr "'%s' ser ut som an RPM-fil. Forsøker å laste den ned."
 
 #~ msgid "services (ls) [OPTIONS]"
 #~ msgstr "services (ls) [alternativer]"

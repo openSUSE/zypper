@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-24 18:09+0100\n"
+"POT-Creation-Date: 2026-03-05 12:49+0100\n"
 "PO-Revision-Date: 2026-02-25 17:04+0000\n"
 "Last-Translator: Arif Budiman <arifpedia@gmail.com>\n"
 "Language-Team: Indonesian <https://l10n.opensuse.org/projects/zypper/master/"
@@ -1380,8 +1380,8 @@ msgid ""
 "The link must point to your core products .prod file in /etc/products.d.\n"
 msgstr ""
 "Symlink /etc/products.d/baseproduct tidak benar atau hilang!\n"
-"Tautan harus mengarah ke produk inti Anda pada berkas .prod di /etc/"
-"products.d.\n"
+"Tautan harus mengarah ke produk inti Anda pada berkas .prod di /etc/products."
+"d.\n"
 
 #. TranslatorExplanation The %s is "--plus-repo"
 #. TranslatorExplanation The %s is "--option-name"
@@ -1935,35 +1935,35 @@ msgstr "Pramuat Paket"
 msgid "Preloading Packages:"
 msgstr "Pramuat Paket:"
 
-#: src/callbacks/media.h:263
+#: src/callbacks/media.h:251
 msgid "Preloading:"
 msgstr "Pramuat:"
 
 # ID
 #. Translator: prefetch progress bar result: ".............[done]"
-#: src/callbacks/media.h:278
+#: src/callbacks/media.h:266
 msgid "done"
 msgstr "selesai"
 
 #. Translator: prefetch progress bar result: "........[not found]"
-#: src/callbacks/media.h:283
+#: src/callbacks/media.h:271
 msgid "not found"
 msgstr "tidak ditemukan"
 
 #. Translator: prefetch progress bar result: "............[error]"
-#: src/callbacks/media.h:290
+#: src/callbacks/media.h:278
 msgid "error"
 msgstr "galat"
 
-#: src/callbacks/media.h:307
+#: src/callbacks/media.h:295
 msgid "Preload finished."
 msgstr "Pramuat selesai."
 
-#: src/callbacks/media.h:312
+#: src/callbacks/media.h:300
 msgid "success"
 msgstr "berhasil"
 
-#: src/callbacks/media.h:315
+#: src/callbacks/media.h:303
 msgid "files missing"
 msgstr "berkas hilang"
 
@@ -2217,9 +2217,9 @@ msgid ""
 msgstr ""
 "Karena penanganan paket yang tidak terawat, dist-upgrade sangat bergantung "
 "pada pengaturan repositori yang benar dibandingkan perintah lainnya. Proses "
-"ini tidak boleh dilanjutkan jika repositori yang diaktifkan gagal "
-"diperbarui.Kondisi ini dapat menyebabkan kerusakan serius pada sistem. Jika "
-"repositori yang gagal sebenarnya tidak diperlukan, repositori tersebut harus "
+"ini tidak boleh dilanjutkan jika repositori yang diaktifkan gagal diperbarui."
+"Kondisi ini dapat menyebabkan kerusakan serius pada sistem. Jika repositori "
+"yang gagal sebenarnya tidak diperlukan, repositori tersebut harus "
 "dinonaktifkan."
 
 #: src/commands/distupgrade.cc:57
@@ -4078,8 +4078,8 @@ msgid ""
 "Use the global GPG check setting defined in /etc/zypp/zypp.conf. This is the "
 "default."
 msgstr ""
-"Gunakan pengaturan pemeriksaan GPG global yang ditentukan di /etc/zypp/"
-"zypp.conf. Ini sudah bawaan."
+"Gunakan pengaturan pemeriksaan GPG global yang ditentukan di /etc/zypp/zypp."
+"conf. Ini sudah bawaan."
 
 #. translators: -a, --alias
 #: src/commands/reposerviceoptionsets.cc:182
@@ -6399,8 +6399,8 @@ msgstr "Masalah terjadi saat membaca paket yang dipasang:"
 
 #: src/repos.cc:1875
 #, c-format, boost-format
-msgid "'%s' looks like an RPM file. Will try to download it."
-msgstr "'%s' tampak seperti berkas RPM. Akan mencoba mengunduhnya."
+msgid "'%s' looks like an RPM file. Will try to use it."
+msgstr ""
 
 #: src/repos.cc:1884
 #, c-format, boost-format
@@ -6581,8 +6581,8 @@ msgstr ""
 #: src/solve-commit.cc:620
 #, c-format, boost-format
 msgid ""
-"Check for running processes using deleted libraries is disabled in "
-"zypper.conf. Run '%s' to check manually."
+"Check for running processes using deleted libraries is disabled in zypper."
+"conf. Run '%s' to check manually."
 msgstr ""
 "Periksa proses yang berjalan menggunakan pustaka yang dihapus yang "
 "dinonaktifkan di zypper.conf. Jalankan '%s' untuk memeriksa secara manual."
@@ -7436,6 +7436,10 @@ msgstr "Obyek tidak valid"
 #: src/utils/prompt.h:102
 msgid "Error"
 msgstr "Galat"
+
+#, c-format, boost-format
+#~ msgid "'%s' looks like an RPM file. Will try to download it."
+#~ msgstr "'%s' tampak seperti berkas RPM. Akan mencoba mengunduhnya."
 
 #~ msgid "services (ls) [OPTIONS]"
 #~ msgstr "services (ls) [OPSI]"

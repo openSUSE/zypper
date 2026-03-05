@@ -6,11 +6,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-24 18:09+0100\n"
+"POT-Creation-Date: 2026-03-05 12:49+0100\n"
 "PO-Revision-Date: 2026-03-02 12:04+0000\n"
 "Last-Translator: Peter Andreasen <noesgaard@gmail.com>\n"
-"Language-Team: Danish <https://l10n.opensuse.org/projects/zypper/master/da/>"
-"\n"
+"Language-Team: Danish <https://l10n.opensuse.org/projects/zypper/master/da/"
+">\n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1997,34 +1997,34 @@ msgstr "Henter pakker på forhånd"
 msgid "Preloading Packages:"
 msgstr "Henter pakker på forhånd:"
 
-#: src/callbacks/media.h:263
+#: src/callbacks/media.h:251
 msgid "Preloading:"
 msgstr "Henter på forhånd:"
 
 #. Translator: prefetch progress bar result: ".............[done]"
-#: src/callbacks/media.h:278
+#: src/callbacks/media.h:266
 msgid "done"
 msgstr "udført"
 
 #. Translator: prefetch progress bar result: "........[not found]"
-#: src/callbacks/media.h:283
+#: src/callbacks/media.h:271
 msgid "not found"
 msgstr "ikke fundet"
 
 #. Translator: prefetch progress bar result: "............[error]"
-#: src/callbacks/media.h:290
+#: src/callbacks/media.h:278
 msgid "error"
 msgstr "fejl"
 
-#: src/callbacks/media.h:307
+#: src/callbacks/media.h:295
 msgid "Preload finished."
 msgstr "Færdig med at hente."
 
-#: src/callbacks/media.h:312
+#: src/callbacks/media.h:300
 msgid "success"
 msgstr "success"
 
-#: src/callbacks/media.h:315
+#: src/callbacks/media.h:303
 msgid "files missing"
 msgstr "filer mangler"
 
@@ -2355,8 +2355,8 @@ msgid ""
 "added e.g. new hardware or driver repos."
 msgstr ""
 "Kaldt som '%1%', begrænser det kommandoen til kun at lede efter pakker som "
-"understøtter tilgængelig hardware, sprog eller filsystemer. Nyttig efter "
-"f.eks. at have tilføjet ny hardware- eller driver-softwarekilder."
+"understøtter tilgængelig hardware, sprog eller filsystemer. Nyttig efter f."
+"eks. at have tilføjet ny hardware- eller driver-softwarekilder."
 
 #. translators: command description
 #: src/commands/inrverify.cc:101
@@ -3567,8 +3567,8 @@ msgstr "Kan ikke bruge %s sammen med %s. Bruger indstillingen %s."
 msgid ""
 "If only one argument is used, it must be a URI pointing to a .repo file."
 msgstr ""
-"Hvis der kun anvendes ét argument, skal det være en URI, der peger på "
-"en .repo-fil."
+"Hvis der kun anvendes ét argument, skal det være en URI, der peger på en ."
+"repo-fil."
 
 #: src/commands/repos/add.cc:130
 msgid "Specified type is not a valid repository type:"
@@ -6058,8 +6058,8 @@ msgid ""
 msgstr ""
 "Dette kan skyldes ugyldig metadata i softwarekilden eller en fejl i metadata-"
 "fortolkeren. I det sidste tilfælde - eller i tvivlstilfælde - opret da "
-"venligst en fejlrapport ved at følge instruktionerne på http://"
-"en.opensuse.org/Zypper/Troubleshooting"
+"venligst en fejlrapport ved at følge instruktionerne på http://en.opensuse."
+"org/Zypper/Troubleshooting"
 
 #: src/repos.cc:446
 #, c-format, boost-format
@@ -6422,8 +6422,8 @@ msgstr "Problem opstod ved læsning af de installerede pakker:"
 
 #: src/repos.cc:1875
 #, c-format, boost-format
-msgid "'%s' looks like an RPM file. Will try to download it."
-msgstr "'%s' ligner en RPM-fil. Vil prøve at downloade den."
+msgid "'%s' looks like an RPM file. Will try to use it."
+msgstr ""
 
 #: src/repos.cc:1884
 #, c-format, boost-format
@@ -6607,8 +6607,8 @@ msgstr ""
 #: src/solve-commit.cc:620
 #, c-format, boost-format
 msgid ""
-"Check for running processes using deleted libraries is disabled in "
-"zypper.conf. Run '%s' to check manually."
+"Check for running processes using deleted libraries is disabled in zypper."
+"conf. Run '%s' to check manually."
 msgstr ""
 "Søgning efter kørende processer ved brug af slettede biblioteker er "
 "deaktiveret i zypper.conf. Kør '%s' for at søge manualt."
@@ -7476,6 +7476,10 @@ msgstr "Ugyldigt objekt"
 #: src/utils/prompt.h:102
 msgid "Error"
 msgstr "Fejl"
+
+#, c-format, boost-format
+#~ msgid "'%s' looks like an RPM file. Will try to download it."
+#~ msgstr "'%s' ligner en RPM-fil. Vil prøve at downloade den."
 
 #~ msgid "services (ls) [OPTIONS]"
 #~ msgstr "services (ls) [tilvalg]"
@@ -10327,8 +10331,8 @@ msgstr "Fejl"
 #~ "søges i\n"
 #~ "                           søges i pakkenavn som standard.\n"
 #~ "-f, --file-list            Søg efter et match i pakkers filliste.\n"
-#~ "-d, --search-descriptions  Søg også i pakkeopsummeringer og "
-#~ "-beskrivelser.\n"
+#~ "-d, --search-descriptions  Søg også i pakkeopsummeringer og -"
+#~ "beskrivelser.\n"
 #~ "-C, --case-sensitive       Udfør versalfølsom søgning.\n"
 #~ "-i, --installed-only       Vis kun pakker, der allerede er installeret.\n"
 #~ "-u, --not-installed-only   Vis kun pakker, der aktuelt ikke er "

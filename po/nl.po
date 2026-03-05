@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.nl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-24 18:09+0100\n"
+"POT-Creation-Date: 2026-03-05 12:49+0100\n"
 "PO-Revision-Date: 2026-02-25 11:04+0000\n"
 "Last-Translator: Freek de Kruijf <freek@opensuse.org>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/zypper/master/nl/>\n"
@@ -2079,34 +2079,34 @@ msgstr "Pakketten worden vooraf geladen"
 msgid "Preloading Packages:"
 msgstr "Pakketten worden vooraf geladen:"
 
-#: src/callbacks/media.h:263
+#: src/callbacks/media.h:251
 msgid "Preloading:"
 msgstr "Vooraf laden:"
 
 #. Translator: prefetch progress bar result: ".............[done]"
-#: src/callbacks/media.h:278
+#: src/callbacks/media.h:266
 msgid "done"
 msgstr "gereed"
 
 #. Translator: prefetch progress bar result: "........[not found]"
-#: src/callbacks/media.h:283
+#: src/callbacks/media.h:271
 msgid "not found"
 msgstr "niet gevonden"
 
 #. Translator: prefetch progress bar result: "............[error]"
-#: src/callbacks/media.h:290
+#: src/callbacks/media.h:278
 msgid "error"
 msgstr "foutmelding"
 
-#: src/callbacks/media.h:307
+#: src/callbacks/media.h:295
 msgid "Preload finished."
 msgstr "Vooraf laden beëindigd."
 
-#: src/callbacks/media.h:312
+#: src/callbacks/media.h:300
 msgid "success"
 msgstr "succes"
 
-#: src/callbacks/media.h:315
+#: src/callbacks/media.h:303
 msgid "files missing"
 msgstr "Ontbrekende bestanden"
 
@@ -6255,8 +6255,8 @@ msgid ""
 msgstr ""
 "Dit kan worden veroorzaakt door ongeldige metagegevens in de opslagruimte of "
 "door een fout in de parser van de metagegevens. In het laatste geval of als "
-"u twijfelt, geeft u de fout door aan de hand van de instructies op http://"
-"nl.opensuse.org/Zypper/Troubleshooting"
+"u twijfelt, geeft u de fout door aan de hand van de instructies op http://nl."
+"opensuse.org/Zypper/Troubleshooting"
 
 #: src/repos.cc:446
 #, c-format, boost-format
@@ -6633,9 +6633,8 @@ msgstr ""
 
 #: src/repos.cc:1875
 #, c-format, boost-format
-msgid "'%s' looks like an RPM file. Will try to download it."
+msgid "'%s' looks like an RPM file. Will try to use it."
 msgstr ""
-"‘%s’ lijkt op een rpmbestand. Er wordt getracht het bestand op te halen."
 
 #: src/repos.cc:1884
 #, c-format, boost-format
@@ -6824,8 +6823,8 @@ msgstr ""
 #: src/solve-commit.cc:620
 #, c-format, boost-format
 msgid ""
-"Check for running processes using deleted libraries is disabled in "
-"zypper.conf. Run '%s' to check manually."
+"Check for running processes using deleted libraries is disabled in zypper."
+"conf. Run '%s' to check manually."
 msgstr ""
 "Controle op actieve processen die verwijderde bibliotheken gebruiken is in "
 "zypper.conf uitgeschakeld. Voer '%s' handmatig uit voor controle."
@@ -7707,6 +7706,11 @@ msgstr "Ongeldig object"
 #: src/utils/prompt.h:102
 msgid "Error"
 msgstr "Foutmelding"
+
+#, c-format, boost-format
+#~ msgid "'%s' looks like an RPM file. Will try to download it."
+#~ msgstr ""
+#~ "‘%s’ lijkt op een rpmbestand. Er wordt getracht het bestand op te halen."
 
 #~ msgid "services (ls) [OPTIONS]"
 #~ msgstr "services (ls) [opties]"
