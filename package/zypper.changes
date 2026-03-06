@@ -1,4 +1,27 @@
 -------------------------------------------------------------------
+Fri Mar  6 13:40:19 CET 2026 - ma@suse.de
+
+- Report download progress for command line rpms (fixes #613)
+- Hint to '-vv ref' to see the mirrors used to download the
+  metadata (bsc#1257882)
+- Service: Allow "zypper ls SERVICE ..." to test whether a
+  service with this alias is defined (bsc#1252744)
+  The command prints an abstract of all services passed on the
+  command line. It returns 3-ZYPPER_EXIT_ERR_INVALID_ARGS if some
+  argument does not name an existing service.
+- Keep repo data when updating the service settings (bsc#1252744)
+- info: Enhance pattern content table (bsc#1158038)
+  Alternatives (multiple packages providing the same requirement)
+  are now listed as a single entry in the content table. The entry
+  shows either the installed package which satisfies the
+  requirement or the requirement itself as type 'Provides'.
+  Listing all potential alternatives was miss leading, especially
+  if the alternatives were mutual exclusive. It looked like an
+  installed pattern had not-installed requirements and it was not
+  possible to install all requirements at the same time.
+- version 1.14.95
+
+-------------------------------------------------------------------
 Tue Sep 23 16:44:12 CEST 2025 - ma@suse.de
 
 - Fixed `bash-completion`: `zypper refresh` now ignores
