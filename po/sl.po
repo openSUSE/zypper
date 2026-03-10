@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-03-05 12:49+0100\n"
-"PO-Revision-Date: 2026-02-24 21:04+0000\n"
+"PO-Revision-Date: 2026-03-10 19:04+0000\n"
 "Last-Translator: Jure Repinc <jlp@holodeck1.com>\n"
 "Language-Team: Slovenian <https://l10n.opensuse.org/projects/zypper/master/"
 "sl/>\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
 "n%100==4 ? 2 : 3;\n"
-"X-Generator: Weblate 5.16\n"
+"X-Generator: Weblate 5.16.2\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -6686,7 +6686,7 @@ msgstr "Med branjem nameščenih paketov je prišlo do težave:"
 #: src/repos.cc:1875
 #, c-format, boost-format
 msgid "'%s' looks like an RPM file. Will try to use it."
-msgstr ""
+msgstr "»%s« je verjetno datoteka RPM. Poskusilo se jo bo uporabiti."
 
 #: src/repos.cc:1884
 #, c-format, boost-format
