@@ -44,7 +44,7 @@ protected:
 private:
   RefreshFlags _flags;
   std::vector<std::string> _repos;
-  bool _services = false;
+  bool _services = true;
 };
 ZYPP_DECLARE_OPERATORS_FOR_FLAGS(RefreshRepoCmd::RefreshFlags);
 
