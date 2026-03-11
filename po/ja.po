@@ -11,16 +11,16 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-03-05 12:49+0100\n"
-"PO-Revision-Date: 2026-02-25 05:04+0000\n"
+"PO-Revision-Date: 2026-03-11 05:04+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
-"Language-Team: Japanese <https://l10n.opensuse.org/projects/zypper/master/ja/"
-">\n"
+"Language-Team: Japanese <https://l10n.opensuse.org/projects/zypper/master/"
+"ja/>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.16\n"
+"X-Generator: Weblate 5.16.2\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -6418,7 +6418,7 @@ msgstr "インストール済みのパッケージを読み込む際にエラー
 #: src/repos.cc:1875
 #, c-format, boost-format
 msgid "'%s' looks like an RPM file. Will try to use it."
-msgstr ""
+msgstr "'%s' は RPM ファイルと思われます。このファイルを使用してみます。"
 
 #: src/repos.cc:1884
 #, c-format, boost-format
