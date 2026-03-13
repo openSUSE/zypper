@@ -72,6 +72,7 @@ SET (zypper_HEADERS
   commands/utils/source-download.h
   commands/utils/system-architecture.h
   commands/utils/purge-kernels.h
+  commands/utils/configcheck.h
   commands/ps.h
   commands/needs-rebooting.h
   commands/query.h
@@ -154,6 +155,7 @@ SET( zypper_SRCS
   commands/utils/source-download.cc
   commands/utils/system-architecture.cc
   commands/utils/purge-kernels.cc
+  commands/utils/configcheck.cc
   commands/ps.cc
   commands/needs-rebooting.cc
   commands/query/info.cc
