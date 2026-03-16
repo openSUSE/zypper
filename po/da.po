@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-03-05 12:49+0100\n"
-"PO-Revision-Date: 2026-03-09 10:04+0000\n"
+"PO-Revision-Date: 2026-03-16 15:04+0000\n"
 "Last-Translator: Peter Andreasen <noesgaard@gmail.com>\n"
 "Language-Team: Danish <https://l10n.opensuse.org/projects/zypper/master/da/>"
 "\n"
@@ -2154,7 +2154,7 @@ msgstr "Kører %s script"
 #: src/callbacks/rpm.h:896
 #, c-format, boost-format
 msgid "Cleaning up: %s"
-msgstr ""
+msgstr "Rydder op: %s"
 
 #. translator: %s is an other command: "This is an alias for 'zypper info -t patch'."
 #: src/commands/commandhelpformatter.h:95
@@ -2269,7 +2269,7 @@ msgstr "Begræns opgradering til angiven softwarekilde."
 
 #: src/commands/distupgrade.cc:41
 msgid "Remove unneeded orphaned packages."
-msgstr ""
+msgstr "Fjern unødvendige forældreløse pakker."
 
 #. FailIfReposFail
 #: src/commands/distupgrade.cc:55
@@ -2279,10 +2279,15 @@ msgid ""
 "enabled repositories fail to refresh. This may severely damage the system. "
 "If a failing repository is actually not needed, it must be disabled."
 msgstr ""
+"På grund af behandlingen af forældreløse pakker, afhænger dist-upgrade mere "
+"end andre kommandoer af korrekt konfiguration af pakke-repoer. Den må ikke "
+"fortsætte, hvis aktive kilder ikke kan genopfriskes. Dette kunne beskadige "
+"systemet alvorligt. Hvis et fejlende repo faktisk ikke er nødvendigt, skal "
+"det deaktiveres."
 
 #: src/commands/distupgrade.cc:57
 msgid "See 'man zypper' for more information about this command."
-msgstr ""
+msgstr "Se 'man zypper' for mere information om denne kommando."
 
 #: src/commands/distupgrade.cc:88
 #, c-format, boost-format
