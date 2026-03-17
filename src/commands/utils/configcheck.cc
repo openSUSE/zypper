@@ -52,6 +52,10 @@ bool ConfigCheck::run(Zypper &zypper, const std::vector<std::string> &configFile
     }
   }
 
+  if (!foundFiles.empty() > 0) {
+    zypper.out().info("Orphaned configuration files:");
+  }
+
   for (const auto& f : foundFiles) {
     zypper.out().info(f);
   }
