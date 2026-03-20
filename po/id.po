@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-03-05 12:49+0100\n"
-"PO-Revision-Date: 2026-02-25 17:04+0000\n"
+"PO-Revision-Date: 2026-03-20 06:04+0000\n"
 "Last-Translator: Arif Budiman <arifpedia@gmail.com>\n"
 "Language-Team: Indonesian <https://l10n.opensuse.org/projects/zypper/master/"
 "id/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.16\n"
+"X-Generator: Weblate 5.16.2\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -6400,7 +6400,7 @@ msgstr "Masalah terjadi saat membaca paket yang dipasang:"
 #: src/repos.cc:1875
 #, c-format, boost-format
 msgid "'%s' looks like an RPM file. Will try to use it."
-msgstr ""
+msgstr "'%s' sepertinya file RPM. Akan coba digunakan."
 
 #: src/repos.cc:1884
 #, c-format, boost-format
