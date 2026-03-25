@@ -1784,6 +1784,14 @@ The reboot-needed flag is set if a package that provides *installhint(reboot-nee
 +
 It is recommended for scripts to use this command to test whether a system reboot is suggested. Use *--quiet* to suppress the normal output.
 
+--
+
+*configcheck* ::
+    Looks for orphaned configuration files in the system config directories and presents a list of .rpmsave / .rpmnew files.
+
+Also the list of orphaned configuration files appears automatically after a package upgrade or removal, just after the ps section.
+--
+
 Subcommands
 ~~~~~~~~~~~
 *subcommand*::
