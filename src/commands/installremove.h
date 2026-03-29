@@ -32,11 +32,14 @@ public:
 protected:
   void fillSrOpts (SolverRequester::Options &sropts_r ) const;
 
+  int handlePackageFile (Zypper &zypper, std::vector<std::string> &positionalArgs );
+
   std::set<zypp::ResKind> _kinds;
 
   bool _details       = false;
   bool _selectByName  = false;
   bool _selectByCap   = false;
+  zypp::Pathname _packageFile;
 
   InitReposOptionSet _initRepos { *this };
   NoConfirmRugOption _noConfirmOpts { *this };
@@ -61,7 +64,7 @@ private:
   // ZypperBaseCommand interface
 protected:
   void doReset() override;
-  int execute(Zypper &zypper, const std::vector<std::string> &positionalArgs) override;
+  int execute(Zypper &zypper, const std::vector<std::string> &positionalArgs_r ) override;
 };
 
 class InstallCmd : public InstallRemoveBase
