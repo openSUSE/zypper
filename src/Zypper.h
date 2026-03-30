@@ -127,7 +127,7 @@ struct RuntimeData
   Pathname tmpdir;
 };
 
-typedef shared_ptr<RepoManager> RepoManager_Ptr;
+using RepoManager_Ptr = std::shared_ptr<RepoManager>;
 
 class Zypper : public ztui::Application
 {
