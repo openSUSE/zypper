@@ -480,12 +480,24 @@ bool match_repo( Zypper & zypper, std::string str, RepoInfo *repo, bool looseQue
   // Quick check for alias/reponumber/name first.
   // Name can be ambiguous, in which case the first match found will be returned
   {
-    unsigned number = 1; // repo number
-    unsigned tmp    = 0;
+    unsigned tmp = 0;
     safe_lexical_cast( str, tmp ); // try to make an int out of the string
-    for ( RepoManager::RepoConstIterator known_it = manager.repoBegin(); known_it != manager.repoEnd(); ++known_it, ++number )
+    std::optional<std::string> aliasFromNumber;
+    if ( tmp ) {
+      // Number CLI arguments referring to repos start by 1 and must be
+      // compared against the initial known repos list. In case a service
+      // refresh already happened the current known repos list may have
+      // changed already.
+      std::string res = zypper.repoManagerInitialAlias( tmp );
+      if ( not res.empty() ) {
+        DBG << "Repo #" << tmp << " refers to alias " << res << endl;
+        aliasFromNumber = res;
+      }
+    }
+
+    for ( RepoManager::RepoConstIterator known_it = manager.repoBegin(); known_it != manager.repoEnd(); ++known_it )
     {
-      if ( known_it->alias() == str || tmp == number || known_it->name() == str )
+      if ( known_it->alias() == str || ( aliasFromNumber &&  known_it->alias() == *aliasFromNumber ) || known_it->name() == str )
       {
         if ( repo )
           *repo = *known_it;
