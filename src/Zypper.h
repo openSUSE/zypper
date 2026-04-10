@@ -127,8 +127,6 @@ struct RuntimeData
   Pathname tmpdir;
 };
 
-typedef shared_ptr<RepoManager> RepoManager_Ptr;
-
 class Zypper : public ztui::Application
 {
 public:
@@ -148,10 +146,13 @@ public:
   RuntimeData & runtimeData()			{ return _rdata; }
 
   void initRepoManager()
-  { _rm.reset( new RepoManager( _config.rm_options ) ); }
+  { _rm = RepoManagerWrapper( _config.rm_options ); }
 
   RepoManager & repoManager()
-  { if ( !_rm ) _rm.reset( new RepoManager( _config.rm_options ) ); return *_rm; }
+  { if ( !_rm ) initRepoManager(); return _rm->get(); }
+
+  std::string repoManagerInitialAlias( unsigned argnum ) const
+  { return _rm ? _rm->initialAlias( argnum ) : std::string(); }
 
   int exitInfoCode() const			{ return _exitInfoCode; }
   void setExitInfoCode( int exit )		{
@@ -249,7 +250,50 @@ private:
 
   RuntimeData _rdata;
 
-  RepoManager_Ptr   _rm;
+private:
+  // Many commands allow a repository argument to be specified by a number.
+  // In \ref match_repo the arguments are evaluated and numbers are mapped
+  // to RepoInfo. Those are the numbers the user saw in a preceding 'lr'.
+  // But the next command may evaluate it's arguments after an service
+  // (auto-)refresh happened. If the service refresh adds or removes repos,
+  // the number may no longer match the repo the user saw.
+  // So we store the initial mapping and let \ref match_repo refer to this
+  // rather than counting in the actual repo list.
+  struct RepoManagerWrapper
+  {
+    RepoManagerWrapper(const RepoManagerWrapper&) = delete;
+    RepoManagerWrapper& operator=(const RepoManagerWrapper&) = delete;
+    RepoManagerWrapper(RepoManagerWrapper&&) = default;
+    RepoManagerWrapper& operator=(RepoManagerWrapper&&) = default;
+
+    RepoManagerWrapper( const RepoManagerOptions & options_r )
+    : _rm { options_r }
+    {
+      for ( const RepoInfo & ri : _rm.knownRepositories() ) {
+        _rm_initialaliases.push_back( ri.alias() );
+      }
+    }
+
+    RepoManager & get()
+    { return _rm; }
+
+    const RepoManager & get() const
+    { return _rm; }
+
+    std::string initialAlias( unsigned argnum ) const
+    {
+      // BEWARE: argnum starts by 1 !
+      if ( argnum >= 1 && argnum <= _rm_initialaliases.size() )
+        return _rm_initialaliases[argnum-1];
+      return "";
+    }
+
+  private:
+
+    RepoManager _rm;
+    std::vector<std::string> _rm_initialaliases;
+  };
+  std::optional<RepoManagerWrapper> _rm;
 };
 
 void print_unknown_command_hint( Zypper & zypper );
