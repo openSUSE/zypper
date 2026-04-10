@@ -117,11 +117,6 @@ zypp::ZyppFlags::CommandGroup RefreshRepoCmd::cmdOptions() const
             // translators: -s, --services
             _("Refresh also services before refreshing repos.")
       },
-      {"no-services", 'S', ZyppFlags::NoArgument,
-            ZyppFlags::BoolType( &that->_services, ZyppFlags::StoreFalse, _services ),
-            // translators: -S, --no-services
-            _("Do not refresh services also before refreshing repos.")
-      },
   }};
 }
 
@@ -129,7 +124,7 @@ void RefreshRepoCmd::doReset()
 {
   _flags = Default;
   _repos.clear();
-  _services = true;
+  _services = false;
 }
 
 int RefreshRepoCmd::execute( Zypper &zypper , const std::vector<std::string> &positionalArgs_r )
