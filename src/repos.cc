@@ -1697,7 +1697,7 @@ ZYPP_DECLARE_OPERATORS_FOR_FLAGS( ServiceListFlags );
 
 
 
-void checkIfToRefreshPluginServices(Zypper & zypper, RepoManager::RefreshServiceFlags flags_r)
+void checkIfToAutoRefreshServices(Zypper & zypper, RepoManager::RefreshServiceFlags flags_r)
 {
   // check root user
   if ( geteuid() != 0 )
@@ -1706,8 +1706,6 @@ void checkIfToRefreshPluginServices(Zypper & zypper, RepoManager::RefreshService
   RepoManager & repoManager = zypper.repoManager();
   for ( const auto & service : repoManager.knownServices() )
   {
-    if ( service.type() != repo::ServiceType::PLUGIN )
-      continue;
     if ( ! service.enabled() )
       continue;
     if ( ! service.autorefresh() )
