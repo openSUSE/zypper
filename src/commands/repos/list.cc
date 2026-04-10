@@ -106,7 +106,7 @@ void ListReposCmd::doReset()
 
 int ListReposCmd::execute( Zypper &zypper, const std::vector<std::string> &positionalArgs_r )
 {
-  checkIfToRefreshPluginServices( zypper );
+  checkIfToAutoRefreshServices( zypper );
 
   RepoManager & manager = zypper.repoManager();
   RuntimeData & gData = zypper.runtimeData();

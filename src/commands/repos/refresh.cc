@@ -164,7 +164,7 @@ int RefreshRepoCmd::execute( Zypper &zypper , const std::vector<std::string> &po
     if ( force )
       opts |= RepoManager::RefreshService_forceRefresh;
 
-    checkIfToRefreshPluginServices( zypper, opts );
+    checkIfToAutoRefreshServices( zypper, opts );
   }
 
   MIL << "going to refresh repositories" << endl;

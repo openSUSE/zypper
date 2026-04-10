@@ -298,7 +298,7 @@ int ListServicesCmd::execute( Zypper &zypper, const std::vector<std::string> &po
   }
 
   if ( _listOptions._flags.testFlag( RSCommonListOptions::ShowWithRepos) )
-    checkIfToRefreshPluginServices( zypper );
+    checkIfToAutoRefreshServices( zypper );
 
   if ( zypper.out().type() == Out::TYPE_XML ) {
     printXMLServiceList( zypper );

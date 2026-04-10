@@ -178,7 +178,7 @@ void remove_service( Zypper & zypper, const ServiceInfo & service );
 void modify_service( Zypper & zypper, const std::string & alias );
 
 /** If root, refresh any plugin services before lr/ls/ref (bnc#893294) */
-void checkIfToRefreshPluginServices( Zypper & zypper, RepoManager::RefreshServiceFlags flags_r =  RepoManager::RefreshServiceFlags() );
+void checkIfToAutoRefreshServices( Zypper & zypper, RepoManager::RefreshServiceFlags flags_r =  RepoManager::RefreshServiceFlags() );
 
 void modify_services_by_option( Zypper & zypper );
 
