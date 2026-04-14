@@ -49,6 +49,29 @@ namespace
     && pi->asKind<Patch>()->restartSuggested();
   }
 
+  std::string stripLastDotSegment( const std::string & rel )
+  {
+    auto pos = rel.rfind( '.' );
+    if ( pos == std::string::npos || pos == 0 )
+      return rel;
+    return rel.substr( 0, pos );
+  }
+
+  bool versionChangeFiltered( const Edition & installed, const Edition & candidate, VersionChangeFilter filter )
+  {
+    if ( filter == VCF_None )
+      return false;
+    if ( installed.epoch() != candidate.epoch() )
+      return false;
+    if ( installed.version() != candidate.version() )
+      return false;
+    // upstream version identical — at most a release (checkin/rebuild) change
+    if ( filter >= VCF_Package )
+      return true;
+    // VCF_Rebuild: filter only if the checkin is the same (releases differ only in rebuild counter)
+    return stripLastDotSegment( installed.release() ) == stripLastDotSegment( candidate.release() );
+  }
+
   /** RNC: Print other-update element */
   inline std::ostream & xmlPrintOtherUpdateOn( std::ostream & str, const PoolItem & pi_r )
   {
@@ -533,13 +556,20 @@ static bool xml_list_patches (Zypper & zypper, bool all_r, const PatchHistoryDat
 
 // ----------------------------------------------------------------------------
 
-static void xml_list_updates(const ResKindSet & kinds, bool all_r )
+static void xml_list_updates(const ResKindSet & kinds, bool all_r, VersionChangeFilter vcFilter_r )
 {
   Candidates candidates;
   find_updates( kinds, candidates, all_r );
 
   for( const PoolItem & pi : candidates )
   {
+    if ( vcFilter_r != VCF_None )
+    {
+      ui::Selectable::Ptr sel( ui::Selectable::get(pi) );
+      if ( sel && sel->hasInstalledObj()
+           && versionChangeFiltered( sel->installedObj()->edition(), pi.edition(), vcFilter_r ) )
+        continue;
+    }
     xmlPrintOtherUpdateOn( cout, pi );
   }
 }
@@ -712,7 +742,7 @@ std::string i18n_kind_updates(const ResKind & kind)
 
 // FIXME rewrite this function so that first the list of updates is collected and later correctly presented (bnc #523573)
 
-void list_updates(Zypper & zypper, const ResKindSet & kinds, bool best_effort, bool all_r, const PatchSelector &patchSel_r )
+void list_updates(Zypper & zypper, const ResKindSet & kinds, bool best_effort, bool all_r, const PatchSelector &patchSel_r, VersionChangeFilter vcFilter_r )
 {
   PatchHistoryData patchHistoryData;	// commonly used by all tables
 
@@ -758,7 +788,7 @@ void list_updates(Zypper & zypper, const ResKindSet & kinds, bool best_effort, b
   {
     if (!affects_pkgmgr)
     {
-      xml_list_updates( localkinds, all_r );
+      xml_list_updates( localkinds, all_r, vcFilter_r );
       cout << "</update-list>" << endl;		// otherwise closed in xml_list_patches
     }
     cout << "</update-status>" << endl;
@@ -806,6 +836,12 @@ void list_updates(Zypper & zypper, const ResKindSet & kinds, bool best_effort, b
 
     for ( const PoolItem & pi : candidates )
     {
+      ui::Selectable::Ptr sel( uipool.lookup( pi ) );
+
+      if ( vcFilter_r != VCF_None && sel && sel->hasInstalledObj()
+           && versionChangeFiltered( sel->installedObj()->edition(), pi.edition(), vcFilter_r ) )
+        continue;
+
       TableRow tr (cols);
       tr << computeStatusIndicator( pi );
       if (!hide_repo) {
@@ -820,7 +856,6 @@ void list_updates(Zypper & zypper, const ResKindSet & kinds, bool best_effort, b
         // for packages show also the current installed version (bnc #466599)
         if (*it == ResKind::package)
         {
-          ui::Selectable::Ptr sel( uipool.lookup( pi ) );
           if ( sel->hasInstalledObj() )
             tr << sel->installedObj()->edition();
         }

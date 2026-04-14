@@ -548,6 +548,15 @@ If *patch* is specified, zypper acts as if the *list-patches* command was execut
 	*--best-effort*::
 		See the *update* command for description.
 
+	*--filter-version-change* _LEVEL_::
+		Filter updates by version change significance to reduce noise. _LEVEL_ is one of:
++
+*none*;; Show all available updates. This is the default.
+*rebuild*;; Hide updates where only the rebuild counter changed (last dot-segment of the release string). The packaging checkin and upstream version are identical.
+*package*;; Hide updates where only the release changed (checkin and/or rebuild). The upstream version is identical. This is more aggressive than *rebuild*.
++
+Epoch changes are never filtered. This option does not apply to patches (use *list-patches* filtering instead).
+
 	Expert Options: :: Don't use them unless you know you need them.
 
 include::{incdir}/option_Solver_Flags_Installs.txt[]
