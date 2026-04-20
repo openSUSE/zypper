@@ -1,4 +1,14 @@
 -------------------------------------------------------------------
+Mon Apr 20 15:51:19 CEST 2026 - ma@suse.de
+
+- Autorefresh ris-services the way as plugin-services (bsc#1246504)
+  It's actually wrong to treat service refreshes different
+  depending on the service type. For the purpose of a service it
+  makes no difference how the data about the repos to use are
+  acquired.
+- version 1.14.96
+
+-------------------------------------------------------------------
 Fri Mar  6 13:40:19 CET 2026 - ma@suse.de
 
 - Report download progress for command line rpms (fixes #613)
