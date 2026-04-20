@@ -119,7 +119,7 @@ function newchangesentry() {
 
 function is_fast_forward() {
   git fetch
-  test "$(git rev-list HEAD..origin/$(git name-rev --name-only HEAD) --count)" == "0"
+  test "$(git rev-list HEAD..origin/$(git rev-parse --abbrev-ref HEAD) --count)" == "0"
 }
 
 is_fast_forward || {
