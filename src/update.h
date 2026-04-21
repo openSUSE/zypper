@@ -9,6 +9,12 @@
 #include "utils/misc.h"
 #include "SolverRequester.h"
 
+enum VersionChangeFilter {
+  VCF_None    = 0,
+  VCF_Rebuild = 1,
+  VCF_Package = 2,
+};
+
 struct PatchSelector {
   std::set<Issue> _requestedIssues;
   std::set<std::string> _requestedPatchCategories;
@@ -34,7 +40,8 @@ void list_updates(Zypper & zypper,
                   const ResKindSet & kinds,
                   bool best_effort,
                   bool all,
-                  const PatchSelector &patchSel_r = PatchSelector() );
+                  const PatchSelector &patchSel_r = PatchSelector(),
+                  VersionChangeFilter vcFilter_r = VCF_None );
 
 /**
  * List available fixes to all issues or issues specified in --bugzilla

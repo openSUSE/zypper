@@ -11,6 +11,7 @@
 #include "utils/flags/zyppflags.h"
 #include "optionsets.h"
 #include "solveroptionset.h"
+#include "src/update.h"
 
 #include <zypp/ResKind.h>
 
@@ -23,6 +24,7 @@ private:
   std::set<ResKind> _kinds;
   bool _all = false;
   bool _bestEffort = false;
+  VersionChangeFilter _vcFilter = VCF_None;
   InitReposOptionSet _initReposOpts { *this };
   SolverInstallsOptionSet _solverOpts { *this };
 
