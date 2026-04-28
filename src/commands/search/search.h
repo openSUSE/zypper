@@ -11,25 +11,17 @@
 #include "commands/optionsets.h"
 #include "utils/flags/zyppflags.h"
 
-
-#include <zypp/sat/SolvAttr.h>
 #include <boost/optional.hpp>
+#include <zypp/sat/SolvAttr.h>
 
-class SearchCmd : public ZypperBaseCommand
-{
+class SearchCmd : public ZypperBaseCommand {
 public:
+  enum MatchMode { Default, Substrings, Words, Exact };
 
-  enum MatchMode {
-    Default,
-    Substrings,
-    Words,
-    Exact
-  };
+  SearchCmd(std::vector<std::string> &&commandAliases_r);
 
-  SearchCmd ( std::vector<std::string> &&commandAliases_r );
-
-  void setMode(const MatchMode &mode_r );
-  void addRequestedDependency ( const zypp::sat::SolvAttr &dep_r );
+  void setMode(const MatchMode &mode_r);
+  void addRequestedDependency(const zypp::sat::SolvAttr &dep_r);
 
 private:
   MatchMode _mode = MatchMode::Default;
@@ -38,21 +30,27 @@ private:
   bool _caseSensitive = false;
   bool _details = false;
   bool _verbose = false;
+
+  bool _showFileLists = false;     /// ISSUE #633 FEATURE REQUEST -> S.A.T
+  bool _showFileListsSave = false; /// ISSUE #633 FEATURE REQUEST -> S.A.T
+
   std::set<zypp::sat::SolvAttr> _requestedDeps;
   boost::optional<zypp::sat::SolvAttr> _requestedReverseSearch;
 
   std::set<ResKind> _requestedTypes;
 
-  //careful when adding new optionsets, only enable them for the right command mode
-  NotInstalledOnlyOptionSet _notInstalledOpts { *this };
-  SortResultOptionSet _sortOpts { *this };
-  InitReposOptionSet _initReposOpts { *this };
+  // careful when adding new optionsets, only enable them for the right command
+  // mode
+  NotInstalledOnlyOptionSet _notInstalledOpts{*this};
+  SortResultOptionSet _sortOpts{*this};
+  InitReposOptionSet _initReposOpts{*this};
 
   // ZypperBaseCommand interface
 protected:
   zypp::ZyppFlags::CommandGroup cmdOptions() const override;
   void doReset() override;
-  int execute(Zypper &zypper, const std::vector<std::string> &positionalArgs_r) override;
+  int execute(Zypper &zypper,
+              const std::vector<std::string> &positionalArgs_r) override;
 
   // ZypperBaseCommand interface
 public:
@@ -61,7 +59,5 @@ public:
   std::string description() const override;
   std::string help() override;
 };
-
-
 
 #endif
