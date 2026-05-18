@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-05-13 17:49+0200\n"
-"PO-Revision-Date: 2025-08-04 14:59+0000\n"
+"PO-Revision-Date: 2026-05-18 16:12+0000\n"
 "Last-Translator: Samanta Magalhaes <samanta_texttrans@outlook.com>\n"
 "Language-Team: Portuguese (Brazil) <https://l10n.opensuse.org/projects/"
 "zypper/master/pt_BR/>\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.12.2\n"
+"X-Generator: Weblate 2026.5\n"
 "X-Poedit-Language: Portuguese\n"
 "X-Poedit-Country: BRAZIL\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -161,7 +161,7 @@ msgstr ""
 #. translators: --userdata <STRING>
 #: src/Config.cc:283
 msgid "User defined transaction id used in history and plugins."
-msgstr "ID da transação definida pelo usuário usado no histórico e plug-ins."
+msgstr "ID da transação definida pelo usuário usado no histórico e em plug-ins."
 
 #. translators: --quiet, -q
 #: src/Config.cc:291
@@ -178,6 +178,8 @@ msgid ""
 "For debugging output specify this option twice. 'zypper -vv ref' for example "
 "will show the mirrors used to download the metadata."
 msgstr ""
+"Para depurar a saída, especifique esta opção duas vezes. Por exemplo, "
+"'zypper -vv ref' mostra os espelhos usados para fazer download dos metadados."
 
 #. translators: --color / --no-color
 #: src/Config.cc:320
@@ -1605,14 +1607,14 @@ msgstr "Nome do RPM:"
 #: src/callbacks/keyring.h:123
 #, boost-format
 msgid "The gpg key signing file '%1%' has expired."
-msgstr "A chave GPG que assina o arquivo '%1%' expirou."
+msgstr "A chave gpg que assina o arquivo '%1%' expirou."
 
 #: src/callbacks/keyring.h:129
 #, boost-format
 msgid "The gpg key signing file '%1%' will expire in %2% day."
 msgid_plural "The gpg key signing file '%1%' will expire in %2% days."
-msgstr[0] "A chave GPG que assina o arquivo '%1%' vai expirar em %2% dia."
-msgstr[1] "A chave GPG que assina o arquivo '%1%' vai expirar em %2% dias."
+msgstr[0] "A chave gpg que assina o arquivo '%1%' vai expirar em %2% dia."
+msgstr[1] "A chave gpg que assina o arquivo '%1%' vai expirar em %2% dias."
 
 #: src/callbacks/keyring.h:152
 #, c-format, boost-format
@@ -1760,8 +1762,8 @@ msgid ""
 "The rpm database seems to contain old V3 version gpg keys which are "
 "meanwhile obsolete and considered insecure:"
 msgstr ""
-"O banco de dados RPM parece conter antigas chaves GPG da versão V3 que, "
-"entretanto, são obsoletas e consideradas inseguras:"
+"O banco de dados RPM parece conter chaves gpg da versão V3 antiga que são "
+"obsoletas e, ao mesmo tempo, consideradas inseguras:"
 
 #: src/callbacks/keyring.h:445
 #, boost-format
@@ -1774,8 +1776,8 @@ msgid ""
 "Unless you believe the key in question is still in use, you can remove it "
 "from the rpm database calling '%1%'."
 msgstr ""
-"A menos que você acredite que a chave em questão ainda esteja em uso, você "
-"pode removê-la da chamada de banco de dados RPM '%1%'."
+"A menos que você acredite que a chave em questão ainda esteja em uso, poderá "
+"removê-la do banco de dados RPM chamando '%1%'."
 
 #. translator: %1% is the number of keys, %2% the name of a repository
 #: src/callbacks/keyring.h:468
@@ -1793,9 +1795,9 @@ msgid ""
 "repository. In order to validate those packages upon download and "
 "installation the new keys will be imported into the rpm database."
 msgstr ""
-"Estas chaves adicionais são geralmente utilizadas para assinar pacotes "
-"presentes no repositório. Para validar estes pacotes antes de baixar e "
-"instalar, as novas chaves serão importadas para o banco de dados RPM."
+"Geralmente, as chaves adicionais são usadas para assinar pacotes presentes "
+"no repositório. Para validar os pacotes no download e na instalação, as "
+"novas chaves serão importadas para o banco de dados RPM."
 
 #: src/callbacks/keyring.h:474
 msgid "New:"
@@ -2294,8 +2296,8 @@ msgid ""
 "The target filesystem is mounted as read-only. Please make sure the target "
 "filesystem is writeable."
 msgstr ""
-"O sistema de arquivos de destino é montado como somente leitura. Por favor, "
-"certifique-se que o sistema de arquivos de destino é gravável."
+"O sistema de arquivos de destino é montado como somente leitura. Certifique-"
+"se de que o sistema de arquivos de destino seja gravável."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/distupgrade.cc:20
@@ -2515,7 +2517,7 @@ msgstr ""
 #: src/commands/installremove.cc:203
 msgid "Silently install unsigned rpm packages given as commandline parameters."
 msgstr ""
-"Instalar silenciosamente pacotes RPM não assinados fornecidos como "
+"Instalar silenciosamente os pacotes RPM não assinados fornecidos como "
 "parâmetros de linha de comando."
 
 #. translators: -f, --force
@@ -2630,7 +2632,7 @@ msgstr "Valores válidos: %1%"
 
 #: src/commands/listupdates.cc:50
 msgid "LEVEL"
-msgstr ""
+msgstr "NÍVEL"
 
 #. translators: --filter-version-change
 #: src/commands/listupdates.cc:53
@@ -2639,6 +2641,10 @@ msgid ""
 "all), 'rebuild' (hide rebuild-only changes), 'package' (hide packaging-only "
 "changes, i.e. same upstream version)."
 msgstr ""
+"Filtra as atualizações por significância de alteração da versão. NÍVEL: "
+"'none' (padrão, mostrar tudo), 'rebuild' (ocultar alterações apenas de "
+"recriação), 'package' (ocultar alterações apenas de pacote, ou seja, mesma "
+"versão upstream)."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/addlocalecmd.cc:20
@@ -3891,6 +3897,8 @@ msgstr ""
 msgid ""
 "HINT: 'zypper -vv ref' will show the mirrors used to download the metadata."
 msgstr ""
+"DICA: 'zypper -vv ref' mostra os espelhos usados para fazer download dos "
+"metadados."
 
 #. translators: -f, --force
 #: src/commands/repos/refresh.cc:82 src/commands/services/refresh.cc:46
@@ -4665,15 +4673,15 @@ msgstr "Serviço '%s' removido."
 
 #: src/commands/services/list.cc:94
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 #: src/commands/services/list.cc:95
 msgid "Config"
-msgstr ""
+msgstr "Configuração"
 
 #: src/commands/services/list.cc:137
 msgid "services (ls) [OPTIONS] [SERVICE] ..."
-msgstr ""
+msgstr "services (ls) [OPÇÕES] [SERVIÇO] ..."
 
 #: src/commands/services/list.cc:138
 msgid "List all defined services."
@@ -5032,7 +5040,7 @@ msgid ""
 "value can be changed in your local rpm configuration. In case of doubt try "
 "executing '%2%'."
 msgstr ""
-"A localização padrão onde o RPM instala os pacotes fontes é '%1%', mas esse "
+"O local padrão onde o RPM instala os pacotes de origem é '%1%', mas esse "
 "valor pode ser alterado na sua configuração local do RPM. Em caso de dúvida, "
 "tente executar '%2%'."
 
@@ -5090,7 +5098,7 @@ msgstr "falha no waitpid de %1% (%2%)"
 #, boost-format
 msgid "waitpid for %1% returns unexpected pid %2% while waiting for %3%"
 msgstr ""
-"waitpid para %1% retornou um PID não esperado %2% enquanto aguardava por %3%"
+"waitpid para %1% retornou um PID %2% não esperado enquanto aguardava por %3%"
 
 #. translators: %1% - command name or path
 #. translators: %2% - signal number
@@ -5264,7 +5272,9 @@ msgstr "download [opções] <pacotes>..."
 #. translators: command summary: download
 #: src/commands/utils/download.cc:144
 msgid "Download rpms specified on the commandline to a local directory."
-msgstr "Baixar os RPMs especificados na linha de comando em uma pasta local."
+msgstr ""
+"Fazer download dos RPMs especificados na linha de comando em um diretório "
+"local."
 
 #. translators: command description
 #: src/commands/utils/download.cc:148
@@ -5484,17 +5494,18 @@ msgstr "Nenhum pacote fonte a ser baixado."
 #: src/commands/utils/source-download.cc:483
 msgid "Download source rpms for all installed packages to a local directory."
 msgstr ""
-"Baixa os RPMs fontes para todos os pacotes instalados em um diretório local."
+"Fazer download dos RPMs de origem de todos os pacotes instalados em um "
+"diretório local."
 
 #. translators: -d, --directory <DIR>
 #: src/commands/utils/source-download.cc:495
 msgid "Download all source rpms to this directory."
-msgstr "Baixar todos os RPMs fonte para este diretório."
+msgstr "Fazer download de todos os RPMs de origem para este diretório."
 
 #. translators: --delete/--no-delete
 #: src/commands/utils/source-download.cc:501
 msgid "Whether to delete extraneous source rpms in the local directory."
-msgstr "Se é para excluir RPMs fontes extra no diretório local."
+msgstr "Se é para excluir RPMs de origem irrelevantes do diretório local."
 
 #. translators: --status
 #: src/commands/utils/source-download.cc:505
@@ -5502,8 +5513,8 @@ msgid ""
 "Don't download any source rpms, but show which source rpms are missing or "
 "extraneous."
 msgstr ""
-"Não baixar nenhum RPM fonte, mas exibir quais são os RPMs fontes faltantes e "
-"quais são extras."
+"Não fazer download de nenhum RPM de origem, mas exibir quais são os RPMs de "
+"origem ausentes ou irrelevantes."
 
 #. translators: command summary: targetos, tos
 #: src/commands/utils/system-architecture.cc:20
@@ -5754,7 +5765,7 @@ msgstr "Sugerido"
 #. translators: A pattern has a 1:1 relation to a .rpm package defining it's properties AKA the pattern's Buddy.
 #: src/info.cc:697
 msgid "Buddy Package"
-msgstr ""
+msgstr "Pacote Buddy"
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:701
@@ -6545,7 +6556,7 @@ msgstr "Problema ao ler os pacotes instalados:"
 #: src/repos.cc:1885
 #, c-format, boost-format
 msgid "'%s' looks like an RPM file. Will try to use it."
-msgstr ""
+msgstr "'%s' parece um arquivo RPM. Vamos tentar usá-lo."
 
 #: src/repos.cc:1894
 #, c-format, boost-format
