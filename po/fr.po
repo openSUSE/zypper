@@ -14,16 +14,16 @@ msgstr ""
 "Project-Id-Version: zypper.fr\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-05-13 17:49+0200\n"
-"PO-Revision-Date: 2025-08-04 14:59+0000\n"
+"PO-Revision-Date: 2026-05-19 11:12+0000\n"
 "Last-Translator: Sophie Leroy <sophie@stoquart.com>\n"
-"Language-Team: French <https://l10n.opensuse.org/projects/zypper/master/fr/"
-">\n"
+"Language-Team: French <https://l10n.opensuse.org/projects/zypper/master/fr/>"
+"\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.12.2\n"
+"X-Generator: Weblate 2026.5\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -185,6 +185,9 @@ msgid ""
 "For debugging output specify this option twice. 'zypper -vv ref' for example "
 "will show the mirrors used to download the metadata."
 msgstr ""
+"Pour la sortie de débogage, spécifiez cette option deux fois. Par exemple, "
+"'zypper -vv ref' affiche les miroirs utilisés pour télécharger les "
+"métadonnées."
 
 #. translators: --color / --no-color
 #: src/Config.cc:320
@@ -2686,7 +2689,7 @@ msgstr "Valeurs valides : %1%"
 
 #: src/commands/listupdates.cc:50
 msgid "LEVEL"
-msgstr ""
+msgstr "NIVEAU"
 
 #. translators: --filter-version-change
 #: src/commands/listupdates.cc:53
@@ -2695,6 +2698,11 @@ msgid ""
 "all), 'rebuild' (hide rebuild-only changes), 'package' (hide packaging-only "
 "changes, i.e. same upstream version)."
 msgstr ""
+"Le filtre est mis à jour en fonction de l'importance des modifications de "
+"version. NIVEAU : 'none' (valeur par défaut, affiche tout), 'rebuild' "
+"(masque les modifications qui concernent uniquement une reconstruction), "
+"'package' (masque les modifications qui concernent uniquement une mise en "
+"paquet, par exemple même version en amont)."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/addlocalecmd.cc:20
@@ -3873,7 +3881,7 @@ msgstr "Impossible d'ouvrir le fichier %s en écriture."
 
 #: src/commands/repos/list.cc:156
 msgid "Maybe you do not have write permissions?"
-msgstr "Peut-être ne possédez-vous pas les autorisations d'écriture ?"
+msgstr "Peut-être ne possédez-vous pas les autorisations d'écriture ?"
 
 #: src/commands/repos/list.cc:162
 #, c-format, boost-format
@@ -3955,6 +3963,8 @@ msgstr ""
 msgid ""
 "HINT: 'zypper -vv ref' will show the mirrors used to download the metadata."
 msgstr ""
+"ASTUCE : 'zypper -vv ref' affiche les miroirs utilisés pour télécharger les "
+"métadonnées."
 
 #. translators: -f, --force
 #: src/commands/repos/refresh.cc:82 src/commands/services/refresh.cc:46
@@ -4739,15 +4749,15 @@ msgstr "Le service '%s' a été supprimé."
 
 #: src/commands/services/list.cc:94
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 #: src/commands/services/list.cc:95
 msgid "Config"
-msgstr ""
+msgstr "Configuration"
 
 #: src/commands/services/list.cc:137
 msgid "services (ls) [OPTIONS] [SERVICE] ..."
-msgstr ""
+msgstr "services (ls) [OPTIONS] [SERVICE] ..."
 
 #: src/commands/services/list.cc:138
 msgid "List all defined services."
@@ -5648,12 +5658,12 @@ msgstr "La sortie en XML n'est pas implémentée pour cette commande."
 #: src/commands/utils/targetos.cc:62 src/commands/utils/targetos.cc:77
 #, c-format, boost-format
 msgid "Distribution Label: %s"
-msgstr "Étiquette de distribution : %s"
+msgstr "Étiquette de distribution : %s"
 
 #: src/commands/utils/targetos.cc:63
 #, c-format, boost-format
 msgid "Short Label: %s"
-msgstr "Étiquette courte : %s"
+msgstr "Étiquette courte : %s"
 
 #. translators: `FILE does not define TAG
 #: src/commands/utils/targetos.cc:71
@@ -5850,7 +5860,7 @@ msgstr "Suggéré"
 #. translators: A pattern has a 1:1 relation to a .rpm package defining it's properties AKA the pattern's Buddy.
 #: src/info.cc:697
 msgid "Buddy Package"
-msgstr ""
+msgstr "Paquet associé"
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:701
@@ -6653,7 +6663,7 @@ msgstr "Un problème est survenu lors de la lecture des paquets installés :"
 #: src/repos.cc:1885
 #, c-format, boost-format
 msgid "'%s' looks like an RPM file. Will try to use it."
-msgstr ""
+msgstr "'%s' ressemble à un fichier RPM. Le système va essayer de l'utiliser."
 
 #: src/repos.cc:1894
 #, c-format, boost-format
@@ -7011,8 +7021,8 @@ msgid ""
 "- use another repository"
 msgstr ""
 "Échec de la vérification de l'intégrité du paquet. Il y a peut-être un "
-"problème avec le support ou le dépôt. Essayez l'une des solutions "
-"suivantes :\n"
+"problème avec le support ou le dépôt. Essayez l'une des solutions suivantes "
+":\n"
 "\n"
 "- Réessayez la commande précédente.\n"
 "- Rafraîchissez les dépôts via 'zypper refresh'.\n"
@@ -7172,8 +7182,8 @@ msgstr "Aucun problème correspondant n'a été trouvé."
 #: src/update.cc:1013
 msgid "The following matches in issue numbers have been found:"
 msgstr ""
-"Les correspondances suivantes dans les numéros de problèmes ont été "
-"trouvées :"
+"Les correspondances suivantes dans les numéros de problèmes ont été trouvées "
+":"
 
 #: src/update.cc:1023
 msgid "Matches in patch descriptions of the following patches have been found:"
