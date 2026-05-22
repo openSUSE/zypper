@@ -1,5 +1,4 @@
 #include "search.h"
-
 #include <cctype>
 #include "src/search.h"
 #include "global-settings.h"
