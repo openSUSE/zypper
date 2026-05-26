@@ -29,21 +29,26 @@ namespace zypp
       );
     }
 
+    bool isDigit( char value_r )
+    {
+      return std::isdigit( static_cast<unsigned char>( value_r ) );
+    }
+
     bool isIsoDateString( const std::string &value_r )
     {
       if ( value_r.size() != 10 )
         return false;
 
-      return std::isdigit( value_r[0] )
-          && std::isdigit( value_r[1] )
-          && std::isdigit( value_r[2] )
-          && std::isdigit( value_r[3] )
+      return isDigit( value_r[0] )
+          && isDigit( value_r[1] )
+          && isDigit( value_r[2] )
+          && isDigit( value_r[3] )
           && value_r[4] == '-'
-          && std::isdigit( value_r[5] )
-          && std::isdigit( value_r[6] )
+          && isDigit( value_r[5] )
+          && isDigit( value_r[6] )
           && value_r[7] == '-'
-          && std::isdigit( value_r[8] )
-          && std::isdigit( value_r[9] );
+          && isDigit( value_r[8] )
+          && isDigit( value_r[9] );
     }
 
     Value setDateOptional ( boost::optional<zypp::Date> &target_r )
@@ -257,11 +262,11 @@ zypp::ZyppFlags::CommandGroup SearchCmd::cmdOptions() const
       },
       { "install-after", '\0', ZyppFlags::RequiredArgument, ZyppFlags::setDateOptional( that._installDateRange.after ),
         // translators: --install-after DATE
-        _("Show installed packages installed after DATE. DATE must use the YYYY-MM-DD format.")
+        _("Show packages installed after DATE. DATE must use the YYYY-MM-DD format.")
       },
       { "install-before", '\0', ZyppFlags::RequiredArgument, ZyppFlags::setDateOptional( that._installDateRange.before ),
         // translators: --install-before DATE
-        _("Show installed packages installed before DATE. DATE must use the YYYY-MM-DD format.")
+        _("Show packages installed before DATE. DATE must use the YYYY-MM-DD format.")
       }
     },
     {
@@ -498,9 +503,6 @@ int SearchCmd::execute( Zypper &zypper, const std::vector<std::string> &position
       const auto reqSearchAttrib = _requestedReverseSearch.get();
 
       for ( const auto slv : query ) {
-
-        if ( !matchesDateFilters( slv ) )
-          continue;
 
         bool isInstalled = slv.isSystem();
         if ( isInstalled && _notInstalledOpts._mode == SolvableFilterMode::ShowOnlyNotInstalled )
