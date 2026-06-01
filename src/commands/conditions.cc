@@ -7,6 +7,7 @@
 #include "conditions.h"
 #include "global-settings.h"
 #include "Zypper.h"
+#include "transactionalwrapper.h"
 
 #include <sys/vfs.h>
 #include <sys/statvfs.h>
@@ -44,7 +45,7 @@ int NeedsWritableRoot::check(std::string &err_r)
       bool isTransactionalServer = ( fsinfo.f_type == BTRFS_SUPER_MAGIC && PathInfo( "/usr/sbin/transactional-update" ).isFile() );
 
       if ( isTransactionalServer && !gopts.changedRoot ) {
-        err_r = _("This is a transactional-server, please use transactional-update to update or modify the system.");
+        return TransactionalWrapper().run( err_r );
       } else {
         err_r = _("The target filesystem is mounted as read-only. Please make sure the target filesystem is writeable.");
       }
