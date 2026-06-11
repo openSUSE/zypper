@@ -399,10 +399,11 @@ void Zypper::commandShell()
 
   //will be reset by ShellQuitCmd
   _continue_running_shell = true;
+  int lastExitCode = ZYPPER_EXIT_OK;
   while ( _continue_running_shell )
   {
     // read a line
-    std::string line = readline_getline();
+    std::string line = readline_getline( str::sconcat("zypper(",lastExitCode,")> ") );
 
     out().info( str::Format("Got: %s") % line, Out::DEBUG );
 
@@ -429,6 +430,7 @@ void Zypper::commandShell()
       print_unknown_command_hint( *this, command_str ); // TODO: command_str should come via the Exception, same for other print_unknown_command_hint's
     }
 
+    lastExitCode = exitCode();
     if ( _continue_running_shell )
       shellCleanup();
   }
