@@ -266,40 +266,16 @@ int ZypperBaseCommand::run( Zypper &zypper )
     return execute( zypper, _positionalArguments );
   }
 
-  // ZypperBaseCommand's should actually handle all exceptions themselves, however
-  // for compatibility reasons we better catch those here again
-  //
+  // ZypperBaseCommand's should actually handle most exceptions themselves.
+  // Out::Error as a common way of reporting issues is handled here.
+  // Whatever escapes is handled by Zypper::doCommand.
   // TODO Someday redesign the Exceptions flow.
   catch ( const Out::Error & error_r )
   {
     error_r.report( zypper );
     return error_r._exitcode;
   }
-  catch ( const AbortRequestException & ex )
-  {
-    ZYPP_CAUGHT( ex );
-    zypper.out().error( ex.asUserString() );
-  }
-  catch ( const ExitRequestException & ex )
-  {
-    ZYPP_CAUGHT( ex );
-    WAR << "Caught exit request: exitCode " << zypper.exitCode() << endl;
-  }
-  catch ( const Exception & ex )
-  {
-    ZYPP_CAUGHT( ex );
-    {
-      SCOPED_VERBOSITY( zypper.out(), Out::DEBUG );
-      zypper.out().error( ex, _("Unexpected exception.") );
-    }
-    report_a_bug( zypper.out() );
-    if ( ! zypper.exitCode() )
-      zypper.setExitCode( ZYPPER_EXIT_ERR_BUG );
-  }
-
-  //if we reach this place we catched a execption the command should've handled,
-  //lets hope it did actually set the exit code
-  return zypper.exitCode();
+  return zypper.exitCode(); // should not be reached.
 }
 
 std::string ZypperBaseCommand::help()
