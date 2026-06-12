@@ -10,11 +10,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-13 17:49+0200\n"
+"POT-Creation-Date: 2026-06-12 12:15+0200\n"
 "PO-Revision-Date: 2026-05-14 11:12+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
-"Language-Team: Japanese <https://l10n.opensuse.org/projects/zypper/master/"
-"ja/>\n"
+"Language-Team: Japanese <https://l10n.opensuse.org/projects/zypper/master/ja/"
+">\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1317,7 +1317,7 @@ msgstr "システムの再起動が必要です。"
 msgid "Consider to cancel:"
 msgstr "ここではキャンセルしておくことをお勧めします:"
 
-#: src/Zypper.cc:87
+#: src/Zypper.cc:88
 msgid ""
 "PackageKit is blocking zypper. This happens if you have an updater applet or "
 "other software management application using PackageKit running."
@@ -1325,7 +1325,7 @@ msgstr ""
 "PackageKitがzypperをブロックしています。更新アプレットやその他のPackageKitを"
 "使用するソフトウエア管理アプリケーションが動作しているものと思われます。"
 
-#: src/Zypper.cc:93
+#: src/Zypper.cc:94
 msgid ""
 "We can ask PackageKit to interrupt the current action as soon as possible, "
 "but it depends on PackageKit how fast it will respond to this request."
@@ -1333,39 +1333,39 @@ msgstr ""
 "PackageKit に対して、現在のセッションをできる限り速やかに中断するよう依頼しま"
 "すが、どれだけの時間を要するのかは PackageKit 側の都合によります。"
 
-#: src/Zypper.cc:96
+#: src/Zypper.cc:97
 msgid "Ask PackageKit to quit?"
 msgstr "PackageKitに対して終了を知らせますか?"
 
-#: src/Zypper.cc:105
+#: src/Zypper.cc:106
 msgid "PackageKit is still running (probably busy)."
 msgstr "PackageKitが稼働中です(おそらくビジーです)。"
 
-#: src/Zypper.cc:106
+#: src/Zypper.cc:107
 msgid "Try again?"
 msgstr "再試行しますか？"
 
-#: src/Zypper.cc:244 src/Zypper.cc:730 src/commands/basecommand.cc:293
+#: src/Zypper.cc:245 src/Zypper.cc:738
 msgid "Unexpected exception."
 msgstr "予期しない例外が発生しました。"
 
 #. translators: %s is "help" or "zypper help" depending on whether
 #. zypper shell is running or not
-#: src/Zypper.cc:291
+#: src/Zypper.cc:292
 #, c-format, boost-format
 msgid "Type '%s' to get command-specific help."
 msgstr "コマンド固有のヘルプを取得するには '%s' と入力してください。"
 
-#: src/Zypper.cc:311
+#: src/Zypper.cc:312
 #, c-format, boost-format
 msgid "Verbosity: %d"
 msgstr "冗長性:%d"
 
-#: src/Zypper.cc:320
+#: src/Zypper.cc:321
 msgid "Enforced setting"
 msgstr "強制設定"
 
-#: src/Zypper.cc:343
+#: src/Zypper.cc:344
 msgid ""
 "The /etc/products.d/baseproduct symlink is dangling or missing!\n"
 "The link must point to your core products .prod file in /etc/products.d.\n"
@@ -1377,12 +1377,12 @@ msgstr ""
 
 #. TranslatorExplanation The %s is "--plus-repo"
 #. TranslatorExplanation The %s is "--option-name"
-#: src/Zypper.cc:545 src/Zypper.cc:597
+#: src/Zypper.cc:548 src/Zypper.cc:600
 #, c-format, boost-format
 msgid "The %s option has no effect here, ignoring."
 msgstr "%s オプションはここでは意味がありません。無視します。"
 
-#: src/Zypper.cc:639
+#: src/Zypper.cc:642
 msgid "Non-option program arguments: "
 msgstr "オプション以外のプログラム引数: "
 
@@ -2149,19 +2149,37 @@ msgstr ""
 msgid "Consider only patches which affect the package management itself."
 msgstr "パッケージ管理システム自身に影響するパッチのみを使用します。"
 
-#: src/commands/conditions.cc:19
+#: src/commands/conditions.cc:16
 msgid "Root privileges are required to run this command."
 msgstr "このコマンドを実行するには root 権限が必要です。"
 
-#: src/commands/conditions.cc:47
-msgid ""
-"This is a transactional-server, please use transactional-update to update or "
-"modify the system."
+#: src/commands/conditions.cc:30
+msgid "Transactional system detected:"
 msgstr ""
-"このマシンはトランザクション型のサーバです。システムを更新したり修正したりす"
-"るには、 transactional-update をお使いください。"
 
-#: src/commands/conditions.cc:49
+#: src/commands/conditions.cc:31
+msgid "A transactional-wrapper command is not installed."
+msgstr ""
+
+#: src/commands/conditions.cc:32
+msgid "The transactional-wrapper command cannot be used in 'zypper shell'."
+msgstr ""
+
+#: src/commands/conditions.cc:33
+msgid ""
+"Using transactional-wrapper is disabled by "
+"'ZYPPER_USE_TRANSACTIONAL_WRAPPER=0'."
+msgstr ""
+
+#: src/commands/conditions.cc:34
+msgid "Please use transactional-update to modify or update the system."
+msgstr ""
+
+#: src/commands/conditions.cc:44
+msgid "Delegating the command to transactional-wrapper."
+msgstr ""
+
+#: src/commands/conditions.cc:57
 msgid ""
 "The target filesystem is mounted as read-only. Please make sure the target "
 "filesystem is writeable."
@@ -2513,9 +2531,8 @@ msgid ""
 "changes, i.e. same upstream version)."
 msgstr ""
 "バージョン変更の種類によって表示可否を指定します。レベル: 'none' (無し、全て"
-"表示), 'rebuild' (再構築のみのバージョン変更を隠す), 'package' "
-"(パッケージングのみの変更 (つまり同じアップストリームバージョンのもの) を隠"
-"す) 。"
+"表示), 'rebuild' (再構築のみのバージョン変更を隠す), 'package' (パッケージン"
+"グのみの変更 (つまり同じアップストリームバージョンのもの) を隠す) 。"
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/addlocalecmd.cc:20
@@ -2640,9 +2657,9 @@ msgid ""
 msgstr ""
 "\"ロック指定\" は '[種類:]名前[ 演算子 エディション]' の形式で指定します。 "
 "\"種類\" には * や ? のワイルドカード文字を利用したグロブパターンを記述するこ"
-"ともできます。また、パッケージ以外のものを指定したい場合は、 'patch:foo' "
-"(パッチを指定する場合) などのように指定するか、もしくは --type オプションをお"
-"使いください。"
+"ともできます。また、パッケージ以外のものを指定したい場合は、 'patch:"
+"foo' (パッチを指定する場合) などのように指定するか、もしくは --type オプショ"
+"ンをお使いください。"
 
 #: src/commands/locks/add.cc:36
 msgid ""
@@ -5065,12 +5082,12 @@ msgstr ""
 "$PATH 内にある zypper サブコマンドの使用が無効化されています。"
 
 #. Currently no concept how to handle global options and ZYPPlock
-#: src/commands/subcommand.cc:626
+#: src/commands/subcommand.cc:632
 msgid "Zypper shell does not support execution of subcommands."
 msgstr "zypper shell はサブコマンドの実行には対応していません。"
 
 #. translators: %1%  - is the name of a subcommand
-#: src/commands/subcommand.cc:640
+#: src/commands/subcommand.cc:646
 #, boost-format
 msgid "Subcommand %1% does not support zypper global options."
 msgstr "サブコマンド %1% は zypper のグローバルオプションに対応していません。"
@@ -5237,9 +5254,9 @@ msgid ""
 "N), running, oldest(+N)."
 msgstr ""
 "/etc/zypp/zypp.conf 内の multiversion.kernels で指定された「保持すべきカーネ"
-"ル」の設定に従って、不要なカーネルを自動削除します。なお "
-"multiversion.kernels の値には、バージョン番号そのもののほか、新しいものから "
-"n 個分や古いものから n 個分のように設定することができます。"
+"ル」の設定に従って、不要なカーネルを自動削除します。なお multiversion."
+"kernels の値には、バージョン番号そのもののほか、新しいものから n 個分や古いも"
+"のから n 個分のように設定することができます。"
 
 #: src/commands/utils/purge-kernels.cc:51
 msgid "Preparing to purge obsolete kernels..."
@@ -6620,8 +6637,8 @@ msgstr ""
 #: src/solve-commit.cc:620
 #, c-format, boost-format
 msgid ""
-"Check for running processes using deleted libraries is disabled in "
-"zypper.conf. Run '%s' to check manually."
+"Check for running processes using deleted libraries is disabled in zypper."
+"conf. Run '%s' to check manually."
 msgstr ""
 "削除されたライブラリを使用している実行中プロセスの確認は、zypper.confで無効に"
 "されています。'%s' を実行して手動で確認してください。"
@@ -7480,6 +7497,13 @@ msgstr "無効なオブジェクト"
 #: src/utils/prompt.h:102
 msgid "Error"
 msgstr "エラー"
+
+#~ msgid ""
+#~ "This is a transactional-server, please use transactional-update to update "
+#~ "or modify the system."
+#~ msgstr ""
+#~ "このマシンはトランザクション型のサーバです。システムを更新したり修正したり"
+#~ "するには、 transactional-update をお使いください。"
 
 #, c-format, boost-format
 #~ msgid "'%s' looks like an RPM file. Will try to download it."

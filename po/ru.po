@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-13 17:49+0200\n"
+"POT-Creation-Date: 2026-06-12 12:15+0200\n"
 "PO-Revision-Date: 2025-07-28 23:59+0000\n"
 "Last-Translator: Aleksey Fedorov <Aleksejfedorov963@gmail.com>\n"
 "Language-Team: Russian <https://l10n.opensuse.org/projects/zypper/master/ru/"
@@ -1509,7 +1509,7 @@ msgstr "Требуется перезагрузка системы."
 msgid "Consider to cancel:"
 msgstr "Возможно, стоит отменить операцию:"
 
-#: src/Zypper.cc:87
+#: src/Zypper.cc:88
 msgid ""
 "PackageKit is blocking zypper. This happens if you have an updater applet or "
 "other software management application using PackageKit running."
@@ -1517,7 +1517,7 @@ msgstr ""
 "PackageKit блокирует zypper. Это происходит, если у вас запущен апплет "
 "обновлений или другое приложение для управления ПО, использующее PackageKit."
 
-#: src/Zypper.cc:93
+#: src/Zypper.cc:94
 msgid ""
 "We can ask PackageKit to interrupt the current action as soon as possible, "
 "but it depends on PackageKit how fast it will respond to this request."
@@ -1525,39 +1525,39 @@ msgstr ""
 "Мы можем попросить PackageKit прервать текущую операцию как можно скорее, но "
 "скорость ответа на этот запрос зависит только от PackageKit."
 
-#: src/Zypper.cc:96
+#: src/Zypper.cc:97
 msgid "Ask PackageKit to quit?"
 msgstr "Завершить PackageKit?"
 
-#: src/Zypper.cc:105
+#: src/Zypper.cc:106
 msgid "PackageKit is still running (probably busy)."
 msgstr "PackageKit все еще запущен (возможно, занят)."
 
-#: src/Zypper.cc:106
+#: src/Zypper.cc:107
 msgid "Try again?"
 msgstr "Повторите попытку?"
 
-#: src/Zypper.cc:244 src/Zypper.cc:730 src/commands/basecommand.cc:293
+#: src/Zypper.cc:245 src/Zypper.cc:738
 msgid "Unexpected exception."
 msgstr "Неожиданное исключение."
 
 #. translators: %s is "help" or "zypper help" depending on whether
 #. zypper shell is running or not
-#: src/Zypper.cc:291
+#: src/Zypper.cc:292
 #, c-format, boost-format
 msgid "Type '%s' to get command-specific help."
 msgstr "Введите \"%s\" для получения справки по командам."
 
-#: src/Zypper.cc:311
+#: src/Zypper.cc:312
 #, c-format, boost-format
 msgid "Verbosity: %d"
 msgstr "Уровень детализации: %d"
 
-#: src/Zypper.cc:320
+#: src/Zypper.cc:321
 msgid "Enforced setting"
 msgstr "Принудительно задано"
 
-#: src/Zypper.cc:343
+#: src/Zypper.cc:344
 msgid ""
 "The /etc/products.d/baseproduct symlink is dangling or missing!\n"
 "The link must point to your core products .prod file in /etc/products.d.\n"
@@ -1567,12 +1567,12 @@ msgstr ""
 
 #. TranslatorExplanation The %s is "--plus-repo"
 #. TranslatorExplanation The %s is "--option-name"
-#: src/Zypper.cc:545 src/Zypper.cc:597
+#: src/Zypper.cc:548 src/Zypper.cc:600
 #, c-format, boost-format
 msgid "The %s option has no effect here, ignoring."
 msgstr "Параметр %s здесь не действует, игнорируется."
 
-#: src/Zypper.cc:639
+#: src/Zypper.cc:642
 msgid "Non-option program arguments: "
 msgstr "Аргументы программы, не являющиеся параметрами: "
 
@@ -2355,19 +2355,37 @@ msgstr ""
 "Использовать только исправления, которые влияют непосредственно на "
 "управление пакетами."
 
-#: src/commands/conditions.cc:19
+#: src/commands/conditions.cc:16
 msgid "Root privileges are required to run this command."
 msgstr "Для выполнения этой команды необходимы права root."
 
-#: src/commands/conditions.cc:47
-msgid ""
-"This is a transactional-server, please use transactional-update to update or "
-"modify the system."
+#: src/commands/conditions.cc:30
+msgid "Transactional system detected:"
 msgstr ""
-"Это transactional-server, для обновления либо изменения системы используйте "
-"transactional-update."
 
-#: src/commands/conditions.cc:49
+#: src/commands/conditions.cc:31
+msgid "A transactional-wrapper command is not installed."
+msgstr ""
+
+#: src/commands/conditions.cc:32
+msgid "The transactional-wrapper command cannot be used in 'zypper shell'."
+msgstr ""
+
+#: src/commands/conditions.cc:33
+msgid ""
+"Using transactional-wrapper is disabled by "
+"'ZYPPER_USE_TRANSACTIONAL_WRAPPER=0'."
+msgstr ""
+
+#: src/commands/conditions.cc:34
+msgid "Please use transactional-update to modify or update the system."
+msgstr ""
+
+#: src/commands/conditions.cc:44
+msgid "Delegating the command to transactional-wrapper."
+msgstr ""
+
+#: src/commands/conditions.cc:57
 msgid ""
 "The target filesystem is mounted as read-only. Please make sure the target "
 "filesystem is writeable."
@@ -2523,8 +2541,8 @@ msgid ""
 "Remove packages with specified capabilities. A capability is NAME[.ARCH]"
 "[OP<VERSION>], where OP is one of <, <=, =, >=, >."
 msgstr ""
-"Удалить пакеты с указанными возможностями. Возможность — это "
-"ИМЯ[.АРХИТЕКТУРА][ОП<ВЕРСИЯ>], где ОП — один из операторов <, <=, =, >=, >."
+"Удалить пакеты с указанными возможностями. Возможность — это ИМЯ[."
+"АРХИТЕКТУРА][ОП<ВЕРСИЯ>], где ОП — один из операторов <, <=, =, >=, >."
 
 #: src/commands/installremove.cc:104 src/commands/installremove.cc:234
 #: src/utils/messages.cc:53
@@ -5287,12 +5305,12 @@ msgstr ""
 "в $PATH выключена в zypper.conf."
 
 #. Currently no concept how to handle global options and ZYPPlock
-#: src/commands/subcommand.cc:626
+#: src/commands/subcommand.cc:632
 msgid "Zypper shell does not support execution of subcommands."
 msgstr "Оболочка zypper не поддерживает выполнение подкоманд."
 
 #. translators: %1%  - is the name of a subcommand
-#: src/commands/subcommand.cc:640
+#: src/commands/subcommand.cc:646
 #, boost-format
 msgid "Subcommand %1% does not support zypper global options."
 msgstr "Подкоманда %1% не поддерживает глобальные параметры zypper."
@@ -6268,8 +6286,8 @@ msgid ""
 msgstr ""
 "Это может быть вызвано недопустимыми метаданными в репозитории или ошибкой в "
 "анализаторе метаданных. В последнем случае (или если возникают сомнения) "
-"отправьте отчёт об ошибке, выполнив указания на странице http://"
-"en.opensuse.org/Zypper/Troubleshooting"
+"отправьте отчёт об ошибке, выполнив указания на странице http://en.opensuse."
+"org/Zypper/Troubleshooting"
 
 #: src/repos.cc:446
 #, c-format, boost-format
@@ -6621,10 +6639,10 @@ msgid ""
 "not solve the issue, it could be that you are using a broken mirror or the "
 "server has actually discontinued to support the repository."
 msgstr ""
-"Метаданные репозитория устарели: Проверьте, что включено «автообновление» "
-"(zypper lr), либо обновите репозиторий вручную (zypper ref). Если это не "
-"решит проблему, то вы, возможно, используете сломанное зеркало или сервер "
-"прекратил поддержку репозитория."
+"Метаданные репозитория устарели: Проверьте, что включено "
+"«автообновление» (zypper lr), либо обновите репозиторий вручную (zypper "
+"ref). Если это не решит проблему, то вы, возможно, используете сломанное "
+"зеркало или сервер прекратил поддержку репозитория."
 
 #: src/repos.cc:1859
 msgid "Reading installed packages..."
@@ -6829,8 +6847,8 @@ msgstr ""
 #: src/solve-commit.cc:620
 #, c-format, boost-format
 msgid ""
-"Check for running processes using deleted libraries is disabled in "
-"zypper.conf. Run '%s' to check manually."
+"Check for running processes using deleted libraries is disabled in zypper."
+"conf. Run '%s' to check manually."
 msgstr ""
 "Проверка запущенных процессов, использующих удаленные библиотеки, отключена "
 "в zypper.conf. Для ручной проверки запустите \"%s\"."
@@ -7712,6 +7730,13 @@ msgstr "Недопустимый объект"
 msgid "Error"
 msgstr "Ошибка"
 
+#~ msgid ""
+#~ "This is a transactional-server, please use transactional-update to update "
+#~ "or modify the system."
+#~ msgstr ""
+#~ "Это transactional-server, для обновления либо изменения системы "
+#~ "используйте transactional-update."
+
 #, c-format, boost-format
 #~ msgid "'%s' looks like an RPM file. Will try to download it."
 #~ msgstr "\"%s\" выглядит как файл RPM. Попробую загрузить его."
@@ -7948,8 +7973,8 @@ msgstr "Ошибка"
 #~ "Следующие %1% пакета были исключены из проверки на конфликты файлов, т.к. "
 #~ "загрузка ещё не завершена:"
 #~ msgstr[2] ""
-#~ "Следующие %1% пакетов были исключены из проверки на конфликты файлов, "
-#~ "т.к. загрузка ещё не завершена:"
+#~ "Следующие %1% пакетов были исключены из проверки на конфликты файлов, т."
+#~ "к. загрузка ещё не завершена:"
 
 #~ msgid "s/r/c"
 #~ msgstr "s/r/c"

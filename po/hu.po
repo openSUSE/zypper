@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.hu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-13 17:49+0200\n"
+"POT-Creation-Date: 2026-06-12 12:15+0200\n"
 "PO-Revision-Date: 2025-07-22 12:47+0000\n"
 "Last-Translator: Julia Faltenbacher <julia.faltenbacher@suse.com>\n"
 "Language-Team: Hungarian <https://l10n.opensuse.org/projects/zypper/master/"
@@ -1424,7 +1424,7 @@ msgstr "Rendszer-újraindítás szükséges."
 msgid "Consider to cancel:"
 msgstr "Fontolja meg a megszakítást:"
 
-#: src/Zypper.cc:87
+#: src/Zypper.cc:88
 msgid ""
 "PackageKit is blocking zypper. This happens if you have an updater applet or "
 "other software management application using PackageKit running."
@@ -1433,7 +1433,7 @@ msgstr ""
 "frissítő kisalkalmazás vagy más szoftverkezelő alkalmazás futtatja a "
 "PackageKit alkalmazást."
 
-#: src/Zypper.cc:93
+#: src/Zypper.cc:94
 msgid ""
 "We can ask PackageKit to interrupt the current action as soon as possible, "
 "but it depends on PackageKit how fast it will respond to this request."
@@ -1442,39 +1442,39 @@ msgstr ""
 "lehetséges, de a PackageKittől függ, hogy milyen gyorsan reagál erre a "
 "kérésre."
 
-#: src/Zypper.cc:96
+#: src/Zypper.cc:97
 msgid "Ask PackageKit to quit?"
 msgstr "Kilépteti a PackageKit alkalmazást?"
 
-#: src/Zypper.cc:105
+#: src/Zypper.cc:106
 msgid "PackageKit is still running (probably busy)."
 msgstr "A PAckageKit még fut (valószínűleg művelet hajt végre)."
 
-#: src/Zypper.cc:106
+#: src/Zypper.cc:107
 msgid "Try again?"
 msgstr "Megpróbálja újra?"
 
-#: src/Zypper.cc:244 src/Zypper.cc:730 src/commands/basecommand.cc:293
+#: src/Zypper.cc:245 src/Zypper.cc:738
 msgid "Unexpected exception."
 msgstr "Váratlan kivétel."
 
 #. translators: %s is "help" or "zypper help" depending on whether
 #. zypper shell is running or not
-#: src/Zypper.cc:291
+#: src/Zypper.cc:292
 #, c-format, boost-format
 msgid "Type '%s' to get command-specific help."
 msgstr "A parancsspecifikus súgó használatához írja be a következőt: '%s'."
 
-#: src/Zypper.cc:311
+#: src/Zypper.cc:312
 #, c-format, boost-format
 msgid "Verbosity: %d"
 msgstr "Részletesség: %d"
 
-#: src/Zypper.cc:320
+#: src/Zypper.cc:321
 msgid "Enforced setting"
 msgstr "Kényszerített beállítás"
 
-#: src/Zypper.cc:343
+#: src/Zypper.cc:344
 msgid ""
 "The /etc/products.d/baseproduct symlink is dangling or missing!\n"
 "The link must point to your core products .prod file in /etc/products.d.\n"
@@ -1486,12 +1486,12 @@ msgstr ""
 
 #. TranslatorExplanation The %s is "--plus-repo"
 #. TranslatorExplanation The %s is "--option-name"
-#: src/Zypper.cc:545 src/Zypper.cc:597
+#: src/Zypper.cc:548 src/Zypper.cc:600
 #, c-format, boost-format
 msgid "The %s option has no effect here, ignoring."
 msgstr "Az %s kapcsolónak itt nincs szerepe, ezért figyelmen kívül marad."
 
-#: src/Zypper.cc:639
+#: src/Zypper.cc:642
 msgid "Non-option program arguments: "
 msgstr "Nem kapcsoló jellegű paraméterek: "
 
@@ -2257,19 +2257,37 @@ msgstr ""
 "Csak olyan javításokat célszerű választania, amelyek magára a "
 "csomagkezelésre vonatkoznak."
 
-#: src/commands/conditions.cc:19
+#: src/commands/conditions.cc:16
 msgid "Root privileges are required to run this command."
 msgstr "A parancs futtatásához root jogosultságok szükségesek."
 
-#: src/commands/conditions.cc:47
-msgid ""
-"This is a transactional-server, please use transactional-update to update or "
-"modify the system."
+#: src/commands/conditions.cc:30
+msgid "Transactional system detected:"
 msgstr ""
-"Ez egy tranzakciós kiszolgáló, használjon tranzakciós frissítést a rendszer "
-"frissítéséhez vagy módosításához."
 
-#: src/commands/conditions.cc:49
+#: src/commands/conditions.cc:31
+msgid "A transactional-wrapper command is not installed."
+msgstr ""
+
+#: src/commands/conditions.cc:32
+msgid "The transactional-wrapper command cannot be used in 'zypper shell'."
+msgstr ""
+
+#: src/commands/conditions.cc:33
+msgid ""
+"Using transactional-wrapper is disabled by "
+"'ZYPPER_USE_TRANSACTIONAL_WRAPPER=0'."
+msgstr ""
+
+#: src/commands/conditions.cc:34
+msgid "Please use transactional-update to modify or update the system."
+msgstr ""
+
+#: src/commands/conditions.cc:44
+msgid "Delegating the command to transactional-wrapper."
+msgstr ""
+
+#: src/commands/conditions.cc:57
 msgid ""
 "The target filesystem is mounted as read-only. Please make sure the target "
 "filesystem is writeable."
@@ -5150,12 +5168,12 @@ msgid ""
 msgstr ""
 
 #. Currently no concept how to handle global options and ZYPPlock
-#: src/commands/subcommand.cc:626
+#: src/commands/subcommand.cc:632
 msgid "Zypper shell does not support execution of subcommands."
 msgstr "A Zypper shell nem támogatja az alparancsok végrehajtását."
 
 #. translators: %1%  - is the name of a subcommand
-#: src/commands/subcommand.cc:640
+#: src/commands/subcommand.cc:646
 #, boost-format
 msgid "Subcommand %1% does not support zypper global options."
 msgstr "A(z) %1% alparancs nem támogatja a Zypper általános beállításait."
@@ -6691,8 +6709,8 @@ msgstr ""
 #: src/solve-commit.cc:620
 #, c-format, boost-format
 msgid ""
-"Check for running processes using deleted libraries is disabled in "
-"zypper.conf. Run '%s' to check manually."
+"Check for running processes using deleted libraries is disabled in zypper."
+"conf. Run '%s' to check manually."
 msgstr ""
 "A törölt függvénytárakat használó futó folyamatok ellenőrzése le van tiltva "
 "a zypper.conf fájlban. Ellenőrizze manuálisan a(z) '%s' futtatásával."
@@ -7580,6 +7598,13 @@ msgstr "Érvénytelen objektum"
 msgid "Error"
 msgstr "Hiba"
 
+#~ msgid ""
+#~ "This is a transactional-server, please use transactional-update to update "
+#~ "or modify the system."
+#~ msgstr ""
+#~ "Ez egy tranzakciós kiszolgáló, használjon tranzakciós frissítést a "
+#~ "rendszer frissítéséhez vagy módosításához."
+
 #, c-format, boost-format
 #~ msgid "'%s' looks like an RPM file. Will try to download it."
 #~ msgstr "A '%s' egy RPM-fájlnak tűnik. Letöltés megkísérlése."
@@ -8136,8 +8161,8 @@ msgstr "Hiba"
 #~ "install (in) [kapcsolók] <funkció|rpm_fájl_uri> ...\n"
 #~ "\n"
 #~ "A megadott funkciókat tartalmazó csomagok vagy adott\n"
-#~ "helyen található RPM-fájlok telepítése. A funkciók meghatározása: "
-#~ "NAME[.ARCH][OP<VERZIÓ>], ahol az OP a\n"
+#~ "helyen található RPM-fájlok telepítése. A funkciók meghatározása: NAME[."
+#~ "ARCH][OP<VERZIÓ>], ahol az OP a\n"
 #~ "<, <=, =, >=, > operátorok egyike.\n"
 #~ "\n"
 #~ "  A parancs kapcsolói:\n"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-13 17:49+0200\n"
+"POT-Creation-Date: 2026-06-12 12:15+0200\n"
 "PO-Revision-Date: 2026-03-20 06:04+0000\n"
 "Last-Translator: Arif Budiman <arifpedia@gmail.com>\n"
 "Language-Team: Indonesian <https://l10n.opensuse.org/projects/zypper/master/"
@@ -1324,7 +1324,7 @@ msgstr "Perlu memulai ulang sistem."
 msgid "Consider to cancel:"
 msgstr "Mempertimbangkan untuk batal:"
 
-#: src/Zypper.cc:87
+#: src/Zypper.cc:88
 msgid ""
 "PackageKit is blocking zypper. This happens if you have an updater applet or "
 "other software management application using PackageKit running."
@@ -1333,7 +1333,7 @@ msgstr ""
 "pemutakhiran atau aplikasi manajemen perangkat lunak yang sedang berjalan "
 "menggunakan PackageKit."
 
-#: src/Zypper.cc:93
+#: src/Zypper.cc:94
 msgid ""
 "We can ask PackageKit to interrupt the current action as soon as possible, "
 "but it depends on PackageKit how fast it will respond to this request."
@@ -1342,55 +1342,55 @@ msgstr ""
 "mungkin, tetapi ini tergantung pada seberapa cepat PackageKit akan merespon "
 "permintaan ini."
 
-#: src/Zypper.cc:96
+#: src/Zypper.cc:97
 msgid "Ask PackageKit to quit?"
 msgstr "Meminta PackageKit untuk keluar?"
 
-#: src/Zypper.cc:105
+#: src/Zypper.cc:106
 msgid "PackageKit is still running (probably busy)."
 msgstr "PackageKit sedang bekerja (kemungkinan sibuk)."
 
-#: src/Zypper.cc:106
+#: src/Zypper.cc:107
 msgid "Try again?"
 msgstr "Coba lagi?"
 
-#: src/Zypper.cc:244 src/Zypper.cc:730 src/commands/basecommand.cc:293
+#: src/Zypper.cc:245 src/Zypper.cc:738
 msgid "Unexpected exception."
 msgstr "Pengecualian tak terduga."
 
 #. translators: %s is "help" or "zypper help" depending on whether
 #. zypper shell is running or not
-#: src/Zypper.cc:291
+#: src/Zypper.cc:292
 #, c-format, boost-format
 msgid "Type '%s' to get command-specific help."
 msgstr "Ketik '%s'  untuk mendapatkan bantuan khusus perintah."
 
-#: src/Zypper.cc:311
+#: src/Zypper.cc:312
 #, c-format, boost-format
 msgid "Verbosity: %d"
 msgstr "Verbositas: %d"
 
-#: src/Zypper.cc:320
+#: src/Zypper.cc:321
 msgid "Enforced setting"
 msgstr "Pengaturan yang dipaksa"
 
-#: src/Zypper.cc:343
+#: src/Zypper.cc:344
 msgid ""
 "The /etc/products.d/baseproduct symlink is dangling or missing!\n"
 "The link must point to your core products .prod file in /etc/products.d.\n"
 msgstr ""
 "Symlink /etc/products.d/baseproduct tidak benar atau hilang!\n"
-"Tautan harus mengarah ke produk inti Anda pada berkas .prod di /etc/"
-"products.d.\n"
+"Tautan harus mengarah ke produk inti Anda pada berkas .prod di /etc/products."
+"d.\n"
 
 #. TranslatorExplanation The %s is "--plus-repo"
 #. TranslatorExplanation The %s is "--option-name"
-#: src/Zypper.cc:545 src/Zypper.cc:597
+#: src/Zypper.cc:548 src/Zypper.cc:600
 #, c-format, boost-format
 msgid "The %s option has no effect here, ignoring."
 msgstr "Opsi %s tidak berfungsi di sini. Abaikan."
 
-#: src/Zypper.cc:639
+#: src/Zypper.cc:642
 msgid "Non-option program arguments: "
 msgstr "Argumen program non-opsi: "
 
@@ -2167,19 +2167,37 @@ msgid "Consider only patches which affect the package management itself."
 msgstr ""
 "Pertimbangkan hanya tambalan yang memengaruhi manajemen paket itu sendiri."
 
-#: src/commands/conditions.cc:19
+#: src/commands/conditions.cc:16
 msgid "Root privileges are required to run this command."
 msgstr "Hak akses root diperlukan untuk menjalankan perintah ini."
 
-#: src/commands/conditions.cc:47
-msgid ""
-"This is a transactional-server, please use transactional-update to update or "
-"modify the system."
+#: src/commands/conditions.cc:30
+msgid "Transactional system detected:"
 msgstr ""
-"Ini adalah peladen transaksional, silakan gunakan transactional-update untuk "
-"memutakhirkan atau memodifikasi sistem."
 
-#: src/commands/conditions.cc:49
+#: src/commands/conditions.cc:31
+msgid "A transactional-wrapper command is not installed."
+msgstr ""
+
+#: src/commands/conditions.cc:32
+msgid "The transactional-wrapper command cannot be used in 'zypper shell'."
+msgstr ""
+
+#: src/commands/conditions.cc:33
+msgid ""
+"Using transactional-wrapper is disabled by "
+"'ZYPPER_USE_TRANSACTIONAL_WRAPPER=0'."
+msgstr ""
+
+#: src/commands/conditions.cc:34
+msgid "Please use transactional-update to modify or update the system."
+msgstr ""
+
+#: src/commands/conditions.cc:44
+msgid "Delegating the command to transactional-wrapper."
+msgstr ""
+
+#: src/commands/conditions.cc:57
 msgid ""
 "The target filesystem is mounted as read-only. Please make sure the target "
 "filesystem is writeable."
@@ -2217,9 +2235,9 @@ msgid ""
 msgstr ""
 "Karena penanganan paket yang tidak terawat, dist-upgrade sangat bergantung "
 "pada pengaturan repositori yang benar dibandingkan perintah lainnya. Proses "
-"ini tidak boleh dilanjutkan jika repositori yang diaktifkan gagal "
-"diperbarui.Kondisi ini dapat menyebabkan kerusakan serius pada sistem. Jika "
-"repositori yang gagal sebenarnya tidak diperlukan, repositori tersebut harus "
+"ini tidak boleh dilanjutkan jika repositori yang diaktifkan gagal diperbarui."
+"Kondisi ini dapat menyebabkan kerusakan serius pada sistem. Jika repositori "
+"yang gagal sebenarnya tidak diperlukan, repositori tersebut harus "
 "dinonaktifkan."
 
 #: src/commands/distupgrade.cc:57
@@ -4095,8 +4113,8 @@ msgid ""
 "Use the global GPG check setting defined in /etc/zypp/zypp.conf. This is the "
 "default."
 msgstr ""
-"Gunakan pengaturan pemeriksaan GPG global yang ditentukan di /etc/zypp/"
-"zypp.conf. Ini sudah bawaan."
+"Gunakan pengaturan pemeriksaan GPG global yang ditentukan di /etc/zypp/zypp."
+"conf. Ini sudah bawaan."
 
 #. translators: -a, --alias
 #: src/commands/reposerviceoptionsets.cc:182
@@ -5072,12 +5090,12 @@ msgstr ""
 "ditemukan di $PATH Anda dinonaktifkan di zypper.conf."
 
 #. Currently no concept how to handle global options and ZYPPlock
-#: src/commands/subcommand.cc:626
+#: src/commands/subcommand.cc:632
 msgid "Zypper shell does not support execution of subcommands."
 msgstr "Shell zypper tidak mendukung eksekusi sub perintah."
 
 #. translators: %1%  - is the name of a subcommand
-#: src/commands/subcommand.cc:640
+#: src/commands/subcommand.cc:646
 #, boost-format
 msgid "Subcommand %1% does not support zypper global options."
 msgstr "Sub perintah %1% tidak mendukung opsi global zypper."
@@ -6593,8 +6611,8 @@ msgstr ""
 #: src/solve-commit.cc:620
 #, c-format, boost-format
 msgid ""
-"Check for running processes using deleted libraries is disabled in "
-"zypper.conf. Run '%s' to check manually."
+"Check for running processes using deleted libraries is disabled in zypper."
+"conf. Run '%s' to check manually."
 msgstr ""
 "Periksa proses yang berjalan menggunakan pustaka yang dihapus yang "
 "dinonaktifkan di zypper.conf. Jalankan '%s' untuk memeriksa secara manual."
@@ -7448,6 +7466,13 @@ msgstr "Obyek tidak valid"
 #: src/utils/prompt.h:102
 msgid "Error"
 msgstr "Galat"
+
+#~ msgid ""
+#~ "This is a transactional-server, please use transactional-update to update "
+#~ "or modify the system."
+#~ msgstr ""
+#~ "Ini adalah peladen transaksional, silakan gunakan transactional-update "
+#~ "untuk memutakhirkan atau memodifikasi sistem."
 
 #, c-format, boost-format
 #~ msgid "'%s' looks like an RPM file. Will try to download it."

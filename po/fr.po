@@ -13,11 +13,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.fr\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-13 17:49+0200\n"
+"POT-Creation-Date: 2026-06-12 12:15+0200\n"
 "PO-Revision-Date: 2026-05-19 11:12+0000\n"
 "Last-Translator: Sophie Leroy <sophie@stoquart.com>\n"
-"Language-Team: French <https://l10n.opensuse.org/projects/zypper/master/fr/>"
-"\n"
+"Language-Team: French <https://l10n.opensuse.org/projects/zypper/master/fr/"
+">\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1465,7 +1465,7 @@ msgstr "Redémarrage du système requis."
 msgid "Consider to cancel:"
 msgstr "Veuillez considérer l'annulation :"
 
-#: src/Zypper.cc:87
+#: src/Zypper.cc:88
 msgid ""
 "PackageKit is blocking zypper. This happens if you have an updater applet or "
 "other software management application using PackageKit running."
@@ -1474,7 +1474,7 @@ msgstr ""
 "tout autre application de gestion des logiciels utilisant PackageKit est en "
 "cours d'exécution."
 
-#: src/Zypper.cc:93
+#: src/Zypper.cc:94
 msgid ""
 "We can ask PackageKit to interrupt the current action as soon as possible, "
 "but it depends on PackageKit how fast it will respond to this request."
@@ -1483,40 +1483,40 @@ msgstr ""
 "possible, mais cela dépend de PackageKit et de la vitesse avec laquelle il "
 "va répondre à cette requête."
 
-#: src/Zypper.cc:96
+#: src/Zypper.cc:97
 msgid "Ask PackageKit to quit?"
 msgstr "Demander à PackageKit de quitter ?"
 
-#: src/Zypper.cc:105
+#: src/Zypper.cc:106
 msgid "PackageKit is still running (probably busy)."
 msgstr "PackageKit est toujours en cours d'exécution (probablement occupé)."
 
 # TLABEL linuxrc_2002_03_29_0036__110
-#: src/Zypper.cc:106
+#: src/Zypper.cc:107
 msgid "Try again?"
 msgstr "Essayer à nouveau ?"
 
-#: src/Zypper.cc:244 src/Zypper.cc:730 src/commands/basecommand.cc:293
+#: src/Zypper.cc:245 src/Zypper.cc:738
 msgid "Unexpected exception."
 msgstr "Exception inattendue."
 
 #. translators: %s is "help" or "zypper help" depending on whether
 #. zypper shell is running or not
-#: src/Zypper.cc:291
+#: src/Zypper.cc:292
 #, c-format, boost-format
 msgid "Type '%s' to get command-specific help."
 msgstr "Tapez '%s' pour obtenir l'aide spécifique d'une commande."
 
-#: src/Zypper.cc:311
+#: src/Zypper.cc:312
 #, c-format, boost-format
 msgid "Verbosity: %d"
 msgstr "Verbosité : %d"
 
-#: src/Zypper.cc:320
+#: src/Zypper.cc:321
 msgid "Enforced setting"
 msgstr "Paramètre appliqué"
 
-#: src/Zypper.cc:343
+#: src/Zypper.cc:344
 msgid ""
 "The /etc/products.d/baseproduct symlink is dangling or missing!\n"
 "The link must point to your core products .prod file in /etc/products.d.\n"
@@ -1527,12 +1527,12 @@ msgstr ""
 
 #. TranslatorExplanation The %s is "--plus-repo"
 #. TranslatorExplanation The %s is "--option-name"
-#: src/Zypper.cc:545 src/Zypper.cc:597
+#: src/Zypper.cc:548 src/Zypper.cc:600
 #, c-format, boost-format
 msgid "The %s option has no effect here, ignoring."
 msgstr "L'option %s n'a aucun effet ici, ignorée."
 
-#: src/Zypper.cc:639
+#: src/Zypper.cc:642
 msgid "Non-option program arguments: "
 msgstr "Arguments de programme non optionnels : "
 
@@ -1820,11 +1820,11 @@ msgstr ""
 msgid "Received %1% new package signing key from repository \"%2%\":"
 msgid_plural "Received %1% new package signing keys from repository \"%2%\":"
 msgstr[0] ""
-"Réception de %1% nouvelle clé de signature de paquets provenant du dépôt "
-"« %2% » :"
+"Réception de %1% nouvelle clé de signature de paquets provenant du dépôt « "
+"%2% » :"
 msgstr[1] ""
-"Réception de %1% nouvelles clés de signature de paquets provenant du dépôt "
-"« %2% » :"
+"Réception de %1% nouvelles clés de signature de paquets provenant du dépôt « "
+"%2% » :"
 
 #: src/callbacks/keyring.h:472
 msgid ""
@@ -2330,19 +2330,37 @@ msgstr ""
 "Considérer seulement les correctifs qui affectent la gestion des paquets "
 "elle-même."
 
-#: src/commands/conditions.cc:19
+#: src/commands/conditions.cc:16
 msgid "Root privileges are required to run this command."
 msgstr "Les privilèges root sont requis pour lancer cette commande."
 
-#: src/commands/conditions.cc:47
-msgid ""
-"This is a transactional-server, please use transactional-update to update or "
-"modify the system."
+#: src/commands/conditions.cc:30
+msgid "Transactional system detected:"
 msgstr ""
-"Ceci est un serveur transactionnel, veuillez utiliser transactional-update "
-"pour mettre à jour ou modifier le système."
 
-#: src/commands/conditions.cc:49
+#: src/commands/conditions.cc:31
+msgid "A transactional-wrapper command is not installed."
+msgstr ""
+
+#: src/commands/conditions.cc:32
+msgid "The transactional-wrapper command cannot be used in 'zypper shell'."
+msgstr ""
+
+#: src/commands/conditions.cc:33
+msgid ""
+"Using transactional-wrapper is disabled by "
+"'ZYPPER_USE_TRANSACTIONAL_WRAPPER=0'."
+msgstr ""
+
+#: src/commands/conditions.cc:34
+msgid "Please use transactional-update to modify or update the system."
+msgstr ""
+
+#: src/commands/conditions.cc:44
+msgid "Delegating the command to transactional-wrapper."
+msgstr ""
+
+#: src/commands/conditions.cc:57
 msgid ""
 "The target filesystem is mounted as read-only. Please make sure the target "
 "filesystem is writeable."
@@ -2699,10 +2717,10 @@ msgid ""
 "changes, i.e. same upstream version)."
 msgstr ""
 "Le filtre est mis à jour en fonction de l'importance des modifications de "
-"version. NIVEAU : 'none' (valeur par défaut, affiche tout), 'rebuild' "
-"(masque les modifications qui concernent uniquement une reconstruction), "
-"'package' (masque les modifications qui concernent uniquement une mise en "
-"paquet, par exemple même version en amont)."
+"version. NIVEAU : 'none' (valeur par défaut, affiche tout), "
+"'rebuild' (masque les modifications qui concernent uniquement une "
+"reconstruction), 'package' (masque les modifications qui concernent "
+"uniquement une mise en paquet, par exemple même version en amont)."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/addlocalecmd.cc:20
@@ -5284,12 +5302,12 @@ msgstr ""
 "zypper trouvées sur votre $PATH est désactivée dans zypper.conf."
 
 #. Currently no concept how to handle global options and ZYPPlock
-#: src/commands/subcommand.cc:626
+#: src/commands/subcommand.cc:632
 msgid "Zypper shell does not support execution of subcommands."
 msgstr "Le shell de zypper ne supporte pas l'exécution des sous-commandes."
 
 #. translators: %1%  - is the name of a subcommand
-#: src/commands/subcommand.cc:640
+#: src/commands/subcommand.cc:646
 #, boost-format
 msgid "Subcommand %1% does not support zypper global options."
 msgstr ""
@@ -6855,8 +6873,8 @@ msgstr ""
 #: src/solve-commit.cc:620
 #, c-format, boost-format
 msgid ""
-"Check for running processes using deleted libraries is disabled in "
-"zypper.conf. Run '%s' to check manually."
+"Check for running processes using deleted libraries is disabled in zypper."
+"conf. Run '%s' to check manually."
 msgstr ""
 "La recherche des processus en cours d'exécution qui utilisent des "
 "bibliothèques supprimées est désactivée dans le fichier zypper.conf. "
@@ -7021,8 +7039,8 @@ msgid ""
 "- use another repository"
 msgstr ""
 "Échec de la vérification de l'intégrité du paquet. Il y a peut-être un "
-"problème avec le support ou le dépôt. Essayez l'une des solutions suivantes "
-":\n"
+"problème avec le support ou le dépôt. Essayez l'une des solutions "
+"suivantes :\n"
 "\n"
 "- Réessayez la commande précédente.\n"
 "- Rafraîchissez les dépôts via 'zypper refresh'.\n"
@@ -7182,8 +7200,8 @@ msgstr "Aucun problème correspondant n'a été trouvé."
 #: src/update.cc:1013
 msgid "The following matches in issue numbers have been found:"
 msgstr ""
-"Les correspondances suivantes dans les numéros de problèmes ont été trouvées "
-":"
+"Les correspondances suivantes dans les numéros de problèmes ont été "
+"trouvées :"
 
 #: src/update.cc:1023
 msgid "Matches in patch descriptions of the following patches have been found:"
@@ -7758,6 +7776,13 @@ msgstr "Objet non valide"
 #: src/utils/prompt.h:102
 msgid "Error"
 msgstr "Erreur"
+
+#~ msgid ""
+#~ "This is a transactional-server, please use transactional-update to update "
+#~ "or modify the system."
+#~ msgstr ""
+#~ "Ceci est un serveur transactionnel, veuillez utiliser transactional-"
+#~ "update pour mettre à jour ou modifier le système."
 
 #, c-format, boost-format
 #~ msgid "'%s' looks like an RPM file. Will try to download it."

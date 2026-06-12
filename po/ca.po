@@ -8,11 +8,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-13 17:49+0200\n"
+"POT-Creation-Date: 2026-06-12 12:15+0200\n"
 "PO-Revision-Date: 2026-05-14 11:12+0000\n"
 "Last-Translator: David Medina <medipas@gmail.com>\n"
-"Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/>"
-"\n"
+"Language-Team: Catalan <https://l10n.opensuse.org/projects/zypper/master/ca/"
+">\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1421,7 +1421,7 @@ msgstr "Caldrà reiniciar el sistema."
 msgid "Consider to cancel:"
 msgstr "Considereu-ne la cancel·lació:"
 
-#: src/Zypper.cc:87
+#: src/Zypper.cc:88
 msgid ""
 "PackageKit is blocking zypper. This happens if you have an updater applet or "
 "other software management application using PackageKit running."
@@ -1430,7 +1430,7 @@ msgstr ""
 "aplicació d'actualització o de gestió de paquets que està usant el "
 "PackageKit en execució."
 
-#: src/Zypper.cc:93
+#: src/Zypper.cc:94
 msgid ""
 "We can ask PackageKit to interrupt the current action as soon as possible, "
 "but it depends on PackageKit how fast it will respond to this request."
@@ -1438,39 +1438,39 @@ msgstr ""
 "Puc demanar al PackageKit que interrompi l'acció actual al més aviat "
 "possible, però la rapidesa amb què respon la petició depèn del PackageKit."
 
-#: src/Zypper.cc:96
+#: src/Zypper.cc:97
 msgid "Ask PackageKit to quit?"
 msgstr "Demano al PackageKit que ho deixi estar?"
 
-#: src/Zypper.cc:105
+#: src/Zypper.cc:106
 msgid "PackageKit is still running (probably busy)."
 msgstr "El PackageKit encara està actiu (probablement ocupat)."
 
-#: src/Zypper.cc:106
+#: src/Zypper.cc:107
 msgid "Try again?"
 msgstr "Ho torno a intentar?"
 
-#: src/Zypper.cc:244 src/Zypper.cc:730 src/commands/basecommand.cc:293
+#: src/Zypper.cc:245 src/Zypper.cc:738
 msgid "Unexpected exception."
 msgstr "Excepció inesperada."
 
 #. translators: %s is "help" or "zypper help" depending on whether
 #. zypper shell is running or not
-#: src/Zypper.cc:291
+#: src/Zypper.cc:292
 #, c-format, boost-format
 msgid "Type '%s' to get command-specific help."
 msgstr "Escriviu \"%s\" per obtenir ajuda sobre una ordre concreta."
 
-#: src/Zypper.cc:311
+#: src/Zypper.cc:312
 #, c-format, boost-format
 msgid "Verbosity: %d"
 msgstr "Verbositat: %d"
 
-#: src/Zypper.cc:320
+#: src/Zypper.cc:321
 msgid "Enforced setting"
 msgstr "Configuració forçada"
 
-#: src/Zypper.cc:343
+#: src/Zypper.cc:344
 msgid ""
 "The /etc/products.d/baseproduct symlink is dangling or missing!\n"
 "The link must point to your core products .prod file in /etc/products.d.\n"
@@ -1480,12 +1480,12 @@ msgstr ""
 
 #. TranslatorExplanation The %s is "--plus-repo"
 #. TranslatorExplanation The %s is "--option-name"
-#: src/Zypper.cc:545 src/Zypper.cc:597
+#: src/Zypper.cc:548 src/Zypper.cc:600
 #, c-format, boost-format
 msgid "The %s option has no effect here, ignoring."
 msgstr "L'opció %s no té cap efecte aquí, ignorant-la."
 
-#: src/Zypper.cc:639
+#: src/Zypper.cc:642
 msgid "Non-option program arguments: "
 msgstr "Arguments del programa sense opcions: "
 
@@ -2264,19 +2264,37 @@ msgstr ""
 msgid "Consider only patches which affect the package management itself."
 msgstr "Considera només els pedaços que afectin el gestor de paquets mateix."
 
-#: src/commands/conditions.cc:19
+#: src/commands/conditions.cc:16
 msgid "Root privileges are required to run this command."
 msgstr "Calen privilegis d'arrel per executar aquesta ordre."
 
-#: src/commands/conditions.cc:47
-msgid ""
-"This is a transactional-server, please use transactional-update to update or "
-"modify the system."
+#: src/commands/conditions.cc:30
+msgid "Transactional system detected:"
 msgstr ""
-"Això és un servidor transaccional. Si us plau, useu transactional-update per "
-"actualitzar o modificar el sistema."
 
-#: src/commands/conditions.cc:49
+#: src/commands/conditions.cc:31
+msgid "A transactional-wrapper command is not installed."
+msgstr ""
+
+#: src/commands/conditions.cc:32
+msgid "The transactional-wrapper command cannot be used in 'zypper shell'."
+msgstr ""
+
+#: src/commands/conditions.cc:33
+msgid ""
+"Using transactional-wrapper is disabled by "
+"'ZYPPER_USE_TRANSACTIONAL_WRAPPER=0'."
+msgstr ""
+
+#: src/commands/conditions.cc:34
+msgid "Please use transactional-update to modify or update the system."
+msgstr ""
+
+#: src/commands/conditions.cc:44
+msgid "Delegating the command to transactional-wrapper."
+msgstr ""
+
+#: src/commands/conditions.cc:57
 msgid ""
 "The target filesystem is mounted as read-only. Please make sure the target "
 "filesystem is writeable."
@@ -3652,8 +3670,8 @@ msgstr ""
 msgid ""
 "If only one argument is used, it must be a URI pointing to a .repo file."
 msgstr ""
-"Si només es fa servir un argument, ha de ser un URI que apunti a un "
-"fitxer .repo."
+"Si només es fa servir un argument, ha de ser un URI que apunti a un fitxer ."
+"repo."
 
 #: src/commands/repos/add.cc:130
 msgid "Specified type is not a valid repository type:"
@@ -5192,12 +5210,12 @@ msgstr ""
 "a $PATH està desactivat a zypper.conf."
 
 #. Currently no concept how to handle global options and ZYPPlock
-#: src/commands/subcommand.cc:626
+#: src/commands/subcommand.cc:632
 msgid "Zypper shell does not support execution of subcommands."
 msgstr "L'intèrpret d'ordres Zypper no té suport per executar subordres."
 
 #. translators: %1%  - is the name of a subcommand
-#: src/commands/subcommand.cc:640
+#: src/commands/subcommand.cc:646
 #, boost-format
 msgid "Subcommand %1% does not support zypper global options."
 msgstr "La subordre %1% no té suport per a opcions globals del zypper."
@@ -5522,8 +5540,8 @@ msgid ""
 "the XPath:/product/register/target entry in /etc/products.d/baseproduct."
 msgstr ""
 "Mostra la cadena d'identificació del sistema operatiu de destinació. La "
-"cadena la defineix l'entrada XPath:/product/register/target a /etc/"
-"products.d/baseproduct."
+"cadena la defineix l'entrada XPath:/product/register/target a /etc/products."
+"d/baseproduct."
 
 #: src/commands/utils/targetos.cc:25
 msgid ""
@@ -6176,8 +6194,8 @@ msgid ""
 msgstr ""
 "Això pot ser degut a una metadada invàlida al repositori, o per un error en "
 "la comprovació de les metadades. En aquest últim cas, o si en dubteu, si us "
-"plau, denuncieu l'error seguint les instruccions que trobareu a http://"
-"en.opensuse.org/Zypper/Troubleshooting"
+"plau, denuncieu l'error seguint les instruccions que trobareu a http://en."
+"opensuse.org/Zypper/Troubleshooting"
 
 #: src/repos.cc:446
 #, c-format, boost-format
@@ -6737,8 +6755,8 @@ msgstr ""
 #: src/solve-commit.cc:620
 #, c-format, boost-format
 msgid ""
-"Check for running processes using deleted libraries is disabled in "
-"zypper.conf. Run '%s' to check manually."
+"Check for running processes using deleted libraries is disabled in zypper."
+"conf. Run '%s' to check manually."
 msgstr ""
 "La comprovació dels processos en execució que usen biblioteques suprimides "
 "està inhabilitada a zypper.conf. Executeu \"%s\" per comprovar-los "
@@ -7624,6 +7642,13 @@ msgstr "Objecte no vàlid"
 msgid "Error"
 msgstr "Error"
 
+#~ msgid ""
+#~ "This is a transactional-server, please use transactional-update to update "
+#~ "or modify the system."
+#~ msgstr ""
+#~ "Això és un servidor transaccional. Si us plau, useu transactional-update "
+#~ "per actualitzar o modificar el sistema."
+
 #, c-format, boost-format
 #~ msgid "'%s' looks like an RPM file. Will try to download it."
 #~ msgstr "'%s' sembla un fitxer RPM. Es provarà de baixar-lo."
@@ -8006,8 +8031,8 @@ msgstr "Error"
 #~ "\t--no-refresh\t\tNo refresquis els repositoris.\n"
 #~ "\t--no-cd\t\t\tIgnora els repositoris de CD/DVD.\n"
 #~ "\t--no-remote\t\tIgnora els repositoris remots.\n"
-#~ "\t--releasever\t\tEstableix el valor de $releasever en tots els "
-#~ "fitxers .repo (per defecte: versió de la distribució)\n"
+#~ "\t--releasever\t\tEstableix el valor de $releasever en tots els fitxers ."
+#~ "repo (per defecte: versió de la distribució)\n"
 
 #~ msgid ""
 #~ "     Target Options:\n"

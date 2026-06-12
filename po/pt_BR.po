@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-13 17:49+0200\n"
+"POT-Creation-Date: 2026-06-12 12:15+0200\n"
 "PO-Revision-Date: 2026-05-18 16:12+0000\n"
 "Last-Translator: Samanta Magalhaes <samanta_texttrans@outlook.com>\n"
 "Language-Team: Portuguese (Brazil) <https://l10n.opensuse.org/projects/"
@@ -161,7 +161,8 @@ msgstr ""
 #. translators: --userdata <STRING>
 #: src/Config.cc:283
 msgid "User defined transaction id used in history and plugins."
-msgstr "ID da transação definida pelo usuário usado no histórico e em plug-ins."
+msgstr ""
+"ID da transação definida pelo usuário usado no histórico e em plug-ins."
 
 #. translators: --quiet, -q
 #: src/Config.cc:291
@@ -1435,7 +1436,7 @@ msgstr "Reinicialização do sistema necessária."
 msgid "Consider to cancel:"
 msgstr "Considere cancelar:"
 
-#: src/Zypper.cc:87
+#: src/Zypper.cc:88
 msgid ""
 "PackageKit is blocking zypper. This happens if you have an updater applet or "
 "other software management application using PackageKit running."
@@ -1444,7 +1445,7 @@ msgstr ""
 "miniaplicativo de atualização ou outro aplicativo de gerenciamento de "
 "software que utiliza o PackageKit em execução."
 
-#: src/Zypper.cc:93
+#: src/Zypper.cc:94
 msgid ""
 "We can ask PackageKit to interrupt the current action as soon as possible, "
 "but it depends on PackageKit how fast it will respond to this request."
@@ -1453,39 +1454,39 @@ msgstr ""
 "possível, mas depende do PackageKit o quão rápido ele irá responder a este "
 "pedido."
 
-#: src/Zypper.cc:96
+#: src/Zypper.cc:97
 msgid "Ask PackageKit to quit?"
 msgstr "Dizer ao PackageKit para sair?"
 
-#: src/Zypper.cc:105
+#: src/Zypper.cc:106
 msgid "PackageKit is still running (probably busy)."
 msgstr "O PackageKit ainda está em execução (provavelmente ocupado)."
 
-#: src/Zypper.cc:106
+#: src/Zypper.cc:107
 msgid "Try again?"
 msgstr "Tentar novamente?"
 
-#: src/Zypper.cc:244 src/Zypper.cc:730 src/commands/basecommand.cc:293
+#: src/Zypper.cc:245 src/Zypper.cc:738
 msgid "Unexpected exception."
 msgstr "Exceção inesperada."
 
 #. translators: %s is "help" or "zypper help" depending on whether
 #. zypper shell is running or not
-#: src/Zypper.cc:291
+#: src/Zypper.cc:292
 #, c-format, boost-format
 msgid "Type '%s' to get command-specific help."
 msgstr "Digite '%s' para ajuda específica sobre o comando."
 
-#: src/Zypper.cc:311
+#: src/Zypper.cc:312
 #, c-format, boost-format
 msgid "Verbosity: %d"
 msgstr "Detalhamento: %d"
 
-#: src/Zypper.cc:320
+#: src/Zypper.cc:321
 msgid "Enforced setting"
 msgstr "Configuração forçada"
 
-#: src/Zypper.cc:343
+#: src/Zypper.cc:344
 msgid ""
 "The /etc/products.d/baseproduct symlink is dangling or missing!\n"
 "The link must point to your core products .prod file in /etc/products.d.\n"
@@ -1496,12 +1497,12 @@ msgstr ""
 
 #. TranslatorExplanation The %s is "--plus-repo"
 #. TranslatorExplanation The %s is "--option-name"
-#: src/Zypper.cc:545 src/Zypper.cc:597
+#: src/Zypper.cc:548 src/Zypper.cc:600
 #, c-format, boost-format
 msgid "The %s option has no effect here, ignoring."
 msgstr "A opção %s não tem efeito aqui, ignorando."
 
-#: src/Zypper.cc:639
+#: src/Zypper.cc:642
 msgid "Non-option program arguments: "
 msgstr "Argumentos sem opção do programa: "
 
@@ -2279,19 +2280,37 @@ msgstr ""
 msgid "Consider only patches which affect the package management itself."
 msgstr "Considere apenas os patches que afetam o gerenciamento de pacotes."
 
-#: src/commands/conditions.cc:19
+#: src/commands/conditions.cc:16
 msgid "Root privileges are required to run this command."
 msgstr "Os privilégios de root são necessários para executar este comando."
 
-#: src/commands/conditions.cc:47
-msgid ""
-"This is a transactional-server, please use transactional-update to update or "
-"modify the system."
+#: src/commands/conditions.cc:30
+msgid "Transactional system detected:"
 msgstr ""
-"Este é um servidor transacional, use a atualização transacional para "
-"atualizar ou modificar o sistema."
 
-#: src/commands/conditions.cc:49
+#: src/commands/conditions.cc:31
+msgid "A transactional-wrapper command is not installed."
+msgstr ""
+
+#: src/commands/conditions.cc:32
+msgid "The transactional-wrapper command cannot be used in 'zypper shell'."
+msgstr ""
+
+#: src/commands/conditions.cc:33
+msgid ""
+"Using transactional-wrapper is disabled by "
+"'ZYPPER_USE_TRANSACTIONAL_WRAPPER=0'."
+msgstr ""
+
+#: src/commands/conditions.cc:34
+msgid "Please use transactional-update to modify or update the system."
+msgstr ""
+
+#: src/commands/conditions.cc:44
+msgid "Delegating the command to transactional-wrapper."
+msgstr ""
+
+#: src/commands/conditions.cc:57
 msgid ""
 "The target filesystem is mounted as read-only. Please make sure the target "
 "filesystem is writeable."
@@ -2445,9 +2464,8 @@ msgid ""
 "Remove packages with specified capabilities. A capability is NAME[.ARCH]"
 "[OP<VERSION>], where OP is one of <, <=, =, >=, >."
 msgstr ""
-"Remove os pacotes com os recursos especificados. Um recurso é "
-"NOME[.ARQUITETURA][OP<VERSÃO>], em que OP é um dos operadores <, <=, =, >=, "
-">."
+"Remove os pacotes com os recursos especificados. Um recurso é NOME[."
+"ARQUITETURA][OP<VERSÃO>], em que OP é um dos operadores <, <=, =, >=, >."
 
 #: src/commands/installremove.cc:104 src/commands/installremove.cc:234
 #: src/utils/messages.cc:53
@@ -4224,8 +4242,8 @@ msgid ""
 "Use the global GPG check setting defined in /etc/zypp/zypp.conf. This is the "
 "default."
 msgstr ""
-"Usar as configurações de verificação GPG globais definidas no /etc/zypp/"
-"zypp.conf. Isto é o padrão."
+"Usar as configurações de verificação GPG globais definidas no /etc/zypp/zypp."
+"conf. Isto é o padrão."
 
 #. translators: -a, --alias
 #: src/commands/reposerviceoptionsets.cc:182
@@ -5205,12 +5223,12 @@ msgstr ""
 "seu $ PATH está desabilitado em zypper.conf."
 
 #. Currently no concept how to handle global options and ZYPPlock
-#: src/commands/subcommand.cc:626
+#: src/commands/subcommand.cc:632
 msgid "Zypper shell does not support execution of subcommands."
 msgstr "O shell do zypper não suporta a execução de subcomandos."
 
 #. translators: %1%  - is the name of a subcommand
-#: src/commands/subcommand.cc:640
+#: src/commands/subcommand.cc:646
 #, boost-format
 msgid "Subcommand %1% does not support zypper global options."
 msgstr "O subcomando %1% não suporta opções globais do zypper."
@@ -6185,8 +6203,8 @@ msgid ""
 msgstr ""
 "Isto pode ter sido causado por metadados inválidos no repositório ou por um "
 "bug no analisador de metadados. Neste último caso, ou em caso de dúvida, "
-"preencha um relatório de bug seguindo as instruções em http://"
-"en.opensuse.org/Zypper/Troubleshooting"
+"preencha um relatório de bug seguindo as instruções em http://en.opensuse."
+"org/Zypper/Troubleshooting"
 
 #: src/repos.cc:446
 #, c-format, boost-format
@@ -6740,8 +6758,8 @@ msgstr ""
 #: src/solve-commit.cc:620
 #, c-format, boost-format
 msgid ""
-"Check for running processes using deleted libraries is disabled in "
-"zypper.conf. Run '%s' to check manually."
+"Check for running processes using deleted libraries is disabled in zypper."
+"conf. Run '%s' to check manually."
 msgstr ""
 "A verificação de processos em execução que usam bibliotecas removidas está "
 "desabilitada em zypper.conf. Execute '%s' para verificar manualmente."
@@ -7616,6 +7634,13 @@ msgstr "Objeto inválido"
 msgid "Error"
 msgstr "Erro"
 
+#~ msgid ""
+#~ "This is a transactional-server, please use transactional-update to update "
+#~ "or modify the system."
+#~ msgstr ""
+#~ "Este é um servidor transacional, use a atualização transacional para "
+#~ "atualizar ou modificar o sistema."
+
 #, c-format, boost-format
 #~ msgid "'%s' looks like an RPM file. Will try to download it."
 #~ msgstr "'%s' se parece com um arquivo RPM. Tentará ser baixado."
@@ -7999,8 +8024,8 @@ msgstr "Erro"
 #~ "\t--no-refresh\t\tNão atualizar os repositórios.\n"
 #~ "\t--no-cd\t\t\tIgnorar os repositórios em CD/DVD.\n"
 #~ "\t--no-remote\t\tIgnorar os repositórios remotos.\n"
-#~ "\t--releasever\t\tDefinir o valor de $releasever em todos os "
-#~ "arquivos .repo (padrão: versão da distribuição)\n"
+#~ "\t--releasever\t\tDefinir o valor de $releasever em todos os arquivos ."
+#~ "repo (padrão: versão da distribuição)\n"
 
 #~ msgid ""
 #~ "     Target Options:\n"
@@ -8584,8 +8609,8 @@ msgstr "Erro"
 #~ "remoto).\n"
 #~ "\n"
 #~ "  Opções do comando:\n"
-#~ "-r, --repo <arquivo.repo>    Apenas outro modo de especificar um "
-#~ "arquivo .repo para leitura.\n"
+#~ "-r, --repo <arquivo.repo>    Apenas outro modo de especificar um arquivo ."
+#~ "repo para leitura.\n"
 #~ "-t, --type <tipo>         Tipo do repositório (%s).\n"
 #~ "-d, --disable             Adicionar o repositório como desabilitado.\n"
 #~ "-c, --check               Testar o URI.\n"
@@ -10196,8 +10221,8 @@ msgstr "Erro"
 #~ "remoto).\n"
 #~ "\n"
 #~ "  Opções do comando:\n"
-#~ "-r, --repo <arquivo.repo>    Apenas outro modo de especificar um "
-#~ "arquivo .repo para leitura.\n"
+#~ "-r, --repo <arquivo.repo>    Apenas outro modo de especificar um arquivo ."
+#~ "repo para leitura.\n"
 #~ "-t, --type <tipo>         Tipo do repositório (%s).\n"
 #~ "-d, --disable             Adicionar o repositório como desabilitado.\n"
 #~ "-c, --check               Testar o URI.\n"
