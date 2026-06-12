@@ -1,4 +1,22 @@
 -------------------------------------------------------------------
+Fri Jun 12 12:15:30 CEST 2026 - ma@suse.de
+
+- Transactional systems: Delegate rw-commands to
+  transactional-wrapper if available (jsc#PED-13680, jsc#PED-15607)
+  On a transactional system where the root filesystem is mounted
+  read-only, zypper commands that modify the system cannot be
+  executed directly.
+  If the system provides a transactional-wrapper utility, zypper
+  will automatically attempt to invoke it. The wrapper
+  transparently executes the zypper command within a new, writable
+  snapshot and manages the lifecycle of that snapshot based on the
+  command's exit status.
+  On transactional systems lacking a transactional-wrapper, users
+  must manually invoke specialized tools -such as
+  transactional-update- to install, update, or remove software.
+- version 1.14.98
+
+-------------------------------------------------------------------
 Wed May 13 17:50:49 CEST 2026 - ma@suse.de
 
 - Add --filter-version-change to zypper lu.
