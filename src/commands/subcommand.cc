@@ -571,21 +571,27 @@ CommandSummaries SubCmd::getSubcommandSummaries()
   return getCommandsummaries( detetctedCommands );
 }
 
-int SubCmd::runCmd( Zypper &zypper )
+
+int SubCmd::doRunAsSubcommand( Zypper & zypper_r, Arglist args_r ) // static
 {
   try {
-    zypper.cleanupForSubcommand();
-    setArg0( ( _options->_detected._path / _options->_detected._name).asString() );
-    RunCommand cmd( _options->_args );
+    zypper_r.cleanupForSubcommand();
+    RunCommand cmd( std::move(args_r) );
     if ( cmd.run() != 0 )
       throw( Out::Error( cmd.exitStatus(), cmd.execError() ) );
     return cmd.exitStatus();
-
-    //handle this error directly for now until the new command flow is implemented
-  } catch ( const Out::Error & error_r ) {
-    error_r.report( zypper );
   }
-  return zypper.exitCode();
+  catch ( const Out::Error & error_r ) {
+    error_r.report( zypper_r ); // also sets the zypper.exitCode
+  }
+  return zypper_r.exitCode();
+}
+
+
+int SubCmd::runCmd( Zypper &zypper )
+{
+  setArg0( ( _options->_detected._path / _options->_detected._name).asString() );
+  return doRunAsSubcommand( zypper, _options->_args );
 }
 
 boost::shared_ptr<SubcommandOptions> SubCmd::subCmdOptions()
