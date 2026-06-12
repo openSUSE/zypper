@@ -80,6 +80,11 @@ public:
 class SubCmd : public ZypperBaseCommand
 {
 public:
+  /** Run an arbitrary command like a SubCmd does (shutdown repos, target and release lock) */
+  using Arglist = SubcommandOptions::Arglist;
+  static int doRunAsSubcommand( Zypper & zypper_r, Arglist args_r );
+
+public:
   SubCmd ( std::vector<std::string> &&commandAliases_r, boost::shared_ptr<SubcommandOptions> options_r = boost::shared_ptr<SubcommandOptions>() );
 
   /** Test whether \c strval_r denotes a subcommand and remember the \ref Detected details.

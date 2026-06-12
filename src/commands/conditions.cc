@@ -7,10 +7,7 @@
 #include "conditions.h"
 #include "global-settings.h"
 #include "Zypper.h"
-
-#include <sys/vfs.h>
-#include <sys/statvfs.h>
-#include <linux/magic.h>
+#include "transactionalwrapper.h"
 
 int NeedsRootCondition::check(std::string &err)
 {
@@ -30,30 +27,37 @@ int NeedsWritableRoot::check(std::string &err_r)
   if ( DryRunSettings::instance().isEnabled() )
     return ZYPPER_EXIT_OK;
 
-  struct statfs fsinfo;
-  memset( &fsinfo, 0, sizeof(struct statfs) );
+  static const std::string msgTS           {_("Transactional System detected:")};
+  static const std::string msgNoWrapper    {_("A transactional-wrapper command is not installed.")};
+  static const std::string msgNoWrapperSH  {_("The transactional-wrapper command can not be used in 'zypper shell'.")};
+  static const std::string msgNoWrapperEnv {_("Using transactional-wrapper is disabled by 'ZYPPER_USE_TRANSACTIONAL_WRAPPER=0'.")};
+  static const std::string msgUseTU        {_("Please use transactional-update to update or modify the system.")};
 
-  int errCode = 0;
-  do {
-    errCode = statfs( gopts.root_dir.c_str(), &fsinfo );
-  } while ( errCode == -1 && errno == EINTR );
-
-  if ( !errCode ) {
-    if ( fsinfo.f_flags & ST_RDONLY ) {
-
-      bool isTransactionalServer = ( fsinfo.f_type == BTRFS_SUPER_MAGIC && PathInfo( "/usr/sbin/transactional-update" ).isFile() );
-
-      if ( isTransactionalServer && !gopts.changedRoot ) {
-        err_r = _("This is a transactional-server, please use transactional-update to update or modify the system.");
+  if ( readOnlyRootAt( gopts.root_dir ) ) {
+    if ( gopts.root_dir == "/" && TransactionalWrapper::isTransactionalSystem() ) {
+      if ( TransactionalWrapper::hasTransactionalWrapper() ) {
+        if ( TransactionalWrapper::mayUseTransactionalWrapper() ) {
+          if ( zypper.runningShell() ) {
+            err_r = str::sprintln( msgTS, msgNoWrapperSH );
+            return ZYPPER_EXIT_ERR_PRIVILEGES;
+          } else {
+            zypper.out().info( MSG_WARNINGString( str::sprintln( msgTS, _("Delegating the command to transactional-wrapper.") ) ).str() );
+            //Exception will be handled and will run transactional-wrapper
+            ZYPP_THROW( TransactionalWrapperException() );
+          }
+        } else {
+          err_r = str::sprintln( msgTS, msgNoWrapperEnv, msgUseTU );
+          return ZYPPER_EXIT_ERR_PRIVILEGES;
+        }
       } else {
-        err_r = _("The target filesystem is mounted as read-only. Please make sure the target filesystem is writeable.");
+        err_r = str::sprintln( msgTS, msgNoWrapper, msgUseTU );
+        return ZYPPER_EXIT_ERR_PRIVILEGES;
       }
-
-      ERR << err_r << endl;
+    } else {
+      err_r = _("The target filesystem is mounted as read-only. Please make sure the target filesystem is writeable.");
       return ZYPPER_EXIT_ERR_PRIVILEGES;
     }
-  } else {
-    WAR << "Checking if " << gopts.root_dir << " is mounted read only failed with errno : " << errno << std::endl;
   }
+
   return ZYPPER_EXIT_OK;
 }

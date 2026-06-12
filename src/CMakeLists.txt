@@ -39,6 +39,7 @@ SET (zypper_HEADERS
   commands/optionsets.h
   commands/commandhelpformatter.h
   commands/conditions.h
+  commands/transactionalwrapper.h
   commands/basecommand.h
   commands/locks.h
   commands/locks/common.h
@@ -125,6 +126,7 @@ SET( zypper_SRCS
   commands/optionsets.cc
   commands/commandhelpformatter.cc
   commands/conditions.cc
+  commands/transactionalwrapper.cc
   commands/basecommand.cc
   commands/locks/common.cc
   commands/locks/add.cc

@@ -57,6 +57,7 @@
 #include "utils/flags/zyppflags.h"
 #include "utils/flags/exceptions.h"
 
+#include "commands/transactionalwrapper.h"
 #include "commands/search/search-packages-hinthack.h"
 #include "commands/help.h"
 #include "utils/console.h"
@@ -723,6 +724,11 @@ void Zypper::doCommand( int cmdArgc, char **cmdArgv, int firstFlag )
   {
     error_r.report( *this );
     report_a_bug( out() );
+  }
+  catch ( const TransactionalWrapperException & ex )
+  {
+    ZYPP_CAUGHT( ex );
+    setExitCode( TransactionalWrapper::run() );
   }
   catch ( const Exception & ex )
   {

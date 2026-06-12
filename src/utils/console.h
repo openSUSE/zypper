@@ -11,6 +11,7 @@
 #include <zypp-tui/utils/console.h>
 
 #if LEGACY(173814)  // ztui::readline_getline has no custom prompt in older libzypp
+#include <string>
 #include <readline/readline.h>
 #include <readline/history.h>
 inline std::string readline_getline( std::string prompt_r = " >" )
