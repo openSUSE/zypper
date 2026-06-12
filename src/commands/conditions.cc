@@ -27,11 +27,11 @@ int NeedsWritableRoot::check(std::string &err_r)
   if ( DryRunSettings::instance().isEnabled() )
     return ZYPPER_EXIT_OK;
 
-  static const std::string msgTS           {_("Transactional System detected:")};
+  static const std::string msgTS           {_("Transactional system detected:")};
   static const std::string msgNoWrapper    {_("A transactional-wrapper command is not installed.")};
-  static const std::string msgNoWrapperSH  {_("The transactional-wrapper command can not be used in 'zypper shell'.")};
+  static const std::string msgNoWrapperSH  {_("The transactional-wrapper command cannot be used in 'zypper shell'.")};
   static const std::string msgNoWrapperEnv {_("Using transactional-wrapper is disabled by 'ZYPPER_USE_TRANSACTIONAL_WRAPPER=0'.")};
-  static const std::string msgUseTU        {_("Please use transactional-update to update or modify the system.")};
+  static const std::string msgUseTU        {_("Please use transactional-update to modify or update the system.")};
 
   if ( readOnlyRootAt( gopts.root_dir ) ) {
     if ( gopts.root_dir == "/" && TransactionalWrapper::isTransactionalSystem() ) {
