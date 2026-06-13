@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-06-12 12:15+0200\n"
-"PO-Revision-Date: 2026-05-14 17:12+0000\n"
+"PO-Revision-Date: 2026-06-13 12:12+0000\n"
 "Last-Translator: Freek de Kruijf <freek@opensuse.org>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/zypper/master/nl/>\n"
 "Language: nl\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.17.1\n"
+"X-Generator: Weblate 2026.6.1\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -2321,29 +2321,34 @@ msgstr "Root-rechten zijn vereist om deze opdracht uit te voeren."
 
 #: src/commands/conditions.cc:30
 msgid "Transactional system detected:"
-msgstr ""
+msgstr "Transactioneel systeem gedetecteerd:"
 
 #: src/commands/conditions.cc:31
 msgid "A transactional-wrapper command is not installed."
-msgstr ""
+msgstr "Een commando transactional-wrapper is niet geïnstalleerd."
 
 #: src/commands/conditions.cc:32
 msgid "The transactional-wrapper command cannot be used in 'zypper shell'."
 msgstr ""
+"Het commando transactional-wrapper kan niet gebruikt worden in 'zypper "
+"shell'."
 
 #: src/commands/conditions.cc:33
 msgid ""
 "Using transactional-wrapper is disabled by "
 "'ZYPPER_USE_TRANSACTIONAL_WRAPPER=0'."
 msgstr ""
+"Transactional-wrapper gebruiken is uitgeschakeld door "
+"'ZYPPER_USE_TRANSACTIONAL_WRAPPER=0'."
 
 #: src/commands/conditions.cc:34
 msgid "Please use transactional-update to modify or update the system."
 msgstr ""
+"Gebruik transactional-update om het systeem te wijzigen of bij te werken."
 
 #: src/commands/conditions.cc:44
 msgid "Delegating the command to transactional-wrapper."
-msgstr ""
+msgstr "Het commando delegeren naar transactional-wrapper."
 
 #: src/commands/conditions.cc:57
 msgid ""
