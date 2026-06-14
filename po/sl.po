@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-06-12 12:15+0200\n"
-"PO-Revision-Date: 2026-03-10 19:04+0000\n"
+"PO-Revision-Date: 2026-06-14 20:12+0000\n"
 "Last-Translator: Jure Repinc <jlp@holodeck1.com>\n"
 "Language-Team: Slovenian <https://l10n.opensuse.org/projects/zypper/master/"
 "sl/>\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
 "n%100==4 ? 2 : 3;\n"
-"X-Generator: Weblate 5.16.2\n"
+"X-Generator: Weblate 2026.6.1\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -2471,29 +2471,31 @@ msgstr "Za zagon tega ukaza so zahtevana dovoljenja uporabnika root."
 
 #: src/commands/conditions.cc:30
 msgid "Transactional system detected:"
-msgstr ""
+msgstr "Zaznan je transakcijski sistem:"
 
 #: src/commands/conditions.cc:31
 msgid "A transactional-wrapper command is not installed."
-msgstr ""
+msgstr "Orodje transactional-wrapper ni nameščeno."
 
 #: src/commands/conditions.cc:32
 msgid "The transactional-wrapper command cannot be used in 'zypper shell'."
-msgstr ""
+msgstr "Ukaza transactional-wrapper ni moč uporabljati v »zypper shell«."
 
 #: src/commands/conditions.cc:33
 msgid ""
 "Using transactional-wrapper is disabled by "
 "'ZYPPER_USE_TRANSACTIONAL_WRAPPER=0'."
 msgstr ""
+"Uporaba ukaza transactional-wrapper je onemogočena z »"
+"ZYPPER_USE_TRANSACTIONAL_WRAPPER=0«."
 
 #: src/commands/conditions.cc:34
 msgid "Please use transactional-update to modify or update the system."
-msgstr ""
+msgstr "Za spremembo ali posodobitev sistema uporabite transactional-update."
 
 #: src/commands/conditions.cc:44
 msgid "Delegating the command to transactional-wrapper."
-msgstr ""
+msgstr "Ukaz bo delegiran orodju transactional-wrapper."
 
 #: src/commands/conditions.cc:57
 msgid ""
@@ -2827,7 +2829,7 @@ msgstr "Veljavne vrednosti: %1%"
 
 #: src/commands/listupdates.cc:50
 msgid "LEVEL"
-msgstr ""
+msgstr "STOPNJA"
 
 #. translators: --filter-version-change
 #: src/commands/listupdates.cc:53
@@ -2836,6 +2838,10 @@ msgid ""
 "all), 'rebuild' (hide rebuild-only changes), 'package' (hide packaging-only "
 "changes, i.e. same upstream version)."
 msgstr ""
+"Filtrira posodobitve glede na pomembnost spremembe različice. STOPNJA: »none"
+"« (privzeto, pokaže vse), »rebuild« (skrije spremembe, ki so samo ponovna "
+"izgradnja), »package« (skrije spremembe zaradi pakiranja, t.j. različica je "
+"enaka)."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/addlocalecmd.cc:20
