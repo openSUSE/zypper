@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-06-12 12:15+0200\n"
-"PO-Revision-Date: 2026-06-16 15:12+0000\n"
+"PO-Revision-Date: 2026-06-17 15:12+0000\n"
 "Last-Translator: Peter Andreasen <noesgaard@gmail.com>\n"
 "Language-Team: Danish <https://l10n.opensuse.org/projects/zypper/master/da/>"
 "\n"
@@ -3345,7 +3345,7 @@ msgstr ""
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/query/info.cc:19
 msgid "info (if) [OPTIONS] <NAME>[-<VERSION>[-<RELEASE>]] ..."
-msgstr ""
+msgstr "info (if) [TILVALG] <NAVN>[-<VERSION>[-<UDGAVE>]] ..."
 
 #. translators: command summary: info, if
 #: src/commands/query/info.cc:21
@@ -3371,6 +3371,9 @@ msgid ""
 "package is shown. Note that both the version and release numbers must always "
 "match exactly."
 msgstr ""
+"Hvis der ikke angives en begrænsning på versionen, så vises den bedste "
+"tilgængelige pakke. Bemærk at nummeret på både version og udgave skal matche "
+"præcist."
 
 #. translators: -s, --match-substrings
 #: src/commands/query/info.cc:65
@@ -3415,7 +3418,7 @@ msgstr "Vis foreslår."
 #. translators: --enhances
 #: src/commands/query/info.cc:98
 msgid "Show enhances."
-msgstr ""
+msgstr "Vis forbedringer."
 
 #: src/commands/query/info.cc:112 src/utils/messages.cc:70
 msgid "Required argument missing."
@@ -3490,17 +3493,17 @@ msgstr "Vis alle tilgængelige mønstre i angivne softwarekilder."
 #: src/commands/query/packages.cc:35
 msgid ""
 "Show installed packages which were automatically selected by the resolver."
-msgstr ""
+msgstr "Vis installerede pakker som blev valgt automatisk af systemet."
 
 #. translators: --userinstalled
 #: src/commands/query/packages.cc:39
 msgid "Show installed packages which were explicitly selected by the user."
-msgstr ""
+msgstr "Vis installerede pakker, som blev tilvalgt af brugeren."
 
 #. translators: --system
 #: src/commands/query/packages.cc:43
 msgid "Show installed packages which are not provided by any repository."
-msgstr ""
+msgstr "Vis installerede pakker, som ikke tilhører noget repo."
 
 #. translators: --orphaned
 #: src/commands/query/packages.cc:47
@@ -3508,6 +3511,8 @@ msgid ""
 "Show system packages which are orphaned (without repository and without "
 "update candidate)."
 msgstr ""
+"Vis systempakker, som er forældreløse (uden repo og uden mulige opdateringer)"
+"."
 
 #. translators: --suggested
 #: src/commands/query/packages.cc:51
@@ -3800,7 +3805,7 @@ msgstr "Genopfrisk"
 #. translators: 'zypper repos' column - whether keep-packages is enabled for the repository
 #: src/commands/repos/list.cc:266
 msgid "Keep"
-msgstr ""
+msgstr "Behold"
 
 #: src/commands/repos/list.cc:357
 msgid "No repositories defined."
@@ -4210,7 +4215,7 @@ msgstr "Vis også flaget for autogenopfrisk."
 #. translators: -k, --keep-packages
 #: src/commands/reposerviceoptionsets.cc:191
 msgid "Show also the keep-packages flag."
-msgstr ""
+msgstr "Vis også 'keep-packages' tilvalget."
 
 #. translators: -u, --uri
 #: src/commands/reposerviceoptionsets.cc:201
