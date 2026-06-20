@@ -84,6 +84,7 @@ struct ZypperCommand
   static const ZypperCommand MOO;
 
   static const ZypperCommand CONFIGTEST;
+  static const ZypperCommand CONFIGCHECK;
 
   //!@{
   static const ZypperCommand RUG_PATCH_INFO;
@@ -161,6 +162,7 @@ struct ZypperCommand
     MOO_e,
 
     CONFIGTEST_e,
+    CONFIGCHECK_e,
 
     RUG_PATCH_INFO_e,
     RUG_PATTERN_INFO_e,
