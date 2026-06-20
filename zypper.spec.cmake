@@ -81,6 +81,17 @@ BuildArch:      noarch
 %description log
 CLI for accessing the zypper logfile
 
+%package mark
+Summary:        CLI for accessing the autoinstall flag
+Group:          System/Packages
+Requires:       %{_bindir}/perl
+Supplements:    zypper
+BuildArch:      noarch
+
+%description mark
+CLI for accessing the zypper autoinstall flag
+
+
 %package aptitude
 Summary:        aptitude compatibility with zypper
 Group:          System/Packages
@@ -211,6 +222,9 @@ done
 %files log
 %{_sbindir}/zypper-log
 %{_mandir}/man8/zypper-log.8%{?ext_man}
+
+%files mark
+%{_sbindir}/zypper-mark
 
 %files aptitude
 %{_bindir}/aptitude

@@ -1,0 +1,62 @@
+#!/usr/bin/perl -w
+use strict;
+use POSIX;
+
+my $dbfile = '/var/lib/zypp/AutoInstalled';
+my $tag = shift;
+my @pkgs = @ARGV;
+if(!$tag or not ($tag eq "auto" or $tag eq "manual") or scalar(@ARGV)<1) {
+    print "usage: $0 auto|manual PKG1 PKG2 ...\n";
+    exit 1;
+}
+
+open(my $fd, '<', $dbfile) or die "error opening $dbfile: $!";
+local $\ = "\n";
+my @entries = <$fd>;
+for my $line (@entries) {
+    chomp($line);
+}
+close($fd);
+
+sub is_listed($)
+{ my $pkg = shift;
+    my $i = 0;
+    foreach my $line (@entries) {
+        $i++;
+        if($line eq $pkg) { return $i }
+    }
+    return 0;
+}
+
+sub mark_auto($)
+{ my $pkg = shift;
+    if(is_listed($pkg)) {
+        print STDERR "INFO: $pkg is already marked as auto";
+        return
+    }
+    push(@entries, "$pkg\n"); # FIXME: does it need to be sorted?
+}
+
+sub mark_manual($)
+{ my $pkg = shift;
+    my $index = is_listed($pkg);
+    unless($index) {
+        print STDERR "INFO: $pkg is not marked as auto";
+        return
+    }
+    # use splice to remove entry
+    splice(@entries, $index-1, 1);
+}
+
+for my $pkg (@pkgs) {
+    if($tag eq "auto") { mark_auto($pkg) }
+    elsif($tag eq "manual") { mark_manual($pkg) }
+    else { die "this should never happen" }
+}
+
+open($fd, '>', $dbfile) or die "error writing $dbfile: $!";
+my $time = asctime(localtime); chomp($time);
+for my $line (@entries) {
+    $line =~ s/^(# AutoInstalled generated).*/$1 $time/;
+    print $fd $line;
+}
