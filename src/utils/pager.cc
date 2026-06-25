@@ -11,6 +11,7 @@
 #include <errno.h>
 #include <sys/wait.h> //for wait()
 #include <iterator>
+#include <vector>     // Added for argv handling
 
 #include <zypp-core/base/Logger.h>
 #include <zypp-core/base/String.h>
@@ -28,7 +29,7 @@
 static std::string pager_help_exit( const std::string & pager )
 {
   std::string ret;
-  if ( pager.substr( pager.size()-4, 4 ) == "less" )
+  if ( pager.size() >= 4 && pager.substr( pager.size()-4, 4 ) == "less" )
     ret = str::form(_("Press '%c' to exit the pager."), 'q' );
   return ret;
 }
@@ -38,9 +39,9 @@ static std::string pager_help_exit( const std::string & pager )
 static std::string pager_help_navigation( const std::string & pager )
 {
   std::string ret;
-  if ( pager.rfind("less") == pager.size() - 5 )
+  if ( pager.rfind("less") != std::string::npos )
     ret = _("Use arrows or pgUp/pgDown keys to scroll the text by lines or pages.");
-  else if ( pager.rfind("more") == pager.size() - 5 )
+  else if ( pager.rfind("more") != std::string::npos )
     ret = _("Use the Enter or Space key to scroll the text by lines or pages.");
   return ret;
 }
@@ -52,10 +53,35 @@ static bool show_in_pager( const std::string & pager, const Pathname & file )
   if ( Zypper::instance().config().non_interactive )
     return true;
 
-  std::ostringstream cmdline;
-  cmdline << "'" << pager << "' '" << file << "'";
+  // Safely tokenize the pager command to handle whitespaces and flags (e.g., "less -R")
+  std::vector<std::string> args;
+  std::istringstream iss(pager);
+  std::string token;
+  while (iss >> token)
+  {
+    args.push_back(token);
+  }
 
-  std::string errmsg;
+  if (args.empty())
+  {
+    WAR << "Pager command is empty" << endl;
+    return false;
+  }
+
+  // Preserve the binary path/name for the hint helpers before adding the target file
+  std::string pager_binary = args[0];
+
+  // Append target file path safely as a standalone argument
+  args.push_back(file.asString());
+
+  // Convert std::vector<std::string> to a null-terminated char* array for execvp
+  std::vector<char*> argv;
+  for (auto &arg : args)
+  {
+    argv.push_back(&arg[0]);
+  }
+  argv.push_back(nullptr);
+
   pid_t pid;
   switch( pid = fork() )
   {
@@ -64,10 +90,10 @@ static bool show_in_pager( const std::string & pager, const Pathname & file )
     return false;
 
   case 0:
-    execlp( "sh", "sh", "-c", cmdline.str().c_str(), (char *)0 );
-    WAR << "exec failed with " << strerror(errno) << endl;
+    // Execute directly without a shell interpreter wrap
+    execvp( argv[0], argv.data() );
+    WAR << "execvp failed with " << strerror(errno) << endl;
     // exit, cannot return false here, because this is another process
-    //! \todo FIXME different exit code + message
     exit(ZYPPER_EXIT_ERR_BUG);
 
   default:
@@ -121,6 +147,11 @@ bool show_text_in_pager( const std::string & text, const std::string & intro )
   if ( envpager && *envpager )
     pager = envpager;
 
+  // Extract just the binary name/path token for accurate help text hints
+  std::string pager_binary;
+  std::istringstream iss(pager);
+  iss >> pager_binary;
+
   filesystem::TmpFile tfile;
   std::ofstream os( tfile.path().c_str() );
 
@@ -128,16 +159,16 @@ bool show_text_in_pager( const std::string & text, const std::string & intro )
   if (!intro.empty())
     os << intro << endl;
 
-  // navigaion hint
-  std::string help( pager_help_navigation( pager ) );
+  // navigation hint - pass the exact binary name token
+  std::string help( pager_help_navigation( pager_binary ) );
   if ( !help.empty() )
     os << "(" << help << ")" << endl << endl;
 
   // the text
   os << text;
 
-  // exit hint
-  help = pager_help_exit( pager );
+  // exit hint - pass the exact binary name token
+  help = pager_help_exit( pager_binary );
   if ( !help.empty() )
     os << endl << endl << "(" << help << ")";
   os.close();
@@ -154,6 +185,11 @@ bool show_file_in_pager( const Pathname & file, const std::string & intro )
   if ( envpager && *envpager )
     pager = envpager;
 
+  // Extract just the binary name/path token for accurate help text hints
+  std::string pager_binary;
+  std::istringstream iss(pager);
+  iss >> pager_binary;
+
   filesystem::TmpFile tfile;
   std::ofstream os( tfile.path().c_str() );
 
@@ -161,8 +197,8 @@ bool show_file_in_pager( const Pathname & file, const std::string & intro )
   if ( !intro.empty() )
     os << intro << endl;
 
-  // navigaion hint
-  std::string help( pager_help_navigation( pager ) );
+  // navigation hint - pass the exact binary name token
+  std::string help( pager_help_navigation( pager_binary ) );
   if ( !help.empty() )
     os << "(" << help << ")" << endl << endl;
 
@@ -178,8 +214,8 @@ bool show_file_in_pager( const Pathname & file, const std::string & intro )
   }
   is.close();
 
-  // exit hint
-  help = pager_help_exit( pager );
+  // exit hint - pass the exact binary name token
+  help = pager_help_exit( pager_binary );
   if ( !help.empty() )
     os << endl << endl << "(" << help << ")";
   os.close();
@@ -188,3 +224,4 @@ bool show_file_in_pager( const Pathname & file, const std::string & intro )
 }
 
 // vim: set ts=2 sts=2 sw=2 et ai:
+
