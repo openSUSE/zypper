@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-06-12 12:15+0200\n"
-"PO-Revision-Date: 2026-05-15 11:12+0000\n"
-"Last-Translator: Emily Dong <Emily.Dong@excel-gits.com>\n"
+"PO-Revision-Date: 2026-06-25 11:12+0000\n"
+"Last-Translator: Grace Yu <grace.yu@excel-gits.com>\n"
 "Language-Team: Chinese (Taiwan) <https://l10n.opensuse.org/projects/zypper/"
 "master/zh_TW/>\n"
 "Language: zh_TW\n"
@@ -22,7 +22,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.17.1\n"
+"X-Generator: Weblate 2026.6.1\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -2063,29 +2063,29 @@ msgstr "執行此指令需要 Root 權限。"
 
 #: src/commands/conditions.cc:30
 msgid "Transactional system detected:"
-msgstr ""
+msgstr "偵測到交易型系統："
 
 #: src/commands/conditions.cc:31
 msgid "A transactional-wrapper command is not installed."
-msgstr ""
+msgstr "未安裝 transactional-wrapper 指令。"
 
 #: src/commands/conditions.cc:32
 msgid "The transactional-wrapper command cannot be used in 'zypper shell'."
-msgstr ""
+msgstr "無法在 'zypper shell' 中使用 transactional-wrapper 指令。"
 
 #: src/commands/conditions.cc:33
 msgid ""
 "Using transactional-wrapper is disabled by "
 "'ZYPPER_USE_TRANSACTIONAL_WRAPPER=0'."
-msgstr ""
+msgstr "'ZYPPER_USE_TRANSACTIONAL_WRAPPER=0' 已停用 transactional-wrapper。"
 
 #: src/commands/conditions.cc:34
 msgid "Please use transactional-update to modify or update the system."
-msgstr ""
+msgstr "請使用 transactional-update 對系統執行修改或更新操作。"
 
 #: src/commands/conditions.cc:44
 msgid "Delegating the command to transactional-wrapper."
-msgstr ""
+msgstr "將該指令委託給 transactional-wrapper 處理。"
 
 #: src/commands/conditions.cc:57
 msgid ""
