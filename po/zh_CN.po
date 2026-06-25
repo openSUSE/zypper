@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-06-12 12:15+0200\n"
-"PO-Revision-Date: 2026-05-15 11:12+0000\n"
-"Last-Translator: Zhao Qiang 赵强 <qzhao@suse.com>\n"
+"PO-Revision-Date: 2026-06-25 11:12+0000\n"
+"Last-Translator: Grace Yu <grace.yu@excel-gits.com>\n"
 "Language-Team: Chinese (China) <https://l10n.opensuse.org/projects/zypper/"
 "master/zh_CN/>\n"
 "Language: zh_CN\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.17.1\n"
+"X-Generator: Weblate 2026.6.1\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -1463,7 +1463,7 @@ msgstr "正在接纳文件 '%s'，该文件以未知密钥 '%s' 签署。"
 #, c-format, boost-format
 msgid ""
 "Accepting file '%s' from repository '%s' signed with an unknown key '%s'."
-msgstr "正在接纳文件 '%s'（来自软件源 '%s'），该文件以未知密钥 '%s' 签署。"
+msgstr "正在接受文件 '%s'（来自储存库 '%s'），该文件以未知密钥 '%s' 签署。"
 
 #. translator: %1% is a file name, %2% is a gpg key ID
 #: src/callbacks/keyring.h:214
@@ -2063,29 +2063,29 @@ msgstr "需要 Root 权限才可运行此命令。"
 
 #: src/commands/conditions.cc:30
 msgid "Transactional system detected:"
-msgstr ""
+msgstr "检测到事务型系统："
 
 #: src/commands/conditions.cc:31
 msgid "A transactional-wrapper command is not installed."
-msgstr ""
+msgstr "未安装 transactional-wrapper 命令。"
 
 #: src/commands/conditions.cc:32
 msgid "The transactional-wrapper command cannot be used in 'zypper shell'."
-msgstr ""
+msgstr "Transactional-wrapper 命令无法在 'zypper shell' 中使用。"
 
 #: src/commands/conditions.cc:33
 msgid ""
 "Using transactional-wrapper is disabled by "
 "'ZYPPER_USE_TRANSACTIONAL_WRAPPER=0'."
-msgstr ""
+msgstr "'ZYPPER_USE_TRANSACTIONAL_WRAPPER=0' 已禁用 transactional-wrapper。"
 
 #: src/commands/conditions.cc:34
 msgid "Please use transactional-update to modify or update the system."
-msgstr ""
+msgstr "请使用 transactional-update 对系统执行修改或更新操作。"
 
 #: src/commands/conditions.cc:44
 msgid "Delegating the command to transactional-wrapper."
-msgstr ""
+msgstr "将该命令交由 transactional-wrapper 处理。"
 
 #: src/commands/conditions.cc:57
 msgid ""
@@ -5650,7 +5650,7 @@ msgstr "是"
 msgid ""
 "Repository priorities are without effect. All enabled repositories share the "
 "same priority."
-msgstr "软件源优先级无效。所有已启用的软件源将使用相同的优先级。"
+msgstr "储存库优先级无效。所有已启用的储存库将使用相同的优先级。"
 
 #: src/repos.cc:184
 msgid "Repository priorities in effect:"
