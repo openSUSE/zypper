@@ -1,6 +1,7 @@
 #include <tests/lib/TestSetup.h>
 #include "commands/search/search.h"
 #include "commands/query.h"
+#include "utils/flags/flagtypes.h"
 
 using namespace zypp;
 
@@ -46,6 +47,40 @@ void runSearch( ZypperBaseCommand & cmd, const std::vector<std::string> & positi
   BOOST_CHECK_EQUAL( Zypper::instance().exitCode(), 0 );
   BOOST_CHECK_EQUAL( Zypper::instance().exitInfoCode(), exitInfoExpect );
 }
+
+void parseCommandArguments( ZypperBaseCommand & cmd, const std::vector<std::string> & args )
+{
+  std::vector<std::string> rawArgs;
+  rawArgs.push_back( cmd.command().front() );
+  rawArgs.insert( rawArgs.end(), args.begin(), args.end() );
+
+  std::vector<char *> argv;
+  for ( std::string & arg : rawArgs )
+    argv.push_back( const_cast<char *>( arg.c_str() ) );
+
+  cmd.reset();
+  const int firstPositional = cmd.parseArguments( Zypper::instance(), argv.size(), argv.data() );
+
+  std::vector<std::string> positionalArgs;
+  for ( int i = firstPositional; i < static_cast<int>( rawArgs.size() ); ++i )
+    positionalArgs.push_back( rawArgs[i] );
+
+  cmd.setPositionalArguments( positionalArgs );
+}
+
+void runSearchWithArgs( ZypperBaseCommand & cmd, const std::vector<std::string> & args, int exitInfoExpect, int exitInfoPre = 0 )
+{
+  Zypper::instance().clearExitInfoCode();  // The only way to reset! setExitInfoCode remembers the fist code set.
+  if ( exitInfoPre )
+    Zypper::instance().setExitInfoCode( exitInfoPre );
+
+  parseCommandArguments( cmd, args );
+
+  int res = cmd.run( Zypper::instance() );
+  BOOST_CHECK_EQUAL( res, 0 );
+  BOOST_CHECK_EQUAL( Zypper::instance().exitCode(), 0 );
+  BOOST_CHECK_EQUAL( Zypper::instance().exitInfoCode(), exitInfoExpect );
+}
 void runBasiccSearchTest( ZypperBaseCommand && cmd )
 {
   Zypper & zypper { Zypper::instance() };
@@ -66,4 +101,33 @@ BOOST_AUTO_TEST_CASE( basic )
   // search/info should behave similar
   runBasiccSearchTest( SearchCmd({ "search" }) );
   runBasiccSearchTest( InfoCmd({ "info" }) );
+}
+
+
+BOOST_AUTO_TEST_CASE( date_filters )
+{
+  Zypper::instance().configNoConst().ignore_unknown = false;
+
+  {
+    SearchCmd cmd({ "search" });
+    BOOST_REQUIRE_THROW(
+      parseCommandArguments( cmd, { "--build-after", "01-01-2024", "zypper" } ),
+      zypp::ZyppFlags::InvalidValueException
+    );
+  }
+
+  {
+    SearchCmd cmd({ "search" });
+    runSearchWithArgs( cmd, { "--build-after", "1900-01-01", "zypper" }, 0 );
+  }
+
+  {
+    SearchCmd cmd({ "search" });
+    runSearchWithArgs( cmd, { "--build-after", "2999-01-01", "zypper" }, 104 );
+  }
+
+  {
+    SearchCmd cmd({ "search" });
+    runSearchWithArgs( cmd, { "--install-after", "1900-01-01", "zypper" }, 104 );
+  }
 }
