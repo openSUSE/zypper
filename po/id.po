@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-06-12 12:15+0200\n"
-"PO-Revision-Date: 2026-03-20 06:04+0000\n"
+"PO-Revision-Date: 2026-06-26 04:12+0000\n"
 "Last-Translator: Arif Budiman <arifpedia@gmail.com>\n"
 "Language-Team: Indonesian <https://l10n.opensuse.org/projects/zypper/master/"
 "id/>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.16.2\n"
+"X-Generator: Weblate 2026.6.1\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -2173,29 +2173,34 @@ msgstr "Hak akses root diperlukan untuk menjalankan perintah ini."
 
 #: src/commands/conditions.cc:30
 msgid "Transactional system detected:"
-msgstr ""
+msgstr "Sistem transactional terdeteksi:"
 
 #: src/commands/conditions.cc:31
 msgid "A transactional-wrapper command is not installed."
-msgstr ""
+msgstr "Perintah transactional-wrapper tidak terpasang."
 
 #: src/commands/conditions.cc:32
 msgid "The transactional-wrapper command cannot be used in 'zypper shell'."
 msgstr ""
+"Perintah transactional-wrapper tidak dapat digunakan di dalam 'zypper shell'."
 
 #: src/commands/conditions.cc:33
 msgid ""
 "Using transactional-wrapper is disabled by "
 "'ZYPPER_USE_TRANSACTIONAL_WRAPPER=0'."
 msgstr ""
+"Penggunaan transactional-wrapper dinonaktifkan oleh "
+"'ZYPPER_USE_TRANSACTIONAL_WRAPPER=0'."
 
 #: src/commands/conditions.cc:34
 msgid "Please use transactional-update to modify or update the system."
 msgstr ""
+"Silakan gunakan transactional-update untuk memodifikasi atau memperbarui "
+"sistem."
 
 #: src/commands/conditions.cc:44
 msgid "Delegating the command to transactional-wrapper."
-msgstr ""
+msgstr "Perintah dialihkan ke transactional-wrapper."
 
 #: src/commands/conditions.cc:57
 msgid ""
@@ -2538,7 +2543,7 @@ msgstr "Nilai valid: %1%"
 
 #: src/commands/listupdates.cc:50
 msgid "LEVEL"
-msgstr ""
+msgstr "LEVEL"
 
 #. translators: --filter-version-change
 #: src/commands/listupdates.cc:53
@@ -2547,6 +2552,10 @@ msgid ""
 "all), 'rebuild' (hide rebuild-only changes), 'package' (hide packaging-only "
 "changes, i.e. same upstream version)."
 msgstr ""
+"Filter pembaruan berdasarkan tingkat signifikansi perubahan versi. LEVEL: "
+"'none' (default, tampilkan semua), 'rebuild' (sembunyikan perubahan khusus "
+"rebuild), 'package' (sembunyikan perubahan khusus packaging, yaitu versi "
+"upstream yang sama)."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/addlocalecmd.cc:20
