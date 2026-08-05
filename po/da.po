@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-06-12 12:15+0200\n"
-"PO-Revision-Date: 2026-06-17 15:12+0000\n"
+"PO-Revision-Date: 2026-08-05 15:13+0000\n"
 "Last-Translator: Peter Andreasen <noesgaard@gmail.com>\n"
 "Language-Team: Danish <https://l10n.opensuse.org/projects/zypper/master/da/>"
 "\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2026.6.1\n"
+"X-Generator: Weblate 2026.8\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -4379,7 +4379,7 @@ msgstr "Søg efter pakker som foreslår søgestrengene."
 #. translators: --enhances
 #: src/commands/search/search.cc:145
 msgid "Search for packages which enhance the search strings."
-msgstr ""
+msgstr "Søg efter pakker, som udvider søgestrengene."
 
 #. translators: --provides-pkg
 #: src/commands/search/search.cc:149
@@ -4450,6 +4450,8 @@ msgid ""
 "Search for all packages that enhance any of the provides of the package(s) "
 "matched by the input parameters."
 msgstr ""
+"Søg efter alle pakker, der forbedrer en af de funktionaliteter (provides), "
+"der leveres af de pakker, som matcher inputparametrene."
 
 #. translators: -t, --type <TYPE>
 #: src/commands/search/search.cc:181
@@ -4555,6 +4557,8 @@ msgstr "Vælg problemstillinger som matcher den angivne streng."
 msgid ""
 "Service '%1%' with URL '%2%' already exists. Just updating the settings."
 msgstr ""
+"Tjeneste '%1%' med URL '%2%' eksisterer allerede. Opdaterer kun "
+"indstillingerne."
 
 #: src/commands/services/add.cc:71
 #, boost-format
@@ -4562,6 +4566,8 @@ msgid ""
 "Service '%1%' already exists but uses a different URL '%2%'. Please use "
 "another alias."
 msgstr ""
+"Tjeneste '%1%' findes allerede men anvender en anden URL '%2%'. Vær venlig "
+"at anvende et andet alias."
 
 #: src/commands/services/add.cc:83
 #, c-format, boost-format
@@ -4637,11 +4643,11 @@ msgstr "Tjenesten '%s' blev fjernet."
 
 #: src/commands/services/list.cc:94
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 #: src/commands/services/list.cc:95
 msgid "Config"
-msgstr ""
+msgstr "Konfiguration"
 
 #: src/commands/services/list.cc:137
 msgid "services (ls) [OPTIONS] [SERVICE] ..."
