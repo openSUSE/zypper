@@ -10,17 +10,17 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-06-12 12:15+0200\n"
-"PO-Revision-Date: 2025-07-28 23:59+0000\n"
-"Last-Translator: Aleksey Fedorov <Aleksejfedorov963@gmail.com>\n"
-"Language-Team: Russian <https://l10n.opensuse.org/projects/zypper/master/ru/"
-">\n"
+"PO-Revision-Date: 2026-08-06 04:13+0000\n"
+"Last-Translator: Andrei Stepanov <adem4ik@gmail.com>\n"
+"Language-Team: Russian <https://l10n.opensuse.org/projects/zypper/master/ru/>"
+"\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 5.12.2\n"
+"X-Generator: Weblate 2026.8\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -181,6 +181,8 @@ msgid ""
 "For debugging output specify this option twice. 'zypper -vv ref' for example "
 "will show the mirrors used to download the metadata."
 msgstr ""
+"Чтобы получить отладочный вывод, укажите этот параметр дважды. Например, "
+"'zypper -vv ref' покажет зеркала, используемые для загрузки метаданных."
 
 #. translators: --color / --no-color
 #: src/Config.cc:320
@@ -2361,29 +2363,33 @@ msgstr "Для выполнения этой команды необходимы
 
 #: src/commands/conditions.cc:30
 msgid "Transactional system detected:"
-msgstr ""
+msgstr "Обнаружена транзакционная система:"
 
 #: src/commands/conditions.cc:31
 msgid "A transactional-wrapper command is not installed."
-msgstr ""
+msgstr "Команда transactional-wrapper не установлена."
 
 #: src/commands/conditions.cc:32
 msgid "The transactional-wrapper command cannot be used in 'zypper shell'."
-msgstr ""
+msgstr "Команда transactional-wrapper не может использоваться в 'zypper shell'."
 
 #: src/commands/conditions.cc:33
 msgid ""
 "Using transactional-wrapper is disabled by "
 "'ZYPPER_USE_TRANSACTIONAL_WRAPPER=0'."
 msgstr ""
+"Использование transactional-wrapper отключено с помощью "
+"'ZYPPER_USE_TRANSACTIONAL_WRAPPER=0'."
 
 #: src/commands/conditions.cc:34
 msgid "Please use transactional-update to modify or update the system."
 msgstr ""
+"Пожалуйста, используйте transactional-update для изменения или обновления "
+"системы."
 
 #: src/commands/conditions.cc:44
 msgid "Delegating the command to transactional-wrapper."
-msgstr ""
+msgstr "Делегирование команды transactional-wrapper."
 
 #: src/commands/conditions.cc:57
 msgid ""
@@ -2725,7 +2731,7 @@ msgstr "Верные значения: %1%"
 
 #: src/commands/listupdates.cc:50
 msgid "LEVEL"
-msgstr ""
+msgstr "УРОВЕНЬ"
 
 #. translators: --filter-version-change
 #: src/commands/listupdates.cc:53
@@ -2734,6 +2740,10 @@ msgid ""
 "all), 'rebuild' (hide rebuild-only changes), 'package' (hide packaging-only "
 "changes, i.e. same upstream version)."
 msgstr ""
+"Фильтровать обновления по значимости изменения версии. УРОВЕНЬ: 'none' (по "
+"умолчанию, показывать все), 'rebuild' (скрывать изменения только пересборки)"
+", 'package' (скрывать изменения только упаковки, т.е. с той же версией "
+"вышестоящего проекта)."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/addlocalecmd.cc:20
@@ -3983,6 +3993,8 @@ msgstr ""
 msgid ""
 "HINT: 'zypper -vv ref' will show the mirrors used to download the metadata."
 msgstr ""
+"ПОДСКАЗКА: 'zypper -vv ref' покажет зеркала, используемые для загрузки "
+"метаданных."
 
 #. translators: -f, --force
 #: src/commands/repos/refresh.cc:82 src/commands/services/refresh.cc:46
@@ -4757,15 +4769,15 @@ msgstr "Сервис \"%s\" удален."
 
 #: src/commands/services/list.cc:94
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 #: src/commands/services/list.cc:95
 msgid "Config"
-msgstr ""
+msgstr "Конфигурация"
 
 #: src/commands/services/list.cc:137
 msgid "services (ls) [OPTIONS] [SERVICE] ..."
-msgstr ""
+msgstr "services (ls) [ПАРАМЕТРЫ] [СЛУЖБА] ..."
 
 #: src/commands/services/list.cc:138
 msgid "List all defined services."
@@ -5868,7 +5880,7 @@ msgstr "Предложено"
 #. translators: A pattern has a 1:1 relation to a .rpm package defining it's properties AKA the pattern's Buddy.
 #: src/info.cc:697
 msgid "Buddy Package"
-msgstr ""
+msgstr "Пакет-компаньон"
 
 #. translators: property name; short; used like "Name: value"
 #: src/info.cc:701
@@ -6655,7 +6667,7 @@ msgstr "Произошла ошибка при чтении установлен
 #: src/repos.cc:1885
 #, c-format, boost-format
 msgid "'%s' looks like an RPM file. Will try to use it."
-msgstr ""
+msgstr "'%s' похоже на RPM-файл. Будет выполнена попытка его использования."
 
 #: src/repos.cc:1894
 #, c-format, boost-format
