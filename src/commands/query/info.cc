@@ -105,7 +105,7 @@ void InfoCmd::doReset()
   _options = PrintInfoOptions();
 }
 
-int InfoCmd::execute( Zypper &zypper, const std::vector<std::string> &positionalArgs_r )
+int InfoCmd::earlyPositionalArgsCheck( Zypper &zypper, const std::vector<std::string> &positionalArgs_r )
 {
   if ( positionalArgs_r.size() < 1 )
   {
@@ -117,7 +117,11 @@ int InfoCmd::execute( Zypper &zypper, const std::vector<std::string> &positional
     zypper.out().info( s.str() );
     return ( ZYPPER_EXIT_ERR_INVALID_ARGS );
   }
+  return ZYPPER_EXIT_OK;
+}
 
+int InfoCmd::execute( Zypper &zypper, const std::vector<std::string> &positionalArgs_r )
+{
   //for aliased modes we override the _kinds in the option object
   switch ( _cmdMode ) {
     case Mode::RugPatchInfo:
