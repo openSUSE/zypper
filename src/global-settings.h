@@ -92,6 +92,12 @@ struct DupSettingsData
 };
 using DupSettings = GlobalSettingSingleton<DupSettingsData>;
 
+struct AutoRemoveSettingsData
+{
+  std::vector<std::string> _fromSystem;
+};
+using AutoRemoveSettings = GlobalSettingSingleton<AutoRemoveSettingsData>;
+
 struct FileConflictPolicyData
 {
   bool _replaceFiles = false;
