@@ -30,6 +30,7 @@
 
 #include "solve-commit.h"
 #include "commands/needs-rebooting.h"
+#include "commands/utils/configcheck.h"
 
 using namespace zypp;
 extern ZYpp::Ptr God;
@@ -642,6 +643,22 @@ static void notify_processes_using_deleted_files( Zypper & zypper )
     {
       zypper.out().info( str::Format(_("There are running programs which still use files and libraries deleted or updated by recent upgrades. They should be restarted to benefit from the latest updates. Run '%1%' to list these programs.") )
       % "zypper ps -s" );
+    }
+  }
+
+  zypper.out().info(" ");
+  zypper.out().info(_("Checking for .rpmnew and .rpmsave configuration files..."), Out::HIGH );
+  try {
+    ConfigCheck checker;
+    std::vector<std::string> files = checker.getSystemConfigFiles();
+    checker.run(zypper, files);
+  } catch (const Exception & e) {
+    if ( zypper.out().verbosity() > Out::NORMAL )
+    {
+      if ( e.historySize() )
+        zypper.out().error( e, _("Check failed:") );
+      else
+        zypper.out().info( str::Str() << ( ColorContext::MSG_WARNING << _("Skip check:") ) << " " << e.asUserString() );
     }
   }
 

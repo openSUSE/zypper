@@ -34,6 +34,7 @@
 #include "commands/search/search.h"
 #include "commands/nullcommands.h"
 #include "commands/configtest.h"
+#include "commands/utils/configcheck.h"
 #include "commands/shell.h"
 #include "commands/help.h"
 #include "commands/subcommand.h"
@@ -165,6 +166,7 @@ namespace
       makeCmd<PSCommand> ( ZypperCommand::PS_e , std::string(), { "ps" } ),
       makeCmd<PurgeKernelsCmd> ( ZypperCommand::PURGE_KERNELS_e , std::string(), { "purge-kernels" } ),
       makeCmd<SystemArchitectureCmd> ( ZypperCommand::SYSTEM_ARCHITECTURE_e, std::string(),  { "system-architecture" } ),
+      makeCmd<ConfigCheckCmd> ( ZypperCommand::CONFIGCHECK_e, std::string(), { "configcheck" } ),
 
       makeCmd<SubCmd> ( ZypperCommand::SUBCOMMAND_e, _("Subcommands:"), { "subcommand" }),
 
@@ -253,6 +255,8 @@ DEF_ZYPPER_COMMAND( HELP );
 DEF_ZYPPER_COMMAND( SHELL );
 DEF_ZYPPER_COMMAND( SHELL_QUIT );
 DEF_ZYPPER_COMMAND( MOO );
+
+DEF_ZYPPER_COMMAND( CONFIGCHECK );
 
 DEF_ZYPPER_COMMAND( RUG_PATCH_INFO );
 DEF_ZYPPER_COMMAND( RUG_PATTERN_INFO );
