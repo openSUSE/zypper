@@ -1,4 +1,5 @@
 #include "search.h"
+#include <cctype>
 #include "src/search.h"
 #include "global-settings.h"
 #include "utils/flags/flagtypes.h"
@@ -8,6 +9,7 @@
 
 #include <zypp/base/Algorithm.h>
 #include <zypp/sat/Solvable.h>
+#include <zypp/Date.h>
 #include <zypp/Capability.h>
 #include <zypp/PoolQueryResult.h>
 
@@ -24,6 +26,52 @@ namespace zypp
             [ &target_r, value_r ] ( const CommandOption &, const boost::optional<std::string> & ) {
               target_r.insert( value_r );
             }
+      );
+    }
+
+    bool isDigit( char value_r )
+    {
+      return std::isdigit( static_cast<unsigned char>( value_r ) );
+    }
+
+    bool isIsoDateString( const std::string &value_r )
+    {
+      if ( value_r.size() != 10 )
+        return false;
+
+      return isDigit( value_r[0] )
+          && isDigit( value_r[1] )
+          && isDigit( value_r[2] )
+          && isDigit( value_r[3] )
+          && value_r[4] == '-'
+          && isDigit( value_r[5] )
+          && isDigit( value_r[6] )
+          && value_r[7] == '-'
+          && isDigit( value_r[8] )
+          && isDigit( value_r[9] );
+    }
+
+    Value setDateOptional ( boost::optional<zypp::Date> &target_r )
+    {
+      return Value (
+            noDefaultValue,
+            [ &target_r ] ( const CommandOption &opt, const boost::optional<std::string> &in ) {
+              if ( !in )
+                ZYPP_THROW( MissingArgumentException( opt.name ) );
+
+              if ( !isIsoDateString( *in ) )
+                ZYPP_THROW( InvalidValueException( opt.name, *in, _("Expected date format: YYYY-MM-DD") ) );
+
+              try
+              {
+                target_r = zypp::Date( *in, "%Y-%m-%d" );
+              }
+              catch ( const zypp::Exception & )
+              {
+                ZYPP_THROW( InvalidValueException( opt.name, *in, _("Expected date format: YYYY-MM-DD") ) );
+              }
+            },
+            "DATE"
       );
     }
 
@@ -203,6 +251,22 @@ zypp::ZyppFlags::CommandGroup SearchCmd::cmdOptions() const
       {"verbose", 'v', ZyppFlags::NoArgument, ZyppFlags::BoolType( &that._verbose, ZyppFlags::StoreTrue, _caseSensitive ),
         // translators: -v, --verbose
         _("Like --details, with additional information where the search has matched (useful for search in dependencies).")
+      },
+      { "build-after", '\0', ZyppFlags::RequiredArgument, ZyppFlags::setDateOptional( that._buildDateRange.after ),
+        // translators: --build-after DATE
+        _("Show packages built after DATE. DATE must use the YYYY-MM-DD format.")
+      },
+      { "build-before", '\0', ZyppFlags::RequiredArgument, ZyppFlags::setDateOptional( that._buildDateRange.before ),
+        // translators: --build-before DATE
+        _("Show packages built before DATE. DATE must use the YYYY-MM-DD format.")
+      },
+      { "install-after", '\0', ZyppFlags::RequiredArgument, ZyppFlags::setDateOptional( that._installDateRange.after ),
+        // translators: --install-after DATE
+        _("Show packages installed after DATE. DATE must use the YYYY-MM-DD format.")
+      },
+      { "install-before", '\0', ZyppFlags::RequiredArgument, ZyppFlags::setDateOptional( that._installDateRange.before ),
+        // translators: --install-before DATE
+        _("Show packages installed before DATE. DATE must use the YYYY-MM-DD format.")
       }
     },
     {
@@ -228,7 +292,43 @@ void SearchCmd::doReset()
   _details = false;
   _verbose = false;
   _requestedDeps.clear();
+  _requestedReverseSearch.reset();
+  _buildDateRange = DateRange();
+  _installDateRange = DateRange();
   _requestedTypes.clear();
+}
+
+bool SearchCmd::hasDateFilters() const
+{
+  return _buildDateRange.after || _buildDateRange.before || _installDateRange.after || _installDateRange.before;
+}
+
+bool SearchCmd::matchesDateFilters( const sat::Solvable & solv_r ) const
+{
+  if ( !hasDateFilters() )
+    return true;
+
+  if ( _buildDateRange.after && solv_r.buildtime() < *_buildDateRange.after )
+    return false;
+
+  if ( _buildDateRange.before && solv_r.buildtime() > *_buildDateRange.before )
+    return false;
+
+  if ( _installDateRange.after || _installDateRange.before )
+  {
+    if ( !solv_r.isSystem() )
+      return false;
+
+    const auto installTime = solv_r.installtime();
+
+    if ( _installDateRange.after && installTime < *_installDateRange.after )
+      return false;
+
+    if ( _installDateRange.before && installTime > *_installDateRange.before )
+      return false;
+  }
+
+  return true;
 }
 
 int SearchCmd::execute( Zypper &zypper, const std::vector<std::string> &positionalArgs_r )
@@ -426,7 +526,10 @@ int SearchCmd::execute( Zypper &zypper, const std::vector<std::string> &position
 
       if ( details ) {
         FillSearchTableSolvable callback( t, inst_notinst );
-        std::for_each( matchedSolvables.begin(), matchedSolvables.end(), [&callback, verb = _verbose, &reqSearchAttrib ]( auto elem ){
+        std::for_each( matchedSolvables.begin(), matchedSolvables.end(), [this, &callback, verb = _verbose, &reqSearchAttrib ]( auto elem ){
+          if ( !matchesDateFilters( elem.first ) )
+            return;
+
           if ( verb )
             callback( elem.first, reqSearchAttrib, elem.second );
           else
@@ -435,7 +538,10 @@ int SearchCmd::execute( Zypper &zypper, const std::vector<std::string> &position
       } else {
 
         PoolQueryResult res;
-        std::for_each( matchedSolvables.begin(), matchedSolvables.end(), [ &res ]( const auto &v ){ res+=v.first; } );
+        std::for_each( matchedSolvables.begin(), matchedSolvables.end(), [ this, &res ]( const auto &v ){
+          if ( matchesDateFilters( v.first ) )
+            res += v.first;
+        } );
 
         FillSearchTableSelectable callback( t, inst_notinst );
         std::for_each( res.selectableBegin(), res.selectableEnd(), callback);
@@ -449,19 +555,29 @@ int SearchCmd::execute( Zypper &zypper, const std::vector<std::string> &position
         {
           // Option 'verbose' shows where (e.g. in 'requires', 'name') the search has matched.
           // Info is available from PoolQuery::const_iterator.
-          for_( it, query.begin(), query.end() )
-            callback( it );
+          for_( it, query.begin(), query.end() ) {
+            if ( matchesDateFilters( *it ) )
+              callback( it );
+          }
         }
         else
         {
-          for ( const auto slv : query )
-            callback( slv );
+          for ( const auto slv : query ) {
+            if ( matchesDateFilters( slv ) )
+              callback( slv );
+          }
         }
       }
       else
       {
+        PoolQueryResult res;
+        for ( const auto slv : query ) {
+          if ( matchesDateFilters( slv ) )
+            res += slv;
+        }
+
         FillSearchTableSelectable callback( t, inst_notinst );
-        invokeOnEach( query.selectableBegin(), query.selectableEnd(), callback );
+        invokeOnEach( res.selectableBegin(), res.selectableEnd(), callback );
       }
     }
 
