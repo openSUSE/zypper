@@ -1,4 +1,17 @@
 -------------------------------------------------------------------
+Fri Aug 14 10:50:50 CEST 2026 - ma@suse.de
+
+- info: check for missing positional args before systemSetup
+  (bsc#1274091)
+- Remove deprecated installRecommends option from zypper.conf.
+  The system wide default for all libzypp based applications is
+  defined in zypp.conf(5). It is not recommended to define this in
+  zypper exclusively.
+- BuildRequires:  libzypp-devel >= 17.38.0.
+  Code uses some of the new libzypp log and string tools.
+- version 1.14.99
+
+-------------------------------------------------------------------
 Fri Jun 12 12:15:30 CEST 2026 - ma@suse.de
 
 - Transactional systems: Delegate rw-commands to
