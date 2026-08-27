@@ -396,6 +396,10 @@ std::vector<ZyppFlags::CommandGroup> Config::cliOptions()
               // translators: --reposd-dir, -D <DIR>
               _("Use alternative repository definition file directory.")
         },
+        { "servicesd-dir", 0, ZyppFlags::RequiredArgument, ZyppFlags::PathNameType( rm_options.knownServicesPath, boost::optional<std::string>(), ARG_DIR ),
+              // translators: --servicesd-dir <DIR>
+              _("Use alternative services definition file directory.")
+        },
         { "cache-dir", 'C', ZyppFlags::RequiredArgument,
               ZyppFlags::CallbackVal( [ this ]( const ZyppFlags::CommandOption &, const boost::optional<std::string> &val ) {
                 ZConfig &zconfig = ZConfig::instance();
