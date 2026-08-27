@@ -2524,8 +2524,8 @@ msgid ""
 "Remove packages with specified capabilities. A capability is NAME[.ARCH]"
 "[OP<VERSION>], where OP is one of <, <=, =, >=, >."
 msgstr ""
-"Вилучити пакунки з вказаною здатністю. Здатність - це запис у вигляді НАЗВА[."
-"АРХ][ДІЯ<ВЕРСІЯ>], де ДІЯ є одним з знаків порівняння <, <=, =, >=, >."
+"Вилучити пакунки з вказаною здатністю. Здатність - це запис у вигляді "
+"НАЗВА[.АРХ][ДІЯ<ВЕРСІЯ>], де ДІЯ є одним з знаків порівняння <, <=, =, >=, >."
 
 #: src/commands/installremove.cc:104 src/commands/installremove.cc:234
 #: src/utils/messages.cc:53
@@ -2836,8 +2836,8 @@ msgid ""
 msgstr ""
 "LOCKSPEC складається з '[ТИП:]ІМ'Я[ ОПЕРАТОР ВАРІАНТ]', де ІМ'Я може бути "
 "вказано як глобальний шаблон з використанням символів \"*\" та \"?\". Для "
-"типів, що не є пакунками можна вказати ТИП: рядок на початку (напр. 'patch:"
-"foo') або використавши команду --type option."
+"типів, що не є пакунками можна вказати ТИП: рядок на початку (напр. "
+"'patch:foo') або використавши команду --type option."
 
 #: src/commands/locks/add.cc:36
 msgid ""
@@ -3714,8 +3714,8 @@ msgstr "Неможливо використати %s разом з %s. Вико�
 msgid ""
 "If only one argument is used, it must be a URI pointing to a .repo file."
 msgstr ""
-"Якщо використано лише один аргумент, це має бути URI, що вказує на файл ."
-"repo."
+"Якщо використано лише один аргумент, це має бути URI, що вказує на "
+"файл .repo."
 
 #: src/commands/repos/add.cc:130
 msgid "Specified type is not a valid repository type:"
@@ -6216,8 +6216,8 @@ msgid ""
 msgstr ""
 "Це може трапитись через недійсні метадані в сховищі або через помилку в "
 "аналізаторі метаданих. В останньому випадку або, якщо ви непевні, будь "
-"ласка, надішліть звіт про помилку згідно до вказівок на сторінці http://en."
-"opensuse.org/Zypper/Troubleshooting"
+"ласка, надішліть звіт про помилку згідно до вказівок на сторінці http://"
+"en.opensuse.org/Zypper/Troubleshooting"
 
 #: src/repos.cc:446
 #, c-format, boost-format
@@ -6783,8 +6783,8 @@ msgstr ""
 #: src/solve-commit.cc:620
 #, c-format, boost-format
 msgid ""
-"Check for running processes using deleted libraries is disabled in zypper."
-"conf. Run '%s' to check manually."
+"Check for running processes using deleted libraries is disabled in "
+"zypper.conf. Run '%s' to check manually."
 msgstr ""
 "Перевірка запущених процесів на використання видалених бібліотек вимкнена у "
 "zypper.conf. Запустіть \"%s\" для ручної перевірки."
