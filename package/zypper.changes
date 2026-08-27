@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Aug 27 11:56:47 CEST 2026 - ma@suse.de
+
+- Add --servicesd-dir global option to relocate
+  /etc/zypp/services.d (bsc#1257249)
+- version 1.14.100
+
+-------------------------------------------------------------------
 Fri Aug 14 10:50:50 CEST 2026 - ma@suse.de
 
 - info: check for missing positional args before systemSetup
