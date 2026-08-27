@@ -1863,6 +1863,9 @@ For *search* and *info* commands the option makes zypper return *ZYPPER_EXIT_OK*
 *-D*, *--reposd-dir* _dir_::
 	Use the specified directory to look for the repository definition (*.repo*) files. The default value is */etc/zypp/repos.d*.
 
+*--servicesd-dir* _dir_::
+	Use the specified directory to look for the service definition (*.service*) files. The default value is */etc/zypp/services.d*.
+
 *-C*, *--cache-dir* _dir_::
 	Use an alternative root directory for all caches. The default value is */var/cache/zypp*.
 
@@ -1990,6 +1993,8 @@ This directory is used by all ZYpp-based applications.
 
 */etc/zypp/services.d*::
 	Directory containing service definition (_\*.service_) files. You can use the Service Management Commands to manipulate these files, or you can edit them yourself. Running *zypper refs* is recommended after modifications have been done.
++
+You can use the *--servicesd-dir* global option to use an alternative directory for this purpose or the *--root* option to make this directory relative to the specified root directory.
 +
 This directory is used by all ZYpp-based applications.
 
