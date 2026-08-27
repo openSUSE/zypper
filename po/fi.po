@@ -22,7 +22,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.fi\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-12 12:15+0200\n"
+"POT-Creation-Date: 2026-08-27 11:53+0200\n"
 "PO-Revision-Date: 2025-07-22 12:47+0000\n"
 "Last-Translator: Julia Faltenbacher <julia.faltenbacher@suse.com>\n"
 "Language-Team: Finnish <https://l10n.opensuse.org/projects/zypper/master/fi/"
@@ -251,40 +251,45 @@ msgstr ""
 msgid "Use alternative repository definition file directory."
 msgstr "Käytä vaihtoehtoista asennuslähdehakemistoa."
 
+#. translators: --servicesd-dir <DIR>
+#: src/Config.cc:401
+msgid "Use alternative services definition file directory."
+msgstr ""
+
 #. translators: --cache-dir, -C <DIR>
-#: src/Config.cc:412
+#: src/Config.cc:416
 msgid "Use alternative directory for all caches."
 msgstr "Käytä vaihtoehtoista välimuistihakemistoa."
 
 #. translators: --raw-cache-dir <DIR>
-#: src/Config.cc:425
+#: src/Config.cc:429
 msgid "Use alternative raw meta-data cache directory."
 msgstr "Käytä vaihtoehtoista raakametatietojen välimuistihakemistoa."
 
 #. translators: --solv-cache-dir <DIR>
-#: src/Config.cc:439
+#: src/Config.cc:443
 msgid "Use alternative solv file cache directory."
 msgstr "Käytä vaihtoehtoista solv-tiedostojen välimuistihakemistoa."
 
 #. translators: --pkg-cache-dir <DIR>
-#: src/Config.cc:453
+#: src/Config.cc:457
 msgid "Use alternative package cache directory."
 msgstr "Käytä vaihtoehtoista pakettivälimuistihakemistoa."
 
-#: src/Config.cc:458
+#: src/Config.cc:462
 msgid "Repository Options"
 msgstr "Asennuslähdevalinnat"
 
-#: src/Config.cc:462
+#: src/Config.cc:466
 msgid "Entering 'no-gpg-checks' mode."
 msgstr "Siirrytään ”ei tarkisteta GPG-avaimia” -tilaan."
 
 #. translators: --no-gpg-checks
-#: src/Config.cc:466
+#: src/Config.cc:470
 msgid "Ignore GPG check failures and continue."
 msgstr "Jätä GPG-tarkistusvirheet huomiotta ja jatka."
 
-#: src/Config.cc:471
+#: src/Config.cc:475
 #, c-format, boost-format
 msgid ""
 "Turning on '%s'. New repository signing keys will be automatically imported!"
@@ -293,19 +298,19 @@ msgstr ""
 "automaattisesti!"
 
 #. translators: --gpg-auto-import-keys
-#: src/Config.cc:477
+#: src/Config.cc:481
 msgid "Automatically trust and import new repository signing keys."
 msgstr ""
 "Luota automaattisesti uusien asennuslähteiden allekirjoitusavaimiin ja tuo "
 "ne."
 
 #. translators: --plus-repo, -p <URI>
-#: src/Config.cc:481
+#: src/Config.cc:485
 msgid "Use an additional repository."
 msgstr "Käytä lisäasennuslähdettä."
 
 #. translators: --plus-content <TAG>
-#: src/Config.cc:485
+#: src/Config.cc:489
 msgid ""
 "Additionally use disabled repositories providing a specific keyword. Try '--"
 "plus-content debug' to enable repos indicating to provide debug packages."
@@ -313,86 +318,86 @@ msgstr ""
 "Käytä myös käytöstä poistettuja avainsanan tarjoavia asennuslähteitä. ”--"
 "plus-content debug” ottaa käyttöön myös vianpaikannusasennuslähteet."
 
-#: src/Config.cc:491
+#: src/Config.cc:495
 msgid "Repositories disabled, using the database of installed packages only."
 msgstr ""
 "Asennuslähteet poistettu käytöstä. Käytetään vain asennettujen pakettien "
 "tietokantaa."
 
 #. translators: --disable-repositories
-#: src/Config.cc:495
+#: src/Config.cc:499
 msgid "Do not read meta-data from repositories."
 msgstr "Älä lue asennuslähteiden metatietoja."
 
-#: src/Config.cc:499
+#: src/Config.cc:503
 msgid "Autorefresh disabled."
 msgstr "Automaattivirkistys ei käytössä."
 
 #. translators: --no-refresh
-#: src/Config.cc:503
+#: src/Config.cc:507
 msgid "Do not refresh the repositories."
 msgstr "Älä virkistä asennuslähteitä."
 
-#: src/Config.cc:507
+#: src/Config.cc:511
 msgid "CD/DVD repositories disabled."
 msgstr "CD/DVD-asennuslähteet poistettiin käytöstä."
 
 #. translators: --no-cd
-#: src/Config.cc:511
+#: src/Config.cc:515
 msgid "Ignore CD/DVD repositories."
 msgstr "Jätä CD/DVD-asennuslähteet huomiotta."
 
-#: src/Config.cc:515
+#: src/Config.cc:519
 msgid "Remote repositories disabled."
 msgstr "Etäasennuslähteet eivät käytössä."
 
 #. translators: --no-remote
-#: src/Config.cc:519
+#: src/Config.cc:523
 msgid "Ignore remote repositories."
 msgstr "Sivuuta etäasennuslähteet."
 
 #. translators: --releasever
-#: src/Config.cc:526
+#: src/Config.cc:530
 msgid ""
 "Set the value of $releasever in all .repo files (default: distribution "
 "version)"
 msgstr ""
 "Aseta kaikkiin .repo-tiedostoihin $releasever-arvo (oletus: jakeluversio)"
 
-#: src/Config.cc:530
+#: src/Config.cc:534
 msgid "Target Options"
 msgstr "Kohdevalinnat"
 
 #. translators: --root, -R <DIR>
-#: src/Config.cc:535
+#: src/Config.cc:539
 msgid "Operate on a different root directory."
 msgstr "Käytä vaihtoehtoista juurikansiota."
 
 #. translators: --installroot <DIR>
-#: src/Config.cc:541
+#: src/Config.cc:545
 msgid ""
 "Operate on a different root directory, but share repositories with the host."
 msgstr "Toimi eri juurikansiossa mutta jaa asennuslähteet isännän kanssa."
 
-#: src/Config.cc:547
+#: src/Config.cc:551
 msgid "Ignoring installed resolvables."
 msgstr "Sivuutetaan asennetut ratkaistavat."
 
 #. translators: --disable-system-resolvables
-#: src/Config.cc:550
+#: src/Config.cc:554
 msgid "Do not read installed packages."
 msgstr "Älä lue asennettuja paketteja."
 
-#: src/Config.cc:717
+#: src/Config.cc:721
 msgid "No config file is in use. Can not save options."
 msgstr "Asetustiedosto ei käytössä: asetuksia ei voi tallentaa."
 
-#: src/Config.cc:728
+#: src/Config.cc:732
 #, boost-format
 msgid "Option '%1%' saved in '%2%'."
 msgstr "Asetus ”%1%” tallennettu kohteeseen ”%2%”."
 
-#: src/Config.cc:735
+#: src/Config.cc:739
 msgid "Failed to save option."
 msgstr "Asetuksen tallentaminen epäonnistui."
 
@@ -3417,47 +3422,47 @@ msgid "Usage"
 msgstr "Käyttö"
 
 #. translators: command summary: patch-info
-#: src/commands/query/info.cc:145
+#: src/commands/query/info.cc:149
 msgid "Show full information for specified patches."
 msgstr "Näytää korjauspäivityksen tiedot."
 
 #. translators: command summary: pattern-info
-#: src/commands/query/info.cc:148
+#: src/commands/query/info.cc:152
 msgid "Show full information for specified patterns."
 msgstr "Näytää ohjelmistoryhmän tiedot."
 
 #. translators: command summary: product-info
-#: src/commands/query/info.cc:151
+#: src/commands/query/info.cc:155
 msgid "Show full information for specified products."
 msgstr "Näytää tuotteen tiedot."
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/commands/query/info.cc:164
+#: src/commands/query/info.cc:168
 msgid "patch-info <PATCHNAME> ..."
 msgstr "patch-info <korjauspäivitys> ..."
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/commands/query/info.cc:167
+#: src/commands/query/info.cc:171
 msgid "pattern-info <PATTERN_NAME> ..."
 msgstr "pattern-info <ohjelmistoryhmän nimi> ..."
 
 #. translators: command synopsis; do not translate lowercase words
-#: src/commands/query/info.cc:170
+#: src/commands/query/info.cc:174
 msgid "product-info <PRODUCT_NAME> ..."
 msgstr "product-info <tuotteen nimi> ..."
 
 #. translators: command description
-#: src/commands/query/info.cc:182
+#: src/commands/query/info.cc:186
 msgid "Show detailed information for patches."
 msgstr "Näyttää korjauspäivityksen yksityiskohtaiset tiedot."
 
 #. translators: command description
-#: src/commands/query/info.cc:185
+#: src/commands/query/info.cc:189
 msgid "Show detailed information for patterns."
 msgstr "Näyttää ohjelmistoryhmän yksityiskohtaiset tiedot."
 
 #. translators: command description
-#: src/commands/query/info.cc:188
+#: src/commands/query/info.cc:192
 msgid "Show detailed information for products."
 msgstr "Näyttää tuotteen yksityiskohtaiset tiedot."
 
@@ -6699,8 +6704,8 @@ msgstr ""
 #: src/solve-commit.cc:620
 #, c-format, boost-format
 msgid ""
-"Check for running processes using deleted libraries is disabled in "
-"zypper.conf. Run '%s' to check manually."
+"Check for running processes using deleted libraries is disabled in zypper."
+"conf. Run '%s' to check manually."
 msgstr ""
 "Poistettuja kirjastoja käyttävien prosessien tarkistus on poistettu käytöstä "
 "zypper.confissa. Tarkista itse suorittamalla ”%s”."
@@ -8537,8 +8542,8 @@ msgstr "Virhe"
 #~ "Listaa järjestelmän asennuslähteet.\n"
 #~ "\n"
 #~ "  Valinnat:\n"
-#~ "-e, --export <FILE.repo>  Tallenna kaikki asennuslähteet "
-#~ "yksittäiseen .repo-tiedostoon.\n"
+#~ "-e, --export <FILE.repo>  Tallenna kaikki asennuslähteet yksittäiseen ."
+#~ "repo-tiedostoon.\n"
 #~ "-a, --alias               Näyttää asennuslähteiden aliakset.\n"
 #~ "-n, --name                Näyttää asennuslähteiden nimet.\n"
 #~ "-u, --uri                 Näyttää asennuslähteiden kanta-URI.\n"
