@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-08-27 11:53+0200\n"
-"PO-Revision-Date: 2026-06-13 12:12+0000\n"
+"PO-Revision-Date: 2026-08-29 11:13+0000\n"
 "Last-Translator: Freek de Kruijf <freek@opensuse.org>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/zypper/master/nl/>\n"
 "Language: nl\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2026.6.1\n"
+"X-Generator: Weblate 2026.8.1\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -249,6 +249,8 @@ msgstr ""
 #: src/Config.cc:401
 msgid "Use alternative services definition file directory."
 msgstr ""
+"Gebruik een alternatieve map voor het bestand met definities van "
+"alternatieve services."
 
 #. translators: --cache-dir, -C <DIR>
 #: src/Config.cc:416
