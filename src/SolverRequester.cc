@@ -170,6 +170,74 @@ void SolverRequester::remove( const PackageArgs & args )
   installRemove( args );
 }
 
+void SolverRequester::apply( const PackageArgs &args_r, const std::function<bool (PoolItem)> cb_r )
+{
+  for_( it, args_r.dos().begin(), args_r.dos().end() ) {
+    apply(*it,cb_r);
+  }
+}
+
+void SolverRequester::apply( const PackageSpec &pkg_r, const std::function<bool (PoolItem)> cb_r )
+{
+  std::string ciMatchHint;	// hint on possible typo (case-insensitive matches)
+
+  // first try by name
+  if ( !_opts.force_by_cap )
+  {
+    PoolQuery q = pkg_spec_to_poolquery( pkg_r.parsed_cap, "" );
+
+    if ( !q.empty() )
+    {
+      bool got_installed = false;
+      for_( it, q.poolItemBegin(), q.poolItemEnd() )
+      {
+        if ( it->status().isInstalled() )
+        {
+          cb_r(*it);
+          got_installed = true;
+        }
+      }
+      if ( got_installed )
+        return;
+      else
+      {
+        addFeedback( Feedback::NOT_INSTALLED, pkg_r );
+        MIL << "'" << pkg_r.parsed_cap << "' is not installed" << endl;
+        if ( _opts.force_by_name)
+          return;
+      }
+      // TODO handle patches (cannot uninstall!), patterns (remove content(?))
+    }
+    else if ( _opts.force_by_name || pkg_r.modified )
+    {
+      addFeedback( Feedback::NOT_FOUND_NAME, pkg_r );
+      WAR << pkg_r << "' not found" << endl;
+      return;
+    }
+
+    addFeedback( Feedback::NOT_FOUND_NAME_TRYING_CAPS, pkg_r );
+    // Quick check whether there would have been matches with different case..
+    getCiMatchHint( q, ciMatchHint );
+  }
+
+  // try by capability
+  // is there a provider for the requested capability?
+  sat::WhatProvides q( pkg_r.parsed_cap );
+  if ( q.empty() )
+  {
+    addFeedback( Feedback::NOT_FOUND_CAP, pkg_r, ciMatchHint );
+    WAR << pkg_r << " not found" << endl;
+    return;
+  }
+
+  // is the provider already installed?
+  for ( PoolItem it : get_installed_providers( pkg_r.parsed_cap ) )
+  {
+    if(!cb_r(it))
+      return;
+  }
+}
+
 // ----------------------------------------------------------------------------
 
 void SolverRequester::installRemove( const PackageArgs & args )
