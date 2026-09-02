@@ -20,8 +20,8 @@ using namespace zypp;
 
 void InstallRemoveBase::fillSrOpts(SolverRequester::Options &sropts_r ) const
 {
-  sropts_r.force_by_cap  = _selectByCap;
-  sropts_r.force_by_name = _selectByName;
+  sropts_r.setForceByCap( _selectByCap );
+  sropts_r.setForceByName( _selectByName );
 }
 
 void InstallRemoveBase::printAndHandleSolverRequesterFeedback( Zypper &zypper, const SolverRequester &sr_r, bool failOnCapNotFound )

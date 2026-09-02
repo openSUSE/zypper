@@ -132,8 +132,6 @@ public:
       , allow_vendor_change( tri2bool( SolverSettings::instance()._allowVendorChange, ZConfig::instance().solver_allowVendorChange() ) )
     {}
 
-    void setForceByName( bool value = true );
-    void setForceByCap ( bool value = true );
 
     /**
      * If true, the requester will force the operation in some defined cases,
@@ -153,14 +151,14 @@ public:
      * Force package selection by capabilities they provide.
      * Do not try to select packages by name first.
      */
-    bool force_by_cap;
+    void setForceByName( bool value = true );
 
     /**
      * Force package selection by name.
      * Do not fall back to selection by capability if give package is not found
      * by name.
      */
-    bool force_by_name;
+    void setForceByCap ( bool value = true );
 
     /**
      * Whether to request updates via Selectable::updateCandidate() or
@@ -186,6 +184,13 @@ public:
 
     /** Aliases of the repos from which the packages should be installed */
     std::list<std::string> from_repos;
+
+  private:
+    // Explicit setter prevents both - force_by_name and force_by_cap -
+    // from being True.
+    friend class SolverRequester;
+    bool force_by_name;
+    bool force_by_cap;
   };
 
 
