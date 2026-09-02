@@ -253,7 +253,7 @@ BOOST_AUTO_TEST_CASE(install7)
   std::vector<std::string> rawargs;
   rawargs.push_back("perl(Net::SSL)");
   SolverRequester::Options sropts;
-  sropts.force_by_name = true;
+  sropts.setForceByName( true );
   SolverRequester sr(sropts);
 
   sr.install(rawargs);
@@ -271,7 +271,7 @@ BOOST_AUTO_TEST_CASE(install8)
   std::vector<std::string> rawargs;
   rawargs.push_back("y2pmsh");
   SolverRequester::Options sropts;
-  sropts.force_by_cap = true;
+  sropts.setForceByCap( true );
   SolverRequester sr(sropts);
 
   sr.install(rawargs);
@@ -700,7 +700,7 @@ BOOST_AUTO_TEST_CASE(remove2)
   PackageArgs args(rawargs, ResKind::package, argopts);
 
   SolverRequester::Options sropts;
-  sropts.force_by_name = true;
+  sropts.setForceByName( true );
   SolverRequester sr1(sropts);
 
   sr1.remove(args);
@@ -758,7 +758,7 @@ BOOST_AUTO_TEST_CASE(remove5)
   std::vector<std::string> rawargs;
   rawargs.push_back("mc");
   SolverRequester::Options sropts;
-  sropts.force_by_name = true;
+  sropts.setForceByName( true );
   SolverRequester sr(sropts);
 
   sr.remove(rawargs);
@@ -795,7 +795,7 @@ BOOST_AUTO_TEST_CASE(remove7)
   rawargs.push_back("y2pmsh");
 
   SolverRequester::Options sropts;
-  sropts.force_by_cap = true;
+  sropts.setForceByCap( true );
   SolverRequester sr(sropts);
 
   sr.remove(rawargs);
@@ -908,7 +908,7 @@ BOOST_AUTO_TEST_CASE(update3)
   std::vector<std::string> rawargs;
   rawargs.push_back("");
   SolverRequester::Options sropts;
-  sropts.force_by_name = true;
+  sropts.setForceByName( true );
   SolverRequester sr(sropts);
 
   sr.install(rawargs);

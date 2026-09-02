@@ -124,12 +124,12 @@ public:
     Options()
       : force( false )
       , oldpackage( false )
-      , force_by_cap( false )
-      , force_by_name( false )
       , best_effort( false )
       , skip_interactive( false )
       , skip_optional_patches( false )
       , allow_vendor_change( tri2bool( SolverSettings::instance()._allowVendorChange, ZConfig::instance().solver_allowVendorChange() ) )
+      , force_by_name( false )
+      , force_by_cap( false )
     {}
 
 
