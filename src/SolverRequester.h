@@ -89,7 +89,7 @@ struct CliMatchPatch
   { return missmatch( patch_r ) == Missmatch::None; }
 
   bool operator()( const PoolItem & pi_r ) const
-  { return pi_r.isKind<Patch>() && operator()( asKind<Patch>(pi_r) ); }
+  { return not pi_r.isKind<Patch>() || operator()( asKind<Patch>(pi_r) ); }
 
 private:
   friend class SolverRequester;	// SolverRequester::updatePatches uses _dateBefore
