@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-08-27 11:53+0200\n"
-"PO-Revision-Date: 2026-08-29 20:13+0000\n"
+"PO-Revision-Date: 2026-09-04 16:13+0000\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
 "Language-Team: Slovak <https://l10n.opensuse.org/projects/zypper/master/sk/>"
 "\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Weblate 2026.8.1\n"
+"X-Generator: Weblate 2026.9\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -240,7 +240,7 @@ msgstr ""
 #. translators: --reposd-dir, -D <DIR>
 #: src/Config.cc:397
 msgid "Use alternative repository definition file directory."
-msgstr "Použiť alternatívny adresár definičného súboru repozitára."
+msgstr "Použiť adresár definičného súboru alternatívnych repozitárov."
 
 #. translators: --servicesd-dir <DIR>
 #: src/Config.cc:401
