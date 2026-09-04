@@ -1,4 +1,14 @@
 -------------------------------------------------------------------
+Fri Sep  4 15:04:27 CEST 2026 - ma@suse.de
+
+- Show solver problem details per default in not-interactive mode
+  (bsc#1277790)
+  This way they see all details when capturing zypper's output
+  because the (d)etail button can't be pressed in not-interactive
+  mode.
+- version 1.14.101
+
+-------------------------------------------------------------------
 Thu Aug 27 11:56:47 CEST 2026 - ma@suse.de
 
 - Add --servicesd-dir global option to relocate
