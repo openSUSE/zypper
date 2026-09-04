@@ -385,7 +385,7 @@ void SolverRequester::remove( const PackageSpec & pkg )
     else if ( _opts.force_by_name || pkg.modified )
     {
       addFeedback( Feedback::NOT_FOUND_NAME, pkg );
-      WAR << pkg << "' not found" << endl;
+      WAR << "'" << pkg << "' not found" << endl;
       return;
     }
 
@@ -411,7 +411,7 @@ void SolverRequester::remove( const PackageSpec & pkg )
   if ( providers.empty() )
   {
     addFeedback( Feedback::NO_INSTALLED_PROVIDER, pkg );
-    MIL << "no provider of " << pkg.parsed_cap << "is installed" << endl;
+    MIL << "no provider of " << pkg.parsed_cap << " is installed" << endl;
   }
   else
   {
