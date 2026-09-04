@@ -198,7 +198,8 @@ static TriBool show_problem( Zypper & zypper, unsigned nr, const ResolverProblem
   popts.setOptionHelp( cancelAnswer,  _("Choose no solution and cancel.") );
   popts.setOptionHelp( extInfoAnswer, _("Toggle show detailed conflict information.") );
 
-  bool showExtInfo = false;
+  // bsc#1277790: Show details per default in not-interactive mode
+  bool showExtInfo = zypper.config().non_interactive;
   unsigned reply = default_reply;
 
   while ( true ) {
