@@ -28,6 +28,7 @@ private:
   RepoServiceCommonOptions _commonProps{OptCommandCtx::RepoContext, *this};
   RepoProperties _repoProps{*this};
   RepoServiceCommonSelectOptions _selections{OptCommandCtx::RepoContext, *this};
+  std::string _baseUrl;
 };
 
 #endif
