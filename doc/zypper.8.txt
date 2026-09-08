@@ -115,7 +115,7 @@ Zypper works with several types of resource objects, called _resolvables_. A res
 +
 Selecting the patch, the conflict is resolved by updating all installed and affected/vulnerable packages to a version providing the fix. When updating the packages zypper always aims for the latest available version. Resolved patches are classified as either *applied* or *not needed*, depending on whether they refer to actually installed packages.
 +
-So installation, update or removal of packages may change the classification of patches referring to these packages. Since libyzpp-17.23.0 the /var/log/zypp/history remembers if a committed transaction changes a patchs classification. If history data are available, patch tables show a column telling _since_ when the patch is in it's current state.
+So installation, update or removal of packages may change the classification of patches referring to these packages. Since libyzpp-17.23.0 the /var/log/zypp/history remembers if a committed transaction changes a patch's classification. If history data are available, patch tables show a column telling _since_ when the patch is in its current state.
 +
 Depending on the kind of defect, patches are classified by _category_ and _severity_. Commonly used values for _category_ are *security*, (*recommended*, *bugfix*), (*optional*, *feature*, *enhancement*) *document* or *yast*. Commonly used values for _severity_ are *critical*, *important*, *moderate*, *low* or *unspecified*. Names listed in parentheses are used synonymously.
 +
@@ -510,9 +510,9 @@ include::{incdir}/option_Solver_Flags_Common.txt[]
 *removeptf* (*rmptf*) [_options_] <PTF|CAPABILITY> ...::
 	Remove (not only) PTFs.
 +
-A remove command which prefers replacing dependant packages to removing them as well. In fact this is a full featured install command with the remove modifier (-) applied to its plain arguments. So 'removeptf foo' is the same as 'install -- -foo'. This is why the command accepts the same options as the install command. It is the recommended way to remove a PTF (Program Temporary Fix).
+A remove command which prefers replacing dependent packages to removing them as well. In fact this is a full featured install command with the remove modifier (-) applied to its plain arguments. So 'removeptf foo' is the same as 'install -- -foo'. This is why the command accepts the same options as the install command. It is the recommended way to remove a PTF (Program Temporary Fix).
 +
-A PTF is typically removed as soon as the fix it provides is applied to the latest official update of the dependant packages. But you don't want the dependant packages to be removed together with the PTF, which is what the remove command would do. The removeptf command however will aim to replace the dependant packages by their official update versions.
+A PTF is typically removed as soon as the fix it provides is applied to the latest official update of the dependent packages. But you don't want the dependent packages to be removed together with the PTF, which is what the remove command would do. The removeptf command however will aim to replace the dependent packages by their official update versions.
 +
 --
 	*supports every option the install command supports*::
