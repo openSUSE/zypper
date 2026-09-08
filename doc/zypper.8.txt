@@ -1795,7 +1795,7 @@ Parsable XML-output produced by *zypper --xmlout* will include a *<download-resu
 +
 The reboot-needed flag is set if a package that provides *installhint(reboot-needed)* is updated or installed. Additionally there is a predefined list (/etc/zypp/needreboot) of well-known packages which cause the reboot-needed flag being set unconditionally. The exit code *ZYPPER_EXIT_INF_REBOOT_NEEDED* indicates that a reboot is suggested, otherwise the exit code is set to *ZYPPER_EXIT_OK*.
 +
-It is recommended for scripts to use this command to test whether a system reboot is suggested. Use *--quiet* to suppress the normal output.
+It is recommended for scripts to use this command to test whether a system reboot is suggested. Use the *--quiet* global option (before the command name) to suppress the normal output.
 
 Subcommands
 ~~~~~~~~~~~
