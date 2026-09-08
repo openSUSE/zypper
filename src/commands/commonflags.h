@@ -45,6 +45,18 @@ namespace CommonFlags
       _("Consider only patches which affect the package management itself.")
     };
   }
+
+  inline zypp::ZyppFlags::CommandOption selectByPackageNameFlag ( bool &targetFlag ) {
+    return {
+      "name", 'n', ZyppFlags::NoArgument, ZyppFlags::BoolType( &targetFlag, ZyppFlags::StoreTrue, targetFlag ),  _("Select packages by plain name, not by capability.")
+    };
+  }
+
+  inline zypp::ZyppFlags::CommandOption selectByPackageCapFlag ( bool &targetFlag ) {
+    return {
+      "capability", 'C', ZyppFlags::NoArgument, ZyppFlags::BoolType( &targetFlag, ZyppFlags::StoreTrue, targetFlag ), _("Select packages solely by capability.")
+    };
+  }
 }
 
 
