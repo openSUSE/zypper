@@ -11,6 +11,7 @@
 #include "commands/optionsets.h"
 #include "utils/flags/zyppflags.h"
 
+#include <zypp/Date.h>
 
 #include <zypp/sat/SolvAttr.h>
 #include <boost/optional.hpp>
@@ -24,6 +25,12 @@ public:
     Substrings,
     Words,
     Exact
+  };
+
+  struct DateRange
+  {
+    boost::optional<zypp::Date> after;
+    boost::optional<zypp::Date> before;
   };
 
   SearchCmd ( std::vector<std::string> &&commandAliases_r );
@@ -40,6 +47,8 @@ private:
   bool _verbose = false;
   std::set<zypp::sat::SolvAttr> _requestedDeps;
   boost::optional<zypp::sat::SolvAttr> _requestedReverseSearch;
+  DateRange _buildDateRange;
+  DateRange _installDateRange;
 
   std::set<ResKind> _requestedTypes;
 
@@ -53,6 +62,9 @@ protected:
   zypp::ZyppFlags::CommandGroup cmdOptions() const override;
   void doReset() override;
   int execute(Zypper &zypper, const std::vector<std::string> &positionalArgs_r) override;
+
+  bool hasDateFilters() const;
+  bool matchesDateFilters( const zypp::sat::Solvable & solv_r ) const;
 
   // ZypperBaseCommand interface
 public:
