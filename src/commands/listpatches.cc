@@ -50,6 +50,8 @@ int ListPatchesCmd::execute( Zypper &zypper, const std::vector<std::string> &pos
     if ( code != ZYPPER_EXIT_OK )
       return code;
 
+    _selectPatchOpts.fixupIfWithOptional();
+
     ResKindSet kinds {
       ResKind::patch
     };

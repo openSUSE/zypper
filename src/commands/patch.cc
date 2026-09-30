@@ -81,6 +81,8 @@ int PatchCmd::execute( Zypper &zypper, const std::vector<std::string> &positiona
   if ( code != ZYPPER_EXIT_OK )
     return code;
 
+  _selectPatchOpts.fixupIfWithOptional();
+
   // Reset to false when leaving the block in case we are in shell mode!
   DtorReset guard( zypper.runtimeData().solve_with_update );
   if ( _withUpdate )

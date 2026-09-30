@@ -56,6 +56,19 @@ std::vector<zypp::ZyppFlags::CommandGroup> SelectPatchOptionSet::options()
   }};
 }
 
+void SelectPatchOptionSet::fixupIfWithOptional()
+{
+  // bsc#1283249: "--category optional" should imply "--with-optional"
+  for ( const std::string & cat : _select._requestedPatchCategories ) {
+    if ( Patch::categoryEnum( cat ) == Patch::CAT_OPTIONAL ) {
+      Zypper & zypper = Zypper::instance();
+      zypper.out().notePar( str::Format(_("Category filter '%1%' implies --with-optional.")) % cat );
+      zypper.configNoConst().exclude_optional_patches = false;
+      return;
+    }
+  }
+}
+
 void SelectPatchOptionSet::reset()
 {
   _select._requestedIssues.clear();
