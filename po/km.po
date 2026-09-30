@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.km\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-27 11:53+0200\n"
+"POT-Creation-Date: 2026-09-30 17:24+0200\n"
 "PO-Revision-Date: 2025-07-22 12:48+0000\n"
 "Last-Translator: Julia Faltenbacher <julia.faltenbacher@suse.com>\n"
 "Language-Team: Khmer (Central) <https://l10n.opensuse.org/projects/zypper/"
@@ -629,7 +629,7 @@ msgstr "បន្ថែម​កា​រប៉ះទង្គិច ៖ '%s' 
 msgid "Did you mean %1%?"
 msgstr ""
 
-#: src/SolverRequester.cc:487
+#: src/SolverRequester.cc:489
 #, c-format, boost-format
 msgid "Ignoring option %s when updating the update stack first."
 msgstr ""
@@ -2959,12 +2959,12 @@ msgstr ""
 msgid "Write debug output to file <path>."
 msgstr ""
 
-#: src/commands/ps.cc:72 src/solve-commit.cc:634
+#: src/commands/ps.cc:72 src/solve-commit.cc:635
 msgid "Check failed:"
 msgstr "បានបរាជ័យ​ក្នុងការ​ត្រួតពិនិត្យ ៖"
 
 #. Here: Table output
-#: src/commands/ps.cc:127 src/solve-commit.cc:623
+#: src/commands/ps.cc:127 src/solve-commit.cc:624
 msgid "Checking for running processes using deleted libraries..."
 msgstr "ពិនិត្យ​មើល​ដំណើរការ​ដែល​កំពុង​រត់ ដោយ​ប្រើបណ្ណាល័យ​ដែល​បាន​លុប..."
 
@@ -4184,6 +4184,11 @@ msgstr ""
 msgid "Select issues matching the specified string."
 msgstr ""
 
+#: src/commands/selectpatchoptionset.cc:65
+#, boost-format
+msgid "Category filter '%1%' implies --with-optional."
+msgstr ""
+
 #: src/commands/services/add.cc:53
 #, boost-format
 msgid ""
@@ -4854,7 +4859,7 @@ msgstr ""
 msgid "Argument resolves to no package"
 msgstr "បានបរាជ័យ​ក្នុង​កា​រដោះស្រាយ​កញ្ចប់"
 
-#: src/commands/utils/download.cc:254 src/solve-commit.cc:1121
+#: src/commands/utils/download.cc:254 src/solve-commit.cc:1122
 msgid "Nothing to do."
 msgstr "គ្មាន​អ្វី​ត្រូវ​ធ្វើ ។"
 
@@ -5651,8 +5656,8 @@ msgstr "បិទ​ឃ្លាំង '%s' ។"
 msgid "Problem retrieving files from '%s'."
 msgstr "បញ្ហា​ក្នុងការ​ទៅ​យក​ឯកសារ​ពី '%s' ។"
 
-#: src/repos.cc:341 src/repos.cc:1869 src/solve-commit.cc:990
-#: src/solve-commit.cc:1022 src/solve-commit.cc:1046
+#: src/repos.cc:341 src/repos.cc:1869 src/solve-commit.cc:991
+#: src/solve-commit.cc:1023 src/solve-commit.cc:1047
 msgid "Please see the above error message for a hint."
 msgstr "សូម​មើល​សារ​កំហុស​ខាងលើ សម្រាប់​ព័ត៌មាន​ជំនួយ ។"
 
@@ -5707,8 +5712,8 @@ msgid ""
 "Troubleshooting"
 msgstr ""
 "វា​អាច​បណ្ដាល​មក​ពី​ទិន្នន័យ​មេតា​មិន​ត្រឹមត្រូវ​នៅ​ក្នុង​ឃ្លាំង ឬ​ដោយ​កំហុស​នៅ​ក្នុង​ឧបករណ៍​ញែក​ទិន្នន័យ​មេតា ។ "
-"ពេលក្រោយ បើ​មាន​ចម្ងល់ សូម​ផ្ញើ​របាយការណ៍​កំហុស​តាម​សេចក្ដី​ណែនាំ​ដូច​ខាង​ក្រោម​នៅ http://"
-"en.opensuse.org/Zypper/Troubleshooting"
+"ពេលក្រោយ បើ​មាន​ចម្ងល់ សូម​ផ្ញើ​របាយការណ៍​កំហុស​តាម​សេចក្ដី​ណែនាំ​ដូច​ខាង​ក្រោម​នៅ http://en.opensuse."
+"org/Zypper/Troubleshooting"
 
 #: src/repos.cc:446
 #, c-format, boost-format
@@ -6185,76 +6190,76 @@ msgstr ""
 msgid "Toggle show detailed conflict information."
 msgstr ""
 
-#: src/solve-commit.cc:230
+#: src/solve-commit.cc:231
 #, c-format, boost-format
 msgid "Applying solution %s"
 msgstr "កំពុង​អនុវត្ត​ដំណោះស្រាយ %s"
 
-#: src/solve-commit.cc:247
+#: src/solve-commit.cc:248
 msgid "Resolver failed but reported no problems."
 msgstr ""
 
 #. display the number of problems
-#: src/solve-commit.cc:259
+#: src/solve-commit.cc:260
 #, c-format, boost-format
 msgid "%d Problem:"
 msgid_plural "%d Problems:"
 msgstr[0] "%d បញ្ហា ៖"
 
 #. translator: The tag says that the preceding dependency problem is auto-resolved by applying the following solution
-#: src/solve-commit.cc:292
+#: src/solve-commit.cc:293
 msgid "Autoresolve:"
 msgstr ""
 
-#: src/solve-commit.cc:321
+#: src/solve-commit.cc:322
 msgid "Resolving dependencies..."
 msgstr "កំពុង​ដោះស្រាយ​ភាព​អាស្រ័យ..."
 
-#: src/solve-commit.cc:382
+#: src/solve-commit.cc:383
 msgid "Force resolution:"
 msgstr "តម្រូវ​ឲ្យប្រើ​គុណភាព​បង្ហាញ ៖"
 
-#: src/solve-commit.cc:481
+#: src/solve-commit.cc:482
 msgid "Verifying dependencies..."
 msgstr "កំពុង​ផ្ទៀងផ្ទាត់​ភាព​អាស្រ័យ..."
 
 #. Here: compute the full upgrade
-#: src/solve-commit.cc:531
+#: src/solve-commit.cc:532
 msgid "Computing upgrade..."
 msgstr "កំពុង​គណនា​ការ​ធ្វើ​ឲ្យ​ប្រសើរឡើង..."
 
-#: src/solve-commit.cc:545
+#: src/solve-commit.cc:546
 msgid "Generating solver test case..."
 msgstr "កំពុង​បង្កើត​ការ​សាកល្បង​កម្មវិធី​ដោះស្រាយ..."
 
-#: src/solve-commit.cc:547
+#: src/solve-commit.cc:548
 #, c-format, boost-format
 msgid "Solver test case generated successfully at %s."
 msgstr "ករណី​សាកល្បង​កញ្ចប់​ដោះស្រាយ បាន​បង្កើត​ដោយ​ជោគជ័យ​នៅ %s ។"
 
-#: src/solve-commit.cc:550
+#: src/solve-commit.cc:551
 msgid "Error creating the solver test case."
 msgstr "កំហុស​ក្នុង​ការ​បង្កើត​ការ​សាកល្បង​កម្មវិធី​ដោះស្រាយ ។"
 
-#: src/solve-commit.cc:602
+#: src/solve-commit.cc:603
 msgid ""
 "Explicitly selecting DownloadAsNeeded also selects the classic_rpmtrans "
 "backend."
 msgstr ""
 
-#: src/solve-commit.cc:620
+#: src/solve-commit.cc:621
 #, fuzzy, c-format, boost-format
 msgid ""
-"Check for running processes using deleted libraries is disabled in "
-"zypper.conf. Run '%s' to check manually."
+"Check for running processes using deleted libraries is disabled in zypper."
+"conf. Run '%s' to check manually."
 msgstr "ពិនិត្យ​មើល​ដំណើរការ​ដែល​កំពុង​រត់ ដោយ​ប្រើបណ្ណាល័យ​ដែល​បាន​លុប..."
 
-#: src/solve-commit.cc:636
+#: src/solve-commit.cc:637
 #, fuzzy
 msgid "Skip check:"
 msgstr "ការ​ពិនិត្យ​មើល GPG"
 
-#: src/solve-commit.cc:643
+#: src/solve-commit.cc:644
 #, boost-format
 msgid ""
 "There are running programs which still use files and libraries deleted or "
@@ -6262,32 +6267,32 @@ msgid ""
 "latest updates. Run '%1%' to list these programs."
 msgstr ""
 
-#: src/solve-commit.cc:657
+#: src/solve-commit.cc:658
 msgid "Update notifications were received from the following packages:"
 msgstr "ធ្វើ​បច្ចុប្បន្នភាព​​​ការ​ជូនដំណឹង​ដែល​ត្រូវបានទទួល​ពី​កញ្ចប់​ដូច​ខាងក្រោម ៖"
 
-#: src/solve-commit.cc:666
+#: src/solve-commit.cc:667
 #, c-format, boost-format
 msgid "Message from package %s:"
 msgstr "សារ​ពី​កញ្ចប់​ %s ៖"
 
-#: src/solve-commit.cc:674
+#: src/solve-commit.cc:675
 msgid "y/n"
 msgstr "y/n"
 
-#: src/solve-commit.cc:675
+#: src/solve-commit.cc:676
 msgid "View the notifications now?"
 msgstr "មើល​ការ​​ជូន​ដំណឹងឥឡូវ ?"
 
-#: src/solve-commit.cc:721
+#: src/solve-commit.cc:722
 msgid "Computing distribution upgrade..."
 msgstr "កំពុង​គណនា​ការ​ធ្វើ​ឲ្យការ​ចែកចាយ​ប្រសើរឡើង..."
 
-#: src/solve-commit.cc:726
+#: src/solve-commit.cc:727
 msgid "Resolving package dependencies..."
 msgstr "កំពុង​ដោះស្រាយ​ភាព​អាស្រ័យ​របស់​កញ្ចប់..."
 
-#: src/solve-commit.cc:788
+#: src/solve-commit.cc:789
 msgid ""
 "Some of the dependencies of installed packages are broken. In order to fix "
 "these dependencies, the following actions need to be taken:"
@@ -6295,7 +6300,7 @@ msgstr ""
 "ភាព​អាស្រ័យ​មួយ​ចំនួន​នៃ​កញ្ចប់​ដែលបាន​ដំឡើង គឺ​ខូច ។ ដើម្បី​ជួសជុល​ភាព​អាស្រ័យ​ទាំងនេះ ដែល​អំពើ​ខាងក្រោម​ត្រូវ​"
 "ជ្រើស ៖"
 
-#: src/solve-commit.cc:795
+#: src/solve-commit.cc:796
 msgid "Root privileges are required to fix broken package dependencies."
 msgstr "ត្រូវការ​សិទ្ធិ​ជា Root ដើម្បី​ជួសជុល​ភាព​អាស្រ័យ​របស់​កញ្ចប់​ដែល​ខូច ។"
 
@@ -6309,82 +6314,82 @@ msgstr "ត្រូវការ​សិទ្ធិ​ជា Root ដើម្
 #. The answers should be lower case letters, but in general, any UTF-8
 #. string will do.
 #. ! \todo add c for changelog and x for explain (show the dep tree)
-#: src/solve-commit.cc:817
+#: src/solve-commit.cc:818
 msgid "y/n/p/v/a/r/m/d/g"
 msgstr "y/n/p/v/a/r/m/d/g"
 
 #. translators: help text for 'y' option in the 'Continue?' prompt
-#: src/solve-commit.cc:822
+#: src/solve-commit.cc:823
 msgid ""
 "Yes, accept the summary and proceed with installation/removal of packages."
 msgstr "បាទ​/​ចាស ទទួល​យក​សេចក្ដី​សង្ខេប និង​បន្ត​ដំឡើង/​យក​កញ្ចប់​ចេញ ។"
 
 #. translators: help text for 'n' option in the 'Continue?' prompt
-#: src/solve-commit.cc:824
+#: src/solve-commit.cc:825
 msgid "No, cancel the operation."
 msgstr "ទេ បោះបង់​ប្រតិបត្តិការ ។"
 
 #. translators: help text for 'p' option in the 'Continue?' prompt
-#: src/solve-commit.cc:826
+#: src/solve-commit.cc:827
 msgid ""
 "Restart solver in no-force-resolution mode in order to show dependency "
 "problems."
 msgstr "ចាប់ផ្ដើម​កម្មវិធី​ដោះស្រាយ​នៅ​ក្នុង​របៀប​គ្មាន​កា​របង្ខំ ដើម្បី​បង្ហាញ​បញ្ហា​ភាព​អាស្រ័យ ។"
 
 #. translators: help text for 'v' option in the 'Continue?' prompt
-#: src/solve-commit.cc:828
+#: src/solve-commit.cc:829
 msgid "Toggle display of package versions."
 msgstr "បិទបើក​ការ​បង្ហាញ​កំណែ​កញ្ចប់ ។"
 
 #. translators: help text for 'a' option in the 'Continue?' prompt
-#: src/solve-commit.cc:830
+#: src/solve-commit.cc:831
 msgid "Toggle display of package architectures."
 msgstr "បិទបើក​ការ​បង្ហាញ​ស្ថាបត្យកម្ម​កញ្ចប់ ។"
 
 #. translators: help text for 'r' option in the 'Continue?' prompt
-#: src/solve-commit.cc:832
+#: src/solve-commit.cc:833
 msgid ""
 "Toggle display of repositories from which the packages will be installed."
 msgstr "បិទបើក​ការ​បង្ហាញ​ឃ្លាំង​ពី​កញ្ចប់​ដែល​នឹង​ត្រូវ​ដំឡើង ។"
 
 #. translators: help text for 'm' option in the 'Continue?' prompt
-#: src/solve-commit.cc:834
+#: src/solve-commit.cc:835
 msgid "Toggle display of package vendor names."
 msgstr "បិទ​បើក​ការ​បង្ហាញ​ឈ្មោះ​ក្រុមហ៊ុន​ផលិត​កញ្ចប់ ។"
 
 #. translators: help text for 'd' option in the 'Continue?' prompt
-#: src/solve-commit.cc:836
+#: src/solve-commit.cc:837
 msgid "Toggle between showing all details and as few details as possible."
 msgstr "បិទបើក​ការ​បង្ហាញ​សេចក្ដី​លម្អិតទាំង​អស់ និង​សេចក្ដី​លម្អិត​មួយ​ចំនួន​ដែល​អាច​បង្ហាញ​បាន ។"
 
 #. translators: help text for 'g' option in the 'Continue?' prompt
-#: src/solve-commit.cc:838
+#: src/solve-commit.cc:839
 msgid "View the summary in pager."
 msgstr "មើល​សេចក្ដី​សង្ខេប​​ក្នុង​ភេគយ័រ ។"
 
-#: src/solve-commit.cc:845
+#: src/solve-commit.cc:846
 msgid "Backend"
 msgstr ""
 
-#: src/solve-commit.cc:959
+#: src/solve-commit.cc:960
 msgid "committing"
 msgstr "ដាក់​ស្នើ"
 
-#: src/solve-commit.cc:961
+#: src/solve-commit.cc:962
 msgid "(dry run)"
 msgstr "(អនុវត្ត)"
 
-#: src/solve-commit.cc:989 src/solve-commit.cc:1023
+#: src/solve-commit.cc:990 src/solve-commit.cc:1024
 msgid "Problem retrieving the package file from the repository:"
 msgstr "បញ្ហា​ក្នុងការ​ទៅ​យក​ឯកសារ​កញ្ចប់​ពី​ឃ្លាំង ៖"
 
 #. translators: the first %s is 'zypper refresh' and the second is repo alias
-#: src/solve-commit.cc:1020
+#: src/solve-commit.cc:1021
 #, c-format, boost-format
 msgid "Repository '%s' is out of date. Running '%s' might help."
 msgstr "ឃ្លាំង '%s' គឺ​ហួស​សម័យ ។ បើ​រត់ '%s' គឺ​អាច​ជួយ​បាន ។"
 
-#: src/solve-commit.cc:1031
+#: src/solve-commit.cc:1032
 msgid ""
 "The package integrity check failed. This may be a problem with the "
 "repository or media. Try one of the following:\n"
@@ -6402,11 +6407,11 @@ msgstr ""
 "- ប្រើ​ឧបករណ៍​ផ្ទុក​ដំឡើង​ផ្សេង (ឧ. ប្រសិន​បើ​វា​ខូច)\n"
 "- ប្រើ​ឃ្លាំង​ផ្សេង"
 
-#: src/solve-commit.cc:1045
+#: src/solve-commit.cc:1046
 msgid "Problem occurred during or after installation or removal of packages:"
 msgstr "មាន​បញ្ហា​កើតឡើង​នៅពេល ឬ​បន្ទាប់​ដំឡើង ឬ​ការ​យក​កញ្ចប់​ចេញ ៖"
 
-#: src/solve-commit.cc:1084
+#: src/solve-commit.cc:1085
 msgid ""
 "One of the installed patches requires a reboot of your machine. Reboot as "
 "soon as possible."
@@ -6414,7 +6419,7 @@ msgstr ""
 "បំណះ​ដែល​បាន​ដំឡើង​មួយ តម្រូវ​ឲ្យ​ចាប់ផ្ដើម​ម៉ាស៊ីន​របស់​អ្នក​ឡើងវិញ ។ ចាប់ផ្ដើម​ឡើងវិញ​ឲ្យ​លឿន​តាម​ដែល​អាច​ធ្វើ​"
 "ទៅបាន ។"
 
-#: src/solve-commit.cc:1097
+#: src/solve-commit.cc:1098
 msgid ""
 "One of the installed patches affects the package manager itself. Run this "
 "command once more to install any other needed patches."
@@ -6422,7 +6427,7 @@ msgstr ""
 "បំណះ​មួយ​ក្នុង​ចំណោម​បំណះ​ដូច​ខាងក្រោម​ប៉ះពាល់​ដល់​កម្មវិធី​គ្រប់គ្រង​​កញ្ចប់​ខ្លួន​ឯង ។ រត់​ពាក្យ​បញ្ជា​ម្ដង​ទៀត​ដើម្បី​"
 "ដំឡើង​បំណះ​ដែល​ត្រូវការ​ផ្សេងៗ​ទៀត ។"
 
-#: src/solve-commit.cc:1119
+#: src/solve-commit.cc:1120
 msgid "Dependencies of all installed packages are satisfied."
 msgstr "ភាព​អាស្រ័យ​របស់​កញ្ចប់​ដែល​បាន​ដំឡើង​គឺ​ត្រឹមត្រូវ ។"
 

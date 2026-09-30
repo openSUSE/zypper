@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.el\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-27 11:53+0200\n"
+"POT-Creation-Date: 2026-09-30 17:24+0200\n"
 "PO-Revision-Date: 2026-02-24 02:04+0000\n"
 "Last-Translator: Efstathios Iosifidis <eiosifidis@yandex.com>\n"
 "Language-Team: Greek <https://l10n.opensuse.org/projects/zypper/master/el/>\n"
@@ -687,7 +687,7 @@ msgstr "Προσθήκη σύγκρουσης: '%s'."
 msgid "Did you mean %1%?"
 msgstr "Μήπως εννοούσατε %1%;"
 
-#: src/SolverRequester.cc:487
+#: src/SolverRequester.cc:489
 #, c-format, boost-format
 msgid "Ignoring option %s when updating the update stack first."
 msgstr ""
@@ -2600,8 +2600,8 @@ msgstr ""
 "Μια εντολή αφαίρεσης η οποία προτιμά την αντικατάσταση των εξαρτώμενων "
 "πακέτων αντί για την αφαίρεσή τους. Στην πραγματικότητα πρόκειται για μια "
 "πλήρη εντολή εγκατάστασης με τον τροποποιητή αφαίρεσης (-) εφαρμοσμένο στα "
-"ορίσματά της. Έτσι, το 'removeptf foo' είναι το ίδιο με το 'install -- "
-"-foo'. Γι' αυτό η εντολή δέχεται τις ίδιες επιλογές με την εντολή "
+"ορίσματά της. Έτσι, το 'removeptf foo' είναι το ίδιο με το 'install -- -"
+"foo'. Γι' αυτό η εντολή δέχεται τις ίδιες επιλογές με την εντολή "
 "εγκατάστασης. Είναι ο προτεινόμενος τρόπος αφαίρεσης ενός PTF (Program "
 "Temporary Fix)."
 
@@ -3065,15 +3065,15 @@ msgstr ""
 "$77777777777777777777777777777777777777777777777777..77...7.77.\n"
 "        ...$7777777777777777777777777777777777777777777777$77777.,7777$"
 "$.7$...\n"
-"        ."
-"$7777777777777777777777777777777777777777777777777I77777.7777$.~77$..\n"
+"        .$7777777777777777777777777777777777777777777777777I77777.7777$."
+"~77$..\n"
 "      ..7777777777777777777777777777777777777777777777777777..777$.....77777..\n"
 "     ..77777777777777777777777777777777777777777777777777777$. ..7777777777...\n"
 "     .777777777777777777777777777777777777777777777777777777777$...........7..\n"
-"   .."
-"$777777777+~I7$7777777777777777777777777777777777777777777777$77:+7$777..\n"
-"   .$77777$.         "
-".77777777777777777777777777777777777777777777777777$7..\n"
+"   ..$777777777+~I7$7777777777777777777777777777777777777777777777$77:"
+"+7$777..\n"
+"   ."
+"$77777$.         .77777777777777777777777777777777777777777777777777$7..\n"
 "   77777$.  ...777.. ...77777777777777777777777777777$$777$77$777777$I.\n"
 "  .7777$....777777777~....77777777$77....777777777777= .. ...  . .  ..\n"
 " ..77777  .777777777777....7777777...   ... ?77777777..\n"
@@ -3084,19 +3084,19 @@ msgstr ""
 "   .$77777........ .?7777      ...                   .$:\n"
 "     7777777.......$777$\n"
 "     .7$777777777777777.        ........  ....   . ..  ........  ..............\n"
-"     ...77777777777777..       777$7$$7.  77..   .$7...?7$7$777  .7$7$7$7$"
-"$.II.\n"
-"        ...77777777,...       $77777777. .77..   .77..77777777$  "
-".777777777....\n"
-"            .......           77....... ..77..   .77..77.....    "
-".77...... .\n"
+"     ...77777777777777..       777$7$$7.  77..   .$7...?7$7$777  .7$7$7$7$$."
+"II.\n"
+"        ...77777777,...       "
+"$77777777. .77..   .77..77777777$  .777777777....\n"
+"            .......           "
+"77....... ..77..   .77..77.....    .77...... .\n"
 ".7777..,7.77?...7777..7.?$$.  7$7$$$$7~...77..   .77..777$$$$7+...777$$$$?\n"
 "$....7.,7...7..7...,$ 7,...7...77777777$..77..   .77. .777777$77..7777777$\n"
 "7....7.,7   $..7777$7.$.  .7..       ,77..77.    .77.        .77 .77.\n"
-"$....$.,$...$..7......$.  "
-".7...,,,,,,77$..777::::777...,,,,,,77$..77:,,,,,,.\n"
-"I7777?.,$777$. 77777..7.  .7..$77777777.  .$77777$7...777777777  "
-".77777777$7\n"
+"$....$.,$...$..7......"
+"$.  .7...,,,,,,77$..777::::777...,,,,,,77$..77:,,,,,,.\n"
+"I7777?.,$777$. 77777..7.  .7..$77777777.  ."
+"$77777$7...777777777  .77777777$7\n"
 ".......,"
 "$...............  ..............  .....................  ...........\n"
 "      .,7\n"
@@ -3378,12 +3378,12 @@ msgstr ""
 msgid "Write debug output to file <path>."
 msgstr "Εγγραφή εξόδου αποσφαλμάτωσης στο αρχείο <path>."
 
-#: src/commands/ps.cc:72 src/solve-commit.cc:634
+#: src/commands/ps.cc:72 src/solve-commit.cc:635
 msgid "Check failed:"
 msgstr "Ο έλεγχος απέτυχε:"
 
 #. Here: Table output
-#: src/commands/ps.cc:127 src/solve-commit.cc:623
+#: src/commands/ps.cc:127 src/solve-commit.cc:624
 msgid "Checking for running processes using deleted libraries..."
 msgstr ""
 "Έλεγχος για διαδικασίες που εκτελούνται και χρησιμοποιούν διαγραμμένες "
@@ -4321,8 +4321,8 @@ msgid ""
 "Use the global GPG check setting defined in /etc/zypp/zypp.conf. This is the "
 "default."
 msgstr ""
-"Χρήση της καθολικής ρύθμισης ελέγχου GPG που ορίζεται στο /etc/zypp/"
-"zypp.conf. Αυτή είναι η προεπιλογή."
+"Χρήση της καθολικής ρύθμισης ελέγχου GPG που ορίζεται στο /etc/zypp/zypp."
+"conf. Αυτή είναι η προεπιλογή."
 
 #. translators: -a, --alias
 #: src/commands/reposerviceoptionsets.cc:182
@@ -4686,6 +4686,11 @@ msgstr "Επιλογή εφαρμόσιμων διορθώσεων για τα �
 #: src/commands/selectpatchoptionset.cc:50
 msgid "Select issues matching the specified string."
 msgstr "Επιλογή θεμάτων που ταιριάζουν με τη συγκεκριμένη συμβολοσειρά."
+
+#: src/commands/selectpatchoptionset.cc:65
+#, boost-format
+msgid "Category filter '%1%' implies --with-optional."
+msgstr ""
 
 #: src/commands/services/add.cc:53
 #, boost-format
@@ -5395,7 +5400,7 @@ msgstr ""
 msgid "Argument resolves to no package"
 msgstr "Το όρισμα δεν επιλύεται σε κάποιο πακέτο"
 
-#: src/commands/utils/download.cc:254 src/solve-commit.cc:1121
+#: src/commands/utils/download.cc:254 src/solve-commit.cc:1122
 msgid "Nothing to do."
 msgstr "Δεν υπάρχει τίποτα να γίνει."
 
@@ -6189,8 +6194,8 @@ msgstr "Σφάλμα απενεργοποίησης του αποθετηρίο�
 msgid "Problem retrieving files from '%s'."
 msgstr "Πρόβλημα κατά τη λήψη αρχείων από το %s."
 
-#: src/repos.cc:341 src/repos.cc:1869 src/solve-commit.cc:990
-#: src/solve-commit.cc:1022 src/solve-commit.cc:1046
+#: src/repos.cc:341 src/repos.cc:1869 src/solve-commit.cc:991
+#: src/solve-commit.cc:1023 src/solve-commit.cc:1047
 msgid "Please see the above error message for a hint."
 msgstr "Παρακαλώ δείτε το παραπάνω μήνυμα σφάλματος για κάποια υπόδειξη."
 
@@ -6760,17 +6765,17 @@ msgstr ""
 msgid "Toggle show detailed conflict information."
 msgstr ""
 
-#: src/solve-commit.cc:230
+#: src/solve-commit.cc:231
 #, c-format, boost-format
 msgid "Applying solution %s"
 msgstr "Εφαρμογή της λύσης %s"
 
-#: src/solve-commit.cc:247
+#: src/solve-commit.cc:248
 msgid "Resolver failed but reported no problems."
 msgstr ""
 
 #. display the number of problems
-#: src/solve-commit.cc:259
+#: src/solve-commit.cc:260
 #, c-format, boost-format
 msgid "%d Problem:"
 msgid_plural "%d Problems:"
@@ -6778,58 +6783,58 @@ msgstr[0] "%d Πρόβλημα:"
 msgstr[1] "%d Προβλήματα:"
 
 #. translator: The tag says that the preceding dependency problem is auto-resolved by applying the following solution
-#: src/solve-commit.cc:292
+#: src/solve-commit.cc:293
 msgid "Autoresolve:"
 msgstr ""
 
-#: src/solve-commit.cc:321
+#: src/solve-commit.cc:322
 msgid "Resolving dependencies..."
 msgstr "Επίλυση εξαρτήσεων..."
 
-#: src/solve-commit.cc:382
+#: src/solve-commit.cc:383
 msgid "Force resolution:"
 msgstr "Επιβολή ανάλυσης:"
 
-#: src/solve-commit.cc:481
+#: src/solve-commit.cc:482
 msgid "Verifying dependencies..."
 msgstr "Επαλήθευση εξαρτήσεων..."
 
 #. Here: compute the full upgrade
-#: src/solve-commit.cc:531
+#: src/solve-commit.cc:532
 msgid "Computing upgrade..."
 msgstr "Υπολογισμός αναβάθμισης..."
 
-#: src/solve-commit.cc:545
+#: src/solve-commit.cc:546
 msgid "Generating solver test case..."
 msgstr "Δημιουργία δοκιμαστικής επίλυσης..."
 
-#: src/solve-commit.cc:547
+#: src/solve-commit.cc:548
 #, c-format, boost-format
 msgid "Solver test case generated successfully at %s."
 msgstr "Η δοκιμαστική επίλυση δημιουργήθηκε με επιτυχία στο %s."
 
-#: src/solve-commit.cc:550
+#: src/solve-commit.cc:551
 msgid "Error creating the solver test case."
 msgstr "Σφάλμα κατά τη δημιουργία δοκιμαστικής επίλυσης."
 
-#: src/solve-commit.cc:602
+#: src/solve-commit.cc:603
 msgid ""
 "Explicitly selecting DownloadAsNeeded also selects the classic_rpmtrans "
 "backend."
 msgstr ""
 
-#: src/solve-commit.cc:620
+#: src/solve-commit.cc:621
 #, c-format, boost-format
 msgid ""
-"Check for running processes using deleted libraries is disabled in "
-"zypper.conf. Run '%s' to check manually."
+"Check for running processes using deleted libraries is disabled in zypper."
+"conf. Run '%s' to check manually."
 msgstr ""
 
-#: src/solve-commit.cc:636
+#: src/solve-commit.cc:637
 msgid "Skip check:"
 msgstr "Έλεγχος GPG"
 
-#: src/solve-commit.cc:643
+#: src/solve-commit.cc:644
 #, boost-format
 msgid ""
 "There are running programs which still use files and libraries deleted or "
@@ -6837,32 +6842,32 @@ msgid ""
 "latest updates. Run '%1%' to list these programs."
 msgstr ""
 
-#: src/solve-commit.cc:657
+#: src/solve-commit.cc:658
 msgid "Update notifications were received from the following packages:"
 msgstr "Οι ειδοποιήσεις ενημερώσεων ελήφθησαν από τα ακόλουθα πακέτα:"
 
-#: src/solve-commit.cc:666
+#: src/solve-commit.cc:667
 #, c-format, boost-format
 msgid "Message from package %s:"
 msgstr "Μήνυμα από το πακέτο %s:"
 
-#: src/solve-commit.cc:674
+#: src/solve-commit.cc:675
 msgid "y/n"
 msgstr "y/n"
 
-#: src/solve-commit.cc:675
+#: src/solve-commit.cc:676
 msgid "View the notifications now?"
 msgstr "Εμφάνιση ειδοποιήσεων τώρα;"
 
-#: src/solve-commit.cc:721
+#: src/solve-commit.cc:722
 msgid "Computing distribution upgrade..."
 msgstr "Υπολογισμός αναβάθμισης διανομής..."
 
-#: src/solve-commit.cc:726
+#: src/solve-commit.cc:727
 msgid "Resolving package dependencies..."
 msgstr "Επίλυση εξαρτήσεων πακέτων..."
 
-#: src/solve-commit.cc:788
+#: src/solve-commit.cc:789
 msgid ""
 "Some of the dependencies of installed packages are broken. In order to fix "
 "these dependencies, the following actions need to be taken:"
@@ -6871,7 +6876,7 @@ msgstr ""
 "Για να διορθωθούν αυτές τις εξαρτήσεις, οι ακόλουθες ενέργειες πρέπει να "
 "γίνουν:"
 
-#: src/solve-commit.cc:795
+#: src/solve-commit.cc:796
 msgid "Root privileges are required to fix broken package dependencies."
 msgstr ""
 "Απαιτούνται δικαιώματα root για τη διόρθωση κατεστραμμένων εξαρτήσεων "
@@ -6887,12 +6892,12 @@ msgstr ""
 #. The answers should be lower case letters, but in general, any UTF-8
 #. string will do.
 #. ! \todo add c for changelog and x for explain (show the dep tree)
-#: src/solve-commit.cc:817
+#: src/solve-commit.cc:818
 msgid "y/n/p/v/a/r/m/d/g"
 msgstr "y/n/p/v/a/r/m/d/g"
 
 #. translators: help text for 'y' option in the 'Continue?' prompt
-#: src/solve-commit.cc:822
+#: src/solve-commit.cc:823
 msgid ""
 "Yes, accept the summary and proceed with installation/removal of packages."
 msgstr ""
@@ -6900,12 +6905,12 @@ msgstr ""
 "πακέτων."
 
 #. translators: help text for 'n' option in the 'Continue?' prompt
-#: src/solve-commit.cc:824
+#: src/solve-commit.cc:825
 msgid "No, cancel the operation."
 msgstr "Όχι, ακύρωση της λειτουργίας."
 
 #. translators: help text for 'p' option in the 'Continue?' prompt
-#: src/solve-commit.cc:826
+#: src/solve-commit.cc:827
 msgid ""
 "Restart solver in no-force-resolution mode in order to show dependency "
 "problems."
@@ -6914,64 +6919,64 @@ msgstr ""
 "προβλήματα εξαρτήσεων."
 
 #. translators: help text for 'v' option in the 'Continue?' prompt
-#: src/solve-commit.cc:828
+#: src/solve-commit.cc:829
 msgid "Toggle display of package versions."
 msgstr "Εναλλαγή εμφάνισης των εκδόσεων των πακέτων."
 
 #. translators: help text for 'a' option in the 'Continue?' prompt
-#: src/solve-commit.cc:830
+#: src/solve-commit.cc:831
 msgid "Toggle display of package architectures."
 msgstr "Εναλλαγή εμφάνισης των αρχιτεκτονικών των πακέτων."
 
 #. translators: help text for 'r' option in the 'Continue?' prompt
-#: src/solve-commit.cc:832
+#: src/solve-commit.cc:833
 msgid ""
 "Toggle display of repositories from which the packages will be installed."
 msgstr ""
 "Εναλλαγή εμφάνισης των αποθετηρίων από τα οποία θα εγκατασταθούν τα πακέτα."
 
 #. translators: help text for 'm' option in the 'Continue?' prompt
-#: src/solve-commit.cc:834
+#: src/solve-commit.cc:835
 msgid "Toggle display of package vendor names."
 msgstr "Εναλλαγή εμφάνισης των ονομάτων των προμηθευτών."
 
 #. translators: help text for 'd' option in the 'Continue?' prompt
-#: src/solve-commit.cc:836
+#: src/solve-commit.cc:837
 msgid "Toggle between showing all details and as few details as possible."
 msgstr ""
 "Εναλλαγή μεταξύ εμφάνισης όλων των λεπτομερειών και των λιγότερο δυνατόν "
 "λεπτομερειών."
 
 #. translators: help text for 'g' option in the 'Continue?' prompt
-#: src/solve-commit.cc:838
+#: src/solve-commit.cc:839
 msgid "View the summary in pager."
 msgstr "Εμφάνιση της περίληψης στο σελιδοδείκτη."
 
-#: src/solve-commit.cc:845
+#: src/solve-commit.cc:846
 msgid "Backend"
 msgstr ""
 
-#: src/solve-commit.cc:959
+#: src/solve-commit.cc:960
 msgid "committing"
 msgstr "υποβολή"
 
-#: src/solve-commit.cc:961
+#: src/solve-commit.cc:962
 msgid "(dry run)"
 msgstr "(στεγνή εκτέλεση)"
 
-#: src/solve-commit.cc:989 src/solve-commit.cc:1023
+#: src/solve-commit.cc:990 src/solve-commit.cc:1024
 msgid "Problem retrieving the package file from the repository:"
 msgstr "Πρόβλημα κατά τη λήψη του πακέτου από το αποθετήριο:"
 
 #. translators: the first %s is 'zypper refresh' and the second is repo alias
-#: src/solve-commit.cc:1020
+#: src/solve-commit.cc:1021
 #, c-format, boost-format
 msgid "Repository '%s' is out of date. Running '%s' might help."
 msgstr ""
 "Το αποθετήριο '%s' δεν είναι ενημερωμένο. Η εκτέλεση του '%s' μπορεί να "
 "βοηθήσει."
 
-#: src/solve-commit.cc:1031
+#: src/solve-commit.cc:1032
 msgid ""
 "The package integrity check failed. This may be a problem with the "
 "repository or media. Try one of the following:\n"
@@ -6989,13 +6994,13 @@ msgstr ""
 "- χρησιμοποιήστε άλλο μέσο εγκατάστασης (εαν π.χ. είναι κατεστραμμένο)\n"
 "- χρησιμοποιήστε άλλο αποθετήριο"
 
-#: src/solve-commit.cc:1045
+#: src/solve-commit.cc:1046
 msgid "Problem occurred during or after installation or removal of packages:"
 msgstr ""
 "Παρουσιάστηκε πρόβλημα κατά ή μετά την εγκατάσταση ή την αφαίρεση των "
 "πακέτων:"
 
-#: src/solve-commit.cc:1084
+#: src/solve-commit.cc:1085
 msgid ""
 "One of the installed patches requires a reboot of your machine. Reboot as "
 "soon as possible."
@@ -7003,7 +7008,7 @@ msgstr ""
 "Μία από τις εγκατεστημένες διορθώσεις απαιτεί επανεκκίνηση του υπολογιστή "
 "σας. Επανεκκινήστε το συντομότερο δυνατόν."
 
-#: src/solve-commit.cc:1097
+#: src/solve-commit.cc:1098
 msgid ""
 "One of the installed patches affects the package manager itself. Run this "
 "command once more to install any other needed patches."
@@ -7012,7 +7017,7 @@ msgstr ""
 "Εκτελέστε αυτή την εντολή ακόμη μια φορά για να εγκαταστήσετε όποιες άλλες "
 "διορθώσεις απαιτούνται."
 
-#: src/solve-commit.cc:1119
+#: src/solve-commit.cc:1120
 msgid "Dependencies of all installed packages are satisfied."
 msgstr "Οι εξαρτήσεις όλων των εγκατεστημένων πακέτων είναι εντάξει."
 
@@ -9535,8 +9540,8 @@ msgstr "Σφάλμα"
 #~ "(ακόμα και απομακρυσμένα).\n"
 #~ "\n"
 #~ "  Επιλογές εντολής:\n"
-#~ "-r, --repo <file.repo>  Άλλος ένας τρόπος να καθορίσετε κάποιο "
-#~ "αρχείο .repo για ανάγνωση.\n"
+#~ "-r, --repo <file.repo>  Άλλος ένας τρόπος να καθορίσετε κάποιο αρχείο ."
+#~ "repo για ανάγνωση.\n"
 #~ "-t, --type <type>       Τύπος αποθετηρίου (%s).\n"
 #~ "-d, --disable           Προσθήκη του αποθετηρίου ως ανενεργό.\n"
 #~ "-c, --check             Ανίχνευση URI.\n"

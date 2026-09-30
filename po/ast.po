@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-27 11:53+0200\n"
+"POT-Creation-Date: 2026-09-30 17:24+0200\n"
 "PO-Revision-Date: 2025-07-22 12:48+0000\n"
 "Last-Translator: Julia Faltenbacher <julia.faltenbacher@suse.com>\n"
 "Language-Team: Asturian <https://l10n.opensuse.org/projects/zypper/master/"
@@ -632,7 +632,7 @@ msgstr "Amestando'l conflictu: «%s»."
 msgid "Did you mean %1%?"
 msgstr "¿Quixesti dicir %1%?"
 
-#: src/SolverRequester.cc:487
+#: src/SolverRequester.cc:489
 #, c-format, boost-format
 msgid "Ignoring option %s when updating the update stack first."
 msgstr ""
@@ -3032,12 +3032,12 @@ msgstr ""
 msgid "Write debug output to file <path>."
 msgstr ""
 
-#: src/commands/ps.cc:72 src/solve-commit.cc:634
+#: src/commands/ps.cc:72 src/solve-commit.cc:635
 msgid "Check failed:"
 msgstr ""
 
 #. Here: Table output
-#: src/commands/ps.cc:127 src/solve-commit.cc:623
+#: src/commands/ps.cc:127 src/solve-commit.cc:624
 msgid "Checking for running processes using deleted libraries..."
 msgstr ""
 
@@ -4252,6 +4252,11 @@ msgstr ""
 msgid "Select issues matching the specified string."
 msgstr ""
 
+#: src/commands/selectpatchoptionset.cc:65
+#, boost-format
+msgid "Category filter '%1%' implies --with-optional."
+msgstr ""
+
 #: src/commands/services/add.cc:53
 #, boost-format
 msgid ""
@@ -4936,7 +4941,7 @@ msgstr ""
 msgid "Argument resolves to no package"
 msgstr ""
 
-#: src/commands/utils/download.cc:254 src/solve-commit.cc:1121
+#: src/commands/utils/download.cc:254 src/solve-commit.cc:1122
 msgid "Nothing to do."
 msgstr "Nada pa facer."
 
@@ -5719,8 +5724,8 @@ msgstr "Fallu entrín se deshabilitaba'l repositoriu «%s»."
 msgid "Problem retrieving files from '%s'."
 msgstr "Problemes recibiendo ficheros de «%s»."
 
-#: src/repos.cc:341 src/repos.cc:1869 src/solve-commit.cc:990
-#: src/solve-commit.cc:1022 src/solve-commit.cc:1046
+#: src/repos.cc:341 src/repos.cc:1869 src/solve-commit.cc:991
+#: src/solve-commit.cc:1023 src/solve-commit.cc:1047
 msgid "Please see the above error message for a hint."
 msgstr ""
 
@@ -6247,17 +6252,17 @@ msgstr ""
 msgid "Toggle show detailed conflict information."
 msgstr ""
 
-#: src/solve-commit.cc:230
+#: src/solve-commit.cc:231
 #, c-format, boost-format
 msgid "Applying solution %s"
 msgstr ""
 
-#: src/solve-commit.cc:247
+#: src/solve-commit.cc:248
 msgid "Resolver failed but reported no problems."
 msgstr ""
 
 #. display the number of problems
-#: src/solve-commit.cc:259
+#: src/solve-commit.cc:260
 #, c-format, boost-format
 msgid "%d Problem:"
 msgid_plural "%d Problems:"
@@ -6265,58 +6270,58 @@ msgstr[0] "%d problema:"
 msgstr[1] "%d problemes:"
 
 #. translator: The tag says that the preceding dependency problem is auto-resolved by applying the following solution
-#: src/solve-commit.cc:292
+#: src/solve-commit.cc:293
 msgid "Autoresolve:"
 msgstr ""
 
-#: src/solve-commit.cc:321
+#: src/solve-commit.cc:322
 msgid "Resolving dependencies..."
 msgstr "Resolviendo dependencies..."
 
-#: src/solve-commit.cc:382
+#: src/solve-commit.cc:383
 msgid "Force resolution:"
 msgstr ""
 
-#: src/solve-commit.cc:481
+#: src/solve-commit.cc:482
 msgid "Verifying dependencies..."
 msgstr "Verificando dependencies..."
 
 #. Here: compute the full upgrade
-#: src/solve-commit.cc:531
+#: src/solve-commit.cc:532
 msgid "Computing upgrade..."
 msgstr ""
 
-#: src/solve-commit.cc:545
+#: src/solve-commit.cc:546
 msgid "Generating solver test case..."
 msgstr ""
 
-#: src/solve-commit.cc:547
+#: src/solve-commit.cc:548
 #, c-format, boost-format
 msgid "Solver test case generated successfully at %s."
 msgstr ""
 
-#: src/solve-commit.cc:550
+#: src/solve-commit.cc:551
 msgid "Error creating the solver test case."
 msgstr ""
 
-#: src/solve-commit.cc:602
+#: src/solve-commit.cc:603
 msgid ""
 "Explicitly selecting DownloadAsNeeded also selects the classic_rpmtrans "
 "backend."
 msgstr ""
 
-#: src/solve-commit.cc:620
+#: src/solve-commit.cc:621
 #, c-format, boost-format
 msgid ""
-"Check for running processes using deleted libraries is disabled in "
-"zypper.conf. Run '%s' to check manually."
+"Check for running processes using deleted libraries is disabled in zypper."
+"conf. Run '%s' to check manually."
 msgstr ""
 
-#: src/solve-commit.cc:636
+#: src/solve-commit.cc:637
 msgid "Skip check:"
 msgstr ""
 
-#: src/solve-commit.cc:643
+#: src/solve-commit.cc:644
 #, boost-format
 msgid ""
 "There are running programs which still use files and libraries deleted or "
@@ -6324,38 +6329,38 @@ msgid ""
 "latest updates. Run '%1%' to list these programs."
 msgstr ""
 
-#: src/solve-commit.cc:657
+#: src/solve-commit.cc:658
 msgid "Update notifications were received from the following packages:"
 msgstr "Recibiéronse avisos d'anovamientu de los paquetes de darréu:"
 
-#: src/solve-commit.cc:666
+#: src/solve-commit.cc:667
 #, c-format, boost-format
 msgid "Message from package %s:"
 msgstr "Mensaxe del paquete %s:"
 
-#: src/solve-commit.cc:674
+#: src/solve-commit.cc:675
 msgid "y/n"
 msgstr "s/n"
 
-#: src/solve-commit.cc:675
+#: src/solve-commit.cc:676
 msgid "View the notifications now?"
 msgstr "¿Ver agora los avisos?"
 
-#: src/solve-commit.cc:721
+#: src/solve-commit.cc:722
 msgid "Computing distribution upgrade..."
 msgstr "Calculando anovamientu de distribución..."
 
-#: src/solve-commit.cc:726
+#: src/solve-commit.cc:727
 msgid "Resolving package dependencies..."
 msgstr "Ríquesen dependencies de paquetes..."
 
-#: src/solve-commit.cc:788
+#: src/solve-commit.cc:789
 msgid ""
 "Some of the dependencies of installed packages are broken. In order to fix "
 "these dependencies, the following actions need to be taken:"
 msgstr ""
 
-#: src/solve-commit.cc:795
+#: src/solve-commit.cc:796
 msgid "Root privileges are required to fix broken package dependencies."
 msgstr "Ríquense privilexos root pa iguar dependencies rotes de paquetes."
 
@@ -6369,82 +6374,82 @@ msgstr "Ríquense privilexos root pa iguar dependencies rotes de paquetes."
 #. The answers should be lower case letters, but in general, any UTF-8
 #. string will do.
 #. ! \todo add c for changelog and x for explain (show the dep tree)
-#: src/solve-commit.cc:817
+#: src/solve-commit.cc:818
 msgid "y/n/p/v/a/r/m/d/g"
 msgstr "s/n/p/v/a/r/m/d/x"
 
 #. translators: help text for 'y' option in the 'Continue?' prompt
-#: src/solve-commit.cc:822
+#: src/solve-commit.cc:823
 msgid ""
 "Yes, accept the summary and proceed with installation/removal of packages."
 msgstr ""
 
 #. translators: help text for 'n' option in the 'Continue?' prompt
-#: src/solve-commit.cc:824
+#: src/solve-commit.cc:825
 msgid "No, cancel the operation."
 msgstr ""
 
 #. translators: help text for 'p' option in the 'Continue?' prompt
-#: src/solve-commit.cc:826
+#: src/solve-commit.cc:827
 msgid ""
 "Restart solver in no-force-resolution mode in order to show dependency "
 "problems."
 msgstr ""
 
 #. translators: help text for 'v' option in the 'Continue?' prompt
-#: src/solve-commit.cc:828
+#: src/solve-commit.cc:829
 msgid "Toggle display of package versions."
 msgstr ""
 
 #. translators: help text for 'a' option in the 'Continue?' prompt
-#: src/solve-commit.cc:830
+#: src/solve-commit.cc:831
 msgid "Toggle display of package architectures."
 msgstr ""
 
 #. translators: help text for 'r' option in the 'Continue?' prompt
-#: src/solve-commit.cc:832
+#: src/solve-commit.cc:833
 msgid ""
 "Toggle display of repositories from which the packages will be installed."
 msgstr ""
 
 #. translators: help text for 'm' option in the 'Continue?' prompt
-#: src/solve-commit.cc:834
+#: src/solve-commit.cc:835
 msgid "Toggle display of package vendor names."
 msgstr ""
 
 #. translators: help text for 'd' option in the 'Continue?' prompt
-#: src/solve-commit.cc:836
+#: src/solve-commit.cc:837
 msgid "Toggle between showing all details and as few details as possible."
 msgstr ""
 
 #. translators: help text for 'g' option in the 'Continue?' prompt
-#: src/solve-commit.cc:838
+#: src/solve-commit.cc:839
 msgid "View the summary in pager."
 msgstr ""
 
-#: src/solve-commit.cc:845
+#: src/solve-commit.cc:846
 msgid "Backend"
 msgstr ""
 
-#: src/solve-commit.cc:959
+#: src/solve-commit.cc:960
 msgid "committing"
 msgstr "unviando"
 
-#: src/solve-commit.cc:961
+#: src/solve-commit.cc:962
 msgid "(dry run)"
 msgstr ""
 
-#: src/solve-commit.cc:989 src/solve-commit.cc:1023
+#: src/solve-commit.cc:990 src/solve-commit.cc:1024
 msgid "Problem retrieving the package file from the repository:"
 msgstr ""
 
 #. translators: the first %s is 'zypper refresh' and the second is repo alias
-#: src/solve-commit.cc:1020
+#: src/solve-commit.cc:1021
 #, c-format, boost-format
 msgid "Repository '%s' is out of date. Running '%s' might help."
 msgstr "El repositoriu «%s» ta ensin anovar. Executar «%s» quiciabes ayude."
 
-#: src/solve-commit.cc:1031
+#: src/solve-commit.cc:1032
 msgid ""
 "The package integrity check failed. This may be a problem with the "
 "repository or media. Try one of the following:\n"
@@ -6455,12 +6460,12 @@ msgid ""
 "- use another repository"
 msgstr ""
 
-#: src/solve-commit.cc:1045
+#: src/solve-commit.cc:1046
 msgid "Problem occurred during or after installation or removal of packages:"
 msgstr ""
 "Asocedieron problemes dempués o na instalación o desaniciu de paquetes:"
 
-#: src/solve-commit.cc:1084
+#: src/solve-commit.cc:1085
 msgid ""
 "One of the installed patches requires a reboot of your machine. Reboot as "
 "soon as possible."
@@ -6468,7 +6473,7 @@ msgstr ""
 "Ún de los parches instalaos rique'l reaniciu del to ordenador. Reanicia lo "
 "más ceo posible."
 
-#: src/solve-commit.cc:1097
+#: src/solve-commit.cc:1098
 msgid ""
 "One of the installed patches affects the package manager itself. Run this "
 "command once more to install any other needed patches."
@@ -6476,7 +6481,7 @@ msgstr ""
 "Ún de los parches instalaos afeuta al xestor de paquetes. Executa esti "
 "comandu una vegada más pa instalar cualesquier otru parche precisu."
 
-#: src/solve-commit.cc:1119
+#: src/solve-commit.cc:1120
 msgid "Dependencies of all installed packages are satisfied."
 msgstr ""
 

@@ -16,11 +16,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.de\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-27 11:53+0200\n"
+"POT-Creation-Date: 2026-09-30 17:24+0200\n"
 "PO-Revision-Date: 2026-09-06 11:13+0000\n"
 "Last-Translator: Ettore Atalan <atalanttore@googlemail.com>\n"
-"Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/>"
-"\n"
+"Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/"
+">\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -688,7 +688,7 @@ msgstr "Konflikt '%s' wird hinzugefügt."
 msgid "Did you mean %1%?"
 msgstr "Meinten Sie %1%?"
 
-#: src/SolverRequester.cc:487
+#: src/SolverRequester.cc:489
 #, c-format, boost-format
 msgid "Ignoring option %s when updating the update stack first."
 msgstr ""
@@ -3361,12 +3361,12 @@ msgstr ""
 msgid "Write debug output to file <path>."
 msgstr "Debug-Ausgabe in Datei-<Pfad> schreiben."
 
-#: src/commands/ps.cc:72 src/solve-commit.cc:634
+#: src/commands/ps.cc:72 src/solve-commit.cc:635
 msgid "Check failed:"
 msgstr "Prüfung fehlerhaft:"
 
 #. Here: Table output
-#: src/commands/ps.cc:127 src/solve-commit.cc:623
+#: src/commands/ps.cc:127 src/solve-commit.cc:624
 msgid "Checking for running processes using deleted libraries..."
 msgstr "Suche nach aktiven Prozessen, die gelöschte Bibliotheken benutzen..."
 
@@ -3749,8 +3749,8 @@ msgstr ""
 msgid ""
 "If only one argument is used, it must be a URI pointing to a .repo file."
 msgstr ""
-"Wenn nur ein Argument verwendet wird, dann muss es sich um einen auf "
-"eine .repo-Datei verweisenden URI handeln."
+"Wenn nur ein Argument verwendet wird, dann muss es sich um einen auf eine ."
+"repo-Datei verweisenden URI handeln."
 
 #: src/commands/repos/add.cc:130
 msgid "Specified type is not a valid repository type:"
@@ -4683,6 +4683,11 @@ msgstr "Wählen Sie anwendbare Patches für die angegebenen CVE-Einträge aus."
 msgid "Select issues matching the specified string."
 msgstr "Wählen Sie Einträge aus, die der angegebenen Zeichenfolge entsprechen."
 
+#: src/commands/selectpatchoptionset.cc:65
+#, boost-format
+msgid "Category filter '%1%' implies --with-optional."
+msgstr ""
+
 #: src/commands/services/add.cc:53
 #, boost-format
 msgid ""
@@ -5447,7 +5452,7 @@ msgstr ""
 msgid "Argument resolves to no package"
 msgstr "Argument löst sich nicht zu einem Paket auf"
 
-#: src/commands/utils/download.cc:254 src/solve-commit.cc:1121
+#: src/commands/utils/download.cc:254 src/solve-commit.cc:1122
 msgid "Nothing to do."
 msgstr "Keine auszuführenden Aktionen."
 
@@ -5507,9 +5512,9 @@ msgid ""
 "N), running, oldest(+N)."
 msgstr ""
 "Automatische Löschungen von installierten Kerneln gemäß der Liste an "
-"Kerneln, die von /etc/zypp/zypp.conf behalten werden sollen: "
-"multiversion.kernels, die als <Version>, aktuellster(-N), laufend, "
-"ältester(+N) gegeben sein können."
+"Kerneln, die von /etc/zypp/zypp.conf behalten werden sollen: multiversion."
+"kernels, die als <Version>, aktuellster(-N), laufend, ältester(+N) gegeben "
+"sein können."
 
 #: src/commands/utils/purge-kernels.cc:51
 msgid "Preparing to purge obsolete kernels..."
@@ -6264,8 +6269,8 @@ msgstr "Fehler beim Deaktivieren des Repositorys '%s'."
 msgid "Problem retrieving files from '%s'."
 msgstr "Problem beim Abrufen der Dateien von '%s'."
 
-#: src/repos.cc:341 src/repos.cc:1869 src/solve-commit.cc:990
-#: src/solve-commit.cc:1022 src/solve-commit.cc:1046
+#: src/repos.cc:341 src/repos.cc:1869 src/solve-commit.cc:991
+#: src/solve-commit.cc:1023 src/solve-commit.cc:1047
 msgid "Please see the above error message for a hint."
 msgstr "In der Fehlermeldung oben finden Sie einen entsprechenden Hinweis."
 
@@ -6844,17 +6849,17 @@ msgstr "Keine Lösung wählen und abbrechen."
 msgid "Toggle show detailed conflict information."
 msgstr "Umschalten der Anzeige der detaillierten Konfliktinformation."
 
-#: src/solve-commit.cc:230
+#: src/solve-commit.cc:231
 #, c-format, boost-format
 msgid "Applying solution %s"
 msgstr "Lösung %s wird angewendet"
 
-#: src/solve-commit.cc:247
+#: src/solve-commit.cc:248
 msgid "Resolver failed but reported no problems."
 msgstr "Auflöser ist fehlgeschlagen, hat aber keine Probleme gemeldet."
 
 #. display the number of problems
-#: src/solve-commit.cc:259
+#: src/solve-commit.cc:260
 #, c-format, boost-format
 msgid "%d Problem:"
 msgid_plural "%d Problems:"
@@ -6862,41 +6867,41 @@ msgstr[0] "%d Problem:"
 msgstr[1] "%d Probleme:"
 
 #. translator: The tag says that the preceding dependency problem is auto-resolved by applying the following solution
-#: src/solve-commit.cc:292
+#: src/solve-commit.cc:293
 msgid "Autoresolve:"
 msgstr "Automatisch auflösen:"
 
-#: src/solve-commit.cc:321
+#: src/solve-commit.cc:322
 msgid "Resolving dependencies..."
 msgstr "Abhängigkeiten werden aufgelöst..."
 
-#: src/solve-commit.cc:382
+#: src/solve-commit.cc:383
 msgid "Force resolution:"
 msgstr "Auflösung erzwingen:"
 
-#: src/solve-commit.cc:481
+#: src/solve-commit.cc:482
 msgid "Verifying dependencies..."
 msgstr "Abhängigkeiten werden überprüft..."
 
 #. Here: compute the full upgrade
-#: src/solve-commit.cc:531
+#: src/solve-commit.cc:532
 msgid "Computing upgrade..."
 msgstr "Aktualisierung wird berechnet..."
 
-#: src/solve-commit.cc:545
+#: src/solve-commit.cc:546
 msgid "Generating solver test case..."
 msgstr "Testfall für Auflösung wird erzeugt..."
 
-#: src/solve-commit.cc:547
+#: src/solve-commit.cc:548
 #, c-format, boost-format
 msgid "Solver test case generated successfully at %s."
 msgstr "Testfall für Auflösung erfolgreich unter %s erzeugt."
 
-#: src/solve-commit.cc:550
+#: src/solve-commit.cc:551
 msgid "Error creating the solver test case."
 msgstr "Fehler beim Erstellen des Testfalls für Auflösung."
 
-#: src/solve-commit.cc:602
+#: src/solve-commit.cc:603
 msgid ""
 "Explicitly selecting DownloadAsNeeded also selects the classic_rpmtrans "
 "backend."
@@ -6904,20 +6909,20 @@ msgstr ""
 "Wenn „DownloadAsNeeded“ ausgewählt wird, wird das Backend „classic_rpmtrans“ "
 "direkt mit ausgewählt."
 
-#: src/solve-commit.cc:620
+#: src/solve-commit.cc:621
 #, c-format, boost-format
 msgid ""
-"Check for running processes using deleted libraries is disabled in "
-"zypper.conf. Run '%s' to check manually."
+"Check for running processes using deleted libraries is disabled in zypper."
+"conf. Run '%s' to check manually."
 msgstr ""
 "Die Suche nach laufenden Prozessen, die gelöschte Bibliotheken verwenden, "
 "ist in zypper.conf deaktiviert. Starten Sie die Suche manuell mit '%s'."
 
-#: src/solve-commit.cc:636
+#: src/solve-commit.cc:637
 msgid "Skip check:"
 msgstr "Überprüfung überspringen:"
 
-#: src/solve-commit.cc:643
+#: src/solve-commit.cc:644
 #, boost-format
 msgid ""
 "There are running programs which still use files and libraries deleted or "
@@ -6929,33 +6934,33 @@ msgstr ""
 "Sie die Programme neu, um die Aktualisierungen zu nutzen. Mit '%1%' erhalten "
 "Sie eine Liste dieser Programme."
 
-#: src/solve-commit.cc:657
+#: src/solve-commit.cc:658
 msgid "Update notifications were received from the following packages:"
 msgstr ""
 "Aktualisierungsbenachrichtigungen wurden von den folgenden Paketen empfangen:"
 
-#: src/solve-commit.cc:666
+#: src/solve-commit.cc:667
 #, c-format, boost-format
 msgid "Message from package %s:"
 msgstr "Nachricht von Paket %s:"
 
-#: src/solve-commit.cc:674
+#: src/solve-commit.cc:675
 msgid "y/n"
 msgstr "j/n"
 
-#: src/solve-commit.cc:675
+#: src/solve-commit.cc:676
 msgid "View the notifications now?"
 msgstr "Benachrichtigungen jetzt anzeigen?"
 
-#: src/solve-commit.cc:721
+#: src/solve-commit.cc:722
 msgid "Computing distribution upgrade..."
 msgstr "Distributions-Aktualisierungen werden verarbeitet..."
 
-#: src/solve-commit.cc:726
+#: src/solve-commit.cc:727
 msgid "Resolving package dependencies..."
 msgstr "Paketabhängigkeiten werden aufgelöst..."
 
-#: src/solve-commit.cc:788
+#: src/solve-commit.cc:789
 msgid ""
 "Some of the dependencies of installed packages are broken. In order to fix "
 "these dependencies, the following actions need to be taken:"
@@ -6964,7 +6969,7 @@ msgstr ""
 "Abhängigkeiten zu reparieren, müssen die folgenden Aktionen ausgeführt "
 "werden:"
 
-#: src/solve-commit.cc:795
+#: src/solve-commit.cc:796
 msgid "Root privileges are required to fix broken package dependencies."
 msgstr ""
 "Zur Reparatur beschädigter Paketabhängigkeiten sind Root-Berechtigungen "
@@ -6980,12 +6985,12 @@ msgstr ""
 #. The answers should be lower case letters, but in general, any UTF-8
 #. string will do.
 #. ! \todo add c for changelog and x for explain (show the dep tree)
-#: src/solve-commit.cc:817
+#: src/solve-commit.cc:818
 msgid "y/n/p/v/a/r/m/d/g"
 msgstr "j/n/p/v/a/r/h/d/g"
 
 #. translators: help text for 'y' option in the 'Continue?' prompt
-#: src/solve-commit.cc:822
+#: src/solve-commit.cc:823
 msgid ""
 "Yes, accept the summary and proceed with installation/removal of packages."
 msgstr ""
@@ -6993,12 +6998,12 @@ msgstr ""
 "Pakete fortfahren."
 
 #. translators: help text for 'n' option in the 'Continue?' prompt
-#: src/solve-commit.cc:824
+#: src/solve-commit.cc:825
 msgid "No, cancel the operation."
 msgstr "Nein, den Vorgang abbrechen."
 
 #. translators: help text for 'p' option in the 'Continue?' prompt
-#: src/solve-commit.cc:826
+#: src/solve-commit.cc:827
 msgid ""
 "Restart solver in no-force-resolution mode in order to show dependency "
 "problems."
@@ -7007,17 +7012,17 @@ msgstr ""
 "Abhängigkeitsprobleme anzuzeigen."
 
 #. translators: help text for 'v' option in the 'Continue?' prompt
-#: src/solve-commit.cc:828
+#: src/solve-commit.cc:829
 msgid "Toggle display of package versions."
 msgstr "Anzeige der Paketversionen ein-/ausschalten."
 
 #. translators: help text for 'a' option in the 'Continue?' prompt
-#: src/solve-commit.cc:830
+#: src/solve-commit.cc:831
 msgid "Toggle display of package architectures."
 msgstr "Anzeige der Paketarchitekturen ein-/ausschalten."
 
 #. translators: help text for 'r' option in the 'Continue?' prompt
-#: src/solve-commit.cc:832
+#: src/solve-commit.cc:833
 msgid ""
 "Toggle display of repositories from which the packages will be installed."
 msgstr ""
@@ -7025,44 +7030,44 @@ msgstr ""
 "ausschalten."
 
 #. translators: help text for 'm' option in the 'Continue?' prompt
-#: src/solve-commit.cc:834
+#: src/solve-commit.cc:835
 msgid "Toggle display of package vendor names."
 msgstr "Anzeige der Namen der Paketanbieter ein-/ausschalten."
 
 #. translators: help text for 'd' option in the 'Continue?' prompt
-#: src/solve-commit.cc:836
+#: src/solve-commit.cc:837
 msgid "Toggle between showing all details and as few details as possible."
 msgstr ""
 "Anzeige zwischen 'Alle Details' und 'Möglichst wenig Details' umschalten."
 
 #. translators: help text for 'g' option in the 'Continue?' prompt
-#: src/solve-commit.cc:838
+#: src/solve-commit.cc:839
 msgid "View the summary in pager."
 msgstr "Zusammenfassung im Pager anzeigen."
 
-#: src/solve-commit.cc:845
+#: src/solve-commit.cc:846
 msgid "Backend"
 msgstr "Backend"
 
-#: src/solve-commit.cc:959
+#: src/solve-commit.cc:960
 msgid "committing"
 msgstr "speichern"
 
-#: src/solve-commit.cc:961
+#: src/solve-commit.cc:962
 msgid "(dry run)"
 msgstr "(Probelauf)"
 
-#: src/solve-commit.cc:989 src/solve-commit.cc:1023
+#: src/solve-commit.cc:990 src/solve-commit.cc:1024
 msgid "Problem retrieving the package file from the repository:"
 msgstr "Problem beim Abrufen der Paketdatei aus dem Repository:"
 
 #. translators: the first %s is 'zypper refresh' and the second is repo alias
-#: src/solve-commit.cc:1020
+#: src/solve-commit.cc:1021
 #, c-format, boost-format
 msgid "Repository '%s' is out of date. Running '%s' might help."
 msgstr "Repository '%s' ist veraltet. Vielleicht hilft es, '%s' auszuführen."
 
-#: src/solve-commit.cc:1031
+#: src/solve-commit.cc:1032
 msgid ""
 "The package integrity check failed. This may be a problem with the "
 "repository or media. Try one of the following:\n"
@@ -7081,13 +7086,13 @@ msgstr ""
 " – Ein anderes Installationsmedium (z. B. bei Beschädigung) verwenden\n"
 " – Ein anderes Repository verwenden"
 
-#: src/solve-commit.cc:1045
+#: src/solve-commit.cc:1046
 msgid "Problem occurred during or after installation or removal of packages:"
 msgstr ""
 "Während oder nach der Installation/dem Entfernung von Paketen ist ein "
 "Problem aufgetreten:"
 
-#: src/solve-commit.cc:1084
+#: src/solve-commit.cc:1085
 msgid ""
 "One of the installed patches requires a reboot of your machine. Reboot as "
 "soon as possible."
@@ -7095,7 +7100,7 @@ msgstr ""
 "Einer der installierten Patches erfordert einen Neustart des Computers. "
 "Führen Sie den Neustart so bald als möglich aus."
 
-#: src/solve-commit.cc:1097
+#: src/solve-commit.cc:1098
 msgid ""
 "One of the installed patches affects the package manager itself. Run this "
 "command once more to install any other needed patches."
@@ -7103,7 +7108,7 @@ msgstr ""
 "Einer der installierten Patches betrifft den Paketmanager selbst. Führen Sie "
 "das Kommando erneut aus, um weitere erforderliche Patches zu installieren."
 
-#: src/solve-commit.cc:1119
+#: src/solve-commit.cc:1120
 msgid "Dependencies of all installed packages are satisfied."
 msgstr "Die Abhängigkeiten aller installierten Pakete sind berücksichtigt."
 
@@ -9731,8 +9736,8 @@ msgstr "Fehler"
 #~ "Standard.\n"
 #~ "-f, --file-list            Suche nach einem Treffer in der Dateiliste der "
 #~ "Pakete.\n"
-#~ "-d, --search-descriptions  Suche auch in Paketzusammenfassungen und "
-#~ "-beschreibungen.\n"
+#~ "-d, --search-descriptions  Suche auch in Paketzusammenfassungen und -"
+#~ "beschreibungen.\n"
 #~ "-C, --case-sensitive       Beachtung der Groß-/Kleinschreibung.\n"
 #~ "-i, --installed-only       Nur Pakete anzeigen, die schon installiert "
 #~ "sind.\n"
@@ -12130,8 +12135,8 @@ msgstr "Fehler"
 #~ "                           ist die Suche in Paketnamen der Standard.\n"
 #~ "-f, --file-list            Suche nach einer Übereinstimmung in der "
 #~ "Dateiliste der Pakete.\n"
-#~ "-d, --search-descriptions  Suche auch in Paketzusammenfassungen und "
-#~ "-beschreibungen.\n"
+#~ "-d, --search-descriptions  Suche auch in Paketzusammenfassungen und -"
+#~ "beschreibungen.\n"
 #~ "-C, --case-sensitive       Suche unter Beachtung der "
 #~ "Großkleinschreibung.\n"
 #~ "-i, --installed-only       Zeige nur schon installierte Pakete.\n"
@@ -12198,8 +12203,8 @@ msgstr "Fehler"
 #~ "    --match-words          Nach einer Übereinstimmung mit nur ganzen "
 #~ "Wörtern suchen.\n"
 #~ "    --match-exact          Nach einem genauen Paketnamen suchen.\n"
-#~ "-d, --search-descriptions  Auch in Paketzusammenfassungen und "
-#~ "-beschreibungen suchen.\n"
+#~ "-d, --search-descriptions  Auch in Paketzusammenfassungen und -"
+#~ "beschreibungen suchen.\n"
 #~ "-C, --case-sensitive       Eine Groß- und Kleinschreibung "
 #~ "berücksichtigende Suche durchführen.\n"
 #~ "-i, --installed-only       Nur installierte Pakete anzeigen.\n"
