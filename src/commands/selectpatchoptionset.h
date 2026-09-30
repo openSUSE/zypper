@@ -26,6 +26,9 @@ public:
 
   PatchSelector _select;
 
+  // bsc#1283249: "--category optional" should imply "--with-optional"
+  void fixupIfWithOptional();
+
 private:
   AnyTypeMode _mode;
 
