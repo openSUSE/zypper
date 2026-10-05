@@ -23,6 +23,7 @@
 #include "Zypper.h"
 
 #include "pager.h"
+#include "utils/RunCommand.h"
 
 // ---------------------------------------------------------------------------
 
@@ -74,68 +75,8 @@ static bool show_in_pager( const std::string & pager, const Pathname & file )
   // Append target file path safely as a standalone argument
   args.push_back(file.asString());
 
-  // Convert std::vector<std::string> to a null-terminated char* array for execvp
-  std::vector<char*> argv;
-  for (auto &arg : args)
-  {
-    argv.push_back(&arg[0]);
-  }
-  argv.push_back(nullptr);
-
-  pid_t pid;
-  switch( pid = fork() )
-  {
-  case -1:
-    WAR << "fork failed" << endl;
-    return false;
-
-  case 0:
-    // Execute directly without a shell interpreter wrap
-    execvp( argv[0], argv.data() );
-    WAR << "execvp failed with " << strerror(errno) << endl;
-    // exit, cannot return false here, because this is another process
-    exit(ZYPPER_EXIT_ERR_BUG);
-
-  default:
-    DBG << "Executed pager process (pid: " << pid << ")" << endl;
-
-    // wait until pager exits
-    int status = 0;
-    int ret;
-    do
-    {
-      ret = waitpid( pid, &status, 0 );
-    }
-    while ( ret == -1 && errno == EINTR );
-
-    if ( WIFEXITED (status) )
-    {
-      status = WEXITSTATUS( status );
-      if ( status )
-      {
-        DBG << "Pid " << pid << " exited with status " << status << endl;
-        return false;
-      }
-      else
-        DBG << "Pid " << pid << " successfully completed" << endl;
-    }
-    else if ( WIFSIGNALED (status) )
-    {
-      status = WTERMSIG( status );
-      WAR << "Pid " << pid << " was killed by signal " << status
-          << " (" << strsignal(status);
-      if ( WCOREDUMP (status) )
-        WAR << ", core dumped";
-      WAR << ")" << endl;
-      return false;
-    }
-    else
-    {
-      ERR << "Pid " << pid << " exited with unknown error" << endl;
-      return false;
-    }
-  }
-  return true;
+  RunCommand cmd( std::move(args) );
+  return ( cmd.run() == 0 );
 }
 
 // ---------------------------------------------------------------------------
