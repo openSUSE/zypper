@@ -894,6 +894,7 @@ void list_patches_by_issue( Zypper & zypper, bool all_r, const PatchSelector & s
 
 
   // pass1 finding PoolItems and their matching issues (pi,itype,iid)
+  std::set<std::string> specificNotFound; // track specific ids without a match
   std::vector<const Issue*> pass2; // on the fly remember anyType issues for pass2
   std::map<PoolItem,std::map<std::string,std::set<std::string>>> iresult;
   for ( const Issue & issue : sel_r._requestedIssues )
@@ -915,27 +916,33 @@ void list_patches_by_issue( Zypper & zypper, bool all_r, const PatchSelector & s
         pass2.push_back( &issue );
       }
     }
-
-    for_( it, q.begin(), q.end() )
-    {
-      PoolItem pi { *it };
-
-      if ( only_needed && ! patchIsApplicable( pi ) )
-        continue;
-
-      if ( ! cliMatchPatch( pi ) )
-      {
-        DBG << pi.ident() << " skipped. (not matching CLI filter)" << endl;
-        continue;
+    if ( q.empty() ) {
+      if ( issue.specificId() ) {
+        specificNotFound.insert( issue.id() ); // remember no match; maybe in pass2 ?
       }
-
-      for_( d, it.matchesBegin(), it.matchesEnd() )
+    }
+    else {
+      for_( it, q.begin(), q.end() )
       {
-        std::string itype { d->subFind( sat::SolvAttr::updateReferenceType ).asString() };
-        if ( issue.specificType() && itype != issue.type() )
-          continue;	// assert correct type of specific IDs
-        // remember....
-        iresult[std::move(pi)][std::move(itype)].insert( d->subFind( sat::SolvAttr::updateReferenceId ).asString() );
+        PoolItem pi { *it };
+
+        if ( only_needed && ! patchIsApplicable( pi ) )
+          continue;
+
+        if ( ! cliMatchPatch( pi ) )
+        {
+          DBG << pi.ident() << " skipped. (not matching CLI filter)" << endl;
+          continue;
+        }
+
+        for_( d, it.matchesBegin(), it.matchesEnd() )
+        {
+          std::string itype { d->subFind( sat::SolvAttr::updateReferenceType ).asString() };
+          if ( issue.specificType() && itype != issue.type() )
+            continue;	// assert correct type of specific IDs
+          // remember....
+          iresult[std::move(pi)][std::move(itype)].insert( d->subFind( sat::SolvAttr::updateReferenceId ).asString() );
+        }
       }
     }
   }
@@ -952,21 +959,26 @@ void list_patches_by_issue( Zypper & zypper, bool all_r, const PatchSelector & s
     q.addAttribute(sat::SolvAttr::summary, issue.id() );
     q.addAttribute(sat::SolvAttr::description, issue.id() );
 
-    for_( it, q.begin(), q.end() )
-    {
-      PoolItem pi { *it };
-
-      if ( only_needed && ! patchIsApplicable( pi ) )
-        continue;
-
-      if ( ! cliMatchPatch( pi ) )
-      {
-        DBG << pi.ident() << " skipped. (not matching CLI filter)" << endl;
-        continue;
+    if ( not q.empty() ) {
+      if ( issue.specificId() ) {
+        specificNotFound.erase( issue.id() ); // we found a match here.
       }
+      for_( it, q.begin(), q.end() )
+      {
+        PoolItem pi { *it };
 
-      if ( ! iresult.count( pi ) )
-      { dresult.push_back( pi ); }
+        if ( only_needed && ! patchIsApplicable( pi ) )
+          continue;
+
+        if ( ! cliMatchPatch( pi ) )
+        {
+          DBG << pi.ident() << " skipped. (not matching CLI filter)" << endl;
+          continue;
+        }
+
+        if ( ! iresult.count( pi ) )
+        { dresult.push_back( pi ); }
+      }
     }
   }
 
@@ -1027,6 +1039,15 @@ void list_patches_by_issue( Zypper & zypper, bool all_r, const PatchSelector & s
         cout << descrMatchesTbl;
       }
     }
+
+    if ( !specificNotFound.empty() ) {
+        zypper.out().gap();
+        zypper.out().info(_( "No matches found for the following issue numbers:"));
+        zypper.out().gap();
+        using zypp::str::noPrint;
+        zypp::dumpRange( cout, specificNotFound.begin(), specificNotFound.end(), "", "", ", ", "", "\n" );
+    }
+
   }
 }
 
