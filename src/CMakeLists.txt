@@ -212,6 +212,7 @@ SET( zypper_utils_HEADERS
   utils/pager.h
   utils/prompt.h
   utils/richtext.h
+  utils/RunCommand.h
   utils/text.h
   utils/XmlFilter.h
   utils/flags/zyppflags.h
