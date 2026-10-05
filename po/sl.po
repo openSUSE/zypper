@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-30 17:24+0200\n"
+"POT-Creation-Date: 2026-10-05 15:03+0200\n"
 "PO-Revision-Date: 2026-06-14 20:12+0000\n"
 "Last-Translator: Jure Repinc <jlp@holodeck1.com>\n"
 "Language-Team: Slovenian <https://l10n.opensuse.org/projects/zypper/master/"
@@ -3864,8 +3864,8 @@ msgstr ""
 msgid ""
 "If only one argument is used, it must be a URI pointing to a .repo file."
 msgstr ""
-"Če je uporabljen samo en argument, mora to biti URI, ki kaže na "
-"datoteko .repo."
+"Če je uporabljen samo en argument, mora to biti URI, ki kaže na datoteko ."
+"repo."
 
 #: src/commands/repos/add.cc:130
 msgid "Specified type is not a valid repository type:"
@@ -4412,8 +4412,8 @@ msgid ""
 "Use the global GPG check setting defined in /etc/zypp/zypp.conf. This is the "
 "default."
 msgstr ""
-"Uporabi splošno nastavitev preverjanja GPG, ki je določena v /etc/zypp/"
-"zypp.conf. To je privzeto."
+"Uporabi splošno nastavitev preverjanja GPG, ki je določena v /etc/zypp/zypp."
+"conf. To je privzeto."
 
 #. translators: -a, --alias
 #: src/commands/reposerviceoptionsets.cc:182
@@ -5249,70 +5249,16 @@ msgid "Uninstalling source packages is not supported."
 msgstr "Odstranjevanje paketov z izvorno kodo ni podprto."
 
 #. translators: %1% is the name of the command which has no man page available.
-#: src/commands/subcommand.cc:88
+#: src/commands/subcommand.cc:87
 #, boost-format
 msgid "No manual entry for %1%"
 msgstr "Priročnik za ukaz »%1%« ni na voljo"
 
-#: src/commands/subcommand.cc:103
+#: src/commands/subcommand.cc:102
 msgid "none"
 msgstr "brez"
 
-#: src/commands/subcommand.cc:332
-#, boost-format
-msgid "cannot exec %1% (%2%)"
-msgstr "ukaza »%1%« ni moč izvesti (%2%)"
-
-#. translators: %1% - command name or path
-#. translators: %2% - system error message
-#: src/commands/subcommand.cc:341
-#, boost-format
-msgid "fork for %1% failed (%2%)"
-msgstr "fork za »%1%« ni uspel (%2%)"
-
-#. translators: %1% - command name or path
-#. translators: %2% - system error message
-#: src/commands/subcommand.cc:360
-#, boost-format
-msgid "waitpid for %1% failed (%2%)"
-msgstr "waitpid za %1% ni uspel (%2%)"
-
-#. translators: %1% - command name or path
-#. translators: %2% - returned PID (number)
-#. translators: %3% - expected PID (number)
-#: src/commands/subcommand.cc:370
-#, boost-format
-msgid "waitpid for %1% returns unexpected pid %2% while waiting for %3%"
-msgstr ""
-"waitpid za %1% vrne nepričakovan določilnik procesa %2% med čakanjem na %3%"
-
-#. translators: %1% - command name or path
-#. translators: %2% - signal number
-#. translators: %3% - signal name
-#: src/commands/subcommand.cc:381
-#, boost-format
-msgid "%1% was killed by signal %2% (%3%)"
-msgstr "%1% je bil ubit s signalom %2% (%3%)"
-
-#: src/commands/subcommand.cc:385
-msgid "core dumped"
-msgstr "izpis jedra"
-
-#. translators: %1% - command name or path
-#. translators: %2% - exit code (number)
-#: src/commands/subcommand.cc:395
-#, boost-format
-msgid "%1% exited with status %2%"
-msgstr "%1% je končal s stanjem %2%"
-
-#. translators: %1% - command name or path
-#. translators: %2% - status (number)
-#: src/commands/subcommand.cc:410
-#, boost-format
-msgid "waitpid for %1% returns unexpected exit status %2%"
-msgstr "waitpid za %1% je vrnil nepričakovano stanje končanja %2%"
-
-#: src/commands/subcommand.cc:443
+#: src/commands/subcommand.cc:240
 #, boost-format
 msgid ""
 "Zypper subcommands are standalone executables that live in the\n"
@@ -5336,7 +5282,7 @@ msgstr ""
 "v preostanku poti v $PATH. Tako je možno pisati krajevne razširitve\n"
 "za zypper, ki se ne nahajajo v sistemskem prostoru.\n"
 
-#: src/commands/subcommand.cc:458
+#: src/commands/subcommand.cc:255
 #, boost-format
 msgid ""
 "Using zypper global-options together with subcommands, as well as\n"
@@ -5346,17 +5292,17 @@ msgstr ""
 "podukazov v »%1%« trenutno ni podprta.\n"
 
 #. translators: headline of an enumeration; %1% is a directory name
-#: src/commands/subcommand.cc:469
+#: src/commands/subcommand.cc:266
 #, boost-format
 msgid "Available zypper subcommands in '%1%'"
 msgstr "Razpoložljivi podukazi za zypper v mapi »%1%«"
 
 #. translators: headline of an enumeration
-#: src/commands/subcommand.cc:475
+#: src/commands/subcommand.cc:272
 msgid "Zypper subcommands available from elsewhere on your $PATH"
 msgstr "Podukazi za zypper, ki so na voljo v drugih mapah iz $PATH"
 
-#: src/commands/subcommand.cc:480
+#: src/commands/subcommand.cc:277
 msgid ""
 "Using zypper subcommands available from elsewhere on your $PATH is disabled "
 "in zypper.conf."
@@ -5365,23 +5311,23 @@ msgstr ""
 "onemogočena v zypper.conf."
 
 #. translators: helptext; %1% is a zypper command
-#: src/commands/subcommand.cc:485
+#: src/commands/subcommand.cc:282
 #, boost-format
 msgid "Type '%1%' to get subcommand-specific help if available."
 msgstr ""
 "Da dobite pomoč specifično za podukaz (če je na voljo), uporabite ukaz »%1%«."
 
 #. translators: %1% - command name
-#: src/commands/subcommand.cc:508
+#: src/commands/subcommand.cc:305
 #, boost-format
 msgid "Manual entry for %1% can't be shown"
 msgstr "Priročnika za ukaz »%1%« ni moč prikazati"
 
-#: src/commands/subcommand.cc:522
+#: src/commands/subcommand.cc:319
 msgid "Lists available subcommands."
 msgstr "Izpiše razpoložljive podukaze."
 
-#: src/commands/subcommand.cc:523
+#: src/commands/subcommand.cc:320
 msgid ""
 "Lists available subcommands. Using zypper subcommands found on your $PATH is "
 "disabled in zypper.conf."
@@ -5390,12 +5336,12 @@ msgstr ""
 "drugih mapah iz $PATH, je onemogočena v zypper.conf."
 
 #. Currently no concept how to handle global options and ZYPPlock
-#: src/commands/subcommand.cc:632
+#: src/commands/subcommand.cc:429
 msgid "Zypper shell does not support execution of subcommands."
 msgstr "Ukazna lupina za zypper ne podpira izvajanja podukazov."
 
 #. translators: %1%  - is the name of a subcommand
-#: src/commands/subcommand.cc:646
+#: src/commands/subcommand.cc:443
 #, boost-format
 msgid "Subcommand %1% does not support zypper global options."
 msgstr "Podukaz »%1%« ne podpira splošnih možnosti za zypper."
@@ -6935,8 +6881,8 @@ msgstr ""
 #: src/solve-commit.cc:621
 #, c-format, boost-format
 msgid ""
-"Check for running processes using deleted libraries is disabled in "
-"zypper.conf. Run '%s' to check manually."
+"Check for running processes using deleted libraries is disabled in zypper."
+"conf. Run '%s' to check manually."
 msgstr ""
 "Preverjanje tekočih procesov, ki uporabljajo izbrisane knjižnice je "
 "onemogočeno v zypper.conf. Da jih preverite ročno, uporabite ukaz »%s«."
@@ -7250,26 +7196,30 @@ msgstr "Trenutna različica"
 msgid "Available Version"
 msgstr "Razpoložljiva različica"
 
-#: src/update.cc:1007
+#: src/update.cc:1019
 msgid "No matching issues found."
 msgstr "Najdeno ni bilo nobeno ujemajoče poročilo o napaki."
 
-#: src/update.cc:1013
+#: src/update.cc:1025
 msgid "The following matches in issue numbers have been found:"
 msgstr "Najdene so bile naslednje ujemajoče številke poročil o napakah:"
 
-#: src/update.cc:1023
+#: src/update.cc:1035
 msgid "Matches in patch descriptions of the following patches have been found:"
 msgstr "Najdeni so bili ujemajoči opisi v naslednjih popravkih:"
 
-#: src/update.cc:1085
+#: src/update.cc:1045
+msgid "No matches found for the following issue numbers:"
+msgstr ""
+
+#: src/update.cc:1106
 #, c-format, boost-format
 msgid "Fix for bugzilla issue number %s was not found or is not needed."
 msgstr ""
 "Popravek za številko poročila Bugzilla o napaki %s ni bil najden ali pa ni "
 "potreben."
 
-#: src/update.cc:1087
+#: src/update.cc:1108
 #, c-format, boost-format
 msgid "Fix for CVE issue number %s was not found or is not needed."
 msgstr ""
@@ -7277,7 +7227,7 @@ msgstr ""
 "potreben."
 
 #. translators: keep '%s issue' together, it's something like 'CVE issue' or 'Bugzilla issue'
-#: src/update.cc:1090
+#: src/update.cc:1111
 #, c-format, boost-format
 msgid "Fix for %s issue number %s was not found or is not needed."
 msgstr ""
@@ -7320,6 +7270,60 @@ msgstr "%1%: Možnost %2% je določena večkrat. Uporabljena bo zadnja."
 #: src/utils/Augeas.cc:656
 msgid "No config file is in use."
 msgstr "V rabi ni nobena nastavitvena datoteka."
+
+#: src/utils/RunCommand.h:130
+#, boost-format
+msgid "cannot exec %1% (%2%)"
+msgstr "ukaza »%1%« ni moč izvesti (%2%)"
+
+#. translators: %1% - command name or path
+#. translators: %2% - system error message
+#: src/utils/RunCommand.h:139
+#, boost-format
+msgid "fork for %1% failed (%2%)"
+msgstr "fork za »%1%« ni uspel (%2%)"
+
+#. translators: %1% - command name or path
+#. translators: %2% - system error message
+#: src/utils/RunCommand.h:158
+#, boost-format
+msgid "waitpid for %1% failed (%2%)"
+msgstr "waitpid za %1% ni uspel (%2%)"
+
+#. translators: %1% - command name or path
+#. translators: %2% - returned PID (number)
+#. translators: %3% - expected PID (number)
+#: src/utils/RunCommand.h:168
+#, boost-format
+msgid "waitpid for %1% returns unexpected pid %2% while waiting for %3%"
+msgstr ""
+"waitpid za %1% vrne nepričakovan določilnik procesa %2% med čakanjem na %3%"
+
+#. translators: %1% - command name or path
+#. translators: %2% - signal number
+#. translators: %3% - signal name
+#: src/utils/RunCommand.h:179
+#, boost-format
+msgid "%1% was killed by signal %2% (%3%)"
+msgstr "%1% je bil ubit s signalom %2% (%3%)"
+
+#: src/utils/RunCommand.h:183
+msgid "core dumped"
+msgstr "izpis jedra"
+
+#. translators: %1% - command name or path
+#. translators: %2% - exit code (number)
+#: src/utils/RunCommand.h:193
+#, boost-format
+msgid "%1% exited with status %2%"
+msgstr "%1% je končal s stanjem %2%"
+
+#. translators: %1% - command name or path
+#. translators: %2% - status (number)
+#: src/utils/RunCommand.h:208
+#, boost-format
+msgid "waitpid for %1% returns unexpected exit status %2%"
+msgstr "waitpid za %1% je vrnil nepričakovano stanje končanja %2%"
 
 #: src/utils/flags/exceptions.cc:22
 #, boost-format
@@ -7717,18 +7721,18 @@ msgstr "Težava prejemanja navedene datoteke RPM"
 msgid "Please check whether the file is accessible."
 msgstr "Preverite, ali je datoteka dostopna."
 
-#: src/utils/pager.cc:32
+#: src/utils/pager.cc:34
 #, c-format, boost-format
 msgid "Press '%c' to exit the pager."
 msgstr "Da zaprete prikaz strani, pritisnite »%c«."
 
-#: src/utils/pager.cc:42
+#: src/utils/pager.cc:44
 msgid "Use arrows or pgUp/pgDown keys to scroll the text by lines or pages."
 msgstr ""
 "Za pomikanje besedila po vrsticah ali straneh uporabite smerne tipke ali "
 "tipki Stran gor/dol (Pg Up/Dn)."
 
-#: src/utils/pager.cc:44
+#: src/utils/pager.cc:46
 msgid "Use the Enter or Space key to scroll the text by lines or pages."
 msgstr ""
 "Za pomikanje besedila po straneh uporabite tipko Vnos (Enter) ali "

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.ko\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-30 17:24+0200\n"
+"POT-Creation-Date: 2026-10-05 15:03+0200\n"
 "PO-Revision-Date: 2025-07-22 12:48+0000\n"
 "Last-Translator: Julia Faltenbacher <julia.faltenbacher@suse.com>\n"
 "Language-Team: Korean <https://l10n.opensuse.org/projects/zypper/master/ko/"
@@ -3397,8 +3397,8 @@ msgid ""
 "Add a repository to the system. The repository can be specified by its URI "
 "or can be read from specified .repo file (even remote)."
 msgstr ""
-"시스템에 리포지토리를 추가합니다. 해당 URI로 리포지토리를 지정하거나 지정"
-"된 .repo 파일(원격 포함)에서 리포지토리를 읽을 수 있습니다."
+"시스템에 리포지토리를 추가합니다. 해당 URI로 리포지토리를 지정하거나 지정된 ."
+"repo 파일(원격 포함)에서 리포지토리를 읽을 수 있습니다."
 
 #: src/commands/repos/add.cc:40
 msgid "Just another means to specify a .repo file to read."
@@ -4767,69 +4767,16 @@ msgid "Uninstalling source packages is not supported."
 msgstr "소프 패키지 제거는 지원되지 않습니다."
 
 #. translators: %1% is the name of the command which has no man page available.
-#: src/commands/subcommand.cc:88
+#: src/commands/subcommand.cc:87
 #, boost-format
 msgid "No manual entry for %1%"
 msgstr ""
 
-#: src/commands/subcommand.cc:103
+#: src/commands/subcommand.cc:102
 msgid "none"
 msgstr "없음"
 
-#: src/commands/subcommand.cc:332
-#, boost-format
-msgid "cannot exec %1% (%2%)"
-msgstr "%1%(%2%) 실행 불가"
-
-#. translators: %1% - command name or path
-#. translators: %2% - system error message
-#: src/commands/subcommand.cc:341
-#, boost-format
-msgid "fork for %1% failed (%2%)"
-msgstr "%1%에 대한 포크 실패(%2%)"
-
-#. translators: %1% - command name or path
-#. translators: %2% - system error message
-#: src/commands/subcommand.cc:360
-#, boost-format
-msgid "waitpid for %1% failed (%2%)"
-msgstr "%1%에 대한 waitpid 실패(%2%)"
-
-#. translators: %1% - command name or path
-#. translators: %2% - returned PID (number)
-#. translators: %3% - expected PID (number)
-#: src/commands/subcommand.cc:370
-#, boost-format
-msgid "waitpid for %1% returns unexpected pid %2% while waiting for %3%"
-msgstr "%3% 대기 중 %1%에 대한 waitpid에서 예기치 못한 pid %2%이(가) 반환됨"
-
-#. translators: %1% - command name or path
-#. translators: %2% - signal number
-#. translators: %3% - signal name
-#: src/commands/subcommand.cc:381
-#, boost-format
-msgid "%1% was killed by signal %2% (%3%)"
-msgstr "%1%이(가) %2%(%3%) 신호로 강제 종료됨"
-
-#: src/commands/subcommand.cc:385
-msgid "core dumped"
-msgstr "코어 덤프됨"
-
-#. translators: %1% - command name or path
-#. translators: %2% - exit code (number)
-#: src/commands/subcommand.cc:395
-#, boost-format
-msgid "%1% exited with status %2%"
-msgstr "%1%이(가) %2% 상태로 종료됨"
-
-#. translators: %1% - command name or path
-#. translators: %2% - status (number)
-#: src/commands/subcommand.cc:410
-#, boost-format
-msgid "waitpid for %1% returns unexpected exit status %2%"
-msgstr "%1%에 대한 waitpid에서 예기치 않은 종료 상태 %2% 반환"
-
-#: src/commands/subcommand.cc:443
+#: src/commands/subcommand.cc:240
 #, boost-format
 msgid ""
 "Zypper subcommands are standalone executables that live in the\n"
@@ -4855,7 +4802,7 @@ msgstr ""
 "$PATH의 나머지 위치를 찾아봅니다. 따라서 \n"
 "시스템 영역에 상주하지 않는 로컬 zypper 확장명을 쓰는 것도 가능합니다.\n"
 
-#: src/commands/subcommand.cc:458
+#: src/commands/subcommand.cc:255
 #, boost-format
 msgid ""
 "Using zypper global-options together with subcommands, as well as\n"
@@ -4865,51 +4812,51 @@ msgstr ""
 "'%1%'의 실행 하위 명령과 함께 사용하는 것은 현재 지원되지 않습니다.\n"
 
 #. translators: headline of an enumeration; %1% is a directory name
-#: src/commands/subcommand.cc:469
+#: src/commands/subcommand.cc:266
 #, boost-format
 msgid "Available zypper subcommands in '%1%'"
 msgstr "'%1%'의 사용 가능한 zypper 하위 명령"
 
 #. translators: headline of an enumeration
-#: src/commands/subcommand.cc:475
+#: src/commands/subcommand.cc:272
 msgid "Zypper subcommands available from elsewhere on your $PATH"
 msgstr "Zypper 하위 명령은 $PATH의 다른 곳에서도 이용 가능"
 
-#: src/commands/subcommand.cc:480
+#: src/commands/subcommand.cc:277
 msgid ""
 "Using zypper subcommands available from elsewhere on your $PATH is disabled "
 "in zypper.conf."
 msgstr ""
 
 #. translators: helptext; %1% is a zypper command
-#: src/commands/subcommand.cc:485
+#: src/commands/subcommand.cc:282
 #, boost-format
 msgid "Type '%1%' to get subcommand-specific help if available."
 msgstr "하위 명령별 도움말을 보려면 '%1%'을(를) 입력합니다."
 
 #. translators: %1% - command name
-#: src/commands/subcommand.cc:508
+#: src/commands/subcommand.cc:305
 #, boost-format
 msgid "Manual entry for %1% can't be shown"
 msgstr "%1%에 대한 수동 엔트리는 표시할 수 없음"
 
-#: src/commands/subcommand.cc:522
+#: src/commands/subcommand.cc:319
 msgid "Lists available subcommands."
 msgstr "사용 가능한 하위 명령을 나열합니다."
 
-#: src/commands/subcommand.cc:523
+#: src/commands/subcommand.cc:320
 msgid ""
 "Lists available subcommands. Using zypper subcommands found on your $PATH is "
 "disabled in zypper.conf."
 msgstr ""
 
 #. Currently no concept how to handle global options and ZYPPlock
-#: src/commands/subcommand.cc:632
+#: src/commands/subcommand.cc:429
 msgid "Zypper shell does not support execution of subcommands."
 msgstr "Zypper 셸은 하위 명령의 실행을 지원하지 않습니다."
 
 #. translators: %1%  - is the name of a subcommand
-#: src/commands/subcommand.cc:646
+#: src/commands/subcommand.cc:443
 #, boost-format
 msgid "Subcommand %1% does not support zypper global options."
 msgstr "하위 명령 %1%은(는) zypper 전역 옵션을 지원하지 않습니다."
@@ -6399,8 +6346,8 @@ msgstr ""
 #: src/solve-commit.cc:621
 #, c-format, boost-format
 msgid ""
-"Check for running processes using deleted libraries is disabled in "
-"zypper.conf. Run '%s' to check manually."
+"Check for running processes using deleted libraries is disabled in zypper."
+"conf. Run '%s' to check manually."
 msgstr ""
 "zypper.conf에서는 삭제된 라이브러리를 사용하여 실행 중인 프로세스를 확인할 "
 "수 없습니다. '%s'을(를) 실행하여 수동으로 확인하십시오."
@@ -6694,30 +6641,34 @@ msgstr "현재 버전"
 msgid "Available Version"
 msgstr "사용 가능한 버전"
 
-#: src/update.cc:1007
+#: src/update.cc:1019
 msgid "No matching issues found."
 msgstr "일치하는 문제가 없습니다."
 
-#: src/update.cc:1013
+#: src/update.cc:1025
 msgid "The following matches in issue numbers have been found:"
 msgstr "문제 번호에서 다음 일치 항목이 발견되었습니다."
 
-#: src/update.cc:1023
+#: src/update.cc:1035
 msgid "Matches in patch descriptions of the following patches have been found:"
 msgstr "다음 패치의 패치 설명과 일치하는 항목이 발견되었습니다."
 
-#: src/update.cc:1085
+#: src/update.cc:1045
+msgid "No matches found for the following issue numbers:"
+msgstr ""
+
+#: src/update.cc:1106
 #, c-format, boost-format
 msgid "Fix for bugzilla issue number %s was not found or is not needed."
 msgstr "bugzilla 문제 번호 %s에 대한 수정사항이 없거나 수정할 필요가 없습니다."
 
-#: src/update.cc:1087
+#: src/update.cc:1108
 #, c-format, boost-format
 msgid "Fix for CVE issue number %s was not found or is not needed."
 msgstr "CVE 문제 번호 %s에 대한 수정사항이 없거나 수정할 필요가 없습니다."
 
 #. translators: keep '%s issue' together, it's something like 'CVE issue' or 'Bugzilla issue'
-#: src/update.cc:1090
+#: src/update.cc:1111
 #, c-format, boost-format
 msgid "Fix for %s issue number %s was not found or is not needed."
 msgstr "%s 문제 번호 %s에 대한 수정 사항이 없거나 필요하지 않습니다."
@@ -6758,6 +6709,59 @@ msgstr "%1%: '%2%' 옵션이 여러 번 정의되었습니다. 마지막 정의�
 #: src/utils/Augeas.cc:656
 msgid "No config file is in use."
 msgstr "사용 중인 구성 파일이 없습니다."
+
+#: src/utils/RunCommand.h:130
+#, boost-format
+msgid "cannot exec %1% (%2%)"
+msgstr "%1%(%2%) 실행 불가"
+
+#. translators: %1% - command name or path
+#. translators: %2% - system error message
+#: src/utils/RunCommand.h:139
+#, boost-format
+msgid "fork for %1% failed (%2%)"
+msgstr "%1%에 대한 포크 실패(%2%)"
+
+#. translators: %1% - command name or path
+#. translators: %2% - system error message
+#: src/utils/RunCommand.h:158
+#, boost-format
+msgid "waitpid for %1% failed (%2%)"
+msgstr "%1%에 대한 waitpid 실패(%2%)"
+
+#. translators: %1% - command name or path
+#. translators: %2% - returned PID (number)
+#. translators: %3% - expected PID (number)
+#: src/utils/RunCommand.h:168
+#, boost-format
+msgid "waitpid for %1% returns unexpected pid %2% while waiting for %3%"
+msgstr "%3% 대기 중 %1%에 대한 waitpid에서 예기치 못한 pid %2%이(가) 반환됨"
+
+#. translators: %1% - command name or path
+#. translators: %2% - signal number
+#. translators: %3% - signal name
+#: src/utils/RunCommand.h:179
+#, boost-format
+msgid "%1% was killed by signal %2% (%3%)"
+msgstr "%1%이(가) %2%(%3%) 신호로 강제 종료됨"
+
+#: src/utils/RunCommand.h:183
+msgid "core dumped"
+msgstr "코어 덤프됨"
+
+#. translators: %1% - command name or path
+#. translators: %2% - exit code (number)
+#: src/utils/RunCommand.h:193
+#, boost-format
+msgid "%1% exited with status %2%"
+msgstr "%1%이(가) %2% 상태로 종료됨"
+
+#. translators: %1% - command name or path
+#. translators: %2% - status (number)
+#: src/utils/RunCommand.h:208
+#, boost-format
+msgid "waitpid for %1% returns unexpected exit status %2%"
+msgstr "%1%에 대한 waitpid에서 예기치 않은 종료 상태 %2% 반환"
 
 #: src/utils/flags/exceptions.cc:22
 #, boost-format
@@ -7128,18 +7132,18 @@ msgstr "지정한 RPM 파일 검색 중 문제가 발생했습니다."
 msgid "Please check whether the file is accessible."
 msgstr "파일이 액세스 가능한지 확인하십시오."
 
-#: src/utils/pager.cc:32
+#: src/utils/pager.cc:34
 #, c-format, boost-format
 msgid "Press '%c' to exit the pager."
 msgstr "호출기를 종료하려면 '%c'을(를) 누르십시오."
 
-#: src/utils/pager.cc:42
+#: src/utils/pager.cc:44
 msgid "Use arrows or pgUp/pgDown keys to scroll the text by lines or pages."
 msgstr ""
 "화살표 또는 <pgUp>/<pgDown> 키를 사용하여 텍스트를 행이나 페이지별로 스크롤합"
 "니다."
 
-#: src/utils/pager.cc:44
+#: src/utils/pager.cc:46
 msgid "Use the Enter or Space key to scroll the text by lines or pages."
 msgstr ""
 "<Enter> 또는 <스페이스> 키를 사용하여 텍스트를 행이나 페이지별로 스크롤합니"

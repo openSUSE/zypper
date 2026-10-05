@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-30 17:24+0200\n"
+"POT-Creation-Date: 2026-10-05 15:03+0200\n"
 "PO-Revision-Date: 2026-06-25 11:12+0000\n"
 "Last-Translator: Grace Yu <grace.yu@excel-gits.com>\n"
 "Language-Team: Chinese (Taiwan) <https://l10n.opensuse.org/projects/zypper/"
@@ -2339,8 +2339,8 @@ msgid ""
 "Temporary Fix)."
 msgstr ""
 "將會取代相依套件而不是也將其移除的移除指令。事實上，這是完整的安裝指令 (對該"
-"指令的普通參數套用了移除修飾詞 (-))。因此 \"removeptf foo\" 與 \"install -- "
-"-foo\" 效果相同。這就是該指令接受的選項與安裝指令相同的原因。建議使用此方式來"
+"指令的普通參數套用了移除修飾詞 (-))。因此 \"removeptf foo\" 與 \"install -- -"
+"foo\" 效果相同。這就是該指令接受的選項與安裝指令相同的原因。建議使用此方式來"
 "移除臨時修復程式 (Program Temporary Fix，PTF)。"
 
 #: src/commands/installremove.cc:317
@@ -2533,8 +2533,8 @@ msgid ""
 "type option."
 msgstr ""
 "LOCKSPEC 的格式為「[KIND:]NAME[ OP EDITION]」，其中 NAME 也可以是使用 * 和 ? "
-"萬用字元的 glob 模式。非套件類型可以在前面預增 KIND: 字串 (例如"
-"「patch:foo」)，或使用指令 --type 選項。"
+"萬用字元的 glob 模式。非套件類型可以在前面預增 KIND: 字串 (例如「patch:"
+"foo」)，或使用指令 --type 選項。"
 
 #: src/commands/locks/add.cc:36
 msgid ""
@@ -4698,69 +4698,16 @@ msgid "Uninstalling source packages is not supported."
 msgstr "不支援解除安裝來源套件。"
 
 #. translators: %1% is the name of the command which has no man page available.
-#: src/commands/subcommand.cc:88
+#: src/commands/subcommand.cc:87
 #, boost-format
 msgid "No manual entry for %1%"
 msgstr "沒有 %1% 的說明文件"
 
-#: src/commands/subcommand.cc:103
+#: src/commands/subcommand.cc:102
 msgid "none"
 msgstr "無"
 
-#: src/commands/subcommand.cc:332
-#, boost-format
-msgid "cannot exec %1% (%2%)"
-msgstr "無法執行 %1% (%2%)"
-
-#. translators: %1% - command name or path
-#. translators: %2% - system error message
-#: src/commands/subcommand.cc:341
-#, boost-format
-msgid "fork for %1% failed (%2%)"
-msgstr "%1% 衍生失敗 (%2%)"
-
-#. translators: %1% - command name or path
-#. translators: %2% - system error message
-#: src/commands/subcommand.cc:360
-#, boost-format
-msgid "waitpid for %1% failed (%2%)"
-msgstr "%1% waitpid 失敗 (%2%)"
-
-#. translators: %1% - command name or path
-#. translators: %2% - returned PID (number)
-#. translators: %3% - expected PID (number)
-#: src/commands/subcommand.cc:370
-#, boost-format
-msgid "waitpid for %1% returns unexpected pid %2% while waiting for %3%"
-msgstr "%1% waitpid 回傳非預期的 pid %2% (預期為 %3%)"
-
-#. translators: %1% - command name or path
-#. translators: %2% - signal number
-#. translators: %3% - signal name
-#: src/commands/subcommand.cc:381
-#, boost-format
-msgid "%1% was killed by signal %2% (%3%)"
-msgstr "%1% 被信號 %2% 強制結束 (%3%)"
-
-#: src/commands/subcommand.cc:385
-msgid "core dumped"
-msgstr "已執行磁心傾印"
-
-#. translators: %1% - command name or path
-#. translators: %2% - exit code (number)
-#: src/commands/subcommand.cc:395
-#, boost-format
-msgid "%1% exited with status %2%"
-msgstr "%1% 結束 (回傳值 %2%)"
-
-#. translators: %1% - command name or path
-#. translators: %2% - status (number)
-#: src/commands/subcommand.cc:410
-#, boost-format
-msgid "waitpid for %1% returns unexpected exit status %2%"
-msgstr "%1% waitpid 回傳非預期的結束狀態值 %2%"
-
-#: src/commands/subcommand.cc:443
+#: src/commands/subcommand.cc:240
 #, boost-format
 msgid ""
 "Zypper subcommands are standalone executables that live in the\n"
@@ -4783,7 +4730,7 @@ msgstr ""
 "下尋找。是故寫一個不存放在系統空間，僅供局部使用的 zypper 擴充是\n"
 "可以做到的。\n"
 
-#: src/commands/subcommand.cc:458
+#: src/commands/subcommand.cc:255
 #, boost-format
 msgid ""
 "Using zypper global-options together with subcommands, as well as\n"
@@ -4793,39 +4740,39 @@ msgstr ""
 "執行「%1%」中的個別指令。\n"
 
 #. translators: headline of an enumeration; %1% is a directory name
-#: src/commands/subcommand.cc:469
+#: src/commands/subcommand.cc:266
 #, boost-format
 msgid "Available zypper subcommands in '%1%'"
 msgstr "'%1%' 中可用的 zypper 個別指令"
 
 #. translators: headline of an enumeration
-#: src/commands/subcommand.cc:475
+#: src/commands/subcommand.cc:272
 msgid "Zypper subcommands available from elsewhere on your $PATH"
 msgstr "您的 $PATH 中可用的 zypper 個別指令"
 
-#: src/commands/subcommand.cc:480
+#: src/commands/subcommand.cc:277
 msgid ""
 "Using zypper subcommands available from elsewhere on your $PATH is disabled "
 "in zypper.conf."
 msgstr "Zypper.conf 中已禁止使用在您 $PATH 之外的位置提供的 zypper 子指令。"
 
 #. translators: helptext; %1% is a zypper command
-#: src/commands/subcommand.cc:485
+#: src/commands/subcommand.cc:282
 #, boost-format
 msgid "Type '%1%' to get subcommand-specific help if available."
 msgstr "輸入 '%1%' 可獲取個別指令的說明 (若有)。"
 
 #. translators: %1% - command name
-#: src/commands/subcommand.cc:508
+#: src/commands/subcommand.cc:305
 #, boost-format
 msgid "Manual entry for %1% can't be shown"
 msgstr "%1% 的手動輸入無法顯示"
 
-#: src/commands/subcommand.cc:522
+#: src/commands/subcommand.cc:319
 msgid "Lists available subcommands."
 msgstr "列出可用的個別指令。"
 
-#: src/commands/subcommand.cc:523
+#: src/commands/subcommand.cc:320
 msgid ""
 "Lists available subcommands. Using zypper subcommands found on your $PATH is "
 "disabled in zypper.conf."
@@ -4834,12 +4781,12 @@ msgstr ""
 "令。"
 
 #. Currently no concept how to handle global options and ZYPPlock
-#: src/commands/subcommand.cc:632
+#: src/commands/subcommand.cc:429
 msgid "Zypper shell does not support execution of subcommands."
 msgstr "zypper shell 不支援執行個別指令。"
 
 #. translators: %1%  - is the name of a subcommand
-#: src/commands/subcommand.cc:646
+#: src/commands/subcommand.cc:443
 #, boost-format
 msgid "Subcommand %1% does not support zypper global options."
 msgstr "個別指令 %1% 不支援 zypper 全域選項。"
@@ -6315,8 +6262,8 @@ msgstr "明確選取 DownloadAsNeeded 還會選取 classic_rpmtrans 後端。"
 #: src/solve-commit.cc:621
 #, c-format, boost-format
 msgid ""
-"Check for running processes using deleted libraries is disabled in "
-"zypper.conf. Run '%s' to check manually."
+"Check for running processes using deleted libraries is disabled in zypper."
+"conf. Run '%s' to check manually."
 msgstr ""
 "檢查使用已刪除函式庫之執行中程序的功能在 zypper.conf 中已被關閉。請手動執行 "
 "'%s' 來做檢查。"
@@ -6601,30 +6548,34 @@ msgstr "目前版本"
 msgid "Available Version"
 msgstr "可用版本"
 
-#: src/update.cc:1007
+#: src/update.cc:1019
 msgid "No matching issues found."
 msgstr "找不到相符問題。"
 
-#: src/update.cc:1013
+#: src/update.cc:1025
 msgid "The following matches in issue numbers have been found:"
 msgstr "已找到下列符合問題編號的項目："
 
-#: src/update.cc:1023
+#: src/update.cc:1035
 msgid "Matches in patch descriptions of the following patches have been found:"
 msgstr "已找到以下修補程式之修補程式描述中的相符項："
 
-#: src/update.cc:1085
+#: src/update.cc:1045
+msgid "No matches found for the following issue numbers:"
+msgstr ""
+
+#: src/update.cc:1106
 #, c-format, boost-format
 msgid "Fix for bugzilla issue number %s was not found or is not needed."
 msgstr "Bugzilla 問題編號 %s 的修正未發現或不需要。"
 
-#: src/update.cc:1087
+#: src/update.cc:1108
 #, c-format, boost-format
 msgid "Fix for CVE issue number %s was not found or is not needed."
 msgstr "CVS 問題編號 %s 的修正未發現或不需要。"
 
 #. translators: keep '%s issue' together, it's something like 'CVE issue' or 'Bugzilla issue'
-#: src/update.cc:1090
+#: src/update.cc:1111
 #, c-format, boost-format
 msgid "Fix for %s issue number %s was not found or is not needed."
 msgstr "%s 問題編號 %s 的修正未發現或不需要。"
@@ -6665,6 +6616,59 @@ msgstr "%1%：多次定義選項「%2%」。將使用最後定義的那個。"
 #: src/utils/Augeas.cc:656
 msgid "No config file is in use."
 msgstr "沒有使用中的組態檔案。"
+
+#: src/utils/RunCommand.h:130
+#, boost-format
+msgid "cannot exec %1% (%2%)"
+msgstr "無法執行 %1% (%2%)"
+
+#. translators: %1% - command name or path
+#. translators: %2% - system error message
+#: src/utils/RunCommand.h:139
+#, boost-format
+msgid "fork for %1% failed (%2%)"
+msgstr "%1% 衍生失敗 (%2%)"
+
+#. translators: %1% - command name or path
+#. translators: %2% - system error message
+#: src/utils/RunCommand.h:158
+#, boost-format
+msgid "waitpid for %1% failed (%2%)"
+msgstr "%1% waitpid 失敗 (%2%)"
+
+#. translators: %1% - command name or path
+#. translators: %2% - returned PID (number)
+#. translators: %3% - expected PID (number)
+#: src/utils/RunCommand.h:168
+#, boost-format
+msgid "waitpid for %1% returns unexpected pid %2% while waiting for %3%"
+msgstr "%1% waitpid 回傳非預期的 pid %2% (預期為 %3%)"
+
+#. translators: %1% - command name or path
+#. translators: %2% - signal number
+#. translators: %3% - signal name
+#: src/utils/RunCommand.h:179
+#, boost-format
+msgid "%1% was killed by signal %2% (%3%)"
+msgstr "%1% 被信號 %2% 強制結束 (%3%)"
+
+#: src/utils/RunCommand.h:183
+msgid "core dumped"
+msgstr "已執行磁心傾印"
+
+#. translators: %1% - command name or path
+#. translators: %2% - exit code (number)
+#: src/utils/RunCommand.h:193
+#, boost-format
+msgid "%1% exited with status %2%"
+msgstr "%1% 結束 (回傳值 %2%)"
+
+#. translators: %1% - command name or path
+#. translators: %2% - status (number)
+#: src/utils/RunCommand.h:208
+#, boost-format
+msgid "waitpid for %1% returns unexpected exit status %2%"
+msgstr "%1% waitpid 回傳非預期的結束狀態值 %2%"
 
 #: src/utils/flags/exceptions.cc:22
 #, boost-format
@@ -7030,16 +7034,16 @@ msgstr "取回指定的 RPM 檔案時出現問題"
 msgid "Please check whether the file is accessible."
 msgstr "請檢查此檔案是否可存取。"
 
-#: src/utils/pager.cc:32
+#: src/utils/pager.cc:34
 #, c-format, boost-format
 msgid "Press '%c' to exit the pager."
 msgstr "按 '%c' 以退出呼叫器。"
 
-#: src/utils/pager.cc:42
+#: src/utils/pager.cc:44
 msgid "Use arrows or pgUp/pgDown keys to scroll the text by lines or pages."
 msgstr "使用箭頭或 pgUp/pgDown 按鍵以一行一行或一頁一頁捲動文字。"
 
-#: src/utils/pager.cc:44
+#: src/utils/pager.cc:46
 msgid "Use the Enter or Space key to scroll the text by lines or pages."
 msgstr "使用 Enter 或空白鍵來一行一行或一頁一頁捲動文字。"
 

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-30 17:24+0200\n"
+"POT-Creation-Date: 2026-10-05 15:03+0200\n"
 "PO-Revision-Date: 2026-09-14 17:13+0000\n"
 "Last-Translator: Peter Andreasen <noesgaard@gmail.com>\n"
 "Language-Team: Danish <https://l10n.opensuse.org/projects/zypper/master/da/"
@@ -2385,8 +2385,8 @@ msgid ""
 "added e.g. new hardware or driver repos."
 msgstr ""
 "Kaldt som '%1%', begrænser det kommandoen til kun at lede efter pakker som "
-"understøtter tilgængelig hardware, sprog eller filsystemer. Nyttig efter "
-"f.eks. at have tilføjet ny hardware- eller driver-softwarekilder."
+"understøtter tilgængelig hardware, sprog eller filsystemer. Nyttig efter f."
+"eks. at have tilføjet ny hardware- eller driver-softwarekilder."
 
 #. translators: command description
 #: src/commands/inrverify.cc:101
@@ -2615,8 +2615,8 @@ msgid ""
 "all), 'rebuild' (hide rebuild-only changes), 'package' (hide packaging-only "
 "changes, i.e. same upstream version)."
 msgstr ""
-"Filtrer opdateringer efter versionsændringens betydning. NIVEAU: 'none' "
-"(standard, vis alle), 'rebuild' (skjul ændringer, der kun skyldes "
+"Filtrer opdateringer efter versionsændringens betydning. NIVEAU: "
+"'none' (standard, vis alle), 'rebuild' (skjul ændringer, der kun skyldes "
 "genbygning), 'package' (skjul ændringer, der kun skyldes pakkehåndtering, "
 "dvs. samme upstream-version)."
 
@@ -3648,8 +3648,8 @@ msgstr "Kan ikke bruge %s sammen med %s. Bruger indstillingen %s."
 msgid ""
 "If only one argument is used, it must be a URI pointing to a .repo file."
 msgstr ""
-"Hvis der kun anvendes ét argument, skal det være en URI, der peger på "
-"en .repo-fil."
+"Hvis der kun anvendes ét argument, skal det være en URI, der peger på en ."
+"repo-fil."
 
 #: src/commands/repos/add.cc:130
 msgid "Specified type is not a valid repository type:"
@@ -5048,69 +5048,16 @@ msgid "Uninstalling source packages is not supported."
 msgstr "Afinstallation af kildepakker understøttes ikke."
 
 #. translators: %1% is the name of the command which has no man page available.
-#: src/commands/subcommand.cc:88
+#: src/commands/subcommand.cc:87
 #, boost-format
 msgid "No manual entry for %1%"
 msgstr "Ingen manualtekst for %1%"
 
-#: src/commands/subcommand.cc:103
+#: src/commands/subcommand.cc:102
 msgid "none"
 msgstr "ingen"
 
-#: src/commands/subcommand.cc:332
-#, boost-format
-msgid "cannot exec %1% (%2%)"
-msgstr "kan ikke eksekvere %1% (%2%)"
-
-#. translators: %1% - command name or path
-#. translators: %2% - system error message
-#: src/commands/subcommand.cc:341
-#, boost-format
-msgid "fork for %1% failed (%2%)"
-msgstr "fork for %1% mislykkedes (%2%)"
-
-#. translators: %1% - command name or path
-#. translators: %2% - system error message
-#: src/commands/subcommand.cc:360
-#, boost-format
-msgid "waitpid for %1% failed (%2%)"
-msgstr "waitpid for %1% mislykkedes (%2%)"
-
-#. translators: %1% - command name or path
-#. translators: %2% - returned PID (number)
-#. translators: %3% - expected PID (number)
-#: src/commands/subcommand.cc:370
-#, boost-format
-msgid "waitpid for %1% returns unexpected pid %2% while waiting for %3%"
-msgstr "waitpid for %1% returnerer uventet pid %2% mens der ventes på %3%"
-
-#. translators: %1% - command name or path
-#. translators: %2% - signal number
-#. translators: %3% - signal name
-#: src/commands/subcommand.cc:381
-#, boost-format
-msgid "%1% was killed by signal %2% (%3%)"
-msgstr "%1% blev dræbt af signal %2% (%3%)"
-
-#: src/commands/subcommand.cc:385
-msgid "core dumped"
-msgstr "kerne dumpet"
-
-#. translators: %1% - command name or path
-#. translators: %2% - exit code (number)
-#: src/commands/subcommand.cc:395
-#, boost-format
-msgid "%1% exited with status %2%"
-msgstr "%1% afsluttede med status %2%"
-
-#. translators: %1% - command name or path
-#. translators: %2% - status (number)
-#: src/commands/subcommand.cc:410
-#, boost-format
-msgid "waitpid for %1% returns unexpected exit status %2%"
-msgstr "waitpid for %1% returnerer uventet afslutningsstatus %2%"
-
-#: src/commands/subcommand.cc:443
+#: src/commands/subcommand.cc:240
 #, boost-format
 msgid ""
 "Zypper subcommands are standalone executables that live in the\n"
@@ -5135,7 +5082,7 @@ msgstr ""
 "lede efter den i resten af din $PATH. Det er derfor muligt at skrive\n"
 "lokale zypper-udvidelser som ikke findes i systemområde.\n"
 
-#: src/commands/subcommand.cc:458
+#: src/commands/subcommand.cc:255
 #, boost-format
 msgid ""
 "Using zypper global-options together with subcommands, as well as\n"
@@ -5146,17 +5093,17 @@ msgstr ""
 "tidspunkt.\n"
 
 #. translators: headline of an enumeration; %1% is a directory name
-#: src/commands/subcommand.cc:469
+#: src/commands/subcommand.cc:266
 #, boost-format
 msgid "Available zypper subcommands in '%1%'"
 msgstr "Tilgængelige zypper-underkommandoer i '%1%'"
 
 #. translators: headline of an enumeration
-#: src/commands/subcommand.cc:475
+#: src/commands/subcommand.cc:272
 msgid "Zypper subcommands available from elsewhere on your $PATH"
 msgstr "Zypper-underkommandoer tilgængelige fra andre steder end din $PATH"
 
-#: src/commands/subcommand.cc:480
+#: src/commands/subcommand.cc:277
 msgid ""
 "Using zypper subcommands available from elsewhere on your $PATH is disabled "
 "in zypper.conf."
@@ -5165,7 +5112,7 @@ msgstr ""
 "$PATH, er slået fra i zypper.conf."
 
 #. translators: helptext; %1% is a zypper command
-#: src/commands/subcommand.cc:485
+#: src/commands/subcommand.cc:282
 #, boost-format
 msgid "Type '%1%' to get subcommand-specific help if available."
 msgstr ""
@@ -5173,16 +5120,16 @@ msgstr ""
 "tilgængeligt."
 
 #. translators: %1% - command name
-#: src/commands/subcommand.cc:508
+#: src/commands/subcommand.cc:305
 #, boost-format
 msgid "Manual entry for %1% can't be shown"
 msgstr "Manuel indtastning for %1% kan ikke vises"
 
-#: src/commands/subcommand.cc:522
+#: src/commands/subcommand.cc:319
 msgid "Lists available subcommands."
 msgstr "Viser tilgængelige underkommandoer."
 
-#: src/commands/subcommand.cc:523
+#: src/commands/subcommand.cc:320
 msgid ""
 "Lists available subcommands. Using zypper subcommands found on your $PATH is "
 "disabled in zypper.conf."
@@ -5191,12 +5138,12 @@ msgstr ""
 "findes i din $PATH, er slået fra i zypper.conf."
 
 #. Currently no concept how to handle global options and ZYPPlock
-#: src/commands/subcommand.cc:632
+#: src/commands/subcommand.cc:429
 msgid "Zypper shell does not support execution of subcommands."
 msgstr "Zypper-skal understøtter ikke eksekvering af underkommandoer."
 
 #. translators: %1%  - is the name of a subcommand
-#: src/commands/subcommand.cc:646
+#: src/commands/subcommand.cc:443
 #, boost-format
 msgid "Subcommand %1% does not support zypper global options."
 msgstr "Underkommando %1% understøtter ikke zypper globale tilvalg."
@@ -6160,8 +6107,8 @@ msgid ""
 msgstr ""
 "Dette kan skyldes ugyldig metadata i softwarekilden eller en fejl i metadata-"
 "fortolkeren. I det sidste tilfælde - eller i tvivlstilfælde - opret da "
-"venligst en fejlrapport ved at følge instruktionerne på http://"
-"en.opensuse.org/Zypper/Troubleshooting"
+"venligst en fejlrapport ved at følge instruktionerne på http://en.opensuse."
+"org/Zypper/Troubleshooting"
 
 #: src/repos.cc:446
 #, c-format, boost-format
@@ -6714,8 +6661,8 @@ msgstr ""
 #: src/solve-commit.cc:621
 #, c-format, boost-format
 msgid ""
-"Check for running processes using deleted libraries is disabled in "
-"zypper.conf. Run '%s' to check manually."
+"Check for running processes using deleted libraries is disabled in zypper."
+"conf. Run '%s' to check manually."
 msgstr ""
 "Søgning efter kørende processer ved brug af slettede biblioteker er "
 "deaktiveret i zypper.conf. Kør '%s' for at søge manualt."
@@ -7019,27 +6966,31 @@ msgstr "Nuværende version"
 msgid "Available Version"
 msgstr "Tilgængelig version"
 
-#: src/update.cc:1007
+#: src/update.cc:1019
 msgid "No matching issues found."
 msgstr "Ingen matchende problemstillinger fundet."
 
-#: src/update.cc:1013
+#: src/update.cc:1025
 msgid "The following matches in issue numbers have been found:"
 msgstr "Følgende matchende problemstillingsnumre er blevet fundet:"
 
-#: src/update.cc:1023
+#: src/update.cc:1035
 msgid "Matches in patch descriptions of the following patches have been found:"
 msgstr ""
 "Der er blevet fundet matchende rettelsesbeskrivelser i følgende rettelser:"
 
-#: src/update.cc:1085
+#: src/update.cc:1045
+msgid "No matches found for the following issue numbers:"
+msgstr ""
+
+#: src/update.cc:1106
 #, c-format, boost-format
 msgid "Fix for bugzilla issue number %s was not found or is not needed."
 msgstr ""
 "Løsning af Bugzilla problemstillingsnummer %s blev ikke fundet eller er ikke "
 "nødvendig."
 
-#: src/update.cc:1087
+#: src/update.cc:1108
 #, c-format, boost-format
 msgid "Fix for CVE issue number %s was not found or is not needed."
 msgstr ""
@@ -7047,7 +6998,7 @@ msgstr ""
 "nødvendig."
 
 #. translators: keep '%s issue' together, it's something like 'CVE issue' or 'Bugzilla issue'
-#: src/update.cc:1090
+#: src/update.cc:1111
 #, c-format, boost-format
 msgid "Fix for %s issue number %s was not found or is not needed."
 msgstr "Rettelse for %s issue nummer %s blev ikke fundet eller behøves ikke."
@@ -7088,6 +7039,59 @@ msgstr "%1%: Tilvalget '%2%' er defineret flere gange. Bruger den sidste."
 #: src/utils/Augeas.cc:656
 msgid "No config file is in use."
 msgstr "Der er ikke nogen konfigurationsfil i brug."
+
+#: src/utils/RunCommand.h:130
+#, boost-format
+msgid "cannot exec %1% (%2%)"
+msgstr "kan ikke eksekvere %1% (%2%)"
+
+#. translators: %1% - command name or path
+#. translators: %2% - system error message
+#: src/utils/RunCommand.h:139
+#, boost-format
+msgid "fork for %1% failed (%2%)"
+msgstr "fork for %1% mislykkedes (%2%)"
+
+#. translators: %1% - command name or path
+#. translators: %2% - system error message
+#: src/utils/RunCommand.h:158
+#, boost-format
+msgid "waitpid for %1% failed (%2%)"
+msgstr "waitpid for %1% mislykkedes (%2%)"
+
+#. translators: %1% - command name or path
+#. translators: %2% - returned PID (number)
+#. translators: %3% - expected PID (number)
+#: src/utils/RunCommand.h:168
+#, boost-format
+msgid "waitpid for %1% returns unexpected pid %2% while waiting for %3%"
+msgstr "waitpid for %1% returnerer uventet pid %2% mens der ventes på %3%"
+
+#. translators: %1% - command name or path
+#. translators: %2% - signal number
+#. translators: %3% - signal name
+#: src/utils/RunCommand.h:179
+#, boost-format
+msgid "%1% was killed by signal %2% (%3%)"
+msgstr "%1% blev dræbt af signal %2% (%3%)"
+
+#: src/utils/RunCommand.h:183
+msgid "core dumped"
+msgstr "kerne dumpet"
+
+#. translators: %1% - command name or path
+#. translators: %2% - exit code (number)
+#: src/utils/RunCommand.h:193
+#, boost-format
+msgid "%1% exited with status %2%"
+msgstr "%1% afsluttede med status %2%"
+
+#. translators: %1% - command name or path
+#. translators: %2% - status (number)
+#: src/utils/RunCommand.h:208
+#, boost-format
+msgid "waitpid for %1% returns unexpected exit status %2%"
+msgstr "waitpid for %1% returnerer uventet afslutningsstatus %2%"
 
 #: src/utils/flags/exceptions.cc:22
 #, boost-format
@@ -7469,18 +7473,18 @@ msgstr "Problem med at hente den angivne RPM-fil"
 msgid "Please check whether the file is accessible."
 msgstr "Tjek om filen er tilgængelig."
 
-#: src/utils/pager.cc:32
+#: src/utils/pager.cc:34
 #, c-format, boost-format
 msgid "Press '%c' to exit the pager."
 msgstr "Tryk '%c' for at afslutte pageren."
 
-#: src/utils/pager.cc:42
+#: src/utils/pager.cc:44
 msgid "Use arrows or pgUp/pgDown keys to scroll the text by lines or pages."
 msgstr ""
 "Brug pile- eller page up/down-taster for at rulle i teksten ved linjer eller "
 "sider."
 
-#: src/utils/pager.cc:44
+#: src/utils/pager.cc:46
 msgid "Use the Enter or Space key to scroll the text by lines or pages."
 msgstr ""
 "Brug retur- eller mellemrumstasten til at rulle i teksten ved linjer eller "
@@ -10445,8 +10449,8 @@ msgstr "Fejl"
 #~ "søges i\n"
 #~ "                           søges i pakkenavn som standard.\n"
 #~ "-f, --file-list            Søg efter et match i pakkers filliste.\n"
-#~ "-d, --search-descriptions  Søg også i pakkeopsummeringer og "
-#~ "-beskrivelser.\n"
+#~ "-d, --search-descriptions  Søg også i pakkeopsummeringer og -"
+#~ "beskrivelser.\n"
 #~ "-C, --case-sensitive       Udfør versalfølsom søgning.\n"
 #~ "-i, --installed-only       Vis kun pakker, der allerede er installeret.\n"
 #~ "-u, --not-installed-only   Vis kun pakker, der aktuelt ikke er "

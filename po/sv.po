@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-30 17:24+0200\n"
+"POT-Creation-Date: 2026-10-05 15:03+0200\n"
 "PO-Revision-Date: 2026-08-30 17:13+0000\n"
 "Last-Translator: Luna  Jernberg <bittin@opensuse.org>\n"
 "Language-Team: Swedish <https://l10n.opensuse.org/projects/zypper/master/sv/"
@@ -1463,8 +1463,8 @@ msgid ""
 msgstr ""
 "/etc/products.d/-basproduktens symboliska länk är verkningslös eller "
 "saknas!\n"
-"Länken måste referera till din .prod-fil för kärnprodukter i /etc/"
-"products.d.\n"
+"Länken måste referera till din .prod-fil för kärnprodukter i /etc/products."
+"d.\n"
 
 #. TranslatorExplanation The %s is "--plus-repo"
 #. TranslatorExplanation The %s is "--option-name"
@@ -2619,10 +2619,10 @@ msgid ""
 "all), 'rebuild' (hide rebuild-only changes), 'package' (hide packaging-only "
 "changes, i.e. same upstream version)."
 msgstr ""
-"Filtrera uppdateringar efter versionsändringens betydelse. NIVÅ: 'none' "
-"(standard, visa alla), 'rebuild' (dölj ändringar som endast rör ombyggnad), "
-"'package' (dölj ändringar som endast rör paketering, d.v.s. samma "
-"uppströmsversion)."
+"Filtrera uppdateringar efter versionsändringens betydelse. NIVÅ: "
+"'none' (standard, visa alla), 'rebuild' (dölj ändringar som endast rör "
+"ombyggnad), 'package' (dölj ändringar som endast rör paketering, d.v.s. "
+"samma uppströmsversion)."
 
 #. translators: command synopsis; do not translate lowercase words
 #: src/commands/locale/addlocalecmd.cc:20
@@ -5020,69 +5020,16 @@ msgid "Uninstalling source packages is not supported."
 msgstr "Avinstallation av källpaket stöds inte."
 
 #. translators: %1% is the name of the command which has no man page available.
-#: src/commands/subcommand.cc:88
+#: src/commands/subcommand.cc:87
 #, boost-format
 msgid "No manual entry for %1%"
 msgstr "Ingen manual post för %1%"
 
-#: src/commands/subcommand.cc:103
+#: src/commands/subcommand.cc:102
 msgid "none"
 msgstr "ingen"
 
-#: src/commands/subcommand.cc:332
-#, boost-format
-msgid "cannot exec %1% (%2%)"
-msgstr "kan inte köra %1% (%2%)"
-
-#. translators: %1% - command name or path
-#. translators: %2% - system error message
-#: src/commands/subcommand.cc:341
-#, boost-format
-msgid "fork for %1% failed (%2%)"
-msgstr "fildel för %1% misslyckades (%2%)"
-
-#. translators: %1% - command name or path
-#. translators: %2% - system error message
-#: src/commands/subcommand.cc:360
-#, boost-format
-msgid "waitpid for %1% failed (%2%)"
-msgstr "waitpid för %1% misslyckades (%2%)"
-
-#. translators: %1% - command name or path
-#. translators: %2% - returned PID (number)
-#. translators: %3% - expected PID (number)
-#: src/commands/subcommand.cc:370
-#, boost-format
-msgid "waitpid for %1% returns unexpected pid %2% while waiting for %3%"
-msgstr "waitpid för %1% returnerar oväntat pid %2% under väntan på %3%"
-
-#. translators: %1% - command name or path
-#. translators: %2% - signal number
-#. translators: %3% - signal name
-#: src/commands/subcommand.cc:381
-#, boost-format
-msgid "%1% was killed by signal %2% (%3%)"
-msgstr "%1% avbröts av signalen %2% (%3%)"
-
-#: src/commands/subcommand.cc:385
-msgid "core dumped"
-msgstr "minnesutskriftsfil skapad"
-
-#. translators: %1% - command name or path
-#. translators: %2% - exit code (number)
-#: src/commands/subcommand.cc:395
-#, boost-format
-msgid "%1% exited with status %2%"
-msgstr "%1% avslutades med status %2%"
-
-#. translators: %1% - command name or path
-#. translators: %2% - status (number)
-#: src/commands/subcommand.cc:410
-#, boost-format
-msgid "waitpid for %1% returns unexpected exit status %2%"
-msgstr "waitpid för %1% returnerar oväntad avslutningsstatus %2%"
-
-#: src/commands/subcommand.cc:443
+#: src/commands/subcommand.cc:240
 #, boost-format
 msgid ""
 "Zypper subcommands are standalone executables that live in the\n"
@@ -5107,7 +5054,7 @@ msgstr ""
 "aktuell $PATH igenom. Det går alltså\n"
 "att skriva lokala zypper-tillägg som inte förvaras i systemutrymmet.\n"
 
-#: src/commands/subcommand.cc:458
+#: src/commands/subcommand.cc:255
 #, boost-format
 msgid ""
 "Using zypper global-options together with subcommands, as well as\n"
@@ -5117,17 +5064,17 @@ msgstr ""
 "tillsammans med underkommandon, och inte heller att köra kommandon i %1%.\n"
 
 #. translators: headline of an enumeration; %1% is a directory name
-#: src/commands/subcommand.cc:469
+#: src/commands/subcommand.cc:266
 #, boost-format
 msgid "Available zypper subcommands in '%1%'"
 msgstr "Tillgängliga zypper-underkommandon i %1%"
 
 #. translators: headline of an enumeration
-#: src/commands/subcommand.cc:475
+#: src/commands/subcommand.cc:272
 msgid "Zypper subcommands available from elsewhere on your $PATH"
 msgstr "Zypper-underkommandon tillgängliga från annan plats i $PATH"
 
-#: src/commands/subcommand.cc:480
+#: src/commands/subcommand.cc:277
 msgid ""
 "Using zypper subcommands available from elsewhere on your $PATH is disabled "
 "in zypper.conf."
@@ -5136,22 +5083,22 @@ msgstr ""
 "$SÖKVÄG är inaktiverat i zypper.conf."
 
 #. translators: helptext; %1% is a zypper command
-#: src/commands/subcommand.cc:485
+#: src/commands/subcommand.cc:282
 #, boost-format
 msgid "Type '%1%' to get subcommand-specific help if available."
 msgstr "Skriv %1% så visas underkommandospecifik hjälp om sådan finns."
 
 #. translators: %1% - command name
-#: src/commands/subcommand.cc:508
+#: src/commands/subcommand.cc:305
 #, boost-format
 msgid "Manual entry for %1% can't be shown"
 msgstr "Manuell inmatning för %1% kan inte visas"
 
-#: src/commands/subcommand.cc:522
+#: src/commands/subcommand.cc:319
 msgid "Lists available subcommands."
 msgstr "Visar tillgängliga underkommandon."
 
-#: src/commands/subcommand.cc:523
+#: src/commands/subcommand.cc:320
 msgid ""
 "Lists available subcommands. Using zypper subcommands found on your $PATH is "
 "disabled in zypper.conf."
@@ -5160,12 +5107,12 @@ msgstr ""
 "finns i din $SÖKVÄG är inaktiverat i zypper.conf."
 
 #. Currently no concept how to handle global options and ZYPPlock
-#: src/commands/subcommand.cc:632
+#: src/commands/subcommand.cc:429
 msgid "Zypper shell does not support execution of subcommands."
 msgstr "Zypperskalet stödjer inte körning av underkommando."
 
 #. translators: %1%  - is the name of a subcommand
-#: src/commands/subcommand.cc:646
+#: src/commands/subcommand.cc:443
 #, boost-format
 msgid "Subcommand %1% does not support zypper global options."
 msgstr "Underkommandot %1% kan inte användas med globala  zypper-alternativ."
@@ -6694,8 +6641,8 @@ msgstr ""
 #: src/solve-commit.cc:621
 #, c-format, boost-format
 msgid ""
-"Check for running processes using deleted libraries is disabled in "
-"zypper.conf. Run '%s' to check manually."
+"Check for running processes using deleted libraries is disabled in zypper."
+"conf. Run '%s' to check manually."
 msgstr ""
 "Sökning efter processer som körs och använder borttagna bibliotek är "
 "inaktiverad i zypper.conf. Kör '%s' om du vill söka manuellt."
@@ -7001,31 +6948,35 @@ msgstr "Aktuell version"
 msgid "Available Version"
 msgstr "Tillgänglig version"
 
-#: src/update.cc:1007
+#: src/update.cc:1019
 msgid "No matching issues found."
 msgstr "Inga matchande utgåvor hittades."
 
-#: src/update.cc:1013
+#: src/update.cc:1025
 msgid "The following matches in issue numbers have been found:"
 msgstr "Följande matchande utgåvenummer har hittats:"
 
-#: src/update.cc:1023
+#: src/update.cc:1035
 msgid "Matches in patch descriptions of the following patches have been found:"
 msgstr "I följande programfixar har matchande programfixbeskrivningar hittats:"
 
-#: src/update.cc:1085
+#: src/update.cc:1045
+msgid "No matches found for the following issue numbers:"
+msgstr ""
+
+#: src/update.cc:1106
 #, c-format, boost-format
 msgid "Fix for bugzilla issue number %s was not found or is not needed."
 msgstr ""
 "Programfix för bugzilla, utgåva nummer %s, hittades inte eller behövs inte."
 
-#: src/update.cc:1087
+#: src/update.cc:1108
 #, c-format, boost-format
 msgid "Fix for CVE issue number %s was not found or is not needed."
 msgstr "Programfix för CVE, utgåva nummer %s, hittades inte eller behövs inte."
 
 #. translators: keep '%s issue' together, it's something like 'CVE issue' or 'Bugzilla issue'
-#: src/update.cc:1090
+#: src/update.cc:1111
 #, c-format, boost-format
 msgid "Fix for %s issue number %s was not found or is not needed."
 msgstr ""
@@ -7068,6 +7019,59 @@ msgstr "%1%: Alternativ '%2%' definieras flera gånger. Använder senaste."
 #: src/utils/Augeas.cc:656
 msgid "No config file is in use."
 msgstr "Ingen konfigurationsfil används."
+
+#: src/utils/RunCommand.h:130
+#, boost-format
+msgid "cannot exec %1% (%2%)"
+msgstr "kan inte köra %1% (%2%)"
+
+#. translators: %1% - command name or path
+#. translators: %2% - system error message
+#: src/utils/RunCommand.h:139
+#, boost-format
+msgid "fork for %1% failed (%2%)"
+msgstr "fildel för %1% misslyckades (%2%)"
+
+#. translators: %1% - command name or path
+#. translators: %2% - system error message
+#: src/utils/RunCommand.h:158
+#, boost-format
+msgid "waitpid for %1% failed (%2%)"
+msgstr "waitpid för %1% misslyckades (%2%)"
+
+#. translators: %1% - command name or path
+#. translators: %2% - returned PID (number)
+#. translators: %3% - expected PID (number)
+#: src/utils/RunCommand.h:168
+#, boost-format
+msgid "waitpid for %1% returns unexpected pid %2% while waiting for %3%"
+msgstr "waitpid för %1% returnerar oväntat pid %2% under väntan på %3%"
+
+#. translators: %1% - command name or path
+#. translators: %2% - signal number
+#. translators: %3% - signal name
+#: src/utils/RunCommand.h:179
+#, boost-format
+msgid "%1% was killed by signal %2% (%3%)"
+msgstr "%1% avbröts av signalen %2% (%3%)"
+
+#: src/utils/RunCommand.h:183
+msgid "core dumped"
+msgstr "minnesutskriftsfil skapad"
+
+#. translators: %1% - command name or path
+#. translators: %2% - exit code (number)
+#: src/utils/RunCommand.h:193
+#, boost-format
+msgid "%1% exited with status %2%"
+msgstr "%1% avslutades med status %2%"
+
+#. translators: %1% - command name or path
+#. translators: %2% - status (number)
+#: src/utils/RunCommand.h:208
+#, boost-format
+msgid "waitpid for %1% returns unexpected exit status %2%"
+msgstr "waitpid för %1% returnerar oväntad avslutningsstatus %2%"
 
 #: src/utils/flags/exceptions.cc:22
 #, boost-format
@@ -7452,17 +7456,17 @@ msgstr "Det gick inte att hämta den angivna RPM-filen"
 msgid "Please check whether the file is accessible."
 msgstr "Kontrollera att filen är hämtningsbar."
 
-#: src/utils/pager.cc:32
+#: src/utils/pager.cc:34
 #, c-format, boost-format
 msgid "Press '%c' to exit the pager."
 msgstr "Tryck på %c när du vill avsluta sökaren."
 
-#: src/utils/pager.cc:42
+#: src/utils/pager.cc:44
 msgid "Use arrows or pgUp/pgDown keys to scroll the text by lines or pages."
 msgstr ""
 "Bläddra radvis eller per sida i texten med hjälp av tangenterna PgUp/PgDn."
 
-#: src/utils/pager.cc:44
+#: src/utils/pager.cc:46
 msgid "Use the Enter or Space key to scroll the text by lines or pages."
 msgstr ""
 "Bläddra radvis eller per sida i texten genom att trycka på Retur eller "

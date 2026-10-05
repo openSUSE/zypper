@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-30 17:24+0200\n"
+"POT-Creation-Date: 2026-10-05 15:03+0200\n"
 "PO-Revision-Date: 2026-07-13 16:12+0000\n"
 "Last-Translator: Akın Birdal <reend21@protonmail.com>\n"
 "Language-Team: Turkish <https://l10n.opensuse.org/projects/zypper/master/tr/"
@@ -2581,8 +2581,8 @@ msgid ""
 msgstr ""
 "Bağımlı paketleri kaldırmaktansa değiştirmeyi tercih eden bir kaldırma "
 "komutu. Aslında bu, düz argümanlarına (-) uygulanan kaldırma değiştiricisi "
-"ile tam özellikli bir yükleme komutudur. Yani 'removeptf foo', 'install -- "
-"-foo' ile aynıdır. Bu yüzden komut, yükleme komutuyla aynı seçenekleri kabul "
+"ile tam özellikli bir yükleme komutudur. Yani 'removeptf foo', 'install -- -"
+"foo' ile aynıdır. Bu yüzden komut, yükleme komutuyla aynı seçenekleri kabul "
 "eder. Bir PTF'yi (Program Geçici Düzeltmesi) kaldırmanın önerilen yoludur."
 
 #: src/commands/installremove.cc:317
@@ -5072,69 +5072,16 @@ msgid "Uninstalling source packages is not supported."
 msgstr "Kaynak paketlerin kaldırılması desteklenmez."
 
 #. translators: %1% is the name of the command which has no man page available.
-#: src/commands/subcommand.cc:88
+#: src/commands/subcommand.cc:87
 #, boost-format
 msgid "No manual entry for %1%"
 msgstr "%1% için manual girişi yok"
 
-#: src/commands/subcommand.cc:103
+#: src/commands/subcommand.cc:102
 msgid "none"
 msgstr "hiçbiri"
 
-#: src/commands/subcommand.cc:332
-#, boost-format
-msgid "cannot exec %1% (%2%)"
-msgstr "%1% çalıştırılamıyor (%2%)"
-
-#. translators: %1% - command name or path
-#. translators: %2% - system error message
-#: src/commands/subcommand.cc:341
-#, boost-format
-msgid "fork for %1% failed (%2%)"
-msgstr "%1% için çatallama başarısız oldu (%2%)"
-
-#. translators: %1% - command name or path
-#. translators: %2% - system error message
-#: src/commands/subcommand.cc:360
-#, boost-format
-msgid "waitpid for %1% failed (%2%)"
-msgstr "%1% için waitpid işlemi başarısız oldu (%2%)"
-
-#. translators: %1% - command name or path
-#. translators: %2% - returned PID (number)
-#. translators: %3% - expected PID (number)
-#: src/commands/subcommand.cc:370
-#, boost-format
-msgid "waitpid for %1% returns unexpected pid %2% while waiting for %3%"
-msgstr "%1% için waitpid,%3% beklerken beklenmedik pid %2% döndürür"
-
-#. translators: %1% - command name or path
-#. translators: %2% - signal number
-#. translators: %3% - signal name
-#: src/commands/subcommand.cc:381
-#, boost-format
-msgid "%1% was killed by signal %2% (%3%)"
-msgstr "%1%, %2% sinyali tarafından sonlandırıldı (%3%)"
-
-#: src/commands/subcommand.cc:385
-msgid "core dumped"
-msgstr "çekirdek döküldü"
-
-#. translators: %1% - command name or path
-#. translators: %2% - exit code (number)
-#: src/commands/subcommand.cc:395
-#, boost-format
-msgid "%1% exited with status %2%"
-msgstr "%1%, %2% durum dönütü ile çıkıldı"
-
-#. translators: %1% - command name or path
-#. translators: %2% - status (number)
-#: src/commands/subcommand.cc:410
-#, boost-format
-msgid "waitpid for %1% returns unexpected exit status %2%"
-msgstr "%1% için waitpid, %2% beklenmedik çıkış durumu döndürüyor"
-
-#: src/commands/subcommand.cc:443
+#: src/commands/subcommand.cc:240
 #, boost-format
 msgid ""
 "Zypper subcommands are standalone executables that live in the\n"
@@ -5159,7 +5106,7 @@ msgstr ""
 "bunun için $PATH yolunuzun geri kalanına bakacak. Böylece mümkün\n"
 "sistem alanında yaşamayan yerel zypper uzantıları yazmak için.\n"
 
-#: src/commands/subcommand.cc:458
+#: src/commands/subcommand.cc:255
 #, boost-format
 msgid ""
 "Using zypper global-options together with subcommands, as well as\n"
@@ -5169,17 +5116,17 @@ msgstr ""
 "alt komutları '%1%' içinde çalıştırmak şu an desteklenmiyor.\n"
 
 #. translators: headline of an enumeration; %1% is a directory name
-#: src/commands/subcommand.cc:469
+#: src/commands/subcommand.cc:266
 #, boost-format
 msgid "Available zypper subcommands in '%1%'"
 msgstr "'%1%' içinde mevcut zypper alt komutları"
 
 #. translators: headline of an enumeration
-#: src/commands/subcommand.cc:475
+#: src/commands/subcommand.cc:272
 msgid "Zypper subcommands available from elsewhere on your $PATH"
 msgstr "Zypper alt komutları $PATH yolunuzda başka bir yerden kullanılabilir"
 
-#: src/commands/subcommand.cc:480
+#: src/commands/subcommand.cc:277
 msgid ""
 "Using zypper subcommands available from elsewhere on your $PATH is disabled "
 "in zypper.conf."
@@ -5188,22 +5135,22 @@ msgstr ""
 "kullanma özelliği zypper.conf dosyasında devre dışı bırakılmıştır."
 
 #. translators: helptext; %1% is a zypper command
-#: src/commands/subcommand.cc:485
+#: src/commands/subcommand.cc:282
 #, boost-format
 msgid "Type '%1%' to get subcommand-specific help if available."
 msgstr "Varsa, alt komuta özel yardım almak için '%1%' yazın."
 
 #. translators: %1% - command name
-#: src/commands/subcommand.cc:508
+#: src/commands/subcommand.cc:305
 #, boost-format
 msgid "Manual entry for %1% can't be shown"
 msgstr "%1% için manual girişi gösterilemiyor"
 
-#: src/commands/subcommand.cc:522
+#: src/commands/subcommand.cc:319
 msgid "Lists available subcommands."
 msgstr "Mevcut alt komutları listeler."
 
-#: src/commands/subcommand.cc:523
+#: src/commands/subcommand.cc:320
 msgid ""
 "Lists available subcommands. Using zypper subcommands found on your $PATH is "
 "disabled in zypper.conf."
@@ -5212,12 +5159,12 @@ msgstr ""
 "komutlarını kullanmak zypper.conf'da devre dışıdır."
 
 #. Currently no concept how to handle global options and ZYPPlock
-#: src/commands/subcommand.cc:632
+#: src/commands/subcommand.cc:429
 msgid "Zypper shell does not support execution of subcommands."
 msgstr "Zypper kabuğu alt komutların çalıştırılmasını desteklemiyor."
 
 #. translators: %1%  - is the name of a subcommand
-#: src/commands/subcommand.cc:646
+#: src/commands/subcommand.cc:443
 #, boost-format
 msgid "Subcommand %1% does not support zypper global options."
 msgstr "%1% alt komutu zypper evrensel seçeneklerini desteklemiyor."
@@ -6768,8 +6715,8 @@ msgstr ""
 #: src/solve-commit.cc:621
 #, c-format, boost-format
 msgid ""
-"Check for running processes using deleted libraries is disabled in "
-"zypper.conf. Run '%s' to check manually."
+"Check for running processes using deleted libraries is disabled in zypper."
+"conf. Run '%s' to check manually."
 msgstr ""
 "Silinen kitaplıkları kullanan çalışan işlemleri denetleme, zypper.conf "
 "içinde devre dışı bırakılmıştır. Manuel olarak kontrol etmek için '%s' "
@@ -7087,31 +7034,35 @@ msgid "Available Version"
 msgstr "Mevcut Sürüm"
 
 # clients/inst_rootpart.ycp:401
-#: src/update.cc:1007
+#: src/update.cc:1019
 msgid "No matching issues found."
 msgstr "Eşleşen sorun bulunamadı."
 
-#: src/update.cc:1013
+#: src/update.cc:1025
 msgid "The following matches in issue numbers have been found:"
 msgstr "Sayı numaralarında aşağıdaki eşleşmeler bulundu:"
 
-#: src/update.cc:1023
+#: src/update.cc:1035
 msgid "Matches in patch descriptions of the following patches have been found:"
 msgstr "Aşağıdaki yamaların yama açıklamalarındaki eşleşmeler bulundu:"
 
-#: src/update.cc:1085
+#: src/update.cc:1045
+msgid "No matches found for the following issue numbers:"
+msgstr ""
+
+#: src/update.cc:1106
 #, c-format, boost-format
 msgid "Fix for bugzilla issue number %s was not found or is not needed."
 msgstr ""
 "%s numaralı bugzilla sorunu için düzeltme bulunamadı veya gerekli değil."
 
-#: src/update.cc:1087
+#: src/update.cc:1108
 #, c-format, boost-format
 msgid "Fix for CVE issue number %s was not found or is not needed."
 msgstr "%s numaralı CVE sorunu için düzeltme bulunamadı veya gerekli değil."
 
 #. translators: keep '%s issue' together, it's something like 'CVE issue' or 'Bugzilla issue'
-#: src/update.cc:1090
+#: src/update.cc:1111
 #, c-format, boost-format
 msgid "Fix for %s issue number %s was not found or is not needed."
 msgstr "%s sorun numarası için düzeltme %s bulunamadı veya gerekli değil."
@@ -7154,6 +7105,59 @@ msgstr ""
 #: src/utils/Augeas.cc:656
 msgid "No config file is in use."
 msgstr "Kullanımda olan yapılandırma dosyası yok."
+
+#: src/utils/RunCommand.h:130
+#, boost-format
+msgid "cannot exec %1% (%2%)"
+msgstr "%1% çalıştırılamıyor (%2%)"
+
+#. translators: %1% - command name or path
+#. translators: %2% - system error message
+#: src/utils/RunCommand.h:139
+#, boost-format
+msgid "fork for %1% failed (%2%)"
+msgstr "%1% için çatallama başarısız oldu (%2%)"
+
+#. translators: %1% - command name or path
+#. translators: %2% - system error message
+#: src/utils/RunCommand.h:158
+#, boost-format
+msgid "waitpid for %1% failed (%2%)"
+msgstr "%1% için waitpid işlemi başarısız oldu (%2%)"
+
+#. translators: %1% - command name or path
+#. translators: %2% - returned PID (number)
+#. translators: %3% - expected PID (number)
+#: src/utils/RunCommand.h:168
+#, boost-format
+msgid "waitpid for %1% returns unexpected pid %2% while waiting for %3%"
+msgstr "%1% için waitpid,%3% beklerken beklenmedik pid %2% döndürür"
+
+#. translators: %1% - command name or path
+#. translators: %2% - signal number
+#. translators: %3% - signal name
+#: src/utils/RunCommand.h:179
+#, boost-format
+msgid "%1% was killed by signal %2% (%3%)"
+msgstr "%1%, %2% sinyali tarafından sonlandırıldı (%3%)"
+
+#: src/utils/RunCommand.h:183
+msgid "core dumped"
+msgstr "çekirdek döküldü"
+
+#. translators: %1% - command name or path
+#. translators: %2% - exit code (number)
+#: src/utils/RunCommand.h:193
+#, boost-format
+msgid "%1% exited with status %2%"
+msgstr "%1%, %2% durum dönütü ile çıkıldı"
+
+#. translators: %1% - command name or path
+#. translators: %2% - status (number)
+#: src/utils/RunCommand.h:208
+#, boost-format
+msgid "waitpid for %1% returns unexpected exit status %2%"
+msgstr "%1% için waitpid, %2% beklenmedik çıkış durumu döndürüyor"
 
 #: src/utils/flags/exceptions.cc:22
 #, boost-format
@@ -7548,18 +7552,18 @@ msgstr "Belirtilen RPM dosyasını alma sorunu"
 msgid "Please check whether the file is accessible."
 msgstr "Dosyanın erişilebilir olup olmadığını kontrol edin."
 
-#: src/utils/pager.cc:32
+#: src/utils/pager.cc:34
 #, c-format, boost-format
 msgid "Press '%c' to exit the pager."
 msgstr "Çağrı cihazından çıkmak için '%c' tuşuna basın."
 
-#: src/utils/pager.cc:42
+#: src/utils/pager.cc:44
 msgid "Use arrows or pgUp/pgDown keys to scroll the text by lines or pages."
 msgstr ""
 "Metni satır ya da sayfa şeklinde kaydırmak için ok ya da pgUp/pgDown "
 "tuşlarını kullanın."
 
-#: src/utils/pager.cc:44
+#: src/utils/pager.cc:46
 msgid "Use the Enter or Space key to scroll the text by lines or pages."
 msgstr ""
 "Metni satır ya da sayfa şeklinde kaydırmak için Enter ya da Boşluk tuşunu "

@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper.de\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-30 17:24+0200\n"
+"POT-Creation-Date: 2026-10-05 15:03+0200\n"
 "PO-Revision-Date: 2026-09-06 11:13+0000\n"
 "Last-Translator: Ettore Atalan <atalanttore@googlemail.com>\n"
 "Language-Team: German <https://l10n.opensuse.org/projects/zypper/master/de/"
@@ -3749,8 +3749,8 @@ msgstr ""
 msgid ""
 "If only one argument is used, it must be a URI pointing to a .repo file."
 msgstr ""
-"Wenn nur ein Argument verwendet wird, dann muss es sich um einen auf "
-"eine .repo-Datei verweisenden URI handeln."
+"Wenn nur ein Argument verwendet wird, dann muss es sich um einen auf eine ."
+"repo-Datei verweisenden URI handeln."
 
 #: src/commands/repos/add.cc:130
 msgid "Specified type is not a valid repository type:"
@@ -5195,69 +5195,16 @@ msgid "Uninstalling source packages is not supported."
 msgstr "Die Deinstallation von Quellpaketen wird nicht unterstützt."
 
 #. translators: %1% is the name of the command which has no man page available.
-#: src/commands/subcommand.cc:88
+#: src/commands/subcommand.cc:87
 #, boost-format
 msgid "No manual entry for %1%"
 msgstr "Kein Handbucheintrag für %1%"
 
-#: src/commands/subcommand.cc:103
+#: src/commands/subcommand.cc:102
 msgid "none"
 msgstr "Keine"
 
-#: src/commands/subcommand.cc:332
-#, boost-format
-msgid "cannot exec %1% (%2%)"
-msgstr "Ausführen von %1% (%2%) nicht möglich"
-
-#. translators: %1% - command name or path
-#. translators: %2% - system error message
-#: src/commands/subcommand.cc:341
-#, boost-format
-msgid "fork for %1% failed (%2%)"
-msgstr "Fehler beim Abzweigen für %1% (%2%)"
-
-#. translators: %1% - command name or path
-#. translators: %2% - system error message
-#: src/commands/subcommand.cc:360
-#, boost-format
-msgid "waitpid for %1% failed (%2%)"
-msgstr "Fehler bei waitpid für %1% (%2%)"
-
-#. translators: %1% - command name or path
-#. translators: %2% - returned PID (number)
-#. translators: %3% - expected PID (number)
-#: src/commands/subcommand.cc:370
-#, boost-format
-msgid "waitpid for %1% returns unexpected pid %2% while waiting for %3%"
-msgstr "waitpid für %1% gibt unerwartete PID %2% beim Warten auf %3% zurück"
-
-#. translators: %1% - command name or path
-#. translators: %2% - signal number
-#. translators: %3% - signal name
-#: src/commands/subcommand.cc:381
-#, boost-format
-msgid "%1% was killed by signal %2% (%3%)"
-msgstr "%1% wurde mit Signal %2% (%3%) beendet"
-
-#: src/commands/subcommand.cc:385
-msgid "core dumped"
-msgstr "Speicherauszug erstellt"
-
-#. translators: %1% - command name or path
-#. translators: %2% - exit code (number)
-#: src/commands/subcommand.cc:395
-#, boost-format
-msgid "%1% exited with status %2%"
-msgstr "%1% mit Status %2% beendet"
-
-#. translators: %1% - command name or path
-#. translators: %2% - status (number)
-#: src/commands/subcommand.cc:410
-#, boost-format
-msgid "waitpid for %1% returns unexpected exit status %2%"
-msgstr "waitpid für %1% gibt unerwarteten Beendigungsstatus %2% zurück"
-
-#: src/commands/subcommand.cc:443
+#: src/commands/subcommand.cc:240
 #, boost-format
 msgid ""
 "Zypper subcommands are standalone executables that live in the\n"
@@ -5285,7 +5232,7 @@ msgstr ""
 "lokale zypper-Erweiterungen geschrieben werden, die sich nicht im "
 "Systembereich befinden.\n"
 
-#: src/commands/subcommand.cc:458
+#: src/commands/subcommand.cc:255
 #, boost-format
 msgid ""
 "Using zypper global-options together with subcommands, as well as\n"
@@ -5296,17 +5243,17 @@ msgstr ""
 "Ausführen von Unterkommandos in '%1%' wird derzeit nicht unterstützt.\n"
 
 #. translators: headline of an enumeration; %1% is a directory name
-#: src/commands/subcommand.cc:469
+#: src/commands/subcommand.cc:266
 #, boost-format
 msgid "Available zypper subcommands in '%1%'"
 msgstr "Verfügbare zypper-Unterkommandos in '%1%'"
 
 #. translators: headline of an enumeration
-#: src/commands/subcommand.cc:475
+#: src/commands/subcommand.cc:272
 msgid "Zypper subcommands available from elsewhere on your $PATH"
 msgstr "Zypper-Unterkommandos in anderen Ordnern im $PATH"
 
-#: src/commands/subcommand.cc:480
+#: src/commands/subcommand.cc:277
 msgid ""
 "Using zypper subcommands available from elsewhere on your $PATH is disabled "
 "in zypper.conf."
@@ -5315,23 +5262,23 @@ msgstr ""
 "$PATH verfügbar sind, ist in zypper.conf deaktiviert."
 
 #. translators: helptext; %1% is a zypper command
-#: src/commands/subcommand.cc:485
+#: src/commands/subcommand.cc:282
 #, boost-format
 msgid "Type '%1%' to get subcommand-specific help if available."
 msgstr ""
 "Mit '%1%' erhalten Sie Hilfe zu einzelnen Unterkommandos (sofern verfügbar)."
 
 #. translators: %1% - command name
-#: src/commands/subcommand.cc:508
+#: src/commands/subcommand.cc:305
 #, boost-format
 msgid "Manual entry for %1% can't be shown"
 msgstr "Anzeige der manuellen Eingabe für %1% nicht möglich"
 
-#: src/commands/subcommand.cc:522
+#: src/commands/subcommand.cc:319
 msgid "Lists available subcommands."
 msgstr "Verfügbare Unterkommandos auflisten."
 
-#: src/commands/subcommand.cc:523
+#: src/commands/subcommand.cc:320
 msgid ""
 "Lists available subcommands. Using zypper subcommands found on your $PATH is "
 "disabled in zypper.conf."
@@ -5341,12 +5288,12 @@ msgstr ""
 "deaktiviert."
 
 #. Currently no concept how to handle global options and ZYPPlock
-#: src/commands/subcommand.cc:632
+#: src/commands/subcommand.cc:429
 msgid "Zypper shell does not support execution of subcommands."
 msgstr "Die zypper-Shell unterstützt nicht die Ausführung von Unterbefehlen."
 
 #. translators: %1%  - is the name of a subcommand
-#: src/commands/subcommand.cc:646
+#: src/commands/subcommand.cc:443
 #, boost-format
 msgid "Subcommand %1% does not support zypper global options."
 msgstr "Unterkommando %1% unterstützt keine globalen zypper-Optionen."
@@ -5512,9 +5459,9 @@ msgid ""
 "N), running, oldest(+N)."
 msgstr ""
 "Automatische Löschungen von installierten Kerneln gemäß der Liste an "
-"Kerneln, die von /etc/zypp/zypp.conf behalten werden sollen: "
-"multiversion.kernels, die als <Version>, aktuellster(-N), laufend, "
-"ältester(+N) gegeben sein können."
+"Kerneln, die von /etc/zypp/zypp.conf behalten werden sollen: multiversion."
+"kernels, die als <Version>, aktuellster(-N), laufend, ältester(+N) gegeben "
+"sein können."
 
 #: src/commands/utils/purge-kernels.cc:51
 msgid "Preparing to purge obsolete kernels..."
@@ -6912,8 +6859,8 @@ msgstr ""
 #: src/solve-commit.cc:621
 #, c-format, boost-format
 msgid ""
-"Check for running processes using deleted libraries is disabled in "
-"zypper.conf. Run '%s' to check manually."
+"Check for running processes using deleted libraries is disabled in zypper."
+"conf. Run '%s' to check manually."
 msgstr ""
 "Die Suche nach laufenden Prozessen, die gelöschte Bibliotheken verwenden, "
 "ist in zypper.conf deaktiviert. Starten Sie die Suche manuell mit '%s'."
@@ -7226,28 +7173,32 @@ msgstr "Aktuelle Version"
 msgid "Available Version"
 msgstr "Verfügbare Version"
 
-#: src/update.cc:1007
+#: src/update.cc:1019
 msgid "No matching issues found."
 msgstr "Keine übereinstimmenden Einträge gefunden."
 
-#: src/update.cc:1013
+#: src/update.cc:1025
 msgid "The following matches in issue numbers have been found:"
 msgstr "Die folgenden Übereinstimmungen mit Eintragsnummern wurden gefunden:"
 
-#: src/update.cc:1023
+#: src/update.cc:1035
 msgid "Matches in patch descriptions of the following patches have been found:"
 msgstr ""
 "Übereinstimmungen wurden in den Patch-Beschreibungen der folgenden Patches "
 "gefunden:"
 
-#: src/update.cc:1085
+#: src/update.cc:1045
+msgid "No matches found for the following issue numbers:"
+msgstr ""
+
+#: src/update.cc:1106
 #, c-format, boost-format
 msgid "Fix for bugzilla issue number %s was not found or is not needed."
 msgstr ""
 "Bereinigung für Bugzilla-Eintragsnummer %s wurde nicht gefunden oder ist "
 "nicht erforderlich."
 
-#: src/update.cc:1087
+#: src/update.cc:1108
 #, c-format, boost-format
 msgid "Fix for CVE issue number %s was not found or is not needed."
 msgstr ""
@@ -7255,7 +7206,7 @@ msgstr ""
 "erforderlich."
 
 #. translators: keep '%s issue' together, it's something like 'CVE issue' or 'Bugzilla issue'
-#: src/update.cc:1090
+#: src/update.cc:1111
 #, c-format, boost-format
 msgid "Fix for %s issue number %s was not found or is not needed."
 msgstr ""
@@ -7299,6 +7250,59 @@ msgstr ""
 #: src/utils/Augeas.cc:656
 msgid "No config file is in use."
 msgstr "Es wird keine Konfigurationsdatei verwendet."
+
+#: src/utils/RunCommand.h:130
+#, boost-format
+msgid "cannot exec %1% (%2%)"
+msgstr "Ausführen von %1% (%2%) nicht möglich"
+
+#. translators: %1% - command name or path
+#. translators: %2% - system error message
+#: src/utils/RunCommand.h:139
+#, boost-format
+msgid "fork for %1% failed (%2%)"
+msgstr "Fehler beim Abzweigen für %1% (%2%)"
+
+#. translators: %1% - command name or path
+#. translators: %2% - system error message
+#: src/utils/RunCommand.h:158
+#, boost-format
+msgid "waitpid for %1% failed (%2%)"
+msgstr "Fehler bei waitpid für %1% (%2%)"
+
+#. translators: %1% - command name or path
+#. translators: %2% - returned PID (number)
+#. translators: %3% - expected PID (number)
+#: src/utils/RunCommand.h:168
+#, boost-format
+msgid "waitpid for %1% returns unexpected pid %2% while waiting for %3%"
+msgstr "waitpid für %1% gibt unerwartete PID %2% beim Warten auf %3% zurück"
+
+#. translators: %1% - command name or path
+#. translators: %2% - signal number
+#. translators: %3% - signal name
+#: src/utils/RunCommand.h:179
+#, boost-format
+msgid "%1% was killed by signal %2% (%3%)"
+msgstr "%1% wurde mit Signal %2% (%3%) beendet"
+
+#: src/utils/RunCommand.h:183
+msgid "core dumped"
+msgstr "Speicherauszug erstellt"
+
+#. translators: %1% - command name or path
+#. translators: %2% - exit code (number)
+#: src/utils/RunCommand.h:193
+#, boost-format
+msgid "%1% exited with status %2%"
+msgstr "%1% mit Status %2% beendet"
+
+#. translators: %1% - command name or path
+#. translators: %2% - status (number)
+#: src/utils/RunCommand.h:208
+#, boost-format
+msgid "waitpid for %1% returns unexpected exit status %2%"
+msgstr "waitpid für %1% gibt unerwarteten Beendigungsstatus %2% zurück"
 
 #: src/utils/flags/exceptions.cc:22
 #, boost-format
@@ -7686,18 +7690,18 @@ msgstr "Problem beim Abrufen der angegebenen RPM-Datei"
 msgid "Please check whether the file is accessible."
 msgstr "Überprüfen Sie, ob auf die Datei zugegriffen werden kann."
 
-#: src/utils/pager.cc:32
+#: src/utils/pager.cc:34
 #, c-format, boost-format
 msgid "Press '%c' to exit the pager."
 msgstr "Drücken Sie '%c', um den Pager zu beenden."
 
-#: src/utils/pager.cc:42
+#: src/utils/pager.cc:44
 msgid "Use arrows or pgUp/pgDown keys to scroll the text by lines or pages."
 msgstr ""
 "Verwenden Sie die Tasten BildAuf/BildAb, um den Text zeilen- oder "
 "seitenweise zu blättern."
 
-#: src/utils/pager.cc:44
+#: src/utils/pager.cc:46
 msgid "Use the Enter or Space key to scroll the text by lines or pages."
 msgstr ""
 "Verwenden Sie die Eingabe- oder Leertaste, um den Text zeilen- oder "
@@ -9736,8 +9740,8 @@ msgstr "Fehler"
 #~ "Standard.\n"
 #~ "-f, --file-list            Suche nach einem Treffer in der Dateiliste der "
 #~ "Pakete.\n"
-#~ "-d, --search-descriptions  Suche auch in Paketzusammenfassungen und "
-#~ "-beschreibungen.\n"
+#~ "-d, --search-descriptions  Suche auch in Paketzusammenfassungen und -"
+#~ "beschreibungen.\n"
 #~ "-C, --case-sensitive       Beachtung der Groß-/Kleinschreibung.\n"
 #~ "-i, --installed-only       Nur Pakete anzeigen, die schon installiert "
 #~ "sind.\n"
@@ -12135,8 +12139,8 @@ msgstr "Fehler"
 #~ "                           ist die Suche in Paketnamen der Standard.\n"
 #~ "-f, --file-list            Suche nach einer Übereinstimmung in der "
 #~ "Dateiliste der Pakete.\n"
-#~ "-d, --search-descriptions  Suche auch in Paketzusammenfassungen und "
-#~ "-beschreibungen.\n"
+#~ "-d, --search-descriptions  Suche auch in Paketzusammenfassungen und -"
+#~ "beschreibungen.\n"
 #~ "-C, --case-sensitive       Suche unter Beachtung der "
 #~ "Großkleinschreibung.\n"
 #~ "-i, --installed-only       Zeige nur schon installierte Pakete.\n"
@@ -12203,8 +12207,8 @@ msgstr "Fehler"
 #~ "    --match-words          Nach einer Übereinstimmung mit nur ganzen "
 #~ "Wörtern suchen.\n"
 #~ "    --match-exact          Nach einem genauen Paketnamen suchen.\n"
-#~ "-d, --search-descriptions  Auch in Paketzusammenfassungen und "
-#~ "-beschreibungen suchen.\n"
+#~ "-d, --search-descriptions  Auch in Paketzusammenfassungen und -"
+#~ "beschreibungen suchen.\n"
 #~ "-C, --case-sensitive       Eine Groß- und Kleinschreibung "
 #~ "berücksichtigende Suche durchführen.\n"
 #~ "-i, --installed-only       Nur installierte Pakete anzeigen.\n"

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-30 17:24+0200\n"
+"POT-Creation-Date: 2026-10-05 15:03+0200\n"
 "PO-Revision-Date: 2026-06-21 21:12+0000\n"
 "Last-Translator: Samanta Magalhaes <samanta_texttrans@outlook.com>\n"
 "Language-Team: Portuguese (Brazil) <https://l10n.opensuse.org/projects/"
@@ -2471,9 +2471,8 @@ msgid ""
 "Remove packages with specified capabilities. A capability is NAME[.ARCH]"
 "[OP<VERSION>], where OP is one of <, <=, =, >=, >."
 msgstr ""
-"Remove os pacotes com os recursos especificados. Um recurso é "
-"NOME[.ARQUITETURA][OP<VERSÃO>], em que OP é um dos operadores <, <=, =, >=, "
-">."
+"Remove os pacotes com os recursos especificados. Um recurso é NOME[."
+"ARQUITETURA][OP<VERSÃO>], em que OP é um dos operadores <, <=, =, >=, >."
 
 #: src/commands/installremove.cc:104 src/commands/installremove.cc:234
 #: src/utils/messages.cc:53
@@ -4250,8 +4249,8 @@ msgid ""
 "Use the global GPG check setting defined in /etc/zypp/zypp.conf. This is the "
 "default."
 msgstr ""
-"Usar as configurações de verificação GPG globais definidas no /etc/zypp/"
-"zypp.conf. Isto é o padrão."
+"Usar as configurações de verificação GPG globais definidas no /etc/zypp/zypp."
+"conf. Isto é o padrão."
 
 #. translators: -a, --alias
 #: src/commands/reposerviceoptionsets.cc:182
@@ -5094,70 +5093,16 @@ msgid "Uninstalling source packages is not supported."
 msgstr "A desinstalação de pacotes de origem não é suportada."
 
 #. translators: %1% is the name of the command which has no man page available.
-#: src/commands/subcommand.cc:88
+#: src/commands/subcommand.cc:87
 #, boost-format
 msgid "No manual entry for %1%"
 msgstr "Sem entrada manual para %1%"
 
-#: src/commands/subcommand.cc:103
+#: src/commands/subcommand.cc:102
 msgid "none"
 msgstr "nenhum"
 
-#: src/commands/subcommand.cc:332
-#, boost-format
-msgid "cannot exec %1% (%2%)"
-msgstr "não foi possível executar %1% (%2%)"
-
-#. translators: %1% - command name or path
-#. translators: %2% - system error message
-#: src/commands/subcommand.cc:341
-#, boost-format
-msgid "fork for %1% failed (%2%)"
-msgstr "falha na bifurcação de %1% (%2%)"
-
-#. translators: %1% - command name or path
-#. translators: %2% - system error message
-#: src/commands/subcommand.cc:360
-#, boost-format
-msgid "waitpid for %1% failed (%2%)"
-msgstr "falha no waitpid de %1% (%2%)"
-
-#. translators: %1% - command name or path
-#. translators: %2% - returned PID (number)
-#. translators: %3% - expected PID (number)
-#: src/commands/subcommand.cc:370
-#, boost-format
-msgid "waitpid for %1% returns unexpected pid %2% while waiting for %3%"
-msgstr ""
-"waitpid para %1% retornou um PID %2% não esperado enquanto aguardava por %3%"
-
-#. translators: %1% - command name or path
-#. translators: %2% - signal number
-#. translators: %3% - signal name
-#: src/commands/subcommand.cc:381
-#, boost-format
-msgid "%1% was killed by signal %2% (%3%)"
-msgstr "%1% eliminado pelo sinal %2% (%3%)"
-
-#: src/commands/subcommand.cc:385
-msgid "core dumped"
-msgstr "dump de memória efetuado"
-
-#. translators: %1% - command name or path
-#. translators: %2% - exit code (number)
-#: src/commands/subcommand.cc:395
-#, boost-format
-msgid "%1% exited with status %2%"
-msgstr "%1% saiu com status %2%"
-
-#. translators: %1% - command name or path
-#. translators: %2% - status (number)
-#: src/commands/subcommand.cc:410
-#, boost-format
-msgid "waitpid for %1% returns unexpected exit status %2%"
-msgstr "waitpid para %1% retornou um status de saída não esperado %2%"
-
-#: src/commands/subcommand.cc:443
+#: src/commands/subcommand.cc:240
 #, boost-format
 msgid ""
 "Zypper subcommands are standalone executables that live in the\n"
@@ -5182,7 +5127,7 @@ msgstr ""
 "vai procurá-lo no restante do $PATH. Dessa forma, é possível\n"
 "gravar as extensões locais do zypper que não residem no espaço do sistema.\n"
 
-#: src/commands/subcommand.cc:458
+#: src/commands/subcommand.cc:255
 #, boost-format
 msgid ""
 "Using zypper global-options together with subcommands, as well as\n"
@@ -5193,17 +5138,17 @@ msgstr ""
 "executar os subcomandos em '%1%'.\n"
 
 #. translators: headline of an enumeration; %1% is a directory name
-#: src/commands/subcommand.cc:469
+#: src/commands/subcommand.cc:266
 #, boost-format
 msgid "Available zypper subcommands in '%1%'"
 msgstr "Subcomandos do zypper disponíveis em '%1%'"
 
 #. translators: headline of an enumeration
-#: src/commands/subcommand.cc:475
+#: src/commands/subcommand.cc:272
 msgid "Zypper subcommands available from elsewhere on your $PATH"
 msgstr "Subcomandos do zypper disponíveis de qualquer lugar em seu $PATH"
 
-#: src/commands/subcommand.cc:480
+#: src/commands/subcommand.cc:277
 msgid ""
 "Using zypper subcommands available from elsewhere on your $PATH is disabled "
 "in zypper.conf."
@@ -5212,22 +5157,22 @@ msgstr ""
 "$PATH está desabilitado em zypper.conf."
 
 #. translators: helptext; %1% is a zypper command
-#: src/commands/subcommand.cc:485
+#: src/commands/subcommand.cc:282
 #, boost-format
 msgid "Type '%1%' to get subcommand-specific help if available."
 msgstr "Digite '%1%' para ajuda específica do subcomando, se disponível."
 
 #. translators: %1% - command name
-#: src/commands/subcommand.cc:508
+#: src/commands/subcommand.cc:305
 #, boost-format
 msgid "Manual entry for %1% can't be shown"
 msgstr "A entrada do manual para %1% não pôde ser exibida"
 
-#: src/commands/subcommand.cc:522
+#: src/commands/subcommand.cc:319
 msgid "Lists available subcommands."
 msgstr "Lista os subcomandos disponíveis."
 
-#: src/commands/subcommand.cc:523
+#: src/commands/subcommand.cc:320
 msgid ""
 "Lists available subcommands. Using zypper subcommands found on your $PATH is "
 "disabled in zypper.conf."
@@ -5236,12 +5181,12 @@ msgstr ""
 "seu $ PATH está desabilitado em zypper.conf."
 
 #. Currently no concept how to handle global options and ZYPPlock
-#: src/commands/subcommand.cc:632
+#: src/commands/subcommand.cc:429
 msgid "Zypper shell does not support execution of subcommands."
 msgstr "O shell do zypper não suporta a execução de subcomandos."
 
 #. translators: %1%  - is the name of a subcommand
-#: src/commands/subcommand.cc:646
+#: src/commands/subcommand.cc:443
 #, boost-format
 msgid "Subcommand %1% does not support zypper global options."
 msgstr "O subcomando %1% não suporta opções globais do zypper."
@@ -6216,8 +6161,8 @@ msgid ""
 msgstr ""
 "Isto pode ter sido causado por metadados inválidos no repositório ou por um "
 "bug no analisador de metadados. Neste último caso, ou em caso de dúvida, "
-"preencha um relatório de bug seguindo as instruções em http://"
-"en.opensuse.org/Zypper/Troubleshooting"
+"preencha um relatório de bug seguindo as instruções em http://en.opensuse."
+"org/Zypper/Troubleshooting"
 
 #: src/repos.cc:446
 #, c-format, boost-format
@@ -6771,8 +6716,8 @@ msgstr ""
 #: src/solve-commit.cc:621
 #, c-format, boost-format
 msgid ""
-"Check for running processes using deleted libraries is disabled in "
-"zypper.conf. Run '%s' to check manually."
+"Check for running processes using deleted libraries is disabled in zypper."
+"conf. Run '%s' to check manually."
 msgstr ""
 "A verificação de processos em execução que usam bibliotecas removidas está "
 "desabilitada em zypper.conf. Execute '%s' para verificar manualmente."
@@ -7080,36 +7025,40 @@ msgstr "Versão atual"
 msgid "Available Version"
 msgstr "Versão disponível"
 
-#: src/update.cc:1007
+#: src/update.cc:1019
 msgid "No matching issues found."
 msgstr "Nenhum problema correspondente encontrado."
 
-#: src/update.cc:1013
+#: src/update.cc:1025
 msgid "The following matches in issue numbers have been found:"
 msgstr ""
 "As seguintes correspondências nos números de problemas foram encontradas:"
 
-#: src/update.cc:1023
+#: src/update.cc:1035
 msgid "Matches in patch descriptions of the following patches have been found:"
 msgstr ""
 "Encontradas correspondências nas descrições da correção das seguintes "
 "correções:"
 
-#: src/update.cc:1085
+#: src/update.cc:1045
+msgid "No matches found for the following issue numbers:"
+msgstr ""
+
+#: src/update.cc:1106
 #, c-format, boost-format
 msgid "Fix for bugzilla issue number %s was not found or is not needed."
 msgstr ""
 "Correção para o problema número %s do Bugzilla não encontrada ou "
 "desnecessária."
 
-#: src/update.cc:1087
+#: src/update.cc:1108
 #, c-format, boost-format
 msgid "Fix for CVE issue number %s was not found or is not needed."
 msgstr ""
 "Correção para o problema número %s do CVE não encontrada ou desnecessária."
 
 #. translators: keep '%s issue' together, it's something like 'CVE issue' or 'Bugzilla issue'
-#: src/update.cc:1090
+#: src/update.cc:1111
 #, c-format, boost-format
 msgid "Fix for %s issue number %s was not found or is not needed."
 msgstr "Correção para o problema %s número %s não encontrada ou desnecessária."
@@ -7150,6 +7099,60 @@ msgstr "%1%: a opção '%2%' é definida várias vezes. Usando o último."
 #: src/utils/Augeas.cc:656
 msgid "No config file is in use."
 msgstr "Nenhum arquivo de configuração está em uso."
+
+#: src/utils/RunCommand.h:130
+#, boost-format
+msgid "cannot exec %1% (%2%)"
+msgstr "não foi possível executar %1% (%2%)"
+
+#. translators: %1% - command name or path
+#. translators: %2% - system error message
+#: src/utils/RunCommand.h:139
+#, boost-format
+msgid "fork for %1% failed (%2%)"
+msgstr "falha na bifurcação de %1% (%2%)"
+
+#. translators: %1% - command name or path
+#. translators: %2% - system error message
+#: src/utils/RunCommand.h:158
+#, boost-format
+msgid "waitpid for %1% failed (%2%)"
+msgstr "falha no waitpid de %1% (%2%)"
+
+#. translators: %1% - command name or path
+#. translators: %2% - returned PID (number)
+#. translators: %3% - expected PID (number)
+#: src/utils/RunCommand.h:168
+#, boost-format
+msgid "waitpid for %1% returns unexpected pid %2% while waiting for %3%"
+msgstr ""
+"waitpid para %1% retornou um PID %2% não esperado enquanto aguardava por %3%"
+
+#. translators: %1% - command name or path
+#. translators: %2% - signal number
+#. translators: %3% - signal name
+#: src/utils/RunCommand.h:179
+#, boost-format
+msgid "%1% was killed by signal %2% (%3%)"
+msgstr "%1% eliminado pelo sinal %2% (%3%)"
+
+#: src/utils/RunCommand.h:183
+msgid "core dumped"
+msgstr "dump de memória efetuado"
+
+#. translators: %1% - command name or path
+#. translators: %2% - exit code (number)
+#: src/utils/RunCommand.h:193
+#, boost-format
+msgid "%1% exited with status %2%"
+msgstr "%1% saiu com status %2%"
+
+#. translators: %1% - command name or path
+#. translators: %2% - status (number)
+#: src/utils/RunCommand.h:208
+#, boost-format
+msgid "waitpid for %1% returns unexpected exit status %2%"
+msgstr "waitpid para %1% retornou um status de saída não esperado %2%"
 
 #: src/utils/flags/exceptions.cc:22
 #, boost-format
@@ -7533,18 +7536,18 @@ msgstr "Problema ao baixar o arquivo RPM especificado"
 msgid "Please check whether the file is accessible."
 msgstr "Verifique se o arquivo é acessível."
 
-#: src/utils/pager.cc:32
+#: src/utils/pager.cc:34
 #, c-format, boost-format
 msgid "Press '%c' to exit the pager."
 msgstr "Pressione '%c' para sair do paginador."
 
-#: src/utils/pager.cc:42
+#: src/utils/pager.cc:44
 msgid "Use arrows or pgUp/pgDown keys to scroll the text by lines or pages."
 msgstr ""
 "Use as setas ou as teclas Pg Up/Pg Dn para rolar o texto por linhas ou "
 "páginas."
 
-#: src/utils/pager.cc:44
+#: src/utils/pager.cc:46
 msgid "Use the Enter or Space key to scroll the text by lines or pages."
 msgstr ""
 "Use a tecla Enter ou de espaço para rolar o texto por linhas ou páginas."
@@ -8037,8 +8040,8 @@ msgstr "Erro"
 #~ "\t--no-refresh\t\tNão atualizar os repositórios.\n"
 #~ "\t--no-cd\t\t\tIgnorar os repositórios em CD/DVD.\n"
 #~ "\t--no-remote\t\tIgnorar os repositórios remotos.\n"
-#~ "\t--releasever\t\tDefinir o valor de $releasever em todos os "
-#~ "arquivos .repo (padrão: versão da distribuição)\n"
+#~ "\t--releasever\t\tDefinir o valor de $releasever em todos os arquivos ."
+#~ "repo (padrão: versão da distribuição)\n"
 
 #~ msgid ""
 #~ "     Target Options:\n"
@@ -8622,8 +8625,8 @@ msgstr "Erro"
 #~ "remoto).\n"
 #~ "\n"
 #~ "  Opções do comando:\n"
-#~ "-r, --repo <arquivo.repo>    Apenas outro modo de especificar um "
-#~ "arquivo .repo para leitura.\n"
+#~ "-r, --repo <arquivo.repo>    Apenas outro modo de especificar um arquivo ."
+#~ "repo para leitura.\n"
 #~ "-t, --type <tipo>         Tipo do repositório (%s).\n"
 #~ "-d, --disable             Adicionar o repositório como desabilitado.\n"
 #~ "-c, --check               Testar o URI.\n"
@@ -10234,8 +10237,8 @@ msgstr "Erro"
 #~ "remoto).\n"
 #~ "\n"
 #~ "  Opções do comando:\n"
-#~ "-r, --repo <arquivo.repo>    Apenas outro modo de especificar um "
-#~ "arquivo .repo para leitura.\n"
+#~ "-r, --repo <arquivo.repo>    Apenas outro modo de especificar um arquivo ."
+#~ "repo para leitura.\n"
 #~ "-t, --type <tipo>         Tipo do repositório (%s).\n"
 #~ "-d, --disable             Adicionar o repositório como desabilitado.\n"
 #~ "-c, --check               Testar o URI.\n"

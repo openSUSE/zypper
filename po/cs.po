@@ -20,7 +20,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-30 17:24+0200\n"
+"POT-Creation-Date: 2026-10-05 15:03+0200\n"
 "PO-Revision-Date: 2025-07-22 12:47+0000\n"
 "Last-Translator: Julia Faltenbacher <julia.faltenbacher@suse.com>\n"
 "Language-Team: Czech <https://l10n.opensuse.org/projects/zypper/master/cs/>\n"
@@ -221,8 +221,8 @@ msgid ""
 "Patches having the flag rebootSuggested set will not be treated as "
 "interactive."
 msgstr ""
-"Opravy, které mají nastavený příznak \"navrhovanýRestart\" "
-"(rebootSuggested), nebudou považovány za interaktivní."
+"Opravy, které mají nastavený příznak "
+"\"navrhovanýRestart\" (rebootSuggested), nebudou považovány za interaktivní."
 
 #. translators: --non-interactive-include-reboot-patches
 #: src/Config.cc:347
@@ -1563,8 +1563,8 @@ msgid ""
 "The link must point to your core products .prod file in /etc/products.d.\n"
 msgstr ""
 "Symbolický odkaz /etc/products.d/baseproduct je neplatný nebo chybí! Tento\n"
-"odkaz musí směřovat na soubor vašich hlavních produktů .prod v /etc/"
-"products.d.\n"
+"odkaz musí směřovat na soubor vašich hlavních produktů .prod v /etc/products."
+"d.\n"
 
 #. TranslatorExplanation The %s is "--plus-repo"
 #. TranslatorExplanation The %s is "--option-name"
@@ -2518,8 +2518,8 @@ msgid ""
 "Remove packages with specified capabilities. A capability is NAME[.ARCH]"
 "[OP<VERSION>], where OP is one of <, <=, =, >=, >."
 msgstr ""
-"Odinstaluje závislosti se zadanými schopnostmi. Schopnost má tvar "
-"NÁZEV[.ARCHITEKTURA][OP<VERZE>], kde OP je jeden z operátorů <, <=, =, >=, >."
+"Odinstaluje závislosti se zadanými schopnostmi. Schopnost má tvar NÁZEV[."
+"ARCHITEKTURA][OP<VERZE>], kde OP je jeden z operátorů <, <=, =, >=, >."
 
 #: src/commands/installremove.cc:104 src/commands/installremove.cc:234
 #: src/utils/messages.cc:53
@@ -5091,71 +5091,16 @@ msgid "Uninstalling source packages is not supported."
 msgstr "Odinstalace zdrojových balíčků není podporována."
 
 #. translators: %1% is the name of the command which has no man page available.
-#: src/commands/subcommand.cc:88
+#: src/commands/subcommand.cc:87
 #, boost-format
 msgid "No manual entry for %1%"
 msgstr "Pro %1% neexistuje záznam příručky"
 
-#: src/commands/subcommand.cc:103
+#: src/commands/subcommand.cc:102
 msgid "none"
 msgstr "žádný"
 
-#: src/commands/subcommand.cc:332
-#, boost-format
-msgid "cannot exec %1% (%2%)"
-msgstr "nelze spustit %1% (%2%)"
-
-#. translators: %1% - command name or path
-#. translators: %2% - system error message
-#: src/commands/subcommand.cc:341
-#, boost-format
-msgid "fork for %1% failed (%2%)"
-msgstr "odnož pro %1% selhala (%2%)"
-
-#. translators: %1% - command name or path
-#. translators: %2% - system error message
-#: src/commands/subcommand.cc:360
-#, boost-format
-msgid "waitpid for %1% failed (%2%)"
-msgstr "waitpid pro %1% selhal (%2%)"
-
-#. translators: %1% - command name or path
-#. translators: %2% - returned PID (number)
-#. translators: %3% - expected PID (number)
-#: src/commands/subcommand.cc:370
-#, boost-format
-msgid "waitpid for %1% returns unexpected pid %2% while waiting for %3%"
-msgstr ""
-"Funkce waitpid pro %1% vrátila neočekávaný identifikátor procesu %2% během "
-"čekání na %3%"
-
-#. translators: %1% - command name or path
-#. translators: %2% - signal number
-#. translators: %3% - signal name
-#: src/commands/subcommand.cc:381
-#, boost-format
-msgid "%1% was killed by signal %2% (%3%)"
-msgstr "%1% byl ukončen signálem %2% (%3%)"
-
-#: src/commands/subcommand.cc:385
-msgid "core dumped"
-msgstr "jádro vypsáno"
-
-#. translators: %1% - command name or path
-#. translators: %2% - exit code (number)
-#: src/commands/subcommand.cc:395
-#, boost-format
-msgid "%1% exited with status %2%"
-msgstr "%1% skončil se stavem %2%"
-
-#. translators: %1% - command name or path
-#. translators: %2% - status (number)
-#: src/commands/subcommand.cc:410
-#, boost-format
-msgid "waitpid for %1% returns unexpected exit status %2%"
-msgstr "waitpid pro %1% vrací neočekávaný stav ukončení %2%"
-
-#: src/commands/subcommand.cc:443
+#: src/commands/subcommand.cc:240
 #, boost-format
 msgid ""
 "Zypper subcommands are standalone executables that live in the\n"
@@ -5180,7 +5125,7 @@ msgstr ""
 "obálka hledat v ostatních adresářích v proměnné $PATH. Tak lze vytvářet\n"
 "místní rozšíření zypperu, která nejsou uložena v systémovém prostoru.\n"
 
-#: src/commands/subcommand.cc:458
+#: src/commands/subcommand.cc:255
 #, boost-format
 msgid ""
 "Using zypper global-options together with subcommands, as well as\n"
@@ -5190,17 +5135,17 @@ msgstr ""
 "provádění podpříkazů v umístění %1% není aktuálně podporováno.\n"
 
 #. translators: headline of an enumeration; %1% is a directory name
-#: src/commands/subcommand.cc:469
+#: src/commands/subcommand.cc:266
 #, boost-format
 msgid "Available zypper subcommands in '%1%'"
 msgstr "Dostupné podpříkazy zypperu v '%1%'"
 
 #. translators: headline of an enumeration
-#: src/commands/subcommand.cc:475
+#: src/commands/subcommand.cc:272
 msgid "Zypper subcommands available from elsewhere on your $PATH"
 msgstr "Podpříkazy zypperu dostupné odjinud ve vaší $PATH"
 
-#: src/commands/subcommand.cc:480
+#: src/commands/subcommand.cc:277
 msgid ""
 "Using zypper subcommands available from elsewhere on your $PATH is disabled "
 "in zypper.conf."
@@ -5209,23 +5154,23 @@ msgstr ""
 "souboru zypper.conf zakázáno."
 
 #. translators: helptext; %1% is a zypper command
-#: src/commands/subcommand.cc:485
+#: src/commands/subcommand.cc:282
 #, boost-format
 msgid "Type '%1%' to get subcommand-specific help if available."
 msgstr ""
 "Chcete-li zobrazit případnou nápovědu k podpříkazu, zadejte příkaz %1%."
 
 #. translators: %1% - command name
-#: src/commands/subcommand.cc:508
+#: src/commands/subcommand.cc:305
 #, boost-format
 msgid "Manual entry for %1% can't be shown"
 msgstr "Ručně zadaný vstup pro %1% nelze zobrazit"
 
-#: src/commands/subcommand.cc:522
+#: src/commands/subcommand.cc:319
 msgid "Lists available subcommands."
 msgstr "Vypíše dostupné podpříkazy."
 
-#: src/commands/subcommand.cc:523
+#: src/commands/subcommand.cc:320
 msgid ""
 "Lists available subcommands. Using zypper subcommands found on your $PATH is "
 "disabled in zypper.conf."
@@ -5234,12 +5179,12 @@ msgstr ""
 "nalezených na vašem $PATH je v souboru zypper.conf zakázáno."
 
 #. Currently no concept how to handle global options and ZYPPlock
-#: src/commands/subcommand.cc:632
+#: src/commands/subcommand.cc:429
 msgid "Zypper shell does not support execution of subcommands."
 msgstr "Příkazový řádek zypperu nepodporuje spouštění podpříkazů."
 
 #. translators: %1%  - is the name of a subcommand
-#: src/commands/subcommand.cc:646
+#: src/commands/subcommand.cc:443
 #, boost-format
 msgid "Subcommand %1% does not support zypper global options."
 msgstr "Podpříkaz %1% nepodporuje globální volby zypperu."
@@ -6762,11 +6707,11 @@ msgstr ""
 #: src/solve-commit.cc:621
 #, c-format, boost-format
 msgid ""
-"Check for running processes using deleted libraries is disabled in "
-"zypper.conf. Run '%s' to check manually."
+"Check for running processes using deleted libraries is disabled in zypper."
+"conf. Run '%s' to check manually."
 msgstr ""
-"Kontrola, které spuštěné procesy používají smazané knihovny, je v "
-"zypper.conf zakázána. Spusťte '%s' pro ruční kontrolu."
+"Kontrola, které spuštěné procesy používají smazané knihovny, je v zypper."
+"conf zakázána. Spusťte '%s' pro ruční kontrolu."
 
 #: src/solve-commit.cc:637
 msgid "Skip check:"
@@ -7072,31 +7017,35 @@ msgstr "Současná verze"
 msgid "Available Version"
 msgstr "Dostupná verze"
 
-#: src/update.cc:1007
+#: src/update.cc:1019
 msgid "No matching issues found."
 msgstr "Nebyly nalezeny odpovídající problémy."
 
-#: src/update.cc:1013
+#: src/update.cc:1025
 msgid "The following matches in issue numbers have been found:"
 msgstr "Byly nalezeny následující shody v číslech problémů:"
 
-#: src/update.cc:1023
+#: src/update.cc:1035
 msgid "Matches in patch descriptions of the following patches have been found:"
 msgstr "Byly nalezeny shody popisu oprav následujících oprav:"
 
-#: src/update.cc:1085
+#: src/update.cc:1045
+msgid "No matches found for the following issue numbers:"
+msgstr ""
+
+#: src/update.cc:1106
 #, c-format, boost-format
 msgid "Fix for bugzilla issue number %s was not found or is not needed."
 msgstr ""
 "Oprava pro problém v Bugzille číslo %s nebyla nalezena nebo není potřeba."
 
-#: src/update.cc:1087
+#: src/update.cc:1108
 #, c-format, boost-format
 msgid "Fix for CVE issue number %s was not found or is not needed."
 msgstr "Oprava pro CVE problém číslo %s nebyla nalezena nebo není potřeba."
 
 #. translators: keep '%s issue' together, it's something like 'CVE issue' or 'Bugzilla issue'
-#: src/update.cc:1090
+#: src/update.cc:1111
 #, c-format, boost-format
 msgid "Fix for %s issue number %s was not found or is not needed."
 msgstr "Oprava pro problém %s číslo %s nebyla nalezena nebo není potřeba."
@@ -7137,6 +7086,61 @@ msgstr "%1%: Volba '%2%' je uvedena vícekrát. Použiji poslední."
 #: src/utils/Augeas.cc:656
 msgid "No config file is in use."
 msgstr "Nepoužívá se žádný konfigurační soubor."
+
+#: src/utils/RunCommand.h:130
+#, boost-format
+msgid "cannot exec %1% (%2%)"
+msgstr "nelze spustit %1% (%2%)"
+
+#. translators: %1% - command name or path
+#. translators: %2% - system error message
+#: src/utils/RunCommand.h:139
+#, boost-format
+msgid "fork for %1% failed (%2%)"
+msgstr "odnož pro %1% selhala (%2%)"
+
+#. translators: %1% - command name or path
+#. translators: %2% - system error message
+#: src/utils/RunCommand.h:158
+#, boost-format
+msgid "waitpid for %1% failed (%2%)"
+msgstr "waitpid pro %1% selhal (%2%)"
+
+#. translators: %1% - command name or path
+#. translators: %2% - returned PID (number)
+#. translators: %3% - expected PID (number)
+#: src/utils/RunCommand.h:168
+#, boost-format
+msgid "waitpid for %1% returns unexpected pid %2% while waiting for %3%"
+msgstr ""
+"Funkce waitpid pro %1% vrátila neočekávaný identifikátor procesu %2% během "
+"čekání na %3%"
+
+#. translators: %1% - command name or path
+#. translators: %2% - signal number
+#. translators: %3% - signal name
+#: src/utils/RunCommand.h:179
+#, boost-format
+msgid "%1% was killed by signal %2% (%3%)"
+msgstr "%1% byl ukončen signálem %2% (%3%)"
+
+#: src/utils/RunCommand.h:183
+msgid "core dumped"
+msgstr "jádro vypsáno"
+
+#. translators: %1% - command name or path
+#. translators: %2% - exit code (number)
+#: src/utils/RunCommand.h:193
+#, boost-format
+msgid "%1% exited with status %2%"
+msgstr "%1% skončil se stavem %2%"
+
+#. translators: %1% - command name or path
+#. translators: %2% - status (number)
+#: src/utils/RunCommand.h:208
+#, boost-format
+msgid "waitpid for %1% returns unexpected exit status %2%"
+msgstr "waitpid pro %1% vrací neočekávaný stav ukončení %2%"
 
 #: src/utils/flags/exceptions.cc:22
 #, boost-format
@@ -7525,18 +7529,18 @@ msgstr "Problém při stahování zadaného souboru RPM"
 msgid "Please check whether the file is accessible."
 msgstr "Zkontrolujte, zda je soubor přístupný."
 
-#: src/utils/pager.cc:32
+#: src/utils/pager.cc:34
 #, c-format, boost-format
 msgid "Press '%c' to exit the pager."
 msgstr "Stiskněte \"%c\" pro opuštění pageru."
 
-#: src/utils/pager.cc:42
+#: src/utils/pager.cc:44
 msgid "Use arrows or pgUp/pgDown keys to scroll the text by lines or pages."
 msgstr ""
 "Použijte šipky nebo klávesy pgUp/pgDown k posouvání textu po řádcích nebo "
 "stránkách."
 
-#: src/utils/pager.cc:44
+#: src/utils/pager.cc:46
 msgid "Use the Enter or Space key to scroll the text by lines or pages."
 msgstr ""
 "Použijte klávesu Enter nebo mezerník k posouvání textu po řádcích nebo "
