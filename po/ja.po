@@ -11,10 +11,10 @@ msgstr ""
 "Project-Id-Version: zypper\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-10-05 15:03+0200\n"
-"PO-Revision-Date: 2026-10-02 10:13+0000\n"
+"PO-Revision-Date: 2026-10-06 07:06+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
-"Language-Team: Japanese <https://l10n.opensuse.org/projects/zypper/master/ja/"
-">\n"
+"Language-Team: Japanese <https://l10n.opensuse.org/projects/zypper/master/"
+"ja/>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -6908,7 +6908,7 @@ msgstr "以下のパッチの説明に該当するものが見つかりました
 
 #: src/update.cc:1045
 msgid "No matches found for the following issue numbers:"
-msgstr ""
+msgstr "下記の発信番号に一致するものが見つかりませんでした:"
 
 #: src/update.cc:1106
 #, c-format, boost-format
