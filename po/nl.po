@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: zypper.nl\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-10-05 15:03+0200\n"
-"PO-Revision-Date: 2026-10-01 15:13+0000\n"
+"PO-Revision-Date: 2026-10-06 11:13+0000\n"
 "Last-Translator: Freek de Kruijf <freek@opensuse.org>\n"
 "Language-Team: Dutch <https://l10n.opensuse.org/projects/zypper/master/nl/>\n"
 "Language: nl\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2026.9.1\n"
+"X-Generator: Weblate 2026.10\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -7149,7 +7149,7 @@ msgstr ""
 
 #: src/update.cc:1045
 msgid "No matches found for the following issue numbers:"
-msgstr ""
+msgstr "Geen overeenkomsten gevonden voor de volgende probleemnummers:"
 
 #: src/update.cc:1106
 #, c-format, boost-format
