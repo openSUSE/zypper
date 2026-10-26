@@ -1,4 +1,18 @@
 -------------------------------------------------------------------
+Mon Oct 26 12:39:57 CET 2026 - bzeller@suse.de
+
+- list-patches: Show issue numbers that were not found
+  (bsc#1275036, fixes #655)
+- Use RunCommand to execute the pager.
+- security: replace shell-based pager execution with execvp.
+- patch: Allow to select optional patches by category
+  (bsc#1283249)
+  Explicitly selecting optional patches by --category must imply
+  --with-optional. Otherwise the without-optional default would
+  sort out the requested patches.
+- version 1.14.102
+
+-------------------------------------------------------------------
 Fri Sep  4 15:04:27 CEST 2026 - ma@suse.de
 
 - Show solver problem details per default in not-interactive mode
