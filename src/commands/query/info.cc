@@ -97,6 +97,10 @@ zypp::ZyppFlags::CommandGroup InfoCmd::cmdOptions() const
             // translators: --enhances
             _("Show enhances.")
       },
+      { "all-deps", '\0', ZyppFlags::NoArgument, ZyppFlags::BitFieldType( that._options._flags, InfoBits::ShowAllDeps, ZyppFlags::StoreTrue),
+            // translators: --all-deps
+            _("Show all dependencies (provides, requires, conflicts, obsoletes, recommends, supplements, suggests and enhances).")
+      },
   }};
 }
 

@@ -236,6 +236,9 @@ If a query returns no results, zypper returns *ZYPPER_EXIT_INF_CAP_NOT_FOUND* un
 	*--enhances*::
 		Show symbols the package enhances.
 
+	*--all-deps*::
+		Show all of the above dependency types at once. Same as specifying *--provides*, *--requires*, *--conflicts*, *--obsoletes*, *--recommends*, *--supplements*, *--suggests* and *--enhances*.
+
 	Examples: :: {nop}
 
 		$ *zypper info workrave*:::
