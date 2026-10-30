@@ -26,6 +26,8 @@ enum class InfoBits {
   ShowSupplements = 1 << 5,
   ShowSuggests    = 1 << 6,
   ShowEnhances    = 1 << 7,
+  ShowAllDeps     = ShowProvides | ShowRequires | ShowConflicts | ShowObsoletes
+                  | ShowRecommends | ShowSupplements | ShowSuggests | ShowEnhances,
 };
 ZYPP_DECLARE_FLAGS( InfoFlags, InfoBits );
 
