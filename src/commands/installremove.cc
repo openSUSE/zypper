@@ -59,8 +59,8 @@ ZyppFlags::CommandGroup InstallRemoveBase::cmdOptions() const
   auto that = const_cast<InstallRemoveBase *> ( this );
   return {{
     CommonFlags::resKindSetFlag( that->_kinds ),
-    { "name", 'n', ZyppFlags::NoArgument, ZyppFlags::BoolType( &that->_selectByName, ZyppFlags::StoreTrue, _selectByName ), _("Select packages by plain name, not by capability.") },
-    { "capability", 'C', ZyppFlags::NoArgument, ZyppFlags::BoolType( &that->_selectByCap, ZyppFlags::StoreTrue, _selectByCap ), _("Select packages solely by capability.") },
+    CommonFlags::selectByPackageNameFlag( that->_selectByName ),
+    CommonFlags::selectByPackageCapFlag( that->_selectByCap ),
     CommonFlags::detailsFlag( that->_details )
     },{
       { "capability", "name" }
