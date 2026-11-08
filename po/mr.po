@@ -3,16 +3,16 @@ msgstr ""
 "Project-Id-Version: @PACKAGE@\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-10-05 15:03+0200\n"
-"PO-Revision-Date: 2025-07-22 12:48+0000\n"
-"Last-Translator: Julia Faltenbacher <julia.faltenbacher@suse.com>\n"
-"Language-Team: Marathi <https://l10n.opensuse.org/projects/zypper/master/mr/"
-">\n"
+"PO-Revision-Date: 2026-11-08 15:13+0000\n"
+"Last-Translator: Gunjan Bagayatkar <gpbagayatkar@gmail.com>\n"
+"Language-Team: Marathi <https://l10n.opensuse.org/projects/zypper/master/mr/>"
+"\n"
 "Language: mr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
-"X-Generator: Weblate 5.12.2\n"
+"X-Generator: Weblate 2026.11.1\n"
 
 #: src/Command.cc:93
 msgid "Invalid command"
@@ -6161,9 +6161,8 @@ msgid ""
 msgstr ""
 
 #: src/repos.cc:1859
-#, fuzzy
 msgid "Reading installed packages..."
-msgstr "आवश्यक पॅकेजेस स्थापन करण्यास अपयश."
+msgstr "प्रतिष्ठापित पॅकेजेस वाचली जात आहेत."
 
 #: src/repos.cc:1868
 #, fuzzy
