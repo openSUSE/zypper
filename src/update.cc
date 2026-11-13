@@ -1072,6 +1072,7 @@ void mark_updates_by_issue( Zypper & zypper, const std::set<Issue> &issues, Solv
     bool found = false;
     // Why no patch was selected (gh#openSUSE/zypper#625):
     bool matched = false;	// some patch references the issue
+    bool needed = false;	// a matching patch is needed (but may not be selectable, e.g. locked)
     bool satisfied = false;	// a matching patch is already installed
     bool notNeeded = false;	// a matching patch does not apply to this system
     bool retracted = false;	// a matching patch was retracted
@@ -1122,6 +1123,7 @@ void mark_updates_by_issue( Zypper & zypper, const std::set<Issue> &issues, Solv
         continue;
       }
 
+      needed = true;
       if ( sr.installPatch( pi ) )
         found = true;
       else
@@ -1135,7 +1137,9 @@ void mark_updates_by_issue( Zypper & zypper, const std::set<Issue> &issues, Solv
       const std::string & itype( issue.type() );
       const char * iid = issue.id().c_str();
 
-      if ( satisfied )
+      // A needed patch which could not be selected takes precedence over
+      // the status of other matching patches: fall through to the last branch.
+      if ( satisfied && ! needed )
       {
         // Nothing left to do: keep ZYPPER_EXIT_OK.
         if ( itype == "bugzilla" )
@@ -1146,7 +1150,7 @@ void mark_updates_by_issue( Zypper & zypper, const std::set<Issue> &issues, Solv
           // translators: keep '%s issue' together, it's something like 'CVE issue' or 'Bugzilla issue'
           zypper.out().info(str::form(_("Fix for %s issue number %s is already installed."), itype.c_str(), iid ));
       }
-      else if ( notNeeded )
+      else if ( notNeeded && ! needed )
       {
         // Nothing left to do: keep ZYPPER_EXIT_OK.
         if ( itype == "bugzilla" )
@@ -1157,7 +1161,7 @@ void mark_updates_by_issue( Zypper & zypper, const std::set<Issue> &issues, Solv
           // translators: keep '%s issue' together, it's something like 'CVE issue' or 'Bugzilla issue'
           zypper.out().info(str::form(_("Fix for %s issue number %s is not needed on this system."), itype.c_str(), iid ));
       }
-      else if ( retracted )
+      else if ( retracted && ! needed )
       {
         if ( itype == "bugzilla" )
           zypper.out().info(str::form(_("Fix for bugzilla issue number %s was retracted."), iid ));
