@@ -423,7 +423,12 @@ bool refresh_raw_metadata( Zypper & zypper, const RepoInfo & repo, bool force_do
 
 bool build_cache( Zypper & zypper, const RepoInfo & repo, bool force_build )
 {
-  if ( force_build )
+  // In a parallel refresh the parent draws the progress, so the child only
+  // reports its state instead of printing a message per repository.
+  const bool parallelChild = zypper.config().internal_refresh_child;
+  if ( parallelChild )
+    refreshstatus::progress( -1, _("Building cache") );
+  else if ( force_build )
     zypper.out().info(_("Forcing building of repository cache") );
 
   try

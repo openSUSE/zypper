@@ -75,6 +75,9 @@ public:
 
   CrossProcessPromptLock( const CrossProcessPromptLock & ) = delete;
   CrossProcessPromptLock & operator=( const CrossProcessPromptLock & ) = delete;
+
+private:
+  bool _notified = false;
 };
 
 class Zypper;

@@ -67,6 +67,14 @@ CrossProcessPromptLock::CrossProcessPromptLock()
     int fd = promptLockFd();
     if ( fd >= 0 )
       ::flock( fd, LOCK_EX );
+    // Ask the parent to stop drawing its progress block *before* the prompt
+    // text is written, so that question and answer stay in one place.
+    if ( refreshstatus::enabled() && !Zypper::instance().config().non_interactive )
+    {
+      refreshstatus::flushOutput();
+      refreshstatus::promptStart();
+      _notified = true;
+    }
   }
 }
 
@@ -75,40 +83,13 @@ CrossProcessPromptLock::~CrossProcessPromptLock()
   PromptLockState & state = promptLockState();
   if ( --state.depth == 0 )
   {
+    if ( _notified )
+      refreshstatus::promptEnd();
     int fd = promptLockFd();
     if ( fd >= 0 )
       ::flock( fd, LOCK_UN );
   }
   state.mutex.unlock();
-}
-
-namespace {
-  /** Pauses the parent's progress display while waiting for user input.
-   *  Must be created after the prompt text has been printed and flushed. */
-  struct PromptDisplayGuard
-  {
-    PromptDisplayGuard()
-    {
-      if ( refreshstatus::enabled() && !Zypper::instance().config().non_interactive )
-      {
-        refreshstatus::flushOutput();
-        refreshstatus::promptStart();
-        _active = true;
-      }
-    }
-
-    ~PromptDisplayGuard()
-    {
-      if ( _active )
-        refreshstatus::promptEnd();
-    }
-
-    PromptDisplayGuard( const PromptDisplayGuard & ) = delete;
-    PromptDisplayGuard & operator=( const PromptDisplayGuard & ) = delete;
-
-  private:
-    bool _active = false;
-  };
 }
 
 // ----------------------------------------------------------------------------
@@ -140,7 +121,6 @@ int read_action_ari_with_timeout( PromptId pid, unsigned timeout, int default_ac
   PromptOptions poptions(_("a/r/i"), (unsigned) default_action );
   zypper.out().prompt( pid, _("Abort, retry, ignore?"), poptions );
   cout << endl;
-  PromptDisplayGuard promptDisplay;
 
   while ( timeout )
   {
@@ -273,8 +253,6 @@ unsigned get_prompt_reply( Zypper & zypper, PromptId pid, const PromptOptions & 
     MIL << "running non-interactively, returning " << poptions.options()[poptions.defaultOpt()] << endl;
     return poptions.defaultOpt();
   }
-
-  PromptDisplayGuard promptDisplay;
 
   clear_keyboard_buffer();
 
@@ -424,7 +402,6 @@ namespace
 std::string get_text( const std::string & prompt, const std::string & prefilled )
 {
   CrossProcessPromptLock promptLock;
-  PromptDisplayGuard promptDisplay;
   std::string ret;
 
   /* Get a line from the user. */

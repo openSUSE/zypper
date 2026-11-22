@@ -18,6 +18,7 @@
 
 #include <algorithm>
 #include <cerrno>
+#include <cwchar>
 #include <cstring>
 #include <iostream>
 #include <limits.h>
@@ -73,6 +74,32 @@ namespace {
       return std::string( len > 0 ? buf : "/usr/bin/zypper" );
     }();
     return exe;
+  }
+
+  /** Cut \a str_r so that it occupies at most \a cols_r terminal columns. */
+  std::string truncateToColumns( const std::string & str_r, unsigned cols_r )
+  {
+    if ( cols_r == 0 )
+      return str_r;
+    std::mbstate_t state {};
+    unsigned used = 0;
+    size_t pos = 0;
+    while ( pos < str_r.size() )
+    {
+      wchar_t wc = L'\0';
+      const size_t len = ::mbrtowc( &wc, str_r.data() + pos, str_r.size() - pos, &state );
+      if ( len == static_cast<size_t>(-1) || len == static_cast<size_t>(-2) )
+        break;	// invalid or incomplete multibyte sequence
+      const size_t charLen = len == 0 ? 1 : len;
+      int width = ::wcwidth( wc );
+      if ( width < 0 )
+        width = 1;
+      if ( used + static_cast<unsigned>( width ) > cols_r )
+        break;
+      used += static_cast<unsigned>( width );
+      pos += charLen;
+    }
+    return str_r.substr( 0, pos );
   }
 
   struct RefreshChildPipes
@@ -279,8 +306,6 @@ namespace {
       if ( addNewline_r && !text_r.empty() && text_r.back() != '\n' )
         std::cout << '\n';
       std::cout.flush();
-      if ( !text_r.empty() )
-        _atLineStart = ( text_r.back() == '\n' );
       if ( _active )
         drawBlock();
     }
@@ -301,7 +326,6 @@ namespace {
     {
       if ( !_enabled )
         return;
-      _atLineStart = true;
       _active = true;
       drawBlock();
     }
@@ -328,7 +352,6 @@ namespace {
       std::cout.flush();
       _lines = 0;
       _drawn.clear();
-      _atLineStart = true;
     }
 
     std::string lineFor( pid_t pid_r ) const
@@ -365,14 +388,7 @@ namespace {
       if ( !label.empty() )
         line += ": " + label;
 
-      if ( line.size() >= _width )
-      {
-        line.resize( _width - 1 );
-        // do not cut a UTF-8 sequence in half
-        while ( !line.empty() && ( static_cast<unsigned char>( line.back() ) & 0xC0 ) == 0x80 )
-          line.pop_back();
-      }
-      return line;
+      return truncateToColumns( line, _width - 1 );
     }
 
     void drawBlock()
@@ -394,14 +410,12 @@ namespace {
       }
       std::cout.flush();
       _lines = lines.size();
-      _atLineStart = ( _lines == 0 );
       _drawn = std::move( lines );
     }
 
     Zypper & _zypper;
     bool _enabled = false;
     bool _active = true;
-    bool _atLineStart = true;
     unsigned _width = 80;
     unsigned _spin = 0;
     size_t _lines = 0;
@@ -520,10 +534,22 @@ namespace {
     size_t next = 0;
     bool aborted = false;
     pid_t promptingPid = -1;
+    // Children which asked for a prompt but have to wait for their turn.
+    // A child can only prompt while it holds the cross process prompt lock,
+    // but PROMPT_START/PROMPT_END lines of different children may still be
+    // read in any order.
+    std::vector<pid_t> pendingPrompts;
 
-    // Print above the progress block, or delay if a child is currently prompting
+    auto isPending = [&]( pid_t pid_r ) {
+      return std::find( pendingPrompts.begin(), pendingPrompts.end(), pid_r ) != pendingPrompts.end();
+    };
+    auto anyPrompt = [&]() {
+      return promptingPid != -1 || !pendingPrompts.empty();
+    };
+
+    // Print above the progress block, or delay if a child is prompting
     auto showMessage = [&]( const std::string & msg_r ) {
-      if ( promptingPid != -1 )
+      if ( anyPrompt() )
         deferredOutput += msg_r + '\n';
       else
         display.message( msg_r );
@@ -569,14 +595,56 @@ namespace {
       child_r.outBuf.clear();
     };
 
+    // Print all complete lines of a child at once to avoid flickering
     auto flushCompleteLines = [&]( ChildState & child_r ) {
-      size_t pos = std::string::npos;
-      while ( ( pos = child_r.outBuf.find( '\n' ) ) != std::string::npos )
+      const size_t pos = child_r.outBuf.rfind( '\n' );
+      if ( pos == std::string::npos )
+        return;
+      std::string text = child_r.outBuf.substr( 0, pos + 1 );
+      child_r.outBuf.erase( 0, pos + 1 );
+      display.message( text );
+    };
+
+    // Hand the terminal over to \a pid_r: print everything it wrote so far
+    // (warnings and the prompt itself) and pause the progress block.
+    auto activatePrompt = [&]( pid_t pid_r ) {
+      promptingPid = pid_r;
+      auto it = children.find( pid_r );
+      if ( it == children.end() )
+        return;
+      drainFd( it->second.outFd, it->second.outBuf );
+      display.beginPrompt();
+      if ( !it->second.outBuf.empty() )
       {
-        std::string text = child_r.outBuf.substr( 0, pos + 1 );
-        child_r.outBuf.erase( 0, pos + 1 );
-        display.message( text );
+        display.message( it->second.outBuf, false );
+        it->second.outBuf.clear();
       }
+    };
+
+    // \a pid_r finished prompting: pass the terminal to the next waiting
+    // child or resume the progress block.
+    auto finishPrompt = [&]( pid_t pid_r ) {
+      if ( promptingPid != pid_r )
+      {
+        pendingPrompts.erase( std::remove( pendingPrompts.begin(), pendingPrompts.end(), pid_r ), pendingPrompts.end() );
+        return;
+      }
+      promptingPid = -1;
+      while ( promptingPid == -1 && !pendingPrompts.empty() )
+      {
+        const pid_t nextPid = pendingPrompts.front();
+        pendingPrompts.erase( pendingPrompts.begin() );
+        if ( children.count( nextPid ) )
+          activatePrompt( nextPid );
+      }
+      if ( promptingPid != -1 )
+        return;
+      if ( !deferredOutput.empty() )
+      {
+        display.message( deferredOutput );
+        deferredOutput.clear();
+      }
+      display.endPrompt();
     };
 
     auto handleStatus = [&]( pid_t pid_r, ChildState & child_r, const std::string & line_r ) {
@@ -592,28 +660,15 @@ namespace {
         }
         display.update( pid_r, percent, label );
       }
-      else if ( line_r == "PROMPT_START" && promptingPid == -1 )
+      else if ( line_r == "PROMPT_START" )
       {
-        promptingPid = pid_r;
-        // The prompt text was written before PROMPT_START was sent
-        drainFd( child_r.outFd, child_r.outBuf );
-        display.beginPrompt();
-        if ( !child_r.outBuf.empty() )
-        {
-          display.message( child_r.outBuf, false );
-          child_r.outBuf.clear();
-        }
+        if ( promptingPid == -1 )
+          activatePrompt( pid_r );
+        else if ( !isPending( pid_r ) )
+          pendingPrompts.push_back( pid_r );
       }
-      else if ( line_r == "PROMPT_END" && promptingPid == pid_r )
-      {
-        promptingPid = -1;
-        if ( !deferredOutput.empty() )
-        {
-          display.message( deferredOutput );
-          deferredOutput.clear();
-        }
-        display.endPrompt();
-      }
+      else if ( line_r == "PROMPT_END" )
+        finishPrompt( pid_r );
     };
 
     while ( next < repos_r.size() || !children.empty() )
@@ -679,19 +734,23 @@ namespace {
           handleStatus( entry.first, child, line );
         }
 
-        if ( promptingPid == -1 )
-          flushCompleteLines( child );
-        else if ( promptingPid == entry.first )
+        if ( promptingPid == entry.first )
         {
-          // Prompt text and help messages may not end with a newline
+          // The prompt text and help messages may not end with a newline
           if ( !child.outBuf.empty() )
           {
             display.message( child.outBuf, false );
             child.outBuf.clear();
           }
         }
-        else
-          deferOutput( child );		// print after the prompt
+        else if ( !isPending( entry.first ) )
+        {
+          if ( anyPrompt() )
+            deferOutput( child );	// print after the prompts
+          else
+            flushCompleteLines( child );
+        }
+        // pending prompts keep their output until it is their turn
       }
 
       int status = 0;
@@ -710,18 +769,21 @@ namespace {
         if ( child.statusFd >= 0 )
           ::close( child.statusFd );
 
+        // Print whatever the child wrote before it exited
         if ( promptingPid == pid )
         {
-          promptingPid = -1;
-          deferOutput( child );
-          if ( !deferredOutput.empty() )
+          if ( !child.outBuf.empty() )
           {
-            display.message( deferredOutput );
-            deferredOutput.clear();
+            display.message( child.outBuf, false );
+            child.outBuf.clear();
           }
-          display.endPrompt();
         }
-        else if ( promptingPid != -1 )
+        else if ( isPending( pid ) )
+        {
+          // its output is printed when it gets its turn; the child is gone though
+          child.outBuf.clear();
+        }
+        else if ( anyPrompt() )
         {
           deferOutput( child );
         }
@@ -735,6 +797,7 @@ namespace {
           }
         }
 
+        finishPrompt( pid );
         const size_t idx = child.idx;
         display.removeLine( pid );
         if ( WIFEXITED( status ) )
