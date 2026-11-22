@@ -276,7 +276,10 @@ struct ProgressReportReceiver  : public callback::ReceiveReport<ProgressReport>
   {
     if ( noProgress() )
     {
-      refreshstatus::progress( data.reportAlive() ? -1 : static_cast<int>( data.reportValue() ), data.name() );
+      if ( refreshstatus::enabled() )
+        refreshstatus::progress( data.reportAlive() ? -1 : static_cast<int>( data.reportValue() ) );
+      else
+        Zypper::instance().out().info( data.name() );
       return;
     }
     Zypper::instance().out().progressStart(
@@ -299,7 +302,7 @@ struct ProgressReportReceiver  : public callback::ReceiveReport<ProgressReport>
             data.name(), data.reportValue());
     }
     else
-      refreshstatus::progress( data.reportAlive() ? -1 : static_cast<int>( data.reportValue() ), data.name() );
+      refreshstatus::progress( data.reportAlive() ? -1 : static_cast<int>( data.reportValue() ) );
     return !Zypper::instance().exitRequested();
   }
 
@@ -339,7 +342,10 @@ struct RepoReportReceiver  : public callback::ReceiveReport<repo::RepoReport>
     _repo = repo;
     if ( noProgress() )
     {
-      refreshstatus::progress( pd.reportAlive() ? -1 : static_cast<int>( pd.val() ), pd.name() );
+      if ( refreshstatus::enabled() )
+        refreshstatus::progress( pd.reportAlive() ? -1 : static_cast<int>( pd.val() ) );
+      else
+        Zypper::instance().out().info( "(" + _repo.name() + ") " + pd.name() );
       return;
     }
     Zypper::instance().out()
@@ -352,7 +358,7 @@ struct RepoReportReceiver  : public callback::ReceiveReport<repo::RepoReport>
       Zypper::instance().out()
         .progress("repo", "(" + _repo.name() + ") " + pd.name(), pd.val());
     else
-      refreshstatus::progress( pd.reportAlive() ? -1 : static_cast<int>( pd.val() ), pd.name() );
+      refreshstatus::progress( pd.reportAlive() ? -1 : static_cast<int>( pd.val() ) );
     return !Zypper::instance().exitRequested();
   }
 

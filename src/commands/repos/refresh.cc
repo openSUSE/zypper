@@ -11,6 +11,7 @@
 
 
 #include "utils/messages.h"
+#include "utils/prompt.h"
 #include "utils/flags/flagtypes.h"
 #include "Zypper.h"
 
@@ -1059,7 +1060,7 @@ unsigned RefreshRepoCmd::refreshRepositories( Zypper & zypper, const std::vector
   }
 
   // bsc#1234752: refresh repositories providing updated GPG keys first.
-  // They are handled sequentially before the others are started in parallel.
+  // They run one after another before the others are started in parallel.
   std::vector<RepoInfo> updateRepos;
   std::vector<RepoInfo> otherRepos;
   for ( const RepoInfo & repo : repos_r )
@@ -1070,18 +1071,12 @@ unsigned RefreshRepoCmd::refreshRepositories( Zypper & zypper, const std::vector
       otherRepos.push_back( repo );
   }
 
+  // Long GPG prompt explanations are shown once per run, see keyring.h
+  resetPromptHints();
+
   // bsc#1234752: complete these before starting the parallel refresh of the others
   unsigned error_count = 0;
-  for ( const RepoInfo & repo : updateRepos )
-  {
-    if ( refreshRepository( zypper, repo, flags_r ) )
-    {
-      zypper.out().error( str::Format(_("Skipping repository '%s' because of the above error.")) % repo.asUserString() );
-      ERR << "Skipping repository '" << repo.alias() << "' because of the above error." << endl;
-      error_count++;
-    }
-  }
-
+  error_count += runRefreshChildren( zypper, updateRepos, flags_r, 1 );
   error_count += runRefreshChildren( zypper, otherRepos, flags_r, jobs );
   return error_count;
 }

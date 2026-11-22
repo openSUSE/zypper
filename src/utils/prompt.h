@@ -80,6 +80,17 @@ private:
   bool _notified = false;
 };
 
+/** Long explanatory texts printed along with GPG prompts.
+ *
+ * When refreshing repositories in parallel every child would repeat them
+ * for each repository. So they are shown only once per refresh run; the
+ * first child to ask claims them (see \ref claimPromptHints).
+ */
+bool claimPromptHints();
+
+/** Forget that the prompt hints were already shown. */
+void resetPromptHints();
+
 class Zypper;
 unsigned get_prompt_reply(Zypper & zypper,
                               PromptId pid,

@@ -60,11 +60,22 @@ namespace refreshstatus
     return label_r.substr( dash + 1 );
   }
 
+  /** Label of the current phase, used when only a percentage is reported. */
+  inline std::string & currentLabel()
+  {
+    static thread_local std::string _label;
+    return _label;
+  }
+
+  inline void setLabel( const std::string & label_r )
+  { currentLabel() = shortenLabel( label_r ); }
+
   inline void progress( int percent_r, const std::string & label_r )
   {
     if ( !enabled() )
       return;
     std::string label( shortenLabel( label_r ) );
+    currentLabel() = label;
     for ( char & c : label )
       if ( static_cast<unsigned char>( c ) < 0x20 )
         c = ' ';
@@ -81,6 +92,10 @@ namespace refreshstatus
 
     writeLine( "PROGRESS " + std::to_string( percent_r ) + " " + label );
   }
+
+  /** Report progress for the current phase (see \ref setLabel). */
+  inline void progress( int percent_r )
+  { progress( percent_r, currentLabel() ); }
 
   inline void flushOutput()
   {

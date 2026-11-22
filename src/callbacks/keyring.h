@@ -19,6 +19,7 @@
 
 #include "Zypper.h"
 #include "utils/prompt.h"
+#include "utils/refreshstatus.h"
 #include "Table.h"
 
 ///////////////////////////////////////////////////////////////////
@@ -168,14 +169,21 @@ namespace zypp
         else
           // translator: %1% is a file name, %2% a repositories name
           msg = str::Format(_("File '%1%' from repository '%2%' is unsigned.") ) % file % context.repoInfo().asUserString();
-        Zypper::instance().out().warning( msg );
+        // The question below repeats the message. In a parallel refresh keep
+        // the output concise and explain the issue only once.
+        const bool parallel = refreshstatus::enabled();
+        if ( !parallel )
+          Zypper::instance().out().warning( msg );	// the question repeats it
 
-        hintUnsignedData();
+        if ( !parallel || claimPromptHints() )
+        {
+          hintUnsignedData();
 
-        if ( !context.empty() )
-          hintIfMasterIndex( file );
+          if ( !context.empty() )
+            hintIfMasterIndex( file );
 
-        warnCanNotVerifyFile();
+          warnCanNotVerifyFile();
+        }
 
         Zypper::instance().out().gap();
         const std::string & question { text::join( msg, text::qContinue(), "\n" ) };
@@ -217,14 +225,19 @@ namespace zypp
         else
           // translator: %1% is a file name, %2% is a gpg key ID, %3% a repositories name
           msg = str::Format(_("File '%1%' from repository '%3%' is signed with an unknown key '%2%'.") ) % file % id % context.repoInfo().asUserString();
-        Zypper::instance().out().warning( msg );
+        const bool parallel = refreshstatus::enabled();
+        if ( !parallel )
+          Zypper::instance().out().warning( msg );	// the question repeats it
 
-        hintUnsignedData();
+        if ( !parallel || claimPromptHints() )
+        {
+          hintUnsignedData();
 
-        if ( !context.empty() )
-          hintIfMasterIndex( file );
+          if ( !context.empty() )
+            hintIfMasterIndex( file );
 
-        warnCanNotVerifyFile();
+          warnCanNotVerifyFile();
+        }
 
         Zypper::instance().out().gap();
         const std::string & question { text::join( msg, text::qContinue(), "\n" ) };
@@ -260,14 +273,16 @@ namespace zypp
         {
           MIL << "Automatically importing key " << key_r << std::endl;
           zypper.out().info(s.str());
-          hintFingerprint();
+          if ( !refreshstatus::enabled() )
+            hintFingerprint();
           return KeyRingReport::KEY_TRUST_AND_IMPORT;
         }
         else if (_gopts.no_gpg_checks && canTrustTemporarily_r )
         {
           MIL << "Automatically trusting key " << key_r << std::endl;
           zypper.out().info(s.str());
-          hintFingerprint();
+          if ( !refreshstatus::enabled() )
+            hintFingerprint();
           return KeyRingReport::KEY_TRUST_TEMPORARILY;
         }
 
@@ -277,8 +292,11 @@ namespace zypp
         // why we print the 1st part here in PROMPT color and just pass the
         // question to propmpt().
         zypper.out().info( ColorString( s.str(), ColorContext::PROMPT ).str() );
-        hintUnsignedData();
-        hintFingerprint();
+        if ( !refreshstatus::enabled() || claimPromptHints() )
+        {
+          hintUnsignedData();
+          hintFingerprint();
+        }
         zypper.out().gap();
         s.str( std::string() );	// clear the string
 

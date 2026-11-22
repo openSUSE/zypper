@@ -17,6 +17,7 @@
 #include "Zypper.h"
 #include "rpm.h"
 #include "output/prompt.h"
+#include "utils/refreshstatus.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace ZmartRecipients
@@ -44,6 +45,14 @@ namespace ZmartRecipients
           break;
 
         case MsgType::info:
+          // In a parallel refresh the parent draws the progress block, so the
+          // children keep quiet about purely informational chatter (looking
+          // for gpg keys, gpgkey= URLs, ...). Use -v to see it.
+          if ( refreshstatus::enabled()
+               && out.verbosity() <= Out::NORMAL
+               && userData_r.type() != rpmPosttrans
+               && userData_r.type().type() != "cmdout" )
+            break;
           if ( userData_r.type() == rpmPosttrans )
           {
             if ( userData_r.hasvalue( "ripoff" ) ) {  // A headline to prepend/separate output lines

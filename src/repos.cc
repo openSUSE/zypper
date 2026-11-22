@@ -224,9 +224,9 @@ bool refresh_raw_metadata( Zypper & zypper, const RepoInfo & repo, bool force_do
     {
       // check whether libzypp indicates a refresh is needed, and if so,
       // print a message
-      if ( quiet_progress_r )
+      if ( quiet_progress_r && refreshstatus::enabled() )
         refreshstatus::progress( -1, _("Checking for updates") );
-      else
+      else if ( !quiet_progress_r )
         zypper.out().info( str::Format(_("Checking whether to refresh metadata for %s")) % repo.asUserString(),
                            Out::HIGH );
       if ( !repo.baseUrlsEmpty() )
@@ -280,7 +280,10 @@ bool refresh_raw_metadata( Zypper & zypper, const RepoInfo & repo, bool force_do
     else
     {
       if ( quiet_progress_r )
-        refreshstatus::progress( -1, _("Retrieving metadata") );
+      {
+        if ( refreshstatus::enabled() )
+          refreshstatus::progress( -1, _("Retrieving metadata") );
+      }
       else
         zypper.out().info(_("Forcing raw metadata refresh"));
       do_refresh = true;
@@ -292,7 +295,8 @@ bool refresh_raw_metadata( Zypper & zypper, const RepoInfo & repo, bool force_do
       {
         // No interactive progress bar: other repositories may be refreshed
         // in parallel and report progress at the same time.
-        refreshstatus::progress( -1, _("Retrieving metadata") );
+        if ( refreshstatus::enabled() )
+          refreshstatus::progress( -1, _("Retrieving metadata") );
       }
       else
       {
@@ -426,7 +430,7 @@ bool build_cache( Zypper & zypper, const RepoInfo & repo, bool force_build )
   // In a parallel refresh the parent draws the progress, so the child only
   // reports its state instead of printing a message per repository.
   const bool parallelChild = zypper.config().internal_refresh_child;
-  if ( parallelChild )
+  if ( parallelChild && refreshstatus::enabled() )
     refreshstatus::progress( -1, _("Building cache") );
   else if ( force_build )
     zypper.out().info(_("Forcing building of repository cache") );

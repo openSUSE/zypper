@@ -43,19 +43,43 @@ namespace {
     return state;
   }
 
+  std::string promptStatePath( const char * suffix_r )
+  {
+    const std::string root { Zypper::instance().config().root_dir };
+    return std::string( "/tmp/zypper.prompt." )
+           + str::numstring( static_cast<unsigned>(::getuid()) ) + "."
+           + str::numstring( std::hash<std::string>{}( root ) ) + suffix_r;
+  }
+
   int promptLockFd()
   {
     PromptLockState & state = promptLockState();
     if ( state.fd < 0 )
-    {
-      const std::string root { Zypper::instance().config().root_dir };
-      const std::string name { std::string("/tmp/zypper.prompt.")
-                               + str::numstring( static_cast<unsigned>(::getuid()) ) + "."
-                               + str::numstring( std::hash<std::string>{}( root ) ) + ".lock" };
-      state.fd = ::open( name.c_str(), O_CREAT|O_RDWR|O_CLOEXEC, 0600 );
-    }
+      state.fd = ::open( promptStatePath( ".lock" ).c_str(), O_CREAT|O_RDWR|O_CLOEXEC, 0600 );
     return state.fd;
   }
+}
+
+bool claimPromptHints()
+{
+  const std::string path( promptStatePath( ".hints" ) );
+  const int fd = ::open( path.c_str(), O_CREAT|O_RDWR|O_CLOEXEC, 0600 );
+  if ( fd < 0 )
+    return true;	// can't coordinate, better show the hints
+  ::flock( fd, LOCK_EX );
+  char buf[2] = { 0, 0 };
+  const bool claimed = ( ::read( fd, buf, 1 ) <= 0 );
+  if ( claimed )
+    if ( ::write( fd, "1", 1 ) < 0 )
+    { /* ignore */ }
+  ::flock( fd, LOCK_UN );
+  ::close( fd );
+  return claimed;
+}
+
+void resetPromptHints()
+{
+  ::unlink( promptStatePath( ".hints" ).c_str() );
 }
 
 CrossProcessPromptLock::CrossProcessPromptLock()
