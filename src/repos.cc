@@ -29,6 +29,7 @@
 #include "utils/messages.h"
 #include "utils/misc.h"
 #include "utils/prompt.h"
+#include "utils/refreshstatus.h"
 #include "repos.h"
 #include "global-settings.h"
 
@@ -223,8 +224,11 @@ bool refresh_raw_metadata( Zypper & zypper, const RepoInfo & repo, bool force_do
     {
       // check whether libzypp indicates a refresh is needed, and if so,
       // print a message
-      zypper.out().info( str::Format(_("Checking whether to refresh metadata for %s")) % repo.asUserString(),
-                         Out::HIGH );
+      if ( quiet_progress_r )
+        refreshstatus::progress( -1, _("Checking for updates") );
+      else
+        zypper.out().info( str::Format(_("Checking whether to refresh metadata for %s")) % repo.asUserString(),
+                           Out::HIGH );
       if ( !repo.baseUrlsEmpty() )
       {
         const auto &repoOrigins = repo.repoOrigins();
@@ -275,7 +279,10 @@ bool refresh_raw_metadata( Zypper & zypper, const RepoInfo & repo, bool force_do
     }
     else
     {
-      zypper.out().info(_("Forcing raw metadata refresh"));
+      if ( quiet_progress_r )
+        refreshstatus::progress( -1, _("Retrieving metadata") );
+      else
+        zypper.out().info(_("Forcing raw metadata refresh"));
       do_refresh = true;
     }
 
@@ -285,7 +292,7 @@ bool refresh_raw_metadata( Zypper & zypper, const RepoInfo & repo, bool force_do
       {
         // No interactive progress bar: other repositories may be refreshed
         // in parallel and report progress at the same time.
-        zypper.out().info( str::Format(_("Retrieving repository '%s' metadata")) % repo.asUserString() );
+        refreshstatus::progress( -1, _("Retrieving metadata") );
       }
       else
       {

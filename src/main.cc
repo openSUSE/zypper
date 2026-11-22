@@ -1,3 +1,4 @@
+#include <cstdio>
 #include <iostream>
 #include <signal.h>
 #include <poll.h>
@@ -110,6 +111,11 @@ void signal_nopipe( int sig )
 
 int main( int argc, char **argv )
 try {
+  // A parallel refresh child reports its progress to the parent. Use line
+  // buffering so that its messages are forwarded promptly.
+  if ( ::getenv( "ZYPPER_REFRESH_STATUS_FD" ) )
+    ::setvbuf( stdout, nullptr, _IOLBF, 0 );
+
   struct Bye {
     ~Bye() {
       MIL << "===== Exiting main("<<exitcode<<") =====" << endl;

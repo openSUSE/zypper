@@ -19,6 +19,7 @@
 #include "Zypper.h"
 #include "utils/prompt.h"
 #include "utils/misc.h"
+#include "utils/refreshstatus.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace ZmartRecipients
@@ -275,7 +276,7 @@ struct ProgressReportReceiver  : public callback::ReceiveReport<ProgressReport>
   {
     if ( noProgress() )
     {
-      Zypper::instance().out().info( data.name() );
+      refreshstatus::progress( data.reportAlive() ? -1 : static_cast<int>( data.reportValue() ), data.name() );
       return;
     }
     Zypper::instance().out().progressStart(
@@ -297,6 +298,8 @@ struct ProgressReportReceiver  : public callback::ReceiveReport<ProgressReport>
             str::numstring(data.numericId()),
             data.name(), data.reportValue());
     }
+    else
+      refreshstatus::progress( data.reportAlive() ? -1 : static_cast<int>( data.reportValue() ), data.name() );
     return !Zypper::instance().exitRequested();
   }
 
@@ -336,7 +339,7 @@ struct RepoReportReceiver  : public callback::ReceiveReport<repo::RepoReport>
     _repo = repo;
     if ( noProgress() )
     {
-      Zypper::instance().out().info( "(" + _repo.name() + ") " + pd.name() );
+      refreshstatus::progress( pd.reportAlive() ? -1 : static_cast<int>( pd.val() ), pd.name() );
       return;
     }
     Zypper::instance().out()
@@ -348,6 +351,8 @@ struct RepoReportReceiver  : public callback::ReceiveReport<repo::RepoReport>
     if ( !noProgress() )
       Zypper::instance().out()
         .progress("repo", "(" + _repo.name() + ") " + pd.name(), pd.val());
+    else
+      refreshstatus::progress( pd.reportAlive() ? -1 : static_cast<int>( pd.val() ), pd.name() );
     return !Zypper::instance().exitRequested();
   }
 

@@ -23,6 +23,7 @@
 
 #include "Zypper.h"
 #include "utils/colors.h"
+#include "utils/refreshstatus.h"
 
 #include "prompt.h"
 
@@ -81,6 +82,35 @@ CrossProcessPromptLock::~CrossProcessPromptLock()
   state.mutex.unlock();
 }
 
+namespace {
+  /** Pauses the parent's progress display while waiting for user input.
+   *  Must be created after the prompt text has been printed and flushed. */
+  struct PromptDisplayGuard
+  {
+    PromptDisplayGuard()
+    {
+      if ( refreshstatus::enabled() && !Zypper::instance().config().non_interactive )
+      {
+        refreshstatus::flushOutput();
+        refreshstatus::promptStart();
+        _active = true;
+      }
+    }
+
+    ~PromptDisplayGuard()
+    {
+      if ( _active )
+        refreshstatus::promptEnd();
+    }
+
+    PromptDisplayGuard( const PromptDisplayGuard & ) = delete;
+    PromptDisplayGuard & operator=( const PromptDisplayGuard & ) = delete;
+
+  private:
+    bool _active = false;
+  };
+}
+
 // ----------------------------------------------------------------------------
 
 //! \todo The default values seems to be useless - we always want to auto-return 'retry' in case of no user input.
@@ -110,6 +140,7 @@ int read_action_ari_with_timeout( PromptId pid, unsigned timeout, int default_ac
   PromptOptions poptions(_("a/r/i"), (unsigned) default_action );
   zypper.out().prompt( pid, _("Abort, retry, ignore?"), poptions );
   cout << endl;
+  PromptDisplayGuard promptDisplay;
 
   while ( timeout )
   {
@@ -242,6 +273,8 @@ unsigned get_prompt_reply( Zypper & zypper, PromptId pid, const PromptOptions & 
     MIL << "running non-interactively, returning " << poptions.options()[poptions.defaultOpt()] << endl;
     return poptions.defaultOpt();
   }
+
+  PromptDisplayGuard promptDisplay;
 
   clear_keyboard_buffer();
 
@@ -391,6 +424,7 @@ namespace
 std::string get_text( const std::string & prompt, const std::string & prefilled )
 {
   CrossProcessPromptLock promptLock;
+  PromptDisplayGuard promptDisplay;
   std::string ret;
 
   /* Get a line from the user. */
