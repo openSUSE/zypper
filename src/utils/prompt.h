@@ -62,6 +62,21 @@ bool read_bool_answer(PromptId pid, const std::string & question, bool default_a
  */
 std::pair<bool,bool> read_bool_answer_opt_save( PromptId pid_r, const std::string & question_r, bool defaultAnswer_r );
 
+/** Serializes interactive prompts between zypper processes.
+ *
+ * 'zypper refresh' may refresh repositories in parallel child processes
+ * sharing one terminal. Only one of them may ask the user at a time.
+ */
+class CrossProcessPromptLock
+{
+public:
+  CrossProcessPromptLock();
+  ~CrossProcessPromptLock();
+
+  CrossProcessPromptLock( const CrossProcessPromptLock & ) = delete;
+  CrossProcessPromptLock & operator=( const CrossProcessPromptLock & ) = delete;
+};
+
 class Zypper;
 unsigned get_prompt_reply(Zypper & zypper,
                               PromptId pid,

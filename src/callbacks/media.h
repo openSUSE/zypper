@@ -101,6 +101,13 @@ namespace ZmartRecipients
     {
       _last_drate_avg = -1;
 
+      if ( Zypper::instance().config().internal_refresh_child )
+      {
+        // Parallel refresh: avoid competing progress bars
+        _be_quiet = true;
+        return;
+      }
+
       Out & out = Zypper::instance().out();
 
       if (out.verbosity() < Out::HIGH &&

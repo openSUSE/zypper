@@ -216,7 +216,10 @@ bool repo_cmp_alias_urls( const RepoInfo & lhs, const RepoInfo & rhs );
 
 void repoPrioSummary( Zypper & zypper );
 
-bool refresh_raw_metadata( Zypper & zypper, const RepoInfo & repo, bool force_download );
+/** \param quiet_progress_r suppress the interactive progress bar (used by
+ *  refresh child processes running in parallel).
+ *  \return true on error */
+bool refresh_raw_metadata( Zypper & zypper, const RepoInfo & repo, bool force_download, bool quiet_progress_r = false );
 
 bool build_cache( Zypper & zypper, const RepoInfo & repo, bool force_build );
 

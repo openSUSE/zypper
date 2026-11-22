@@ -6,10 +6,15 @@
 \*---------------------------------------------------------------------------*/
 
 #include <ctype.h>
-#include <iostream>
-#include <sstream>
+#include <fcntl.h>
+#include <sys/file.h>
+#include <unistd.h>
 #include <fstream>
+#include <functional>
+#include <iostream>
+#include <mutex>
 #include <poll.h>
+#include <sstream>
 #include <readline/readline.h>
 #include <termios.h>
 
@@ -20,6 +25,61 @@
 #include "utils/colors.h"
 
 #include "prompt.h"
+
+// ----------------------------------------------------------------------------
+
+namespace {
+  struct PromptLockState
+  {
+    std::recursive_mutex mutex;
+    unsigned depth = 0;
+    int fd = -1;
+  };
+
+  PromptLockState & promptLockState()
+  {
+    static PromptLockState state;
+    return state;
+  }
+
+  int promptLockFd()
+  {
+    PromptLockState & state = promptLockState();
+    if ( state.fd < 0 )
+    {
+      const std::string root { Zypper::instance().config().root_dir };
+      const std::string name { std::string("/tmp/zypper.prompt.")
+                               + str::numstring( static_cast<unsigned>(::getuid()) ) + "."
+                               + str::numstring( std::hash<std::string>{}( root ) ) + ".lock" };
+      state.fd = ::open( name.c_str(), O_CREAT|O_RDWR|O_CLOEXEC, 0600 );
+    }
+    return state.fd;
+  }
+}
+
+CrossProcessPromptLock::CrossProcessPromptLock()
+{
+  PromptLockState & state = promptLockState();
+  state.mutex.lock();
+  if ( state.depth++ == 0 )
+  {
+    int fd = promptLockFd();
+    if ( fd >= 0 )
+      ::flock( fd, LOCK_EX );
+  }
+}
+
+CrossProcessPromptLock::~CrossProcessPromptLock()
+{
+  PromptLockState & state = promptLockState();
+  if ( --state.depth == 0 )
+  {
+    int fd = promptLockFd();
+    if ( fd >= 0 )
+      ::flock( fd, LOCK_UN );
+  }
+  state.mutex.unlock();
+}
 
 // ----------------------------------------------------------------------------
 
@@ -46,6 +106,7 @@ int read_action_ari_with_timeout( PromptId pid, unsigned timeout, int default_ac
     return default_action;
   }
 
+  CrossProcessPromptLock promptLock;
   PromptOptions poptions(_("a/r/i"), (unsigned) default_action );
   zypper.out().prompt( pid, _("Abort, retry, ignore?"), poptions );
   cout << endl;
@@ -133,6 +194,7 @@ int read_action_ari_with_timeout( PromptId pid, unsigned timeout, int default_ac
 int read_action_ari( PromptId pid, int default_action )
 {
   Zypper & zypper( Zypper::instance() );
+  CrossProcessPromptLock promptLock;
   // translators: "a/r/i" are the answers to the
   // "Abort, retry, ignore?" prompt
   // Translate the letters to whatever is suitable for your language.
@@ -149,6 +211,7 @@ int read_action_ari( PromptId pid, int default_action )
 bool read_bool_answer( PromptId pid, const std::string & question, bool default_answer )
 {
   Zypper & zypper( Zypper::instance() );
+  CrossProcessPromptLock promptLock;
   std::string yn( std::string(_("yes")) + "/" + _("no") );
   PromptOptions popts( yn, default_answer ? 0 : 1 );
   zypper.out().prompt( pid, question, popts );
@@ -158,6 +221,7 @@ bool read_bool_answer( PromptId pid, const std::string & question, bool default_
 std::pair<bool,bool> read_bool_answer_opt_save( PromptId pid_r, const std::string & question_r, bool defaultAnswer_r )
 {
   Zypper & zypper( Zypper::instance() );
+  CrossProcessPromptLock promptLock;
   PromptOptions popts( { _("yes"), _("no"), _("always"), _("never") }, defaultAnswer_r ? 0 : 1 );
 
   zypper.out().prompt( pid_r, question_r, popts );
@@ -167,6 +231,7 @@ std::pair<bool,bool> read_bool_answer_opt_save( PromptId pid_r, const std::strin
 
 unsigned get_prompt_reply( Zypper & zypper, PromptId pid, const PromptOptions & poptions )
 {
+  CrossProcessPromptLock promptLock;
   // non-interactive mode: return the default reply
   if (zypper.config().non_interactive)
   {
@@ -325,6 +390,7 @@ namespace
 ///////////////////////////////////////////////////////////////////
 std::string get_text( const std::string & prompt, const std::string & prefilled )
 {
+  CrossProcessPromptLock promptLock;
   std::string ret;
 
   /* Get a line from the user. */

@@ -141,6 +141,7 @@ namespace zypp
       virtual bool askUserToAcceptUnsignedFile(
           const std::string & file, const KeyContext & context)
       {
+        CrossProcessPromptLock promptLock;
         if (_gopts.no_gpg_checks)
         {
           MIL << "Accepting unsigned file (" << file << ", repo: "
@@ -188,6 +189,7 @@ namespace zypp
           const std::string & id,
           const KeyContext & context)
       {
+        CrossProcessPromptLock promptLock;
         if (_gopts.no_gpg_checks)
         {
           MIL
@@ -238,6 +240,7 @@ namespace zypp
       KeyRingReport::KeyTrust askUserToAcceptKey(
                 const PublicKey &key_r, const KeyContext & context_r, bool canTrustTemporarily_r )
       {
+        CrossProcessPromptLock promptLock;
         Zypper & zypper = Zypper::instance();
 
         std::ostringstream s;
@@ -356,6 +359,7 @@ namespace zypp
           const PublicKey & key,
           const KeyContext & context )
       {
+        CrossProcessPromptLock promptLock;
         if (_gopts.no_gpg_checks)
         {
           MIL << str::Format("Ignoring failed signature verification for %s")
@@ -516,6 +520,7 @@ namespace zypp
 
       virtual bool askUserToAcceptWrongDigest( const Pathname &file, const std::string &requested, const std::string &found )
       {
+        CrossProcessPromptLock promptLock;
         Zypper & zypper = Zypper::instance();
         std::string unblock( found.substr( 0, 4 ) );
 

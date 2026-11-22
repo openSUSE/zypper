@@ -199,7 +199,7 @@ void repoPrioSummary( Zypper & zypper )
 
 // ----------------------------------------------------------------------------
 
-bool refresh_raw_metadata( Zypper & zypper, const RepoInfo & repo, bool force_download )
+bool refresh_raw_metadata( Zypper & zypper, const RepoInfo & repo, bool force_download, bool quiet_progress_r )
 {
   RuntimeData & gData( zypper.runtimeData() );
   gData.current_repo = repo;
@@ -281,8 +281,17 @@ bool refresh_raw_metadata( Zypper & zypper, const RepoInfo & repo, bool force_do
 
     if ( do_refresh )
     {
-      plabel = str::form(_("Retrieving repository '%s' metadata"), repo.asUserString().c_str() );
-      zypper.out().progressStart( "raw-refresh", plabel, true );
+      if ( quiet_progress_r )
+      {
+        // No interactive progress bar: other repositories may be refreshed
+        // in parallel and report progress at the same time.
+        zypper.out().info( str::Format(_("Retrieving repository '%s' metadata")) % repo.asUserString() );
+      }
+      else
+      {
+        plabel = str::form(_("Retrieving repository '%s' metadata"), repo.asUserString().c_str() );
+        zypper.out().progressStart( "raw-refresh", plabel, true );
+      }
 
       // RepoManager::RefreshForced because we already know from checkIfToRefreshMetadata above
       // that refresh is needed (or forced anyway). Forcing here prevents refreshMetadata from
@@ -290,7 +299,8 @@ bool refresh_raw_metadata( Zypper & zypper, const RepoInfo & repo, bool force_do
       manager.refreshMetadata( repo, RepoManager::RefreshForced );
 
       //plabel += repoGpgCheckStatus( repo );
-      zypper.out().progressEnd( "raw-refresh", plabel );
+      if ( !quiet_progress_r )
+        zypper.out().progressEnd( "raw-refresh", plabel );
       plabel.clear();
     }
   }
@@ -332,7 +342,7 @@ bool refresh_raw_metadata( Zypper & zypper, const RepoInfo & repo, bool force_do
   catch ( const media::MediaException & e )
   {
     ZYPP_CAUGHT( e );
-    if ( do_refresh )
+    if ( do_refresh && !quiet_progress_r )
     {
       zypper.out().progressEnd( "raw-refresh", plabel, true );
       plabel.clear();
@@ -345,7 +355,7 @@ bool refresh_raw_metadata( Zypper & zypper, const RepoInfo & repo, bool force_do
   catch ( const repo::RepoNoUrlException & e )
   {
     ZYPP_CAUGHT( e );
-    if ( do_refresh )
+    if ( do_refresh && !quiet_progress_r )
     {
       zypper.out().progressEnd( "raw-refresh", plabel, true );
       plabel.clear();
@@ -364,7 +374,7 @@ bool refresh_raw_metadata( Zypper & zypper, const RepoInfo & repo, bool force_do
   catch ( const repo::RepoNoAliasException & e )
   {
     ZYPP_CAUGHT( e );
-    if ( do_refresh )
+    if ( do_refresh && !quiet_progress_r )
     {
       zypper.out().progressEnd( "raw-refresh", plabel, true );
       plabel.clear();
@@ -376,7 +386,7 @@ bool refresh_raw_metadata( Zypper & zypper, const RepoInfo & repo, bool force_do
   catch ( const repo::RepoException & e )
   {
     ZYPP_CAUGHT( e );
-    if ( do_refresh )
+    if ( do_refresh && !quiet_progress_r )
     {
       zypper.out().progressEnd( "raw-refresh", plabel, true );
       plabel.clear();
@@ -388,7 +398,7 @@ bool refresh_raw_metadata( Zypper & zypper, const RepoInfo & repo, bool force_do
   catch ( const Exception & e )
   {
     ZYPP_CAUGHT( e );
-    if ( do_refresh )
+    if ( do_refresh && !quiet_progress_r )
     {
       zypper.out().progressEnd( "raw-refresh", plabel, true );
       plabel.clear();

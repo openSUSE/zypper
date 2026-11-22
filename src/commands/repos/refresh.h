@@ -28,7 +28,8 @@ public:
 
   RefreshRepoCmd( std::vector<std::string> &&commandAliases_r );
 
-  static int refreshRepositories ( Zypper &zypper, RefreshFlags flags_r = Default, const std::vector<std::string> repos_r = std::vector<std::string>() );
+  /** \param jobs_r number of repositories refreshed in parallel, 0 means automatic. */
+  static int refreshRepositories ( Zypper &zypper, RefreshFlags flags_r = Default, const std::vector<std::string> repos_r = std::vector<std::string>(), unsigned jobs_r = 0 );
 
   /** \return false on success, true on error */
   static bool refreshRepository  ( Zypper & zypper, const zypp::RepoInfo & repo, RefreshFlags flags_r = Default );
@@ -42,9 +43,14 @@ protected:
 
 
 private:
+  /** Refresh the given repositories, returns the number of failed repositories. */
+  static unsigned refreshRepositories ( Zypper & zypper, const std::vector<zypp::RepoInfo> & repos_r, RefreshFlags flags_r, unsigned jobs_r );
+
   RefreshFlags _flags;
   std::vector<std::string> _repos;
   bool _services = false;
+  /** Number of parallel jobs, 0 means automatic. */
+  int _jobs = 0;
 };
 ZYPP_DECLARE_OPERATORS_FOR_FLAGS(RefreshRepoCmd::RefreshFlags);
 
