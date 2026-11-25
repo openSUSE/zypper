@@ -197,6 +197,20 @@ bool refresh_service(Zypper & zypper, const ServiceInfo & service, RepoManager::
     // this is just an informal note. The service will be used as is (usually empty)
     error = false;
   }
+  catch ( repo::RepoAlreadyExistsException & e )
+  {
+    // A repo not maintained by this service already uses an alias the service wants to add.
+    ZYPP_CAUGHT( e );
+    std::string hint;
+    RepoInfo existing( manager.getRepo( e.alias() ) );
+    if ( ! existing.filepath().empty() )
+      hint = str::Format(_("The existing repository is defined in '%s'. Rename or remove it if the service should manage this repository."))
+             % existing.filepath();
+    zypper.out().error( e, str::Format(_("Service '%s' can not add repository '%s' because a repository with the same alias already exists."))
+                           % service.asUserString() % e.alias(),
+                        hint );
+    zypper.setExitCode( ZYPPER_EXIT_ERR_ZYPP );
+  }
   catch ( const media::MediaException & e )
   {
     ZYPP_CAUGHT( e );
