@@ -10,7 +10,7 @@
 #include <string>
 #include "commands/basecommand.h"
 #include <zypp-core/base/Exception.h>
-#include <zypp/Pathname.h>
+#include <zypp-core/Pathname.h>
 
 class Zypper;
 
