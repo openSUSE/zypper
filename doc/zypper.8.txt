@@ -115,7 +115,7 @@ Zypper works with several types of resource objects, called _resolvables_. A res
 +
 Selecting the patch, the conflict is resolved by updating all installed and affected/vulnerable packages to a version providing the fix. When updating the packages zypper always aims for the latest available version. Resolved patches are classified as either *applied* or *not needed*, depending on whether they refer to actually installed packages.
 +
-So installation, update or removal of packages may change the classification of patches referring to these packages. Since libyzpp-17.23.0 the /var/log/zypp/history remembers if a committed transaction changes a patch's classification. If history data are available, patch tables show a column telling _since_ when the patch is in its current state.
+So installation, update or removal of packages may change the classification of patches referring to these packages. Since libzypp-17.23.0 the /var/log/zypp/history remembers if a committed transaction changes a patch's classification. If history data are available, patch tables show a column telling _since_ when the patch is in its current state.
 +
 Depending on the kind of defect, patches are classified by _category_ and _severity_. Commonly used values for _category_ are *security*, (*recommended*, *bugfix*), (*optional*, *feature*, *enhancement*) *document* or *yast*. Commonly used values for _severity_ are *critical*, *important*, *moderate*, *low* or *unspecified*. Names listed in parentheses are used synonymously.
 +
@@ -389,7 +389,6 @@ This command will try to find the newest available versions of the source packag
 +
 Note that the source packages must be available in repositories you are using. You can check whether a repository contains any source packages using the following command:
 
-		{nop}::: $ *zypper search -t srcpackage -r* _alias_|_name_|_#_|_URI_
 		{nop}::: $ *zypper search -t srcpackage -r* _alias_|_name_|_#_|_URI_
 
 +
@@ -1445,7 +1444,7 @@ Newly added services are not refreshed automatically. Use the *refresh-services*
 --
 
 *removeservice* (*rs*) [_options_] _alias_|_name_|_#_|_URI_...::
-	Remove specified service from the system. Removing a service will also remove of all of its repositories.
+	Remove specified service from the system. Removing a service will also remove all of its repositories.
 +
 --
 	*--loose-auth*::
@@ -1628,7 +1627,7 @@ These commands give information about requested locales and the possibility to m
 --
 
 *addlocale* (*aloc*) [OPTIONS] <LOCALE> ...::
- Add specified locale(s) to the list of requested locales..
+ Add specified locale(s) to the list of requested locales.
 +
 --
  *-n*, *--no-packages*::
@@ -1636,7 +1635,7 @@ These commands give information about requested locales and the possibility to m
 --
 
 *removelocale* (*rloc*) [OPTIONS] <LOCALE> ...::
- Remove specified locale(s) from the list of requested locales..
+ Remove specified locale(s) from the list of requested locales.
 +
 --
  *-n*, *--no-packages*::
@@ -1699,7 +1698,7 @@ In not-terse mode the distribution label is shown instead of an empty value, if 
 *licenses*::
 	Prints a report about _licenses_ and __EULA__'s of installed packages to standard output.
 +
-First, a list of all packages and their licenses and/or EULAs is shown. This is followed by a summary, including the total number of installed packages, the number of installed packages with EULAs that required a confirmation from the user. Since the EULAs are not stored on the system and can only be read from repository metadata, the summary includes also the number of installed packages that have their counterpart in repositories. The report ends with a list of all licenses uses by the installed packages.
+First, a list of all packages and their licenses and/or EULAs is shown. This is followed by a summary, including the total number of installed packages, the number of installed packages with EULAs that required a confirmation from the user. Since the EULAs are not stored on the system and can only be read from repository metadata, the summary includes also the number of installed packages that have their counterpart in repositories. The report ends with a list of all licenses used by the installed packages.
 +
 This command can be useful for companies redistributing a custom distribution (like appliances) to figure out what licenses they are bound by.
 
@@ -1877,7 +1876,7 @@ For *search* and *info* commands the option makes zypper return *ZYPPER_EXIT_OK*
 
 *--pkg-cache-dir* _dir_::
 	Use the specified directory for storing rpm packages downloaded from repositories (see *addrepo --keep-packages*). The default value is */var/cache/zypp/packages*.
-+ Packages are stored in subdirectories named after the repositories alias and using the same path as on the repositories medium.
++ Packages are stored in subdirectories named after the repositories aliases and using the same path as on the repositories medium.
 
 *--userdata* _string_::
 	User data is expected to be a simple string without special chars or embedded newlines and may serve as transaction id. It will be written to all install history log entries created throughout this specific zypper call. It will also be passed on to zypp plugins executed during commit. This will enable e.g. a btrfs plugin to tag created snapshots with this string. For zypper itself this string has no special meaning.
