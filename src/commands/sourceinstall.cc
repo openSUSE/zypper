@@ -34,7 +34,6 @@ SourceInstallCmd::SourceInstallCmd(std::vector<std::string> &&commandAliases_r) 
 std::vector<BaseCommandConditionPtr> SourceInstallCmd::conditions() const
 {
   return {
-    std::make_shared<NeedsRootCondition>(),
     std::make_shared<NeedsWritableRoot>()
   };
 }
