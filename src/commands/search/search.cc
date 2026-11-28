@@ -27,6 +27,24 @@ namespace zypp
       );
     }
 
+    Value appendAllDepsToSet ( std::set<zypp::sat::SolvAttr> &target_r )
+    {
+      return Value (
+            noDefaultValue,
+            [ &target_r ] ( const CommandOption &, const boost::optional<std::string> & ) {
+              target_r.insert( {
+                zypp::sat::SolvAttr::dep_requires,
+                zypp::sat::SolvAttr::dep_recommends,
+                zypp::sat::SolvAttr::dep_supplements,
+                zypp::sat::SolvAttr::dep_conflicts,
+                zypp::sat::SolvAttr::dep_obsoletes,
+                zypp::sat::SolvAttr::dep_suggests,
+                zypp::sat::SolvAttr::dep_enhances
+              } );
+            }
+      );
+    }
+
     Value setSolvAttrOptional ( boost::optional<zypp::sat::SolvAttr> &target_r, zypp::sat::SolvAttr value_r ) {
       return Value (
           noDefaultValue,
@@ -144,6 +162,10 @@ zypp::ZyppFlags::CommandGroup SearchCmd::cmdOptions() const
         // translators: --enhances
         _("Search for packages which enhance the search strings.")
       },
+      { "all-deps", '\0', ZyppFlags::NoArgument, ZyppFlags::appendAllDepsToSet( that._requestedDeps ),
+        // translators: --all-deps
+        _("Search in all of the above dependencies except provides. Add --provides to search in provides too.")
+      },
       { "provides-pkg", '\0', ZyppFlags::NoArgument, ZyppFlags::setSolvAttrOptional( that._requestedReverseSearch, sat::SolvAttr::dep_provides ),
         // translators: --provides-pkg
         _("Search for all packages that provide any of the provides of the package(s) matched by the input parameters.")
@@ -200,14 +222,14 @@ zypp::ZyppFlags::CommandGroup SearchCmd::cmdOptions() const
                                 // translators: -s, --details
                                 _("Show each available version in each repository on a separate line.")
       ),
-      {"verbose", 'v', ZyppFlags::NoArgument, ZyppFlags::BoolType( &that._verbose, ZyppFlags::StoreTrue, _caseSensitive ),
+      {"verbose", 'v', ZyppFlags::NoArgument, ZyppFlags::BoolType( &that._verbose, ZyppFlags::StoreTrue, _verbose ),
         // translators: -v, --verbose
         _("Like --details, with additional information where the search has matched (useful for search in dependencies).")
       }
     },
     {
       { "match-substrings", "match-words", "match-exact" },
-      { "provides-pkg", "requires-pkg", "recommends-pkg", "supplements-pkg", "conflicts-pkg", "obsoletes-pkg", "suggests-pkg"  }
+      { "provides-pkg", "requires-pkg", "recommends-pkg", "supplements-pkg", "conflicts-pkg", "obsoletes-pkg", "suggests-pkg", "enhances-pkg", "all-deps" }
     }
   };
 
