@@ -154,6 +154,10 @@ public:
   std::string repoManagerInitialAlias( unsigned argnum ) const
   { return _rm ? _rm->initialAlias( argnum ) : std::string(); }
 
+  /** Global options from the original command line (everything before the command).
+   *  Used to set up child processes for parallel repository refresh. */
+  std::vector<std::string> globalOptions() const;
+
   int exitInfoCode() const			{ return _exitInfoCode; }
   void setExitInfoCode( int exit )		{
     WAR << "setExitInfoCode " << exit << " (" << _exitInfoCode << ")" << endl;

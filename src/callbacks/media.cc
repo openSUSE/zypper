@@ -199,6 +199,7 @@ namespace ZmartRecipients
                                                                      const std::vector<std::string> & devices,
                                                                      unsigned & index)
   {
+    CrossProcessPromptLock promptLock;
     Zypper & zypper = Zypper::instance();
 
     DBG << "medium problem, url: " << url.asString()
@@ -284,6 +285,7 @@ namespace ZmartRecipients
                                              const std::string & description,
                                              media::AuthData & auth_data )
   {
+    CrossProcessPromptLock promptLock;
     Zypper & zypper = Zypper::instance();
 
     if ( geteuid() != 0 && url.getQueryString().find("credentials=") != std::string::npos )

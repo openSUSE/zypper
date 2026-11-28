@@ -19,6 +19,7 @@
 #include "Zypper.h"
 #include "utils/prompt.h"
 #include "utils/misc.h"
+#include "utils/refreshstatus.h"
 
 ///////////////////////////////////////////////////////////////////
 namespace ZmartRecipients
@@ -266,8 +267,21 @@ struct DownloadResolvableReportReceiver : public callback::ReceiveReport<repo::D
 
 struct ProgressReportReceiver  : public callback::ReceiveReport<ProgressReport>
 {
+  /** Whether this is a refresh child running in parallel to other processes.
+   *  Progress bars of parallel processes would overwrite each other. */
+  static bool noProgress()
+  { return Zypper::instance().config().internal_refresh_child; }
+
   virtual void start( const ProgressData &data )
   {
+    if ( noProgress() )
+    {
+      if ( refreshstatus::enabled() )
+        refreshstatus::progress( data.reportAlive() ? -1 : static_cast<int>( data.reportValue() ) );
+      else
+        Zypper::instance().out().info( data.name() );
+      return;
+    }
     Zypper::instance().out().progressStart(
         str::numstring(data.numericId()),
         data.name(),
@@ -276,14 +290,19 @@ struct ProgressReportReceiver  : public callback::ReceiveReport<ProgressReport>
 
   virtual bool progress( const ProgressData &data )
   {
-    if (data.reportAlive())
-      Zypper::instance().out().progress(
-          str::numstring(data.numericId()),
-          data.name());
+    if ( !noProgress() )
+    {
+      if (data.reportAlive())
+        Zypper::instance().out().progress(
+            str::numstring(data.numericId()),
+            data.name());
+      else
+        Zypper::instance().out().progress(
+            str::numstring(data.numericId()),
+            data.name(), data.reportValue());
+    }
     else
-      Zypper::instance().out().progress(
-          str::numstring(data.numericId()),
-          data.name(), data.reportValue());
+      refreshstatus::progress( data.reportAlive() ? -1 : static_cast<int>( data.reportValue() ) );
     return !Zypper::instance().exitRequested();
   }
 
@@ -296,6 +315,9 @@ struct ProgressReportReceiver  : public callback::ReceiveReport<ProgressReport>
 
   virtual void finish( const ProgressData &data )
   {
+    if ( noProgress() )
+      return;
+
     // Don't report success if data reports percent and is not at 100%
     ProgressData::value_type last = data.reportValue();
 
@@ -310,32 +332,50 @@ struct ProgressReportReceiver  : public callback::ReceiveReport<ProgressReport>
 
 struct RepoReportReceiver  : public callback::ReceiveReport<repo::RepoReport>
 {
+  /** Whether this is a refresh child running in parallel to other processes.
+   *  Progress bars of parallel processes would overwrite each other. */
+  static bool noProgress()
+  { return Zypper::instance().config().internal_refresh_child; }
+
   virtual void start(const ProgressData & pd, const RepoInfo repo)
   {
     _repo = repo;
+    if ( noProgress() )
+    {
+      if ( refreshstatus::enabled() )
+        refreshstatus::progress( pd.reportAlive() ? -1 : static_cast<int>( pd.val() ) );
+      else
+        Zypper::instance().out().info( "(" + _repo.name() + ") " + pd.name() );
+      return;
+    }
     Zypper::instance().out()
       .progressStart("repo", "(" + _repo.name() + ") " + pd.name());
   }
 
   virtual bool progress(const ProgressData & pd)
   {
-    Zypper::instance().out()
-      .progress("repo", "(" + _repo.name() + ") " + pd.name(), pd.val());
+    if ( !noProgress() )
+      Zypper::instance().out()
+        .progress("repo", "(" + _repo.name() + ") " + pd.name(), pd.val());
+    else
+      refreshstatus::progress( pd.reportAlive() ? -1 : static_cast<int>( pd.val() ) );
     return !Zypper::instance().exitRequested();
   }
 
   virtual Action problem( Repository /*repo*/, Error error, const std::string & description )
   {
-    Zypper::instance().out()
-      .progressEnd("repo", "(" + _repo.name() + ") ");
+    if ( !noProgress() )
+      Zypper::instance().out()
+        .progressEnd("repo", "(" + _repo.name() + ") ");
     Zypper::instance().out().error(zcb_error2str(error, description));
     return (Action) read_action_ari (PROMPT_ARI_REPO_PROBLEM, ABORT);
   }
 
   virtual void finish( Repository /*repo*/, const std::string & task, Error error, const std::string & reason )
   {
-    Zypper::instance().out()
-      .progressEnd("repo", "(" + _repo.name() + ") ");
+    if ( !noProgress() )
+      Zypper::instance().out()
+        .progressEnd("repo", "(" + _repo.name() + ") ");
     if (error != NO_ERROR)
       Zypper::instance().out().error(zcb_error2str(error, reason));
 //    display_step(100);

@@ -216,6 +216,7 @@ Config::Config()
   , exclude_optional_patches_default( true )
   , exclude_optional_patches( exclude_optional_patches_default )
   , wantHelp ( false )
+  , internal_refresh_child( false )
 {}
 
 std::vector<ZyppFlags::CommandGroup> Config::cliOptions()
@@ -235,6 +236,11 @@ std::vector<ZyppFlags::CommandGroup> Config::cliOptions()
           // translators: --help, -h
           _("Help.")
         },
+        std::move( ZyppFlags::CommandOption(
+          "internal-refresh-child", 0, ZyppFlags::NoArgument | ZyppFlags::Hidden,
+          ZyppFlags::BoolType( &internal_refresh_child, ZyppFlags::StoreTrue ),
+          std::string()
+        ).setPriority( Priority::HIGHEST ) ),
         std::move( ZyppFlags::CommandOption(
           "version", 'V', ZyppFlags::NoArgument,
               ZyppFlags::CallbackVal ( []( const ZyppFlags::CommandOption &, const boost::optional<std::string> & ) {

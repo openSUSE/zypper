@@ -88,6 +88,9 @@ struct Config : public ztui::Config
   const int	exclude_optional_patches_default;	// global default
   int		exclude_optional_patches;		// effective value (--with[out]-optional)
   bool wantHelp; ///< help was requested by CLI
+  /** Internal use only: this process refreshes a single repository
+   *  on behalf of a parallel 'zypper refresh' parent process. */
+  bool internal_refresh_child;
 
 
   // helper variables for CLI parsing

@@ -11,14 +11,44 @@
 
 
 #include "utils/messages.h"
+#include "utils/prompt.h"
 #include "utils/flags/flagtypes.h"
 #include "Zypper.h"
+
+#include <zypp-core/base/UserRequestException>
+
+#include <algorithm>
+#include <cerrno>
+#include <cwchar>
+#include <cstring>
+#include <iostream>
+#include <limits.h>
+#include <map>
+#include <poll.h>
+#include <sys/wait.h>
+#include <unistd.h>
+#include <vector>
 
 using namespace zypp;
 
 extern ZYpp::Ptr God;
 
 namespace {
+  /** Repositories expected to provide updated GPG keys (bsc#1234752).
+   *  They must be refreshed before the other repositories.
+   *  \li 2: 'update' directory within the repo's path
+   *  \li 1: 'update' in alias or name
+   */
+  unsigned updateRepoRank( const RepoInfo & repo_r )
+  {
+    static const std::string update { "update" };
+    if ( str::containsCI( repo_r.url().getPathName(), update ) )
+      return 2;
+    if ( str::containsCI( repo_r.alias(), update ) || str::containsCI( repo_r.name(), update ) )
+      return 1;
+    return 0;
+  }
+
   // bsc#1234752: Try to refresh update repos first (to have updated GPG keys on the fly).
   // GA repos usually ship the old, maybe meanwhile expired, GPG key. If such a key was
   // prolonged, the update repo may contain it and zypp updates the trusted key on the fly
@@ -27,24 +57,789 @@ namespace {
   inline std::list<RepoInfo> inRefreshOrder( std::list<RepoInfo> && list_r )
   {
     list_r.sort( []( const RepoInfo & lhs, const RepoInfo & rhs ) {
-      static const std::string update { "update" };
-      // 'update' directory within the URS's path
-      bool lu = str::containsCI( lhs.url().getPathName(), update );
-      bool ru = str::containsCI( rhs.url().getPathName(), update );
-      if ( lu != ru )
-        return lu;      // update in path wins
-      const std::string & la { lhs.alias() };
-      const std::string & ra { rhs.alias() };
-      if ( lu )
-        return la < ra; // both update => by alias
-      // 'update' in alias or name
-      lu = str::containsCI( la, update ) || str::containsCI( lhs.name(), update );
-      ru = str::containsCI( ra, update ) || str::containsCI( rhs.name(), update );
-      if ( lu != ru )
-        return lu;    // update in alias or name wins
-      return la < ra; // finally by alias
+      const unsigned lrank = updateRepoRank( lhs );
+      const unsigned rrank = updateRepoRank( rhs );
+      if ( lrank != rrank )
+        return lrank > rrank;
+      return lhs.alias() < rhs.alias();
     } );
     return std::move(list_r);
+  }
+
+  /** Path of the running zypper executable. */
+  const std::string & selfExecutable()
+  {
+    static const std::string exe = []() {
+      char buf[ PATH_MAX + 1 ] = { 0 };
+      ssize_t len = ::readlink( "/proc/self/exe", buf, PATH_MAX );
+      return std::string( len > 0 ? buf : "/usr/bin/zypper" );
+    }();
+    return exe;
+  }
+
+  /** Cut \a str_r so that it occupies at most \a cols_r terminal columns. */
+  std::string truncateToColumns( const std::string & str_r, unsigned cols_r )
+  {
+    if ( cols_r == 0 )
+      return str_r;
+    std::mbstate_t state {};
+    unsigned used = 0;
+    size_t pos = 0;
+    while ( pos < str_r.size() )
+    {
+      wchar_t wc = L'\0';
+      const size_t len = ::mbrtowc( &wc, str_r.data() + pos, str_r.size() - pos, &state );
+      if ( len == static_cast<size_t>(-1) || len == static_cast<size_t>(-2) )
+        break;	// invalid or incomplete multibyte sequence
+      const size_t charLen = len == 0 ? 1 : len;
+      int width = ::wcwidth( wc );
+      if ( width < 0 )
+        width = 1;
+      if ( used + static_cast<unsigned>( width ) > cols_r )
+        break;
+      used += static_cast<unsigned>( width );
+      pos += charLen;
+    }
+    return str_r.substr( 0, pos );
+  }
+
+  struct RefreshChildPipes
+  {
+    int outFd = -1;     ///< parent read end of the child's stdout/stderr
+    int statusFd = -1;  ///< parent read end of the child's status messages
+  };
+
+  /** Fork a child process refreshing a single repository.
+   *  \param capture_r redirect the child's output and progress into pipes
+   *         owned by the parent.
+   *  \return child pid, -1 on error. */
+  pid_t startRefreshChild( const Zypper & zypper, const RepoInfo & repo_r, RefreshRepoCmd::RefreshFlags flags_r,
+                           bool capture_r, RefreshChildPipes & pipes_r )
+  {
+    std::vector<std::string> args { selfExecutable() };
+    for ( const std::string & globalOpt : zypper.globalOptions() )
+      args.push_back( globalOpt );
+    args.push_back( "--internal-refresh-child" );
+    args.push_back( "refresh" );
+    args.push_back( "--jobs" );
+    args.push_back( "1" );
+    if ( flags_r.testFlag( RefreshRepoCmd::Force ) )
+      args.push_back( "--force" );
+    if ( flags_r.testFlag( RefreshRepoCmd::ForceBuild ) )
+      args.push_back( "--force-build" );
+    if ( flags_r.testFlag( RefreshRepoCmd::ForceDownload ) )
+      args.push_back( "--force-download" );
+    if ( flags_r.testFlag( RefreshRepoCmd::DownloadOnly ) )
+      args.push_back( "--download-only" );
+    if ( flags_r.testFlag( RefreshRepoCmd::AllArchs ) )
+      args.push_back( "--include-all-archs" );
+    args.push_back( repo_r.alias() );
+
+    std::vector<char *> argv;
+    argv.reserve( args.size() + 1 );
+    for ( std::string & arg : args )
+      argv.push_back( const_cast<char *>( arg.c_str() ) );
+    argv.push_back( nullptr );
+
+    int outPipe[2] = { -1, -1 };
+    int statusPipe[2] = { -1, -1 };
+    std::string statusFdEnv;
+
+    if ( capture_r )
+    {
+      if ( ::pipe( outPipe ) != 0 )
+        return -1;
+      if ( ::pipe( statusPipe ) != 0 )
+      {
+        ::close( outPipe[0] );
+        ::close( outPipe[1] );
+        return -1;
+      }
+      // The status fd must survive the dup2 of stdout/stderr
+      if ( statusPipe[1] <= STDERR_FILENO )
+      {
+        int fd = ::fcntl( statusPipe[1], F_DUPFD, STDERR_FILENO + 1 );
+        if ( fd >= 0 )
+        {
+          ::close( statusPipe[1] );
+          statusPipe[1] = fd;
+        }
+      }
+      statusFdEnv = "ZYPPER_REFRESH_STATUS_FD=" + std::to_string( statusPipe[1] );
+    }
+
+    // The parallel refresh parent holds the ZYpp lock. Children work on
+    // distinct repositories and must not try to acquire it.
+    std::vector<std::string> envStore;
+    bool haveReadonlyHack = false;
+    for ( char ** env = environ; *env; ++env )
+    {
+      std::string entry( *env );
+      if ( entry.rfind( "ZYPP_READONLY_HACK=", 0 ) == 0 )
+      {
+        entry = "ZYPP_READONLY_HACK=1";
+        haveReadonlyHack = true;
+      }
+      else if ( entry.rfind( "ZYPPER_REFRESH_STATUS_FD=", 0 ) == 0 )
+        continue;
+      envStore.push_back( std::move( entry ) );
+    }
+    if ( !haveReadonlyHack )
+      envStore.emplace_back( "ZYPP_READONLY_HACK=1" );
+    if ( !statusFdEnv.empty() )
+      envStore.push_back( statusFdEnv );
+
+    std::vector<char *> envp;
+    envp.reserve( envStore.size() + 1 );
+    for ( std::string & entry : envStore )
+      envp.push_back( const_cast<char *>( entry.c_str() ) );
+    envp.push_back( nullptr );
+
+    const std::string & exe = selfExecutable();	// initialized before fork()
+    const pid_t pid = ::fork();
+    if ( pid == 0 )
+    {
+      if ( capture_r )
+      {
+        ::dup2( outPipe[1], STDOUT_FILENO );
+        ::dup2( outPipe[1], STDERR_FILENO );
+        ::close( outPipe[0] );
+        if ( outPipe[1] != STDOUT_FILENO && outPipe[1] != STDERR_FILENO )
+          ::close( outPipe[1] );
+        ::close( statusPipe[0] );
+      }
+      ::execve( exe.c_str(), argv.data(), envp.data() );
+      ::_exit( 127 );
+    }
+
+    if ( capture_r )
+    {
+      ::close( outPipe[1] );
+      ::close( statusPipe[1] );
+      if ( pid > 0 )
+      {
+        pipes_r.outFd = outPipe[0];
+        pipes_r.statusFd = statusPipe[0];
+        // Do not leak the parent's read ends into subsequent children
+        ::fcntl( pipes_r.outFd, F_SETFD, FD_CLOEXEC );
+        ::fcntl( pipes_r.statusFd, F_SETFD, FD_CLOEXEC );
+        ::fcntl( pipes_r.outFd, F_SETFL, O_NONBLOCK );
+        ::fcntl( pipes_r.statusFd, F_SETFL, O_NONBLOCK );
+      }
+      else
+      {
+        ::close( outPipe[0] );
+        ::close( statusPipe[0] );
+      }
+    }
+    return pid;
+  }
+
+  /** Draws one status line per repository and keeps it out of the way of
+   *  the regular messages emitted by the child processes. */
+  class RefreshDisplay
+  {
+  public:
+    explicit RefreshDisplay( Zypper & zypper_r )
+      : _zypper( zypper_r )
+    {
+      const char * term = ::getenv( "TERM" );
+      _enabled = ::isatty( STDOUT_FILENO )
+                 && term && std::string( term ) != "dumb"
+                 && _zypper.out().type() == Out::TYPE_NORMAL
+                 && _zypper.out().verbosity() > Out::QUIET;
+      const unsigned width = _zypper.out().termwidth();
+      _width = width > 1 ? width : 80;
+    }
+
+    ~RefreshDisplay()
+    { eraseBlock(); }
+
+    bool enabled() const
+    { return _enabled; }
+
+    void addLine( pid_t pid_r, const std::string & alias_r )
+    {
+      if ( !_enabled )
+        return;
+      _order.push_back( pid_r );
+      _aliases[pid_r] = alias_r;
+      _percent[pid_r] = -1;
+      if ( _active )
+        drawBlock();
+    }
+
+    void update( pid_t pid_r, int percent_r, const std::string & label_r )
+    {
+      if ( !_enabled || !_aliases.count( pid_r ) )
+        return;
+      _percent[pid_r] = percent_r;
+      _labels[pid_r] = label_r;
+      if ( _active )
+        drawBlock();
+    }
+
+    void removeLine( pid_t pid_r )
+    {
+      if ( !_enabled )
+        return;
+      if ( _active )
+        eraseBlock();
+      _order.erase( std::remove( _order.begin(), _order.end(), pid_r ), _order.end() );
+      _aliases.erase( pid_r );
+      _percent.erase( pid_r );
+      _labels.erase( pid_r );
+      if ( _active )
+        drawBlock();
+    }
+
+    /** Print a message above the status block. */
+    void message( const std::string & text_r, bool addNewline_r = true )
+    {
+      if ( !_enabled )
+      {
+        std::cout << text_r;
+        std::cout.flush();
+        return;
+      }
+      eraseBlock();
+      std::cout << text_r;
+      if ( addNewline_r && !text_r.empty() && text_r.back() != '\n' )
+        std::cout << '\n';
+      std::cout.flush();
+      if ( _active )
+        drawBlock();
+    }
+
+    /** Stop drawing the status block while the child waits for user input. */
+    void beginPrompt()
+    {
+      if ( !_enabled )
+        return;
+      eraseBlock();
+      _active = false;
+      _drawn.clear();
+    }
+
+    /** Resume the status block after the user answered. The answer echoed by
+     *  the terminal already moved the cursor to the next line. */
+    void endPrompt()
+    {
+      if ( !_enabled )
+        return;
+      _active = true;
+      drawBlock();
+    }
+
+    void tick()
+    {
+      if ( !_enabled || !_active )
+        return;
+      ++_spin;
+      drawBlock();
+    }
+
+  private:
+    void eraseBlock()
+    {
+      if ( _lines == 0 )
+        return;
+      for ( size_t i = 0; i < _lines; ++i )
+      {
+        std::cout << "\r\033[2K";
+        if ( i + 1 < _lines )
+          std::cout << "\033[1A";
+      }
+      std::cout.flush();
+      _lines = 0;
+      _drawn.clear();
+    }
+
+    std::string lineFor( pid_t pid_r ) const
+    {
+      const std::string & alias = _aliases.at( pid_r );
+      std::string label;
+      auto labelIt = _labels.find( pid_r );
+      if ( labelIt != _labels.end() )
+        label = labelIt->second;
+      const int percent = _percent.at( pid_r );
+
+      std::string line;
+      if ( percent >= 0 )
+      {
+        static const unsigned barWidth = 12;
+        const unsigned filled = static_cast<unsigned>( percent ) * barWidth / 100;
+        line += "[";
+        line += std::string( filled, '#' );
+        line += std::string( barWidth - filled, '-' );
+        line += "] ";
+        std::string num = std::to_string( percent );
+        if ( num.size() < 3 )
+          line += std::string( 3 - num.size(), ' ' );
+        line += num + "% ";
+      }
+      else
+      {
+        static const char spin[] = "|/-\\";
+        line += "  ";
+        line += spin[_spin % 4];
+        line += "     ";
+      }
+      line += alias;
+      if ( !label.empty() )
+        line += ": " + label;
+
+      return truncateToColumns( line, _width - 1 );
+    }
+
+    void drawBlock()
+    {
+      if ( !_enabled || !_active )
+        return;
+      std::vector<std::string> lines;
+      lines.reserve( _order.size() );
+      for ( pid_t pid : _order )
+        lines.push_back( lineFor( pid ) );
+      if ( lines == _drawn )
+        return;
+      eraseBlock();
+      for ( size_t i = 0; i < lines.size(); ++i )
+      {
+        std::cout << "\033[2K\r" << lines[i];
+        if ( i + 1 < lines.size() )
+          std::cout << '\n';
+      }
+      std::cout.flush();
+      _lines = lines.size();
+      _drawn = std::move( lines );
+    }
+
+    Zypper & _zypper;
+    bool _enabled = false;
+    bool _active = true;
+    unsigned _width = 80;
+    unsigned _spin = 0;
+    size_t _lines = 0;
+    std::vector<std::string> _drawn;
+    std::vector<pid_t> _order;
+    std::map<pid_t, std::string> _aliases;
+    std::map<pid_t, int> _percent;
+    std::map<pid_t, std::string> _labels;
+  };
+
+  /** Sequential waitpid based loop used when the terminal can not show a
+   *  progress block. */
+  unsigned runRefreshChildrenPlain( Zypper & zypper, const std::vector<RepoInfo> & repos_r,
+                                    RefreshRepoCmd::RefreshFlags flags_r, unsigned jobs_r )
+  {
+    unsigned error_count = 0;
+    std::vector<unsigned char> failed( repos_r.size(), 0 );
+    std::map<pid_t, size_t> running;
+    size_t next = 0;
+    bool aborted = false;
+
+    auto reportFailure = [&]( size_t idx ) {
+      if ( failed[idx] )
+        return;
+      failed[idx] = 1;
+      zypper.out().error( str::Format(_("Skipping repository '%s' because of the above error.")) % repos_r[idx].asUserString() );
+      ERR << "Skipping repository '" << repos_r[idx].alias() << "' because of the above error." << endl;
+      error_count++;
+    };
+
+    while ( next < repos_r.size() || !running.empty() )
+    {
+      if ( zypper.exitRequested() )
+        aborted = true;
+
+      while ( !aborted && running.size() < jobs_r && next < repos_r.size() )
+      {
+        RefreshChildPipes pipes;
+        const pid_t pid = startRefreshChild( zypper, repos_r[next], flags_r, false, pipes );
+        if ( pid > 0 )
+        {
+          running[pid] = next++;
+        }
+        else
+        {
+          zypper.out().error( str::Format(_("Could not start a refresh process for repository '%s'.")) % repos_r[next].asUserString() );
+          reportFailure( next );
+          ++next;
+        }
+      }
+
+      if ( running.empty() )
+        break;
+
+      int status = 0;
+      const pid_t pid = ::waitpid( -1, &status, 0 );
+      if ( pid < 0 )
+      {
+        if ( errno == EINTR )
+          continue;
+        ERR << "waitpid failed: " << ::strerror( errno ) << endl;
+        break;
+      }
+
+      auto it = running.find( pid );
+      if ( it == running.end() )
+        continue;
+      const size_t idx = it->second;
+      running.erase( it );
+
+      if ( WIFEXITED( status ) )
+      {
+        if ( WEXITSTATUS( status ) != 0 )
+          reportFailure( idx );
+      }
+      else
+      {
+        zypper.out().error( str::Format(_("Refresh process for repository '%s' was terminated unexpectedly.")) % repos_r[idx].asUserString() );
+        reportFailure( idx );
+      }
+    }
+
+    if ( aborted )
+    {
+      zypper.setExitCode( ZYPPER_EXIT_ERR_ZYPP );
+      throw AbortRequestException();
+    }
+    return error_count;
+  }
+
+  /** Refresh \a repos_r each in its own child process, at most \a jobs_r at a time.
+   *  \return number of failed repositories */
+  unsigned runRefreshChildren( Zypper & zypper, const std::vector<RepoInfo> & repos_r,
+                               RefreshRepoCmd::RefreshFlags flags_r, unsigned jobs_r )
+  {
+    if ( repos_r.empty() )
+      return 0;
+
+    RefreshDisplay display( zypper );
+    if ( !display.enabled() )
+      return runRefreshChildrenPlain( zypper, repos_r, flags_r, jobs_r );
+
+    struct ChildState
+    {
+      size_t idx = 0;
+      int outFd = -1;
+      int statusFd = -1;
+      std::string outBuf;
+      std::string statusBuf;
+    };
+
+    unsigned error_count = 0;
+    std::vector<unsigned char> failed( repos_r.size(), 0 );
+    std::map<pid_t, ChildState> children;
+    std::string deferredOutput;
+    size_t next = 0;
+    bool aborted = false;
+    pid_t promptingPid = -1;
+    // Children which asked for a prompt but have to wait for their turn.
+    // A child can only prompt while it holds the cross process prompt lock,
+    // but PROMPT_START/PROMPT_END lines of different children may still be
+    // read in any order.
+    std::vector<pid_t> pendingPrompts;
+
+    auto isPending = [&]( pid_t pid_r ) {
+      return std::find( pendingPrompts.begin(), pendingPrompts.end(), pid_r ) != pendingPrompts.end();
+    };
+    auto anyPrompt = [&]() {
+      return promptingPid != -1 || !pendingPrompts.empty();
+    };
+
+    // Print above the progress block, or delay if a child is prompting
+    auto showMessage = [&]( const std::string & msg_r ) {
+      if ( anyPrompt() )
+        deferredOutput += msg_r + '\n';
+      else
+        display.message( msg_r );
+    };
+
+    auto reportFailure = [&]( size_t idx ) {
+      if ( failed[idx] )
+        return;
+      failed[idx] = 1;
+      showMessage( str::Format(_("Skipping repository '%s' because of the above error.")) % repos_r[idx].asUserString() );
+      ERR << "Skipping repository '" << repos_r[idx].alias() << "' because of the above error." << endl;
+      error_count++;
+    };
+
+    // Read all available data from a non-blocking fd, close it on EOF
+    auto drainFd = []( int & fd_r, std::string & buf_r ) {
+      if ( fd_r < 0 )
+        return;
+      char tmp[4096];
+      while ( true )
+      {
+        const ssize_t len = ::read( fd_r, tmp, sizeof(tmp) );
+        if ( len > 0 )
+        {
+          buf_r.append( tmp, len );
+          continue;
+        }
+        if ( len == 0 )
+        {
+          ::close( fd_r );
+          fd_r = -1;
+        }
+        break;
+      }
+    };
+
+    auto deferOutput = [&]( ChildState & child_r ) {
+      if ( child_r.outBuf.empty() )
+        return;
+      deferredOutput += child_r.outBuf;
+      if ( child_r.outBuf.back() != '\n' )
+        deferredOutput += '\n';
+      child_r.outBuf.clear();
+    };
+
+    // Print all complete lines of a child at once to avoid flickering
+    auto flushCompleteLines = [&]( ChildState & child_r ) {
+      const size_t pos = child_r.outBuf.rfind( '\n' );
+      if ( pos == std::string::npos )
+        return;
+      std::string text = child_r.outBuf.substr( 0, pos + 1 );
+      child_r.outBuf.erase( 0, pos + 1 );
+      display.message( text );
+    };
+
+    // Hand the terminal over to \a pid_r: print everything it wrote so far
+    // (warnings and the prompt itself) and pause the progress block.
+    auto activatePrompt = [&]( pid_t pid_r ) {
+      promptingPid = pid_r;
+      auto it = children.find( pid_r );
+      if ( it == children.end() )
+        return;
+      drainFd( it->second.outFd, it->second.outBuf );
+      display.beginPrompt();
+      if ( !it->second.outBuf.empty() )
+      {
+        display.message( it->second.outBuf, false );
+        it->second.outBuf.clear();
+      }
+    };
+
+    // \a pid_r finished prompting: pass the terminal to the next waiting
+    // child or resume the progress block.
+    auto finishPrompt = [&]( pid_t pid_r ) {
+      if ( promptingPid != pid_r )
+      {
+        pendingPrompts.erase( std::remove( pendingPrompts.begin(), pendingPrompts.end(), pid_r ), pendingPrompts.end() );
+        return;
+      }
+      promptingPid = -1;
+      while ( promptingPid == -1 && !pendingPrompts.empty() )
+      {
+        const pid_t nextPid = pendingPrompts.front();
+        pendingPrompts.erase( pendingPrompts.begin() );
+        if ( children.count( nextPid ) )
+          activatePrompt( nextPid );
+      }
+      if ( promptingPid != -1 )
+        return;
+      if ( !deferredOutput.empty() )
+      {
+        display.message( deferredOutput );
+        deferredOutput.clear();
+      }
+      display.endPrompt();
+    };
+
+    auto handleStatus = [&]( pid_t pid_r, ChildState & child_r, const std::string & line_r ) {
+      if ( line_r.rfind( "PROGRESS ", 0 ) == 0 )
+      {
+        int percent = -1;
+        std::string label;
+        size_t sep = line_r.find( ' ', 9 );
+        if ( sep != std::string::npos )
+        {
+          percent = std::atoi( line_r.c_str() + 9 );
+          label = line_r.substr( sep + 1 );
+        }
+        display.update( pid_r, percent, label );
+      }
+      else if ( line_r == "PROMPT_START" )
+      {
+        if ( promptingPid == -1 )
+          activatePrompt( pid_r );
+        else if ( !isPending( pid_r ) )
+          pendingPrompts.push_back( pid_r );
+      }
+      else if ( line_r == "PROMPT_END" )
+        finishPrompt( pid_r );
+    };
+
+    while ( next < repos_r.size() || !children.empty() )
+    {
+      if ( zypper.exitRequested() )
+        aborted = true;
+
+      while ( !aborted && children.size() < jobs_r && next < repos_r.size() )
+      {
+        RefreshChildPipes pipes;
+        const pid_t pid = startRefreshChild( zypper, repos_r[next], flags_r, true, pipes );
+        if ( pid > 0 )
+        {
+          ChildState child;
+          child.idx = next;
+          child.outFd = pipes.outFd;
+          child.statusFd = pipes.statusFd;
+          children.emplace( pid, std::move( child ) );
+          display.addLine( pid, repos_r[next].alias() );
+          ++next;
+        }
+        else
+        {
+          showMessage( str::Format(_("Could not start a refresh process for repository '%s'.")) % repos_r[next].asUserString() );
+          reportFailure( next );
+          ++next;
+        }
+      }
+
+      if ( children.empty() )
+        break;
+
+      std::vector<pollfd> pfds;
+      pfds.reserve( children.size() * 2 );
+      for ( const auto & entry : children )
+      {
+        if ( entry.second.outFd >= 0 )
+          pfds.push_back( { entry.second.outFd, POLLIN, 0 } );
+        if ( entry.second.statusFd >= 0 )
+          pfds.push_back( { entry.second.statusFd, POLLIN, 0 } );
+      }
+
+      const int pollRes = ::poll( pfds.data(), pfds.size(), 100 );
+      if ( pollRes < 0 && errno != EINTR )
+      {
+        ERR << "poll failed: " << ::strerror( errno ) << endl;
+        break;
+      }
+      if ( pollRes == 0 )
+        display.tick();
+
+      for ( auto & entry : children )
+      {
+        ChildState & child = entry.second;
+        drainFd( child.outFd, child.outBuf );
+        drainFd( child.statusFd, child.statusBuf );
+
+        size_t pos = std::string::npos;
+        while ( ( pos = child.statusBuf.find( '\n' ) ) != std::string::npos )
+        {
+          std::string line = child.statusBuf.substr( 0, pos );
+          child.statusBuf.erase( 0, pos + 1 );
+          handleStatus( entry.first, child, line );
+        }
+
+        if ( promptingPid == entry.first )
+        {
+          // The prompt text and help messages may not end with a newline
+          if ( !child.outBuf.empty() )
+          {
+            display.message( child.outBuf, false );
+            child.outBuf.clear();
+          }
+        }
+        else if ( !isPending( entry.first ) )
+        {
+          if ( anyPrompt() )
+            deferOutput( child );	// print after the prompts
+          else
+            flushCompleteLines( child );
+        }
+        // pending prompts keep their output until it is their turn
+      }
+
+      int status = 0;
+      pid_t pid = 0;
+      while ( ( pid = ::waitpid( -1, &status, WNOHANG ) ) > 0 )
+      {
+        auto it = children.find( pid );
+        if ( it == children.end() )
+          continue;
+        ChildState & child = it->second;
+
+        drainFd( child.outFd, child.outBuf );
+        drainFd( child.statusFd, child.statusBuf );
+        if ( child.outFd >= 0 )
+          ::close( child.outFd );
+        if ( child.statusFd >= 0 )
+          ::close( child.statusFd );
+
+        // Print whatever the child wrote before it exited
+        if ( promptingPid == pid )
+        {
+          if ( !child.outBuf.empty() )
+          {
+            display.message( child.outBuf, false );
+            child.outBuf.clear();
+          }
+        }
+        else if ( isPending( pid ) )
+        {
+          // its output is printed when it gets its turn; the child is gone though
+          child.outBuf.clear();
+        }
+        else if ( anyPrompt() )
+        {
+          deferOutput( child );
+        }
+        else
+        {
+          flushCompleteLines( child );
+          if ( !child.outBuf.empty() )
+          {
+            display.message( child.outBuf );
+            child.outBuf.clear();
+          }
+        }
+
+        finishPrompt( pid );
+        const size_t idx = child.idx;
+        display.removeLine( pid );
+        if ( WIFEXITED( status ) )
+        {
+          if ( WEXITSTATUS( status ) != 0 )
+            reportFailure( idx );
+        }
+        else
+        {
+          showMessage( str::Format(_("Refresh process for repository '%s' was terminated unexpectedly.")) % repos_r[idx].asUserString() );
+          reportFailure( idx );
+        }
+        children.erase( it );
+      }
+    }
+
+    // In case we bailed out early (poll/waitpid error), do not leave children behind
+    for ( auto & entry : children )
+    {
+      if ( entry.second.outFd >= 0 )
+        ::close( entry.second.outFd );
+      if ( entry.second.statusFd >= 0 )
+        ::close( entry.second.statusFd );
+    }
+    children.clear();
+    while ( ::waitpid( -1, nullptr, 0 ) > 0 )
+    {}
+
+    if ( aborted )
+    {
+      zypper.setExitCode( ZYPPER_EXIT_ERR_ZYPP );
+      throw AbortRequestException();
+    }
+    return error_count;
+  }
+
+  /** Number of parallel repository refreshes to use by default. */
+  unsigned defaultJobs()
+  {
+    const long nprocs = ::sysconf( _SC_NPROCESSORS_ONLN );
+    return nprocs > 0 ? static_cast<unsigned>( nprocs ) : 1u;
   }
 
 } // namespace
@@ -117,6 +912,11 @@ zypp::ZyppFlags::CommandGroup RefreshRepoCmd::cmdOptions() const
             // translators: -s, --services
             _("Refresh also services before refreshing repos.")
       },
+      {"jobs", 'j', ZyppFlags::RequiredArgument,
+            ZyppFlags::IntType( &that->_jobs ),
+            // translators: -j, --jobs <N>
+            _("Number of repositories to refresh in parallel. The default is the number of CPUs, limited by the number of repositories. Use '--jobs 1' to refresh sequentially.")
+      },
   }};
 }
 
@@ -125,12 +925,23 @@ void RefreshRepoCmd::doReset()
   _flags = Default;
   _repos.clear();
   _services = false;
+  _jobs = 0;
 }
 
 int RefreshRepoCmd::execute( Zypper &zypper , const std::vector<std::string> &positionalArgs_r )
 {
   if ( zypper.config().no_refresh )
     zypper.out().warning( str::Format(_("The '%s' global option has no effect here.")) % "--no-refresh" );
+
+  if ( _jobs < 0 )
+  {
+    zypper.out().error( str::Format(_("Invalid number of jobs: '%s'.")) % str::numstring(_jobs) );
+    return ZYPPER_EXIT_ERR_INVALID_ARGS;
+  }
+
+  // Child processes spawned for parallel refresh must not refresh services
+  // again (the parent has already done this) and must not spawn further children.
+  const bool refreshChild = zypper.config().internal_refresh_child;
 
   bool force = _flags.testFlag(Force);
 
@@ -158,7 +969,7 @@ int RefreshRepoCmd::execute( Zypper &zypper , const std::vector<std::string> &po
     if ( code != ZYPPER_EXIT_OK )
       return code;
   }
-  else
+  else if ( !refreshChild )
   {
     RepoManager::RefreshServiceOptions opts;
     if ( force )
@@ -177,7 +988,8 @@ int RefreshRepoCmd::execute( Zypper &zypper , const std::vector<std::string> &po
   for ( const std::string &repoFromCLI : positionalArgs_r )
     specifiedRepos.push_back(repoFromCLI);
 
-  return refreshRepositories ( zypper, _flags, specifiedRepos );
+  const unsigned jobs = refreshChild ? 1u : static_cast<unsigned>( _jobs );
+  return refreshRepositories ( zypper, _flags, specifiedRepos, jobs );
 }
 
 bool RefreshRepoCmd::refreshRepository(Zypper &zypper, const RepoInfo &repo, RefreshFlags flags_r)
@@ -197,7 +1009,7 @@ bool RefreshRepoCmd::refreshRepository(Zypper &zypper, const RepoInfo &repo, Ref
   {
     bool force_download = flags_r.testFlag(Force) || flags_r.testFlag(ForceDownload);
     MIL << "calling refreshMetadata" << (force_download ? ", forced" : "") << endl;
-    error = refresh_raw_metadata( zypper, repo, force_download );
+    error = refresh_raw_metadata( zypper, repo, force_download, zypper.config().internal_refresh_child );
   }
 
   // db rebuild
@@ -211,7 +1023,65 @@ bool RefreshRepoCmd::refreshRepository(Zypper &zypper, const RepoInfo &repo, Ref
   return error;
 }
 
-int RefreshRepoCmd::refreshRepositories( Zypper &zypper, RefreshFlags flags_r, const std::vector<std::string> repos_r )
+unsigned RefreshRepoCmd::refreshRepositories( Zypper & zypper, const std::vector<RepoInfo> & repos_r, RefreshFlags flags_r, unsigned jobs_r )
+{
+  if ( repos_r.empty() )
+    return 0;
+
+  unsigned jobs = jobs_r ? jobs_r : defaultJobs();
+  jobs = std::min( jobs, static_cast<unsigned>( repos_r.size() ) );
+
+  // Refreshing in parallel child processes is only safe if they do not
+  // have to share the parent's state or the output format.
+  const bool useChildren = jobs > 1
+    && !flags_r.testFlag(BuildOnly)
+    && !zypper.runningShell()
+    && !zypper.config().machine_readable
+    && zypper.runtimeData().plusContentRepos.empty()
+    && zypper.config().plusRepoFromCLI.empty();
+
+  if ( !useChildren )
+  {
+    unsigned error_count = 0;
+    for ( const RepoInfo & repo : repos_r )
+    {
+      if ( refreshRepository( zypper, repo, flags_r ) )
+      {
+        // A child process reports failures to its parent, see below.
+        if ( !zypper.config().internal_refresh_child )
+        {
+          zypper.out().error( str::Format(_("Skipping repository '%s' because of the above error.")) % repo.asUserString() );
+          ERR << "Skipping repository '" << repo.alias() << "' because of the above error." << endl;
+        }
+        error_count++;
+      }
+    }
+    return error_count;
+  }
+
+  // bsc#1234752: refresh repositories providing updated GPG keys first.
+  // They run one after another before the others are started in parallel.
+  std::vector<RepoInfo> updateRepos;
+  std::vector<RepoInfo> otherRepos;
+  for ( const RepoInfo & repo : repos_r )
+  {
+    if ( updateRepoRank( repo ) )
+      updateRepos.push_back( repo );
+    else
+      otherRepos.push_back( repo );
+  }
+
+  // Long GPG prompt explanations are shown once per run, see keyring.h
+  resetPromptHints();
+
+  // bsc#1234752: complete these before starting the parallel refresh of the others
+  unsigned error_count = 0;
+  error_count += runRefreshChildren( zypper, updateRepos, flags_r, 1 );
+  error_count += runRefreshChildren( zypper, otherRepos, flags_r, jobs );
+  return error_count;
+}
+
+int RefreshRepoCmd::refreshRepositories( Zypper &zypper, RefreshFlags flags_r, const std::vector<std::string> repos_r, unsigned jobs_r )
 {
   RepoManager & manager( zypper.repoManager() );
   // bsc#1234752: Try to refresh update repos first (to have updated GPG keys on the fly)
@@ -245,6 +1115,7 @@ int RefreshRepoCmd::refreshRepositories( Zypper &zypper, RefreshFlags flags_r, c
 
   unsigned error_count = 0;
   unsigned enabled_repo_count = repos.size();
+  std::vector<RepoInfo> refreshList;
 
   if ( !specified.empty() || not_found.empty() )
   {
@@ -302,17 +1173,26 @@ int RefreshRepoCmd::refreshRepositories( Zypper &zypper, RefreshFlags flags_r, c
         }
       }
 
-      // do the refresh
-      if ( refreshRepository( zypper, repo, flags_r ) )
-      {
-        zypper.out().error( str::Format(_("Skipping repository '%s' because of the above error.")) % repo.asUserString() );
-        ERR << "Skipping repository '" << repo.alias() << "' because of the above error." << endl;
-        error_count++;
-      }
+      refreshList.push_back( repo );
     }
   }
   else
     enabled_repo_count = 0;
+
+  error_count = refreshRepositories( zypper, refreshList, flags_r, jobs_r );
+
+  // A refresh child reports problems itself. The overall result is
+  // reported by the parent process.
+  if ( zypper.config().internal_refresh_child )
+  {
+    if ( !not_found.empty() )
+      return ZYPPER_EXIT_ERR_INVALID_ARGS;
+    if ( enabled_repo_count == 0 )
+      return ZYPPER_EXIT_NO_REPOS;
+    if ( error_count )
+      return ZYPPER_EXIT_ERR_ZYPP;
+    return ZYPPER_EXIT_OK;
+  }
 
   // print the result message
   if ( !not_found.empty() )

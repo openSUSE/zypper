@@ -18,6 +18,7 @@
 
 #include "Zypper.h"
 #include "utils/prompt.h"
+#include "utils/refreshstatus.h"
 
 // auto-repeat counter limit
 #define REPEAT_LIMIT 3
@@ -101,6 +102,14 @@ namespace ZmartRecipients
     {
       _last_drate_avg = -1;
 
+      if ( Zypper::instance().config().internal_refresh_child )
+      {
+        // Parallel refresh: the parent draws the progress
+        _be_quiet = true;
+        refreshstatus::progress( 0, Pathname(uri.getPathName()).basename() );
+        return;
+      }
+
       Out & out = Zypper::instance().out();
 
       if (out.verbosity() < Out::HIGH &&
@@ -130,6 +139,9 @@ namespace ZmartRecipients
         DBG << "received exit request" << std::endl;
         return false;
       }
+
+      if ( zypper.config().internal_refresh_child )
+        refreshstatus::progress( value, Pathname(uri.getPathName()).basename() );
 
       if (!zypper.runtimeData().raw_refresh_progress_label.empty())
         zypper.out().progress(

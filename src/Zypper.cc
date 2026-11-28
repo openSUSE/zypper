@@ -252,6 +252,14 @@ int Zypper::main( int argc, char ** argv )
   return exitCode();
 }
 
+std::vector<std::string> Zypper::globalOptions() const
+{
+  std::vector<std::string> options;
+  for ( int i = 1; i < _commandArgOffset; ++i )
+    options.emplace_back( _argv[i] );
+  return options;
+}
+
 Out & Zypper::out()
 {
     // PENDING SigINT? Some frequently called place to avoid exiting from within the signal handler?
