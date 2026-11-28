@@ -1070,46 +1070,131 @@ void mark_updates_by_issue( Zypper & zypper, const std::set<Issue> &issues, Solv
 
     SolverRequester sr( srOpts );
     bool found = false;
+    // Why no patch was selected (gh#openSUSE/zypper#625):
+    bool matched = false;	// some patch references the issue
+    bool needed = false;	// a matching patch is needed (but may not be selectable, e.g. locked)
+    bool satisfied = false;	// a matching patch is already installed
+    bool notNeeded = false;	// a matching patch does not apply to this system
+    bool retracted = false;	// a matching patch was retracted
 
     for_( it, q.begin(), q.end() )
     {
       PoolItem pi( *it );
-      Patch::constPtr patch = asKind<Patch>(pi);
-
-      if ( !pi.isBroken() ) // not needed
-        continue;
 
       // CliMatchPatch not needed, it's fed into srOpts!
 
-      DBG << "got: " << *it << endl;
-
+      // Post processing: the patch must reference the issue with the correct type.
+      bool typeMatches = false;
       for_( d, it.matchesBegin(), it.matchesEnd() )
       {
         const std::string & itype = d->subFind( sat::SolvAttr::updateReferenceType ).asString();
-
-        if ( issue.specificType() && itype != issue.type() )
-          continue;	// assert correct type of specific IDs
-
-        if ( sr.installPatch( pi ) )
-          found = true;
-        else
-          DBG << str::form("fix for %s issue number %s was not marked.",
-                           issue.type().c_str(), issue.id().c_str() );
+        if ( ! issue.specificType() || itype == issue.type() )
+        {
+          typeMatches = true;
+          break;
+        }
       }
+      if ( ! typeMatches )
+        continue;	// assert correct type of specific IDs
+
+      DBG << "got: " << *it << endl;
+      matched = true;
+
+      if ( pi.isRetracted() )
+      {
+        DBG << "candidate patch " << pi << " is retracted" << endl;
+        retracted = true;
+        continue;
+      }
+
+      if ( ! pi.isBroken() )
+      {
+        // isSatisfied() excludes !isRelevant()
+        if ( pi.isSatisfied() )
+        {
+          DBG << "candidate patch " << pi << " is already installed" << endl;
+          satisfied = true;
+        }
+        else if ( ! pi.isRelevant() )
+        {
+          DBG << "candidate patch " << pi << " does not apply to this system" << endl;
+          notNeeded = true;
+        }
+        continue;
+      }
+
+      needed = true;
+      if ( sr.installPatch( pi ) )
+        found = true;
+      else
+        DBG << str::form("fix for %s issue number %s was not marked.",
+                         issue.type().c_str(), issue.id().c_str() );
     }
 
     sr.printFeedback( zypper.out() );
     if ( ! found )
     {
       const std::string & itype( issue.type() );
-      if ( itype == "bugzilla" )
-        zypper.out().info(str::form(_("Fix for bugzilla issue number %s was not found or is not needed."), issue.id().c_str() ));
-      else if ( itype == "cve" )
-        zypper.out().info(str::form(_("Fix for CVE issue number %s was not found or is not needed."), issue.id().c_str() ));
+      const char * iid = issue.id().c_str();
+
+      // A needed patch which could not be selected takes precedence over
+      // the status of other matching patches: fall through to the last branch.
+      if ( satisfied && ! needed )
+      {
+        // Nothing left to do: keep ZYPPER_EXIT_OK.
+        if ( itype == "bugzilla" )
+          zypper.out().info(str::form(_("Fix for bugzilla issue number %s is already installed."), iid ));
+        else if ( itype == "cve" )
+          zypper.out().info(str::form(_("Fix for CVE issue number %s is already installed."), iid ));
+        else
+          // translators: keep '%s issue' together, it's something like 'CVE issue' or 'Bugzilla issue'
+          zypper.out().info(str::form(_("Fix for %s issue number %s is already installed."), itype.c_str(), iid ));
+      }
+      else if ( notNeeded && ! needed )
+      {
+        // Nothing left to do: keep ZYPPER_EXIT_OK.
+        if ( itype == "bugzilla" )
+          zypper.out().info(str::form(_("Fix for bugzilla issue number %s is not needed on this system."), iid ));
+        else if ( itype == "cve" )
+          zypper.out().info(str::form(_("Fix for CVE issue number %s is not needed on this system."), iid ));
+        else
+          // translators: keep '%s issue' together, it's something like 'CVE issue' or 'Bugzilla issue'
+          zypper.out().info(str::form(_("Fix for %s issue number %s is not needed on this system."), itype.c_str(), iid ));
+      }
+      else if ( retracted && ! needed )
+      {
+        if ( itype == "bugzilla" )
+          zypper.out().info(str::form(_("Fix for bugzilla issue number %s was retracted."), iid ));
+        else if ( itype == "cve" )
+          zypper.out().info(str::form(_("Fix for CVE issue number %s was retracted."), iid ));
+        else
+          // translators: keep '%s issue' together, it's something like 'CVE issue' or 'Bugzilla issue'
+          zypper.out().info(str::form(_("Fix for %s issue number %s was retracted."), itype.c_str(), iid ));
+        zypper.setExitInfoCode( ZYPPER_EXIT_INF_CAP_NOT_FOUND );
+      }
+      else if ( ! matched )
+      {
+        if ( itype == "bugzilla" )
+          zypper.out().info(str::form(_("Fix for bugzilla issue number %s was not found."), iid ));
+        else if ( itype == "cve" )
+          zypper.out().info(str::form(_("Fix for CVE issue number %s was not found."), iid ));
+        else
+          // translators: keep '%s issue' together, it's something like 'CVE issue' or 'Bugzilla issue'
+          zypper.out().info(str::form(_("Fix for %s issue number %s was not found."), itype.c_str(), iid ));
+        zypper.setExitInfoCode( ZYPPER_EXIT_INF_CAP_NOT_FOUND );
+      }
       else
-        // translators: keep '%s issue' together, it's something like 'CVE issue' or 'Bugzilla issue'
-        zypper.out().info(str::form(_("Fix for %s issue number %s was not found or is not needed."), itype.c_str(), issue.id().c_str() ));
-      zypper.setExitInfoCode( ZYPPER_EXIT_INF_CAP_NOT_FOUND );  // try to use InstallRemoveBase::printAndHandleSolverRequesterFeedback
+      {
+        // A needed patch exists but could not be selected (e.g. locked); keep the old wording.
+        if ( itype == "bugzilla" )
+          zypper.out().info(str::form(_("Fix for bugzilla issue number %s was not found or is not needed."), iid ));
+        else if ( itype == "cve" )
+          zypper.out().info(str::form(_("Fix for CVE issue number %s was not found or is not needed."), iid ));
+        else
+          // translators: keep '%s issue' together, it's something like 'CVE issue' or 'Bugzilla issue'
+          zypper.out().info(str::form(_("Fix for %s issue number %s was not found or is not needed."), itype.c_str(), iid ));
+        zypper.setExitInfoCode( ZYPPER_EXIT_INF_CAP_NOT_FOUND );  // try to use InstallRemoveBase::printAndHandleSolverRequesterFeedback
+      }
     }
   } // next issue from --bz --cve
 }
